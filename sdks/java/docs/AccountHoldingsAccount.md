@@ -11,6 +11,7 @@ Account Holdings with Account ID
 |**account** | [**SnapTradeHoldingsAccountAccountId**](SnapTradeHoldingsAccountAccountId.md) |  |  [optional] |
 |**balances** | [**List&lt;Balance&gt;**](Balance.md) |  |  [optional] |
 |**positions** | [**List&lt;Position&gt;**](Position.md) |  |  [optional] |
+|**optionPostions** | [**List&lt;OptionsPosition&gt;**](OptionsPosition.md) |  |  [optional] |
 |**orders** | [**List&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md) |  |  [optional] |
 |**totalValue** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  |  [optional] |
 

@@ -553,6 +553,7 @@ public class Example {
       System.out.println(result.getAccount());
       System.out.println(result.getBalances());
       System.out.println(result.getPositions());
+      System.out.println(result.getOptionPostions());
       System.out.println(result.getOrders());
       System.out.println(result.getTotalValue());
     } catch (ApiException e) {

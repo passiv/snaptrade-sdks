@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { AccountOrderRecord } from './account-order-record';
 import { Balance } from './balance';
+import { OptionsPosition } from './options-position';
 import { Position } from './position';
 import { SnapTradeHoldingsAccountAccountId } from './snap-trade-holdings-account-account-id';
 import { SnapTradeHoldingsTotalValue } from './snap-trade-holdings-total-value';
@@ -42,6 +43,12 @@ export interface AccountHoldingsAccount {
      * @memberof AccountHoldingsAccount
      */
     'positions'?: Array<Position> | null;
+    /**
+     * 
+     * @type {Array<OptionsPosition>}
+     * @memberof AccountHoldingsAccount
+     */
+    'option_postions'?: Array<OptionsPosition> | null;
     /**
      * 
      * @type {Array<AccountOrderRecord>}

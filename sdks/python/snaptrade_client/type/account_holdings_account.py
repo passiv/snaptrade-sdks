@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.balance import Balance
+from snaptrade_client.type.options_position import OptionsPosition
 from snaptrade_client.type.position import Position
 from snaptrade_client.type.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.type.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
@@ -30,6 +31,8 @@ class OptionalAccountHoldingsAccount(TypedDict, total=False):
     balances: typing.Optional[typing.List[Balance]]
 
     positions: typing.Optional[typing.List[Position]]
+
+    option_postions: typing.Optional[typing.List[OptionsPosition]]
 
     orders: typing.Optional[typing.List[AccountOrderRecord]]
 

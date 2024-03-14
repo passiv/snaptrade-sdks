@@ -19,6 +19,8 @@ module SnapTrade
 
     attr_accessor :positions
 
+    attr_accessor :option_postions
+
     attr_accessor :orders
 
     attr_accessor :total_value
@@ -29,6 +31,7 @@ module SnapTrade
         :'account' => :'account',
         :'balances' => :'balances',
         :'positions' => :'positions',
+        :'option_postions' => :'option_postions',
         :'orders' => :'orders',
         :'total_value' => :'total_value'
       }
@@ -45,6 +48,7 @@ module SnapTrade
         :'account' => :'SnapTradeHoldingsAccountAccountId',
         :'balances' => :'Array<Balance>',
         :'positions' => :'Array<Position>',
+        :'option_postions' => :'Array<OptionsPosition>',
         :'orders' => :'Array<AccountOrderRecord>',
         :'total_value' => :'SnapTradeHoldingsTotalValue'
       }
@@ -55,6 +59,7 @@ module SnapTrade
       Set.new([
         :'balances',
         :'positions',
+        :'option_postions',
         :'orders',
       ])
     end
@@ -90,6 +95,12 @@ module SnapTrade
         end
       end
 
+      if attributes.key?(:'option_postions')
+        if (value = attributes[:'option_postions']).is_a?(Array)
+          self.option_postions = value
+        end
+      end
+
       if attributes.key?(:'orders')
         if (value = attributes[:'orders']).is_a?(Array)
           self.orders = value
@@ -122,6 +133,7 @@ module SnapTrade
           account == o.account &&
           balances == o.balances &&
           positions == o.positions &&
+          option_postions == o.option_postions &&
           orders == o.orders &&
           total_value == o.total_value
     end
@@ -135,7 +147,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account, balances, positions, orders, total_value].hash
+      [account, balances, positions, option_postions, orders, total_value].hash
     end
 
     # Builds the object from hash

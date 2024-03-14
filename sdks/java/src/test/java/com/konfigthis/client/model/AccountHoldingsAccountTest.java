@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.Position;
 import com.konfigthis.client.model.SnapTradeHoldingsAccountAccountId;
 import com.konfigthis.client.model.SnapTradeHoldingsTotalValue;
@@ -68,6 +69,14 @@ public class AccountHoldingsAccountTest {
     @Test
     public void positionsTest() {
         // TODO: test positions
+    }
+
+    /**
+     * Test the property 'optionPostions'
+     */
+    @Test
+    public void optionPostionsTest() {
+        // TODO: test optionPostions
     }
 
     /**
