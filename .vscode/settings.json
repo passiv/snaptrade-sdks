@@ -15,6 +15,8 @@
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true
   },
+  "files.insertFinalNewline": false,
+  "terminal.integrated.scrollback": 50000,
   "black-formatter.importStrategy": "fromEnvironment",
   "python.formatting.provider": "none",
   "python.analysis.typeCheckingMode": "basic",
@@ -34,5 +36,9 @@
       "useBundler": true
     }
   },
-  "ruby.format": "rubocop"
+  "ruby.format": "rubocop",
+  "[csharp]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "csharpier.csharpier-vscode"
+  }
 }
