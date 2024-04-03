@@ -202,13 +202,12 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 9.0.11
+    version: 9.0.12
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey
     apiDocumentationAuthenticationPartial: snippets/typescriptDocAuthPartial.ts
     clientName: Snaptrade
-    useAxios0_27_2: true
     readmeSnippet: snippets/typescript.ts
     git:
       host: github.com
