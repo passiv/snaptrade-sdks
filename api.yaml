@@ -40,8 +40,6 @@ tags:
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported
       brokerages, exchanges, currencies, etc.
-  - name: Error Logs
-    description: Retrieve error logs for your SnapTrade users and API requests.
   - name: Webhooks
     description:
       Reach out directly to SnapTrade to enable webhooks in order to be
@@ -641,7 +639,7 @@ paths:
               - executed
         - in: query
           name: days
-          description: Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
           schema:
             type: integer
             format: int32
@@ -1218,32 +1216,6 @@ paths:
                   $ref: "#/components/schemas/Currency"
         default:
           description: Unexpected error.
-  /snapTrade/listUserErrors:
-    get:
-      tags:
-        - Error Logs
-      summary: Retrieve error logs on behalf of your SnapTrade users
-      operationId: ErrorLogs_listUserErrors
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-      responses:
-        "200":
-          description: A list of all user errors for a particular user in the last 30 days.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/UserErrorLog"
   /currencies/rates:
     get:
       tags:

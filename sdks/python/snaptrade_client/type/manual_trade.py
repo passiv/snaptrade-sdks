@@ -19,6 +19,7 @@ from snaptrade_client.type.action import Action
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.units_nullable import UnitsNullable
 
 class RequiredManualTrade(TypedDict):
     pass
@@ -37,7 +38,7 @@ class OptionalManualTrade(TypedDict, total=False):
 
     action: Action
 
-    units: float
+    units: UnitsNullable
 
     price: Price
 

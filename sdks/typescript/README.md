@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.12-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.12)
+[![npm](https://img.shields.io/badge/npm-v9.0.13-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.13)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -37,7 +37,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.errorLogs.listUserErrors`](#snaptradeerrorlogslistusererrors)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -325,7 +324,7 @@ defaults value is set to \"all\"
 
 ##### days: `number`<a id="days-number"></a>
 
-Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -864,38 +863,6 @@ Optional comma seperated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.errorLogs.listUserErrors`<a id="snaptradeerrorlogslistusererrors"></a>
-
-Retrieve error logs on behalf of your SnapTrade users
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const listUserErrorsResponse = await snaptrade.errorLogs.listUserErrors({
-  userId: "John.doe@snaptrade.com",
-  userSecret: "USERSECRET123",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[UserErrorLog](./models/user-error-log.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/listUserErrors` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

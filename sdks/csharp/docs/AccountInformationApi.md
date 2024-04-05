@@ -327,7 +327,7 @@ namespace Example
             var userSecret = "userSecret_example";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get orders.
             var state = "all"; // defaults value is set to \"all\" (optional) 
-            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional) 
+            var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional) 
             
             try
             {
@@ -380,7 +380,7 @@ catch (ApiException e)
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** | The ID of the account to get orders. |  |
 | **state** | **string** | defaults value is set to \&quot;all\&quot; | [optional]  |
-| **days** | **int?** | Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. | [optional]  |
+| **days** | **int?** | Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. | [optional]  |
 
 ### Return type
 

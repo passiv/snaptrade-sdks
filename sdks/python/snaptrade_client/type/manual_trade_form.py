@@ -16,10 +16,12 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.action import Action
+from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.type.units_nullable import UnitsNullable
 
 class RequiredManualTradeForm(TypedDict):
     pass
@@ -37,11 +39,11 @@ class OptionalManualTradeForm(TypedDict, total=False):
 
     time_in_force: TimeInForceStrict
 
-    units: float
+    units: UnitsNullable
 
     universal_symbol_id: str
 
-    notional_value: float
+    notional_value: NotionalValueNullable
 
 class ManualTradeForm(RequiredManualTradeForm, OptionalManualTradeForm):
     pass

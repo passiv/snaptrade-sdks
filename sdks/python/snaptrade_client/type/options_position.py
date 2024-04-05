@@ -16,7 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.brokerage_symbol import BrokerageSymbol
-from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.currency_nullable import CurrencyNullable
 from snaptrade_client.type.price import Price
 
 class RequiredOptionsPosition(TypedDict):
@@ -29,7 +29,7 @@ class OptionalOptionsPosition(TypedDict, total=False):
 
     units: typing.Union[int, float]
 
-    currency: Currency
+    currency: typing.Optional[CurrencyNullable]
 
     # Average purchase price for this position
     average_purchase_price: typing.Optional[typing.Union[int, float]]

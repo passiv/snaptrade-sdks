@@ -41,11 +41,6 @@ namespace SnapTrade.Net.Client
         /// <summary>
         /// API instance
         /// </summary>
-        public virtual IErrorLogsApi ErrorLogs { get; set; }
-
-        /// <summary>
-        /// API instance
-        /// </summary>
         public virtual IOptionsApi Options { get; set; }
 
         /// <summary>
@@ -83,7 +78,6 @@ namespace SnapTrade.Net.Client
             APIStatus = new APIStatusApi(Configuration);
             Authentication = new AuthenticationApi(Configuration);
             Connections = new ConnectionsApi(Configuration);
-            ErrorLogs = new ErrorLogsApi(Configuration);
             Options = new OptionsApi(Configuration);
             ReferenceData = new ReferenceDataApi(Configuration);
             Trading = new TradingApi(Configuration);

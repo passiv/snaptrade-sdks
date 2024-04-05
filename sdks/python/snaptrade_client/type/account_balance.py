@@ -15,14 +15,13 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.amount import Amount
+from snaptrade_client.type.amount_nullable import AmountNullable
 
 class RequiredAccountBalance(TypedDict):
     pass
 
 class OptionalAccountBalance(TypedDict, total=False):
-    # Total value of this account (includes cash, equity, fixed income, etc)
-    total: Amount
+    total: typing.Optional[AmountNullable]
 
 class AccountBalance(RequiredAccountBalance, OptionalAccountBalance):
     pass

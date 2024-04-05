@@ -58,81 +58,15 @@ class ManualTradeForm(
             @staticmethod
             def time_in_force() -> typing.Type['TimeInForceStrict']:
                 return TimeInForceStrict
-            
-            
-            class units(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    all_of_0 = schemas.NumberSchema
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            cls.all_of_0,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'units':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def units() -> typing.Type['UnitsNullable']:
+                return UnitsNullable
             universal_symbol_id = schemas.UUIDSchema
-            
-            
-            class notional_value(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    all_of_0 = schemas.NumberSchema
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            cls.all_of_0,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'notional_value':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def notional_value() -> typing.Type['NotionalValueNullable']:
+                return NotionalValueNullable
             __annotations__ = {
                 "account_id": account_id,
                 "action": action,
@@ -164,13 +98,13 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
+    def __getitem__(self, name: typing_extensions.Literal["units"]) -> 'UnitsNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["universal_symbol_id"]) -> MetaOapg.properties.universal_symbol_id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["notional_value"]) -> MetaOapg.properties.notional_value: ...
+    def __getitem__(self, name: typing_extensions.Literal["notional_value"]) -> 'NotionalValueNullable': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -199,13 +133,13 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> typing.Union['TimeInForceStrict', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union['UnitsNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["universal_symbol_id"]) -> typing.Union[MetaOapg.properties.universal_symbol_id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["notional_value"]) -> typing.Union[MetaOapg.properties.notional_value, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["notional_value"]) -> typing.Union['NotionalValueNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -223,9 +157,9 @@ class ManualTradeForm(
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         stop: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union['TimeInForceStrict', schemas.Unset] = schemas.unset,
-        units: typing.Union[MetaOapg.properties.units, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        units: typing.Union['UnitsNullable', schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        notional_value: typing.Union[MetaOapg.properties.notional_value, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        notional_value: typing.Union['NotionalValueNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ManualTradeForm':
@@ -246,7 +180,9 @@ class ManualTradeForm(
         )
 
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.units_nullable import UnitsNullable

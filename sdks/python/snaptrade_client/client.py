@@ -20,7 +20,6 @@ from snaptrade_client.apis.tags.account_information_api import AccountInformatio
 from snaptrade_client.apis.tags.api_status_api import APIStatusApi
 from snaptrade_client.apis.tags.authentication_api import AuthenticationApi
 from snaptrade_client.apis.tags.connections_api import ConnectionsApi
-from snaptrade_client.apis.tags.error_logs_api import ErrorLogsApi
 from snaptrade_client.apis.tags.options_api import OptionsApi
 from snaptrade_client.apis.tags.reference_data_api import ReferenceDataApi
 from snaptrade_client.apis.tags.trading_api import TradingApi
@@ -41,7 +40,6 @@ class SnapTrade(ClientCustom):
         self.api_status: APIStatusApi = APIStatusApi(api_client)
         self.authentication: AuthenticationApi = AuthenticationApi(api_client)
         self.connections: ConnectionsApi = ConnectionsApi(api_client)
-        self.error_logs: ErrorLogsApi = ErrorLogsApi(api_client)
         self.options: OptionsApi = OptionsApi(api_client)
         self.reference_data: ReferenceDataApi = ReferenceDataApi(api_client)
         self.trading: TradingApi = TradingApi(api_client)

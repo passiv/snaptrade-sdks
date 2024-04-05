@@ -348,7 +348,7 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get orders.
     String state = "all"; // defaults value is set to \"all\"
-    Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+    Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
     try {
       List<AccountOrderRecord> result = client
               .accountInformation
@@ -398,7 +398,7 @@ public class Example {
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**| The ID of the account to get orders. | |
 | **state** | **String**| defaults value is set to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
-| **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. | [optional] |
+| **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. | [optional] |
 
 ### Return type
 
