@@ -231,16 +231,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/snapTrade/listUserErrors-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionStrategy-POST': {
         parameters: [
             {

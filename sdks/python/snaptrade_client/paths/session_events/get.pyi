@@ -141,12 +141,12 @@ class SchemaFor200ResponseBodyApplicationJson(
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[typing.Union[typing.List[SessionEvent]]]
+    body: typing.List[typing.Union[SessionEvent]]
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[typing.Union[typing.List[SessionEvent]]]
+    body: typing.List[typing.Union[SessionEvent]]
 
 
 _response_for_200 = api_client.OpenApiResponse(

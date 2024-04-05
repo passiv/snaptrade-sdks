@@ -225,16 +225,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/snapTrade/listUserErrors-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionStrategy-POST': {
         'parameters': [
             {

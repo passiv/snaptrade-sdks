@@ -38,8 +38,6 @@ tags:
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
-- description: Retrieve error logs for your SnapTrade users and API requests.
-  name: Error Logs
 - description: Endpoints to search for options prices and chains as well as place
     options trades if supported.
   name: Options
@@ -891,7 +889,7 @@ paths:
           type: string
         style: form
       - description: Number of days in the past to fetch the most recent orders. Defaults
-          to the last 90 days if no value is passed in.
+          to the last 30 days if no value is passed in.
         explode: true
         in: query
         name: days
@@ -1705,41 +1703,6 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--currencies
-      x-accepts: application/json
-  /snapTrade/listUserErrors:
-    get:
-      operationId: ErrorLogs_listUserErrors
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/UserErrorLog'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: A list of all user errors for a particular user in the last
-            30 days.
-      summary: Retrieve error logs on behalf of your SnapTrade users
-      tags:
-      - Error Logs
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-listUserErrors
       x-accepts: application/json
   /currencies/rates:
     get:
@@ -3364,6 +3327,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
       type: object
       x-konfig-is-used-in-successful-response: true
+      x-konfig-properties:
+        total_quantity:
+          nullable: true
     AccountOrderRecordStatus:
       enum:
       - NONE
@@ -3534,6 +3500,9 @@ components:
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
       type: object
+      x-konfig-properties:
+        currency:
+          nullable: true
     OptionsHoldings:
       additionalProperties: true
       description: Option Holdings
@@ -5649,6 +5618,11 @@ components:
         option_symbol:
           $ref: '#/components/schemas/OptionsSymbolNullable'
       type: object
+      x-konfig-properties:
+        symbol:
+          nullable: true
+        option_symbol:
+          nullable: true
     PositionSymbol:
       additionalProperties: true
       description: Symbol returned in position object
@@ -6683,6 +6657,9 @@ components:
           x-konfig-original-example: 100
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-NotionalValue
       type: object
+      x-konfig-properties:
+        notional_value:
+          nullable: true
     ValidatedTradeBody:
       description: Validated Trade Form
       example:
@@ -7360,13 +7337,6 @@ components:
     UserErrorLog:
       additionalProperties: true
       description: An API error log for a specific SnapTrade user.
-      example:
-        endpoint: api/v1/snapTrade
-        requestedAt: 2022-01-21T20:11:19.217Z
-        queryParams: queryParams
-        response: response
-        httpMethod: POST
-        statusCode: 200
       properties:
         requestedAt:
           example: 2022-01-21T20:11:19.217Z
@@ -9590,21 +9560,6 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-listUserErrors:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-get--currencies-rates:
       additionalProperties: true
       properties: {}

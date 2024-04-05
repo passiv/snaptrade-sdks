@@ -23,6 +23,7 @@ from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.amount import Amount
+from snaptrade_client.model.amount_nullable import AmountNullable
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_auth_ids import BrokerageAuthIDs
@@ -41,6 +42,7 @@ from snaptrade_client.model.cash_restriction import CashRestriction
 from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.consumer_key import ConsumerKey
 from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.currency_nullable import CurrencyNullable
 from snaptrade_client.model.delete_user_response import DeleteUserResponse
 from snaptrade_client.model.dividend_at_date import DividendAtDate
 from snaptrade_client.model.email import Email
@@ -74,6 +76,7 @@ from snaptrade_client.model.monthly_dividends import MonthlyDividends
 from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.notional_value import NotionalValue
+from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.open_units import OpenUnits
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_chain_item import OptionChainItem
@@ -87,6 +90,7 @@ from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs
 from snaptrade_client.model.options_holdings import OptionsHoldings
 from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.partner_data import PartnerData
 from snaptrade_client.model.past_value import PastValue
@@ -152,8 +156,10 @@ from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
 from snaptrade_client.model.units import Units
+from snaptrade_client.model.units_nullable import UnitsNullable
 from snaptrade_client.model.universal_activity import UniversalActivity
 from snaptrade_client.model.universal_symbol import UniversalSymbol
+from snaptrade_client.model.universal_symbol_nullable import UniversalSymbolNullable
 from snaptrade_client.model.user_error_log import UserErrorLog
 from snaptrade_client.model.user_id import UserID
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret

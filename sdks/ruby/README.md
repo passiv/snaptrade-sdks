@@ -38,7 +38,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.error_logs.list_user_errors`](#snaptradeerror_logslist_user_errors)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -245,7 +244,7 @@ defaults value is set to \"all\"
 
 ##### days: `Integer`<a id="days-integer"></a>
 Number of days in the past to fetch the most recent orders. Defaults to the last
-90 days if no value is passed in.
+30 days if no value is passed in.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -757,37 +756,6 @@ specific users
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.error_logs.list_user_errors`<a id="snaptradeerror_logslist_user_errors"></a>
-
-Retrieve error logs on behalf of your SnapTrade users
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.error_logs.list_user_errors(
-  user_id: "John.doe@snaptrade.com",
-  user_secret: "USERSECRET123",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-#### 🔄 Return<a id="🔄-return"></a>
-
-[UserErrorLog](./lib/snaptrade/models/user_error_log.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/listUserErrors` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

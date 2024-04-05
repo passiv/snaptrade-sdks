@@ -35,6 +35,8 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.action import Action as ActionSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
+from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
+from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
 from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
@@ -43,6 +45,8 @@ from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 
 from snaptrade_client.type.action import Action
+from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
+from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
@@ -196,9 +200,9 @@ class BaseApi(api_client.Api):
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
-        notional_value: typing.Optional[float] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
@@ -477,9 +481,9 @@ class PlaceForceOrder(BaseApi):
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
-        notional_value: typing.Optional[float] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -519,9 +523,9 @@ class PlaceForceOrder(BaseApi):
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
-        notional_value: typing.Optional[float] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -561,9 +565,9 @@ class ApiForpost(BaseApi):
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
-        notional_value: typing.Optional[float] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -603,9 +607,9 @@ class ApiForpost(BaseApi):
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[float] = None,
+        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
-        notional_value: typing.Optional[float] = None,
+        notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,

@@ -24,6 +24,7 @@ from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
+from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredAccountOrderRecord(TypedDict):
@@ -43,7 +44,7 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     action: Action
 
-    total_quantity: float
+    total_quantity: UnitsNullable
 
     open_quantity: OpenUnits
 

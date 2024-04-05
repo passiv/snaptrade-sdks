@@ -787,7 +787,7 @@ public class AccountInformationApiGenerated {
         
         /**
          * Set days
-         * @param days Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in. (optional)
+         * @param days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional)
          * @return GetUserAccountOrdersRequestBuilder
          */
         public GetUserAccountOrdersRequestBuilder days(Integer days) {

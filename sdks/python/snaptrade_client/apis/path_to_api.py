@@ -34,7 +34,6 @@ from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_stra
 from snaptrade_client.apis.paths.brokerages import Brokerages
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
 from snaptrade_client.apis.paths.currencies import Currencies
-from snaptrade_client.apis.paths.snap_trade_list_user_errors import SnapTradeListUserErrors
 from snaptrade_client.apis.paths.currencies_rates import CurrenciesRates
 from snaptrade_client.apis.paths.currencies_rates_currency_pair import CurrenciesRatesCurrencyPair
 from snaptrade_client.apis.paths.exchanges import Exchanges
@@ -80,7 +79,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
-        PathValues.SNAP_TRADE_LIST_USER_ERRORS: SnapTradeListUserErrors,
         PathValues.CURRENCIES_RATES: CurrenciesRates,
         PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,
@@ -127,7 +125,6 @@ path_to_api = PathToApi(
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
-        PathValues.SNAP_TRADE_LIST_USER_ERRORS: SnapTradeListUserErrors,
         PathValues.CURRENCIES_RATES: CurrenciesRates,
         PathValues.CURRENCIES_RATES_CURRENCY_PAIR: CurrenciesRatesCurrencyPair,
         PathValues.EXCHANGES: Exchanges,

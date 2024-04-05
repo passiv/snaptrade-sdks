@@ -33,7 +33,7 @@ class OptionalTargetAsset(TypedDict, total=False):
 
     is_excluded: bool
 
-    meta: TargetAssetMeta
+    meta: typing.Optional[TargetAssetMeta]
 
 class TargetAsset(RequiredTargetAsset, OptionalTargetAsset):
     pass

@@ -41,7 +41,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.error_logs.list_user_errors`](#snaptradeerror_logslist_user_errors)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -324,7 +323,7 @@ defaults value is set to \"all\"
 
 ##### days: `int`<a id="days-int"></a>
 
-Number of days in the past to fetch the most recent orders. Defaults to the last 90 days if no value is passed in.
+Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -847,37 +846,6 @@ Optional comma seperated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.error_logs.list_user_errors`<a id="snaptradeerror_logslist_user_errors"></a>
-
-Retrieve error logs on behalf of your SnapTrade users
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-list_user_errors_response = snaptrade.error_logs.list_user_errors(
-    user_id="John.doe@snaptrade.com",
-    user_secret="USERSECRET123",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`UserErrorLog`](./snaptrade_client/type/user_error_log.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/listUserErrors` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1495,11 +1463,11 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
-##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-##### notional_value: `Union[int, float]`<a id="notional_value-unionint-float"></a>
+##### notional_value: [`NotionalValueNullable`](./snaptrade_client/type/notional_value_nullable.py)<a id="notional_value-notionalvaluenullablesnaptrade_clienttypenotional_value_nullablepy"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -1602,11 +1570,11 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
-##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-##### notional_value: `Union[int, float]`<a id="notional_value-unionint-float"></a>
+##### notional_value: [`NotionalValueNullable`](./snaptrade_client/type/notional_value_nullable.py)<a id="notional_value-notionalvaluenullablesnaptrade_clienttypenotional_value_nullablepy"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

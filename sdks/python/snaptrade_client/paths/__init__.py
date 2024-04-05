@@ -39,7 +39,6 @@ class PathValues(str, enum.Enum):
     BROKERAGES = "/brokerages"
     BROKERAGE_AUTHORIZATION_TYPES = "/brokerageAuthorizationTypes"
     CURRENCIES = "/currencies"
-    SNAP_TRADE_LIST_USER_ERRORS = "/snapTrade/listUserErrors"
     CURRENCIES_RATES = "/currencies/rates"
     CURRENCIES_RATES_CURRENCY_PAIR = "/currencies/rates/{currencyPair}"
     EXCHANGES = "/exchanges"
