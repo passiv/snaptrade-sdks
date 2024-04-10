@@ -27,7 +27,7 @@ The different webhook event types are outlined below.
 
 ## USER_REGISTERED
 
-Created when a new user is successfully registered through the `/registerUser/` endpoint.
+Sent when a new user is successfully registered through the `/registerUser/` endpoint.
 
 Example payload is below:
 
@@ -44,7 +44,7 @@ Example payload is below:
 
 ## CONNECTION_ATTEMPTED
 
-Created when a user a user attempts to make a brokerage connection, will also report the result of the attempt.
+Sent when a user a user attempts to make a brokerage connection, will also report the result of the attempt.
 
 Example payload is below:
 
@@ -187,7 +187,7 @@ Example payload is below:
 
 ## NEW_ACCOUNT_AVAILABLE
 
-Created when a new account is detected through a brokerage connection.
+Sent when a new account is detected through a brokerage connection.
 
 Example payload is below:
 
@@ -206,7 +206,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_INITIAL_UPDATE
 
-Created the first time that we collect transactions data from a brokerage account.
+Sent the first time that we collect transactions data from a brokerage account.
 
 Example payload is below:
 
@@ -225,7 +225,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_UPDATED
 
-Created when account transactions are updated.
+Sent when account transactions are updated.
 
 Example payload is below:
 
@@ -236,6 +236,25 @@ Example payload is below:
   "eventTimestamp": "2022-05-31T12:40:05.944481+00:00",
   "userId": "4XTxw0mZhffRCdrgPHBG1VqdklkVJdEz5Uor0hq29hwPYlLS7s",
   "eventType": "ACCOUNT_TRANSACTIONS_UPDATED",
+  "webhookSecret": "DDAVBuPPGgqwADXgbcOE",
+  "accountId": "6e30be12-4ab0-4ec0-8d4d-0dfdce509e36",
+  "brokerageAuthorizationId": "8105b33e-3dd6-4189-b93e-31ccaa9d3b69"
+}
+```
+
+## ACCOUNT_REMOVED
+
+Sent when an account is removed from a connection.
+
+Example payload is below:
+
+```json
+{
+  "webhookId": "60b9ad5f-9e78-43b2-af5a-8ce8412b1cd6",
+  "clientId": "PARTNERAPP",
+  "eventTimestamp": "2024-05-31T12:40:05.944481+00:00",
+  "userId": "4XTxw0mZhffRCdrgPHBG1VqdklkVJdEz5Uor0hq29hwPYlLS7s",
+  "eventType": "ACCOUNT_REMOVED",
   "webhookSecret": "DDAVBuPPGgqwADXgbcOE",
   "accountId": "6e30be12-4ab0-4ec0-8d4d-0dfdce509e36",
   "brokerageAuthorizationId": "8105b33e-3dd6-4189-b93e-31ccaa9d3b69"
