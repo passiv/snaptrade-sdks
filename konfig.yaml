@@ -46,10 +46,8 @@ portal:
               path: docs/ratelimiting.md
             - id: fix-broken-connections
               path: docs/fix-broken-connections.md
-            - id: display-the-connection-portal-in-an-iframe
-              path: docs/display-the-connection-portal-in-an-iframe.md
-            - id: connection-messaging
-              path: docs/connection-messaging.md
+            - id: implement-connection-portal
+              path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: webhooks
