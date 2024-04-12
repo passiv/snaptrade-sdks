@@ -24,6 +24,7 @@ from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.order_type import OrderType
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
+from snaptrade_client.type.time_nullable import TimeNullable
 from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
@@ -66,8 +67,7 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # Time
     time_placed: str
 
-    # Time
-    time_updated: str
+    time_updated: TimeNullable
 
     # Time
     expiry_date: str

@@ -186,7 +186,7 @@ namespace SnapTrade.Net.Model
         /// Time
         /// </summary>
         /// <value>Time</value>
-        [DataMember(Name = "time_updated", EmitDefaultValue = false)]
+        [DataMember(Name = "time_updated", EmitDefaultValue = true)]
         public string TimeUpdated { get; set; }
 
         /// <summary>

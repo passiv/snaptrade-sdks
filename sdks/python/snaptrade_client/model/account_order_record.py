@@ -89,7 +89,10 @@ class AccountOrderRecord(
                 return OrderType
             time_in_force = schemas.StrSchema
             time_placed = schemas.StrSchema
-            time_updated = schemas.StrSchema
+        
+            @staticmethod
+            def time_updated() -> typing.Type['TimeNullable']:
+                return TimeNullable
             expiry_date = schemas.StrSchema
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
@@ -162,7 +165,7 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["time_placed"]) -> MetaOapg.properties.time_placed: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_updated"]) -> MetaOapg.properties.time_updated: ...
+    def __getitem__(self, name: typing_extensions.Literal["time_updated"]) -> 'TimeNullable': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["expiry_date"]) -> MetaOapg.properties.expiry_date: ...
@@ -223,7 +226,7 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["time_placed"]) -> typing.Union[MetaOapg.properties.time_placed, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_updated"]) -> typing.Union[MetaOapg.properties.time_updated, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_updated"]) -> typing.Union['TimeNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["expiry_date"]) -> typing.Union[MetaOapg.properties.expiry_date, schemas.Unset]: ...
@@ -253,7 +256,7 @@ class AccountOrderRecord(
         order_type: typing.Union['OrderType', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, schemas.Unset] = schemas.unset,
-        time_updated: typing.Union[MetaOapg.properties.time_updated, str, schemas.Unset] = schemas.unset,
+        time_updated: typing.Union['TimeNullable', schemas.Unset] = schemas.unset,
         expiry_date: typing.Union[MetaOapg.properties.expiry_date, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -292,5 +295,6 @@ from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.price import Price
 from snaptrade_client.model.stop_price import StopPrice
+from snaptrade_client.model.time_nullable import TimeNullable
 from snaptrade_client.model.units_nullable import UnitsNullable
 from snaptrade_client.model.universal_symbol import UniversalSymbol

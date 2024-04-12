@@ -2603,7 +2603,7 @@ components:
             id: 87b24961-b51e-4db8-9226-f198f6518a89
           cash: 300.71
           buying_power: 410.71
-        option_postions:
+        option_positions:
         - symbol:
             symbol:
               figi_code: BBG000B9XRY4
@@ -3136,7 +3136,7 @@ components:
             $ref: '#/components/schemas/Position'
           nullable: true
           type: array
-        option_postions:
+        option_positions:
           items:
             $ref: '#/components/schemas/OptionsPosition'
           nullable: true
@@ -3316,6 +3316,7 @@ components:
         time_updated:
           description: Time
           example: 2022-01-21T20:11:19.217Z
+          nullable: true
           type: string
           x-konfig-original-example: 2022-01-21T20:11:19.217Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
@@ -3329,6 +3330,8 @@ components:
       x-konfig-is-used-in-successful-response: true
       x-konfig-properties:
         total_quantity:
+          nullable: true
+        time_updated:
           nullable: true
     AccountOrderRecordStatus:
       enum:
@@ -9882,6 +9885,13 @@ components:
       description: Trade Units. Cannot work with notional value.
       nullable: true
       type: number
+    TimeNullable:
+      description: Time
+      example: 2022-01-21T20:11:19.217Z
+      nullable: true
+      type: string
+      x-konfig-original-example: 2022-01-21T20:11:19.217Z
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
     CurrencyNullable:
       additionalProperties: true
       description: Currency

@@ -19,7 +19,7 @@ module SnapTrade
 
     attr_accessor :positions
 
-    attr_accessor :option_postions
+    attr_accessor :option_positions
 
     attr_accessor :orders
 
@@ -31,7 +31,7 @@ module SnapTrade
         :'account' => :'account',
         :'balances' => :'balances',
         :'positions' => :'positions',
-        :'option_postions' => :'option_postions',
+        :'option_positions' => :'option_positions',
         :'orders' => :'orders',
         :'total_value' => :'total_value'
       }
@@ -48,7 +48,7 @@ module SnapTrade
         :'account' => :'SnapTradeHoldingsAccountAccountId',
         :'balances' => :'Array<Balance>',
         :'positions' => :'Array<Position>',
-        :'option_postions' => :'Array<OptionsPosition>',
+        :'option_positions' => :'Array<OptionsPosition>',
         :'orders' => :'Array<AccountOrderRecord>',
         :'total_value' => :'SnapTradeHoldingsTotalValue'
       }
@@ -59,7 +59,7 @@ module SnapTrade
       Set.new([
         :'balances',
         :'positions',
-        :'option_postions',
+        :'option_positions',
         :'orders',
       ])
     end
@@ -95,9 +95,9 @@ module SnapTrade
         end
       end
 
-      if attributes.key?(:'option_postions')
-        if (value = attributes[:'option_postions']).is_a?(Array)
-          self.option_postions = value
+      if attributes.key?(:'option_positions')
+        if (value = attributes[:'option_positions']).is_a?(Array)
+          self.option_positions = value
         end
       end
 
@@ -133,7 +133,7 @@ module SnapTrade
           account == o.account &&
           balances == o.balances &&
           positions == o.positions &&
-          option_postions == o.option_postions &&
+          option_positions == o.option_positions &&
           orders == o.orders &&
           total_value == o.total_value
     end
@@ -147,7 +147,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account, balances, positions, option_postions, orders, total_value].hash
+      [account, balances, positions, option_positions, orders, total_value].hash
     end
 
     # Builds the object from hash

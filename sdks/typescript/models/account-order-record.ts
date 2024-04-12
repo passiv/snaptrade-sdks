@@ -121,11 +121,11 @@ export interface AccountOrderRecord {
      */
     'time_placed'?: string;
     /**
-     * Time
+     * 
      * @type {string}
      * @memberof AccountOrderRecord
      */
-    'time_updated'?: string;
+    'time_updated'?: string | null;
     /**
      * Time
      * @type {string}

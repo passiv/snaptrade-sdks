@@ -71,9 +71,9 @@ public class AccountHoldingsAccount {
   @SerializedName(SERIALIZED_NAME_POSITIONS)
   private List<Position> positions = null;
 
-  public static final String SERIALIZED_NAME_OPTION_POSTIONS = "option_postions";
-  @SerializedName(SERIALIZED_NAME_OPTION_POSTIONS)
-  private List<OptionsPosition> optionPostions = null;
+  public static final String SERIALIZED_NAME_OPTION_POSITIONS = "option_positions";
+  @SerializedName(SERIALIZED_NAME_OPTION_POSITIONS)
+  private List<OptionsPosition> optionPositions = null;
 
   public static final String SERIALIZED_NAME_ORDERS = "orders";
   @SerializedName(SERIALIZED_NAME_ORDERS)
@@ -189,40 +189,40 @@ public class AccountHoldingsAccount {
   }
 
 
-  public AccountHoldingsAccount optionPostions(List<OptionsPosition> optionPostions) {
+  public AccountHoldingsAccount optionPositions(List<OptionsPosition> optionPositions) {
     
     
     
     
-    this.optionPostions = optionPostions;
+    this.optionPositions = optionPositions;
     return this;
   }
 
-  public AccountHoldingsAccount addOptionPostionsItem(OptionsPosition optionPostionsItem) {
-    if (this.optionPostions == null) {
-      this.optionPostions = new ArrayList<>();
+  public AccountHoldingsAccount addOptionPositionsItem(OptionsPosition optionPositionsItem) {
+    if (this.optionPositions == null) {
+      this.optionPositions = new ArrayList<>();
     }
-    this.optionPostions.add(optionPostionsItem);
+    this.optionPositions.add(optionPositionsItem);
     return this;
   }
 
    /**
-   * Get optionPostions
-   * @return optionPostions
+   * Get optionPositions
+   * @return optionPositions
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public List<OptionsPosition> getOptionPostions() {
-    return optionPostions;
+  public List<OptionsPosition> getOptionPositions() {
+    return optionPositions;
   }
 
 
-  public void setOptionPostions(List<OptionsPosition> optionPostions) {
+  public void setOptionPositions(List<OptionsPosition> optionPositions) {
     
     
     
-    this.optionPostions = optionPostions;
+    this.optionPositions = optionPositions;
   }
 
 
@@ -349,7 +349,7 @@ public class AccountHoldingsAccount {
     return Objects.equals(this.account, accountHoldingsAccount.account) &&
         Objects.equals(this.balances, accountHoldingsAccount.balances) &&
         Objects.equals(this.positions, accountHoldingsAccount.positions) &&
-        Objects.equals(this.optionPostions, accountHoldingsAccount.optionPostions) &&
+        Objects.equals(this.optionPositions, accountHoldingsAccount.optionPositions) &&
         Objects.equals(this.orders, accountHoldingsAccount.orders) &&
         Objects.equals(this.totalValue, accountHoldingsAccount.totalValue)&&
         Objects.equals(this.additionalProperties, accountHoldingsAccount.additionalProperties);
@@ -361,7 +361,7 @@ public class AccountHoldingsAccount {
 
   @Override
   public int hashCode() {
-    return Objects.hash(account, balances, positions, optionPostions, orders, totalValue, additionalProperties);
+    return Objects.hash(account, balances, positions, optionPositions, orders, totalValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -378,7 +378,7 @@ public class AccountHoldingsAccount {
     sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("    balances: ").append(toIndentedString(balances)).append("\n");
     sb.append("    positions: ").append(toIndentedString(positions)).append("\n");
-    sb.append("    optionPostions: ").append(toIndentedString(optionPostions)).append("\n");
+    sb.append("    optionPositions: ").append(toIndentedString(optionPositions)).append("\n");
     sb.append("    orders: ").append(toIndentedString(orders)).append("\n");
     sb.append("    totalValue: ").append(toIndentedString(totalValue)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -407,7 +407,7 @@ public class AccountHoldingsAccount {
     openapiFields.add("account");
     openapiFields.add("balances");
     openapiFields.add("positions");
-    openapiFields.add("option_postions");
+    openapiFields.add("option_positions");
     openapiFields.add("orders");
     openapiFields.add("total_value");
 
@@ -459,17 +459,17 @@ public class AccountHoldingsAccount {
           };
         }
       }
-      if (jsonObj.get("option_postions") != null && !jsonObj.get("option_postions").isJsonNull()) {
-        JsonArray jsonArrayoptionPostions = jsonObj.getAsJsonArray("option_postions");
-        if (jsonArrayoptionPostions != null) {
+      if (jsonObj.get("option_positions") != null && !jsonObj.get("option_positions").isJsonNull()) {
+        JsonArray jsonArrayoptionPositions = jsonObj.getAsJsonArray("option_positions");
+        if (jsonArrayoptionPositions != null) {
           // ensure the json data is an array
-          if (!jsonObj.get("option_postions").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `option_postions` to be an array in the JSON string but got `%s`", jsonObj.get("option_postions").toString()));
+          if (!jsonObj.get("option_positions").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `option_positions` to be an array in the JSON string but got `%s`", jsonObj.get("option_positions").toString()));
           }
 
-          // validate the optional field `option_postions` (array)
-          for (int i = 0; i < jsonArrayoptionPostions.size(); i++) {
-            OptionsPosition.validateJsonObject(jsonArrayoptionPostions.get(i).getAsJsonObject());
+          // validate the optional field `option_positions` (array)
+          for (int i = 0; i < jsonArrayoptionPositions.size(); i++) {
+            OptionsPosition.validateJsonObject(jsonArrayoptionPositions.get(i).getAsJsonObject());
           };
         }
       }

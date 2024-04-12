@@ -72,6 +72,10 @@ export class Configuration {
      */
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     /**
+     * When the access token expires, measured in Unix time in seconds
+     */
+    accessTokenExpiresIn?: number;
+    /**
      * override base path
      *
      * @type {string}
@@ -116,7 +120,7 @@ export class Configuration {
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions ?? {};
-        this.userAgent = param.userAgent === undefined ? "Konfig/9.0.13/typescript" : param.userAgent;
+        this.userAgent = param.userAgent === undefined ? "Konfig/9.0.14/typescript" : param.userAgent;
         this.formDataCtor = param.formDataCtor;
     }
 
