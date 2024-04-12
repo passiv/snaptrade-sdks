@@ -2119,7 +2119,7 @@ components:
           nullable: true
           items:
             $ref: "#/components/schemas/Position"
-        option_postions:
+        option_positions:
           type: array
           nullable: true
           items:
@@ -2171,7 +2171,9 @@ components:
         time_placed:
           $ref: "#/components/schemas/Time"
         time_updated:
-          $ref: "#/components/schemas/Time"
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Time"
         expiry_date:
           $ref: "#/components/schemas/Time"
     AccountOrderRecordStatus:
