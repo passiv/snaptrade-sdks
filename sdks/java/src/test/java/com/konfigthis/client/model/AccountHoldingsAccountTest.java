@@ -72,11 +72,11 @@ public class AccountHoldingsAccountTest {
     }
 
     /**
-     * Test the property 'optionPostions'
+     * Test the property 'optionPositions'
      */
     @Test
-    public void optionPostionsTest() {
-        // TODO: test optionPostions
+    public void optionPositionsTest() {
+        // TODO: test optionPositions
     }
 
     /**

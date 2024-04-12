@@ -56,7 +56,6 @@ module SnapTrade
     # Time
     attr_accessor :time_placed
 
-    # Time
     attr_accessor :time_updated
 
     # Time
@@ -125,6 +124,7 @@ module SnapTrade
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'time_updated',
       ])
     end
 

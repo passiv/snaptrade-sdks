@@ -82,12 +82,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Positions'
         }
         /// <summary>
-        /// Test the property 'OptionPostions'
+        /// Test the property 'OptionPositions'
         /// </summary>
         [Fact]
-        public void OptionPostionsTest()
+        public void OptionPositionsTest()
         {
-            // TODO unit test for the property 'OptionPostions'
+            // TODO unit test for the property 'OptionPositions'
         }
         /// <summary>
         /// Test the property 'Orders'

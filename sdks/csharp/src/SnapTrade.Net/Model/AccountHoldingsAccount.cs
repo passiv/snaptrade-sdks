@@ -38,15 +38,15 @@ namespace SnapTrade.Net.Model
         /// <param name="account">account.</param>
         /// <param name="balances">balances.</param>
         /// <param name="positions">positions.</param>
-        /// <param name="optionPostions">optionPostions.</param>
+        /// <param name="optionPositions">optionPositions.</param>
         /// <param name="orders">orders.</param>
         /// <param name="totalValue">totalValue.</param>
-        public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<OptionsPosition> optionPostions = default(List<OptionsPosition>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
+        public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<OptionsPosition> optionPositions = default(List<OptionsPosition>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
         {
             this.Account = account;
             this.Balances = balances;
             this.Positions = positions;
-            this.OptionPostions = optionPostions;
+            this.OptionPositions = optionPositions;
             this.Orders = orders;
             this.TotalValue = totalValue;
             this.AdditionalProperties = new Dictionary<string, object>();
@@ -71,10 +71,10 @@ namespace SnapTrade.Net.Model
         public List<Position> Positions { get; set; }
 
         /// <summary>
-        /// Gets or Sets OptionPostions
+        /// Gets or Sets OptionPositions
         /// </summary>
-        [DataMember(Name = "option_postions", EmitDefaultValue = true)]
-        public List<OptionsPosition> OptionPostions { get; set; }
+        [DataMember(Name = "option_positions", EmitDefaultValue = true)]
+        public List<OptionsPosition> OptionPositions { get; set; }
 
         /// <summary>
         /// Gets or Sets Orders
@@ -106,7 +106,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Account: ").Append(Account).Append("\n");
             sb.Append("  Balances: ").Append(Balances).Append("\n");
             sb.Append("  Positions: ").Append(Positions).Append("\n");
-            sb.Append("  OptionPostions: ").Append(OptionPostions).Append("\n");
+            sb.Append("  OptionPositions: ").Append(OptionPositions).Append("\n");
             sb.Append("  Orders: ").Append(Orders).Append("\n");
             sb.Append("  TotalValue: ").Append(TotalValue).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -163,10 +163,10 @@ namespace SnapTrade.Net.Model
                     this.Positions.SequenceEqual(input.Positions)
                 ) && base.Equals(input) && 
                 (
-                    this.OptionPostions == input.OptionPostions ||
-                    this.OptionPostions != null &&
-                    input.OptionPostions != null &&
-                    this.OptionPostions.SequenceEqual(input.OptionPostions)
+                    this.OptionPositions == input.OptionPositions ||
+                    this.OptionPositions != null &&
+                    input.OptionPositions != null &&
+                    this.OptionPositions.SequenceEqual(input.OptionPositions)
                 ) && base.Equals(input) && 
                 (
                     this.Orders == input.Orders ||
@@ -203,9 +203,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Positions.GetHashCode();
                 }
-                if (this.OptionPostions != null)
+                if (this.OptionPositions != null)
                 {
-                    hashCode = (hashCode * 59) + this.OptionPostions.GetHashCode();
+                    hashCode = (hashCode * 59) + this.OptionPositions.GetHashCode();
                 }
                 if (this.Orders != null)
                 {

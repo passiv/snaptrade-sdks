@@ -48,7 +48,7 @@ export interface AccountHoldingsAccount {
      * @type {Array<OptionsPosition>}
      * @memberof AccountHoldingsAccount
      */
-    'option_postions'?: Array<OptionsPosition> | null;
+    'option_positions'?: Array<OptionsPosition> | null;
     /**
      * 
      * @type {Array<AccountOrderRecord>}

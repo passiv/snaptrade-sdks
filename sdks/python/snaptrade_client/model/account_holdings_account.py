@@ -97,7 +97,7 @@ class AccountHoldingsAccount(
                     )
             
             
-            class option_postions(
+            class option_positions(
                 schemas.ListBase,
                 schemas.NoneBase,
                 schemas.Schema,
@@ -116,7 +116,7 @@ class AccountHoldingsAccount(
                     cls,
                     *args: typing.Union[list, tuple, None, ],
                     _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'option_postions':
+                ) -> 'option_positions':
                     return super().__new__(
                         cls,
                         *args,
@@ -157,7 +157,7 @@ class AccountHoldingsAccount(
                 "account": account,
                 "balances": balances,
                 "positions": positions,
-                "option_postions": option_postions,
+                "option_positions": option_positions,
                 "orders": orders,
                 "total_value": total_value,
             }
@@ -173,7 +173,7 @@ class AccountHoldingsAccount(
     def __getitem__(self, name: typing_extensions.Literal["positions"]) -> MetaOapg.properties.positions: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["option_postions"]) -> MetaOapg.properties.option_postions: ...
+    def __getitem__(self, name: typing_extensions.Literal["option_positions"]) -> MetaOapg.properties.option_positions: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["orders"]) -> MetaOapg.properties.orders: ...
@@ -184,7 +184,7 @@ class AccountHoldingsAccount(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account"], typing_extensions.Literal["balances"], typing_extensions.Literal["positions"], typing_extensions.Literal["option_postions"], typing_extensions.Literal["orders"], typing_extensions.Literal["total_value"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account"], typing_extensions.Literal["balances"], typing_extensions.Literal["positions"], typing_extensions.Literal["option_positions"], typing_extensions.Literal["orders"], typing_extensions.Literal["total_value"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -198,7 +198,7 @@ class AccountHoldingsAccount(
     def get_item_oapg(self, name: typing_extensions.Literal["positions"]) -> typing.Union[MetaOapg.properties.positions, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["option_postions"]) -> typing.Union[MetaOapg.properties.option_postions, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["option_positions"]) -> typing.Union[MetaOapg.properties.option_positions, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["orders"]) -> typing.Union[MetaOapg.properties.orders, schemas.Unset]: ...
@@ -209,7 +209,7 @@ class AccountHoldingsAccount(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account"], typing_extensions.Literal["balances"], typing_extensions.Literal["positions"], typing_extensions.Literal["option_postions"], typing_extensions.Literal["orders"], typing_extensions.Literal["total_value"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account"], typing_extensions.Literal["balances"], typing_extensions.Literal["positions"], typing_extensions.Literal["option_positions"], typing_extensions.Literal["orders"], typing_extensions.Literal["total_value"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -218,7 +218,7 @@ class AccountHoldingsAccount(
         account: typing.Union['SnapTradeHoldingsAccountAccountId', schemas.Unset] = schemas.unset,
         balances: typing.Union[MetaOapg.properties.balances, list, tuple, None, schemas.Unset] = schemas.unset,
         positions: typing.Union[MetaOapg.properties.positions, list, tuple, None, schemas.Unset] = schemas.unset,
-        option_postions: typing.Union[MetaOapg.properties.option_postions, list, tuple, None, schemas.Unset] = schemas.unset,
+        option_positions: typing.Union[MetaOapg.properties.option_positions, list, tuple, None, schemas.Unset] = schemas.unset,
         orders: typing.Union[MetaOapg.properties.orders, list, tuple, None, schemas.Unset] = schemas.unset,
         total_value: typing.Union['SnapTradeHoldingsTotalValue', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -230,7 +230,7 @@ class AccountHoldingsAccount(
             account=account,
             balances=balances,
             positions=positions,
-            option_postions=option_postions,
+            option_positions=option_positions,
             orders=orders,
             total_value=total_value,
             _configuration=_configuration,

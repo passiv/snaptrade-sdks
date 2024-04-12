@@ -32,7 +32,7 @@ class OptionalAccountHoldingsAccount(TypedDict, total=False):
 
     positions: typing.Optional[typing.List[Position]]
 
-    option_postions: typing.Optional[typing.List[OptionsPosition]]
+    option_positions: typing.Optional[typing.List[OptionsPosition]]
 
     orders: typing.Optional[typing.List[AccountOrderRecord]]
 

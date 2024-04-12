@@ -908,7 +908,7 @@ public class AccountOrderRecord {
       if ((jsonObj.get("time_placed") != null && !jsonObj.get("time_placed").isJsonNull()) && !jsonObj.get("time_placed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_placed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_placed").toString()));
       }
-      if ((jsonObj.get("time_updated") != null && !jsonObj.get("time_updated").isJsonNull()) && !jsonObj.get("time_updated").isJsonPrimitive()) {
+      if (!jsonObj.get("time_updated").isJsonNull() && (jsonObj.get("time_updated") != null && !jsonObj.get("time_updated").isJsonNull()) && !jsonObj.get("time_updated").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_updated` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_updated").toString()));
       }
       if ((jsonObj.get("expiry_date") != null && !jsonObj.get("expiry_date").isJsonNull()) && !jsonObj.get("expiry_date").isJsonPrimitive()) {
