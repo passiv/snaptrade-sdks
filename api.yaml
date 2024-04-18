@@ -3160,6 +3160,10 @@ components:
           type: string
           example: BBG000B9XRY4
           nullable: true
+        figi_instrument:
+          nullable: true
+          allOf:
+           - $ref: "#/components/schemas/FigiInstrument"
     Timestamp:
       externalDocs:
         url: https://en.wikipedia.org/wiki/Unix_time
@@ -4133,6 +4137,18 @@ components:
           type: number
           description: Usually but not necessarily an integer
           example: 5
+    FigiInstrument:
+      description: Open FIGI Identifiers
+      type: object
+      properties:
+        figi_code:
+          type: string
+          example: BBG000B9Y5X2
+          nullable: true
+        figi_share_class:
+          type: string
+          example: BBG001S5N8V8
+          nullable: true
     UniversalSymbol:
       description: Universal symbol
       type: object
@@ -4163,6 +4179,10 @@ components:
           type: string
           example: BBG000B9XRY4
           nullable: true
+        figi_instrument:
+          nullable: true
+          allOf:
+           - $ref: "#/components/schemas/FigiInstrument"
       required:
         - id
         - symbol
@@ -4197,6 +4217,10 @@ components:
           type: string
           example: BBG000B9XRY4
           nullable: true
+        figi_instrument:
+          nullable: true
+          allOf:
+           - $ref: "#/components/schemas/FigiInstrument"
     OptionsSymbol:
       description: Options Symbol
       type: object
