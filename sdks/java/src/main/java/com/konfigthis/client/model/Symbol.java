@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
+import com.konfigthis.client.model.FigiInstrumentNullable;
 import com.konfigthis.client.model.SecurityType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -86,6 +87,10 @@ public class Symbol {
   public static final String SERIALIZED_NAME_FIGI_CODE = "figi_code";
   @SerializedName(SERIALIZED_NAME_FIGI_CODE)
   private String figiCode;
+
+  public static final String SERIALIZED_NAME_FIGI_INSTRUMENT = "figi_instrument";
+  @SerializedName(SERIALIZED_NAME_FIGI_INSTRUMENT)
+  private FigiInstrumentNullable figiInstrument;
 
   public Symbol() {
   }
@@ -321,6 +326,35 @@ public class Symbol {
     this.figiCode = figiCode;
   }
 
+
+  public Symbol figiInstrument(FigiInstrumentNullable figiInstrument) {
+    
+    
+    
+    
+    this.figiInstrument = figiInstrument;
+    return this;
+  }
+
+   /**
+   * Get figiInstrument
+   * @return figiInstrument
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public FigiInstrumentNullable getFigiInstrument() {
+    return figiInstrument;
+  }
+
+
+  public void setFigiInstrument(FigiInstrumentNullable figiInstrument) {
+    
+    
+    
+    this.figiInstrument = figiInstrument;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -383,7 +417,8 @@ public class Symbol {
         Objects.equals(this.currency, symbol.currency) &&
         Objects.equals(this.exchange, symbol.exchange) &&
         Objects.equals(this.type, symbol.type) &&
-        Objects.equals(this.figiCode, symbol.figiCode)&&
+        Objects.equals(this.figiCode, symbol.figiCode) &&
+        Objects.equals(this.figiInstrument, symbol.figiInstrument)&&
         Objects.equals(this.additionalProperties, symbol.additionalProperties);
   }
 
@@ -393,7 +428,7 @@ public class Symbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, rawSymbol, name, currency, exchange, type, figiCode, additionalProperties);
+    return Objects.hash(id, symbol, rawSymbol, name, currency, exchange, type, figiCode, figiInstrument, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -415,6 +450,7 @@ public class Symbol {
     sb.append("    exchange: ").append(toIndentedString(exchange)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    figiCode: ").append(toIndentedString(figiCode)).append("\n");
+    sb.append("    figiInstrument: ").append(toIndentedString(figiInstrument)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -446,6 +482,7 @@ public class Symbol {
     openapiFields.add("exchange");
     openapiFields.add("type");
     openapiFields.add("figi_code");
+    openapiFields.add("figi_instrument");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -489,6 +526,10 @@ public class Symbol {
       }
       if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
+      }
+      // validate the optional field `figi_instrument`
+      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
+        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
       }
   }
 

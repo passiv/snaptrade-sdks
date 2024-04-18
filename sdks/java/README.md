@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.12-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.12)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.13-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.13)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.12</version>
+  <version>5.0.13</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.12"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.13"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.12.jar`
+* `target/snaptrade-java-sdk-5.0.13.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -262,6 +262,8 @@ Class | Method | HTTP request | Description
  - [Exchange](docs/Exchange.md)
  - [ExchangeRatePairs](docs/ExchangeRatePairs.md)
  - [ExcludedAsset](docs/ExcludedAsset.md)
+ - [FigiInstrument](docs/FigiInstrument.md)
+ - [FigiInstrumentNullable](docs/FigiInstrumentNullable.md)
  - [JWT](docs/JWT.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)

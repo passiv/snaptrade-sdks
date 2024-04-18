@@ -73,6 +73,10 @@ class Symbol(
                         *args,
                         _configuration=_configuration,
                     )
+        
+            @staticmethod
+            def figi_instrument() -> typing.Type['FigiInstrumentNullable']:
+                return FigiInstrumentNullable
             __annotations__ = {
                 "id": id,
                 "symbol": symbol,
@@ -82,6 +86,7 @@ class Symbol(
                 "exchange": exchange,
                 "type": type,
                 "figi_code": figi_code,
+                "figi_instrument": figi_instrument,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -110,9 +115,12 @@ class Symbol(
     def __getitem__(self, name: typing_extensions.Literal["figi_code"]) -> MetaOapg.properties.figi_code: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["figi_instrument"]) -> 'FigiInstrumentNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], typing_extensions.Literal["figi_instrument"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -141,9 +149,12 @@ class Symbol(
     def get_item_oapg(self, name: typing_extensions.Literal["figi_code"]) -> typing.Union[MetaOapg.properties.figi_code, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["figi_instrument"]) -> typing.Union['FigiInstrumentNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["raw_symbol"], typing_extensions.Literal["name"], typing_extensions.Literal["currency"], typing_extensions.Literal["exchange"], typing_extensions.Literal["type"], typing_extensions.Literal["figi_code"], typing_extensions.Literal["figi_instrument"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -157,6 +168,7 @@ class Symbol(
         exchange: typing.Union['Exchange', schemas.Unset] = schemas.unset,
         type: typing.Union['SecurityType', schemas.Unset] = schemas.unset,
         figi_code: typing.Union[MetaOapg.properties.figi_code, None, str, schemas.Unset] = schemas.unset,
+        figi_instrument: typing.Union['FigiInstrumentNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Symbol':
@@ -171,10 +183,12 @@ class Symbol(
             exchange=exchange,
             type=type,
             figi_code=figi_code,
+            figi_instrument=figi_instrument,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.exchange import Exchange
+from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.model.security_type import SecurityType

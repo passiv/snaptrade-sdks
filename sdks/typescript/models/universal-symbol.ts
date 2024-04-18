@@ -13,6 +13,7 @@ import type * as buffer from "buffer"
 import { Currency } from './currency';
 import { Exchange } from './exchange';
 import { SecurityType } from './security-type';
+import { SymbolFigiInstrument } from './symbol-figi-instrument';
 
 /**
  * Universal symbol
@@ -76,5 +77,11 @@ export interface UniversalSymbol {
      * @memberof UniversalSymbol
      */
     'figi_code'?: string | null;
+    /**
+     * 
+     * @type {SymbolFigiInstrument}
+     * @memberof UniversalSymbol
+     */
+    'figi_instrument'?: SymbolFigiInstrument | null;
 }
 

@@ -43,7 +43,8 @@ namespace SnapTrade.Net.Model
         /// <param name="type">type.</param>
         /// <param name="currencies">currencies.</param>
         /// <param name="figiCode">figiCode.</param>
-        public UnderlyingSymbol(string id = default(string), string symbol = default(string), string description = default(string), Currency currency = default(Currency), USExchange exchange = default(USExchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>), string figiCode = default(string)) : base()
+        /// <param name="figiInstrument">figiInstrument.</param>
+        public UnderlyingSymbol(string id = default(string), string symbol = default(string), string description = default(string), Currency currency = default(Currency), USExchange exchange = default(USExchange), SecurityType type = default(SecurityType), List<Currency> currencies = default(List<Currency>), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -53,6 +54,7 @@ namespace SnapTrade.Net.Model
             this.Type = type;
             this.Currencies = currencies;
             this.FigiCode = figiCode;
+            this.FigiInstrument = figiInstrument;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -105,6 +107,12 @@ namespace SnapTrade.Net.Model
         public string FigiCode { get; set; }
 
         /// <summary>
+        /// Gets or Sets FigiInstrument
+        /// </summary>
+        [DataMember(Name = "figi_instrument", EmitDefaultValue = true)]
+        public FigiInstrumentNullable FigiInstrument { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -127,6 +135,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Currencies: ").Append(Currencies).Append("\n");
             sb.Append("  FigiCode: ").Append(FigiCode).Append("\n");
+            sb.Append("  FigiInstrument: ").Append(FigiInstrument).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -203,6 +212,11 @@ namespace SnapTrade.Net.Model
                     this.FigiCode == input.FigiCode ||
                     (this.FigiCode != null &&
                     this.FigiCode.Equals(input.FigiCode))
+                ) && base.Equals(input) && 
+                (
+                    this.FigiInstrument == input.FigiInstrument ||
+                    (this.FigiInstrument != null &&
+                    this.FigiInstrument.Equals(input.FigiInstrument))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -247,6 +261,10 @@ namespace SnapTrade.Net.Model
                 if (this.FigiCode != null)
                 {
                     hashCode = (hashCode * 59) + this.FigiCode.GetHashCode();
+                }
+                if (this.FigiInstrument != null)
+                {
+                    hashCode = (hashCode * 59) + this.FigiInstrument.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

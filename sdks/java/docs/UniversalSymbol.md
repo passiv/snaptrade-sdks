@@ -17,6 +17,7 @@ Universal symbol
 |**type** | [**SecurityType**](SecurityType.md) |  |  |
 |**currencies** | [**List&lt;Currency&gt;**](Currency.md) |  |  |
 |**figiCode** | **String** |  |  [optional] |
+|**figiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  |  [optional] |
 
 
 

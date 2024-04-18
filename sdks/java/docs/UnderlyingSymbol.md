@@ -16,6 +16,7 @@ Underlying Symbol
 |**type** | [**SecurityType**](SecurityType.md) |  |  [optional] |
 |**currencies** | [**List&lt;Currency&gt;**](Currency.md) |  |  [optional] |
 |**figiCode** | **String** |  |  [optional] |
+|**figiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  |  [optional] |
 
 
 

@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.FigiInstrumentNullable;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.USExchange;
 import io.swagger.annotations.ApiModel;
@@ -88,6 +89,10 @@ public class UnderlyingSymbol {
   public static final String SERIALIZED_NAME_FIGI_CODE = "figi_code";
   @SerializedName(SERIALIZED_NAME_FIGI_CODE)
   private String figiCode;
+
+  public static final String SERIALIZED_NAME_FIGI_INSTRUMENT = "figi_instrument";
+  @SerializedName(SERIALIZED_NAME_FIGI_INSTRUMENT)
+  private FigiInstrumentNullable figiInstrument;
 
   public UnderlyingSymbol() {
   }
@@ -331,6 +336,35 @@ public class UnderlyingSymbol {
     this.figiCode = figiCode;
   }
 
+
+  public UnderlyingSymbol figiInstrument(FigiInstrumentNullable figiInstrument) {
+    
+    
+    
+    
+    this.figiInstrument = figiInstrument;
+    return this;
+  }
+
+   /**
+   * Get figiInstrument
+   * @return figiInstrument
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public FigiInstrumentNullable getFigiInstrument() {
+    return figiInstrument;
+  }
+
+
+  public void setFigiInstrument(FigiInstrumentNullable figiInstrument) {
+    
+    
+    
+    this.figiInstrument = figiInstrument;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -393,7 +427,8 @@ public class UnderlyingSymbol {
         Objects.equals(this.exchange, underlyingSymbol.exchange) &&
         Objects.equals(this.type, underlyingSymbol.type) &&
         Objects.equals(this.currencies, underlyingSymbol.currencies) &&
-        Objects.equals(this.figiCode, underlyingSymbol.figiCode)&&
+        Objects.equals(this.figiCode, underlyingSymbol.figiCode) &&
+        Objects.equals(this.figiInstrument, underlyingSymbol.figiInstrument)&&
         Objects.equals(this.additionalProperties, underlyingSymbol.additionalProperties);
   }
 
@@ -403,7 +438,7 @@ public class UnderlyingSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, description, currency, exchange, type, currencies, figiCode, additionalProperties);
+    return Objects.hash(id, symbol, description, currency, exchange, type, currencies, figiCode, figiInstrument, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -425,6 +460,7 @@ public class UnderlyingSymbol {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    figiCode: ").append(toIndentedString(figiCode)).append("\n");
+    sb.append("    figiInstrument: ").append(toIndentedString(figiInstrument)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -456,6 +492,7 @@ public class UnderlyingSymbol {
     openapiFields.add("type");
     openapiFields.add("currencies");
     openapiFields.add("figi_code");
+    openapiFields.add("figi_instrument");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -510,6 +547,10 @@ public class UnderlyingSymbol {
       }
       if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
+      }
+      // validate the optional field `figi_instrument`
+      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
+        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
       }
   }
 

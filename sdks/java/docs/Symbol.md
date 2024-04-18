@@ -16,6 +16,7 @@ Symbol
 |**exchange** | [**Exchange**](Exchange.md) |  |  [optional] |
 |**type** | [**SecurityType**](SecurityType.md) |  |  [optional] |
 |**figiCode** | **String** |  |  [optional] |
+|**figiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  |  [optional] |
 
 
 

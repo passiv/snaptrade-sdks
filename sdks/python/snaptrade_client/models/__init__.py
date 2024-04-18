@@ -51,6 +51,8 @@ from snaptrade_client.model.encrypted_response_encrypted_message_data import Enc
 from snaptrade_client.model.exchange import Exchange
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs
 from snaptrade_client.model.excluded_asset import ExcludedAsset
+from snaptrade_client.model.figi_instrument import FigiInstrument
+from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.model.filled_units import FilledUnits
 from snaptrade_client.model.id import Id
 from snaptrade_client.model.jwt import JWT

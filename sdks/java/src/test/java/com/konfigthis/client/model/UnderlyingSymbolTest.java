@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.FigiInstrumentNullable;
 import com.konfigthis.client.model.SecurityType;
 import com.konfigthis.client.model.USExchange;
 import io.swagger.annotations.ApiModel;
@@ -107,6 +108,14 @@ public class UnderlyingSymbolTest {
     @Test
     public void figiCodeTest() {
         // TODO: test figiCode
+    }
+
+    /**
+     * Test the property 'figiInstrument'
+     */
+    @Test
+    public void figiInstrumentTest() {
+        // TODO: test figiInstrument
     }
 
 }

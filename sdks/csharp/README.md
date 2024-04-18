@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.14-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.14)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.15-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.15)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -171,6 +171,8 @@ Class | Method | HTTP request | Description
  - [Exchange](docs/Exchange.md)
  - [ExchangeRatePairs](docs/ExchangeRatePairs.md)
  - [ExcludedAsset](docs/ExcludedAsset.md)
+ - [FigiInstrument](docs/FigiInstrument.md)
+ - [FigiInstrumentNullable](docs/FigiInstrumentNullable.md)
  - [JWT](docs/JWT.md)
  - [LoginRedirectURI](docs/LoginRedirectURI.md)
  - [ManualTrade](docs/ManualTrade.md)

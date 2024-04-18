@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.currency import Currency
+from snaptrade_client.type.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.type.security_type import SecurityType
 from snaptrade_client.type.us_exchange import USExchange
 
@@ -38,6 +39,8 @@ class OptionalUnderlyingSymbol(TypedDict, total=False):
     currencies: typing.List[Currency]
 
     figi_code: typing.Optional[str]
+
+    figi_instrument: typing.Optional[FigiInstrumentNullable]
 
 class UnderlyingSymbol(RequiredUnderlyingSymbol, OptionalUnderlyingSymbol):
     pass

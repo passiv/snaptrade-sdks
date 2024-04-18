@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { Currency } from './currency';
 import { SecurityType } from './security-type';
+import { SymbolFigiInstrument } from './symbol-figi-instrument';
 import { USExchange } from './usexchange';
 
 /**
@@ -70,5 +71,11 @@ export interface UnderlyingSymbol {
      * @memberof UnderlyingSymbol
      */
     'figi_code'?: string | null;
+    /**
+     * 
+     * @type {SymbolFigiInstrument}
+     * @memberof UnderlyingSymbol
+     */
+    'figi_instrument'?: SymbolFigiInstrument | null;
 }
 
