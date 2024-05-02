@@ -104,6 +104,9 @@ paths:
       tags:
         - Authentication
       summary: Create SnapTrade user
+      description: |
+        Registers a new SnapTrade user under your ClientID.
+        Most SnapTrade operations require a user to be passed as a parameter.
       operationId: Authentication_registerSnapTradeUser
       requestBody:
         $ref: "#/components/requestBodies/RegisterUserRequestBody"
@@ -230,6 +233,9 @@ paths:
         - Authentication
       summary:
         Generate encrypted JWT token
+      description: |
+        This API is available to ClientIDs which have opted to use encrypted
+        JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
       operationId: Authentication_getUserJWT
       parameters:
         - in: query
@@ -276,6 +282,9 @@ paths:
       tags:
         - Authentication
       summary: Obtain a new user secret for a user
+      description: |
+        This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret
+        is comprimised or lost among other reasons.
       operationId: Authentication_resetSnapTradeUserSecret
       requestBody:
         $ref: "#/components/requestBodies/ResetUserSecretRequestBody"
@@ -311,6 +320,7 @@ paths:
       tags:
         - Reference Data
       summary: Get metadata related to Snaptrade partner
+      description: Returns useful data related to the specified ClientID, including allowed brokerages and data access.
       operationId: ReferenceData_getPartnerInfo
       parameters: []
       responses:
@@ -350,6 +360,9 @@ paths:
       summary:
         List all accounts for the user, plus balances, positions, and orders for each
         account.
+      description: |
+        Lists balances, positions and orders for the specified account. The data returned is similar to
+        the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
       operationId: AccountInformation_getAllUserHoldings
       parameters:
         - in: query
@@ -400,6 +413,10 @@ paths:
       tags:
         - Account Information
       summary: List balances, positions and orders for the specified account
+      description: |
+        Lists balances, positions and orders for the specified account as well as
+        option_positions and account metadata. The data returned is similar to the
+        data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
       operationId: AccountInformation_getUserHoldings
       parameters:
         - in: path
@@ -446,6 +463,7 @@ paths:
       tags:
         - Account Information
       summary: List accounts
+      description: Get a list of all Account objects for the authenticated SnapTrade user.
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -474,6 +492,9 @@ paths:
       tags:
         - Account Information
       summary: Return details of a specific investment account
+      description: |
+        Returns an account object with details for the specified account,
+        including the total account market value.
       operationId: AccountInformation_getUserAccountDetails
       parameters:
         - in: query
@@ -507,6 +528,7 @@ paths:
       tags:
         - Account Information
       summary: Update details of an investment account
+      description: Updates various properties of a specified account.
       operationId: AccountInformation_updateUserAccount
       parameters:
         - in: query
@@ -579,6 +601,7 @@ paths:
       tags:
         - Account Information
       summary: List account positions
+      description: Returns a list of positions in the the specified account.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
         - in: query
@@ -673,6 +696,7 @@ paths:
       tags:
         - Trading
       summary: Get symbol quotes
+      description: Returns live quote(s) from the brokerage for the specified symbol(s).
       operationId: Trading_getUserAccountQuotes
       parameters:
         - in: query
@@ -722,6 +746,9 @@ paths:
       tags:
         - Trading
       summary: Cancel open order in account
+      description: |
+        Sends a signal to the brokerage to cancel the specified order.
+        This will only work if the order has not yet been executed.
       operationId: Trading_cancelUserAccountOrder
       parameters:
         - in: query
@@ -774,6 +801,10 @@ paths:
         - Reference Data
       summary:
         Search for symbols available in an account
+      description: |
+        Returns a list of universal symbols that are supported by
+        the specificied account. Returned symbols are based on the
+        provided search string, matching on ticker and name.
       operationId: ReferenceData_symbolSearchUserAccount
       parameters:
         - in: query
@@ -1456,41 +1487,6 @@ paths:
           description: Unexpected Error
       requestBody:
         $ref: "#/components/requestBodies/ValidatedTradeRequestBody"
-  /trade/oco:
-    post:
-      deprecated: true
-      tags:
-        - Trading
-      summary: Place a OCO (One Cancels Other) order
-      operationId: Trading_placeOCOOrder
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-      responses:
-        "200":
-          description: Status of order placed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AccountOrderRecord"
-        "400":
-          description: Failed to submit order to broker
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/400FailedRequestResponse"
-        "500":
-          description: Unexpected Error
-      requestBody:
-        $ref: "#/components/requestBodies/OCORequestBody"
   /activities:
     get:
       tags:
@@ -1877,17 +1873,6 @@ components:
                 description: API Client Secret from brokerage when registering app
               redirectURI:
                 description: Redirect uri from brokerage when registering app
-    OCORequestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              first_trade_id:
-                description: The ID of first trade object obtained from trade/impact endpoint
-              second_trade_id:
-                description: The ID of second trade object obtained from trade/impact endpoint
 
     OptionStrategyRequestBody:
       required: true
