@@ -194,6 +194,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'TimeUpdated'
         }
         /// <summary>
+        /// Test the property 'TimeExecuted'
+        /// </summary>
+        [Fact]
+        public void TimeExecutedTest()
+        {
+            // TODO unit test for the property 'TimeExecuted'
+        }
+        /// <summary>
         /// Test the property 'ExpiryDate'
         /// </summary>
         [Fact]

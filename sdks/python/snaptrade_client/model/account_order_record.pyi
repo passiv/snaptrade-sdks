@@ -93,6 +93,10 @@ class AccountOrderRecord(
             @staticmethod
             def time_updated() -> typing.Type['TimeNullable']:
                 return TimeNullable
+        
+            @staticmethod
+            def time_executed() -> typing.Type['TimeNullable']:
+                return TimeNullable
             expiry_date = schemas.StrSchema
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
@@ -112,6 +116,7 @@ class AccountOrderRecord(
                 "time_in_force": time_in_force,
                 "time_placed": time_placed,
                 "time_updated": time_updated,
+                "time_executed": time_executed,
                 "expiry_date": expiry_date,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -168,12 +173,15 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["time_updated"]) -> 'TimeNullable': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["time_executed"]) -> 'TimeNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["expiry_date"]) -> MetaOapg.properties.expiry_date: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["symbol"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["expiry_date"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["symbol"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -229,12 +237,15 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["time_updated"]) -> typing.Union['TimeNullable', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["time_executed"]) -> typing.Union['TimeNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["expiry_date"]) -> typing.Union[MetaOapg.properties.expiry_date, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["symbol"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["expiry_date"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["symbol"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -257,6 +268,7 @@ class AccountOrderRecord(
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         time_placed: typing.Union[MetaOapg.properties.time_placed, str, schemas.Unset] = schemas.unset,
         time_updated: typing.Union['TimeNullable', schemas.Unset] = schemas.unset,
+        time_executed: typing.Union['TimeNullable', schemas.Unset] = schemas.unset,
         expiry_date: typing.Union[MetaOapg.properties.expiry_date, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -281,6 +293,7 @@ class AccountOrderRecord(
             time_in_force=time_in_force,
             time_placed=time_placed,
             time_updated=time_updated,
+            time_executed=time_executed,
             expiry_date=expiry_date,
             _configuration=_configuration,
             **kwargs,

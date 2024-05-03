@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **TimeInForce** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **TimePlaced** | **string** | Time | [optional] 
 **TimeUpdated** | **string** | Time | [optional] 
+**TimeExecuted** | **string** | Time | [optional] 
 **ExpiryDate** | **string** | Time | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

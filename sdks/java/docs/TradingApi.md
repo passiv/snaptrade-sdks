@@ -69,6 +69,7 @@ public class Example {
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
       System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
@@ -426,6 +427,7 @@ public class Example {
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
       System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
@@ -550,6 +552,7 @@ public class Example {
       System.out.println(result.getTimeInForce());
       System.out.println(result.getTimePlaced());
       System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");

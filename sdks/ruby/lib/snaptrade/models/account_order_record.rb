@@ -58,6 +58,8 @@ module SnapTrade
 
     attr_accessor :time_updated
 
+    attr_accessor :time_executed
+
     # Time
     attr_accessor :expiry_date
 
@@ -81,6 +83,7 @@ module SnapTrade
         :'time_in_force' => :'time_in_force',
         :'time_placed' => :'time_placed',
         :'time_updated' => :'time_updated',
+        :'time_executed' => :'time_executed',
         :'expiry_date' => :'expiry_date'
       }
     end
@@ -110,6 +113,7 @@ module SnapTrade
         :'time_in_force' => :'String',
         :'time_placed' => :'String',
         :'time_updated' => :'String',
+        :'time_executed' => :'String',
         :'expiry_date' => :'String'
       }
     end
@@ -125,6 +129,7 @@ module SnapTrade
         :'limit_price',
         :'stop_price',
         :'time_updated',
+        :'time_executed',
       ])
     end
 
@@ -211,6 +216,10 @@ module SnapTrade
         self.time_updated = attributes[:'time_updated']
       end
 
+      if attributes.key?(:'time_executed')
+        self.time_executed = attributes[:'time_executed']
+      end
+
       if attributes.key?(:'expiry_date')
         self.expiry_date = attributes[:'expiry_date']
       end
@@ -251,6 +260,7 @@ module SnapTrade
           time_in_force == o.time_in_force &&
           time_placed == o.time_placed &&
           time_updated == o.time_updated &&
+          time_executed == o.time_executed &&
           expiry_date == o.expiry_date
     end
 
@@ -263,7 +273,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, symbol, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, expiry_date].hash
+      [brokerage_order_id, status, symbol, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date].hash
     end
 
     # Builds the object from hash

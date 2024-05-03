@@ -2934,6 +2934,7 @@ components:
           average_purchase_price: 108.3353
         orders:
         - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          time_executed: 2022-01-21T20:11:19.217Z
           time_placed: 2022-01-21T20:11:19.217Z
           expiry_date: 2022-01-21T20:11:19.217Z
           brokerage_order_id: brokerage_order_id
@@ -3027,6 +3028,7 @@ components:
           open_quantity: 6.027456183070403
           status: null
         - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          time_executed: 2022-01-21T20:11:19.217Z
           time_placed: 2022-01-21T20:11:19.217Z
           expiry_date: 2022-01-21T20:11:19.217Z
           brokerage_order_id: brokerage_order_id
@@ -3174,6 +3176,7 @@ components:
       description: Record of order in brokerageaccount
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        time_executed: 2022-01-21T20:11:19.217Z
         time_placed: 2022-01-21T20:11:19.217Z
         expiry_date: 2022-01-21T20:11:19.217Z
         brokerage_order_id: brokerage_order_id
@@ -3339,6 +3342,13 @@ components:
           x-konfig-original-example: 2022-01-21T20:11:19.217Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
         time_updated:
+          description: Time
+          example: 2022-01-21T20:11:19.217Z
+          nullable: true
+          type: string
+          x-konfig-original-example: 2022-01-21T20:11:19.217Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+        time_executed:
           description: Time
           example: 2022-01-21T20:11:19.217Z
           nullable: true

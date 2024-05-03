@@ -125,6 +125,10 @@ public class AccountOrderRecord {
   @SerializedName(SERIALIZED_NAME_TIME_UPDATED)
   private String timeUpdated;
 
+  public static final String SERIALIZED_NAME_TIME_EXECUTED = "time_executed";
+  @SerializedName(SERIALIZED_NAME_TIME_EXECUTED)
+  private String timeExecuted;
+
   public static final String SERIALIZED_NAME_EXPIRY_DATE = "expiry_date";
   @SerializedName(SERIALIZED_NAME_EXPIRY_DATE)
   private String expiryDate;
@@ -688,6 +692,35 @@ public class AccountOrderRecord {
   }
 
 
+  public AccountOrderRecord timeExecuted(String timeExecuted) {
+    
+    
+    
+    
+    this.timeExecuted = timeExecuted;
+    return this;
+  }
+
+   /**
+   * Time
+   * @return timeExecuted
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2022-01-21T20:11:19.217Z", value = "Time")
+
+  public String getTimeExecuted() {
+    return timeExecuted;
+  }
+
+
+  public void setTimeExecuted(String timeExecuted) {
+    
+    
+    
+    this.timeExecuted = timeExecuted;
+  }
+
+
   public AccountOrderRecord expiryDate(String expiryDate) {
     
     
@@ -788,6 +821,7 @@ public class AccountOrderRecord {
         Objects.equals(this.timeInForce, accountOrderRecord.timeInForce) &&
         Objects.equals(this.timePlaced, accountOrderRecord.timePlaced) &&
         Objects.equals(this.timeUpdated, accountOrderRecord.timeUpdated) &&
+        Objects.equals(this.timeExecuted, accountOrderRecord.timeExecuted) &&
         Objects.equals(this.expiryDate, accountOrderRecord.expiryDate)&&
         Objects.equals(this.additionalProperties, accountOrderRecord.additionalProperties);
   }
@@ -798,7 +832,7 @@ public class AccountOrderRecord {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, symbol, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, expiryDate, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, symbol, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -829,6 +863,7 @@ public class AccountOrderRecord {
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    timePlaced: ").append(toIndentedString(timePlaced)).append("\n");
     sb.append("    timeUpdated: ").append(toIndentedString(timeUpdated)).append("\n");
+    sb.append("    timeExecuted: ").append(toIndentedString(timeExecuted)).append("\n");
     sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -870,6 +905,7 @@ public class AccountOrderRecord {
     openapiFields.add("time_in_force");
     openapiFields.add("time_placed");
     openapiFields.add("time_updated");
+    openapiFields.add("time_executed");
     openapiFields.add("expiry_date");
 
     // a set of required properties/fields (JSON key names)
@@ -910,6 +946,9 @@ public class AccountOrderRecord {
       }
       if (!jsonObj.get("time_updated").isJsonNull() && (jsonObj.get("time_updated") != null && !jsonObj.get("time_updated").isJsonNull()) && !jsonObj.get("time_updated").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_updated` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_updated").toString()));
+      }
+      if (!jsonObj.get("time_executed").isJsonNull() && (jsonObj.get("time_executed") != null && !jsonObj.get("time_executed").isJsonNull()) && !jsonObj.get("time_executed").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `time_executed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_executed").toString()));
       }
       if ((jsonObj.get("expiry_date") != null && !jsonObj.get("expiry_date").isJsonNull()) && !jsonObj.get("expiry_date").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `expiry_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("expiry_date").toString()));

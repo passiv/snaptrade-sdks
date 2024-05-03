@@ -25,6 +25,7 @@ Record of order in brokerageaccount
 |**timeInForce** | **String** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  |  [optional] |
 |**timePlaced** | **String** | Time |  [optional] |
 |**timeUpdated** | **String** | Time |  [optional] |
+|**timeExecuted** | **String** | Time |  [optional] |
 |**expiryDate** | **String** | Time |  [optional] |
 
 
