@@ -116,6 +116,8 @@ public class Example {
 
 Get metadata related to Snaptrade partner
 
+Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -937,6 +939,8 @@ This endpoint does not need any parameter.
 > List&lt;UniversalSymbol&gt; symbolSearchUserAccount(userId, userSecret, accountId).symbolQuery(symbolQuery).execute();
 
 Search for symbols available in an account
+
+Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
 
 ### Example
 ```java

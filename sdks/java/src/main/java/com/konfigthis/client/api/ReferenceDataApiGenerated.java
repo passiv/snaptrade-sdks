@@ -374,7 +374,7 @@ public class ReferenceDataApiGenerated {
 
     /**
      * Get metadata related to Snaptrade partner
-     * 
+     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
      * @return GetPartnerInfoRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1809,7 +1809,7 @@ public class ReferenceDataApiGenerated {
 
     /**
      * Search for symbols available in an account
-     * 
+     * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to search for symbols within. (required)

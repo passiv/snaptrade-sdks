@@ -24,7 +24,6 @@ import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
-import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
@@ -53,6 +52,8 @@ public class TradingApiTest {
 
     /**
      * Cancel open order in account
+     *
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -103,6 +104,8 @@ public class TradingApiTest {
     /**
      * Get symbol quotes
      *
+     * Returns live quote(s) from the brokerage for the specified symbol(s).
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -146,24 +149,6 @@ public class TradingApiTest {
                 .units(units)
                 .universalSymbolId(universalSymbolId)
                 .notionalValue(notionalValue)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Place a OCO (One Cancels Other) order
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void placeOCOOrderTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        Object firstTradeId = null;
-        Object secondTradeId = null;
-        AccountOrderRecord response = api.placeOCOOrder(userId, userSecret)
-                .firstTradeId(firstTradeId)
-                .secondTradeId(secondTradeId)
                 .execute();
         // TODO: test validations
     }

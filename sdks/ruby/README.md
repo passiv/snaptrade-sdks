@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.14-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.14)
+[![npm](https://img.shields.io/badge/gem-v2.0.15-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.15)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -58,7 +58,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
-  * [`snaptrade.trading.place_oco_order`](#snaptradetradingplace_oco_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
@@ -70,7 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.14'
+gem 'snaptrade', '~> 2.0.15'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -111,7 +110,9 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 
-List all accounts for the user, plus balances, positions, and orders for each account.
+Lists balances, positions and orders for the specified account. The data returned is similar to
+the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -182,7 +183,9 @@ The ID of the account to get balances.
 
 ### `snaptrade.account_information.get_user_account_details`<a id="snaptradeaccount_informationget_user_account_details"></a>
 
-Return details of a specific investment account
+Returns an account object with details for the specified account,
+including the total account market value.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -261,7 +264,7 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 ### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
 
-List account positions
+Returns a list of positions in the the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -296,7 +299,10 @@ The ID of the account to get positions.
 
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 
-List balances, positions and orders for the specified account
+Lists balances, positions and orders for the specified account as well as
+option_positions and account metadata. The data returned is similar to the
+data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -331,7 +337,7 @@ The ID of the account to fetch holdings for.
 
 ### `snaptrade.account_information.list_user_accounts`<a id="snaptradeaccount_informationlist_user_accounts"></a>
 
-List accounts
+Get a list of all Account objects for the authenticated SnapTrade user.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -362,7 +368,7 @@ p result
 
 ### `snaptrade.account_information.update_user_account`<a id="snaptradeaccount_informationupdate_user_account"></a>
 
-Update details of an investment account
+Updates various properties of a specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -450,7 +456,9 @@ p result
 
 ### `snaptrade.authentication.get_user_jwt`<a id="snaptradeauthenticationget_user_jwt"></a>
 
-Generate encrypted JWT token
+This API is available to ClientIDs which have opted to use encrypted
+JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -559,7 +567,9 @@ Sets the version of the connection portal to render, with a default to 'v2'
 
 ### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
-Create SnapTrade user
+Registers a new SnapTrade user under your ClientID.
+Most SnapTrade operations require a user to be passed as a parameter.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -591,7 +601,9 @@ it's unique to a user
 
 ### `snaptrade.authentication.reset_snap_trade_user_secret`<a id="snaptradeauthenticationreset_snap_trade_user_secret"></a>
 
-Obtain a new user secret for a user
+This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret
+is comprimised or lost among other reasons.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1007,7 +1019,7 @@ A currency pair based on currency code for example, {CAD-USD}
 
 ### `snaptrade.reference_data.get_partner_info`<a id="snaptradereference_dataget_partner_info"></a>
 
-Get metadata related to Snaptrade partner
+Returns useful data related to the specified ClientID, including allowed brokerages and data access.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1242,7 +1254,10 @@ p result
 
 ### `snaptrade.reference_data.symbol_search_user_account`<a id="snaptradereference_datasymbol_search_user_account"></a>
 
-Search for symbols available in an account
+Returns a list of universal symbols that are supported by
+the specificied account. Returned symbols are based on the
+provided search string, matching on ticker and name.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1279,7 +1294,9 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 
-Cancel open order in account
+Sends a signal to the brokerage to cancel the specified order.
+This will only work if the order has not yet been executed.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1376,7 +1393,7 @@ Canceled
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Get symbol quotes
+Returns live quote(s) from the brokerage for the specified symbol(s).
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1471,45 +1488,6 @@ Canceled
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.place_oco_order`<a id="snaptradetradingplace_oco_order"></a>
-
-Place a OCO (One Cancels Other) order
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.trading.place_oco_order(
-  user_id: "John.doe@snaptrade.com",
-  user_secret: "USERSECRET123",
-  first_trade_id: None,
-  second_trade_id: None,
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### first_trade_id: `Object`<a id="first_trade_id-object"></a>
-The ID of first trade object obtained from trade/impact endpoint
-
-##### second_trade_id: `Object`<a id="second_trade_id-object"></a>
-The ID of second trade object obtained from trade/impact endpoint
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/trade/oco` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -19,6 +19,9 @@ module SnapTrade
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
     #
+    # Lists balances, positions and orders for the specified account. The data returned is similar to
+    # the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -31,6 +34,9 @@ module SnapTrade
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
     #
+    # Lists balances, positions and orders for the specified account. The data returned is similar to
+    # the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
@@ -41,6 +47,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
+    # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -52,6 +59,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
+    # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -218,6 +226,9 @@ module SnapTrade
 
     # Return details of a specific investment account
     #
+    # Returns an account object with details for the specified account,
+    # including the total account market value.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -229,6 +240,9 @@ module SnapTrade
 
     # Return details of a specific investment account
     #
+    # Returns an account object with details for the specified account,
+    # including the total account market value.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -238,6 +252,7 @@ module SnapTrade
     end
 
     # Return details of a specific investment account
+    # Returns an account object with details for the specified account, including the total account market value. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -249,6 +264,7 @@ module SnapTrade
     end
 
     # Return details of a specific investment account
+    # Returns an account object with details for the specified account, including the total account market value. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get detail of.
@@ -440,6 +456,8 @@ module SnapTrade
 
     # List account positions
     #
+    # Returns a list of positions in the the specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -451,6 +469,8 @@ module SnapTrade
 
     # List account positions
     #
+    # Returns a list of positions in the the specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -460,6 +480,7 @@ module SnapTrade
     end
 
     # List account positions
+    # Returns a list of positions in the the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -471,6 +492,7 @@ module SnapTrade
     end
 
     # List account positions
+    # Returns a list of positions in the the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -537,6 +559,10 @@ module SnapTrade
 
     # List balances, positions and orders for the specified account
     #
+    # Lists balances, positions and orders for the specified account as well as
+    # option_positions and account metadata. The data returned is similar to the
+    # data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    #
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -548,6 +574,10 @@ module SnapTrade
 
     # List balances, positions and orders for the specified account
     #
+    # Lists balances, positions and orders for the specified account as well as
+    # option_positions and account metadata. The data returned is similar to the
+    # data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    #
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -557,6 +587,7 @@ module SnapTrade
     end
 
     # List balances, positions and orders for the specified account
+    # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -568,6 +599,7 @@ module SnapTrade
     end
 
     # List balances, positions and orders for the specified account
+    # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
     # @param account_id [String] The ID of the account to fetch holdings for.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -634,6 +666,8 @@ module SnapTrade
 
     # List accounts
     #
+    # Get a list of all Account objects for the authenticated SnapTrade user.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -644,6 +678,8 @@ module SnapTrade
 
     # List accounts
     #
+    # Get a list of all Account objects for the authenticated SnapTrade user.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -652,6 +688,7 @@ module SnapTrade
     end
 
     # List accounts
+    # Get a list of all Account objects for the authenticated SnapTrade user.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -662,6 +699,7 @@ module SnapTrade
     end
 
     # List accounts
+    # Get a list of all Account objects for the authenticated SnapTrade user.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -723,6 +761,8 @@ module SnapTrade
 
     # Update details of an investment account
     #
+    # Updates various properties of a specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
@@ -734,6 +774,8 @@ module SnapTrade
 
     # Update details of an investment account
     #
+    # Updates various properties of a specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
@@ -743,6 +785,7 @@ module SnapTrade
     end
 
     # Update details of an investment account
+    # Updates various properties of a specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.
@@ -754,6 +797,7 @@ module SnapTrade
     end
 
     # Update details of an investment account
+    # Updates various properties of a specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to update.

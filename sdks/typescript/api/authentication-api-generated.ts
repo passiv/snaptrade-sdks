@@ -101,7 +101,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * 
+         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
          * @summary Generate encrypted JWT token
          * @param {string} userId 
          * @param {string} userSecret 
@@ -267,7 +267,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * 
+         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {SnapTradeRegisterUserRequestBody} snapTradeRegisterUserRequestBody 
          * @param {*} [options] Override http request option.
@@ -319,7 +319,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * 
+         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
          * @summary Obtain a new user secret for a user
          * @param {UserIDandSecret} userIDandSecret 
          * @param {*} [options] Override http request option.
@@ -392,7 +392,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
          * @summary Generate encrypted JWT token
          * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -432,7 +432,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -446,7 +446,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
          * @summary Obtain a new user secret for a user
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -481,7 +481,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.deleteSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
          * @summary Generate encrypted JWT token
          * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -510,7 +510,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.loginSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -520,7 +520,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.registerSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
          * @summary Obtain a new user secret for a user
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -632,7 +632,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
      * @summary Generate encrypted JWT token
      * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -667,7 +667,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
      * @summary Create SnapTrade user
      * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -679,7 +679,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
      * @summary Obtain a new user secret for a user
      * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

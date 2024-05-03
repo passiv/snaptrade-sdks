@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.13-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.13)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.14-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.14)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.13</version>
+  <version>5.0.14</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.13"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.14"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.13.jar`
+* `target/snaptrade-java-sdk-5.0.14.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -224,7 +224,6 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**getOrderImpact**](docs/TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check impact of trades on account.
 *TradingApi* | [**getUserAccountQuotes**](docs/TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**placeForceOrder**](docs/TradingApi.md#placeForceOrder) | **POST** /trade/place | Place a trade with NO validation.
-*TradingApi* | [**placeOCOOrder**](docs/TradingApi.md#placeOCOOrder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 *TradingApi* | [**placeOrder**](docs/TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order
 *TransactionsAndReportingApi* | [**getActivities**](docs/TransactionsAndReportingApi.md#getActivities) | **GET** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**getReportingCustomRange**](docs/TransactionsAndReportingApi.md#getReportingCustomRange) | **GET** /performance/custom | Get performance information for a specific timeframe
@@ -331,7 +330,6 @@ Class | Method | HTTP request | Description
  - [TradeExecutionStatus](docs/TradeExecutionStatus.md)
  - [TradeImpact](docs/TradeImpact.md)
  - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
- - [TradingPlaceOCOOrderRequest](docs/TradingPlaceOCOOrderRequest.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)

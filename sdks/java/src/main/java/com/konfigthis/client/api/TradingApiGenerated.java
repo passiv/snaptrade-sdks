@@ -34,7 +34,6 @@ import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
-import com.konfigthis.client.model.TradingPlaceOCOOrderRequest;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 
@@ -271,7 +270,7 @@ public class TradingApiGenerated {
 
     /**
      * Cancel open order in account
-     * 
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to cancel the order in. (required)
@@ -830,7 +829,7 @@ public class TradingApiGenerated {
 
     /**
      * Get symbol quotes
-     * 
+     * Returns live quote(s) from the brokerage for the specified symbol(s).
      * @param userId  (required)
      * @param userSecret  (required)
      * @param symbols List of universal_symbol_id or tickers to get quotes for. (required)
@@ -1202,235 +1201,6 @@ public class TradingApiGenerated {
             
 
         return new PlaceForceOrderRequestBuilder(userId, userSecret);
-    }
-    private okhttp3.Call placeOCOOrderCall(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback _callback) throws ApiException {
-        String basePath = null;
-        // Operation Servers
-        String[] localBasePaths = new String[] {  };
-
-        // Determine Base Path to Use
-        if (localCustomBaseUrl != null){
-            basePath = localCustomBaseUrl;
-        } else if ( localBasePaths.length > 0 ) {
-            basePath = localBasePaths[localHostIndex];
-        } else {
-            basePath = null;
-        }
-
-        Object localVarPostBody = tradingPlaceOCOOrderRequest;
-
-        // create path and map variables
-        String localVarPath = "/trade/oco";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (userId != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
-        }
-
-        if (userSecret != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
-        }
-
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        if (localVarContentType != null) {
-            localVarHeaderParams.put("Content-Type", localVarContentType);
-        }
-
-        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @Deprecated
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeOCOOrderValidateBeforeCall(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'userId' is set
-        if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling placeOCOOrder(Async)");
-        }
-
-        // verify the required parameter 'userSecret' is set
-        if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling placeOCOOrder(Async)");
-        }
-
-        // verify the required parameter 'tradingPlaceOCOOrderRequest' is set
-        if (tradingPlaceOCOOrderRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingPlaceOCOOrderRequest' when calling placeOCOOrder(Async)");
-        }
-
-        return placeOCOOrderCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
-
-    }
-
-
-    private ApiResponse<AccountOrderRecord> placeOCOOrderWithHttpInfo(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = placeOCOOrderValidateBeforeCall(userId, userSecret, tradingPlaceOCOOrderRequest, null);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    private okhttp3.Call placeOCOOrderAsync(String userId, String userSecret, TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = placeOCOOrderValidateBeforeCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-
-    public class PlaceOCOOrderRequestBuilder {
-        private final String userId;
-        private final String userSecret;
-        private Object firstTradeId;
-        private Object secondTradeId;
-
-        private PlaceOCOOrderRequestBuilder(String userId, String userSecret) {
-            this.userId = userId;
-            this.userSecret = userSecret;
-        }
-
-        /**
-         * Set firstTradeId
-         * @param firstTradeId The ID of first trade object obtained from trade/impact endpoint (optional)
-         * @return PlaceOCOOrderRequestBuilder
-         */
-        public PlaceOCOOrderRequestBuilder firstTradeId(Object firstTradeId) {
-            this.firstTradeId = firstTradeId;
-            return this;
-        }
-        
-        /**
-         * Set secondTradeId
-         * @param secondTradeId The ID of second trade object obtained from trade/impact endpoint (optional)
-         * @return PlaceOCOOrderRequestBuilder
-         */
-        public PlaceOCOOrderRequestBuilder secondTradeId(Object secondTradeId) {
-            this.secondTradeId = secondTradeId;
-            return this;
-        }
-        
-        /**
-         * Build call for placeOCOOrder
-         * @param _callback ApiCallback API callback
-         * @return Call to execute
-         * @throws ApiException If fail to serialize the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
-            return placeOCOOrderCall(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
-        }
-
-        private TradingPlaceOCOOrderRequest buildBodyParams() {
-            TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest();
-            tradingPlaceOCOOrderRequest.firstTradeId(this.firstTradeId);
-            tradingPlaceOCOOrderRequest.secondTradeId(this.secondTradeId);
-            return tradingPlaceOCOOrderRequest;
-        }
-
-        /**
-         * Execute placeOCOOrder request
-         * @return AccountOrderRecord
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public AccountOrderRecord execute() throws ApiException {
-            TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = placeOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
-            return localVarResp.getResponseBody();
-        }
-
-        /**
-         * Execute placeOCOOrder request with HTTP info returned
-         * @return ApiResponse&lt;AccountOrderRecord&gt;
-         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
-            TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
-            return placeOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
-        }
-
-        /**
-         * Execute placeOCOOrder request (asynchronously)
-         * @param _callback The callback to be executed when the API call finishes
-         * @return The request call
-         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-         * @http.response.details
-         <table summary="Response Details" border="1">
-            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
-            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-         </table>
-         * @deprecated
-         */
-        @Deprecated
-        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
-            TradingPlaceOCOOrderRequest tradingPlaceOCOOrderRequest = buildBodyParams();
-            return placeOCOOrderAsync(userId, userSecret, tradingPlaceOCOOrderRequest, _callback);
-        }
-    }
-
-    /**
-     * Place a OCO (One Cancels Other) order
-     * 
-     * @param userId  (required)
-     * @param userSecret  (required)
-     * @param tradingPlaceOCOOrderRequest  (required)
-     * @return PlaceOCOOrderRequestBuilder
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Status of order placed </td><td>  -  </td></tr>
-        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
-     </table>
-     * @deprecated
-     */
-    @Deprecated
-    public PlaceOCOOrderRequestBuilder placeOCOOrder(String userId, String userSecret) throws IllegalArgumentException {
-        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
-            
-
-        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
-            
-
-        return new PlaceOCOOrderRequestBuilder(userId, userSecret);
     }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;

@@ -30,6 +30,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
+        /// <remarks>
+        /// Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -43,7 +46,7 @@ namespace SnapTrade.Net.Api
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -83,6 +86,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Return details of a specific investment account
         /// </summary>
+        /// <remarks>
+        /// Returns an account object with details for the specified account, including the total account market value. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -95,7 +101,7 @@ namespace SnapTrade.Net.Api
         /// Return details of a specific investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an account object with details for the specified account, including the total account market value. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -138,6 +144,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List account positions
         /// </summary>
+        /// <remarks>
+        /// Returns a list of positions in the the specified account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -150,7 +159,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of positions in the the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -162,6 +171,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List balances, positions and orders for the specified account
         /// </summary>
+        /// <remarks>
+        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
         /// <param name="userId"></param>
@@ -174,7 +186,7 @@ namespace SnapTrade.Net.Api
         /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -186,6 +198,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// List accounts
         /// </summary>
+        /// <remarks>
+        /// Get a list of all Account objects for the authenticated SnapTrade user.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -197,7 +212,7 @@ namespace SnapTrade.Net.Api
         /// List accounts
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get a list of all Account objects for the authenticated SnapTrade user.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -208,6 +223,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Update details of an investment account
         /// </summary>
+        /// <remarks>
+        /// Updates various properties of a specified account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -220,7 +238,7 @@ namespace SnapTrade.Net.Api
         /// Update details of an investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Updates various properties of a specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -242,7 +260,7 @@ namespace SnapTrade.Net.Api
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -258,7 +276,7 @@ namespace SnapTrade.Net.Api
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -302,7 +320,7 @@ namespace SnapTrade.Net.Api
         /// Return details of a specific investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an account object with details for the specified account, including the total account market value. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -317,7 +335,7 @@ namespace SnapTrade.Net.Api
         /// Return details of a specific investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an account object with details for the specified account, including the total account market value. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -364,7 +382,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of positions in the the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -379,7 +397,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of positions in the the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -393,7 +411,7 @@ namespace SnapTrade.Net.Api
         /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -408,7 +426,7 @@ namespace SnapTrade.Net.Api
         /// List balances, positions and orders for the specified account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -422,7 +440,7 @@ namespace SnapTrade.Net.Api
         /// List accounts
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get a list of all Account objects for the authenticated SnapTrade user.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -436,7 +454,7 @@ namespace SnapTrade.Net.Api
         /// List accounts
         /// </summary>
         /// <remarks>
-        /// 
+        /// Get a list of all Account objects for the authenticated SnapTrade user.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -449,7 +467,7 @@ namespace SnapTrade.Net.Api
         /// Update details of an investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Updates various properties of a specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -464,7 +482,7 @@ namespace SnapTrade.Net.Api
         /// Update details of an investment account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Updates various properties of a specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -595,7 +613,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances, positions, and orders for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -611,7 +629,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances, positions, and orders for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -697,7 +715,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances, positions, and orders for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -714,7 +732,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all accounts for the user, plus balances, positions, and orders for each account. 
+        /// List all accounts for the user, plus balances, positions, and orders for each account. Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1013,7 +1031,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return details of a specific investment account 
+        /// Return details of a specific investment account Returns an account object with details for the specified account, including the total account market value. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1028,7 +1046,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return details of a specific investment account 
+        /// Return details of a specific investment account Returns an account object with details for the specified account, including the total account market value. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1116,7 +1134,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return details of a specific investment account 
+        /// Return details of a specific investment account Returns an account object with details for the specified account, including the total account market value. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1132,7 +1150,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return details of a specific investment account 
+        /// Return details of a specific investment account Returns an account object with details for the specified account, including the total account market value. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1457,7 +1475,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions 
+        /// List account positions Returns a list of positions in the the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1472,7 +1490,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions 
+        /// List account positions Returns a list of positions in the the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1560,7 +1578,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions 
+        /// List account positions Returns a list of positions in the the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1576,7 +1594,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions 
+        /// List account positions Returns a list of positions in the the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1667,7 +1685,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account 
+        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1682,7 +1700,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account 
+        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1770,7 +1788,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account 
+        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1786,7 +1804,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account 
+        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to fetch holdings for.</param>
@@ -1877,7 +1895,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts 
+        /// List accounts Get a list of all Account objects for the authenticated SnapTrade user.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1891,7 +1909,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts 
+        /// List accounts Get a list of all Account objects for the authenticated SnapTrade user.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1971,7 +1989,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts 
+        /// List accounts Get a list of all Account objects for the authenticated SnapTrade user.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1986,7 +2004,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List accounts 
+        /// List accounts Get a list of all Account objects for the authenticated SnapTrade user.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2069,7 +2087,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Update details of an investment account 
+        /// Update details of an investment account Updates various properties of a specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2084,7 +2102,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Update details of an investment account 
+        /// Update details of an investment account Updates various properties of a specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2172,7 +2190,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Update details of an investment account 
+        /// Update details of an investment account Updates various properties of a specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2188,7 +2206,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Update details of an investment account 
+        /// Update details of an investment account Updates various properties of a specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

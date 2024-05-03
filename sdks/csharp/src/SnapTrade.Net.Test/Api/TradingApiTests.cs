@@ -215,42 +215,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test PlaceOCOOrder
-        /// </summary>
-        [Fact]
-        public void PlaceOCOOrderTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var firstTradeId = "firstTradeId_example"; // The ID of first trade object obtained from trade/impact endpoint
-            var secondTradeId = "secondTradeId_example"; // The ID of second trade object obtained from trade/impact endpoint
-            
-            var tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(
-                firstTradeId,
-                secondTradeId
-            );
-            
-            try
-            {
-                // Place a OCO (One Cancels Other) order
-                AccountOrderRecord result = client.Trading.PlaceOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling TradingApi.PlaceOCOOrder: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test PlaceOrder
         /// </summary>
         [Fact]

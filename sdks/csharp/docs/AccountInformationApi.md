@@ -16,7 +16,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 # **GetAllUserHoldings**
 
-List all accounts for the user, plus balances, positions, and orders for each account.
+
+
+Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
 
 ### Example
 ```csharp
@@ -206,7 +208,9 @@ catch (ApiException e)
 
 # **GetUserAccountDetails**
 
-Return details of a specific investment account
+
+
+Returns an account object with details for the specified account, including the total account market value. 
 
 ### Example
 ```csharp
@@ -398,7 +402,9 @@ catch (ApiException e)
 
 # **GetUserAccountPositions**
 
-List account positions
+
+
+Returns a list of positions in the the specified account.
 
 ### Example
 ```csharp
@@ -491,7 +497,9 @@ catch (ApiException e)
 
 # **GetUserHoldings**
 
-List balances, positions and orders for the specified account
+
+
+Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
 
 ### Example
 ```csharp
@@ -586,7 +594,9 @@ catch (ApiException e)
 
 # **ListUserAccounts**
 
-List accounts
+
+
+Get a list of all Account objects for the authenticated SnapTrade user.
 
 ### Example
 ```csharp
@@ -677,7 +687,9 @@ catch (ApiException e)
 
 # **UpdateUserAccount**
 
-Update details of an investment account
+
+
+Updates various properties of a specified account.
 
 ### Example
 ```csharp

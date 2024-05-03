@@ -494,22 +494,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/trade/oco-POST': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'first_trade_id'
-            },
-            {
-                'name': 'second_trade_id'
-            },
-        ]
-    },
     '/trade/{tradeId}-POST': {
         'parameters': [
             {

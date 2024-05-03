@@ -100,7 +100,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
+         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
          * @summary Get metadata related to Snaptrade partner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -511,7 +511,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
+         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
          * @summary Search for symbols available in an account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -600,7 +600,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
          * @summary Get metadata related to Snaptrade partner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -696,7 +696,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
          * @summary Search for symbols available in an account
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -730,7 +730,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getCurrencyExchangeRatePair(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
          * @summary Get metadata related to Snaptrade partner
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -814,7 +814,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllCurrenciesRates(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
          * @summary Search for symbols available in an account
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -933,7 +933,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
      * @summary Get metadata related to Snaptrade partner
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1035,7 +1035,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
      * @summary Search for symbols available in an account
      * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

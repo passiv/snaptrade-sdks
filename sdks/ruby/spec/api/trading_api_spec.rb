@@ -29,6 +29,7 @@ describe 'TradingApi' do
 
   # unit tests for cancel_user_account_order
   # Cancel open order in account
+  # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to cancel the order in.
@@ -56,6 +57,7 @@ describe 'TradingApi' do
 
   # unit tests for get_user_account_quotes
   # Get symbol quotes
+  # Returns live quote(s) from the brokerage for the specified symbol(s).
   # @param user_id 
   # @param user_secret 
   # @param symbols List of universal_symbol_id or tickers to get quotes for.
@@ -77,19 +79,6 @@ describe 'TradingApi' do
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecord]
   describe 'place_force_order test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for place_oco_order
-  # Place a OCO (One Cancels Other) order
-  # @param user_id 
-  # @param user_secret 
-  # @param trading_place_oco_order_request 
-  # @param [Hash] opts the optional parameters
-  # @return [AccountOrderRecord]
-  describe 'place_oco_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

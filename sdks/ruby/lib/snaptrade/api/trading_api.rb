@@ -19,6 +19,9 @@ module SnapTrade
 
     # Cancel open order in account
     #
+    # Sends a signal to the brokerage to cancel the specified order.
+    # This will only work if the order has not yet been executed.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
@@ -35,6 +38,9 @@ module SnapTrade
 
     # Cancel open order in account
     #
+    # Sends a signal to the brokerage to cancel the specified order.
+    # This will only work if the order has not yet been executed.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
@@ -49,6 +55,7 @@ module SnapTrade
     end
 
     # Cancel open order in account
+    # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
@@ -61,6 +68,7 @@ module SnapTrade
     end
 
     # Cancel open order in account
+    # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to cancel the order in.
@@ -279,6 +287,8 @@ module SnapTrade
 
     # Get symbol quotes
     #
+    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -293,6 +303,8 @@ module SnapTrade
 
     # Get symbol quotes
     #
+    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -305,6 +317,7 @@ module SnapTrade
     end
 
     # Get symbol quotes
+    # Returns live quote(s) from the brokerage for the specified symbol(s).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -318,6 +331,7 @@ module SnapTrade
     end
 
     # Get symbol quotes
+    # Returns live quote(s) from the brokerage for the specified symbol(s).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -527,120 +541,6 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_force_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Place a OCO (One Cancels Other) order
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
-    # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
-    # @param body [TradingPlaceOCOOrderRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_oco_order(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
-      _body = {}
-      _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
-      _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
-      trading_place_oco_order_request = _body
-      data, _status_code, _headers = place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
-      data
-    end
-
-    # Place a OCO (One Cancels Other) order
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param first_trade_id [Object] The ID of first trade object obtained from trade/impact endpoint
-    # @param second_trade_id [Object] The ID of second trade object obtained from trade/impact endpoint
-    # @param body [TradingPlaceOCOOrderRequest] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_oco_order_with_http_info(user_id:, user_secret:, first_trade_id: SENTINEL, second_trade_id: SENTINEL, extra: {})
-      _body = {}
-      _body[:first_trade_id] = first_trade_id if first_trade_id != SENTINEL
-      _body[:second_trade_id] = second_trade_id if second_trade_id != SENTINEL
-      trading_place_oco_order_request = _body
-      place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, extra)
-    end
-
-    # Place a OCO (One Cancels Other) order
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [AccountOrderRecord]
-    private def place_oco_order_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
-      data, _status_code, _headers = place_oco_order_with_http_info(user_id, user_secret, trading_place_oco_order_request, opts)
-      data
-    end
-
-    # Place a OCO (One Cancels Other) order
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param trading_place_oco_order_request [TradingPlaceOCOOrderRequest] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def place_oco_order_with_http_info_impl(user_id, user_secret, trading_place_oco_order_request, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.place_oco_order ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_oco_order"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_oco_order"
-      end
-      # verify the required parameter 'trading_place_oco_order_request' is set
-      if @api_client.config.client_side_validation && trading_place_oco_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_place_oco_order_request' when calling TradingApi.place_oco_order"
-      end
-      # resource path
-      local_var_path = '/trade/oco'
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_oco_order_request)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"TradingApi.place_oco_order",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#place_oco_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.15-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.15)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.16-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.16)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -132,7 +132,6 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation.
-*TradingApi* | [**PlaceOCOOrder**](docs/TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
@@ -246,7 +245,6 @@ Class | Method | HTTP request | Description
  - [TradeExecutionStatus](docs/TradeExecutionStatus.md)
  - [TradeImpact](docs/TradeImpact.md)
  - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
- - [TradingPlaceOCOOrderRequest](docs/TradingPlaceOCOOrderRequest.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)

@@ -64,6 +64,9 @@ paths:
       x-accepts: application/json
   /snapTrade/registerUser:
     post:
+      description: |
+        Registers a new SnapTrade user under your ClientID.
+        Most SnapTrade operations require a user to be passed as a parameter.
       operationId: Authentication_registerSnapTradeUser
       requestBody:
         $ref: '#/components/requestBodies/RegisterUserRequestBody'
@@ -251,6 +254,9 @@ paths:
       x-accepts: application/json
   /snapTrade/encryptedJWT:
     get:
+      description: |
+        This API is available to ClientIDs which have opted to use encrypted
+        JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
       operationId: Authentication_getUserJWT
       parameters:
       - explode: true
@@ -306,6 +312,9 @@ paths:
       x-accepts: application/json
   /snapTrade/resetUserSecret:
     post:
+      description: |
+        This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret
+        is comprimised or lost among other reasons.
       operationId: Authentication_resetSnapTradeUserSecret
       requestBody:
         $ref: '#/components/requestBodies/ResetUserSecretRequestBody'
@@ -512,6 +521,8 @@ paths:
       x-accepts: application/json
   /accounts:
     get:
+      description: Get a list of all Account objects for the authenticated SnapTrade
+        user.
       operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
@@ -549,6 +560,9 @@ paths:
   /holdings:
     get:
       deprecated: true
+      description: |
+        Lists balances, positions and orders for the specified account. The data returned is similar to
+        the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
       operationId: AccountInformation_getAllUserHoldings
       parameters:
       - explode: true
@@ -613,6 +627,10 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/holdings:
     get:
+      description: |
+        Lists balances, positions and orders for the specified account as well as
+        option_positions and account metadata. The data returned is similar to the
+        data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
       operationId: AccountInformation_getUserHoldings
       parameters:
       - description: The ID of the account to fetch holdings for.
@@ -672,6 +690,9 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}:
     get:
+      description: |
+        Returns an account object with details for the specified account,
+        including the total account market value.
       operationId: AccountInformation_getUserAccountDetails
       parameters:
       - explode: true
@@ -716,6 +737,7 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId
       x-accepts: application/json
     put:
+      description: Updates various properties of a specified account.
       operationId: AccountInformation_updateUserAccount
       parameters:
       - explode: true
@@ -811,6 +833,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/positions:
     get:
+      description: Returns a list of positions in the the specified account.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
       - explode: true
@@ -939,6 +962,7 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/quotes:
     get:
+      description: Returns live quote(s) from the brokerage for the specified symbol(s).
       operationId: Trading_getUserAccountQuotes
       parameters:
       - explode: true
@@ -1155,52 +1179,11 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
       x-content-type: application/json
       x-accepts: application/json
-  /trade/oco:
-    post:
-      deprecated: true
-      operationId: Trading_placeOCOOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      requestBody:
-        $ref: '#/components/requestBodies/OCORequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Status of order placed
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Failed to submit order to broker
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place a OCO (One Cancels Other) order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-oco
-      x-content-type: application/json
-      x-accepts: application/json
   /accounts/{accountId}/orders/cancel:
     post:
+      description: |
+        Sends a signal to the brokerage to cancel the specified order.
+        This will only work if the order has not yet been executed.
       operationId: Trading_cancelUserAccountOrder
       parameters:
       - explode: true
@@ -1262,6 +1245,8 @@ paths:
       x-accepts: application/json
   /snapTrade/partners:
     get:
+      description: "Returns useful data related to the specified ClientID, including\
+        \ allowed brokerages and data access."
       operationId: ReferenceData_getPartnerInfo
       parameters: []
       responses:
@@ -1303,6 +1288,10 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/symbols:
     post:
+      description: |
+        Returns a list of universal symbols that are supported by
+        the specificied account. Returned symbols are based on the
+        provided search string, matching on ticker and name.
       operationId: ReferenceData_symbolSearchUserAccount
       parameters:
       - explode: true
@@ -2086,12 +2075,6 @@ components:
           schema:
             $ref: '#/components/schemas/Trading_cancelUserAccountOrder_request'
       description: The Order ID to be canceled
-      required: true
-    OCORequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Trading_placeOCOOrder_request'
       required: true
     OptionStrategyRequestBody:
       content:
@@ -9458,25 +9441,6 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--trade-oco:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        first_trade_id:
-          description: The ID of first trade object obtained from trade/impact endpoint
-        second_trade_id:
-          description: The ID of second trade object obtained from trade/impact endpoint
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
       additionalProperties: true
       properties:
@@ -10268,13 +10232,6 @@ components:
       type: number
       x-konfig-original-example: 100
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-NotionalValue
-    Trading_placeOCOOrder_request:
-      properties:
-        first_trade_id:
-          description: The ID of first trade object obtained from trade/impact endpoint
-        second_trade_id:
-          description: The ID of second trade object obtained from trade/impact endpoint
-      type: object
     Trading_cancelUserAccountOrder_request:
       properties:
         brokerage_order_id:
