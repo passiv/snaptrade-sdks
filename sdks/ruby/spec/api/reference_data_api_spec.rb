@@ -40,6 +40,7 @@ describe 'ReferenceDataApi' do
 
   # unit tests for get_partner_info
   # Get metadata related to Snaptrade partner
+  # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
   # @param [Hash] opts the optional parameters
   # @return [PartnerData]
   describe 'get_partner_info test' do
@@ -134,6 +135,7 @@ describe 'ReferenceDataApi' do
 
   # unit tests for symbol_search_user_account
   # Search for symbols available in an account
+  # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to search for symbols within.

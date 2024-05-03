@@ -205,7 +205,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TradeExecutionStatus.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TradeImpact.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TradingCancelUserAccountOrderRequest.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TradingPlaceOCOOrderRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.TransactionsStatus.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.USExchange.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.UnderlyingSymbol.CustomTypeAdapterFactory());

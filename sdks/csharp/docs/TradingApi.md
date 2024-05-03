@@ -8,13 +8,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account. |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
 | [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation. |
-| [**PlaceOCOOrder**](TradingApi.md#placeocoorder) | **POST** /trade/oco | Place a OCO (One Cancels Other) order |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order |
 
 
 # **CancelUserAccountOrder**
 
-Cancel open order in account
+
+
+Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
 
 ### Example
 ```csharp
@@ -230,7 +231,9 @@ catch (ApiException e)
 
 # **GetUserAccountQuotes**
 
-Get symbol quotes
+
+
+Returns live quote(s) from the brokerage for the specified symbol(s).
 
 ### Example
 ```csharp
@@ -435,106 +438,6 @@ catch (ApiException e)
 | **200** | Trade sucessfully placed |  -  |
 | **400** | Trade could not be placed |  -  |
 | **403** | User does not have permissions to place trades |  -  |
-| **500** | Unexpected Error |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-# **PlaceOCOOrder**
-
-Place a OCO (One Cancels Other) order
-
-### Example
-```csharp
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using SnapTrade.Net.Client;
-using SnapTrade.Net.Model;
-
-namespace Example
-{
-    public class PlaceOCOOrderExample
-    {
-        public static void Main()
-        {
-            Snaptrade client = new Snaptrade();
-            // Configure custom BasePath if desired
-            // client.SetBasePath("https://api.snaptrade.com/api/v1");
-            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
-            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
-
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var firstTradeId = "firstTradeId_example"; // The ID of first trade object obtained from trade/impact endpoint
-            var secondTradeId = "secondTradeId_example"; // The ID of second trade object obtained from trade/impact endpoint
-            
-            var tradingPlaceOCOOrderRequest = new TradingPlaceOCOOrderRequest(
-                firstTradeId,
-                secondTradeId
-            );
-            
-            try
-            {
-                // Place a OCO (One Cancels Other) order
-                AccountOrderRecord result = client.Trading.PlaceOCOOrder(userId, userSecret, tradingPlaceOCOOrderRequest);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling TradingApi.PlaceOCOOrder: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-    }
-}
-```
-
-#### Using the PlaceOCOOrderWithHttpInfo variant
-This returns an ApiResponse object which contains the response data, status code and headers.
-
-```csharp
-try
-{
-    // Place a OCO (One Cancels Other) order
-    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOCOOrderWithHttpInfo(userId, userSecret, tradingPlaceOCOOrderRequest);
-    Debug.Write("Status Code: " + response.StatusCode);
-    Debug.Write("Response Headers: " + response.Headers);
-    Debug.Write("Response Body: " + response.Data);
-}
-catch (ApiException e)
-{
-    Debug.Print("Exception when calling TradingApi.PlaceOCOOrderWithHttpInfo: " + e.Message);
-    Debug.Print("Status Code: " + e.ErrorCode);
-    Debug.Print(e.StackTrace);
-}
-```
-
-### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **userId** | **string** |  |  |
-| **userSecret** | **string** |  |  |
-| **tradingPlaceOCOOrderRequest** | [**TradingPlaceOCOOrderRequest**](TradingPlaceOCOOrderRequest.md) |  |  |
-
-### Return type
-
-[**AccountOrderRecord**](AccountOrderRecord.md)
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Status of order placed |  -  |
-| **400** | Failed to submit order to broker |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

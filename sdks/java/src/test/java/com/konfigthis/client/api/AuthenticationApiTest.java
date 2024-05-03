@@ -63,6 +63,8 @@ public class AuthenticationApiTest {
     /**
      * Generate encrypted JWT token
      *
+     * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -119,6 +121,8 @@ public class AuthenticationApiTest {
     /**
      * Create SnapTrade user
      *
+     * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -132,6 +136,8 @@ public class AuthenticationApiTest {
 
     /**
      * Obtain a new user secret for a user
+     *
+     * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
      *
      * @throws ApiException if the Api call fails
      */

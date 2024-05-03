@@ -261,7 +261,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List all accounts for the user, plus balances, positions, and orders for each account.
-     * 
+     * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetAllUserHoldingsRequestBuilder
@@ -641,7 +641,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * Return details of a specific investment account
-     * 
+     * Returns an account object with details for the specified account, including the total account market value. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get detail of. (required)
@@ -1048,7 +1048,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account positions
-     * 
+     * Returns a list of positions in the the specified account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get positions. (required)
@@ -1239,7 +1239,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List balances, positions and orders for the specified account
-     * 
+     * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
      * @param accountId The ID of the account to fetch holdings for. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1422,7 +1422,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List accounts
-     * 
+     * Get a list of all Account objects for the authenticated SnapTrade user.
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListUserAccountsRequestBuilder
@@ -1609,7 +1609,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * Update details of an investment account
-     * 
+     * Updates various properties of a specified account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to update. (required)

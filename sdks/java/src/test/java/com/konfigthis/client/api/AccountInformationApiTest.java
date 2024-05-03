@@ -50,6 +50,8 @@ public class AccountInformationApiTest {
     /**
      * List all accounts for the user, plus balances, positions, and orders for each account.
      *
+     * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -82,6 +84,8 @@ public class AccountInformationApiTest {
 
     /**
      * Return details of a specific investment account
+     *
+     * Returns an account object with details for the specified account, including the total account market value. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -119,6 +123,8 @@ public class AccountInformationApiTest {
     /**
      * List account positions
      *
+     * Returns a list of positions in the the specified account.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -133,6 +139,8 @@ public class AccountInformationApiTest {
 
     /**
      * List balances, positions and orders for the specified account
+     *
+     * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -149,6 +157,8 @@ public class AccountInformationApiTest {
     /**
      * List accounts
      *
+     * Get a list of all Account objects for the authenticated SnapTrade user.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -162,6 +172,8 @@ public class AccountInformationApiTest {
 
     /**
      * Update details of an investment account
+     *
+     * Updates various properties of a specified account.
      *
      * @throws ApiException if the Api call fails
      */

@@ -29,6 +29,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_all_user_holdings
   # List all accounts for the user, plus balances, positions, and orders for each account.
+  # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
@@ -56,6 +57,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_account_details
   # Return details of a specific investment account
+  # Returns an account object with details for the specified account, including the total account market value. 
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get detail of.
@@ -85,6 +87,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_account_positions
   # List account positions
+  # Returns a list of positions in the the specified account.
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get positions.
@@ -98,6 +101,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_holdings
   # List balances, positions and orders for the specified account
+  # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
   # @param account_id The ID of the account to fetch holdings for.
   # @param user_id 
   # @param user_secret 
@@ -111,6 +115,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for list_user_accounts
   # List accounts
+  # Get a list of all Account objects for the authenticated SnapTrade user.
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
@@ -123,6 +128,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for update_user_account
   # Update details of an investment account
+  # Updates various properties of a specified account.
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to update.

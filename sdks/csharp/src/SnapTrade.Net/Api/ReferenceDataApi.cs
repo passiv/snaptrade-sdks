@@ -50,6 +50,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Get metadata related to Snaptrade partner
         /// </summary>
+        /// <remarks>
+        /// Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>PartnerData</returns>
@@ -59,7 +62,7 @@ namespace SnapTrade.Net.Api
         /// Get metadata related to Snaptrade partner
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -221,6 +224,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Search for symbols available in an account
         /// </summary>
+        /// <remarks>
+        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -234,7 +240,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols available in an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -282,7 +288,7 @@ namespace SnapTrade.Net.Api
         /// Get metadata related to Snaptrade partner
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -294,7 +300,7 @@ namespace SnapTrade.Net.Api
         /// Get metadata related to Snaptrade partner
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -495,7 +501,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols available in an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -511,7 +517,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols available in an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -817,7 +823,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get metadata related to Snaptrade partner 
+        /// Get metadata related to Snaptrade partner Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -829,7 +835,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get metadata related to Snaptrade partner 
+        /// Get metadata related to Snaptrade partner Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -893,7 +899,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get metadata related to Snaptrade partner 
+        /// Get metadata related to Snaptrade partner Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -906,7 +912,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get metadata related to Snaptrade partner 
+        /// Get metadata related to Snaptrade partner Returns useful data related to the specified ClientID, including allowed brokerages and data access.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2259,7 +2265,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account 
+        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2275,7 +2281,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account 
+        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2366,7 +2372,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account 
+        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2383,7 +2389,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account 
+        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

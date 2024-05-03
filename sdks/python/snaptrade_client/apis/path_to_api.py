@@ -22,7 +22,6 @@ from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccou
 from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
-from snaptrade_client.apis.paths.trade_oco import TradeOco
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
@@ -67,7 +66,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.TRADE_OCO: TradeOco,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
@@ -113,7 +111,6 @@ path_to_api = PathToApi(
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.TRADE_OCO: TradeOco,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,

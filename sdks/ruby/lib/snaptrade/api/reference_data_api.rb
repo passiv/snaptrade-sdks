@@ -98,6 +98,8 @@ module SnapTrade
 
     # Get metadata related to Snaptrade partner
     #
+    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info(extra: {})
       data, _status_code, _headers = get_partner_info_with_http_info_impl(extra)
@@ -106,12 +108,15 @@ module SnapTrade
 
     # Get metadata related to Snaptrade partner
     #
+    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info_with_http_info(extra: {})
       get_partner_info_with_http_info_impl(extra)
     end
 
     # Get metadata related to Snaptrade partner
+    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
     # @param [Hash] opts the optional parameters
     # @return [PartnerData]
     private def get_partner_info_impl(opts = {})
@@ -120,6 +125,7 @@ module SnapTrade
     end
 
     # Get metadata related to Snaptrade partner
+    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PartnerData, Integer, Hash)>] PartnerData data, response status code and response headers
     private def get_partner_info_with_http_info_impl(opts = {})
@@ -775,6 +781,10 @@ module SnapTrade
 
     # Search for symbols available in an account
     #
+    # Returns a list of universal symbols that are supported by
+    # the specificied account. Returned symbols are based on the
+    # provided search string, matching on ticker and name.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to search for symbols within.
@@ -791,6 +801,10 @@ module SnapTrade
 
     # Search for symbols available in an account
     #
+    # Returns a list of universal symbols that are supported by
+    # the specificied account. Returned symbols are based on the
+    # provided search string, matching on ticker and name.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to search for symbols within.
@@ -805,6 +819,7 @@ module SnapTrade
     end
 
     # Search for symbols available in an account
+    # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to search for symbols within.
@@ -817,6 +832,7 @@ module SnapTrade
     end
 
     # Search for symbols available in an account
+    # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to search for symbols within.

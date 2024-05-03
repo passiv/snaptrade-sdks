@@ -399,7 +399,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Generate encrypted JWT token
-     * 
+     * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetUserJWTRequestBuilder
@@ -984,7 +984,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Create SnapTrade user
-     * 
+     * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
      * @param snapTradeRegisterUserRequestBody  (required)
      * @return RegisterSnapTradeUserRequestBuilder
      * @http.response.details
@@ -1167,7 +1167,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Obtain a new user secret for a user
-     * 
+     * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
      * @param userIDandSecret  (required)
      * @return ResetSnapTradeUserSecretRequestBuilder
      * @http.response.details

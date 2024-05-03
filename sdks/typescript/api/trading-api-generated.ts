@@ -41,8 +41,6 @@ import { TimeInForceStrict } from '../models';
 // @ts-ignore
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
-import { TradingPlaceOCOOrderRequest } from '../models';
-// @ts-ignore
 import { ValidatedTradeBody } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
@@ -54,7 +52,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TradingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
          * @summary Cancel open order in account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -190,7 +188,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Returns live quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
@@ -331,73 +329,6 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @summary Place a OCO (One Cancels Other) order
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {TradingPlaceOCOOrderRequest} tradingPlaceOCOOrderRequest 
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        placeOCOOrder: async (userId: string, userSecret: string, tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('placeOCOOrder', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('placeOCOOrder', 'userSecret', userSecret)
-            // verify required parameter 'tradingPlaceOCOOrderRequest' is not null or undefined
-            assertParamExists('placeOCOOrder', 'tradingPlaceOCOOrderRequest', tradingPlaceOCOOrderRequest)
-            const localVarPath = `/trade/oco`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                requestBody: tradingPlaceOCOOrderRequest,
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/trade/oco',
-                httpMethod: 'POST'
-            });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceOCOOrderRequest, localVarRequestOptions, configuration)
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
          * @summary Place order
          * @param {string} tradeId The ID of trade object obtained from trade/impact endpoint
          * @param {string} userId 
@@ -475,7 +406,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TradingApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
          * @summary Cancel open order in account
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -511,7 +442,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns live quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -545,22 +476,6 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Place a OCO (One Cancels Other) order
-         * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        async placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const tradingPlaceOCOOrderRequest: TradingPlaceOCOOrderRequest = {
-                first_trade_id: requestParameters.first_trade_id,
-                second_trade_id: requestParameters.second_trade_id
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeOCOOrder(requestParameters.userId, requestParameters.userSecret, tradingPlaceOCOOrderRequest, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @summary Place order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -584,7 +499,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = TradingApiFp(configuration)
     return {
         /**
-         * 
+         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
          * @summary Cancel open order in account
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -604,7 +519,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOrderImpact(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns live quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -622,17 +537,6 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.placeForceOrder(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary Place a OCO (One Cancels Other) order
-         * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @deprecated
-         * @throws {RequiredError}
-         */
-        placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
-            return localVarFp.placeOCOOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -768,29 +672,6 @@ export type TradingApiPlaceForceOrderRequest = {
 } & ManualTradeForm
 
 /**
- * Request parameters for placeOCOOrder operation in TradingApi.
- * @export
- * @interface TradingApiPlaceOCOOrderRequest
- */
-export type TradingApiPlaceOCOOrderRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof TradingApiPlaceOCOOrder
-    */
-    readonly userId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof TradingApiPlaceOCOOrder
-    */
-    readonly userSecret: string
-    
-} & TradingPlaceOCOOrderRequest
-
-/**
  * Request parameters for placeOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceOrderRequest
@@ -828,7 +709,7 @@ export type TradingApiPlaceOrderRequest = {
  */
 export class TradingApiGenerated extends BaseAPI {
     /**
-     * 
+     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
      * @summary Cancel open order in account
      * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -852,7 +733,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns live quote(s) from the brokerage for the specified symbol(s).
      * @summary Get symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -873,19 +754,6 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeForceOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary Place a OCO (One Cancels Other) order
-     * @param {TradingApiPlaceOCOOrderRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @deprecated
-     * @throws {RequiredError}
-     * @memberof TradingApiGenerated
-     */
-    public placeOCOOrder(requestParameters: TradingApiPlaceOCOOrderRequest, options?: AxiosRequestConfig) {
-        return TradingApiFp(this.configuration).placeOCOOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

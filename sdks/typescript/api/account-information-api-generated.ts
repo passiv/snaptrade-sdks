@@ -46,7 +46,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const AccountInformationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -172,7 +172,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Returns an account object with details for the specified account, including the total account market value. 
          * @summary Return details of a specific investment account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -306,7 +306,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Returns a list of positions in the the specified account.
          * @summary List account positions
          * @param {string} userId 
          * @param {string} userSecret 
@@ -368,7 +368,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List balances, positions and orders for the specified account
          * @param {string} accountId The ID of the account to fetch holdings for.
          * @param {string} userId 
@@ -430,7 +430,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Get a list of all Account objects for the authenticated SnapTrade user.
          * @summary List accounts
          * @param {string} userId 
          * @param {string} userSecret 
@@ -488,7 +488,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * 
+         * Updates various properties of a specified account.
          * @summary Update details of an investment account
          * @param {string} userId 
          * @param {string} userSecret 
@@ -560,7 +560,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AccountInformationApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -583,7 +583,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns an account object with details for the specified account, including the total account market value. 
          * @summary Return details of a specific investment account
          * @param {AccountInformationApiGetUserAccountDetailsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -605,7 +605,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns a list of positions in the the specified account.
          * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -616,7 +616,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List balances, positions and orders for the specified account
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -627,7 +627,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Get a list of all Account objects for the authenticated SnapTrade user.
          * @summary List accounts
          * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -638,7 +638,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Updates various properties of a specified account.
          * @summary Update details of an investment account
          * @param {AccountInformationApiUpdateUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -659,7 +659,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     const localVarFp = AccountInformationApiFp(configuration)
     return {
         /**
-         * 
+         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -680,7 +680,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountBalance(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns an account object with details for the specified account, including the total account market value. 
          * @summary Return details of a specific investment account
          * @param {AccountInformationApiGetUserAccountDetailsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -700,7 +700,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountOrders(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of positions in the the specified account.
          * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -710,7 +710,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountPositions(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
          * @summary List balances, positions and orders for the specified account
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -720,7 +720,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Get a list of all Account objects for the authenticated SnapTrade user.
          * @summary List accounts
          * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -730,7 +730,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.listUserAccounts(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Updates various properties of a specified account.
          * @summary Update details of an investment account
          * @param {AccountInformationApiUpdateUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -997,7 +997,7 @@ export type AccountInformationApiUpdateUserAccountRequest = {
  */
 export class AccountInformationApiGenerated extends BaseAPI {
     /**
-     * 
+     * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
      * @summary List all accounts for the user, plus balances, positions, and orders for each account.
      * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1022,7 +1022,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns an account object with details for the specified account, including the total account market value. 
      * @summary Return details of a specific investment account
      * @param {AccountInformationApiGetUserAccountDetailsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1046,7 +1046,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of positions in the the specified account.
      * @summary List account positions
      * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1058,7 +1058,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
      * @summary List balances, positions and orders for the specified account
      * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1070,7 +1070,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Get a list of all Account objects for the authenticated SnapTrade user.
      * @summary List accounts
      * @param {AccountInformationApiListUserAccountsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -1082,7 +1082,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Updates various properties of a specified account.
      * @summary Update details of an investment account
      * @param {AccountInformationApiUpdateUserAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

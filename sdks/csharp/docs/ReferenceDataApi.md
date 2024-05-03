@@ -107,7 +107,9 @@ catch (ApiException e)
 
 # **GetPartnerInfo**
 
-Get metadata related to Snaptrade partner
+
+
+Returns useful data related to the specified ClientID, including allowed brokerages and data access.
 
 ### Example
 ```csharp
@@ -886,7 +888,9 @@ This endpoint does not need any parameter.
 
 # **SymbolSearchUserAccount**
 
-Search for symbols available in an account
+
+
+Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
 
 ### Example
 ```csharp
