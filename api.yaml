@@ -2159,6 +2159,10 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Time"
+        time_executed:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Time"
         expiry_date:
           $ref: "#/components/schemas/Time"
     AccountOrderRecordStatus:

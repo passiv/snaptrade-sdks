@@ -127,6 +127,12 @@ export interface AccountOrderRecord {
      */
     'time_updated'?: string | null;
     /**
+     * 
+     * @type {string}
+     * @memberof AccountOrderRecord
+     */
+    'time_executed'?: string | null;
+    /**
      * Time
      * @type {string}
      * @memberof AccountOrderRecord

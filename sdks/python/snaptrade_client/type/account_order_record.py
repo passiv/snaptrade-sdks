@@ -69,6 +69,8 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     time_updated: TimeNullable
 
+    time_executed: TimeNullable
+
     # Time
     expiry_date: str
 

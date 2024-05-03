@@ -182,6 +182,14 @@ public class AccountOrderRecordTest {
     }
 
     /**
+     * Test the property 'timeExecuted'
+     */
+    @Test
+    public void timeExecutedTest() {
+        // TODO: test timeExecuted
+    }
+
+    /**
      * Test the property 'expiryDate'
      */
     @Test

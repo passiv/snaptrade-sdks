@@ -70,8 +70,9 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
+        /// <param name="timeExecuted">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -90,6 +91,7 @@ namespace SnapTrade.Net.Model
             this.TimeInForce = timeInForce;
             this.TimePlaced = timePlaced;
             this.TimeUpdated = timeUpdated;
+            this.TimeExecuted = timeExecuted;
             this.ExpiryDate = expiryDate;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
@@ -193,6 +195,13 @@ namespace SnapTrade.Net.Model
         /// Time
         /// </summary>
         /// <value>Time</value>
+        [DataMember(Name = "time_executed", EmitDefaultValue = true)]
+        public string TimeExecuted { get; set; }
+
+        /// <summary>
+        /// Time
+        /// </summary>
+        /// <value>Time</value>
         [DataMember(Name = "expiry_date", EmitDefaultValue = false)]
         public string ExpiryDate { get; set; }
 
@@ -228,6 +237,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  TimePlaced: ").Append(TimePlaced).Append("\n");
             sb.Append("  TimeUpdated: ").Append(TimeUpdated).Append("\n");
+            sb.Append("  TimeExecuted: ").Append(TimeExecuted).Append("\n");
             sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -348,6 +358,11 @@ namespace SnapTrade.Net.Model
                     this.TimeUpdated.Equals(input.TimeUpdated))
                 ) && base.Equals(input) && 
                 (
+                    this.TimeExecuted == input.TimeExecuted ||
+                    (this.TimeExecuted != null &&
+                    this.TimeExecuted.Equals(input.TimeExecuted))
+                ) && base.Equals(input) && 
+                (
                     this.ExpiryDate == input.ExpiryDate ||
                     (this.ExpiryDate != null &&
                     this.ExpiryDate.Equals(input.ExpiryDate))
@@ -422,6 +437,10 @@ namespace SnapTrade.Net.Model
                 if (this.TimeUpdated != null)
                 {
                     hashCode = (hashCode * 59) + this.TimeUpdated.GetHashCode();
+                }
+                if (this.TimeExecuted != null)
+                {
+                    hashCode = (hashCode * 59) + this.TimeExecuted.GetHashCode();
                 }
                 if (this.ExpiryDate != null)
                 {
