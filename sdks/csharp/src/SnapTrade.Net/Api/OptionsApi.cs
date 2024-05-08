@@ -28,8 +28,11 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order
+        /// Create options strategy
         /// </summary>
+        /// <remarks>
+        /// Creates an option strategy object that will be used to place an option strategy order. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -40,10 +43,10 @@ namespace SnapTrade.Net.Api
         StrategyQuotes GetOptionStrategy(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order
+        /// Create options strategy
         /// </summary>
         /// <remarks>
-        /// 
+        /// Creates an option strategy object that will be used to place an option strategy order. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -54,8 +57,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of StrategyQuotes</returns>
         ApiResponse<StrategyQuotes> GetOptionStrategyWithHttpInfo(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0);
         /// <summary>
-        /// Get the options chain
+        /// Get the options chain for a symbol
         /// </summary>
+        /// <remarks>
+        /// Returns the option chain for the specified symbol in the specified account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -66,10 +72,10 @@ namespace SnapTrade.Net.Api
         List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
 
         /// <summary>
-        /// Get the options chain
+        /// Get the options chain for a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the option chain for the specified symbol in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -80,8 +86,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
         ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
         /// <summary>
-        /// Get latest market data of option strategy
+        /// Get options strategy quotes
         /// </summary>
+        /// <remarks>
+        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -92,10 +101,10 @@ namespace SnapTrade.Net.Api
         StrategyQuotes GetOptionsStrategyQuote(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
 
         /// <summary>
-        /// Get latest market data of option strategy
+        /// Get options strategy quotes
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -106,8 +115,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of StrategyQuotes</returns>
         ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
         /// <summary>
-        /// Get the options holdings in the account
+        /// Get account option holdings
         /// </summary>
+        /// <remarks>
+        /// Returns a list of Options Positions. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -117,10 +129,10 @@ namespace SnapTrade.Net.Api
         List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0);
 
         /// <summary>
-        /// Get the options holdings in the account
+        /// Get account option holdings
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Options Positions. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -130,8 +142,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
-        /// Place an option strategy order on the brokerage
+        /// Place an option strategy order
         /// </summary>
+        /// <remarks>
+        /// Places the option strategy order and returns the order record received from the brokerage.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -143,10 +158,10 @@ namespace SnapTrade.Net.Api
         StrategyOrderRecord PlaceOptionStrategy(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0);
 
         /// <summary>
-        /// Place an option strategy order on the brokerage
+        /// Place an option strategy order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the option strategy order and returns the order record received from the brokerage.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -167,10 +182,10 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order
+        /// Create options strategy
         /// </summary>
         /// <remarks>
-        /// 
+        /// Creates an option strategy object that will be used to place an option strategy order. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -183,10 +198,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<StrategyQuotes> GetOptionStrategyAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order
+        /// Create options strategy
         /// </summary>
         /// <remarks>
-        /// 
+        /// Creates an option strategy object that will be used to place an option strategy order. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -198,10 +213,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
         System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionStrategyWithHttpInfoAsync(string userId, string userSecret, string accountId, OptionsGetOptionStrategyRequest optionsGetOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get the options chain
+        /// Get the options chain for a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the option chain for the specified symbol in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -214,10 +229,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get the options chain
+        /// Get the options chain for a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the option chain for the specified symbol in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -229,10 +244,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get latest market data of option strategy
+        /// Get options strategy quotes
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -245,10 +260,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<StrategyQuotes> GetOptionsStrategyQuoteAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get latest market data of option strategy
+        /// Get options strategy quotes
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -260,10 +275,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
         System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get the options holdings in the account
+        /// Get account option holdings
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Options Positions. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -275,10 +290,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get the options holdings in the account
+        /// Get account option holdings
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Options Positions. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -289,10 +304,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<OptionsPosition>>> ListOptionHoldingsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place an option strategy order on the brokerage
+        /// Place an option strategy order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the option strategy order and returns the order record received from the brokerage.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -306,10 +321,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<StrategyOrderRecord> PlaceOptionStrategyAsync(string userId, string userSecret, string accountId, string optionStrategyId, OptionsPlaceOptionStrategyRequest optionsPlaceOptionStrategyRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place an option strategy order on the brokerage
+        /// Place an option strategy order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the option strategy order and returns the order record received from the brokerage.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -442,7 +457,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order 
+        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -458,7 +473,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order 
+        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -555,7 +570,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order 
+        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -572,7 +587,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Creates an option strategy object that will be used to place an option strategy order 
+        /// Create options strategy Creates an option strategy object that will be used to place an option strategy order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -672,7 +687,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain 
+        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -688,7 +703,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain 
+        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -784,7 +799,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain 
+        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -801,7 +816,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain 
+        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -900,7 +915,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get latest market data of option strategy 
+        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -916,7 +931,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get latest market data of option strategy 
+        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1012,7 +1027,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get latest market data of option strategy 
+        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1029,7 +1044,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get latest market data of option strategy 
+        /// Get options strategy quotes Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1128,7 +1143,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options holdings in the account 
+        /// Get account option holdings Returns a list of Options Positions. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1143,7 +1158,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options holdings in the account 
+        /// Get account option holdings Returns a list of Options Positions. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1231,7 +1246,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options holdings in the account 
+        /// Get account option holdings Returns a list of Options Positions. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1247,7 +1262,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options holdings in the account 
+        /// Get account option holdings Returns a list of Options Positions. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1338,7 +1353,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place an option strategy order on the brokerage 
+        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1355,7 +1370,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place an option strategy order on the brokerage 
+        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1460,7 +1475,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place an option strategy order on the brokerage 
+        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1478,7 +1493,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place an option strategy order on the brokerage 
+        /// Place an option strategy order Places the option strategy order and returns the order record received from the brokerage.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

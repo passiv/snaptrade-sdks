@@ -306,7 +306,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns a list of positions in the the specified account.
+         * Returns a list of positions in the specified account.
          * @summary List account positions
          * @param {string} userId 
          * @param {string} userSecret 
@@ -605,7 +605,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of positions in the the specified account.
+         * Returns a list of positions in the specified account.
          * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -700,7 +700,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountOrders(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of positions in the the specified account.
+         * Returns a list of positions in the specified account.
          * @summary List account positions
          * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1046,7 +1046,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of positions in the the specified account.
+     * Returns a list of positions in the specified account.
      * @summary List account positions
      * @param {AccountInformationApiGetUserAccountPositionsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

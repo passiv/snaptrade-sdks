@@ -32,7 +32,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
+         * Returns a single brokerage authorization object for the specified ID.
          * @summary Get brokerage authorization details
          * @param {string} authorizationId The ID of a brokerage authorization object.
          * @param {string} userId 
@@ -94,8 +94,8 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * 
-         * @summary List all brokerage authorizations for the user
+         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * @summary List all brokerage authorizations for the User
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -152,7 +152,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * 
+         * Deletes a specified brokerage authorization given by the ID.
          * @summary Delete brokerage authorization
          * @param {string} authorizationId The ID of the Authorization to delete.
          * @param {string} userId 
@@ -214,8 +214,8 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * 
-         * @summary List all session events for the partner
+         * Returns a list of session events associated with a user.
+         * @summary Get all session events for a user
          * @param {string} partnerClientId 
          * @param {string} [userId] Optional comma seperated list of user IDs used to filter the request on specific users
          * @param {string} [sessionId] Optional comma seperated list of session IDs used to filter the request on specific users
@@ -285,7 +285,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConnectionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
+         * Returns a single brokerage authorization object for the specified ID.
          * @summary Get brokerage authorization details
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -296,8 +296,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List all brokerage authorizations for the user
+         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * @summary List all brokerage authorizations for the User
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -307,7 +307,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Deletes a specified brokerage authorization given by the ID.
          * @summary Delete brokerage authorization
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -318,8 +318,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List all session events for the partner
+         * Returns a list of session events associated with a user.
+         * @summary Get all session events for a user
          * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -339,7 +339,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = ConnectionsApiFp(configuration)
     return {
         /**
-         * 
+         * Returns a single brokerage authorization object for the specified ID.
          * @summary Get brokerage authorization details
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -349,8 +349,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.detailBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List all brokerage authorizations for the user
+         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * @summary List all brokerage authorizations for the User
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -359,7 +359,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.listBrokerageAuthorizations(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Deletes a specified brokerage authorization given by the ID.
          * @summary Delete brokerage authorization
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -369,8 +369,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List all session events for the partner
+         * Returns a list of session events associated with a user.
+         * @summary Get all session events for a user
          * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -502,7 +502,7 @@ export type ConnectionsApiSessionEventsRequest = {
  */
 export class ConnectionsApiGenerated extends BaseAPI {
     /**
-     * 
+     * Returns a single brokerage authorization object for the specified ID.
      * @summary Get brokerage authorization details
      * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -514,8 +514,8 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List all brokerage authorizations for the user
+     * Returns a list of Brokerage Autherization objects for the specified userId.
+     * @summary List all brokerage authorizations for the User
      * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -526,7 +526,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Deletes a specified brokerage authorization given by the ID.
      * @summary Delete brokerage authorization
      * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -538,8 +538,8 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List all session events for the partner
+     * Returns a list of session events associated with a user.
+     * @summary Get all session events for a user
      * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

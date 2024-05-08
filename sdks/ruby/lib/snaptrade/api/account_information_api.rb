@@ -456,7 +456,7 @@ module SnapTrade
 
     # List account positions
     #
-    # Returns a list of positions in the the specified account.
+    # Returns a list of positions in the specified account.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -469,7 +469,7 @@ module SnapTrade
 
     # List account positions
     #
-    # Returns a list of positions in the the specified account.
+    # Returns a list of positions in the specified account.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -480,7 +480,7 @@ module SnapTrade
     end
 
     # List account positions
-    # Returns a list of positions in the the specified account.
+    # Returns a list of positions in the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.
@@ -492,7 +492,7 @@ module SnapTrade
     end
 
     # List account positions
-    # Returns a list of positions in the the specified account.
+    # Returns a list of positions in the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] The ID of the account to get positions.

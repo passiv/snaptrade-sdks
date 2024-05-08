@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSessionEvents(ApiTestMixin, unittest.TestCase):
     """
     SessionEvents unit test stubs
-        List all session events for the partner
+        Get all session events for a user
     """
 
     def setUp(self):

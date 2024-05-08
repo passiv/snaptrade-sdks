@@ -4,16 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetOptionStrategy**](OptionsApi.md#getoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order |
-| [**GetOptionsChain**](OptionsApi.md#getoptionschain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain |
-| [**GetOptionsStrategyQuote**](OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy |
-| [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
-| [**PlaceOptionStrategy**](OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage |
+| [**GetOptionStrategy**](OptionsApi.md#getoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy | Create options strategy |
+| [**GetOptionsChain**](OptionsApi.md#getoptionschain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain for a symbol |
+| [**GetOptionsStrategyQuote**](OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes |
+| [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get account option holdings |
+| [**PlaceOptionStrategy**](OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order |
 
 
 # **GetOptionStrategy**
 
-Creates an option strategy object that will be used to place an option strategy order
+
+
+Creates an option strategy object that will be used to place an option strategy order. 
 
 ### Example
 ```csharp
@@ -50,7 +52,7 @@ namespace Example
             
             try
             {
-                // Creates an option strategy object that will be used to place an option strategy order
+                // Create options strategy
                 StrategyQuotes result = client.Options.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
                 Console.WriteLine(result);
             }
@@ -77,7 +79,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Creates an option strategy object that will be used to place an option strategy order
+    // Create options strategy
     ApiResponse<StrategyQuotes> response = apiInstance.GetOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -116,7 +118,9 @@ catch (ApiException e)
 
 # **GetOptionsChain**
 
-Get the options chain
+
+
+Returns the option chain for the specified symbol in the specified account.
 
 ### Example
 ```csharp
@@ -145,7 +149,7 @@ namespace Example
             
             try
             {
-                // Get the options chain
+                // Get the options chain for a symbol
                 List<OptionChainInner> result = client.Options.GetOptionsChain(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
@@ -172,7 +176,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get the options chain
+    // Get the options chain for a symbol
     ApiResponse<List<OptionChainInner>> response = apiInstance.GetOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -211,7 +215,9 @@ catch (ApiException e)
 
 # **GetOptionsStrategyQuote**
 
-Get latest market data of option strategy
+
+
+Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
 
 ### Example
 ```csharp
@@ -240,7 +246,7 @@ namespace Example
             
             try
             {
-                // Get latest market data of option strategy
+                // Get options strategy quotes
                 StrategyQuotes result = client.Options.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
                 Console.WriteLine(result);
             }
@@ -267,7 +273,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get latest market data of option strategy
+    // Get options strategy quotes
     ApiResponse<StrategyQuotes> response = apiInstance.GetOptionsStrategyQuoteWithHttpInfo(userId, userSecret, accountId, optionStrategyId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -306,7 +312,9 @@ catch (ApiException e)
 
 # **ListOptionHoldings**
 
-Get the options holdings in the account
+
+
+Returns a list of Options Positions. 
 
 ### Example
 ```csharp
@@ -334,7 +342,7 @@ namespace Example
             
             try
             {
-                // Get the options holdings in the account
+                // Get account option holdings
                 List<OptionsPosition> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -361,7 +369,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get the options holdings in the account
+    // Get account option holdings
     ApiResponse<List<OptionsPosition>> response = apiInstance.ListOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -399,7 +407,9 @@ catch (ApiException e)
 
 # **PlaceOptionStrategy**
 
-Place an option strategy order on the brokerage
+
+
+Places the option strategy order and returns the order record received from the brokerage.
 
 ### Example
 ```csharp
@@ -437,7 +447,7 @@ namespace Example
             
             try
             {
-                // Place an option strategy order on the brokerage
+                // Place an option strategy order
                 StrategyOrderRecord result = client.Options.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
                 Console.WriteLine(result);
             }
@@ -464,7 +474,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place an option strategy order on the brokerage
+    // Place an option strategy order
     ApiResponse<StrategyOrderRecord> response = apiInstance.PlaceOptionStrategyWithHttpInfo(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

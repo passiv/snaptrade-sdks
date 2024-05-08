@@ -1048,7 +1048,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account positions
-     * Returns a list of positions in the the specified account.
+     * Returns a list of positions in the specified account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get positions. (required)

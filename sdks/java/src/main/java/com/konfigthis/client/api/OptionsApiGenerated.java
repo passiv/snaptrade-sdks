@@ -267,8 +267,8 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Creates an option strategy object that will be used to place an option strategy order
-     * 
+     * Create options strategy
+     * Creates an option strategy object that will be used to place an option strategy order. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to create the option strategy object in. (required)
@@ -472,8 +472,8 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Get the options chain
-     * 
+     * Get the options chain for a symbol
+     * Returns the option chain for the specified symbol in the specified account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to get the options chain from. (required)
@@ -670,8 +670,8 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Get latest market data of option strategy
-     * 
+     * Get options strategy quotes
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account the strategy will be placed in. (required)
@@ -860,8 +860,8 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Get the options holdings in the account
-     * 
+     * Get account option holdings
+     * Returns a list of Options Positions. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to fetch options holdings for. (required)
@@ -1097,8 +1097,8 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Place an option strategy order on the brokerage
-     * 
+     * Place an option strategy order
+     * Places the option strategy order and returns the order record received from the brokerage.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId The ID of the account to execute the strategy in. (required)

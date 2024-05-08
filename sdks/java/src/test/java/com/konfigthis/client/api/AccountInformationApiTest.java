@@ -123,7 +123,7 @@ public class AccountInformationApiTest {
     /**
      * List account positions
      *
-     * Returns a list of positions in the the specified account.
+     * Returns a list of positions in the specified account.
      *
      * @throws ApiException if the Api call fails
      */

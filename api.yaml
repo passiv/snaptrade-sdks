@@ -601,7 +601,7 @@ paths:
       tags:
         - Account Information
       summary: List account positions
-      description: Returns a list of positions in the the specified account.
+      description: Returns a list of positions in the specified account.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
         - in: query
@@ -833,7 +833,7 @@ paths:
       responses:
         "200":
           description:
-            Array of universal symbol supported by account based on substring
+            List of universal symbol supported by account based on substring
             sent it
           content:
             "*/*":
@@ -847,7 +847,9 @@ paths:
     get:
       tags:
         - Options
-      summary: Get the options holdings in the account
+      summary: Get account option holdings
+      description: |
+        Returns a list of Options Positions.
       operationId: Options_listOptionHoldings
       parameters:
         - in: query
@@ -886,7 +888,8 @@ paths:
     get:
       tags:
         - Options
-      summary: Get the options chain
+      summary: Get the options chain for a symbol
+      description: Returns the option chain for the specified symbol in the specified account.
       operationId: Options_getOptionsChain
       parameters:
         - in: query
@@ -930,7 +933,9 @@ paths:
     post:
       tags:
         - Options
-      summary: Creates an option strategy object that will be used to place an option strategy order
+      summary: Create options strategy
+      description: |
+        Creates an option strategy object that will be used to place an option strategy order.
       operationId: Options_getOptionStrategy
       parameters:
         - in: query
@@ -972,7 +977,9 @@ paths:
     get:
       tags:
         - Options
-      summary: Get latest market data of option strategy
+      summary: Get options strategy quotes
+      description: |
+        Returns a Strategy Quotes object which has latest market data of the specified option strategy.
       operationId: Options_getOptionsStrategyQuote
       parameters:
         - in: query
@@ -1016,7 +1023,8 @@ paths:
     post:
       tags:
         - Options
-      summary: Place an option strategy order on the brokerage
+      summary: Place an option strategy order
+      description: Places the option strategy order and returns the order record received from the brokerage.
       operationId: Options_placeOptionStrategy
       parameters:
         - in: query
@@ -1061,7 +1069,8 @@ paths:
     get:
       tags:
         - Connections
-      summary: List all brokerage authorizations for the user
+      summary: List all brokerage authorizations for the User
+      description: Returns a list of Brokerage Autherization objects for the specified userId.
       operationId: Connections_listBrokerageAuthorizations
       parameters:
         - in: query
@@ -1090,6 +1099,7 @@ paths:
       tags:
         - Connections
       summary: Get brokerage authorization details
+      description: Returns a single brokerage authorization object for the specified ID.
       operationId: Connections_detailBrokerageAuthorization
       parameters:
         - in: path
@@ -1121,6 +1131,7 @@ paths:
       tags:
         - Connections
       summary: Delete brokerage authorization
+      description: Deletes a specified brokerage authorization given by the ID.
       operationId: Connections_removeBrokerageAuthorization
       parameters:
         - in: path
@@ -1152,7 +1163,8 @@ paths:
     get:
       tags:
         - Connections
-      summary: List all session events for the partner
+      summary: Get all session events for a user
+      description: Returns a list of session events associated with a user.
       operationId: Connections_sessionEvents
       parameters:
         - in: query

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOptionStrategy(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOptionStrategy unit test stubs
-        Creates an option strategy object that will be used to place an option strategy order
+        Create options strategy
     """
 
     def setUp(self):

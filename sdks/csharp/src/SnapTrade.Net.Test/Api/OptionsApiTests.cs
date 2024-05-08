@@ -67,7 +67,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Creates an option strategy object that will be used to place an option strategy order
+                // Create options strategy
                 StrategyQuotes result = client.Options.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
                 Console.WriteLine(result);
             }
@@ -98,7 +98,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get the options chain
+                // Get the options chain for a symbol
                 List<OptionChainInner> result = client.Options.GetOptionsChain(userId, userSecret, accountId, symbol);
                 Console.WriteLine(result);
             }
@@ -129,7 +129,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get latest market data of option strategy
+                // Get options strategy quotes
                 StrategyQuotes result = client.Options.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
                 Console.WriteLine(result);
             }
@@ -159,7 +159,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get the options holdings in the account
+                // Get account option holdings
                 List<OptionsPosition> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -199,7 +199,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Place an option strategy order on the brokerage
+                // Place an option strategy order
                 StrategyOrderRecord result = client.Options.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
                 Console.WriteLine(result);
             }

@@ -87,7 +87,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List all brokerage authorizations for the user
+                // List all brokerage authorizations for the User
                 List<BrokerageAuthorization> result = client.Connections.ListBrokerageAuthorizations(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -146,7 +146,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List all session events for the partner
+                // Get all session events for a user
                 List<ConnectionsSessionEvents200ResponseInner> result = client.Connections.SessionEvents(partnerClientId, userId, sessionId);
                 Console.WriteLine(result);
             }

@@ -4,18 +4,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getOptionStrategy**](OptionsApi.md#getOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy | Creates an option strategy object that will be used to place an option strategy order |
-| [**getOptionsChain**](OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain |
-| [**getOptionsStrategyQuote**](OptionsApi.md#getOptionsStrategyQuote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get latest market data of option strategy |
-| [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | Get the options holdings in the account |
-| [**placeOptionStrategy**](OptionsApi.md#placeOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order on the brokerage |
+| [**getOptionStrategy**](OptionsApi.md#getOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy | Create options strategy |
+| [**getOptionsChain**](OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain for a symbol |
+| [**getOptionsStrategyQuote**](OptionsApi.md#getOptionsStrategyQuote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes |
+| [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | Get account option holdings |
+| [**placeOptionStrategy**](OptionsApi.md#placeOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order |
 
 
 <a name="getOptionStrategy"></a>
 # **getOptionStrategy**
 > StrategyQuotes getOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest).execute();
 
-Creates an option strategy object that will be used to place an option strategy order
+Create options strategy
+
+Creates an option strategy object that will be used to place an option strategy order. 
 
 ### Example
 ```java
@@ -119,7 +121,9 @@ public class Example {
 # **getOptionsChain**
 > List&lt;OptionChainInner&gt; getOptionsChain(userId, userSecret, accountId, symbol).execute();
 
-Get the options chain
+Get the options chain for a symbol
+
+Returns the option chain for the specified symbol in the specified account.
 
 ### Example
 ```java
@@ -215,7 +219,9 @@ public class Example {
 # **getOptionsStrategyQuote**
 > StrategyQuotes getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId).execute();
 
-Get latest market data of option strategy
+Get options strategy quotes
+
+Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
 
 ### Example
 ```java
@@ -317,7 +323,9 @@ public class Example {
 # **listOptionHoldings**
 > List&lt;OptionsPosition&gt; listOptionHoldings(userId, userSecret, accountId).execute();
 
-Get the options holdings in the account
+Get account option holdings
+
+Returns a list of Options Positions. 
 
 ### Example
 ```java
@@ -411,7 +419,9 @@ public class Example {
 # **placeOptionStrategy**
 > StrategyOrderRecord placeOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest).execute();
 
-Place an option strategy order on the brokerage
+Place an option strategy order
+
+Places the option strategy order and returns the order record received from the brokerage.
 
 ### Example
 ```java

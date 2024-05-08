@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.16-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.16)
+[![npm](https://img.shields.io/badge/gem-v2.0.17-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.17)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -69,7 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.16'
+gem 'snaptrade', '~> 2.0.17'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -264,7 +264,7 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 ### `snaptrade.account_information.get_user_account_positions`<a id="snaptradeaccount_informationget_user_account_positions"></a>
 
-Returns a list of positions in the the specified account.
+Returns a list of positions in the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -641,7 +641,7 @@ SnapTrade user.
 
 ### `snaptrade.connections.detail_brokerage_authorization`<a id="snaptradeconnectionsdetail_brokerage_authorization"></a>
 
-Get brokerage authorization details
+Returns a single brokerage authorization object for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -676,7 +676,7 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
-List all brokerage authorizations for the user
+Returns a list of Brokerage Autherization objects for the specified userId.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -707,7 +707,7 @@ p result
 
 ### `snaptrade.connections.remove_brokerage_authorization`<a id="snaptradeconnectionsremove_brokerage_authorization"></a>
 
-Delete brokerage authorization
+Deletes a specified brokerage authorization given by the ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -737,7 +737,7 @@ The ID of the Authorization to delete.
 
 ### `snaptrade.connections.session_events`<a id="snaptradeconnectionssession_events"></a>
 
-List all session events for the partner
+Returns a list of session events associated with a user.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -776,7 +776,8 @@ specific users
 
 ### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
 
-Creates an option strategy object that will be used to place an option strategy order
+Creates an option strategy object that will be used to place an option strategy order.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -823,7 +824,7 @@ The ID of the account to create the option strategy object in.
 
 ### `snaptrade.options.get_options_chain`<a id="snaptradeoptionsget_options_chain"></a>
 
-Get the options chain
+Returns the option chain for the specified symbol in the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -862,7 +863,8 @@ Universal symbol ID if symbol
 
 ### `snaptrade.options.get_options_strategy_quote`<a id="snaptradeoptionsget_options_strategy_quote"></a>
 
-Get latest market data of option strategy
+Returns a Strategy Quotes object which has latest market data of the specified option strategy.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -901,7 +903,8 @@ Option strategy id obtained from response when creating option strategy object
 
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
 
-Get the options holdings in the account
+Returns a list of Options Positions.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -936,7 +939,7 @@ The ID of the account to fetch options holdings for.
 
 ### `snaptrade.options.place_option_strategy`<a id="snaptradeoptionsplace_option_strategy"></a>
 
-Place an option strategy order on the brokerage
+Places the option strategy order and returns the order record received from the brokerage.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

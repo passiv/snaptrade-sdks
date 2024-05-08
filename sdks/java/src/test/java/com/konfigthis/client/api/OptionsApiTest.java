@@ -51,7 +51,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Creates an option strategy object that will be used to place an option strategy order
+     * Create options strategy
+     *
+     * Creates an option strategy object that will be used to place an option strategy order. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -69,7 +71,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get the options chain
+     * Get the options chain for a symbol
+     *
+     * Returns the option chain for the specified symbol in the specified account.
      *
      * @throws ApiException if the Api call fails
      */
@@ -85,7 +89,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get latest market data of option strategy
+     * Get options strategy quotes
+     *
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -101,7 +107,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get the options holdings in the account
+     * Get account option holdings
+     *
+     * Returns a list of Options Positions. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -116,7 +124,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Place an option strategy order on the brokerage
+     * Place an option strategy order
+     *
+     * Places the option strategy order and returns the order record received from the brokerage.
      *
      * @throws ApiException if the Api call fails
      */

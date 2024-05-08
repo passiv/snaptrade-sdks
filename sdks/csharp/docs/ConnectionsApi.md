@@ -5,14 +5,16 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
-| [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
+| [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
-| [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | List all session events for the partner |
+| [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user |
 
 
 # **DetailBrokerageAuthorization**
 
-Get brokerage authorization details
+
+
+Returns a single brokerage authorization object for the specified ID.
 
 ### Example
 ```csharp
@@ -105,7 +107,9 @@ catch (ApiException e)
 
 # **ListBrokerageAuthorizations**
 
-List all brokerage authorizations for the user
+
+
+Returns a list of Brokerage Autherization objects for the specified userId.
 
 ### Example
 ```csharp
@@ -132,7 +136,7 @@ namespace Example
             
             try
             {
-                // List all brokerage authorizations for the user
+                // List all brokerage authorizations for the User
                 List<BrokerageAuthorization> result = client.Connections.ListBrokerageAuthorizations(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -159,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List all brokerage authorizations for the user
+    // List all brokerage authorizations for the User
     ApiResponse<List<BrokerageAuthorization>> response = apiInstance.ListBrokerageAuthorizationsWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -196,7 +200,9 @@ catch (ApiException e)
 
 # **RemoveBrokerageAuthorization**
 
-Delete brokerage authorization
+
+
+Deletes a specified brokerage authorization given by the ID.
 
 ### Example
 ```csharp
@@ -287,7 +293,9 @@ void (empty response body)
 
 # **SessionEvents**
 
-List all session events for the partner
+
+
+Returns a list of session events associated with a user.
 
 ### Example
 ```csharp
@@ -315,7 +323,7 @@ namespace Example
             
             try
             {
-                // List all session events for the partner
+                // Get all session events for a user
                 List<ConnectionsSessionEvents200ResponseInner> result = client.Connections.SessionEvents(partnerClientId, userId, sessionId);
                 Console.WriteLine(result);
             }
@@ -342,7 +350,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List all session events for the partner
+    // Get all session events for a user
     ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> response = apiInstance.SessionEventsWithHttpInfo(partnerClientId, userId, sessionId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

@@ -357,6 +357,8 @@ paths:
       x-accepts: application/json
   /authorizations:
     get:
+      description: Returns a list of Brokerage Autherization objects for the specified
+        userId.
       operationId: Connections_listBrokerageAuthorizations
       parameters:
       - explode: true
@@ -385,7 +387,7 @@ paths:
           description: A list of all Authorization objects for the authenticated user.
         default:
           description: Unexpected error.
-      summary: List all brokerage authorizations for the user
+      summary: List all brokerage authorizations for the User
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
@@ -393,6 +395,7 @@ paths:
       x-accepts: application/json
   /authorizations/{authorizationId}:
     delete:
+      description: Deletes a specified brokerage authorization given by the ID.
       operationId: Connections_removeBrokerageAuthorization
       parameters:
       - description: The ID of the Authorization to delete.
@@ -433,6 +436,8 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--authorizations-authorizationId
       x-accepts: application/json
     get:
+      description: Returns a single brokerage authorization object for the specified
+        ID.
       operationId: Connections_detailBrokerageAuthorization
       parameters:
       - description: The ID of a brokerage authorization object.
@@ -474,6 +479,7 @@ paths:
       x-accepts: application/json
   /sessionEvents:
     get:
+      description: Returns a list of session events associated with a user.
       operationId: Connections_sessionEvents
       parameters:
       - explode: true
@@ -513,7 +519,7 @@ paths:
           description: A list of all Session Events for the Partner.
         default:
           description: Unexpected error.
-      summary: List all session events for the partner
+      summary: Get all session events for a user
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
@@ -833,7 +839,7 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/positions:
     get:
-      description: Returns a list of positions in the the specified account.
+      description: Returns a list of positions in the specified account.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
       - explode: true
@@ -1334,7 +1340,7 @@ paths:
                   $ref: '#/components/schemas/UniversalSymbol'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: Array of universal symbol supported by account based on substring
+          description: List of universal symbol supported by account based on substring
             sent it
         default:
           description: Unexpected error
@@ -1347,6 +1353,8 @@ paths:
       x-accepts: '*/*'
   /accounts/{accountId}/options:
     get:
+      description: |
+        Returns a list of Options Positions.
       operationId: Options_listOptionHoldings
       parameters:
       - explode: true
@@ -1389,7 +1397,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Get the options holdings in the account
+      summary: Get account option holdings
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true
@@ -1397,6 +1405,8 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/optionsChain:
     get:
+      description: Returns the option chain for the specified symbol in the specified
+        account.
       operationId: Options_getOptionsChain
       parameters:
       - explode: true
@@ -1445,7 +1455,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Get the options chain
+      summary: Get the options chain for a symbol
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true
@@ -1453,6 +1463,8 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/optionStrategy:
     post:
+      description: |
+        Creates an option strategy object that will be used to place an option strategy order.
       operationId: Options_getOptionStrategy
       parameters:
       - explode: true
@@ -1494,8 +1506,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Creates an option strategy object that will be used to place an option
-        strategy order
+      summary: Create options strategy
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true
@@ -1504,6 +1515,8 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/optionStrategy/{optionStrategyId}:
     get:
+      description: |
+        Returns a Strategy Quotes object which has latest market data of the specified option strategy.
       operationId: Options_getOptionsStrategyQuote
       parameters:
       - explode: true
@@ -1552,7 +1565,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Get latest market data of option strategy
+      summary: Get options strategy quotes
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true
@@ -1560,6 +1573,8 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
     post:
+      description: Places the option strategy order and returns the order record received
+        from the brokerage.
       operationId: Options_placeOptionStrategy
       parameters:
       - explode: true
@@ -1609,7 +1624,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Place an option strategy order on the brokerage
+      summary: Place an option strategy order
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true

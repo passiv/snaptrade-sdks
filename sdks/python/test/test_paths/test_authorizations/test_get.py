@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAuthorizations(ApiTestMixin, unittest.TestCase):
     """
     Authorizations unit test stubs
-        List all brokerage authorizations for the user
+        List all brokerage authorizations for the User
     """
 
     def setUp(self):

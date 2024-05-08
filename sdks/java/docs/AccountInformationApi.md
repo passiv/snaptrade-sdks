@@ -428,7 +428,7 @@ public class Example {
 
 List account positions
 
-Returns a list of positions in the the specified account.
+Returns a list of positions in the specified account.
 
 ### Example
 ```java

@@ -29,6 +29,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for detail_brokerage_authorization
   # Get brokerage authorization details
+  # Returns a single brokerage authorization object for the specified ID.
   # @param authorization_id The ID of a brokerage authorization object.
   # @param user_id 
   # @param user_secret 
@@ -41,7 +42,8 @@ describe 'ConnectionsApi' do
   end
 
   # unit tests for list_brokerage_authorizations
-  # List all brokerage authorizations for the user
+  # List all brokerage authorizations for the User
+  # Returns a list of Brokerage Autherization objects for the specified userId.
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
@@ -54,6 +56,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for remove_brokerage_authorization
   # Delete brokerage authorization
+  # Deletes a specified brokerage authorization given by the ID.
   # @param authorization_id The ID of the Authorization to delete.
   # @param user_id 
   # @param user_secret 
@@ -66,7 +69,8 @@ describe 'ConnectionsApi' do
   end
 
   # unit tests for session_events
-  # List all session events for the partner
+  # Get all session events for a user
+  # Returns a list of session events associated with a user.
   # @param partner_client_id 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users

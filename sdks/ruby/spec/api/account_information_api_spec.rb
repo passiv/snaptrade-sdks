@@ -87,7 +87,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_user_account_positions
   # List account positions
-  # Returns a list of positions in the the specified account.
+  # Returns a list of positions in the specified account.
   # @param user_id 
   # @param user_secret 
   # @param account_id The ID of the account to get positions.

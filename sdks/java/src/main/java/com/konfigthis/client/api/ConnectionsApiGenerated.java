@@ -241,7 +241,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Get brokerage authorization details
-     * 
+     * Returns a single brokerage authorization object for the specified ID.
      * @param authorizationId The ID of a brokerage authorization object. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -423,8 +423,8 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * List all brokerage authorizations for the user
-     * 
+     * List all brokerage authorizations for the User
+     * Returns a list of Brokerage Autherization objects for the specified userId.
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListBrokerageAuthorizationsRequestBuilder
@@ -614,7 +614,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Delete brokerage authorization
-     * 
+     * Deletes a specified brokerage authorization given by the ID.
      * @param authorizationId The ID of the Authorization to delete. (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -817,8 +817,8 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * List all session events for the partner
-     * 
+     * Get all session events for a user
+     * Returns a list of session events associated with a user.
      * @param partnerClientId  (required)
      * @return SessionEventsRequestBuilder
      * @http.response.details
