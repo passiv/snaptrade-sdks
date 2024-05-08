@@ -324,7 +324,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Creates an option strategy object that will be used to place an option strategy order
+        Create options strategy
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -470,7 +470,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Creates an option strategy object that will be used to place an option strategy order
+        Create options strategy
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances

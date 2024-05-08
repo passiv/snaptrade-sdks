@@ -5,9 +5,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
-| [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the user |
+| [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
 | [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
-| [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | List all session events for the partner |
+| [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 
 
 <a name="detailBrokerageAuthorization"></a>
@@ -15,6 +15,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 > BrokerageAuthorization detailBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
 Get brokerage authorization details
+
+Returns a single brokerage authorization object for the specified ID.
 
 ### Example
 ```java
@@ -118,7 +120,9 @@ public class Example {
 # **listBrokerageAuthorizations**
 > List&lt;BrokerageAuthorization&gt; listBrokerageAuthorizations(userId, userSecret).execute();
 
-List all brokerage authorizations for the user
+List all brokerage authorizations for the User
+
+Returns a list of Brokerage Autherization objects for the specified userId.
 
 ### Example
 ```java
@@ -213,6 +217,8 @@ public class Example {
 
 Delete brokerage authorization
 
+Deletes a specified brokerage authorization given by the ID.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -302,7 +308,9 @@ null (empty response body)
 # **sessionEvents**
 > List&lt;SessionEvent&gt; sessionEvents(partnerClientId).userId(userId).sessionId(sessionId).execute();
 
-List all session events for the partner
+Get all session events for a user
+
+Returns a list of session events associated with a user.
 
 ### Example
 ```java

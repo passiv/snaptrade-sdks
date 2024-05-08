@@ -46,6 +46,8 @@ public class ConnectionsApiTest {
     /**
      * Get brokerage authorization details
      *
+     * Returns a single brokerage authorization object for the specified ID.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -59,7 +61,9 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * List all brokerage authorizations for the user
+     * List all brokerage authorizations for the User
+     *
+     * Returns a list of Brokerage Autherization objects for the specified userId.
      *
      * @throws ApiException if the Api call fails
      */
@@ -75,6 +79,8 @@ public class ConnectionsApiTest {
     /**
      * Delete brokerage authorization
      *
+     * Deletes a specified brokerage authorization given by the ID.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -88,7 +94,9 @@ public class ConnectionsApiTest {
     }
 
     /**
-     * List all session events for the partner
+     * Get all session events for a user
+     *
+     * Returns a list of session events associated with a user.
      *
      * @throws ApiException if the Api call fails
      */

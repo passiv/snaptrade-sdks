@@ -19,6 +19,8 @@ module SnapTrade
 
     # Get brokerage authorization details
     #
+    # Returns a single brokerage authorization object for the specified ID.
+    #
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -30,6 +32,8 @@ module SnapTrade
 
     # Get brokerage authorization details
     #
+    # Returns a single brokerage authorization object for the specified ID.
+    #
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -39,6 +43,7 @@ module SnapTrade
     end
 
     # Get brokerage authorization details
+    # Returns a single brokerage authorization object for the specified ID.
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -50,6 +55,7 @@ module SnapTrade
     end
 
     # Get brokerage authorization details
+    # Returns a single brokerage authorization object for the specified ID.
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -114,7 +120,9 @@ module SnapTrade
     end
 
 
-    # List all brokerage authorizations for the user
+    # List all brokerage authorizations for the User
+    #
+    # Returns a list of Brokerage Autherization objects for the specified userId.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -124,7 +132,9 @@ module SnapTrade
       data
     end
 
-    # List all brokerage authorizations for the user
+    # List all brokerage authorizations for the User
+    #
+    # Returns a list of Brokerage Autherization objects for the specified userId.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -133,7 +143,8 @@ module SnapTrade
       list_brokerage_authorizations_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # List all brokerage authorizations for the user
+    # List all brokerage authorizations for the User
+    # Returns a list of Brokerage Autherization objects for the specified userId.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -143,7 +154,8 @@ module SnapTrade
       data
     end
 
-    # List all brokerage authorizations for the user
+    # List all brokerage authorizations for the User
+    # Returns a list of Brokerage Autherization objects for the specified userId.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -205,6 +217,8 @@ module SnapTrade
 
     # Delete brokerage authorization
     #
+    # Deletes a specified brokerage authorization given by the ID.
+    #
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -216,6 +230,8 @@ module SnapTrade
 
     # Delete brokerage authorization
     #
+    # Deletes a specified brokerage authorization given by the ID.
+    #
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -225,6 +241,7 @@ module SnapTrade
     end
 
     # Delete brokerage authorization
+    # Deletes a specified brokerage authorization given by the ID.
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -236,6 +253,7 @@ module SnapTrade
     end
 
     # Delete brokerage authorization
+    # Deletes a specified brokerage authorization given by the ID.
     # @param authorization_id [String] The ID of the Authorization to delete.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -298,7 +316,9 @@ module SnapTrade
     end
 
 
-    # List all session events for the partner
+    # Get all session events for a user
+    #
+    # Returns a list of session events associated with a user.
     #
     # @param partner_client_id [String] 
     # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
@@ -311,7 +331,9 @@ module SnapTrade
       data
     end
 
-    # List all session events for the partner
+    # Get all session events for a user
+    #
+    # Returns a list of session events associated with a user.
     #
     # @param partner_client_id [String] 
     # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
@@ -323,7 +345,8 @@ module SnapTrade
       session_events_with_http_info_impl(partner_client_id, extra)
     end
 
-    # List all session events for the partner
+    # Get all session events for a user
+    # Returns a list of session events associated with a user.
     # @param partner_client_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users
@@ -334,7 +357,8 @@ module SnapTrade
       data
     end
 
-    # List all session events for the partner
+    # Get all session events for a user
+    # Returns a list of session events associated with a user.
     # @param partner_client_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOptionStrategyOptionStrategyIdExecute(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOptionStrategyOptionStrategyIdExecute unit test stubs
-        Place an option strategy order on the brokerage
+        Place an option strategy order
     """
 
     def setUp(self):

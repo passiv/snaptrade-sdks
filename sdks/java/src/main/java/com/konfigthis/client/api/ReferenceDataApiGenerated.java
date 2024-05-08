@@ -1741,7 +1741,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1763,7 +1763,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1780,7 +1780,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1797,7 +1797,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1817,7 +1817,7 @@ public class ReferenceDataApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Array of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */

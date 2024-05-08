@@ -48,8 +48,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const OptionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * Creates an option strategy object that will be used to place an option strategy order. 
+         * @summary Create options strategy
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account to create the option strategy object in.
@@ -118,8 +118,8 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Get the options chain
+         * Returns the option chain for the specified symbol in the specified account.
+         * @summary Get the options chain for a symbol
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account to get the options chain from.
@@ -187,8 +187,8 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Get latest market data of option strategy
+         * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
+         * @summary Get options strategy quotes
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account the strategy will be placed in.
@@ -253,8 +253,8 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Get the options holdings in the account
+         * Returns a list of Options Positions. 
+         * @summary Get account option holdings
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account to fetch options holdings for.
@@ -315,8 +315,8 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Place an option strategy order on the brokerage
+         * Places the option strategy order and returns the order record received from the brokerage.
+         * @summary Place an option strategy order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId The ID of the account to execute the strategy in.
@@ -399,8 +399,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OptionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * Creates an option strategy object that will be used to place an option strategy order. 
+         * @summary Create options strategy
          * @param {OptionsApiGetOptionStrategyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -415,8 +415,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Get the options chain
+         * Returns the option chain for the specified symbol in the specified account.
+         * @summary Get the options chain for a symbol
          * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -426,8 +426,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Get latest market data of option strategy
+         * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
+         * @summary Get options strategy quotes
          * @param {OptionsApiGetOptionsStrategyQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -437,8 +437,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Get the options holdings in the account
+         * Returns a list of Options Positions. 
+         * @summary Get account option holdings
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -448,8 +448,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Place an option strategy order on the brokerage
+         * Places the option strategy order and returns the order record received from the brokerage.
+         * @summary Place an option strategy order
          * @param {OptionsApiPlaceOptionStrategyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -474,8 +474,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = OptionsApiFp(configuration)
     return {
         /**
-         * 
-         * @summary Creates an option strategy object that will be used to place an option strategy order
+         * Creates an option strategy object that will be used to place an option strategy order. 
+         * @summary Create options strategy
          * @param {OptionsApiGetOptionStrategyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -484,8 +484,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOptionStrategy(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get the options chain
+         * Returns the option chain for the specified symbol in the specified account.
+         * @summary Get the options chain for a symbol
          * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -494,8 +494,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOptionsChain(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get latest market data of option strategy
+         * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
+         * @summary Get options strategy quotes
          * @param {OptionsApiGetOptionsStrategyQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -504,8 +504,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOptionsStrategyQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get the options holdings in the account
+         * Returns a list of Options Positions. 
+         * @summary Get account option holdings
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -514,8 +514,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.listOptionHoldings(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Place an option strategy order on the brokerage
+         * Places the option strategy order and returns the order record received from the brokerage.
+         * @summary Place an option strategy order
          * @param {OptionsApiPlaceOptionStrategyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -705,8 +705,8 @@ export type OptionsApiPlaceOptionStrategyRequest = {
  */
 export class OptionsApiGenerated extends BaseAPI {
     /**
-     * 
-     * @summary Creates an option strategy object that will be used to place an option strategy order
+     * Creates an option strategy object that will be used to place an option strategy order. 
+     * @summary Create options strategy
      * @param {OptionsApiGetOptionStrategyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -717,8 +717,8 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get the options chain
+     * Returns the option chain for the specified symbol in the specified account.
+     * @summary Get the options chain for a symbol
      * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -729,8 +729,8 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get latest market data of option strategy
+     * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
+     * @summary Get options strategy quotes
      * @param {OptionsApiGetOptionsStrategyQuoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -741,8 +741,8 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get the options holdings in the account
+     * Returns a list of Options Positions. 
+     * @summary Get account option holdings
      * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -753,8 +753,8 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Place an option strategy order on the brokerage
+     * Places the option strategy order and returns the order record received from the brokerage.
+     * @summary Place an option strategy order
      * @param {OptionsApiPlaceOptionStrategyRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

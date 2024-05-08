@@ -145,7 +145,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of positions in the the specified account.
+        /// Returns a list of positions in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -159,7 +159,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of positions in the the specified account.
+        /// Returns a list of positions in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -382,7 +382,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of positions in the the specified account.
+        /// Returns a list of positions in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -397,7 +397,7 @@ namespace SnapTrade.Net.Api
         /// List account positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of positions in the the specified account.
+        /// Returns a list of positions in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1475,7 +1475,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions Returns a list of positions in the the specified account.
+        /// List account positions Returns a list of positions in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1490,7 +1490,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions Returns a list of positions in the the specified account.
+        /// List account positions Returns a list of positions in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1578,7 +1578,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions Returns a list of positions in the the specified account.
+        /// List account positions Returns a list of positions in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1594,7 +1594,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account positions Returns a list of positions in the the specified account.
+        /// List account positions Returns a list of positions in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

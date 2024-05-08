@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOptionsChain(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOptionsChain unit test stubs
-        Get the options chain
+        Get the options chain for a symbol
     """
 
     def setUp(self):

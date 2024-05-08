@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOptionStrategyOptionStrategyId(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOptionStrategyOptionStrategyId unit test stubs
-        Get latest market data of option strategy
+        Get options strategy quotes
     """
 
     def setUp(self):
