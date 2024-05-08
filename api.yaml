@@ -1202,7 +1202,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List brokerages
+      summary: Get brokerages
+      description: Returns a list of all defined Brokerage objects.
       operationId: ReferenceData_listAllBrokerages
       parameters: []
       responses:
@@ -1220,7 +1221,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List of all brokerage authorization types
+      summary: Get all brokerage authorization types
+      description: Returns a list of all defined Brokerage authorization Type objects.
       operationId: ReferenceData_listAllBrokerageAuthorizationType
       parameters:
         - in: query
@@ -1245,7 +1247,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List currencies
+      summary: Get currencies
+      description: Returns a list of all defined Currency objects.
       operationId: ReferenceData_listAllCurrencies
       parameters: []
       responses:
@@ -1263,7 +1266,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List currency exchange rates
+      summary: Get currency exchange rates
+      description: Returns a list of all Exchange Rate Pairs for all supported Currencies.
       operationId: ReferenceData_listAllCurrenciesRates
       parameters: []
       responses:
@@ -1279,7 +1283,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Return the exchange rate of a currency pair
+      summary: Get exchange rate of a currency pair
+      description: Returns an Exchange Rate Pair object for the specified Currency Pair.
       operationId: ReferenceData_getCurrencyExchangeRatePair
       parameters:
         - in: path
@@ -1299,7 +1304,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List exchanges
+      summary: Get exchanges
+      description: Returns a list of all supported Exchanges.
       operationId: ReferenceData_getStockExchanges
       parameters: []
       responses:
@@ -1335,6 +1341,10 @@ paths:
       tags:
         - Reference Data
       summary: Search for symbols
+      description: |
+        Returns a list of Universal Symbol objects that match a defined string.
+
+        Matches on ticker or name.
       operationId: ReferenceData_getSymbols
       parameters: []
       responses:
@@ -1357,7 +1367,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Get details of a symbol by the ticker or the universal_symbol_id
+      summary: Get details of a symbol
+      description: Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
         - in: path
@@ -1382,6 +1393,7 @@ paths:
       tags:
         - Trading
       summary: Place a trade with NO validation.
+      description: Places a specified trade in the specified account.
       operationId: Trading_placeForceOrder
       parameters:
         - in: query
@@ -1422,7 +1434,8 @@ paths:
     post:
       tags:
         - Trading
-      summary: Check impact of trades on account.
+      summary: Check the impact of a trade on an account
+      description: Return the trade object and it's impact on the account for the specified order.
       operationId: Trading_getOrderImpact
       parameters:
         - in: query
@@ -1463,6 +1476,9 @@ paths:
       tags:
         - Trading
       summary: Place order
+      description: |
+        Places the specified trade object. This places the order in the account and
+        returns the status of the order from the brokerage.
       operationId: Trading_placeOrder
       parameters:
         - in: path
@@ -1653,6 +1669,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_connectionAdded
+      description: A webhook that is sent whenever a new connection is added.
       requestBody:
         description: Information about a new connection in the system
         content:
@@ -1669,6 +1686,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_connectionDeleted
+      description: A webhook that is sent whenever an existing connection is deleted.
       requestBody:
         description: Information about the deleted connection
         content:
@@ -1687,6 +1705,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_userRegistered
+      description: A webhook that is sent whenever a user is newly registered.
       requestBody:
         description: Information about the newly registered user
         content:
@@ -1706,6 +1725,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_userDeleted
+      description: A webhook that is sent whenever an existing user is deleted.
       requestBody:
         description: Information about the deleted user
         content:
@@ -1723,6 +1743,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_accountAdded
+      description: A webhook that is sent whenever a new account is added to an existing brokerage authorization.
       requestBody:
         description: Information about the newly added account
         content:
@@ -1736,12 +1757,13 @@ paths:
             successfully
         "201":
           description: Return a 201 status to indicate that the account was added
-            successfull
+            successfully
   /accountDeleted:
     post:
       tags:
         - Webhooks
       operationId: Webhooks_accountDeleted
+      description: A webhook that is sent whenever an existing account under a brokerage authorization is deleted.
       requestBody:
         description: Information about the deleted account
         content:
@@ -1761,6 +1783,7 @@ paths:
       tags:
         - Webhooks
       operationId: Webhooks_updatedTransactions
+      description: A webhook that is sent whenever transactions have been updated for an account.
       requestBody:
         description: Information about the account for which transactions have been updated
         content:
