@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.16-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.16)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.17-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.17)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.16</version>
+  <version>5.0.17</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.16"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.17"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.16.jar`
+* `target/snaptrade-java-sdk-5.0.17.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -209,19 +209,19 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**getOptionsStrategyQuote**](docs/OptionsApi.md#getOptionsStrategyQuote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
 *OptionsApi* | [**listOptionHoldings**](docs/OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | Get account option holdings
 *OptionsApi* | [**placeOptionStrategy**](docs/OptionsApi.md#placeOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order
-*ReferenceDataApi* | [**getCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
+*ReferenceDataApi* | [**getCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**getPartnerInfo**](docs/ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *ReferenceDataApi* | [**getSecurityTypes**](docs/ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types
-*ReferenceDataApi* | [**getStockExchanges**](docs/ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | List exchanges
+*ReferenceDataApi* | [**getStockExchanges**](docs/ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Get exchanges
 *ReferenceDataApi* | [**getSymbols**](docs/ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols
-*ReferenceDataApi* | [**getSymbolsByTicker**](docs/ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id
-*ReferenceDataApi* | [**listAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**listAllBrokerages**](docs/ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | List brokerages
-*ReferenceDataApi* | [**listAllCurrencies**](docs/ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | List currencies
-*ReferenceDataApi* | [**listAllCurrenciesRates**](docs/ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | List currency exchange rates
+*ReferenceDataApi* | [**getSymbolsByTicker**](docs/ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol
+*ReferenceDataApi* | [**listAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types
+*ReferenceDataApi* | [**listAllBrokerages**](docs/ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages
+*ReferenceDataApi* | [**listAllCurrencies**](docs/ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies
+*ReferenceDataApi* | [**listAllCurrenciesRates**](docs/ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**symbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 *TradingApi* | [**cancelUserAccountOrder**](docs/TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*TradingApi* | [**getOrderImpact**](docs/TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check impact of trades on account.
+*TradingApi* | [**getOrderImpact**](docs/TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check the impact of a trade on an account
 *TradingApi* | [**getUserAccountQuotes**](docs/TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**placeForceOrder**](docs/TradingApi.md#placeForceOrder) | **POST** /trade/place | Place a trade with NO validation.
 *TradingApi* | [**placeOrder**](docs/TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order

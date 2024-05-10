@@ -43,7 +43,8 @@ describe 'TradingApi' do
   end
 
   # unit tests for get_order_impact
-  # Check impact of trades on account.
+  # Check the impact of a trade on an account
+  # Return the trade object and it&#39;s impact on the account for the specified order.
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_form 
@@ -73,6 +74,7 @@ describe 'TradingApi' do
 
   # unit tests for place_force_order
   # Place a trade with NO validation.
+  # Places a specified trade in the specified account.
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_form 
@@ -86,6 +88,7 @@ describe 'TradingApi' do
 
   # unit tests for place_order
   # Place order
+  # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
   # @param trade_id The ID of trade object obtained from trade/impact endpoint
   # @param user_id 
   # @param user_secret 

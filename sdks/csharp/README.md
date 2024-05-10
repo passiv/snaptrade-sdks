@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.18-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.18)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.19-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.19)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -117,19 +117,19 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**GetOptionsStrategyQuote**](docs/OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get account option holdings
 *OptionsApi* | [**PlaceOptionStrategy**](docs/OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order
-*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair
+*ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner
 *ReferenceDataApi* | [**GetSecurityTypes**](docs/ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types
-*ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges
+*ReferenceDataApi* | [**GetStockExchanges**](docs/ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols
-*ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id
-*ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types
-*ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages
-*ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies
-*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates
+*ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol
+*ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types
+*ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages
+*ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies
+*ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account
-*TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account.
+*TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check the impact of a trade on an account
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation.
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order

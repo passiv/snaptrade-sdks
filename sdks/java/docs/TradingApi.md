@@ -5,7 +5,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account |
-| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check impact of trades on account. |
+| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check the impact of a trade on an account |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place a trade with NO validation. |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order |
@@ -134,7 +134,9 @@ public class Example {
 # **getOrderImpact**
 > ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm).execute();
 
-Check impact of trades on account.
+Check the impact of a trade on an account
+
+Return the trade object and it&#39;s impact on the account for the specified order.
 
 ### Example
 ```java
@@ -362,6 +364,8 @@ public class Example {
 
 Place a trade with NO validation.
 
+Places a specified trade in the specified account.
+
 ### Example
 ```java
 import com.konfigthis.client.ApiClient;
@@ -501,6 +505,8 @@ public class Example {
 > AccountOrderRecord placeOrder(tradeId, userId, userSecret).validatedTradeBody(validatedTradeBody).execute();
 
 Place order
+
+Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
 
 ### Example
 ```java

@@ -357,8 +357,7 @@ paths:
       x-accepts: application/json
   /authorizations:
     get:
-      description: Returns a list of Brokerage Autherization objects for the specified
-        userId.
+      description: Returns a list of Brokerage Authorization objects for the user
       operationId: Connections_listBrokerageAuthorizations
       parameters:
       - explode: true
@@ -1035,6 +1034,8 @@ paths:
       x-accepts: application/json
   /trade/impact:
     post:
+      description: Return the trade object and it's impact on the account for the
+        specified order.
       operationId: Trading_getOrderImpact
       parameters:
       - explode: true
@@ -1076,7 +1077,7 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Check impact of trades on account.
+      summary: Check the impact of a trade on an account
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -1085,6 +1086,9 @@ paths:
       x-accepts: application/json
   /trade/{tradeId}:
     post:
+      description: |
+        Places the specified trade object. This places the order in the account and
+        returns the status of the order from the brokerage.
       operationId: Trading_placeOrder
       parameters:
       - description: The ID of trade object obtained from trade/impact endpoint
@@ -1137,6 +1141,7 @@ paths:
       x-accepts: application/json
   /trade/place:
     post:
+      description: Places a specified trade in the specified account.
       operationId: Trading_placeForceOrder
       parameters:
       - explode: true
@@ -1633,6 +1638,7 @@ paths:
       x-accepts: application/json
   /brokerages:
     get:
+      description: Returns a list of all defined Brokerage objects.
       operationId: ReferenceData_listAllBrokerages
       parameters: []
       responses:
@@ -1647,7 +1653,7 @@ paths:
           description: A list of all defined Brokerage objects.
         default:
           description: Unexpected error.
-      summary: List brokerages
+      summary: Get brokerages
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1655,6 +1661,7 @@ paths:
       x-accepts: application/json
   /brokerageAuthorizationTypes:
     get:
+      description: Returns a list of all defined Brokerage authorization Type objects.
       operationId: ReferenceData_listAllBrokerageAuthorizationType
       parameters:
       - description: Comma separated value of brokerage slugs
@@ -1680,7 +1687,7 @@ paths:
           description: A list of all defined Brokerage Authorization Type objects.
         default:
           description: Unexpected error.
-      summary: List of all brokerage authorization types
+      summary: Get all brokerage authorization types
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1688,6 +1695,7 @@ paths:
       x-accepts: application/json
   /currencies:
     get:
+      description: Returns a list of all defined Currency objects.
       operationId: ReferenceData_listAllCurrencies
       parameters: []
       responses:
@@ -1702,7 +1710,7 @@ paths:
           description: A list of all currencies.
         default:
           description: Unexpected error.
-      summary: List currencies
+      summary: Get currencies
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1710,6 +1718,7 @@ paths:
       x-accepts: application/json
   /currencies/rates:
     get:
+      description: Returns a list of all Exchange Rate Pairs for all supported Currencies.
       operationId: ReferenceData_listAllCurrenciesRates
       parameters: []
       responses:
@@ -1722,7 +1731,7 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: A list of all exchange rates pairs for supported currencies
-      summary: List currency exchange rates
+      summary: Get currency exchange rates
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1730,6 +1739,8 @@ paths:
       x-accepts: application/json
   /currencies/rates/{currencyPair}:
     get:
+      description: Returns an Exchange Rate Pair object for the specified Currency
+        Pair.
       operationId: ReferenceData_getCurrencyExchangeRatePair
       parameters:
       - description: "A currency pair based on currency code for example, {CAD-USD}"
@@ -1747,7 +1758,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExchangeRatePairs'
           description: A list of all exchange rates pairs for supported currencies
-      summary: Return the exchange rate of a currency pair
+      summary: Get exchange rate of a currency pair
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1755,6 +1766,7 @@ paths:
       x-accepts: application/json
   /exchanges:
     get:
+      description: Returns a list of all supported Exchanges.
       operationId: ReferenceData_getStockExchanges
       parameters: []
       responses:
@@ -1767,7 +1779,7 @@ paths:
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: A list of all supported stock exchanges
-      summary: List exchanges
+      summary: Get exchanges
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1798,6 +1810,10 @@ paths:
       x-accepts: application/json
   /symbols:
     post:
+      description: |
+        Returns a list of Universal Symbol objects that match a defined string.
+
+        Matches on ticker or name.
       operationId: ReferenceData_getSymbols
       parameters: []
       requestBody:
@@ -1827,6 +1843,8 @@ paths:
       x-accepts: application/json
   /symbols/{query}:
     get:
+      description: Returns the Universal Symbol object specified by the ticker or
+        the universal_symbol_id.
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
       - description: The ticker or universal_symbol_id of the UniversalSymbol to get.
@@ -1848,7 +1866,7 @@ paths:
           description: No symbol with the specified ticker found.
         default:
           description: Unexpected error
-      summary: Get details of a symbol by the ticker or the universal_symbol_id
+      summary: Get details of a symbol
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true

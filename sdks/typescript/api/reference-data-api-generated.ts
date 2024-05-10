@@ -52,8 +52,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ReferenceDataApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * 
-         * @summary Return the exchange rate of a currency pair
+         * Returns an Exchange Rate Pair object for the specified Currency Pair.
+         * @summary Get exchange rate of a currency pair
          * @param {string} currencyPair A currency pair based on currency code for example, {CAD-USD}
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -188,8 +188,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List exchanges
+         * Returns a list of all supported Exchanges.
+         * @summary Get exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -232,7 +232,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
+         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
          * @summary Search for symbols
          * @param {SymbolQuery} [symbolQuery] 
          * @param {*} [options] Override http request option.
@@ -282,8 +282,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary Get details of a symbol by the ticker or the universal_symbol_id
+         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+         * @summary Get details of a symbol
          * @param {string} query The ticker or universal_symbol_id of the UniversalSymbol to get.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -330,8 +330,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List of all brokerage authorization types
+         * Returns a list of all defined Brokerage authorization Type objects.
+         * @summary Get all brokerage authorization types
          * @param {string} [brokerage] Comma separated value of brokerage slugs
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -379,8 +379,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List brokerages
+         * Returns a list of all defined Brokerage objects.
+         * @summary Get brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -423,8 +423,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List currencies
+         * Returns a list of all defined Currency objects.
+         * @summary Get currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -467,8 +467,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * 
-         * @summary List currency exchange rates
+         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+         * @summary Get currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -589,8 +589,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ReferenceDataApiAxiosParamCreator(configuration)
     return {
         /**
-         * 
-         * @summary Return the exchange rate of a currency pair
+         * Returns an Exchange Rate Pair object for the specified Currency Pair.
+         * @summary Get exchange rate of a currency pair
          * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -620,8 +620,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List exchanges
+         * Returns a list of all supported Exchanges.
+         * @summary Get exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -630,7 +630,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
          * @summary Search for symbols
          * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -644,8 +644,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Get details of a symbol by the ticker or the universal_symbol_id
+         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+         * @summary Get details of a symbol
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -655,8 +655,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List of all brokerage authorization types
+         * Returns a list of all defined Brokerage authorization Type objects.
+         * @summary Get all brokerage authorization types
          * @param {ReferenceDataApiListAllBrokerageAuthorizationTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -666,8 +666,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List brokerages
+         * Returns a list of all defined Brokerage objects.
+         * @summary Get brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -676,8 +676,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List currencies
+         * Returns a list of all defined Currency objects.
+         * @summary Get currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -686,8 +686,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary List currency exchange rates
+         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+         * @summary Get currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -720,8 +720,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
     const localVarFp = ReferenceDataApiFp(configuration)
     return {
         /**
-         * 
-         * @summary Return the exchange rate of a currency pair
+         * Returns an Exchange Rate Pair object for the specified Currency Pair.
+         * @summary Get exchange rate of a currency pair
          * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -748,8 +748,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getSecurityTypes(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List exchanges
+         * Returns a list of all supported Exchanges.
+         * @summary Get exchanges
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -757,7 +757,7 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getStockExchanges(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
          * @summary Search for symbols
          * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -767,8 +767,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getSymbols(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Get details of a symbol by the ticker or the universal_symbol_id
+         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+         * @summary Get details of a symbol
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -777,8 +777,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getSymbolsByTicker(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List of all brokerage authorization types
+         * Returns a list of all defined Brokerage authorization Type objects.
+         * @summary Get all brokerage authorization types
          * @param {ReferenceDataApiListAllBrokerageAuthorizationTypeRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -787,8 +787,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllBrokerageAuthorizationType(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List brokerages
+         * Returns a list of all defined Brokerage objects.
+         * @summary Get brokerages
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -796,8 +796,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllBrokerages(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List currencies
+         * Returns a list of all defined Currency objects.
+         * @summary Get currencies
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -805,8 +805,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllCurrencies(options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary List currency exchange rates
+         * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+         * @summary Get currency exchange rates
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -921,8 +921,8 @@ export type ReferenceDataApiSymbolSearchUserAccountRequest = {
  */
 export class ReferenceDataApiGenerated extends BaseAPI {
     /**
-     * 
-     * @summary Return the exchange rate of a currency pair
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
+     * @summary Get exchange rate of a currency pair
      * @param {ReferenceDataApiGetCurrencyExchangeRatePairRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -955,8 +955,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List exchanges
+     * Returns a list of all supported Exchanges.
+     * @summary Get exchanges
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -966,7 +966,7 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
      * @summary Search for symbols
      * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -978,8 +978,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Get details of a symbol by the ticker or the universal_symbol_id
+     * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+     * @summary Get details of a symbol
      * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -990,8 +990,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List of all brokerage authorization types
+     * Returns a list of all defined Brokerage authorization Type objects.
+     * @summary Get all brokerage authorization types
      * @param {ReferenceDataApiListAllBrokerageAuthorizationTypeRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1002,8 +1002,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List brokerages
+     * Returns a list of all defined Brokerage objects.
+     * @summary Get brokerages
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -1013,8 +1013,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List currencies
+     * Returns a list of all defined Currency objects.
+     * @summary Get currencies
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -1024,8 +1024,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary List currency exchange rates
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
+     * @summary Get currency exchange rates
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated

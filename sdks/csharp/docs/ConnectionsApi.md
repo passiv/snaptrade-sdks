@@ -109,7 +109,7 @@ catch (ApiException e)
 
 
 
-Returns a list of Brokerage Autherization objects for the specified userId.
+Returns a list of Brokerage Authorization objects for the user
 
 ### Example
 ```csharp

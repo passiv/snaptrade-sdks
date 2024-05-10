@@ -28,8 +28,11 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Return the exchange rate of a currency pair
+        /// Get exchange rate of a currency pair
         /// </summary>
+        /// <remarks>
+        /// Returns an Exchange Rate Pair object for the specified Currency Pair.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -37,10 +40,10 @@ namespace SnapTrade.Net.Api
         ExchangeRatePairs GetCurrencyExchangeRatePair(string currencyPair, int operationIndex = 0);
 
         /// <summary>
-        /// Return the exchange rate of a currency pair
+        /// Get exchange rate of a currency pair
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -90,18 +93,21 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;SecurityType&gt;</returns>
         ApiResponse<List<SecurityType>> GetSecurityTypesWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// List exchanges
+        /// Get exchanges
         /// </summary>
+        /// <remarks>
+        /// Returns a list of all supported Exchanges.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Exchange&gt;</returns>
         List<Exchange> GetStockExchanges(int operationIndex = 0);
 
         /// <summary>
-        /// List exchanges
+        /// Get exchanges
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all supported Exchanges.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -110,6 +116,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Search for symbols
         /// </summary>
+        /// <remarks>
+        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -120,7 +129,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -128,8 +137,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;UniversalSymbol&gt;</returns>
         ApiResponse<List<UniversalSymbol>> GetSymbolsWithHttpInfo(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0);
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id
+        /// Get details of a symbol
         /// </summary>
+        /// <remarks>
+        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -137,10 +149,10 @@ namespace SnapTrade.Net.Api
         UniversalSymbol GetSymbolsByTicker(string query, int operationIndex = 0);
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id
+        /// Get details of a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -148,8 +160,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of UniversalSymbol</returns>
         ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(string query, int operationIndex = 0);
         /// <summary>
-        /// List of all brokerage authorization types
+        /// Get all brokerage authorization types
         /// </summary>
+        /// <remarks>
+        /// Returns a list of all defined Brokerage authorization Type objects.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -157,10 +172,10 @@ namespace SnapTrade.Net.Api
         List<BrokerageAuthorizationTypeReadOnly> ListAllBrokerageAuthorizationType(string brokerage = default(string), int operationIndex = 0);
 
         /// <summary>
-        /// List of all brokerage authorization types
+        /// Get all brokerage authorization types
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage authorization Type objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -168,54 +183,63 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;BrokerageAuthorizationTypeReadOnly&gt;</returns>
         ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> ListAllBrokerageAuthorizationTypeWithHttpInfo(string brokerage = default(string), int operationIndex = 0);
         /// <summary>
-        /// List brokerages
+        /// Get brokerages
         /// </summary>
+        /// <remarks>
+        /// Returns a list of all defined Brokerage objects.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Brokerage&gt;</returns>
         List<Brokerage> ListAllBrokerages(int operationIndex = 0);
 
         /// <summary>
-        /// List brokerages
+        /// Get brokerages
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Brokerage&gt;</returns>
         ApiResponse<List<Brokerage>> ListAllBrokeragesWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// List currencies
+        /// Get currencies
         /// </summary>
+        /// <remarks>
+        /// Returns a list of all defined Currency objects.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;Currency&gt;</returns>
         List<Currency> ListAllCurrencies(int operationIndex = 0);
 
         /// <summary>
-        /// List currencies
+        /// Get currencies
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Currency objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;Currency&gt;</returns>
         ApiResponse<List<Currency>> ListAllCurrenciesWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// List currency exchange rates
+        /// Get currency exchange rates
         /// </summary>
+        /// <remarks>
+        /// Returns a list of all Exchange Rate Pairs for all supported Currencies.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ExchangeRatePairs&gt;</returns>
         List<ExchangeRatePairs> ListAllCurrenciesRates(int operationIndex = 0);
 
         /// <summary>
-        /// List currency exchange rates
+        /// Get currency exchange rates
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -260,10 +284,10 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Return the exchange rate of a currency pair
+        /// Get exchange rate of a currency pair
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -273,10 +297,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<ExchangeRatePairs> GetCurrencyExchangeRatePairAsync(string currencyPair, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Return the exchange rate of a currency pair
+        /// Get exchange rate of a currency pair
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -331,10 +355,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;SecurityType&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<SecurityType>>> GetSecurityTypesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List exchanges
+        /// Get exchanges
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all supported Exchanges.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -343,10 +367,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Exchange>> GetStockExchangesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List exchanges
+        /// Get exchanges
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all supported Exchanges.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -357,7 +381,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -370,7 +394,7 @@ namespace SnapTrade.Net.Api
         /// Search for symbols
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -379,10 +403,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;UniversalSymbol&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<UniversalSymbol>>> GetSymbolsWithHttpInfoAsync(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id
+        /// Get details of a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -392,10 +416,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id
+        /// Get details of a symbol
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -404,10 +428,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (UniversalSymbol)</returns>
         System.Threading.Tasks.Task<ApiResponse<UniversalSymbol>> GetSymbolsByTickerWithHttpInfoAsync(string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List of all brokerage authorization types
+        /// Get all brokerage authorization types
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage authorization Type objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -417,10 +441,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<BrokerageAuthorizationTypeReadOnly>> ListAllBrokerageAuthorizationTypeAsync(string brokerage = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List of all brokerage authorization types
+        /// Get all brokerage authorization types
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage authorization Type objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -429,10 +453,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;BrokerageAuthorizationTypeReadOnly&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<BrokerageAuthorizationTypeReadOnly>>> ListAllBrokerageAuthorizationTypeWithHttpInfoAsync(string brokerage = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List brokerages
+        /// Get brokerages
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -441,10 +465,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Brokerage>> ListAllBrokeragesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List brokerages
+        /// Get brokerages
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Brokerage objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -452,10 +476,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Brokerage&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Brokerage>>> ListAllBrokeragesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List currencies
+        /// Get currencies
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Currency objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -464,10 +488,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<Currency>> ListAllCurrenciesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List currencies
+        /// Get currencies
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all defined Currency objects.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -475,10 +499,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Currency&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Currency>>> ListAllCurrenciesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List currency exchange rates
+        /// Get currency exchange rates
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -487,10 +511,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<ExchangeRatePairs>> ListAllCurrenciesRatesAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List currency exchange rates
+        /// Get currency exchange rates
         /// </summary>
         /// <remarks>
-        /// 
+        /// Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -649,7 +673,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return the exchange rate of a currency pair 
+        /// Get exchange rate of a currency pair Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -662,7 +686,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return the exchange rate of a currency pair 
+        /// Get exchange rate of a currency pair Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -734,7 +758,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return the exchange rate of a currency pair 
+        /// Get exchange rate of a currency pair Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -748,7 +772,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Return the exchange rate of a currency pair 
+        /// Get exchange rate of a currency pair Returns an Exchange Rate Pair object for the specified Currency Pair.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currencyPair">A currency pair based on currency code for example, {CAD-USD}</param>
@@ -1135,7 +1159,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List exchanges 
+        /// Get exchanges Returns a list of all supported Exchanges.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1147,7 +1171,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List exchanges 
+        /// Get exchanges Returns a list of all supported Exchanges.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1211,7 +1235,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List exchanges 
+        /// Get exchanges Returns a list of all supported Exchanges.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1224,7 +1248,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List exchanges 
+        /// Get exchanges Returns a list of all supported Exchanges.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1291,7 +1315,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols 
+        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1304,7 +1328,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols 
+        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1371,7 +1395,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols 
+        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1385,7 +1409,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols 
+        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1455,7 +1479,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id 
+        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -1468,7 +1492,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id 
+        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -1540,7 +1564,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id 
+        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -1554,7 +1578,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol by the ticker or the universal_symbol_id 
+        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
@@ -1629,7 +1653,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all brokerage authorization types 
+        /// Get all brokerage authorization types Returns a list of all defined Brokerage authorization Type objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -1642,7 +1666,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all brokerage authorization types 
+        /// Get all brokerage authorization types Returns a list of all defined Brokerage authorization Type objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -1711,7 +1735,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all brokerage authorization types 
+        /// Get all brokerage authorization types Returns a list of all defined Brokerage authorization Type objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -1725,7 +1749,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List of all brokerage authorization types 
+        /// Get all brokerage authorization types Returns a list of all defined Brokerage authorization Type objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerage">Comma separated value of brokerage slugs (optional)</param>
@@ -1797,7 +1821,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List brokerages 
+        /// Get brokerages Returns a list of all defined Brokerage objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1809,7 +1833,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List brokerages 
+        /// Get brokerages Returns a list of all defined Brokerage objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1873,7 +1897,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List brokerages 
+        /// Get brokerages Returns a list of all defined Brokerage objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1886,7 +1910,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List brokerages 
+        /// Get brokerages Returns a list of all defined Brokerage objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1953,7 +1977,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currencies 
+        /// Get currencies Returns a list of all defined Currency objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1965,7 +1989,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currencies 
+        /// Get currencies Returns a list of all defined Currency objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2029,7 +2053,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currencies 
+        /// Get currencies Returns a list of all defined Currency objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2042,7 +2066,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currencies 
+        /// Get currencies Returns a list of all defined Currency objects.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2109,7 +2133,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currency exchange rates 
+        /// Get currency exchange rates Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2121,7 +2145,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currency exchange rates 
+        /// Get currency exchange rates Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2185,7 +2209,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currency exchange rates 
+        /// Get currency exchange rates Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -2198,7 +2222,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List currency exchange rates 
+        /// Get currency exchange rates Returns a list of all Exchange Rate Pairs for all supported Currencies.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>

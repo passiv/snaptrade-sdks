@@ -94,7 +94,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * Returns a list of Brokerage Authorization objects for the user
          * @summary List all brokerage authorizations for the User
          * @param {string} userId 
          * @param {string} userSecret 
@@ -296,7 +296,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * Returns a list of Brokerage Authorization objects for the user
          * @summary List all brokerage authorizations for the User
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -349,7 +349,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.detailBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of Brokerage Autherization objects for the specified userId.
+         * Returns a list of Brokerage Authorization objects for the user
          * @summary List all brokerage authorizations for the User
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -514,7 +514,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of Brokerage Autherization objects for the specified userId.
+     * Returns a list of Brokerage Authorization objects for the user
      * @summary List all brokerage authorizations for the User
      * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

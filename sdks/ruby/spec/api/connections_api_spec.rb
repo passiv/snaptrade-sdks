@@ -43,7 +43,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for list_brokerage_authorizations
   # List all brokerage authorizations for the User
-  # Returns a list of Brokerage Autherization objects for the specified userId.
+  # Returns a list of Brokerage Authorization objects for the user
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

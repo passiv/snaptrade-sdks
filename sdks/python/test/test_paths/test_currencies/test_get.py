@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestCurrencies(ApiTestMixin, unittest.TestCase):
     """
     Currencies unit test stubs
-        List currencies
+        Get currencies
     """
 
     def setUp(self):

@@ -51,7 +51,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Return the exchange rate of a currency pair
+     * Get exchange rate of a currency pair
+     *
+     * Returns an Exchange Rate Pair object for the specified Currency Pair.
      *
      * @throws ApiException if the Api call fails
      */
@@ -92,7 +94,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List exchanges
+     * Get exchanges
+     *
+     * Returns a list of all supported Exchanges.
      *
      * @throws ApiException if the Api call fails
      */
@@ -106,6 +110,8 @@ public class ReferenceDataApiTest {
     /**
      * Search for symbols
      *
+     * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -118,7 +124,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Get details of a symbol by the ticker or the universal_symbol_id
+     * Get details of a symbol
+     *
+     * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
      *
      * @throws ApiException if the Api call fails
      */
@@ -131,7 +139,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List of all brokerage authorization types
+     * Get all brokerage authorization types
+     *
+     * Returns a list of all defined Brokerage authorization Type objects.
      *
      * @throws ApiException if the Api call fails
      */
@@ -145,7 +155,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List brokerages
+     * Get brokerages
+     *
+     * Returns a list of all defined Brokerage objects.
      *
      * @throws ApiException if the Api call fails
      */
@@ -157,7 +169,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List currencies
+     * Get currencies
+     *
+     * Returns a list of all defined Currency objects.
      *
      * @throws ApiException if the Api call fails
      */
@@ -169,7 +183,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List currency exchange rates
+     * Get currency exchange rates
+     *
+     * Returns a list of all Exchange Rate Pairs for all supported Currencies.
      *
      * @throws ApiException if the Api call fails
      */

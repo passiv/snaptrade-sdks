@@ -58,7 +58,7 @@ namespace SnapTrade.Net.Api
         /// List all brokerage authorizations for the User
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Autherization objects for the specified userId.
+        /// Returns a list of Brokerage Authorization objects for the user
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -71,7 +71,7 @@ namespace SnapTrade.Net.Api
         /// List all brokerage authorizations for the User
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Autherization objects for the specified userId.
+        /// Returns a list of Brokerage Authorization objects for the user
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -175,7 +175,7 @@ namespace SnapTrade.Net.Api
         /// List all brokerage authorizations for the User
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Autherization objects for the specified userId.
+        /// Returns a list of Brokerage Authorization objects for the user
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -189,7 +189,7 @@ namespace SnapTrade.Net.Api
         /// List all brokerage authorizations for the User
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Autherization objects for the specified userId.
+        /// Returns a list of Brokerage Authorization objects for the user
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -587,7 +587,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Autherization objects for the specified userId.
+        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -601,7 +601,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Autherization objects for the specified userId.
+        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -681,7 +681,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Autherization objects for the specified userId.
+        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -696,7 +696,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Autherization objects for the specified userId.
+        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

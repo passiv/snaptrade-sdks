@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestExchanges(ApiTestMixin, unittest.TestCase):
     """
     Exchanges unit test stubs
-        List exchanges
+        Get exchanges
     """
 
     def setUp(self):

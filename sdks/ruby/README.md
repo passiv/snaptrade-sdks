@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.17-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.17)
+[![npm](https://img.shields.io/badge/gem-v2.0.18-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.18)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -69,7 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.17'
+gem 'snaptrade', '~> 2.0.18'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -676,7 +676,7 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
-Returns a list of Brokerage Autherization objects for the specified userId.
+Returns a list of Brokerage Authorization objects for the user
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -991,7 +991,7 @@ Trade Price if limit or stop limit order
 
 ### `snaptrade.reference_data.get_currency_exchange_rate_pair`<a id="snaptradereference_dataget_currency_exchange_rate_pair"></a>
 
-Return the exchange rate of a currency pair
+Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1070,7 +1070,7 @@ p result
 
 ### `snaptrade.reference_data.get_stock_exchanges`<a id="snaptradereference_dataget_stock_exchanges"></a>
 
-List exchanges
+Returns a list of all supported Exchanges.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1094,7 +1094,10 @@ p result
 
 ### `snaptrade.reference_data.get_symbols`<a id="snaptradereference_dataget_symbols"></a>
 
-Search for symbols
+Returns a list of Universal Symbol objects that match a defined string.
+
+Matches on ticker or name.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1123,7 +1126,7 @@ p result
 
 ### `snaptrade.reference_data.get_symbols_by_ticker`<a id="snaptradereference_dataget_symbols_by_ticker"></a>
 
-Get details of a symbol by the ticker or the universal_symbol_id
+Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1154,7 +1157,7 @@ The ticker or universal_symbol_id of the UniversalSymbol to get.
 
 ### `snaptrade.reference_data.list_all_brokerage_authorization_type`<a id="snaptradereference_datalist_all_brokerage_authorization_type"></a>
 
-List of all brokerage authorization types
+Returns a list of all defined Brokerage authorization Type objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1185,7 +1188,7 @@ Comma separated value of brokerage slugs
 
 ### `snaptrade.reference_data.list_all_brokerages`<a id="snaptradereference_datalist_all_brokerages"></a>
 
-List brokerages
+Returns a list of all defined Brokerage objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1209,7 +1212,7 @@ p result
 
 ### `snaptrade.reference_data.list_all_currencies`<a id="snaptradereference_datalist_all_currencies"></a>
 
-List currencies
+Returns a list of all defined Currency objects.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1233,7 +1236,7 @@ p result
 
 ### `snaptrade.reference_data.list_all_currencies_rates`<a id="snaptradereference_datalist_all_currencies_rates"></a>
 
-List currency exchange rates
+Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1336,7 +1339,7 @@ The ID of the account to cancel the order in.
 
 ### `snaptrade.trading.get_order_impact`<a id="snaptradetradingget_order_impact"></a>
 
-Check impact of trades on account.
+Return the trade object and it's impact on the account for the specified order.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1439,7 +1442,7 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
-Place a trade with NO validation.
+Places a specified trade in the specified account.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1499,7 +1502,9 @@ Canceled
 
 ### `snaptrade.trading.place_order`<a id="snaptradetradingplace_order"></a>
 
-Place order
+Places the specified trade object. This places the order in the account and
+returns the status of the order from the brokerage.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

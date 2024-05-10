@@ -143,7 +143,9 @@ module SnapTrade
     end
 
 
-    # Check impact of trades on account.
+    # Check the impact of a trade on an account
+    #
+    # Return the trade object and it's impact on the account for the specified order.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -174,7 +176,9 @@ module SnapTrade
       data
     end
 
-    # Check impact of trades on account.
+    # Check the impact of a trade on an account
+    #
+    # Return the trade object and it's impact on the account for the specified order.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -204,7 +208,8 @@ module SnapTrade
       get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
-    # Check impact of trades on account.
+    # Check the impact of a trade on an account
+    # Return the trade object and it's impact on the account for the specified order.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -215,7 +220,8 @@ module SnapTrade
       data
     end
 
-    # Check impact of trades on account.
+    # Check the impact of a trade on an account
+    # Return the trade object and it&#39;s impact on the account for the specified order.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -406,6 +412,8 @@ module SnapTrade
 
     # Place a trade with NO validation.
     #
+    # Places a specified trade in the specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -437,6 +445,8 @@ module SnapTrade
 
     # Place a trade with NO validation.
     #
+    # Places a specified trade in the specified account.
+    #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -466,6 +476,7 @@ module SnapTrade
     end
 
     # Place a trade with NO validation.
+    # Places a specified trade in the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -477,6 +488,7 @@ module SnapTrade
     end
 
     # Place a trade with NO validation.
+    # Places a specified trade in the specified account.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -548,6 +560,9 @@ module SnapTrade
 
     # Place order
     #
+    # Places the specified trade object. This places the order in the account and
+    # returns the status of the order from the brokerage.
+    #
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -564,6 +579,9 @@ module SnapTrade
 
     # Place order
     #
+    # Places the specified trade object. This places the order in the account and
+    # returns the status of the order from the brokerage.
+    #
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -578,6 +596,7 @@ module SnapTrade
     end
 
     # Place order
+    # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -590,6 +609,7 @@ module SnapTrade
     end
 
     # Place order
+    # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
     # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
     # @param user_id [String] 
     # @param user_secret [String] 
