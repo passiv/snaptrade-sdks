@@ -4,16 +4,16 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getCurrencyExchangeRatePair**](ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
+| [**getCurrencyExchangeRatePair**](ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair |
 | [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types |
-| [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | List exchanges |
+| [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Get exchanges |
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols |
-| [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id |
-| [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
-| [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | List brokerages |
-| [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | List currencies |
-| [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | List currency exchange rates |
+| [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol |
+| [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
+| [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
+| [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
+| [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates |
 | [**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
 
 
@@ -21,7 +21,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 # **getCurrencyExchangeRatePair**
 > ExchangeRatePairs getCurrencyExchangeRatePair(currencyPair).execute();
 
-Return the exchange rate of a currency pair
+Get exchange rate of a currency pair
+
+Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 ### Example
 ```java
@@ -304,7 +306,9 @@ This endpoint does not need any parameter.
 # **getStockExchanges**
 > List&lt;Exchange&gt; getStockExchanges().execute();
 
-List exchanges
+Get exchanges
+
+Returns a list of all supported Exchanges.
 
 ### Example
 ```java
@@ -391,6 +395,8 @@ This endpoint does not need any parameter.
 > List&lt;UniversalSymbol&gt; getSymbols().symbolQuery(symbolQuery).execute();
 
 Search for symbols
+
+Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
 
 ### Example
 ```java
@@ -483,7 +489,9 @@ public class Example {
 # **getSymbolsByTicker**
 > UniversalSymbol getSymbolsByTicker(query).execute();
 
-Get details of a symbol by the ticker or the universal_symbol_id
+Get details of a symbol
+
+Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
 
 ### Example
 ```java
@@ -585,7 +593,9 @@ public class Example {
 # **listAllBrokerageAuthorizationType**
 > List&lt;BrokerageAuthorizationTypeReadOnly&gt; listAllBrokerageAuthorizationType().brokerage(brokerage).execute();
 
-List of all brokerage authorization types
+Get all brokerage authorization types
+
+Returns a list of all defined Brokerage authorization Type objects.
 
 ### Example
 ```java
@@ -678,7 +688,9 @@ public class Example {
 # **listAllBrokerages**
 > List&lt;Brokerage&gt; listAllBrokerages().execute();
 
-List brokerages
+Get brokerages
+
+Returns a list of all defined Brokerage objects.
 
 ### Example
 ```java
@@ -765,7 +777,9 @@ This endpoint does not need any parameter.
 # **listAllCurrencies**
 > List&lt;Currency&gt; listAllCurrencies().execute();
 
-List currencies
+Get currencies
+
+Returns a list of all defined Currency objects.
 
 ### Example
 ```java
@@ -852,7 +866,9 @@ This endpoint does not need any parameter.
 # **listAllCurrenciesRates**
 > List&lt;ExchangeRatePairs&gt; listAllCurrenciesRates().execute();
 
-List currency exchange rates
+Get currency exchange rates
+
+Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 ### Example
 ```java

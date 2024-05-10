@@ -114,7 +114,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Check impact of trades on account.
+                // Check the impact of a trade on an account
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }

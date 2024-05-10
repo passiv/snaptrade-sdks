@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSymbolsQuery(ApiTestMixin, unittest.TestCase):
     """
     SymbolsQuery unit test stubs
-        Get details of a symbol by the ticker or the universal_symbol_id
+        Get details of a symbol
     """
 
     def setUp(self):

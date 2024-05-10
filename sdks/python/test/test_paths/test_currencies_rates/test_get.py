@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestCurrenciesRates(ApiTestMixin, unittest.TestCase):
     """
     CurrenciesRates unit test stubs
-        List currency exchange rates
+        Get currency exchange rates
     """
 
     def setUp(self):

@@ -5,7 +5,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account |
-| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check impact of trades on account. |
+| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check the impact of a trade on an account |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
 | [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation. |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order |
@@ -116,7 +116,9 @@ catch (ApiException e)
 
 # **GetOrderImpact**
 
-Check impact of trades on account.
+
+
+Return the trade object and it's impact on the account for the specified order.
 
 ### Example
 ```csharp
@@ -164,7 +166,7 @@ namespace Example
             
             try
             {
-                // Check impact of trades on account.
+                // Check the impact of a trade on an account
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -191,7 +193,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Check impact of trades on account.
+    // Check the impact of a trade on an account
     ApiResponse<ManualTradeAndImpact> response = apiInstance.GetOrderImpactWithHttpInfo(userId, userSecret, manualTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -330,7 +332,9 @@ catch (ApiException e)
 
 # **PlaceForceOrder**
 
-Place a trade with NO validation.
+
+
+Places a specified trade in the specified account.
 
 ### Example
 ```csharp
@@ -445,7 +449,9 @@ catch (ApiException e)
 
 # **PlaceOrder**
 
-Place order
+
+
+Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
 
 ### Example
 ```csharp

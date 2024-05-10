@@ -57,8 +57,11 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
         /// <summary>
-        /// Check impact of trades on account.
+        /// Check the impact of a trade on an account
         /// </summary>
+        /// <remarks>
+        /// Return the trade object and it&#39;s impact on the account for the specified order.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -68,10 +71,10 @@ namespace SnapTrade.Net.Api
         ManualTradeAndImpact GetOrderImpact(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
 
         /// <summary>
-        /// Check impact of trades on account.
+        /// Check the impact of a trade on an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Return the trade object and it&#39;s impact on the account for the specified order.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -114,6 +117,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Place a trade with NO validation.
         /// </summary>
+        /// <remarks>
+        /// Places a specified trade in the specified account.
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
@@ -126,7 +132,7 @@ namespace SnapTrade.Net.Api
         /// Place a trade with NO validation.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places a specified trade in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -138,6 +144,9 @@ namespace SnapTrade.Net.Api
         /// <summary>
         /// Place order
         /// </summary>
+        /// <remarks>
+        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
         /// <param name="userId"></param>
@@ -151,7 +160,7 @@ namespace SnapTrade.Net.Api
         /// Place order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -202,10 +211,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Check impact of trades on account.
+        /// Check the impact of a trade on an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Return the trade object and it&#39;s impact on the account for the specified order.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -217,10 +226,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<ManualTradeAndImpact> GetOrderImpactAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Check impact of trades on account.
+        /// Check the impact of a trade on an account
         /// </summary>
         /// <remarks>
-        /// 
+        /// Return the trade object and it&#39;s impact on the account for the specified order.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -267,7 +276,7 @@ namespace SnapTrade.Net.Api
         /// Place a trade with NO validation.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places a specified trade in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -282,7 +291,7 @@ namespace SnapTrade.Net.Api
         /// Place a trade with NO validation.
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places a specified trade in the specified account.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -296,7 +305,7 @@ namespace SnapTrade.Net.Api
         /// Place order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -312,7 +321,7 @@ namespace SnapTrade.Net.Api
         /// Place order
         /// </summary>
         /// <remarks>
-        /// 
+        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -674,7 +683,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check impact of trades on account. 
+        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -689,7 +698,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check impact of trades on account. 
+        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -778,7 +787,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check impact of trades on account. 
+        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -794,7 +803,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check impact of trades on account. 
+        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1126,7 +1135,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. 
+        /// Place a trade with NO validation. Places a specified trade in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1141,7 +1150,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. 
+        /// Place a trade with NO validation. Places a specified trade in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1230,7 +1239,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. 
+        /// Place a trade with NO validation. Places a specified trade in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1246,7 +1255,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. 
+        /// Place a trade with NO validation. Places a specified trade in the specified account.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1338,7 +1347,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order 
+        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -1354,7 +1363,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order 
+        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -1445,7 +1454,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order 
+        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
@@ -1462,7 +1471,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order 
+        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>

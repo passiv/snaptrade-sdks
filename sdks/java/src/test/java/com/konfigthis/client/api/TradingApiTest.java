@@ -70,7 +70,9 @@ public class TradingApiTest {
     }
 
     /**
-     * Check impact of trades on account.
+     * Check the impact of a trade on an account
+     *
+     * Return the trade object and it&#39;s impact on the account for the specified order.
      *
      * @throws ApiException if the Api call fails
      */
@@ -124,6 +126,8 @@ public class TradingApiTest {
     /**
      * Place a trade with NO validation.
      *
+     * Places a specified trade in the specified account.
+     *
      * @throws ApiException if the Api call fails
      */
     @Test
@@ -155,6 +159,8 @@ public class TradingApiTest {
 
     /**
      * Place order
+     *
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
      *
      * @throws ApiException if the Api call fails
      */

@@ -618,8 +618,8 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Check impact of trades on account.
-     * 
+     * Check the impact of a trade on an account
+     * Return the trade object and it&#39;s impact on the account for the specified order.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param manualTradeForm  (required)
@@ -1181,7 +1181,7 @@ public class TradingApiGenerated {
 
     /**
      * Place a trade with NO validation.
-     * 
+     * Places a specified trade in the specified account.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param manualTradeForm  (required)
@@ -1390,7 +1390,7 @@ public class TradingApiGenerated {
 
     /**
      * Place order
-     * 
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
      * @param tradeId The ID of trade object obtained from trade/impact endpoint (required)
      * @param userId  (required)
      * @param userSecret  (required)

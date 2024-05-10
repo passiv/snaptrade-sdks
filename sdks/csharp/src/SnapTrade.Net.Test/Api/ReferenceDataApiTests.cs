@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Return the exchange rate of a currency pair
+                // Get exchange rate of a currency pair
                 ExchangeRatePairs result = client.ReferenceData.GetCurrencyExchangeRatePair(currencyPair);
                 Console.WriteLine(result);
             }
@@ -137,7 +137,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List exchanges
+                // Get exchanges
                 List<Exchange> result = client.ReferenceData.GetStockExchanges();
                 Console.WriteLine(result);
             }
@@ -197,7 +197,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get details of a symbol by the ticker or the universal_symbol_id
+                // Get details of a symbol
                 UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
@@ -225,7 +225,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List of all brokerage authorization types
+                // Get all brokerage authorization types
                 List<BrokerageAuthorizationTypeReadOnly> result = client.ReferenceData.ListAllBrokerageAuthorizationType(brokerage);
                 Console.WriteLine(result);
             }
@@ -252,7 +252,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List brokerages
+                // Get brokerages
                 List<Brokerage> result = client.ReferenceData.ListAllBrokerages();
                 Console.WriteLine(result);
             }
@@ -279,7 +279,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List currencies
+                // Get currencies
                 List<Currency> result = client.ReferenceData.ListAllCurrencies();
                 Console.WriteLine(result);
             }
@@ -306,7 +306,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List currency exchange rates
+                // Get currency exchange rates
                 List<ExchangeRatePairs> result = client.ReferenceData.ListAllCurrenciesRates();
                 Console.WriteLine(result);
             }

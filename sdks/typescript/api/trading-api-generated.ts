@@ -122,8 +122,8 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
-         * @summary Check impact of trades on account.
+         * Return the trade object and it\'s impact on the account for the specified order.
+         * @summary Check the impact of a trade on an account
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeForm} manualTradeForm 
@@ -262,7 +262,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Places a specified trade in the specified account.
          * @summary Place a trade with NO validation.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -328,7 +328,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * 
+         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
          * @summary Place order
          * @param {string} tradeId The ID of trade object obtained from trade/impact endpoint
          * @param {string} userId 
@@ -420,8 +420,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
-         * @summary Check impact of trades on account.
+         * Return the trade object and it\'s impact on the account for the specified order.
+         * @summary Check the impact of a trade on an account
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -453,7 +453,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Places a specified trade in the specified account.
          * @summary Place a trade with NO validation.
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -475,7 +475,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * 
+         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
          * @summary Place order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -509,8 +509,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.cancelUserAccountOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
-         * @summary Check impact of trades on account.
+         * Return the trade object and it\'s impact on the account for the specified order.
+         * @summary Check the impact of a trade on an account
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -529,7 +529,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getUserAccountQuotes(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Places a specified trade in the specified account.
          * @summary Place a trade with NO validation.
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -539,7 +539,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.placeForceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * 
+         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
          * @summary Place order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -721,8 +721,8 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
-     * @summary Check impact of trades on account.
+     * Return the trade object and it\'s impact on the account for the specified order.
+     * @summary Check the impact of a trade on an account
      * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -745,7 +745,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Places a specified trade in the specified account.
      * @summary Place a trade with NO validation.
      * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -757,7 +757,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * 
+     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
      * @summary Place order
      * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

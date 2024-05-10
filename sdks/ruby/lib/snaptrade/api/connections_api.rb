@@ -122,7 +122,7 @@ module SnapTrade
 
     # List all brokerage authorizations for the User
     #
-    # Returns a list of Brokerage Autherization objects for the specified userId.
+    # Returns a list of Brokerage Authorization objects for the user
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -134,7 +134,7 @@ module SnapTrade
 
     # List all brokerage authorizations for the User
     #
-    # Returns a list of Brokerage Autherization objects for the specified userId.
+    # Returns a list of Brokerage Authorization objects for the user
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -144,7 +144,7 @@ module SnapTrade
     end
 
     # List all brokerage authorizations for the User
-    # Returns a list of Brokerage Autherization objects for the specified userId.
+    # Returns a list of Brokerage Authorization objects for the user
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -155,7 +155,7 @@ module SnapTrade
     end
 
     # List all brokerage authorizations for the User
-    # Returns a list of Brokerage Autherization objects for the specified userId.
+    # Returns a list of Brokerage Authorization objects for the user
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

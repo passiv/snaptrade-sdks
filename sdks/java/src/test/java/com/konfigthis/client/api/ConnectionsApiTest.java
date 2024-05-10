@@ -63,7 +63,7 @@ public class ConnectionsApiTest {
     /**
      * List all brokerage authorizations for the User
      *
-     * Returns a list of Brokerage Autherization objects for the specified userId.
+     * Returns a list of Brokerage Authorization objects for the user
      *
      * @throws ApiException if the Api call fails
      */

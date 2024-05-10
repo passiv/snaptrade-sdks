@@ -4,22 +4,24 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Return the exchange rate of a currency pair |
+| [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair |
 | [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types |
-| [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | List exchanges |
+| [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges |
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols |
-| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol by the ticker or the universal_symbol_id |
-| [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | List of all brokerage authorization types |
-| [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | List brokerages |
-| [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | List currencies |
-| [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | List currency exchange rates |
+| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol |
+| [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
+| [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages |
+| [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies |
+| [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates |
 | [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
 
 
 # **GetCurrencyExchangeRatePair**
 
-Return the exchange rate of a currency pair
+
+
+Returns an Exchange Rate Pair object for the specified Currency Pair.
 
 ### Example
 ```csharp
@@ -45,7 +47,7 @@ namespace Example
             
             try
             {
-                // Return the exchange rate of a currency pair
+                // Get exchange rate of a currency pair
                 ExchangeRatePairs result = client.ReferenceData.GetCurrencyExchangeRatePair(currencyPair);
                 Console.WriteLine(result);
             }
@@ -72,7 +74,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Return the exchange rate of a currency pair
+    // Get exchange rate of a currency pair
     ApiResponse<ExchangeRatePairs> response = apiInstance.GetCurrencyExchangeRatePairWithHttpInfo(currencyPair);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -282,7 +284,9 @@ This endpoint does not need any parameter.
 
 # **GetStockExchanges**
 
-List exchanges
+
+
+Returns a list of all supported Exchanges.
 
 ### Example
 ```csharp
@@ -307,7 +311,7 @@ namespace Example
             
             try
             {
-                // List exchanges
+                // Get exchanges
                 List<Exchange> result = client.ReferenceData.GetStockExchanges();
                 Console.WriteLine(result);
             }
@@ -334,7 +338,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List exchanges
+    // Get exchanges
     ApiResponse<List<Exchange>> response = apiInstance.GetStockExchangesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -365,7 +369,9 @@ This endpoint does not need any parameter.
 
 # **GetSymbols**
 
-Search for symbols
+
+
+Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
 
 ### Example
 ```csharp
@@ -458,7 +464,9 @@ catch (ApiException e)
 
 # **GetSymbolsByTicker**
 
-Get details of a symbol by the ticker or the universal_symbol_id
+
+
+Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
 
 ### Example
 ```csharp
@@ -484,7 +492,7 @@ namespace Example
             
             try
             {
-                // Get details of a symbol by the ticker or the universal_symbol_id
+                // Get details of a symbol
                 UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
@@ -511,7 +519,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get details of a symbol by the ticker or the universal_symbol_id
+    // Get details of a symbol
     ApiResponse<UniversalSymbol> response = apiInstance.GetSymbolsByTickerWithHttpInfo(query);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -548,7 +556,9 @@ catch (ApiException e)
 
 # **ListAllBrokerageAuthorizationType**
 
-List of all brokerage authorization types
+
+
+Returns a list of all defined Brokerage authorization Type objects.
 
 ### Example
 ```csharp
@@ -574,7 +584,7 @@ namespace Example
             
             try
             {
-                // List of all brokerage authorization types
+                // Get all brokerage authorization types
                 List<BrokerageAuthorizationTypeReadOnly> result = client.ReferenceData.ListAllBrokerageAuthorizationType(brokerage);
                 Console.WriteLine(result);
             }
@@ -601,7 +611,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List of all brokerage authorization types
+    // Get all brokerage authorization types
     ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> response = apiInstance.ListAllBrokerageAuthorizationTypeWithHttpInfo(brokerage);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -637,7 +647,9 @@ catch (ApiException e)
 
 # **ListAllBrokerages**
 
-List brokerages
+
+
+Returns a list of all defined Brokerage objects.
 
 ### Example
 ```csharp
@@ -662,7 +674,7 @@ namespace Example
             
             try
             {
-                // List brokerages
+                // Get brokerages
                 List<Brokerage> result = client.ReferenceData.ListAllBrokerages();
                 Console.WriteLine(result);
             }
@@ -689,7 +701,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List brokerages
+    // Get brokerages
     ApiResponse<List<Brokerage>> response = apiInstance.ListAllBrokeragesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -721,7 +733,9 @@ This endpoint does not need any parameter.
 
 # **ListAllCurrencies**
 
-List currencies
+
+
+Returns a list of all defined Currency objects.
 
 ### Example
 ```csharp
@@ -746,7 +760,7 @@ namespace Example
             
             try
             {
-                // List currencies
+                // Get currencies
                 List<Currency> result = client.ReferenceData.ListAllCurrencies();
                 Console.WriteLine(result);
             }
@@ -773,7 +787,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List currencies
+    // Get currencies
     ApiResponse<List<Currency>> response = apiInstance.ListAllCurrenciesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -805,7 +819,9 @@ This endpoint does not need any parameter.
 
 # **ListAllCurrenciesRates**
 
-List currency exchange rates
+
+
+Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
 ### Example
 ```csharp
@@ -830,7 +846,7 @@ namespace Example
             
             try
             {
-                // List currency exchange rates
+                // Get currency exchange rates
                 List<ExchangeRatePairs> result = client.ReferenceData.ListAllCurrenciesRates();
                 Console.WriteLine(result);
             }
@@ -857,7 +873,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List currency exchange rates
+    // Get currency exchange rates
     ApiResponse<List<ExchangeRatePairs>> response = apiInstance.ListAllCurrenciesRatesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
