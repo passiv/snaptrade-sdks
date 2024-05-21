@@ -1937,7 +1937,7 @@ components:
             required: ["order_type", "time_in_force"]
             properties:
               order_type:
-                $ref: "#/components/schemas/OrderType"
+                $ref: "#/components/schemas/OrderTypeStrict"
               time_in_force:
                 $ref: "#/components/schemas/TimeInForceStrict"
               price:
@@ -3892,7 +3892,7 @@ components:
           type: string
           example: 2bcd7cc3-e922-4976-bce1-9855556801c3
         order_type:
-          $ref: "#/components/schemas/OrderType"
+          $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
           $ref: "#/components/schemas/TimeInForce"
         symbol:
@@ -3978,7 +3978,7 @@ components:
         action:
           $ref: "#/components/schemas/Action"
         order_type:
-          $ref: "#/components/schemas/OrderType"
+          $ref: "#/components/schemas/OrderTypeStrict"
         price:
           $ref: "#/components/schemas/Price"
         stop:
@@ -4009,10 +4009,18 @@ components:
       type: number
       example: 1.11
       nullable: true
-    OrderType:
+    OrderTypeStrict:
       description: Order Type
       type: string
       enum:
+        - Limit
+        - Market
+        - StopLimit
+        - StopLoss
+    OrderType:
+      type: string
+      nullable: true
+      description: Order Type potential values include (but are not limited to)
         - Limit
         - Market
         - StopLimit
