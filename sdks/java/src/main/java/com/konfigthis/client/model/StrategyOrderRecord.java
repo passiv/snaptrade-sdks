@@ -20,7 +20,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.OptionStrategy;
-import com.konfigthis.client.model.OrderType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -156,7 +155,7 @@ public class StrategyOrderRecord {
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-  private OrderType orderType;
+  private String orderType;
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
@@ -353,7 +352,7 @@ public class StrategyOrderRecord {
   }
 
 
-  public StrategyOrderRecord orderType(OrderType orderType) {
+  public StrategyOrderRecord orderType(String orderType) {
     
     
     
@@ -363,18 +362,18 @@ public class StrategyOrderRecord {
   }
 
    /**
-   * Get orderType
+   * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
    * @return orderType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss")
 
-  public OrderType getOrderType() {
+  public String getOrderType() {
     return orderType;
   }
 
 
-  public void setOrderType(OrderType orderType) {
+  public void setOrderType(String orderType) {
     
     
     
@@ -701,6 +700,9 @@ public class StrategyOrderRecord {
       }
       if ((jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+      }
+      if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
       }
       if ((jsonObj.get("time_in_force") != null && !jsonObj.get("time_in_force").isJsonNull()) && !jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));

@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets OrderType
         /// </summary>
         [DataMember(Name = "order_type", IsRequired = true, EmitDefaultValue = true)]
-        public OrderType OrderType { get; set; }
+        public OrderTypeStrict OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public OptionsPlaceOptionStrategyRequest(OrderType orderType = default(OrderType), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?))
+        public OptionsPlaceOptionStrategyRequest(OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;

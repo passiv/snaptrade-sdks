@@ -33,7 +33,7 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
-import { OrderType } from '../models';
+import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { SymbolsQuotesInner } from '../models';
 // @ts-ignore

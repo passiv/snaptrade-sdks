@@ -144,7 +144,7 @@ namespace Example
             var userSecret = "userSecret_example";
             var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var action = ModelAction.BUY;
-            var orderType = OrderType.Limit;
+            var orderType = OrderTypeStrict.Limit;
             var price = 31.33; // Trade Price if limit or stop limit order
             var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;
@@ -360,7 +360,7 @@ namespace Example
             var userSecret = "userSecret_example";
             var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
             var action = ModelAction.BUY;
-            var orderType = OrderType.Limit;
+            var orderType = OrderTypeStrict.Limit;
             var price = 31.33; // Trade Price if limit or stop limit order
             var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;

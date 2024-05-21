@@ -47,7 +47,7 @@ module SnapTrade
     # Stop Price. If stop loss or stop limit order, the price to trigger the stop
     attr_accessor :stop_price
 
-    # Order Type
+    # Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
     attr_accessor :order_type
 
     # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
@@ -109,7 +109,7 @@ module SnapTrade
         :'execution_price' => :'Float',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
-        :'order_type' => :'OrderType',
+        :'order_type' => :'String',
         :'time_in_force' => :'String',
         :'time_placed' => :'String',
         :'time_updated' => :'String',
@@ -128,6 +128,7 @@ module SnapTrade
         :'execution_price',
         :'limit_price',
         :'stop_price',
+        :'order_type',
         :'time_updated',
         :'time_executed',
       ])

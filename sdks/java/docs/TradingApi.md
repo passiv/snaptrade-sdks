@@ -164,7 +164,7 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
     Action action = Action.fromValue("BUY");
-    OrderType orderType = OrderType.fromValue("Limit");
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
@@ -392,7 +392,7 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
     Action action = Action.fromValue("BUY");
-    OrderType orderType = OrderType.fromValue("Limit");
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");

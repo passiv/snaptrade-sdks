@@ -57,7 +57,7 @@ module SnapTrade
       {
         :'id' => :'String',
         :'account' => :'String',
-        :'order_type' => :'OrderType',
+        :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'String',
         :'symbol' => :'ManualTradeSymbol',
         :'action' => :'Action',

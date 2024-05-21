@@ -13,7 +13,6 @@ import type * as buffer from "buffer"
 import { AccountOrderRecordStatus } from './account-order-record-status';
 import { Action } from './action';
 import { OptionsSymbol } from './options-symbol';
-import { OrderType } from './order-type';
 import { UniversalSymbol } from './universal-symbol';
 
 /**
@@ -103,11 +102,11 @@ export interface AccountOrderRecord {
      */
     'stop_price'?: number | null;
     /**
-     * Order Type
-     * @type {OrderType}
+     * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'order_type'?: OrderType;
+    'order_type'?: string | null;
     /**
      * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
      * @type {string}

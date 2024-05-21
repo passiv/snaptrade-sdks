@@ -44,12 +44,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public ModelAction? _Action { get; set; }
-
-        /// <summary>
-        /// Gets or Sets OrderType
-        /// </summary>
-        [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderType? OrderType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
@@ -66,13 +60,13 @@ namespace SnapTrade.Net.Model
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="stopPrice">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
-        /// <param name="orderType">orderType.</param>
+        /// <param name="orderType">Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss.</param>
         /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
         /// <param name="timeExecuted">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), OrderType? orderType = default(OrderType?), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -169,6 +163,13 @@ namespace SnapTrade.Net.Model
         /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public double? StopPrice { get; set; }
+
+        /// <summary>
+        /// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+        /// </summary>
+        /// <value>Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss</value>
+        [DataMember(Name = "order_type", EmitDefaultValue = true)]
+        public string OrderType { get; set; }
 
         /// <summary>
         /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
@@ -340,7 +341,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.OrderType == input.OrderType ||
-                    this.OrderType.Equals(input.OrderType)
+                    (this.OrderType != null &&
+                    this.OrderType.Equals(input.OrderType))
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
@@ -425,7 +427,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
+                if (this.OrderType != null)
+                {
+                    hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
+                }
                 if (this.TimeInForce != null)
                 {
                     hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();

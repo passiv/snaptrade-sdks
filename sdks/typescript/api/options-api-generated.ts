@@ -31,7 +31,7 @@ import { OptionsPlaceOptionStrategyRequest } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';
 // @ts-ignore
-import { OrderType } from '../models';
+import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { StrategyOrderRecord } from '../models';
 // @ts-ignore

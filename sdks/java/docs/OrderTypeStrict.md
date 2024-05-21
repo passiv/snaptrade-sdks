@@ -1,6 +1,6 @@
 
 
-# OrderType
+# OrderTypeStrict
 
 ## Enum
 

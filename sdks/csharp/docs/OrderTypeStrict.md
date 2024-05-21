@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.OrderType
+# SnapTrade.Net.Model.OrderTypeStrict
 Order Type
 
 ## Properties

@@ -445,7 +445,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    OrderType orderType = OrderType.fromValue("Limit");
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     String userId = "userId_example";
     String userSecret = "userSecret_example";

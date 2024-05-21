@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountId** | **string** |  | [optional] 
 **_Action** | **ModelAction** |  | [optional] 
-**OrderType** | **OrderType** |  | [optional] 
+**OrderType** | **OrderTypeStrict** |  | [optional] 
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **Stop** | **double?** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] 
 **TimeInForce** | **TimeInForceStrict** |  | [optional] 

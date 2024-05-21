@@ -160,12 +160,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public StatusEnum? Status { get; set; }
-
-        /// <summary>
-        /// Gets or Sets OrderType
-        /// </summary>
-        [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderType? OrderType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="StrategyOrderRecord" /> class.
         /// </summary>
@@ -174,13 +168,13 @@ namespace SnapTrade.Net.Model
         /// <param name="filledQuantity">filledQuantity.</param>
         /// <param name="openQuantity">openQuantity.</param>
         /// <param name="closedQuantity">closedQuantity.</param>
-        /// <param name="orderType">orderType.</param>
+        /// <param name="orderType">Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss.</param>
         /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="timePlaced">Time.</param>
         /// <param name="timeUpdated">Time.</param>
-        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), OrderType? orderType = default(OrderType?), string timeInForce = default(string), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
+        public StrategyOrderRecord(OptionStrategy strategy = default(OptionStrategy), StatusEnum? status = default(StatusEnum?), double filledQuantity = default(double), double openQuantity = default(double), double closedQuantity = default(double), string orderType = default(string), string timeInForce = default(string), double? limitPrice = default(double?), double? executionPrice = default(double?), string timePlaced = default(string), string timeUpdated = default(string)) : base()
         {
             this.Strategy = strategy;
             this.Status = status;
@@ -219,6 +213,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "closed_quantity", EmitDefaultValue = false)]
         public double ClosedQuantity { get; set; }
+
+        /// <summary>
+        /// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+        /// </summary>
+        /// <value>Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss</value>
+        [DataMember(Name = "order_type", EmitDefaultValue = true)]
+        public string OrderType { get; set; }
 
         /// <summary>
         /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
@@ -340,7 +341,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.OrderType == input.OrderType ||
-                    this.OrderType.Equals(input.OrderType)
+                    (this.OrderType != null &&
+                    this.OrderType.Equals(input.OrderType))
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
@@ -387,7 +389,10 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.FilledQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.OpenQuantity.GetHashCode();
                 hashCode = (hashCode * 59) + this.ClosedQuantity.GetHashCode();
-                hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
+                if (this.OrderType != null)
+                {
+                    hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
+                }
                 if (this.TimeInForce != null)
                 {
                     hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();

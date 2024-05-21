@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
-from snaptrade_client.type.order_type import OrderType
+from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.units_nullable import UnitsNullable
 
@@ -29,7 +29,7 @@ class OptionalManualTrade(TypedDict, total=False):
 
     account: str
 
-    order_type: OrderType
+    order_type: OrderTypeStrict
 
     # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
     time_in_force: str

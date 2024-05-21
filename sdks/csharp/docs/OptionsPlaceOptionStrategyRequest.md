@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderType** | **OrderType** |  | 
+**OrderType** | **OrderTypeStrict** |  | 
 **TimeInForce** | **TimeInForceStrict** |  | 
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 
 

@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Action;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -65,7 +65,7 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-  private OrderType orderType;
+  private OrderTypeStrict orderType;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -152,7 +152,7 @@ public class ManualTradeForm {
   }
 
 
-  public ManualTradeForm orderType(OrderType orderType) {
+  public ManualTradeForm orderType(OrderTypeStrict orderType) {
     
     
     
@@ -168,12 +168,12 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OrderType getOrderType() {
+  public OrderTypeStrict getOrderType() {
     return orderType;
   }
 
 
-  public void setOrderType(OrderType orderType) {
+  public void setOrderType(OrderTypeStrict orderType) {
     
     
     

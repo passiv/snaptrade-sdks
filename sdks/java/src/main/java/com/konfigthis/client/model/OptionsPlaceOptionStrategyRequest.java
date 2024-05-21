@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -54,7 +54,7 @@ import com.konfigthis.client.JSON;
 public class OptionsPlaceOptionStrategyRequest {
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-  private OrderType orderType;
+  private OrderTypeStrict orderType;
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
@@ -67,7 +67,7 @@ public class OptionsPlaceOptionStrategyRequest {
   public OptionsPlaceOptionStrategyRequest() {
   }
 
-  public OptionsPlaceOptionStrategyRequest orderType(OrderType orderType) {
+  public OptionsPlaceOptionStrategyRequest orderType(OrderTypeStrict orderType) {
     
     
     
@@ -83,12 +83,12 @@ public class OptionsPlaceOptionStrategyRequest {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public OrderType getOrderType() {
+  public OrderTypeStrict getOrderType() {
     return orderType;
   }
 
 
-  public void setOrderType(OrderType orderType) {
+  public void setOrderType(OrderTypeStrict orderType) {
     
     
     

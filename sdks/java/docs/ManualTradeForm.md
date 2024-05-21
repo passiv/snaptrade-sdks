@@ -10,7 +10,7 @@ Manual Trade Form
 |------------ | ------------- | ------------- | -------------|
 |**accountId** | **UUID** |  |  [optional] |
 |**action** | **Action** |  |  [optional] |
-|**orderType** | **OrderType** |  |  [optional] |
+|**orderType** | **OrderTypeStrict** |  |  [optional] |
 |**price** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**stop** | **Double** | Stop Price. If stop loss or stop limit order, the price to trigger the stop |  [optional] |
 |**timeInForce** | **TimeInForceStrict** |  |  [optional] |

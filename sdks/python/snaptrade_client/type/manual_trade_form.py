@@ -17,7 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
-from snaptrade_client.type.order_type import OrderType
+from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
@@ -31,7 +31,7 @@ class OptionalManualTradeForm(TypedDict, total=False):
 
     action: Action
 
-    order_type: OrderType
+    order_type: OrderTypeStrict
 
     price: Price
 

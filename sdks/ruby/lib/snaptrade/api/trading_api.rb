@@ -151,7 +151,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param action [Action] Trade Action
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
@@ -184,7 +184,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param action [Action] Trade Action
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
@@ -418,7 +418,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param action [Action] Trade Action
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
@@ -451,7 +451,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param action [Action] Trade Action
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 

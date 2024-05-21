@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.18-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.18)
+[![npm](https://img.shields.io/badge/gem-v2.0.19-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.19)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -69,7 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.18'
+gem 'snaptrade', '~> 2.0.19'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -109,6 +109,7 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 
 
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Lists balances, positions and orders for the specified account. The data returned is similar to
 the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
@@ -958,7 +959,7 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type: [`OrderType`](./lib/snaptrade/models/order_type.rb)<a id="order_type-ordertypelibsnaptrademodelsorder_typerb"></a>
+##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
 Order Type
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
@@ -1368,7 +1369,7 @@ p result
 ##### action: [`Action`](./lib/snaptrade/models/action.rb)<a id="action-actionlibsnaptrademodelsactionrb"></a>
 Trade Action
 
-##### order_type: [`OrderType`](./lib/snaptrade/models/order_type.rb)<a id="order_type-ordertypelibsnaptrademodelsorder_typerb"></a>
+##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
 Order Type
 
 ##### price: `Float`<a id="price-float"></a>
@@ -1471,7 +1472,7 @@ p result
 ##### action: [`Action`](./lib/snaptrade/models/action.rb)<a id="action-actionlibsnaptrademodelsactionrb"></a>
 Trade Action
 
-##### order_type: [`OrderType`](./lib/snaptrade/models/order_type.rb)<a id="order_type-ordertypelibsnaptrademodelsorder_typerb"></a>
+##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
 Order Type
 
 ##### price: `Float`<a id="price-float"></a>
@@ -1601,6 +1602,7 @@ FXT
 
 
 ### `snaptrade.transactions_and_reporting.get_reporting_custom_range`<a id="snaptradetransactions_and_reportingget_reporting_custom_range"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 

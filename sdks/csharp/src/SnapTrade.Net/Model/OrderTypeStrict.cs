@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Model
     /// </summary>
     /// <value>Order Type</value>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum OrderType
+    public enum OrderTypeStrict
     {
         /// <summary>
         /// Enum Limit for value: Limit
