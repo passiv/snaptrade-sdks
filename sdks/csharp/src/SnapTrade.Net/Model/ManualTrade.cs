@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets OrderType
         /// </summary>
         [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderType? OrderType { get; set; }
+        public OrderTypeStrict? OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets _Action
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         /// <param name="action">action.</param>
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(string id = default(string), string account = default(string), OrderType? orderType = default(OrderType?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double? units = default(double?), double? price = default(double?)) : base()
+        public ManualTrade(string id = default(string), string account = default(string), OrderTypeStrict? orderType = default(OrderTypeStrict?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double? units = default(double?), double? price = default(double?)) : base()
         {
             this.Id = id;
             this.Account = account;

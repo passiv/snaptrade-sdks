@@ -21,7 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.ManualTradeSymbol;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class ManualTrade {
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
-  private OrderType orderType;
+  private OrderTypeStrict orderType;
 
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
@@ -148,7 +148,7 @@ public class ManualTrade {
   }
 
 
-  public ManualTrade orderType(OrderType orderType) {
+  public ManualTrade orderType(OrderTypeStrict orderType) {
     
     
     
@@ -164,12 +164,12 @@ public class ManualTrade {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public OrderType getOrderType() {
+  public OrderTypeStrict getOrderType() {
     return orderType;
   }
 
 
-  public void setOrderType(OrderType orderType) {
+  public void setOrderType(OrderTypeStrict orderType) {
     
     
     

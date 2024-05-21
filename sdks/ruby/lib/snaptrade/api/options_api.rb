@@ -479,7 +479,7 @@ module SnapTrade
     #
     # Places the option strategy order and returns the order record received from the brokerage.
     #
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -502,7 +502,7 @@ module SnapTrade
     #
     # Places the option strategy order and returns the order record received from the brokerage.
     #
-    # @param order_type [OrderType] Order Type
+    # @param order_type [OrderTypeStrict] Order Type
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param user_id [String] 
     # @param user_secret [String] 

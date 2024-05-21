@@ -94,6 +94,7 @@ from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
+from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.partner_data import PartnerData
 from snaptrade_client.model.past_value import PastValue
 from snaptrade_client.model.percent import Percent

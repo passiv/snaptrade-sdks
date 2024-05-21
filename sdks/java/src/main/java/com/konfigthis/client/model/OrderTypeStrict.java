@@ -26,7 +26,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Order Type
  */
-@JsonAdapter(OrderType.Adapter.class)public enum OrderType {
+@JsonAdapter(OrderTypeStrict.Adapter.class)public enum OrderTypeStrict {
   
   LIMIT("Limit"),
   
@@ -38,7 +38,7 @@ import com.google.gson.stream.JsonWriter;
 
   private String value;
 
-  OrderType(String value) {
+  OrderTypeStrict(String value) {
     this.value = value;
   }
 
@@ -51,8 +51,8 @@ import com.google.gson.stream.JsonWriter;
     return String.valueOf(value);
   }
 
-  public static OrderType fromValue(String value) {
-    for (OrderType b : OrderType.values()) {
+  public static OrderTypeStrict fromValue(String value) {
+    for (OrderTypeStrict b : OrderTypeStrict.values()) {
       if (b.value.equals(value)) {
         return b;
       }
@@ -60,16 +60,16 @@ import com.google.gson.stream.JsonWriter;
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
-  public static class Adapter extends TypeAdapter<OrderType> {
+  public static class Adapter extends TypeAdapter<OrderTypeStrict> {
     @Override
-    public void write(final JsonWriter jsonWriter, final OrderType enumeration) throws IOException {
+    public void write(final JsonWriter jsonWriter, final OrderTypeStrict enumeration) throws IOException {
       jsonWriter.value(enumeration.getValue());
     }
 
     @Override
-    public OrderType read(final JsonReader jsonReader) throws IOException {
+    public OrderTypeStrict read(final JsonReader jsonReader) throws IOException {
       String value = jsonReader.nextString();
-      return OrderType.fromValue(value);
+      return OrderTypeStrict.fromValue(value);
     }
   }
 }

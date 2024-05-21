@@ -30,7 +30,7 @@ import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
@@ -388,7 +388,7 @@ public class TradingApiGenerated {
         private final String userSecret;
         private UUID accountId;
         private Action action;
-        private OrderType orderType;
+        private OrderTypeStrict orderType;
         private Double price;
         private Double stop;
         private TimeInForceStrict timeInForce;
@@ -426,7 +426,7 @@ public class TradingApiGenerated {
          * @param orderType  (optional)
          * @return GetOrderImpactRequestBuilder
          */
-        public GetOrderImpactRequestBuilder orderType(OrderType orderType) {
+        public GetOrderImpactRequestBuilder orderType(OrderTypeStrict orderType) {
             this.orderType = orderType;
             return this;
         }
@@ -950,7 +950,7 @@ public class TradingApiGenerated {
         private final String userSecret;
         private UUID accountId;
         private Action action;
-        private OrderType orderType;
+        private OrderTypeStrict orderType;
         private Double price;
         private Double stop;
         private TimeInForceStrict timeInForce;
@@ -988,7 +988,7 @@ public class TradingApiGenerated {
          * @param orderType  (optional)
          * @return PlaceForceOrderRequestBuilder
          */
-        public PlaceForceOrderRequestBuilder orderType(OrderType orderType) {
+        public PlaceForceOrderRequestBuilder orderType(OrderTypeStrict orderType) {
             this.orderType = orderType;
             return this;
         }

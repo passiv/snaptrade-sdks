@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 import { Action } from './action';
 import { ManualTradeSymbol } from './manual-trade-symbol';
-import { OrderType } from './order-type';
+import { OrderTypeStrict } from './order-type-strict';
 
 /**
  * A manual trade object
@@ -36,10 +36,10 @@ export interface ManualTrade {
     'account'?: string;
     /**
      * Order Type
-     * @type {OrderType}
+     * @type {OrderTypeStrict}
      * @memberof ManualTrade
      */
-    'order_type'?: OrderType;
+    'order_type'?: OrderTypeStrict;
     /**
      * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
      * @type {string}

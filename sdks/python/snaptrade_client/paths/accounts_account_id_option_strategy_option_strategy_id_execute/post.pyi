@@ -33,16 +33,16 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord as StrategyOrderRecordSchema
-from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
+from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
+from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
-from snaptrade_client.type.order_type import OrderType
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -131,8 +131,8 @@ class SchemaForRequestBodyApplicationJson(
         class properties:
         
             @staticmethod
-            def order_type() -> typing.Type['OrderType']:
-                return OrderType
+            def order_type() -> typing.Type['OrderTypeStrict']:
+                return OrderTypeStrict
         
             @staticmethod
             def time_in_force() -> typing.Type['TimeInForceStrict']:
@@ -148,10 +148,10 @@ class SchemaForRequestBodyApplicationJson(
             }
     
     time_in_force: 'TimeInForceStrict'
-    order_type: 'OrderType'
+    order_type: 'OrderTypeStrict'
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
+    def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
@@ -168,7 +168,7 @@ class SchemaForRequestBodyApplicationJson(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'OrderType': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
@@ -187,7 +187,7 @@ class SchemaForRequestBodyApplicationJson(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         time_in_force: 'TimeInForceStrict',
-        order_type: 'OrderType',
+        order_type: 'OrderTypeStrict',
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -262,7 +262,7 @@ class BaseApi(api_client.Api):
     def _place_option_strategy_mapped_args(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -566,7 +566,7 @@ class PlaceOptionStrategy(BaseApi):
     async def aplace_option_strategy(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -603,7 +603,7 @@ class PlaceOptionStrategy(BaseApi):
     def place_option_strategy(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -640,7 +640,7 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -677,7 +677,7 @@ class ApiForpost(BaseApi):
     def post(
         self,
         body: typing.Optional[typing.Any] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,

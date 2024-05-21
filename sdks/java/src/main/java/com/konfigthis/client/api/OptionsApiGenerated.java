@@ -31,7 +31,7 @@ import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPosition;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import com.konfigthis.client.model.TimeInForceStrict;
@@ -986,7 +986,7 @@ public class OptionsApiGenerated {
     }
 
     public class PlaceOptionStrategyRequestBuilder {
-        private final OrderType orderType;
+        private final OrderTypeStrict orderType;
         private final TimeInForceStrict timeInForce;
         private final String userId;
         private final String userSecret;
@@ -994,7 +994,7 @@ public class OptionsApiGenerated {
         private final UUID optionStrategyId;
         private Double price;
 
-        private PlaceOptionStrategyRequestBuilder(OrderType orderType, TimeInForceStrict timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
+        private PlaceOptionStrategyRequestBuilder(OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) {
             this.orderType = orderType;
             this.timeInForce = timeInForce;
             this.userId = userId;
@@ -1111,7 +1111,7 @@ public class OptionsApiGenerated {
         <tr><td> 200 </td><td> Status of strategy order placed </td><td>  -  </td></tr>
      </table>
      */
-    public PlaceOptionStrategyRequestBuilder placeOptionStrategy(OrderType orderType, TimeInForceStrict timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
+    public PlaceOptionStrategyRequestBuilder placeOptionStrategy(OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret, UUID accountId, UUID optionStrategyId) throws IllegalArgumentException {
         if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");

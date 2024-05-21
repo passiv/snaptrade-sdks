@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.19-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.19)
+[![npm](https://img.shields.io/badge/npm-v9.0.20-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.20)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -177,6 +177,7 @@ main();
 
 
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Lists balances, positions and orders for the specified account. The data returned is similar to
 the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
@@ -1080,7 +1081,7 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
 Order Type
 
@@ -1508,7 +1509,7 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
 
 Trade Action
 
-##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
 Order Type
 
@@ -1623,7 +1624,7 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 Trade Action
 
-##### order_type: [`OrderType`](./models/order-type.ts)<a id="order_type-ordertypemodelsorder-typets"></a>
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
 Order Type
 
@@ -1759,6 +1760,7 @@ Optional comma seperated list of types to filter activities by. This is not an e
 
 
 ### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 

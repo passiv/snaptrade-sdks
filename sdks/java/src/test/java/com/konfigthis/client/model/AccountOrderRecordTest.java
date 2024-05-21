@@ -20,7 +20,6 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.OptionsSymbol;
-import com.konfigthis.client.model.OrderType;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -3057,7 +3057,7 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             expiration_date: 2017-07-17T15:13:07.177712+00:00
             strike_price: 200
-          order_type: null
+          order_type: order_type
           open_quantity: 6.027456183070403
           status: null
         - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -3151,7 +3151,7 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             expiration_date: 2017-07-17T15:13:07.177712+00:00
             strike_price: 200
-          order_type: null
+          order_type: order_type
           open_quantity: 6.027456183070403
           status: null
         account:
@@ -3299,7 +3299,7 @@ components:
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           expiration_date: 2017-07-17T15:13:07.177712+00:00
           strike_price: 200
-        order_type: null
+        order_type: order_type
         open_quantity: 6.027456183070403
         status: null
       properties:
@@ -3359,7 +3359,10 @@ components:
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopPrice
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          description: Order Type potential values include (but are not limited to)
+            - Limit - Market - StopLimit - StopLoss
+          nullable: true
+          type: string
         time_in_force:
           description: |
             Trade time in force examples:
@@ -3912,7 +3915,7 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
         filled_quantity: 10
-        order_type: null
+        order_type: order_type
         limit_price: 31.33
         open_quantity: 10
         closed_quantity: 10
@@ -3959,7 +3962,10 @@ components:
           x-konfig-original-example: 10
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderRecord-properties-closed_quantity
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          description: Order Type potential values include (but are not limited to)
+            - Limit - Market - StopLimit - StopLoss
+          nullable: true
+          type: string
         time_in_force:
           description: |
             Trade time in force examples:
@@ -6477,7 +6483,7 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9855556801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTrade-properties-account
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
           description: |
             Trade time in force examples:
@@ -6733,7 +6739,7 @@ components:
         action:
           $ref: '#/components/schemas/Action'
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -6798,13 +6804,18 @@ components:
       type: number
       x-konfig-original-example: 1.11
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Cash
-    OrderType:
+    OrderTypeStrict:
       description: Order Type
       enum:
       - Limit
       - Market
       - StopLimit
       - StopLoss
+      type: string
+    OrderType:
+      description: Order Type potential values include (but are not limited to) -
+        Limit - Market - StopLimit - StopLoss
+      nullable: true
       type: string
     SnapTradeAPIDisclaimerAcceptStatus:
       additionalProperties: true
@@ -9400,7 +9411,7 @@ components:
         action:
           $ref: '#/components/schemas/Action'
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         price:
           $ref: '#/components/schemas/Price'
         stop:
@@ -9463,7 +9474,7 @@ components:
         action:
           $ref: '#/components/schemas/Action'
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         price:
           $ref: '#/components/schemas/Price'
         stop:
@@ -9657,7 +9668,7 @@ components:
         optionStrategyId:
           $ref: '#/components/schemas/Id'
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         price:
@@ -10308,7 +10319,7 @@ components:
     Options_placeOptionStrategy_request:
       properties:
         order_type:
-          $ref: '#/components/schemas/OrderType'
+          $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         price:

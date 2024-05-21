@@ -19,15 +19,15 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for OrderType
+ * Model tests for OrderTypeStrict
  */
-public class OrderTypeTest {
+public class OrderTypeStrictTest {
     /**
-     * Model tests for OrderType
+     * Model tests for OrderTypeStrict
      */
     @Test
-    public void testOrderType() {
-        // TODO: test OrderType
+    public void testOrderTypeStrict() {
+        // TODO: test OrderTypeStrict
     }
 
 }

@@ -20,7 +20,7 @@ import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
@@ -82,7 +82,7 @@ public class TradingApiTest {
         String userSecret = null;
         UUID accountId = null;
         Action action = null;
-        OrderType orderType = null;
+        OrderTypeStrict orderType = null;
         Double price = null;
         Double stop = null;
         TimeInForceStrict timeInForce = null;
@@ -136,7 +136,7 @@ public class TradingApiTest {
         String userSecret = null;
         UUID accountId = null;
         Action action = null;
-        OrderType orderType = null;
+        OrderTypeStrict orderType = null;
         Double price = null;
         Double stop = null;
         TimeInForceStrict timeInForce = null;

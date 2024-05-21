@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets OrderType
         /// </summary>
         [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderType? OrderType { get; set; }
+        public OrderTypeStrict? OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
@@ -62,7 +62,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="universalSymbolId">universalSymbolId.</param>
         /// <param name="notionalValue">Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**.</param>
-        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderType? orderType = default(OrderType?), double? price = default(double?), double? stop = default(double?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
+        public ManualTradeForm(string accountId = default(string), ModelAction? action = default(ModelAction?), OrderTypeStrict? orderType = default(OrderTypeStrict?), double? price = default(double?), double? stop = default(double?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), double? units = default(double?), string universalSymbolId = default(string), double? notionalValue = default(double?))
         {
             this.AccountId = accountId;
             this._Action = action;

@@ -38,11 +38,11 @@ from snaptrade_client.model.model400_failed_request_response import Model400Fail
 from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
 from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
-from snaptrade_client.model.order_type import OrderType as OrderTypeSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
+from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
 from snaptrade_client.type.action import Action
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
@@ -53,8 +53,8 @@ from snaptrade_client.type.model400_failed_request_response import Model400Faile
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
+from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
-from snaptrade_client.type.order_type import OrderType
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -196,7 +196,7 @@ class BaseApi(api_client.Api):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
@@ -477,7 +477,7 @@ class GetOrderImpact(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
@@ -519,7 +519,7 @@ class GetOrderImpact(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
@@ -561,7 +561,7 @@ class ApiForpost(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
@@ -603,7 +603,7 @@ class ApiForpost(BaseApi):
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[Action] = None,
-        order_type: typing.Optional[OrderType] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,

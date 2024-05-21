@@ -21,7 +21,7 @@ import com.konfigthis.client.model.OptionLeg;
 import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPosition;
-import com.konfigthis.client.model.OrderType;
+import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StrategyOrderRecord;
 import com.konfigthis.client.model.StrategyQuotes;
 import com.konfigthis.client.model.TimeInForceStrict;
@@ -132,7 +132,7 @@ public class OptionsApiTest {
      */
     @Test
     public void placeOptionStrategyTest() throws ApiException {
-        OrderType orderType = null;
+        OrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         String userId = null;
         String userSecret = null;

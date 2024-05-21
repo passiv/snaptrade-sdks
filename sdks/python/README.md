@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.17-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.17)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.18-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.18)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -74,7 +74,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.17
+pip install snaptrade-python-sdk==11.0.18
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -177,6 +177,7 @@ asyncio.run(main())
 
 ## Reference<a id="reference"></a>
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Lists balances, positions and orders for the specified account. The data returned is similar to
 the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
@@ -1058,7 +1059,7 @@ place_option_strategy_response = snaptrade.options.place_option_strategy(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
@@ -1478,7 +1479,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
 ##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
 
@@ -1585,7 +1586,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
 
-##### order_type: [`OrderType`](./snaptrade_client/type/order_type.py)<a id="order_type-ordertypesnaptrade_clienttypeorder_typepy"></a>
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
 ##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
 
@@ -1713,6 +1714,7 @@ Optional comma seperated list of types to filter activities by. This is not an e
 ---
 
 ### `snaptrade.transactions_and_reporting.get_reporting_custom_range`<a id="snaptradetransactions_and_reportingget_reporting_custom_range"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 

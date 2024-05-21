@@ -61,7 +61,7 @@ module SnapTrade
       {
         :'account_id' => :'String',
         :'action' => :'Action',
-        :'order_type' => :'OrderType',
+        :'order_type' => :'OrderTypeStrict',
         :'price' => :'Float',
         :'stop' => :'Float',
         :'time_in_force' => :'TimeInForceStrict',
