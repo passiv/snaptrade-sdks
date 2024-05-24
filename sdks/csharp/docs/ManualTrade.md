@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **OrderType** | **OrderTypeStrict** |  | [optional] 
 **TimeInForce** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **Symbol** | [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
-**_Action** | **ModelAction** |  | [optional] 
+**_Action** | **ActionStrict** |  | [optional] 
 **Units** | **double?** | Trade Units. Cannot work with notional value. | [optional] 
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 
 

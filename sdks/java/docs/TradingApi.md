@@ -163,14 +163,14 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    Action action = Action.fromValue("BUY");
+    ActionStrict action = ActionStrict.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
-    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
+    Object notionalValue = null;
     try {
       ManualTradeAndImpact result = client
               .trading
@@ -391,14 +391,14 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    Action action = Action.fromValue("BUY");
+    ActionStrict action = ActionStrict.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     Double price = 3.4D; // Trade Price if limit or stop limit order
     Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     Double units = 3.4D; // Trade Units. Cannot work with notional value.
     UUID universalSymbolId = UUID.randomUUID();
-    Double notionalValue = 3.4D; // Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
+    Object notionalValue = null;
     try {
       AccountOrderRecord result = client
               .trading

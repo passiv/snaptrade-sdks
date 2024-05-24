@@ -19,15 +19,15 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for Action
+ * Model tests for ActionStrict
  */
-public class ActionTest {
+public class ActionStrictTest {
     /**
-     * Model tests for Action
+     * Model tests for ActionStrict
      */
     @Test
-    public void testAction() {
-        // TODO: test Action
+    public void testActionStrict() {
+        // TODO: test ActionStrict
     }
 
 }

@@ -38,12 +38,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public AccountOrderRecordStatus? Status { get; set; }
-
-        /// <summary>
-        /// Gets or Sets _Action
-        /// </summary>
-        [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ModelAction? _Action { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
@@ -52,7 +46,7 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
-        /// <param name="action">action.</param>
+        /// <param name="action">Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE.</param>
         /// <param name="totalQuantity">Trade Units. Cannot work with notional value..</param>
         /// <param name="openQuantity">Trade Units.</param>
         /// <param name="canceledQuantity">Trade Units.</param>
@@ -66,7 +60,7 @@ namespace SnapTrade.Net.Model
         /// <param name="timeUpdated">Time.</param>
         /// <param name="timeExecuted">Time.</param>
         /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), ModelAction? action = default(ModelAction?), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -114,6 +108,13 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
         public OptionsSymbol OptionSymbol { get; set; }
+
+        /// <summary>
+        /// Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+        /// </summary>
+        /// <value>Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE</value>
+        [DataMember(Name = "action", EmitDefaultValue = false)]
+        public string _Action { get; set; }
 
         /// <summary>
         /// Trade Units. Cannot work with notional value.
@@ -302,7 +303,8 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this._Action == input._Action ||
-                    this._Action.Equals(input._Action)
+                    (this._Action != null &&
+                    this._Action.Equals(input._Action))
                 ) && base.Equals(input) && 
                 (
                     this.TotalQuantity == input.TotalQuantity ||
@@ -398,7 +400,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this._Action.GetHashCode();
+                if (this._Action != null)
+                {
+                    hashCode = (hashCode * 59) + this._Action.GetHashCode();
+                }
                 if (this.TotalQuantity != null)
                 {
                     hashCode = (hashCode * 59) + this.TotalQuantity.GetHashCode();

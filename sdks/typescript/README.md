@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.20-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.20)
+[![npm](https://img.shields.io/badge/npm-v9.0.21-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.21)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1493,7 +1493,6 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   stop: 31.33,
   time_in_force: "FOK",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
 });
 ```
 
@@ -1505,7 +1504,7 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-##### action: [`Action`](./models/action.ts)<a id="action-actionmodelsactionts"></a>
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
 
 Trade Action
 
@@ -1529,7 +1528,7 @@ Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Goo
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-##### notional_value: [`number`](./models/number.ts)<a id="notional_value-numbermodelsnumberts"></a>
+##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1608,7 +1607,6 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   stop: 31.33,
   time_in_force: "FOK",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
 });
 ```
 
@@ -1620,7 +1618,7 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 ##### account_id: `string`<a id="account_id-string"></a>
 
-##### action: [`Action`](./models/action.ts)<a id="action-actionmodelsactionts"></a>
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
 
 Trade Action
 
@@ -1644,7 +1642,7 @@ Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Goo
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
-##### notional_value: [`number`](./models/number.ts)<a id="notional_value-numbermodelsnumberts"></a>
+##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

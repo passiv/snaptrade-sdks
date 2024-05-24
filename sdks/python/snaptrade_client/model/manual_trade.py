@@ -50,8 +50,8 @@ class ManualTrade(
                 return ManualTradeSymbol
         
             @staticmethod
-            def action() -> typing.Type['Action']:
-                return Action
+            def action() -> typing.Type['ActionStrict']:
+                return ActionStrict
         
             @staticmethod
             def units() -> typing.Type['UnitsNullable']:
@@ -88,7 +88,7 @@ class ManualTrade(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'ManualTradeSymbol': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'Action': ...
+    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'ActionStrict': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["units"]) -> 'UnitsNullable': ...
@@ -119,7 +119,7 @@ class ManualTrade(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['ManualTradeSymbol', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union['Action', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union['ActionStrict', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union['UnitsNullable', schemas.Unset]: ...
@@ -141,7 +141,7 @@ class ManualTrade(
         order_type: typing.Union['OrderTypeStrict', schemas.Unset] = schemas.unset,
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union['ManualTradeSymbol', schemas.Unset] = schemas.unset,
-        action: typing.Union['Action', schemas.Unset] = schemas.unset,
+        action: typing.Union['ActionStrict', schemas.Unset] = schemas.unset,
         units: typing.Union['UnitsNullable', schemas.Unset] = schemas.unset,
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -162,7 +162,7 @@ class ManualTrade(
             **kwargs,
         )
 
-from snaptrade_client.model.action import Action
+from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.price import Price

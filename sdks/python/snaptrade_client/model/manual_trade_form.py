@@ -40,8 +40,8 @@ class ManualTradeForm(
             account_id = schemas.UUIDSchema
         
             @staticmethod
-            def action() -> typing.Type['Action']:
-                return Action
+            def action() -> typing.Type['ActionStrict']:
+                return ActionStrict
         
             @staticmethod
             def order_type() -> typing.Type['OrderTypeStrict']:
@@ -83,7 +83,7 @@ class ManualTradeForm(
     def __getitem__(self, name: typing_extensions.Literal["account_id"]) -> MetaOapg.properties.account_id: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'Action': ...
+    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'ActionStrict': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
@@ -118,7 +118,7 @@ class ManualTradeForm(
     def get_item_oapg(self, name: typing_extensions.Literal["account_id"]) -> typing.Union[MetaOapg.properties.account_id, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union['Action', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union['ActionStrict', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> typing.Union['OrderTypeStrict', schemas.Unset]: ...
@@ -152,7 +152,7 @@ class ManualTradeForm(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         account_id: typing.Union[MetaOapg.properties.account_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
-        action: typing.Union['Action', schemas.Unset] = schemas.unset,
+        action: typing.Union['ActionStrict', schemas.Unset] = schemas.unset,
         order_type: typing.Union['OrderTypeStrict', schemas.Unset] = schemas.unset,
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         stop: typing.Union['StopPrice', schemas.Unset] = schemas.unset,
@@ -179,7 +179,7 @@ class ManualTradeForm(
             **kwargs,
         )
 
-from snaptrade_client.model.action import Action
+from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.price import Price

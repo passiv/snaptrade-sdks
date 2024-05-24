@@ -16,7 +16,6 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
-from snaptrade_client.type.action import Action
 from snaptrade_client.type.cancelled_units import CancelledUnits
 from snaptrade_client.type.filled_units import FilledUnits
 from snaptrade_client.type.open_units import OpenUnits
@@ -43,7 +42,8 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     option_symbol: OptionsSymbol
 
-    action: Action
+    # Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+    action: str
 
     total_quantity: UnitsNullable
 

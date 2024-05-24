@@ -26,7 +26,7 @@ import com.google.gson.stream.JsonWriter;
 /**
  * Trade Action
  */
-@JsonAdapter(Action.Adapter.class)public enum Action {
+@JsonAdapter(ActionStrict.Adapter.class)public enum ActionStrict {
   
   BUY("BUY"),
   
@@ -34,7 +34,7 @@ import com.google.gson.stream.JsonWriter;
 
   private String value;
 
-  Action(String value) {
+  ActionStrict(String value) {
     this.value = value;
   }
 
@@ -47,8 +47,8 @@ import com.google.gson.stream.JsonWriter;
     return String.valueOf(value);
   }
 
-  public static Action fromValue(String value) {
-    for (Action b : Action.values()) {
+  public static ActionStrict fromValue(String value) {
+    for (ActionStrict b : ActionStrict.values()) {
       if (b.value.equals(value)) {
         return b;
       }
@@ -56,16 +56,16 @@ import com.google.gson.stream.JsonWriter;
     throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
-  public static class Adapter extends TypeAdapter<Action> {
+  public static class Adapter extends TypeAdapter<ActionStrict> {
     @Override
-    public void write(final JsonWriter jsonWriter, final Action enumeration) throws IOException {
+    public void write(final JsonWriter jsonWriter, final ActionStrict enumeration) throws IOException {
       jsonWriter.value(enumeration.getValue());
     }
 
     @Override
-    public Action read(final JsonReader jsonReader) throws IOException {
+    public ActionStrict read(final JsonReader jsonReader) throws IOException {
       String value = jsonReader.nextString();
-      return Action.fromValue(value);
+      return ActionStrict.fromValue(value);
     }
   }
 }

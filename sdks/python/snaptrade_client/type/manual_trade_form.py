@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.action import Action
+from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
@@ -29,7 +29,7 @@ class RequiredManualTradeForm(TypedDict):
 class OptionalManualTradeForm(TypedDict, total=False):
     account_id: str
 
-    action: Action
+    action: ActionStrict
 
     order_type: OrderTypeStrict
 
@@ -43,7 +43,7 @@ class OptionalManualTradeForm(TypedDict, total=False):
 
     universal_symbol_id: str
 
-    notional_value: NotionalValueNullable
+    notional_value: typing.Optional[NotionalValueNullable]
 
 class ManualTradeForm(RequiredManualTradeForm, OptionalManualTradeForm):
     pass

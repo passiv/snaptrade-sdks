@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.ModelAction
+# SnapTrade.Net.Model.ActionStrict
 Trade Action
 
 ## Properties

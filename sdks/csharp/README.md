@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.20-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.20)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.21-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.21)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -147,6 +147,7 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [ActionStrict](docs/ActionStrict.md)
  - [Amount](docs/Amount.md)
  - [AmountNullable](docs/AmountNullable.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
@@ -184,7 +185,6 @@ Class | Method | HTTP request | Description
  - [Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
  - [Model404FailedRequestResponse](docs/Model404FailedRequestResponse.md)
  - [Model500UnexpectedExceptionResponse](docs/Model500UnexpectedExceptionResponse.md)
- - [ModelAction](docs/ModelAction.md)
  - [ModelAssetClass](docs/ModelAssetClass.md)
  - [ModelAssetClassDetails](docs/ModelAssetClassDetails.md)
  - [ModelAssetClassTarget](docs/ModelAssetClassTarget.md)
@@ -195,6 +195,8 @@ Class | Method | HTTP request | Description
  - [MonthlyDividends](docs/MonthlyDividends.md)
  - [NetContributions](docs/NetContributions.md)
  - [NetDividend](docs/NetDividend.md)
+ - [NotionalValue](docs/NotionalValue.md)
+ - [NotionalValueNullable](docs/NotionalValueNullable.md)
  - [OptionChainInner](docs/OptionChainInner.md)
  - [OptionChainInnerChainPerRootInner](docs/OptionChainInnerChainPerRootInner.md)
  - [OptionChainInnerChainPerRootInnerChainPerStrikePriceInner](docs/OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.md)

@@ -39,10 +39,10 @@ namespace SnapTrade.Net.Model
         public enum SessionEventTypeEnum
         {
             /// <summary>
-            /// Enum CONNECTIONFAILED for value: CONNECTION_FAILED
+            /// Enum OAUTHREDIRECT for value: OAUTH_REDIRECT
             /// </summary>
-            [EnumMember(Value = "CONNECTION_FAILED")]
-            CONNECTIONFAILED = 1,
+            [EnumMember(Value = "OAUTH_REDIRECT")]
+            OAUTHREDIRECT = 1,
 
             /// <summary>
             /// Enum DISCLAIMERACCEPTED for value: DISCLAIMER_ACCEPTED
@@ -57,28 +57,76 @@ namespace SnapTrade.Net.Model
             BROKERAGECONNECTIONINITIATED = 3,
 
             /// <summary>
+            /// Enum BROKERAGERECONNECTINITIATED for value: BROKERAGE_RECONNECT_INITIATED
+            /// </summary>
+            [EnumMember(Value = "BROKERAGE_RECONNECT_INITIATED")]
+            BROKERAGERECONNECTINITIATED = 4,
+
+            /// <summary>
             /// Enum BROKERAGEAUTHENTICATION for value: BROKERAGE_AUTHENTICATION
             /// </summary>
             [EnumMember(Value = "BROKERAGE_AUTHENTICATION")]
-            BROKERAGEAUTHENTICATION = 4,
+            BROKERAGEAUTHENTICATION = 5,
 
             /// <summary>
-            /// Enum MFAAUTHORIZATION for value: MFA_AUTHORIZATION
+            /// Enum OAUTHBROKERAGEAUTHENTICATION for value: OAUTH_BROKERAGE_AUTHENTICATION
             /// </summary>
-            [EnumMember(Value = "MFA_AUTHORIZATION")]
-            MFAAUTHORIZATION = 5,
+            [EnumMember(Value = "OAUTH_BROKERAGE_AUTHENTICATION")]
+            OAUTHBROKERAGEAUTHENTICATION = 6,
+
+            /// <summary>
+            /// Enum MFAREQUESTED for value: MFA_REQUESTED
+            /// </summary>
+            [EnumMember(Value = "MFA_REQUESTED")]
+            MFAREQUESTED = 7,
+
+            /// <summary>
+            /// Enum MFASUBMITTED for value: MFA_SUBMITTED
+            /// </summary>
+            [EnumMember(Value = "MFA_SUBMITTED")]
+            MFASUBMITTED = 8,
+
+            /// <summary>
+            /// Enum MFACHOICEREQUESTED for value: MFA_CHOICE_REQUESTED
+            /// </summary>
+            [EnumMember(Value = "MFA_CHOICE_REQUESTED")]
+            MFACHOICEREQUESTED = 9,
+
+            /// <summary>
+            /// Enum MFACHOICESUBMITTED for value: MFA_CHOICE_SUBMITTED
+            /// </summary>
+            [EnumMember(Value = "MFA_CHOICE_SUBMITTED")]
+            MFACHOICESUBMITTED = 10,
 
             /// <summary>
             /// Enum CONNECTIONSUCCESSFUL for value: CONNECTION_SUCCESSFUL
             /// </summary>
             [EnumMember(Value = "CONNECTION_SUCCESSFUL")]
-            CONNECTIONSUCCESSFUL = 6,
+            CONNECTIONSUCCESSFUL = 11,
+
+            /// <summary>
+            /// Enum CONNECTIONFAILED for value: CONNECTION_FAILED
+            /// </summary>
+            [EnumMember(Value = "CONNECTION_FAILED")]
+            CONNECTIONFAILED = 12,
 
             /// <summary>
             /// Enum PARTNERREDIRECT for value: PARTNER_REDIRECT
             /// </summary>
             [EnumMember(Value = "PARTNER_REDIRECT")]
-            PARTNERREDIRECT = 7
+            PARTNERREDIRECT = 13,
+
+            /// <summary>
+            /// Enum CONNECTIONABORTED for value: CONNECTION_ABORTED
+            /// </summary>
+            [EnumMember(Value = "CONNECTION_ABORTED")]
+            CONNECTIONABORTED = 14,
+
+            /// <summary>
+            /// Enum SESSIONSTARTED for value: SESSION_STARTED
+            /// </summary>
+            [EnumMember(Value = "SESSION_STARTED")]
+            SESSIONSTARTED = 15
 
         }
 

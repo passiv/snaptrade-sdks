@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Model
     /// </summary>
     /// <value>Trade Action</value>
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum ModelAction
+    public enum ActionStrict
     {
         /// <summary>
         /// Enum BUY for value: BUY

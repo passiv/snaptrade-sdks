@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-NotionalValueNullable = float
+NotionalValueNullable = typing.Union[str,typing.Union[int, float]]

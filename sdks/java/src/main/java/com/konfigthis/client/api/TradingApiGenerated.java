@@ -27,7 +27,7 @@ import java.io.IOException;
 
 
 import com.konfigthis.client.model.AccountOrderRecord;
-import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderTypeStrict;
@@ -387,14 +387,14 @@ public class TradingApiGenerated {
         private final String userId;
         private final String userSecret;
         private UUID accountId;
-        private Action action;
+        private ActionStrict action;
         private OrderTypeStrict orderType;
         private Double price;
         private Double stop;
         private TimeInForceStrict timeInForce;
         private Double units;
         private UUID universalSymbolId;
-        private Double notionalValue;
+        private Object notionalValue;
 
         private GetOrderImpactRequestBuilder(String userId, String userSecret) {
             this.userId = userId;
@@ -416,7 +416,7 @@ public class TradingApiGenerated {
          * @param action  (optional)
          * @return GetOrderImpactRequestBuilder
          */
-        public GetOrderImpactRequestBuilder action(Action action) {
+        public GetOrderImpactRequestBuilder action(ActionStrict action) {
             this.action = action;
             return this;
         }
@@ -516,22 +516,11 @@ public class TradingApiGenerated {
         
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades** (optional)
+         * @param notionalValue  (optional)
          * @return GetOrderImpactRequestBuilder
          */
-        public GetOrderImpactRequestBuilder notionalValue(Double notionalValue) {
+        public GetOrderImpactRequestBuilder notionalValue(Object notionalValue) {
             this.notionalValue = notionalValue;
-            return this;
-        }
-        
-
-        /**
-         * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades** (optional)
-         * @return GetOrderImpactRequestBuilder
-         */
-        public GetOrderImpactRequestBuilder notionalValue(Integer notionalValue) {
-            this.notionalValue = notionalValue.doubleValue();
             return this;
         }
         
@@ -949,14 +938,14 @@ public class TradingApiGenerated {
         private final String userId;
         private final String userSecret;
         private UUID accountId;
-        private Action action;
+        private ActionStrict action;
         private OrderTypeStrict orderType;
         private Double price;
         private Double stop;
         private TimeInForceStrict timeInForce;
         private Double units;
         private UUID universalSymbolId;
-        private Double notionalValue;
+        private Object notionalValue;
 
         private PlaceForceOrderRequestBuilder(String userId, String userSecret) {
             this.userId = userId;
@@ -978,7 +967,7 @@ public class TradingApiGenerated {
          * @param action  (optional)
          * @return PlaceForceOrderRequestBuilder
          */
-        public PlaceForceOrderRequestBuilder action(Action action) {
+        public PlaceForceOrderRequestBuilder action(ActionStrict action) {
             this.action = action;
             return this;
         }
@@ -1078,22 +1067,11 @@ public class TradingApiGenerated {
         
         /**
          * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades** (optional)
+         * @param notionalValue  (optional)
          * @return PlaceForceOrderRequestBuilder
          */
-        public PlaceForceOrderRequestBuilder notionalValue(Double notionalValue) {
+        public PlaceForceOrderRequestBuilder notionalValue(Object notionalValue) {
             this.notionalValue = notionalValue;
-            return this;
-        }
-        
-
-        /**
-         * Set notionalValue
-         * @param notionalValue Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades** (optional)
-         * @return PlaceForceOrderRequestBuilder
-         */
-        public PlaceForceOrderRequestBuilder notionalValue(Integer notionalValue) {
-            this.notionalValue = notionalValue.doubleValue();
             return this;
         }
         

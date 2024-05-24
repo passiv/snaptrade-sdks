@@ -51,10 +51,7 @@ class AccountOrderRecord(
             @staticmethod
             def option_symbol() -> typing.Type['OptionsSymbol']:
                 return OptionsSymbol
-        
-            @staticmethod
-            def action() -> typing.Type['Action']:
-                return Action
+            action = schemas.StrSchema
         
             @staticmethod
             def total_quantity() -> typing.Type['UnitsNullable']:
@@ -137,7 +134,7 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbol': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'Action': ...
+    def __getitem__(self, name: typing_extensions.Literal["action"]) -> MetaOapg.properties.action: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["total_quantity"]) -> 'UnitsNullable': ...
@@ -201,7 +198,7 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbol', schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union['Action', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union[MetaOapg.properties.action, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["total_quantity"]) -> typing.Union['UnitsNullable', schemas.Unset]: ...
@@ -256,7 +253,7 @@ class AccountOrderRecord(
         symbol: typing.Union[MetaOapg.properties.symbol, str, uuid.UUID, schemas.Unset] = schemas.unset,
         universal_symbol: typing.Union['UniversalSymbol', schemas.Unset] = schemas.unset,
         option_symbol: typing.Union['OptionsSymbol', schemas.Unset] = schemas.unset,
-        action: typing.Union['Action', schemas.Unset] = schemas.unset,
+        action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
         total_quantity: typing.Union['UnitsNullable', schemas.Unset] = schemas.unset,
         open_quantity: typing.Union['OpenUnits', schemas.Unset] = schemas.unset,
         canceled_quantity: typing.Union['CancelledUnits', schemas.Unset] = schemas.unset,
@@ -300,7 +297,6 @@ class AccountOrderRecord(
         )
 
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
-from snaptrade_client.model.action import Action
 from snaptrade_client.model.cancelled_units import CancelledUnits
 from snaptrade_client.model.filled_units import FilledUnits
 from snaptrade_client.model.open_units import OpenUnits

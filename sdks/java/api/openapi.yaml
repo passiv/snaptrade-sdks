@@ -2977,7 +2977,7 @@ components:
           time_in_force: time_in_force
           execution_price: 31.33
           stop_price: 31.33
-          action: null
+          action: action
           total_quantity: 0.8008281904610115
           universal_symbol:
             figi_code: BBG000B9XRY4
@@ -3071,7 +3071,7 @@ components:
           time_in_force: time_in_force
           execution_price: 31.33
           stop_price: 31.33
-          action: null
+          action: action
           total_quantity: 0.8008281904610115
           universal_symbol:
             figi_code: BBG000B9XRY4
@@ -3219,7 +3219,7 @@ components:
         time_in_force: time_in_force
         execution_price: 31.33
         stop_price: 31.33
-        action: null
+        action: action
         total_quantity: 0.8008281904610115
         universal_symbol:
           figi_code: BBG000B9XRY4
@@ -3319,7 +3319,10 @@ components:
         option_symbol:
           $ref: '#/components/schemas/OptionsSymbol'
         action:
-          $ref: '#/components/schemas/Action'
+          description: Trade Action potential values include (but are not limited
+            to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN
+            - SELL_CLOSE
+          type: string
         total_quantity:
           description: Trade Units. Cannot work with notional value.
           nullable: true
@@ -5532,7 +5535,7 @@ components:
     SessionEvent:
       additionalProperties: true
       example:
-        session_event_type: CONNECTION_FAILED
+        session_event_type: OAUTH_REDIRECT
         user_id: snaptrade-user-123
         brokerage_status_code: 400
         session_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -5548,13 +5551,21 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         session_event_type:
           enum:
-          - CONNECTION_FAILED
+          - OAUTH_REDIRECT
           - DISCLAIMER_ACCEPTED
           - BROKERAGE_CONNECTION_INITIATED
+          - BROKERAGE_RECONNECT_INITIATED
           - BROKERAGE_AUTHENTICATION
-          - MFA_AUTHORIZATION
+          - OAUTH_BROKERAGE_AUTHENTICATION
+          - MFA_REQUESTED
+          - MFA_SUBMITTED
+          - MFA_CHOICE_REQUESTED
+          - MFA_CHOICE_SUBMITTED
           - CONNECTION_SUCCESSFUL
+          - CONNECTION_FAILED
           - PARTNER_REDIRECT
+          - CONNECTION_ABORTED
+          - SESSION_STARTED
           type: string
         session_id:
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6495,7 +6506,7 @@ components:
         symbol:
           $ref: '#/components/schemas/ManualTradeSymbol'
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: '#/components/schemas/ActionStrict'
         units:
           description: Trade Units. Cannot work with notional value.
           nullable: true
@@ -6725,7 +6736,7 @@ components:
         account_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         stop: 31.33
         price: 31.33
-        notional_value: 100
+        notional_value: ""
         action: null
         units: 0.8008281904610115
         order_type: null
@@ -6737,7 +6748,7 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: '#/components/schemas/ActionStrict'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         price:
@@ -6767,16 +6778,7 @@ components:
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        notional_value:
-          description: "Dollar amount to trade. Cannot work with units. Can only work\
-            \ for market order types and day for time in force. **Only available for\
-            \ Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access\
-            \ to place notional trades**"
-          example: 100
-          nullable: true
-          type: number
-          x-konfig-original-example: 100
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-NotionalValue
+        notional_value: {}
       type: object
       x-konfig-properties:
         notional_value:
@@ -6848,11 +6850,16 @@ components:
           * GTC - Good Til Canceled
           * GTD - Good Til Date
       type: string
-    Action:
+    ActionStrict:
       description: Trade Action
       enum:
       - BUY
       - SELL
+      type: string
+    Action:
+      description: Trade Action potential values include (but are not limited to)
+        - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN -
+        SELL_CLOSE
       type: string
     Units:
       description: Trade Units. Cannot work with notional value.
@@ -6876,15 +6883,7 @@ components:
       type: number
       x-konfig-original-example: 31.33
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
-    NotionalValue:
-      description: "Dollar amount to trade. Cannot work with units. Can only work\
-        \ for market order types and day for time in force. **Only available for Alpaca,\
-        \ Alpaca Paper, and Robinhood. Please contact support to get access to place\
-        \ notional trades**"
-      example: 100
-      type: number
-      x-konfig-original-example: 100
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-NotionalValue
+    NotionalValue: {}
     StopPrice:
       description: "Stop Price. If stop loss or stop limit order, the price to trigger\
         \ the stop"
@@ -8768,10 +8767,6 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-NotionalValue:
-      example: 100
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-StopPrice:
       example: 31.33
       type: number
@@ -9409,7 +9404,7 @@ components:
         account_id:
           $ref: '#/components/schemas/Id'
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: '#/components/schemas/ActionStrict'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         price:
@@ -9472,7 +9467,7 @@ components:
         account_id:
           $ref: '#/components/schemas/Id'
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: '#/components/schemas/ActionStrict'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         price:
@@ -10276,16 +10271,7 @@ components:
       - ticker
       - underlying_symbol
       type: object
-    NotionalValueNullable:
-      description: "Dollar amount to trade. Cannot work with units. Can only work\
-        \ for market order types and day for time in force. **Only available for Alpaca,\
-        \ Alpaca Paper, and Robinhood. Please contact support to get access to place\
-        \ notional trades**"
-      example: 100
-      nullable: true
-      type: number
-      x-konfig-original-example: 100
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-NotionalValue
+    NotionalValueNullable: {}
     Trading_cancelUserAccountOrder_request:
       properties:
         brokerage_order_id:
