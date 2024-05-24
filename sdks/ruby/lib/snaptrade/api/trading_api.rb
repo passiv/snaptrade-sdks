@@ -150,14 +150,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] Trade Action
+    # @param action [ActionStrict] Trade Action
     # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] 
+    # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -183,14 +183,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] Trade Action
+    # @param action [ActionStrict] Trade Action
     # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] 
+    # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -417,14 +417,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] Trade Action
+    # @param action [ActionStrict] Trade Action
     # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] 
+    # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
@@ -450,14 +450,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param action [Action] Trade Action
+    # @param action [ActionStrict] Trade Action
     # @param order_type [OrderTypeStrict] Order Type
     # @param price [Float] Trade Price if limit or stop limit order
     # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
     # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
     # @param units [Float] 
     # @param universal_symbol_id [String] 
-    # @param notional_value [Float] 
+    # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})

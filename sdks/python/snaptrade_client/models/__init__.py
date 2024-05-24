@@ -22,6 +22,7 @@ from snaptrade_client.model.account_order_record_status import AccountOrderRecor
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.action import Action
+from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.amount import Amount
 from snaptrade_client.model.amount_nullable import AmountNullable
 from snaptrade_client.model.balance import Balance

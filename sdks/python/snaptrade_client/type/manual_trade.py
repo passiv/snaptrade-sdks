@@ -15,7 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.action import Action
+from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
@@ -36,7 +36,7 @@ class OptionalManualTrade(TypedDict, total=False):
 
     symbol: ManualTradeSymbol
 
-    action: Action
+    action: ActionStrict
 
     units: UnitsNullable
 

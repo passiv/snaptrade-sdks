@@ -24,7 +24,7 @@ module SnapTrade
 
     attr_accessor :option_symbol
 
-    # Trade Action
+    # Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
     attr_accessor :action
 
     attr_accessor :total_quantity
@@ -101,7 +101,7 @@ module SnapTrade
         :'symbol' => :'String',
         :'universal_symbol' => :'UniversalSymbol',
         :'option_symbol' => :'OptionsSymbol',
-        :'action' => :'Action',
+        :'action' => :'String',
         :'total_quantity' => :'Float',
         :'open_quantity' => :'Float',
         :'canceled_quantity' => :'Float',

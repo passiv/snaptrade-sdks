@@ -1,6 +1,6 @@
 
 
-# Action
+# ActionStrict
 
 ## Enum
 

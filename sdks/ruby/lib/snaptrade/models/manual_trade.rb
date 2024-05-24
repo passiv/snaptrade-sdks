@@ -60,7 +60,7 @@ module SnapTrade
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'String',
         :'symbol' => :'ManualTradeSymbol',
-        :'action' => :'Action',
+        :'action' => :'ActionStrict',
         :'units' => :'Float',
         :'price' => :'Float'
       }

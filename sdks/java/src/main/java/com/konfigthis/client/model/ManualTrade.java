@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ManualTradeSymbol;
 import com.konfigthis.client.model.OrderTypeStrict;
 import io.swagger.annotations.ApiModel;
@@ -77,7 +77,7 @@ public class ManualTrade {
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
-  private Action action;
+  private ActionStrict action;
 
   public static final String SERIALIZED_NAME_UNITS = "units";
   @SerializedName(SERIALIZED_NAME_UNITS)
@@ -235,7 +235,7 @@ public class ManualTrade {
   }
 
 
-  public ManualTrade action(Action action) {
+  public ManualTrade action(ActionStrict action) {
     
     
     
@@ -251,12 +251,12 @@ public class ManualTrade {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Action getAction() {
+  public ActionStrict getAction() {
     return action;
   }
 
 
-  public void setAction(Action action) {
+  public void setAction(ActionStrict action) {
     
     
     

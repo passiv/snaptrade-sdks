@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.18-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.18)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.19-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.19)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -74,7 +74,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.18
+pip install snaptrade-python-sdk==11.0.19
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1465,7 +1465,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    notional_value=100,
+    notional_value=None,
 )
 ```
 
@@ -1477,7 +1477,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
-##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
@@ -1491,7 +1491,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-##### notional_value: [`NotionalValueNullable`](./snaptrade_client/type/notional_value_nullable.py)<a id="notional_value-notionalvaluenullablesnaptrade_clienttypenotional_value_nullablepy"></a>
+##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -1572,7 +1572,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     time_in_force="FOK",
     units=3.14,
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    notional_value=100,
+    notional_value=None,
 )
 ```
 
@@ -1584,7 +1584,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
-##### action: [`Action`](./snaptrade_client/type/action.py)<a id="action-actionsnaptrade_clienttypeactionpy"></a>
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
@@ -1598,7 +1598,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
-##### notional_value: [`NotionalValueNullable`](./snaptrade_client/type/notional_value_nullable.py)<a id="notional_value-notionalvaluenullablesnaptrade_clienttypenotional_value_nullablepy"></a>
+##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

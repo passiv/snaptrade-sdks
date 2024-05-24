@@ -3374,13 +3374,21 @@ components:
         session_event_type:
           type: string
           enum:
-            - CONNECTION_FAILED
+            - OAUTH_REDIRECT
             - DISCLAIMER_ACCEPTED
             - BROKERAGE_CONNECTION_INITIATED
+            - BROKERAGE_RECONNECT_INITIATED
             - BROKERAGE_AUTHENTICATION
-            - MFA_AUTHORIZATION
+            - OAUTH_BROKERAGE_AUTHENTICATION
+            - MFA_REQUESTED
+            - MFA_SUBMITTED
+            - MFA_CHOICE_REQUESTED
+            - MFA_CHOICE_SUBMITTED
             - CONNECTION_SUCCESSFUL
+            - CONNECTION_FAILED
             - PARTNER_REDIRECT
+            - CONNECTION_ABORTED
+            - SESSION_STARTED
         session_id:
           $ref: "#/components/schemas/Id"
         user_id:
@@ -3898,7 +3906,7 @@ components:
         symbol:
           $ref: "#/components/schemas/ManualTradeSymbol"
         action:
-          $ref: "#/components/schemas/Action"
+          $ref: "#/components/schemas/ActionStrict"
         units:
           nullable: true
           allOf:
@@ -3976,7 +3984,7 @@ components:
         account_id:
           $ref: "#/components/schemas/Id"
         action:
-          $ref: "#/components/schemas/Action"
+          $ref: "#/components/schemas/ActionStrict"
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         price:
@@ -4053,12 +4061,23 @@ components:
           * GTC - Good Til Canceled
           * GTD - Good Til Date
       type: string
-    Action:
+    ActionStrict:
       description: Trade Action
       type: string
       enum:
         - BUY
         - SELL
+    Action:
+      type: string
+      description: Trade Action potential values include (but are not limited to)
+        - BUY
+        - SELL
+        - BUY_COVER
+        - SELL_SHORT
+        - BUY_OPEN
+        - BUY_CLOSE
+        - SELL_OPEN
+        - SELL_CLOSE
     Units:
       description: Trade Units. Cannot work with notional value.
       type: number
@@ -4080,8 +4099,10 @@ components:
       nullable: true
       example: 31.33
     NotionalValue:
-      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
-      type: number
+      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood.**
+      oneOf:
+        - type: string
+        - type: number
       example: 100.00
     StopPrice:
       description:

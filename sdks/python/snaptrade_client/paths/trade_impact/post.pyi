@@ -33,8 +33,8 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact as ManualTradeAndImpactSchema
-from snaptrade_client.model.action import Action as ActionSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
+from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
 from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
 from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
@@ -44,12 +44,12 @@ from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
-from snaptrade_client.type.action import Action
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
+from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
@@ -195,7 +195,7 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        action: typing.Optional[Action] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
@@ -476,7 +476,7 @@ class GetOrderImpact(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        action: typing.Optional[Action] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
@@ -518,7 +518,7 @@ class GetOrderImpact(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        action: typing.Optional[Action] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
@@ -560,7 +560,7 @@ class ApiForpost(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        action: typing.Optional[Action] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,
@@ -602,7 +602,7 @@ class ApiForpost(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
-        action: typing.Optional[Action] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         price: typing.Optional[Price] = None,
         stop: typing.Optional[StopPrice] = None,

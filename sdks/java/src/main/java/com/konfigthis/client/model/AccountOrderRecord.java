@@ -20,7 +20,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
-import com.konfigthis.client.model.Action;
 import com.konfigthis.client.model.OptionsSymbol;
 import com.konfigthis.client.model.UniversalSymbol;
 import io.swagger.annotations.ApiModel;
@@ -78,7 +77,7 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
-  private Action action;
+  private String action;
 
   public static final String SERIALIZED_NAME_TOTAL_QUANTITY = "total_quantity";
   @SerializedName(SERIALIZED_NAME_TOTAL_QUANTITY)
@@ -280,7 +279,7 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord action(Action action) {
+  public AccountOrderRecord action(String action) {
     
     
     
@@ -290,18 +289,18 @@ public class AccountOrderRecord {
   }
 
    /**
-   * Get action
+   * Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
    * @return action
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(value = "Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE")
 
-  public Action getAction() {
+  public String getAction() {
     return action;
   }
 
 
-  public void setAction(Action action) {
+  public void setAction(String action) {
     
     
     
@@ -936,6 +935,9 @@ public class AccountOrderRecord {
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
         OptionsSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+      }
+      if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
       }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));

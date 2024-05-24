@@ -21,11 +21,13 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
-import { Action } from '../models';
+import { ActionStrict } from '../models';
 // @ts-ignore
 import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
 import { ManualTradeForm } from '../models';
+// @ts-ignore
+import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore

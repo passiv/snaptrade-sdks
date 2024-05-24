@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ModelAction? _Action { get; set; }
+        public ActionStrict? _Action { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTrade" /> class.
         /// </summary>
@@ -55,7 +55,7 @@ namespace SnapTrade.Net.Model
         /// <param name="action">action.</param>
         /// <param name="units">Trade Units. Cannot work with notional value..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(string id = default(string), string account = default(string), OrderTypeStrict? orderType = default(OrderTypeStrict?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ModelAction? action = default(ModelAction?), double? units = default(double?), double? price = default(double?)) : base()
+        public ManualTrade(string id = default(string), string account = default(string), OrderTypeStrict? orderType = default(OrderTypeStrict?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ActionStrict? action = default(ActionStrict?), double? units = default(double?), double? price = default(double?)) : base()
         {
             this.Id = id;
             this.Account = account;

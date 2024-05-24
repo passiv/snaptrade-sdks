@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.19-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.19)
+[![npm](https://img.shields.io/badge/gem-v2.0.20-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.20)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -69,7 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.19'
+gem 'snaptrade', '~> 2.0.20'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1356,7 +1356,7 @@ result = snaptrade.trading.get_order_impact(
   time_in_force: "FOK",
   units: 3.14,
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
+  notional_value: None,
 )
 p result
 ```
@@ -1366,7 +1366,7 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### action: [`Action`](./lib/snaptrade/models/action.rb)<a id="action-actionlibsnaptrademodelsactionrb"></a>
+##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
 Trade Action
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
@@ -1384,7 +1384,7 @@ Canceled
 
 ##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
 ##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
-##### notional_value: [`Float`](./lib/snaptrade/models/float.rb)<a id="notional_value-floatlibsnaptrademodelsfloatrb"></a>
+##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [ManualTradeAndImpact](./lib/snaptrade/models/manual_trade_and_impact.rb)
@@ -1459,7 +1459,7 @@ result = snaptrade.trading.place_force_order(
   time_in_force: "FOK",
   units: 3.14,
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  notional_value: 100,
+  notional_value: None,
 )
 p result
 ```
@@ -1469,7 +1469,7 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### action: [`Action`](./lib/snaptrade/models/action.rb)<a id="action-actionlibsnaptrademodelsactionrb"></a>
+##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
 Trade Action
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
@@ -1487,7 +1487,7 @@ Canceled
 
 ##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
 ##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
-##### notional_value: [`Float`](./lib/snaptrade/models/float.rb)<a id="notional_value-floatlibsnaptrademodelsfloatrb"></a>
+##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)

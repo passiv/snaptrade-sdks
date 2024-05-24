@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
@@ -61,7 +61,7 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
-  private Action action;
+  private ActionStrict action;
 
   public static final String SERIALIZED_NAME_ORDER_TYPE = "order_type";
   @SerializedName(SERIALIZED_NAME_ORDER_TYPE)
@@ -89,7 +89,7 @@ public class ManualTradeForm {
 
   public static final String SERIALIZED_NAME_NOTIONAL_VALUE = "notional_value";
   @SerializedName(SERIALIZED_NAME_NOTIONAL_VALUE)
-  private Double notionalValue;
+  private Object notionalValue = null;
 
   public ManualTradeForm() {
   }
@@ -123,7 +123,7 @@ public class ManualTradeForm {
   }
 
 
-  public ManualTradeForm action(Action action) {
+  public ManualTradeForm action(ActionStrict action) {
     
     
     
@@ -139,12 +139,12 @@ public class ManualTradeForm {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Action getAction() {
+  public ActionStrict getAction() {
     return action;
   }
 
 
-  public void setAction(Action action) {
+  public void setAction(ActionStrict action) {
     
     
     
@@ -353,7 +353,7 @@ public class ManualTradeForm {
   }
 
 
-  public ManualTradeForm notionalValue(Double notionalValue) {
+  public ManualTradeForm notionalValue(Object notionalValue) {
     
     
     
@@ -362,28 +362,19 @@ public class ManualTradeForm {
     return this;
   }
 
-  public ManualTradeForm notionalValue(Integer notionalValue) {
-    
-    
-    
-    
-    this.notionalValue = notionalValue.doubleValue();
-    return this;
-  }
-
    /**
-   * Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**
+   * Get notionalValue
    * @return notionalValue
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "100", value = "Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood. Please contact support to get access to place notional trades**")
+  @ApiModelProperty(value = "")
 
-  public Double getNotionalValue() {
+  public Object getNotionalValue() {
     return notionalValue;
   }
 
 
-  public void setNotionalValue(Double notionalValue) {
+  public void setNotionalValue(Object notionalValue) {
     
     
     

@@ -33,6 +33,7 @@ class RequiredUniversalSymbolNullable(TypedDict):
 
     currencies: typing.List[Currency]
 
+
 class OptionalUniversalSymbolNullable(TypedDict, total=False):
     description: typing.Optional[str]
 

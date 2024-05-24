@@ -16,5 +16,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type Action = 'BUY' | 'SELL'
+export type ActionStrict = 'BUY' | 'SELL'
 

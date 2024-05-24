@@ -17,7 +17,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.AccountOrderRecord;
-import com.konfigthis.client.model.Action;
+import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.OrderTypeStrict;
@@ -81,14 +81,14 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        Action action = null;
+        ActionStrict action = null;
         OrderTypeStrict orderType = null;
         Double price = null;
         Double stop = null;
         TimeInForceStrict timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
-        Double notionalValue = null;
+        Object notionalValue = null;
         ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret)
                 .accountId(accountId)
                 .action(action)
@@ -135,14 +135,14 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        Action action = null;
+        ActionStrict action = null;
         OrderTypeStrict orderType = null;
         Double price = null;
         Double stop = null;
         TimeInForceStrict timeInForce = null;
         Double units = null;
         UUID universalSymbolId = null;
-        Double notionalValue = null;
+        Object notionalValue = null;
         AccountOrderRecord response = api.placeForceOrder(userId, userSecret)
                 .accountId(accountId)
                 .action(action)

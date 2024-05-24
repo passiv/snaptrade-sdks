@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Symbol** | **string** |  | [optional] 
 **UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
-**_Action** | **ModelAction** |  | [optional] 
+**_Action** | **string** | Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE | [optional] 
 **TotalQuantity** | **double?** | Trade Units. Cannot work with notional value. | [optional] 
 **OpenQuantity** | **double?** | Trade Units | [optional] 
 **CanceledQuantity** | **double?** | Trade Units | [optional] 

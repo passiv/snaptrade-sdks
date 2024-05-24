@@ -44,8 +44,8 @@ class SessionEvent(
             ):
                 
                 @schemas.classproperty
-                def CONNECTION_FAILED(cls):
-                    return cls("CONNECTION_FAILED")
+                def OAUTH_REDIRECT(cls):
+                    return cls("OAUTH_REDIRECT")
                 
                 @schemas.classproperty
                 def DISCLAIMER_ACCEPTED(cls):
@@ -56,20 +56,52 @@ class SessionEvent(
                     return cls("BROKERAGE_CONNECTION_INITIATED")
                 
                 @schemas.classproperty
+                def BROKERAGE_RECONNECT_INITIATED(cls):
+                    return cls("BROKERAGE_RECONNECT_INITIATED")
+                
+                @schemas.classproperty
                 def BROKERAGE_AUTHENTICATION(cls):
                     return cls("BROKERAGE_AUTHENTICATION")
                 
                 @schemas.classproperty
-                def MFA_AUTHORIZATION(cls):
-                    return cls("MFA_AUTHORIZATION")
+                def OAUTH_BROKERAGE_AUTHENTICATION(cls):
+                    return cls("OAUTH_BROKERAGE_AUTHENTICATION")
+                
+                @schemas.classproperty
+                def MFA_REQUESTED(cls):
+                    return cls("MFA_REQUESTED")
+                
+                @schemas.classproperty
+                def MFA_SUBMITTED(cls):
+                    return cls("MFA_SUBMITTED")
+                
+                @schemas.classproperty
+                def MFA_CHOICE_REQUESTED(cls):
+                    return cls("MFA_CHOICE_REQUESTED")
+                
+                @schemas.classproperty
+                def MFA_CHOICE_SUBMITTED(cls):
+                    return cls("MFA_CHOICE_SUBMITTED")
                 
                 @schemas.classproperty
                 def CONNECTION_SUCCESSFUL(cls):
                     return cls("CONNECTION_SUCCESSFUL")
                 
                 @schemas.classproperty
+                def CONNECTION_FAILED(cls):
+                    return cls("CONNECTION_FAILED")
+                
+                @schemas.classproperty
                 def PARTNER_REDIRECT(cls):
                     return cls("PARTNER_REDIRECT")
+                
+                @schemas.classproperty
+                def CONNECTION_ABORTED(cls):
+                    return cls("CONNECTION_ABORTED")
+                
+                @schemas.classproperty
+                def SESSION_STARTED(cls):
+                    return cls("SESSION_STARTED")
             session_id = schemas.UUIDSchema
             user_id = schemas.StrSchema
             created_date = schemas.StrSchema

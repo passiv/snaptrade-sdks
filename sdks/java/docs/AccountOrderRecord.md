@@ -13,7 +13,7 @@ Record of order in brokerageaccount
 |**symbol** | **UUID** |  |  [optional] |
 |**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  |  [optional] |
-|**action** | **Action** |  |  [optional] |
+|**action** | **String** | Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE |  [optional] |
 |**totalQuantity** | **Double** | Trade Units. Cannot work with notional value. |  [optional] |
 |**openQuantity** | **Double** | Trade Units |  [optional] |
 |**canceledQuantity** | **Double** | Trade Units |  [optional] |
