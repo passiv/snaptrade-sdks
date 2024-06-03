@@ -155,7 +155,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.21
+    version: 5.0.22
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
