@@ -35,16 +35,16 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeRegisterUserRequestBody" /> class.
         /// </summary>
-        /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
+        /// <param name="userId">SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable..</param>
         public SnapTradeRegisterUserRequestBody(string userId = default(string))
         {
             this.UserId = userId;
         }
 
         /// <summary>
-        /// SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+        /// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
         /// </summary>
-        /// <value>SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user</value>
+        /// <value>SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.</value>
         [DataMember(Name = "userId", EmitDefaultValue = false)]
         public string UserId { get; set; }
 

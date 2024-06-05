@@ -4411,10 +4411,13 @@ components:
       x-konfig-original-example: SNAPTRADETEST
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-ClientID
     UserID:
-      description: SnapTrade User ID
-      example: John.doe@snaptrade.com
+      description: "SnapTrade User ID. This is chosen by the API partner and can be\
+        \ any string that is a) unique to the user, and b) immutable for the user.\
+        \ It is recommended to NOT use email addresses for this property because they\
+        \ are usually not immutable."
+      example: snaptrade-user-123
       type: string
-      x-konfig-original-example: John.doe@snaptrade.com
+      x-konfig-original-example: snaptrade-user-123
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserID
     UserSecret:
       description: SnapTrade User Secret (generated when registering user)
@@ -5039,8 +5042,10 @@ components:
         userId: snaptrade-user-123
       properties:
         userId:
-          description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any\
-            \ string, as long as it's unique to a user"
+          description: "SnapTrade User ID. This is chosen by the API partner and can\
+            \ be any string that is a) unique to the user, and b) immutable for the\
+            \ user. It is recommended to NOT use email addresses for this property\
+            \ because they are usually not immutable."
           example: snaptrade-user-123
           type: string
           x-konfig-original-example: snaptrade-user-123
@@ -5099,8 +5104,10 @@ components:
           type: string
       type: object
     SnapTradeUserID:
-      description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any string,\
-        \ as long as it's unique to a user"
+      description: "SnapTrade User ID. This is chosen by the API partner and can be\
+        \ any string that is a) unique to the user, and b) immutable for the user.\
+        \ It is recommended to NOT use email addresses for this property because they\
+        \ are usually not immutable."
       example: snaptrade-user-123
       type: string
       x-konfig-original-example: snaptrade-user-123
@@ -5198,8 +5205,10 @@ components:
         userId: snaptrade-user-123
       properties:
         userId:
-          description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any\
-            \ string, as long as it's unique to a user"
+          description: "SnapTrade User ID. This is chosen by the API partner and can\
+            \ be any string that is a) unique to the user, and b) immutable for the\
+            \ user. It is recommended to NOT use email addresses for this property\
+            \ because they are usually not immutable."
           example: snaptrade-user-123
           type: string
           x-konfig-original-example: snaptrade-user-123
@@ -5243,8 +5252,10 @@ components:
           x-konfig-original-example: deleted
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-DeleteUserResponse-properties-status
         userId:
-          description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any\
-            \ string, as long as it's unique to a user"
+          description: "SnapTrade User ID. This is chosen by the API partner and can\
+            \ be any string that is a) unique to the user, and b) immutable for the\
+            \ user. It is recommended to NOT use email addresses for this property\
+            \ because they are usually not immutable."
           example: snaptrade-user-123
           type: string
           x-konfig-original-example: snaptrade-user-123
@@ -5574,8 +5585,10 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         user_id:
-          description: "SnapTrade User ID. Provided by SnapTrade Partner. Can be any\
-            \ string, as long as it's unique to a user"
+          description: "SnapTrade User ID. This is chosen by the API partner and can\
+            \ be any string that is a) unique to the user, and b) immutable for the\
+            \ user. It is recommended to NOT use email addresses for this property\
+            \ because they are usually not immutable."
           example: snaptrade-user-123
           type: string
           x-konfig-original-example: snaptrade-user-123
@@ -8158,7 +8171,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UserID:
-      example: John.doe@snaptrade.com
+      example: snaptrade-user-123
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UserSecret:

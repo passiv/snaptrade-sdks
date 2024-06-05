@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="DeleteUserResponse" /> class.
         /// </summary>
         /// <param name="status">Delete status.</param>
-        /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
+        /// <param name="userId">SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable..</param>
         public DeleteUserResponse(string status = default(string), string userId = default(string)) : base()
         {
             this.Status = status;
@@ -52,9 +52,9 @@ namespace SnapTrade.Net.Model
         public string Status { get; set; }
 
         /// <summary>
-        /// SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+        /// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
         /// </summary>
-        /// <value>SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user</value>
+        /// <value>SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.</value>
         [DataMember(Name = "userId", EmitDefaultValue = false)]
         public string UserId { get; set; }
 
