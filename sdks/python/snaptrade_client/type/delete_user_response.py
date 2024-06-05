@@ -23,7 +23,7 @@ class OptionalDeleteUserResponse(TypedDict, total=False):
     # Delete status
     status: str
 
-    # SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+    # SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     userId: str
 
 class DeleteUserResponse(RequiredDeleteUserResponse, OptionalDeleteUserResponse):

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.21-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.21)
+[![npm](https://img.shields.io/badge/npm-v9.0.22-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.22)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -188,7 +188,7 @@ the data returned over the more fine-grained **positions**, **orders** and **bal
 ```typescript
 const getAllUserHoldingsResponse =
   await snaptrade.accountInformation.getAllUserHoldings({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     brokerageAuthorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
@@ -226,7 +226,7 @@ A list of account balances for the specified account (one per currency that the 
 ```typescript
 const getUserAccountBalanceResponse =
   await snaptrade.accountInformation.getUserAccountBalance({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
@@ -266,7 +266,7 @@ including the total account market value.
 ```typescript
 const getUserAccountDetailsResponse =
   await snaptrade.accountInformation.getUserAccountDetails({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
@@ -304,7 +304,7 @@ Fetch all recent orders from a user's account.
 ```typescript
 const getUserAccountOrdersResponse =
   await snaptrade.accountInformation.getUserAccountOrders({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     state: "all",
     days: 30,
@@ -352,7 +352,7 @@ Returns a list of positions in the specified account.
 ```typescript
 const getUserAccountPositionsResponse =
   await snaptrade.accountInformation.getUserAccountPositions({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   });
@@ -394,7 +394,7 @@ data returned over the more fine-grained **positions**, **orders** and **balance
 const getUserHoldingsResponse =
   await snaptrade.accountInformation.getUserHoldings({
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -431,7 +431,7 @@ Get a list of all Account objects for the authenticated SnapTrade user.
 ```typescript
 const listUserAccountsResponse =
   await snaptrade.accountInformation.listUserAccounts({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -464,7 +464,7 @@ Updates various properties of a specified account.
 ```typescript
 const updateUserAccountResponse =
   await snaptrade.accountInformation.updateUserAccount({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "accountId_example",
   });
@@ -525,7 +525,7 @@ Deletes a user you've registered over the SnapTrade API, and any data associated
 ```typescript
 const deleteSnapTradeUserResponse =
   await snaptrade.authentication.deleteSnapTradeUser({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
   });
 ```
 
@@ -556,7 +556,7 @@ JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
 
 ```typescript
 const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
 });
 ```
@@ -609,7 +609,7 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 ```typescript
 const loginSnapTradeUserResponse =
   await snaptrade.authentication.loginSnapTradeUser({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     broker: "ALPACA",
     immediateRedirect: true,
@@ -682,7 +682,7 @@ const registerSnapTradeUserResponse =
 
 ##### userId: `string`<a id="userid-string"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\\\'s unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -717,7 +717,7 @@ const resetSnapTradeUserSecretResponse =
 
 ##### userId: `string`<a id="userid-string"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it\\\'s unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
@@ -746,7 +746,7 @@ Returns a single brokerage authorization object for the specified ID.
 const detailBrokerageAuthorizationResponse =
   await snaptrade.connections.detailBrokerageAuthorization({
     authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -783,7 +783,7 @@ Returns a list of Brokerage Authorization objects for the user
 ```typescript
 const listBrokerageAuthorizationsResponse =
   await snaptrade.connections.listBrokerageAuthorizations({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -817,7 +817,7 @@ Deletes a specified brokerage authorization given by the ID.
 const removeBrokerageAuthorizationResponse =
   await snaptrade.connections.removeBrokerageAuthorization({
     authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -891,7 +891,7 @@ Creates an option strategy object that will be used to place an option strategy 
 
 ```typescript
 const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   accountId: "accountId_example",
   underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -943,7 +943,7 @@ Returns the option chain for the specified symbol in the specified account.
 
 ```typescript
 const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   accountId: "accountId_example",
   symbol: "symbol_example",
@@ -987,7 +987,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 ```typescript
 const getOptionsStrategyQuoteResponse =
   await snaptrade.options.getOptionsStrategyQuote({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "accountId_example",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1030,7 +1030,7 @@ Returns a list of Options Positions.
 
 ```typescript
 const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   accountId: "accountId_example",
 });
@@ -1068,7 +1068,7 @@ Places the option strategy order and returns the order record received from the 
 ```typescript
 const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
   {
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1401,7 +1401,7 @@ provided search string, matching on ticker and name.
 ```typescript
 const symbolSearchUserAccountResponse =
   await snaptrade.referenceData.symbolSearchUserAccount({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     substring: "apple",
@@ -1444,7 +1444,7 @@ This will only work if the order has not yet been executed.
 ```typescript
 const cancelUserAccountOrderResponse =
   await snaptrade.trading.cancelUserAccountOrder({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1484,7 +1484,7 @@ Return the trade object and it's impact on the account for the specified order.
 
 ```typescript
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   action: "BUY",
@@ -1552,7 +1552,7 @@ Returns live quote(s) from the brokerage for the specified symbol(s).
 ```typescript
 const getUserAccountQuotesResponse =
   await snaptrade.trading.getUserAccountQuotes({
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
     symbols: "symbols_example",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -1598,7 +1598,7 @@ Places a specified trade in the specified account.
 
 ```typescript
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   action: "BUY",
@@ -1668,7 +1668,7 @@ returns the status of the order from the brokerage.
 ```typescript
 const placeOrderResponse = await snaptrade.trading.placeOrder({
   tradeId: "tradeId_example",
-  userId: "John.doe@snaptrade.com",
+  userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
   wait_to_confirm: true,
 });
@@ -1717,7 +1717,7 @@ const getActivitiesResponse =
     brokerageAuthorizations:
       "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     type: "DIVIDEND",
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```
@@ -1773,7 +1773,7 @@ const getReportingCustomRangeResponse =
       "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     detailed: true,
     frequency: "monthly",
-    userId: "John.doe@snaptrade.com",
+    userId: "snaptrade-user-123",
     userSecret: "USERSECRET123",
   });
 ```

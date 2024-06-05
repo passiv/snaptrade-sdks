@@ -142,7 +142,7 @@ namespace SnapTrade.Net.Model
         /// <param name="id">id.</param>
         /// <param name="sessionEventType">sessionEventType.</param>
         /// <param name="sessionId">sessionId.</param>
-        /// <param name="userId">SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user.</param>
+        /// <param name="userId">SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable..</param>
         /// <param name="createdDate">Time.</param>
         /// <param name="brokerageStatusCode">brokerageStatusCode.</param>
         /// <param name="brokerageAuthorizationId">brokerageAuthorizationId.</param>
@@ -171,9 +171,9 @@ namespace SnapTrade.Net.Model
         public string SessionId { get; set; }
 
         /// <summary>
-        /// SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user
+        /// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
         /// </summary>
-        /// <value>SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it&#39;s unique to a user</value>
+        /// <value>SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.</value>
         [DataMember(Name = "user_id", EmitDefaultValue = false)]
         public string UserId { get; set; }
 

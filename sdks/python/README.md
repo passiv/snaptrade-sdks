@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.19-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.19)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.20-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.20)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -74,7 +74,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.19
+pip install snaptrade-python-sdk==11.0.20
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -146,7 +146,7 @@ async def main():
         # List all accounts for the user, plus balances, positions, and orders for each account.
         get_all_user_holdings_response = (
             await snaptrade.account_information.aget_all_user_holdings(
-                user_id="John.doe@snaptrade.com",
+                user_id="snaptrade-user-123",
                 user_secret="USERSECRET123",
                 brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
             )
@@ -187,7 +187,7 @@ the data returned over the more fine-grained **positions**, **orders** and **bal
 
 ```python
 get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
@@ -224,7 +224,7 @@ A list of account balances for the specified account (one per currency that the 
 ```python
 get_user_account_balance_response = (
     snaptrade.account_information.get_user_account_balance(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
@@ -264,7 +264,7 @@ including the total account market value.
 ```python
 get_user_account_details_response = (
     snaptrade.account_information.get_user_account_details(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
@@ -302,7 +302,7 @@ Fetch all recent orders from a user's account.
 ```python
 get_user_account_orders_response = (
     snaptrade.account_information.get_user_account_orders(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
@@ -350,7 +350,7 @@ Returns a list of positions in the specified account.
 ```python
 get_user_account_positions_response = (
     snaptrade.account_information.get_user_account_positions(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
@@ -391,7 +391,7 @@ data returned over the more fine-grained **positions**, **orders** and **balance
 ```python
 get_user_holdings_response = snaptrade.account_information.get_user_holdings(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
 )
 ```
@@ -426,7 +426,7 @@ Get a list of all Account objects for the authenticated SnapTrade user.
 
 ```python
 list_user_accounts_response = snaptrade.account_information.list_user_accounts(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
 )
 ```
@@ -457,7 +457,7 @@ Updates various properties of a specified account.
 
 ```python
 update_user_account_response = snaptrade.account_information.update_user_account(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="accountId_example",
 )
@@ -515,7 +515,7 @@ Deletes a user you've registered over the SnapTrade API, and any data associated
 
 ```python
 delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_user(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
 )
 ```
 
@@ -545,7 +545,7 @@ JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
 
 ```python
 get_user_jwt_response = snaptrade.authentication.get_user_jwt(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
 )
 ```
@@ -598,7 +598,7 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 
 ```python
 login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     broker="ALPACA",
     immediate_redirect=True,
@@ -668,7 +668,7 @@ register_snap_trade_user_response = snaptrade.authentication.register_snap_trade
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -706,7 +706,7 @@ reset_snap_trade_user_secret_response = (
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
-SnapTrade User ID. Provided by SnapTrade Partner. Can be any string, as long as it's unique to a user
+SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
@@ -737,7 +737,7 @@ Returns a single brokerage authorization object for the specified ID.
 detail_brokerage_authorization_response = (
     snaptrade.connections.detail_brokerage_authorization(
         authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
     )
 )
@@ -774,7 +774,7 @@ Returns a list of Brokerage Authorization objects for the user
 ```python
 list_brokerage_authorizations_response = (
     snaptrade.connections.list_brokerage_authorizations(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
     )
 )
@@ -807,7 +807,7 @@ Deletes a specified brokerage authorization given by the ID.
 ```python
 snaptrade.connections.remove_brokerage_authorization(
     authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
 )
 ```
@@ -882,7 +882,7 @@ get_option_strategy_response = snaptrade.options.get_option_strategy(
         }
     ],
     strategy_type="CUSTOM",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="accountId_example",
 )
@@ -927,7 +927,7 @@ Returns the option chain for the specified symbol in the specified account.
 
 ```python
 get_options_chain_response = snaptrade.options.get_options_chain(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="accountId_example",
     symbol="symbol_example",
@@ -969,7 +969,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 
 ```python
 get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="accountId_example",
     option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1011,7 +1011,7 @@ Returns a list of Options Positions.
 
 ```python
 list_option_holdings_response = snaptrade.options.list_option_holdings(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="accountId_example",
 )
@@ -1049,7 +1049,7 @@ Places the option strategy order and returns the order record received from the 
 place_option_strategy_response = snaptrade.options.place_option_strategy(
     order_type="Limit",
     time_in_force="FOK",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1366,7 +1366,7 @@ provided search string, matching on ticker and name.
 ```python
 symbol_search_user_account_response = (
     snaptrade.reference_data.symbol_search_user_account(
-        user_id="John.doe@snaptrade.com",
+        user_id="snaptrade-user-123",
         user_secret="USERSECRET123",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         substring="apple",
@@ -1411,7 +1411,7 @@ This will only work if the order has not yet been executed.
 
 ```python
 cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1455,7 +1455,7 @@ Return the trade object and it's impact on the account for the specified order.
 
 ```python
 get_order_impact_response = snaptrade.trading.get_order_impact(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     action="BUY",
@@ -1516,7 +1516,7 @@ Returns live quote(s) from the brokerage for the specified symbol(s).
 
 ```python
 get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     symbols="symbols_example",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -1562,7 +1562,7 @@ Places a specified trade in the specified account.
 
 ```python
 place_force_order_response = snaptrade.trading.place_force_order(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     action="BUY",
@@ -1626,7 +1626,7 @@ returns the status of the order from the brokerage.
 ```python
 place_order_response = snaptrade.trading.place_order(
     trade_id="tradeId_example",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     wait_to_confirm=True,
 )
@@ -1669,7 +1669,7 @@ Returns activities (transactions) for a user. Specifying start and end date is h
 
 ```python
 get_activities_response = snaptrade.transactions_and_reporting.get_activities(
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     start_date="2022-01-24",
     end_date="2022-01-24",
@@ -1724,7 +1724,7 @@ Returns performance information (contributions, dividends, rate of return, etc) 
 get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_reporting_custom_range(
     start_date="2022-01-24",
     end_date="2022-01-24",
-    user_id="John.doe@snaptrade.com",
+    user_id="snaptrade-user-123",
     user_secret="USERSECRET123",
     accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     detailed=True,

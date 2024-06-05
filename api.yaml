@@ -2817,9 +2817,9 @@ components:
       type: string
       example: SNAPTRADETEST
     UserID:
-      description: SnapTrade User ID
+      description: SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
       type: string
-      example: John.doe@snaptrade.com
+      example: snaptrade-user-123
     UserSecret:
       description: SnapTrade User Secret (generated when registering user)
       type: string
@@ -3151,8 +3151,7 @@ components:
             - v2
             - v3
     SnapTradeUserID:
-      description: SnapTrade User ID. Provided by SnapTrade Partner. Can be any
-        string, as long as it's unique to a user
+      description: SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
       type: string
       example: snaptrade-user-123
     SnapTradeUserSecret:
