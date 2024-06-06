@@ -113,7 +113,7 @@ async function main() {
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
-  const userId = uuid();
+  const userId = getUserId();
   const { userSecret } = (
     await snaptrade.authentication.registerSnapTradeUser({
       userId,
