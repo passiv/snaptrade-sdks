@@ -179,6 +179,8 @@ main();
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+⚠️ This function is deprecated. Instead, use [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings) for each `accountId`.
+
 Lists balances, positions and orders for the specified account. The data returned is similar to
 the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
 
