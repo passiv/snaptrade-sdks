@@ -2668,6 +2668,9 @@ components:
         institution_name:
           type: string
           example: Alpaca
+        balance:
+          nullable: true
+          $ref: "#/components/schemas/AccountBalance"
         meta:
           type: object
           example:
