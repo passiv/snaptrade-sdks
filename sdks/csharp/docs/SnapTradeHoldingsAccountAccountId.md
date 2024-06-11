@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Name** | **string** |  | [optional] 
 **Number** | **string** |  | [optional] 
 **InstitutionName** | **string** |  | [optional] 
+**Balance** | [**AccountBalanceNullable**](AccountBalanceNullable.md) |  | [optional] 
 **Meta** | **Dictionary&lt;string, Object&gt;** |  | [optional] 
 **CashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) |  | [optional] 
 **CreatedDate** | **string** | Time | [optional] 

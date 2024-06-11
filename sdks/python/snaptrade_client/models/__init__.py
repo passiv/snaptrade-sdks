@@ -13,6 +13,7 @@
 
 from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_balance import AccountBalance
+from snaptrade_client.model.account_balance_nullable import AccountBalanceNullable
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.model.account_ids import AccountIDs

@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.account_balance_nullable import AccountBalanceNullable
 from snaptrade_client.type.cash_restriction import CashRestriction
 from snaptrade_client.type.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta
 
@@ -33,6 +34,8 @@ class OptionalSnapTradeHoldingsAccountAccountId(TypedDict, total=False):
     number: str
 
     institution_name: str
+
+    balance: typing.Optional[AccountBalanceNullable]
 
     meta: SnapTradeHoldingsAccountAccountIdMeta
 

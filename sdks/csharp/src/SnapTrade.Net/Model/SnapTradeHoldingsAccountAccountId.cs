@@ -41,10 +41,11 @@ namespace SnapTrade.Net.Model
         /// <param name="name">name.</param>
         /// <param name="number">number.</param>
         /// <param name="institutionName">institutionName.</param>
+        /// <param name="balance">balance.</param>
         /// <param name="meta">meta.</param>
         /// <param name="cashRestrictions">cashRestrictions.</param>
         /// <param name="createdDate">Time.</param>
-        public SnapTradeHoldingsAccountAccountId(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), string createdDate = default(string)) : base()
+        public SnapTradeHoldingsAccountAccountId(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), AccountBalanceNullable balance = default(AccountBalanceNullable), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), string createdDate = default(string)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -52,6 +53,7 @@ namespace SnapTrade.Net.Model
             this.Name = name;
             this.Number = number;
             this.InstitutionName = institutionName;
+            this.Balance = balance;
             this.Meta = meta;
             this.CashRestrictions = cashRestrictions;
             this.CreatedDate = createdDate;
@@ -95,6 +97,12 @@ namespace SnapTrade.Net.Model
         public string InstitutionName { get; set; }
 
         /// <summary>
+        /// Gets or Sets Balance
+        /// </summary>
+        [DataMember(Name = "balance", EmitDefaultValue = true)]
+        public AccountBalanceNullable Balance { get; set; }
+
+        /// <summary>
         /// Gets or Sets Meta
         /// </summary>
         [DataMember(Name = "meta", EmitDefaultValue = false)]
@@ -134,6 +142,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  InstitutionName: ").Append(InstitutionName).Append("\n");
+            sb.Append("  Balance: ").Append(Balance).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
@@ -204,6 +213,11 @@ namespace SnapTrade.Net.Model
                     this.InstitutionName.Equals(input.InstitutionName))
                 ) && base.Equals(input) && 
                 (
+                    this.Balance == input.Balance ||
+                    (this.Balance != null &&
+                    this.Balance.Equals(input.Balance))
+                ) && base.Equals(input) && 
+                (
                     this.Meta == input.Meta ||
                     this.Meta != null &&
                     input.Meta != null &&
@@ -255,6 +269,10 @@ namespace SnapTrade.Net.Model
                 if (this.InstitutionName != null)
                 {
                     hashCode = (hashCode * 59) + this.InstitutionName.GetHashCode();
+                }
+                if (this.Balance != null)
+                {
+                    hashCode = (hashCode * 59) + this.Balance.GetHashCode();
                 }
                 if (this.Meta != null)
                 {

@@ -84,6 +84,7 @@ export * from './session-event';
 export * from './snap-trade-apidisclaimer-accept-status';
 export * from './snap-trade-holdings-account';
 export * from './snap-trade-holdings-account-account-id';
+export * from './snap-trade-holdings-account-account-id-balance';
 export * from './snap-trade-holdings-total-value';
 export * from './snap-trade-login-user-request-body';
 export * from './snap-trade-register-user-request-body';

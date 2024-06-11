@@ -3156,6 +3156,10 @@ components:
           status: null
         account:
           number: Q6542138443
+          balance:
+            total:
+              amount: 15363.23
+              currency: USD
           brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
           meta:
             type: Margin
@@ -4109,6 +4113,10 @@ components:
       description: Holdings with account ID
       example:
         number: Q6542138443
+        balance:
+          total:
+            amount: 15363.23
+            currency: USD
         brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
         meta:
           type: Margin
@@ -4165,6 +4173,8 @@ components:
           type: string
           x-konfig-original-example: Alpaca
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-institution_name
+        balance:
+          $ref: '#/components/schemas/AccountBalanceNullable'
         meta:
           additionalProperties: true
           example:
@@ -4188,6 +4198,9 @@ components:
           x-konfig-original-example: 2022-01-21T20:11:19.217Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
       type: object
+      x-konfig-properties:
+        balance:
+          nullable: true
     SnapTradeHoldingsTotalValue:
       additionalProperties: true
       description: Summed value of account positions and cash balances
@@ -10074,6 +10087,16 @@ components:
           x-konfig-original-example: US Dollar
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-name
       type: object
+    AccountBalanceNullable:
+      description: Balance of the account
+      example:
+        total:
+          amount: 15363.23
+          currency: USD
+      nullable: true
+      properties:
+        total:
+          $ref: '#/components/schemas/AmountNullable'
     FigiInstrumentNullable:
       additionalProperties: true
       description: Open FIGI Identifiers
