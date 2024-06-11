@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.AccountBalanceNullable;
 import com.konfigthis.client.model.CashRestriction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -80,6 +81,10 @@ public class SnapTradeHoldingsAccountAccountId {
   public static final String SERIALIZED_NAME_INSTITUTION_NAME = "institution_name";
   @SerializedName(SERIALIZED_NAME_INSTITUTION_NAME)
   private String institutionName;
+
+  public static final String SERIALIZED_NAME_BALANCE = "balance";
+  @SerializedName(SERIALIZED_NAME_BALANCE)
+  private AccountBalanceNullable balance;
 
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
@@ -270,6 +275,35 @@ public class SnapTradeHoldingsAccountAccountId {
   }
 
 
+  public SnapTradeHoldingsAccountAccountId balance(AccountBalanceNullable balance) {
+    
+    
+    
+    
+    this.balance = balance;
+    return this;
+  }
+
+   /**
+   * Get balance
+   * @return balance
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountBalanceNullable getBalance() {
+    return balance;
+  }
+
+
+  public void setBalance(AccountBalanceNullable balance) {
+    
+    
+    
+    this.balance = balance;
+  }
+
+
   public SnapTradeHoldingsAccountAccountId meta(Map<String, Object> meta) {
     
     
@@ -433,6 +467,7 @@ public class SnapTradeHoldingsAccountAccountId {
         Objects.equals(this.name, snapTradeHoldingsAccountAccountId.name) &&
         Objects.equals(this.number, snapTradeHoldingsAccountAccountId.number) &&
         Objects.equals(this.institutionName, snapTradeHoldingsAccountAccountId.institutionName) &&
+        Objects.equals(this.balance, snapTradeHoldingsAccountAccountId.balance) &&
         Objects.equals(this.meta, snapTradeHoldingsAccountAccountId.meta) &&
         Objects.equals(this.cashRestrictions, snapTradeHoldingsAccountAccountId.cashRestrictions) &&
         Objects.equals(this.createdDate, snapTradeHoldingsAccountAccountId.createdDate)&&
@@ -445,7 +480,7 @@ public class SnapTradeHoldingsAccountAccountId {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, meta, cashRestrictions, createdDate, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, balance, meta, cashRestrictions, createdDate, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -465,6 +500,7 @@ public class SnapTradeHoldingsAccountAccountId {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    institutionName: ").append(toIndentedString(institutionName)).append("\n");
+    sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
@@ -497,6 +533,7 @@ public class SnapTradeHoldingsAccountAccountId {
     openapiFields.add("name");
     openapiFields.add("number");
     openapiFields.add("institution_name");
+    openapiFields.add("balance");
     openapiFields.add("meta");
     openapiFields.add("cash_restrictions");
     openapiFields.add("created_date");
@@ -534,6 +571,10 @@ public class SnapTradeHoldingsAccountAccountId {
       }
       if ((jsonObj.get("institution_name") != null && !jsonObj.get("institution_name").isJsonNull()) && !jsonObj.get("institution_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_name").toString()));
+      }
+      // validate the optional field `balance`
+      if (jsonObj.get("balance") != null && !jsonObj.get("balance").isJsonNull()) {
+        AccountBalanceNullable.validateJsonObject(jsonObj.getAsJsonObject("balance"));
       }
       if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonNull()) {
         JsonArray jsonArraycashRestrictions = jsonObj.getAsJsonArray("cash_restrictions");

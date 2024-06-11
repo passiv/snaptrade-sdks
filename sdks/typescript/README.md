@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.22-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.22)
+[![npm](https://img.shields.io/badge/npm-v9.0.23-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.23)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -113,7 +113,7 @@ async function main() {
   console.log("status:", status.data);
 
   // 3) Create a new user on SnapTrade
-  const userId = getUserId();
+  const userId = uuid();
   const { userSecret } = (
     await snaptrade.authentication.registerSnapTradeUser({
       userId,
