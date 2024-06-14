@@ -205,6 +205,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/refresh-POST': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}-DELETE': {
         parameters: [
             {

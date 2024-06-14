@@ -21,7 +21,17 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { BrokerageAuthorization } from '../models';
 // @ts-ignore
+import { BrokerageAuthorizationRefreshConfirmation } from '../models';
+// @ts-ignore
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
+// @ts-ignore
+import { Model401FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model402BrokerageAuthDisabledResponse } from '../models';
+// @ts-ignore
+import { Model403FeatureNotEnabledResponse } from '../models';
+// @ts-ignore
+import { Model404FailedRequestResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -143,6 +153,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
                 configuration,
                 pathTemplate: '/authorizations',
                 httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+         * @summary Refresh holdings for a connection
+         * @param {string} authorizationId The ID of a brokerage authorization object.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refreshBrokerageAuthorization: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('refreshBrokerageAuthorization', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('refreshBrokerageAuthorization', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('refreshBrokerageAuthorization', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}/refresh`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/refresh',
+                httpMethod: 'POST'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -307,6 +379,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+         * @summary Refresh holdings for a connection
+         * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationRefreshConfirmation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.refreshBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Deletes a specified brokerage authorization given by the ID.
          * @summary Delete brokerage authorization
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
@@ -357,6 +440,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         listBrokerageAuthorizations(requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<BrokerageAuthorization>> {
             return localVarFp.listBrokerageAuthorizations(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+         * @summary Refresh holdings for a connection
+         * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationRefreshConfirmation> {
+            return localVarFp.refreshBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Deletes a specified brokerage authorization given by the ID.
@@ -429,6 +522,36 @@ export type ConnectionsApiListBrokerageAuthorizationsRequest = {
     * 
     * @type {string}
     * @memberof ConnectionsApiListBrokerageAuthorizations
+    */
+    readonly userSecret: string
+    
+}
+
+/**
+ * Request parameters for refreshBrokerageAuthorization operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiRefreshBrokerageAuthorizationRequest
+ */
+export type ConnectionsApiRefreshBrokerageAuthorizationRequest = {
+    
+    /**
+    * The ID of a brokerage authorization object.
+    * @type {string}
+    * @memberof ConnectionsApiRefreshBrokerageAuthorization
+    */
+    readonly authorizationId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiRefreshBrokerageAuthorization
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiRefreshBrokerageAuthorization
     */
     readonly userSecret: string
     
@@ -523,6 +646,18 @@ export class ConnectionsApiGenerated extends BaseAPI {
      */
     public listBrokerageAuthorizations(requestParameters: ConnectionsApiListBrokerageAuthorizationsRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).listBrokerageAuthorizations(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+     * @summary Refresh holdings for a connection
+     * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public refreshBrokerageAuthorization(requestParameters: ConnectionsApiRefreshBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).refreshBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

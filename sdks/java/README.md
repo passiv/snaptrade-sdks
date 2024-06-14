@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.21-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.21)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.22-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.22)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.21</version>
+  <version>5.0.22</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.21"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.22"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.21.jar`
+* `target/snaptrade-java-sdk-5.0.22.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -202,6 +202,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**resetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
 *ConnectionsApi* | [**detailBrokerageAuthorization**](docs/ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the User
+*ConnectionsApi* | [**refreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 *ConnectionsApi* | [**removeBrokerageAuthorization**](docs/ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization
 *ConnectionsApi* | [**sessionEvents**](docs/ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user
 *OptionsApi* | [**getOptionStrategy**](docs/OptionsApi.md#getOptionStrategy) | **POST** /accounts/{accountId}/optionStrategy | Create options strategy
@@ -246,6 +247,7 @@ Class | Method | HTTP request | Description
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
+ - [BrokerageAuthorizationRefreshConfirmation](docs/BrokerageAuthorizationRefreshConfirmation.md)
  - [BrokerageAuthorizationType](docs/BrokerageAuthorizationType.md)
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)

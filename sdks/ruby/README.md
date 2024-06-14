@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.22-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.22)
+[![npm](https://img.shields.io/badge/gem-v2.0.23-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.23)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -36,6 +36,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
+  * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
@@ -69,7 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.22'
+gem 'snaptrade', '~> 2.0.23'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -704,6 +705,41 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
+
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.connections.refresh_brokerage_authorization(
+  authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  user_id: "snaptrade-user-123",
+  user_secret: "USERSECRET123",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `String`<a id="authorization_id-string"></a>
+The ID of a brokerage authorization object.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationRefreshConfirmation](./lib/snaptrade/models/brokerage_authorization_refresh_confirmation.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/refresh` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

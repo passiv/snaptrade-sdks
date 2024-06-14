@@ -52,6 +52,7 @@ from snaptrade_client.schemas import (
     unset,
 )
 
+
 @dataclass
 class MappedArgs:
     body: typing.Any = None
@@ -1152,7 +1153,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'Konfig/11.0.21/python'
+        self.user_agent = 'Konfig/11.0.22/python'
 
     def __enter__(self):
         return self

@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.21-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.21)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.22-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.22)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -39,6 +39,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
+  * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
@@ -74,7 +75,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.21
+pip install snaptrade-python-sdk==11.0.22
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -793,6 +794,44 @@ list_brokerage_authorizations_response = (
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
+
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+refresh_brokerage_authorization_response = (
+    snaptrade.connections.refresh_brokerage_authorization(
+        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="snaptrade-user-123",
+        user_secret="USERSECRET123",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+The ID of a brokerage authorization object.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`BrokerageAuthorizationRefreshConfirmation`](./snaptrade_client/type/brokerage_authorization_refresh_confirmation.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/refresh` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

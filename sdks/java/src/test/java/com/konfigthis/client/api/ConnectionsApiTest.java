@@ -17,6 +17,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.BrokerageAuthorization;
+import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -72,6 +73,23 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         List<BrokerageAuthorization> response = api.listBrokerageAuthorizations(userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Refresh holdings for a connection
+     *
+     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void refreshBrokerageAuthorizationTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        BrokerageAuthorizationRefreshConfirmation response = api.refreshBrokerageAuthorization(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.23-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.23)
+[![npm](https://img.shields.io/badge/npm-v9.0.24-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.24)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -35,6 +35,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.resetSnapTradeUserSecret`](#snaptradeauthenticationresetsnaptradeusersecret)
   * [`snaptrade.connections.detailBrokerageAuthorization`](#snaptradeconnectionsdetailbrokerageauthorization)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
+  * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
@@ -801,6 +802,44 @@ const listBrokerageAuthorizationsResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
+
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const refreshBrokerageAuthorizationResponse =
+  await snaptrade.connections.refreshBrokerageAuthorization({
+    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "snaptrade-user-123",
+    userSecret: "USERSECRET123",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorizationId: `string`<a id="authorizationid-string"></a>
+
+The ID of a brokerage authorization object.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationRefreshConfirmation](./models/brokerage-authorization-refresh-confirmation.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/refresh` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

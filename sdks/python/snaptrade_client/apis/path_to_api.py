@@ -10,6 +10,7 @@ from snaptrade_client.apis.paths.snap_trade_encrypted_jwt import SnapTradeEncryp
 from snaptrade_client.apis.paths.snap_trade_reset_user_secret import SnapTradeResetUserSecret
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
+from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import AuthorizationsAuthorizationIdRefresh
 from snaptrade_client.apis.paths.session_events import SessionEvents
 from snaptrade_client.apis.paths.accounts import Accounts
 from snaptrade_client.apis.paths.holdings import Holdings
@@ -54,6 +55,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,
@@ -99,6 +101,7 @@ path_to_api = PathToApi(
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,

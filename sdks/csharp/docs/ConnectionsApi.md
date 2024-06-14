@@ -6,6 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
+| [**RefreshBrokerageAuthorization**](ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user |
 
@@ -194,6 +195,104 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | A list of all Authorization objects for the authenticated user. |  -  |
 | **0** | Unexpected error. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **RefreshBrokerageAuthorization**
+
+
+
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class RefreshBrokerageAuthorizationExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Refresh holdings for a connection
+                BrokerageAuthorizationRefreshConfirmation result = client.Connections.RefreshBrokerageAuthorization(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.RefreshBrokerageAuthorization: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the RefreshBrokerageAuthorizationWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Refresh holdings for a connection
+    ApiResponse<BrokerageAuthorizationRefreshConfirmation> response = apiInstance.RefreshBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ConnectionsApi.RefreshBrokerageAuthorizationWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **authorizationId** | **string** | The ID of a brokerage authorization object. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
+### Return type
+
+[**BrokerageAuthorizationRefreshConfirmation**](BrokerageAuthorizationRefreshConfirmation.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Confirmation that the syncs have been scheduled |  -  |
+| **401** | Unauthorized, invalid credentials for this resource |  -  |
+| **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
+| **403** | Customer or user does not have access to this feature |  -  |
+| **404** | The requested resource does not exist. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

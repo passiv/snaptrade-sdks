@@ -123,6 +123,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Balance.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Brokerage.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorization.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorizationType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnlyBrokerage.CustomTypeAdapterFactory());

@@ -476,6 +476,77 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId
       x-accepts: application/json
+  /authorizations/{authorizationId}/refresh:
+    post:
+      description: Trigger a holdings update for all accounts under this authorization.
+        Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will
+        be sent once the sync completes
+      operationId: Connections_refreshBrokerageAuthorization
+      parameters:
+      - description: The ID of a brokerage authorization object.
+        explode: false
+        in: path
+        name: authorizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerageAuthorizationRefreshConfirmation'
+          description: Confirmation that the syncs have been scheduled
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+          x-do-not-generate: true
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402BrokerageAuthDisabledResponse'
+          description: Unable to sync with brokerage account because the connection
+            is disabled.
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Customer or user does not have access to this feature
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: The requested resource does not exist.
+          x-do-not-generate: true
+      summary: Refresh holdings for a connection
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh
+      x-accepts: application/json
   /sessionEvents:
     get:
       description: Returns a list of session events associated with a user.
@@ -2160,6 +2231,21 @@ components:
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true
+    "402BrokerageAuthDisabledResponse":
+      additionalProperties: true
+      description: Cannot perform action because connection is disabled
+      properties:
+        detail:
+          example: Unable to sync with brokerage account because the connection is
+            disabled.
+          x-konfig-original-example: Unable to sync with brokerage account because
+            the connection is disabled.
+        code:
+          example: 3003
+          x-konfig-original-example: 3003
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
     "403FailedRequestResponse":
       additionalProperties: true
       description: Example for failed request response
@@ -2171,6 +2257,20 @@ components:
         default_code:
           example: 1066
           x-konfig-original-example: 1066
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    "403FeatureNotEnabledResponse":
+      additionalProperties: true
+      description: Example for failed request response
+      properties:
+        detail:
+          example: Feature is not enabled for this customer or this connection
+          x-konfig-original-example: Feature is not enabled for this customer or this
+            connection
+        default_code:
+          example: 1141
+          x-konfig-original-example: 1141
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true
@@ -5556,6 +5656,20 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-meta
       type: object
       x-konfig-is-used-in-successful-response: true
+    BrokerageAuthorizationRefreshConfirmation:
+      additionalProperties: true
+      example:
+        detail: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+      properties:
+        detail:
+          description: Refresh confirmation details
+          example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+          type: string
+          x-konfig-original-example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+            scheduled for refresh
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail
+      type: object
+      x-konfig-is-used-in-successful-response: true
     SessionEvent:
       additionalProperties: true
       example:
@@ -8495,6 +8609,10 @@ components:
           type: number
       type: object
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail:
+      example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SessionEvent-properties-brokerage_status_code:
       example: 400
       type: number
@@ -9168,6 +9286,25 @@ components:
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh:
       additionalProperties: true
       properties:
         authorizationId:

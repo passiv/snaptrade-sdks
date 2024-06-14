@@ -199,6 +199,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/refresh-POST': {
+        'parameters': [
+            {
+                'name': 'authorizationId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}-DELETE': {
         'parameters': [
             {

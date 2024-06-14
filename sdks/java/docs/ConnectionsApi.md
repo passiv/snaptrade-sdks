@@ -6,6 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |------------- | ------------- | -------------|
 | [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
+| [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
 | [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 
@@ -210,6 +211,103 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | A list of all Authorization objects for the authenticated user. |  -  |
 | **0** | Unexpected error. |  -  |
+
+<a name="refreshBrokerageAuthorization"></a>
+# **refreshBrokerageAuthorization**
+> BrokerageAuthorizationRefreshConfirmation refreshBrokerageAuthorization(authorizationId, userId, userSecret).execute();
+
+Refresh holdings for a connection
+
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.ConnectionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID authorizationId = UUID.randomUUID(); // The ID of a brokerage authorization object.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    try {
+      BrokerageAuthorizationRefreshConfirmation result = client
+              .connections
+              .refreshBrokerageAuthorization(authorizationId, userId, userSecret)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getDetail());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#refreshBrokerageAuthorization");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<BrokerageAuthorizationRefreshConfirmation> response = client
+              .connections
+              .refreshBrokerageAuthorization(authorizationId, userId, userSecret)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#refreshBrokerageAuthorization");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **authorizationId** | **UUID**| The ID of a brokerage authorization object. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+
+### Return type
+
+[**BrokerageAuthorizationRefreshConfirmation**](BrokerageAuthorizationRefreshConfirmation.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Confirmation that the syncs have been scheduled |  -  |
 
 <a name="removeBrokerageAuthorization"></a>
 # **removeBrokerageAuthorization**
