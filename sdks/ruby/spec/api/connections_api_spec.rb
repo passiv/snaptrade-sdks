@@ -54,6 +54,20 @@ describe 'ConnectionsApi' do
     end
   end
 
+  # unit tests for refresh_brokerage_authorization
+  # Refresh holdings for a connection
+  # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+  # @param authorization_id The ID of a brokerage authorization object.
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [BrokerageAuthorizationRefreshConfirmation]
+  describe 'refresh_brokerage_authorization test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for remove_brokerage_authorization
   # Delete brokerage authorization
   # Deletes a specified brokerage authorization given by the ID.

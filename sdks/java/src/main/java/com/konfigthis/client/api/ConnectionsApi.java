@@ -2,6 +2,7 @@ package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.BrokerageAuthorization;
+import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -22,6 +23,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
     public class ListBrokerageAuthorizationsRequestBuilder extends ListBrokerageAuthorizationsRequestBuilderGenerated {
         public ListBrokerageAuthorizationsRequestBuilder(String userId, String userSecret) {
             super(userId, userSecret);
+        }
+    }
+    public class RefreshBrokerageAuthorizationRequestBuilder extends RefreshBrokerageAuthorizationRequestBuilderGenerated {
+        public RefreshBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {
+            super(authorizationId, userId, userSecret);
         }
     }
     public class RemoveBrokerageAuthorizationRequestBuilder extends RemoveBrokerageAuthorizationRequestBuilderGenerated {

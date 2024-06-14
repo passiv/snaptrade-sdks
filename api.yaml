@@ -1159,6 +1159,62 @@ paths:
           description: The specified authorizationId was not found.
         default:
           description: Unexpected error.
+  "/authorizations/{authorizationId}/refresh":
+    post:
+      tags:
+        - Connections
+      summary: Refresh holdings for a connection
+      description: Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+      operationId: Connections_refreshBrokerageAuthorization
+      parameters:
+        - in: path
+          name: authorizationId
+          required: true
+          description: The ID of a brokerage authorization object.
+          schema:
+            $ref: "#/components/schemas/Id"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: Confirmation that the syncs have been scheduled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrokerageAuthorizationRefreshConfirmation"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "402":
+          description: Unable to sync with brokerage account because the connection is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/402BrokerageAuthDisabledResponse"
+        "403":
+          description: Customer or user does not have access to this feature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+
   "/sessionEvents":
     get:
       tags:
@@ -1972,6 +2028,14 @@ components:
           example: Unable to verify signature sent
         default_code:
           example: 1076
+    402BrokerageAuthDisabledResponse:
+      description: Cannot perform action because connection is disabled
+      type: object
+      properties:
+        detail:
+          example: Unable to sync with brokerage account because the connection is disabled.
+        code:
+          example: 3003
     403FailedRequestResponse:
       description: Example for failed request response
       type: object
@@ -1980,6 +2044,14 @@ components:
           example: User does not have permission to access this resource
         default_code:
           example: 1066
+    403FeatureNotEnabledResponse:
+      description: Example for failed request response
+      type: object
+      properties:
+        detail:
+          example: Feature is not enabled for this customer or this connection
+        default_code:
+          example: 1141
     404FailedRequestResponse:
       description: Example for failed request response
       type: object
@@ -3369,6 +3441,13 @@ components:
           type: object
           example:
             identifier: 123456
+    BrokerageAuthorizationRefreshConfirmation:
+      type: object
+      properties:
+        detail:
+          description: Refresh confirmation details
+          type: string
+          example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
     SessionEvent:
       type: object
       properties:

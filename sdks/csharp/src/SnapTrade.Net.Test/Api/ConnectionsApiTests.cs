@@ -106,6 +106,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test RefreshBrokerageAuthorization
+        /// </summary>
+        [Fact]
+        public void RefreshBrokerageAuthorizationTest()
+        {
+            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Refresh holdings for a connection
+                BrokerageAuthorizationRefreshConfirmation result = client.Connections.RefreshBrokerageAuthorization(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.RefreshBrokerageAuthorization: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test RemoveBrokerageAuthorization
         /// </summary>
         [Fact]

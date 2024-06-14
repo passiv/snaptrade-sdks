@@ -11,6 +11,7 @@
 
 from snaptrade_client.paths.authorizations_authorization_id.get import DetailBrokerageAuthorization
 from snaptrade_client.paths.authorizations.get import ListBrokerageAuthorizations
+from snaptrade_client.paths.authorizations_authorization_id_refresh.post import RefreshBrokerageAuthorization
 from snaptrade_client.paths.authorizations_authorization_id.delete import RemoveBrokerageAuthorization
 from snaptrade_client.paths.session_events.get import SessionEvents
 
@@ -18,6 +19,7 @@ from snaptrade_client.paths.session_events.get import SessionEvents
 class ConnectionsApiGenerated(
     DetailBrokerageAuthorization,
     ListBrokerageAuthorizations,
+    RefreshBrokerageAuthorization,
     RemoveBrokerageAuthorization,
     SessionEvents,
 ):

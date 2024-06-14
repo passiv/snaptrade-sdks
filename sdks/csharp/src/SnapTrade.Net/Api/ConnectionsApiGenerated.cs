@@ -80,6 +80,33 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;BrokerageAuthorization&gt;</returns>
         ApiResponse<List<BrokerageAuthorization>> ListBrokerageAuthorizationsWithHttpInfo(string userId, string userSecret, int operationIndex = 0);
         /// <summary>
+        /// Refresh holdings for a connection
+        /// </summary>
+        /// <remarks>
+        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>BrokerageAuthorizationRefreshConfirmation</returns>
+        BrokerageAuthorizationRefreshConfirmation RefreshBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
+
+        /// <summary>
+        /// Refresh holdings for a connection
+        /// </summary>
+        /// <remarks>
+        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of BrokerageAuthorizationRefreshConfirmation</returns>
+        ApiResponse<BrokerageAuthorizationRefreshConfirmation> RefreshBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
+        /// <summary>
         /// Delete brokerage authorization
         /// </summary>
         /// <remarks>
@@ -198,6 +225,35 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;BrokerageAuthorization&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<BrokerageAuthorization>>> ListBrokerageAuthorizationsWithHttpInfoAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Refresh holdings for a connection
+        /// </summary>
+        /// <remarks>
+        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BrokerageAuthorizationRefreshConfirmation</returns>
+        System.Threading.Tasks.Task<BrokerageAuthorizationRefreshConfirmation> RefreshBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Refresh holdings for a connection
+        /// </summary>
+        /// <remarks>
+        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BrokerageAuthorizationRefreshConfirmation)</returns>
+        System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorizationRefreshConfirmation>> RefreshBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Delete brokerage authorization
         /// </summary>
@@ -769,6 +825,216 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListBrokerageAuthorizations", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>BrokerageAuthorizationRefreshConfirmation</returns>
+        public BrokerageAuthorizationRefreshConfirmation RefreshBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<BrokerageAuthorizationRefreshConfirmation> localVarResponse = RefreshBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of BrokerageAuthorizationRefreshConfirmation</returns>
+        public SnapTrade.Net.Client.ApiResponse<BrokerageAuthorizationRefreshConfirmation> RefreshBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0)
+        {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("authorizationId", SnapTrade.Net.Client.ClientUtils.ParameterToString(authorizationId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "ConnectionsApi.RefreshBrokerageAuthorization";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<BrokerageAuthorizationRefreshConfirmation>("/authorizations/{authorizationId}/refresh", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshBrokerageAuthorization", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of BrokerageAuthorizationRefreshConfirmation</returns>
+        public async System.Threading.Tasks.Task<BrokerageAuthorizationRefreshConfirmation> RefreshBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<BrokerageAuthorizationRefreshConfirmation> localVarResponse = await RefreshBrokerageAuthorizationWithHttpInfoAsync(authorizationId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (BrokerageAuthorizationRefreshConfirmation)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<BrokerageAuthorizationRefreshConfirmation>> RefreshBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'authorizationId' is set
+            if (authorizationId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'authorizationId' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ConnectionsApi->RefreshBrokerageAuthorization");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("authorizationId", SnapTrade.Net.Client.ClientUtils.ParameterToString(authorizationId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "ConnectionsApi.RefreshBrokerageAuthorization";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<BrokerageAuthorizationRefreshConfirmation>("/authorizations/{authorizationId}/refresh", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("RefreshBrokerageAuthorization", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

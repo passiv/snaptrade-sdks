@@ -27,6 +27,7 @@ import java.io.IOException;
 
 
 import com.konfigthis.client.model.BrokerageAuthorization;
+import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 
@@ -443,6 +444,192 @@ public class ConnectionsApiGenerated {
             
 
         return ((ConnectionsApi) this).new ListBrokerageAuthorizationsRequestBuilder(userId, userSecret);
+    }
+    private okhttp3.Call refreshBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/authorizations/{authorizationId}/refresh"
+            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call refreshBrokerageAuthorizationValidateBeforeCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'authorizationId' is set
+        if (authorizationId == null) {
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling refreshBrokerageAuthorization(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling refreshBrokerageAuthorization(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling refreshBrokerageAuthorization(Async)");
+        }
+
+        return refreshBrokerageAuthorizationCall(authorizationId, userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<BrokerageAuthorizationRefreshConfirmation> refreshBrokerageAuthorizationWithHttpInfo(UUID authorizationId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = refreshBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<BrokerageAuthorizationRefreshConfirmation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call refreshBrokerageAuthorizationAsync(UUID authorizationId, String userId, String userSecret, final ApiCallback<BrokerageAuthorizationRefreshConfirmation> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = refreshBrokerageAuthorizationValidateBeforeCall(authorizationId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<BrokerageAuthorizationRefreshConfirmation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class RefreshBrokerageAuthorizationRequestBuilderGenerated {
+        final UUID authorizationId;
+        final String userId;
+        final String userSecret;
+
+        public RefreshBrokerageAuthorizationRequestBuilderGenerated(UUID authorizationId, String userId, String userSecret) {
+            this.authorizationId = authorizationId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for refreshBrokerageAuthorization
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return refreshBrokerageAuthorizationCall(authorizationId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute refreshBrokerageAuthorization request
+         * @return BrokerageAuthorizationRefreshConfirmation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+         </table>
+         */
+        public BrokerageAuthorizationRefreshConfirmation execute() throws ApiException {
+            ApiResponse<BrokerageAuthorizationRefreshConfirmation> localVarResp = refreshBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute refreshBrokerageAuthorization request with HTTP info returned
+         * @return ApiResponse&lt;BrokerageAuthorizationRefreshConfirmation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BrokerageAuthorizationRefreshConfirmation> executeWithHttpInfo() throws ApiException {
+            return refreshBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
+        }
+
+        /**
+         * Execute refreshBrokerageAuthorization request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<BrokerageAuthorizationRefreshConfirmation> _callback) throws ApiException {
+            return refreshBrokerageAuthorizationAsync(authorizationId, userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * Refresh holdings for a connection
+     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+     * @param authorizationId The ID of a brokerage authorization object. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return RefreshBrokerageAuthorizationRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.RefreshBrokerageAuthorizationRequestBuilder refreshBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
+        if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new RefreshBrokerageAuthorizationRequestBuilder(authorizationId, userId, userSecret);
     }
     private okhttp3.Call removeBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
