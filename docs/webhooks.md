@@ -305,7 +305,7 @@ Example payload is below:
   "webhookSecret": "yfqvPlWrTFILBcjCERPh",
   "eventTimestamp": "2024-03-01T14:38:13.111991+00:00",
   "brokerageAuthorizationId": "6bb1ahb0-b8c8-4b59-8bf9-7841d7a89c63",
-  "details": {"total_value": {"success": True, "error": null}, "positions": {"success": True, "error": null}, "balances": {"success": True, "error": null}, "orders": 
-    {"success": True, "error": null}}
+  "details": {"total_value": {"success": true, "error": null}, "positions": {"success": true, "error": null}, "balances": {"success": true, "error": null}, "orders": 
+    {"success": true, "error": null}}
 }
 ```
