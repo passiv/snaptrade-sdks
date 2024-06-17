@@ -290,6 +290,15 @@ Gets sent when holdings for an account has been updated. Updated does not necess
 
 This webhook will be sent when we run our daily account syncs, as well as if a manual account refresh has been requested via: https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization
 
+Account Holdings in this context refers to:
+ - Positions
+ - Balances
+ - Orders
+ - Total Account Value
+ - Account Detail
+
+Historical transactions will be polled for, but will not fetch transactions from the current day
+
 Please contact us in order to receive these webhooks as they are disabled by default.
 
 Example payload is below:
