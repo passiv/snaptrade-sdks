@@ -283,3 +283,29 @@ Example payload is below:
   "brokerageAuthorizationId": "6bb0ahb0-b8c8-4b59-8bf9-7841d7a89c63"
 }
 ```
+
+## ACCOUNT_HOLDINGS_UPDATED
+
+Gets sent when holdings for an account has been updated. Updated does not necessarily mean that the holdings have changed, instead it means that updating holdings with new data has been attempted. In the rare case that a holdings update fails (for example when a brokerage's API is down for maintenance), the webhook will still be sent and details on what failed will be included as part of the details field in the body.
+
+This webhook will be sent when we run our daily account syncs, as well as if a manual account refresh has been requested via: https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization
+
+Please contact us in order to receive these webhooks as they are disabled by default.
+
+Example payload is below:
+```json
+{
+  "userId": "60b9ad5f-8e78-43b2-af5a-8ce8412b1cd6",
+  "clientId": "PARTNERAPP",
+  "webookId": "312a13f3-3929-46dd-a70f-ade6aaefc100",
+  "accountId": "45a3g56a-eef6-4904-a68e-d3f90c3e07c5",
+  "eventType": "ACCOUNT_HOLDINGS_UPDATED",
+  "webhookId": "312a13f3-3929-46dd-a70f-ade6aaefc100",
+  "brokerageId": "905872ac-a7b1-4031-a31f-790cba1bfc94",
+  "webhookSecret": "yfqvPlWrTFILBcjCERPh",
+  "eventTimestamp": "2024-03-01T14:38:13.111991+00:00",
+  "brokerageAuthorizationId": "6bb1ahb0-b8c8-4b59-8bf9-7841d7a89c63",
+  "details": {"total_value": {"success": True, "error": null}, "positions": {"success": True, "error": null}, "balances": {"success": True, "error": null}, "orders": 
+    {"success": True, "error": null}}
+}
+```
