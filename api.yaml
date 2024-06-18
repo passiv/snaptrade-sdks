@@ -2301,7 +2301,7 @@ components:
       type: object
       properties:
         symbol:
-          $ref: "#/components/schemas/BrokerageSymbol"
+          $ref: "#/components/schemas/OptionBrokerageSymbol"
         price:
           $ref: "#/components/schemas/Price"
         units:
@@ -3506,6 +3506,34 @@ components:
           allOf:
             - $ref: "#/components/schemas/OptionsSymbol"
           nullable: true
+    OptionBrokerageSymbol:
+      description: Option Brokerage symbol
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        description:
+          type: string
+          example: SPY CALL 7/17 200
+        option_symbol:
+          allOf:
+            - $ref: "#/components/schemas/OptionsSymbol"
+          nullable: true
+        security_type:
+          $ref: "#/components/schemas/SecurityType"
+        listing_exchange:
+          type: string
+          example: OPRA
+        local_id:
+          type: string
+          example: "3291231"
+          nullable: true
+        is_quotable:
+          type: boolean
+          example: true
+        is_tradable:
+          type: boolean
+          example: true
     PositionSymbol:
       description: Symbol returned in position object
       type: object
