@@ -85,6 +85,7 @@ from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.notional_value import NotionalValue
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.open_units import OpenUnits
+from snaptrade_client.model.option_brokerage_symbol import OptionBrokerageSymbol
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_chain_item import OptionChainItem
 from snaptrade_client.model.option_chain_item_chain_per_root import OptionChainItemChainPerRoot

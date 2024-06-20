@@ -11,28 +11,20 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Option Holdings
-  class OptionsPosition
-    attr_accessor :symbol
+  # Option Brokerage symbol
+  class OptionBrokerageSymbol
+    attr_accessor :id
 
-    # Trade Price if limit or stop limit order
-    attr_accessor :price
+    attr_accessor :description
 
-    attr_accessor :units
-
-    attr_accessor :currency
-
-    # Average purchase price for this position
-    attr_accessor :average_purchase_price
+    attr_accessor :option_symbol
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'symbol' => :'symbol',
-        :'price' => :'price',
-        :'units' => :'units',
-        :'currency' => :'currency',
-        :'average_purchase_price' => :'average_purchase_price'
+        :'id' => :'id',
+        :'description' => :'description',
+        :'option_symbol' => :'option_symbol'
       }
     end
 
@@ -44,20 +36,15 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'symbol' => :'OptionBrokerageSymbol',
-        :'price' => :'Float',
-        :'units' => :'Float',
-        :'currency' => :'OptionsPositionCurrency',
-        :'average_purchase_price' => :'Float'
+        :'id' => :'String',
+        :'description' => :'String',
+        :'option_symbol' => :'OptionsSymbol'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'price',
-        :'currency',
-        :'average_purchase_price'
       ])
     end
 
@@ -65,35 +52,27 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::OptionsPosition` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::OptionBrokerageSymbol` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::OptionsPosition`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::OptionBrokerageSymbol`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
-      end
-
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
-      end
-
-      if attributes.key?(:'average_purchase_price')
-        self.average_purchase_price = attributes[:'average_purchase_price']
+      if attributes.key?(:'option_symbol')
+        self.option_symbol = attributes[:'option_symbol']
       end
     end
 
@@ -115,11 +94,9 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          symbol == o.symbol &&
-          price == o.price &&
-          units == o.units &&
-          currency == o.currency &&
-          average_purchase_price == o.average_purchase_price
+          id == o.id &&
+          description == o.description &&
+          option_symbol == o.option_symbol
     end
 
     # @see the `==` method
@@ -131,7 +108,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, price, units, currency, average_purchase_price].hash
+      [id, description, option_symbol].hash
     end
 
     # Builds the object from hash

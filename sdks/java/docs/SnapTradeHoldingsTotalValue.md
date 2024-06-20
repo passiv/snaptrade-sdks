@@ -2,7 +2,7 @@
 
 # SnapTradeHoldingsTotalValue
 
-Summed value of account positions and cash balances
+Calculated based on the sum of the values of account positions and cash balances
 
 ## Properties
 

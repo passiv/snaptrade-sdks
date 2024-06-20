@@ -2378,7 +2378,7 @@ components:
         total:
           $ref: '#/components/schemas/AmountNullable'
     Amount:
-      description: Total Value of the account
+      description: "Total value of the account, as reported by the brokerage"
       properties:
         amount:
           example: 15363.23
@@ -2727,78 +2727,7 @@ components:
           buying_power: 410.71
         option_positions:
         - symbol:
-            symbol:
-              figi_code: BBG000B9XRY4
-              symbol: VAB.TO
-              figi_instrument:
-                figi_code: BBG000B9Y5X2
-                figi_share_class: BBG001S5N8V8
-              raw_symbol: VAB
-              description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type:
-                is_supported: true
-                code: cs
-                description: Common Stock
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            allows_fractional_units: true
-            brokerage_authorization:
-              brokerage:
-                maintenance_mode: true
-                allows_fractional_units: true
-                exchanges:
-                - 2bcd7cc3-e922-4976-bce1-9858296801c3
-                - 4bcd8cc3-c122-4974-dc21-1858296801f4
-                description: Questrade is an online brokerage firm and wealth management
-                  firm based in Canada. It is Canada's largest discount broker.
-                open_url: https://www.brokerage.com
-                display_name: Questrade
-                url: https://www.questrade.com/
-                enabled: true
-                allows_trading: true
-                has_reporting: true
-                aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
-                is_real_time_connection: true
-                name: Questrade
-                allows_trading_through_snaptrade_api: true
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                brokerage_type:
-                  name: Traditional Brokerage
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-                slug: QUESTRADE
-                is_scraping_integration: true
-              disabled_date: 2022-01-21T20:11:19.217Z
-              meta:
-                identifier: 123456
-              name: Connection-1
-              disabled: false
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              created_date: 2022-01-21T20:11:19.217Z
-              updated_date: 2022-01-21T20:11:19.217Z
-              type: trade
-            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            description: SPY CALL 7/17 200
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
               ticker: SPY 220819P00200000
@@ -2851,78 +2780,7 @@ components:
           units: 10
           average_purchase_price: 108.3353
         - symbol:
-            symbol:
-              figi_code: BBG000B9XRY4
-              symbol: VAB.TO
-              figi_instrument:
-                figi_code: BBG000B9Y5X2
-                figi_share_class: BBG001S5N8V8
-              raw_symbol: VAB
-              description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type:
-                is_supported: true
-                code: cs
-                description: Common Stock
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            allows_fractional_units: true
-            brokerage_authorization:
-              brokerage:
-                maintenance_mode: true
-                allows_fractional_units: true
-                exchanges:
-                - 2bcd7cc3-e922-4976-bce1-9858296801c3
-                - 4bcd8cc3-c122-4974-dc21-1858296801f4
-                description: Questrade is an online brokerage firm and wealth management
-                  firm based in Canada. It is Canada's largest discount broker.
-                open_url: https://www.brokerage.com
-                display_name: Questrade
-                url: https://www.questrade.com/
-                enabled: true
-                allows_trading: true
-                has_reporting: true
-                aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
-                is_real_time_connection: true
-                name: Questrade
-                allows_trading_through_snaptrade_api: true
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                brokerage_type:
-                  name: Traditional Brokerage
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-                slug: QUESTRADE
-                is_scraping_integration: true
-              disabled_date: 2022-01-21T20:11:19.217Z
-              meta:
-                identifier: 123456
-              name: Connection-1
-              disabled: false
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              created_date: 2022-01-21T20:11:19.217Z
-              updated_date: 2022-01-21T20:11:19.217Z
-              type: trade
-            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            description: SPY CALL 7/17 200
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
               ticker: SPY 220819P00200000
@@ -3539,78 +3397,7 @@ components:
       description: Option Holdings
       example:
         symbol:
-          symbol:
-            figi_code: BBG000B9XRY4
-            symbol: VAB.TO
-            figi_instrument:
-              figi_code: BBG000B9Y5X2
-              figi_share_class: BBG001S5N8V8
-            raw_symbol: VAB
-            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          allows_fractional_units: true
-          brokerage_authorization:
-            brokerage:
-              maintenance_mode: true
-              allows_fractional_units: true
-              exchanges:
-              - 2bcd7cc3-e922-4976-bce1-9858296801c3
-              - 4bcd8cc3-c122-4974-dc21-1858296801f4
-              description: Questrade is an online brokerage firm and wealth management
-                firm based in Canada. It is Canada's largest discount broker.
-              open_url: https://www.brokerage.com
-              display_name: Questrade
-              url: https://www.questrade.com/
-              enabled: true
-              allows_trading: true
-              has_reporting: true
-              aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
-              is_real_time_connection: true
-              name: Questrade
-              allows_trading_through_snaptrade_api: true
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              brokerage_type:
-                name: Traditional Brokerage
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-              slug: QUESTRADE
-              is_scraping_integration: true
-            disabled_date: 2022-01-21T20:11:19.217Z
-            meta:
-              identifier: 123456
-            name: Connection-1
-            disabled: false
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            created_date: 2022-01-21T20:11:19.217Z
-            updated_date: 2022-01-21T20:11:19.217Z
-            type: trade
-          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          description: SPY CALL 7/17 200
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_symbol:
             ticker: SPY 220819P00200000
@@ -3664,7 +3451,7 @@ components:
         average_purchase_price: 108.3353
       properties:
         symbol:
-          $ref: '#/components/schemas/BrokerageSymbol'
+          $ref: '#/components/schemas/OptionBrokerageSymbol'
         price:
           description: Trade Price if limit or stop limit order
           example: 31.33
@@ -4303,7 +4090,8 @@ components:
           nullable: true
     SnapTradeHoldingsTotalValue:
       additionalProperties: true
-      description: Summed value of account positions and cash balances
+      description: Calculated based on the sum of the values of account positions
+        and cash balances
       example:
         currency: USD
         value: 32600.71
@@ -5742,79 +5530,41 @@ components:
     BrokerageSymbol:
       additionalProperties: true
       description: Brokerage symbol
-      example:
+      properties:
+        id:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         symbol:
-          figi_code: BBG000B9XRY4
-          symbol: VAB.TO
-          figi_instrument:
-            figi_code: BBG000B9Y5X2
-            figi_share_class: BBG001S5N8V8
-          raw_symbol: VAB
-          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type:
-            is_supported: true
-            code: cs
-            description: Common Stock
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          currencies:
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-        allows_fractional_units: true
+          $ref: '#/components/schemas/UniversalSymbolNullable'
         brokerage_authorization:
-          brokerage:
-            maintenance_mode: true
-            allows_fractional_units: true
-            exchanges:
-            - 2bcd7cc3-e922-4976-bce1-9858296801c3
-            - 4bcd8cc3-c122-4974-dc21-1858296801f4
-            description: Questrade is an online brokerage firm and wealth management
-              firm based in Canada. It is Canada's largest discount broker.
-            open_url: https://www.brokerage.com
-            display_name: Questrade
-            url: https://www.questrade.com/
-            enabled: true
-            allows_trading: true
-            has_reporting: true
-            aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
-            is_real_time_connection: true
-            name: Questrade
-            allows_trading_through_snaptrade_api: true
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            brokerage_type:
-              name: Traditional Brokerage
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-            slug: QUESTRADE
-            is_scraping_integration: true
-          disabled_date: 2022-01-21T20:11:19.217Z
-          meta:
-            identifier: 123456
-          name: Connection-1
-          disabled: false
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          created_date: 2022-01-21T20:11:19.217Z
-          updated_date: 2022-01-21T20:11:19.217Z
-          type: trade
-        description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          $ref: '#/components/schemas/BrokerageAuthorization'
+        description:
+          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          type: string
+          x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-description
+        allows_fractional_units:
+          example: true
+          nullable: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-allows_fractional_units
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbolNullable'
+      type: object
+      x-konfig-properties:
+        symbol:
+          nullable: true
+        option_symbol:
+          nullable: true
+    OptionBrokerageSymbol:
+      additionalProperties: true
+      description: Option Brokerage symbol
+      example:
+        description: SPY CALL 7/17 200
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         option_symbol:
           ticker: SPY 220819P00200000
@@ -5866,29 +5616,14 @@ components:
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbolNullable'
-        brokerage_authorization:
-          $ref: '#/components/schemas/BrokerageAuthorization'
         description:
-          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          example: SPY CALL 7/17 200
           type: string
-          x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-description
-        allows_fractional_units:
-          example: true
-          nullable: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-allows_fractional_units
+          x-konfig-original-example: SPY CALL 7/17 200
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionBrokerageSymbol-properties-description
         option_symbol:
-          $ref: '#/components/schemas/OptionsSymbolNullable'
+          $ref: '#/components/schemas/OptionsSymbol'
       type: object
-      x-konfig-properties:
-        symbol:
-          nullable: true
-        option_symbol:
-          nullable: true
     PositionSymbol:
       additionalProperties: true
       description: Symbol returned in position object
@@ -8625,6 +8360,10 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionBrokerageSymbol-properties-description:
+      example: SPY CALL 7/17 200
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-PositionSymbol-properties-description:
       example: VANGUARD CDN AGGREGATE BOND INDEX ETF
       type: string
@@ -10171,7 +9910,7 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter: []
     AmountNullable:
-      description: Total Value of the account
+      description: "Total value of the account, as reported by the brokerage"
       example:
         amount: 15363.23
         currency: USD
@@ -10258,40 +9997,6 @@ components:
     UniversalSymbolNullable:
       additionalProperties: true
       description: Universal symbol
-      example:
-        figi_code: BBG000B9XRY4
-        symbol: VAB.TO
-        figi_instrument:
-          figi_code: BBG000B9Y5X2
-          figi_share_class: BBG001S5N8V8
-        raw_symbol: VAB
-        description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
-        exchange:
-          start_time: 09:30:00
-          mic_code: XTSE
-          code: TSX
-          timezone: America/New_York
-          name: Toronto Stock Exchange
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          close_time: "57600"
-          suffix: .TO
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        type:
-          is_supported: true
-          code: cs
-          description: Common Stock
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        currencies:
-        - code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
-        - code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
       nullable: true
       properties:
         id:
@@ -10346,49 +10051,6 @@ components:
     OptionsSymbolNullable:
       additionalProperties: true
       description: Options Symbol
-      example:
-        ticker: SPY 220819P00200000
-        exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        local_id: "40817960"
-        is_mini_option: false
-        option_type: CALL
-        underlying_symbol:
-          figi_code: BBG000B9XRY4
-          symbol: SPY
-          figi_instrument:
-            figi_code: BBG000B9Y5X2
-            figi_share_class: BBG001S5N8V8
-          description: SPDR S&P 500 ETF Trust
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: ARCA
-            code: ARCX
-            timezone: America/New_York
-            name: NYSE ARCA
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: None
-            allows_cryptocurrency_symbols: false
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type:
-            is_supported: true
-            code: cs
-            description: Common Stock
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          currencies:
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        expiration_date: 2017-07-17T15:13:07.177712+00:00
-        strike_price: 200
       nullable: true
       properties:
         id:
