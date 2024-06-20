@@ -40,7 +40,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">units.</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
-        public OptionsPosition(BrokerageSymbol symbol = default(BrokerageSymbol), double? price = default(double?), double units = default(double), CurrencyNullable currency = default(CurrencyNullable), double? averagePurchasePrice = default(double?)) : base()
+        public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), CurrencyNullable currency = default(CurrencyNullable), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Symbol
         /// </summary>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public BrokerageSymbol Symbol { get; set; }
+        public OptionBrokerageSymbol Symbol { get; set; }
 
         /// <summary>
         /// Trade Price if limit or stop limit order

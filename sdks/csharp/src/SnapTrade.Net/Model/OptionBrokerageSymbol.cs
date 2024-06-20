@@ -27,34 +27,42 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Calculated based on the sum of the values of account positions and cash balances
+    /// Option Brokerage symbol
     /// </summary>
-    [DataContract(Name = "SnapTradeHoldingsTotalValue")]
-    public partial class SnapTradeHoldingsTotalValue : IEquatable<SnapTradeHoldingsTotalValue>, IValidatableObject
+    [DataContract(Name = "OptionBrokerageSymbol")]
+    public partial class OptionBrokerageSymbol : IEquatable<OptionBrokerageSymbol>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SnapTradeHoldingsTotalValue" /> class.
+        /// Initializes a new instance of the <see cref="OptionBrokerageSymbol" /> class.
         /// </summary>
-        /// <param name="value">value.</param>
-        /// <param name="currency">currency.</param>
-        public SnapTradeHoldingsTotalValue(double? value = default(double?), string currency = default(string)) : base()
+        /// <param name="id">id.</param>
+        /// <param name="description">description.</param>
+        /// <param name="optionSymbol">optionSymbol.</param>
+        public OptionBrokerageSymbol(string id = default(string), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol)) : base()
         {
-            this.Value = value;
-            this.Currency = currency;
+            this.Id = id;
+            this.Description = description;
+            this.OptionSymbol = optionSymbol;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// Gets or Sets Id
         /// </summary>
-        [DataMember(Name = "value", EmitDefaultValue = true)]
-        public double? Value { get; set; }
+        [DataMember(Name = "id", EmitDefaultValue = false)]
+        public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Currency
+        /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = true)]
-        public string Currency { get; set; }
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Gets or Sets OptionSymbol
+        /// </summary>
+        [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
+        public OptionsSymbol OptionSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -69,10 +77,11 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class SnapTradeHoldingsTotalValue {\n");
+            sb.Append("class OptionBrokerageSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  Value: ").Append(Value).Append("\n");
-            sb.Append("  Currency: ").Append(Currency).Append("\n");
+            sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -94,15 +103,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as SnapTradeHoldingsTotalValue);
+            return this.Equals(input as OptionBrokerageSymbol);
         }
 
         /// <summary>
-        /// Returns true if SnapTradeHoldingsTotalValue instances are equal
+        /// Returns true if OptionBrokerageSymbol instances are equal
         /// </summary>
-        /// <param name="input">Instance of SnapTradeHoldingsTotalValue to be compared</param>
+        /// <param name="input">Instance of OptionBrokerageSymbol to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(SnapTradeHoldingsTotalValue input)
+        public bool Equals(OptionBrokerageSymbol input)
         {
             if (input == null)
             {
@@ -110,14 +119,19 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.Value == input.Value ||
-                    (this.Value != null &&
-                    this.Value.Equals(input.Value))
+                    this.Id == input.Id ||
+                    (this.Id != null &&
+                    this.Id.Equals(input.Id))
                 ) && base.Equals(input) && 
                 (
-                    this.Currency == input.Currency ||
-                    (this.Currency != null &&
-                    this.Currency.Equals(input.Currency))
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
+                ) && base.Equals(input) && 
+                (
+                    this.OptionSymbol == input.OptionSymbol ||
+                    (this.OptionSymbol != null &&
+                    this.OptionSymbol.Equals(input.OptionSymbol))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -131,13 +145,17 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.Value != null)
+                if (this.Id != null)
                 {
-                    hashCode = (hashCode * 59) + this.Value.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Id.GetHashCode();
                 }
-                if (this.Currency != null)
+                if (this.Description != null)
                 {
-                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
+                }
+                if (this.OptionSymbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

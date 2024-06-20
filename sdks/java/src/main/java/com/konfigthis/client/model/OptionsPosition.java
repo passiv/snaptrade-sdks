@@ -19,8 +19,8 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.BrokerageSymbol;
 import com.konfigthis.client.model.CurrencyNullable;
+import com.konfigthis.client.model.OptionBrokerageSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -55,7 +55,7 @@ import com.konfigthis.client.JSON;
 public class OptionsPosition {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private BrokerageSymbol symbol;
+  private OptionBrokerageSymbol symbol;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -76,7 +76,7 @@ public class OptionsPosition {
   public OptionsPosition() {
   }
 
-  public OptionsPosition symbol(BrokerageSymbol symbol) {
+  public OptionsPosition symbol(OptionBrokerageSymbol symbol) {
     
     
     
@@ -92,12 +92,12 @@ public class OptionsPosition {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public BrokerageSymbol getSymbol() {
+  public OptionBrokerageSymbol getSymbol() {
     return symbol;
   }
 
 
-  public void setSymbol(BrokerageSymbol symbol) {
+  public void setSymbol(OptionBrokerageSymbol symbol) {
     
     
     
@@ -382,7 +382,7 @@ public class OptionsPosition {
       }
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
-        BrokerageSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+        OptionBrokerageSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {

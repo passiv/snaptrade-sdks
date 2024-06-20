@@ -39,8 +39,8 @@ class OptionsPosition(
         class properties:
         
             @staticmethod
-            def symbol() -> typing.Type['BrokerageSymbol']:
-                return BrokerageSymbol
+            def symbol() -> typing.Type['OptionBrokerageSymbol']:
+                return OptionBrokerageSymbol
         
             @staticmethod
             def price() -> typing.Type['Price']:
@@ -80,7 +80,7 @@ class OptionsPosition(
         additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'BrokerageSymbol': ...
+    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'OptionBrokerageSymbol': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> 'Price': ...
@@ -102,7 +102,7 @@ class OptionsPosition(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['BrokerageSymbol', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['OptionBrokerageSymbol', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union['Price', schemas.Unset]: ...
@@ -125,7 +125,7 @@ class OptionsPosition(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        symbol: typing.Union['BrokerageSymbol', schemas.Unset] = schemas.unset,
+        symbol: typing.Union['OptionBrokerageSymbol', schemas.Unset] = schemas.unset,
         price: typing.Union['Price', schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         currency: typing.Union['CurrencyNullable', schemas.Unset] = schemas.unset,
@@ -145,6 +145,6 @@ class OptionsPosition(
             **kwargs,
         )
 
-from snaptrade_client.model.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.model.currency_nullable import CurrencyNullable
+from snaptrade_client.model.option_brokerage_symbol import OptionBrokerageSymbol
 from snaptrade_client.model.price import Price

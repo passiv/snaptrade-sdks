@@ -1,12 +1,13 @@
-# SnapTrade.Net.Model.AmountNullable
-Total value of the account, as reported by the brokerage
+# SnapTrade.Net.Model.OptionBrokerageSymbol
+Option Brokerage symbol
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **double** |  | [optional] 
-**Currency** | **string** |  | [optional] 
+**Id** | **string** |  | [optional] 
+**Description** | **string** |  | [optional] 
+**OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

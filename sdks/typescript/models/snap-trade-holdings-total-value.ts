@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Summed value of account positions and cash balances
+ * Calculated based on the sum of the values of account positions and cash balances
  * @export
  * @interface SnapTradeHoldingsTotalValue
  */

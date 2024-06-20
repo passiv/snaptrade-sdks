@@ -15,15 +15,15 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.brokerage_symbol import BrokerageSymbol
 from snaptrade_client.type.currency_nullable import CurrencyNullable
+from snaptrade_client.type.option_brokerage_symbol import OptionBrokerageSymbol
 from snaptrade_client.type.price import Price
 
 class RequiredOptionsPosition(TypedDict):
     pass
 
 class OptionalOptionsPosition(TypedDict, total=False):
-    symbol: BrokerageSymbol
+    symbol: OptionBrokerageSymbol
 
     price: Price
 

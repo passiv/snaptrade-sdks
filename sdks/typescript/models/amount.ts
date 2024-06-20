@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Total Value of the account
+ * Total value of the account, as reported by the brokerage
  * @export
  * @interface Amount
  */

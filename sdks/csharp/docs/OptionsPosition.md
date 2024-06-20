@@ -5,7 +5,7 @@ Option Holdings
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | [**BrokerageSymbol**](BrokerageSymbol.md) |  | [optional] 
+**Symbol** | [**OptionBrokerageSymbol**](OptionBrokerageSymbol.md) |  | [optional] 
 **Price** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **Units** | **double** |  | [optional] 
 **Currency** | [**CurrencyNullable**](CurrencyNullable.md) |  | [optional] 

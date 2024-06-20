@@ -2111,7 +2111,7 @@ components:
           allOf:
            - $ref: "#/components/schemas/Amount"
     Amount:
-      description: Total Value of the account
+      description: Total value of the account, as reported by the brokerage
       properties:
         amount:
           type: number
@@ -2301,7 +2301,7 @@ components:
       type: object
       properties:
         symbol:
-          $ref: "#/components/schemas/BrokerageSymbol"
+          $ref: "#/components/schemas/OptionBrokerageSymbol"
         price:
           $ref: "#/components/schemas/Price"
         units:
@@ -2758,7 +2758,7 @@ components:
           $ref: "#/components/schemas/Time"
 
     SnapTradeHoldingsTotalValue:
-      description: Summed value of account positions and cash balances
+      description: Calculated based on the sum of the values of account positions and cash balances
       type: object
       properties:
         value:
@@ -3506,6 +3506,17 @@ components:
           allOf:
             - $ref: "#/components/schemas/OptionsSymbol"
           nullable: true
+    OptionBrokerageSymbol:
+      description: Option Brokerage symbol
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/Id"
+        description:
+          type: string
+          example: SPY CALL 7/17 200
+        option_symbol:
+          $ref: "#/components/schemas/OptionsSymbol"
     PositionSymbol:
       description: Symbol returned in position object
       type: object

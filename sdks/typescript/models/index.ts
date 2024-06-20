@@ -59,6 +59,7 @@ export * from './monthly-dividends';
 export * from './net-contributions';
 export * from './net-dividend';
 export * from './notional-value';
+export * from './option-brokerage-symbol';
 export * from './option-chain-inner';
 export * from './option-chain-inner-chain-per-root-inner';
 export * from './option-chain-inner-chain-per-root-inner-chain-per-strike-price-inner';
