@@ -1214,6 +1214,62 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/404FailedRequestResponse"
+  "/authorizations/{authorizationId}/disable":
+    post:
+      tags:
+        - Connections
+      summary: Manually disable a connection for testing
+      description: Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections.
+        Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+      operationId: Connections_disableBrokerageAuthorization
+      parameters:
+        - in: path
+          name: authorizationId
+          required: true
+          description: The ID of a brokerage authorization object.
+          schema:
+            $ref: "#/components/schemas/Id"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: Confirmation that the connection has been disabled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrokerageAuthorizationDisabledConfirmation"
+        "401":
+          description: Unauthorized, invalid credentials for this resource
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/401FailedRequestResponse"
+        "402":
+          description: Unable to sync with brokerage account because the connection is disabled.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/402BrokerageAuthAlreadyDisabledException"
+        "403":
+          description: Customer or user does not have access to this feature
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "404":
+          description: The requested resource does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
 
   "/sessionEvents":
     get:
@@ -2036,6 +2092,14 @@ components:
           example: Unable to sync with brokerage account because the connection is disabled.
         code:
           example: 3003
+    402BrokerageAuthAlreadyDisabledException:
+      description: This connection is already disabled.
+      type: object
+      properties:
+        detail:
+          example: This connection is already disabled.
+        code:
+          example: 3011
     403FailedRequestResponse:
       description: Example for failed request response
       type: object
@@ -3448,6 +3512,13 @@ components:
           description: Refresh confirmation details
           type: string
           example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+    BrokerageAuthorizationDisabledConfirmation:
+      type: object
+      properties:
+        detail:
+          description: Connection disabled confirmation
+          type: string
+          example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
     SessionEvent:
       type: object
       properties:
