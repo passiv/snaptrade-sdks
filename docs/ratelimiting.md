@@ -4,7 +4,7 @@ The SnapTrade API uses a number of safety mechanisms to protect against bursts o
 
 Sending many requests in quick succession might trigger error responses that show up as HTTP status code 429.
 
-Every SnapTrade client is ratelimited to 100 requests per minute by default. If you have a large number of users and would like to request a higher ratelimit, please contact your Customer Success Manager.
+Every SnapTrade client is ratelimited to 250 requests per minute by default. If you have a large number of users and would like to request a higher ratelimit, please contact your Customer Success Manager.
 
 ## Common Causes and Mitigations
 
