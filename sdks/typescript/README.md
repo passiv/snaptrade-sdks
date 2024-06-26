@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.25-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.25)
+[![npm](https://img.shields.io/badge/npm-v9.0.26-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.26)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -34,6 +34,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.registerSnapTradeUser`](#snaptradeauthenticationregistersnaptradeuser)
   * [`snaptrade.authentication.resetSnapTradeUserSecret`](#snaptradeauthenticationresetsnaptradeusersecret)
   * [`snaptrade.connections.detailBrokerageAuthorization`](#snaptradeconnectionsdetailbrokerageauthorization)
+  * [`snaptrade.connections.disableBrokerageAuthorization`](#snaptradeconnectionsdisablebrokerageauthorization)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
@@ -769,6 +770,44 @@ The ID of a brokerage authorization object.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.disableBrokerageAuthorization`<a id="snaptradeconnectionsdisablebrokerageauthorization"></a>
+
+Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const disableBrokerageAuthorizationResponse =
+  await snaptrade.connections.disableBrokerageAuthorization({
+    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    userId: "snaptrade-user-123",
+    userSecret: "USERSECRET123",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorizationId: `string`<a id="authorizationid-string"></a>
+
+The ID of a brokerage authorization object.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationDisabledConfirmation](./models/brokerage-authorization-disabled-confirmation.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/disable` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

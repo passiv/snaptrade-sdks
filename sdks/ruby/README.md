@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.24-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.24)
+[![npm](https://img.shields.io/badge/gem-v2.0.25-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.25)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -35,6 +35,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
   * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
+  * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
@@ -70,7 +71,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.24'
+gem 'snaptrade', '~> 2.0.25'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -674,6 +675,41 @@ The ID of a brokerage authorization object.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.disable_brokerage_authorization`<a id="snaptradeconnectionsdisable_brokerage_authorization"></a>
+
+Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.connections.disable_brokerage_authorization(
+  authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  user_id: "snaptrade-user-123",
+  user_secret: "USERSECRET123",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `String`<a id="authorization_id-string"></a>
+The ID of a brokerage authorization object.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageAuthorizationDisabledConfirmation](./lib/snaptrade/models/brokerage_authorization_disabled_confirmation.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/disable` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

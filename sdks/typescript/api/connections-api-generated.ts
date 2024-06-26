@@ -21,11 +21,15 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { BrokerageAuthorization } from '../models';
 // @ts-ignore
+import { BrokerageAuthorizationDisabledConfirmation } from '../models';
+// @ts-ignore
 import { BrokerageAuthorizationRefreshConfirmation } from '../models';
 // @ts-ignore
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model402BrokerageAuthAlreadyDisabledException } from '../models';
 // @ts-ignore
 import { Model402BrokerageAuthDisabledResponse } from '../models';
 // @ts-ignore
@@ -95,6 +99,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
                 configuration,
                 pathTemplate: '/authorizations/{authorizationId}',
                 httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+         * @summary Manually disable a connection for testing
+         * @param {string} authorizationId The ID of a brokerage authorization object.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        disableBrokerageAuthorization: async (authorizationId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('disableBrokerageAuthorization', 'authorizationId', authorizationId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('disableBrokerageAuthorization', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('disableBrokerageAuthorization', 'userSecret', userSecret)
+            const localVarPath = `/authorizations/{authorizationId}/disable`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/disable',
+                httpMethod: 'POST'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -368,6 +434,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+         * @summary Manually disable a connection for testing
+         * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageAuthorizationDisabledConfirmation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.disableBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of Brokerage Authorization objects for the user
          * @summary List all brokerage authorizations for the User
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
@@ -430,6 +507,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         detailBrokerageAuthorization(requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorization> {
             return localVarFp.detailBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+         * @summary Manually disable a connection for testing
+         * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageAuthorizationDisabledConfirmation> {
+            return localVarFp.disableBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of Brokerage Authorization objects for the user
@@ -499,6 +586,36 @@ export type ConnectionsApiDetailBrokerageAuthorizationRequest = {
     * 
     * @type {string}
     * @memberof ConnectionsApiDetailBrokerageAuthorization
+    */
+    readonly userSecret: string
+    
+}
+
+/**
+ * Request parameters for disableBrokerageAuthorization operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiDisableBrokerageAuthorizationRequest
+ */
+export type ConnectionsApiDisableBrokerageAuthorizationRequest = {
+    
+    /**
+    * The ID of a brokerage authorization object.
+    * @type {string}
+    * @memberof ConnectionsApiDisableBrokerageAuthorization
+    */
+    readonly authorizationId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDisableBrokerageAuthorization
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDisableBrokerageAuthorization
     */
     readonly userSecret: string
     
@@ -634,6 +751,18 @@ export class ConnectionsApiGenerated extends BaseAPI {
      */
     public detailBrokerageAuthorization(requestParameters: ConnectionsApiDetailBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).detailBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+     * @summary Manually disable a connection for testing
+     * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public disableBrokerageAuthorization(requestParameters: ConnectionsApiDisableBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).disableBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

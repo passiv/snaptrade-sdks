@@ -11,6 +11,7 @@ from snaptrade_client.apis.paths.snap_trade_reset_user_secret import SnapTradeRe
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
 from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import AuthorizationsAuthorizationIdRefresh
+from snaptrade_client.apis.paths.authorizations_authorization_id_disable import AuthorizationsAuthorizationIdDisable
 from snaptrade_client.apis.paths.session_events import SessionEvents
 from snaptrade_client.apis.paths.accounts import Accounts
 from snaptrade_client.apis.paths.holdings import Holdings
@@ -56,6 +57,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,
@@ -102,6 +104,7 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.SESSION_EVENTS: SessionEvents,
         PathValues.ACCOUNTS: Accounts,
         PathValues.HOLDINGS: Holdings,

@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.23-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.23)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.24-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.24)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -38,6 +38,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
   * [`snaptrade.authentication.reset_snap_trade_user_secret`](#snaptradeauthenticationreset_snap_trade_user_secret)
   * [`snaptrade.connections.detail_brokerage_authorization`](#snaptradeconnectionsdetail_brokerage_authorization)
+  * [`snaptrade.connections.disable_brokerage_authorization`](#snaptradeconnectionsdisable_brokerage_authorization)
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
@@ -75,7 +76,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.23
+pip install snaptrade-python-sdk==11.0.24
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -761,6 +762,44 @@ The ID of a brokerage authorization object.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.connections.disable_brokerage_authorization`<a id="snaptradeconnectionsdisable_brokerage_authorization"></a>
+
+Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+disable_brokerage_authorization_response = (
+    snaptrade.connections.disable_brokerage_authorization(
+        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        user_id="snaptrade-user-123",
+        user_secret="USERSECRET123",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+The ID of a brokerage authorization object.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`BrokerageAuthorizationDisabledConfirmation`](./snaptrade_client/type/brokerage_authorization_disabled_confirmation.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/disable` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

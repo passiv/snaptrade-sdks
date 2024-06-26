@@ -17,6 +17,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.BrokerageAuthorization;
+import com.konfigthis.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
@@ -57,6 +58,23 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         BrokerageAuthorization response = api.detailBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Manually disable a connection for testing
+     *
+     * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void disableBrokerageAuthorizationTest() throws ApiException {
+        UUID authorizationId = null;
+        String userId = null;
+        String userSecret = null;
+        BrokerageAuthorizationDisabledConfirmation response = api.disableBrokerageAuthorization(authorizationId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }
