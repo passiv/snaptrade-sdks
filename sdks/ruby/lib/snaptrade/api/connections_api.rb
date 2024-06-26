@@ -120,6 +120,109 @@ module SnapTrade
     end
 
 
+    # Manually disable a connection for testing
+    #
+    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    #
+    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def disable_brokerage_authorization(authorization_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = disable_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Manually disable a connection for testing
+    #
+    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    #
+    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def disable_brokerage_authorization_with_http_info(authorization_id:, user_id:, user_secret:, extra: {})
+      disable_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
+    end
+
+    # Manually disable a connection for testing
+    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [BrokerageAuthorizationDisabledConfirmation]
+    private def disable_brokerage_authorization_impl(authorization_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = disable_brokerage_authorization_with_http_info(authorization_id, user_id, user_secret, opts)
+      data
+    end
+
+    # Manually disable a connection for testing
+    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(BrokerageAuthorizationDisabledConfirmation, Integer, Hash)>] BrokerageAuthorizationDisabledConfirmation data, response status code and response headers
+    private def disable_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectionsApi.disable_brokerage_authorization ...'
+      end
+      # verify the required parameter 'authorization_id' is set
+      if @api_client.config.client_side_validation && authorization_id.nil?
+        fail ArgumentError, "Missing the required parameter 'authorization_id' when calling ConnectionsApi.disable_brokerage_authorization"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ConnectionsApi.disable_brokerage_authorization"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ConnectionsApi.disable_brokerage_authorization"
+      end
+      # resource path
+      local_var_path = '/authorizations/{authorizationId}/disable'.sub('{' + 'authorizationId' + '}', CGI.escape(authorization_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'BrokerageAuthorizationDisabledConfirmation'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ConnectionsApi.disable_brokerage_authorization",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectionsApi#disable_brokerage_authorization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List all brokerage authorizations for the User
     #
     # Returns a list of Brokerage Authorization objects for the user

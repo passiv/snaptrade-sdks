@@ -195,6 +195,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/disable-POST': {
+        parameters: [
+            {
+                name: 'authorizationId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         parameters: [
             {

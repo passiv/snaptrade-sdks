@@ -547,6 +547,79 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh
       x-accepts: application/json
+  /authorizations/{authorizationId}/disable:
+    post:
+      description: "Manually disable a connection. This should only be used for testing\
+        \ a reconnect flow, and never used on production connections. Will trigger\
+        \ a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook\
+        \ for the connection. Please contact us in order to use this endpoint as it\
+        \ is disabled by default."
+      operationId: Connections_disableBrokerageAuthorization
+      parameters:
+      - description: The ID of a brokerage authorization object.
+        explode: false
+        in: path
+        name: authorizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerageAuthorizationDisabledConfirmation'
+          description: Confirmation that the connection has been disabled
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/401FailedRequestResponse'
+          description: "Unauthorized, invalid credentials for this resource"
+          x-do-not-generate: true
+        "402":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/402BrokerageAuthAlreadyDisabledException'
+          description: Unable to sync with brokerage account because the connection
+            is disabled.
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Customer or user does not have access to this feature
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: The requested resource does not exist.
+          x-do-not-generate: true
+      summary: Manually disable a connection for testing
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-disable
+      x-accepts: application/json
   /sessionEvents:
     get:
       description: Returns a list of session events associated with a user.
@@ -2243,6 +2316,19 @@ components:
         code:
           example: 3003
           x-konfig-original-example: 3003
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    "402BrokerageAuthAlreadyDisabledException":
+      additionalProperties: true
+      description: This connection is already disabled.
+      properties:
+        detail:
+          example: This connection is already disabled.
+          x-konfig-original-example: This connection is already disabled.
+        code:
+          example: 3011
+          x-konfig-original-example: 3011
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true
@@ -5458,6 +5544,20 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail
       type: object
       x-konfig-is-used-in-successful-response: true
+    BrokerageAuthorizationDisabledConfirmation:
+      additionalProperties: true
+      example:
+        detail: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
+      properties:
+        detail:
+          description: Connection disabled confirmation
+          example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
+          type: string
+          x-konfig-original-example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+            has been disabled
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationDisabledConfirmation-properties-detail
+      type: object
+      x-konfig-is-used-in-successful-response: true
     SessionEvent:
       additionalProperties: true
       example:
@@ -8348,6 +8448,10 @@ components:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorizationDisabledConfirmation-properties-detail:
+      example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SessionEvent-properties-brokerage_status_code:
       example: 400
       type: number
@@ -9044,6 +9148,25 @@ components:
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh:
+      additionalProperties: true
+      properties:
+        authorizationId:
+          $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-disable:
       additionalProperties: true
       properties:
         authorizationId:

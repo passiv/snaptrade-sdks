@@ -77,6 +77,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test DisableBrokerageAuthorization
+        /// </summary>
+        [Fact]
+        public void DisableBrokerageAuthorizationTest()
+        {
+            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Manually disable a connection for testing
+                BrokerageAuthorizationDisabledConfirmation result = client.Connections.DisableBrokerageAuthorization(authorizationId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.DisableBrokerageAuthorization: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test ListBrokerageAuthorizations
         /// </summary>
         [Fact]

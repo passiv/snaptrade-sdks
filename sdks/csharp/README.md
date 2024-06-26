@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.26-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.26)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.27-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.27)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
 *AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
 *ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
+*ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Manually disable a connection for testing
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the User
 *ConnectionsApi* | [**RefreshBrokerageAuthorization**](docs/ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization
@@ -156,6 +157,7 @@ Class | Method | HTTP request | Description
  - [Balance](docs/Balance.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
+ - [BrokerageAuthorizationDisabledConfirmation](docs/BrokerageAuthorizationDisabledConfirmation.md)
  - [BrokerageAuthorizationRefreshConfirmation](docs/BrokerageAuthorizationRefreshConfirmation.md)
  - [BrokerageAuthorizationType](docs/BrokerageAuthorizationType.md)
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
@@ -185,6 +187,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
  - [Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)
+ - [Model402BrokerageAuthAlreadyDisabledException](docs/Model402BrokerageAuthAlreadyDisabledException.md)
  - [Model402BrokerageAuthDisabledResponse](docs/Model402BrokerageAuthDisabledResponse.md)
  - [Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
  - [Model403FeatureNotEnabledResponse](docs/Model403FeatureNotEnabledResponse.md)

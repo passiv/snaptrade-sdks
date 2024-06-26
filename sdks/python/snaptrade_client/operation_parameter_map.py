@@ -189,6 +189,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/authorizations/{authorizationId}/disable-POST': {
+        'parameters': [
+            {
+                'name': 'authorizationId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/authorizations-GET': {
         'parameters': [
             {
