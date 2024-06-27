@@ -3393,13 +3393,13 @@ components:
             name:
               type: string
               example: Questrade
-              description: Name of Brokerage
+              description: Full name of the brokerage.
             slug:
               type: string
               example: QUESTRADE
               description:
-                Slug of Brokerage. It is usually the name of the brokerage in
-                capital letters
+                A unique identifier for that brokerage. It is usually the name of the brokerage in
+                capital letters and will never change.
     Brokerage:
       type: object
       properties:
@@ -3408,9 +3408,11 @@ components:
         name:
           type: string
           example: Questrade
+          description: Full name of the brokerage.
         display_name:
           type: string
           example: Questrade
+          description: A display-friendly name of the brokerage.
         description:
           type: string
           example: Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada's largest discount broker.
@@ -3431,6 +3433,9 @@ components:
         slug:
           type: string
           example: QUESTRADE
+          description:
+            A unique identifier for that brokerage. It is usually the name of the brokerage in
+            capital letters and will never change.
         url:
           type: string
           format: url

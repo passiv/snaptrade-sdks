@@ -26,13 +26,13 @@ export interface BrokerageAuthorizationTypeReadOnlyBrokerage {
      */
     'id'?: string;
     /**
-     * Name of Brokerage
+     * Full name of the brokerage.
      * @type {string}
      * @memberof BrokerageAuthorizationTypeReadOnlyBrokerage
      */
     'name'?: string;
     /**
-     * Slug of Brokerage. It is usually the name of the brokerage in capital letters
+     * A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
      * @type {string}
      * @memberof BrokerageAuthorizationTypeReadOnlyBrokerage
      */

@@ -36,13 +36,13 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Brokerage" /> class.
         /// </summary>
         /// <param name="id">id.</param>
-        /// <param name="name">name.</param>
-        /// <param name="displayName">displayName.</param>
+        /// <param name="name">Full name of the brokerage..</param>
+        /// <param name="displayName">A display-friendly name of the brokerage..</param>
         /// <param name="description">description.</param>
         /// <param name="awsS3LogoUrl">awsS3LogoUrl.</param>
         /// <param name="awsS3SquareLogoUrl">awsS3SquareLogoUrl.</param>
         /// <param name="openUrl">openUrl.</param>
-        /// <param name="slug">slug.</param>
+        /// <param name="slug">A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change..</param>
         /// <param name="url">url.</param>
         /// <param name="enabled">enabled.</param>
         /// <param name="maintenanceMode">maintenanceMode.</param>
@@ -87,14 +87,16 @@ namespace SnapTrade.Net.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Full name of the brokerage.
         /// </summary>
+        /// <value>Full name of the brokerage.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets DisplayName
+        /// A display-friendly name of the brokerage.
         /// </summary>
+        /// <value>A display-friendly name of the brokerage.</value>
         [DataMember(Name = "display_name", EmitDefaultValue = false)]
         public string DisplayName { get; set; }
 
@@ -123,8 +125,9 @@ namespace SnapTrade.Net.Model
         public string OpenUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets Slug
+        /// A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
         /// </summary>
+        /// <value>A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.</value>
         [DataMember(Name = "slug", EmitDefaultValue = false)]
         public string Slug { get; set; }
 

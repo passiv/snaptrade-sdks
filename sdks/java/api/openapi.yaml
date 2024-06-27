@@ -5326,11 +5326,13 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         name:
+          description: Full name of the brokerage.
           example: Questrade
           type: string
           x-konfig-original-example: Questrade
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-name
         display_name:
+          description: A display-friendly name of the brokerage.
           example: Questrade
           type: string
           x-konfig-original-example: Questrade
@@ -5363,6 +5365,8 @@ components:
           x-konfig-original-example: https://www.brokerage.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-open_url
         slug:
+          description: A unique identifier for that brokerage. It is usually the name
+            of the brokerage in capital letters and will never change.
           example: QUESTRADE
           type: string
           x-konfig-original-example: QUESTRADE
@@ -10625,14 +10629,14 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         name:
-          description: Name of Brokerage
+          description: Full name of the brokerage.
           example: Questrade
           type: string
           x-konfig-original-example: Questrade
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationTypeReadOnly-properties-brokerage-properties-name
         slug:
-          description: Slug of Brokerage. It is usually the name of the brokerage
-            in capital letters
+          description: A unique identifier for that brokerage. It is usually the name
+            of the brokerage in capital letters and will never change.
           example: QUESTRADE
           type: string
           x-konfig-original-example: QUESTRADE

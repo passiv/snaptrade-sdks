@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] 
-**Name** | **string** |  | [optional] 
-**DisplayName** | **string** |  | [optional] 
+**Name** | **string** | Full name of the brokerage. | [optional] 
+**DisplayName** | **string** | A display-friendly name of the brokerage. | [optional] 
 **Description** | **string** |  | [optional] 
 **AwsS3LogoUrl** | **string** |  | [optional] 
 **AwsS3SquareLogoUrl** | **string** |  | [optional] 
 **OpenUrl** | **string** |  | [optional] 
-**Slug** | **string** |  | [optional] 
+**Slug** | **string** | A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change. | [optional] 
 **Url** | **string** |  | [optional] 
 **Enabled** | **bool** |  | [optional] 
 **MaintenanceMode** | **bool** |  | [optional] 

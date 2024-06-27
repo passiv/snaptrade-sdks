@@ -36,8 +36,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="BrokerageAuthorizationTypeReadOnlyBrokerage" /> class.
         /// </summary>
         /// <param name="id">id.</param>
-        /// <param name="name">Name of Brokerage.</param>
-        /// <param name="slug">Slug of Brokerage. It is usually the name of the brokerage in capital letters.</param>
+        /// <param name="name">Full name of the brokerage..</param>
+        /// <param name="slug">A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change..</param>
         public BrokerageAuthorizationTypeReadOnlyBrokerage(string id = default(string), string name = default(string), string slug = default(string)) : base()
         {
             this.Id = id;
@@ -53,16 +53,16 @@ namespace SnapTrade.Net.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// Name of Brokerage
+        /// Full name of the brokerage.
         /// </summary>
-        /// <value>Name of Brokerage</value>
+        /// <value>Full name of the brokerage.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Slug of Brokerage. It is usually the name of the brokerage in capital letters
+        /// A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
         /// </summary>
-        /// <value>Slug of Brokerage. It is usually the name of the brokerage in capital letters</value>
+        /// <value>A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.</value>
         [DataMember(Name = "slug", EmitDefaultValue = false)]
         public string Slug { get; set; }
 
