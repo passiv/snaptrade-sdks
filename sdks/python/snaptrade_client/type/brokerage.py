@@ -24,8 +24,10 @@ class RequiredBrokerage(TypedDict):
 class OptionalBrokerage(TypedDict, total=False):
     id: str
 
+    # Full name of the brokerage.
     name: str
 
+    # A display-friendly name of the brokerage.
     display_name: str
 
     description: str
@@ -36,6 +38,7 @@ class OptionalBrokerage(TypedDict, total=False):
 
     open_url: typing.Optional[str]
 
+    # A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
     slug: str
 
     url: str

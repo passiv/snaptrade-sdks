@@ -104,11 +104,11 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
   }
 
    /**
-   * Name of Brokerage
+   * Full name of the brokerage.
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Questrade", value = "Name of Brokerage")
+  @ApiModelProperty(example = "Questrade", value = "Full name of the brokerage.")
 
   public String getName() {
     return name;
@@ -133,11 +133,11 @@ public class BrokerageAuthorizationTypeReadOnlyBrokerage {
   }
 
    /**
-   * Slug of Brokerage. It is usually the name of the brokerage in capital letters
+   * A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
    * @return slug
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "QUESTRADE", value = "Slug of Brokerage. It is usually the name of the brokerage in capital letters")
+  @ApiModelProperty(example = "QUESTRADE", value = "A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.")
 
   public String getSlug() {
     return slug;

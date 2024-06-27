@@ -176,11 +176,11 @@ public class Brokerage {
   }
 
    /**
-   * Get name
+   * Full name of the brokerage.
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Questrade", value = "")
+  @ApiModelProperty(example = "Questrade", value = "Full name of the brokerage.")
 
   public String getName() {
     return name;
@@ -205,11 +205,11 @@ public class Brokerage {
   }
 
    /**
-   * Get displayName
+   * A display-friendly name of the brokerage.
    * @return displayName
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Questrade", value = "")
+  @ApiModelProperty(example = "Questrade", value = "A display-friendly name of the brokerage.")
 
   public String getDisplayName() {
     return displayName;
@@ -350,11 +350,11 @@ public class Brokerage {
   }
 
    /**
-   * Get slug
+   * A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
    * @return slug
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "QUESTRADE", value = "")
+  @ApiModelProperty(example = "QUESTRADE", value = "A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.")
 
   public String getSlug() {
     return slug;

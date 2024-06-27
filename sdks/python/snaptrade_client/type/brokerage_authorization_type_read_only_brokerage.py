@@ -22,10 +22,10 @@ class RequiredBrokerageAuthorizationTypeReadOnlyBrokerage(TypedDict):
 class OptionalBrokerageAuthorizationTypeReadOnlyBrokerage(TypedDict, total=False):
     id: str
 
-    # Name of Brokerage
+    # Full name of the brokerage.
     name: str
 
-    # Slug of Brokerage. It is usually the name of the brokerage in capital letters
+    # A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
     slug: str
 
 class BrokerageAuthorizationTypeReadOnlyBrokerage(RequiredBrokerageAuthorizationTypeReadOnlyBrokerage, OptionalBrokerageAuthorizationTypeReadOnlyBrokerage):

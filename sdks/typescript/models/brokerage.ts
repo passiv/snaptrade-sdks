@@ -27,13 +27,13 @@ export interface Brokerage {
      */
     'id'?: string;
     /**
-     * 
+     * Full name of the brokerage.
      * @type {string}
      * @memberof Brokerage
      */
     'name'?: string;
     /**
-     * 
+     * A display-friendly name of the brokerage.
      * @type {string}
      * @memberof Brokerage
      */
@@ -63,7 +63,7 @@ export interface Brokerage {
      */
     'open_url'?: string | null;
     /**
-     * 
+     * A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
      * @type {string}
      * @memberof Brokerage
      */

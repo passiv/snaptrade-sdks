@@ -14,8 +14,10 @@ module SnapTrade
   class Brokerage
     attr_accessor :id
 
+    # Full name of the brokerage.
     attr_accessor :name
 
+    # A display-friendly name of the brokerage.
     attr_accessor :display_name
 
     attr_accessor :description
@@ -26,6 +28,7 @@ module SnapTrade
 
     attr_accessor :open_url
 
+    # A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
     attr_accessor :slug
 
     attr_accessor :url
