@@ -2159,6 +2159,8 @@ components:
       properties:
         transactions:
           $ref: "#/components/schemas/TransactionsStatus"
+        holdings:
+          $ref: "#/components/schemas/HoldingsStatus"
     TransactionsStatus:
       description: Status of account transaction sync
       properties:
@@ -2166,6 +2168,15 @@ components:
           type: boolean
         last_successful_sync:
           $ref: "#/components/schemas/SyncStatusDate"
+        first_transaction_date:
+          $ref: "#/components/schemas/SyncStatusDate"
+    HoldingsStatus:
+      description: Status of account holdings sync
+      properties:
+        initial_sync_completed:
+          type: boolean
+        last_successful_sync:
+          $ref: "#/components/schemas/HoldingsSyncStatusDate"
     AccountBalance:
       description: Balance of the account
       properties:
@@ -3943,6 +3954,13 @@ components:
       type: string
       example: "2022-01-24"
       format: date
+      nullable: true
+    HoldingsSyncStatusDate:
+      description:
+        Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+      type: string
+      example: "2024-06-28 18:42:46.561408+00:00"
+      format: datetime
       nullable: true
     TargetAsset:
       description: Target percentage of a certain asset
