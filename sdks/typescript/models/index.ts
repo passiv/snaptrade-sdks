@@ -34,6 +34,7 @@ export * from './exchange';
 export * from './exchange-rate-pairs';
 export * from './excluded-asset';
 export * from './figi-instrument';
+export * from './holdings-status';
 export * from './jwt';
 export * from './login-redirect-uri';
 export * from './manual-trade';

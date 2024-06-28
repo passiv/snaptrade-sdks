@@ -9,6 +9,7 @@ Status of account
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**transactions** | [**TransactionsStatus**](TransactionsStatus.md) |  |  [optional] |
+|**holdings** | [**HoldingsStatus**](HoldingsStatus.md) |  |  [optional] |
 
 
 

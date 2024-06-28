@@ -11,17 +11,18 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Status of account
-  class AccountSyncStatus
-    attr_accessor :transactions
+  # Status of account holdings sync
+  class HoldingsStatus
+    attr_accessor :initial_sync_completed
 
-    attr_accessor :holdings
+    # Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+    attr_accessor :last_successful_sync
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'transactions' => :'transactions',
-        :'holdings' => :'holdings'
+        :'initial_sync_completed' => :'initial_sync_completed',
+        :'last_successful_sync' => :'last_successful_sync'
       }
     end
 
@@ -33,14 +34,15 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'transactions' => :'TransactionsStatus',
-        :'holdings' => :'HoldingsStatus'
+        :'initial_sync_completed' => :'Boolean',
+        :'last_successful_sync' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'last_successful_sync'
       ])
     end
 
@@ -48,23 +50,23 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::AccountSyncStatus` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::HoldingsStatus` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::AccountSyncStatus`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::HoldingsStatus`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'transactions')
-        self.transactions = attributes[:'transactions']
+      if attributes.key?(:'initial_sync_completed')
+        self.initial_sync_completed = attributes[:'initial_sync_completed']
       end
 
-      if attributes.key?(:'holdings')
-        self.holdings = attributes[:'holdings']
+      if attributes.key?(:'last_successful_sync')
+        self.last_successful_sync = attributes[:'last_successful_sync']
       end
     end
 
@@ -86,8 +88,8 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          transactions == o.transactions &&
-          holdings == o.holdings
+          initial_sync_completed == o.initial_sync_completed &&
+          last_successful_sync == o.last_successful_sync
     end
 
     # @see the `==` method
@@ -99,7 +101,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [transactions, holdings].hash
+      [initial_sync_completed, last_successful_sync].hash
     end
 
     # Builds the object from hash

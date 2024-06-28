@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.HoldingsStatus;
 import com.konfigthis.client.model.TransactionsStatus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,6 +46,14 @@ public class AccountSyncStatusTest {
     @Test
     public void transactionsTest() {
         // TODO: test transactions
+    }
+
+    /**
+     * Test the property 'holdings'
+     */
+    @Test
+    public void holdingsTest() {
+        // TODO: test holdings
     }
 
 }

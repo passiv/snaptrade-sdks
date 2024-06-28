@@ -60,6 +60,10 @@ public class TransactionsStatus {
   @SerializedName(SERIALIZED_NAME_LAST_SUCCESSFUL_SYNC)
   private LocalDate lastSuccessfulSync;
 
+  public static final String SERIALIZED_NAME_FIRST_TRANSACTION_DATE = "first_transaction_date";
+  @SerializedName(SERIALIZED_NAME_FIRST_TRANSACTION_DATE)
+  private LocalDate firstTransactionDate;
+
   public TransactionsStatus() {
   }
 
@@ -120,6 +124,35 @@ public class TransactionsStatus {
     this.lastSuccessfulSync = lastSuccessfulSync;
   }
 
+
+  public TransactionsStatus firstTransactionDate(LocalDate firstTransactionDate) {
+    
+    
+    
+    
+    this.firstTransactionDate = firstTransactionDate;
+    return this;
+  }
+
+   /**
+   * Date in YYYY-MM-DD format or null
+   * @return firstTransactionDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date in YYYY-MM-DD format or null")
+
+  public LocalDate getFirstTransactionDate() {
+    return firstTransactionDate;
+  }
+
+
+  public void setFirstTransactionDate(LocalDate firstTransactionDate) {
+    
+    
+    
+    this.firstTransactionDate = firstTransactionDate;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -176,7 +209,8 @@ public class TransactionsStatus {
     }
     TransactionsStatus transactionsStatus = (TransactionsStatus) o;
     return Objects.equals(this.initialSyncCompleted, transactionsStatus.initialSyncCompleted) &&
-        Objects.equals(this.lastSuccessfulSync, transactionsStatus.lastSuccessfulSync)&&
+        Objects.equals(this.lastSuccessfulSync, transactionsStatus.lastSuccessfulSync) &&
+        Objects.equals(this.firstTransactionDate, transactionsStatus.firstTransactionDate)&&
         Objects.equals(this.additionalProperties, transactionsStatus.additionalProperties);
   }
 
@@ -186,7 +220,7 @@ public class TransactionsStatus {
 
   @Override
   public int hashCode() {
-    return Objects.hash(initialSyncCompleted, lastSuccessfulSync, additionalProperties);
+    return Objects.hash(initialSyncCompleted, lastSuccessfulSync, firstTransactionDate, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -202,6 +236,7 @@ public class TransactionsStatus {
     sb.append("class TransactionsStatus {\n");
     sb.append("    initialSyncCompleted: ").append(toIndentedString(initialSyncCompleted)).append("\n");
     sb.append("    lastSuccessfulSync: ").append(toIndentedString(lastSuccessfulSync)).append("\n");
+    sb.append("    firstTransactionDate: ").append(toIndentedString(firstTransactionDate)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -227,6 +262,7 @@ public class TransactionsStatus {
     openapiFields = new HashSet<String>();
     openapiFields.add("initial_sync_completed");
     openapiFields.add("last_successful_sync");
+    openapiFields.add("first_transaction_date");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

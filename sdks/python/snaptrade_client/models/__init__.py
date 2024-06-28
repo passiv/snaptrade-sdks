@@ -58,6 +58,8 @@ from snaptrade_client.model.excluded_asset import ExcludedAsset
 from snaptrade_client.model.figi_instrument import FigiInstrument
 from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.model.filled_units import FilledUnits
+from snaptrade_client.model.holdings_status import HoldingsStatus
+from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
 from snaptrade_client.model.id import Id
 from snaptrade_client.model.jwt import JWT
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI

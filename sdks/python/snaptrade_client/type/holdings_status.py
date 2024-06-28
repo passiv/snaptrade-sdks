@@ -15,17 +15,15 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.sync_status_date import SyncStatusDate
+from snaptrade_client.type.holdings_sync_status_date import HoldingsSyncStatusDate
 
-class RequiredTransactionsStatus(TypedDict):
+class RequiredHoldingsStatus(TypedDict):
     pass
 
-class OptionalTransactionsStatus(TypedDict, total=False):
+class OptionalHoldingsStatus(TypedDict, total=False):
     initial_sync_completed: bool
 
-    last_successful_sync: SyncStatusDate
+    last_successful_sync: HoldingsSyncStatusDate
 
-    first_transaction_date: SyncStatusDate
-
-class TransactionsStatus(RequiredTransactionsStatus, OptionalTransactionsStatus):
+class HoldingsStatus(RequiredHoldingsStatus, OptionalHoldingsStatus):
     pass
