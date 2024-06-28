@@ -20,24 +20,23 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.time.LocalDate;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for TransactionsStatus
+ * Model tests for HoldingsStatus
  */
-public class TransactionsStatusTest {
-    private final TransactionsStatus model = new TransactionsStatus();
+public class HoldingsStatusTest {
+    private final HoldingsStatus model = new HoldingsStatus();
 
     /**
-     * Model tests for TransactionsStatus
+     * Model tests for HoldingsStatus
      */
     @Test
-    public void testTransactionsStatus() {
-        // TODO: test TransactionsStatus
+    public void testHoldingsStatus() {
+        // TODO: test HoldingsStatus
     }
 
     /**
@@ -54,14 +53,6 @@ public class TransactionsStatusTest {
     @Test
     public void lastSuccessfulSyncTest() {
         // TODO: test lastSuccessfulSync
-    }
-
-    /**
-     * Test the property 'firstTransactionDate'
-     */
-    @Test
-    public void firstTransactionDateTest() {
-        // TODO: test firstTransactionDate
     }
 
 }

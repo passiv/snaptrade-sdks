@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.holdings_status import HoldingsStatus
 from snaptrade_client.type.transactions_status import TransactionsStatus
 
 class RequiredAccountSyncStatus(TypedDict):
@@ -22,6 +23,8 @@ class RequiredAccountSyncStatus(TypedDict):
 
 class OptionalAccountSyncStatus(TypedDict, total=False):
     transactions: TransactionsStatus
+
+    holdings: HoldingsStatus
 
 class AccountSyncStatus(RequiredAccountSyncStatus, OptionalAccountSyncStatus):
     pass

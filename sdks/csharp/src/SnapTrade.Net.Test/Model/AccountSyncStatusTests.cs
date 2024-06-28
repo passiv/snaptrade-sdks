@@ -65,6 +65,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Transactions'
         }
+        /// <summary>
+        /// Test the property 'Holdings'
+        /// </summary>
+        [Fact]
+        public void HoldingsTest()
+        {
+            // TODO unit test for the property 'Holdings'
+        }
 
     }
 

@@ -27,22 +27,20 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Status of account transaction sync
+    /// Status of account holdings sync
     /// </summary>
-    [DataContract(Name = "TransactionsStatus")]
-    public partial class TransactionsStatus : IEquatable<TransactionsStatus>, IValidatableObject
+    [DataContract(Name = "HoldingsStatus")]
+    public partial class HoldingsStatus : IEquatable<HoldingsStatus>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TransactionsStatus" /> class.
+        /// Initializes a new instance of the <see cref="HoldingsStatus" /> class.
         /// </summary>
         /// <param name="initialSyncCompleted">initialSyncCompleted.</param>
-        /// <param name="lastSuccessfulSync">Date in YYYY-MM-DD format or null.</param>
-        /// <param name="firstTransactionDate">Date in YYYY-MM-DD format or null.</param>
-        public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?), DateTime? firstTransactionDate = default(DateTime?))
+        /// <param name="lastSuccessfulSync">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
+        public HoldingsStatus(bool initialSyncCompleted = default(bool), string lastSuccessfulSync = default(string))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
-            this.FirstTransactionDate = firstTransactionDate;
         }
 
         /// <summary>
@@ -52,20 +50,11 @@ namespace SnapTrade.Net.Model
         public bool InitialSyncCompleted { get; set; }
 
         /// <summary>
-        /// Date in YYYY-MM-DD format or null
+        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
         /// </summary>
-        /// <value>Date in YYYY-MM-DD format or null</value>
+        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
         [DataMember(Name = "last_successful_sync", EmitDefaultValue = true)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? LastSuccessfulSync { get; set; }
-
-        /// <summary>
-        /// Date in YYYY-MM-DD format or null
-        /// </summary>
-        /// <value>Date in YYYY-MM-DD format or null</value>
-        [DataMember(Name = "first_transaction_date", EmitDefaultValue = true)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? FirstTransactionDate { get; set; }
+        public string LastSuccessfulSync { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -74,10 +63,9 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class TransactionsStatus {\n");
+            sb.Append("class HoldingsStatus {\n");
             sb.Append("  InitialSyncCompleted: ").Append(InitialSyncCompleted).Append("\n");
             sb.Append("  LastSuccessfulSync: ").Append(LastSuccessfulSync).Append("\n");
-            sb.Append("  FirstTransactionDate: ").Append(FirstTransactionDate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -98,15 +86,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TransactionsStatus);
+            return this.Equals(input as HoldingsStatus);
         }
 
         /// <summary>
-        /// Returns true if TransactionsStatus instances are equal
+        /// Returns true if HoldingsStatus instances are equal
         /// </summary>
-        /// <param name="input">Instance of TransactionsStatus to be compared</param>
+        /// <param name="input">Instance of HoldingsStatus to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TransactionsStatus input)
+        public bool Equals(HoldingsStatus input)
         {
             if (input == null)
             {
@@ -121,11 +109,6 @@ namespace SnapTrade.Net.Model
                     this.LastSuccessfulSync == input.LastSuccessfulSync ||
                     (this.LastSuccessfulSync != null &&
                     this.LastSuccessfulSync.Equals(input.LastSuccessfulSync))
-                ) && 
-                (
-                    this.FirstTransactionDate == input.FirstTransactionDate ||
-                    (this.FirstTransactionDate != null &&
-                    this.FirstTransactionDate.Equals(input.FirstTransactionDate))
                 );
         }
 
@@ -142,10 +125,6 @@ namespace SnapTrade.Net.Model
                 if (this.LastSuccessfulSync != null)
                 {
                     hashCode = (hashCode * 59) + this.LastSuccessfulSync.GetHashCode();
-                }
-                if (this.FirstTransactionDate != null)
-                {
-                    hashCode = (hashCode * 59) + this.FirstTransactionDate.GetHashCode();
                 }
                 return hashCode;
             }

@@ -12,28 +12,22 @@ import type * as buffer from "buffer"
 
 
 /**
- * Status of account transaction sync
+ * Status of account holdings sync
  * @export
- * @interface TransactionsStatus
+ * @interface HoldingsStatus
  */
-export interface TransactionsStatus {
+export interface HoldingsStatus {
     /**
      * 
      * @type {boolean}
-     * @memberof TransactionsStatus
+     * @memberof HoldingsStatus
      */
     'initial_sync_completed'?: boolean;
     /**
-     * Date in YYYY-MM-DD format or null
+     * Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
      * @type {string}
-     * @memberof TransactionsStatus
+     * @memberof HoldingsStatus
      */
     'last_successful_sync'?: string | null;
-    /**
-     * Date in YYYY-MM-DD format or null
-     * @type {string}
-     * @memberof TransactionsStatus
-     */
-    'first_transaction_date'?: string | null;
 }
 

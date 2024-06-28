@@ -1,13 +1,12 @@
-# SnapTrade.Net.Model.TransactionsStatus
-Status of account transaction sync
+# SnapTrade.Net.Model.HoldingsStatus
+Status of account holdings sync
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSyncCompleted** | **bool** |  | [optional] 
-**LastSuccessfulSync** | **DateTime?** | Date in YYYY-MM-DD format or null | [optional] 
-**FirstTransactionDate** | **DateTime?** | Date in YYYY-MM-DD format or null | [optional] 
+**LastSuccessfulSync** | **string** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

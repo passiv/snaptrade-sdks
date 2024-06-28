@@ -2432,17 +2432,24 @@ components:
     AccountSyncStatus:
       description: Status of account
       example:
+        holdings:
+          last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+          initial_sync_completed: true
         transactions:
           last_successful_sync: 2022-01-24T00:00:00.000+00:00
           initial_sync_completed: true
+          first_transaction_date: 2022-01-24T00:00:00.000+00:00
       properties:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
+        holdings:
+          $ref: '#/components/schemas/HoldingsStatus'
     TransactionsStatus:
       description: Status of account transaction sync
       example:
         last_successful_sync: 2022-01-24T00:00:00.000+00:00
         initial_sync_completed: true
+        first_transaction_date: 2022-01-24T00:00:00.000+00:00
       properties:
         initial_sync_completed:
           type: boolean
@@ -2454,6 +2461,30 @@ components:
           type: string
           x-konfig-original-example: 2022-01-24
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+        first_transaction_date:
+          description: Date in YYYY-MM-DD format or null
+          example: 2022-01-24
+          format: date
+          nullable: true
+          type: string
+          x-konfig-original-example: 2022-01-24
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+    HoldingsStatus:
+      description: Status of account holdings sync
+      example:
+        last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+        initial_sync_completed: true
+      properties:
+        initial_sync_completed:
+          type: boolean
+        last_successful_sync:
+          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+          example: 2024-06-28 18:42:46.561408+00:00
+          format: datetime
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
     AccountBalance:
       description: Balance of the account
       example:
@@ -2492,9 +2523,13 @@ components:
           institution_name: Alpaca
         name: Registered Retirement Savings Account
         sync_status:
+          holdings:
+            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            initial_sync_completed: true
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         created_date: 2021-06-04T16:26:46.523Z
@@ -2578,9 +2613,13 @@ components:
         number: Q6542138443
         name: Registered Retirement Savings Account
         sync_status:
+          holdings:
+            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            initial_sync_completed: true
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
@@ -2769,9 +2808,13 @@ components:
             institution_name: Alpaca
           name: Registered Retirement Savings Account
           sync_status:
+            holdings:
+              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              initial_sync_completed: true
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           institution_name: Alpaca
@@ -4029,9 +4072,13 @@ components:
           institution_name: Alpaca
         name: Registered Retirement Savings Account
         sync_status:
+          holdings:
+            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            initial_sync_completed: true
           transactions:
             last_successful_sync: 2022-01-24T00:00:00.000+00:00
             initial_sync_completed: true
+            first_transaction_date: 2022-01-24T00:00:00.000+00:00
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         institution_name: Alpaca
@@ -6274,6 +6321,14 @@ components:
       type: string
       x-konfig-original-example: 2022-01-24
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+    HoldingsSyncStatusDate:
+      description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+      example: 2024-06-28 18:42:46.561408+00:00
+      format: datetime
+      nullable: true
+      type: string
+      x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
     TargetAsset:
       additionalProperties: true
       description: Target percentage of a certain asset
@@ -6565,9 +6620,13 @@ components:
             institution_name: Alpaca
           name: Registered Retirement Savings Account
           sync_status:
+            holdings:
+              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              initial_sync_completed: true
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           created_date: 2021-06-04T16:26:46.523Z
@@ -6672,9 +6731,13 @@ components:
               institution_name: Alpaca
             name: Registered Retirement Savings Account
             sync_status:
+              holdings:
+                last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+                initial_sync_completed: true
               transactions:
                 last_successful_sync: 2022-01-24T00:00:00.000+00:00
                 initial_sync_completed: true
+                first_transaction_date: 2022-01-24T00:00:00.000+00:00
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
             created_date: 2021-06-04T16:26:46.523Z
@@ -6966,9 +7029,13 @@ components:
           number: Q6542138443
           name: Registered Retirement Savings Account
           sync_status:
+            holdings:
+              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              initial_sync_completed: true
             transactions:
               last_successful_sync: 2022-01-24T00:00:00.000+00:00
               initial_sync_completed: true
+              first_transaction_date: 2022-01-24T00:00:00.000+00:00
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
@@ -8638,6 +8705,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SyncStatusDate:
       example: 2022-01-24
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-HoldingsSyncStatusDate:
+      example: 2024-06-28 18:42:46.561408+00:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TargetAsset-properties-is_supported:

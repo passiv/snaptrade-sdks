@@ -36,9 +36,11 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountSyncStatus" /> class.
         /// </summary>
         /// <param name="transactions">transactions.</param>
-        public AccountSyncStatus(TransactionsStatus transactions = default(TransactionsStatus))
+        /// <param name="holdings">holdings.</param>
+        public AccountSyncStatus(TransactionsStatus transactions = default(TransactionsStatus), HoldingsStatus holdings = default(HoldingsStatus))
         {
             this.Transactions = transactions;
+            this.Holdings = holdings;
         }
 
         /// <summary>
@@ -46,6 +48,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "transactions", EmitDefaultValue = false)]
         public TransactionsStatus Transactions { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Holdings
+        /// </summary>
+        [DataMember(Name = "holdings", EmitDefaultValue = false)]
+        public HoldingsStatus Holdings { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -56,6 +64,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountSyncStatus {\n");
             sb.Append("  Transactions: ").Append(Transactions).Append("\n");
+            sb.Append("  Holdings: ").Append(Holdings).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -95,6 +104,11 @@ namespace SnapTrade.Net.Model
                     this.Transactions == input.Transactions ||
                     (this.Transactions != null &&
                     this.Transactions.Equals(input.Transactions))
+                ) && 
+                (
+                    this.Holdings == input.Holdings ||
+                    (this.Holdings != null &&
+                    this.Holdings.Equals(input.Holdings))
                 );
         }
 
@@ -110,6 +124,10 @@ namespace SnapTrade.Net.Model
                 if (this.Transactions != null)
                 {
                     hashCode = (hashCode * 59) + this.Transactions.GetHashCode();
+                }
+                if (this.Holdings != null)
+                {
+                    hashCode = (hashCode * 59) + this.Holdings.GetHashCode();
                 }
                 return hashCode;
             }
