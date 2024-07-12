@@ -319,7 +319,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
+         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
          * @summary Obtain a new user secret for a user
          * @param {UserIDandSecret} userIDandSecret 
          * @param {*} [options] Override http request option.
@@ -446,7 +446,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
+         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
          * @summary Obtain a new user secret for a user
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -520,7 +520,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.registerSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
+         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
          * @summary Obtain a new user secret for a user
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -679,7 +679,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
+     * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
      * @summary Obtain a new user secret for a user
      * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

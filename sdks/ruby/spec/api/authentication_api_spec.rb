@@ -91,7 +91,7 @@ describe 'AuthenticationApi' do
 
   # unit tests for reset_snap_trade_user_secret
   # Obtain a new user secret for a user
-  # This API is used to generate a new secret for a SnapTrade user. You might use this if a userSecret is comprimised or lost among other reasons. 
+  # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
   # @param user_i_dand_secret 
   # @param [Hash] opts the optional parameters
   # @return [UserIDandSecret]
