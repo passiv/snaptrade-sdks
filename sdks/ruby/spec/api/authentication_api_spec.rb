@@ -39,19 +39,6 @@ describe 'AuthenticationApi' do
     end
   end
 
-  # unit tests for get_user_jwt
-  # Generate encrypted JWT token
-  # This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-  # @param user_id 
-  # @param user_secret 
-  # @param [Hash] opts the optional parameters
-  # @return [EncryptedResponse]
-  describe 'get_user_jwt test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   # unit tests for list_snap_trade_users
   # List SnapTrade users
   # Returns a list of users you&#39;ve registered over the SnapTrade API.

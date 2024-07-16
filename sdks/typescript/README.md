@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.29-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.29)
+[![npm](https://img.shields.io/badge/npm-v9.0.30-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.30)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -28,7 +28,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
   * [`snaptrade.apiStatus.check`](#snaptradeapistatuscheck)
   * [`snaptrade.authentication.deleteSnapTradeUser`](#snaptradeauthenticationdeletesnaptradeuser)
-  * [`snaptrade.authentication.getUserJWT`](#snaptradeauthenticationgetuserjwt)
   * [`snaptrade.authentication.listSnapTradeUsers`](#snaptradeauthenticationlistsnaptradeusers)
   * [`snaptrade.authentication.loginSnapTradeUser`](#snaptradeauthenticationloginsnaptradeuser)
   * [`snaptrade.authentication.registerSnapTradeUser`](#snaptradeauthenticationregistersnaptradeuser)
@@ -542,40 +541,6 @@ const deleteSnapTradeUserResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.authentication.getUserJWT`<a id="snaptradeauthenticationgetuserjwt"></a>
-
-This API is available to ClientIDs which have opted to use encrypted
-JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getUserJWTResponse = await snaptrade.authentication.getUserJWT({
-  userId: "snaptrade-user-123",
-  userSecret: "USERSECRET123",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[EncryptedResponse](./models/encrypted-response.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/encryptedJWT` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

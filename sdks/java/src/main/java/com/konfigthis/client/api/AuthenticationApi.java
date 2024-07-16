@@ -2,7 +2,6 @@ package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.DeleteUserResponse;
-import com.konfigthis.client.model.EncryptedResponse;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -19,11 +18,6 @@ public class AuthenticationApi extends AuthenticationApiGenerated {
     public class DeleteSnapTradeUserRequestBuilder extends DeleteSnapTradeUserRequestBuilderGenerated {
         public DeleteSnapTradeUserRequestBuilder(String userId) {
             super(userId);
-        }
-    }
-    public class GetUserJWTRequestBuilder extends GetUserJWTRequestBuilderGenerated {
-        public GetUserJWTRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
         }
     }
     public class ListSnapTradeUsersRequestBuilder extends ListSnapTradeUsersRequestBuilderGenerated {
