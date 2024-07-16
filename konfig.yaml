@@ -23,6 +23,9 @@ portal:
   hideNonSdkSnippets: true
   primaryColor: '#ebb964'
   favicon: favicon.png
+  cta:
+    url: https://app.simplymeet.me/marc-williams-f6mezb/25min
+    label: Book A Demo
   logo:
     light: portal-logo-light.png
     dark: portal-logo-dark.png
