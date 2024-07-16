@@ -227,56 +227,6 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /snapTrade/encryptedJWT:
-    get:
-      tags:
-        - Authentication
-      summary:
-        Generate encrypted JWT token
-      description: |
-        This API is available to ClientIDs which have opted to use encrypted
-        JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-      operationId: Authentication_getUserJWT
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-      responses:
-        "200":
-          description:
-            Successfully obtained encrypted JWT data. See description on how to
-            object JWT token
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/encryptedResponse"
-        "400":
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/400FailedRequestResponse"
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/403FailedRequestResponse"
-        "404":
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/404FailedRequestResponse"
-        "500":
-          description: Unexpected Error
   /snapTrade/resetUserSecret:
     post:
       tags:
