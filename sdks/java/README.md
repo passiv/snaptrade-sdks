@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.27-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.27)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.28-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.28)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.27</version>
+  <version>5.0.28</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.27"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.28"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.27.jar`
+* `target/snaptrade-java-sdk-5.0.28.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -195,7 +195,6 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**updateUserAccount**](docs/AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *ApiStatusApi* | [**check**](docs/ApiStatusApi.md#check) | **GET** / | Get API Status
 *AuthenticationApi* | [**deleteSnapTradeUser**](docs/AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
-*AuthenticationApi* | [**getUserJWT**](docs/AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token
 *AuthenticationApi* | [**listSnapTradeUsers**](docs/AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users
 *AuthenticationApi* | [**loginSnapTradeUser**](docs/AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link
 *AuthenticationApi* | [**registerSnapTradeUser**](docs/AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user

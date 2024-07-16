@@ -17,7 +17,6 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.DeleteUserResponse;
-import com.konfigthis.client.model.EncryptedResponse;
 import com.konfigthis.client.model.SnapTradeLoginUserRequestBody;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.UserIDandSecret;
@@ -56,22 +55,6 @@ public class AuthenticationApiTest {
     public void deleteSnapTradeUserTest() throws ApiException {
         String userId = null;
         DeleteUserResponse response = api.deleteSnapTradeUser(userId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Generate encrypted JWT token
-     *
-     * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getUserJWTTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        EncryptedResponse response = api.getUserJWT(userId, userSecret)
                 .execute();
         // TODO: test validations
     }

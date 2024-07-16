@@ -252,64 +252,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--snapTrade-deleteUser
       x-accepts: application/json
-  /snapTrade/encryptedJWT:
-    get:
-      description: |
-        This API is available to ClientIDs which have opted to use encrypted
-        JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-      operationId: Authentication_getUserJWT
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/encryptedResponse'
-          description: Successfully obtained encrypted JWT data. See description on
-            how to object JWT token
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/403FailedRequestResponse'
-          description: Forbidden
-          x-do-not-generate: true
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Not Found
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Generate encrypted JWT token
-      tags:
-      - Authentication
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-encryptedJWT
-      x-accepts: application/json
   /snapTrade/resetUserSecret:
     post:
       description: |
@@ -7623,12 +7565,6 @@ components:
 
               return cipher.decrypt_and_verify(encrypted_msg, tag).decode()
           ```
-      example:
-        encryptedSharedKey: 5UEaY9QGzcNTr8y2jGDUI79jY1OdfK9x
-        encryptedMessageData:
-          encryptedMessage: 9Xy05vqZOfp0OpW5fLAaDw==
-          tag: mWZPkpQh5ktbcz6N7cTRmQ==
-          nonce: None
       properties:
         encryptedSharedKey:
           example: 5UEaY9QGzcNTr8y2jGDUI79jY1OdfK9x
@@ -7638,7 +7574,6 @@ components:
         encryptedMessageData:
           $ref: '#/components/schemas/encryptedResponse_encryptedMessageData'
       type: object
-      x-konfig-is-used-in-successful-response: true
     konfig-generated-schema-paths--holdings-get-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -9144,21 +9079,6 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - userId
-    konfig-generated-schema-single-parameter-schema-get--snapTrade-encryptedJWT:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-post--snapTrade-resetUserSecret:
       additionalProperties: true
       properties:
@@ -10894,10 +10814,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
     encryptedResponse_encryptedMessageData:
       additionalProperties: true
-      example:
-        encryptedMessage: 9Xy05vqZOfp0OpW5fLAaDw==
-        tag: mWZPkpQh5ktbcz6N7cTRmQ==
-        nonce: None
       properties:
         encryptedMessage:
           example: 9Xy05vqZOfp0OpW5fLAaDw==

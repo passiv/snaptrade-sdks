@@ -10,7 +10,6 @@
 """
 
 from snaptrade_client.paths.snap_trade_delete_user.delete import DeleteSnapTradeUser
-from snaptrade_client.paths.snap_trade_encrypted_jwt.get import GetUserJwt
 from snaptrade_client.paths.snap_trade_list_users.get import ListSnapTradeUsers
 from snaptrade_client.paths.snap_trade_login.post import LoginSnapTradeUser
 from snaptrade_client.paths.snap_trade_register_user.post import RegisterSnapTradeUser
@@ -19,7 +18,6 @@ from snaptrade_client.paths.snap_trade_reset_user_secret.post import ResetSnapTr
 
 class AuthenticationApiGenerated(
     DeleteSnapTradeUser,
-    GetUserJwt,
     ListSnapTradeUsers,
     LoginSnapTradeUser,
     RegisterSnapTradeUser,

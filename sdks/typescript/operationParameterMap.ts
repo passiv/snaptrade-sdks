@@ -123,16 +123,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/snapTrade/encryptedJWT-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-        ]
-    },
     '/snapTrade/listUsers-GET': {
         parameters: [
         ]

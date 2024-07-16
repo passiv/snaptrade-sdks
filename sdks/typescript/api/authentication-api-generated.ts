@@ -23,8 +23,6 @@ import { AuthenticationLoginSnapTradeUser200Response } from '../models';
 // @ts-ignore
 import { DeleteUserResponse } from '../models';
 // @ts-ignore
-import { EncryptedResponse } from '../models';
-// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
@@ -92,64 +90,6 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
                 configuration,
                 pathTemplate: '/snapTrade/deleteUser',
                 httpMethod: 'DELETE'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-         * @summary Generate encrypted JWT token
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserJWT: async (userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getUserJWT', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getUserJWT', 'userSecret', userSecret)
-            const localVarPath = `/snapTrade/encryptedJWT`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/snapTrade/encryptedJWT',
-                httpMethod: 'GET'
             });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -392,17 +332,6 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-         * @summary Generate encrypted JWT token
-         * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUserJWT(requestParameters: AuthenticationApiGetUserJWTRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<EncryptedResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserJWT(requestParameters.userId, requestParameters.userSecret, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
          * Returns a list of users you\'ve registered over the SnapTrade API.
          * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
@@ -481,16 +410,6 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.deleteSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-         * @summary Generate encrypted JWT token
-         * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserJWT(requestParameters: AuthenticationApiGetUserJWTRequest, options?: AxiosRequestConfig): AxiosPromise<EncryptedResponse> {
-            return localVarFp.getUserJWT(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Returns a list of users you\'ve registered over the SnapTrade API.
          * @summary List SnapTrade users
          * @param {*} [options] Override http request option.
@@ -545,29 +464,6 @@ export type AuthenticationApiDeleteSnapTradeUserRequest = {
     * @memberof AuthenticationApiDeleteSnapTradeUser
     */
     readonly userId: string
-    
-}
-
-/**
- * Request parameters for getUserJWT operation in AuthenticationApi.
- * @export
- * @interface AuthenticationApiGetUserJWTRequest
- */
-export type AuthenticationApiGetUserJWTRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof AuthenticationApiGetUserJWT
-    */
-    readonly userId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof AuthenticationApiGetUserJWT
-    */
-    readonly userSecret: string
     
 }
 
@@ -629,18 +525,6 @@ export class AuthenticationApiGenerated extends BaseAPI {
      */
     public deleteSnapTradeUser(requestParameters: AuthenticationApiDeleteSnapTradeUserRequest, options?: AxiosRequestConfig) {
         return AuthenticationApiFp(this.configuration).deleteSnapTradeUser(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-     * @summary Generate encrypted JWT token
-     * @param {AuthenticationApiGetUserJWTRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApiGenerated
-     */
-    public getUserJWT(requestParameters: AuthenticationApiGetUserJWTRequest, options?: AxiosRequestConfig) {
-        return AuthenticationApiFp(this.configuration).getUserJWT(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

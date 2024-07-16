@@ -6,7 +6,6 @@ from snaptrade_client.apis.paths.snap_trade_register_user import SnapTradeRegist
 from snaptrade_client.apis.paths.snap_trade_login import SnapTradeLogin
 from snaptrade_client.apis.paths.snap_trade_list_users import SnapTradeListUsers
 from snaptrade_client.apis.paths.snap_trade_delete_user import SnapTradeDeleteUser
-from snaptrade_client.apis.paths.snap_trade_encrypted_jwt import SnapTradeEncryptedJWT
 from snaptrade_client.apis.paths.snap_trade_reset_user_secret import SnapTradeResetUserSecret
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
@@ -52,7 +51,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SNAP_TRADE_LOGIN: SnapTradeLogin,
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
-        PathValues.SNAP_TRADE_ENCRYPTED_JWT: SnapTradeEncryptedJWT,
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
@@ -99,7 +97,6 @@ path_to_api = PathToApi(
         PathValues.SNAP_TRADE_LOGIN: SnapTradeLogin,
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
-        PathValues.SNAP_TRADE_ENCRYPTED_JWT: SnapTradeEncryptedJWT,
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,

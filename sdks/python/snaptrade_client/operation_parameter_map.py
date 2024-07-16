@@ -117,16 +117,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/snapTrade/encryptedJWT-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-        ]
-    },
     '/snapTrade/listUsers-GET': {
         'parameters': [
         ]

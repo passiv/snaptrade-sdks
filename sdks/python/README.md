@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.27-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.27)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.28-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.28)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -32,7 +32,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
   * [`snaptrade.api_status.check`](#snaptradeapi_statuscheck)
   * [`snaptrade.authentication.delete_snap_trade_user`](#snaptradeauthenticationdelete_snap_trade_user)
-  * [`snaptrade.authentication.get_user_jwt`](#snaptradeauthenticationget_user_jwt)
   * [`snaptrade.authentication.list_snap_trade_users`](#snaptradeauthenticationlist_snap_trade_users)
   * [`snaptrade.authentication.login_snap_trade_user`](#snaptradeauthenticationlogin_snap_trade_user)
   * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
@@ -76,7 +75,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.27
+pip install snaptrade-python-sdk==11.0.28
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -532,39 +531,6 @@ delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_use
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `delete`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.authentication.get_user_jwt`<a id="snaptradeauthenticationget_user_jwt"></a>
-
-This API is available to ClientIDs which have opted to use encrypted
-JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_user_jwt_response = snaptrade.authentication.get_user_jwt(
-    user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`EncryptedResponse`](./snaptrade_client/type/encrypted_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/encryptedJWT` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

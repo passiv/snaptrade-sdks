@@ -5,7 +5,6 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
-| [**getUserJWT**](AuthenticationApi.md#getUserJWT) | **GET** /snapTrade/encryptedJWT | Generate encrypted JWT token |
 | [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users |
 | [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
 | [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
@@ -105,103 +104,6 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Delete successful |  -  |
-| **500** | Unexpected Error |  -  |
-
-<a name="getUserJWT"></a>
-# **getUserJWT**
-> EncryptedResponse getUserJWT(userId, userSecret).execute();
-
-Generate encrypted JWT token
-
-This API is available to ClientIDs which have opted to use encrypted JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification. 
-
-### Example
-```java
-import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.ApiResponse;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.auth.*;
-import com.konfigthis.client.model.*;
-import com.konfigthis.client.api.AuthenticationApi;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-public class Example {
-  public static void main(String[] args) {
-    Configuration configuration = new Configuration();
-    configuration.host = "https://api.snaptrade.com/api/v1";
-    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-    
-    Snaptrade client = new Snaptrade(configuration);
-    String userId = "userId_example";
-    String userSecret = "userSecret_example";
-    try {
-      EncryptedResponse result = client
-              .authentication
-              .getUserJWT(userId, userSecret)
-              .execute();
-      System.out.println(result);
-      System.out.println(result.getEncryptedSharedKey());
-      System.out.println(result.getEncryptedMessageData());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getUserJWT");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-
-    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
-    try {
-      ApiResponse<EncryptedResponse> response = client
-              .authentication
-              .getUserJWT(userId, userSecret)
-              .executeWithHttpInfo();
-      System.out.println(response.getResponseBody());
-      System.out.println(response.getResponseHeaders());
-      System.out.println(response.getStatusCode());
-      System.out.println(response.getRoundTripTime());
-      System.out.println(response.getRequest());
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getUserJWT");
-      System.err.println("Status code: " + e.getStatusCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
-    }
-  }
-}
-
-```
-
-### Parameters
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | |
-| **userSecret** | **String**|  | |
-
-### Return type
-
-[**EncryptedResponse**](EncryptedResponse.md)
-
-### Authorization
-
-[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Successfully obtained encrypted JWT data. See description on how to object JWT token |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="listSnapTradeUsers"></a>

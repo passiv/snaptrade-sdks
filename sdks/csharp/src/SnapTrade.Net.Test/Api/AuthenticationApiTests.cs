@@ -75,35 +75,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetUserJWT
-        /// </summary>
-        [Fact]
-        public void GetUserJWTTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            
-            try
-            {
-                // Generate encrypted JWT token
-                EncryptedResponse result = client.Authentication.GetUserJWT(userId, userSecret);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling AuthenticationApi.GetUserJWT: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test ListSnapTradeUsers
         /// </summary>
         [Fact]

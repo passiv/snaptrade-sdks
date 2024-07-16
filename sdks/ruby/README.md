@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.28-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.28)
+[![npm](https://img.shields.io/badge/gem-v2.0.29-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.29)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -29,7 +29,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
   * [`snaptrade.api_status.check`](#snaptradeapi_statuscheck)
   * [`snaptrade.authentication.delete_snap_trade_user`](#snaptradeauthenticationdelete_snap_trade_user)
-  * [`snaptrade.authentication.get_user_jwt`](#snaptradeauthenticationget_user_jwt)
   * [`snaptrade.authentication.list_snap_trade_users`](#snaptradeauthenticationlist_snap_trade_users)
   * [`snaptrade.authentication.login_snap_trade_user`](#snaptradeauthenticationlogin_snap_trade_user)
   * [`snaptrade.authentication.register_snap_trade_user`](#snaptradeauthenticationregister_snap_trade_user)
@@ -71,7 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.28'
+gem 'snaptrade', '~> 2.0.29'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -451,39 +450,6 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `DELETE`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.authentication.get_user_jwt`<a id="snaptradeauthenticationget_user_jwt"></a>
-
-This API is available to ClientIDs which have opted to use encrypted
-JWTs (JSON Web Tokens) instead of standard SnapTrade signature verification.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.authentication.get_user_jwt(
-  user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-#### 🔄 Return<a id="🔄-return"></a>
-
-[EncryptedResponse](./lib/snaptrade/models/encrypted_response.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/snapTrade/encryptedJWT` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
