@@ -3246,7 +3246,7 @@ components:
             - read
             - trade
         connectionPortalVersion:
-          description: Sets the version of the connection portal to render, with a default to 'v2'
+          description: Sets the version of the connection portal to render, with a default to 'v3'
           type: string
           enum:
             - v2
