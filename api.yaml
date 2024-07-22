@@ -646,7 +646,7 @@ paths:
       tags:
         - Trading
       summary: Get symbol quotes
-      description: Returns live quote(s) from the brokerage for the specified symbol(s).
+      description: Returns quote(s) from the brokerage for the specified symbol(s).
       operationId: Trading_getUserAccountQuotes
       parameters:
         - in: query
@@ -3246,7 +3246,7 @@ components:
             - read
             - trade
         connectionPortalVersion:
-          description: Sets the version of the connection portal to render, with a default to 'v2'
+          description: Sets the version of the connection portal to render, with a default to 'v3'
           type: string
           enum:
             - v2
