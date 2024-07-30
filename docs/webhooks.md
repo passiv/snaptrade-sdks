@@ -299,8 +299,6 @@ Account Holdings in this context refers to:
 
 Historical transactions will be polled for, but will not fetch transactions from the current day
 
-Please contact us in order to receive these webhooks as they are disabled by default.
-
 Example payload is below:
 ```json
 {
