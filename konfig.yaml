@@ -27,7 +27,7 @@ portal:
     url: https://app.simplymeet.me/marc-williams-f6mezb/25min
     label: Book A Demo
   logo:
-    light: portal-logo-light.png
+    light: portal-logo-light.svg
     dark: portal-logo-dark.svg
   socials:
     website: https://snaptrade.com
