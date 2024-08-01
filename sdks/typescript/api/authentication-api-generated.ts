@@ -207,7 +207,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+         * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {SnapTradeRegisterUserRequestBody} snapTradeRegisterUserRequestBody 
          * @param {*} [options] Override http request option.
@@ -361,7 +361,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+         * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -429,7 +429,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.loginSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+         * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
          * @summary Create SnapTrade user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -551,7 +551,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+     * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
      * @summary Create SnapTrade user
      * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

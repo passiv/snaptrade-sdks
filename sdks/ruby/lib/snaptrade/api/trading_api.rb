@@ -293,7 +293,7 @@ module SnapTrade
 
     # Get symbol quotes
     #
-    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    # Returns quote(s) from the brokerage for the specified symbol(s).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -309,7 +309,7 @@ module SnapTrade
 
     # Get symbol quotes
     #
-    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    # Returns quote(s) from the brokerage for the specified symbol(s).
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -323,7 +323,7 @@ module SnapTrade
     end
 
     # Get symbol quotes
-    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    # Returns quote(s) from the brokerage for the specified symbol(s).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
@@ -337,7 +337,7 @@ module SnapTrade
     end
 
     # Get symbol quotes
-    # Returns live quote(s) from the brokerage for the specified symbol(s).
+    # Returns quote(s) from the brokerage for the specified symbol(s).
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.

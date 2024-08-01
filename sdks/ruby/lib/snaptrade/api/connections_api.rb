@@ -320,7 +320,7 @@ module SnapTrade
 
     # Refresh holdings for a connection
     #
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
     #
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
@@ -333,7 +333,7 @@ module SnapTrade
 
     # Refresh holdings for a connection
     #
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
     #
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
@@ -344,7 +344,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -356,7 +356,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
     # @param authorization_id [String] The ID of a brokerage authorization object.
     # @param user_id [String] 
     # @param user_secret [String] 

@@ -20,7 +20,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 List all accounts for the user, plus balances, positions, and orders for each account.
 
-Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+**Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
 
 ### Example
 ```java

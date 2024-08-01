@@ -66,7 +66,7 @@ describe 'AuthenticationApi' do
 
   # unit tests for register_snap_trade_user
   # Create SnapTrade user
-  # Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+  # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
   # @param snap_trade_register_user_request_body 
   # @param [Hash] opts the optional parameters
   # @return [UserIDandSecret]

@@ -87,7 +87,7 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quote(s) from the brokerage for the specified symbol(s).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -103,7 +103,7 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quote(s) from the brokerage for the specified symbol(s).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -243,7 +243,7 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quote(s) from the brokerage for the specified symbol(s).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -260,7 +260,7 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quote(s) from the brokerage for the specified symbol(s).
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -895,7 +895,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -912,7 +912,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1013,7 +1013,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1031,7 +1031,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns live quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

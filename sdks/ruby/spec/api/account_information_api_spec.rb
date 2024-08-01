@@ -29,7 +29,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for get_all_user_holdings
   # List all accounts for the user, plus balances, positions, and orders for each account.
-  # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+  # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

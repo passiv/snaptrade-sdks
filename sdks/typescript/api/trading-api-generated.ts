@@ -190,7 +190,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns live quote(s) from the brokerage for the specified symbol(s).
+         * Returns quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
@@ -444,7 +444,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns live quote(s) from the brokerage for the specified symbol(s).
+         * Returns quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -521,7 +521,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOrderImpact(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns live quote(s) from the brokerage for the specified symbol(s).
+         * Returns quote(s) from the brokerage for the specified symbol(s).
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -735,7 +735,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns live quote(s) from the brokerage for the specified symbol(s).
+     * Returns quote(s) from the brokerage for the specified symbol(s).
      * @summary Get symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

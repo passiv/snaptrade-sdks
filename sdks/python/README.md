@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.28-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.28)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.29-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.29)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.28
+pip install snaptrade-python-sdk==11.0.29
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -180,8 +180,10 @@ asyncio.run(main())
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Lists balances, positions and orders for the specified account. The data returned is similar to
-the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+**Deprecated, please use the account-specific holdings endpoint instead.**
+
+List all accounts for the user, plus balances, positions, and orders for each
+account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -585,7 +587,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
 
 ##### broker: `str`<a id="broker-str"></a>
 
-Slug of the brokerage to connect the user to
+Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
 
 ##### immediate_redirect: `bool`<a id="immediate_redirect-bool"></a>
 
@@ -605,7 +607,7 @@ Sets whether the connection should be read or trade
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 
-Sets the version of the connection portal to render, with a default to 'v2'
+Sets the version of the connection portal to render, with a default to 'v3'
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -620,8 +622,8 @@ Sets the version of the connection portal to render, with a default to 'v2'
 
 ### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
-Registers a new SnapTrade user under your ClientID.
-Most SnapTrade operations require a user to be passed as a parameter.
+Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
+Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -806,7 +808,7 @@ list_brokerage_authorizations_response = (
 
 ### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1554,7 +1556,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns live quote(s) from the brokerage for the specified symbol(s).
+Returns quote(s) from the brokerage for the specified symbol(s).
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

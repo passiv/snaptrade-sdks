@@ -225,12 +225,12 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String broker = "broker_example"; // Slug of the brokerage to connect the user to
+    String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
     Boolean immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account
     String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     String connectionType = "read"; // Sets whether the connection should be read or trade
-    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render, with a default to 'v2'
+    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render, with a default to 'v3'
     try {
       Object result = client
               .authentication
@@ -312,7 +312,7 @@ public class Example {
 
 Create SnapTrade user
 
-Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
 
 ### Example
 ```java

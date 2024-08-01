@@ -186,12 +186,12 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] Slug of the brokerage to connect the user to
+    # @param broker [String] Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
     # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v2'
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v3'
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
@@ -213,12 +213,12 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] Slug of the brokerage to connect the user to
+    # @param broker [String] Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
     # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
     # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v2'
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v3'
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
@@ -314,8 +314,8 @@ module SnapTrade
 
     # Create SnapTrade user
     #
-    # Registers a new SnapTrade user under your ClientID.
-    # Most SnapTrade operations require a user to be passed as a parameter.
+    # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
+    # Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
     #
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
@@ -330,8 +330,8 @@ module SnapTrade
 
     # Create SnapTrade user
     #
-    # Registers a new SnapTrade user under your ClientID.
-    # Most SnapTrade operations require a user to be passed as a parameter.
+    # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
+    # Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
     #
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
@@ -344,7 +344,7 @@ module SnapTrade
     end
 
     # Create SnapTrade user
-    # Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+    # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
@@ -354,7 +354,7 @@ module SnapTrade
     end
 
     # Create SnapTrade user
-    # Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+    # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers

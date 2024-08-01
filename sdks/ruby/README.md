@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.29-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.29)
+[![npm](https://img.shields.io/badge/gem-v2.0.30-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.30)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -70,7 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.29'
+gem 'snaptrade', '~> 2.0.30'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -112,8 +112,10 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
-Lists balances, positions and orders for the specified account. The data returned is similar to
-the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+**Deprecated, please use the account-specific holdings endpoint instead.**
+
+List all accounts for the user, plus balances, positions, and orders for each
+account.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -501,7 +503,9 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### broker: `String`<a id="broker-string"></a>
-Slug of the brokerage to connect the user to
+Slug of the brokerage to connect the user to. See [this
+document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead)
+for a list of supported brokerages and their slugs.
 
 ##### immediateRedirect: `Boolean`<a id="immediateredirect-boolean"></a>
 When set to True, user will be redirected back to the partner's site instead of
@@ -519,7 +523,7 @@ Accounts’ for more information.
 Sets whether the connection should be read or trade
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
-Sets the version of the connection portal to render, with a default to 'v2'
+Sets the version of the connection portal to render, with a default to 'v3'
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -536,8 +540,8 @@ Sets the version of the connection portal to render, with a default to 'v2'
 
 ### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
-Registers a new SnapTrade user under your ClientID.
-Most SnapTrade operations require a user to be passed as a parameter.
+Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
+Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -714,7 +718,7 @@ p result
 
 ### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1441,7 +1445,7 @@ Canceled
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns live quote(s) from the brokerage for the specified symbol(s).
+Returns quote(s) from the brokerage for the specified symbol(s).
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

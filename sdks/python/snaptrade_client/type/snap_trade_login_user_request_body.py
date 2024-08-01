@@ -20,7 +20,7 @@ class RequiredSnapTradeLoginUserRequestBody(TypedDict):
     pass
 
 class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
-    # Slug of the brokerage to connect the user to
+    # Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
     broker: str
 
     # When set to True, user will be redirected back to the partner's site instead of the connection portal
@@ -35,7 +35,7 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     # Sets whether the connection should be read or trade
     connectionType: str
 
-    # Sets the version of the connection portal to render, with a default to 'v2'
+    # Sets the version of the connection portal to render, with a default to 'v3'
     connectionPortalVersion: str
 
 class SnapTradeLoginUserRequestBody(RequiredSnapTradeLoginUserRequestBody, OptionalSnapTradeLoginUserRequestBody):

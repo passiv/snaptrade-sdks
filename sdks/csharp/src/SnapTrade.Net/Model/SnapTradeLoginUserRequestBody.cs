@@ -61,9 +61,9 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
-        /// Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+        /// Sets the version of the connection portal to render, with a default to &#39;v3&#39;
         /// </summary>
-        /// <value>Sets the version of the connection portal to render, with a default to &#39;v2&#39;</value>
+        /// <value>Sets the version of the connection portal to render, with a default to &#39;v3&#39;</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionPortalVersionEnum
         {
@@ -83,20 +83,20 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+        /// Sets the version of the connection portal to render, with a default to &#39;v3&#39;
         /// </summary>
-        /// <value>Sets the version of the connection portal to render, with a default to &#39;v2&#39;</value>
+        /// <value>Sets the version of the connection portal to render, with a default to &#39;v3&#39;</value>
         [DataMember(Name = "connectionPortalVersion", EmitDefaultValue = false)]
         public ConnectionPortalVersionEnum? ConnectionPortalVersion { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
-        /// <param name="broker">Slug of the brokerage to connect the user to.</param>
+        /// <param name="broker">Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs..</param>
         /// <param name="immediateRedirect">When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal.</param>
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account.</param>
         /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information..</param>
         /// <param name="connectionType">Sets whether the connection should be read or trade.</param>
-        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render, with a default to &#39;v2&#39;.</param>
+        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render, with a default to &#39;v3&#39;.</param>
         public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = default(ConnectionTypeEnum?), ConnectionPortalVersionEnum? connectionPortalVersion = default(ConnectionPortalVersionEnum?))
         {
             this.Broker = broker;
@@ -108,9 +108,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Slug of the brokerage to connect the user to
+        /// Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
         /// </summary>
-        /// <value>Slug of the brokerage to connect the user to</value>
+        /// <value>Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.</value>
         [DataMember(Name = "broker", EmitDefaultValue = false)]
         public string Broker { get; set; }
 
