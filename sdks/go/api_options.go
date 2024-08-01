@@ -76,7 +76,11 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy"
+    subpath := "/accounts/{accountId}/optionStrategy"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -244,7 +248,11 @@ func (a *OptionsApiService) GetOptionsChainExecute(r OptionsApiGetOptionsChainRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/optionsChain"
+    subpath := "/accounts/{accountId}/optionsChain"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -412,7 +420,11 @@ func (a *OptionsApiService) GetOptionsStrategyQuoteExecute(r OptionsApiGetOption
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy/{optionStrategyId}"
+    subpath := "/accounts/{accountId}/optionStrategy/{optionStrategyId}"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"optionStrategyId"+"}", url.PathEscape(parameterToString(r.optionStrategyId, "")), -1)
 
@@ -577,7 +589,11 @@ func (a *OptionsApiService) ListOptionHoldingsExecute(r OptionsApiListOptionHold
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/options"
+    subpath := "/accounts/{accountId}/options"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -746,7 +762,11 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute"
+    subpath := "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"optionStrategyId"+"}", url.PathEscape(parameterToString(r.optionStrategyId, "")), -1)
 

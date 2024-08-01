@@ -13,7 +13,7 @@ import (
     "testing"
     // "github.com/stretchr/testify/assert"
     // "github.com/stretchr/testify/require"
-    // snaptrade "github.com/passiv/snaptrade-sdks/go"
+    // snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func Test_snaptrade_OptionsApiService(t *testing.T) {

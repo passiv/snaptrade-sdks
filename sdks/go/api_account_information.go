@@ -83,7 +83,11 @@ func (a *AccountInformationApiService) GetAllUserHoldingsExecute(r AccountInform
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/holdings"
+    subpath := "/holdings"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -260,7 +264,11 @@ func (a *AccountInformationApiService) GetUserAccountBalanceExecute(r AccountInf
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/balances"
+    subpath := "/accounts/{accountId}/balances"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -415,7 +423,7 @@ func (a *AccountInformationApiService) GetUserAccountDetailsExecute(r AccountInf
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	subpath := "/accounts/{accountId}"
+    subpath := "/accounts/{accountId}"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
@@ -586,7 +594,11 @@ func (a *AccountInformationApiService) GetUserAccountOrdersExecute(r AccountInfo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/orders"
+    subpath := "/accounts/{accountId}/orders"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -758,7 +770,11 @@ func (a *AccountInformationApiService) GetUserAccountPositionsExecute(r AccountI
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/positions"
+    subpath := "/accounts/{accountId}/positions"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -914,7 +930,11 @@ func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformati
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/holdings"
+    subpath := "/accounts/{accountId}/holdings"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1086,7 +1106,11 @@ func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformat
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts"
+    subpath := "/accounts"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1238,7 +1262,11 @@ func (a *AccountInformationApiService) UpdateUserAccountExecute(r AccountInforma
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}"
+    subpath := "/accounts/{accountId}"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

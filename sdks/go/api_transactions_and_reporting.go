@@ -101,7 +101,11 @@ func (a *TransactionsAndReportingApiService) GetActivitiesExecute(r Transactions
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/activities"
+    subpath := "/activities"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -295,7 +299,11 @@ func (a *TransactionsAndReportingApiService) GetReportingCustomRangeExecute(r Tr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/performance/custom"
+    subpath := "/performance/custom"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

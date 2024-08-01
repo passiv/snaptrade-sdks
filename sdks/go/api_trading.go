@@ -77,7 +77,11 @@ func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUser
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/orders/cancel"
+    subpath := "/accounts/{accountId}/orders/cancel"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -253,7 +257,11 @@ func (a *TradingApiService) GetOrderImpactExecute(r TradingApiGetOrderImpactRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/trade/impact"
+    subpath := "/trade/impact"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -439,7 +447,11 @@ func (a *TradingApiService) GetUserAccountQuotesExecute(r TradingApiGetUserAccou
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/quotes"
+    subpath := "/accounts/{accountId}/quotes"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -606,7 +618,11 @@ func (a *TradingApiService) PlaceForceOrderExecute(r TradingApiPlaceForceOrderRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/trade/place"
+    subpath := "/trade/place"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -790,7 +806,11 @@ func (a *TradingApiService) PlaceOrderExecute(r TradingApiPlaceOrderRequest) (*A
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/trade/{tradeId}"
+    subpath := "/trade/{tradeId}"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"tradeId"+"}", url.PathEscape(parameterToString(r.tradeId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

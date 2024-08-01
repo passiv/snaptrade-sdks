@@ -66,7 +66,11 @@ func (a *ReferenceDataApiService) GetCurrencyExchangeRatePairExecute(r Reference
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/currencies/rates/{currencyPair}"
+    subpath := "/currencies/rates/{currencyPair}"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"currencyPair"+"}", url.PathEscape(parameterToString(r.currencyPair, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -208,7 +212,11 @@ func (a *ReferenceDataApiService) GetPartnerInfoExecute(r ReferenceDataApiGetPar
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/partners"
+    subpath := "/snapTrade/partners"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -382,7 +390,11 @@ func (a *ReferenceDataApiService) GetSecurityTypesExecute(r ReferenceDataApiGetS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/securityTypes"
+    subpath := "/securityTypes"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -523,7 +535,11 @@ func (a *ReferenceDataApiService) GetStockExchangesExecute(r ReferenceDataApiGet
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/exchanges"
+    subpath := "/exchanges"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -673,7 +689,11 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/symbols"
+    subpath := "/symbols"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -819,7 +839,11 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/symbols/{query}"
+    subpath := "/symbols/{query}"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"query"+"}", url.PathEscape(parameterToString(r.query, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -968,7 +992,11 @@ func (a *ReferenceDataApiService) ListAllBrokerageAuthorizationTypeExecute(r Ref
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/brokerageAuthorizationTypes"
+    subpath := "/brokerageAuthorizationTypes"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1112,7 +1140,11 @@ func (a *ReferenceDataApiService) ListAllBrokeragesExecute(r ReferenceDataApiLis
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/brokerages"
+    subpath := "/brokerages"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1253,7 +1285,11 @@ func (a *ReferenceDataApiService) ListAllCurrenciesExecute(r ReferenceDataApiLis
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/currencies"
+    subpath := "/currencies"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1394,7 +1430,11 @@ func (a *ReferenceDataApiService) ListAllCurrenciesRatesExecute(r ReferenceDataA
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/currencies/rates"
+    subpath := "/currencies/rates"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1553,7 +1593,11 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/accounts/{accountId}/symbols"
+    subpath := "/accounts/{accountId}/symbols"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/go@v1.0.0)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.0)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -16,7 +16,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to your project:
 
 ```shell
-go get github.com/passiv/snaptrade-sdks/go
+go get github.com/passiv/snaptrade-sdks/sdks/go
 ```
 
 ## Getting Started
@@ -27,7 +27,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {

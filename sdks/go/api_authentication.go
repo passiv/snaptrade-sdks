@@ -65,7 +65,11 @@ func (a *AuthenticationApiService) DeleteSnapTradeUserExecute(r AuthenticationAp
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/deleteUser"
+    subpath := "/snapTrade/deleteUser"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -240,7 +244,11 @@ func (a *AuthenticationApiService) ListSnapTradeUsersExecute(r AuthenticationApi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/listUsers"
+    subpath := "/snapTrade/listUsers"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -425,7 +433,11 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/login"
+    subpath := "/snapTrade/login"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -608,7 +620,11 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/registerUser"
+    subpath := "/snapTrade/registerUser"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -788,7 +804,11 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/resetUserSecret"
+    subpath := "/snapTrade/resetUserSecret"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

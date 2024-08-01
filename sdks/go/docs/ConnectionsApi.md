@@ -27,7 +27,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
@@ -82,7 +82,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
@@ -129,7 +129,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
@@ -183,7 +183,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
@@ -230,7 +230,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
@@ -274,7 +274,7 @@ package main
 import (
     "fmt"
     "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/go"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
