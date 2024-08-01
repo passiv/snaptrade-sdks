@@ -364,21 +364,16 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List balances, positions and orders for the specified account
+      summary: List account holdings
       description: |
-        Lists balances, positions and orders for the specified account as well as
-        option_positions and account metadata. The data returned is similar to the
-        data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+        Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
       operationId: AccountInformation_getUserHoldings
       parameters:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to fetch holdings for.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
         - in: query
           required: true
           name: userId
@@ -391,7 +386,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: Returns holdings for the account
+          description: OK
           content:
             application/json:
               schema:
@@ -2130,7 +2125,7 @@ components:
         last_successful_sync:
           $ref: "#/components/schemas/HoldingsSyncStatusDate"
     AccountBalance:
-      description: Balance of the account
+      description: Contains balance related information for the account.
       properties:
         total:
           description: Total value of this account (includes cash, equity, fixed income, etc)
@@ -2142,9 +2137,11 @@ components:
       properties:
         amount:
           type: number
+          description: Total value denominated in the currency of the `currency` field.
           example: 15363.23
         currency:
           type: string
+          description: The ISO-4217 currency code for the amount.
           example: USD
     Account:
       description: SnapTradeUser Investment Account
@@ -2196,10 +2193,20 @@ components:
           example: Q6542138443
         sync_status:
           $ref: "#/components/schemas/AccountSyncStatus"
+    AccountID:
+      description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+      type: string
+      format: uuid
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
     AccountIDs:
       description: Comma seperated list of account IDs
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+    BrokerageAuthID:
+      description: Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+      type: string
+      format: uuid
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
     BrokerageAuthIDs:
       description: Comma seperated list of brokerage authorization IDs
       type: string
@@ -2223,29 +2230,34 @@ components:
         total_value:
           $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
     AccountHoldingsAccount:
-      description: Account Holdings with Account ID
+      description: A wrapper object containing holdings information for a single account
       type: object
       properties:
         account:
+          # FIXME - This should be a reference to the Account object
           $ref: "#/components/schemas/SnapTradeHoldingsAccountAccountId"
         balances:
           type: array
           nullable: true
+          description: List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
           items:
             $ref: "#/components/schemas/Balance"
         positions:
           type: array
           nullable: true
+          description: List of stock/ETF/crypto/mutual fund positions in the account.
           items:
             $ref: "#/components/schemas/Position"
         option_positions:
           type: array
           nullable: true
+          description: List of option positions in the account.
           items:
             $ref: "#/components/schemas/OptionsPosition"
         orders:
           type: array
           nullable: true
+          description: List of recent orders in the account, including both pending and executed orders.
           items:
             $ref: "#/components/schemas/AccountOrderRecord"
         total_value:
@@ -2324,15 +2336,19 @@ components:
         - CONTINGENT_ORDER
 
     OptionsPosition:
-      description: Option Holdings
+      description: Describes a single option position in an account.
       type: object
       properties:
         symbol:
           $ref: "#/components/schemas/OptionBrokerageSymbol"
         price:
-          $ref: "#/components/schemas/Price"
+          type: number
+          example: 113.15
+          description: Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+          nullable: true
         units:
           type: number
+          description: The number of contracts for this option position.
           example: 10
         currency:
           nullable: true
@@ -2342,28 +2358,7 @@ components:
           type: number
           nullable: true
           example: 108.3353
-          description: Average purchase price for this position
-    OptionsHoldings:
-      description: Option Holdings
-      type: object
-      properties:
-        id:
-          description: Options information
-          type: string
-          example: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
-        symbol:
-          $ref: "#/components/schemas/Id"
-        option_symbol:
-          $ref: "#/components/schemas/OptionsSymbol"
-        price:
-          $ref: "#/components/schemas/Price"
-        currency:
-            $ref: "#/components/schemas/Currency"
-        average_purchase_price:
-          nullable: true
-          type: number
-          example: 108.3353
-          description: Average purchase price for this position
+          description: Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     StrategyImpact:
       description: The strategy impact
       type: object
@@ -2746,26 +2741,27 @@ components:
             institution_name: Alpaca
 
     SnapTradeHoldingsAccountAccountId:
-      description: Holdings with account ID
+      description: A single brokerage account at a financial institution.
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/AccountID"
         brokerage_authorization:
-          format: uuid
-          type: string
-          example: 87b24961-b51e-4db8-9226-f198f6518a89
+          $ref: "#/components/schemas/BrokerageAuthID"
         portfolio_group:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/PortfolioGroupID"
         name:
           type: string
-          example: Registered Retirement Savings Account
+          description: A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+          example: Robinhood Individual
           nullable: true
         number:
           type: string
           example: Q6542138443
+          description: The account number assigned by the financial institution.
         institution_name:
           type: string
+          description: The name of the financial institution that holds the account.
           example: Alpaca
         balance:
           nullable: true
@@ -2773,41 +2769,51 @@ components:
             - $ref: "#/components/schemas/AccountBalance"
         meta:
           type: object
+          deprecated: true
+          description: Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
           example:
             type: Margin
             status: ACTIVE
             institution_name: Alpaca
         cash_restrictions:
           type: array
+          deprecated: true
+          description: This field is deprecated.
           items:
             $ref: "#/components/schemas/CashRestriction"
         created_date:
-          $ref: "#/components/schemas/Time"
-
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+          type: string
+          format: date-time
+          example: 2024-07-23T22:50:22.761390Z
     SnapTradeHoldingsTotalValue:
-      description: Calculated based on the sum of the values of account positions and cash balances
+      description: The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to `account.balance.total`.
       type: object
       properties:
         value:
           type: number
           example: 32600.71
+          description: Total value denominated in the currency of the `currency` field.
           nullable: true
         currency:
           type: string
           nullable: true
+          description: The ISO-4217 currency code for the amount.
           example: USD
     Balance:
-      description: Account Balance
+      description: Holds balance information for a single currency in an account.
       type: object
       properties:
         currency:
           $ref: "#/components/schemas/Currency"
         cash:
           type: number
+          description: The amount of available cash in the account denominated in the currency of the `currency` field.
           example: 300.71
           nullable: true
         buying_power:
           type: number
+          description: Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
           example: 410.71
           nullable: true
     ConsumerKey:
@@ -2815,18 +2821,21 @@ components:
       type: string
       example: UxrFb4cHdRWlmJKNuJjA6hoaN8uVa6jPGFVUl2UKHuKmurCnaU
     Currency:
-      description: Currency
+      description: Describes a currency object.
       type: object
       properties:
         id:
           type: string
           format: uuid
+          description: Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
           example: 87b24961-b51e-4db8-9226-f198f6518a89
         code:
           type: string
+          description: The ISO-4217 currency code for the currency.
           example: USD
         name:
           type: string
+          description: A human-friendly name of the currency.
           example: US Dollar
     Exchange:
       description: Stock Exchange
@@ -3109,27 +3118,30 @@ components:
           description: Shows if Snaptrade partners can get users account order history
           example: true
     Position:
-      description: Account Position
+      description: Describes a single stock/ETF/crypto/mutual fund position in an account.
       type: object
       properties:
         symbol:
           $ref: "#/components/schemas/PositionSymbol"
         units:
+          description: The number of shares of the position. This can be fractional or integer units.
           type: number
           example: 40
           nullable: true
         price:
           type: number
           example: 113.15
-          description: Last known market price for the symbol
+          description: Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
           nullable: true
         open_pnl:
           type: number
+          description: The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
           example: 0.44
           nullable: true
         fractional_units:
+          deprecated: true
           description:
-            Deprecated, use the units field for both fractional and integer
+            Deprecated, use the `units` field for both fractional and integer
             units going forward
           type: number
           nullable: true
@@ -3139,8 +3151,7 @@ components:
           nullable: true
           example: 108.3353
           description:
-            Average purchase price for this position. Either returned by the
-            underlying broker or calculated using historical transactions.
+            Cost basis _per share_ of this position.
     RedirectTokenandPin:
       description: Response when register user is successful
       type: object
@@ -3785,6 +3796,12 @@ components:
       minimum: 0
       maximum: 100
       example: 90
+    PortfolioGroupID:
+      description: Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+      deprecated: true
+      type: string
+      format: uuid
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
     PortfolioGroup:
       type: object
       properties:
