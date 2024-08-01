@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   # Data to login a user via SnapTrade Partner
   class SnapTradeLoginUserRequestBody
-    # Slug of the brokerage to connect the user to
+    # Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
     attr_accessor :broker
 
     # When set to True, user will be redirected back to the partner's site instead of the connection portal
@@ -28,7 +28,7 @@ module SnapTrade
     # Sets whether the connection should be read or trade
     attr_accessor :connection_type
 
-    # Sets the version of the connection portal to render, with a default to 'v2'
+    # Sets the version of the connection portal to render, with a default to 'v3'
     attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.

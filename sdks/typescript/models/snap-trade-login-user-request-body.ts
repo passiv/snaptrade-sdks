@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface SnapTradeLoginUserRequestBody {
     /**
-     * Slug of the brokerage to connect the user to
+     * Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
@@ -48,7 +48,7 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'connectionType'?: SnapTradeLoginUserRequestBodyConnectionTypeEnum;
     /**
-     * Sets the version of the connection portal to render, with a default to \'v2\'
+     * Sets the version of the connection portal to render, with a default to \'v3\'
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */

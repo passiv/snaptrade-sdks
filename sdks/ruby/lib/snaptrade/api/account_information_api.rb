@@ -19,8 +19,10 @@ module SnapTrade
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
     #
-    # Lists balances, positions and orders for the specified account. The data returned is similar to
-    # the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    # **Deprecated, please use the account-specific holdings endpoint instead.**
+    # 
+    # List all accounts for the user, plus balances, positions, and orders for each
+    # account.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -34,8 +36,10 @@ module SnapTrade
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
     #
-    # Lists balances, positions and orders for the specified account. The data returned is similar to
-    # the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    # **Deprecated, please use the account-specific holdings endpoint instead.**
+    # 
+    # List all accounts for the user, plus balances, positions, and orders for each
+    # account.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -47,7 +51,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
-    # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+    # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -59,7 +63,7 @@ module SnapTrade
     end
 
     # List all accounts for the user, plus balances, positions, and orders for each account.
-    # Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+    # **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

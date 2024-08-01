@@ -46,7 +46,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const AccountInformationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+         * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -560,7 +560,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AccountInformationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+         * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -659,7 +659,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     const localVarFp = AccountInformationApiFp(configuration)
     return {
         /**
-         * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+         * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -997,7 +997,7 @@ export type AccountInformationApiUpdateUserAccountRequest = {
  */
 export class AccountInformationApiGenerated extends BaseAPI {
     /**
-     * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
      * @summary List all accounts for the user, plus balances, positions, and orders for each account.
      * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

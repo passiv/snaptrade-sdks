@@ -818,7 +818,7 @@ public class TradingApiGenerated {
 
     /**
      * Get symbol quotes
-     * Returns live quote(s) from the brokerage for the specified symbol(s).
+     * Returns quote(s) from the brokerage for the specified symbol(s).
      * @param userId  (required)
      * @param userSecret  (required)
      * @param symbols List of universal_symbol_id or tickers to get quotes for. (required)

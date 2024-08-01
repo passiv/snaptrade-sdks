@@ -109,12 +109,12 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var broker = "ALPACA"; // Slug of the brokerage to connect the user to
+            var broker = "ALPACA"; // Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
             var immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
             var customRedirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account
             var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
             var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read or trade
-            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V2; // Sets the version of the connection portal to render, with a default to 'v2'
+            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V2; // Sets the version of the connection portal to render, with a default to 'v3'
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
                 broker,

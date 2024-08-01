@@ -795,7 +795,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Refresh holdings for a connection
-     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
      * @param authorizationId The ID of a brokerage authorization object. (required)
      * @param userId  (required)
      * @param userSecret  (required)

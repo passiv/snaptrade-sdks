@@ -484,7 +484,7 @@ public class AuthenticationApiGenerated {
 
         /**
          * Set broker
-         * @param broker Slug of the brokerage to connect the user to (optional)
+         * @param broker Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder broker(String broker) {
@@ -534,7 +534,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionPortalVersion
-         * @param connectionPortalVersion Sets the version of the connection portal to render, with a default to &#39;v2&#39; (optional)
+         * @param connectionPortalVersion Sets the version of the connection portal to render, with a default to &#39;v3&#39; (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionPortalVersion(String connectionPortalVersion) {
@@ -804,7 +804,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * Create SnapTrade user
-     * Registers a new SnapTrade user under your ClientID. Most SnapTrade operations require a user to be passed as a parameter. 
+     * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
      * @param snapTradeRegisterUserRequestBody  (required)
      * @return RegisterSnapTradeUserRequestBuilder
      * @http.response.details

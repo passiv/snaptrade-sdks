@@ -261,7 +261,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List all accounts for the user, plus balances, positions, and orders for each account.
-     * Lists balances, positions and orders for the specified account. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+     * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetAllUserHoldingsRequestBuilder

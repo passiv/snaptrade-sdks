@@ -118,7 +118,7 @@ public class SnapTradeLoginUserRequestBody {
   private ConnectionTypeEnum connectionType;
 
   /**
-   * Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+   * Sets the version of the connection portal to render, with a default to &#39;v3&#39;
    */
   @JsonAdapter(ConnectionPortalVersionEnum.Adapter.class)
  public enum ConnectionPortalVersionEnum {
@@ -181,11 +181,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Slug of the brokerage to connect the user to
+   * Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
    * @return broker
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to")
+  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.")
 
   public String getBroker() {
     return broker;
@@ -326,11 +326,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets the version of the connection portal to render, with a default to &#39;v2&#39;
+   * Sets the version of the connection portal to render, with a default to &#39;v3&#39;
    * @return connectionPortalVersion
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Sets the version of the connection portal to render, with a default to 'v2'")
+  @ApiModelProperty(value = "Sets the version of the connection portal to render, with a default to 'v3'")
 
   public ConnectionPortalVersionEnum getConnectionPortalVersion() {
     return connectionPortalVersion;

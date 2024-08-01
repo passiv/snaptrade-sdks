@@ -98,7 +98,7 @@ public class ConnectionsApiTest {
     /**
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes
+     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
      *
      * @throws ApiException if the Api call fails
      */

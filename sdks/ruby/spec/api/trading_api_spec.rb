@@ -58,7 +58,7 @@ describe 'TradingApi' do
 
   # unit tests for get_user_account_quotes
   # Get symbol quotes
-  # Returns live quote(s) from the brokerage for the specified symbol(s).
+  # Returns quote(s) from the brokerage for the specified symbol(s).
   # @param user_id 
   # @param user_secret 
   # @param symbols List of universal_symbol_id or tickers to get quotes for.

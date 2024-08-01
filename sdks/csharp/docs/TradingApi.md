@@ -235,7 +235,7 @@ catch (ApiException e)
 
 
 
-Returns live quote(s) from the brokerage for the specified symbol(s).
+Returns quote(s) from the brokerage for the specified symbol(s).
 
 ### Example
 ```csharp
