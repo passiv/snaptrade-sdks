@@ -140,6 +140,8 @@ generators:
     git:
       userId: passiv
       repoId: snaptrade-sdks/sdks/go
+    clientState:
+      - ConsumerKey
   ruby:
     moduleName: SnapTrade
     version: 2.0.31
