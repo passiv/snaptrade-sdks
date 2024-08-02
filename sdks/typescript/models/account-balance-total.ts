@@ -19,13 +19,13 @@ import { Amount } from './amount';
  */
 export interface AccountBalanceTotal {
     /**
-     * 
+     * Total value denominated in the currency of the `currency` field.
      * @type {number}
      * @memberof AccountBalanceTotal
      */
     'amount'?: number;
     /**
-     * 
+     * The ISO-4217 currency code for the amount.
      * @type {string}
      * @memberof AccountBalanceTotal
      */

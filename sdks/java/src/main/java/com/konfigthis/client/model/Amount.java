@@ -80,11 +80,11 @@ public class Amount {
   }
 
    /**
-   * Get amount
+   * Total value denominated in the currency of the &#x60;currency&#x60; field.
    * @return amount
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "15363.23", value = "")
+  @ApiModelProperty(example = "15363.23", value = "Total value denominated in the currency of the `currency` field.")
 
   public Double getAmount() {
     return amount;
@@ -109,11 +109,11 @@ public class Amount {
   }
 
    /**
-   * Get currency
+   * The ISO-4217 currency code for the amount.
    * @return currency
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "USD", value = "")
+  @ApiModelProperty(example = "USD", value = "The ISO-4217 currency code for the amount.")
 
   public String getCurrency() {
     return currency;

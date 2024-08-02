@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.29-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.29)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.30-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.30)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -46,7 +46,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.29</version>
+  <version>5.0.30</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.29"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.30"
 }
 ```
 
@@ -99,7 +99,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.29.jar`
+* `target/snaptrade-java-sdk-5.0.30.jar`
 * `target/lib/*.jar`
 
 ## Getting Started
@@ -190,7 +190,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**getUserAccountDetails**](docs/AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *AccountInformationApi* | [**getUserAccountOrders**](docs/AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders
 *AccountInformationApi* | [**getUserAccountPositions**](docs/AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions
-*AccountInformationApi* | [**getUserHoldings**](docs/AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
+*AccountInformationApi* | [**getUserHoldings**](docs/AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**listUserAccounts**](docs/AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**updateUserAccount**](docs/AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *ApiStatusApi* | [**check**](docs/ApiStatusApi.md#check) | **GET** / | Get API Status
@@ -293,7 +293,6 @@ Class | Method | HTTP request | Description
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
  - [OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
- - [OptionsHoldings](docs/OptionsHoldings.md)
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)

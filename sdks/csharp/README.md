@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.32-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.32)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.33-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.33)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
@@ -98,7 +98,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account orders
 *AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
-*AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
+*AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
@@ -213,7 +213,6 @@ Class | Method | HTTP request | Description
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
  - [OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
- - [OptionsHoldings](docs/OptionsHoldings.md)
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)

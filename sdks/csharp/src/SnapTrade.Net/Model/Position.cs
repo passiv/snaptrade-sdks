@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Account Position
+    /// Describes a single stock/ETF/crypto/mutual fund position in an account.
     /// </summary>
     [DataContract(Name = "Position")]
     public partial class Position : IEquatable<Position>, IValidatableObject
@@ -36,11 +36,11 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Position" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
-        /// <param name="units">units.</param>
-        /// <param name="price">Last known market price for the symbol.</param>
-        /// <param name="openPnl">openPnl.</param>
-        /// <param name="fractionalUnits">Deprecated, use the units field for both fractional and integer units going forward.</param>
-        /// <param name="averagePurchasePrice">Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions..</param>
+        /// <param name="units">The number of shares of the position. This can be fractional or integer units..</param>
+        /// <param name="price">Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
+        /// <param name="openPnl">The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field..</param>
+        /// <param name="fractionalUnits">Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward.</param>
+        /// <param name="averagePurchasePrice">Cost basis _per share_ of this position..</param>
         public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? fractionalUnits = default(double?), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Symbol = symbol;
@@ -59,35 +59,38 @@ namespace SnapTrade.Net.Model
         public PositionSymbol Symbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets Units
+        /// The number of shares of the position. This can be fractional or integer units.
         /// </summary>
+        /// <value>The number of shares of the position. This can be fractional or integer units.</value>
         [DataMember(Name = "units", EmitDefaultValue = true)]
         public double? Units { get; set; }
 
         /// <summary>
-        /// Last known market price for the symbol
+        /// Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
         /// </summary>
-        /// <value>Last known market price for the symbol</value>
+        /// <value>Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
         public double? Price { get; set; }
 
         /// <summary>
-        /// Gets or Sets OpenPnl
+        /// The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
         /// </summary>
+        /// <value>The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.</value>
         [DataMember(Name = "open_pnl", EmitDefaultValue = true)]
         public double? OpenPnl { get; set; }
 
         /// <summary>
-        /// Deprecated, use the units field for both fractional and integer units going forward
+        /// Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward
         /// </summary>
-        /// <value>Deprecated, use the units field for both fractional and integer units going forward</value>
+        /// <value>Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward</value>
         [DataMember(Name = "fractional_units", EmitDefaultValue = true)]
+        [Obsolete]
         public double? FractionalUnits { get; set; }
 
         /// <summary>
-        /// Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
+        /// Cost basis _per share_ of this position.
         /// </summary>
-        /// <value>Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.</value>
+        /// <value>Cost basis _per share_ of this position.</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
         public double? AveragePurchasePrice { get; set; }
 

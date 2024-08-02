@@ -23,8 +23,10 @@ class RequiredBalance(TypedDict):
 class OptionalBalance(TypedDict, total=False):
     currency: Currency
 
+    # The amount of available cash in the account denominated in the currency of the `currency` field.
     cash: typing.Optional[typing.Union[int, float]]
 
+    # Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
     buying_power: typing.Optional[typing.Union[int, float]]
 
 class Balance(RequiredBalance, OptionalBalance):

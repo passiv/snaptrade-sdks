@@ -11,12 +11,15 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Currency
+  # Describes a currency object.
   class Currency
+    # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
     attr_accessor :id
 
+    # The ISO-4217 currency code for the currency.
     attr_accessor :code
 
+    # A human-friendly name of the currency.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

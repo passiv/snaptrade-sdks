@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.29-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.29)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.30-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.30)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -75,7 +75,7 @@ Python >=3.7
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.29
+pip install snaptrade-python-sdk==11.0.30
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -384,9 +384,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 
-Lists balances, positions and orders for the specified account as well as
-option_positions and account metadata. The data returned is similar to the
-data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -402,8 +400,6 @@ get_user_holdings_response = snaptrade.account_information.get_user_holdings(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `str`<a id="account_id-str"></a>
-
-The ID of the account to fetch holdings for.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 

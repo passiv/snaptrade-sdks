@@ -35,8 +35,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AmountNullable" /> class.
         /// </summary>
-        /// <param name="amount">amount.</param>
-        /// <param name="currency">currency.</param>
+        /// <param name="amount">Total value denominated in the currency of the &#x60;currency&#x60; field..</param>
+        /// <param name="currency">The ISO-4217 currency code for the amount..</param>
         public AmountNullable(double amount = default(double), string currency = default(string))
         {
             this.Amount = amount;
@@ -44,14 +44,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Amount
+        /// Total value denominated in the currency of the &#x60;currency&#x60; field.
         /// </summary>
+        /// <value>Total value denominated in the currency of the &#x60;currency&#x60; field.</value>
         [DataMember(Name = "amount", EmitDefaultValue = false)]
         public double Amount { get; set; }
 
         /// <summary>
-        /// Gets or Sets Currency
+        /// The ISO-4217 currency code for the amount.
         /// </summary>
+        /// <value>The ISO-4217 currency code for the amount.</value>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public string Currency { get; set; }
 

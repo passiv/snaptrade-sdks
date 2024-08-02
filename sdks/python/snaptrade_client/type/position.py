@@ -23,17 +23,20 @@ class RequiredPosition(TypedDict):
 class OptionalPosition(TypedDict, total=False):
     symbol: PositionSymbol
 
+    # The number of shares of the position. This can be fractional or integer units.
     units: typing.Optional[typing.Union[int, float]]
 
-    # Last known market price for the symbol
+    # Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     price: typing.Optional[typing.Union[int, float]]
 
+    # The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
     open_pnl: typing.Optional[typing.Union[int, float]]
 
-    # Deprecated, use the units field for both fractional and integer units going forward
+    # WARNING: This property is deprecated
+    # Deprecated, use the `units` field for both fractional and integer units going forward
     fractional_units: typing.Optional[typing.Union[int, float]]
 
-    # Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
+    # Cost basis _per share_ of this position.
     average_purchase_price: typing.Optional[typing.Union[int, float]]
 
 class Position(RequiredPosition, OptionalPosition):

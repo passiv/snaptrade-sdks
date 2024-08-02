@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { AccountBalanceTotal } from './account-balance-total';
 
 /**
- * Balance of the account
+ * Contains balance related information for the account.
  * @export
  * @interface AccountBalance
  */

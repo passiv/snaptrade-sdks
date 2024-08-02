@@ -18,7 +18,7 @@ import { SnapTradeHoldingsAccountAccountId } from './snap-trade-holdings-account
 import { SnapTradeHoldingsTotalValue } from './snap-trade-holdings-total-value';
 
 /**
- * Account Holdings with Account ID
+ * A wrapper object containing holdings information for a single account
  * @export
  * @interface AccountHoldingsAccount
  */
@@ -32,25 +32,25 @@ export interface AccountHoldingsAccount {
      */
     'account'?: SnapTradeHoldingsAccountAccountId;
     /**
-     * 
+     * List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
      * @type {Array<Balance>}
      * @memberof AccountHoldingsAccount
      */
     'balances'?: Array<Balance> | null;
     /**
-     * 
+     * List of stock/ETF/crypto/mutual fund positions in the account.
      * @type {Array<Position>}
      * @memberof AccountHoldingsAccount
      */
     'positions'?: Array<Position> | null;
     /**
-     * 
+     * List of option positions in the account.
      * @type {Array<OptionsPosition>}
      * @memberof AccountHoldingsAccount
      */
     'option_positions'?: Array<OptionsPosition> | null;
     /**
-     * 
+     * List of recent orders in the account, including both pending and executed orders.
      * @type {Array<AccountOrderRecord>}
      * @memberof AccountHoldingsAccount
      */

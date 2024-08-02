@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Balance of the account
+    /// Contains balance related information for the account.
     /// </summary>
     [DataContract(Name = "AccountBalanceNullable")]
     public partial class AccountBalanceNullable : IEquatable<AccountBalanceNullable>, IValidatableObject

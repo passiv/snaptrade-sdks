@@ -20,8 +20,10 @@ class RequiredSnapTradeHoldingsTotalValue(TypedDict):
     pass
 
 class OptionalSnapTradeHoldingsTotalValue(TypedDict, total=False):
+    # Total value denominated in the currency of the `currency` field.
     value: typing.Optional[typing.Union[int, float]]
 
+    # The ISO-4217 currency code for the amount.
     currency: typing.Optional[str]
 
 class SnapTradeHoldingsTotalValue(RequiredSnapTradeHoldingsTotalValue, OptionalSnapTradeHoldingsTotalValue):

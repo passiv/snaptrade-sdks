@@ -204,13 +204,13 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetUserHoldingsTest()
         {
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to fetch holdings for.
+            var accountId = "accountId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // List balances, positions and orders for the specified account
+                // List account holdings
                 AccountHoldingsAccount result = client.AccountInformation.GetUserHoldings(accountId, userId, userSecret);
                 Console.WriteLine(result);
             }

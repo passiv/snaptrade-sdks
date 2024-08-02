@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.30-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.30)
+[![npm](https://img.shields.io/badge/gem-v2.0.31-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.31)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -70,7 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.30'
+gem 'snaptrade', '~> 2.0.31'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -303,9 +303,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 
-Lists balances, positions and orders for the specified account as well as
-option_positions and account metadata. The data returned is similar to the
-data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -322,8 +320,6 @@ p result
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to fetch holdings for.
-
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>

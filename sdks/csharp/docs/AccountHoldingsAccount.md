@@ -1,15 +1,15 @@
 # SnapTrade.Net.Model.AccountHoldingsAccount
-Account Holdings with Account ID
+A wrapper object containing holdings information for a single account
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | [**SnapTradeHoldingsAccountAccountId**](SnapTradeHoldingsAccountAccountId.md) |  | [optional] 
-**Balances** | [**List&lt;Balance&gt;**](Balance.md) |  | [optional] 
-**Positions** | [**List&lt;Position&gt;**](Position.md) |  | [optional] 
-**OptionPositions** | [**List&lt;OptionsPosition&gt;**](OptionsPosition.md) |  | [optional] 
-**Orders** | [**List&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md) |  | [optional] 
+**Balances** | [**List&lt;Balance&gt;**](Balance.md) | List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances). | [optional] 
+**Positions** | [**List&lt;Position&gt;**](Position.md) | List of stock/ETF/crypto/mutual fund positions in the account. | [optional] 
+**OptionPositions** | [**List&lt;OptionsPosition&gt;**](OptionsPosition.md) | List of option positions in the account. | [optional] 
+**Orders** | [**List&lt;AccountOrderRecord&gt;**](AccountOrderRecord.md) | List of recent orders in the account, including both pending and executed orders. | [optional] 
 **TotalValue** | [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -11,18 +11,19 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Option Holdings
+  # Describes a single option position in an account.
   class OptionsPosition
     attr_accessor :symbol
 
-    # Trade Price if limit or stop limit order
+    # Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     attr_accessor :price
 
+    # The number of contracts for this option position.
     attr_accessor :units
 
     attr_accessor :currency
 
-    # Average purchase price for this position
+    # Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     attr_accessor :average_purchase_price
 
     # Attribute mapping from ruby-style variable name to JSON key.

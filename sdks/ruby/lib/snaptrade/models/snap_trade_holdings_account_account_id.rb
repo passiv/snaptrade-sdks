@@ -11,27 +11,35 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Holdings with account ID
+  # A single brokerage account at a financial institution.
   class SnapTradeHoldingsAccountAccountId
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :id
 
+    # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :brokerage_authorization
 
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
     attr_accessor :portfolio_group
 
+    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
     attr_accessor :name
 
+    # The account number assigned by the financial institution.
     attr_accessor :number
 
+    # The name of the financial institution that holds the account.
     attr_accessor :institution_name
 
     attr_accessor :balance
 
+    # Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
     attr_accessor :meta
 
+    # This field is deprecated.
     attr_accessor :cash_restrictions
 
-    # Time
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
     attr_accessor :created_date
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -67,7 +75,7 @@ module SnapTrade
         :'balance' => :'SnapTradeHoldingsAccountAccountIdBalance',
         :'meta' => :'Hash<String, Object>',
         :'cash_restrictions' => :'Array<CashRestriction>',
-        :'created_date' => :'String'
+        :'created_date' => :'Time'
       }
     end
 

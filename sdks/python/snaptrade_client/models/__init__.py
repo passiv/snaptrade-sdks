@@ -16,6 +16,7 @@ from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_balance_nullable import AccountBalanceNullable
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
+from snaptrade_client.model.account_id import AccountID
 from snaptrade_client.model.account_ids import AccountIDs
 from snaptrade_client.model.account_meta import AccountMeta
 from snaptrade_client.model.account_order_record import AccountOrderRecord
@@ -28,6 +29,7 @@ from snaptrade_client.model.amount import Amount
 from snaptrade_client.model.amount_nullable import AmountNullable
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
+from snaptrade_client.model.brokerage_auth_id import BrokerageAuthID
 from snaptrade_client.model.brokerage_auth_ids import BrokerageAuthIDs
 from snaptrade_client.model.brokerage_authorization import BrokerageAuthorization
 from snaptrade_client.model.brokerage_authorization_disabled_confirmation import BrokerageAuthorizationDisabledConfirmation
@@ -99,7 +101,6 @@ from snaptrade_client.model.option_chain_item_chain_per_root_item_chain_per_stri
 from snaptrade_client.model.option_leg import OptionLeg
 from snaptrade_client.model.option_strategy import OptionStrategy
 from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs
-from snaptrade_client.model.options_holdings import OptionsHoldings
 from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
@@ -111,6 +112,7 @@ from snaptrade_client.model.percent import Percent
 from snaptrade_client.model.performance_custom import PerformanceCustom
 from snaptrade_client.model.performance_custom_bad_tickers import PerformanceCustomBadTickers
 from snaptrade_client.model.portfolio_group import PortfolioGroup
+from snaptrade_client.model.portfolio_group_id import PortfolioGroupID
 from snaptrade_client.model.portfolio_group_info import PortfolioGroupInfo
 from snaptrade_client.model.portfolio_group_position import PortfolioGroupPosition
 from snaptrade_client.model.portfolio_group_settings import PortfolioGroupSettings

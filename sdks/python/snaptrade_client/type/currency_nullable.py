@@ -20,10 +20,13 @@ class RequiredCurrencyNullable(TypedDict):
     pass
 
 class OptionalCurrencyNullable(TypedDict, total=False):
+    # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
     id: str
 
+    # The ISO-4217 currency code for the currency.
     code: str
 
+    # A human-friendly name of the currency.
     name: str
 
 class CurrencyNullable(RequiredCurrencyNullable, OptionalCurrencyNullable):

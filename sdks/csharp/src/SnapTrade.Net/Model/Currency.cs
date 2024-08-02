@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Currency
+    /// Describes a currency object.
     /// </summary>
     [DataContract(Name = "Currency")]
     public partial class Currency : IEquatable<Currency>, IValidatableObject
@@ -35,9 +35,9 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Currency" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="code">code.</param>
-        /// <param name="name">name.</param>
+        /// <param name="id">Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade..</param>
+        /// <param name="code">The ISO-4217 currency code for the currency..</param>
+        /// <param name="name">A human-friendly name of the currency..</param>
         public Currency(string id = default(string), string code = default(string), string name = default(string)) : base()
         {
             this.Id = id;
@@ -47,20 +47,23 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Code
+        /// The ISO-4217 currency code for the currency.
         /// </summary>
+        /// <value>The ISO-4217 currency code for the currency.</value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// A human-friendly name of the currency.
         /// </summary>
+        /// <value>A human-friendly name of the currency.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 

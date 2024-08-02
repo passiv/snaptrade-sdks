@@ -11,21 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Account Position
+  # Describes a single stock/ETF/crypto/mutual fund position in an account.
   class Position
     attr_accessor :symbol
 
+    # The number of shares of the position. This can be fractional or integer units.
     attr_accessor :units
 
-    # Last known market price for the symbol
+    # Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     attr_accessor :price
 
+    # The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
     attr_accessor :open_pnl
 
-    # Deprecated, use the units field for both fractional and integer units going forward
+    # Deprecated, use the `units` field for both fractional and integer units going forward
     attr_accessor :fractional_units
 
-    # Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
+    # Cost basis _per share_ of this position.
     attr_accessor :average_purchase_price
 
     # Attribute mapping from ruby-style variable name to JSON key.
