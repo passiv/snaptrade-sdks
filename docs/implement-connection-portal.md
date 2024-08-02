@@ -206,16 +206,34 @@ public class MyWebViewActivity extends AppCompatActivity {
 ## **Window Messages to Monitor on the client side**:
 
 - `SUCCESS`: Indicates successful institution connection. The message contains the authorization ID.
-  - Structure: `{status: 'SUCCESS', authorizationId: 'AUTHORIZATION_ID'}`.
-  - Note: Legacy string format `SUCCESS:AUTHORIZATION_ID` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
-- `ERROR`: Sent when a connection error occurs, including an error code, status code and description.
-  - Structure: `{status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}`.
-  - Note: Legacy string format `ERROR:STATUS_CODE` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
-- `CLOSED`: Triggered when the user closes the OAuth connection window.
-- `CLOSE_MODAL`: Triggered when the user opts to exit the connection flow.
 
+  - Structure:
+
+  ```
+  {status: 'SUCCESS', authorizationId: 'AUTHORIZATION_ID'}
+  ```
+
+  - Note: Legacy string format `SUCCESS:AUTHORIZATION_ID` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
+
+- `ERROR`: Sent when a connection error occurs, including an error code, status code and description.
+
+  - Structure:
+
+  ```
+  {status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}
+  ```
+
+  - Note: Legacy string format `ERROR:STATUS_CODE` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
+
+- `CLOSED`: Sent when the user closes the OAuth connection window that opens in a new tab.
+
+  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#3-implementation-via-an-iframe)
+
+- `CLOSE_MODAL`: Sent when the user opts to exit the connection flow or clicks `Done` after successful connection (if the portal is not already closed when listening for `SUCCESS`).
+  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#3-implementation-via-an-iframe).
+- `ABANDONED`: Functions the same as `CLOSE_MODAL` but only triggers for non-iframe implementations.
 <aside>
-💡 **Note**: Your application is responsible for closing the modal and displaying success/error messages post OAuth connections.
+💡 **Note**: When loading the connection portal in an iframe, your application is responsible for closing the modal and displaying success/error messages post <u>OAuth connections</u>.
 
 </aside>
 
@@ -228,17 +246,20 @@ useEffect(() => {
       const data = e.data;
       if (data.status === 'SUCCESS') {
         const authorizationId = data.authorizationId;
-        // close the modal and display success message to the user
+        // close the connection portal/modal and display success message to the user
       }
       if (data.status === 'ERROR') {
         const { errorCode, statusCode, detail } = data;
-        // close the modal and display error message to the user
+        // close the connection portal/modal and display error message to the user
       }
       if (data === 'CLOSED') {
         // close the modal
       }
       if (data === 'CLOSE_MODAL') {
         // close the modal
+      }
+      if (data === 'ABANDONED') {
+        // close the connection portal
       }
     }
   };
