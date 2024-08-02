@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
 )
 
@@ -24,7 +25,6 @@ func prepareRequestBefore(
 	formParams url.Values,
 	formFiles []formFile) {
 	queryParams["timestamp"] = []string{fmt.Sprintf("%d", time.Now().Unix())}
-	fmt.Println("Query Parameters:", queryParams)
 }
 
 // prepareRequestAfter prepares the request after it has been created
@@ -32,8 +32,6 @@ func prepareRequestAfter(
 	httpRequest *http.Request,
 	ctx context.Context,
 ) {
-	fmt.Println("Preparing request after:", httpRequest.Method, httpRequest.URL)
-
 	// Extract consumer key from context
 	apiKeys := ctx.Value(ContextAPIKeys).(map[string]APIKey)
 	consumerKey := apiKeys["ConsumerKey"].Key // Assuming the consumer key is stored without a specific key name
@@ -60,14 +58,17 @@ func prepareRequestAfter(
 	}
 
 	// Generate signature
-	sigContent, _ := json.Marshal(sigObject)
-	signature := computeHmacSha256(string(sigContent), consumerKey)
+	var sigContent bytes.Buffer
+	encoder := json.NewEncoder(&sigContent)
+	encoder.SetEscapeHTML(false) // Prevent escaping of HTML characters
+	encoder.Encode(sigObject)
+	signature := computeHmacSha256(strings.TrimSuffix(sigContent.String(), "\n"), consumerKey)
 
 	// Add signature to headers
 	httpRequest.Header.Set("Signature", signature)
 }
 
-// computeHmacSha256 computes HMAC SHA256 signature
+// computeHmacSha256 computes HMAC SHA256 signature and encodes it as base64
 func computeHmacSha256(message string, key string) string {
 	h := hmac.New(sha256.New, []byte(key))
 	h.Write([]byte(message))
