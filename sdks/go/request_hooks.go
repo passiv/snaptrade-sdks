@@ -1,12 +1,14 @@
 package snaptrade
 
 import (
+	"bytes"
 	"context"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 	"time"
@@ -34,13 +36,14 @@ func prepareRequestAfter(
 
 	// Extract consumer key from context
 	apiKeys := ctx.Value(ContextAPIKeys).(map[string]APIKey)
-	consumerKey := apiKeys[""].Key // Assuming the consumer key is stored without a specific key name
+	consumerKey := apiKeys["ConsumerKey"].Key // Assuming the consumer key is stored without a specific key name
 
 	// Prepare request data from the body
 	var requestData interface{}
 	if httpRequest.Body != nil {
-		var bodyBytes []byte
-		if _, err := httpRequest.Body.Read(bodyBytes); err == nil {
+		bodyBytes, err := ioutil.ReadAll(httpRequest.Body)
+		if err == nil {
+			httpRequest.Body = ioutil.NopCloser(bytes.NewBuffer(bodyBytes)) // Reset the body for future reads
 			json.Unmarshal(bodyBytes, &requestData)
 		}
 	}

@@ -1,8 +1,10 @@
 package snaptrade
 
 import (
+	"os"
 	"testing"
 
+	"github.com/google/uuid"
 	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -27,13 +29,15 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 
 	t.Run("Test GettingStarted", func(t *testing.T) {
 		configuration := snaptrade.NewConfiguration()
-		configuration.SetPartnerClientId("CLIENT_ID")
-		configuration.SetConsumerKey("CONSUMER_KEY")
+		configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+		configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
 		client := snaptrade.NewAPIClient(configuration)
 
 		// Create a new user
-
-		request := client.AccountInformationApi.GetUserAccountDetails("userId", "userSecret", "accountId")
+		requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
+		userId := uuid.New().String()
+		requestBody.SetUserId(userId)
+		request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
 
 		resp, httpRes, err := request.Execute()
 
