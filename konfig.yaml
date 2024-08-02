@@ -189,7 +189,7 @@ generators:
     readmeSnippet: snippets/python.py
     useAiohttp3_8: true
     setSkipSerializationToTrueByDefault: true
-    pypiApiTokenEnvironmentVariable: SNAPTRADE_PYPI_API_TOKEN
+    pypiApiTokenEnvironmentVariable: PYPI_TOKEN_1
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
     clientName: SnapTrade
     keepAllParametersOptional: true

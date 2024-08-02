@@ -1,0 +1,25 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - disabled
+
+jobs:
+  release:
+    uses: konfig-dev/automation/.github/workflows/release.yaml@main
+    secrets:
+      TEST_ENV: ${{ secrets.TEST_ENV }}
+      KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+      SUBMODULE_DEPLOY_KEY_PHP: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
+      SUBMODULE_DEPLOY_KEY_PHP7: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      PYPI_TOKEN_1: ${{ secrets.PYPI_TOKEN_1 }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      PACKAGIST_API_TOKEN: ${{ secrets.PACKAGIST_API_TOKEN }}
+      GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
