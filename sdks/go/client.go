@@ -377,7 +377,7 @@ func (c *APIClient) prepareRequest(
 		localVarRequest.Header.Add(header, value)
 	}
 
-	prepareRequestAfter(localVarRequest, ctx)
+    prepareRequestAfter(localVarRequest, ctx)
 
 	return localVarRequest, nil
 }
