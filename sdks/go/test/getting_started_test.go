@@ -33,7 +33,7 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 		configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
 		client := snaptrade.NewAPIClient(configuration)
 
-		// Create a new user
+		// 1) Create a new user
 		requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
 		userId := uuid.New().String()
 		requestBody.SetUserId(userId)
