@@ -1,14 +1,26 @@
 package snaptrade
 
 import (
+	"fmt"
+	"math/rand"
 	"os"
 	"testing"
+	"time"
 
-	"github.com/google/uuid"
 	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+func generateUUID() string {
+	t := time.Now().UnixNano()
+	rand.Seed(t)
+	u := make([]byte, 16)
+	rand.Read(u)
+	u[8] = (u[8] | 0x40) & 0x7F
+	u[6] = (u[6] & 0xF) | (4 << 4)
+	return fmt.Sprintf("%x-%x-%x-%x-%x", u[0:4], u[4:6], u[6:8], u[8:10], u[10:])
+}
 
 func Test_snaptrade_GettingStarted(t *testing.T) {
 
@@ -35,7 +47,7 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 
 		// 1) Create a new user
 		requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
-		userId := uuid.New().String()
+		userId := generateUUID()
 		requestBody.SetUserId(userId)
 		request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
 
