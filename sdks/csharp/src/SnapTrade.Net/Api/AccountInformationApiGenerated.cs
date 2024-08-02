@@ -169,13 +169,13 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
-        /// List balances, positions and orders for the specified account
+        /// List account holdings
         /// </summary>
         /// <remarks>
-        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -183,13 +183,13 @@ namespace SnapTrade.Net.Api
         AccountHoldingsAccount GetUserHoldings(string accountId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// List balances, positions and orders for the specified account
+        /// List account holdings
         /// </summary>
         /// <remarks>
-        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -408,13 +408,13 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Position>>> GetUserAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List balances, positions and orders for the specified account
+        /// List account holdings
         /// </summary>
         /// <remarks>
-        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -423,13 +423,13 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountHoldingsAccount> GetUserHoldingsAsync(string accountId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List balances, positions and orders for the specified account
+        /// List account holdings
         /// </summary>
         /// <remarks>
-        /// Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1685,10 +1685,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// List account holdings Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1700,10 +1700,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// List account holdings Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1788,10 +1788,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// List account holdings Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1804,10 +1804,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List balances, positions and orders for the specified account Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
+        /// List account holdings Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="accountId">The ID of the account to fetch holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>

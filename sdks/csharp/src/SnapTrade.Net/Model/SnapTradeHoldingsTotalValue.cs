@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Calculated based on the sum of the values of account positions and cash balances
+    /// The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to &#x60;account.balance.total&#x60;.
     /// </summary>
     [DataContract(Name = "SnapTradeHoldingsTotalValue")]
     public partial class SnapTradeHoldingsTotalValue : IEquatable<SnapTradeHoldingsTotalValue>, IValidatableObject
@@ -35,8 +35,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeHoldingsTotalValue" /> class.
         /// </summary>
-        /// <param name="value">value.</param>
-        /// <param name="currency">currency.</param>
+        /// <param name="value">Total value denominated in the currency of the &#x60;currency&#x60; field..</param>
+        /// <param name="currency">The ISO-4217 currency code for the amount..</param>
         public SnapTradeHoldingsTotalValue(double? value = default(double?), string currency = default(string)) : base()
         {
             this.Value = value;
@@ -45,14 +45,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// Total value denominated in the currency of the &#x60;currency&#x60; field.
         /// </summary>
+        /// <value>Total value denominated in the currency of the &#x60;currency&#x60; field.</value>
         [DataMember(Name = "value", EmitDefaultValue = true)]
         public double? Value { get; set; }
 
         /// <summary>
-        /// Gets or Sets Currency
+        /// The ISO-4217 currency code for the amount.
         /// </summary>
+        /// <value>The ISO-4217 currency code for the amount.</value>
         [DataMember(Name = "currency", EmitDefaultValue = true)]
         public string Currency { get; set; }
 

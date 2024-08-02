@@ -561,13 +561,11 @@ module SnapTrade
     end
 
 
-    # List balances, positions and orders for the specified account
+    # List account holdings
     #
-    # Lists balances, positions and orders for the specified account as well as
-    # option_positions and account metadata. The data returned is similar to the
-    # data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
     #
-    # @param account_id [String] The ID of the account to fetch holdings for.
+    # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -576,13 +574,11 @@ module SnapTrade
       data
     end
 
-    # List balances, positions and orders for the specified account
+    # List account holdings
     #
-    # Lists balances, positions and orders for the specified account as well as
-    # option_positions and account metadata. The data returned is similar to the
-    # data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
     #
-    # @param account_id [String] The ID of the account to fetch holdings for.
+    # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -590,9 +586,9 @@ module SnapTrade
       get_user_holdings_with_http_info_impl(account_id, user_id, user_secret, extra)
     end
 
-    # List balances, positions and orders for the specified account
-    # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
-    # @param account_id [String] The ID of the account to fetch holdings for.
+    # List account holdings
+    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
+    # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -602,9 +598,9 @@ module SnapTrade
       data
     end
 
-    # List balances, positions and orders for the specified account
-    # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
-    # @param account_id [String] The ID of the account to fetch holdings for.
+    # List account holdings
+    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
+    # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

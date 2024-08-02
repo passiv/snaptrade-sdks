@@ -70,7 +70,6 @@ export * from './option-leg';
 export * from './option-strategy';
 export * from './option-strategy-legs-inner';
 export * from './options-get-option-strategy-request';
-export * from './options-holdings';
 export * from './options-place-option-strategy-request';
 export * from './options-position';
 export * from './options-position-currency';

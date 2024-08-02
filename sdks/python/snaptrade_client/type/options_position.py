@@ -17,7 +17,6 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.currency_nullable import CurrencyNullable
 from snaptrade_client.type.option_brokerage_symbol import OptionBrokerageSymbol
-from snaptrade_client.type.price import Price
 
 class RequiredOptionsPosition(TypedDict):
     pass
@@ -25,13 +24,15 @@ class RequiredOptionsPosition(TypedDict):
 class OptionalOptionsPosition(TypedDict, total=False):
     symbol: OptionBrokerageSymbol
 
-    price: Price
+    # Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+    price: typing.Optional[typing.Union[int, float]]
 
+    # The number of contracts for this option position.
     units: typing.Union[int, float]
 
     currency: typing.Optional[CurrencyNullable]
 
-    # Average purchase price for this position
+    # Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     average_purchase_price: typing.Optional[typing.Union[int, float]]
 
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):

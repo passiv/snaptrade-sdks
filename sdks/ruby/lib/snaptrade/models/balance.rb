@@ -11,12 +11,14 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Account Balance
+  # Holds balance information for a single currency in an account.
   class Balance
     attr_accessor :currency
 
+    # The amount of available cash in the account denominated in the currency of the `currency` field.
     attr_accessor :cash
 
+    # Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
     attr_accessor :buying_power
 
     # Attribute mapping from ruby-style variable name to JSON key.

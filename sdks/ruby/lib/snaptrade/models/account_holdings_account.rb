@@ -11,16 +11,20 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Account Holdings with Account ID
+  # A wrapper object containing holdings information for a single account
   class AccountHoldingsAccount
     attr_accessor :account
 
+    # List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
     attr_accessor :balances
 
+    # List of stock/ETF/crypto/mutual fund positions in the account.
     attr_accessor :positions
 
+    # List of option positions in the account.
     attr_accessor :option_positions
 
+    # List of recent orders in the account, including both pending and executed orders.
     attr_accessor :orders
 
     attr_accessor :total_value

@@ -1180,7 +1180,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1196,7 +1196,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1212,7 +1212,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1228,7 +1228,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1238,16 +1238,16 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * List balances, positions and orders for the specified account
-     * Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
-     * @param accountId The ID of the account to fetch holdings for. (required)
+     * List account holdings
+     * Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
+     * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetUserHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns holdings for the account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */

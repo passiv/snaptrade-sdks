@@ -20,8 +20,10 @@ class RequiredAmount(TypedDict):
     pass
 
 class OptionalAmount(TypedDict, total=False):
+    # Total value denominated in the currency of the `currency` field.
     amount: typing.Union[int, float]
 
+    # The ISO-4217 currency code for the amount.
     currency: str
 
 class Amount(RequiredAmount, OptionalAmount):

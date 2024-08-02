@@ -100,9 +100,9 @@ describe 'AccountInformationApi' do
   end
 
   # unit tests for get_user_holdings
-  # List balances, positions and orders for the specified account
-  # Lists balances, positions and orders for the specified account as well as option_positions and account metadata. The data returned is similar to the data returned over the more fine-grained **positions**, **orders** and **balances** endpoints. 
-  # @param account_id The ID of the account to fetch holdings for.
+  # List account holdings
+  # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__ 
+  # @param account_id 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

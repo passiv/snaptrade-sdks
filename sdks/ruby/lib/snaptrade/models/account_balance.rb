@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Balance of the account
+  # Contains balance related information for the account.
   class AccountBalance
     attr_accessor :total
 

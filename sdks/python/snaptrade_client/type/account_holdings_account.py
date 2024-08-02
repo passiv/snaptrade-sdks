@@ -28,12 +28,16 @@ class RequiredAccountHoldingsAccount(TypedDict):
 class OptionalAccountHoldingsAccount(TypedDict, total=False):
     account: SnapTradeHoldingsAccountAccountId
 
+    # List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
     balances: typing.Optional[typing.List[Balance]]
 
+    # List of stock/ETF/crypto/mutual fund positions in the account.
     positions: typing.Optional[typing.List[Position]]
 
+    # List of option positions in the account.
     option_positions: typing.Optional[typing.List[OptionsPosition]]
 
+    # List of recent orders in the account, including both pending and executed orders.
     orders: typing.Optional[typing.List[AccountOrderRecord]]
 
     total_value: SnapTradeHoldingsTotalValue

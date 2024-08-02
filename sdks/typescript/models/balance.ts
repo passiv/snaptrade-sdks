@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { Currency } from './currency';
 
 /**
- * Account Balance
+ * Holds balance information for a single currency in an account.
  * @export
  * @interface Balance
  */
@@ -27,13 +27,13 @@ export interface Balance {
      */
     'currency'?: Currency;
     /**
-     * 
+     * The amount of available cash in the account denominated in the currency of the `currency` field.
      * @type {number}
      * @memberof Balance
      */
     'cash'?: number | null;
     /**
-     * 
+     * Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
      * @type {number}
      * @memberof Balance
      */

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdHoldings(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdHoldings unit test stubs
-        List balances, positions and orders for the specified account
+        List account holdings
     """
 
     def setUp(self):

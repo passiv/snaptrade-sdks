@@ -432,7 +432,7 @@ conf = snaptrade_client.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 1.0.0\n"\
-               "SDK Package Version: 11.0.29".\
+               "SDK Package Version: 11.0.30".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

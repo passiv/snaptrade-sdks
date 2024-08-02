@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.AccountBalance
-Balance of the account
+Contains balance related information for the account.
 
 ## Properties
 

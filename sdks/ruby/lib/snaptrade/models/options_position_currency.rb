@@ -12,10 +12,13 @@ require 'time'
 
 module SnapTrade
   class OptionsPositionCurrency
+    # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
     attr_accessor :id
 
+    # The ISO-4217 currency code for the currency.
     attr_accessor :code
 
+    # A human-friendly name of the currency.
     attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.

@@ -14,7 +14,7 @@ import { OptionBrokerageSymbol } from './option-brokerage-symbol';
 import { OptionsPositionCurrency } from './options-position-currency';
 
 /**
- * Option Holdings
+ * Describes a single option position in an account.
  * @export
  * @interface OptionsPosition
  */
@@ -28,13 +28,13 @@ export interface OptionsPosition {
      */
     'symbol'?: OptionBrokerageSymbol;
     /**
-     * Trade Price if limit or stop limit order
+     * Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
      * @type {number}
      * @memberof OptionsPosition
      */
     'price'?: number | null;
     /**
-     * 
+     * The number of contracts for this option position.
      * @type {number}
      * @memberof OptionsPosition
      */
@@ -46,7 +46,7 @@ export interface OptionsPosition {
      */
     'currency'?: OptionsPositionCurrency | null;
     /**
-     * Average purchase price for this position
+     * Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
      * @type {number}
      * @memberof OptionsPosition
      */

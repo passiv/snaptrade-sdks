@@ -13,8 +13,10 @@ require 'time'
 module SnapTrade
   # Total value of the account, as reported by the brokerage
   class Amount
+    # Total value denominated in the currency of the `currency` field.
     attr_accessor :amount
 
+    # The ISO-4217 currency code for the amount.
     attr_accessor :currency
 
     # Attribute mapping from ruby-style variable name to JSON key.

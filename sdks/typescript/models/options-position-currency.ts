@@ -19,19 +19,19 @@ import { Currency } from './currency';
  */
 export interface OptionsPositionCurrency {
     /**
-     * 
+     * Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
      * @type {string}
      * @memberof OptionsPositionCurrency
      */
     'id'?: string;
     /**
-     * 
+     * The ISO-4217 currency code for the currency.
      * @type {string}
      * @memberof OptionsPositionCurrency
      */
     'code'?: string;
     /**
-     * 
+     * A human-friendly name of the currency.
      * @type {string}
      * @memberof OptionsPositionCurrency
      */

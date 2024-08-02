@@ -13,12 +13,12 @@
 import unittest
 
 import snaptrade_client
-from snaptrade_client.model.options_holdings import OptionsHoldings
+from snaptrade_client.model.brokerage_auth_id import BrokerageAuthID
 from snaptrade_client import configuration
 
 
-class TestOptionsHoldings(unittest.TestCase):
-    """OptionsHoldings unit test stubs"""
+class TestBrokerageAuthID(unittest.TestCase):
+    """BrokerageAuthID unit test stubs"""
     pass
 
 

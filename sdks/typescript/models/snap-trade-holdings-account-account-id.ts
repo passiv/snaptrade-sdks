@@ -14,7 +14,7 @@ import { CashRestriction } from './cash-restriction';
 import { SnapTradeHoldingsAccountAccountIdBalance } from './snap-trade-holdings-account-account-id-balance';
 
 /**
- * Holdings with account ID
+ * A single brokerage account at a financial institution.
  * @export
  * @interface SnapTradeHoldingsAccountAccountId
  */
@@ -22,37 +22,38 @@ export interface SnapTradeHoldingsAccountAccountId {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
     'id'?: string;
     /**
-     * 
+     * Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
     'brokerage_authorization'?: string;
     /**
-     * 
+     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
+     * @deprecated
      */
     'portfolio_group'?: string;
     /**
-     * 
+     * A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
     'name'?: string | null;
     /**
-     * 
+     * The account number assigned by the financial institution.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
     'number'?: string;
     /**
-     * 
+     * The name of the financial institution that holds the account.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */
@@ -64,19 +65,21 @@ export interface SnapTradeHoldingsAccountAccountId {
      */
     'balance'?: SnapTradeHoldingsAccountAccountIdBalance | null;
     /**
-     * 
+     * Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there\'s no standard format for this data. Please use at your own risk.
      * @type {{ [key: string]: any; }}
      * @memberof SnapTradeHoldingsAccountAccountId
+     * @deprecated
      */
     'meta'?: { [key: string]: any; };
     /**
-     * 
+     * This field is deprecated.
      * @type {Array<CashRestriction>}
      * @memberof SnapTradeHoldingsAccountAccountId
+     * @deprecated
      */
     'cash_restrictions'?: Array<CashRestriction>;
     /**
-     * Time
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
      * @type {string}
      * @memberof SnapTradeHoldingsAccountAccountId
      */

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Account Balance
+    /// Holds balance information for a single currency in an account.
     /// </summary>
     [DataContract(Name = "Balance")]
     public partial class Balance : IEquatable<Balance>, IValidatableObject
@@ -36,8 +36,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="Balance" /> class.
         /// </summary>
         /// <param name="currency">currency.</param>
-        /// <param name="cash">cash.</param>
-        /// <param name="buyingPower">buyingPower.</param>
+        /// <param name="cash">The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field..</param>
+        /// <param name="buyingPower">Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages..</param>
         public Balance(Currency currency = default(Currency), double? cash = default(double?), double? buyingPower = default(double?)) : base()
         {
             this.Currency = currency;
@@ -53,14 +53,16 @@ namespace SnapTrade.Net.Model
         public Currency Currency { get; set; }
 
         /// <summary>
-        /// Gets or Sets Cash
+        /// The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.
         /// </summary>
+        /// <value>The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.</value>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
         public double? Cash { get; set; }
 
         /// <summary>
-        /// Gets or Sets BuyingPower
+        /// Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
         /// </summary>
+        /// <value>Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.</value>
         [DataMember(Name = "buying_power", EmitDefaultValue = true)]
         public double? BuyingPower { get; set; }
 

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Option Holdings
+    /// Describes a single option position in an account.
     /// </summary>
     [DataContract(Name = "OptionsPosition")]
     public partial class OptionsPosition : IEquatable<OptionsPosition>, IValidatableObject
@@ -36,10 +36,10 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="OptionsPosition" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
-        /// <param name="price">Trade Price if limit or stop limit order.</param>
-        /// <param name="units">units.</param>
+        /// <param name="price">Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
+        /// <param name="units">The number of contracts for this option position..</param>
         /// <param name="currency">currency.</param>
-        /// <param name="averagePurchasePrice">Average purchase price for this position.</param>
+        /// <param name="averagePurchasePrice">Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100)..</param>
         public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), CurrencyNullable currency = default(CurrencyNullable), double? averagePurchasePrice = default(double?)) : base()
         {
             this.Symbol = symbol;
@@ -57,15 +57,16 @@ namespace SnapTrade.Net.Model
         public OptionBrokerageSymbol Symbol { get; set; }
 
         /// <summary>
-        /// Trade Price if limit or stop limit order
+        /// Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
         /// </summary>
-        /// <value>Trade Price if limit or stop limit order</value>
+        /// <value>Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
         public double? Price { get; set; }
 
         /// <summary>
-        /// Gets or Sets Units
+        /// The number of contracts for this option position.
         /// </summary>
+        /// <value>The number of contracts for this option position.</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
         public double Units { get; set; }
 
@@ -76,9 +77,9 @@ namespace SnapTrade.Net.Model
         public CurrencyNullable Currency { get; set; }
 
         /// <summary>
-        /// Average purchase price for this position
+        /// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
         /// </summary>
-        /// <value>Average purchase price for this position</value>
+        /// <value>Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
         public double? AveragePurchasePrice { get; set; }
 

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Account Holdings with Account ID
+    /// A wrapper object containing holdings information for a single account
     /// </summary>
     [DataContract(Name = "AccountHoldingsAccount")]
     public partial class AccountHoldingsAccount : IEquatable<AccountHoldingsAccount>, IValidatableObject
@@ -36,10 +36,10 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountHoldingsAccount" /> class.
         /// </summary>
         /// <param name="account">account.</param>
-        /// <param name="balances">balances.</param>
-        /// <param name="positions">positions.</param>
-        /// <param name="optionPositions">optionPositions.</param>
-        /// <param name="orders">orders.</param>
+        /// <param name="balances">List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances)..</param>
+        /// <param name="positions">List of stock/ETF/crypto/mutual fund positions in the account..</param>
+        /// <param name="optionPositions">List of option positions in the account..</param>
+        /// <param name="orders">List of recent orders in the account, including both pending and executed orders..</param>
         /// <param name="totalValue">totalValue.</param>
         public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<OptionsPosition> optionPositions = default(List<OptionsPosition>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
         {
@@ -59,26 +59,30 @@ namespace SnapTrade.Net.Model
         public SnapTradeHoldingsAccountAccountId Account { get; set; }
 
         /// <summary>
-        /// Gets or Sets Balances
+        /// List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
         /// </summary>
+        /// <value>List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).</value>
         [DataMember(Name = "balances", EmitDefaultValue = true)]
         public List<Balance> Balances { get; set; }
 
         /// <summary>
-        /// Gets or Sets Positions
+        /// List of stock/ETF/crypto/mutual fund positions in the account.
         /// </summary>
+        /// <value>List of stock/ETF/crypto/mutual fund positions in the account.</value>
         [DataMember(Name = "positions", EmitDefaultValue = true)]
         public List<Position> Positions { get; set; }
 
         /// <summary>
-        /// Gets or Sets OptionPositions
+        /// List of option positions in the account.
         /// </summary>
+        /// <value>List of option positions in the account.</value>
         [DataMember(Name = "option_positions", EmitDefaultValue = true)]
         public List<OptionsPosition> OptionPositions { get; set; }
 
         /// <summary>
-        /// Gets or Sets Orders
+        /// List of recent orders in the account, including both pending and executed orders.
         /// </summary>
+        /// <value>List of recent orders in the account, including both pending and executed orders.</value>
         [DataMember(Name = "orders", EmitDefaultValue = true)]
         public List<AccountOrderRecord> Orders { get; set; }
 
