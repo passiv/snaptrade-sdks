@@ -376,6 +376,9 @@ func (c *APIClient) prepareRequest(
 	for header, value := range c.cfg.DefaultHeader {
 		localVarRequest.Header.Add(header, value)
 	}
+
+	prepareRequestAfter(localVarRequest, ctx)
+
 	return localVarRequest, nil
 }
 
