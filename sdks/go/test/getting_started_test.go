@@ -56,5 +56,33 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 		require.Nil(t, err)
 		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
+
+		// 2) Get user secret
+		userSecret := resp.UserSecret
+		require.NotEmpty(t, userSecret)
+
+		// List users to ensure it was created
+		listResp, _, _ := client.AuthenticationApi.ListSnapTradeUsers().Execute()
+		require.Contains(t, listResp, userId)
+
+		// 3) Get redirect URI
+		loginResp, httpRes, err := client.AuthenticationApi.LoginSnapTradeUser(userId, *userSecret).Execute()
+		require.Nil(t, err)
+		require.NotNil(t, loginResp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NotEmpty(t, loginResp.LoginRedirectURI)
+
+		// 4) Obtain account holdings data
+		holdingsResp, httpRes, err := client.AccountInformationApi.GetAllUserHoldings(userId, *userSecret).Execute()
+		require.Nil(t, err)
+		require.NotNil(t, holdingsResp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+		assert.NotEmpty(t, holdingsResp[0].Account)
+
+		// 5) Delete the user
+		deleteResp, httpRes, err := client.AuthenticationApi.DeleteSnapTradeUser(userId).Execute()
+		require.Nil(t, err)
+		require.NotNil(t, deleteResp)
+		assert.Equal(t, 200, httpRes.StatusCode)
 	})
 }
