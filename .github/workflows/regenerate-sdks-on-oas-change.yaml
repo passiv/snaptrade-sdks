@@ -6,7 +6,7 @@ on:
       - opened
       - synchronize
     branches:
-      - disabled
+      - master
 
 jobs:
   regenerate-sdks-on-oas-change:
