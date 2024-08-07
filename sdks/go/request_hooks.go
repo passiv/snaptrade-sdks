@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"sort"
 	"strings"
 	"time"
 )
@@ -57,11 +58,23 @@ func prepareRequestAfter(
 		"query":   requestQuery,
 	}
 
+	// Sort keys in sigObject before encoding
+	sortedSigObject := make(map[string]interface{})
+	keys := make([]string, 0, len(sigObject))
+	for k := range sigObject {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys) // Sort keys
+
+	for _, k := range keys {
+		sortedSigObject[k] = sigObject[k]
+	}
+
 	// Generate signature
 	var sigContent bytes.Buffer
 	encoder := json.NewEncoder(&sigContent)
-	encoder.SetEscapeHTML(false) // Prevent escaping of HTML characters
-	encoder.Encode(sigObject)
+	encoder.SetEscapeHTML(false)    // Prevent escaping of HTML characters
+	encoder.Encode(sortedSigObject) // Encode sorted object
 	signature := computeHmacSha256(strings.TrimSuffix(sigContent.String(), "\n"), consumerKey)
 
 	// Add signature to headers
