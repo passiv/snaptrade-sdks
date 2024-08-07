@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.1)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.2)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -39,7 +39,7 @@ func main() {
 
 	// 1) Create a new user
 	requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
-	userId := ""
+	userId := "USER_ID_FROM_YOU"
 	requestBody.SetUserId(userId)
 	request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
 	resp, _, _ := request.Execute()
