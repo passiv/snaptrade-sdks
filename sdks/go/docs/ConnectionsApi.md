@@ -32,8 +32,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.DetailBrokerageAuthorization(
@@ -86,8 +87,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.DisableBrokerageAuthorization(
@@ -132,8 +134,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.ListBrokerageAuthorizations(
@@ -185,8 +188,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.RefreshBrokerageAuthorization(
@@ -231,8 +235,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.RemoveBrokerageAuthorization(
@@ -274,8 +279,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ConnectionsApi.SessionEvents(

@@ -37,8 +37,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.GetCurrencyExchangeRatePair(
@@ -83,8 +84,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.GetPartnerInfo(
@@ -137,8 +139,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.GetSecurityTypes(
@@ -183,8 +186,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.GetStockExchanges(
@@ -233,8 +237,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     
@@ -290,8 +295,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.GetSymbolsByTicker(
@@ -343,8 +349,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.ListAllBrokerageAuthorizationType(
@@ -390,8 +397,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.ListAllBrokerages(
@@ -452,8 +460,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.ListAllCurrencies(
@@ -497,8 +506,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.ListAllCurrenciesRates(
@@ -542,8 +552,9 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    configuration.SetPartnerClientId("CLIENT_ID")
+    configuration.SetPartnerSignature("SIGNATURE")
+    configuration.SetPartnerTimestamp("TIMESTAMP")
     client := snaptrade.NewAPIClient(configuration)
 
     

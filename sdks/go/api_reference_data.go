@@ -66,11 +66,7 @@ func (a *ReferenceDataApiService) GetCurrencyExchangeRatePairExecute(r Reference
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/currencies/rates/{currencyPair}"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/currencies/rates/{currencyPair}"
 	localVarPath = strings.Replace(localVarPath, "{"+"currencyPair"+"}", url.PathEscape(parameterToString(r.currencyPair, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -136,8 +132,6 @@ func (a *ReferenceDataApiService) GetCurrencyExchangeRatePairExecute(r Reference
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -214,11 +208,7 @@ func (a *ReferenceDataApiService) GetPartnerInfoExecute(r ReferenceDataApiGetPar
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/snapTrade/partners"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/snapTrade/partners"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -283,8 +273,6 @@ func (a *ReferenceDataApiService) GetPartnerInfoExecute(r ReferenceDataApiGetPar
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -394,11 +382,7 @@ func (a *ReferenceDataApiService) GetSecurityTypesExecute(r ReferenceDataApiGetS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/securityTypes"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/securityTypes"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -463,8 +447,6 @@ func (a *ReferenceDataApiService) GetSecurityTypesExecute(r ReferenceDataApiGetS
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -541,11 +523,7 @@ func (a *ReferenceDataApiService) GetStockExchangesExecute(r ReferenceDataApiGet
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/exchanges"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/exchanges"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -610,8 +588,6 @@ func (a *ReferenceDataApiService) GetStockExchangesExecute(r ReferenceDataApiGet
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -697,11 +673,7 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/symbols"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/symbols"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -725,9 +697,7 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if r.symbolQuery != nil {
-        localVarPostBody = r.symbolQuery
-    }
+	localVarPostBody = r.symbolQuery
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -770,8 +740,6 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -851,11 +819,7 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/symbols/{query}"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/symbols/{query}"
 	localVarPath = strings.Replace(localVarPath, "{"+"query"+"}", url.PathEscape(parameterToString(r.query, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -921,8 +885,6 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1006,11 +968,7 @@ func (a *ReferenceDataApiService) ListAllBrokerageAuthorizationTypeExecute(r Ref
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/brokerageAuthorizationTypes"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/brokerageAuthorizationTypes"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1078,8 +1036,6 @@ func (a *ReferenceDataApiService) ListAllBrokerageAuthorizationTypeExecute(r Ref
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1156,11 +1112,7 @@ func (a *ReferenceDataApiService) ListAllBrokeragesExecute(r ReferenceDataApiLis
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/brokerages"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/brokerages"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1225,8 +1177,6 @@ func (a *ReferenceDataApiService) ListAllBrokeragesExecute(r ReferenceDataApiLis
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1303,11 +1253,7 @@ func (a *ReferenceDataApiService) ListAllCurrenciesExecute(r ReferenceDataApiLis
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/currencies"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/currencies"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1372,8 +1318,6 @@ func (a *ReferenceDataApiService) ListAllCurrenciesExecute(r ReferenceDataApiLis
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1450,11 +1394,7 @@ func (a *ReferenceDataApiService) ListAllCurrenciesRatesExecute(r ReferenceDataA
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/currencies/rates"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/currencies/rates"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1519,8 +1459,6 @@ func (a *ReferenceDataApiService) ListAllCurrenciesRatesExecute(r ReferenceDataA
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1615,11 +1553,7 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/symbols"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/symbols"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1646,9 +1580,7 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if r.symbolQuery != nil {
-        localVarPostBody = r.symbolQuery
-    }
+	localVarPostBody = r.symbolQuery
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1691,8 +1623,6 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

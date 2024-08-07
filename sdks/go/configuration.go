@@ -105,7 +105,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "Konfig/1.0.0/go",
+		UserAgent:        "Konfig/1.0.1/go",
 		TokenUrl:   	  "",
 		Debug:            false,
         Context: context.Background(),
@@ -164,9 +164,6 @@ func (c *Configuration) SetPartnerTimestamp(partnerTimestamp string) {
 	c.AddAPIKey("PartnerTimestamp", APIKey{Key: partnerTimestamp})
 }
 
-func (c *Configuration) SetConsumerKey(ConsumerKey string) {
-    c.AddAPIKey("ConsumerKey", APIKey{Key: ConsumerKey})
-}
 // Setup OAuth Client Credentials Flow for all requests
 func (c *Configuration) SetOAuthClientCredentials(clientId string, clientSecret string) {
        config := &clientcredentials.Config{
