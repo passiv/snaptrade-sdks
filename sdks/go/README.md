@@ -25,37 +25,40 @@ go get github.com/passiv/snaptrade-sdks/sdks/go
 package main
 
 import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+	"fmt"
+	"os"
+
+	snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
 )
 
 func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
-    client := snaptrade.NewAPIClient(configuration)
+	configuration := snaptrade.NewConfiguration()
+	configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+	configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+	client := snaptrade.NewAPIClient(configuration)
 
-    request := client.AccountInformationApi.GetAllUserHoldings(
-        "userId_example",
-        "userSecret_example",
-    )
-    request.BrokerageAuthorizations("917c8734-8470-4a3e-a18f-57c3f2ee6631")
-    
-    resp, httpRes, err := request.Execute()
+	// 1) Create a new user
+	requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
+	userId := ""
+	requestBody.SetUserId(userId)
+	request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
+	resp, _, _ := request.Execute()
 
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAllUserHoldings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `GetAllUserHoldings`: []AccountHoldings
-    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAllUserHoldings`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Account`: %v\n", *resp.Account)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Balances`: %v\n", *resp.Balances)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.Positions`: %v\n", *resp.Positions)
-    fmt.Fprintf(os.Stdout, "Response from `AccountHoldings.GetAllUserHoldings.TotalValue`: %v\n", *resp.TotalValue)
+	// 2) Get user secret
+	userSecret := resp.UserSecret
+
+	// 3) Get redirect URI
+	loginResp, _, _ := client.AuthenticationApi.LoginSnapTradeUser(userId, *userSecret).Execute()
+	fmt.Println("Login redirect URI:", loginResp.LoginRedirectURI)
+
+	// 4) Obtain account holdings data
+	holdingsResp, _, _ := client.AccountInformationApi.GetAllUserHoldings(userId, *userSecret).Execute()
+	fmt.Println("Account holdings:", holdingsResp)
+	// 5) Delete the user
+	deleteResp, _, _ := client.AuthenticationApi.DeleteSnapTradeUser(userId).Execute()
+	fmt.Println("User deletion response:", deleteResp)
 }
+
 ```
 
 ## Documentation for API Endpoints
