@@ -15,7 +15,7 @@ func main() {
 
 	// 1) Create a new user
 	requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
-	userId := ""
+	userId := "USER_ID_FROM_YOU"
 	requestBody.SetUserId(userId)
 	request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
 	resp, _, _ := request.Execute()
