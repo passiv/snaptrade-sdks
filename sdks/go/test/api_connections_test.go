@@ -21,9 +21,8 @@ func Test_snaptrade_ConnectionsApiService(t *testing.T) {
     // configuration := snaptrade.NewConfiguration()
     // configuration.SetHost("http://127.0.0.1:4010")
     /* 
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
     */
 

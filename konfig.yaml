@@ -138,6 +138,7 @@ generators:
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
+    apiDocumentationAuthenticationPartial: snippets/godocauthpartial.go
     git:
       userId: passiv
       repoId: snaptrade-sdks/sdks/go

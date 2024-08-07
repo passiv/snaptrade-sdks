@@ -35,9 +35,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetAllUserHoldings(
@@ -85,9 +84,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountBalance(
@@ -134,9 +132,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountDetails(
@@ -191,9 +188,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountOrders(
@@ -258,9 +254,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserAccountPositions(
@@ -310,9 +305,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserHoldings(
@@ -362,9 +356,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.ListUserAccounts(
@@ -418,9 +411,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.UpdateUserAccount(
