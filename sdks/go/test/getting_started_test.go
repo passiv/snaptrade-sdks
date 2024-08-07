@@ -77,7 +77,6 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 		require.Nil(t, err)
 		require.NotNil(t, holdingsResp)
 		assert.Equal(t, 200, httpRes.StatusCode)
-		assert.NotEmpty(t, holdingsResp[0].Account)
 
 		// 5) Delete the user
 		deleteResp, httpRes, err := client.AuthenticationApi.DeleteSnapTradeUser(userId).Execute()

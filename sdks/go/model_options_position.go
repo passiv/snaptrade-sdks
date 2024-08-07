@@ -15,14 +15,15 @@ import (
 	"encoding/json"
 )
 
-// OptionsPosition Option Holdings
+// OptionsPosition Describes a single option position in an account.
 type OptionsPosition struct {
 	Symbol *OptionBrokerageSymbol `json:"symbol,omitempty"`
-	// Trade Price if limit or stop limit order
+	// Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
 	Price NullableFloat32 `json:"price,omitempty"`
+	// The number of contracts for this option position.
 	Units *float32 `json:"units,omitempty"`
 	Currency NullableOptionsPositionCurrency `json:"currency,omitempty"`
-	// Average purchase price for this position
+	// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
 	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

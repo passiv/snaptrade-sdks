@@ -15,16 +15,19 @@ import (
 	"encoding/json"
 )
 
-// Position Account Position
+// Position Describes a single stock/ETF/crypto/mutual fund position in an account.
 type Position struct {
 	Symbol *PositionSymbol `json:"symbol,omitempty"`
+	// The number of shares of the position. This can be fractional or integer units.
 	Units NullableFloat32 `json:"units,omitempty"`
-	// Last known market price for the symbol
+	// Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
 	Price NullableFloat32 `json:"price,omitempty"`
+	// The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
 	OpenPnl NullableFloat32 `json:"open_pnl,omitempty"`
-	// Deprecated, use the units field for both fractional and integer units going forward
+	// Deprecated, use the `units` field for both fractional and integer units going forward
+	// Deprecated
 	FractionalUnits NullableFloat32 `json:"fractional_units,omitempty"`
-	// Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions.
+	// Cost basis _per share_ of this position.
 	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -207,6 +210,7 @@ func (o *Position) UnsetOpenPnl() {
 }
 
 // GetFractionalUnits returns the FractionalUnits field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Position) GetFractionalUnits() float32 {
 	if o == nil || isNil(o.FractionalUnits.Get()) {
 		var ret float32
@@ -218,6 +222,7 @@ func (o *Position) GetFractionalUnits() float32 {
 // GetFractionalUnitsOk returns a tuple with the FractionalUnits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Position) GetFractionalUnitsOk() (*float32, bool) {
 	if o == nil {
     return nil, false
@@ -235,6 +240,7 @@ func (o *Position) HasFractionalUnits() bool {
 }
 
 // SetFractionalUnits gets a reference to the given NullableFloat32 and assigns it to the FractionalUnits field.
+// Deprecated
 func (o *Position) SetFractionalUnits(v float32) {
 	o.FractionalUnits.Set(&v)
 }

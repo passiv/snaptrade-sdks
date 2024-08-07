@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float32** |  | [optional] 
-**Currency** | Pointer to **string** |  | [optional] 
+**Amount** | Pointer to **float32** | Total value denominated in the currency of the &#x60;currency&#x60; field. | [optional] 
+**Currency** | Pointer to **string** | The ISO-4217 currency code for the amount. | [optional] 
 
 ## Methods
 

@@ -15,12 +15,16 @@ import (
 	"encoding/json"
 )
 
-// AccountHoldingsAccount Account Holdings with Account ID
+// AccountHoldingsAccount A wrapper object containing holdings information for a single account
 type AccountHoldingsAccount struct {
 	Account *SnapTradeHoldingsAccountAccountId `json:"account,omitempty"`
+	// List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
 	Balances []Balance `json:"balances,omitempty"`
+	// List of stock/ETF/crypto/mutual fund positions in the account.
 	Positions []Position `json:"positions,omitempty"`
+	// List of option positions in the account.
 	OptionPositions []OptionsPosition `json:"option_positions,omitempty"`
+	// List of recent orders in the account, including both pending and executed orders.
 	Orders []AccountOrderRecord `json:"orders,omitempty"`
 	TotalValue *SnapTradeHoldingsTotalValue `json:"total_value,omitempty"`
 	AdditionalProperties map[string]interface{}

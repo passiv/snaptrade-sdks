@@ -136,6 +136,7 @@ func (a *ReferenceDataApiService) GetCurrencyExchangeRatePairExecute(r Reference
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -282,6 +283,7 @@ func (a *ReferenceDataApiService) GetPartnerInfoExecute(r ReferenceDataApiGetPar
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -461,6 +463,7 @@ func (a *ReferenceDataApiService) GetSecurityTypesExecute(r ReferenceDataApiGetS
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -607,6 +610,7 @@ func (a *ReferenceDataApiService) GetStockExchangesExecute(r ReferenceDataApiGet
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -721,7 +725,9 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.symbolQuery
+    if r.symbolQuery != nil {
+        localVarPostBody = r.symbolQuery
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -764,6 +770,7 @@ func (a *ReferenceDataApiService) GetSymbolsExecute(r ReferenceDataApiGetSymbols
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -914,6 +921,7 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1070,6 +1078,7 @@ func (a *ReferenceDataApiService) ListAllBrokerageAuthorizationTypeExecute(r Ref
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1216,6 +1225,7 @@ func (a *ReferenceDataApiService) ListAllBrokeragesExecute(r ReferenceDataApiLis
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1362,6 +1372,7 @@ func (a *ReferenceDataApiService) ListAllCurrenciesExecute(r ReferenceDataApiLis
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1508,6 +1519,7 @@ func (a *ReferenceDataApiService) ListAllCurrenciesRatesExecute(r ReferenceDataA
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -1634,7 +1646,9 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.symbolQuery
+    if r.symbolQuery != nil {
+        localVarPostBody = r.symbolQuery
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -1677,6 +1691,7 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

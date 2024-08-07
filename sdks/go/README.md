@@ -69,7 +69,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **Get** /accounts/{accountId} | Return details of a specific investment account
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **Get** /accounts/{accountId}/orders | List account orders
 *AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **Get** /accounts/{accountId}/positions | List account positions
-*AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
+*AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **Put** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **Get** / | Get API Status
@@ -182,7 +182,6 @@ Class | Method | HTTP request | Description
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
  - [OptionsGetOptionStrategyRequest](docs/OptionsGetOptionStrategyRequest.md)
- - [OptionsHoldings](docs/OptionsHoldings.md)
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsPositionCurrency](docs/OptionsPositionCurrency.md)

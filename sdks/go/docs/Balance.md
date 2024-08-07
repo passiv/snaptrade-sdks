@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
-**Cash** | Pointer to **NullableFloat32** |  | [optional] 
-**BuyingPower** | Pointer to **NullableFloat32** |  | [optional] 
+**Cash** | Pointer to **NullableFloat32** | The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. | [optional] 
+**BuyingPower** | Pointer to **NullableFloat32** | Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages. | [optional] 
 
 ## Methods
 

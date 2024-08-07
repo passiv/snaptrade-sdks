@@ -17,7 +17,9 @@ import (
 
 // Amount Total value of the account, as reported by the brokerage
 type Amount struct {
+	// Total value denominated in the currency of the `currency` field.
 	Amount *float32 `json:"amount,omitempty"`
+	// The ISO-4217 currency code for the amount.
 	Currency *string `json:"currency,omitempty"`
 }
 

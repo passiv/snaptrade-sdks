@@ -107,7 +107,9 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.optionsGetOptionStrategyRequest
+    if !checkNilInterface(r.optionsGetOptionStrategyRequest) {
+        localVarPostBody = r.optionsGetOptionStrategyRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -150,6 +152,7 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -322,6 +325,7 @@ func (a *OptionsApiService) GetOptionsChainExecute(r OptionsApiGetOptionsChainRe
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -495,6 +499,7 @@ func (a *OptionsApiService) GetOptionsStrategyQuoteExecute(r OptionsApiGetOption
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -664,6 +669,7 @@ func (a *OptionsApiService) ListOptionHoldingsExecute(r OptionsApiListOptionHold
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -798,7 +804,9 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.optionsPlaceOptionStrategyRequest
+    if !checkNilInterface(r.optionsPlaceOptionStrategyRequest) {
+        localVarPostBody = r.optionsPlaceOptionStrategyRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -841,6 +849,7 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

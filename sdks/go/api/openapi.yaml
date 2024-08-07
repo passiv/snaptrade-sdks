@@ -677,22 +677,15 @@ paths:
   /accounts/{accountId}/holdings:
     get:
       description: |
-        Lists balances, positions and orders for the specified account as well as
-        option_positions and account metadata. The data returned is similar to the
-        data returned over the more fine-grained **positions**, **orders** and **balances** endpoints.
+        Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
       operationId: AccountInformation_getUserHoldings
       parameters:
-      - description: The ID of the account to fetch holdings for.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-parameters-0-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       - explode: true
         in: query
@@ -714,7 +707,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountHoldingsAccount'
-          description: Returns holdings for the account
+          description: OK
         "400":
           content:
             application/json:
@@ -729,7 +722,7 @@ paths:
           description: Forbidden
         "500":
           description: Unexpected Error
-      summary: "List balances, positions and orders for the specified account"
+      summary: List account holdings
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -2300,7 +2293,7 @@ components:
           x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
     AccountBalance:
-      description: Balance of the account
+      description: Contains balance related information for the account.
       example:
         total: null
       properties:
@@ -2310,11 +2303,13 @@ components:
       description: "Total value of the account, as reported by the brokerage"
       properties:
         amount:
+          description: Total value denominated in the currency of the `currency` field.
           example: 15363.23
           type: number
           x-konfig-original-example: 15363.23
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-amount
         currency:
+          description: The ISO-4217 currency code for the amount.
           example: USD
           type: string
           x-konfig-original-example: USD
@@ -2450,12 +2445,28 @@ components:
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
       type: object
+    AccountID:
+      description: Unique identifier for the connected brokerage account. This is
+        the UUID used to reference the account in SnapTrade.
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      format: uuid
+      type: string
+      x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
     AccountIDs:
       description: Comma seperated list of account IDs
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-konfig-original-example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountIDs
+    BrokerageAuthID:
+      description: Unique identifier for the connection (brokerage authorization).
+        This is the UUID used to reference the connection in SnapTrade.
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
+      format: uuid
+      type: string
+      x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
     BrokerageAuthIDs:
       description: Comma seperated list of brokerage authorization IDs
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
@@ -2641,7 +2652,7 @@ components:
       type: object
     AccountHoldingsAccount:
       additionalProperties: true
-      description: Account Holdings with Account ID
+      description: A wrapper object containing holdings information for a single account
       example:
         total_value:
           currency: USD
@@ -2704,7 +2715,7 @@ components:
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               expiration_date: 2017-07-17T15:13:07.177712+00:00
               strike_price: 200
-          price: 31.33
+          price: 113.15
           currency: null
           units: 10
           average_purchase_price: 108.3353
@@ -2752,7 +2763,7 @@ components:
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               expiration_date: 2017-07-17T15:13:07.177712+00:00
               strike_price: 200
-          price: 31.33
+          price: 113.15
           currency: null
           units: 10
           average_purchase_price: 108.3353
@@ -3032,10 +3043,10 @@ components:
             type: Margin
             status: ACTIVE
             institution_name: Alpaca
-          name: Registered Retirement Savings Account
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          name: Robinhood Individual
+          id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          created_date: 2022-01-21T20:11:19.217Z
+          created_date: 2024-07-23T22:50:22.761Z
           institution_name: Alpaca
           cash_restrictions:
           - amount: 100
@@ -3052,21 +3063,28 @@ components:
         account:
           $ref: '#/components/schemas/SnapTradeHoldingsAccountAccountId'
         balances:
+          description: "List of balances for the account. Each element of the list\
+            \ has a distinct currency. Some brokerages like Questrade [allows holding\
+            \ multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances)."
           items:
             $ref: '#/components/schemas/Balance'
           nullable: true
           type: array
         positions:
+          description: List of stock/ETF/crypto/mutual fund positions in the account.
           items:
             $ref: '#/components/schemas/Position'
           nullable: true
           type: array
         option_positions:
+          description: List of option positions in the account.
           items:
             $ref: '#/components/schemas/OptionsPosition'
           nullable: true
           type: array
         orders:
+          description: "List of recent orders in the account, including both pending\
+            \ and executed orders."
           items:
             $ref: '#/components/schemas/AccountOrderRecord'
           nullable: true
@@ -3286,7 +3304,7 @@ components:
       type: string
     OptionsPosition:
       additionalProperties: true
-      description: Option Holdings
+      description: Describes a single option position in an account.
       example:
         symbol:
           description: SPY CALL 7/17 200
@@ -3332,7 +3350,7 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             expiration_date: 2017-07-17T15:13:07.177712+00:00
             strike_price: 200
-        price: 31.33
+        price: 113.15
         currency: null
         units: 10
         average_purchase_price: 108.3353
@@ -3340,13 +3358,18 @@ components:
         symbol:
           $ref: '#/components/schemas/OptionBrokerageSymbol'
         price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
+          description: "Last known market price for the option contract. The freshness\
+            \ of this price depends on the brokerage. Some brokerages provide real-time\
+            \ prices, while others provide delayed prices. It is recommended that\
+            \ you rely on your own third-party market data provider for most up to\
+            \ date prices."
+          example: 113.15
           nullable: true
           type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
+          x-konfig-original-example: 113.15
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-price
         units:
+          description: The number of contracts for this option position.
           example: 10
           type: number
           x-konfig-original-example: 10
@@ -3354,47 +3377,14 @@ components:
         currency:
           $ref: '#/components/schemas/OptionsPosition_currency'
         average_purchase_price:
-          description: Average purchase price for this position
+          description: "Cost basis _per contract_ of this option position. To get\
+            \ the cost basis _per share_, divide this value by the number of shares\
+            \ per contract (usually 100)."
           example: 108.3353
           nullable: true
           type: number
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
-      type: object
-    OptionsHoldings:
-      additionalProperties: true
-      description: Option Holdings
-      properties:
-        id:
-          description: Options information
-          example: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
-          type: string
-          x-konfig-original-example: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsHoldings-properties-id
-        symbol:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        option_symbol:
-          $ref: '#/components/schemas/OptionsSymbol'
-        price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
-        currency:
-          $ref: '#/components/schemas/Currency'
-        average_purchase_price:
-          description: Average purchase price for this position
-          example: 108.3353
-          nullable: true
-          type: number
-          x-konfig-original-example: 108.3353
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsHoldings-properties-average_purchase_price
       type: object
     StrategyImpact:
       additionalProperties: true
@@ -3877,7 +3867,7 @@ components:
       type: object
     SnapTradeHoldingsAccountAccountId:
       additionalProperties: true
-      description: Holdings with account ID
+      description: A single brokerage account at a financial institution.
       example:
         number: Q6542138443
         balance: null
@@ -3886,10 +3876,10 @@ components:
           type: Margin
           status: ACTIVE
           institution_name: Alpaca
-        name: Registered Retirement Savings Account
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        name: Robinhood Individual
+        id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        created_date: 2022-01-21T20:11:19.217Z
+        created_date: 2024-07-23T22:50:22.761Z
         institution_name: Alpaca
         cash_restrictions:
         - amount: 100
@@ -3904,35 +3894,47 @@ components:
           account: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
           format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
         brokerage_authorization:
+          description: Unique identifier for the connection (brokerage authorization).
+            This is the UUID used to reference the connection in SnapTrade.
           example: 87b24961-b51e-4db8-9226-f198f6518a89
           format: uuid
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-brokerage_authorization
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         portfolio_group:
+          deprecated: true
+          description: Portfolio Group ID. Portfolio Groups have been deprecated.
+            Please contact support if you have a usecase for it.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
         name:
-          example: Registered Retirement Savings Account
+          description: "A display name for the account. Either assigned by the user\
+            \ or by the financial institution itself. For certain institutions, SnapTrade\
+            \ appends the institution name to the account name for clarity."
+          example: Robinhood Individual
           nullable: true
           type: string
-          x-konfig-original-example: Registered Retirement Savings Account
+          x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-name
         number:
+          description: The account number assigned by the financial institution.
           example: Q6542138443
           type: string
           x-konfig-original-example: Q6542138443
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-number
         institution_name:
+          description: The name of the financial institution that holds the account.
           example: Alpaca
           type: string
           x-konfig-original-example: Alpaca
@@ -3941,6 +3943,11 @@ components:
           $ref: '#/components/schemas/SnapTradeHoldingsAccountAccountId_balance'
         meta:
           additionalProperties: true
+          deprecated: true
+          description: "Additional information about the account, such as account\
+            \ type, status, etc. This information is specific to the financial institution\
+            \ and there's no standard format for this data. Please use at your own\
+            \ risk."
           example:
             type: Margin
             status: ACTIVE
@@ -3952,31 +3959,43 @@ components:
             institution_name: Alpaca
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-meta
         cash_restrictions:
+          deprecated: true
+          description: This field is deprecated.
           items:
             $ref: '#/components/schemas/CashRestriction'
           type: array
         created_date:
-          description: Time
-          example: 2022-01-21T20:11:19.217Z
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the account was created in SnapTrade. This is\
+            \ _not_ the account opening date at the financial institution."
+          example: 2024-07-23T22:50:22.761Z
+          format: date-time
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+          x-konfig-original-example: 2024-07-23T22:50:22.761Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-created_date
       type: object
     SnapTradeHoldingsTotalValue:
       additionalProperties: true
-      description: Calculated based on the sum of the values of account positions
-        and cash balances
+      description: "The total market value of the account. Note that this field is\
+        \ calculated based on the sum of the values of account positions and cash\
+        \ balances known to SnapTrade. It may not be accurate if the brokerage account\
+        \ has holdings that SnapTrade is not aware of. For example, if the brokerage\
+        \ account holds assets that SnapTrade does not support, the total value may\
+        \ be underreported. To get the brokerage reported total market value of the\
+        \ account, refer to `account.balance.total`."
       example:
         currency: USD
         value: 32600.71
       properties:
         value:
+          description: Total value denominated in the currency of the `currency` field.
           example: 32600.71
           nullable: true
           type: number
           x-konfig-original-example: 32600.71
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsTotalValue-properties-value
         currency:
+          description: The ISO-4217 currency code for the amount.
           example: USD
           nullable: true
           type: string
@@ -3985,7 +4004,7 @@ components:
       type: object
     Balance:
       additionalProperties: true
-      description: Account Balance
+      description: Holds balance information for a single currency in an account.
       example:
         currency:
           code: USD
@@ -3997,12 +4016,17 @@ components:
         currency:
           $ref: '#/components/schemas/Currency'
         cash:
+          description: The amount of available cash in the account denominated in
+            the currency of the `currency` field.
           example: 300.71
           nullable: true
           type: number
           x-konfig-original-example: 300.71
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Balance-properties-cash
         buying_power:
+          description: "Buying power only applies to margin accounts. For non-margin\
+            \ accounts, buying power should be the same as cash. Please note that\
+            \ this field is not always available for all brokerages."
           example: 410.71
           nullable: true
           type: number
@@ -4017,24 +4041,28 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConsumerKey
     Currency:
       additionalProperties: true
-      description: Currency
+      description: Describes a currency object.
       example:
         code: USD
         name: US Dollar
         id: 87b24961-b51e-4db8-9226-f198f6518a89
       properties:
         id:
+          description: Unique identifier for the currency. This is the UUID used to
+            reference the currency in SnapTrade.
           example: 87b24961-b51e-4db8-9226-f198f6518a89
           format: uuid
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-id
         code:
+          description: The ISO-4217 currency code for the currency.
           example: USD
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-code
         name:
+          description: A human-friendly name of the currency.
           example: US Dollar
           type: string
           x-konfig-original-example: US Dollar
@@ -4655,7 +4683,8 @@ components:
       type: object
     Position:
       additionalProperties: true
-      description: Account Position
+      description: Describes a single stock/ETF/crypto/mutual fund position in an
+        account.
       example:
         symbol:
           is_quotable: true
@@ -4704,35 +4733,45 @@ components:
         symbol:
           $ref: '#/components/schemas/PositionSymbol'
         units:
+          description: The number of shares of the position. This can be fractional
+            or integer units.
           example: 40
           nullable: true
           type: number
           x-konfig-original-example: 40
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-units
         price:
-          description: Last known market price for the symbol
+          description: "Last known market price for the symbol. The freshness of this\
+            \ price depends on the brokerage. Some brokerages provide real-time prices,\
+            \ while others provide delayed prices. It is recommended that you rely\
+            \ on your own third-party market data provider for most up to date prices."
           example: 113.15
           nullable: true
           type: number
           x-konfig-original-example: 113.15
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-price
         open_pnl:
+          description: "The profit or loss on the position since it was opened. This\
+            \ is calculated as the difference between the current market value of\
+            \ the position and the total cost of the position. It is recommended to\
+            \ calculate this value using the average purchase price and the current\
+            \ market price yourself, instead of relying on this field."
           example: 0.44
           nullable: true
           type: number
           x-konfig-original-example: 0.44
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-open_pnl
         fractional_units:
-          description: "Deprecated, use the units field for both fractional and integer\
-            \ units going forward"
+          deprecated: true
+          description: "Deprecated, use the `units` field for both fractional and\
+            \ integer units going forward"
           example: 1.44
           nullable: true
           type: number
           x-konfig-original-example: 1.44
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-fractional_units
         average_purchase_price:
-          description: Average purchase price for this position. Either returned by
-            the underlying broker or calculated using historical transactions.
+          description: Cost basis _per share_ of this position.
           example: 108.3353
           nullable: true
           type: number
@@ -5862,6 +5901,15 @@ components:
       type: number
       x-konfig-original-example: 90
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Percent
+    PortfolioGroupID:
+      deprecated: true
+      description: Portfolio Group ID. Portfolio Groups have been deprecated. Please
+        contact support if you have a usecase for it.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
     PortfolioGroup:
       additionalProperties: true
       properties:
@@ -7334,10 +7382,6 @@ components:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-holdings-get-parameters-0-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -7450,27 +7494,31 @@ components:
       example: Q6542138443
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountID:
+      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountIDs:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthID:
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthIDs:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionsPosition-properties-price:
+      example: 113.15
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-units:
       example: 10
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price:
-      example: 108.3353
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsHoldings-properties-id:
-      example: 11b55fd2-dc29-42ec-ac03-97b5cd757a4d
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsHoldings-properties-average_purchase_price:
       example: 108.3353
       type: number
       x-do-not-generate: true
@@ -7760,12 +7808,8 @@ components:
           type: string
       type: object
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-brokerage_authorization:
-      example: 87b24961-b51e-4db8-9226-f198f6518a89
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-name:
-      example: Registered Retirement Savings Account
+      example: Robinhood Individual
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-number:
@@ -7793,6 +7837,10 @@ components:
           example: Alpaca
           type: string
       type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-created_date:
+      example: 2024-07-23T22:50:22.761Z
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeHoldingsTotalValue-properties-value:
       example: 32600.71
@@ -8341,6 +8389,10 @@ components:
     konfig-generated-schema-components-schemas-Percent:
       example: 90
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PortfolioGroupID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PortfolioGroup-properties-name:
       example: Combined Retirement Portfolio
@@ -8995,11 +9047,7 @@ components:
       additionalProperties: true
       properties:
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-holdings-get-parameters-0-schema
+          $ref: '#/components/schemas/AccountID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:

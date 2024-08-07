@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AccountBalance Balance of the account
+// AccountBalance Contains balance related information for the account.
 type AccountBalance struct {
 	Total NullableAccountBalanceTotal `json:"total,omitempty"`
 }

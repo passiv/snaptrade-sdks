@@ -15,10 +15,13 @@ import (
 	"encoding/json"
 )
 
-// Currency Currency
+// Currency Describes a currency object.
 type Currency struct {
+	// Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// The ISO-4217 currency code for the currency.
 	Code *string `json:"code,omitempty"`
+	// A human-friendly name of the currency.
 	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

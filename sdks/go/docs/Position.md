@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | Pointer to [**PositionSymbol**](PositionSymbol.md) |  | [optional] 
-**Units** | Pointer to **NullableFloat32** |  | [optional] 
-**Price** | Pointer to **NullableFloat32** | Last known market price for the symbol | [optional] 
-**OpenPnl** | Pointer to **NullableFloat32** |  | [optional] 
-**FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the units field for both fractional and integer units going forward | [optional] 
-**AveragePurchasePrice** | Pointer to **NullableFloat32** | Average purchase price for this position. Either returned by the underlying broker or calculated using historical transactions. | [optional] 
+**Units** | Pointer to **NullableFloat32** | The number of shares of the position. This can be fractional or integer units. | [optional] 
+**Price** | Pointer to **NullableFloat32** | Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
+**OpenPnl** | Pointer to **NullableFloat32** | The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field. | [optional] 
+**FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
+**AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per share_ of this position. | [optional] 
 
 ## Methods
 

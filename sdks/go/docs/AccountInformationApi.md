@@ -9,7 +9,7 @@ Method | Path | Description
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Return details of a specific investment account
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
-[**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List balances, positions and orders for the specified account
+[**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
 [**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
 [**UpdateUserAccount**](AccountInformationApi.md#UpdateUserAccount) | **Put** /accounts/{accountId} | Update details of an investment account
 
@@ -293,7 +293,7 @@ func main() {
 
 ## GetUserHoldings
 
-List balances, positions and orders for the specified account
+List account holdings
 
 
 
@@ -316,7 +316,7 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.AccountInformationApi.GetUserHoldings(
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         "userId_example",
         "userSecret_example",
     )

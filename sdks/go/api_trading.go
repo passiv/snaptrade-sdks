@@ -108,7 +108,9 @@ func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUser
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    if !checkNilInterface(r.tradingCancelUserAccountOrderRequest) {
+        localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -151,6 +153,7 @@ func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUser
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -288,7 +291,9 @@ func (a *TradingApiService) GetOrderImpactExecute(r TradingApiGetOrderImpactRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.manualTradeForm
+    if !checkNilInterface(r.manualTradeForm) {
+        localVarPostBody = r.manualTradeForm
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -331,6 +336,7 @@ func (a *TradingApiService) GetOrderImpactExecute(r TradingApiGetOrderImpactRequ
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -525,6 +531,7 @@ func (a *TradingApiService) GetUserAccountQuotesExecute(r TradingApiGetUserAccou
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -651,7 +658,9 @@ func (a *TradingApiService) PlaceForceOrderExecute(r TradingApiPlaceForceOrderRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.manualTradeForm
+    if !checkNilInterface(r.manualTradeForm) {
+        localVarPostBody = r.manualTradeForm
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -694,6 +703,7 @@ func (a *TradingApiService) PlaceForceOrderExecute(r TradingApiPlaceForceOrderRe
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -841,7 +851,9 @@ func (a *TradingApiService) PlaceOrderExecute(r TradingApiPlaceOrderRequest) (*A
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.validatedTradeBody
+    if r.validatedTradeBody != nil {
+        localVarPostBody = r.validatedTradeBody
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -884,6 +896,7 @@ func (a *TradingApiService) PlaceOrderExecute(r TradingApiPlaceOrderRequest) (*A
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

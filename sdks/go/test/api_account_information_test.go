@@ -112,7 +112,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
     t.Run("Test AccountInformationApiService GetUserHoldings", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetUserHoldings(
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
             "userId_example",
             "userSecret_example",
         )

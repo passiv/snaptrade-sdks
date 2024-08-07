@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Code** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade. | [optional] 
+**Code** | Pointer to **string** | The ISO-4217 currency code for the currency. | [optional] 
+**Name** | Pointer to **string** | A human-friendly name of the currency. | [optional] 
 
 ## Methods
 

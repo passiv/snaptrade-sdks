@@ -135,6 +135,7 @@ func (a *AuthenticationApiService) DeleteSnapTradeUserExecute(r AuthenticationAp
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -314,6 +315,7 @@ func (a *AuthenticationApiService) ListSnapTradeUsersExecute(r AuthenticationApi
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -465,7 +467,9 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.snapTradeLoginUserRequestBody
+    if r.snapTradeLoginUserRequestBody != nil {
+        localVarPostBody = r.snapTradeLoginUserRequestBody
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -508,6 +512,7 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -651,7 +656,9 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.snapTradeRegisterUserRequestBody
+    if !checkNilInterface(r.snapTradeRegisterUserRequestBody) {
+        localVarPostBody = r.snapTradeRegisterUserRequestBody
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -694,6 +701,7 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -836,7 +844,9 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.userIDandSecret
+    if !checkNilInterface(r.userIDandSecret) {
+        localVarPostBody = r.userIDandSecret
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -879,6 +889,7 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 			}
 		}
 	}
+
     prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

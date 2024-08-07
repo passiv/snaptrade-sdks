@@ -13,21 +13,33 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// SnapTradeHoldingsAccountAccountId Holdings with account ID
+// SnapTradeHoldingsAccountAccountId A single brokerage account at a financial institution.
 type SnapTradeHoldingsAccountAccountId struct {
+	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
 	BrokerageAuthorization *string `json:"brokerage_authorization,omitempty"`
+	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+	// Deprecated
 	PortfolioGroup *string `json:"portfolio_group,omitempty"`
+	// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
 	Name NullableString `json:"name,omitempty"`
+	// The account number assigned by the financial institution.
 	Number *string `json:"number,omitempty"`
+	// The name of the financial institution that holds the account.
 	InstitutionName *string `json:"institution_name,omitempty"`
 	Balance NullableSnapTradeHoldingsAccountAccountIdBalance `json:"balance,omitempty"`
+	// Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
+	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
+	// This field is deprecated.
+	// Deprecated
 	CashRestrictions []CashRestriction `json:"cash_restrictions,omitempty"`
-	// Time
-	CreatedDate *string `json:"created_date,omitempty"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+	CreatedDate *time.Time `json:"created_date,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -115,6 +127,7 @@ func (o *SnapTradeHoldingsAccountAccountId) SetBrokerageAuthorization(v string) 
 }
 
 // GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetPortfolioGroup() string {
 	if o == nil || isNil(o.PortfolioGroup) {
 		var ret string
@@ -125,6 +138,7 @@ func (o *SnapTradeHoldingsAccountAccountId) GetPortfolioGroup() string {
 
 // GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetPortfolioGroupOk() (*string, bool) {
 	if o == nil || isNil(o.PortfolioGroup) {
     return nil, false
@@ -142,6 +156,7 @@ func (o *SnapTradeHoldingsAccountAccountId) HasPortfolioGroup() bool {
 }
 
 // SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) SetPortfolioGroup(v string) {
 	o.PortfolioGroup = &v
 }
@@ -295,6 +310,7 @@ func (o *SnapTradeHoldingsAccountAccountId) UnsetBalance() {
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetMeta() map[string]interface{} {
 	if o == nil || isNil(o.Meta) {
 		var ret map[string]interface{}
@@ -305,6 +321,7 @@ func (o *SnapTradeHoldingsAccountAccountId) GetMeta() map[string]interface{} {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetMetaOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Meta) {
     return map[string]interface{}{}, false
@@ -322,11 +339,13 @@ func (o *SnapTradeHoldingsAccountAccountId) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
 
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []CashRestriction {
 	if o == nil || isNil(o.CashRestrictions) {
 		var ret []CashRestriction
@@ -337,6 +356,7 @@ func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []CashRestrict
 
 // GetCashRestrictionsOk returns a tuple with the CashRestrictions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictionsOk() ([]CashRestriction, bool) {
 	if o == nil || isNil(o.CashRestrictions) {
     return nil, false
@@ -354,14 +374,15 @@ func (o *SnapTradeHoldingsAccountAccountId) HasCashRestrictions() bool {
 }
 
 // SetCashRestrictions gets a reference to the given []CashRestriction and assigns it to the CashRestrictions field.
+// Deprecated
 func (o *SnapTradeHoldingsAccountAccountId) SetCashRestrictions(v []CashRestriction) {
 	o.CashRestrictions = v
 }
 
 // GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
-func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDate() string {
+func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDate() time.Time {
 	if o == nil || isNil(o.CreatedDate) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.CreatedDate
@@ -369,7 +390,7 @@ func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDate() string {
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDateOk() (*string, bool) {
+func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedDate) {
     return nil, false
 	}
@@ -385,8 +406,8 @@ func (o *SnapTradeHoldingsAccountAccountId) HasCreatedDate() bool {
 	return false
 }
 
-// SetCreatedDate gets a reference to the given string and assigns it to the CreatedDate field.
-func (o *SnapTradeHoldingsAccountAccountId) SetCreatedDate(v string) {
+// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+func (o *SnapTradeHoldingsAccountAccountId) SetCreatedDate(v time.Time) {
 	o.CreatedDate = &v
 }
 

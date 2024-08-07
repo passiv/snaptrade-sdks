@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**BrokerageAuthorization** | Pointer to **string** |  | [optional] 
-**PortfolioGroup** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Number** | Pointer to **string** |  | [optional] 
-**InstitutionName** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | [optional] 
+**BrokerageAuthorization** | Pointer to **string** | Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade. | [optional] 
+**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
+**Name** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity. | [optional] 
+**Number** | Pointer to **string** | The account number assigned by the financial institution. | [optional] 
+**InstitutionName** | Pointer to **string** | The name of the financial institution that holds the account. | [optional] 
 **Balance** | Pointer to [**NullableSnapTradeHoldingsAccountAccountIdBalance**](SnapTradeHoldingsAccountAccountIdBalance.md) |  | [optional] 
-**Meta** | Pointer to **map[string]interface{}** |  | [optional] 
-**CashRestrictions** | Pointer to [**[]CashRestriction**](CashRestriction.md) |  | [optional] 
-**CreatedDate** | Pointer to **string** | Time | [optional] 
+**Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk. | [optional] 
+**CashRestrictions** | Pointer to [**[]CashRestriction**](CashRestriction.md) | This field is deprecated. | [optional] 
+**CreatedDate** | Pointer to **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution. | [optional] 
 
 ## Methods
 
@@ -281,20 +281,20 @@ HasCashRestrictions returns a boolean if a field has been set.
 
 ### GetCreatedDate
 
-`func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDate() string`
+`func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDate() time.Time`
 
 GetCreatedDate returns the CreatedDate field if non-nil, zero value otherwise.
 
 ### GetCreatedDateOk
 
-`func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDateOk() (*string, bool)`
+`func (o *SnapTradeHoldingsAccountAccountId) GetCreatedDateOk() (*time.Time, bool)`
 
 GetCreatedDateOk returns a tuple with the CreatedDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedDate
 
-`func (o *SnapTradeHoldingsAccountAccountId) SetCreatedDate(v string)`
+`func (o *SnapTradeHoldingsAccountAccountId) SetCreatedDate(v time.Time)`
 
 SetCreatedDate sets CreatedDate field to given value.
 

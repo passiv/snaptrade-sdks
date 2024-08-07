@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Account** | Pointer to [**SnapTradeHoldingsAccountAccountId**](SnapTradeHoldingsAccountAccountId.md) |  | [optional] 
-**Balances** | Pointer to [**[]Balance**](Balance.md) |  | [optional] 
-**Positions** | Pointer to [**[]Position**](Position.md) |  | [optional] 
-**OptionPositions** | Pointer to [**[]OptionsPosition**](OptionsPosition.md) |  | [optional] 
-**Orders** | Pointer to [**[]AccountOrderRecord**](AccountOrderRecord.md) |  | [optional] 
+**Balances** | Pointer to [**[]Balance**](Balance.md) | List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances). | [optional] 
+**Positions** | Pointer to [**[]Position**](Position.md) | List of stock/ETF/crypto/mutual fund positions in the account. | [optional] 
+**OptionPositions** | Pointer to [**[]OptionsPosition**](OptionsPosition.md) | List of option positions in the account. | [optional] 
+**Orders** | Pointer to [**[]AccountOrderRecord**](AccountOrderRecord.md) | List of recent orders in the account, including both pending and executed orders. | [optional] 
 **TotalValue** | Pointer to [**SnapTradeHoldingsTotalValue**](SnapTradeHoldingsTotalValue.md) |  | [optional] 
 
 ## Methods
