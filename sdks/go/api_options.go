@@ -76,11 +76,7 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/optionStrategy"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -107,9 +103,7 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.optionsGetOptionStrategyRequest) {
-        localVarPostBody = r.optionsGetOptionStrategyRequest
-    }
+	localVarPostBody = r.optionsGetOptionStrategyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -152,8 +146,6 @@ func (a *OptionsApiService) GetOptionStrategyExecute(r OptionsApiGetOptionStrate
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -252,11 +244,7 @@ func (a *OptionsApiService) GetOptionsChainExecute(r OptionsApiGetOptionsChainRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/optionsChain"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/optionsChain"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -325,8 +313,6 @@ func (a *OptionsApiService) GetOptionsChainExecute(r OptionsApiGetOptionsChainRe
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -426,11 +412,7 @@ func (a *OptionsApiService) GetOptionsStrategyQuoteExecute(r OptionsApiGetOption
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/optionStrategy/{optionStrategyId}"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy/{optionStrategyId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"optionStrategyId"+"}", url.PathEscape(parameterToString(r.optionStrategyId, "")), -1)
 
@@ -499,8 +481,6 @@ func (a *OptionsApiService) GetOptionsStrategyQuoteExecute(r OptionsApiGetOption
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -597,11 +577,7 @@ func (a *OptionsApiService) ListOptionHoldingsExecute(r OptionsApiListOptionHold
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/options"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/options"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -669,8 +645,6 @@ func (a *OptionsApiService) ListOptionHoldingsExecute(r OptionsApiListOptionHold
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -772,11 +746,7 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"optionStrategyId"+"}", url.PathEscape(parameterToString(r.optionStrategyId, "")), -1)
 
@@ -804,9 +774,7 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.optionsPlaceOptionStrategyRequest) {
-        localVarPostBody = r.optionsPlaceOptionStrategyRequest
-    }
+	localVarPostBody = r.optionsPlaceOptionStrategyRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -849,8 +817,6 @@ func (a *OptionsApiService) PlaceOptionStrategyExecute(r OptionsApiPlaceOptionSt
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

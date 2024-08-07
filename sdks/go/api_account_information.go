@@ -83,11 +83,7 @@ func (a *AccountInformationApiService) GetAllUserHoldingsExecute(r AccountInform
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/holdings"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/holdings"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -157,8 +153,6 @@ func (a *AccountInformationApiService) GetAllUserHoldingsExecute(r AccountInform
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -266,11 +260,7 @@ func (a *AccountInformationApiService) GetUserAccountBalanceExecute(r AccountInf
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/balances"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/balances"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -338,8 +328,6 @@ func (a *AccountInformationApiService) GetUserAccountBalanceExecute(r AccountInf
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -427,11 +415,7 @@ func (a *AccountInformationApiService) GetUserAccountDetailsExecute(r AccountInf
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -499,8 +483,6 @@ func (a *AccountInformationApiService) GetUserAccountDetailsExecute(r AccountInf
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -600,11 +582,7 @@ func (a *AccountInformationApiService) GetUserAccountOrdersExecute(r AccountInfo
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/orders"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -681,8 +659,6 @@ func (a *AccountInformationApiService) GetUserAccountOrdersExecute(r AccountInfo
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -778,11 +754,7 @@ func (a *AccountInformationApiService) GetUserAccountPositionsExecute(r AccountI
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/positions"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/positions"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -850,8 +822,6 @@ func (a *AccountInformationApiService) GetUserAccountPositionsExecute(r AccountI
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -938,11 +908,7 @@ func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformati
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/holdings"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}/holdings"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1010,8 +976,6 @@ func (a *AccountInformationApiService) GetUserHoldingsExecute(r AccountInformati
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1116,11 +1080,7 @@ func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformat
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -1187,8 +1147,6 @@ func (a *AccountInformationApiService) ListUserAccountsExecute(r AccountInformat
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -1274,11 +1232,7 @@ func (a *AccountInformationApiService) UpdateUserAccountExecute(r AccountInforma
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}"
-	localVarPath := localBasePath + subpath
-	if a.client.cfg.Host != "" {
-		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
-	}
+	localVarPath := localBasePath + "/accounts/{accountId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1346,8 +1300,6 @@ func (a *AccountInformationApiService) UpdateUserAccountExecute(r AccountInforma
 			}
 		}
 	}
-
-    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
