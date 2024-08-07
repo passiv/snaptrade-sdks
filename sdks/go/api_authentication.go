@@ -65,7 +65,11 @@ func (a *AuthenticationApiService) DeleteSnapTradeUserExecute(r AuthenticationAp
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/deleteUser"
+    subpath := "/snapTrade/deleteUser"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -131,6 +135,8 @@ func (a *AuthenticationApiService) DeleteSnapTradeUserExecute(r AuthenticationAp
 			}
 		}
 	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -240,7 +246,11 @@ func (a *AuthenticationApiService) ListSnapTradeUsersExecute(r AuthenticationApi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/listUsers"
+    subpath := "/snapTrade/listUsers"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -305,6 +315,8 @@ func (a *AuthenticationApiService) ListSnapTradeUsersExecute(r AuthenticationApi
 			}
 		}
 	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -425,7 +437,11 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/login"
+    subpath := "/snapTrade/login"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -451,7 +467,9 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.snapTradeLoginUserRequestBody
+    if r.snapTradeLoginUserRequestBody != nil {
+        localVarPostBody = r.snapTradeLoginUserRequestBody
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -494,6 +512,8 @@ func (a *AuthenticationApiService) LoginSnapTradeUserExecute(r AuthenticationApi
 			}
 		}
 	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -608,7 +628,11 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/registerUser"
+    subpath := "/snapTrade/registerUser"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -632,7 +656,9 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.snapTradeRegisterUserRequestBody
+    if !checkNilInterface(r.snapTradeRegisterUserRequestBody) {
+        localVarPostBody = r.snapTradeRegisterUserRequestBody
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -675,6 +701,8 @@ func (a *AuthenticationApiService) RegisterSnapTradeUserExecute(r Authentication
 			}
 		}
 	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -788,7 +816,11 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/snapTrade/resetUserSecret"
+    subpath := "/snapTrade/resetUserSecret"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -812,7 +844,9 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.userIDandSecret
+    if !checkNilInterface(r.userIDandSecret) {
+        localVarPostBody = r.userIDandSecret
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -855,6 +889,8 @@ func (a *AuthenticationApiService) ResetSnapTradeUserSecretExecute(r Authenticat
 			}
 		}
 	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

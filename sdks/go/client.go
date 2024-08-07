@@ -376,6 +376,9 @@ func (c *APIClient) prepareRequest(
 	for header, value := range c.cfg.DefaultHeader {
 		localVarRequest.Header.Add(header, value)
 	}
+
+    prepareRequestAfter(localVarRequest, ctx)
+
 	return localVarRequest, nil
 }
 
@@ -485,6 +488,19 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 		return nil, err
 	}
 	return bodyBuf, nil
+}
+
+func checkNilInterface(i interface{}) bool {
+	iv := reflect.ValueOf(i)
+	if !iv.IsValid() {
+	  return true
+	}
+	switch iv.Kind() {
+	case reflect.Ptr, reflect.Slice, reflect.Map, reflect.Func, reflect.Interface:
+	  return iv.IsNil()
+	default:
+	  return false
+	}
 }
 
 // detectContentType method is used to figure out `Request.Body` content type for request header

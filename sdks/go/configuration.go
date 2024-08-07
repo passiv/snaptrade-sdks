@@ -164,6 +164,9 @@ func (c *Configuration) SetPartnerTimestamp(partnerTimestamp string) {
 	c.AddAPIKey("PartnerTimestamp", APIKey{Key: partnerTimestamp})
 }
 
+func (c *Configuration) SetConsumerKey(ConsumerKey string) {
+    c.AddAPIKey("ConsumerKey", APIKey{Key: ConsumerKey})
+}
 // Setup OAuth Client Credentials Flow for all requests
 func (c *Configuration) SetOAuthClientCredentials(clientId string, clientSecret string) {
        config := &clientcredentials.Config{

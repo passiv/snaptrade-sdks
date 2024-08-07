@@ -31,9 +31,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     
@@ -101,9 +100,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     units := *snaptrade.Newfloat32()
@@ -164,9 +162,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.TradingApi.GetUserAccountQuotes(
@@ -218,9 +215,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     units := *snaptrade.Newfloat32()
@@ -297,9 +293,8 @@ import (
 
 func main() {
     configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId("CLIENT_ID")
-    configuration.SetPartnerSignature("SIGNATURE")
-    configuration.SetPartnerTimestamp("TIMESTAMP")
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
     
