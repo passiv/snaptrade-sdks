@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// OptionsPositionCurrency struct for OptionsPositionCurrency
+// OptionsPositionCurrency The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
 type OptionsPositionCurrency struct {
 	// Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
 	Id *string `json:"id,omitempty"`

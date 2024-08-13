@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Stock Exchange
+    /// Describes a single stock or crypto exchange.
     /// </summary>
     [DataContract(Name = "Exchange")]
     public partial class Exchange : IEquatable<Exchange>, IValidatableObject
@@ -35,14 +35,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Exchange" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="code">code.</param>
-        /// <param name="micCode">micCode.</param>
-        /// <param name="name">name.</param>
-        /// <param name="timezone">timezone.</param>
-        /// <param name="startTime">startTime.</param>
-        /// <param name="closeTime">closeTime.</param>
-        /// <param name="suffix">suffix.</param>
+        /// <param name="id">Unique ID for the exchange in SnapTrade..</param>
+        /// <param name="code">A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field..</param>
+        /// <param name="micCode">The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange..</param>
+        /// <param name="name">The full name of the exchange..</param>
+        /// <param name="timezone">The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange..</param>
+        /// <param name="startTime">The time when the exchange opens for trading..</param>
+        /// <param name="closeTime">The time when the exchange closes for trading..</param>
+        /// <param name="suffix">The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is &#x60;.TO&#x60;. See &#x60;UniversalSymbol-&gt;symbol&#x60; and &#x60;UniversalSymbol-&gt;raw_symbol&#x60; for more detail..</param>
         public Exchange(string id = default(string), string code = default(string), string micCode = default(string), string name = default(string), string timezone = default(string), string startTime = default(string), string closeTime = default(string), string suffix = default(string)) : base()
         {
             this.Id = id;
@@ -57,50 +57,58 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique ID for the exchange in SnapTrade.
         /// </summary>
+        /// <value>Unique ID for the exchange in SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Code
+        /// A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field.
         /// </summary>
+        /// <value>A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field.</value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
 
         /// <summary>
-        /// Gets or Sets MicCode
+        /// The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
         /// </summary>
+        /// <value>The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.</value>
         [DataMember(Name = "mic_code", EmitDefaultValue = false)]
         public string MicCode { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// The full name of the exchange.
         /// </summary>
+        /// <value>The full name of the exchange.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Timezone
+        /// The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange.
         /// </summary>
+        /// <value>The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange.</value>
         [DataMember(Name = "timezone", EmitDefaultValue = false)]
         public string Timezone { get; set; }
 
         /// <summary>
-        /// Gets or Sets StartTime
+        /// The time when the exchange opens for trading.
         /// </summary>
+        /// <value>The time when the exchange opens for trading.</value>
         [DataMember(Name = "start_time", EmitDefaultValue = false)]
         public string StartTime { get; set; }
 
         /// <summary>
-        /// Gets or Sets CloseTime
+        /// The time when the exchange closes for trading.
         /// </summary>
+        /// <value>The time when the exchange closes for trading.</value>
         [DataMember(Name = "close_time", EmitDefaultValue = false)]
         public string CloseTime { get; set; }
 
         /// <summary>
-        /// Gets or Sets Suffix
+        /// The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is &#x60;.TO&#x60;. See &#x60;UniversalSymbol-&gt;symbol&#x60; and &#x60;UniversalSymbol-&gt;raw_symbol&#x60; for more detail.
         /// </summary>
+        /// <value>The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is &#x60;.TO&#x60;. See &#x60;UniversalSymbol-&gt;symbol&#x60; and &#x60;UniversalSymbol-&gt;raw_symbol&#x60; for more detail.</value>
         [DataMember(Name = "suffix", EmitDefaultValue = true)]
         public string Suffix { get; set; }
 

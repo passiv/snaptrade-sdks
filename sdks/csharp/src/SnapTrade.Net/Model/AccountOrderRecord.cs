@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Record of order in brokerageaccount
+    /// Describes a single recent order in an account.
     /// </summary>
     [DataContract(Name = "AccountOrderRecord")]
     public partial class AccountOrderRecord : IEquatable<AccountOrderRecord>, IValidatableObject
@@ -41,9 +41,9 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountOrderRecord" /> class.
         /// </summary>
-        /// <param name="brokerageOrderId">Order id returned by brokerage.</param>
+        /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system..</param>
         /// <param name="status">status.</param>
-        /// <param name="symbol">symbol.</param>
+        /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="action">Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE.</param>
@@ -85,16 +85,18 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Order id returned by brokerage
+        /// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
         /// </summary>
-        /// <value>Order id returned by brokerage</value>
+        /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
         [DataMember(Name = "brokerage_order_id", EmitDefaultValue = false)]
         public string BrokerageOrderId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Symbol
+        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
         /// </summary>
+        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        [Obsolete]
         public string Symbol { get; set; }
 
         /// <summary>

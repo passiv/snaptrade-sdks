@@ -15,13 +15,23 @@ import (
 	"encoding/json"
 )
 
-// PositionSymbol Symbol returned in position object
+// PositionSymbol Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
 type PositionSymbol struct {
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
 	Id *string `json:"id,omitempty"`
+	// This field is deprecated and the caller should use the `symbol` child property's `description` instead.
+	// Deprecated
 	Description *string `json:"description,omitempty"`
 	Symbol *UniversalSymbol `json:"symbol,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	LocalId NullableString `json:"local_id,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	IsQuotable *bool `json:"is_quotable,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	IsTradable *bool `json:"is_tradable,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,6 +56,7 @@ func NewPositionSymbolWithDefaults() *PositionSymbol {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
+// Deprecated
 func (o *PositionSymbol) GetId() string {
 	if o == nil || isNil(o.Id) {
 		var ret string
@@ -56,6 +67,7 @@ func (o *PositionSymbol) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PositionSymbol) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
     return nil, false
@@ -73,11 +85,13 @@ func (o *PositionSymbol) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
+// Deprecated
 func (o *PositionSymbol) SetId(v string) {
 	o.Id = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
+// Deprecated
 func (o *PositionSymbol) GetDescription() string {
 	if o == nil || isNil(o.Description) {
 		var ret string
@@ -88,6 +102,7 @@ func (o *PositionSymbol) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PositionSymbol) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
     return nil, false
@@ -105,6 +120,7 @@ func (o *PositionSymbol) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
+// Deprecated
 func (o *PositionSymbol) SetDescription(v string) {
 	o.Description = &v
 }
@@ -142,6 +158,7 @@ func (o *PositionSymbol) SetSymbol(v UniversalSymbol) {
 }
 
 // GetLocalId returns the LocalId field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *PositionSymbol) GetLocalId() string {
 	if o == nil || isNil(o.LocalId.Get()) {
 		var ret string
@@ -153,6 +170,7 @@ func (o *PositionSymbol) GetLocalId() string {
 // GetLocalIdOk returns a tuple with the LocalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *PositionSymbol) GetLocalIdOk() (*string, bool) {
 	if o == nil {
     return nil, false
@@ -170,6 +188,7 @@ func (o *PositionSymbol) HasLocalId() bool {
 }
 
 // SetLocalId gets a reference to the given NullableString and assigns it to the LocalId field.
+// Deprecated
 func (o *PositionSymbol) SetLocalId(v string) {
 	o.LocalId.Set(&v)
 }
@@ -184,6 +203,7 @@ func (o *PositionSymbol) UnsetLocalId() {
 }
 
 // GetIsQuotable returns the IsQuotable field value if set, zero value otherwise.
+// Deprecated
 func (o *PositionSymbol) GetIsQuotable() bool {
 	if o == nil || isNil(o.IsQuotable) {
 		var ret bool
@@ -194,6 +214,7 @@ func (o *PositionSymbol) GetIsQuotable() bool {
 
 // GetIsQuotableOk returns a tuple with the IsQuotable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PositionSymbol) GetIsQuotableOk() (*bool, bool) {
 	if o == nil || isNil(o.IsQuotable) {
     return nil, false
@@ -211,11 +232,13 @@ func (o *PositionSymbol) HasIsQuotable() bool {
 }
 
 // SetIsQuotable gets a reference to the given bool and assigns it to the IsQuotable field.
+// Deprecated
 func (o *PositionSymbol) SetIsQuotable(v bool) {
 	o.IsQuotable = &v
 }
 
 // GetIsTradable returns the IsTradable field value if set, zero value otherwise.
+// Deprecated
 func (o *PositionSymbol) GetIsTradable() bool {
 	if o == nil || isNil(o.IsTradable) {
 		var ret bool
@@ -226,6 +249,7 @@ func (o *PositionSymbol) GetIsTradable() bool {
 
 // GetIsTradableOk returns a tuple with the IsTradable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *PositionSymbol) GetIsTradableOk() (*bool, bool) {
 	if o == nil || isNil(o.IsTradable) {
     return nil, false
@@ -243,6 +267,7 @@ func (o *PositionSymbol) HasIsTradable() bool {
 }
 
 // SetIsTradable gets a reference to the given bool and assigns it to the IsTradable field.
+// Deprecated
 func (o *PositionSymbol) SetIsTradable(v bool) {
 	o.IsTradable = &v
 }

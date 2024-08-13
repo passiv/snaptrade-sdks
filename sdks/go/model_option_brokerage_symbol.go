@@ -15,9 +15,13 @@ import (
 	"encoding/json"
 )
 
-// OptionBrokerageSymbol Option Brokerage symbol
+// OptionBrokerageSymbol Uniquely describes a security for the option position within an account. The distinction between this and the `option_symbol` child property is that this object is specific to a position within an account, while the `option_symbol` child property is universal across all brokerage accounts. The caller should rely on the `option_symbol` child property for most use cases.
 type OptionBrokerageSymbol struct {
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
 	Id *string `json:"id,omitempty"`
+	// This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
+	// Deprecated
 	Description *string `json:"description,omitempty"`
 	OptionSymbol *OptionsSymbol `json:"option_symbol,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -43,6 +47,7 @@ func NewOptionBrokerageSymbolWithDefaults() *OptionBrokerageSymbol {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
+// Deprecated
 func (o *OptionBrokerageSymbol) GetId() string {
 	if o == nil || isNil(o.Id) {
 		var ret string
@@ -53,6 +58,7 @@ func (o *OptionBrokerageSymbol) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *OptionBrokerageSymbol) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
     return nil, false
@@ -70,11 +76,13 @@ func (o *OptionBrokerageSymbol) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
+// Deprecated
 func (o *OptionBrokerageSymbol) SetId(v string) {
 	o.Id = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
+// Deprecated
 func (o *OptionBrokerageSymbol) GetDescription() string {
 	if o == nil || isNil(o.Description) {
 		var ret string
@@ -85,6 +93,7 @@ func (o *OptionBrokerageSymbol) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *OptionBrokerageSymbol) GetDescriptionOk() (*string, bool) {
 	if o == nil || isNil(o.Description) {
     return nil, false
@@ -102,6 +111,7 @@ func (o *OptionBrokerageSymbol) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
+// Deprecated
 func (o *OptionBrokerageSymbol) SetDescription(v string) {
 	o.Description = &v
 }

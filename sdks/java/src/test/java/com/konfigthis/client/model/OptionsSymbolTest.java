@@ -21,6 +21,7 @@ import com.konfigthis.client.model.UnderlyingSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -94,22 +95,6 @@ public class OptionsSymbolTest {
     @Test
     public void underlyingSymbolTest() {
         // TODO: test underlyingSymbol
-    }
-
-    /**
-     * Test the property 'localId'
-     */
-    @Test
-    public void localIdTest() {
-        // TODO: test localId
-    }
-
-    /**
-     * Test the property 'exchangeId'
-     */
-    @Test
-    public void exchangeIdTest() {
-        // TODO: test exchangeId
     }
 
 }

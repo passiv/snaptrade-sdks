@@ -20,8 +20,9 @@ type OptionsPosition struct {
 	Symbol *OptionBrokerageSymbol `json:"symbol,omitempty"`
 	// Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
 	Price NullableFloat32 `json:"price,omitempty"`
-	// The number of contracts for this option position.
+	// The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
 	Units *float32 `json:"units,omitempty"`
+	// Deprecated
 	Currency NullableOptionsPositionCurrency `json:"currency,omitempty"`
 	// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
 	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
@@ -154,6 +155,7 @@ func (o *OptionsPosition) SetUnits(v float32) {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency {
 	if o == nil || isNil(o.Currency.Get()) {
 		var ret OptionsPositionCurrency
@@ -165,6 +167,7 @@ func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency {
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *OptionsPosition) GetCurrencyOk() (*OptionsPositionCurrency, bool) {
 	if o == nil {
     return nil, false
@@ -182,6 +185,7 @@ func (o *OptionsPosition) HasCurrency() bool {
 }
 
 // SetCurrency gets a reference to the given NullableOptionsPositionCurrency and assigns it to the Currency field.
+// Deprecated
 func (o *OptionsPosition) SetCurrency(v OptionsPositionCurrency) {
 	o.Currency.Set(&v)
 }

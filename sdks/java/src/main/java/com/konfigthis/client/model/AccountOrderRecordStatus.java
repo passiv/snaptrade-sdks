@@ -14,6 +14,7 @@ package com.konfigthis.client.model;
 
 import java.util.Objects;
 import java.util.Arrays;
+import io.swagger.annotations.ApiModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * Gets or Sets AccountOrderRecordStatus
+ * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
  */
 @JsonAdapter(AccountOrderRecordStatus.Adapter.class)public enum AccountOrderRecordStatus {
   

@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** |  | 
-**Symbol** | **string** |  | 
-**RawSymbol** | **string** |  | 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**Currency** | [**Currency**](Currency.md) |  | 
-**Exchange** | Pointer to [**Exchange**](Exchange.md) |  | [optional] 
+**Id** | **string** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | 
+**Symbol** | **string** | The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. | 
+**RawSymbol** | **string** | The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;. | 
+**Description** | Pointer to **NullableString** | A human-readable description of the security. This is usually the company name or ETF name. | [optional] 
+**Currency** | [**UniversalSymbolCurrency**](UniversalSymbolCurrency.md) |  | 
+**Exchange** | Pointer to [**UniversalSymbolExchange**](UniversalSymbolExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | 
-**Currencies** | [**[]Currency**](Currency.md) |  | 
-**FigiCode** | Pointer to **NullableString** |  | [optional] 
+**Currencies** | [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
+**FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
 
 ## Methods
 
 ### NewUniversalSymbol
 
-`func NewUniversalSymbol(id string, symbol string, rawSymbol string, currency Currency, type_ SecurityType, currencies []Currency, ) *UniversalSymbol`
+`func NewUniversalSymbol(id string, symbol string, rawSymbol string, currency UniversalSymbolCurrency, type_ SecurityType, currencies []Currency, ) *UniversalSymbol`
 
 NewUniversalSymbol instantiates a new UniversalSymbol object
 This constructor will assign default values to properties that have it defined,
@@ -131,40 +131,40 @@ HasDescription returns a boolean if a field has been set.
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
-`func (o *UniversalSymbol) GetCurrency() Currency`
+`func (o *UniversalSymbol) GetCurrency() UniversalSymbolCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *UniversalSymbol) GetCurrencyOk() (*Currency, bool)`
+`func (o *UniversalSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *UniversalSymbol) SetCurrency(v Currency)`
+`func (o *UniversalSymbol) SetCurrency(v UniversalSymbolCurrency)`
 
 SetCurrency sets Currency field to given value.
 
 
 ### GetExchange
 
-`func (o *UniversalSymbol) GetExchange() Exchange`
+`func (o *UniversalSymbol) GetExchange() UniversalSymbolExchange`
 
 GetExchange returns the Exchange field if non-nil, zero value otherwise.
 
 ### GetExchangeOk
 
-`func (o *UniversalSymbol) GetExchangeOk() (*Exchange, bool)`
+`func (o *UniversalSymbol) GetExchangeOk() (*UniversalSymbolExchange, bool)`
 
 GetExchangeOk returns a tuple with the Exchange field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExchange
 
-`func (o *UniversalSymbol) SetExchange(v Exchange)`
+`func (o *UniversalSymbol) SetExchange(v UniversalSymbolExchange)`
 
 SetExchange sets Exchange field to given value.
 

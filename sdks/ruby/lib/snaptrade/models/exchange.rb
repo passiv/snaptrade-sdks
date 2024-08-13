@@ -11,22 +11,30 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Stock Exchange
+  # Describes a single stock or crypto exchange.
   class Exchange
+    # Unique ID for the exchange in SnapTrade.
     attr_accessor :id
 
+    # A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
     attr_accessor :code
 
+    # The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
     attr_accessor :mic_code
 
+    # The full name of the exchange.
     attr_accessor :name
 
+    # The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
     attr_accessor :timezone
 
+    # The time when the exchange opens for trading.
     attr_accessor :start_time
 
+    # The time when the exchange closes for trading.
     attr_accessor :close_time
 
+    # The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol` for more detail.
     attr_accessor :suffix
 
     # Attribute mapping from ruby-style variable name to JSON key.

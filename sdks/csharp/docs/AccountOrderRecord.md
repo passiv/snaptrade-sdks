@@ -1,13 +1,13 @@
 # SnapTrade.Net.Model.AccountOrderRecord
-Record of order in brokerageaccount
+Describes a single recent order in an account.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BrokerageOrderId** | **string** | Order id returned by brokerage | [optional] 
+**BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
 **Status** | **AccountOrderRecordStatus** |  | [optional] 
-**Symbol** | **string** |  | [optional] 
+**Symbol** | **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
 **UniversalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
 **_Action** | **string** | Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE | [optional] 

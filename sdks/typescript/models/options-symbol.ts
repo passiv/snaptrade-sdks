@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { UnderlyingSymbol } from './underlying-symbol';
 
 /**
- * Options Symbol
+ * Uniquely describes an option security + exchange combination across all brokerages.
  * @export
  * @interface OptionsSymbol
  */
@@ -21,37 +21,37 @@ export interface OptionsSymbol {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      * @type {string}
      * @memberof OptionsSymbol
      */
     'id': string;
     /**
-     * 
+     * The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
      * @type {string}
      * @memberof OptionsSymbol
      */
     'ticker': string;
     /**
-     * 
+     * The type of option. Either \"CALL\" or \"PUT\".
      * @type {string}
      * @memberof OptionsSymbol
      */
     'option_type': OptionsSymbolOptionTypeEnum;
     /**
-     * 
+     * The option strike price.
      * @type {number}
      * @memberof OptionsSymbol
      */
     'strike_price': number;
     /**
-     * 
+     * The option expiration date.
      * @type {string}
      * @memberof OptionsSymbol
      */
     'expiration_date': string;
     /**
-     * 
+     * Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
      * @type {boolean}
      * @memberof OptionsSymbol
      */
@@ -62,18 +62,6 @@ export interface OptionsSymbol {
      * @memberof OptionsSymbol
      */
     'underlying_symbol': UnderlyingSymbol;
-    /**
-     * 
-     * @type {string}
-     * @memberof OptionsSymbol
-     */
-    'local_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof OptionsSymbol
-     */
-    'exchange_id'?: string;
 }
 
 type OptionsSymbolOptionTypeEnum = 'CALL' | 'PUT'

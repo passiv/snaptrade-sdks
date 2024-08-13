@@ -2,7 +2,7 @@
 
 # AccountHoldingsAccount
 
-A wrapper object containing holdings information for a single account
+A wrapper object containing holdings information for a single account.
 
 ## Properties
 

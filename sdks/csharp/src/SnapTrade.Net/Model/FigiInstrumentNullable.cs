@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Open FIGI Identifiers
+    /// Financial Instrument Global Identifier (FIGI) information for the security. See [OpenFIGI](https://www.openfigi.com/) for more information.
     /// </summary>
     [DataContract(Name = "FigiInstrumentNullable")]
     public partial class FigiInstrumentNullable : IEquatable<FigiInstrumentNullable>, IValidatableObject
@@ -35,8 +35,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="FigiInstrumentNullable" /> class.
         /// </summary>
-        /// <param name="figiCode">figiCode.</param>
-        /// <param name="figiShareClass">figiShareClass.</param>
+        /// <param name="figiCode">This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information..</param>
+        /// <param name="figiShareClass">This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, &#x60;AAPL&#x60; has a different FIGI for each exchange/trading venue it is traded on. The &#x60;figi_share_class&#x60; is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information..</param>
         public FigiInstrumentNullable(string figiCode = default(string), string figiShareClass = default(string)) : base()
         {
             this.FigiCode = figiCode;
@@ -45,14 +45,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets FigiCode
+        /// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
         /// </summary>
+        /// <value>This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.</value>
         [DataMember(Name = "figi_code", EmitDefaultValue = true)]
         public string FigiCode { get; set; }
 
         /// <summary>
-        /// Gets or Sets FigiShareClass
+        /// This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, &#x60;AAPL&#x60; has a different FIGI for each exchange/trading venue it is traded on. The &#x60;figi_share_class&#x60; is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
         /// </summary>
+        /// <value>This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, &#x60;AAPL&#x60; has a different FIGI for each exchange/trading venue it is traded on. The &#x60;figi_share_class&#x60; is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.</value>
         [DataMember(Name = "figi_share_class", EmitDefaultValue = true)]
         public string FigiShareClass { get; set; }
 

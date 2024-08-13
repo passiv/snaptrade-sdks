@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Security Type
+    /// The type of security. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
     /// </summary>
     [DataContract(Name = "SecurityType")]
     public partial class SecurityType : IEquatable<SecurityType>, IValidatableObject
@@ -35,10 +35,10 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SecurityType" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="code">code.</param>
-        /// <param name="description">description.</param>
-        /// <param name="isSupported">isSupported.</param>
+        /// <param name="id">Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls..</param>
+        /// <param name="code">A short code representing the security type. For example, \&quot;cs\&quot; for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant .</param>
+        /// <param name="description">A human-readable description of the security type. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;..</param>
+        /// <param name="isSupported">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
         public SecurityType(string id = default(string), string code = default(string), string description = default(string), bool isSupported = default(bool)) : base()
         {
             this.Id = id;
@@ -49,27 +49,32 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
         /// </summary>
+        /// <value>Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Code
+        /// A short code representing the security type. For example, \&quot;cs\&quot; for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant 
         /// </summary>
+        /// <value>A short code representing the security type. For example, \&quot;cs\&quot; for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant </value>
         [DataMember(Name = "code", EmitDefaultValue = false)]
         public string Code { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// A human-readable description of the security type. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.
         /// </summary>
+        /// <value>A human-readable description of the security type. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets IsSupported
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
         /// </summary>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
         [DataMember(Name = "is_supported", EmitDefaultValue = true)]
+        [Obsolete]
         public bool IsSupported { get; set; }
 
         /// <summary>

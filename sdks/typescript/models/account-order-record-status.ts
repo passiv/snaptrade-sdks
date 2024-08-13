@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * 
+ * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
  * @export
  * @enum {string}
  */

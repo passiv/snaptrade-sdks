@@ -28,10 +28,8 @@ tags:
   name: Connections
 - description: "Retrieve account information, such as positions, balances, etc."
   name: Account Information
-- description: Manage orders on user accounts
+- description: Manage orders on user accounts.
   name: Trading
-- description: Endpoints related to terms of conditions of SnapTrade API use
-  name: API Disclaimer
 - description: "Retrieve information on account transactions, performance, dividends,\
     \ contributions, etc."
   name: Transactions And Reporting
@@ -678,6 +676,8 @@ paths:
     get:
       description: |
         Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserHoldings
       parameters:
       - explode: false
@@ -2027,36 +2027,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SnapTradeLoginUserRequestBody'
-    LoginRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserIDandSecret'
-      required: true
-    DeleteUserRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/UserIDandSecret'
-      required: true
-    RedeemTokenRequestBody:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/RedirectTokenandPin'
-      required: true
-    PortfolioGroup:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/PortfolioGroup'
-      required: true
-    TargetAsset:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/TargetAsset'
-      required: true
     ManualTradeFormRequestBody:
       content:
         application/json:
@@ -2087,18 +2057,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Options_placeOptionStrategy_request'
-      required: true
-    SnapTradeAPIDisclaimerAcceptRequestBody:
-      content:
-        application/json:
-          schema:
-            additionalProperties: true
-            properties:
-              accepted:
-                description: A boolean that indicates whether this user has accepted
-                  the disclaimer or not.
-                type: boolean
-            type: object
       required: true
   schemas:
     "400FailedRequestResponse":
@@ -2502,19 +2460,8 @@ components:
               figi_instrument: null
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               type:
                 is_supported: true
@@ -2545,19 +2492,8 @@ components:
               figi_instrument: null
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               type:
                 is_supported: true
@@ -2652,7 +2588,7 @@ components:
       type: object
     AccountHoldingsAccount:
       additionalProperties: true
-      description: A wrapper object containing holdings information for a single account
+      description: A wrapper object containing holdings information for a single account.
       example:
         total_value:
           currency: USD
@@ -2676,35 +2612,18 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
               ticker: SPY 220819P00200000
-              exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              local_id: "40817960"
               is_mini_option: false
               option_type: CALL
               underlying_symbol:
                 figi_code: BBG000B9XRY4
                 symbol: SPY
                 figi_instrument: null
+                raw_symbol: VAB
                 description: SPDR S&P 500 ETF Trust
-                currency:
-                  code: USD
-                  name: US Dollar
-                  id: 87b24961-b51e-4db8-9226-f198f6518a89
-                exchange:
-                  start_time: 09:30:00
-                  mic_code: ARCA
-                  code: ARCX
-                  timezone: America/New_York
-                  name: NYSE ARCA
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                  close_time: "57600"
-                  suffix: None
-                  allows_cryptocurrency_symbols: false
+                currency: null
+                exchange: null
                 id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                type:
-                  is_supported: true
-                  code: cs
-                  description: Common Stock
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+                type: null
                 currencies:
                 - code: USD
                   name: US Dollar
@@ -2713,7 +2632,7 @@ components:
                   name: US Dollar
                   id: 87b24961-b51e-4db8-9226-f198f6518a89
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              expiration_date: 2017-07-17T15:13:07.177712+00:00
+              expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 200
           price: 113.15
           currency: null
@@ -2724,35 +2643,18 @@ components:
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
               ticker: SPY 220819P00200000
-              exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              local_id: "40817960"
               is_mini_option: false
               option_type: CALL
               underlying_symbol:
                 figi_code: BBG000B9XRY4
                 symbol: SPY
                 figi_instrument: null
+                raw_symbol: VAB
                 description: SPDR S&P 500 ETF Trust
-                currency:
-                  code: USD
-                  name: US Dollar
-                  id: 87b24961-b51e-4db8-9226-f198f6518a89
-                exchange:
-                  start_time: 09:30:00
-                  mic_code: ARCA
-                  code: ARCX
-                  timezone: America/New_York
-                  name: NYSE ARCA
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                  close_time: "57600"
-                  suffix: None
-                  allows_cryptocurrency_symbols: false
+                currency: null
+                exchange: null
                 id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                type:
-                  is_supported: true
-                  code: cs
-                  description: Common Stock
-                  id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+                type: null
                 currencies:
                 - code: USD
                   name: US Dollar
@@ -2761,7 +2663,7 @@ components:
                   name: US Dollar
                   id: 87b24961-b51e-4db8-9226-f198f6518a89
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              expiration_date: 2017-07-17T15:13:07.177712+00:00
+              expiration_date: 2026-12-18T00:00:00.000+00:00
               strike_price: 200
           price: 113.15
           currency: null
@@ -2776,19 +2678,8 @@ components:
               figi_instrument: null
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               type:
                 is_supported: true
@@ -2819,19 +2710,8 @@ components:
               figi_instrument: null
               raw_symbol: VAB
               description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: XTSE
-                code: TSX
-                timezone: America/New_York
-                name: Toronto Stock Exchange
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: .TO
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               type:
                 is_supported: true
@@ -2874,19 +2754,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -2903,35 +2772,18 @@ components:
           filled_quantity: 1.4658129805029452
           option_symbol:
             ticker: SPY 220819P00200000
-            exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
               figi_code: BBG000B9XRY4
               symbol: SPY
               figi_instrument: null
+              raw_symbol: VAB
               description: SPDR S&P 500 ETF Trust
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: ARCA
-                code: ARCX
-                timezone: America/New_York
-                name: NYSE ARCA
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: None
-                allows_cryptocurrency_symbols: false
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type:
-                is_supported: true
-                code: cs
-                description: Common Stock
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
               currencies:
               - code: USD
                 name: US Dollar
@@ -2940,7 +2792,7 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2017-07-17T15:13:07.177712+00:00
+            expiration_date: 2026-12-18T00:00:00.000+00:00
             strike_price: 200
           order_type: order_type
           open_quantity: 0.8008281904610115
@@ -2964,19 +2816,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -2993,35 +2834,18 @@ components:
           filled_quantity: 1.4658129805029452
           option_symbol:
             ticker: SPY 220819P00200000
-            exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
               figi_code: BBG000B9XRY4
               symbol: SPY
               figi_instrument: null
+              raw_symbol: VAB
               description: SPDR S&P 500 ETF Trust
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: ARCA
-                code: ARCX
-                timezone: America/New_York
-                name: NYSE ARCA
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: None
-                allows_cryptocurrency_symbols: false
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type:
-                is_supported: true
-                code: cs
-                description: Common Stock
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
               currencies:
               - code: USD
                 name: US Dollar
@@ -3030,7 +2854,7 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2017-07-17T15:13:07.177712+00:00
+            expiration_date: 2026-12-18T00:00:00.000+00:00
             strike_price: 200
           order_type: order_type
           open_quantity: 0.8008281904610115
@@ -3094,7 +2918,7 @@ components:
       type: object
     AccountOrderRecord:
       additionalProperties: true
-      description: Record of order in brokerageaccount
+      description: Describes a single recent order in an account.
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         time_executed: ""
@@ -3115,19 +2939,8 @@ components:
           figi_instrument: null
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
             is_supported: true
@@ -3144,35 +2957,18 @@ components:
         filled_quantity: 1.4658129805029452
         option_symbol:
           ticker: SPY 220819P00200000
-          exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
             figi_code: BBG000B9XRY4
             symbol: SPY
             figi_instrument: null
+            raw_symbol: VAB
             description: SPDR S&P 500 ETF Trust
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: ARCA
-              code: ARCX
-              timezone: America/New_York
-              name: NYSE ARCA
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: None
-              allows_cryptocurrency_symbols: false
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
             currencies:
             - code: USD
               name: US Dollar
@@ -3181,23 +2977,29 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2017-07-17T15:13:07.177712+00:00
+          expiration_date: 2026-12-18T00:00:00.000+00:00
           strike_price: 200
         order_type: order_type
         open_quantity: 0.8008281904610115
         status: null
       properties:
         brokerage_order_id:
-          description: Order id returned by brokerage
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
           type: string
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         symbol:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         universal_symbol:
           $ref: '#/components/schemas/UniversalSymbol'
         option_symbol:
@@ -3280,6 +3082,8 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
       type: object
     AccountOrderRecordStatus:
+      description: Indicates the status of an order. SnapTrade does a best effort
+        to map brokerage statuses to statuses in this enum.
       enum:
       - NONE
       - PENDING
@@ -3311,35 +3115,18 @@ components:
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_symbol:
             ticker: SPY 220819P00200000
-            exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            local_id: "40817960"
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
               figi_code: BBG000B9XRY4
               symbol: SPY
               figi_instrument: null
+              raw_symbol: VAB
               description: SPDR S&P 500 ETF Trust
-              currency:
-                code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              exchange:
-                start_time: 09:30:00
-                mic_code: ARCA
-                code: ARCX
-                timezone: America/New_York
-                name: NYSE ARCA
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-                close_time: "57600"
-                suffix: None
-                allows_cryptocurrency_symbols: false
+              currency: null
+              exchange: null
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type:
-                is_supported: true
-                code: cs
-                description: Common Stock
-                id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
               currencies:
               - code: USD
                 name: US Dollar
@@ -3348,7 +3135,7 @@ components:
                 name: US Dollar
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2017-07-17T15:13:07.177712+00:00
+            expiration_date: 2026-12-18T00:00:00.000+00:00
             strike_price: 200
         price: 113.15
         currency: null
@@ -3369,7 +3156,9 @@ components:
           x-konfig-original-example: 113.15
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-price
         units:
-          description: The number of contracts for this option position.
+          description: "The number of contracts for this option position. A positive\
+            \ number indicates a long position, while a negative number indicates\
+            \ a short position."
           example: 10
           type: number
           x-konfig-original-example: 10
@@ -3385,82 +3174,6 @@ components:
           type: number
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
-      type: object
-    StrategyImpact:
-      additionalProperties: true
-      description: The strategy impact
-      properties:
-        estimatedCommissions:
-          example: 11.95
-          type: number
-          x-konfig-original-example: 11.95
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-estimatedCommissions
-        buyingPowerEffect:
-          example: -156.3435
-          type: number
-          x-konfig-original-example: -156.3435
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-buyingPowerEffect
-        buyingPowerResult:
-          example: 8800.0882
-          type: number
-          x-konfig-original-example: 8800.0882
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-buyingPowerResult
-        maintExcessEffect:
-          example: -46.95
-          type: number
-          x-konfig-original-example: -46.95
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-maintExcessEffect
-        maintExcessResult:
-          example: 2642.669129
-          type: number
-          x-konfig-original-example: 2642.669129
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-maintExcessResult
-        tradeValueCalculation:
-          example: 1 x 0.07 x 100 + 1 x 0.28 x 100 = DR 35.00 CAD
-          type: string
-          x-konfig-original-example: 1 x 0.07 x 100 + 1 x 0.28 x 100 = DR 35.00 CAD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-tradeValueCalculation
-        legs:
-          items:
-            $ref: '#/components/schemas/StrategyImpact_legs_inner'
-          type: array
-        side:
-          example: Buy
-          type: string
-          x-konfig-original-example: Buy
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-side
-        effect:
-          example: Debit
-          type: string
-          x-konfig-original-example: Debit
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-effect
-        price:
-          example: 0.35
-          type: number
-          x-konfig-original-example: 0.35
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-price
-        strategy:
-          example: Strangle
-          type: string
-          x-konfig-original-example: Strangle
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-strategy
-      type: object
-    StrategyOrderQuotes:
-      description: The quotes for the strategy requested
-    StrategyOrderPlace:
-      additionalProperties: true
-      description: The reponse for a correctly placed order
-      properties:
-        orderId:
-          example: 1069605761
-          format: int32
-          type: integer
-          x-konfig-original-example: 1069605761
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orderId
-        orders:
-          items:
-            $ref: '#/components/schemas/StrategyOrderPlace_orders_inner'
-          type: array
       type: object
     OptionStrategy:
       additionalProperties: true
@@ -3483,19 +3196,8 @@ components:
           figi_instrument: null
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
             is_supported: true
@@ -3562,19 +3264,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -3649,19 +3340,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -4033,12 +3713,6 @@ components:
           x-konfig-original-example: 410.71
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Balance-properties-buying_power
       type: object
-    ConsumerKey:
-      description: Shared key used to sign requests
-      example: UxrFb4cHdRWlmJKNuJjA6hoaN8uVa6jPGFVUl2UKHuKmurCnaU
-      type: string
-      x-konfig-original-example: UxrFb4cHdRWlmJKNuJjA6hoaN8uVa6jPGFVUl2UKHuKmurCnaU
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ConsumerKey
     Currency:
       additionalProperties: true
       description: Describes a currency object.
@@ -4070,7 +3744,7 @@ components:
       type: object
     Exchange:
       additionalProperties: true
-      description: Stock Exchange
+      description: Describes a single stock or crypto exchange.
       example:
         start_time: 09:30:00
         mic_code: XTSE
@@ -4082,42 +3756,56 @@ components:
         suffix: .TO
       properties:
         id:
+          description: Unique ID for the exchange in SnapTrade.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ExchangeID
         code:
+          description: "A short name for the exchange. For standardized exchange code,\
+            \ please us the `mic_code` field."
           example: TSX
           type: string
           x-konfig-original-example: TSX
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-code
         mic_code:
+          description: "The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code)\
+            \ (MIC) for the exchange."
           example: XTSE
           type: string
           x-konfig-original-example: XTSE
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-mic_code
         name:
+          description: The full name of the exchange.
           example: Toronto Stock Exchange
           type: string
           x-konfig-original-example: Toronto Stock Exchange
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-name
         timezone:
+          description: The timezone for the trading hours (`start_time` and `close_time`)
+            of the exchange.
           example: America/New_York
           type: string
           x-konfig-original-example: America/New_York
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-timezone
         start_time:
+          description: The time when the exchange opens for trading.
           example: 09:30:00
           type: string
           x-konfig-original-example: 09:30:00
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-start_time
         close_time:
+          description: The time when the exchange closes for trading.
           example: "57600"
           type: string
           x-konfig-original-example: 57600
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Exchange-properties-close_time
         suffix:
+          description: "The suffix to be appended to the symbol when trading on this\
+            \ exchange. For example, the suffix for the Toronto Stock Exchange is\
+            \ `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol`\
+            \ for more detail."
           example: .TO
           nullable: true
           type: string
@@ -4127,16 +3815,6 @@ components:
     USExchange:
       additionalProperties: true
       description: US Stock Exchange
-      example:
-        start_time: 09:30:00
-        mic_code: ARCA
-        code: ARCX
-        timezone: America/New_York
-        name: NYSE ARCA
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        close_time: "57600"
-        suffix: None
-        allows_cryptocurrency_symbols: false
       properties:
         id:
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -4185,18 +3863,6 @@ components:
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-USExchange-properties-allows_cryptocurrency_symbols
-      type: object
-    JWT:
-      additionalProperties: true
-      description: JWT Token. Used to acess resources in private endpoints available
-        only through the Passiv app
-      properties:
-        token:
-          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImZSbUdsbWFyU1dtZDY5RDkyeGZWbVdCWUxCS0x0QiIsImV4cCI6MTU0MDA1NTMxOSwiZW1haWwiOiJ3b29kQHN5bmNocm92ZXJnZS5jb20iLCJvcmlnX2lhdCI6MTUzNzM3NjkxOX0.ZSn85i3kSBvEP5wuhWOE8_w903N1G1AfiVlD3fmri78
-          format: jwt
-          type: string
-          x-konfig-original-example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImZSbUdsbWFyU1dtZDY5RDkyeGZWbVdCWUxCS0x0QiIsImV4cCI6MTU0MDA1NTMxOSwiZW1haWwiOiJ3b29kQHN5bmNocm92ZXJnZS5jb20iLCJvcmlnX2lhdCI6MTUzNzM3NjkxOX0.ZSn85i3kSBvEP5wuhWOE8_w903N1G1AfiVlD3fmri78
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-JWT-properties-token
       type: object
     LoginRedirectURI:
       description: Redirect uri upon successful login
@@ -4278,19 +3944,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -4312,19 +3967,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -4694,19 +4338,8 @@ components:
             figi_instrument: null
             raw_symbol: VAB
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: XTSE
-              code: TSX
-              timezone: America/New_York
-              name: Toronto Stock Exchange
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: .TO
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             type:
               is_supported: true
@@ -4778,70 +4411,6 @@ components:
           x-konfig-original-example: 108.3353
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-average_purchase_price
       type: object
-    RedirectTokenandPin:
-      additionalProperties: true
-      description: Response when register user is successful
-      properties:
-        token:
-          example: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B
-          type: string
-          x-konfig-original-example: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RedirectTokenandPin-properties-token
-        pin:
-          example: usERdeFiP@1in9
-          type: string
-          x-konfig-original-example: usERdeFiP@1in9
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RedirectTokenandPin-properties-pin
-      type: object
-    Signature:
-      description: |
-        Steps to generate a signature
-          * Prepare signed content (see SignedContent schema)
-          * Sign content prepared above with HMAC-SHA256 using the UTF-8 encoding
-          * Return base64 encoding of sign content along with headers
-         Note: Use the shared consumer key provided by SnapTrade to signed the request
-        Example python code
-        ```
-        import hmac
-        import json
-        from base64 import b64encode
-        from hashlib import sha256
-        from urllib.parse import urlencode
-        consumer_key = "UxrFb4cHdRWlmJKNuJjA6hoaN8uVa6jPGFVUl2UKHuKmurCnaU".encode()
-        request_data = {'userId': 'snaptrade-user-123', 'userSecret': 'CHRIS.P.BACON'}
-        request_path = "/api/v1/snapTrade/mockSignature"
-        request_query = "clientId=SNAPTRADETEST&timestamp=1635790389"
-        sig_object = {"content": request_data, "path": request_path, "query": request_query}
-        sig_content = json.dumps(sig_object, separators=(",", ":"), sort_keys=True)
-        sig_digest = hmac.new(consumer_key, sig_content.encode(), sha256).digest()
-        signature = b64encode(sig_digest).decode()
-        ```
-      example: QJPQgW0Y8mWbG9Whw/fhCYofIgSo/UAo2AIc1bBPMnY=
-      type: string
-      x-konfig-original-example: QJPQgW0Y8mWbG9Whw/fhCYofIgSo/UAo2AIc1bBPMnY=
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Signature
-    SignedContent:
-      description: |
-        Signed content requires 3 key-value pairs
-        * content -> Content included in request body, set to null if no content is included. Sort keys in content alphabetically
-        * path -> Url path of request submitted
-        * query -> Query params included in requests
-        After preparing the key-value pairs, sort them alphabetically and convert them
-        into a string.
-        Note:
-        Remove any extra whitespace characters and delimiters from the signed content.
-        For example, some JSON rendering engines will produce output like this:
-          -- `{"blue": "moon", "hello": "world"}`
-        To produce the correct signature, the JSON should be processed to look like this:
-          -- `{"blue":"moon","hello":"world"}`
-      example: "{\"content\":{\"userId\":\"snaptrade-user-123\",\"userSecret\":\"\
-        CHRIS.P.BACON\"},\"path\":\"/api/v1/snapTrade/mockSignature\",\"query\":\"\
-        clientId=SNAPTRADETEST&timestamp=1635790389\"}"
-      type: string
-      x-konfig-original-example: "{\"content\":{\"userId\":\"snaptrade-user-123\"\
-        ,\"userSecret\":\"CHRIS.P.BACON\"},\"path\":\"/api/v1/snapTrade/mockSignature\"\
-        ,\"query\":\"clientId=SNAPTRADETEST&timestamp=1635790389\"}"
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-SignedContent
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       example:
@@ -4992,14 +4561,6 @@ components:
         figi_instrument:
           $ref: '#/components/schemas/Symbol_figi_instrument'
       type: object
-    Timestamp:
-      description: Unix Epoch time
-      example: 1635790389
-      externalDocs:
-        url: https://en.wikipedia.org/wiki/Unix_time
-      type: integer
-      x-konfig-original-example: 1635790389
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Timestamp
     UserIDandSecret:
       description: Response when register user is successful
       example:
@@ -5060,15 +4621,6 @@ components:
           type: string
           x-konfig-original-example: snaptrade-user-123
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeUserID
-      type: object
-    BrokerageAuthorizationType:
-      additionalProperties: true
-      properties:
-        type:
-          enum:
-          - read
-          - trade
-          type: string
       type: object
     BrokerageAuthorizationTypeReadOnly:
       additionalProperties: true
@@ -5440,71 +4992,31 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
       type: object
-    BrokerageSymbol:
-      additionalProperties: true
-      description: Brokerage symbol
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        symbol:
-          $ref: '#/components/schemas/BrokerageSymbol_symbol'
-        brokerage_authorization:
-          $ref: '#/components/schemas/BrokerageAuthorization'
-        description:
-          example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          type: string
-          x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-description
-        allows_fractional_units:
-          example: true
-          nullable: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbol-properties-allows_fractional_units
-        option_symbol:
-          $ref: '#/components/schemas/BrokerageSymbol_option_symbol'
-      type: object
     OptionBrokerageSymbol:
       additionalProperties: true
-      description: Option Brokerage symbol
+      description: "Uniquely describes a security for the option position within an\
+        \ account. The distinction between this and the `option_symbol` child property\
+        \ is that this object is specific to a position within an account, while the\
+        \ `option_symbol` child property is universal across all brokerage accounts.\
+        \ The caller should rely on the `option_symbol` child property for most use\
+        \ cases."
       example:
         description: SPY CALL 7/17 200
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         option_symbol:
           ticker: SPY 220819P00200000
-          exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
             figi_code: BBG000B9XRY4
             symbol: SPY
             figi_instrument: null
+            raw_symbol: VAB
             description: SPDR S&P 500 ETF Trust
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: ARCA
-              code: ARCX
-              timezone: America/New_York
-              name: NYSE ARCA
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: None
-              allows_cryptocurrency_symbols: false
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
             currencies:
             - code: USD
               name: US Dollar
@@ -5513,16 +5025,24 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2017-07-17T15:13:07.177712+00:00
+          expiration_date: 2026-12-18T00:00:00.000+00:00
           strike_price: 200
       properties:
         id:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         description:
+          deprecated: true
+          description: This field is deprecated and the caller should use the `option_symbol`
+            child property's `description` instead.
           example: SPY CALL 7/17 200
           type: string
           x-konfig-original-example: SPY CALL 7/17 200
@@ -5532,7 +5052,11 @@ components:
       type: object
     PositionSymbol:
       additionalProperties: true
-      description: Symbol returned in position object
+      description: "Uniquely describes a security for the position within an account.\
+        \ The distinction between this and the `symbol` child property is that this\
+        \ object is specific to a position within an account, while the `symbol` child\
+        \ property is universal across all brokerage accounts. The caller should rely\
+        \ on the `symbol` child property for most use cases."
       example:
         is_quotable: true
         symbol:
@@ -5541,19 +5065,8 @@ components:
           figi_instrument: null
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
             is_supported: true
@@ -5573,12 +5086,20 @@ components:
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         description:
+          deprecated: true
+          description: This field is deprecated and the caller should use the `symbol`
+            child property's `description` instead.
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
           type: string
           x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
@@ -5586,48 +5107,36 @@ components:
         symbol:
           $ref: '#/components/schemas/UniversalSymbol'
         local_id:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           example: "3291231"
           nullable: true
           type: string
           x-konfig-original-example: "3291231"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-local_id
         is_quotable:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-is_quotable
         is_tradable:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-is_tradable
-      type: object
-    CalculatedTrade:
-      additionalProperties: true
-      description: Array of trades to make to rebalance portfolio
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        trades:
-          items:
-            $ref: '#/components/schemas/Trade'
-          type: array
       type: object
     OptionChain:
       description: chain of options
       items:
         $ref: '#/components/schemas/OptionChain_inner'
       type: array
-    Email:
-      example: ops@snaptrade.com
-      format: email
-      type: string
-      x-konfig-original-example: ops@snaptrade.com
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Email
     ExchangeRatePairs:
       additionalProperties: true
       description: The exchange rate of a pair of currencies
@@ -5652,117 +5161,53 @@ components:
           x-konfig-original-example: 1.32
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ExchangeRatePairs-properties-exchange_rate
       type: object
-    ExcludedAsset:
-      additionalProperties: true
-      description: An excluded asset in a portfolio group
-      properties:
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-      type: object
     Id:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       format: uuid
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-    ModelAssetClass:
-      additionalProperties: true
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        name:
-          example: Bonds
-          type: string
-          x-konfig-original-example: Bonds
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelAssetClass-properties-name
-      type: object
-    ModelAssetClassDetails:
-      additionalProperties: true
-      properties:
-        model_asset_class:
-          $ref: '#/components/schemas/ModelAssetClass'
-        model_asset_class_target:
-          items:
-            $ref: '#/components/schemas/ModelAssetClassTarget'
-          type: array
-      type: object
-    ModelAssetClassTarget:
-      additionalProperties: true
-      properties:
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-      type: object
-    ModelPortfolio:
-      additionalProperties: true
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        name:
-          example: SnapTrade 5x Aggressive Growth Fund
-          type: string
-          x-konfig-original-example: SnapTrade 5x Aggressive Growth Fund
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelPortfolio-properties-name
-        model_type:
-          default: -1
-          description: "Enum definitions -> [-1: Unassigned, 0: Security Model Portfolio,\
-            \ 1: Asset Class Portfolio]"
-          enum:
-          - -1
-          - 0
-          - 1
-          example: -1
-          type: integer
-          x-konfig-original-example: -1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelPortfolio-properties-model_type
-      type: object
-    ModelPortfolioAssetClass:
-      additionalProperties: true
-      properties:
-        model_asset_class:
-          $ref: '#/components/schemas/ModelAssetClass'
-        percent:
-          example: 100
-          maximum: 100
-          minimum: 0
-          type: integer
-          x-konfig-original-example: 100
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelPortfolioAssetClass-properties-percent
-      type: object
-    ModelPortfolioDetails:
-      additionalProperties: true
-      properties:
-        model_portfolio:
-          $ref: '#/components/schemas/ModelPortfolio'
-        model_portfolio_security:
-          items:
-            $ref: '#/components/schemas/ModelPortfolioSecurity'
-          type: array
-        model_portfolio_asset_class:
-          items:
-            $ref: '#/components/schemas/ModelPortfolioAssetClass'
-          type: array
-      type: object
-    ModelPortfolioSecurity:
-      additionalProperties: true
-      properties:
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        percent:
-          example: 100
-          maximum: 100
-          minimum: 0
-          type: integer
-          x-konfig-original-example: 100
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ModelPortfolioSecurity-properties-percent
-      type: object
+    BrokerageSymbolID:
+      deprecated: true
+      description: "A unique ID for the security within SnapTrade, scoped to the brokerage\
+        \ account that the security belongs to. This is a legacy field and should\
+        \ not be used. Do not rely on this being a stable ID as it can change."
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+    UniversalSymbolID:
+      description: Unique identifier for the symbol within SnapTrade. This is the
+        ID used to reference the symbol in SnapTrade API calls.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
+    OptionSymbolID:
+      description: Unique identifier for the option symbol within SnapTrade. This
+        is the ID used to reference the symbol in SnapTrade API calls.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionSymbolID
+    ExchangeID:
+      description: Unique ID for the exchange in SnapTrade.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-ExchangeID
+    SecurityTypeID:
+      description: Unique identifier for the security type within SnapTrade. This
+        is the ID used to reference the security type in SnapTrade API calls.
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      format: uuid
+      type: string
+      x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-SecurityTypeID
     MonthlyDividends:
       additionalProperties: true
       example:
@@ -5825,19 +5270,8 @@ components:
           figi_instrument: null
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
             is_supported: true
@@ -5894,13 +5328,6 @@ components:
           x-konfig-original-example: CAD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PastValue-properties-currency
       type: object
-    Percent:
-      example: 90
-      maximum: 100
-      minimum: 0
-      type: number
-      x-konfig-original-example: 90
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Percent
     PortfolioGroupID:
       deprecated: true
       description: Portfolio Group ID. Portfolio Groups have been deprecated. Please
@@ -5910,116 +5337,6 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
-    PortfolioGroup:
-      additionalProperties: true
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        name:
-          example: Combined Retirement Portfolio
-          type: string
-          x-konfig-original-example: Combined Retirement Portfolio
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroup-properties-name
-      type: object
-    PortfolioGroupInfo:
-      additionalProperties: true
-      description: Summary of all relevant information about a portfolio group.
-      properties:
-        symbols:
-          items:
-            $ref: '#/components/schemas/UniversalSymbol'
-          type: array
-        quotable_symbols:
-          items:
-            $ref: '#/components/schemas/UniversalSymbol'
-          type: array
-        balances:
-          items:
-            $ref: '#/components/schemas/Balance'
-          type: array
-        positions:
-          items:
-            $ref: '#/components/schemas/Position'
-          type: array
-        target_positions:
-          items:
-            $ref: '#/components/schemas/TargetAsset'
-          type: array
-        ideal_positions:
-          items:
-            $ref: '#/components/schemas/Position'
-          type: array
-        excluded_positions:
-          items:
-            $ref: '#/components/schemas/ExcludedAsset'
-          type: array
-        calculated_trades:
-          items:
-            $ref: '#/components/schemas/CalculatedTrade'
-          type: array
-        brokerage_authorizations:
-          items:
-            $ref: '#/components/schemas/BrokerageAuthorization'
-          type: array
-        accuracy:
-          example: 0.962
-          type: number
-          x-konfig-original-example: 0.962
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupInfo-properties-accuracy
-        settings:
-          $ref: '#/components/schemas/PortfolioGroupSettings'
-      type: object
-    PortfolioGroupPosition:
-      additionalProperties: true
-      description: Details of a security held
-      properties:
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        price:
-          description: Last known market price for the symbol
-          example: 24.81
-          nullable: true
-          type: number
-          x-konfig-original-example: 24.81
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupPosition-properties-price
-        units:
-          example: 15
-          type: integer
-          x-konfig-original-example: 15
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupPosition-properties-units
-      type: object
-    PortfolioGroupSettings:
-      additionalProperties: true
-      properties:
-        buyOnly:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-buyOnly
-        cash_optimizer:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-cash_optimizer
-        notifyFrequency:
-          example: 7 00:00:00
-          type: string
-          x-konfig-original-example: 7 00:00:00
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-notifyFrequency
-        driftThreshold:
-          example: 90
-          maximum: 100
-          minimum: 0
-          type: number
-          x-konfig-original-example: 90
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Percent
-        preferred_currency:
-          $ref: '#/components/schemas/Currency'
-      type: object
     ReportingDate:
       description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
         format)
@@ -6086,171 +5403,6 @@ components:
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
-    TargetAsset:
-      additionalProperties: true
-      description: Target percentage of a certain asset
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        percent:
-          example: 90
-          maximum: 100
-          minimum: 0
-          type: number
-          x-konfig-original-example: 90
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Percent
-        is_supported:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TargetAsset-properties-is_supported
-        is_excluded:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TargetAsset-properties-is_excluded
-        meta:
-          additionalProperties: true
-          nullable: true
-          type: object
-      type: object
-    TargetAssetList:
-      description: Target percentage of a certain asset
-      items:
-        $ref: '#/components/schemas/TargetAsset'
-      type: array
-    Trade:
-      additionalProperties: true
-      description: A trade object
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        account:
-          $ref: '#/components/schemas/Account'
-        symbol:
-          $ref: '#/components/schemas/BrokerageSymbol'
-        universal_symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        action:
-          enum:
-          - BUY
-          - SELL
-          example: BUY
-          type: string
-          x-konfig-original-example: BUY
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Trade-properties-action
-        units:
-          example: 6
-          type: integer
-          x-konfig-original-example: 6
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Trade-properties-units
-        price:
-          example: 24.81
-          type: number
-          x-konfig-original-example: 24.81
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Trade-properties-price
-        sequence:
-          example: 1
-          type: integer
-          x-konfig-original-example: 1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Trade-properties-sequence
-      type: object
-    TradeExecutionStatus:
-      additionalProperties: true
-      description: Execution status of a trade
-      properties:
-        symbol:
-          $ref: '#/components/schemas/BrokerageSymbol'
-        universal_symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
-        trade:
-          $ref: '#/components/schemas/Trade'
-        state:
-          description: Execution state of a trade
-          enum:
-          - Executed
-          - Canceled
-          - Rejected
-          - Failed
-          - Not Executed
-          example: Executed
-          type: string
-          x-konfig-original-example: Executed
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-state
-        filled_units:
-          description: Number of filled units
-          example: 3
-          type: integer
-          x-konfig-original-example: 3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-filled_units
-        action:
-          description: Action of executed trade
-          enum:
-          - BUY
-          - SELL
-          example: SELL
-          type: string
-          x-konfig-original-example: SELL
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-action
-        price:
-          description: Price of execution
-          example: 23.44
-          type: number
-          x-konfig-original-example: 23.44
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-price
-        commissions:
-          description: Fees paid from executing trade
-          example: 23.44
-          type: number
-          x-konfig-original-example: 23.44
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-commissions
-        meta:
-          additionalProperties: true
-          description: Other misc. data
-          example:
-            canceledUnits: 2
-          type: object
-          x-konfig-original-example:
-            canceledUnits: 2
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-meta
-      type: object
-    TradeImpact:
-      additionalProperties: true
-      description: Impact of a group of trade
-      properties:
-        account:
-          $ref: '#/components/schemas/Account'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        remaining_cash:
-          description: Remaining balance after executing all trades
-          example: 1.01
-          type: number
-          x-konfig-original-example: 1.01
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeImpact-properties-remaining_cash
-        estimated_commissions:
-          description: Total estimated commissions across all trades to make
-          example: 10.05
-          type: number
-          x-konfig-original-example: 10.05
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeImpact-properties-estimated_commissions
-        forex_fees:
-          description: Estimated forex fees to pay to excute trades
-          example: 2.01
-          type: number
-          x-konfig-original-example: 2.01
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeImpact-properties-forex_fees
-      type: object
     ManualTrade:
       additionalProperties: true
       description: A manual trade object
@@ -6610,18 +5762,6 @@ components:
         Limit - Market - StopLimit - StopLoss
       nullable: true
       type: string
-    SnapTradeAPIDisclaimerAcceptStatus:
-      additionalProperties: true
-      description: Status of user acceptance of SnapTrade API disclaimer
-      properties:
-        accepted:
-          type: boolean
-        timestamp:
-          example: 2022-01-21T20:11:19.217Z
-          type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeAPIDisclaimerAcceptStatus-properties-timestamp
-      type: object
     TimeInForceStrict:
       description: |
         Trade time in force examples:
@@ -6739,35 +5879,18 @@ components:
         fx_rate: 1.032
         option_symbol:
           ticker: SPY 220819P00200000
-          exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          local_id: "40817960"
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
             figi_code: BBG000B9XRY4
             symbol: SPY
             figi_instrument: null
+            raw_symbol: VAB
             description: SPDR S&P 500 ETF Trust
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            exchange:
-              start_time: 09:30:00
-              mic_code: ARCA
-              code: ARCX
-              timezone: America/New_York
-              name: NYSE ARCA
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              close_time: "57600"
-              suffix: None
-              allows_cryptocurrency_symbols: false
+            currency: null
+            exchange: null
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
             currencies:
             - code: USD
               name: US Dollar
@@ -6776,7 +5899,7 @@ components:
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2017-07-17T15:13:07.177712+00:00
+          expiration_date: 2026-12-18T00:00:00.000+00:00
           strike_price: 200
         account:
           number: Q6542138443
@@ -6885,15 +6008,25 @@ components:
       type: object
     FigiInstrument:
       additionalProperties: true
-      description: Open FIGI Identifiers
+      description: "Financial Instrument Global Identifier (FIGI) information for\
+        \ the security. See [OpenFIGI](https://www.openfigi.com/) for more information."
       properties:
         figi_code:
+          description: "This identifier is unique per security per trading venue.\
+            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information."
           example: BBG000B9Y5X2
           nullable: true
           type: string
           x-konfig-original-example: BBG000B9Y5X2
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-FigiInstrument-properties-figi_code
         figi_share_class:
+          description: "This enables users to link multiple FIGIs for the same security\
+            \ in order to obtain an aggregated view across all countries and all exchanges.\
+            \ For example, `AAPL` has a different FIGI for each exchange/trading venue\
+            \ it is traded on. The `figi_share_class` is the same for all of these\
+            \ FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information."
           example: BBG001S5N8V8
           nullable: true
           type: string
@@ -6902,26 +6035,16 @@ components:
       type: object
     UniversalSymbol:
       additionalProperties: true
-      description: Universal symbol
+      description: Uniquely describes a single security + exchange combination across
+        all brokerages.
       example:
         figi_code: BBG000B9XRY4
         symbol: VAB.TO
         figi_instrument: null
         raw_symbol: VAB
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
-        exchange:
-          start_time: 09:30:00
-          mic_code: XTSE
-          code: TSX
-          timezone: America/New_York
-          name: Toronto Stock Exchange
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          close_time: "57600"
-          suffix: .TO
+        currency: null
+        exchange: null
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         type:
           is_supported: true
@@ -6937,38 +6060,58 @@ components:
           id: 87b24961-b51e-4db8-9226-f198f6518a89
       properties:
         id:
+          description: Unique identifier for the symbol within SnapTrade. This is
+            the ID used to reference the symbol in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
         symbol:
+          description: "The security's trading ticker symbol. For example \"AAPL\"\
+            \ for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click\
+            \ on \"Yahoo Finance Market Coverage and Data Delays\"). For example,\
+            \ for securities traded on the Toronto Stock Exchange, the symbol has\
+            \ a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol\
+            \ does not have a suffix."
           example: VAB.TO
           type: string
           x-konfig-original-example: VAB.TO
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-symbol
         raw_symbol:
+          description: "The raw symbol is `symbol` with the exchange suffix removed.\
+            \ For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\"\
+            ."
           example: VAB
           type: string
           x-konfig-original-example: VAB
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-raw_symbol
         description:
+          description: A human-readable description of the security. This is usually
+            the company name or ETF name.
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
           nullable: true
           type: string
           x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-description
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/UniversalSymbol_currency'
         exchange:
-          $ref: '#/components/schemas/Exchange'
+          $ref: '#/components/schemas/UniversalSymbol_exchange'
         type:
           $ref: '#/components/schemas/SecurityType'
         currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           items:
             $ref: '#/components/schemas/Currency'
           type: array
         figi_code:
+          description: "This identifier is unique per security per trading venue.\
+            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information. This value should be the same as the `figi_code`\
+            \ in the `figi_instrument` child property."
           example: BBG000B9XRY4
           nullable: true
           type: string
@@ -6986,32 +6129,17 @@ components:
       type: object
     UnderlyingSymbol:
       additionalProperties: true
-      description: Underlying Symbol
+      description: Symbol object for the underlying security of an option.
       example:
         figi_code: BBG000B9XRY4
         symbol: SPY
         figi_instrument: null
+        raw_symbol: VAB
         description: SPDR S&P 500 ETF Trust
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
-        exchange:
-          start_time: 09:30:00
-          mic_code: ARCA
-          code: ARCX
-          timezone: America/New_York
-          name: NYSE ARCA
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          close_time: "57600"
-          suffix: None
-          allows_cryptocurrency_symbols: false
+        currency: null
+        exchange: null
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        type:
-          is_supported: true
-          code: cs
-          description: Common Stock
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        type: null
         currencies:
         - code: USD
           name: US Dollar
@@ -7021,33 +6149,58 @@ components:
           id: 87b24961-b51e-4db8-9226-f198f6518a89
       properties:
         id:
+          description: Unique identifier for the symbol within SnapTrade. This is
+            the ID used to reference the symbol in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
         symbol:
+          description: "The security's trading ticker symbol. For example \"AAPL\"\
+            \ for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click\
+            \ on \"Yahoo Finance Market Coverage and Data Delays\"). For example,\
+            \ for securities traded on the Toronto Stock Exchange, the symbol has\
+            \ a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol\
+            \ does not have a suffix."
           example: SPY
           type: string
           x-konfig-original-example: SPY
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-symbol
+        raw_symbol:
+          description: "The raw symbol is `symbol` with the exchange suffix removed.\
+            \ For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\"\
+            ."
+          example: VAB
+          type: string
+          x-konfig-original-example: VAB
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-raw_symbol
         description:
+          description: A human-readable description of the security. This is usually
+            the company name or ETF name.
           example: SPDR S&P 500 ETF Trust
           nullable: true
           type: string
           x-konfig-original-example: SPDR S&P 500 ETF Trust
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-description
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/UniversalSymbol_currency'
         exchange:
-          $ref: '#/components/schemas/USExchange'
+          $ref: '#/components/schemas/UnderlyingSymbol_exchange'
         type:
-          $ref: '#/components/schemas/SecurityType'
+          $ref: '#/components/schemas/UnderlyingSymbol_type'
         currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           items:
             $ref: '#/components/schemas/Currency'
           type: array
         figi_code:
+          description: "This identifier is unique per security per trading venue.\
+            \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
+            \ for more information. This value should be the same as the `figi_code`\
+            \ in the `figi_instrument` child property."
           example: BBG000B9XRY4
           nullable: true
           type: string
@@ -7058,38 +6211,22 @@ components:
       type: object
     OptionsSymbol:
       additionalProperties: true
-      description: Options Symbol
+      description: Uniquely describes an option security + exchange combination across
+        all brokerages.
       example:
         ticker: SPY 220819P00200000
-        exchange_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        local_id: "40817960"
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
           figi_code: BBG000B9XRY4
           symbol: SPY
           figi_instrument: null
+          raw_symbol: VAB
           description: SPDR S&P 500 ETF Trust
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: ARCA
-            code: ARCX
-            timezone: America/New_York
-            name: NYSE ARCA
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: None
-            allows_cryptocurrency_symbols: false
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type:
-            is_supported: true
-            code: cs
-            description: Common Stock
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type: null
           currencies:
           - code: USD
             name: US Dollar
@@ -7098,21 +6235,26 @@ components:
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        expiration_date: 2017-07-17T15:13:07.177712+00:00
+        expiration_date: 2026-12-18T00:00:00.000+00:00
         strike_price: 200
       properties:
         id:
+          description: Unique identifier for the option symbol within SnapTrade. This
+            is the ID used to reference the symbol in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionSymbolID
         ticker:
+          description: "The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol)\
+            \ for the option."
           example: SPY 220819P00200000
           type: string
           x-konfig-original-example: SPY 220819P00200000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker
         option_type:
+          description: The type of option. Either "CALL" or "PUT".
           enum:
           - CALL
           - PUT
@@ -7121,31 +6263,27 @@ components:
           x-konfig-original-example: CALL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-option_type
         strike_price:
+          description: The option strike price.
           example: 200
           type: number
           x-konfig-original-example: 200
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-strike_price
         expiration_date:
-          example: 2017-07-17T15:13:07.177712+00:00
-          format: datetime
+          description: The option expiration date.
+          example: 2026-12-18
+          format: date
           type: string
-          x-konfig-original-example: 2017-07-17T15:13:07.177712+00:00
+          x-konfig-original-example: 2026-12-18
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-expiration_date
         is_mini_option:
+          description: Whether the option is a mini option. Mini options have 10 underlying
+            shares per contract instead of the standard 100.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option
         underlying_symbol:
           $ref: '#/components/schemas/UnderlyingSymbol'
-        local_id:
-          example: "40817960"
-          type: string
-          x-konfig-original-example: "40817960"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id
-        exchange_id:
-          format: uuid
-          type: string
       required:
       - expiration_date
       - id
@@ -7179,7 +6317,8 @@ components:
       type: object
     SecurityType:
       additionalProperties: true
-      description: Security Type
+      description: "The type of security. For example, \"Common Stock\" or \"ETF\"\
+        ."
       example:
         is_supported: true
         code: cs
@@ -7187,80 +6326,47 @@ components:
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
+          description: Unique identifier for the security type within SnapTrade. This
+            is the ID used to reference the security type in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SecurityTypeID
         code:
+          description: |
+            A short code representing the security type. For example, "cs" for Common Stock. Here are some common values:
+              ad - ADR
+              bnd - Bond
+              cs - Common Stock
+              cef - Closed End Fund
+              et - ETF
+              oef - Open Ended Fund
+              ps - Preferred Stock
+              rt - Right
+              struct - Structured Product
+              ut - Unit
+              wi - When Issued
+              wt - Warrant
           example: cs
           type: string
           x-konfig-original-example: cs
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SecurityType-properties-code
         description:
+          description: "A human-readable description of the security type. For example,\
+            \ \"Common Stock\" or \"ETF\"."
           example: Common Stock
           type: string
           x-konfig-original-example: Common Stock
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SecurityType-properties-description
         is_supported:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SecurityType-properties-is_supported
-      type: object
-    UserSettings:
-      additionalProperties: true
-      description: User account settings
-      properties:
-        email:
-          example: ops@snaptrade.com
-          format: email
-          type: string
-          x-konfig-original-example: ops@snaptrade.com
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Email
-        name:
-          example: James Bond
-          type: string
-          x-konfig-original-example: James Bond
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-name
-        receive_cash_notification:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-receive_cash_notification
-        receive_drift_notification:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-receive_drift_notification
-        user_trial_activated:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-user_trial_activated
-        activated_trial_date:
-          example: 2017-07-17T15:13:07.177712+00:00
-          format: dateTime
-          type: string
-          x-konfig-original-example: 2017-07-17T15:13:07.177712+00:00
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-activated_trial_date
-        demo:
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-demo
-        api_enabled:
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-api_enabled
-        drift_threshold:
-          example: 95
-          type: number
-          x-konfig-original-example: 95
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserSettings-properties-drift_threshold
-        preferred_currency:
-          $ref: '#/components/schemas/Currency'
       type: object
     Time:
       description: Time
@@ -7287,41 +6393,6 @@ components:
           x-konfig-original-example: Traditional Brokerage
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageType-properties-name
       type: object
-    UserErrorLog:
-      additionalProperties: true
-      description: An API error log for a specific SnapTrade user.
-      properties:
-        requestedAt:
-          example: 2022-01-21T20:11:19.217Z
-          type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserErrorLog-properties-requestedAt
-        response:
-          type: string
-        statusCode:
-          example: 200
-          type: number
-          x-konfig-original-example: 200
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserErrorLog-properties-statusCode
-        queryParams:
-          type: string
-        httpMethod:
-          example: POST
-          type: string
-          x-konfig-original-example: POST
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserErrorLog-properties-httpMethod
-        endpoint:
-          example: api/v1/snapTrade
-          type: string
-          x-konfig-original-example: api/v1/snapTrade
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserErrorLog-properties-endpoint
-      type: object
-    rsaPublicKey:
-      description: Open SSH RSA public key
-      example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
-      type: string
-      x-konfig-original-example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-rsaPublicKey
     encryptedResponse:
       additionalProperties: false
       description: |
@@ -7426,20 +6497,6 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-MockSignatureRequestBody-content-application-json-schema:
-      additionalProperties: true
-      example:
-        userId: snaptrade-user-123
-        userSecret: CHRIS.P.BACON
-      properties:
-        userId:
-          example: snaptrade-user-123
-          type: string
-        userSecret:
-          example: CHRIS.P.BACON
-          type: string
-      type: object
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-CashRestriction-properties-amount:
       example: 100
       type: number
@@ -7520,202 +6577,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price:
       example: 108.3353
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-estimatedCommissions:
-      example: 11.95
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-buyingPowerEffect:
-      example: -156.3435
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-buyingPowerResult:
-      example: 8800.0882
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-maintExcessEffect:
-      example: -46.95
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-maintExcessResult:
-      example: 2642.669129
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-tradeValueCalculation:
-      example: 1 x 0.07 x 100 + 1 x 0.28 x 100 = DR 35.00 CAD
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-legId:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-symbol:
-      example: AC21Oct22C30.00.MX
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-symbolId:
-      example: 41790511
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-legRatioQuantity:
-      example: 1
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-side:
-      example: BTO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-side:
-      example: Buy
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-effect:
-      example: Debit
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-price:
-      example: 0.35
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyImpact-properties-strategy:
-      example: Strangle
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orderId:
-      example: 1069605761
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-id:
-      example: 1069605761
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-symbol:
-      example: AC.TO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-symbolId:
-      example: 7960447
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-totalQuantity:
-      example: 1
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-openQuantity:
-      example: 1
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-filledQuantity:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-canceledQuantity:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-side:
-      example: Buy
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderType:
-      example: Market
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-avgExecPrice:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-source:
-      example: TradingAPI
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-timeInForce:
-      example: Day
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-state:
-      example: Pending
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-rejectionReason:
-      example: None
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-chainId:
-      example: 1069605761
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-creationTime:
-      example: 2022-07-19T19:53:47.915Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-updateTime:
-      example: 2022-07-19T19:53:47.939Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-notes:
-      example: None
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-primaryRoute:
-      example: AUTO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-secondaryRoute:
-      example: AUTO
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderRoute:
-      example: MX
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-venueHoldingOrder:
-      example: None
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-comissionCharged:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-exchangeOrderId:
-      example: None
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-userId:
-      example: 514603
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-legId:
-      example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-symbol:
-      example: AC21Oct22C30.00.MX
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-symbolId:
-      example: 41790511
-      type: number
-      x-do-not-generate: true
-    ? konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-legRatioQuantity
-    : example: 1
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-side:
-      example: BTO
-      type: string
-      x-do-not-generate: true
-    ? konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-avgExecPrice
-    : example: 0
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-strategyType:
-      example: Strangle
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderGroupId:
-      example: 0
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionStrategy-properties-strategy_type:
@@ -7858,10 +6719,6 @@ components:
       example: 410.71
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ConsumerKey:
-      example: UxrFb4cHdRWlmJKNuJjA6hoaN8uVa6jPGFVUl2UKHuKmurCnaU
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Currency-properties-id:
       example: 87b24961-b51e-4db8-9226-f198f6518a89
       type: string
@@ -7933,10 +6790,6 @@ components:
     konfig-generated-schema-components-schemas-USExchange-properties-allows_cryptocurrency_symbols:
       example: false
       type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-JWT-properties-token:
-      example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6ImZSbUdsbWFyU1dtZDY5RDkyeGZWbVdCWUxCS0x0QiIsImV4cCI6MTU0MDA1NTMxOSwiZW1haWwiOiJ3b29kQHN5bmNocm92ZXJnZS5jb20iLCJvcmlnX2lhdCI6MTUzNzM3NjkxOX0.ZSn85i3kSBvEP5wuhWOE8_w903N1G1AfiVlD3fmri78
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ClientID:
       example: SNAPTRADETEST
@@ -8070,24 +6923,6 @@ components:
       example: 108.3353
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-RedirectTokenandPin-properties-token:
-      example: myDAIBCP/EYqSmMByhMRB65aMa%2BdYhu2xRsGQe0sDd9SgZXMbdRh3eBaTh/bLViVGQoil6p9ytUUVhkqWalejOqCNVkXXTk/iNPTPaFCeh9%2B
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-RedirectTokenandPin-properties-pin:
-      example: usERdeFiP@1in9
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Signature:
-      example: QJPQgW0Y8mWbG9Whw/fhCYofIgSo/UAo2AIc1bBPMnY=
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SignedContent:
-      example: "{\"content\":{\"userId\":\"snaptrade-user-123\",\"userSecret\":\"\
-        CHRIS.P.BACON\"},\"path\":\"/api/v1/snapTrade/mockSignature\",\"query\":\"\
-        clientId=SNAPTRADETEST&timestamp=1635790389\"}"
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:
       example: ALPACA
       type: string
@@ -8127,10 +6962,6 @@ components:
     konfig-generated-schema-components-schemas-Symbol-properties-figi_code:
       example: BBG000B9XRY4
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Timestamp:
-      example: 1635790389
-      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UserList:
       example:
@@ -8266,14 +7097,6 @@ components:
       example: 400
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-BrokerageSymbol-properties-description:
-      example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-BrokerageSymbol-properties-allows_fractional_units:
-      example: true
-      type: boolean
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionBrokerageSymbol-properties-description:
       example: SPY CALL 7/17 200
       type: string
@@ -8330,10 +7153,6 @@ components:
       example: 100
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Email:
-      example: ops@snaptrade.com
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ExchangeRatePairs-properties-exchange_rate:
       example: 1.32
       type: number
@@ -8342,25 +7161,25 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ModelAssetClass-properties-name:
-      example: Bonds
+    konfig-generated-schema-components-schemas-BrokerageSymbolID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ModelPortfolio-properties-name:
-      example: SnapTrade 5x Aggressive Growth Fund
+    konfig-generated-schema-components-schemas-UniversalSymbolID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ModelPortfolio-properties-model_type:
-      example: -1
-      type: number
+    konfig-generated-schema-components-schemas-OptionSymbolID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ModelPortfolioAssetClass-properties-percent:
-      example: 100
-      type: number
+    konfig-generated-schema-components-schemas-ExchangeID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ModelPortfolioSecurity-properties-percent:
-      example: 100
-      type: number
+    konfig-generated-schema-components-schemas-SecurityTypeID:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-NetContributions-properties-contributions:
       example: 524.74
@@ -8386,40 +7205,8 @@ components:
       example: CAD
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Percent:
-      example: 90
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-PortfolioGroupID:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroup-properties-name:
-      example: Combined Retirement Portfolio
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupInfo-properties-accuracy:
-      example: 0.962
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupPosition-properties-price:
-      example: 24.81
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupPosition-properties-units:
-      example: 15
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-buyOnly:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-cash_optimizer:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PortfolioGroupSettings-properties-notifyFrequency:
-      example: 7 00:00:00
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ReportingDate:
@@ -8453,72 +7240,6 @@ components:
     konfig-generated-schema-components-schemas-HoldingsSyncStatusDate:
       example: 2024-06-28 18:42:46.561408+00:00
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TargetAsset-properties-is_supported:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TargetAsset-properties-is_excluded:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Trade-properties-action:
-      example: BUY
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Trade-properties-units:
-      example: 6
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Trade-properties-price:
-      example: 24.81
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Trade-properties-sequence:
-      example: 1
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-state:
-      example: Executed
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-filled_units:
-      example: 3
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-action:
-      example: SELL
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-price:
-      example: 23.44
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-commissions:
-      example: 23.44
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeExecutionStatus-properties-meta:
-      additionalProperties: true
-      example:
-        canceledUnits: 2
-      properties:
-        canceledUnits:
-          example: 2
-          type: number
-      type: object
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeImpact-properties-remaining_cash:
-      example: 1.01
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeImpact-properties-estimated_commissions:
-      example: 10.05
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-TradeImpact-properties-forex_fees:
-      example: 2.01
-      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTrade-properties-account:
       example: 2bcd7cc3-e922-4976-bce1-9855556801c3
@@ -8563,10 +7284,6 @@ components:
     konfig-generated-schema-components-schemas-Cash:
       example: 1.11
       type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeAPIDisclaimerAcceptStatus-properties-timestamp:
-      example: 2022-01-21T20:11:19.217Z
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Price:
       example: 31.33
@@ -8652,6 +7369,10 @@ components:
       example: SPY
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-raw_symbol:
+      example: VAB
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-description:
       example: SPDR S&P 500 ETF Trust
       type: string
@@ -8673,16 +7394,12 @@ components:
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-expiration_date:
-      example: 2017-07-17T15:13:07.177712+00:00
+      example: 2026-12-18
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-is_mini_option:
       example: false
       type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-OptionsSymbol-properties-local_id:
-      example: "40817960"
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionLeg-properties-option_symbol_id:
       example: SPY220819P00200000
@@ -8703,42 +7420,6 @@ components:
     konfig-generated-schema-components-schemas-SecurityType-properties-is_supported:
       example: true
       type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradePartnerAPICredential-properties-redirect_uri:
-      example: https://www.example.com/oauth
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-name:
-      example: James Bond
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-receive_cash_notification:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-receive_drift_notification:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-user_trial_activated:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-activated_trial_date:
-      example: 2017-07-17T15:13:07.177712+00:00
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-demo:
-      example: false
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-api_enabled:
-      example: false
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserSettings-properties-drift_threshold:
-      example: 95
-      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Time:
       example: 2022-01-21T20:11:19.217Z
@@ -8762,26 +7443,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-WebhookBase-properties-userId:
       example: external_user@test.com
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserErrorLog-properties-requestedAt:
-      example: 2022-01-21T20:11:19.217Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserErrorLog-properties-statusCode:
-      example: 200
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserErrorLog-properties-httpMethod:
-      example: POST
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-UserErrorLog-properties-endpoint:
-      example: api/v1/snapTrade
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-rsaPublicKey:
-      example: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQC7vbqajDw4o6gJy8UtmIbkcpnkO3Kwc4qsEnSZp/TR+fQi62F79RHWmwKOtFmwteURgLbj7D/WGuNLGOfa/2vse3G2eHnHl5CB8ruRX9fBl/KgwCVr2JaEuUm66bBQeP5XeBotdR4cvX38uPYivCDdPjJ1QWPdspTBKcxeFbccDw==
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-encryptedResponse-properties-encryptedSharedKey:
@@ -9900,279 +8561,11 @@ components:
     OptionsPosition_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
+      deprecated: true
+      description: The currency of the price. This field is deprecated and will be
+        removed in a future version. The currency of the price is determined by the
+        currency of the underlying security.
       nullable: true
-    StrategyImpact_legs_inner:
-      additionalProperties: true
-      properties:
-        legId:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-legId
-        symbol:
-          example: AC21Oct22C30.00.MX
-          type: string
-          x-konfig-original-example: AC21Oct22C30.00.MX
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-symbol
-        symbolId:
-          example: 41790511
-          format: int32
-          type: integer
-          x-konfig-original-example: 41790511
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-symbolId
-        legRatioQuantity:
-          example: 1
-          format: int32
-          type: integer
-          x-konfig-original-example: 1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-legRatioQuantity
-        side:
-          example: BTO
-          type: string
-          x-konfig-original-example: BTO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyImpact-properties-legs-items-properties-side
-        avgExecPrice:
-          format: nullable
-          type: string
-        lastExecPrice:
-          format: nullable
-          type: string
-      type: object
-    StrategyOrderPlace_orders_inner_legs_inner:
-      additionalProperties: true
-      properties:
-        legId:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-legId
-        symbol:
-          example: AC21Oct22C30.00.MX
-          type: string
-          x-konfig-original-example: AC21Oct22C30.00.MX
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-symbol
-        symbolId:
-          example: 41790511
-          format: int32
-          type: integer
-          x-konfig-original-example: 41790511
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-symbolId
-        legRatioQuantity:
-          example: 1
-          format: int32
-          type: integer
-          x-konfig-original-example: 1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-legRatioQuantity
-        side:
-          example: BTO
-          type: string
-          x-konfig-original-example: BTO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-side
-        avgExecPrice:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-legs-items-properties-avgExecPrice
-        lastExecPrice:
-          format: nullable
-          type: string
-      type: object
-    StrategyOrderPlace_orders_inner:
-      additionalProperties: true
-      properties:
-        id:
-          example: 1069605761
-          format: int32
-          type: integer
-          x-konfig-original-example: 1069605761
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-id
-        symbol:
-          example: AC.TO
-          type: string
-          x-konfig-original-example: AC.TO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-symbol
-        symbolId:
-          example: 7960447
-          format: int32
-          type: integer
-          x-konfig-original-example: 7960447
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-symbolId
-        totalQuantity:
-          example: 1
-          format: int32
-          type: integer
-          x-konfig-original-example: 1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-totalQuantity
-        openQuantity:
-          example: 1
-          format: int32
-          type: integer
-          x-konfig-original-example: 1
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-openQuantity
-        filledQuantity:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-filledQuantity
-        canceledQuantity:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-canceledQuantity
-        side:
-          example: Buy
-          type: string
-          x-konfig-original-example: Buy
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-side
-        orderType:
-          example: Market
-          type: string
-          x-konfig-original-example: Market
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderType
-        limitPrice:
-          format: nullable
-          type: string
-        stopPrice:
-          format: nullable
-          type: string
-        isAllOrNone:
-          type: boolean
-        isAnonymous:
-          type: boolean
-        icebergQuantity:
-          format: nullable
-          type: string
-        minQuantity:
-          format: nullable
-          type: string
-        avgExecPrice:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-avgExecPrice
-        lastExecPrice:
-          format: nullable
-          type: string
-        source:
-          example: TradingAPI
-          type: string
-          x-konfig-original-example: TradingAPI
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-source
-        timeInForce:
-          example: Day
-          type: string
-          x-konfig-original-example: Day
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-timeInForce
-        gtdDate:
-          format: nullable
-          type: string
-        state:
-          example: Pending
-          type: string
-          x-konfig-original-example: Pending
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-state
-        rejectionReason:
-          example: None
-          type: string
-          x-konfig-original-example: None
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-rejectionReason
-        chainId:
-          example: 1069605761
-          format: int32
-          type: integer
-          x-konfig-original-example: 1069605761
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-chainId
-        creationTime:
-          example: 2022-07-19T19:53:47.915Z
-          type: string
-          x-konfig-original-example: 2022-07-19T19:53:47.915Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-creationTime
-        updateTime:
-          example: 2022-07-19T19:53:47.939Z
-          type: string
-          x-konfig-original-example: 2022-07-19T19:53:47.939Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-updateTime
-        notes:
-          example: None
-          type: string
-          x-konfig-original-example: None
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-notes
-        primaryRoute:
-          example: AUTO
-          type: string
-          x-konfig-original-example: AUTO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-primaryRoute
-        secondaryRoute:
-          example: AUTO
-          type: string
-          x-konfig-original-example: AUTO
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-secondaryRoute
-        orderRoute:
-          example: MX
-          type: string
-          x-konfig-original-example: MX
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderRoute
-        venueHoldingOrder:
-          example: None
-          type: string
-          x-konfig-original-example: None
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-venueHoldingOrder
-        comissionCharged:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-comissionCharged
-        exchangeOrderId:
-          example: None
-          type: string
-          x-konfig-original-example: None
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-exchangeOrderId
-        isSignificantShareHolder:
-          type: boolean
-        isInsider:
-          type: boolean
-        isLimitOffsetInDollar:
-          type: boolean
-        userId:
-          example: 514603
-          format: int32
-          type: integer
-          x-konfig-original-example: 514603
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-userId
-        placementCommission:
-          format: nullable
-          type: string
-        legs:
-          items:
-            $ref: '#/components/schemas/StrategyOrderPlace_orders_inner_legs_inner'
-          type: array
-        strategyType:
-          example: Strangle
-          type: string
-          x-konfig-original-example: Strangle
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-strategyType
-        triggerStopPrice:
-          format: nullable
-          type: string
-        orderGroupId:
-          example: 0
-          format: int32
-          type: integer
-          x-konfig-original-example: 0
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderPlace-properties-orders-items-properties-orderGroupId
-        orderClass:
-          format: nullable
-          type: string
-        isCrossZero:
-          type: boolean
-      type: object
     OptionStrategy_legs_inner:
       example:
         quantity: 10
@@ -10270,14 +8663,6 @@ components:
           x-konfig-original-example: QUESTRADE
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationTypeReadOnly-properties-brokerage-properties-slug
       type: object
-    BrokerageSymbol_symbol:
-      allOf:
-      - $ref: '#/components/schemas/UniversalSymbol'
-      nullable: true
-    BrokerageSymbol_option_symbol:
-      allOf:
-      - $ref: '#/components/schemas/OptionsSymbol'
-      nullable: true
     OptionChain_inner_chainPerRoot_inner_chainPerStrikePrice_inner:
       additionalProperties: true
       example:
@@ -10396,19 +8781,8 @@ components:
           figi_instrument: null
           raw_symbol: VAB
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          exchange:
-            start_time: 09:30:00
-            mic_code: XTSE
-            code: TSX
-            timezone: America/New_York
-            name: Toronto Stock Exchange
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            close_time: "57600"
-            suffix: .TO
+          currency: null
+          exchange: null
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           type:
             is_supported: true
@@ -10459,6 +8833,23 @@ components:
       allOf:
       - $ref: '#/components/schemas/NotionalValue'
       nullable: true
+    UniversalSymbol_currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency'
+      description: The currency in which the security is traded.
+    UniversalSymbol_exchange:
+      allOf:
+      - $ref: '#/components/schemas/Exchange'
+      description: The exchange on which the security is listed and traded.
+    UnderlyingSymbol_exchange:
+      allOf:
+      - $ref: '#/components/schemas/USExchange'
+      description: The exchange on which the security is listed and traded.
+    UnderlyingSymbol_type:
+      allOf:
+      - $ref: '#/components/schemas/SecurityType'
+      description: "The type of security. For example, \"Common Stock\" or \"ETF\"\
+        ."
     encryptedResponse_encryptedMessageData:
       additionalProperties: true
       properties:

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A wrapper object containing holdings information for a single account
+    /// A wrapper object containing holdings information for a single account.
     /// </summary>
     [DataContract(Name = "AccountHoldingsAccount")]
     public partial class AccountHoldingsAccount : IEquatable<AccountHoldingsAccount>, IValidatableObject

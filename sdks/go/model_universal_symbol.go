@@ -15,16 +15,23 @@ import (
 	"encoding/json"
 )
 
-// UniversalSymbol Universal symbol
+// UniversalSymbol Uniquely describes a single security + exchange combination across all brokerages.
 type UniversalSymbol struct {
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id string `json:"id"`
+	// The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
 	Symbol string `json:"symbol"`
+	// The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
 	RawSymbol string `json:"raw_symbol"`
+	// A human-readable description of the security. This is usually the company name or ETF name.
 	Description NullableString `json:"description,omitempty"`
-	Currency Currency `json:"currency"`
-	Exchange *Exchange `json:"exchange,omitempty"`
+	Currency UniversalSymbolCurrency `json:"currency"`
+	Exchange *UniversalSymbolExchange `json:"exchange,omitempty"`
 	Type SecurityType `json:"type"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	Currencies []Currency `json:"currencies"`
+	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +43,7 @@ type _UniversalSymbol UniversalSymbol
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUniversalSymbol(id string, symbol string, rawSymbol string, currency Currency, type_ SecurityType, currencies []Currency) *UniversalSymbol {
+func NewUniversalSymbol(id string, symbol string, rawSymbol string, currency UniversalSymbolCurrency, type_ SecurityType, currencies []Currency) *UniversalSymbol {
 	this := UniversalSymbol{}
 	this.Id = id
 	this.Symbol = symbol
@@ -170,9 +177,9 @@ func (o *UniversalSymbol) UnsetDescription() {
 }
 
 // GetCurrency returns the Currency field value
-func (o *UniversalSymbol) GetCurrency() Currency {
+func (o *UniversalSymbol) GetCurrency() UniversalSymbolCurrency {
 	if o == nil {
-		var ret Currency
+		var ret UniversalSymbolCurrency
 		return ret
 	}
 
@@ -181,7 +188,7 @@ func (o *UniversalSymbol) GetCurrency() Currency {
 
 // GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *UniversalSymbol) GetCurrencyOk() (*Currency, bool) {
+func (o *UniversalSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -189,14 +196,14 @@ func (o *UniversalSymbol) GetCurrencyOk() (*Currency, bool) {
 }
 
 // SetCurrency sets field value
-func (o *UniversalSymbol) SetCurrency(v Currency) {
+func (o *UniversalSymbol) SetCurrency(v UniversalSymbolCurrency) {
 	o.Currency = v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
-func (o *UniversalSymbol) GetExchange() Exchange {
+func (o *UniversalSymbol) GetExchange() UniversalSymbolExchange {
 	if o == nil || isNil(o.Exchange) {
-		var ret Exchange
+		var ret UniversalSymbolExchange
 		return ret
 	}
 	return *o.Exchange
@@ -204,7 +211,7 @@ func (o *UniversalSymbol) GetExchange() Exchange {
 
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UniversalSymbol) GetExchangeOk() (*Exchange, bool) {
+func (o *UniversalSymbol) GetExchangeOk() (*UniversalSymbolExchange, bool) {
 	if o == nil || isNil(o.Exchange) {
     return nil, false
 	}
@@ -220,8 +227,8 @@ func (o *UniversalSymbol) HasExchange() bool {
 	return false
 }
 
-// SetExchange gets a reference to the given Exchange and assigns it to the Exchange field.
-func (o *UniversalSymbol) SetExchange(v Exchange) {
+// SetExchange gets a reference to the given UniversalSymbolExchange and assigns it to the Exchange field.
+func (o *UniversalSymbol) SetExchange(v UniversalSymbolExchange) {
 	o.Exchange = &v
 }
 
@@ -250,6 +257,7 @@ func (o *UniversalSymbol) SetType(v SecurityType) {
 }
 
 // GetCurrencies returns the Currencies field value
+// Deprecated
 func (o *UniversalSymbol) GetCurrencies() []Currency {
 	if o == nil {
 		var ret []Currency
@@ -261,6 +269,7 @@ func (o *UniversalSymbol) GetCurrencies() []Currency {
 
 // GetCurrenciesOk returns a tuple with the Currencies field value
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UniversalSymbol) GetCurrenciesOk() ([]Currency, bool) {
 	if o == nil {
     return nil, false
@@ -269,6 +278,7 @@ func (o *UniversalSymbol) GetCurrenciesOk() ([]Currency, bool) {
 }
 
 // SetCurrencies sets field value
+// Deprecated
 func (o *UniversalSymbol) SetCurrencies(v []Currency) {
 	o.Currencies = v
 }

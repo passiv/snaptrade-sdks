@@ -4,15 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** |  | 
-**Ticker** | **string** |  | 
-**OptionType** | **string** |  | 
-**StrikePrice** | **float32** |  | 
-**ExpirationDate** | **string** |  | 
-**IsMiniOption** | Pointer to **bool** |  | [optional] 
+**Id** | **string** | Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | 
+**Ticker** | **string** | The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option. | 
+**OptionType** | **string** | The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;. | 
+**StrikePrice** | **float32** | The option strike price. | 
+**ExpirationDate** | **string** | The option expiration date. | 
+**IsMiniOption** | Pointer to **bool** | Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100. | [optional] 
 **UnderlyingSymbol** | [**UnderlyingSymbol**](UnderlyingSymbol.md) |  | 
-**LocalId** | Pointer to **string** |  | [optional] 
-**ExchangeId** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -177,56 +175,6 @@ and a boolean to check if the value has been set.
 
 SetUnderlyingSymbol sets UnderlyingSymbol field to given value.
 
-
-### GetLocalId
-
-`func (o *OptionsSymbol) GetLocalId() string`
-
-GetLocalId returns the LocalId field if non-nil, zero value otherwise.
-
-### GetLocalIdOk
-
-`func (o *OptionsSymbol) GetLocalIdOk() (*string, bool)`
-
-GetLocalIdOk returns a tuple with the LocalId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLocalId
-
-`func (o *OptionsSymbol) SetLocalId(v string)`
-
-SetLocalId sets LocalId field to given value.
-
-### HasLocalId
-
-`func (o *OptionsSymbol) HasLocalId() bool`
-
-HasLocalId returns a boolean if a field has been set.
-
-### GetExchangeId
-
-`func (o *OptionsSymbol) GetExchangeId() string`
-
-GetExchangeId returns the ExchangeId field if non-nil, zero value otherwise.
-
-### GetExchangeIdOk
-
-`func (o *OptionsSymbol) GetExchangeIdOk() (*string, bool)`
-
-GetExchangeIdOk returns a tuple with the ExchangeId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExchangeId
-
-`func (o *OptionsSymbol) SetExchangeId(v string)`
-
-SetExchangeId sets ExchangeId field to given value.
-
-### HasExchangeId
-
-`func (o *OptionsSymbol) HasExchangeId() bool`
-
-HasExchangeId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

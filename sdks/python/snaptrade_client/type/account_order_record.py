@@ -31,11 +31,13 @@ class RequiredAccountOrderRecord(TypedDict):
     pass
 
 class OptionalAccountOrderRecord(TypedDict, total=False):
-    # Order id returned by brokerage
+    # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     brokerage_order_id: str
 
     status: AccountOrderRecordStatus
 
+    # WARNING: This property is deprecated
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     symbol: str
 
     universal_symbol: UniversalSymbol

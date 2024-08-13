@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A wrapper object containing holdings information for a single account
+  # A wrapper object containing holdings information for a single account.
   class AccountHoldingsAccount
     attr_accessor :account
 

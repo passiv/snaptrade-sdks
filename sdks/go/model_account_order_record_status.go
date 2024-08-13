@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// AccountOrderRecordStatus the model 'AccountOrderRecordStatus'
+// AccountOrderRecordStatus Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
 type AccountOrderRecordStatus string
 
 // List of AccountOrderRecordStatus

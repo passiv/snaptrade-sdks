@@ -1,4 +1,5 @@
 # SnapTrade.Net.Model.AccountOrderRecordStatus
+Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
 
 ## Properties
 

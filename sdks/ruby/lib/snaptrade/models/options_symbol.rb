@@ -11,25 +11,27 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Options Symbol
+  # Uniquely describes an option security + exchange combination across all brokerages.
   class OptionsSymbol
+    # Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :id
 
+    # The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
     attr_accessor :ticker
 
+    # The type of option. Either \"CALL\" or \"PUT\".
     attr_accessor :option_type
 
+    # The option strike price.
     attr_accessor :strike_price
 
+    # The option expiration date.
     attr_accessor :expiration_date
 
+    # Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
     attr_accessor :is_mini_option
 
     attr_accessor :underlying_symbol
-
-    attr_accessor :local_id
-
-    attr_accessor :exchange_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -40,9 +42,7 @@ module SnapTrade
         :'strike_price' => :'strike_price',
         :'expiration_date' => :'expiration_date',
         :'is_mini_option' => :'is_mini_option',
-        :'underlying_symbol' => :'underlying_symbol',
-        :'local_id' => :'local_id',
-        :'exchange_id' => :'exchange_id'
+        :'underlying_symbol' => :'underlying_symbol'
       }
     end
 
@@ -58,11 +58,9 @@ module SnapTrade
         :'ticker' => :'String',
         :'option_type' => :'OptionType',
         :'strike_price' => :'Float',
-        :'expiration_date' => :'String',
+        :'expiration_date' => :'Date',
         :'is_mini_option' => :'Boolean',
-        :'underlying_symbol' => :'UnderlyingSymbol',
-        :'local_id' => :'String',
-        :'exchange_id' => :'String'
+        :'underlying_symbol' => :'UnderlyingSymbol'
       }
     end
 
@@ -113,14 +111,6 @@ module SnapTrade
 
       if attributes.key?(:'underlying_symbol')
         self.underlying_symbol = attributes[:'underlying_symbol']
-      end
-
-      if attributes.key?(:'local_id')
-        self.local_id = attributes[:'local_id']
-      end
-
-      if attributes.key?(:'exchange_id')
-        self.exchange_id = attributes[:'exchange_id']
       end
     end
 
@@ -178,9 +168,7 @@ module SnapTrade
           strike_price == o.strike_price &&
           expiration_date == o.expiration_date &&
           is_mini_option == o.is_mini_option &&
-          underlying_symbol == o.underlying_symbol &&
-          local_id == o.local_id &&
-          exchange_id == o.exchange_id
+          underlying_symbol == o.underlying_symbol
     end
 
     # @see the `==` method
@@ -192,7 +180,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, ticker, option_type, strike_price, expiration_date, is_mini_option, underlying_symbol, local_id, exchange_id].hash
+      [id, ticker, option_type, strike_price, expiration_date, is_mini_option, underlying_symbol].hash
     end
 
     # Builds the object from hash

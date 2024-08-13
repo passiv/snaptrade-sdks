@@ -162,11 +162,11 @@ public class OptionsPosition {
   }
 
    /**
-   * The number of contracts for this option position.
+   * The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "10", value = "The number of contracts for this option position.")
+  @ApiModelProperty(example = "10", value = "The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.")
 
   public Double getUnits() {
     return units;

@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Security Type
+ * The type of security. For example, \"Common Stock\" or \"ETF\".
  * @export
  * @interface SecurityType
  */
@@ -20,27 +20,28 @@ export interface SecurityType {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
      * @type {string}
      * @memberof SecurityType
      */
     'id'?: string;
     /**
-     * 
+     * A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant 
      * @type {string}
      * @memberof SecurityType
      */
     'code'?: string;
     /**
-     * 
+     * A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
      * @type {string}
      * @memberof SecurityType
      */
     'description'?: string;
     /**
-     * 
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      * @type {boolean}
      * @memberof SecurityType
+     * @deprecated
      */
     'is_supported'?: boolean;
 }
