@@ -79,7 +79,7 @@ Sent when a new brokerage connection is created using the SnapTrade connection p
 
 Example payload is below.
 
-```coffeescript JSON
+```json
 {
   "webhookId": "7467e5e4-4b59-4514-9d04-d05dbc10dea9",
   "clientId": "cJEQQgtDIb",
@@ -273,7 +273,6 @@ Example payload is below:
 {
   "userId": "vAzgPrUHizYheZVi_WEALTHSIMPLETRADE_oiuzalkd",
   "clientId": "PARTNERAPP",
-  "webookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
   "accountId": "45a2g56a-eef6-4904-a68e-d3f90c3e07c5",
   "eventType": "TRADES_PLACED",
   "webhookId": "311a13f3-3929-46dd-a70f-ade6aaefc100",
@@ -304,7 +303,6 @@ Example payload is below:
 {
   "userId": "60b9ad5f-8e78-43b2-af5a-8ce8412b1cd6",
   "clientId": "PARTNERAPP",
-  "webookId": "312a13f3-3929-46dd-a70f-ade6aaefc100",
   "accountId": "45a3g56a-eef6-4904-a68e-d3f90c3e07c5",
   "eventType": "ACCOUNT_HOLDINGS_UPDATED",
   "webhookId": "312a13f3-3929-46dd-a70f-ade6aaefc100",
@@ -312,7 +310,11 @@ Example payload is below:
   "webhookSecret": "yfqvPlWrTFILBcjCERPh",
   "eventTimestamp": "2024-03-01T14:38:13.111991+00:00",
   "brokerageAuthorizationId": "6bb1ahb0-b8c8-4b59-8bf9-7841d7a89c63",
-  "details": {"total_value": {"success": true, "error": null}, "positions": {"success": true, "error": null}, "balances": {"success": true, "error": null}, "orders": 
-    {"success": true, "error": null}}
+  "details": {
+    "total_value": { "success": true, "error": null },
+    "positions": { "success": true, "error": null },
+    "balances": { "success": true, "error": null },
+    "orders": { "success": true, "error": null }
+  }
 }
 ```
