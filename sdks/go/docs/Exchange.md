@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Code** | Pointer to **string** |  | [optional] 
-**MicCode** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Timezone** | Pointer to **string** |  | [optional] 
-**StartTime** | Pointer to **string** |  | [optional] 
-**CloseTime** | Pointer to **string** |  | [optional] 
-**Suffix** | Pointer to **NullableString** |  | [optional] 
+**Id** | Pointer to **string** | Unique ID for the exchange in SnapTrade. | [optional] 
+**Code** | Pointer to **string** | A short name for the exchange. For standardized exchange code, please us the &#x60;mic_code&#x60; field. | [optional] 
+**MicCode** | Pointer to **string** | The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange. | [optional] 
+**Name** | Pointer to **string** | The full name of the exchange. | [optional] 
+**Timezone** | Pointer to **string** | The timezone for the trading hours (&#x60;start_time&#x60; and &#x60;close_time&#x60;) of the exchange. | [optional] 
+**StartTime** | Pointer to **string** | The time when the exchange opens for trading. | [optional] 
+**CloseTime** | Pointer to **string** | The time when the exchange closes for trading. | [optional] 
+**Suffix** | Pointer to **NullableString** | The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is &#x60;.TO&#x60;. See &#x60;UniversalSymbol-&gt;symbol&#x60; and &#x60;UniversalSymbol-&gt;raw_symbol&#x60; for more detail. | [optional] 
 
 ## Methods
 

@@ -11,7 +11,6 @@ class TagValues(str, enum.Enum):
     CONNECTIONS = "Connections"
     ACCOUNT_INFORMATION = "Account Information"
     TRADING = "Trading"
-    API_DISCLAIMER = "API Disclaimer"
     TRANSACTIONS_AND_REPORTING = "Transactions And Reporting"
     REFERENCE_DATA = "Reference Data"
     OPTIONS = "Options"

@@ -15,11 +15,16 @@ import (
 	"encoding/json"
 )
 
-// SecurityType Security Type
+// SecurityType The type of security. For example, \"Common Stock\" or \"ETF\".
 type SecurityType struct {
+	// Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
 	Id *string `json:"id,omitempty"`
+	// A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant 
 	Code *string `json:"code,omitempty"`
+	// A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
 	Description *string `json:"description,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	IsSupported *bool `json:"is_supported,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -140,6 +145,7 @@ func (o *SecurityType) SetDescription(v string) {
 }
 
 // GetIsSupported returns the IsSupported field value if set, zero value otherwise.
+// Deprecated
 func (o *SecurityType) GetIsSupported() bool {
 	if o == nil || isNil(o.IsSupported) {
 		var ret bool
@@ -150,6 +156,7 @@ func (o *SecurityType) GetIsSupported() bool {
 
 // GetIsSupportedOk returns a tuple with the IsSupported field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *SecurityType) GetIsSupportedOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSupported) {
     return nil, false
@@ -167,6 +174,7 @@ func (o *SecurityType) HasIsSupported() bool {
 }
 
 // SetIsSupported gets a reference to the given bool and assigns it to the IsSupported field.
+// Deprecated
 func (o *SecurityType) SetIsSupported(v bool) {
 	o.IsSupported = &v
 }

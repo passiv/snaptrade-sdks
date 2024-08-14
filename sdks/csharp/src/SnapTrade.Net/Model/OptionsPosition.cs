@@ -37,7 +37,7 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="symbol">symbol.</param>
         /// <param name="price">Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
-        /// <param name="units">The number of contracts for this option position..</param>
+        /// <param name="units">The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position..</param>
         /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100)..</param>
         public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), CurrencyNullable currency = default(CurrencyNullable), double? averagePurchasePrice = default(double?)) : base()
@@ -64,9 +64,9 @@ namespace SnapTrade.Net.Model
         public double? Price { get; set; }
 
         /// <summary>
-        /// The number of contracts for this option position.
+        /// The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
         /// </summary>
-        /// <value>The number of contracts for this option position.</value>
+        /// <value>The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.</value>
         [DataMember(Name = "units", EmitDefaultValue = false)]
         public double Units { get; set; }
 

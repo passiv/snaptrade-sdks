@@ -19,13 +19,13 @@ import { FigiInstrument } from './figi-instrument';
  */
 export interface SymbolFigiInstrument {
     /**
-     * 
+     * This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      * @type {string}
      * @memberof SymbolFigiInstrument
      */
     'figi_code'?: string | null;
     /**
-     * 
+     * This enables users to link multiple FIGIs for the same security in order to obtain an aggregated view across all countries and all exchanges. For example, `AAPL` has a different FIGI for each exchange/trading venue it is traded on. The `figi_share_class` is the same for all of these FIGIs. See section 1.4.3 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information.
      * @type {string}
      * @memberof SymbolFigiInstrument
      */

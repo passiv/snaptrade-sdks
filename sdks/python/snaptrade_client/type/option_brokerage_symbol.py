@@ -21,8 +21,12 @@ class RequiredOptionBrokerageSymbol(TypedDict):
     pass
 
 class OptionalOptionBrokerageSymbol(TypedDict, total=False):
+    # WARNING: This property is deprecated
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     id: str
 
+    # WARNING: This property is deprecated
+    # This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
     description: str
 
     option_symbol: OptionsSymbol

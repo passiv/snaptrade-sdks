@@ -15,15 +15,23 @@ import (
 	"encoding/json"
 )
 
-// UnderlyingSymbol Underlying Symbol
+// UnderlyingSymbol Symbol object for the underlying security of an option.
 type UnderlyingSymbol struct {
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id *string `json:"id,omitempty"`
+	// The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
 	Symbol *string `json:"symbol,omitempty"`
+	// The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
+	RawSymbol *string `json:"raw_symbol,omitempty"`
+	// A human-readable description of the security. This is usually the company name or ETF name.
 	Description NullableString `json:"description,omitempty"`
-	Currency *Currency `json:"currency,omitempty"`
-	Exchange *USExchange `json:"exchange,omitempty"`
-	Type *SecurityType `json:"type,omitempty"`
+	Currency *UniversalSymbolCurrency `json:"currency,omitempty"`
+	Exchange *UnderlyingSymbolExchange `json:"exchange,omitempty"`
+	Type *UnderlyingSymbolType `json:"type,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
 	Currencies []Currency `json:"currencies,omitempty"`
+	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -112,6 +120,38 @@ func (o *UnderlyingSymbol) SetSymbol(v string) {
 	o.Symbol = &v
 }
 
+// GetRawSymbol returns the RawSymbol field value if set, zero value otherwise.
+func (o *UnderlyingSymbol) GetRawSymbol() string {
+	if o == nil || isNil(o.RawSymbol) {
+		var ret string
+		return ret
+	}
+	return *o.RawSymbol
+}
+
+// GetRawSymbolOk returns a tuple with the RawSymbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UnderlyingSymbol) GetRawSymbolOk() (*string, bool) {
+	if o == nil || isNil(o.RawSymbol) {
+    return nil, false
+	}
+	return o.RawSymbol, true
+}
+
+// HasRawSymbol returns a boolean if a field has been set.
+func (o *UnderlyingSymbol) HasRawSymbol() bool {
+	if o != nil && !isNil(o.RawSymbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetRawSymbol gets a reference to the given string and assigns it to the RawSymbol field.
+func (o *UnderlyingSymbol) SetRawSymbol(v string) {
+	o.RawSymbol = &v
+}
+
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UnderlyingSymbol) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
@@ -155,9 +195,9 @@ func (o *UnderlyingSymbol) UnsetDescription() {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *UnderlyingSymbol) GetCurrency() Currency {
+func (o *UnderlyingSymbol) GetCurrency() UniversalSymbolCurrency {
 	if o == nil || isNil(o.Currency) {
-		var ret Currency
+		var ret UniversalSymbolCurrency
 		return ret
 	}
 	return *o.Currency
@@ -165,7 +205,7 @@ func (o *UnderlyingSymbol) GetCurrency() Currency {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnderlyingSymbol) GetCurrencyOk() (*Currency, bool) {
+func (o *UnderlyingSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool) {
 	if o == nil || isNil(o.Currency) {
     return nil, false
 	}
@@ -181,15 +221,15 @@ func (o *UnderlyingSymbol) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given Currency and assigns it to the Currency field.
-func (o *UnderlyingSymbol) SetCurrency(v Currency) {
+// SetCurrency gets a reference to the given UniversalSymbolCurrency and assigns it to the Currency field.
+func (o *UnderlyingSymbol) SetCurrency(v UniversalSymbolCurrency) {
 	o.Currency = &v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
-func (o *UnderlyingSymbol) GetExchange() USExchange {
+func (o *UnderlyingSymbol) GetExchange() UnderlyingSymbolExchange {
 	if o == nil || isNil(o.Exchange) {
-		var ret USExchange
+		var ret UnderlyingSymbolExchange
 		return ret
 	}
 	return *o.Exchange
@@ -197,7 +237,7 @@ func (o *UnderlyingSymbol) GetExchange() USExchange {
 
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnderlyingSymbol) GetExchangeOk() (*USExchange, bool) {
+func (o *UnderlyingSymbol) GetExchangeOk() (*UnderlyingSymbolExchange, bool) {
 	if o == nil || isNil(o.Exchange) {
     return nil, false
 	}
@@ -213,15 +253,15 @@ func (o *UnderlyingSymbol) HasExchange() bool {
 	return false
 }
 
-// SetExchange gets a reference to the given USExchange and assigns it to the Exchange field.
-func (o *UnderlyingSymbol) SetExchange(v USExchange) {
+// SetExchange gets a reference to the given UnderlyingSymbolExchange and assigns it to the Exchange field.
+func (o *UnderlyingSymbol) SetExchange(v UnderlyingSymbolExchange) {
 	o.Exchange = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *UnderlyingSymbol) GetType() SecurityType {
+func (o *UnderlyingSymbol) GetType() UnderlyingSymbolType {
 	if o == nil || isNil(o.Type) {
-		var ret SecurityType
+		var ret UnderlyingSymbolType
 		return ret
 	}
 	return *o.Type
@@ -229,7 +269,7 @@ func (o *UnderlyingSymbol) GetType() SecurityType {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnderlyingSymbol) GetTypeOk() (*SecurityType, bool) {
+func (o *UnderlyingSymbol) GetTypeOk() (*UnderlyingSymbolType, bool) {
 	if o == nil || isNil(o.Type) {
     return nil, false
 	}
@@ -245,12 +285,13 @@ func (o *UnderlyingSymbol) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given SecurityType and assigns it to the Type field.
-func (o *UnderlyingSymbol) SetType(v SecurityType) {
+// SetType gets a reference to the given UnderlyingSymbolType and assigns it to the Type field.
+func (o *UnderlyingSymbol) SetType(v UnderlyingSymbolType) {
 	o.Type = &v
 }
 
 // GetCurrencies returns the Currencies field value if set, zero value otherwise.
+// Deprecated
 func (o *UnderlyingSymbol) GetCurrencies() []Currency {
 	if o == nil || isNil(o.Currencies) {
 		var ret []Currency
@@ -261,6 +302,7 @@ func (o *UnderlyingSymbol) GetCurrencies() []Currency {
 
 // GetCurrenciesOk returns a tuple with the Currencies field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *UnderlyingSymbol) GetCurrenciesOk() ([]Currency, bool) {
 	if o == nil || isNil(o.Currencies) {
     return nil, false
@@ -278,6 +320,7 @@ func (o *UnderlyingSymbol) HasCurrencies() bool {
 }
 
 // SetCurrencies gets a reference to the given []Currency and assigns it to the Currencies field.
+// Deprecated
 func (o *UnderlyingSymbol) SetCurrencies(v []Currency) {
 	o.Currencies = v
 }
@@ -374,6 +417,9 @@ func (o UnderlyingSymbol) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
 	}
+	if !isNil(o.RawSymbol) {
+		toSerialize["raw_symbol"] = o.RawSymbol
+	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
@@ -415,6 +461,7 @@ func (o *UnderlyingSymbol) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "raw_symbol")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "exchange")

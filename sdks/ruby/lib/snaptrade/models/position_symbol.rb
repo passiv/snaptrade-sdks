@@ -11,18 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Symbol returned in position object
+  # Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
   class PositionSymbol
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :id
 
+    # This field is deprecated and the caller should use the `symbol` child property's `description` instead.
     attr_accessor :description
 
     attr_accessor :symbol
 
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
     attr_accessor :local_id
 
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
     attr_accessor :is_quotable
 
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
     attr_accessor :is_tradable
 
     # Attribute mapping from ruby-style variable name to JSON key.

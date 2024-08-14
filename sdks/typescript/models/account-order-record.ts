@@ -15,7 +15,7 @@ import { OptionsSymbol } from './options-symbol';
 import { UniversalSymbol } from './universal-symbol';
 
 /**
- * Record of order in brokerageaccount
+ * Describes a single recent order in an account.
  * @export
  * @interface AccountOrderRecord
  */
@@ -23,21 +23,22 @@ export interface AccountOrderRecord {
     [key: string]: any;
 
     /**
-     * Order id returned by brokerage
+     * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      * @type {string}
      * @memberof AccountOrderRecord
      */
     'brokerage_order_id'?: string;
     /**
-     * 
+     * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
      * @type {AccountOrderRecordStatus}
      * @memberof AccountOrderRecord
      */
     'status'?: AccountOrderRecordStatus;
     /**
-     * 
+     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      * @type {string}
      * @memberof AccountOrderRecord
+     * @deprecated
      */
     'symbol'?: string;
     /**

@@ -4,10 +4,8 @@ import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.DeleteUserResponse;
-import com.konfigthis.client.model.PortfolioGroup;
 import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
 import com.konfigthis.client.model.Status;
-import com.konfigthis.client.model.TargetAsset;
 import com.konfigthis.client.model.UniversalSymbol;
 import com.konfigthis.client.model.UserIDandSecret;
 import org.junit.jupiter.api.Disabled;
@@ -32,8 +30,6 @@ public class GettingStartedTest {
                 UUID userId = UUID.randomUUID();
                 UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
                         .userId(userId.toString()).execute();
-                List<TargetAsset> targetAsset = new ArrayList<>();
-                targetAsset.add(new TargetAsset().symbol(new UniversalSymbol().symbol("AAPL")).percent(90));
                 snaptrade.authentication.deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
         }
 

@@ -11,14 +11,18 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Universal symbol
+  # Uniquely describes a single security + exchange combination across all brokerages.
   class UniversalSymbol
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :id
 
+    # The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
     attr_accessor :symbol
 
+    # The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
     attr_accessor :raw_symbol
 
+    # A human-readable description of the security. This is usually the company name or ETF name.
     attr_accessor :description
 
     attr_accessor :currency
@@ -27,8 +31,10 @@ module SnapTrade
 
     attr_accessor :type
 
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
     attr_accessor :currencies
 
+    # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
     attr_accessor :figi_code
 
     attr_accessor :figi_instrument
@@ -61,8 +67,8 @@ module SnapTrade
         :'symbol' => :'String',
         :'raw_symbol' => :'String',
         :'description' => :'String',
-        :'currency' => :'Currency',
-        :'exchange' => :'Exchange',
+        :'currency' => :'UniversalSymbolCurrency',
+        :'exchange' => :'UniversalSymbolExchange',
         :'type' => :'SecurityType',
         :'currencies' => :'Array<Currency>',
         :'figi_code' => :'String',

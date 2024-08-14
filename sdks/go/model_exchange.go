@@ -15,15 +15,23 @@ import (
 	"encoding/json"
 )
 
-// Exchange Stock Exchange
+// Exchange Describes a single stock or crypto exchange.
 type Exchange struct {
+	// Unique ID for the exchange in SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// A short name for the exchange. For standardized exchange code, please us the `mic_code` field.
 	Code *string `json:"code,omitempty"`
+	// The [Market Identifier Code](https://en.wikipedia.org/wiki/Market_Identifier_Code) (MIC) for the exchange.
 	MicCode *string `json:"mic_code,omitempty"`
+	// The full name of the exchange.
 	Name *string `json:"name,omitempty"`
+	// The timezone for the trading hours (`start_time` and `close_time`) of the exchange.
 	Timezone *string `json:"timezone,omitempty"`
+	// The time when the exchange opens for trading.
 	StartTime *string `json:"start_time,omitempty"`
+	// The time when the exchange closes for trading.
 	CloseTime *string `json:"close_time,omitempty"`
+	// The suffix to be appended to the symbol when trading on this exchange. For example, the suffix for the Toronto Stock Exchange is `.TO`. See `UniversalSymbol->symbol` and `UniversalSymbol->raw_symbol` for more detail.
 	Suffix NullableString `json:"suffix,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

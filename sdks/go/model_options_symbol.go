@@ -15,17 +15,21 @@ import (
 	"encoding/json"
 )
 
-// OptionsSymbol Options Symbol
+// OptionsSymbol Uniquely describes an option security + exchange combination across all brokerages.
 type OptionsSymbol struct {
+	// Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id string `json:"id"`
+	// The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
 	Ticker string `json:"ticker"`
+	// The type of option. Either \"CALL\" or \"PUT\".
 	OptionType string `json:"option_type"`
+	// The option strike price.
 	StrikePrice float32 `json:"strike_price"`
+	// The option expiration date.
 	ExpirationDate string `json:"expiration_date"`
+	// Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
 	IsMiniOption *bool `json:"is_mini_option,omitempty"`
 	UnderlyingSymbol UnderlyingSymbol `json:"underlying_symbol"`
-	LocalId *string `json:"local_id,omitempty"`
-	ExchangeId *string `json:"exchange_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -230,70 +234,6 @@ func (o *OptionsSymbol) SetUnderlyingSymbol(v UnderlyingSymbol) {
 	o.UnderlyingSymbol = v
 }
 
-// GetLocalId returns the LocalId field value if set, zero value otherwise.
-func (o *OptionsSymbol) GetLocalId() string {
-	if o == nil || isNil(o.LocalId) {
-		var ret string
-		return ret
-	}
-	return *o.LocalId
-}
-
-// GetLocalIdOk returns a tuple with the LocalId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionsSymbol) GetLocalIdOk() (*string, bool) {
-	if o == nil || isNil(o.LocalId) {
-    return nil, false
-	}
-	return o.LocalId, true
-}
-
-// HasLocalId returns a boolean if a field has been set.
-func (o *OptionsSymbol) HasLocalId() bool {
-	if o != nil && !isNil(o.LocalId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLocalId gets a reference to the given string and assigns it to the LocalId field.
-func (o *OptionsSymbol) SetLocalId(v string) {
-	o.LocalId = &v
-}
-
-// GetExchangeId returns the ExchangeId field value if set, zero value otherwise.
-func (o *OptionsSymbol) GetExchangeId() string {
-	if o == nil || isNil(o.ExchangeId) {
-		var ret string
-		return ret
-	}
-	return *o.ExchangeId
-}
-
-// GetExchangeIdOk returns a tuple with the ExchangeId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OptionsSymbol) GetExchangeIdOk() (*string, bool) {
-	if o == nil || isNil(o.ExchangeId) {
-    return nil, false
-	}
-	return o.ExchangeId, true
-}
-
-// HasExchangeId returns a boolean if a field has been set.
-func (o *OptionsSymbol) HasExchangeId() bool {
-	if o != nil && !isNil(o.ExchangeId) {
-		return true
-	}
-
-	return false
-}
-
-// SetExchangeId gets a reference to the given string and assigns it to the ExchangeId field.
-func (o *OptionsSymbol) SetExchangeId(v string) {
-	o.ExchangeId = &v
-}
-
 func (o OptionsSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -316,12 +256,6 @@ func (o OptionsSymbol) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["underlying_symbol"] = o.UnderlyingSymbol
-	}
-	if !isNil(o.LocalId) {
-		toSerialize["local_id"] = o.LocalId
-	}
-	if !isNil(o.ExchangeId) {
-		toSerialize["exchange_id"] = o.ExchangeId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -348,8 +282,6 @@ func (o *OptionsSymbol) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "expiration_date")
 		delete(additionalProperties, "is_mini_option")
 		delete(additionalProperties, "underlying_symbol")
-		delete(additionalProperties, "local_id")
-		delete(additionalProperties, "exchange_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

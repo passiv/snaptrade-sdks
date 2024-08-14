@@ -19,8 +19,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.FigiInstrumentNullable;
-import com.konfigthis.client.model.SecurityType;
-import com.konfigthis.client.model.USExchange;
+import com.konfigthis.client.model.UnderlyingSymbolExchange;
+import com.konfigthis.client.model.UnderlyingSymbolType;
+import com.konfigthis.client.model.UniversalSymbolCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -60,6 +61,14 @@ public class UnderlyingSymbolTest {
     @Test
     public void symbolTest() {
         // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'rawSymbol'
+     */
+    @Test
+    public void rawSymbolTest() {
+        // TODO: test rawSymbol
     }
 
     /**

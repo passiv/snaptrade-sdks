@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { Currency } from './currency';
 
 /**
- * 
+ * The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
  * @export
  * @interface OptionsPositionCurrency
  */

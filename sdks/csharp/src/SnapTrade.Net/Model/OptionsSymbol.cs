@@ -27,14 +27,15 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Options Symbol
+    /// Uniquely describes an option security + exchange combination across all brokerages.
     /// </summary>
     [DataContract(Name = "OptionsSymbol")]
     public partial class OptionsSymbol : IEquatable<OptionsSymbol>, IValidatableObject
     {
         /// <summary>
-        /// Defines OptionType
+        /// The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;.
         /// </summary>
+        /// <value>The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum OptionTypeEnum
         {
@@ -54,8 +55,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets OptionType
+        /// The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;.
         /// </summary>
+        /// <value>The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;.</value>
         [DataMember(Name = "option_type", IsRequired = true, EmitDefaultValue = true)]
         public OptionTypeEnum OptionType { get; set; }
         /// <summary>
@@ -69,16 +71,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsSymbol" /> class.
         /// </summary>
-        /// <param name="id">id (required).</param>
-        /// <param name="ticker">ticker (required).</param>
-        /// <param name="optionType">optionType (required).</param>
-        /// <param name="strikePrice">strikePrice (required).</param>
-        /// <param name="expirationDate">expirationDate (required).</param>
-        /// <param name="isMiniOption">isMiniOption.</param>
+        /// <param name="id">Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. (required).</param>
+        /// <param name="ticker">The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option. (required).</param>
+        /// <param name="optionType">The type of option. Either \&quot;CALL\&quot; or \&quot;PUT\&quot;. (required).</param>
+        /// <param name="strikePrice">The option strike price. (required).</param>
+        /// <param name="expirationDate">The option expiration date. (required).</param>
+        /// <param name="isMiniOption">Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100..</param>
         /// <param name="underlyingSymbol">underlyingSymbol (required).</param>
-        /// <param name="localId">localId.</param>
-        /// <param name="exchangeId">exchangeId.</param>
-        public OptionsSymbol(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), string expirationDate = default(string), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol), string localId = default(string), string exchangeId = default(string)) : base()
+        public OptionsSymbol(string id = default(string), string ticker = default(string), OptionTypeEnum optionType = default(OptionTypeEnum), double strikePrice = default(double), DateTime expirationDate = default(DateTime), bool isMiniOption = default(bool), UnderlyingSymbol underlyingSymbol = default(UnderlyingSymbol)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -94,11 +94,6 @@ namespace SnapTrade.Net.Model
             this.Ticker = ticker;
             this.OptionType = optionType;
             this.StrikePrice = strikePrice;
-            // to ensure "expirationDate" is required (not null)
-            if (expirationDate == null)
-            {
-                throw new ArgumentNullException("expirationDate is a required property for OptionsSymbol and cannot be null");
-            }
             this.ExpirationDate = expirationDate;
             // to ensure "underlyingSymbol" is required (not null)
             if (underlyingSymbol == null)
@@ -107,38 +102,42 @@ namespace SnapTrade.Net.Model
             }
             this.UnderlyingSymbol = underlyingSymbol;
             this.IsMiniOption = isMiniOption;
-            this.LocalId = localId;
-            this.ExchangeId = exchangeId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
         /// </summary>
+        /// <value>Unique identifier for the option symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.</value>
         [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Ticker
+        /// The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
         /// </summary>
+        /// <value>The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.</value>
         [DataMember(Name = "ticker", IsRequired = true, EmitDefaultValue = true)]
         public string Ticker { get; set; }
 
         /// <summary>
-        /// Gets or Sets StrikePrice
+        /// The option strike price.
         /// </summary>
+        /// <value>The option strike price.</value>
         [DataMember(Name = "strike_price", IsRequired = true, EmitDefaultValue = true)]
         public double StrikePrice { get; set; }
 
         /// <summary>
-        /// Gets or Sets ExpirationDate
+        /// The option expiration date.
         /// </summary>
+        /// <value>The option expiration date.</value>
         [DataMember(Name = "expiration_date", IsRequired = true, EmitDefaultValue = true)]
-        public string ExpirationDate { get; set; }
+        [JsonConverter(typeof(OpenAPIDateConverter))]
+        public DateTime ExpirationDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets IsMiniOption
+        /// Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.
         /// </summary>
+        /// <value>Whether the option is a mini option. Mini options have 10 underlying shares per contract instead of the standard 100.</value>
         [DataMember(Name = "is_mini_option", EmitDefaultValue = true)]
         public bool IsMiniOption { get; set; }
 
@@ -147,18 +146,6 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "underlying_symbol", IsRequired = true, EmitDefaultValue = true)]
         public UnderlyingSymbol UnderlyingSymbol { get; set; }
-
-        /// <summary>
-        /// Gets or Sets LocalId
-        /// </summary>
-        [DataMember(Name = "local_id", EmitDefaultValue = false)]
-        public string LocalId { get; set; }
-
-        /// <summary>
-        /// Gets or Sets ExchangeId
-        /// </summary>
-        [DataMember(Name = "exchange_id", EmitDefaultValue = false)]
-        public string ExchangeId { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -182,8 +169,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
             sb.Append("  IsMiniOption: ").Append(IsMiniOption).Append("\n");
             sb.Append("  UnderlyingSymbol: ").Append(UnderlyingSymbol).Append("\n");
-            sb.Append("  LocalId: ").Append(LocalId).Append("\n");
-            sb.Append("  ExchangeId: ").Append(ExchangeId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -251,16 +236,6 @@ namespace SnapTrade.Net.Model
                     this.UnderlyingSymbol == input.UnderlyingSymbol ||
                     (this.UnderlyingSymbol != null &&
                     this.UnderlyingSymbol.Equals(input.UnderlyingSymbol))
-                ) && base.Equals(input) && 
-                (
-                    this.LocalId == input.LocalId ||
-                    (this.LocalId != null &&
-                    this.LocalId.Equals(input.LocalId))
-                ) && base.Equals(input) && 
-                (
-                    this.ExchangeId == input.ExchangeId ||
-                    (this.ExchangeId != null &&
-                    this.ExchangeId.Equals(input.ExchangeId))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -292,14 +267,6 @@ namespace SnapTrade.Net.Model
                 if (this.UnderlyingSymbol != null)
                 {
                     hashCode = (hashCode * 59) + this.UnderlyingSymbol.GetHashCode();
-                }
-                if (this.LocalId != null)
-                {
-                    hashCode = (hashCode * 59) + this.LocalId.GetHashCode();
-                }
-                if (this.ExchangeId != null)
-                {
-                    hashCode = (hashCode * 59) + this.ExchangeId.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

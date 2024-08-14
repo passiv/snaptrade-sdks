@@ -15,11 +15,13 @@ import (
 	"encoding/json"
 )
 
-// AccountOrderRecord Record of order in brokerageaccount
+// AccountOrderRecord Describes a single recent order in an account.
 type AccountOrderRecord struct {
-	// Order id returned by brokerage
+	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
 	UniversalSymbol *UniversalSymbol `json:"universal_symbol,omitempty"`
 	OptionSymbol *OptionsSymbol `json:"option_symbol,omitempty"`
@@ -135,6 +137,7 @@ func (o *AccountOrderRecord) SetStatus(v AccountOrderRecordStatus) {
 }
 
 // GetSymbol returns the Symbol field value if set, zero value otherwise.
+// Deprecated
 func (o *AccountOrderRecord) GetSymbol() string {
 	if o == nil || isNil(o.Symbol) {
 		var ret string
@@ -145,6 +148,7 @@ func (o *AccountOrderRecord) GetSymbol() string {
 
 // GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AccountOrderRecord) GetSymbolOk() (*string, bool) {
 	if o == nil || isNil(o.Symbol) {
     return nil, false
@@ -162,6 +166,7 @@ func (o *AccountOrderRecord) HasSymbol() bool {
 }
 
 // SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// Deprecated
 func (o *AccountOrderRecord) SetSymbol(v string) {
 	o.Symbol = &v
 }

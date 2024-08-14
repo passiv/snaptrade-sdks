@@ -34,7 +34,7 @@ export interface OptionsPosition {
      */
     'price'?: number | null;
     /**
-     * The number of contracts for this option position.
+     * The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
      * @type {number}
      * @memberof OptionsPosition
      */
@@ -43,6 +43,7 @@ export interface OptionsPosition {
      * 
      * @type {OptionsPositionCurrency}
      * @memberof OptionsPosition
+     * @deprecated
      */
     'currency'?: OptionsPositionCurrency | null;
     /**

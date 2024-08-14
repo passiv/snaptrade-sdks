@@ -27,8 +27,9 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Defines AccountOrderRecordStatus
+    /// Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
     /// </summary>
+    /// <value>Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum AccountOrderRecordStatus
     {

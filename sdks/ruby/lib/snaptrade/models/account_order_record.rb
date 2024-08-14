@@ -11,13 +11,15 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Record of order in brokerageaccount
+  # Describes a single recent order in an account.
   class AccountOrderRecord
-    # Order id returned by brokerage
+    # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
+    # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
     attr_accessor :status
 
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :symbol
 
     attr_accessor :universal_symbol

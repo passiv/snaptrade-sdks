@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { UniversalSymbol } from './universal-symbol';
 
 /**
- * Symbol returned in position object
+ * Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
  * @export
  * @interface PositionSymbol
  */
@@ -21,15 +21,17 @@ export interface PositionSymbol {
     [key: string]: any;
 
     /**
-     * 
+     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      * @type {string}
      * @memberof PositionSymbol
+     * @deprecated
      */
     'id'?: string;
     /**
-     * 
+     * This field is deprecated and the caller should use the `symbol` child property\'s `description` instead.
      * @type {string}
      * @memberof PositionSymbol
+     * @deprecated
      */
     'description'?: string;
     /**
@@ -39,21 +41,24 @@ export interface PositionSymbol {
      */
     'symbol'?: UniversalSymbol;
     /**
-     * 
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      * @type {string}
      * @memberof PositionSymbol
+     * @deprecated
      */
     'local_id'?: string | null;
     /**
-     * 
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      * @type {boolean}
      * @memberof PositionSymbol
+     * @deprecated
      */
     'is_quotable'?: boolean;
     /**
-     * 
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      * @type {boolean}
      * @memberof PositionSymbol
+     * @deprecated
      */
     'is_tradable'?: boolean;
 }

@@ -11,10 +11,12 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Option Brokerage symbol
+  # Uniquely describes a security for the option position within an account. The distinction between this and the `option_symbol` child property is that this object is specific to a position within an account, while the `option_symbol` child property is universal across all brokerage accounts. The caller should rely on the `option_symbol` child property for most use cases.
   class OptionBrokerageSymbol
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :id
 
+    # This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
     attr_accessor :description
 
     attr_accessor :option_symbol

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Option Brokerage symbol
+    /// Uniquely describes a security for the option position within an account. The distinction between this and the &#x60;option_symbol&#x60; child property is that this object is specific to a position within an account, while the &#x60;option_symbol&#x60; child property is universal across all brokerage accounts. The caller should rely on the &#x60;option_symbol&#x60; child property for most use cases.
     /// </summary>
     [DataContract(Name = "OptionBrokerageSymbol")]
     public partial class OptionBrokerageSymbol : IEquatable<OptionBrokerageSymbol>, IValidatableObject
@@ -35,8 +35,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionBrokerageSymbol" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="description">description.</param>
+        /// <param name="id">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
+        /// <param name="description">This field is deprecated and the caller should use the &#x60;option_symbol&#x60; child property&#39;s &#x60;description&#x60; instead..</param>
         /// <param name="optionSymbol">optionSymbol.</param>
         public OptionBrokerageSymbol(string id = default(string), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol)) : base()
         {
@@ -47,15 +47,19 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
         /// </summary>
+        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
+        [Obsolete]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// This field is deprecated and the caller should use the &#x60;option_symbol&#x60; child property&#39;s &#x60;description&#x60; instead.
         /// </summary>
+        /// <value>This field is deprecated and the caller should use the &#x60;option_symbol&#x60; child property&#39;s &#x60;description&#x60; instead.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
+        [Obsolete]
         public string Description { get; set; }
 
         /// <summary>

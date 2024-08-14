@@ -18,7 +18,7 @@ import { SnapTradeHoldingsAccountAccountId } from './snap-trade-holdings-account
 import { SnapTradeHoldingsTotalValue } from './snap-trade-holdings-total-value';
 
 /**
- * A wrapper object containing holdings information for a single account
+ * A wrapper object containing holdings information for a single account.
  * @export
  * @interface AccountHoldingsAccount
  */

@@ -11,6 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
+  # The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
   class OptionsPositionCurrency
     # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
     attr_accessor :id

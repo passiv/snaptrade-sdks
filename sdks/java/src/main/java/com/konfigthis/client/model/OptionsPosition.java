@@ -162,11 +162,11 @@ public class OptionsPosition {
   }
 
    /**
-   * The number of contracts for this option position.
+   * The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "10", value = "The number of contracts for this option position.")
+  @ApiModelProperty(example = "10", value = "The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.")
 
   public Double getUnits() {
     return units;
@@ -417,7 +417,9 @@ public class OptionsPosition {
                    obj.addProperty(entry.getKey(), (Boolean) entry.getValue());
                  else if (entry.getValue() instanceof Character)
                    obj.addProperty(entry.getKey(), (Character) entry.getValue());
-                 else {
+                 else if (entry.getValue() == null) {
+                   obj.addProperty(entry.getKey(), (String) null);
+                 } else {
                    obj.add(entry.getKey(), gson.toJsonTree(entry.getValue()).getAsJsonObject());
                  }
                }

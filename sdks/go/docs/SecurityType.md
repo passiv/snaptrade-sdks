@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Code** | Pointer to **string** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
-**IsSupported** | Pointer to **bool** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls. | [optional] 
+**Code** | Pointer to **string** | A short code representing the security type. For example, \&quot;cs\&quot; for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant  | [optional] 
+**Description** | Pointer to **string** | A human-readable description of the security type. For example, \&quot;Common Stock\&quot; or \&quot;ETF\&quot;. | [optional] 
+**IsSupported** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
 
 ## Methods
 
