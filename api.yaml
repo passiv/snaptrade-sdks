@@ -2001,26 +2001,6 @@ components:
           example: 500
         code:
           example: 1000
-    CashRestriction:
-      description:
-        Cash restriction rules that apply to this account when undergoing
-        portfolio rebalance calculations.
-      type: object
-      properties:
-        id:
-          $ref: "#/components/schemas/Id"
-        account:
-          $ref: "#/components/schemas/Id"
-        currency:
-          $ref: "#/components/schemas/Id"
-        type:
-          type: string
-          enum:
-            - ALLOCATE_MAX
-            - RETAIN_MIN
-        amount:
-          type: number
-          example: 100
     AccountSyncStatus:
       description: Status of account
       properties:
@@ -2092,9 +2072,12 @@ components:
             status: ACTIVE
             institution_name: Alpaca
         cash_restrictions:
+          deprecated: true
+          description: This field is deprecated.
           type: array
           items:
-            $ref: "#/components/schemas/CashRestriction"
+            type: string
+          example: []
         sync_status:
           $ref: "#/components/schemas/AccountSyncStatus"
         balance:
@@ -2177,13 +2160,13 @@ components:
         orders:
           type: array
           nullable: true
-          description: List of recent orders in the account, including both pending and executed orders.
+          description: List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.
           items:
             $ref: "#/components/schemas/AccountOrderRecord"
         total_value:
           $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
     AccountOrderRecord:
-      description: Describes a single recent order in an account. 
+      description: Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
       type: object
       properties:
         brokerage_order_id:
@@ -2192,45 +2175,89 @@ components:
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
         symbol:
-          $ref: "#/components/schemas/BrokerageSymbolID"
+         $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol:
-          $ref: "#/components/schemas/UniversalSymbol"
+          description: Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
+          allOf:
+            - $ref: "#/components/schemas/UniversalSymbol"
         option_symbol:
-          $ref: "#/components/schemas/OptionsSymbol"
+          description: Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
+          allOf:
+            - $ref: "#/components/schemas/OptionsSymbol"
         action:
           $ref: "#/components/schemas/Action"
         total_quantity:
+          description: The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
           nullable: true
-          allOf:
-            - $ref: "#/components/schemas/Units"
+          type: number
+          example: 100
         open_quantity:
-          $ref: "#/components/schemas/OpenUnits"
+          description: The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
+          nullable: true
+          type: number
+          example: 10
         canceled_quantity:
-          $ref: "#/components/schemas/CancelledUnits"
+          description: The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
+          nullable: true
+          type: number
+          example: 10
         filled_quantity:
-          $ref: "#/components/schemas/FilledUnits"
+          description: The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
+          nullable: true
+          type: number
+          example: 80
         execution_price:
-          $ref: "#/components/schemas/Price"
+          description: The price at which the order was executed.
+          nullable: true
+          type: number
+          example: 12.34
         limit_price:
-          $ref: "#/components/schemas/Price"
+          description: The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+          nullable: true
+          type: number
+          example: 12.34
         stop_price:
-          $ref: "#/components/schemas/StopPrice"
+          description: The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+          nullable: true
+          type: number
+          example: 12.50
         order_type:
-          $ref: "#/components/schemas/OrderType"
+          description: The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
+          nullable: true
+          type: string
+          example: "Market"
         time_in_force:
-          $ref: "#/components/schemas/TimeInForce"
+          description: >
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
+              - `Day` - Day. The order is valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          type: string
         time_placed:
-          $ref: "#/components/schemas/Time"
+          description: The time the order was placed. This is the time the order was submitted to the brokerage.
+          type: string
+          format: date-time
+          example: 2024-07-30T22:51:49.746270Z
         time_updated:
+          description: The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
           nullable: true
-          allOf:
-            - $ref: "#/components/schemas/Time"
+          type: string
+          format: date-time
+          example: 2024-08-05T00:05:57.409000Z
         time_executed:
+          description: The time the order was executed in the brokerage system. This value is not always available from the brokerage.
           nullable: true
-          allOf:
-            - $ref: "#/components/schemas/Time"
+          type: string
+          format: date-time
+          example: 2024-08-05T00:05:57.409000Z
         expiry_date:
-          $ref: "#/components/schemas/Time"
+          description: The time the order expires. This value is not always available from the brokerage.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2024-08-05T00:05:57.409000Z
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
       type: string
@@ -2458,11 +2485,12 @@ components:
             status: ACTIVE
             institution_name: Alpaca
         cash_restrictions:
-          type: array
           deprecated: true
           description: This field is deprecated.
+          type: array
           items:
-            $ref: "#/components/schemas/CashRestriction"
+            type: string
+          example: []
         created_date:
           description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
           type: string
@@ -3298,7 +3326,7 @@ components:
     ReportingDate:
       description:
         Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-        format)
+        format). These dates are inclusive.
       type: string
       example: "2022-01-24"
       format: date
@@ -3475,7 +3503,7 @@ components:
         - Limit
         - Market
         - StopLimit
-        - StopLoss
+        - Stop
     OrderType:
       type: string
       nullable: true
@@ -3483,7 +3511,7 @@ components:
         - Limit
         - Market
         - StopLimit
-        - StopLoss
+        - Stop
     TimeInForceStrict:
       description: |
         Trade time in force examples:
@@ -3511,30 +3539,19 @@ components:
         - SELL
     Action:
       type: string
-      description: Trade Action potential values include (but are not limited to)
-        - BUY
-        - SELL
-        - BUY_COVER
-        - SELL_SHORT
-        - BUY_OPEN
-        - BUY_CLOSE
-        - SELL_OPEN
-        - SELL_CLOSE
+      description: >
+        The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
+          - BUY
+          - SELL
+          - BUY_COVER
+          - SELL_SHORT
+          - BUY_OPEN
+          - BUY_CLOSE
+          - SELL_OPEN
+          - SELL_CLOSE
     Units:
       description: Trade Units. Cannot work with notional value.
       type: number
-    OpenUnits:
-      description: Trade Units
-      type: number
-      nullable: true
-    CancelledUnits:
-      description: Trade Units
-      type: number
-      nullable: true
-    FilledUnits:
-      description: Trade Units
-      type: number
-      nullable: true
     Price:
       description: Trade Price if limit or stop limit order
       type: number
@@ -3758,7 +3775,7 @@ components:
         id:
           $ref: "#/components/schemas/OptionSymbolID"
         ticker:
-          description: The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option. 
+          description: The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
           type: string
           example: SPY 220819P00200000
         option_type:
@@ -3769,7 +3786,7 @@ components:
             - PUT
           example: CALL
         strike_price:
-          description: The option strike price. 
+          description: The option strike price.
           type: number
           example: 200
         expiration_date:
@@ -3809,7 +3826,7 @@ components:
         id:
           $ref: "#/components/schemas/SecurityTypeID"
         code:
-          description: > 
+          description: >
             A short code representing the security type. For example, "cs" for Common Stock. Here are some common values:
               ad - ADR
               bnd - Bond
