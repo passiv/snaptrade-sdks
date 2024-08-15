@@ -16,9 +16,9 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_balance import AccountBalance
+from snaptrade_client.type.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.type.account_meta import AccountMeta
 from snaptrade_client.type.account_sync_status import AccountSyncStatus
-from snaptrade_client.type.cash_restriction import CashRestriction
 
 class RequiredAccount(TypedDict):
     pass
@@ -40,7 +40,8 @@ class OptionalAccount(TypedDict, total=False):
 
     meta: AccountMeta
 
-    cash_restrictions: typing.List[CashRestriction]
+    # WARNING: This property is deprecated
+    cash_restrictions: AccountCashRestrictions
 
     sync_status: AccountSyncStatus
 

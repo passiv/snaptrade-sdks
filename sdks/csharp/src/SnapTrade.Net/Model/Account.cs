@@ -43,10 +43,10 @@ namespace SnapTrade.Net.Model
         /// <param name="institutionName">institutionName.</param>
         /// <param name="createdDate">createdDate.</param>
         /// <param name="meta">meta.</param>
-        /// <param name="cashRestrictions">cashRestrictions.</param>
+        /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="syncStatus">syncStatus.</param>
         /// <param name="balance">balance.</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), string createdDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance)) : base()
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), string createdDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<string> cashRestrictions = default(List<string>), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -111,10 +111,12 @@ namespace SnapTrade.Net.Model
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
-        /// Gets or Sets CashRestrictions
+        /// This field is deprecated.
         /// </summary>
+        /// <value>This field is deprecated.</value>
         [DataMember(Name = "cash_restrictions", EmitDefaultValue = false)]
-        public List<CashRestriction> CashRestrictions { get; set; }
+        [Obsolete]
+        public List<string> CashRestrictions { get; set; }
 
         /// <summary>
         /// Gets or Sets SyncStatus

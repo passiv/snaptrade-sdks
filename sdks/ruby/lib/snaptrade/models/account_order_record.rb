@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Describes a single recent order in an account.
+  # Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
   class AccountOrderRecord
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
@@ -26,43 +26,46 @@ module SnapTrade
 
     attr_accessor :option_symbol
 
-    # Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+    # The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
     attr_accessor :action
 
+    # The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
     attr_accessor :total_quantity
 
-    # Trade Units
+    # The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
     attr_accessor :open_quantity
 
-    # Trade Units
+    # The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
     attr_accessor :canceled_quantity
 
-    # Trade Units
+    # The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
     attr_accessor :filled_quantity
 
-    # Trade Price if limit or stop limit order
+    # The price at which the order was executed.
     attr_accessor :execution_price
 
-    # Trade Price if limit or stop limit order
+    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
     attr_accessor :limit_price
 
-    # Stop Price. If stop loss or stop limit order, the price to trigger the stop
+    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
     attr_accessor :stop_price
 
-    # Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+    # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
     attr_accessor :order_type
 
-    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
     attr_accessor :time_in_force
 
-    # Time
+    # The time the order was placed. This is the time the order was submitted to the brokerage.
     attr_accessor :time_placed
 
+    # The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
     attr_accessor :time_updated
 
+    # The time the order was executed in the brokerage system. This value is not always available from the brokerage.
     attr_accessor :time_executed
 
-    # Time
+    # The time the order expires. This value is not always available from the brokerage.
     attr_accessor :expiry_date
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -101,8 +104,8 @@ module SnapTrade
         :'brokerage_order_id' => :'String',
         :'status' => :'AccountOrderRecordStatus',
         :'symbol' => :'String',
-        :'universal_symbol' => :'UniversalSymbol',
-        :'option_symbol' => :'OptionsSymbol',
+        :'universal_symbol' => :'AccountOrderRecordUniversalSymbol',
+        :'option_symbol' => :'AccountOrderRecordOptionSymbol',
         :'action' => :'String',
         :'total_quantity' => :'Float',
         :'open_quantity' => :'Float',
@@ -113,10 +116,10 @@ module SnapTrade
         :'stop_price' => :'Float',
         :'order_type' => :'String',
         :'time_in_force' => :'String',
-        :'time_placed' => :'String',
-        :'time_updated' => :'String',
-        :'time_executed' => :'String',
-        :'expiry_date' => :'String'
+        :'time_placed' => :'Time',
+        :'time_updated' => :'Time',
+        :'time_executed' => :'Time',
+        :'expiry_date' => :'Time'
       }
     end
 
@@ -133,6 +136,7 @@ module SnapTrade
         :'order_type',
         :'time_updated',
         :'time_executed',
+        :'expiry_date'
       ])
     end
 

@@ -20,7 +20,7 @@ class RequiredPastValue(TypedDict):
     pass
 
 class OptionalPastValue(TypedDict, total=False):
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     date: date
 
     value: typing.Union[int, float]

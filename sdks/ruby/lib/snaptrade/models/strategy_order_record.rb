@@ -23,7 +23,7 @@ module SnapTrade
 
     attr_accessor :closed_quantity
 
-    # Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+    # Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
     attr_accessor :order_type
 
     # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 

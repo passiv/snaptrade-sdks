@@ -47,5 +47,5 @@ class OrderTypeStrict(
         return cls("StopLimit")
     
     @schemas.classproperty
-    def STOP_LOSS(cls):
-        return cls("StopLoss")
+    def STOP(cls):
+        return cls("Stop")

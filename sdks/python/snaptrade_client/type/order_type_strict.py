@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-OrderTypeStrict = Literal["Limit", "Market", "StopLimit", "StopLoss"]
+OrderTypeStrict = Literal["Limit", "Market", "StopLimit", "Stop"]

@@ -11,7 +11,7 @@
 
 * `STOPLIMIT` (value: `"StopLimit"`)
 
-* `STOPLOSS` (value: `"StopLoss"`)
+* `STOP` (value: `"Stop"`)
 
 
 

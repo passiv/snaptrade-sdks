@@ -52,10 +52,10 @@ namespace SnapTrade.Net.Model
         StopLimit = 3,
 
         /// <summary>
-        /// Enum StopLoss for value: StopLoss
+        /// Enum Stop for value: Stop
         /// </summary>
-        [EnumMember(Value = "StopLoss")]
-        StopLoss = 4
+        [EnumMember(Value = "Stop")]
+        Stop = 4
 
     }
 

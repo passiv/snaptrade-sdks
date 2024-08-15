@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
+**Date** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive. | [optional] 
 **Value** | Pointer to **float32** |  | [optional] 
 **Currency** | Pointer to **string** |  | [optional] 
 

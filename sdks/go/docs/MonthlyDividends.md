@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Date** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
+**Date** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive. | [optional] 
 **Dividends** | Pointer to [**[]DividendAtDate**](DividendAtDate.md) |  | [optional] 
 
 ## Methods

@@ -24,7 +24,7 @@ const (
 	ORDERTYPESTRICT_LIMIT OrderTypeStrict = "Limit"
 	ORDERTYPESTRICT_MARKET OrderTypeStrict = "Market"
 	ORDERTYPESTRICT_STOP_LIMIT OrderTypeStrict = "StopLimit"
-	ORDERTYPESTRICT_STOP_LOSS OrderTypeStrict = "StopLoss"
+	ORDERTYPESTRICT_STOP OrderTypeStrict = "Stop"
 )
 
 // All allowed values of OrderTypeStrict enum
@@ -32,7 +32,7 @@ var AllowedOrderTypeStrictEnumValues = []OrderTypeStrict{
 	"Limit",
 	"Market",
 	"StopLimit",
-	"StopLoss",
+	"Stop",
 }
 
 func (v *OrderTypeStrict) UnmarshalJSON(src []byte) error {

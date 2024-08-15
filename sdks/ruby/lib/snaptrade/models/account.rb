@@ -29,6 +29,7 @@ module SnapTrade
 
     attr_accessor :meta
 
+    # This field is deprecated.
     attr_accessor :cash_restrictions
 
     attr_accessor :sync_status
@@ -68,7 +69,7 @@ module SnapTrade
         :'institution_name' => :'String',
         :'created_date' => :'String',
         :'meta' => :'Hash<String, Object>',
-        :'cash_restrictions' => :'Array<CashRestriction>',
+        :'cash_restrictions' => :'Array<String>',
         :'sync_status' => :'AccountSyncStatus',
         :'balance' => :'AccountBalance'
       }

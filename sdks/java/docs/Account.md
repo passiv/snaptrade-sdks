@@ -16,7 +16,7 @@ SnapTradeUser Investment Account
 |**institutionName** | **String** |  |  [optional] |
 |**createdDate** | **String** |  |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** |  |  [optional] |
-|**cashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) |  |  [optional] |
+|**cashRestrictions** | **List&lt;String&gt;** | This field is deprecated. |  [optional] |
 |**syncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  |  [optional] |
 |**balance** | [**AccountBalance**](AccountBalance.md) |  |  [optional] |
 

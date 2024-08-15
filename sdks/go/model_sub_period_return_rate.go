@@ -17,9 +17,9 @@ import (
 
 // SubPeriodReturnRate struct for SubPeriodReturnRate
 type SubPeriodReturnRate struct {
-	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
 	PeriodStart *string `json:"periodStart,omitempty"`
-	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
 	PeriodEnd *string `json:"periodEnd,omitempty"`
 	// The return rate for the given period
 	RateOfReturn NullableFloat32 `json:"rateOfReturn,omitempty"`

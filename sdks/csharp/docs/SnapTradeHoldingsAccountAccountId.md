@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **InstitutionName** | **string** | The name of the financial institution that holds the account. | [optional] 
 **Balance** | [**AccountBalanceNullable**](AccountBalanceNullable.md) |  | [optional] 
 **Meta** | **Dictionary&lt;string, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk. | [optional] 
-**CashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) | This field is deprecated. | [optional] 
+**CashRestrictions** | **List&lt;string&gt;** | This field is deprecated. | [optional] 
 **CreatedDate** | **DateTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

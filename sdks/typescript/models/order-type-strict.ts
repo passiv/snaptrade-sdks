@@ -16,5 +16,5 @@ import type * as buffer from "buffer"
  * @export
  * @enum {string}
  */
-export type OrderTypeStrict = 'Limit' | 'Market' | 'StopLimit' | 'StopLoss'
+export type OrderTypeStrict = 'Limit' | 'Market' | 'StopLimit' | 'Stop'
 

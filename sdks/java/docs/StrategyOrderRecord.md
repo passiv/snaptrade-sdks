@@ -13,7 +13,7 @@ Strategy order record
 |**filledQuantity** | **Double** |  |  [optional] |
 |**openQuantity** | **Double** |  |  [optional] |
 |**closedQuantity** | **Double** |  |  [optional] |
-|**orderType** | **String** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss |  [optional] |
+|**orderType** | **String** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop |  [optional] |
 |**timeInForce** | **String** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  |  [optional] |
 |**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
 |**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |

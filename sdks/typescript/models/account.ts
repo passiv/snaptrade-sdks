@@ -12,7 +12,6 @@ import type * as buffer from "buffer"
 
 import { AccountBalance } from './account-balance';
 import { AccountSyncStatus } from './account-sync-status';
-import { CashRestriction } from './cash-restriction';
 
 /**
  * SnapTradeUser Investment Account
@@ -71,11 +70,12 @@ export interface Account {
      */
     'meta'?: { [key: string]: any; };
     /**
-     * 
-     * @type {Array<CashRestriction>}
+     * This field is deprecated.
+     * @type {Array<string>}
      * @memberof Account
+     * @deprecated
      */
-    'cash_restrictions'?: Array<CashRestriction>;
+    'cash_restrictions'?: Array<string>;
     /**
      * 
      * @type {AccountSyncStatus}

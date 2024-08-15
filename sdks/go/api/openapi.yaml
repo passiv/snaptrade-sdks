@@ -2154,46 +2154,6 @@ components:
           example: 1000
           x-konfig-original-example: 1000
       type: object
-    CashRestriction:
-      additionalProperties: true
-      description: Cash restriction rules that apply to this account when undergoing
-        portfolio rebalance calculations.
-      example:
-        amount: 100
-        currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        type: ALLOCATE_MAX
-        account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-      properties:
-        id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        account:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        currency:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        type:
-          enum:
-          - ALLOCATE_MAX
-          - RETAIN_MIN
-          type: string
-        amount:
-          example: 100
-          type: number
-          x-konfig-original-example: 100
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CashRestriction-properties-amount
-      type: object
     AccountSyncStatus:
       description: Status of account
       example:
@@ -2297,17 +2257,7 @@ components:
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         created_date: 2021-06-04T16:26:46.523Z
         institution_name: Alpaca
-        cash_restrictions:
-        - amount: 100
-          currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type: ALLOCATE_MAX
-          account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        - amount: 100
-          currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type: ALLOCATE_MAX
-          account: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        cash_restrictions: []
       properties:
         id:
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -2360,9 +2310,14 @@ components:
             institution_name: Alpaca
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-meta
         cash_restrictions:
+          deprecated: true
+          description: This field is deprecated.
+          example: []
           items:
-            $ref: '#/components/schemas/CashRestriction'
+            type: string
           type: array
+          x-konfig-original-example: []
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-cash_restrictions
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
         balance:
@@ -2736,128 +2691,42 @@ components:
           average_purchase_price: 108.3353
         orders:
         - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_executed: ""
-          time_placed: 2022-01-21T20:11:19.217Z
-          expiry_date: 2022-01-21T20:11:19.217Z
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: brokerage_order_id
-          limit_price: 31.33
-          time_updated: ""
-          canceled_quantity: 6.027456183070403
+          limit_price: 12.34
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
           time_in_force: time_in_force
-          execution_price: 31.33
-          stop_price: 31.33
+          execution_price: 12.34
+          stop_price: 12.5
           action: action
-          total_quantity: ""
-          universal_symbol:
-            figi_code: BBG000B9XRY4
-            symbol: VAB.TO
-            figi_instrument: null
-            raw_symbol: VAB
-            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency: null
-            exchange: null
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          filled_quantity: 1.4658129805029452
-          option_symbol:
-            ticker: SPY 220819P00200000
-            is_mini_option: false
-            option_type: CALL
-            underlying_symbol:
-              figi_code: BBG000B9XRY4
-              symbol: SPY
-              figi_instrument: null
-              raw_symbol: VAB
-              description: SPDR S&P 500 ETF Trust
-              currency: null
-              exchange: null
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: null
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2026-12-18T00:00:00.000+00:00
-            strike_price: 200
-          order_type: order_type
-          open_quantity: 0.8008281904610115
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
           status: null
         - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_executed: ""
-          time_placed: 2022-01-21T20:11:19.217Z
-          expiry_date: 2022-01-21T20:11:19.217Z
+          time_executed: 2024-08-05T00:05:57.409Z
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: brokerage_order_id
-          limit_price: 31.33
-          time_updated: ""
-          canceled_quantity: 6.027456183070403
+          limit_price: 12.34
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
           time_in_force: time_in_force
-          execution_price: 31.33
-          stop_price: 31.33
+          execution_price: 12.34
+          stop_price: 12.5
           action: action
-          total_quantity: ""
-          universal_symbol:
-            figi_code: BBG000B9XRY4
-            symbol: VAB.TO
-            figi_instrument: null
-            raw_symbol: VAB
-            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-            currency: null
-            exchange: null
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type:
-              is_supported: true
-              code: cs
-              description: Common Stock
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          filled_quantity: 1.4658129805029452
-          option_symbol:
-            ticker: SPY 220819P00200000
-            is_mini_option: false
-            option_type: CALL
-            underlying_symbol:
-              figi_code: BBG000B9XRY4
-              symbol: SPY
-              figi_instrument: null
-              raw_symbol: VAB
-              description: SPDR S&P 500 ETF Trust
-              currency: null
-              exchange: null
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: null
-              currencies:
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-              - code: USD
-                name: US Dollar
-                id: 87b24961-b51e-4db8-9226-f198f6518a89
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            expiration_date: 2026-12-18T00:00:00.000+00:00
-            strike_price: 200
-          order_type: order_type
-          open_quantity: 0.8008281904610115
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
           status: null
         account:
           number: Q6542138443
@@ -2872,17 +2741,7 @@ components:
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           created_date: 2024-07-23T22:50:22.761Z
           institution_name: Alpaca
-          cash_restrictions:
-          - amount: 100
-            currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: ALLOCATE_MAX
-            account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          - amount: 100
-            currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: ALLOCATE_MAX
-            account: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_restrictions: []
       properties:
         account:
           $ref: '#/components/schemas/SnapTradeHoldingsAccountAccountId'
@@ -2908,7 +2767,9 @@ components:
           type: array
         orders:
           description: "List of recent orders in the account, including both pending\
-            \ and executed orders."
+            \ and executed orders. Note that option orders are included in this list.\
+            \ Option orders will have a null `universal_symbol` field and a non-null\
+            \ `option_symbol` field."
           items:
             $ref: '#/components/schemas/AccountOrderRecord'
           nullable: true
@@ -2918,69 +2779,28 @@ components:
       type: object
     AccountOrderRecord:
       additionalProperties: true
-      description: Describes a single recent order in an account.
+      description: "Describes a single recent order in an account. Each record here\
+        \ represents a single order leg. For multi-leg orders, there will be multiple\
+        \ records."
       example:
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        time_executed: ""
-        time_placed: 2022-01-21T20:11:19.217Z
-        expiry_date: 2022-01-21T20:11:19.217Z
+        time_executed: 2024-08-05T00:05:57.409Z
+        time_placed: 2024-07-30T22:51:49.746Z
+        expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: brokerage_order_id
-        limit_price: 31.33
-        time_updated: ""
-        canceled_quantity: 6.027456183070403
+        limit_price: 12.34
+        time_updated: 2024-08-05T00:05:57.409Z
+        canceled_quantity: 10
         time_in_force: time_in_force
-        execution_price: 31.33
-        stop_price: 31.33
+        execution_price: 12.34
+        stop_price: 12.5
         action: action
-        total_quantity: ""
-        universal_symbol:
-          figi_code: BBG000B9XRY4
-          symbol: VAB.TO
-          figi_instrument: null
-          raw_symbol: VAB
-          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
-          currency: null
-          exchange: null
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type:
-            is_supported: true
-            code: cs
-            description: Common Stock
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          currencies:
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-          - code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
-        filled_quantity: 1.4658129805029452
-        option_symbol:
-          ticker: SPY 220819P00200000
-          is_mini_option: false
-          option_type: CALL
-          underlying_symbol:
-            figi_code: BBG000B9XRY4
-            symbol: SPY
-            figi_instrument: null
-            raw_symbol: VAB
-            description: SPDR S&P 500 ETF Trust
-            currency: null
-            exchange: null
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: null
-            currencies:
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-            - code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          expiration_date: 2026-12-18T00:00:00.000+00:00
-          strike_price: 200
-        order_type: order_type
-        open_quantity: 0.8008281904610115
+        total_quantity: 100
+        universal_symbol: null
+        filled_quantity: 80
+        option_symbol: null
+        order_type: Market
+        open_quantity: 10
         status: null
       properties:
         brokerage_order_id:
@@ -3001,85 +2821,132 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         universal_symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
+          $ref: '#/components/schemas/AccountOrderRecord_universal_symbol'
         option_symbol:
-          $ref: '#/components/schemas/OptionsSymbol'
+          $ref: '#/components/schemas/AccountOrderRecord_option_symbol'
         action:
-          description: Trade Action potential values include (but are not limited
-            to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN
-            - SELL_CLOSE
+          description: |
+            The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
+              - BUY
+              - SELL
+              - BUY_COVER
+              - SELL_SHORT
+              - BUY_OPEN
+              - BUY_CLOSE
+              - SELL_OPEN
+              - SELL_CLOSE
           type: string
         total_quantity:
-          allOf:
-          - $ref: '#/components/schemas/Units'
+          description: "The total number of shares or contracts of the order. This\
+            \ should be the sum of the filled, canceled, and open quantities. Can\
+            \ be a decimal number for fractional shares."
+          example: 100
           nullable: true
+          type: number
+          x-konfig-original-example: 100
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity
         open_quantity:
-          description: Trade Units
+          description: The number of shares or contracts that are still open (waiting
+            for execution). Can be a decimal number for fractional shares.
+          example: 10
           nullable: true
           type: number
+          x-konfig-original-example: 10
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity
         canceled_quantity:
-          description: Trade Units
+          description: The number of shares or contracts that have been canceled.
+            Can be a decimal number for fractional shares.
+          example: 10
           nullable: true
           type: number
+          x-konfig-original-example: 10
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity
         filled_quantity:
-          description: Trade Units
+          description: The number of shares or contracts that have been filled. Can
+            be a decimal number for fractional shares.
+          example: 80
           nullable: true
           type: number
+          x-konfig-original-example: 80
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
         execution_price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
+          description: The price at which the order was executed.
+          example: 12.34
           nullable: true
           type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
+          x-konfig-original-example: 12.34
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price
         limit_price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
+          description: The limit price is maximum price one is willing to pay for
+            a buy order or the minimum price one is willing to accept for a sell order.
+            Should only apply to `Limit` and `StopLimit` orders.
+          example: 12.34
           nullable: true
           type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
+          x-konfig-original-example: 12.34
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price
         stop_price:
-          description: "Stop Price. If stop loss or stop limit order, the price to\
-            \ trigger the stop"
-          example: 31.33
+          description: The stop price is the price at which a stop order is triggered.
+            Should only apply to `Stop` and `StopLimit` orders.
+          example: 12.5
           nullable: true
           type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopPrice
+          x-konfig-original-example: 12.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price
         order_type:
-          description: Order Type potential values include (but are not limited to)
-            - Limit - Market - StopLimit - StopLoss
+          description: "The type of order placed. The most common values are `Market`,\
+            \ `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order\
+            \ types to these values. When mapping fails, we will return the brokerage's\
+            \ order type value."
+          example: Market
           nullable: true
           type: string
+          x-konfig-original-example: Market
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type
         time_in_force:
           description: |
-            Trade time in force examples:
-              * FOK - Fill Or Kill
-              * Day - Day
-              * GTC - Good Til Canceled
-              * GTD - Good Til Date
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
+              - `Day` - Day. The order is valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
           type: string
         time_placed:
-          description: Time
-          example: 2022-01-21T20:11:19.217Z
+          description: The time the order was placed. This is the time the order was
+            submitted to the brokerage.
+          example: 2024-07-30T22:51:49.746Z
+          format: date-time
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed
         time_updated:
-          allOf:
-          - $ref: '#/components/schemas/Time'
+          description: The time the order was last updated in the brokerage system.
+            This value is not always available from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
           nullable: true
-        time_executed:
-          allOf:
-          - $ref: '#/components/schemas/Time'
-          nullable: true
-        expiry_date:
-          description: Time
-          example: 2022-01-21T20:11:19.217Z
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated
+        time_executed:
+          description: The time the order was executed in the brokerage system. This
+            value is not always available from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed
+        expiry_date:
+          description: The time the order expires. This value is not always available
+            from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
       type: object
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort
@@ -3404,7 +3271,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyOrderRecord-properties-closed_quantity
         order_type:
           description: Order Type potential values include (but are not limited to)
-            - Limit - Market - StopLimit - StopLoss
+            - Limit - Market - StopLimit - Stop
           nullable: true
           type: string
         time_in_force:
@@ -3561,17 +3428,7 @@ components:
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         created_date: 2024-07-23T22:50:22.761Z
         institution_name: Alpaca
-        cash_restrictions:
-        - amount: 100
-          currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type: ALLOCATE_MAX
-          account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        - amount: 100
-          currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          type: ALLOCATE_MAX
-          account: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        cash_restrictions: []
       properties:
         id:
           description: Unique identifier for the connected brokerage account. This
@@ -3641,9 +3498,12 @@ components:
         cash_restrictions:
           deprecated: true
           description: This field is deprecated.
+          example: []
           items:
-            $ref: '#/components/schemas/CashRestriction'
+            type: string
           type: array
+          x-konfig-original-example: []
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-cash_restrictions
         created_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
             \ format indicating when the account was created in SnapTrade. This is\
@@ -4134,7 +3994,7 @@ components:
       properties:
         periodStart:
           description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-            format)
+            format). These dates are inclusive.
           example: 2022-01-24
           format: date
           type: string
@@ -4142,7 +4002,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ReportingDate
         periodEnd:
           description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-            format)
+            format). These dates are inclusive.
           example: 2022-01-24
           format: date
           type: string
@@ -5222,7 +5082,7 @@ components:
       properties:
         date:
           description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-            format)
+            format). These dates are inclusive.
           example: 2022-01-24
           format: date
           type: string
@@ -5242,7 +5102,7 @@ components:
       properties:
         date:
           description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-            format)
+            format). These dates are inclusive.
           example: 2022-01-24
           format: date
           type: string
@@ -5311,7 +5171,7 @@ components:
       properties:
         date:
           description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-            format)
+            format). These dates are inclusive.
           example: 2022-01-24
           format: date
           type: string
@@ -5339,7 +5199,7 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
     ReportingDate:
       description: Date used to specify timeframe for a reporting call (in YYYY-MM-DD
-        format)
+        format). These dates are inclusive.
       example: 2022-01-24
       format: date
       type: string
@@ -5538,17 +5398,7 @@ components:
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           created_date: 2021-06-04T16:26:46.523Z
           institution_name: Alpaca
-          cash_restrictions:
-          - amount: 100
-            currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: ALLOCATE_MAX
-            account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          - amount: 100
-            currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            type: ALLOCATE_MAX
-            account: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_restrictions: []
       properties:
         account:
           $ref: '#/components/schemas/Account'
@@ -5647,17 +5497,7 @@ components:
             portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
             created_date: 2021-06-04T16:26:46.523Z
             institution_name: Alpaca
-            cash_restrictions:
-            - amount: 100
-              currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: ALLOCATE_MAX
-              account: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            - amount: 100
-              currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              type: ALLOCATE_MAX
-              account: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            cash_restrictions: []
       properties:
         trade:
           $ref: '#/components/schemas/ManualTrade'
@@ -5755,11 +5595,11 @@ components:
       - Limit
       - Market
       - StopLimit
-      - StopLoss
+      - Stop
       type: string
     OrderType:
       description: Order Type potential values include (but are not limited to) -
-        Limit - Market - StopLimit - StopLoss
+        Limit - Market - StopLimit - Stop
       nullable: true
       type: string
     TimeInForceStrict:
@@ -5788,24 +5628,19 @@ components:
       - SELL
       type: string
     Action:
-      description: Trade Action potential values include (but are not limited to)
-        - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN -
-        SELL_CLOSE
+      description: |
+        The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
+          - BUY
+          - SELL
+          - BUY_COVER
+          - SELL_SHORT
+          - BUY_OPEN
+          - BUY_CLOSE
+          - SELL_OPEN
+          - SELL_CLOSE
       type: string
     Units:
       description: Trade Units. Cannot work with notional value.
-      type: number
-    OpenUnits:
-      description: Trade Units
-      nullable: true
-      type: number
-    CancelledUnits:
-      description: Trade Units
-      nullable: true
-      type: number
-    FilledUnits:
-      description: Trade Units
-      nullable: true
       type: number
     Price:
       description: Trade Price if limit or stop limit order
@@ -6497,10 +6332,6 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-CashRestriction-properties-amount:
-      example: 100
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Amount-properties-amount:
       example: 15363.23
       type: number
@@ -6543,6 +6374,11 @@ components:
           type: string
       type: object
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-cash_restrictions:
+      items:
+        type: string
+      type: array
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-name:
       example: Registered Retirement Savings Account
       type: string
@@ -6565,6 +6401,54 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthIDs:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity:
+      example: 100
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity:
+      example: 10
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity:
+      example: 10
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity:
+      example: 80
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price:
+      example: 12.34
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-limit_price:
+      example: 12.34
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-stop_price:
+      example: 12.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-order_type:
+      example: Market
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_placed:
+      example: 2024-07-30T22:51:49.746Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_updated:
+      example: 2024-08-05T00:05:57.409Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-time_executed:
+      example: 2024-08-05T00:05:57.409Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date:
+      example: 2024-08-05T00:05:57.409Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-price:
@@ -6698,6 +6582,11 @@ components:
           example: Alpaca
           type: string
       type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-cash_restrictions:
+      items:
+        type: string
+      type: array
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-created_date:
       example: 2024-07-23T22:50:22.761Z
@@ -8558,6 +8447,20 @@ components:
       description: "Total value of this account (includes cash, equity, fixed income,\
         \ etc)"
       nullable: true
+    AccountOrderRecord_universal_symbol:
+      allOf:
+      - $ref: '#/components/schemas/UniversalSymbol'
+      description: "Contains information about the security that the order is for.\
+        \ This field is only present for stock/ETF/crypto/mutual fund orders. For\
+        \ option orders, this field will be null and the `option_symbol` field will\
+        \ be populated."
+    AccountOrderRecord_option_symbol:
+      allOf:
+      - $ref: '#/components/schemas/OptionsSymbol'
+      description: "Contains information about the option contract that the order\
+        \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
+        \ fund orders, this field will be null and the `universal_symbol` field will\
+        \ be populated."
     OptionsPosition_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

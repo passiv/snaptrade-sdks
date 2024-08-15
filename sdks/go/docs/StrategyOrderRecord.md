@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **FilledQuantity** | Pointer to **float32** |  | [optional] 
 **OpenQuantity** | Pointer to **float32** |  | [optional] 
 **ClosedQuantity** | Pointer to **float32** |  | [optional] 
-**OrderType** | Pointer to **NullableString** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss | [optional] 
+**OrderType** | Pointer to **NullableString** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop | [optional] 
 **TimeInForce** | Pointer to **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **LimitPrice** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 
 **ExecutionPrice** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 

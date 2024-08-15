@@ -25,7 +25,9 @@ type Account struct {
 	InstitutionName *string `json:"institution_name,omitempty"`
 	CreatedDate *string `json:"created_date,omitempty"`
 	Meta map[string]interface{} `json:"meta,omitempty"`
-	CashRestrictions []CashRestriction `json:"cash_restrictions,omitempty"`
+	// This field is deprecated.
+	// Deprecated
+	CashRestrictions []string `json:"cash_restrictions,omitempty"`
 	SyncStatus *AccountSyncStatus `json:"sync_status,omitempty"`
 	Balance *AccountBalance `json:"balance,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -307,9 +309,10 @@ func (o *Account) SetMeta(v map[string]interface{}) {
 }
 
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
-func (o *Account) GetCashRestrictions() []CashRestriction {
+// Deprecated
+func (o *Account) GetCashRestrictions() []string {
 	if o == nil || isNil(o.CashRestrictions) {
-		var ret []CashRestriction
+		var ret []string
 		return ret
 	}
 	return o.CashRestrictions
@@ -317,7 +320,8 @@ func (o *Account) GetCashRestrictions() []CashRestriction {
 
 // GetCashRestrictionsOk returns a tuple with the CashRestrictions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Account) GetCashRestrictionsOk() ([]CashRestriction, bool) {
+// Deprecated
+func (o *Account) GetCashRestrictionsOk() ([]string, bool) {
 	if o == nil || isNil(o.CashRestrictions) {
     return nil, false
 	}
@@ -333,8 +337,9 @@ func (o *Account) HasCashRestrictions() bool {
 	return false
 }
 
-// SetCashRestrictions gets a reference to the given []CashRestriction and assigns it to the CashRestrictions field.
-func (o *Account) SetCashRestrictions(v []CashRestriction) {
+// SetCashRestrictions gets a reference to the given []string and assigns it to the CashRestrictions field.
+// Deprecated
+func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 

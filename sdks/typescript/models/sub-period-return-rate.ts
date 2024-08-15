@@ -20,13 +20,13 @@ export interface SubPeriodReturnRate {
     [key: string]: any;
 
     /**
-     * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
      * @type {string}
      * @memberof SubPeriodReturnRate
      */
     'periodStart'?: string;
     /**
-     * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+     * Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
      * @type {string}
      * @memberof SubPeriodReturnRate
      */

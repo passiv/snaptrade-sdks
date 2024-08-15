@@ -14,6 +14,7 @@
 from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_balance import AccountBalance
 from snaptrade_client.model.account_balance_nullable import AccountBalanceNullable
+from snaptrade_client.model.account_cash_restrictions import AccountCashRestrictions
 from snaptrade_client.model.account_holdings import AccountHoldings
 from snaptrade_client.model.account_holdings_account import AccountHoldingsAccount
 from snaptrade_client.model.account_id import AccountID
@@ -40,9 +41,7 @@ from snaptrade_client.model.brokerage_authorization_type_read_only_brokerage imp
 from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.model.brokerage_symbol_id import BrokerageSymbolID
 from snaptrade_client.model.brokerage_type import BrokerageType
-from snaptrade_client.model.cancelled_units import CancelledUnits
 from snaptrade_client.model.cash import Cash
-from snaptrade_client.model.cash_restriction import CashRestriction
 from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.currency_nullable import CurrencyNullable
@@ -55,7 +54,6 @@ from snaptrade_client.model.exchange_id import ExchangeID
 from snaptrade_client.model.exchange_rate_pairs import ExchangeRatePairs
 from snaptrade_client.model.figi_instrument import FigiInstrument
 from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
-from snaptrade_client.model.filled_units import FilledUnits
 from snaptrade_client.model.holdings_status import HoldingsStatus
 from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
 from snaptrade_client.model.id import Id
@@ -78,7 +76,6 @@ from snaptrade_client.model.net_contributions import NetContributions
 from snaptrade_client.model.net_dividend import NetDividend
 from snaptrade_client.model.notional_value import NotionalValue
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
-from snaptrade_client.model.open_units import OpenUnits
 from snaptrade_client.model.option_brokerage_symbol import OptionBrokerageSymbol
 from snaptrade_client.model.option_chain import OptionChain
 from snaptrade_client.model.option_chain_item import OptionChainItem
@@ -109,6 +106,7 @@ from snaptrade_client.model.security_type_id import SecurityTypeID
 from snaptrade_client.model.session_event import SessionEvent
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount
 from snaptrade_client.model.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
+from snaptrade_client.model.snap_trade_holdings_account_account_id_cash_restrictions import SnapTradeHoldingsAccountAccountIdCashRestrictions
 from snaptrade_client.model.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta
 from snaptrade_client.model.snap_trade_holdings_account_meta import SnapTradeHoldingsAccountMeta
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
@@ -129,7 +127,6 @@ from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
-from snaptrade_client.model.time_nullable import TimeNullable
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol

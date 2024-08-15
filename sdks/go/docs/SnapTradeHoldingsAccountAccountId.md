@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **InstitutionName** | Pointer to **string** | The name of the financial institution that holds the account. | [optional] 
 **Balance** | Pointer to [**NullableSnapTradeHoldingsAccountAccountIdBalance**](SnapTradeHoldingsAccountAccountIdBalance.md) |  | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk. | [optional] 
-**CashRestrictions** | Pointer to [**[]CashRestriction**](CashRestriction.md) | This field is deprecated. | [optional] 
+**CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
 **CreatedDate** | Pointer to **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution. | [optional] 
 
 ## Methods
@@ -256,20 +256,20 @@ HasMeta returns a boolean if a field has been set.
 
 ### GetCashRestrictions
 
-`func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []CashRestriction`
+`func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []string`
 
 GetCashRestrictions returns the CashRestrictions field if non-nil, zero value otherwise.
 
 ### GetCashRestrictionsOk
 
-`func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictionsOk() (*[]CashRestriction, bool)`
+`func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictionsOk() (*[]string, bool)`
 
 GetCashRestrictionsOk returns a tuple with the CashRestrictions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCashRestrictions
 
-`func (o *SnapTradeHoldingsAccountAccountId) SetCashRestrictions(v []CashRestriction)`
+`func (o *SnapTradeHoldingsAccountAccountId) SetCashRestrictions(v []string)`
 
 SetCashRestrictions sets CashRestrictions field to given value.
 

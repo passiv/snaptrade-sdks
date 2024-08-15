@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **FilledQuantity** | **double** |  | [optional] 
 **OpenQuantity** | **double** |  | [optional] 
 **ClosedQuantity** | **double** |  | [optional] 
-**OrderType** | **string** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss | [optional] 
+**OrderType** | **string** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop | [optional] 
 **TimeInForce** | **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
 **LimitPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 
 **ExecutionPrice** | **double?** | Trade Price if limit or stop limit order | [optional] 

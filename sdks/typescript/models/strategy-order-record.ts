@@ -51,7 +51,7 @@ export interface StrategyOrderRecord {
      */
     'closed_quantity'?: number;
     /**
-     * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+     * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
      * @type {string}
      * @memberof StrategyOrderRecord
      */

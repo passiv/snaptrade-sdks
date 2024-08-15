@@ -2,7 +2,7 @@
 
 # AccountOrderRecord
 
-Describes a single recent order in an account.
+Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
 
 ## Properties
 
@@ -11,22 +11,22 @@ Describes a single recent order in an account.
 |**brokerageOrderId** | **String** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. |  [optional] |
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
 |**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
-|**universalSymbol** | [**UniversalSymbol**](UniversalSymbol.md) |  |  [optional] |
-|**optionSymbol** | [**OptionsSymbol**](OptionsSymbol.md) |  |  [optional] |
-|**action** | **String** | Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE |  [optional] |
-|**totalQuantity** | **Double** | Trade Units. Cannot work with notional value. |  [optional] |
-|**openQuantity** | **Double** | Trade Units |  [optional] |
-|**canceledQuantity** | **Double** | Trade Units |  [optional] |
-|**filledQuantity** | **Double** | Trade Units |  [optional] |
-|**executionPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
-|**limitPrice** | **Double** | Trade Price if limit or stop limit order |  [optional] |
-|**stopPrice** | **Double** | Stop Price. If stop loss or stop limit order, the price to trigger the stop |  [optional] |
-|**orderType** | **String** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss |  [optional] |
-|**timeInForce** | **String** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  |  [optional] |
-|**timePlaced** | **String** | Time |  [optional] |
-|**timeUpdated** | **String** | Time |  [optional] |
-|**timeExecuted** | **String** | Time |  [optional] |
-|**expiryDate** | **String** | Time |  [optional] |
+|**universalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  |  [optional] |
+|**optionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  |  [optional] |
+|**action** | **String** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  |  [optional] |
+|**totalQuantity** | **Double** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. |  [optional] |
+|**openQuantity** | **Double** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. |  [optional] |
+|**canceledQuantity** | **Double** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. |  [optional] |
+|**filledQuantity** | **Double** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. |  [optional] |
+|**executionPrice** | **Double** | The price at which the order was executed. |  [optional] |
+|**limitPrice** | **Double** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
+|**stopPrice** | **Double** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
+|**orderType** | **String** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. |  [optional] |
+|**timeInForce** | **String** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  |  [optional] |
+|**timePlaced** | **OffsetDateTime** | The time the order was placed. This is the time the order was submitted to the brokerage. |  [optional] |
+|**timeUpdated** | **OffsetDateTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. |  [optional] |
+|**timeExecuted** | **OffsetDateTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. |  [optional] |
+|**expiryDate** | **OffsetDateTime** | The time the order expires. This value is not always available from the brokerage. |  [optional] |
 
 
 

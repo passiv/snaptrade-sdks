@@ -168,7 +168,7 @@ namespace SnapTrade.Net.Model
         /// <param name="filledQuantity">filledQuantity.</param>
         /// <param name="openQuantity">openQuantity.</param>
         /// <param name="closedQuantity">closedQuantity.</param>
-        /// <param name="orderType">Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss.</param>
+        /// <param name="orderType">Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop.</param>
         /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
         /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
         /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
@@ -215,9 +215,9 @@ namespace SnapTrade.Net.Model
         public double ClosedQuantity { get; set; }
 
         /// <summary>
-        /// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+        /// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
         /// </summary>
-        /// <value>Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss</value>
+        /// <value>Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop</value>
         [DataMember(Name = "order_type", EmitDefaultValue = true)]
         public string OrderType { get; set; }
 

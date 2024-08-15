@@ -17,7 +17,7 @@ import (
 
 // NetContributions struct for NetContributions
 type NetContributions struct {
-	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
 	Date *string `json:"date,omitempty"`
 	Contributions NullableFloat32 `json:"contributions,omitempty"`
 	Currency *string `json:"currency,omitempty"`

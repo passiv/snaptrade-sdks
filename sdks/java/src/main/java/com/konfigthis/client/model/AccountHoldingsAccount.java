@@ -244,11 +244,11 @@ public class AccountHoldingsAccount {
   }
 
    /**
-   * List of recent orders in the account, including both pending and executed orders.
+   * List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null &#x60;universal_symbol&#x60; field and a non-null &#x60;option_symbol&#x60; field.
    * @return orders
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "List of recent orders in the account, including both pending and executed orders.")
+  @ApiModelProperty(value = "List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.")
 
   public List<AccountOrderRecord> getOrders() {
     return orders;
