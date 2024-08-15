@@ -20,10 +20,10 @@ class RequiredSubPeriodReturnRate(TypedDict):
     pass
 
 class OptionalSubPeriodReturnRate(TypedDict, total=False):
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     periodStart: date
 
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     periodEnd: date
 
     # The return rate for the given period

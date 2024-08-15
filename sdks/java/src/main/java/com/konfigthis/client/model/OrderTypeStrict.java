@@ -34,7 +34,7 @@ import com.google.gson.stream.JsonWriter;
   
   STOPLIMIT("StopLimit"),
   
-  STOPLOSS("StopLoss");
+  STOP("Stop");
 
   private String value;
 

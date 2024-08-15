@@ -22,7 +22,7 @@ type StrategyOrderRecord struct {
 	FilledQuantity *float32 `json:"filled_quantity,omitempty"`
 	OpenQuantity *float32 `json:"open_quantity,omitempty"`
 	ClosedQuantity *float32 `json:"closed_quantity,omitempty"`
-	// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+	// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
 	OrderType NullableString `json:"order_type,omitempty"`
 	// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
 	TimeInForce *string `json:"time_in_force,omitempty"`

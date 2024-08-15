@@ -12,7 +12,7 @@ require 'time'
 
 module SnapTrade
   class NetContributions
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     attr_accessor :date
 
     attr_accessor :contributions

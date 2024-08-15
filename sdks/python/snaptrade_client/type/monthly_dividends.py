@@ -21,7 +21,7 @@ class RequiredMonthlyDividends(TypedDict):
     pass
 
 class OptionalMonthlyDividends(TypedDict, total=False):
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     date: date
 
     dividends: typing.List[DividendAtDate]

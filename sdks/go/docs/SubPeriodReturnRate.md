@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PeriodStart** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
-**PeriodEnd** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format) | [optional] 
+**PeriodStart** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive. | [optional] 
+**PeriodEnd** | Pointer to **string** | Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive. | [optional] 
 **RateOfReturn** | Pointer to **NullableFloat32** | The return rate for the given period | [optional] 
 
 ## Methods

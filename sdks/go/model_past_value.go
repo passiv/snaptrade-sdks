@@ -17,7 +17,7 @@ import (
 
 // PastValue struct for PastValue
 type PastValue struct {
-	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
 	Date *string `json:"date,omitempty"`
 	Value *float32 `json:"value,omitempty"`
 	Currency *string `json:"currency,omitempty"`

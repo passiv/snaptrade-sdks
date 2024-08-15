@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **InstitutionName** | **string** |  | [optional] 
 **CreatedDate** | **string** |  | [optional] 
 **Meta** | **Dictionary&lt;string, Object&gt;** |  | [optional] 
-**CashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) |  | [optional] 
+**CashRestrictions** | **List&lt;string&gt;** | This field is deprecated. | [optional] 
 **SyncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 **Balance** | [**AccountBalance**](AccountBalance.md) |  | [optional] 
 

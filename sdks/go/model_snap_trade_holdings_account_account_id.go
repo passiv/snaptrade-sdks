@@ -37,7 +37,7 @@ type SnapTradeHoldingsAccountAccountId struct {
 	Meta map[string]interface{} `json:"meta,omitempty"`
 	// This field is deprecated.
 	// Deprecated
-	CashRestrictions []CashRestriction `json:"cash_restrictions,omitempty"`
+	CashRestrictions []string `json:"cash_restrictions,omitempty"`
 	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
 	CreatedDate *time.Time `json:"created_date,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -346,9 +346,9 @@ func (o *SnapTradeHoldingsAccountAccountId) SetMeta(v map[string]interface{}) {
 
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
 // Deprecated
-func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []CashRestriction {
+func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []string {
 	if o == nil || isNil(o.CashRestrictions) {
-		var ret []CashRestriction
+		var ret []string
 		return ret
 	}
 	return o.CashRestrictions
@@ -357,7 +357,7 @@ func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictions() []CashRestrict
 // GetCashRestrictionsOk returns a tuple with the CashRestrictions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated
-func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictionsOk() ([]CashRestriction, bool) {
+func (o *SnapTradeHoldingsAccountAccountId) GetCashRestrictionsOk() ([]string, bool) {
 	if o == nil || isNil(o.CashRestrictions) {
     return nil, false
 	}
@@ -373,9 +373,9 @@ func (o *SnapTradeHoldingsAccountAccountId) HasCashRestrictions() bool {
 	return false
 }
 
-// SetCashRestrictions gets a reference to the given []CashRestriction and assigns it to the CashRestrictions field.
+// SetCashRestrictions gets a reference to the given []string and assigns it to the CashRestrictions field.
 // Deprecated
-func (o *SnapTradeHoldingsAccountAccountId) SetCashRestrictions(v []CashRestriction) {
+func (o *SnapTradeHoldingsAccountAccountId) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 

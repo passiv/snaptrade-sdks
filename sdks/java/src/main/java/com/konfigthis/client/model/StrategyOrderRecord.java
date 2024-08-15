@@ -362,11 +362,11 @@ public class StrategyOrderRecord {
   }
 
    /**
-   * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+   * Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop
    * @return orderType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss")
+  @ApiModelProperty(value = "Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - Stop")
 
   public String getOrderType() {
     return orderType;

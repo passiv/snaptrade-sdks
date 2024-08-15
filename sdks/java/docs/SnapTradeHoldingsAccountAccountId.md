@@ -16,7 +16,7 @@ A single brokerage account at a financial institution.
 |**institutionName** | **String** | The name of the financial institution that holds the account. |  [optional] |
 |**balance** | [**AccountBalanceNullable**](AccountBalanceNullable.md) |  |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk. |  [optional] |
-|**cashRestrictions** | [**List&lt;CashRestriction&gt;**](CashRestriction.md) | This field is deprecated. |  [optional] |
+|**cashRestrictions** | **List&lt;String&gt;** | This field is deprecated. |  [optional] |
 |**createdDate** | **OffsetDateTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution. |  [optional] |
 
 

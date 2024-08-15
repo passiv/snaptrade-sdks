@@ -16,7 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_balance_nullable import AccountBalanceNullable
-from snaptrade_client.type.cash_restriction import CashRestriction
+from snaptrade_client.type.snap_trade_holdings_account_account_id_cash_restrictions import SnapTradeHoldingsAccountAccountIdCashRestrictions
 from snaptrade_client.type.snap_trade_holdings_account_account_id_meta import SnapTradeHoldingsAccountAccountIdMeta
 
 class RequiredSnapTradeHoldingsAccountAccountId(TypedDict):
@@ -48,8 +48,7 @@ class OptionalSnapTradeHoldingsAccountAccountId(TypedDict, total=False):
     meta: SnapTradeHoldingsAccountAccountIdMeta
 
     # WARNING: This property is deprecated
-    # This field is deprecated.
-    cash_restrictions: typing.List[CashRestriction]
+    cash_restrictions: SnapTradeHoldingsAccountAccountIdCashRestrictions
 
     # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
     created_date: datetime

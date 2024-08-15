@@ -15,10 +15,10 @@ module SnapTrade
     LIMIT = "Limit".freeze
     MARKET = "Market".freeze
     STOP_LIMIT = "StopLimit".freeze
-    STOP_LOSS = "StopLoss".freeze
+    STOP = "Stop".freeze
 
     def self.all_vars
-      @all_vars ||= [LIMIT, MARKET, STOP_LIMIT, STOP_LOSS].freeze
+      @all_vars ||= [LIMIT, MARKET, STOP_LIMIT, STOP].freeze
     end
 
     # Builds the enum from string

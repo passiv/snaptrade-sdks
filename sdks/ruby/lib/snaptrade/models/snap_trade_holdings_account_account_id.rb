@@ -74,7 +74,7 @@ module SnapTrade
         :'institution_name' => :'String',
         :'balance' => :'SnapTradeHoldingsAccountAccountIdBalance',
         :'meta' => :'Hash<String, Object>',
-        :'cash_restrictions' => :'Array<CashRestriction>',
+        :'cash_restrictions' => :'Array<String>',
         :'created_date' => :'Time'
       }
     end

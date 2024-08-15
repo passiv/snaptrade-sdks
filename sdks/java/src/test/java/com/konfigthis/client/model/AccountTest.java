@@ -19,7 +19,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountBalance;
 import com.konfigthis.client.model.AccountSyncStatus;
-import com.konfigthis.client.model.CashRestriction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;

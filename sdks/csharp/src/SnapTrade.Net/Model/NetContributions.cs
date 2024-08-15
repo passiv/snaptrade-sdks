@@ -35,7 +35,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="NetContributions" /> class.
         /// </summary>
-        /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
+        /// <param name="date">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive..</param>
         /// <param name="contributions">contributions.</param>
         /// <param name="currency">currency.</param>
         public NetContributions(DateTime date = default(DateTime), double? contributions = default(double?), string currency = default(string)) : base()
@@ -47,9 +47,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
         /// </summary>
-        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
+        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.</value>
         [DataMember(Name = "date", EmitDefaultValue = false)]
         [JsonConverter(typeof(OpenAPIDateConverter))]
         public DateTime Date { get; set; }

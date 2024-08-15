@@ -16,15 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
-from snaptrade_client.type.cancelled_units import CancelledUnits
-from snaptrade_client.type.filled_units import FilledUnits
-from snaptrade_client.type.open_units import OpenUnits
 from snaptrade_client.type.options_symbol import OptionsSymbol
-from snaptrade_client.type.order_type import OrderType
-from snaptrade_client.type.price import Price
-from snaptrade_client.type.stop_price import StopPrice
-from snaptrade_client.type.time_nullable import TimeNullable
-from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
 class RequiredAccountOrderRecord(TypedDict):
@@ -40,41 +32,53 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     symbol: str
 
+    # Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
     universal_symbol: UniversalSymbol
 
+    # Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
     option_symbol: OptionsSymbol
 
-    # Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+    # The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
     action: str
 
-    total_quantity: UnitsNullable
+    # The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
+    total_quantity: typing.Optional[typing.Union[int, float]]
 
-    open_quantity: OpenUnits
+    # The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
+    open_quantity: typing.Optional[typing.Union[int, float]]
 
-    canceled_quantity: CancelledUnits
+    # The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
+    canceled_quantity: typing.Optional[typing.Union[int, float]]
 
-    filled_quantity: FilledUnits
+    # The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
+    filled_quantity: typing.Optional[typing.Union[int, float]]
 
-    execution_price: Price
+    # The price at which the order was executed.
+    execution_price: typing.Optional[typing.Union[int, float]]
 
-    limit_price: Price
+    # The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+    limit_price: typing.Optional[typing.Union[int, float]]
 
-    stop_price: StopPrice
+    # The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+    stop_price: typing.Optional[typing.Union[int, float]]
 
-    order_type: OrderType
+    # The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
+    order_type: typing.Optional[str]
 
-    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
     time_in_force: str
 
-    # Time
-    time_placed: str
+    # The time the order was placed. This is the time the order was submitted to the brokerage.
+    time_placed: datetime
 
-    time_updated: TimeNullable
+    # The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
+    time_updated: typing.Optional[datetime]
 
-    time_executed: TimeNullable
+    # The time the order was executed in the brokerage system. This value is not always available from the brokerage.
+    time_executed: typing.Optional[datetime]
 
-    # Time
-    expiry_date: str
+    # The time the order expires. This value is not always available from the brokerage.
+    expiry_date: typing.Optional[datetime]
 
 class AccountOrderRecord(RequiredAccountOrderRecord, OptionalAccountOrderRecord):
     pass

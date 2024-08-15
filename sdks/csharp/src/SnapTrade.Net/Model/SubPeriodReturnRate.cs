@@ -35,8 +35,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SubPeriodReturnRate" /> class.
         /// </summary>
-        /// <param name="periodStart">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
-        /// <param name="periodEnd">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format).</param>
+        /// <param name="periodStart">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive..</param>
+        /// <param name="periodEnd">Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive..</param>
         /// <param name="rateOfReturn">The return rate for the given period.</param>
         public SubPeriodReturnRate(DateTime periodStart = default(DateTime), DateTime periodEnd = default(DateTime), double? rateOfReturn = default(double?)) : base()
         {
@@ -47,17 +47,17 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
         /// </summary>
-        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
+        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.</value>
         [DataMember(Name = "periodStart", EmitDefaultValue = false)]
         [JsonConverter(typeof(OpenAPIDateConverter))]
         public DateTime PeriodStart { get; set; }
 
         /// <summary>
-        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+        /// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
         /// </summary>
-        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)</value>
+        /// <value>Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.</value>
         [DataMember(Name = "periodEnd", EmitDefaultValue = false)]
         [JsonConverter(typeof(OpenAPIDateConverter))]
         public DateTime PeriodEnd { get; set; }

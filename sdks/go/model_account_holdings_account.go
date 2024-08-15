@@ -24,7 +24,7 @@ type AccountHoldingsAccount struct {
 	Positions []Position `json:"positions,omitempty"`
 	// List of option positions in the account.
 	OptionPositions []OptionsPosition `json:"option_positions,omitempty"`
-	// List of recent orders in the account, including both pending and executed orders.
+	// List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.
 	Orders []AccountOrderRecord `json:"orders,omitempty"`
 	TotalValue *SnapTradeHoldingsTotalValue `json:"total_value,omitempty"`
 	AdditionalProperties map[string]interface{}

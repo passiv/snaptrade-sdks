@@ -37,7 +37,7 @@ class OptionalAccountHoldingsAccount(TypedDict, total=False):
     # List of option positions in the account.
     option_positions: typing.Optional[typing.List[OptionsPosition]]
 
-    # List of recent orders in the account, including both pending and executed orders.
+    # List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.
     orders: typing.Optional[typing.List[AccountOrderRecord]]
 
     total_value: SnapTradeHoldingsTotalValue

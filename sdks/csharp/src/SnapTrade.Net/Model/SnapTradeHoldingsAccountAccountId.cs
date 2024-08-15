@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution..</param>
-        public SnapTradeHoldingsAccountAccountId(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), AccountBalanceNullable balance = default(AccountBalanceNullable), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<CashRestriction> cashRestrictions = default(List<CashRestriction>), DateTime createdDate = default(DateTime)) : base()
+        public SnapTradeHoldingsAccountAccountId(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), AccountBalanceNullable balance = default(AccountBalanceNullable), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<string> cashRestrictions = default(List<string>), DateTime createdDate = default(DateTime)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -123,7 +123,7 @@ namespace SnapTrade.Net.Model
         /// <value>This field is deprecated.</value>
         [DataMember(Name = "cash_restrictions", EmitDefaultValue = false)]
         [Obsolete]
-        public List<CashRestriction> CashRestrictions { get; set; }
+        public List<string> CashRestrictions { get; set; }
 
         /// <summary>
         /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.

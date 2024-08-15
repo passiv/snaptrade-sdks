@@ -12,10 +12,10 @@ require 'time'
 
 module SnapTrade
   class SubPeriodReturnRate
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     attr_accessor :period_start
 
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     attr_accessor :period_end
 
     # The return rate for the given period

@@ -12,11 +12,11 @@ require 'time'
 
 module SnapTrade
   class Type
-    ALLOCATE_MAX = "ALLOCATE_MAX".freeze
-    RETAIN_MIN = "RETAIN_MIN".freeze
+    READ = "read".freeze
+    TRADE = "trade".freeze
 
     def self.all_vars
-      @all_vars ||= [ALLOCATE_MAX, RETAIN_MIN].freeze
+      @all_vars ||= [READ, TRADE].freeze
     end
 
     # Builds the enum from string

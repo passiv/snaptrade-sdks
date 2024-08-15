@@ -20,7 +20,7 @@ class RequiredNetContributions(TypedDict):
     pass
 
 class OptionalNetContributions(TypedDict, total=False):
-    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+    # Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
     date: date
 
     contributions: typing.Optional[typing.Union[int, float]]

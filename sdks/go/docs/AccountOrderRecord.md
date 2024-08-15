@@ -7,22 +7,22 @@ Name | Type | Description | Notes
 **BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
 **Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
-**UniversalSymbol** | Pointer to [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**OptionSymbol** | Pointer to [**OptionsSymbol**](OptionsSymbol.md) |  | [optional] 
-**Action** | Pointer to **string** | Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE | [optional] 
-**TotalQuantity** | Pointer to **NullableFloat32** |  | [optional] 
-**OpenQuantity** | Pointer to **NullableFloat32** | Trade Units | [optional] 
-**CanceledQuantity** | Pointer to **NullableFloat32** | Trade Units | [optional] 
-**FilledQuantity** | Pointer to **NullableFloat32** | Trade Units | [optional] 
-**ExecutionPrice** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 
-**LimitPrice** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 
-**StopPrice** | Pointer to **NullableFloat32** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] 
-**OrderType** | Pointer to **NullableString** | Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss | [optional] 
-**TimeInForce** | Pointer to **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
-**TimePlaced** | Pointer to **string** | Time | [optional] 
-**TimeUpdated** | Pointer to **NullableString** |  | [optional] 
-**TimeExecuted** | Pointer to **NullableString** |  | [optional] 
-**ExpiryDate** | Pointer to **string** | Time | [optional] 
+**UniversalSymbol** | Pointer to [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
+**OptionSymbol** | Pointer to [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
+**Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
+**TotalQuantity** | Pointer to **NullableFloat32** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
+**OpenQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
+**CanceledQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares. | [optional] 
+**FilledQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that have been filled. Can be a decimal number for fractional shares. | [optional] 
+**ExecutionPrice** | Pointer to **NullableFloat32** | The price at which the order was executed. | [optional] 
+**LimitPrice** | Pointer to **NullableFloat32** | The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**StopPrice** | Pointer to **NullableFloat32** | The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**OrderType** | Pointer to **NullableString** | The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value. | [optional] 
+**TimeInForce** | Pointer to **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  | [optional] 
+**TimePlaced** | Pointer to **time.Time** | The time the order was placed. This is the time the order was submitted to the brokerage. | [optional] 
+**TimeUpdated** | Pointer to **NullableTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
+**ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
 
 ## Methods
 
@@ -120,20 +120,20 @@ HasSymbol returns a boolean if a field has been set.
 
 ### GetUniversalSymbol
 
-`func (o *AccountOrderRecord) GetUniversalSymbol() UniversalSymbol`
+`func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol`
 
 GetUniversalSymbol returns the UniversalSymbol field if non-nil, zero value otherwise.
 
 ### GetUniversalSymbolOk
 
-`func (o *AccountOrderRecord) GetUniversalSymbolOk() (*UniversalSymbol, bool)`
+`func (o *AccountOrderRecord) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool)`
 
 GetUniversalSymbolOk returns a tuple with the UniversalSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUniversalSymbol
 
-`func (o *AccountOrderRecord) SetUniversalSymbol(v UniversalSymbol)`
+`func (o *AccountOrderRecord) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol)`
 
 SetUniversalSymbol sets UniversalSymbol field to given value.
 
@@ -145,20 +145,20 @@ HasUniversalSymbol returns a boolean if a field has been set.
 
 ### GetOptionSymbol
 
-`func (o *AccountOrderRecord) GetOptionSymbol() OptionsSymbol`
+`func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol`
 
 GetOptionSymbol returns the OptionSymbol field if non-nil, zero value otherwise.
 
 ### GetOptionSymbolOk
 
-`func (o *AccountOrderRecord) GetOptionSymbolOk() (*OptionsSymbol, bool)`
+`func (o *AccountOrderRecord) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool)`
 
 GetOptionSymbolOk returns a tuple with the OptionSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOptionSymbol
 
-`func (o *AccountOrderRecord) SetOptionSymbol(v OptionsSymbol)`
+`func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol)`
 
 SetOptionSymbol sets OptionSymbol field to given value.
 
@@ -500,20 +500,20 @@ HasTimeInForce returns a boolean if a field has been set.
 
 ### GetTimePlaced
 
-`func (o *AccountOrderRecord) GetTimePlaced() string`
+`func (o *AccountOrderRecord) GetTimePlaced() time.Time`
 
 GetTimePlaced returns the TimePlaced field if non-nil, zero value otherwise.
 
 ### GetTimePlacedOk
 
-`func (o *AccountOrderRecord) GetTimePlacedOk() (*string, bool)`
+`func (o *AccountOrderRecord) GetTimePlacedOk() (*time.Time, bool)`
 
 GetTimePlacedOk returns a tuple with the TimePlaced field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimePlaced
 
-`func (o *AccountOrderRecord) SetTimePlaced(v string)`
+`func (o *AccountOrderRecord) SetTimePlaced(v time.Time)`
 
 SetTimePlaced sets TimePlaced field to given value.
 
@@ -525,20 +525,20 @@ HasTimePlaced returns a boolean if a field has been set.
 
 ### GetTimeUpdated
 
-`func (o *AccountOrderRecord) GetTimeUpdated() string`
+`func (o *AccountOrderRecord) GetTimeUpdated() time.Time`
 
 GetTimeUpdated returns the TimeUpdated field if non-nil, zero value otherwise.
 
 ### GetTimeUpdatedOk
 
-`func (o *AccountOrderRecord) GetTimeUpdatedOk() (*string, bool)`
+`func (o *AccountOrderRecord) GetTimeUpdatedOk() (*time.Time, bool)`
 
 GetTimeUpdatedOk returns a tuple with the TimeUpdated field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeUpdated
 
-`func (o *AccountOrderRecord) SetTimeUpdated(v string)`
+`func (o *AccountOrderRecord) SetTimeUpdated(v time.Time)`
 
 SetTimeUpdated sets TimeUpdated field to given value.
 
@@ -560,20 +560,20 @@ HasTimeUpdated returns a boolean if a field has been set.
 UnsetTimeUpdated ensures that no value is present for TimeUpdated, not even an explicit nil
 ### GetTimeExecuted
 
-`func (o *AccountOrderRecord) GetTimeExecuted() string`
+`func (o *AccountOrderRecord) GetTimeExecuted() time.Time`
 
 GetTimeExecuted returns the TimeExecuted field if non-nil, zero value otherwise.
 
 ### GetTimeExecutedOk
 
-`func (o *AccountOrderRecord) GetTimeExecutedOk() (*string, bool)`
+`func (o *AccountOrderRecord) GetTimeExecutedOk() (*time.Time, bool)`
 
 GetTimeExecutedOk returns a tuple with the TimeExecuted field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeExecuted
 
-`func (o *AccountOrderRecord) SetTimeExecuted(v string)`
+`func (o *AccountOrderRecord) SetTimeExecuted(v time.Time)`
 
 SetTimeExecuted sets TimeExecuted field to given value.
 
@@ -595,20 +595,20 @@ HasTimeExecuted returns a boolean if a field has been set.
 UnsetTimeExecuted ensures that no value is present for TimeExecuted, not even an explicit nil
 ### GetExpiryDate
 
-`func (o *AccountOrderRecord) GetExpiryDate() string`
+`func (o *AccountOrderRecord) GetExpiryDate() time.Time`
 
 GetExpiryDate returns the ExpiryDate field if non-nil, zero value otherwise.
 
 ### GetExpiryDateOk
 
-`func (o *AccountOrderRecord) GetExpiryDateOk() (*string, bool)`
+`func (o *AccountOrderRecord) GetExpiryDateOk() (*time.Time, bool)`
 
 GetExpiryDateOk returns a tuple with the ExpiryDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiryDate
 
-`func (o *AccountOrderRecord) SetExpiryDate(v string)`
+`func (o *AccountOrderRecord) SetExpiryDate(v time.Time)`
 
 SetExpiryDate sets ExpiryDate field to given value.
 
@@ -618,6 +618,16 @@ SetExpiryDate sets ExpiryDate field to given value.
 
 HasExpiryDate returns a boolean if a field has been set.
 
+### SetExpiryDateNil
+
+`func (o *AccountOrderRecord) SetExpiryDateNil(b bool)`
+
+ SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+
+### UnsetExpiryDate
+`func (o *AccountOrderRecord) UnsetExpiryDate()`
+
+UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

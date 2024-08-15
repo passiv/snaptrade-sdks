@@ -17,7 +17,7 @@ import (
 
 // MonthlyDividends struct for MonthlyDividends
 type MonthlyDividends struct {
-	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format)
+	// Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.
 	Date *string `json:"date,omitempty"`
 	Dividends []DividendAtDate `json:"dividends,omitempty"`
 	AdditionalProperties map[string]interface{}

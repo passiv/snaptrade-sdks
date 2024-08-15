@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Describes a single recent order in an account.
+    /// Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
     /// </summary>
     [DataContract(Name = "AccountOrderRecord")]
     public partial class AccountOrderRecord : IEquatable<AccountOrderRecord>, IValidatableObject
@@ -46,21 +46,21 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
-        /// <param name="action">Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE.</param>
-        /// <param name="totalQuantity">Trade Units. Cannot work with notional value..</param>
-        /// <param name="openQuantity">Trade Units.</param>
-        /// <param name="canceledQuantity">Trade Units.</param>
-        /// <param name="filledQuantity">Trade Units.</param>
-        /// <param name="executionPrice">Trade Price if limit or stop limit order.</param>
-        /// <param name="limitPrice">Trade Price if limit or stop limit order.</param>
-        /// <param name="stopPrice">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
-        /// <param name="orderType">Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss.</param>
-        /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
-        /// <param name="timePlaced">Time.</param>
-        /// <param name="timeUpdated">Time.</param>
-        /// <param name="timeExecuted">Time.</param>
-        /// <param name="expiryDate">Time.</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), UniversalSymbol universalSymbol = default(UniversalSymbol), OptionsSymbol optionSymbol = default(OptionsSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), string timePlaced = default(string), string timeUpdated = default(string), string timeExecuted = default(string), string expiryDate = default(string)) : base()
+        /// <param name="action">The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE .</param>
+        /// <param name="totalQuantity">The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares..</param>
+        /// <param name="openQuantity">The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares..</param>
+        /// <param name="canceledQuantity">The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares..</param>
+        /// <param name="filledQuantity">The number of shares or contracts that have been filled. Can be a decimal number for fractional shares..</param>
+        /// <param name="executionPrice">The price at which the order was executed..</param>
+        /// <param name="limitPrice">The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="stopPrice">The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="orderType">The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value..</param>
+        /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. .</param>
+        /// <param name="timePlaced">The time the order was placed. This is the time the order was submitted to the brokerage..</param>
+        /// <param name="timeUpdated">The time the order was last updated in the brokerage system. This value is not always available from the brokerage..</param>
+        /// <param name="timeExecuted">The time the order was executed in the brokerage system. This value is not always available from the brokerage..</param>
+        /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -103,111 +103,111 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets UniversalSymbol
         /// </summary>
         [DataMember(Name = "universal_symbol", EmitDefaultValue = false)]
-        public UniversalSymbol UniversalSymbol { get; set; }
+        public AccountOrderRecordUniversalSymbol UniversalSymbol { get; set; }
 
         /// <summary>
         /// Gets or Sets OptionSymbol
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
-        public OptionsSymbol OptionSymbol { get; set; }
+        public AccountOrderRecordOptionSymbol OptionSymbol { get; set; }
 
         /// <summary>
-        /// Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+        /// The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
         /// </summary>
-        /// <value>Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE</value>
+        /// <value>The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE </value>
         [DataMember(Name = "action", EmitDefaultValue = false)]
         public string _Action { get; set; }
 
         /// <summary>
-        /// Trade Units. Cannot work with notional value.
+        /// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
         /// </summary>
-        /// <value>Trade Units. Cannot work with notional value.</value>
+        /// <value>The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "total_quantity", EmitDefaultValue = true)]
         public double? TotalQuantity { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "open_quantity", EmitDefaultValue = true)]
         public double? OpenQuantity { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "canceled_quantity", EmitDefaultValue = true)]
         public double? CanceledQuantity { get; set; }
 
         /// <summary>
-        /// Trade Units
+        /// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
         /// </summary>
-        /// <value>Trade Units</value>
+        /// <value>The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.</value>
         [DataMember(Name = "filled_quantity", EmitDefaultValue = true)]
         public double? FilledQuantity { get; set; }
 
         /// <summary>
-        /// Trade Price if limit or stop limit order
+        /// The price at which the order was executed.
         /// </summary>
-        /// <value>Trade Price if limit or stop limit order</value>
+        /// <value>The price at which the order was executed.</value>
         [DataMember(Name = "execution_price", EmitDefaultValue = true)]
         public double? ExecutionPrice { get; set; }
 
         /// <summary>
-        /// Trade Price if limit or stop limit order
+        /// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
         /// </summary>
-        /// <value>Trade Price if limit or stop limit order</value>
+        /// <value>The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = true)]
         public double? LimitPrice { get; set; }
 
         /// <summary>
-        /// Stop Price. If stop loss or stop limit order, the price to trigger the stop
+        /// The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
         /// </summary>
-        /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
+        /// <value>The stop price is the price at which a stop order is triggered. Should only apply to &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public double? StopPrice { get; set; }
 
         /// <summary>
-        /// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+        /// The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value.
         /// </summary>
-        /// <value>Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss</value>
+        /// <value>The type of order placed. The most common values are &#x60;Market&#x60;, &#x60;Limit&#x60;, &#x60;Stop&#x60;, and &#x60;StopLimit&#x60;. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage&#39;s order type value.</value>
         [DataMember(Name = "order_type", EmitDefaultValue = true)]
         public string OrderType { get; set; }
 
         /// <summary>
-        /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+        /// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. 
         /// </summary>
-        /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date </value>
+        /// <value>The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage&#39;s time in force value.   - &#x60;Day&#x60; - Day. The order is valid only for the trading day on which it is placed.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. </value>
         [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
         public string TimeInForce { get; set; }
 
         /// <summary>
-        /// Time
+        /// The time the order was placed. This is the time the order was submitted to the brokerage.
         /// </summary>
-        /// <value>Time</value>
+        /// <value>The time the order was placed. This is the time the order was submitted to the brokerage.</value>
         [DataMember(Name = "time_placed", EmitDefaultValue = false)]
-        public string TimePlaced { get; set; }
+        public DateTime TimePlaced { get; set; }
 
         /// <summary>
-        /// Time
+        /// The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
         /// </summary>
-        /// <value>Time</value>
+        /// <value>The time the order was last updated in the brokerage system. This value is not always available from the brokerage.</value>
         [DataMember(Name = "time_updated", EmitDefaultValue = true)]
-        public string TimeUpdated { get; set; }
+        public DateTime? TimeUpdated { get; set; }
 
         /// <summary>
-        /// Time
+        /// The time the order was executed in the brokerage system. This value is not always available from the brokerage.
         /// </summary>
-        /// <value>Time</value>
+        /// <value>The time the order was executed in the brokerage system. This value is not always available from the brokerage.</value>
         [DataMember(Name = "time_executed", EmitDefaultValue = true)]
-        public string TimeExecuted { get; set; }
+        public DateTime? TimeExecuted { get; set; }
 
         /// <summary>
-        /// Time
+        /// The time the order expires. This value is not always available from the brokerage.
         /// </summary>
-        /// <value>Time</value>
-        [DataMember(Name = "expiry_date", EmitDefaultValue = false)]
-        public string ExpiryDate { get; set; }
+        /// <value>The time the order expires. This value is not always available from the brokerage.</value>
+        [DataMember(Name = "expiry_date", EmitDefaultValue = true)]
+        public DateTime? ExpiryDate { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties

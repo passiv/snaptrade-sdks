@@ -13,9 +13,10 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// AccountOrderRecord Describes a single recent order in an account.
+// AccountOrderRecord Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
 type AccountOrderRecord struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
@@ -23,33 +24,36 @@ type AccountOrderRecord struct {
 	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
 	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
-	UniversalSymbol *UniversalSymbol `json:"universal_symbol,omitempty"`
-	OptionSymbol *OptionsSymbol `json:"option_symbol,omitempty"`
-	// Trade Action potential values include (but are not limited to) - BUY - SELL - BUY_COVER - SELL_SHORT - BUY_OPEN - BUY_CLOSE - SELL_OPEN - SELL_CLOSE
+	UniversalSymbol *AccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
+	OptionSymbol *AccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
+	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
+	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
 	TotalQuantity NullableFloat32 `json:"total_quantity,omitempty"`
-	// Trade Units
+	// The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
 	OpenQuantity NullableFloat32 `json:"open_quantity,omitempty"`
-	// Trade Units
+	// The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
 	CanceledQuantity NullableFloat32 `json:"canceled_quantity,omitempty"`
-	// Trade Units
+	// The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
 	FilledQuantity NullableFloat32 `json:"filled_quantity,omitempty"`
-	// Trade Price if limit or stop limit order
+	// The price at which the order was executed.
 	ExecutionPrice NullableFloat32 `json:"execution_price,omitempty"`
-	// Trade Price if limit or stop limit order
+	// The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
 	LimitPrice NullableFloat32 `json:"limit_price,omitempty"`
-	// Stop Price. If stop loss or stop limit order, the price to trigger the stop
+	// The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
 	StopPrice NullableFloat32 `json:"stop_price,omitempty"`
-	// Order Type potential values include (but are not limited to) - Limit - Market - StopLimit - StopLoss
+	// The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
 	OrderType NullableString `json:"order_type,omitempty"`
-	// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
 	TimeInForce *string `json:"time_in_force,omitempty"`
-	// Time
-	TimePlaced *string `json:"time_placed,omitempty"`
-	TimeUpdated NullableString `json:"time_updated,omitempty"`
-	TimeExecuted NullableString `json:"time_executed,omitempty"`
-	// Time
-	ExpiryDate *string `json:"expiry_date,omitempty"`
+	// The time the order was placed. This is the time the order was submitted to the brokerage.
+	TimePlaced *time.Time `json:"time_placed,omitempty"`
+	// The time the order was last updated in the brokerage system. This value is not always available from the brokerage.
+	TimeUpdated NullableTime `json:"time_updated,omitempty"`
+	// The time the order was executed in the brokerage system. This value is not always available from the brokerage.
+	TimeExecuted NullableTime `json:"time_executed,omitempty"`
+	// The time the order expires. This value is not always available from the brokerage.
+	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -172,9 +176,9 @@ func (o *AccountOrderRecord) SetSymbol(v string) {
 }
 
 // GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise.
-func (o *AccountOrderRecord) GetUniversalSymbol() UniversalSymbol {
+func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol {
 	if o == nil || isNil(o.UniversalSymbol) {
-		var ret UniversalSymbol
+		var ret AccountOrderRecordUniversalSymbol
 		return ret
 	}
 	return *o.UniversalSymbol
@@ -182,7 +186,7 @@ func (o *AccountOrderRecord) GetUniversalSymbol() UniversalSymbol {
 
 // GetUniversalSymbolOk returns a tuple with the UniversalSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecord) GetUniversalSymbolOk() (*UniversalSymbol, bool) {
+func (o *AccountOrderRecord) GetUniversalSymbolOk() (*AccountOrderRecordUniversalSymbol, bool) {
 	if o == nil || isNil(o.UniversalSymbol) {
     return nil, false
 	}
@@ -198,15 +202,15 @@ func (o *AccountOrderRecord) HasUniversalSymbol() bool {
 	return false
 }
 
-// SetUniversalSymbol gets a reference to the given UniversalSymbol and assigns it to the UniversalSymbol field.
-func (o *AccountOrderRecord) SetUniversalSymbol(v UniversalSymbol) {
+// SetUniversalSymbol gets a reference to the given AccountOrderRecordUniversalSymbol and assigns it to the UniversalSymbol field.
+func (o *AccountOrderRecord) SetUniversalSymbol(v AccountOrderRecordUniversalSymbol) {
 	o.UniversalSymbol = &v
 }
 
 // GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise.
-func (o *AccountOrderRecord) GetOptionSymbol() OptionsSymbol {
+func (o *AccountOrderRecord) GetOptionSymbol() AccountOrderRecordOptionSymbol {
 	if o == nil || isNil(o.OptionSymbol) {
-		var ret OptionsSymbol
+		var ret AccountOrderRecordOptionSymbol
 		return ret
 	}
 	return *o.OptionSymbol
@@ -214,7 +218,7 @@ func (o *AccountOrderRecord) GetOptionSymbol() OptionsSymbol {
 
 // GetOptionSymbolOk returns a tuple with the OptionSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecord) GetOptionSymbolOk() (*OptionsSymbol, bool) {
+func (o *AccountOrderRecord) GetOptionSymbolOk() (*AccountOrderRecordOptionSymbol, bool) {
 	if o == nil || isNil(o.OptionSymbol) {
     return nil, false
 	}
@@ -230,8 +234,8 @@ func (o *AccountOrderRecord) HasOptionSymbol() bool {
 	return false
 }
 
-// SetOptionSymbol gets a reference to the given OptionsSymbol and assigns it to the OptionSymbol field.
-func (o *AccountOrderRecord) SetOptionSymbol(v OptionsSymbol) {
+// SetOptionSymbol gets a reference to the given AccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
+func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
 	o.OptionSymbol = &v
 }
 
@@ -636,9 +640,9 @@ func (o *AccountOrderRecord) SetTimeInForce(v string) {
 }
 
 // GetTimePlaced returns the TimePlaced field value if set, zero value otherwise.
-func (o *AccountOrderRecord) GetTimePlaced() string {
+func (o *AccountOrderRecord) GetTimePlaced() time.Time {
 	if o == nil || isNil(o.TimePlaced) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.TimePlaced
@@ -646,7 +650,7 @@ func (o *AccountOrderRecord) GetTimePlaced() string {
 
 // GetTimePlacedOk returns a tuple with the TimePlaced field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecord) GetTimePlacedOk() (*string, bool) {
+func (o *AccountOrderRecord) GetTimePlacedOk() (*time.Time, bool) {
 	if o == nil || isNil(o.TimePlaced) {
     return nil, false
 	}
@@ -662,15 +666,15 @@ func (o *AccountOrderRecord) HasTimePlaced() bool {
 	return false
 }
 
-// SetTimePlaced gets a reference to the given string and assigns it to the TimePlaced field.
-func (o *AccountOrderRecord) SetTimePlaced(v string) {
+// SetTimePlaced gets a reference to the given time.Time and assigns it to the TimePlaced field.
+func (o *AccountOrderRecord) SetTimePlaced(v time.Time) {
 	o.TimePlaced = &v
 }
 
 // GetTimeUpdated returns the TimeUpdated field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetTimeUpdated() string {
+func (o *AccountOrderRecord) GetTimeUpdated() time.Time {
 	if o == nil || isNil(o.TimeUpdated.Get()) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.TimeUpdated.Get()
@@ -679,7 +683,7 @@ func (o *AccountOrderRecord) GetTimeUpdated() string {
 // GetTimeUpdatedOk returns a tuple with the TimeUpdated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetTimeUpdatedOk() (*string, bool) {
+func (o *AccountOrderRecord) GetTimeUpdatedOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -695,8 +699,8 @@ func (o *AccountOrderRecord) HasTimeUpdated() bool {
 	return false
 }
 
-// SetTimeUpdated gets a reference to the given NullableString and assigns it to the TimeUpdated field.
-func (o *AccountOrderRecord) SetTimeUpdated(v string) {
+// SetTimeUpdated gets a reference to the given NullableTime and assigns it to the TimeUpdated field.
+func (o *AccountOrderRecord) SetTimeUpdated(v time.Time) {
 	o.TimeUpdated.Set(&v)
 }
 // SetTimeUpdatedNil sets the value for TimeUpdated to be an explicit nil
@@ -710,9 +714,9 @@ func (o *AccountOrderRecord) UnsetTimeUpdated() {
 }
 
 // GetTimeExecuted returns the TimeExecuted field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *AccountOrderRecord) GetTimeExecuted() string {
+func (o *AccountOrderRecord) GetTimeExecuted() time.Time {
 	if o == nil || isNil(o.TimeExecuted.Get()) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.TimeExecuted.Get()
@@ -721,7 +725,7 @@ func (o *AccountOrderRecord) GetTimeExecuted() string {
 // GetTimeExecutedOk returns a tuple with the TimeExecuted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AccountOrderRecord) GetTimeExecutedOk() (*string, bool) {
+func (o *AccountOrderRecord) GetTimeExecutedOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -737,8 +741,8 @@ func (o *AccountOrderRecord) HasTimeExecuted() bool {
 	return false
 }
 
-// SetTimeExecuted gets a reference to the given NullableString and assigns it to the TimeExecuted field.
-func (o *AccountOrderRecord) SetTimeExecuted(v string) {
+// SetTimeExecuted gets a reference to the given NullableTime and assigns it to the TimeExecuted field.
+func (o *AccountOrderRecord) SetTimeExecuted(v time.Time) {
 	o.TimeExecuted.Set(&v)
 }
 // SetTimeExecutedNil sets the value for TimeExecuted to be an explicit nil
@@ -751,36 +755,46 @@ func (o *AccountOrderRecord) UnsetTimeExecuted() {
 	o.TimeExecuted.Unset()
 }
 
-// GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise.
-func (o *AccountOrderRecord) GetExpiryDate() string {
-	if o == nil || isNil(o.ExpiryDate) {
-		var ret string
+// GetExpiryDate returns the ExpiryDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecord) GetExpiryDate() time.Time {
+	if o == nil || isNil(o.ExpiryDate.Get()) {
+		var ret time.Time
 		return ret
 	}
-	return *o.ExpiryDate
+	return *o.ExpiryDate.Get()
 }
 
 // GetExpiryDateOk returns a tuple with the ExpiryDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecord) GetExpiryDateOk() (*string, bool) {
-	if o == nil || isNil(o.ExpiryDate) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecord) GetExpiryDateOk() (*time.Time, bool) {
+	if o == nil {
     return nil, false
 	}
-	return o.ExpiryDate, true
+	return o.ExpiryDate.Get(), o.ExpiryDate.IsSet()
 }
 
 // HasExpiryDate returns a boolean if a field has been set.
 func (o *AccountOrderRecord) HasExpiryDate() bool {
-	if o != nil && !isNil(o.ExpiryDate) {
+	if o != nil && o.ExpiryDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiryDate gets a reference to the given string and assigns it to the ExpiryDate field.
-func (o *AccountOrderRecord) SetExpiryDate(v string) {
-	o.ExpiryDate = &v
+// SetExpiryDate gets a reference to the given NullableTime and assigns it to the ExpiryDate field.
+func (o *AccountOrderRecord) SetExpiryDate(v time.Time) {
+	o.ExpiryDate.Set(&v)
+}
+// SetExpiryDateNil sets the value for ExpiryDate to be an explicit nil
+func (o *AccountOrderRecord) SetExpiryDateNil() {
+	o.ExpiryDate.Set(nil)
+}
+
+// UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
+func (o *AccountOrderRecord) UnsetExpiryDate() {
+	o.ExpiryDate.Unset()
 }
 
 func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
@@ -839,8 +853,8 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if o.TimeExecuted.IsSet() {
 		toSerialize["time_executed"] = o.TimeExecuted.Get()
 	}
-	if !isNil(o.ExpiryDate) {
-		toSerialize["expiry_date"] = o.ExpiryDate
+	if o.ExpiryDate.IsSet() {
+		toSerialize["expiry_date"] = o.ExpiryDate.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {

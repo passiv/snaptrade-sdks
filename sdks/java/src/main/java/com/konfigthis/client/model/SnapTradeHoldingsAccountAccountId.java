@@ -20,7 +20,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountBalanceNullable;
-import com.konfigthis.client.model.CashRestriction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -93,7 +92,7 @@ public class SnapTradeHoldingsAccountAccountId {
 
   public static final String SERIALIZED_NAME_CASH_RESTRICTIONS = "cash_restrictions";
   @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
-  private List<CashRestriction> cashRestrictions = null;
+  private List<String> cashRestrictions = null;
 
   public static final String SERIALIZED_NAME_CREATED_DATE = "created_date";
   @SerializedName(SERIALIZED_NAME_CREATED_DATE)
@@ -346,7 +345,7 @@ public class SnapTradeHoldingsAccountAccountId {
   }
 
 
-  public SnapTradeHoldingsAccountAccountId cashRestrictions(List<CashRestriction> cashRestrictions) {
+  public SnapTradeHoldingsAccountAccountId cashRestrictions(List<String> cashRestrictions) {
     
     
     
@@ -355,7 +354,7 @@ public class SnapTradeHoldingsAccountAccountId {
     return this;
   }
 
-  public SnapTradeHoldingsAccountAccountId addCashRestrictionsItem(CashRestriction cashRestrictionsItem) {
+  public SnapTradeHoldingsAccountAccountId addCashRestrictionsItem(String cashRestrictionsItem) {
     if (this.cashRestrictions == null) {
       this.cashRestrictions = new ArrayList<>();
     }
@@ -370,14 +369,14 @@ public class SnapTradeHoldingsAccountAccountId {
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "This field is deprecated.")
+  @ApiModelProperty(example = "[]", value = "This field is deprecated.")
 
-  public List<CashRestriction> getCashRestrictions() {
+  public List<String> getCashRestrictions() {
     return cashRestrictions;
   }
 
 
-  public void setCashRestrictions(List<CashRestriction> cashRestrictions) {
+  public void setCashRestrictions(List<String> cashRestrictions) {
     
     
     
@@ -583,19 +582,9 @@ public class SnapTradeHoldingsAccountAccountId {
       if (jsonObj.get("balance") != null && !jsonObj.get("balance").isJsonNull()) {
         AccountBalanceNullable.validateJsonObject(jsonObj.getAsJsonObject("balance"));
       }
-      if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonNull()) {
-        JsonArray jsonArraycashRestrictions = jsonObj.getAsJsonArray("cash_restrictions");
-        if (jsonArraycashRestrictions != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("cash_restrictions").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
-          }
-
-          // validate the optional field `cash_restrictions` (array)
-          for (int i = 0; i < jsonArraycashRestrictions.size(); i++) {
-            CashRestriction.validateJsonObject(jsonArraycashRestrictions.get(i).getAsJsonObject());
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
       }
   }
 

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **InstitutionName** | Pointer to **string** |  | [optional] 
 **CreatedDate** | Pointer to **string** |  | [optional] 
 **Meta** | Pointer to **map[string]interface{}** |  | [optional] 
-**CashRestrictions** | Pointer to [**[]CashRestriction**](CashRestriction.md) |  | [optional] 
+**CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
 **SyncStatus** | Pointer to [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 **Balance** | Pointer to [**AccountBalance**](AccountBalance.md) |  | [optional] 
 
@@ -237,20 +237,20 @@ HasMeta returns a boolean if a field has been set.
 
 ### GetCashRestrictions
 
-`func (o *Account) GetCashRestrictions() []CashRestriction`
+`func (o *Account) GetCashRestrictions() []string`
 
 GetCashRestrictions returns the CashRestrictions field if non-nil, zero value otherwise.
 
 ### GetCashRestrictionsOk
 
-`func (o *Account) GetCashRestrictionsOk() (*[]CashRestriction, bool)`
+`func (o *Account) GetCashRestrictionsOk() (*[]string, bool)`
 
 GetCashRestrictionsOk returns a tuple with the CashRestrictions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCashRestrictions
 
-`func (o *Account) SetCashRestrictions(v []CashRestriction)`
+`func (o *Account) SetCashRestrictions(v []string)`
 
 SetCashRestrictions sets CashRestrictions field to given value.
 
