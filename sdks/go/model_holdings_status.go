@@ -13,13 +13,15 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// HoldingsStatus Status of account holdings sync
+// HoldingsStatus Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established. 2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage. 3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
 type HoldingsStatus struct {
+	// Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
 	InitialSyncCompleted *bool `json:"initial_sync_completed,omitempty"`
-	// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
-	LastSuccessfulSync NullableString `json:"last_successful_sync,omitempty"`
+	// The last time holdings were successfully synced by SnapTrade.
+	LastSuccessfulSync *time.Time `json:"last_successful_sync,omitempty"`
 }
 
 // NewHoldingsStatus instantiates a new HoldingsStatus object
@@ -71,46 +73,36 @@ func (o *HoldingsStatus) SetInitialSyncCompleted(v bool) {
 	o.InitialSyncCompleted = &v
 }
 
-// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *HoldingsStatus) GetLastSuccessfulSync() string {
-	if o == nil || isNil(o.LastSuccessfulSync.Get()) {
-		var ret string
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+func (o *HoldingsStatus) GetLastSuccessfulSync() time.Time {
+	if o == nil || isNil(o.LastSuccessfulSync) {
+		var ret time.Time
 		return ret
 	}
-	return *o.LastSuccessfulSync.Get()
+	return *o.LastSuccessfulSync
 }
 
 // GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *HoldingsStatus) GetLastSuccessfulSyncOk() (*string, bool) {
-	if o == nil {
+func (o *HoldingsStatus) GetLastSuccessfulSyncOk() (*time.Time, bool) {
+	if o == nil || isNil(o.LastSuccessfulSync) {
     return nil, false
 	}
-	return o.LastSuccessfulSync.Get(), o.LastSuccessfulSync.IsSet()
+	return o.LastSuccessfulSync, true
 }
 
 // HasLastSuccessfulSync returns a boolean if a field has been set.
 func (o *HoldingsStatus) HasLastSuccessfulSync() bool {
-	if o != nil && o.LastSuccessfulSync.IsSet() {
+	if o != nil && !isNil(o.LastSuccessfulSync) {
 		return true
 	}
 
 	return false
 }
 
-// SetLastSuccessfulSync gets a reference to the given NullableString and assigns it to the LastSuccessfulSync field.
-func (o *HoldingsStatus) SetLastSuccessfulSync(v string) {
-	o.LastSuccessfulSync.Set(&v)
-}
-// SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
-func (o *HoldingsStatus) SetLastSuccessfulSyncNil() {
-	o.LastSuccessfulSync.Set(nil)
-}
-
-// UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
-func (o *HoldingsStatus) UnsetLastSuccessfulSync() {
-	o.LastSuccessfulSync.Unset()
+// SetLastSuccessfulSync gets a reference to the given time.Time and assigns it to the LastSuccessfulSync field.
+func (o *HoldingsStatus) SetLastSuccessfulSync(v time.Time) {
+	o.LastSuccessfulSync = &v
 }
 
 func (o HoldingsStatus) MarshalJSON() ([]byte, error) {
@@ -118,8 +110,8 @@ func (o HoldingsStatus) MarshalJSON() ([]byte, error) {
 	if !isNil(o.InitialSyncCompleted) {
 		toSerialize["initial_sync_completed"] = o.InitialSyncCompleted
 	}
-	if o.LastSuccessfulSync.IsSet() {
-		toSerialize["last_successful_sync"] = o.LastSuccessfulSync.Get()
+	if !isNil(o.LastSuccessfulSync) {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
 	}
 	return json.Marshal(toSerialize)
 }

@@ -6,8 +6,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |------------- | ------------- | -------------|
 | [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
-| [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders |
+| [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Get account detail |
+| [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account recent orders |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
@@ -119,7 +119,7 @@ public class Example {
 
 List account balances
 
-A list of account balances for the specified account (one per currency that the account holds).
+Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -145,7 +145,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get balances.
+    UUID accountId = UUID.randomUUID();
     try {
       List<Balance> result = client
               .accountInformation
@@ -189,7 +189,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to get balances. | |
+| **accountId** | **UUID**|  | |
 
 ### Return type
 
@@ -202,21 +202,21 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of all balances in investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 <a name="getUserAccountDetails"></a>
 # **getUserAccountDetails**
 > Account getUserAccountDetails(userId, userSecret, accountId).execute();
 
-Return details of a specific investment account
+Get account detail
 
-Returns an account object with details for the specified account, including the total account market value. 
+Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -242,7 +242,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get detail of.
+    UUID accountId = UUID.randomUUID();
     try {
       Account result = client
               .accountInformation
@@ -297,7 +297,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to get detail of. | |
+| **accountId** | **UUID**|  | |
 
 ### Return type
 
@@ -315,16 +315,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Details of a specific investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 <a name="getUserAccountOrders"></a>
 # **getUserAccountOrders**
 > List&lt;AccountOrderRecord&gt; getUserAccountOrders(userId, userSecret, accountId).state(state).days(days).execute();
 
-List account orders
+List account recent orders
 
-Fetch all recent orders from a user&#39;s account.
+Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -350,7 +350,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get orders.
+    UUID accountId = UUID.randomUUID();
     String state = "all"; // defaults value is set to \"all\"
     Integer days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
     try {
@@ -400,7 +400,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to get orders. | |
+| **accountId** | **UUID**|  | |
 | **state** | **String**| defaults value is set to \&quot;all\&quot; | [optional] [enum: all, open, executed] |
 | **days** | **Integer**| Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. | [optional] |
 
@@ -420,7 +420,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List all orders in account |  -  |
+| **200** | OK |  -  |
 
 <a name="getUserAccountPositions"></a>
 # **getUserAccountPositions**
@@ -428,7 +428,7 @@ public class Example {
 
 List account positions
 
-Returns a list of positions in the specified account.
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -454,7 +454,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get positions.
+    UUID accountId = UUID.randomUUID();
     try {
       List<Position> result = client
               .accountInformation
@@ -498,7 +498,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to get positions. | |
+| **accountId** | **UUID**|  | |
 
 ### Return type
 
@@ -511,12 +511,12 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List all positions in investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 <a name="getUserHoldings"></a>
@@ -525,7 +525,7 @@ public class Example {
 
 List account holdings
 
-Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -628,7 +628,7 @@ public class Example {
 
 List accounts
 
-Get a list of all Account objects for the authenticated SnapTrade user.
+Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -714,7 +714,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all Account objects for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="updateUserAccount"></a>

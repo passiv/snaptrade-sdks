@@ -14,7 +14,7 @@ import { AccountBalance } from './account-balance';
 import { AccountSyncStatus } from './account-sync-status';
 
 /**
- * SnapTradeUser Investment Account
+ * A single brokerage account at a financial institution.
  * @export
  * @interface Account
  */
@@ -22,51 +22,53 @@ export interface Account {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
      * @type {string}
      * @memberof Account
      */
     'id'?: string;
     /**
-     * 
+     * Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
      * @type {string}
      * @memberof Account
      */
     'brokerage_authorization'?: string;
     /**
-     * 
+     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
      * @type {string}
      * @memberof Account
+     * @deprecated
      */
     'portfolio_group'?: string;
     /**
-     * 
+     * A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
      * @type {string}
      * @memberof Account
      */
-    'name'?: string;
+    'name'?: string | null;
     /**
-     * 
+     * The account number assigned by the financial institution.
      * @type {string}
      * @memberof Account
      */
     'number'?: string;
     /**
-     * 
+     * The name of the financial institution that holds the account.
      * @type {string}
      * @memberof Account
      */
     'institution_name'?: string;
     /**
-     * 
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
      * @type {string}
      * @memberof Account
      */
     'created_date'?: string;
     /**
-     * 
+     * Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there\'s no standard format for this data. Please use at your own risk.
      * @type {{ [key: string]: any; }}
      * @memberof Account
+     * @deprecated
      */
     'meta'?: { [key: string]: any; };
     /**

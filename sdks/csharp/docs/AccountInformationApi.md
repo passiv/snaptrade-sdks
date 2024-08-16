@@ -6,8 +6,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**GetAllUserHoldings**](AccountInformationApi.md#getalluserholdings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**GetUserAccountBalance**](AccountInformationApi.md#getuseraccountbalance) | **GET** /accounts/{accountId}/balances | List account balances |
-| [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Return details of a specific investment account |
-| [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account orders |
+| [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail |
+| [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account recent orders |
 | [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
@@ -115,7 +115,7 @@ catch (ApiException e)
 
 
 
-A list of account balances for the specified account (one per currency that the account holds).
+Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -139,7 +139,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get balances.
+            var accountId = "accountId_example";
             
             try
             {
@@ -190,7 +190,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to get balances. |  |
+| **accountId** | **string** |  |  |
 
 ### Return type
 
@@ -200,7 +200,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of all balances in investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -210,7 +210,7 @@ catch (ApiException e)
 
 
 
-Returns an account object with details for the specified account, including the total account market value. 
+Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -234,11 +234,11 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get detail of.
+            var accountId = "accountId_example";
             
             try
             {
-                // Return details of a specific investment account
+                // Get account detail
                 Account result = client.AccountInformation.GetUserAccountDetails(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -265,7 +265,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Return details of a specific investment account
+    // Get account detail
     ApiResponse<Account> response = apiInstance.GetUserAccountDetailsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -285,7 +285,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to get detail of. |  |
+| **accountId** | **string** |  |  |
 
 ### Return type
 
@@ -295,7 +295,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Details of a specific investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -305,7 +305,7 @@ catch (ApiException e)
 
 
 
-Fetch all recent orders from a user's account.
+Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -329,13 +329,13 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get orders.
+            var accountId = "accountId_example";
             var state = "all"; // defaults value is set to \"all\" (optional) 
             var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional) 
             
             try
             {
-                // List account orders
+                // List account recent orders
                 List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state, days);
                 Console.WriteLine(result);
             }
@@ -362,7 +362,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List account orders
+    // List account recent orders
     ApiResponse<List<AccountOrderRecord>> response = apiInstance.GetUserAccountOrdersWithHttpInfo(userId, userSecret, accountId, state, days);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -382,7 +382,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to get orders. |  |
+| **accountId** | **string** |  |  |
 | **state** | **string** | defaults value is set to \&quot;all\&quot; | [optional]  |
 | **days** | **int?** | Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. | [optional]  |
 
@@ -394,7 +394,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List all orders in account |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -404,7 +404,7 @@ catch (ApiException e)
 
 
 
-Returns a list of positions in the specified account.
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -428,7 +428,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get positions.
+            var accountId = "accountId_example";
             
             try
             {
@@ -479,7 +479,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to get positions. |  |
+| **accountId** | **string** |  |  |
 
 ### Return type
 
@@ -489,7 +489,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List all positions in investment account |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -499,7 +499,7 @@ catch (ApiException e)
 
 
 
-Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -596,7 +596,7 @@ catch (ApiException e)
 
 
 
-Get a list of all Account objects for the authenticated SnapTrade user.
+Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -679,7 +679,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all Account objects for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

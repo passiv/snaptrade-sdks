@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="AccountBalance" /> class.
         /// </summary>
         /// <param name="total">total.</param>
-        public AccountBalance(AmountNullable total = default(AmountNullable))
+        public AccountBalance(AccountBalanceTotal total = default(AccountBalanceTotal))
         {
             this.Total = total;
         }
@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Total
         /// </summary>
         [DataMember(Name = "total", EmitDefaultValue = true)]
-        public AmountNullable Total { get; set; }
+        public AccountBalanceTotal Total { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

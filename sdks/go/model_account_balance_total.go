@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AccountBalanceTotal Total value of this account (includes cash, equity, fixed income, etc)
+// AccountBalanceTotal Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
 type AccountBalanceTotal struct {
 	// Total value denominated in the currency of the `currency` field.
 	Amount *float32 `json:"amount,omitempty"`

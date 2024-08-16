@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InitialSyncCompleted** | Pointer to **bool** |  | [optional] 
-**LastSuccessfulSync** | Pointer to **NullableString** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
+**InitialSyncCompleted** | Pointer to **bool** | Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete. | [optional] 
+**LastSuccessfulSync** | Pointer to [**time.Time**](time.Time.md) | The last time holdings were successfully synced by SnapTrade. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasInitialSyncCompleted returns a boolean if a field has been set.
 
 ### GetLastSuccessfulSync
 
-`func (o *HoldingsStatus) GetLastSuccessfulSync() string`
+`func (o *HoldingsStatus) GetLastSuccessfulSync() time.Time`
 
 GetLastSuccessfulSync returns the LastSuccessfulSync field if non-nil, zero value otherwise.
 
 ### GetLastSuccessfulSyncOk
 
-`func (o *HoldingsStatus) GetLastSuccessfulSyncOk() (*string, bool)`
+`func (o *HoldingsStatus) GetLastSuccessfulSyncOk() (*time.Time, bool)`
 
 GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastSuccessfulSync
 
-`func (o *HoldingsStatus) SetLastSuccessfulSync(v string)`
+`func (o *HoldingsStatus) SetLastSuccessfulSync(v time.Time)`
 
 SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
 
@@ -76,16 +76,6 @@ SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
 
 HasLastSuccessfulSync returns a boolean if a field has been set.
 
-### SetLastSuccessfulSyncNil
-
-`func (o *HoldingsStatus) SetLastSuccessfulSyncNil(b bool)`
-
- SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
-
-### UnsetLastSuccessfulSync
-`func (o *HoldingsStatus) UnsetLastSuccessfulSync()`
-
-UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

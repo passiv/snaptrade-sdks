@@ -21,8 +21,10 @@ class RequiredHoldingsStatus(TypedDict):
     pass
 
 class OptionalHoldingsStatus(TypedDict, total=False):
+    # Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
     initial_sync_completed: bool
 
+    # The last time holdings were successfully synced by SnapTrade.
     last_successful_sync: HoldingsSyncStatusDate
 
 class HoldingsStatus(RequiredHoldingsStatus, OptionalHoldingsStatus):

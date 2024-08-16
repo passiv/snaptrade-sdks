@@ -25,6 +25,7 @@ from snaptrade_client import schemas  # noqa: F401
 
 
 class HoldingsSyncStatusDate(
+    schemas.DateTimeBase,
     schemas.StrBase,
     schemas.NoneBase,
     schemas.Schema,
@@ -38,12 +39,12 @@ class HoldingsSyncStatusDate(
 
 
     class MetaOapg:
-        format = 'datetime'
+        format = 'date-time'
 
 
     def __new__(
         cls,
-        *args: typing.Union[None, str, ],
+        *args: typing.Union[None, str, datetime, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'HoldingsSyncStatusDate':
         return super().__new__(

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
+**Currency** | Pointer to [**BalanceCurrency**](BalanceCurrency.md) |  | [optional] 
 **Cash** | Pointer to **NullableFloat32** | The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field. | [optional] 
 **BuyingPower** | Pointer to **NullableFloat32** | Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages. | [optional] 
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetCurrency
 
-`func (o *Balance) GetCurrency() Currency`
+`func (o *Balance) GetCurrency() BalanceCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *Balance) GetCurrencyOk() (*Currency, bool)`
+`func (o *Balance) GetCurrencyOk() (*BalanceCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *Balance) SetCurrency(v Currency)`
+`func (o *Balance) SetCurrency(v BalanceCurrency)`
 
 SetCurrency sets Currency field to given value.
 

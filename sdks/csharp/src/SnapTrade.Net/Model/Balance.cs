@@ -38,7 +38,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currency">currency.</param>
         /// <param name="cash">The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field..</param>
         /// <param name="buyingPower">Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages..</param>
-        public Balance(Currency currency = default(Currency), double? cash = default(double?), double? buyingPower = default(double?)) : base()
+        public Balance(BalanceCurrency currency = default(BalanceCurrency), double? cash = default(double?), double? buyingPower = default(double?)) : base()
         {
             this.Currency = currency;
             this.Cash = cash;
@@ -50,7 +50,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public Currency Currency { get; set; }
+        public BalanceCurrency Currency { get; set; }
 
         /// <summary>
         /// The amount of available cash in the account denominated in the currency of the &#x60;currency&#x60; field.

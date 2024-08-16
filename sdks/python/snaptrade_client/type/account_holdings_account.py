@@ -15,18 +15,18 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.account import Account
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.balance import Balance
 from snaptrade_client.type.options_position import OptionsPosition
 from snaptrade_client.type.position import Position
-from snaptrade_client.type.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.type.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue
 
 class RequiredAccountHoldingsAccount(TypedDict):
     pass
 
 class OptionalAccountHoldingsAccount(TypedDict, total=False):
-    account: SnapTradeHoldingsAccountAccountId
+    account: Account
 
     # List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
     balances: typing.Optional[typing.List[Balance]]

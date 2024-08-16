@@ -49,7 +49,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account' => :'SnapTradeHoldingsAccountAccountId',
+        :'account' => :'Account',
         :'balances' => :'Array<Balance>',
         :'positions' => :'Array<Position>',
         :'option_positions' => :'Array<OptionsPosition>',

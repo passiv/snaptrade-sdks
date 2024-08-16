@@ -127,11 +127,13 @@ module SnapTrade
 
     # List account balances
     #
-    # A list of account balances for the specified account (one per currency that the account holds).
+    # Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get balances.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -140,21 +142,23 @@ module SnapTrade
 
     # List account balances
     #
-    # A list of account balances for the specified account (one per currency that the account holds).
+    # Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get balances.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_balance_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # List account balances
-    # A list of account balances for the specified account (one per currency that the account holds).
+    # Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get balances.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<Balance>]
     private def get_user_account_balance_impl(user_id, user_secret, account_id, opts = {})
@@ -163,10 +167,10 @@ module SnapTrade
     end
 
     # List account balances
-    # A list of account balances for the specified account (one per currency that the account holds).
+    # Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get balances.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Balance>, Integer, Hash)>] Array<Balance> data, response status code and response headers
     private def get_user_account_balance_with_http_info_impl(user_id, user_secret, account_id, opts = {})
@@ -196,7 +200,7 @@ module SnapTrade
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -228,38 +232,40 @@ module SnapTrade
     end
 
 
-    # Return details of a specific investment account
+    # Get account detail
     #
-    # Returns an account object with details for the specified account,
-    # including the total account market value.
+    # Returns account detail known to SnapTrade for the specified account.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get detail of.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_details(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
 
-    # Return details of a specific investment account
+    # Get account detail
     #
-    # Returns an account object with details for the specified account,
-    # including the total account market value.
+    # Returns account detail known to SnapTrade for the specified account.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get detail of.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_details_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Return details of a specific investment account
-    # Returns an account object with details for the specified account, including the total account market value. 
+    # Get account detail
+    # Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get detail of.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Account]
     private def get_user_account_details_impl(user_id, user_secret, account_id, opts = {})
@@ -267,11 +273,11 @@ module SnapTrade
       data
     end
 
-    # Return details of a specific investment account
-    # Returns an account object with details for the specified account, including the total account market value. 
+    # Get account detail
+    # Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get detail of.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Account, Integer, Hash)>] Account data, response status code and response headers
     private def get_user_account_details_with_http_info_impl(user_id, user_secret, account_id, opts = {})
@@ -333,13 +339,15 @@ module SnapTrade
     end
 
 
-    # List account orders
+    # List account recent orders
     #
-    # Fetch all recent orders from a user's account.
+    # Returns a list of recent orders in the specified account.
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get orders.
+    # @param account_id [String] 
     # @param state [String] defaults value is set to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -350,13 +358,15 @@ module SnapTrade
       data
     end
 
-    # List account orders
+    # List account recent orders
     #
-    # Fetch all recent orders from a user's account.
+    # Returns a list of recent orders in the specified account.
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get orders.
+    # @param account_id [String] 
     # @param state [String] defaults value is set to \"all\"
     # @param days [Integer] Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -366,11 +376,11 @@ module SnapTrade
       get_user_account_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # List account orders
-    # Fetch all recent orders from a user's account.
+    # List account recent orders
+    # Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get orders.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
@@ -380,11 +390,11 @@ module SnapTrade
       data
     end
 
-    # List account orders
-    # Fetch all recent orders from a user&#39;s account.
+    # List account recent orders
+    # Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get orders.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :state defaults value is set to \"all\"
     # @option opts [Integer] :days Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
@@ -460,11 +470,13 @@ module SnapTrade
 
     # List account positions
     #
-    # Returns a list of positions in the specified account.
+    # Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get positions.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions(user_id:, user_secret:, account_id:, extra: {})
       data, _status_code, _headers = get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
@@ -473,21 +485,23 @@ module SnapTrade
 
     # List account positions
     #
-    # Returns a list of positions in the specified account.
+    # Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+    # 
+    # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get positions.
+    # @param account_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_positions_with_http_info(user_id:, user_secret:, account_id:, extra: {})
       get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
     # List account positions
-    # Returns a list of positions in the specified account.
+    # Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get positions.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<Position>]
     private def get_user_account_positions_impl(user_id, user_secret, account_id, opts = {})
@@ -496,10 +510,10 @@ module SnapTrade
     end
 
     # List account positions
-    # Returns a list of positions in the specified account.
+    # Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to get positions.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<Position>, Integer, Hash)>] Array<Position> data, response status code and response headers
     private def get_user_account_positions_with_http_info_impl(user_id, user_secret, account_id, opts = {})
@@ -529,7 +543,7 @@ module SnapTrade
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -563,7 +577,7 @@ module SnapTrade
 
     # List account holdings
     #
-    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+    # Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
     # 
     # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
@@ -578,7 +592,7 @@ module SnapTrade
 
     # List account holdings
     #
-    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+    # Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
     # 
     # The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
@@ -591,7 +605,7 @@ module SnapTrade
     end
 
     # List account holdings
-    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -603,7 +617,7 @@ module SnapTrade
     end
 
     # List account holdings
-    # Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -670,7 +684,9 @@ module SnapTrade
 
     # List accounts
     #
-    # Get a list of all Account objects for the authenticated SnapTrade user.
+    # Returns all brokerage accounts known to SnapTrade for the authenticated user.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -682,7 +698,9 @@ module SnapTrade
 
     # List accounts
     #
-    # Get a list of all Account objects for the authenticated SnapTrade user.
+    # Returns all brokerage accounts known to SnapTrade for the authenticated user.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -692,7 +710,7 @@ module SnapTrade
     end
 
     # List accounts
-    # Get a list of all Account objects for the authenticated SnapTrade user.
+    # Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -703,7 +721,7 @@ module SnapTrade
     end
 
     # List accounts
-    # Get a list of all Account objects for the authenticated SnapTrade user.
+    # Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

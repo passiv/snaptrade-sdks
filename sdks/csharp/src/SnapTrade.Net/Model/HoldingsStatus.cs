@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Status of account holdings sync
+    /// Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established. 2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage. 3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
     /// </summary>
     [DataContract(Name = "HoldingsStatus")]
     public partial class HoldingsStatus : IEquatable<HoldingsStatus>, IValidatableObject
@@ -35,26 +35,27 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="HoldingsStatus" /> class.
         /// </summary>
-        /// <param name="initialSyncCompleted">initialSyncCompleted.</param>
-        /// <param name="lastSuccessfulSync">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
-        public HoldingsStatus(bool initialSyncCompleted = default(bool), string lastSuccessfulSync = default(string))
+        /// <param name="initialSyncCompleted">Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete..</param>
+        /// <param name="lastSuccessfulSync">The last time holdings were successfully synced by SnapTrade..</param>
+        public HoldingsStatus(bool initialSyncCompleted = default(bool), DateTime lastSuccessfulSync = default(DateTime))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
         }
 
         /// <summary>
-        /// Gets or Sets InitialSyncCompleted
+        /// Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
         /// </summary>
+        /// <value>Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.</value>
         [DataMember(Name = "initial_sync_completed", EmitDefaultValue = true)]
         public bool InitialSyncCompleted { get; set; }
 
         /// <summary>
-        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+        /// The last time holdings were successfully synced by SnapTrade.
         /// </summary>
-        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
-        [DataMember(Name = "last_successful_sync", EmitDefaultValue = true)]
-        public string LastSuccessfulSync { get; set; }
+        /// <value>The last time holdings were successfully synced by SnapTrade.</value>
+        [DataMember(Name = "last_successful_sync", EmitDefaultValue = false)]
+        public DateTime LastSuccessfulSync { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

@@ -19,11 +19,11 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.OptionsPosition;
 import com.konfigthis.client.model.Position;
-import com.konfigthis.client.model.SnapTradeHoldingsAccountAccountId;
 import com.konfigthis.client.model.SnapTradeHoldingsTotalValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -61,7 +61,7 @@ import com.konfigthis.client.JSON;
 public class AccountHoldingsAccount {
   public static final String SERIALIZED_NAME_ACCOUNT = "account";
   @SerializedName(SERIALIZED_NAME_ACCOUNT)
-  private SnapTradeHoldingsAccountAccountId account;
+  private Account account;
 
   public static final String SERIALIZED_NAME_BALANCES = "balances";
   @SerializedName(SERIALIZED_NAME_BALANCES)
@@ -86,7 +86,7 @@ public class AccountHoldingsAccount {
   public AccountHoldingsAccount() {
   }
 
-  public AccountHoldingsAccount account(SnapTradeHoldingsAccountAccountId account) {
+  public AccountHoldingsAccount account(Account account) {
     
     
     
@@ -102,12 +102,12 @@ public class AccountHoldingsAccount {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public SnapTradeHoldingsAccountAccountId getAccount() {
+  public Account getAccount() {
     return account;
   }
 
 
-  public void setAccount(SnapTradeHoldingsAccountAccountId account) {
+  public void setAccount(Account account) {
     
     
     
@@ -429,7 +429,7 @@ public class AccountHoldingsAccount {
       }
       // validate the optional field `account`
       if (jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) {
-        SnapTradeHoldingsAccountAccountId.validateJsonObject(jsonObj.getAsJsonObject("account"));
+        Account.validateJsonObject(jsonObj.getAsJsonObject("account"));
       }
       if (jsonObj.get("balances") != null && !jsonObj.get("balances").isJsonNull()) {
         JsonArray jsonArraybalances = jsonObj.getAsJsonArray("balances");

@@ -222,7 +222,10 @@ Optional. Comma seperated list of authorization IDs (only use if filtering is ne
 
 ### `snaptrade.accountInformation.getUserAccountBalance`<a id="snaptradeaccountinformationgetuseraccountbalance"></a>
 
-A list of account balances for the specified account (one per currency that the account holds).
+Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
+
+The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -243,8 +246,6 @@ const getUserAccountBalanceResponse =
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-The ID of the account to get balances.
-
 #### 🔄 Return<a id="🔄-return"></a>
 
 [Balance](./models/balance.ts)
@@ -260,8 +261,9 @@ The ID of the account to get balances.
 
 ### `snaptrade.accountInformation.getUserAccountDetails`<a id="snaptradeaccountinformationgetuseraccountdetails"></a>
 
-Returns an account object with details for the specified account,
-including the total account market value.
+Returns account detail known to SnapTrade for the specified account.
+
+The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -283,8 +285,6 @@ const getUserAccountDetailsResponse =
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-The ID of the account to get detail of.
-
 #### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./models/account.ts)
@@ -300,7 +300,10 @@ The ID of the account to get detail of.
 
 ### `snaptrade.accountInformation.getUserAccountOrders`<a id="snaptradeaccountinformationgetuseraccountorders"></a>
 
-Fetch all recent orders from a user's account.
+Returns a list of recent orders in the specified account.
+
+The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -322,8 +325,6 @@ const getUserAccountOrdersResponse =
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to get orders.
 
 ##### state: `'all' | 'open' | 'executed'`<a id="state-all--open--executed"></a>
 
@@ -348,7 +349,10 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 ### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
 
-Returns a list of positions in the specified account.
+Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+
+The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -369,8 +373,6 @@ const getUserAccountPositionsResponse =
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-The ID of the account to get positions.
-
 #### 🔄 Return<a id="🔄-return"></a>
 
 [Position](./models/position.ts)
@@ -386,7 +388,7 @@ The ID of the account to get positions.
 
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
-Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
@@ -425,7 +427,10 @@ const getUserHoldingsResponse =
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
-Get a list of all Account objects for the authenticated SnapTrade user.
+Returns all brokerage accounts known to SnapTrade for the authenticated user.
+
+The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1066,7 +1071,9 @@ Option strategy id obtained from response when creating option strategy object
 
 ### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
-Returns a list of Options Positions.
+Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
+
+The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1075,7 +1082,7 @@ Returns a list of Options Positions.
 const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
   userId: "snaptrade-user-123",
   userSecret: "USERSECRET123",
-  accountId: "accountId_example",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 });
 ```
 
@@ -1086,8 +1093,6 @@ const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to fetch options holdings for.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

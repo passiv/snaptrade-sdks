@@ -11,11 +11,12 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Status of account holdings sync
+  # Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established. 2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage. 3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
   class HoldingsStatus
+    # Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
     attr_accessor :initial_sync_completed
 
-    # Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+    # The last time holdings were successfully synced by SnapTrade.
     attr_accessor :last_successful_sync
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -35,14 +36,13 @@ module SnapTrade
     def self.openapi_types
       {
         :'initial_sync_completed' => :'Boolean',
-        :'last_successful_sync' => :'String'
+        :'last_successful_sync' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'last_successful_sync'
       ])
     end
 

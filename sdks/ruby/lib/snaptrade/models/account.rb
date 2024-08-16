@@ -11,22 +11,30 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # SnapTradeUser Investment Account
+  # A single brokerage account at a financial institution.
   class Account
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
     attr_accessor :id
 
+    # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :brokerage_authorization
 
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
     attr_accessor :portfolio_group
 
+    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
     attr_accessor :name
 
+    # The account number assigned by the financial institution.
     attr_accessor :number
 
+    # The name of the financial institution that holds the account.
     attr_accessor :institution_name
 
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
     attr_accessor :created_date
 
+    # Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
     attr_accessor :meta
 
     # This field is deprecated.
@@ -67,7 +75,7 @@ module SnapTrade
         :'name' => :'String',
         :'number' => :'String',
         :'institution_name' => :'String',
-        :'created_date' => :'String',
+        :'created_date' => :'Time',
         :'meta' => :'Hash<String, Object>',
         :'cash_restrictions' => :'Array<String>',
         :'sync_status' => :'AccountSyncStatus',
@@ -78,6 +86,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
       ])
     end
 

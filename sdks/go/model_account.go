@@ -13,17 +13,28 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// Account SnapTradeUser Investment Account
+// Account A single brokerage account at a financial institution.
 type Account struct {
+	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
 	Id *string `json:"id,omitempty"`
+	// Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
 	BrokerageAuthorization *string `json:"brokerage_authorization,omitempty"`
+	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+	// Deprecated
 	PortfolioGroup *string `json:"portfolio_group,omitempty"`
-	Name *string `json:"name,omitempty"`
+	// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+	Name NullableString `json:"name,omitempty"`
+	// The account number assigned by the financial institution.
 	Number *string `json:"number,omitempty"`
+	// The name of the financial institution that holds the account.
 	InstitutionName *string `json:"institution_name,omitempty"`
-	CreatedDate *string `json:"created_date,omitempty"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+	CreatedDate *time.Time `json:"created_date,omitempty"`
+	// Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
+	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
 	// This field is deprecated.
 	// Deprecated
@@ -117,6 +128,7 @@ func (o *Account) SetBrokerageAuthorization(v string) {
 }
 
 // GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
+// Deprecated
 func (o *Account) GetPortfolioGroup() string {
 	if o == nil || isNil(o.PortfolioGroup) {
 		var ret string
@@ -127,6 +139,7 @@ func (o *Account) GetPortfolioGroup() string {
 
 // GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Account) GetPortfolioGroupOk() (*string, bool) {
 	if o == nil || isNil(o.PortfolioGroup) {
     return nil, false
@@ -144,40 +157,51 @@ func (o *Account) HasPortfolioGroup() bool {
 }
 
 // SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
+// Deprecated
 func (o *Account) SetPortfolioGroup(v string) {
 	o.PortfolioGroup = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
+// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Account) GetName() string {
-	if o == nil || isNil(o.Name) {
+	if o == nil || isNil(o.Name.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Name.Get()
 }
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Account) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+	if o == nil {
     return nil, false
 	}
-	return o.Name, true
+	return o.Name.Get(), o.Name.IsSet()
 }
 
 // HasName returns a boolean if a field has been set.
 func (o *Account) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+	if o != nil && o.Name.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
+// SetName gets a reference to the given NullableString and assigns it to the Name field.
 func (o *Account) SetName(v string) {
-	o.Name = &v
+	o.Name.Set(&v)
+}
+// SetNameNil sets the value for Name to be an explicit nil
+func (o *Account) SetNameNil() {
+	o.Name.Set(nil)
+}
+
+// UnsetName ensures that no value is present for Name, not even an explicit nil
+func (o *Account) UnsetName() {
+	o.Name.Unset()
 }
 
 // GetNumber returns the Number field value if set, zero value otherwise.
@@ -245,9 +269,9 @@ func (o *Account) SetInstitutionName(v string) {
 }
 
 // GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
-func (o *Account) GetCreatedDate() string {
+func (o *Account) GetCreatedDate() time.Time {
 	if o == nil || isNil(o.CreatedDate) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.CreatedDate
@@ -255,7 +279,7 @@ func (o *Account) GetCreatedDate() string {
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Account) GetCreatedDateOk() (*string, bool) {
+func (o *Account) GetCreatedDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedDate) {
     return nil, false
 	}
@@ -271,12 +295,13 @@ func (o *Account) HasCreatedDate() bool {
 	return false
 }
 
-// SetCreatedDate gets a reference to the given string and assigns it to the CreatedDate field.
-func (o *Account) SetCreatedDate(v string) {
+// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+func (o *Account) SetCreatedDate(v time.Time) {
 	o.CreatedDate = &v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
+// Deprecated
 func (o *Account) GetMeta() map[string]interface{} {
 	if o == nil || isNil(o.Meta) {
 		var ret map[string]interface{}
@@ -287,6 +312,7 @@ func (o *Account) GetMeta() map[string]interface{} {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Account) GetMetaOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Meta) {
     return map[string]interface{}{}, false
@@ -304,6 +330,7 @@ func (o *Account) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
+// Deprecated
 func (o *Account) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
@@ -418,8 +445,8 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if !isNil(o.PortfolioGroup) {
 		toSerialize["portfolio_group"] = o.PortfolioGroup
 	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Name.IsSet() {
+		toSerialize["name"] = o.Name.Get()
 	}
 	if !isNil(o.Number) {
 		toSerialize["number"] = o.Number

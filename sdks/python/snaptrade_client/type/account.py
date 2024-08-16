@@ -24,20 +24,29 @@ class RequiredAccount(TypedDict):
     pass
 
 class OptionalAccount(TypedDict, total=False):
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
     id: str
 
+    # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
     brokerage_authorization: str
 
+    # WARNING: This property is deprecated
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
     portfolio_group: str
 
-    name: str
+    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+    name: typing.Optional[str]
 
+    # The account number assigned by the financial institution.
     number: str
 
+    # The name of the financial institution that holds the account.
     institution_name: str
 
-    created_date: str
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+    created_date: datetime
 
+    # WARNING: This property is deprecated
     meta: AccountMeta
 
     # WARNING: This property is deprecated

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOptions(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOptions unit test stubs
-        Get account option holdings
+        List account option positions
     """
 
     def setUp(self):

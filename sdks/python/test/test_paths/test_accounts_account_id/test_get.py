@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountId(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountId unit test stubs
-        Return details of a specific investment account
+        Get account detail
     """
 
     def setUp(self):

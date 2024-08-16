@@ -155,11 +155,11 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to fetch options holdings for.
+            var accountId = "accountId_example";
             
             try
             {
-                // Get account option holdings
+                // List account option positions
                 List<OptionsPosition> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }

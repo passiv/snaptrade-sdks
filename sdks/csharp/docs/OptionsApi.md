@@ -7,7 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetOptionStrategy**](OptionsApi.md#getoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy | Create options strategy |
 | [**GetOptionsChain**](OptionsApi.md#getoptionschain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain for a symbol |
 | [**GetOptionsStrategyQuote**](OptionsApi.md#getoptionsstrategyquote) | **GET** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes |
-| [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | Get account option holdings |
+| [**ListOptionHoldings**](OptionsApi.md#listoptionholdings) | **GET** /accounts/{accountId}/options | List account option positions |
 | [**PlaceOptionStrategy**](OptionsApi.md#placeoptionstrategy) | **POST** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order |
 
 
@@ -314,7 +314,7 @@ catch (ApiException e)
 
 
 
-Returns a list of Options Positions. 
+Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```csharp
@@ -338,11 +338,11 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to fetch options holdings for.
+            var accountId = "accountId_example";
             
             try
             {
-                // Get account option holdings
+                // List account option positions
                 List<OptionsPosition> result = client.Options.ListOptionHoldings(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -369,7 +369,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get account option holdings
+    // List account option positions
     ApiResponse<List<OptionsPosition>> response = apiInstance.ListOptionHoldingsWithHttpInfo(userId, userSecret, accountId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -389,7 +389,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to fetch options holdings for. |  |
+| **accountId** | **string** |  |  |
 
 ### Return type
 
@@ -399,7 +399,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The option holdings in the account |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

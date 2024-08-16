@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | Pointer to [**SnapTradeHoldingsAccountAccountId**](SnapTradeHoldingsAccountAccountId.md) |  | [optional] 
+**Account** | Pointer to [**Account**](Account.md) |  | [optional] 
 **Balances** | Pointer to [**[]Balance**](Balance.md) | List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances). | [optional] 
 **Positions** | Pointer to [**[]Position**](Position.md) | List of stock/ETF/crypto/mutual fund positions in the account. | [optional] 
 **OptionPositions** | Pointer to [**[]OptionsPosition**](OptionsPosition.md) | List of option positions in the account. | [optional] 
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAccount
 
-`func (o *AccountHoldingsAccount) GetAccount() SnapTradeHoldingsAccountAccountId`
+`func (o *AccountHoldingsAccount) GetAccount() Account`
 
 GetAccount returns the Account field if non-nil, zero value otherwise.
 
 ### GetAccountOk
 
-`func (o *AccountHoldingsAccount) GetAccountOk() (*SnapTradeHoldingsAccountAccountId, bool)`
+`func (o *AccountHoldingsAccount) GetAccountOk() (*Account, bool)`
 
 GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccount
 
-`func (o *AccountHoldingsAccount) SetAccount(v SnapTradeHoldingsAccountAccountId)`
+`func (o *AccountHoldingsAccount) SetAccount(v Account)`
 
 SetAccount sets Account field to given value.
 

@@ -69,8 +69,8 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountInformationApi* | [**GetAllUserHoldings**](docs/AccountInformationApi.md#getalluserholdings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 *AccountInformationApi* | [**GetUserAccountBalance**](docs/AccountInformationApi.md#getuseraccountbalance) | **Get** /accounts/{accountId}/balances | List account balances
-*AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **Get** /accounts/{accountId} | Return details of a specific investment account
-*AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **Get** /accounts/{accountId}/orders | List account orders
+*AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **Get** /accounts/{accountId} | Get account detail
+*AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **Get** /accounts/{accountId}/orders | List account recent orders
 *AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **Get** /accounts/{accountId}/positions | List account positions
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **Get** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List accounts
@@ -90,7 +90,7 @@ Class | Method | HTTP request | Description
 *OptionsApi* | [**GetOptionStrategy**](docs/OptionsApi.md#getoptionstrategy) | **Post** /accounts/{accountId}/optionStrategy | Create options strategy
 *OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 *OptionsApi* | [**GetOptionsStrategyQuote**](docs/OptionsApi.md#getoptionsstrategyquote) | **Get** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
-*OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | Get account option holdings
+*OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
 *OptionsApi* | [**PlaceOptionStrategy**](docs/OptionsApi.md#placeoptionstrategy) | **Post** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get metadata related to Snaptrade partner
@@ -126,9 +126,9 @@ Class | Method | HTTP request | Description
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [ActionStrict](docs/ActionStrict.md)
- - [Amount](docs/Amount.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
  - [Balance](docs/Balance.md)
+ - [BalanceCurrency](docs/BalanceCurrency.md)
  - [Brokerage](docs/Brokerage.md)
  - [BrokerageAuthorization](docs/BrokerageAuthorization.md)
  - [BrokerageAuthorizationDisabledConfirmation](docs/BrokerageAuthorizationDisabledConfirmation.md)
@@ -185,8 +185,6 @@ Class | Method | HTTP request | Description
  - [SecurityType](docs/SecurityType.md)
  - [SessionEvent](docs/SessionEvent.md)
  - [SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
- - [SnapTradeHoldingsAccountAccountId](docs/SnapTradeHoldingsAccountAccountId.md)
- - [SnapTradeHoldingsAccountAccountIdBalance](docs/SnapTradeHoldingsAccountAccountIdBalance.md)
  - [SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
  - [SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)
  - [SnapTradeRegisterUserRequestBody](docs/SnapTradeRegisterUserRequestBody.md)

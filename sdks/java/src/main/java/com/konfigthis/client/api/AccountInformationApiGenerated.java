@@ -318,7 +318,7 @@ public class AccountInformationApiGenerated {
         }
 
         final String[] localVarAccepts = {
-            "*/*"
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -391,7 +391,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -407,7 +407,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -423,7 +423,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -439,7 +439,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -450,15 +450,15 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account balances
-     * A list of account balances for the specified account (one per currency that the account holds).
+     * Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to get balances. (required)
+     * @param accountId  (required)
      * @return GetUserAccountBalanceRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of all balances in investment account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -582,7 +582,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -598,7 +598,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -614,7 +614,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -630,7 +630,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -640,16 +640,16 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * Return details of a specific investment account
-     * Returns an account object with details for the specified account, including the total account market value. 
+     * Get account detail
+     * Returns account detail known to SnapTrade for the specified account.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to get detail of. (required)
+     * @param accountId  (required)
      * @return GetUserAccountDetailsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Details of a specific investment account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -803,7 +803,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -818,7 +818,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public List<AccountOrderRecord> execute() throws ApiException {
@@ -833,7 +833,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<AccountOrderRecord>> executeWithHttpInfo() throws ApiException {
@@ -848,7 +848,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<AccountOrderRecord>> _callback) throws ApiException {
@@ -857,16 +857,16 @@ public class AccountInformationApiGenerated {
     }
 
     /**
-     * List account orders
-     * Fetch all recent orders from a user&#39;s account.
+     * List account recent orders
+     * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to get orders. (required)
+     * @param accountId  (required)
      * @return GetUserAccountOrdersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all orders in account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public AccountInformationApi.GetUserAccountOrdersRequestBuilder getUserAccountOrders(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
@@ -916,7 +916,7 @@ public class AccountInformationApiGenerated {
         }
 
         final String[] localVarAccepts = {
-            "*/*"
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -989,7 +989,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1005,7 +1005,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1021,7 +1021,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1037,7 +1037,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -1048,15 +1048,15 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account positions
-     * Returns a list of positions in the specified account.
+     * Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to get positions. (required)
+     * @param accountId  (required)
      * @return GetUserAccountPositionsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List all positions in investment account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -1239,7 +1239,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * List account holdings
-     * Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+     * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1363,7 +1363,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1379,7 +1379,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1395,7 +1395,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1411,7 +1411,7 @@ public class AccountInformationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -1422,14 +1422,14 @@ public class AccountInformationApiGenerated {
 
     /**
      * List accounts
-     * Get a list of all Account objects for the authenticated SnapTrade user.
+     * Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListUserAccountsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Account objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */

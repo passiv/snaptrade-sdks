@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.AccountSyncStatus
-Status of account
+Contains status update for the account sync process between SnapTrade and the brokerage.
 
 ## Properties
 

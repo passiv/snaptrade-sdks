@@ -806,7 +806,7 @@ public class OptionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -821,7 +821,7 @@ public class OptionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public List<OptionsPosition> execute() throws ApiException {
@@ -836,7 +836,7 @@ public class OptionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<OptionsPosition>> executeWithHttpInfo() throws ApiException {
@@ -851,7 +851,7 @@ public class OptionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<OptionsPosition>> _callback) throws ApiException {
@@ -860,16 +860,16 @@ public class OptionsApiGenerated {
     }
 
     /**
-     * Get account option holdings
-     * Returns a list of Options Positions. 
+     * List account option positions
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to fetch options holdings for. (required)
+     * @param accountId  (required)
      * @return ListOptionHoldingsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The option holdings in the account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public OptionsApi.ListOptionHoldingsRequestBuilder listOptionHoldings(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {

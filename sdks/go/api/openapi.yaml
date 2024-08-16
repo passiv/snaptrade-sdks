@@ -572,8 +572,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--sessionEvents
   /accounts:
     get:
-      description: Get a list of all Account objects for the authenticated SnapTrade
-        user.
+      description: |
+        Returns all brokerage accounts known to SnapTrade for the authenticated user.
+
+        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
@@ -598,7 +600,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Account'
                 type: array
-          description: A list of all Account objects for the authenticated user.
+          description: OK
         default:
           description: Unexpected error.
       summary: List accounts
@@ -675,7 +677,7 @@ paths:
   /accounts/{accountId}/holdings:
     get:
       description: |
-        Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+        Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
         The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserHoldings
@@ -730,8 +732,9 @@ paths:
   /accounts/{accountId}:
     get:
       description: |
-        Returns an account object with details for the specified account,
-        including the total account market value.
+        Returns account detail known to SnapTrade for the specified account.
+
+        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountDetails
       parameters:
       - explode: true
@@ -748,17 +751,12 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to get detail of.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
@@ -766,10 +764,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Account'
-          description: Details of a specific investment account
+          description: OK
         default:
           description: Unexpected error
-      summary: Return details of a specific investment account
+      summary: Get account detail
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -819,8 +817,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-put--accounts-accountId
   /accounts/{accountId}/balances:
     get:
-      description: A list of account balances for the specified account (one per currency
-        that the account holds).
+      description: |
+        Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountBalance
       parameters:
       - explode: true
@@ -837,27 +837,22 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to get balances.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 items:
                   $ref: '#/components/schemas/Balance'
                 type: array
-          description: List of all balances in investment account
+          description: OK
         default:
           description: Unexpected error
       summary: List account balances
@@ -867,7 +862,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balances
   /accounts/{accountId}/positions:
     get:
-      description: Returns a list of positions in the specified account.
+      description: |
+        Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
       - explode: true
@@ -884,27 +882,22 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to get positions.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 items:
                   $ref: '#/components/schemas/Position'
                 type: array
-          description: List all positions in investment account
+          description: OK
         default:
           description: Unexpected error
       summary: List account positions
@@ -914,7 +907,10 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-positions
   /accounts/{accountId}/orders:
     get:
-      description: Fetch all recent orders from a user's account.
+      description: |
+        Returns a list of recent orders in the specified account.
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountOrders
       parameters:
       - explode: true
@@ -957,17 +953,12 @@ paths:
           x-konfig-original-example: 30
           x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema
         style: form
-      - description: The ID of the account to get orders.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
@@ -977,14 +968,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/AccountOrderRecord'
                 type: array
-          description: List all orders in account
+          description: OK
         "500":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
-      summary: List account orders
+      summary: List account recent orders
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -1359,7 +1350,9 @@ paths:
   /accounts/{accountId}/options:
     get:
       description: |
-        Returns a list of Options Positions.
+        Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: Options_listOptionHoldings
       parameters:
       - explode: true
@@ -1376,14 +1369,12 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to fetch options holdings for.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
@@ -1393,14 +1384,14 @@ paths:
                 items:
                   $ref: '#/components/schemas/OptionsPosition'
                 type: array
-          description: The option holdings in the account
+          description: OK
         "500":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
-      summary: Get account option holdings
+      summary: List account option positions
       tags:
       - Options
       x-konfig-operation-can-have-single-parameter: true
@@ -2155,159 +2146,183 @@ components:
           x-konfig-original-example: 1000
       type: object
     AccountSyncStatus:
-      description: Status of account
+      description: Contains status update for the account sync process between SnapTrade
+        and the brokerage.
       example:
         holdings:
-          last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+          last_successful_sync: ""
           initial_sync_completed: true
         transactions:
-          last_successful_sync: 2022-01-24T00:00:00.000+00:00
+          last_successful_sync: ""
           initial_sync_completed: true
-          first_transaction_date: 2022-01-24T00:00:00.000+00:00
+          first_transaction_date: ""
       properties:
         transactions:
           $ref: '#/components/schemas/TransactionsStatus'
         holdings:
           $ref: '#/components/schemas/HoldingsStatus'
     TransactionsStatus:
-      description: Status of account transaction sync
+      description: |
+        Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions:
+        1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage.
+        2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage.
+        3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       example:
-        last_successful_sync: 2022-01-24T00:00:00.000+00:00
+        last_successful_sync: ""
         initial_sync_completed: true
-        first_transaction_date: 2022-01-24T00:00:00.000+00:00
+        first_transaction_date: ""
       properties:
         initial_sync_completed:
+          description: "Indicates if the initial sync of transactions has been completed.\
+            \ For accounts with a large number of transactions, the initial sync may\
+            \ take a while to complete."
+          example: true
           type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed
         last_successful_sync:
-          description: Date in YYYY-MM-DD format or null
-          example: 2022-01-24
-          format: date
-          nullable: true
-          type: string
-          x-konfig-original-example: 2022-01-24
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+          allOf:
+          - $ref: '#/components/schemas/SyncStatusDate'
+          description: "All transactions up to this date have been successfully synced.\
+            \ Please note that this is not the date of the last transaction, nor the\
+            \ last time SnapTrade attempted to sync transactions."
         first_transaction_date:
-          description: Date in YYYY-MM-DD format or null
-          example: 2022-01-24
-          format: date
-          nullable: true
-          type: string
-          x-konfig-original-example: 2022-01-24
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
+          allOf:
+          - $ref: '#/components/schemas/SyncStatusDate'
+          description: "The date of the first transaction in the account known to\
+            \ SnapTrade. It's possible that the account has transactions before this\
+            \ date, but they are not known to SnapTrade."
     HoldingsStatus:
-      description: Status of account holdings sync
+      description: |
+        Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions:
+        1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established.
+        2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage.
+        3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       example:
-        last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+        last_successful_sync: ""
         initial_sync_completed: true
       properties:
         initial_sync_completed:
+          description: "Indicates if the initial sync of holdings has been completed.\
+            \ For accounts with a large number of positions/orders/transactions, the\
+            \ initial sync may take a while to complete."
+          example: true
           type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsStatus-properties-initial_sync_completed
         last_successful_sync:
-          description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
-          example: 2024-06-28 18:42:46.561408+00:00
-          format: datetime
-          nullable: true
-          type: string
-          x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
+          allOf:
+          - $ref: '#/components/schemas/HoldingsSyncStatusDate'
+          description: The last time holdings were successfully synced by SnapTrade.
     AccountBalance:
       description: Contains balance related information for the account.
       example:
-        total: null
+        total:
+          amount: 15363.23
+          currency: USD
       properties:
         total:
           $ref: '#/components/schemas/AccountBalance_total'
-    Amount:
-      description: "Total value of the account, as reported by the brokerage"
-      properties:
-        amount:
-          description: Total value denominated in the currency of the `currency` field.
-          example: 15363.23
-          type: number
-          x-konfig-original-example: 15363.23
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-amount
-        currency:
-          description: The ISO-4217 currency code for the amount.
-          example: USD
-          type: string
-          x-konfig-original-example: USD
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Amount-properties-currency
     Account:
       additionalProperties: true
-      description: SnapTradeUser Investment Account
+      description: A single brokerage account at a financial institution.
       example:
         number: Q6542138443
         balance:
-          total: null
-        brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          total:
+            amount: 15363.23
+            currency: USD
+        brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
         meta:
           type: Margin
           status: ACTIVE
-          institution_name: Alpaca
-        name: Registered Retirement Savings Account
+          institution_name: Robinhood
+        name: Robinhood Individual
         sync_status:
           holdings:
-            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
           transactions:
-            last_successful_sync: 2022-01-24T00:00:00.000+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
-            first_transaction_date: 2022-01-24T00:00:00.000+00:00
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            first_transaction_date: ""
+        id: ""
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        created_date: 2021-06-04T16:26:46.523Z
-        institution_name: Alpaca
+        created_date: 2024-07-23T22:50:22.761Z
+        institution_name: Robinhood
         cash_restrictions: []
       properties:
         id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          allOf:
+          - $ref: '#/components/schemas/AccountID'
+          description: "Unique identifier for the connected brokerage account. This\
+            \ is the UUID used to reference the account in SnapTrade. This ID should\
+            \ not change for as long as the connection stays active. If the connection\
+            \ is deleted and re-added, a new account ID will be generated. If you\
+            \ want a stable identifier for the account, use the `number` field."
         brokerage_authorization:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          description: Unique identifier for the connection (brokerage authorization).
+            This is the UUID used to reference the connection in SnapTrade.
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
           format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         portfolio_group:
+          deprecated: true
+          description: Portfolio Group ID. Portfolio Groups have been deprecated.
+            Please contact support if you have a usecase for it.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
         name:
-          example: Registered Retirement Savings Account
+          description: "A display name for the account. Either assigned by the user\
+            \ or by the financial institution itself. For certain institutions, SnapTrade\
+            \ appends the institution name to the account name for clarity."
+          example: Robinhood Individual
+          nullable: true
           type: string
-          x-konfig-original-example: Registered Retirement Savings Account
+          x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-name
         number:
+          description: The account number assigned by the financial institution.
           example: Q6542138443
           type: string
           x-konfig-original-example: Q6542138443
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-number
         institution_name:
-          example: Alpaca
+          description: The name of the financial institution that holds the account.
+          example: Robinhood
           type: string
-          x-konfig-original-example: Alpaca
+          x-konfig-original-example: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-institution_name
         created_date:
-          example: 2021-06-04T16:26:46.523Z
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the account was created in SnapTrade. This is\
+            \ _not_ the account opening date at the financial institution."
+          example: 2024-07-23T22:50:22.761Z
+          format: date-time
           type: string
-          x-konfig-original-example: 2021-06-04T16:26:46.523Z
+          x-konfig-original-example: 2024-07-23T22:50:22.761Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-created_date
         meta:
           additionalProperties: true
+          deprecated: true
+          description: "Additional information about the account, such as account\
+            \ type, status, etc. This information is specific to the financial institution\
+            \ and there's no standard format for this data. Please use at your own\
+            \ risk."
           example:
             type: Margin
             status: ACTIVE
-            institution_name: Alpaca
+            institution_name: Robinhood
           type: object
           x-konfig-original-example:
             type: Margin
             status: ACTIVE
-            institution_name: Alpaca
+            institution_name: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-meta
         cash_restrictions:
           deprecated: true
@@ -2331,12 +2346,12 @@ components:
         name: Registered Retirement Savings Account
         sync_status:
           holdings:
-            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
           transactions:
-            last_successful_sync: 2022-01-24T00:00:00.000+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
-            first_transaction_date: 2022-01-24T00:00:00.000+00:00
+            first_transaction_date: ""
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
@@ -2394,16 +2409,10 @@ components:
           currency: USD
           value: 32600.71
         balances:
-        - currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        - currency: null
           cash: 300.71
           buying_power: 410.71
-        - currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        - currency: null
           cash: 300.71
           buying_power: 410.71
         positions:
@@ -2516,12 +2525,12 @@ components:
           name: Registered Retirement Savings Account
           sync_status:
             holdings:
-              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
             transactions:
-              last_successful_sync: 2022-01-24T00:00:00.000+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
-              first_transaction_date: 2022-01-24T00:00:00.000+00:00
+              first_transaction_date: ""
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           institution_name: Alpaca
@@ -2549,16 +2558,10 @@ components:
           currency: USD
           value: 32600.71
         balances:
-        - currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        - currency: null
           cash: 300.71
           buying_power: 410.71
-        - currency:
-            code: USD
-            name: US Dollar
-            id: 87b24961-b51e-4db8-9226-f198f6518a89
+        - currency: null
           cash: 300.71
           buying_power: 410.71
         option_positions:
@@ -2730,21 +2733,32 @@ components:
           status: null
         account:
           number: Q6542138443
-          balance: null
+          balance:
+            total:
+              amount: 15363.23
+              currency: USD
           brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
           meta:
             type: Margin
             status: ACTIVE
-            institution_name: Alpaca
+            institution_name: Robinhood
           name: Robinhood Individual
-          id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          sync_status:
+            holdings:
+              last_successful_sync: ""
+              initial_sync_completed: true
+            transactions:
+              last_successful_sync: ""
+              initial_sync_completed: true
+              first_transaction_date: ""
+          id: ""
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           created_date: 2024-07-23T22:50:22.761Z
-          institution_name: Alpaca
+          institution_name: Robinhood
           cash_restrictions: []
       properties:
         account:
-          $ref: '#/components/schemas/SnapTradeHoldingsAccountAccountId'
+          $ref: '#/components/schemas/Account'
         balances:
           description: "List of balances for the account. Each element of the list\
             \ has a distinct currency. Some brokerages like Questrade [allows holding\
@@ -3357,12 +3371,12 @@ components:
         name: Registered Retirement Savings Account
         sync_status:
           holdings:
-            last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
           transactions:
-            last_successful_sync: 2022-01-24T00:00:00.000+00:00
+            last_successful_sync: ""
             initial_sync_completed: true
-            first_transaction_date: 2022-01-24T00:00:00.000+00:00
+            first_transaction_date: ""
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         institution_name: Alpaca
@@ -3412,108 +3426,6 @@ components:
             institution_name: Alpaca
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccount-properties-meta
       type: object
-    SnapTradeHoldingsAccountAccountId:
-      additionalProperties: true
-      description: A single brokerage account at a financial institution.
-      example:
-        number: Q6542138443
-        balance: null
-        brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
-        meta:
-          type: Margin
-          status: ACTIVE
-          institution_name: Alpaca
-        name: Robinhood Individual
-        id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-        portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        created_date: 2024-07-23T22:50:22.761Z
-        institution_name: Alpaca
-        cash_restrictions: []
-      properties:
-        id:
-          description: Unique identifier for the connected brokerage account. This
-            is the UUID used to reference the account in SnapTrade.
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
-        brokerage_authorization:
-          description: Unique identifier for the connection (brokerage authorization).
-            This is the UUID used to reference the connection in SnapTrade.
-          example: 87b24961-b51e-4db8-9226-f198f6518a89
-          format: uuid
-          type: string
-          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
-        portfolio_group:
-          deprecated: true
-          description: Portfolio Group ID. Portfolio Groups have been deprecated.
-            Please contact support if you have a usecase for it.
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
-        name:
-          description: "A display name for the account. Either assigned by the user\
-            \ or by the financial institution itself. For certain institutions, SnapTrade\
-            \ appends the institution name to the account name for clarity."
-          example: Robinhood Individual
-          nullable: true
-          type: string
-          x-konfig-original-example: Robinhood Individual
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-name
-        number:
-          description: The account number assigned by the financial institution.
-          example: Q6542138443
-          type: string
-          x-konfig-original-example: Q6542138443
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-number
-        institution_name:
-          description: The name of the financial institution that holds the account.
-          example: Alpaca
-          type: string
-          x-konfig-original-example: Alpaca
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-institution_name
-        balance:
-          $ref: '#/components/schemas/SnapTradeHoldingsAccountAccountId_balance'
-        meta:
-          additionalProperties: true
-          deprecated: true
-          description: "Additional information about the account, such as account\
-            \ type, status, etc. This information is specific to the financial institution\
-            \ and there's no standard format for this data. Please use at your own\
-            \ risk."
-          example:
-            type: Margin
-            status: ACTIVE
-            institution_name: Alpaca
-          type: object
-          x-konfig-original-example:
-            type: Margin
-            status: ACTIVE
-            institution_name: Alpaca
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-meta
-        cash_restrictions:
-          deprecated: true
-          description: This field is deprecated.
-          example: []
-          items:
-            type: string
-          type: array
-          x-konfig-original-example: []
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-cash_restrictions
-        created_date:
-          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
-            \ format indicating when the account was created in SnapTrade. This is\
-            \ _not_ the account opening date at the financial institution."
-          example: 2024-07-23T22:50:22.761Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-07-23T22:50:22.761Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-created_date
-      type: object
     SnapTradeHoldingsTotalValue:
       additionalProperties: true
       description: "The total market value of the account. Note that this field is\
@@ -3546,15 +3458,12 @@ components:
       additionalProperties: true
       description: Holds balance information for a single currency in an account.
       example:
-        currency:
-          code: USD
-          name: US Dollar
-          id: 87b24961-b51e-4db8-9226-f198f6518a89
+        currency: null
         cash: 300.71
         buying_power: 410.71
       properties:
         currency:
-          $ref: '#/components/schemas/Currency'
+          $ref: '#/components/schemas/Balance_currency'
         cash:
           description: The amount of available cash in the account denominated in
             the currency of the `currency` field.
@@ -5257,8 +5166,7 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-SyncStatusDate
     HoldingsSyncStatusDate:
       description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
-      example: 2024-06-28 18:42:46.561408+00:00
-      format: datetime
+      format: date-time
       nullable: true
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
@@ -5379,25 +5287,27 @@ components:
         account:
           number: Q6542138443
           balance:
-            total: null
-          brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            total:
+              amount: 15363.23
+              currency: USD
+          brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
           meta:
             type: Margin
             status: ACTIVE
-            institution_name: Alpaca
-          name: Registered Retirement Savings Account
+            institution_name: Robinhood
+          name: Robinhood Individual
           sync_status:
             holdings:
-              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
             transactions:
-              last_successful_sync: 2022-01-24T00:00:00.000+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
-              first_transaction_date: 2022-01-24T00:00:00.000+00:00
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              first_transaction_date: ""
+          id: ""
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          created_date: 2021-06-04T16:26:46.523Z
-          institution_name: Alpaca
+          created_date: 2024-07-23T22:50:22.761Z
+          institution_name: Robinhood
           cash_restrictions: []
       properties:
         account:
@@ -5478,25 +5388,27 @@ components:
           account:
             number: Q6542138443
             balance:
-              total: null
-            brokerage_authorization: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              total:
+                amount: 15363.23
+                currency: USD
+            brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
             meta:
               type: Margin
               status: ACTIVE
-              institution_name: Alpaca
-            name: Registered Retirement Savings Account
+              institution_name: Robinhood
+            name: Robinhood Individual
             sync_status:
               holdings:
-                last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+                last_successful_sync: ""
                 initial_sync_completed: true
               transactions:
-                last_successful_sync: 2022-01-24T00:00:00.000+00:00
+                last_successful_sync: ""
                 initial_sync_completed: true
-                first_transaction_date: 2022-01-24T00:00:00.000+00:00
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+                first_transaction_date: ""
+            id: ""
             portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            created_date: 2021-06-04T16:26:46.523Z
-            institution_name: Alpaca
+            created_date: 2024-07-23T22:50:22.761Z
+            institution_name: Robinhood
             cash_restrictions: []
       properties:
         trade:
@@ -5741,12 +5653,12 @@ components:
           name: Registered Retirement Savings Account
           sync_status:
             holdings:
-              last_successful_sync: 2024-06-28 18:42:46.561408+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
             transactions:
-              last_successful_sync: 2022-01-24T00:00:00.000+00:00
+              last_successful_sync: ""
               initial_sync_completed: true
-              first_transaction_date: 2022-01-24T00:00:00.000+00:00
+              first_transaction_date: ""
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
         id:
@@ -6288,25 +6200,9 @@ components:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema:
       example: 30
       type: number
-      x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
@@ -6332,16 +6228,24 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Amount-properties-amount:
+    konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-HoldingsStatus-properties-initial_sync_completed:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-amount:
       example: 15363.23
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Amount-properties-currency:
+    konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-currency:
       example: USD
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-name:
-      example: Registered Retirement Savings Account
+      example: Robinhood Individual
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-number:
@@ -6349,11 +6253,11 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-institution_name:
-      example: Alpaca
+      example: Robinhood
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-created_date:
-      example: 2021-06-04T16:26:46.523Z
+      example: 2024-07-23T22:50:22.761Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-meta:
@@ -6361,7 +6265,7 @@ components:
       example:
         type: Margin
         status: ACTIVE
-        institution_name: Alpaca
+        institution_name: Robinhood
       properties:
         type:
           example: Margin
@@ -6370,7 +6274,7 @@ components:
           example: ACTIVE
           type: string
         institution_name:
-          example: Alpaca
+          example: Robinhood
           type: string
       type: object
       x-do-not-generate: true
@@ -6552,45 +6456,6 @@ components:
           example: Alpaca
           type: string
       type: object
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-name:
-      example: Robinhood Individual
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-number:
-      example: Q6542138443
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-institution_name:
-      example: Alpaca
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-meta:
-      additionalProperties: true
-      example:
-        type: Margin
-        status: ACTIVE
-        institution_name: Alpaca
-      properties:
-        type:
-          example: Margin
-          type: string
-        status:
-          example: ACTIVE
-          type: string
-        institution_name:
-          example: Alpaca
-          type: string
-      type: object
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-cash_restrictions:
-      items:
-        type: string
-      type: array
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SnapTradeHoldingsAccountAccountId-properties-created_date:
-      example: 2024-07-23T22:50:22.761Z
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeHoldingsTotalValue-properties-value:
       example: 32600.71
@@ -7620,11 +7485,7 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - userId
@@ -7663,11 +7524,7 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-balances-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - userId
@@ -7686,11 +7543,7 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-positions-get-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - userId
@@ -7722,11 +7575,7 @@ components:
           x-konfig-original-example: 30
           x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-3-schema
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-get-parameters-4-schema
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - userId
@@ -7940,8 +7789,7 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - userId
@@ -8442,11 +8290,26 @@ components:
       - time_in_force
       type: object
     AccountBalance_total:
-      allOf:
-      - $ref: '#/components/schemas/Amount'
-      description: "Total value of this account (includes cash, equity, fixed income,\
-        \ etc)"
+      description: "Total market value of this account (includes cash, equity, fixed\
+        \ income, etc). This value is directly obtained from the brokerage and should\
+        \ reflect the most accurate value of the account."
+      example:
+        amount: 15363.23
+        currency: USD
       nullable: true
+      properties:
+        amount:
+          description: Total value denominated in the currency of the `currency` field.
+          example: 15363.23
+          type: number
+          x-konfig-original-example: 15363.23
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-amount
+        currency:
+          description: The ISO-4217 currency code for the amount.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountBalance-properties-total-properties-currency
     AccountOrderRecord_universal_symbol:
       allOf:
       - $ref: '#/components/schemas/UniversalSymbol'
@@ -8531,10 +8394,10 @@ components:
           x-konfig-original-example: 0.1
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-StrategyQuotes-properties-greek-properties-rho
       type: object
-    SnapTradeHoldingsAccountAccountId_balance:
+    Balance_currency:
       allOf:
-      - $ref: '#/components/schemas/AccountBalance'
-      nullable: true
+      - $ref: '#/components/schemas/Currency'
+      description: The currency of the balance. This applies to both `cash` and `buying_power`.
     Symbol_figi_instrument:
       allOf:
       - $ref: '#/components/schemas/FigiInstrument'

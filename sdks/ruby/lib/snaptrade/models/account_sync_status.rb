@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Status of account
+  # Contains status update for the account sync process between SnapTrade and the brokerage.
   class AccountSyncStatus
     attr_accessor :transactions
 
