@@ -355,7 +355,7 @@ paths:
         - Account Information
       summary: List account holdings
       description: |
-        Lists balances, positions, option positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
+        Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
         The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserHoldings
@@ -401,7 +401,10 @@ paths:
       tags:
         - Account Information
       summary: List accounts
-      description: Get a list of all Account objects for the authenticated SnapTrade user.
+      description: |
+        Returns all brokerage accounts known to SnapTrade for the authenticated user.
+
+        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -416,7 +419,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: A list of all Account objects for the authenticated user.
+          description: OK
           content:
             application/json:
               schema:
@@ -429,10 +432,11 @@ paths:
     get:
       tags:
         - Account Information
-      summary: Return details of a specific investment account
+      summary: Get account detail
       description: |
-        Returns an account object with details for the specified account,
-        including the total account market value.
+        Returns account detail known to SnapTrade for the specified account.
+
+        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountDetails
       parameters:
         - in: query
@@ -446,16 +450,13 @@ paths:
           schema:
             $ref: "#/components/schemas/UserSecret"
         - in: path
-          name: accountId
           required: true
-          description: The ID of the account to get detail of.
+          name: accountId
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: Details of a specific investment account
+          description: OK
           content:
             application/json:
               schema:
@@ -503,7 +504,10 @@ paths:
         - Account Information
       summary: List account balances
       operationId: AccountInformation_getUserAccountBalance
-      description: A list of account balances for the specified account (one per currency that the account holds).
+      description: |
+        Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       parameters:
         - in: query
           required: true
@@ -518,16 +522,13 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to get balances.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: List of all balances in investment account
+          description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -539,7 +540,10 @@ paths:
       tags:
         - Account Information
       summary: List account positions
-      description: Returns a list of positions in the specified account.
+      description: |
+        Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
+        
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_getUserAccountPositions
       parameters:
         - in: query
@@ -555,16 +559,13 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to get positions.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: List all positions in investment account
+          description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
                 items:
@@ -575,9 +576,12 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List account orders
+      summary: List account recent orders
       operationId: AccountInformation_getUserAccountOrders
-      description: Fetch all recent orders from a user's account.
+      description: |
+        Returns a list of recent orders in the specified account.
+        
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       parameters:
         - in: query
           required: true
@@ -609,14 +613,11 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to get orders.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: List all orders in account
+          description: OK
           content:
             application/json:
               schema:
@@ -785,9 +786,11 @@ paths:
     get:
       tags:
         - Options
-      summary: Get account option holdings
+      summary: List account option positions
       description: |
-        Returns a list of Options Positions.
+        Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
+        
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: Options_listOptionHoldings
       parameters:
         - in: query
@@ -803,13 +806,11 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to fetch options holdings for.
           schema:
-            type: string
-            format: uuid
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: The option holdings in the account
+          description: OK
           content:
               application/json:
                 schema:
@@ -2002,75 +2003,99 @@ components:
         code:
           example: 1000
     AccountSyncStatus:
-      description: Status of account
+      description: Contains status update for the account sync process between SnapTrade and the brokerage.
       properties:
         transactions:
           $ref: "#/components/schemas/TransactionsStatus"
         holdings:
           $ref: "#/components/schemas/HoldingsStatus"
     TransactionsStatus:
-      description: Status of account transaction sync
+      description: |
+        Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions:
+        1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage.
+        2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage.
+        3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       properties:
         initial_sync_completed:
+          description: Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
           type: boolean
+          example: true 
         last_successful_sync:
-          $ref: "#/components/schemas/SyncStatusDate"
+          description: All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+          allOf:
+            - $ref: "#/components/schemas/SyncStatusDate"
         first_transaction_date:
-          $ref: "#/components/schemas/SyncStatusDate"
+          description: The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
+          allOf:
+            - $ref: "#/components/schemas/SyncStatusDate"
     HoldingsStatus:
-      description: Status of account holdings sync
+      description: | 
+        Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions:
+        1. Initial connection - SnapTrade syncs all holdings (positions, balances, recent orders, and transactions) immediately after the connection is established.
+        2. Daily sync - Once a day SnapTrade refreshes all holdings from the brokerage.
+        3. Manual sync - You can trigger a refresh of holdings with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       properties:
         initial_sync_completed:
+          description: Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
           type: boolean
+          example: true 
         last_successful_sync:
-          $ref: "#/components/schemas/HoldingsSyncStatusDate"
+          description: The last time holdings were successfully synced by SnapTrade.
+          allOf:
+            - $ref: "#/components/schemas/HoldingsSyncStatusDate"
     AccountBalance:
       description: Contains balance related information for the account.
       properties:
         total:
-          description: Total value of this account (includes cash, equity, fixed income, etc)
+          description: Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
           nullable: true
-          allOf:
-           - $ref: "#/components/schemas/Amount"
-    Amount:
-      description: Total value of the account, as reported by the brokerage
-      properties:
-        amount:
-          type: number
-          description: Total value denominated in the currency of the `currency` field.
-          example: 15363.23
-        currency:
-          type: string
-          description: The ISO-4217 currency code for the amount.
-          example: USD
+          properties:
+            amount:
+              type: number
+              description: Total value denominated in the currency of the `currency` field.
+              example: 15363.23
+            currency:
+              type: string
+              description: The ISO-4217 currency code for the amount.
+              example: USD
     Account:
-      description: SnapTradeUser Investment Account
+      description: A single brokerage account at a financial institution.
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+          allOf:
+            - $ref: "#/components/schemas/AccountID"
         brokerage_authorization:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/BrokerageAuthID"
         portfolio_group:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/PortfolioGroupID"
         name:
           type: string
-          example: Registered Retirement Savings Account
+          description: A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+          example: Robinhood Individual
+          nullable: true
         number:
           type: string
           example: Q6542138443
+          description: The account number assigned by the financial institution.
         institution_name:
           type: string
-          example: Alpaca
+          description: The name of the financial institution that holds the account.
+          example: Robinhood
         created_date:
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
           type: string
-          example: 2021-06-04T16:26:46.523334Z
+          format: date-time
+          example: 2024-07-23T22:50:22.761390Z
         meta:
           type: object
+          deprecated: true
+          description: Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
           example:
             type: Margin
             status: ACTIVE
-            institution_name: Alpaca
+            institution_name: Robinhood
         cash_restrictions:
           deprecated: true
           description: This field is deprecated.
@@ -2137,8 +2162,7 @@ components:
       type: object
       properties:
         account:
-          # FIXME - This should be a reference to the Account object
-          $ref: "#/components/schemas/SnapTradeHoldingsAccountAccountId"
+          $ref: "#/components/schemas/Account"
         balances:
           type: array
           nullable: true
@@ -2449,53 +2473,6 @@ components:
             status: ACTIVE
             institution_name: Alpaca
 
-    SnapTradeHoldingsAccountAccountId:
-      description: A single brokerage account at a financial institution.
-      type: object
-      properties:
-        id:
-          $ref: "#/components/schemas/AccountID"
-        brokerage_authorization:
-          $ref: "#/components/schemas/BrokerageAuthID"
-        portfolio_group:
-          $ref: "#/components/schemas/PortfolioGroupID"
-        name:
-          type: string
-          description: A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
-          example: Robinhood Individual
-          nullable: true
-        number:
-          type: string
-          example: Q6542138443
-          description: The account number assigned by the financial institution.
-        institution_name:
-          type: string
-          description: The name of the financial institution that holds the account.
-          example: Alpaca
-        balance:
-          nullable: true
-          allOf:
-            - $ref: "#/components/schemas/AccountBalance"
-        meta:
-          type: object
-          deprecated: true
-          description: Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
-          example:
-            type: Margin
-            status: ACTIVE
-            institution_name: Alpaca
-        cash_restrictions:
-          deprecated: true
-          description: This field is deprecated.
-          type: array
-          items:
-            type: string
-          example: []
-        created_date:
-          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
-          type: string
-          format: date-time
-          example: 2024-07-23T22:50:22.761390Z
     SnapTradeHoldingsTotalValue:
       description: The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to `account.balance.total`.
       type: object
@@ -2515,7 +2492,9 @@ components:
       type: object
       properties:
         currency:
-          $ref: "#/components/schemas/Currency"
+          description: The currency of the balance. This applies to both `cash` and `buying_power`.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         cash:
           type: number
           description: The amount of available cash in the account denominated in the currency of the `currency` field.
@@ -3367,7 +3346,7 @@ components:
         Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
       type: string
       example: "2024-06-28 18:42:46.561408+00:00"
-      format: datetime
+      format: date-time
       nullable: true
     ManualTrade:
       description: A manual trade object
