@@ -80,7 +80,7 @@ public class NetContributions {
    * @return date
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Sun Jan 23 16:00:00 PST 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.")
+  @ApiModelProperty(example = "Mon Jan 24 00:00:00 UTC 2022", value = "Date used to specify timeframe for a reporting call (in YYYY-MM-DD format). These dates are inclusive.")
 
   public LocalDate getDate() {
     return date;
