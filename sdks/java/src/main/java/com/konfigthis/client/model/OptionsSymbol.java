@@ -270,7 +270,7 @@ public class OptionsSymbol {
    * @return expirationDate
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "Fri Dec 18 00:00:00 UTC 2026", required = true, value = "The option expiration date.")
+  @ApiModelProperty(example = "Thu Dec 17 16:00:00 PST 2026", required = true, value = "The option expiration date.")
 
   public LocalDate getExpirationDate() {
     return expirationDate;

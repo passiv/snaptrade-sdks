@@ -232,10 +232,6 @@ public class HoldingsStatus {
           throw new IllegalArgumentException(String.format("The required field(s) %s in HoldingsStatus is not found in the empty JSON string", HoldingsStatus.openapiRequiredFields.toString()));
         }
       }
-      // validate the optional field `last_successful_sync`
-      if (jsonObj.get("last_successful_sync") != null && !jsonObj.get("last_successful_sync").isJsonNull()) {
-        OffsetDateTime.validateJsonObject(jsonObj.getAsJsonObject("last_successful_sync"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

@@ -597,10 +597,6 @@ public class Account {
           throw new IllegalArgumentException(String.format("The required field(s) %s in Account is not found in the empty JSON string", Account.openapiRequiredFields.toString()));
         }
       }
-      // validate the optional field `id`
-      if (jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) {
-        UUID.validateJsonObject(jsonObj.getAsJsonObject("id"));
-      }
       if ((jsonObj.get("brokerage_authorization") != null && !jsonObj.get("brokerage_authorization").isJsonNull()) && !jsonObj.get("brokerage_authorization").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_authorization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_authorization").toString()));
       }

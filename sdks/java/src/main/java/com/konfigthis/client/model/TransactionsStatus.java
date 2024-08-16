@@ -268,14 +268,6 @@ public class TransactionsStatus {
           throw new IllegalArgumentException(String.format("The required field(s) %s in TransactionsStatus is not found in the empty JSON string", TransactionsStatus.openapiRequiredFields.toString()));
         }
       }
-      // validate the optional field `last_successful_sync`
-      if (jsonObj.get("last_successful_sync") != null && !jsonObj.get("last_successful_sync").isJsonNull()) {
-        LocalDate.validateJsonObject(jsonObj.getAsJsonObject("last_successful_sync"));
-      }
-      // validate the optional field `first_transaction_date`
-      if (jsonObj.get("first_transaction_date") != null && !jsonObj.get("first_transaction_date").isJsonNull()) {
-        LocalDate.validateJsonObject(jsonObj.getAsJsonObject("first_transaction_date"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
