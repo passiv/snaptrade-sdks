@@ -8,7 +8,7 @@ Contains balance related information for the account.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**total** | [**AmountNullable**](AmountNullable.md) |  |  [optional] |
+|**total** | [**AccountBalanceTotal**](AccountBalanceTotal.md) |  |  [optional] |
 
 
 

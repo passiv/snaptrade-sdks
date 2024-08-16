@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOrders(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOrders unit test stubs
-        List account orders
+        List account recent orders
     """
 
     def setUp(self):

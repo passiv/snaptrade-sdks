@@ -100,7 +100,7 @@ request_path_account_id = api_client.PathParameter(
 )
 
 
-class SchemaFor200ResponseBody(
+class SchemaFor200ResponseBodyApplicationJson(
     schemas.ListSchema
 ):
 
@@ -115,7 +115,7 @@ class SchemaFor200ResponseBody(
         cls,
         arg: typing.Union[typing.Tuple['Position'], typing.List['Position']],
         _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'SchemaFor200ResponseBody':
+    ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
             arg,
@@ -140,8 +140,8 @@ _response_for_200 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor200,
     response_cls_async=ApiResponseFor200Async,
     content={
-        '*/*': api_client.MediaType(
-            schema=SchemaFor200ResponseBody),
+        'application/json': api_client.MediaType(
+            schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
 
@@ -160,7 +160,7 @@ _response_for_default = api_client.OpenApiResponse(
     response_cls=ApiResponseForDefault,
 )
 _all_accept_content_types = (
-    '*/*',
+    'application/json',
 )
 
 

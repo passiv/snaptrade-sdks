@@ -115,29 +115,29 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of StrategyQuotes</returns>
         ApiResponse<StrategyQuotes> GetOptionsStrategyQuoteWithHttpInfo(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0);
         /// <summary>
-        /// Get account option holdings
+        /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of Options Positions. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
         List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0);
 
         /// <summary>
-        /// Get account option holdings
+        /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of Options Positions. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
@@ -275,30 +275,30 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (StrategyQuotes)</returns>
         System.Threading.Tasks.Task<ApiResponse<StrategyQuotes>> GetOptionsStrategyQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string optionStrategyId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get account option holdings
+        /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of Options Positions. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
         System.Threading.Tasks.Task<List<OptionsPosition>> ListOptionHoldingsAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get account option holdings
+        /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of Options Positions. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>
@@ -1143,12 +1143,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account option holdings Returns a list of Options Positions. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;OptionsPosition&gt;</returns>
         public List<OptionsPosition> ListOptionHoldings(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1158,12 +1158,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account option holdings Returns a list of Options Positions. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;OptionsPosition&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<OptionsPosition>> ListOptionHoldingsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
@@ -1246,12 +1246,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account option holdings Returns a list of Options Positions. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;OptionsPosition&gt;</returns>
@@ -1262,12 +1262,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account option holdings Returns a list of Options Positions. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to fetch options holdings for.</param>
+        /// <param name="accountId"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;OptionsPosition&gt;)</returns>

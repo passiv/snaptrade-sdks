@@ -107,7 +107,7 @@ _auth = [
 ]
 
 
-class SchemaFor200ResponseBody(
+class SchemaFor200ResponseBodyApplicationJson(
     schemas.ListSchema
 ):
 
@@ -122,7 +122,7 @@ class SchemaFor200ResponseBody(
         cls,
         arg: typing.Union[typing.Tuple['Balance'], typing.List['Balance']],
         _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'SchemaFor200ResponseBody':
+    ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
             arg,
@@ -147,8 +147,8 @@ _response_for_200 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor200,
     response_cls_async=ApiResponseFor200Async,
     content={
-        '*/*': api_client.MediaType(
-            schema=SchemaFor200ResponseBody),
+        'application/json': api_client.MediaType(
+            schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
 
@@ -171,7 +171,7 @@ _status_code_to_response = {
     'default': _response_for_default,
 }
 _all_accept_content_types = (
-    '*/*',
+    'application/json',
 )
 
 

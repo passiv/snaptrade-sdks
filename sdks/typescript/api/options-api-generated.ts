@@ -253,11 +253,11 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns a list of Options Positions. 
-         * @summary Get account option holdings
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+         * @summary List account option positions
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account to fetch options holdings for.
+         * @param {string} accountId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -437,8 +437,8 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of Options Positions. 
-         * @summary Get account option holdings
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+         * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -504,8 +504,8 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOptionsStrategyQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of Options Positions. 
-         * @summary Get account option holdings
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+         * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -652,7 +652,7 @@ export type OptionsApiListOptionHoldingsRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account to fetch options holdings for.
+    * 
     * @type {string}
     * @memberof OptionsApiListOptionHoldings
     */
@@ -741,8 +741,8 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of Options Positions. 
-     * @summary Get account option holdings
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+     * @summary List account option positions
      * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

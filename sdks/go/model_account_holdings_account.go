@@ -17,7 +17,7 @@ import (
 
 // AccountHoldingsAccount A wrapper object containing holdings information for a single account.
 type AccountHoldingsAccount struct {
-	Account *SnapTradeHoldingsAccountAccountId `json:"account,omitempty"`
+	Account *Account `json:"account,omitempty"`
 	// List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
 	Balances []Balance `json:"balances,omitempty"`
 	// List of stock/ETF/crypto/mutual fund positions in the account.
@@ -50,9 +50,9 @@ func NewAccountHoldingsAccountWithDefaults() *AccountHoldingsAccount {
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
-func (o *AccountHoldingsAccount) GetAccount() SnapTradeHoldingsAccountAccountId {
+func (o *AccountHoldingsAccount) GetAccount() Account {
 	if o == nil || isNil(o.Account) {
-		var ret SnapTradeHoldingsAccountAccountId
+		var ret Account
 		return ret
 	}
 	return *o.Account
@@ -60,7 +60,7 @@ func (o *AccountHoldingsAccount) GetAccount() SnapTradeHoldingsAccountAccountId 
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountHoldingsAccount) GetAccountOk() (*SnapTradeHoldingsAccountAccountId, bool) {
+func (o *AccountHoldingsAccount) GetAccountOk() (*Account, bool) {
 	if o == nil || isNil(o.Account) {
     return nil, false
 	}
@@ -76,8 +76,8 @@ func (o *AccountHoldingsAccount) HasAccount() bool {
 	return false
 }
 
-// SetAccount gets a reference to the given SnapTradeHoldingsAccountAccountId and assigns it to the Account field.
-func (o *AccountHoldingsAccount) SetAccount(v SnapTradeHoldingsAccountAccountId) {
+// SetAccount gets a reference to the given Account and assigns it to the Account field.
+func (o *AccountHoldingsAccount) SetAccount(v Account) {
 	o.Account = &v
 }
 

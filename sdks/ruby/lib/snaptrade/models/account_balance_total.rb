@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Total value of this account (includes cash, equity, fixed income, etc)
+  # Total market value of this account (includes cash, equity, fixed income, etc). This value is directly obtained from the brokerage and should reflect the most accurate value of the account.
   class AccountBalanceTotal
     # Total value denominated in the currency of the `currency` field.
     attr_accessor :amount
@@ -44,13 +44,6 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'Amount'
-      ]
     end
 
     # Initializes the object

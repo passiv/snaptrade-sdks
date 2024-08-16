@@ -37,17 +37,74 @@ class AccountBalance(
     class MetaOapg:
         
         class properties:
-        
-            @staticmethod
-            def total() -> typing.Type['AmountNullable']:
-                return AmountNullable
+            
+            
+            class total(
+                schemas.AnyTypeSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    class properties:
+                        amount = schemas.NumberSchema
+                        currency = schemas.StrSchema
+                        __annotations__ = {
+                            "amount": amount,
+                            "currency": currency,
+                        }
+            
+                
+                @typing.overload
+                def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
+                
+                @typing.overload
+                def __getitem__(self, name: typing_extensions.Literal["currency"]) -> MetaOapg.properties.currency: ...
+                
+                @typing.overload
+                def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+                
+                def __getitem__(self, name: typing.Union[typing_extensions.Literal["amount", "currency", ], str]):
+                    # dict_instance[name] accessor
+                    return super().__getitem__(name)
+                
+                
+                @typing.overload
+                def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> typing.Union[MetaOapg.properties.amount, schemas.Unset]: ...
+                
+                @typing.overload
+                def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union[MetaOapg.properties.currency, schemas.Unset]: ...
+                
+                @typing.overload
+                def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+                
+                def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["amount", "currency", ], str]):
+                    return super().get_item_oapg(name)
+                
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    amount: typing.Union[MetaOapg.properties.amount, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+                    currency: typing.Union[MetaOapg.properties.currency, str, schemas.Unset] = schemas.unset,
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'total':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        amount=amount,
+                        currency=currency,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             __annotations__ = {
                 "total": total,
             }
 
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["total"]) -> 'AmountNullable': ...
+    def __getitem__(self, name: typing_extensions.Literal["total"]) -> MetaOapg.properties.total: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -58,7 +115,7 @@ class AccountBalance(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["total"]) -> typing.Union['AmountNullable', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["total"]) -> typing.Union[MetaOapg.properties.total, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -70,7 +127,7 @@ class AccountBalance(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-        total: typing.Union['AmountNullable', schemas.Unset] = schemas.unset,
+        total: typing.Union[MetaOapg.properties.total, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'AccountBalance':
@@ -81,5 +138,3 @@ class AccountBalance(
             _configuration=_configuration,
             **kwargs,
         )
-
-from snaptrade_client.model.amount_nullable import AmountNullable

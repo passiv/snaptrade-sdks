@@ -11,14 +11,15 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Status of account transaction sync
+  # Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage. 2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage. 3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
   class TransactionsStatus
+    # Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
     attr_accessor :initial_sync_completed
 
-    # Date in YYYY-MM-DD format or null
+    # All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
     attr_accessor :last_successful_sync
 
-    # Date in YYYY-MM-DD format or null
+    # The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
     attr_accessor :first_transaction_date
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -47,8 +48,6 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'last_successful_sync',
-        :'first_transaction_date'
       ])
     end
 

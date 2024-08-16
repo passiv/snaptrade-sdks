@@ -19,7 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Currency;
+import com.konfigthis.client.model.BalanceCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -54,7 +54,7 @@ import com.konfigthis.client.JSON;
 public class Balance {
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private Currency currency;
+  private BalanceCurrency currency;
 
   public static final String SERIALIZED_NAME_CASH = "cash";
   @SerializedName(SERIALIZED_NAME_CASH)
@@ -67,7 +67,7 @@ public class Balance {
   public Balance() {
   }
 
-  public Balance currency(Currency currency) {
+  public Balance currency(BalanceCurrency currency) {
     
     
     
@@ -83,12 +83,12 @@ public class Balance {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Currency getCurrency() {
+  public BalanceCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(Currency currency) {
+  public void setCurrency(BalanceCurrency currency) {
     
     
     
@@ -300,7 +300,7 @@ public class Balance {
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        BalanceCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
   }
 

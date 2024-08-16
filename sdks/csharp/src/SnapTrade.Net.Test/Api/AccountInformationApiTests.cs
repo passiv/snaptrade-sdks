@@ -84,7 +84,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get balances.
+            var accountId = "accountId_example";
             
             try
             {
@@ -114,11 +114,11 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get detail of.
+            var accountId = "accountId_example";
             
             try
             {
-                // Return details of a specific investment account
+                // Get account detail
                 Account result = client.AccountInformation.GetUserAccountDetails(userId, userSecret, accountId);
                 Console.WriteLine(result);
             }
@@ -144,13 +144,13 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get orders.
+            var accountId = "accountId_example";
             var state = "all"; // defaults value is set to \"all\" (optional) 
             var days = 30; // Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in. (optional) 
             
             try
             {
-                // List account orders
+                // List account recent orders
                 List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state, days);
                 Console.WriteLine(result);
             }
@@ -176,7 +176,7 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get positions.
+            var accountId = "accountId_example";
             
             try
             {

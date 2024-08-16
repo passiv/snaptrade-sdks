@@ -41,7 +41,7 @@ namespace SnapTrade.Net.Model
         /// <param name="optionPositions">List of option positions in the account..</param>
         /// <param name="orders">List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null &#x60;universal_symbol&#x60; field and a non-null &#x60;option_symbol&#x60; field..</param>
         /// <param name="totalValue">totalValue.</param>
-        public AccountHoldingsAccount(SnapTradeHoldingsAccountAccountId account = default(SnapTradeHoldingsAccountAccountId), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<OptionsPosition> optionPositions = default(List<OptionsPosition>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
+        public AccountHoldingsAccount(Account account = default(Account), List<Balance> balances = default(List<Balance>), List<Position> positions = default(List<Position>), List<OptionsPosition> optionPositions = default(List<OptionsPosition>), List<AccountOrderRecord> orders = default(List<AccountOrderRecord>), SnapTradeHoldingsTotalValue totalValue = default(SnapTradeHoldingsTotalValue)) : base()
         {
             this.Account = account;
             this.Balances = balances;
@@ -56,7 +56,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Account
         /// </summary>
         [DataMember(Name = "account", EmitDefaultValue = false)]
-        public SnapTradeHoldingsAccountAccountId Account { get; set; }
+        public Account Account { get; set; }
 
         /// <summary>
         /// List of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).

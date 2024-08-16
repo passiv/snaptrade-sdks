@@ -47,7 +47,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         request := client.AccountInformationApi.GetUserAccountBalance(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -63,7 +63,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         request := client.AccountInformationApi.GetUserAccountDetails(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         
         resp, httpRes, err := request.Execute()
@@ -79,7 +79,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         request := client.AccountInformationApi.GetUserAccountOrders(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.State("state_example")
         request.Days(30)
@@ -97,7 +97,7 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         request := client.AccountInformationApi.GetUserAccountPositions(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         
         resp, httpRes, err := request.Execute()

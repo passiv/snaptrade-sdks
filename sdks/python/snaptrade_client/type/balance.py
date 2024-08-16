@@ -21,6 +21,7 @@ class RequiredBalance(TypedDict):
     pass
 
 class OptionalBalance(TypedDict, total=False):
+    # The currency of the balance. This applies to both `cash` and `buying_power`.
     currency: Currency
 
     # The amount of available cash in the account denominated in the currency of the `currency` field.

@@ -38,7 +38,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'currency' => :'Currency',
+        :'currency' => :'BalanceCurrency',
         :'cash' => :'Float',
         :'buying_power' => :'Float'
       }

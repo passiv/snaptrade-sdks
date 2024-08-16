@@ -39,8 +39,8 @@ class AccountHoldingsAccount(
         class properties:
         
             @staticmethod
-            def account() -> typing.Type['SnapTradeHoldingsAccountAccountId']:
-                return SnapTradeHoldingsAccountAccountId
+            def account() -> typing.Type['Account']:
+                return Account
             
             
             class balances(
@@ -164,7 +164,7 @@ class AccountHoldingsAccount(
         additional_properties = schemas.AnyTypeSchema
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["account"]) -> 'SnapTradeHoldingsAccountAccountId': ...
+    def __getitem__(self, name: typing_extensions.Literal["account"]) -> 'Account': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["balances"]) -> MetaOapg.properties.balances: ...
@@ -189,7 +189,7 @@ class AccountHoldingsAccount(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union['SnapTradeHoldingsAccountAccountId', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union['Account', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["balances"]) -> typing.Union[MetaOapg.properties.balances, schemas.Unset]: ...
@@ -215,7 +215,7 @@ class AccountHoldingsAccount(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        account: typing.Union['SnapTradeHoldingsAccountAccountId', schemas.Unset] = schemas.unset,
+        account: typing.Union['Account', schemas.Unset] = schemas.unset,
         balances: typing.Union[MetaOapg.properties.balances, list, tuple, None, schemas.Unset] = schemas.unset,
         positions: typing.Union[MetaOapg.properties.positions, list, tuple, None, schemas.Unset] = schemas.unset,
         option_positions: typing.Union[MetaOapg.properties.option_positions, list, tuple, None, schemas.Unset] = schemas.unset,
@@ -237,9 +237,9 @@ class AccountHoldingsAccount(
             **kwargs,
         )
 
+from snaptrade_client.model.account import Account
 from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.position import Position
-from snaptrade_client.model.snap_trade_holdings_account_account_id import SnapTradeHoldingsAccountAccountId
 from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHoldingsTotalValue

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**BrokerageAuthorization** | Pointer to **string** |  | [optional] 
-**PortfolioGroup** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Number** | Pointer to **string** |  | [optional] 
-**InstitutionName** | Pointer to **string** |  | [optional] 
-**CreatedDate** | Pointer to **string** |  | [optional] 
-**Meta** | Pointer to **map[string]interface{}** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field. | [optional] 
+**BrokerageAuthorization** | Pointer to **string** | Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade. | [optional] 
+**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
+**Name** | Pointer to **NullableString** | A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity. | [optional] 
+**Number** | Pointer to **string** | The account number assigned by the financial institution. | [optional] 
+**InstitutionName** | Pointer to **string** | The name of the financial institution that holds the account. | [optional] 
+**CreatedDate** | Pointer to **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution. | [optional] 
+**Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
 **SyncStatus** | Pointer to [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 **Balance** | Pointer to [**AccountBalance**](AccountBalance.md) |  | [optional] 
@@ -135,6 +135,16 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### SetNameNil
+
+`func (o *Account) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *Account) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetNumber
 
 `func (o *Account) GetNumber() string`
@@ -187,20 +197,20 @@ HasInstitutionName returns a boolean if a field has been set.
 
 ### GetCreatedDate
 
-`func (o *Account) GetCreatedDate() string`
+`func (o *Account) GetCreatedDate() time.Time`
 
 GetCreatedDate returns the CreatedDate field if non-nil, zero value otherwise.
 
 ### GetCreatedDateOk
 
-`func (o *Account) GetCreatedDateOk() (*string, bool)`
+`func (o *Account) GetCreatedDateOk() (*time.Time, bool)`
 
 GetCreatedDateOk returns a tuple with the CreatedDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedDate
 
-`func (o *Account) SetCreatedDate(v string)`
+`func (o *Account) SetCreatedDate(v time.Time)`
 
 SetCreatedDate sets CreatedDate field to given value.
 

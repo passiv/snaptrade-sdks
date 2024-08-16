@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Status of account transaction sync
+    /// Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions: 1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage. 2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage. 3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
     /// </summary>
     [DataContract(Name = "TransactionsStatus")]
     public partial class TransactionsStatus : IEquatable<TransactionsStatus>, IValidatableObject
@@ -35,10 +35,10 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionsStatus" /> class.
         /// </summary>
-        /// <param name="initialSyncCompleted">initialSyncCompleted.</param>
-        /// <param name="lastSuccessfulSync">Date in YYYY-MM-DD format or null.</param>
-        /// <param name="firstTransactionDate">Date in YYYY-MM-DD format or null.</param>
-        public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?), DateTime? firstTransactionDate = default(DateTime?))
+        /// <param name="initialSyncCompleted">Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete..</param>
+        /// <param name="lastSuccessfulSync">All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions..</param>
+        /// <param name="firstTransactionDate">The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade..</param>
+        public TransactionsStatus(bool initialSyncCompleted = default(bool), DateTime lastSuccessfulSync = default(DateTime), DateTime firstTransactionDate = default(DateTime))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
@@ -46,26 +46,25 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets InitialSyncCompleted
+        /// Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
         /// </summary>
+        /// <value>Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.</value>
         [DataMember(Name = "initial_sync_completed", EmitDefaultValue = true)]
         public bool InitialSyncCompleted { get; set; }
 
         /// <summary>
-        /// Date in YYYY-MM-DD format or null
+        /// All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
         /// </summary>
-        /// <value>Date in YYYY-MM-DD format or null</value>
-        [DataMember(Name = "last_successful_sync", EmitDefaultValue = true)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? LastSuccessfulSync { get; set; }
+        /// <value>All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.</value>
+        [DataMember(Name = "last_successful_sync", EmitDefaultValue = false)]
+        public DateTime LastSuccessfulSync { get; set; }
 
         /// <summary>
-        /// Date in YYYY-MM-DD format or null
+        /// The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade.
         /// </summary>
-        /// <value>Date in YYYY-MM-DD format or null</value>
-        [DataMember(Name = "first_transaction_date", EmitDefaultValue = true)]
-        [JsonConverter(typeof(OpenAPIDateConverter))]
-        public DateTime? FirstTransactionDate { get; set; }
+        /// <value>The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade.</value>
+        [DataMember(Name = "first_transaction_date", EmitDefaultValue = false)]
+        public DateTime FirstTransactionDate { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

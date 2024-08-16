@@ -17,7 +17,7 @@ import (
 
 // Balance Holds balance information for a single currency in an account.
 type Balance struct {
-	Currency *Currency `json:"currency,omitempty"`
+	Currency *BalanceCurrency `json:"currency,omitempty"`
 	// The amount of available cash in the account denominated in the currency of the `currency` field.
 	Cash NullableFloat32 `json:"cash,omitempty"`
 	// Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
@@ -45,9 +45,9 @@ func NewBalanceWithDefaults() *Balance {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *Balance) GetCurrency() Currency {
+func (o *Balance) GetCurrency() BalanceCurrency {
 	if o == nil || isNil(o.Currency) {
-		var ret Currency
+		var ret BalanceCurrency
 		return ret
 	}
 	return *o.Currency
@@ -55,7 +55,7 @@ func (o *Balance) GetCurrency() Currency {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Balance) GetCurrencyOk() (*Currency, bool) {
+func (o *Balance) GetCurrencyOk() (*BalanceCurrency, bool) {
 	if o == nil || isNil(o.Currency) {
     return nil, false
 	}
@@ -71,8 +71,8 @@ func (o *Balance) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given Currency and assigns it to the Currency field.
-func (o *Balance) SetCurrency(v Currency) {
+// SetCurrency gets a reference to the given BalanceCurrency and assigns it to the Currency field.
+func (o *Balance) SetCurrency(v BalanceCurrency) {
 	o.Currency = &v
 }
 

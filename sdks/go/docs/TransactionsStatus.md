@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InitialSyncCompleted** | Pointer to **bool** |  | [optional] 
-**LastSuccessfulSync** | Pointer to **NullableString** | Date in YYYY-MM-DD format or null | [optional] 
-**FirstTransactionDate** | Pointer to **NullableString** | Date in YYYY-MM-DD format or null | [optional] 
+**InitialSyncCompleted** | Pointer to **bool** | Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete. | [optional] 
+**LastSuccessfulSync** | Pointer to **string** | All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions. | [optional] 
+**FirstTransactionDate** | Pointer to **string** | The date of the first transaction in the account known to SnapTrade. It&#39;s possible that the account has transactions before this date, but they are not known to SnapTrade. | [optional] 
 
 ## Methods
 
@@ -77,16 +77,6 @@ SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
 
 HasLastSuccessfulSync returns a boolean if a field has been set.
 
-### SetLastSuccessfulSyncNil
-
-`func (o *TransactionsStatus) SetLastSuccessfulSyncNil(b bool)`
-
- SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
-
-### UnsetLastSuccessfulSync
-`func (o *TransactionsStatus) UnsetLastSuccessfulSync()`
-
-UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
 ### GetFirstTransactionDate
 
 `func (o *TransactionsStatus) GetFirstTransactionDate() string`
@@ -112,16 +102,6 @@ SetFirstTransactionDate sets FirstTransactionDate field to given value.
 
 HasFirstTransactionDate returns a boolean if a field has been set.
 
-### SetFirstTransactionDateNil
-
-`func (o *TransactionsStatus) SetFirstTransactionDateNil(b bool)`
-
- SetFirstTransactionDateNil sets the value for FirstTransactionDate to be an explicit nil
-
-### UnsetFirstTransactionDate
-`func (o *TransactionsStatus) UnsetFirstTransactionDate()`
-
-UnsetFirstTransactionDate ensures that no value is present for FirstTransactionDate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

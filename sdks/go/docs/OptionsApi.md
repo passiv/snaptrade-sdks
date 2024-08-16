@@ -7,7 +7,7 @@ Method | Path | Description
 [**GetOptionStrategy**](OptionsApi.md#GetOptionStrategy) | **Post** /accounts/{accountId}/optionStrategy | Create options strategy
 [**GetOptionsChain**](OptionsApi.md#GetOptionsChain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 [**GetOptionsStrategyQuote**](OptionsApi.md#GetOptionsStrategyQuote) | **Get** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
-[**ListOptionHoldings**](OptionsApi.md#ListOptionHoldings) | **Get** /accounts/{accountId}/options | Get account option holdings
+[**ListOptionHoldings**](OptionsApi.md#ListOptionHoldings) | **Get** /accounts/{accountId}/options | List account option positions
 [**PlaceOptionStrategy**](OptionsApi.md#PlaceOptionStrategy) | **Post** /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute | Place an option strategy order
 
 
@@ -176,7 +176,7 @@ func main() {
 
 ## ListOptionHoldings
 
-Get account option holdings
+List account option positions
 
 
 

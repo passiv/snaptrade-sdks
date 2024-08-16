@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// AccountSyncStatus Status of account
+// AccountSyncStatus Contains status update for the account sync process between SnapTrade and the brokerage.
 type AccountSyncStatus struct {
 	Transactions *TransactionsStatus `json:"transactions,omitempty"`
 	Holdings *HoldingsStatus `json:"holdings,omitempty"`

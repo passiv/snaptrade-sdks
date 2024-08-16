@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Status of account
+    /// Contains status update for the account sync process between SnapTrade and the brokerage.
     /// </summary>
     [DataContract(Name = "AccountSyncStatus")]
     public partial class AccountSyncStatus : IEquatable<AccountSyncStatus>, IValidatableObject

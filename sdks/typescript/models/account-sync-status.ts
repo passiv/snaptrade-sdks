@@ -14,7 +14,7 @@ import { HoldingsStatus } from './holdings-status';
 import { TransactionsStatus } from './transactions-status';
 
 /**
- * Status of account
+ * Contains status update for the account sync process between SnapTrade and the brokerage.
  * @export
  * @interface AccountSyncStatus
  */

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// SnapTradeUser Investment Account
+    /// A single brokerage account at a financial institution.
     /// </summary>
     [DataContract(Name = "Account")]
     public partial class Account : IEquatable<Account>, IValidatableObject
@@ -35,18 +35,18 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="brokerageAuthorization">brokerageAuthorization.</param>
-        /// <param name="portfolioGroup">portfolioGroup.</param>
-        /// <param name="name">name.</param>
-        /// <param name="number">number.</param>
-        /// <param name="institutionName">institutionName.</param>
-        /// <param name="createdDate">createdDate.</param>
-        /// <param name="meta">meta.</param>
+        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field..</param>
+        /// <param name="brokerageAuthorization">Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade..</param>
+        /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
+        /// <param name="name">A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity..</param>
+        /// <param name="number">The account number assigned by the financial institution..</param>
+        /// <param name="institutionName">The name of the financial institution that holds the account..</param>
+        /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution..</param>
+        /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="syncStatus">syncStatus.</param>
         /// <param name="balance">balance.</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), string createdDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<string> cashRestrictions = default(List<string>), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance)) : base()
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<string> cashRestrictions = default(List<string>), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance)) : base()
         {
             this.Id = id;
             this.BrokerageAuthorization = brokerageAuthorization;
@@ -63,51 +63,61 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field.
         /// </summary>
+        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets BrokerageAuthorization
+        /// Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.</value>
         [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
         public string BrokerageAuthorization { get; set; }
 
         /// <summary>
-        /// Gets or Sets PortfolioGroup
+        /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
         /// </summary>
+        /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.</value>
         [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
+        [Obsolete]
         public string PortfolioGroup { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
         /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
+        /// <value>A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.</value>
+        [DataMember(Name = "name", EmitDefaultValue = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Number
+        /// The account number assigned by the financial institution.
         /// </summary>
+        /// <value>The account number assigned by the financial institution.</value>
         [DataMember(Name = "number", EmitDefaultValue = false)]
         public string Number { get; set; }
 
         /// <summary>
-        /// Gets or Sets InstitutionName
+        /// The name of the financial institution that holds the account.
         /// </summary>
+        /// <value>The name of the financial institution that holds the account.</value>
         [DataMember(Name = "institution_name", EmitDefaultValue = false)]
         public string InstitutionName { get; set; }
 
         /// <summary>
-        /// Gets or Sets CreatedDate
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
         /// </summary>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.</value>
         [DataMember(Name = "created_date", EmitDefaultValue = false)]
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         /// <summary>
-        /// Gets or Sets Meta
+        /// Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk.
         /// </summary>
+        /// <value>Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk.</value>
         [DataMember(Name = "meta", EmitDefaultValue = false)]
+        [Obsolete]
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
