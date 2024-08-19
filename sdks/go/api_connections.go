@@ -898,13 +898,13 @@ type ConnectionsApiSessionEventsRequest struct {
 	sessionId *string
 }
 
-// Optional comma seperated list of user IDs used to filter the request on specific users
+// Optional comma separated list of user IDs used to filter the request on specific users
 func (r *ConnectionsApiSessionEventsRequest) UserId(userId string) *ConnectionsApiSessionEventsRequest {
 	r.userId = &userId
 	return r
 }
 
-// Optional comma seperated list of session IDs used to filter the request on specific users
+// Optional comma separated list of session IDs used to filter the request on specific users
 func (r *ConnectionsApiSessionEventsRequest) SessionId(sessionId string) *ConnectionsApiSessionEventsRequest {
 	r.sessionId = &sessionId
 	return r

@@ -34,9 +34,9 @@ func (r AuthenticationApiDeleteSnapTradeUserRequest) Execute() (*DeleteUserRespo
 }
 
 /*
-DeleteSnapTradeUser Delete SnapTrade user
+DeleteSnapTradeUser Delete user
 
-Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -217,9 +217,9 @@ func (r AuthenticationApiListSnapTradeUsersRequest) Execute() ([]string, *http.R
 }
 
 /*
-ListSnapTradeUsers List SnapTrade users
+ListSnapTradeUsers List all users
 
-Returns a list of users you've registered over the SnapTrade API.
+Returns a list of all registered user IDs.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return AuthenticationApiListSnapTradeUsersRequest
@@ -595,7 +595,7 @@ func (r AuthenticationApiRegisterSnapTradeUserRequest) Execute() (*UserIDandSecr
 }
 
 /*
-RegisterSnapTradeUser Create SnapTrade user
+RegisterSnapTradeUser Register user
 
 Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
 Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
@@ -783,10 +783,9 @@ func (r AuthenticationApiResetSnapTradeUserSecretRequest) Execute() (*UserIDandS
 }
 
 /*
-ResetSnapTradeUserSecret Obtain a new user secret for a user
+ResetSnapTradeUserSecret Rotate user secret
 
-This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret
-is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

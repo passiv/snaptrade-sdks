@@ -26,7 +26,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    # @param brokerage_authorizations [String] Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_all_user_holdings(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
@@ -43,7 +43,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param brokerage_authorizations [String] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    # @param brokerage_authorizations [String] Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_all_user_holdings_with_http_info(user_id:, user_secret:, brokerage_authorizations: SENTINEL, extra: {})
       extra[:brokerage_authorizations] = brokerage_authorizations if brokerage_authorizations != SENTINEL
@@ -55,7 +55,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    # @option opts [String] :brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<AccountHoldings>]
     private def get_all_user_holdings_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_all_user_holdings_with_http_info(user_id, user_secret, opts)
@@ -67,7 +67,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    # @option opts [String] :brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     # @return [Array<(Array<AccountHoldings>, Integer, Hash)>] Array<AccountHoldings> data, response status code and response headers
     private def get_all_user_holdings_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging

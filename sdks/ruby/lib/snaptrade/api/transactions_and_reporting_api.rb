@@ -19,15 +19,19 @@ module SnapTrade
 
     # Get transaction history for a user
     #
-    # Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+    # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+    # 
+    # There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param start_date [Date] 
-    # @param end_date [Date] 
-    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
-    # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @param type [String] Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @param start_date [Date] The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    # @param end_date [Date] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    # @param accounts [String] Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
+    # @param brokerage_authorizations [String] Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - BUY - SELL - DIVIDEND - CONTRIBUTION - WITHDRAWAL - REI - INTEREST - FEE 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -41,15 +45,19 @@ module SnapTrade
 
     # Get transaction history for a user
     #
-    # Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+    # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+    # 
+    # There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+    # 
+    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param start_date [Date] 
-    # @param end_date [Date] 
-    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
-    # @param brokerage_authorizations [String] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @param type [String] Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @param start_date [Date] The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    # @param end_date [Date] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    # @param accounts [String] Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
+    # @param brokerage_authorizations [String] Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - BUY - SELL - DIVIDEND - CONTRIBUTION - WITHDRAWAL - REI - INTEREST - FEE 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -61,15 +69,15 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+    # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Date] :start_date 
-    # @option opts [Date] :end_date 
-    # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
-    # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @option opts [String] :type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @option opts [Date] :start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    # @option opts [Date] :end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    # @option opts [String] :accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
+    # @option opts [String] :brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
     # @return [Array<UniversalActivity>]
     private def get_activities_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_activities_with_http_info(user_id, user_secret, opts)
@@ -77,15 +85,15 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+    # Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Date] :start_date 
-    # @option opts [Date] :end_date 
-    # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
-    # @option opts [String] :brokerage_authorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    # @option opts [String] :type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # @option opts [Date] :start_date The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    # @option opts [Date] :end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    # @option opts [String] :accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
+    # @option opts [String] :brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
     # @return [Array<(Array<UniversalActivity>, Integer, Hash)>] Array<UniversalActivity> data, response status code and response headers
     private def get_activities_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging
@@ -155,7 +163,7 @@ module SnapTrade
     # @param end_date [Date] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param accounts [String] Optional comma separated list of account IDs used to filter the request on specific accounts
     # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -175,7 +183,7 @@ module SnapTrade
     # @param end_date [Date] 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param accounts [String] Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @param accounts [String] Optional comma separated list of account IDs used to filter the request on specific accounts
     # @param detailed [Boolean] Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @param frequency [String] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -193,7 +201,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @option opts [String] :accounts Optional comma separated list of account IDs used to filter the request on specific accounts
     # @option opts [Boolean] :detailed Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @option opts [String] :frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @return [PerformanceCustom]
@@ -209,7 +217,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :accounts Optional comma seperated list of account IDs used to filter the request on specific accounts
+    # @option opts [String] :accounts Optional comma separated list of account IDs used to filter the request on specific accounts
     # @option opts [Boolean] :detailed Optional, increases frequency of data points for the total value and contribution charts if set to true
     # @option opts [String] :frequency Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     # @return [Array<(PerformanceCustom, Integer, Hash)>] PerformanceCustom data, response status code and response headers

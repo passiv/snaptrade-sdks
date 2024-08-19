@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// SnapTradeUser Investment Account
+    /// A single brokerage account at a financial institution.
     /// </summary>
     [DataContract(Name = "AccountSimple")]
     public partial class AccountSimple : IEquatable<AccountSimple>, IValidatableObject
@@ -35,9 +35,9 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountSimple" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="name">name.</param>
-        /// <param name="number">number.</param>
+        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade..</param>
+        /// <param name="name">A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity..</param>
+        /// <param name="number">The account number assigned by the financial institution..</param>
         /// <param name="syncStatus">syncStatus.</param>
         public AccountSimple(string id = default(string), string name = default(string), string number = default(string), AccountSyncStatus syncStatus = default(AccountSyncStatus)) : base()
         {
@@ -49,20 +49,23 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
         /// </summary>
+        /// <value>A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Number
+        /// The account number assigned by the financial institution.
         /// </summary>
+        /// <value>The account number assigned by the financial institution.</value>
         [DataMember(Name = "number", EmitDefaultValue = false)]
         public string Number { get; set; }
 

@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Symbol
+    /// Uniquely describes a single security + exchange combination across all brokerages.
     /// </summary>
     [DataContract(Name = "Symbol")]
     public partial class Symbol : IEquatable<Symbol>, IValidatableObject
@@ -35,21 +35,21 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Symbol" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="symbol">symbol.</param>
-        /// <param name="rawSymbol">rawSymbol.</param>
-        /// <param name="name">name.</param>
+        /// <param name="id">Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls..</param>
+        /// <param name="symbol">The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix..</param>
+        /// <param name="rawSymbol">The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;..</param>
+        /// <param name="description">A human-readable description of the security. This is usually the company name or ETF name..</param>
         /// <param name="currency">currency.</param>
         /// <param name="exchange">exchange.</param>
         /// <param name="type">type.</param>
-        /// <param name="figiCode">figiCode.</param>
+        /// <param name="figiCode">This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property..</param>
         /// <param name="figiInstrument">figiInstrument.</param>
-        public Symbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string name = default(string), Currency currency = default(Currency), Exchange exchange = default(Exchange), SecurityType type = default(SecurityType), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
+        public Symbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), SymbolCurrency currency = default(SymbolCurrency), SymbolExchange exchange = default(SymbolExchange), SecurityType type = default(SecurityType), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
         {
             this.Id = id;
             this._Symbol = symbol;
             this.RawSymbol = rawSymbol;
-            this.Name = name;
+            this.Description = description;
             this.Currency = currency;
             this.Exchange = exchange;
             this.Type = type;
@@ -59,40 +59,44 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
         /// </summary>
+        /// <value>Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets _Symbol
+        /// The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
         /// </summary>
+        /// <value>The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
         public string _Symbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets RawSymbol
+        /// The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;.
         /// </summary>
+        /// <value>The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;.</value>
         [DataMember(Name = "raw_symbol", EmitDefaultValue = false)]
         public string RawSymbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// A human-readable description of the security. This is usually the company name or ETF name.
         /// </summary>
-        [DataMember(Name = "name", EmitDefaultValue = false)]
-        public string Name { get; set; }
+        /// <value>A human-readable description of the security. This is usually the company name or ETF name.</value>
+        [DataMember(Name = "description", EmitDefaultValue = true)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public Currency Currency { get; set; }
+        public SymbolCurrency Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Exchange
         /// </summary>
         [DataMember(Name = "exchange", EmitDefaultValue = false)]
-        public Exchange Exchange { get; set; }
+        public SymbolExchange Exchange { get; set; }
 
         /// <summary>
         /// Gets or Sets Type
@@ -101,8 +105,9 @@ namespace SnapTrade.Net.Model
         public SecurityType Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets FigiCode
+        /// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property.
         /// </summary>
+        /// <value>This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property.</value>
         [DataMember(Name = "figi_code", EmitDefaultValue = true)]
         public string FigiCode { get; set; }
 
@@ -130,7 +135,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  _Symbol: ").Append(_Symbol).Append("\n");
             sb.Append("  RawSymbol: ").Append(RawSymbol).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Exchange: ").Append(Exchange).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -188,9 +193,9 @@ namespace SnapTrade.Net.Model
                     this.RawSymbol.Equals(input.RawSymbol))
                 ) && base.Equals(input) && 
                 (
-                    this.Name == input.Name ||
-                    (this.Name != null &&
-                    this.Name.Equals(input.Name))
+                    this.Description == input.Description ||
+                    (this.Description != null &&
+                    this.Description.Equals(input.Description))
                 ) && base.Equals(input) && 
                 (
                     this.Currency == input.Currency ||
@@ -241,9 +246,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.RawSymbol.GetHashCode();
                 }
-                if (this.Name != null)
+                if (this.Description != null)
                 {
-                    hashCode = (hashCode * 59) + this.Name.GetHashCode();
+                    hashCode = (hashCode * 59) + this.Description.GetHashCode();
                 }
                 if (this.Currency != null)
                 {

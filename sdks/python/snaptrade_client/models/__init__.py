@@ -86,6 +86,7 @@ from snaptrade_client.model.option_strategy_legs import OptionStrategyLegs
 from snaptrade_client.model.option_symbol_id import OptionSymbolID
 from snaptrade_client.model.options_position import OptionsPosition
 from snaptrade_client.model.options_symbol import OptionsSymbol
+from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.partner_data import PartnerData
@@ -115,6 +116,7 @@ from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
 from snaptrade_client.model.sub_period_return_rate import SubPeriodReturnRate
 from snaptrade_client.model.symbol import Symbol
+from snaptrade_client.model.symbol_nullable import SymbolNullable
 from snaptrade_client.model.symbol_query import SymbolQuery
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.sync_status_date import SyncStatusDate

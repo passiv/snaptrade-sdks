@@ -46,7 +46,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    UUID brokerageAuthorizations = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     try {
       List<AccountHoldings> result = client
               .accountInformation
@@ -92,7 +92,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **brokerageAuthorizations** | **UUID**| Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional] |
+| **brokerageAuthorizations** | **UUID**| Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional] |
 
 ### Return type
 

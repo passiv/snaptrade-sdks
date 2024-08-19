@@ -41,7 +41,7 @@ func main() {
     request.EndDate(2013-10-20)
     request.Accounts("accounts_example")
     request.BrokerageAuthorizations("brokerageAuthorizations_example")
-    request.Type(""DIVIDEND"")
+    request.Type(""BUY,SELL,DIVIDEND"")
     
     resp, httpRes, err := request.Execute()
 
@@ -53,21 +53,21 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TransactionsAndReportingApi.GetActivities`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Account`: %v\n", *resp.Account)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Price`: %v\n", *resp.Price)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Units`: %v\n", *resp.Units)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Amount`: %v\n", *resp.Amount)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Currency`: %v\n", *resp.Currency)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Type`: %v\n", *resp.Type)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.OptionType`: %v\n", *resp.OptionType)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Description`: %v\n", *resp.Description)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.TradeDate`: %v\n", *resp.TradeDate)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.SettlementDate`: %v\n", *resp.SettlementDate)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Fee`: %v\n", *resp.Fee)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.FxRate`: %v\n", *resp.FxRate)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Institution`: %v\n", *resp.Institution)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.OptionType`: %v\n", *resp.OptionType)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Price`: %v\n", *resp.Price)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.SettlementDate`: %v\n", *resp.SettlementDate)
     fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.ExternalReferenceId`: %v\n", *resp.ExternalReferenceId)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.TradeDate`: %v\n", *resp.TradeDate)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Type`: %v\n", *resp.Type)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetActivities.Units`: %v\n", *resp.Units)
 }
 ```
 

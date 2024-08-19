@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **Symbol** | **string** | The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. | 
 **RawSymbol** | **string** | The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;. | 
 **Description** | Pointer to **NullableString** | A human-readable description of the security. This is usually the company name or ETF name. | [optional] 
-**Currency** | [**UniversalSymbolCurrency**](UniversalSymbolCurrency.md) |  | 
-**Exchange** | Pointer to [**UniversalSymbolExchange**](UniversalSymbolExchange.md) |  | [optional] 
+**Currency** | [**SymbolCurrency**](SymbolCurrency.md) |  | 
+**Exchange** | Pointer to [**SymbolExchange**](SymbolExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | 
 **Currencies** | [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
 **FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewAccountOrderRecordUniversalSymbol
 
-`func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol string, currency UniversalSymbolCurrency, type_ SecurityType, currencies []Currency, ) *AccountOrderRecordUniversalSymbol`
+`func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol string, currency SymbolCurrency, type_ SecurityType, currencies []Currency, ) *AccountOrderRecordUniversalSymbol`
 
 NewAccountOrderRecordUniversalSymbol instantiates a new AccountOrderRecordUniversalSymbol object
 This constructor will assign default values to properties that have it defined,
@@ -131,40 +131,40 @@ HasDescription returns a boolean if a field has been set.
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
-`func (o *AccountOrderRecordUniversalSymbol) GetCurrency() UniversalSymbolCurrency`
+`func (o *AccountOrderRecordUniversalSymbol) GetCurrency() SymbolCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool)`
+`func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*SymbolCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *AccountOrderRecordUniversalSymbol) SetCurrency(v UniversalSymbolCurrency)`
+`func (o *AccountOrderRecordUniversalSymbol) SetCurrency(v SymbolCurrency)`
 
 SetCurrency sets Currency field to given value.
 
 
 ### GetExchange
 
-`func (o *AccountOrderRecordUniversalSymbol) GetExchange() UniversalSymbolExchange`
+`func (o *AccountOrderRecordUniversalSymbol) GetExchange() SymbolExchange`
 
 GetExchange returns the Exchange field if non-nil, zero value otherwise.
 
 ### GetExchangeOk
 
-`func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*UniversalSymbolExchange, bool)`
+`func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*SymbolExchange, bool)`
 
 GetExchangeOk returns a tuple with the Exchange field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExchange
 
-`func (o *AccountOrderRecordUniversalSymbol) SetExchange(v UniversalSymbolExchange)`
+`func (o *AccountOrderRecordUniversalSymbol) SetExchange(v SymbolExchange)`
 
 SetExchange sets Exchange field to given value.
 

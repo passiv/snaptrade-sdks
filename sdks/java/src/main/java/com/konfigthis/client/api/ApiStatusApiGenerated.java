@@ -150,8 +150,8 @@ public class ApiStatusApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> API is operational. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -166,8 +166,8 @@ public class ApiStatusApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> API is operational. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public Status execute() throws ApiException {
@@ -182,8 +182,8 @@ public class ApiStatusApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> API is operational. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<Status> executeWithHttpInfo() throws ApiException {
@@ -198,8 +198,8 @@ public class ApiStatusApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> API is operational. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<Status> _callback) throws ApiException {
@@ -214,8 +214,8 @@ public class ApiStatusApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> API is operational. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
     public ApiStatusApi.CheckRequestBuilder check() throws IllegalArgumentException {

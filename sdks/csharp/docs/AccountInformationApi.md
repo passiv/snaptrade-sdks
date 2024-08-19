@@ -42,7 +42,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
+            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
             
             try
             {
@@ -93,7 +93,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **brokerageAuthorizations** | **string** | Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional]  |
+| **brokerageAuthorizations** | **string** | Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). | [optional]  |
 
 ### Return type
 

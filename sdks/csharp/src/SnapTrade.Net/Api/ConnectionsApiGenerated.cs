@@ -168,8 +168,8 @@ namespace SnapTrade.Net.Api
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
         List<ConnectionsSessionEvents200ResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
@@ -182,8 +182,8 @@ namespace SnapTrade.Net.Api
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
         ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0);
@@ -347,8 +347,8 @@ namespace SnapTrade.Net.Api
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
@@ -362,8 +362,8 @@ namespace SnapTrade.Net.Api
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEvents200ResponseInner&gt;)</returns>
@@ -1521,8 +1521,8 @@ namespace SnapTrade.Net.Api
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
         public List<ConnectionsSessionEvents200ResponseInner> SessionEvents(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
@@ -1536,8 +1536,8 @@ namespace SnapTrade.Net.Api
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<ConnectionsSessionEvents200ResponseInner>> SessionEventsWithHttpInfo(string partnerClientId, string userId = default(string), string sessionId = default(string), int operationIndex = 0)
@@ -1618,8 +1618,8 @@ namespace SnapTrade.Net.Api
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;ConnectionsSessionEvents200ResponseInner&gt;</returns>
@@ -1634,8 +1634,8 @@ namespace SnapTrade.Net.Api
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="partnerClientId"></param>
-        /// <param name="userId">Optional comma seperated list of user IDs used to filter the request on specific users (optional)</param>
-        /// <param name="sessionId">Optional comma seperated list of session IDs used to filter the request on specific users (optional)</param>
+        /// <param name="userId">Optional comma separated list of user IDs used to filter the request on specific users (optional)</param>
+        /// <param name="sessionId">Optional comma separated list of session IDs used to filter the request on specific users (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;ConnectionsSessionEvents200ResponseInner&gt;)</returns>

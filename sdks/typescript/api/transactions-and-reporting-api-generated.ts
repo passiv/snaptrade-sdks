@@ -32,15 +32,15 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TransactionsAndReportingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+         * Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary Get transaction history for a user
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string | Date} [startDate] 
-         * @param {string | Date} [endDate] 
-         * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
-         * @param {string} [brokerageAuthorizations] Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-         * @param {string} [type] Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+         * @param {string | Date} [startDate] The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;.
+         * @param {string | Date} [endDate] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;.
+         * @param {string} [accounts] Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter.
+         * @param {string} [brokerageAuthorizations] Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter.
+         * @param {string} [type] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -125,7 +125,7 @@ export const TransactionsAndReportingApiAxiosParamCreator = function (configurat
          * @param {string | Date} endDate 
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} [accounts] Optional comma seperated list of account IDs used to filter the request on specific accounts
+         * @param {string} [accounts] Optional comma separated list of account IDs used to filter the request on specific accounts
          * @param {boolean} [detailed] Optional, increases frequency of data points for the total value and contribution charts if set to true
          * @param {string} [frequency] Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
          * @param {*} [options] Override http request option.
@@ -221,7 +221,7 @@ export const TransactionsAndReportingApiFp = function(configuration?: Configurat
     const localVarAxiosParamCreator = TransactionsAndReportingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+         * Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -254,7 +254,7 @@ export const TransactionsAndReportingApiFactory = function (configuration?: Conf
     const localVarFp = TransactionsAndReportingApiFp(configuration)
     return {
         /**
-         * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+         * Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary Get transaction history for a user
          * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -299,35 +299,35 @@ export type TransactionsAndReportingApiGetActivitiesRequest = {
     readonly userSecret: string
     
     /**
-    * 
+    * The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
     * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly startDate?: string | Date
     
     /**
-    * 
+    * The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     * @type {string | Date}
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly endDate?: string | Date
     
     /**
-    * Optional comma seperated list of account IDs used to filter the request on specific accounts
+    * Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
     * @type {string}
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly accounts?: string
     
     /**
-    * Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+    * Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
     * @type {string}
     * @memberof TransactionsAndReportingApiGetActivities
     */
     readonly brokerageAuthorizations?: string
     
     /**
-    * Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    * Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
     * @type {string}
     * @memberof TransactionsAndReportingApiGetActivities
     */
@@ -371,7 +371,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
     readonly userSecret: string
     
     /**
-    * Optional comma seperated list of account IDs used to filter the request on specific accounts
+    * Optional comma separated list of account IDs used to filter the request on specific accounts
     * @type {string}
     * @memberof TransactionsAndReportingApiGetReportingCustomRange
     */
@@ -401,7 +401,7 @@ export type TransactionsAndReportingApiGetReportingCustomRangeRequest = {
  */
 export class TransactionsAndReportingApiGenerated extends BaseAPI {
     /**
-     * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+     * Returns all historical transactions for the specified user and filtering criteria. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @summary Get transaction history for a user
      * @param {TransactionsAndReportingApiGetActivitiesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

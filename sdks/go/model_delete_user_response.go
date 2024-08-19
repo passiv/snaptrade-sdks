@@ -15,10 +15,12 @@ import (
 	"encoding/json"
 )
 
-// DeleteUserResponse Response when delete user is successful
+// DeleteUserResponse struct for DeleteUserResponse
 type DeleteUserResponse struct {
-	// Delete status
+	// This is always `deleted` when a user is queued for deletion.
 	Status *string `json:"status,omitempty"`
+	// Human friendly message about the deletion status.
+	Detail *string `json:"detail,omitempty"`
 	// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 	UserId *string `json:"userId,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -75,6 +77,38 @@ func (o *DeleteUserResponse) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetDetail returns the Detail field value if set, zero value otherwise.
+func (o *DeleteUserResponse) GetDetail() string {
+	if o == nil || isNil(o.Detail) {
+		var ret string
+		return ret
+	}
+	return *o.Detail
+}
+
+// GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DeleteUserResponse) GetDetailOk() (*string, bool) {
+	if o == nil || isNil(o.Detail) {
+    return nil, false
+	}
+	return o.Detail, true
+}
+
+// HasDetail returns a boolean if a field has been set.
+func (o *DeleteUserResponse) HasDetail() bool {
+	if o != nil && !isNil(o.Detail) {
+		return true
+	}
+
+	return false
+}
+
+// SetDetail gets a reference to the given string and assigns it to the Detail field.
+func (o *DeleteUserResponse) SetDetail(v string) {
+	o.Detail = &v
+}
+
 // GetUserId returns the UserId field value if set, zero value otherwise.
 func (o *DeleteUserResponse) GetUserId() string {
 	if o == nil || isNil(o.UserId) {
@@ -112,6 +146,9 @@ func (o DeleteUserResponse) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
+	if !isNil(o.Detail) {
+		toSerialize["detail"] = o.Detail
+	}
 	if !isNil(o.UserId) {
 		toSerialize["userId"] = o.UserId
 	}
@@ -134,6 +171,7 @@ func (o *DeleteUserResponse) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "detail")
 		delete(additionalProperties, "userId")
 		o.AdditionalProperties = additionalProperties
 	}

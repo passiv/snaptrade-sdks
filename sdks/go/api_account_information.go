@@ -32,7 +32,7 @@ type AccountInformationApiGetAllUserHoldingsRequest struct {
 	brokerageAuthorizations *string
 }
 
-// Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+// Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 func (r *AccountInformationApiGetAllUserHoldingsRequest) BrokerageAuthorizations(brokerageAuthorizations string) *AccountInformationApiGetAllUserHoldingsRequest {
 	r.brokerageAuthorizations = &brokerageAuthorizations
 	return r

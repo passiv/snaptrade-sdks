@@ -22,8 +22,8 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.FigiInstrumentNullable;
 import com.konfigthis.client.model.SecurityType;
-import com.konfigthis.client.model.UniversalSymbolCurrency;
-import com.konfigthis.client.model.UniversalSymbolExchange;
+import com.konfigthis.client.model.SymbolCurrency;
+import com.konfigthis.client.model.SymbolExchange;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -77,11 +77,11 @@ public class UniversalSymbol {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private UniversalSymbolCurrency currency;
+  private SymbolCurrency currency;
 
   public static final String SERIALIZED_NAME_EXCHANGE = "exchange";
   @SerializedName(SERIALIZED_NAME_EXCHANGE)
-  private UniversalSymbolExchange exchange;
+  private SymbolExchange exchange;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -218,7 +218,7 @@ public class UniversalSymbol {
   }
 
 
-  public UniversalSymbol currency(UniversalSymbolCurrency currency) {
+  public UniversalSymbol currency(SymbolCurrency currency) {
     
     
     
@@ -234,12 +234,12 @@ public class UniversalSymbol {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public UniversalSymbolCurrency getCurrency() {
+  public SymbolCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(UniversalSymbolCurrency currency) {
+  public void setCurrency(SymbolCurrency currency) {
     
     
     
@@ -247,7 +247,7 @@ public class UniversalSymbol {
   }
 
 
-  public UniversalSymbol exchange(UniversalSymbolExchange exchange) {
+  public UniversalSymbol exchange(SymbolExchange exchange) {
     
     
     
@@ -263,12 +263,12 @@ public class UniversalSymbol {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public UniversalSymbolExchange getExchange() {
+  public SymbolExchange getExchange() {
     return exchange;
   }
 
 
-  public void setExchange(UniversalSymbolExchange exchange) {
+  public void setExchange(SymbolExchange exchange) {
     
     
     
@@ -572,10 +572,10 @@ public class UniversalSymbol {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
       }
       // validate the required field `currency`
-      UniversalSymbolCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      SymbolCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       // validate the optional field `exchange`
       if (jsonObj.get("exchange") != null && !jsonObj.get("exchange").isJsonNull()) {
-        UniversalSymbolExchange.validateJsonObject(jsonObj.getAsJsonObject("exchange"));
+        SymbolExchange.validateJsonObject(jsonObj.getAsJsonObject("exchange"));
       }
       // validate the required field `type`
       SecurityType.validateJsonObject(jsonObj.getAsJsonObject("type"));

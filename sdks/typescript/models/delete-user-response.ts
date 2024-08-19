@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Response when delete user is successful
+ * 
  * @export
  * @interface DeleteUserResponse
  */
@@ -20,11 +20,17 @@ export interface DeleteUserResponse {
     [key: string]: any;
 
     /**
-     * Delete status
+     * This is always `deleted` when a user is queued for deletion.
      * @type {string}
      * @memberof DeleteUserResponse
      */
     'status'?: string;
+    /**
+     * Human friendly message about the deletion status.
+     * @type {string}
+     * @memberof DeleteUserResponse
+     */
+    'detail'?: string;
     /**
      * SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
      * @type {string}

@@ -15,10 +15,13 @@ import (
 	"encoding/json"
 )
 
-// AccountSimple SnapTradeUser Investment Account
+// AccountSimple A single brokerage account at a financial institution.
 type AccountSimple struct {
+	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
 	Name *string `json:"name,omitempty"`
+	// The account number assigned by the financial institution.
 	Number *string `json:"number,omitempty"`
 	SyncStatus *AccountSyncStatus `json:"sync_status,omitempty"`
 	AdditionalProperties map[string]interface{}

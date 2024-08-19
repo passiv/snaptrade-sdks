@@ -13,22 +13,22 @@ require 'time'
 module SnapTrade
   # Data to login a user via SnapTrade Partner
   class SnapTradeLoginUserRequestBody
-    # Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+    # Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
     attr_accessor :broker
 
-    # When set to True, user will be redirected back to the partner's site instead of the connection portal
+    # When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
     attr_accessor :immediate_redirect
 
-    # URL to redirect the user to after the user connects their brokerage account
+    # URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
     attr_accessor :custom_redirect
 
-    # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+    # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
     attr_accessor :reconnect
 
-    # Sets whether the connection should be read or trade
+    # Sets whether the connection should be read-only or trade-enabled.
     attr_accessor :connection_type
 
-    # Sets the version of the connection portal to render, with a default to 'v3'
+    # Sets the version of the connection portal to render.
     attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -99,10 +99,14 @@ module SnapTrade
 
       if attributes.key?(:'connection_type')
         self.connection_type = attributes[:'connection_type']
+      else
+        self.connection_type = 'read'
       end
 
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
+      else
+        self.connection_portal_version = 'v3'
       end
     end
 

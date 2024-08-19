@@ -527,8 +527,8 @@ module SnapTrade
     # Returns a list of session events associated with a user.
     #
     # @param partner_client_id [String] 
-    # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
-    # @param session_id [String] Optional comma seperated list of session IDs used to filter the request on specific users
+    # @param user_id [String] Optional comma separated list of user IDs used to filter the request on specific users
+    # @param session_id [String] Optional comma separated list of session IDs used to filter the request on specific users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def session_events(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {})
       extra[:user_id] = user_id if user_id != SENTINEL
@@ -542,8 +542,8 @@ module SnapTrade
     # Returns a list of session events associated with a user.
     #
     # @param partner_client_id [String] 
-    # @param user_id [String] Optional comma seperated list of user IDs used to filter the request on specific users
-    # @param session_id [String] Optional comma seperated list of session IDs used to filter the request on specific users
+    # @param user_id [String] Optional comma separated list of user IDs used to filter the request on specific users
+    # @param session_id [String] Optional comma separated list of session IDs used to filter the request on specific users
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def session_events_with_http_info(partner_client_id:, user_id: SENTINEL, session_id: SENTINEL, extra: {})
       extra[:user_id] = user_id if user_id != SENTINEL
@@ -555,8 +555,8 @@ module SnapTrade
     # Returns a list of session events associated with a user.
     # @param partner_client_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users
-    # @option opts [String] :session_id Optional comma seperated list of session IDs used to filter the request on specific users
+    # @option opts [String] :user_id Optional comma separated list of user IDs used to filter the request on specific users
+    # @option opts [String] :session_id Optional comma separated list of session IDs used to filter the request on specific users
     # @return [Array<ConnectionsSessionEvents200ResponseInner>]
     private def session_events_impl(partner_client_id, opts = {})
       data, _status_code, _headers = session_events_with_http_info(partner_client_id, opts)
@@ -567,8 +567,8 @@ module SnapTrade
     # Returns a list of session events associated with a user.
     # @param partner_client_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users
-    # @option opts [String] :session_id Optional comma seperated list of session IDs used to filter the request on specific users
+    # @option opts [String] :user_id Optional comma separated list of user IDs used to filter the request on specific users
+    # @option opts [String] :session_id Optional comma separated list of session IDs used to filter the request on specific users
     # @return [Array<(Array<ConnectionsSessionEvents200ResponseInner>, Integer, Hash)>] Array<ConnectionsSessionEvents200ResponseInner> data, response status code and response headers
     private def session_events_with_http_info_impl(partner_client_id, opts = {})
       if @api_client.config.debugging

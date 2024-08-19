@@ -516,8 +516,8 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
             var partnerClientId = "partnerClientId_example";
-            var userId = "userId_example"; // Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
-            var sessionId = "sessionId_example"; // Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
+            var userId = "userId_example"; // Optional comma separated list of user IDs used to filter the request on specific users (optional) 
+            var sessionId = "sessionId_example"; // Optional comma separated list of session IDs used to filter the request on specific users (optional) 
             
             try
             {
@@ -567,8 +567,8 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **partnerClientId** | **string** |  |  |
-| **userId** | **string** | Optional comma seperated list of user IDs used to filter the request on specific users | [optional]  |
-| **sessionId** | **string** | Optional comma seperated list of session IDs used to filter the request on specific users | [optional]  |
+| **userId** | **string** | Optional comma separated list of user IDs used to filter the request on specific users | [optional]  |
+| **sessionId** | **string** | Optional comma separated list of session IDs used to filter the request on specific users | [optional]  |
 
 ### Return type
 

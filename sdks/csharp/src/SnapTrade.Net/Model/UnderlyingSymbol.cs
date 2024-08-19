@@ -45,7 +45,7 @@ namespace SnapTrade.Net.Model
         /// <param name="currencies">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
         /// <param name="figiCode">This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property..</param>
         /// <param name="figiInstrument">figiInstrument.</param>
-        public UnderlyingSymbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), UniversalSymbolCurrency currency = default(UniversalSymbolCurrency), UnderlyingSymbolExchange exchange = default(UnderlyingSymbolExchange), UnderlyingSymbolType type = default(UnderlyingSymbolType), List<Currency> currencies = default(List<Currency>), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
+        public UnderlyingSymbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), SymbolCurrency currency = default(SymbolCurrency), UnderlyingSymbolExchange exchange = default(UnderlyingSymbolExchange), UnderlyingSymbolType type = default(UnderlyingSymbolType), List<Currency> currencies = default(List<Currency>), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable)) : base()
         {
             this.Id = id;
             this.Symbol = symbol;
@@ -92,7 +92,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Currency
         /// </summary>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
-        public UniversalSymbolCurrency Currency { get; set; }
+        public SymbolCurrency Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets Exchange

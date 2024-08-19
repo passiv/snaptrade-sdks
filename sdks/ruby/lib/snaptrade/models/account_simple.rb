@@ -11,12 +11,15 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # SnapTradeUser Investment Account
+  # A single brokerage account at a financial institution.
   class AccountSimple
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :id
 
+    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
     attr_accessor :name
 
+    # The account number assigned by the financial institution.
     attr_accessor :number
 
     attr_accessor :sync_status

@@ -36,7 +36,7 @@ func Test_snaptrade_TransactionsAndReportingApiService(t *testing.T) {
         request.EndDate(2013-10-20)
         request.Accounts("accounts_example")
         request.BrokerageAuthorizations("brokerageAuthorizations_example")
-        request.Type(""DIVIDEND"")
+        request.Type(""BUY,SELL,DIVIDEND"")
         
         resp, httpRes, err := request.Execute()
 

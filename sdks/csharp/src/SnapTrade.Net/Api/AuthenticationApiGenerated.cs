@@ -28,10 +28,10 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Delete SnapTrade user
+        /// Delete user
         /// </summary>
         /// <remarks>
-        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -40,10 +40,10 @@ namespace SnapTrade.Net.Api
         DeleteUserResponse DeleteSnapTradeUser(string userId, int operationIndex = 0);
 
         /// <summary>
-        /// Delete SnapTrade user
+        /// Delete user
         /// </summary>
         /// <remarks>
-        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -51,10 +51,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of DeleteUserResponse</returns>
         ApiResponse<DeleteUserResponse> DeleteSnapTradeUserWithHttpInfo(string userId, int operationIndex = 0);
         /// <summary>
-        /// List SnapTrade users
+        /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// Returns a list of all registered user IDs.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -62,10 +62,10 @@ namespace SnapTrade.Net.Api
         List<string> ListSnapTradeUsers(int operationIndex = 0);
 
         /// <summary>
-        /// List SnapTrade users
+        /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// Returns a list of all registered user IDs.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -99,7 +99,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AuthenticationLoginSnapTradeUser200Response</returns>
         ApiResponse<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserWithHttpInfo(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
         /// <summary>
-        /// Create SnapTrade user
+        /// Register user
         /// </summary>
         /// <remarks>
         /// Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
@@ -111,7 +111,7 @@ namespace SnapTrade.Net.Api
         UserIDandSecret RegisterSnapTradeUser(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0);
 
         /// <summary>
-        /// Create SnapTrade user
+        /// Register user
         /// </summary>
         /// <remarks>
         /// Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
@@ -122,10 +122,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of UserIDandSecret</returns>
         ApiResponse<UserIDandSecret> RegisterSnapTradeUserWithHttpInfo(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0);
         /// <summary>
-        /// Obtain a new user secret for a user
+        /// Rotate user secret
         /// </summary>
         /// <remarks>
-        /// This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -134,10 +134,10 @@ namespace SnapTrade.Net.Api
         UserIDandSecret ResetSnapTradeUserSecret(UserIDandSecret userIDandSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Obtain a new user secret for a user
+        /// Rotate user secret
         /// </summary>
         /// <remarks>
-        /// This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -154,10 +154,10 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Delete SnapTrade user
+        /// Delete user
         /// </summary>
         /// <remarks>
-        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -167,10 +167,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<DeleteUserResponse> DeleteSnapTradeUserAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Delete SnapTrade user
+        /// Delete user
         /// </summary>
         /// <remarks>
-        /// Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -179,10 +179,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (DeleteUserResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<DeleteUserResponse>> DeleteSnapTradeUserWithHttpInfoAsync(string userId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List SnapTrade users
+        /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// Returns a list of all registered user IDs.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -191,10 +191,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<string>> ListSnapTradeUsersAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List SnapTrade users
+        /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// Returns a list of all registered user IDs.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -231,7 +231,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AuthenticationLoginSnapTradeUser200Response)</returns>
         System.Threading.Tasks.Task<ApiResponse<AuthenticationLoginSnapTradeUser200Response>> LoginSnapTradeUserWithHttpInfoAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Create SnapTrade user
+        /// Register user
         /// </summary>
         /// <remarks>
         /// Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
@@ -244,7 +244,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<UserIDandSecret> RegisterSnapTradeUserAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Create SnapTrade user
+        /// Register user
         /// </summary>
         /// <remarks>
         /// Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
@@ -256,10 +256,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (UserIDandSecret)</returns>
         System.Threading.Tasks.Task<ApiResponse<UserIDandSecret>> RegisterSnapTradeUserWithHttpInfoAsync(SnapTradeRegisterUserRequestBody snapTradeRegisterUserRequestBody, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Obtain a new user secret for a user
+        /// Rotate user secret
         /// </summary>
         /// <remarks>
-        /// This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -269,10 +269,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<UserIDandSecret> ResetSnapTradeUserSecretAsync(UserIDandSecret userIDandSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Obtain a new user secret for a user
+        /// Rotate user secret
         /// </summary>
         /// <remarks>
-        /// This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -401,7 +401,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Delete user Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -414,7 +414,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Delete user Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -486,7 +486,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Delete user Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -500,7 +500,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete SnapTrade user Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+        /// Delete user Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -575,7 +575,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// List all users Returns a list of all registered user IDs.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -587,7 +587,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// List all users Returns a list of all registered user IDs.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -651,7 +651,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// List all users Returns a list of all registered user IDs.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -664,7 +664,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List SnapTrade users Returns a list of users you&#39;ve registered over the SnapTrade API.
+        /// List all users Returns a list of all registered user IDs.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -931,7 +931,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Create SnapTrade user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
+        /// Register user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -944,7 +944,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Create SnapTrade user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
+        /// Register user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1017,7 +1017,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Create SnapTrade user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
+        /// Register user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1031,7 +1031,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Create SnapTrade user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
+        /// Register user Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="snapTradeRegisterUserRequestBody"></param>
@@ -1107,7 +1107,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtain a new user secret for a user This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotate user secret Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -1120,7 +1120,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtain a new user secret for a user This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotate user secret Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -1193,7 +1193,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtain a new user secret for a user This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotate user secret Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>
@@ -1207,7 +1207,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Obtain a new user secret for a user This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+        /// Rotate user secret Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userIDandSecret"></param>

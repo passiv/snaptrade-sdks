@@ -4,20 +4,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
-| [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users |
+| [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user |
+| [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List all users |
 | [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
-| [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
-| [**resetSnapTradeUserSecret**](AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user |
+| [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user |
+| [**resetSnapTradeUserSecret**](AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret |
 
 
 <a name="deleteSnapTradeUser"></a>
 # **deleteSnapTradeUser**
 > DeleteUserResponse deleteSnapTradeUser(userId).execute();
 
-Delete SnapTrade user
+Delete user
 
-Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
 
 ### Example
 ```java
@@ -49,6 +49,7 @@ public class Example {
               .execute();
       System.out.println(result);
       System.out.println(result.getStatus());
+      System.out.println(result.getDetail());
       System.out.println(result.getUserId());
     } catch (ApiException e) {
       System.err.println("Exception when calling AuthenticationApi#deleteSnapTradeUser");
@@ -103,16 +104,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Delete successful |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="listSnapTradeUsers"></a>
 # **listSnapTradeUsers**
 > List&lt;String&gt; listSnapTradeUsers().execute();
 
-List SnapTrade users
+List all users
 
-Returns a list of users you&#39;ve registered over the SnapTrade API.
+Returns a list of all registered user IDs.
 
 ### Example
 ```java
@@ -191,7 +192,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully retrieved a list of users |  -  |
+| **200** | OK |  -  |
 
 <a name="loginSnapTradeUser"></a>
 # **loginSnapTradeUser**
@@ -225,12 +226,12 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
-    Boolean immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
-    String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account
-    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-    String connectionType = "read"; // Sets whether the connection should be read or trade
-    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render, with a default to 'v3'
+    String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+    Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled.
+    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render.
     try {
       Object result = client
               .authentication
@@ -303,14 +304,14 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Login successful. Redirect user to provided URI in response |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="registerSnapTradeUser"></a>
 # **registerSnapTradeUser**
 > UserIDandSecret registerSnapTradeUser(snapTradeRegisterUserRequestBody).execute();
 
-Create SnapTrade user
+Register user
 
 Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
 
@@ -400,15 +401,15 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully registered user |  -  |
+| **200** | OK |  -  |
 
 <a name="resetSnapTradeUserSecret"></a>
 # **resetSnapTradeUserSecret**
 > UserIDandSecret resetSnapTradeUserSecret(userIDandSecret).execute();
 
-Obtain a new user secret for a user
+Rotate user secret
 
-This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
 
 ### Example
 ```java
@@ -433,7 +434,7 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example"; // SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-    String userSecret = "userSecret_example"; // SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+    String userSecret = "userSecret_example"; // SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
     try {
       UserIDandSecret result = client
               .authentication

@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeLoginUserRequestBody : IEquatable<SnapTradeLoginUserRequestBody>, IValidatableObject
     {
         /// <summary>
-        /// Sets whether the connection should be read or trade
+        /// Sets whether the connection should be read-only or trade-enabled.
         /// </summary>
-        /// <value>Sets whether the connection should be read or trade</value>
+        /// <value>Sets whether the connection should be read-only or trade-enabled.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionTypeEnum
         {
@@ -55,15 +55,15 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets whether the connection should be read or trade
+        /// Sets whether the connection should be read-only or trade-enabled.
         /// </summary>
-        /// <value>Sets whether the connection should be read or trade</value>
+        /// <value>Sets whether the connection should be read-only or trade-enabled.</value>
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
-        /// Sets the version of the connection portal to render, with a default to &#39;v3&#39;
+        /// Sets the version of the connection portal to render.
         /// </summary>
-        /// <value>Sets the version of the connection portal to render, with a default to &#39;v3&#39;</value>
+        /// <value>Sets the version of the connection portal to render.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionPortalVersionEnum
         {
@@ -83,21 +83,21 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets the version of the connection portal to render, with a default to &#39;v3&#39;
+        /// Sets the version of the connection portal to render.
         /// </summary>
-        /// <value>Sets the version of the connection portal to render, with a default to &#39;v3&#39;</value>
+        /// <value>Sets the version of the connection portal to render.</value>
         [DataMember(Name = "connectionPortalVersion", EmitDefaultValue = false)]
         public ConnectionPortalVersionEnum? ConnectionPortalVersion { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="SnapTradeLoginUserRequestBody" /> class.
         /// </summary>
-        /// <param name="broker">Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs..</param>
-        /// <param name="immediateRedirect">When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal.</param>
-        /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account.</param>
-        /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information..</param>
-        /// <param name="connectionType">Sets whether the connection should be read or trade.</param>
-        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render, with a default to &#39;v3&#39;.</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = default(ConnectionTypeEnum?), ConnectionPortalVersionEnum? connectionPortalVersion = default(ConnectionPortalVersionEnum?))
+        /// <param name="broker">Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs..</param>
+        /// <param name="immediateRedirect">When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information..</param>
+        /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information..</param>
+        /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information..</param>
+        /// <param name="connectionType">Sets whether the connection should be read-only or trade-enabled. (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render. (default to ConnectionPortalVersionEnum.V3).</param>
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V3)
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
@@ -108,30 +108,30 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+        /// Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.
         /// </summary>
-        /// <value>Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.</value>
+        /// <value>Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.</value>
         [DataMember(Name = "broker", EmitDefaultValue = false)]
         public string Broker { get; set; }
 
         /// <summary>
-        /// When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+        /// When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
         /// </summary>
-        /// <value>When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal</value>
+        /// <value>When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.</value>
         [DataMember(Name = "immediateRedirect", EmitDefaultValue = true)]
         public bool ImmediateRedirect { get; set; }
 
         /// <summary>
-        /// URL to redirect the user to after the user connects their brokerage account
+        /// URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
         /// </summary>
-        /// <value>URL to redirect the user to after the user connects their brokerage account</value>
+        /// <value>URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.</value>
         [DataMember(Name = "customRedirect", EmitDefaultValue = false)]
         public string CustomRedirect { get; set; }
 
         /// <summary>
-        /// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+        /// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
         /// </summary>
-        /// <value>The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.</value>
+        /// <value>The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.</value>
         [DataMember(Name = "reconnect", EmitDefaultValue = false)]
         public string Reconnect { get; set; }
 

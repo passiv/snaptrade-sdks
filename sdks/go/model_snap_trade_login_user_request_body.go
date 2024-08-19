@@ -17,17 +17,17 @@ import (
 
 // SnapTradeLoginUserRequestBody Data to login a user via SnapTrade Partner
 type SnapTradeLoginUserRequestBody struct {
-	// Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+	// Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
 	Broker *string `json:"broker,omitempty"`
-	// When set to True, user will be redirected back to the partner's site instead of the connection portal
+	// When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
 	ImmediateRedirect *bool `json:"immediateRedirect,omitempty"`
-	// URL to redirect the user to after the user connects their brokerage account
+	// URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
 	CustomRedirect *string `json:"customRedirect,omitempty"`
-	// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+	// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
 	Reconnect *string `json:"reconnect,omitempty"`
-	// Sets whether the connection should be read or trade
+	// Sets whether the connection should be read-only or trade-enabled.
 	ConnectionType *string `json:"connectionType,omitempty"`
-	// Sets the version of the connection portal to render, with a default to 'v3'
+	// Sets the version of the connection portal to render.
 	ConnectionPortalVersion *string `json:"connectionPortalVersion,omitempty"`
 }
 
@@ -37,6 +37,10 @@ type SnapTradeLoginUserRequestBody struct {
 // will change when the set of required properties is changed
 func NewSnapTradeLoginUserRequestBody() *SnapTradeLoginUserRequestBody {
 	this := SnapTradeLoginUserRequestBody{}
+	var connectionType string = "read"
+	this.ConnectionType = &connectionType
+	var connectionPortalVersion string = "v3"
+	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
 }
 
@@ -45,6 +49,10 @@ func NewSnapTradeLoginUserRequestBody() *SnapTradeLoginUserRequestBody {
 // but it doesn't guarantee that properties required by API are set
 func NewSnapTradeLoginUserRequestBodyWithDefaults() *SnapTradeLoginUserRequestBody {
 	this := SnapTradeLoginUserRequestBody{}
+	var connectionType string = "read"
+	this.ConnectionType = &connectionType
+	var connectionPortalVersion string = "v3"
+	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
 }
 

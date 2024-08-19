@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. | [optional] 
 **RawSymbol** | Pointer to **string** | The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;. | [optional] 
 **Description** | Pointer to **NullableString** | A human-readable description of the security. This is usually the company name or ETF name. | [optional] 
-**Currency** | Pointer to [**UniversalSymbolCurrency**](UniversalSymbolCurrency.md) |  | [optional] 
+**Currency** | Pointer to [**SymbolCurrency**](SymbolCurrency.md) |  | [optional] 
 **Exchange** | Pointer to [**UnderlyingSymbolExchange**](UnderlyingSymbolExchange.md) |  | [optional] 
 **Type** | Pointer to [**UnderlyingSymbolType**](UnderlyingSymbolType.md) |  | [optional] 
 **Currencies** | Pointer to [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
@@ -146,20 +146,20 @@ HasDescription returns a boolean if a field has been set.
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
-`func (o *UnderlyingSymbol) GetCurrency() UniversalSymbolCurrency`
+`func (o *UnderlyingSymbol) GetCurrency() SymbolCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *UnderlyingSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool)`
+`func (o *UnderlyingSymbol) GetCurrencyOk() (*SymbolCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *UnderlyingSymbol) SetCurrency(v UniversalSymbolCurrency)`
+`func (o *UnderlyingSymbol) SetCurrency(v SymbolCurrency)`
 
 SetCurrency sets Currency field to given value.
 

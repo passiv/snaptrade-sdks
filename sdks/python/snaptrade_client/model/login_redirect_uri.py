@@ -37,7 +37,7 @@ class LoginRedirectURI(
     class MetaOapg:
         
         class properties:
-            redirectURI = schemas.AnyTypeSchema
+            redirectURI = schemas.StrSchema
             sessionId = schemas.StrSchema
             __annotations__ = {
                 "redirectURI": redirectURI,
@@ -74,7 +74,7 @@ class LoginRedirectURI(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        redirectURI: typing.Union[MetaOapg.properties.redirectURI, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        redirectURI: typing.Union[MetaOapg.properties.redirectURI, str, schemas.Unset] = schemas.unset,
         sessionId: typing.Union[MetaOapg.properties.sessionId, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],

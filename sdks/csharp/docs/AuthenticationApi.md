@@ -4,18 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**DeleteSnapTradeUser**](AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user |
-| [**ListSnapTradeUsers**](AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users |
+| [**DeleteSnapTradeUser**](AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user |
+| [**ListSnapTradeUsers**](AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List all users |
 | [**LoginSnapTradeUser**](AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
-| [**RegisterSnapTradeUser**](AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user |
-| [**ResetSnapTradeUserSecret**](AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user |
+| [**RegisterSnapTradeUser**](AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Register user |
+| [**ResetSnapTradeUserSecret**](AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret |
 
 
 # **DeleteSnapTradeUser**
 
 
 
-Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
 
 ### Example
 ```csharp
@@ -41,7 +41,7 @@ namespace Example
             
             try
             {
-                // Delete SnapTrade user
+                // Delete user
                 DeleteUserResponse result = client.Authentication.DeleteSnapTradeUser(userId);
                 Console.WriteLine(result);
             }
@@ -68,7 +68,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete SnapTrade user
+    // Delete user
     ApiResponse<DeleteUserResponse> response = apiInstance.DeleteSnapTradeUserWithHttpInfo(userId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -96,7 +96,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Delete successful |  -  |
+| **200** | OK |  -  |
 | **400** | Bad Request |  -  |
 | **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
@@ -109,7 +109,7 @@ catch (ApiException e)
 
 
 
-Returns a list of users you've registered over the SnapTrade API.
+Returns a list of all registered user IDs.
 
 ### Example
 ```csharp
@@ -134,7 +134,7 @@ namespace Example
             
             try
             {
-                // List SnapTrade users
+                // List all users
                 List<string> result = client.Authentication.ListSnapTradeUsers();
                 Console.WriteLine(result);
             }
@@ -161,7 +161,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List SnapTrade users
+    // List all users
     ApiResponse<List<string>> response = apiInstance.ListSnapTradeUsersWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -185,10 +185,10 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully retrieved a list of users |  -  |
-| **400** | Bad Request. Could be caused by various reasons. Error message is provided in response |  -  |
-| **404** | Invalid SnapTrade Client ID provided in query |  -  |
-| **500** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -221,12 +221,12 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var broker = "ALPACA"; // Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
-            var immediateRedirect = true; // When set to True, user will be redirected back to the partner's site instead of the connection portal
-            var customRedirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account
-            var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read or trade
-            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V2; // Sets the version of the connection portal to render, with a default to 'v3'
+            var broker = "ALPACA"; // Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+            var immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+            var customRedirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+            var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read-only or trade-enabled.
+            var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V3; // Sets the version of the connection portal to render.
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
                 broker,
@@ -296,7 +296,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Login successful. Redirect user to provided URI in response |  -  |
+| **200** | OK |  -  |
 | **400** | Bad Request |  -  |
 | **403** | Forbidden |  -  |
 | **404** | Not Found |  -  |
@@ -339,7 +339,7 @@ namespace Example
             
             try
             {
-                // Create SnapTrade user
+                // Register user
                 UserIDandSecret result = client.Authentication.RegisterSnapTradeUser(snapTradeRegisterUserRequestBody);
                 Console.WriteLine(result);
             }
@@ -366,7 +366,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Create SnapTrade user
+    // Register user
     ApiResponse<UserIDandSecret> response = apiInstance.RegisterSnapTradeUserWithHttpInfo(snapTradeRegisterUserRequestBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -394,10 +394,10 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully registered user |  -  |
-| **400** | Bad Request. Could be caused by various reasons. Error message is provided in response |  -  |
-| **404** | Invalid SnapTrade Client ID provided in query |  -  |
-| **500** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -406,7 +406,7 @@ catch (ApiException e)
 
 
 
-This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
 
 ### Example
 ```csharp
@@ -429,7 +429,7 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
             var userId = "snaptrade-user-123"; // SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-            var userSecret = "h81@cx1lkalablakwjaltkejraj11="; // SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+            var userSecret = "h81@cx1lkalablakwjaltkejraj11="; // SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
             
             var userIDandSecret = new UserIDandSecret(
                 userId,
@@ -438,7 +438,7 @@ namespace Example
             
             try
             {
-                // Obtain a new user secret for a user
+                // Rotate user secret
                 UserIDandSecret result = client.Authentication.ResetSnapTradeUserSecret(userIDandSecret);
                 Console.WriteLine(result);
             }
@@ -465,7 +465,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Obtain a new user secret for a user
+    // Rotate user secret
     ApiResponse<UserIDandSecret> response = apiInstance.ResetSnapTradeUserSecretWithHttpInfo(userIDandSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

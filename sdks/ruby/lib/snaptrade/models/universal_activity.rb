@@ -13,65 +13,73 @@ require 'time'
 module SnapTrade
   # A transaction or activity from an institution
   class UniversalActivity
+    # Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
     attr_accessor :id
 
     attr_accessor :account
-
-    attr_accessor :amount
-
-    attr_accessor :currency
-
-    attr_accessor :description
-
-    attr_accessor :fee
-
-    # The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
-    attr_accessor :fx_rate
-
-    attr_accessor :institution
-
-    # If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
-    attr_accessor :option_type
-
-    attr_accessor :price
-
-    attr_accessor :settlement_date
-
-    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
-    attr_accessor :external_reference_id
 
     attr_accessor :symbol
 
     attr_accessor :option_symbol
 
-    attr_accessor :trade_date
+    # The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+    attr_accessor :price
 
-    # Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    # The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+    attr_accessor :units
+
+    # The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
+    attr_accessor :amount
+
+    attr_accessor :currency
+
+    # A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
     attr_accessor :type
 
-    # Usually but not necessarily an integer
-    attr_accessor :units
+    # If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE 
+    attr_accessor :option_type
+
+    # A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
+    attr_accessor :description
+
+    # The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+    attr_accessor :trade_date
+
+    # The date on which the transaction is settled.
+    attr_accessor :settlement_date
+
+    # Any fee associated with the transaction if provided by the brokerage.
+    attr_accessor :fee
+
+    # The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
+    attr_accessor :fx_rate
+
+    # The institution that the transaction is associated with. This is usually the brokerage name.
+    attr_accessor :institution
+
+    # Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+    attr_accessor :external_reference_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'account' => :'account',
+        :'symbol' => :'symbol',
+        :'option_symbol' => :'option_symbol',
+        :'price' => :'price',
+        :'units' => :'units',
         :'amount' => :'amount',
         :'currency' => :'currency',
+        :'type' => :'type',
+        :'option_type' => :'option_type',
         :'description' => :'description',
+        :'trade_date' => :'trade_date',
+        :'settlement_date' => :'settlement_date',
         :'fee' => :'fee',
         :'fx_rate' => :'fx_rate',
         :'institution' => :'institution',
-        :'option_type' => :'option_type',
-        :'price' => :'price',
-        :'settlement_date' => :'settlement_date',
-        :'external_reference_id' => :'external_reference_id',
-        :'symbol' => :'symbol',
-        :'option_symbol' => :'option_symbol',
-        :'trade_date' => :'trade_date',
-        :'type' => :'type',
-        :'units' => :'units'
+        :'external_reference_id' => :'external_reference_id'
       }
     end
 
@@ -85,31 +93,33 @@ module SnapTrade
       {
         :'id' => :'String',
         :'account' => :'AccountSimple',
+        :'symbol' => :'UniversalActivitySymbol',
+        :'option_symbol' => :'UniversalActivityOptionSymbol',
+        :'price' => :'Float',
+        :'units' => :'Float',
         :'amount' => :'Float',
-        :'currency' => :'Currency',
+        :'currency' => :'UniversalActivityCurrency',
+        :'type' => :'String',
+        :'option_type' => :'String',
         :'description' => :'String',
+        :'trade_date' => :'Time',
+        :'settlement_date' => :'Time',
         :'fee' => :'Float',
         :'fx_rate' => :'Float',
         :'institution' => :'String',
-        :'option_type' => :'String',
-        :'price' => :'Float',
-        :'settlement_date' => :'String',
-        :'external_reference_id' => :'String',
-        :'symbol' => :'Symbol',
-        :'option_symbol' => :'OptionsSymbol',
-        :'trade_date' => :'String',
-        :'type' => :'String',
-        :'units' => :'Float'
+        :'external_reference_id' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'symbol',
+        :'option_symbol',
         :'amount',
-        :'fx_rate',
-        :'external_reference_id',
         :'trade_date',
+        :'fx_rate',
+        :'external_reference_id'
       ])
     end
 
@@ -136,6 +146,22 @@ module SnapTrade
         self.account = attributes[:'account']
       end
 
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'option_symbol')
+        self.option_symbol = attributes[:'option_symbol']
+      end
+
+      if attributes.key?(:'price')
+        self.price = attributes[:'price']
+      end
+
+      if attributes.key?(:'units')
+        self.units = attributes[:'units']
+      end
+
       if attributes.key?(:'amount')
         self.amount = attributes[:'amount']
       end
@@ -144,8 +170,24 @@ module SnapTrade
         self.currency = attributes[:'currency']
       end
 
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'option_type')
+        self.option_type = attributes[:'option_type']
+      end
+
       if attributes.key?(:'description')
         self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'trade_date')
+        self.trade_date = attributes[:'trade_date']
+      end
+
+      if attributes.key?(:'settlement_date')
+        self.settlement_date = attributes[:'settlement_date']
       end
 
       if attributes.key?(:'fee')
@@ -160,40 +202,8 @@ module SnapTrade
         self.institution = attributes[:'institution']
       end
 
-      if attributes.key?(:'option_type')
-        self.option_type = attributes[:'option_type']
-      end
-
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
-      end
-
-      if attributes.key?(:'settlement_date')
-        self.settlement_date = attributes[:'settlement_date']
-      end
-
       if attributes.key?(:'external_reference_id')
         self.external_reference_id = attributes[:'external_reference_id']
-      end
-
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
-      end
-
-      if attributes.key?(:'option_symbol')
-        self.option_symbol = attributes[:'option_symbol']
-      end
-
-      if attributes.key?(:'trade_date')
-        self.trade_date = attributes[:'trade_date']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
       end
     end
 
@@ -217,21 +227,21 @@ module SnapTrade
       self.class == o.class &&
           id == o.id &&
           account == o.account &&
+          symbol == o.symbol &&
+          option_symbol == o.option_symbol &&
+          price == o.price &&
+          units == o.units &&
           amount == o.amount &&
           currency == o.currency &&
+          type == o.type &&
+          option_type == o.option_type &&
           description == o.description &&
+          trade_date == o.trade_date &&
+          settlement_date == o.settlement_date &&
           fee == o.fee &&
           fx_rate == o.fx_rate &&
           institution == o.institution &&
-          option_type == o.option_type &&
-          price == o.price &&
-          settlement_date == o.settlement_date &&
-          external_reference_id == o.external_reference_id &&
-          symbol == o.symbol &&
-          option_symbol == o.option_symbol &&
-          trade_date == o.trade_date &&
-          type == o.type &&
-          units == o.units
+          external_reference_id == o.external_reference_id
     end
 
     # @see the `==` method
@@ -243,7 +253,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, account, amount, currency, description, fee, fx_rate, institution, option_type, price, settlement_date, external_reference_id, symbol, option_symbol, trade_date, type, units].hash
+      [id, account, symbol, option_symbol, price, units, amount, currency, type, option_type, description, trade_date, settlement_date, fee, fx_rate, institution, external_reference_id].hash
     end
 
     # Builds the object from hash

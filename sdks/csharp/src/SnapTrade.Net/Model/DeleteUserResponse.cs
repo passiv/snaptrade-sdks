@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Response when delete user is successful
+    /// DeleteUserResponse
     /// </summary>
     [DataContract(Name = "DeleteUserResponse")]
     public partial class DeleteUserResponse : IEquatable<DeleteUserResponse>, IValidatableObject
@@ -35,21 +35,30 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DeleteUserResponse" /> class.
         /// </summary>
-        /// <param name="status">Delete status.</param>
+        /// <param name="status">This is always &#x60;deleted&#x60; when a user is queued for deletion..</param>
+        /// <param name="detail">Human friendly message about the deletion status..</param>
         /// <param name="userId">SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable..</param>
-        public DeleteUserResponse(string status = default(string), string userId = default(string)) : base()
+        public DeleteUserResponse(string status = default(string), string detail = default(string), string userId = default(string)) : base()
         {
             this.Status = status;
+            this.Detail = detail;
             this.UserId = userId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Delete status
+        /// This is always &#x60;deleted&#x60; when a user is queued for deletion.
         /// </summary>
-        /// <value>Delete status</value>
+        /// <value>This is always &#x60;deleted&#x60; when a user is queued for deletion.</value>
         [DataMember(Name = "status", EmitDefaultValue = false)]
         public string Status { get; set; }
+
+        /// <summary>
+        /// Human friendly message about the deletion status.
+        /// </summary>
+        /// <value>Human friendly message about the deletion status.</value>
+        [DataMember(Name = "detail", EmitDefaultValue = false)]
+        public string Detail { get; set; }
 
         /// <summary>
         /// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
@@ -74,6 +83,7 @@ namespace SnapTrade.Net.Model
             sb.Append("class DeleteUserResponse {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  Detail: ").Append(Detail).Append("\n");
             sb.Append("  UserId: ").Append(UserId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
@@ -117,6 +127,11 @@ namespace SnapTrade.Net.Model
                     this.Status.Equals(input.Status))
                 ) && base.Equals(input) && 
                 (
+                    this.Detail == input.Detail ||
+                    (this.Detail != null &&
+                    this.Detail.Equals(input.Detail))
+                ) && base.Equals(input) && 
+                (
                     this.UserId == input.UserId ||
                     (this.UserId != null &&
                     this.UserId.Equals(input.UserId))
@@ -136,6 +151,10 @@ namespace SnapTrade.Net.Model
                 if (this.Status != null)
                 {
                     hashCode = (hashCode * 59) + this.Status.GetHashCode();
+                }
+                if (this.Detail != null)
+                {
+                    hashCode = (hashCode * 59) + this.Detail.GetHashCode();
                 }
                 if (this.UserId != null)
                 {

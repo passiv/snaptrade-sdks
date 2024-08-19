@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,7 +52,7 @@ import com.konfigthis.client.JSON;
 public class LoginRedirectURI {
   public static final String SERIALIZED_NAME_REDIRECT_U_R_I = "redirectURI";
   @SerializedName(SERIALIZED_NAME_REDIRECT_U_R_I)
-  private Object redirectURI = null;
+  private String redirectURI;
 
   public static final String SERIALIZED_NAME_SESSION_ID = "sessionId";
   @SerializedName(SERIALIZED_NAME_SESSION_ID)
@@ -62,7 +61,7 @@ public class LoginRedirectURI {
   public LoginRedirectURI() {
   }
 
-  public LoginRedirectURI redirectURI(Object redirectURI) {
+  public LoginRedirectURI redirectURI(String redirectURI) {
     
     
     
@@ -72,18 +71,18 @@ public class LoginRedirectURI {
   }
 
    /**
-   * Get redirectURI
+   * Connection Portal link to redirect user to connect a brokerage account.
    * @return redirectURI
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://app.snaptrade.com/snapTrade/redeemToken?token=this$token1does2ntactu4allyexist==&clientId=example", value = "")
+  @ApiModelProperty(example = "https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d", value = "Connection Portal link to redirect user to connect a brokerage account.")
 
-  public Object getRedirectURI() {
+  public String getRedirectURI() {
     return redirectURI;
   }
 
 
-  public void setRedirectURI(Object redirectURI) {
+  public void setRedirectURI(String redirectURI) {
     
     
     
@@ -101,11 +100,11 @@ public class LoginRedirectURI {
   }
 
    /**
-   * Get sessionId
+   * ID to identify the connection portal session.
    * @return sessionId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "cf371bb4-a475-4f17-ab94-d0fee699960d", value = "ID to identify the connection portal session.")
 
   public String getSessionId() {
     return sessionId;
@@ -179,20 +178,9 @@ public class LoginRedirectURI {
         Objects.equals(this.additionalProperties, loginRedirectURI.additionalProperties);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(redirectURI, sessionId, additionalProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -242,6 +230,9 @@ public class LoginRedirectURI {
         if (!LoginRedirectURI.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in LoginRedirectURI is not found in the empty JSON string", LoginRedirectURI.openapiRequiredFields.toString()));
         }
+      }
+      if ((jsonObj.get("redirectURI") != null && !jsonObj.get("redirectURI").isJsonNull()) && !jsonObj.get("redirectURI").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `redirectURI` to be a primitive type in the JSON string but got `%s`", jsonObj.get("redirectURI").toString()));
       }
       if ((jsonObj.get("sessionId") != null && !jsonObj.get("sessionId").isJsonNull()) && !jsonObj.get("sessionId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `sessionId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("sessionId").toString()));

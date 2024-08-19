@@ -45,9 +45,9 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Delete SnapTrade user
+     * Delete user
      *
-     * Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      *
      * @throws ApiException if the Api call fails
      */
@@ -60,9 +60,9 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * List SnapTrade users
+     * List all users
      *
-     * Returns a list of users you&#39;ve registered over the SnapTrade API.
+     * Returns a list of all registered user IDs.
      *
      * @throws ApiException if the Api call fails
      */
@@ -102,7 +102,7 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Create SnapTrade user
+     * Register user
      *
      * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
      *
@@ -118,9 +118,9 @@ public class AuthenticationApiTest {
     }
 
     /**
-     * Obtain a new user secret for a user
+     * Rotate user secret
      *
-     * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
      *
      * @throws ApiException if the Api call fails
      */

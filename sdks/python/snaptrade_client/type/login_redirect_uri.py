@@ -20,8 +20,10 @@ class RequiredLoginRedirectURI(TypedDict):
     pass
 
 class OptionalLoginRedirectURI(TypedDict, total=False):
-    redirectURI: typing.Union[bool, date, datetime, dict, float, int, list, str, None]
+    # Connection Portal link to redirect user to connect a brokerage account.
+    redirectURI: str
 
+    # ID to identify the connection portal session.
     sessionId: str
 
 class LoginRedirectURI(RequiredLoginRedirectURI, OptionalLoginRedirectURI):

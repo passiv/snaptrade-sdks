@@ -67,7 +67,7 @@ module SnapTrade
         :'symbol' => :'String',
         :'raw_symbol' => :'String',
         :'description' => :'String',
-        :'currency' => :'UniversalSymbolCurrency',
+        :'currency' => :'SymbolCurrency',
         :'exchange' => :'UnderlyingSymbolExchange',
         :'type' => :'UnderlyingSymbolType',
         :'currencies' => :'Array<Currency>',

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeDeleteUser(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeDeleteUser unit test stubs
-        Delete SnapTrade user
+        Delete user
     """
 
     def setUp(self):

@@ -62,7 +62,7 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
+            var brokerageAuthorizations = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional) 
             
             try
             {
@@ -102,11 +102,11 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **GET** / | Get API Status
-*AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
-*AuthenticationApi* | [**ListSnapTradeUsers**](docs/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **DELETE** /snapTrade/deleteUser | Delete user
+*AuthenticationApi* | [**ListSnapTradeUsers**](docs/AuthenticationApi.md#listsnaptradeusers) | **GET** /snapTrade/listUsers | List all users
 *AuthenticationApi* | [**LoginSnapTradeUser**](docs/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Login user & generate connection link
-*AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Create SnapTrade user
-*AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
+*AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Register user
+*AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret
 *ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Manually disable a connection for testing
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the User
@@ -204,6 +204,7 @@ Class | Method | HTTP request | Description
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
+ - [OptionsSymbolNullable](docs/OptionsSymbolNullable.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
  - [PartnerData](docs/PartnerData.md)
  - [PastValue](docs/PastValue.md)
@@ -222,6 +223,9 @@ Class | Method | HTTP request | Description
  - [StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
  - [SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [Symbol](docs/Symbol.md)
+ - [SymbolCurrency](docs/SymbolCurrency.md)
+ - [SymbolExchange](docs/SymbolExchange.md)
+ - [SymbolNullable](docs/SymbolNullable.md)
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
@@ -232,9 +236,8 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbolExchange](docs/UnderlyingSymbolExchange.md)
  - [UnderlyingSymbolType](docs/UnderlyingSymbolType.md)
  - [UniversalActivity](docs/UniversalActivity.md)
+ - [UniversalActivityCurrency](docs/UniversalActivityCurrency.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
- - [UniversalSymbolCurrency](docs/UniversalSymbolCurrency.md)
- - [UniversalSymbolExchange](docs/UniversalSymbolExchange.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)
 

@@ -50,7 +50,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} [brokerageAuthorizations] Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+         * @param {string} [brokerageAuthorizations] Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
          * @param {*} [options] Override http request option.
          * @deprecated
          * @throws {RequiredError}
@@ -764,7 +764,7 @@ export type AccountInformationApiGetAllUserHoldingsRequest = {
     readonly userSecret: string
     
     /**
-    * Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+    * Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
     * @type {string}
     * @memberof AccountInformationApiGetAllUserHoldings
     */

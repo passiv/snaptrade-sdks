@@ -74,6 +74,38 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Account'
         }
         /// <summary>
+        /// Test the property 'Symbol'
+        /// </summary>
+        [Fact]
+        public void SymbolTest()
+        {
+            // TODO unit test for the property 'Symbol'
+        }
+        /// <summary>
+        /// Test the property 'OptionSymbol'
+        /// </summary>
+        [Fact]
+        public void OptionSymbolTest()
+        {
+            // TODO unit test for the property 'OptionSymbol'
+        }
+        /// <summary>
+        /// Test the property 'Price'
+        /// </summary>
+        [Fact]
+        public void PriceTest()
+        {
+            // TODO unit test for the property 'Price'
+        }
+        /// <summary>
+        /// Test the property 'Units'
+        /// </summary>
+        [Fact]
+        public void UnitsTest()
+        {
+            // TODO unit test for the property 'Units'
+        }
+        /// <summary>
         /// Test the property 'Amount'
         /// </summary>
         [Fact]
@@ -90,12 +122,44 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Currency'
         }
         /// <summary>
+        /// Test the property 'Type'
+        /// </summary>
+        [Fact]
+        public void TypeTest()
+        {
+            // TODO unit test for the property 'Type'
+        }
+        /// <summary>
+        /// Test the property 'OptionType'
+        /// </summary>
+        [Fact]
+        public void OptionTypeTest()
+        {
+            // TODO unit test for the property 'OptionType'
+        }
+        /// <summary>
         /// Test the property 'Description'
         /// </summary>
         [Fact]
         public void DescriptionTest()
         {
             // TODO unit test for the property 'Description'
+        }
+        /// <summary>
+        /// Test the property 'TradeDate'
+        /// </summary>
+        [Fact]
+        public void TradeDateTest()
+        {
+            // TODO unit test for the property 'TradeDate'
+        }
+        /// <summary>
+        /// Test the property 'SettlementDate'
+        /// </summary>
+        [Fact]
+        public void SettlementDateTest()
+        {
+            // TODO unit test for the property 'SettlementDate'
         }
         /// <summary>
         /// Test the property 'Fee'
@@ -122,76 +186,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Institution'
         }
         /// <summary>
-        /// Test the property 'OptionType'
-        /// </summary>
-        [Fact]
-        public void OptionTypeTest()
-        {
-            // TODO unit test for the property 'OptionType'
-        }
-        /// <summary>
-        /// Test the property 'Price'
-        /// </summary>
-        [Fact]
-        public void PriceTest()
-        {
-            // TODO unit test for the property 'Price'
-        }
-        /// <summary>
-        /// Test the property 'SettlementDate'
-        /// </summary>
-        [Fact]
-        public void SettlementDateTest()
-        {
-            // TODO unit test for the property 'SettlementDate'
-        }
-        /// <summary>
         /// Test the property 'ExternalReferenceId'
         /// </summary>
         [Fact]
         public void ExternalReferenceIdTest()
         {
             // TODO unit test for the property 'ExternalReferenceId'
-        }
-        /// <summary>
-        /// Test the property 'Symbol'
-        /// </summary>
-        [Fact]
-        public void SymbolTest()
-        {
-            // TODO unit test for the property 'Symbol'
-        }
-        /// <summary>
-        /// Test the property 'OptionSymbol'
-        /// </summary>
-        [Fact]
-        public void OptionSymbolTest()
-        {
-            // TODO unit test for the property 'OptionSymbol'
-        }
-        /// <summary>
-        /// Test the property 'TradeDate'
-        /// </summary>
-        [Fact]
-        public void TradeDateTest()
-        {
-            // TODO unit test for the property 'TradeDate'
-        }
-        /// <summary>
-        /// Test the property 'Type'
-        /// </summary>
-        [Fact]
-        public void TypeTest()
-        {
-            // TODO unit test for the property 'Type'
-        }
-        /// <summary>
-        /// Test the property 'Units'
-        /// </summary>
-        [Fact]
-        public void UnitsTest()
-        {
-            // TODO unit test for the property 'Units'
         }
 
     }

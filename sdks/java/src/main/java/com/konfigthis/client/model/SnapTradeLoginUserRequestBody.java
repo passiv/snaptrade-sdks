@@ -67,7 +67,7 @@ public class SnapTradeLoginUserRequestBody {
   private String reconnect;
 
   /**
-   * Sets whether the connection should be read or trade
+   * Sets whether the connection should be read-only or trade-enabled.
    */
   @JsonAdapter(ConnectionTypeEnum.Adapter.class)
  public enum ConnectionTypeEnum {
@@ -115,10 +115,10 @@ public class SnapTradeLoginUserRequestBody {
 
   public static final String SERIALIZED_NAME_CONNECTION_TYPE = "connectionType";
   @SerializedName(SERIALIZED_NAME_CONNECTION_TYPE)
-  private ConnectionTypeEnum connectionType;
+  private ConnectionTypeEnum connectionType = ConnectionTypeEnum.READ;
 
   /**
-   * Sets the version of the connection portal to render, with a default to &#39;v3&#39;
+   * Sets the version of the connection portal to render.
    */
   @JsonAdapter(ConnectionPortalVersionEnum.Adapter.class)
  public enum ConnectionPortalVersionEnum {
@@ -166,7 +166,7 @@ public class SnapTradeLoginUserRequestBody {
 
   public static final String SERIALIZED_NAME_CONNECTION_PORTAL_VERSION = "connectionPortalVersion";
   @SerializedName(SERIALIZED_NAME_CONNECTION_PORTAL_VERSION)
-  private ConnectionPortalVersionEnum connectionPortalVersion;
+  private ConnectionPortalVersionEnum connectionPortalVersion = ConnectionPortalVersionEnum.V3;
 
   public SnapTradeLoginUserRequestBody() {
   }
@@ -181,11 +181,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
+   * Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.
    * @return broker
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.")
+  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.")
 
   public String getBroker() {
     return broker;
@@ -210,11 +210,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal
+   * When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
    * @return immediateRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "When set to True, user will be redirected back to the partner's site instead of the connection portal")
+  @ApiModelProperty(example = "true", value = "When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.")
 
   public Boolean getImmediateRedirect() {
     return immediateRedirect;
@@ -239,11 +239,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * URL to redirect the user to after the user connects their brokerage account
+   * URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
    * @return customRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://snaptrade.com", value = "URL to redirect the user to after the user connects their brokerage account")
+  @ApiModelProperty(example = "https://snaptrade.com", value = "URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.")
 
   public String getCustomRedirect() {
     return customRedirect;
@@ -268,11 +268,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
+   * The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
    * @return reconnect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.")
+  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.")
 
   public String getReconnect() {
     return reconnect;
@@ -297,11 +297,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets whether the connection should be read or trade
+   * Sets whether the connection should be read-only or trade-enabled.
    * @return connectionType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Sets whether the connection should be read or trade")
+  @ApiModelProperty(example = "READ", value = "Sets whether the connection should be read-only or trade-enabled.")
 
   public ConnectionTypeEnum getConnectionType() {
     return connectionType;
@@ -326,11 +326,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets the version of the connection portal to render, with a default to &#39;v3&#39;
+   * Sets the version of the connection portal to render.
    * @return connectionPortalVersion
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Sets the version of the connection portal to render, with a default to 'v3'")
+  @ApiModelProperty(example = "V3", value = "Sets the version of the connection portal to render.")
 
   public ConnectionPortalVersionEnum getConnectionPortalVersion() {
     return connectionPortalVersion;

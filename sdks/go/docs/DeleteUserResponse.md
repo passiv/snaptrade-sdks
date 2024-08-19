@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to **string** | Delete status | [optional] 
+**Status** | Pointer to **string** | This is always &#x60;deleted&#x60; when a user is queued for deletion. | [optional] 
+**Detail** | Pointer to **string** | Human friendly message about the deletion status. | [optional] 
 **UserId** | Pointer to **string** | SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable. | [optional] 
 
 ## Methods
@@ -50,6 +51,31 @@ SetStatus sets Status field to given value.
 `func (o *DeleteUserResponse) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetDetail
+
+`func (o *DeleteUserResponse) GetDetail() string`
+
+GetDetail returns the Detail field if non-nil, zero value otherwise.
+
+### GetDetailOk
+
+`func (o *DeleteUserResponse) GetDetailOk() (*string, bool)`
+
+GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetail
+
+`func (o *DeleteUserResponse) SetDetail(v string)`
+
+SetDetail sets Detail field to given value.
+
+### HasDetail
+
+`func (o *DeleteUserResponse) HasDetail() bool`
+
+HasDetail returns a boolean if a field has been set.
 
 ### GetUserId
 

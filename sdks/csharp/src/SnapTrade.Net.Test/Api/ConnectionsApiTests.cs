@@ -201,8 +201,8 @@ namespace SnapTrade.Net.Test.Api
         public void SessionEventsTest()
         {
             var partnerClientId = "partnerClientId_example";
-            var userId = "userId_example"; // Optional comma seperated list of user IDs used to filter the request on specific users (optional) 
-            var sessionId = "sessionId_example"; // Optional comma seperated list of session IDs used to filter the request on specific users (optional) 
+            var userId = "userId_example"; // Optional comma separated list of user IDs used to filter the request on specific users (optional) 
+            var sessionId = "sessionId_example"; // Optional comma separated list of session IDs used to filter the request on specific users (optional) 
             
             try
             {

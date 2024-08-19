@@ -17,10 +17,10 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.FigiInstrumentNullable;
 import com.konfigthis.client.model.SecurityType;
+import com.konfigthis.client.model.SymbolCurrency;
+import com.konfigthis.client.model.SymbolExchange;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -69,11 +69,11 @@ public class SymbolTest {
     }
 
     /**
-     * Test the property 'name'
+     * Test the property 'description'
      */
     @Test
-    public void nameTest() {
-        // TODO: test name
+    public void descriptionTest() {
+        // TODO: test description
     }
 
     /**

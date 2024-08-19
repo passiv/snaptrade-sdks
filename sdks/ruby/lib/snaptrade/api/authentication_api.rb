@@ -17,9 +17,9 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Delete SnapTrade user
+    # Delete user
     #
-    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    # Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
     #
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -28,9 +28,9 @@ module SnapTrade
       data
     end
 
-    # Delete SnapTrade user
+    # Delete user
     #
-    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    # Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
     #
     # @param user_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -38,8 +38,8 @@ module SnapTrade
       delete_snap_trade_user_with_http_info_impl(user_id, extra)
     end
 
-    # Delete SnapTrade user
-    # Deletes a user you've registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    # Delete user
+    # Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [DeleteUserResponse]
@@ -48,8 +48,8 @@ module SnapTrade
       data
     end
 
-    # Delete SnapTrade user
-    # Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+    # Delete user
+    # Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
     # @param user_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(DeleteUserResponse, Integer, Hash)>] DeleteUserResponse data, response status code and response headers
@@ -103,9 +103,9 @@ module SnapTrade
     end
 
 
-    # List SnapTrade users
+    # List all users
     #
-    # Returns a list of users you've registered over the SnapTrade API.
+    # Returns a list of all registered user IDs.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
@@ -113,17 +113,17 @@ module SnapTrade
       data
     end
 
-    # List SnapTrade users
+    # List all users
     #
-    # Returns a list of users you've registered over the SnapTrade API.
+    # Returns a list of all registered user IDs.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
       list_snap_trade_users_with_http_info_impl(extra)
     end
 
-    # List SnapTrade users
-    # Returns a list of users you've registered over the SnapTrade API.
+    # List all users
+    # Returns a list of all registered user IDs.
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
     private def list_snap_trade_users_impl(opts = {})
@@ -131,8 +131,8 @@ module SnapTrade
       data
     end
 
-    # List SnapTrade users
-    # Returns a list of users you&#39;ve registered over the SnapTrade API.
+    # List all users
+    # Returns a list of all registered user IDs.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
     private def list_snap_trade_users_with_http_info_impl(opts = {})
@@ -186,15 +186,15 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
-    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
-    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v3'
+    # @param broker [String] Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
+    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v3', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -213,15 +213,15 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param broker [String] Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs.
-    # @param immediate_redirect [Boolean] When set to True, user will be redirected back to the partner's site instead of the connection portal
-    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read or trade
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render, with a default to 'v3'
+    # @param broker [String] Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: SENTINEL, connection_portal_version: SENTINEL, extra: {})
+    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v3', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -312,7 +312,7 @@ module SnapTrade
     end
 
 
-    # Create SnapTrade user
+    # Register user
     #
     # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
     # Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
@@ -328,7 +328,7 @@ module SnapTrade
       data
     end
 
-    # Create SnapTrade user
+    # Register user
     #
     # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
     # Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
@@ -343,7 +343,7 @@ module SnapTrade
       register_snap_trade_user_with_http_info_impl(snap_trade_register_user_request_body, extra)
     end
 
-    # Create SnapTrade user
+    # Register user
     # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
@@ -353,7 +353,7 @@ module SnapTrade
       data
     end
 
-    # Create SnapTrade user
+    # Register user
     # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
     # @param snap_trade_register_user_request_body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] opts the optional parameters
@@ -412,13 +412,12 @@ module SnapTrade
     end
 
 
-    # Obtain a new user secret for a user
+    # Rotate user secret
     #
-    # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret
-    # is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+    # Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
     #
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-    # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+    # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
     # @param body [UserIDandSecret] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def reset_snap_trade_user_secret(user_id: SENTINEL, user_secret: SENTINEL, extra: {})
@@ -430,13 +429,12 @@ module SnapTrade
       data
     end
 
-    # Obtain a new user secret for a user
+    # Rotate user secret
     #
-    # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret
-    # is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+    # Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
     #
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-    # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API.
+    # @param user_secret [String] SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
     # @param body [UserIDandSecret] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def reset_snap_trade_user_secret_with_http_info(user_id: SENTINEL, user_secret: SENTINEL, extra: {})
@@ -447,8 +445,8 @@ module SnapTrade
       reset_snap_trade_user_secret_with_http_info_impl(user_i_dand_secret, extra)
     end
 
-    # Obtain a new user secret for a user
-    # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+    # Rotate user secret
+    # Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
     # @param user_i_dand_secret [UserIDandSecret] 
     # @param [Hash] opts the optional parameters
     # @return [UserIDandSecret]
@@ -457,8 +455,8 @@ module SnapTrade
       data
     end
 
-    # Obtain a new user secret for a user
-    # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+    # Rotate user secret
+    # Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
     # @param user_i_dand_secret [UserIDandSecret] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(UserIDandSecret, Integer, Hash)>] UserIDandSecret data, response status code and response headers

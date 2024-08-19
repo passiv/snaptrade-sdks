@@ -21,9 +21,9 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.FigiInstrumentNullable;
+import com.konfigthis.client.model.SymbolCurrency;
 import com.konfigthis.client.model.UnderlyingSymbolExchange;
 import com.konfigthis.client.model.UnderlyingSymbolType;
-import com.konfigthis.client.model.UniversalSymbolCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class UnderlyingSymbol {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private UniversalSymbolCurrency currency;
+  private SymbolCurrency currency;
 
   public static final String SERIALIZED_NAME_EXCHANGE = "exchange";
   @SerializedName(SERIALIZED_NAME_EXCHANGE)
@@ -218,7 +218,7 @@ public class UnderlyingSymbol {
   }
 
 
-  public UnderlyingSymbol currency(UniversalSymbolCurrency currency) {
+  public UnderlyingSymbol currency(SymbolCurrency currency) {
     
     
     
@@ -234,12 +234,12 @@ public class UnderlyingSymbol {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public UniversalSymbolCurrency getCurrency() {
+  public SymbolCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(UniversalSymbolCurrency currency) {
+  public void setCurrency(SymbolCurrency currency) {
     
     
     
@@ -563,7 +563,7 @@ public class UnderlyingSymbol {
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        UniversalSymbolCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        SymbolCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
       // validate the optional field `exchange`
       if (jsonObj.get("exchange") != null && !jsonObj.get("exchange").isJsonNull()) {

@@ -36,7 +36,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountHoldings&gt;</returns>
         [Obsolete]
@@ -51,7 +51,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountHoldings&gt;</returns>
         [Obsolete]
@@ -265,7 +265,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountHoldings&gt;</returns>
@@ -281,7 +281,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountHoldings&gt;)</returns>
@@ -618,7 +618,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;AccountHoldings&gt;</returns>
         [Obsolete]
@@ -634,7 +634,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;AccountHoldings&gt;</returns>
         [Obsolete]
@@ -720,7 +720,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;AccountHoldings&gt;</returns>
@@ -737,7 +737,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="brokerageAuthorizations">Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
+        /// <param name="brokerageAuthorizations">Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;AccountHoldings&gt;)</returns>

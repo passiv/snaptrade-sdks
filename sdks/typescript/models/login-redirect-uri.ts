@@ -18,13 +18,13 @@ import type * as buffer from "buffer"
  */
 export interface LoginRedirectURI {
     /**
-     * 
-     * @type {any}
+     * Connection Portal link to redirect user to connect a brokerage account.
+     * @type {string}
      * @memberof LoginRedirectURI
      */
-    'redirectURI'?: any;
+    'redirectURI'?: string;
     /**
-     * 
+     * ID to identify the connection portal session.
      * @type {string}
      * @memberof LoginRedirectURI
      */

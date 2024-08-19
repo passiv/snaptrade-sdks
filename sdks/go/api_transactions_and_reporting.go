@@ -35,29 +35,31 @@ type TransactionsAndReportingApiGetActivitiesRequest struct {
 	type_ *string
 }
 
+// The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;.
 func (r *TransactionsAndReportingApiGetActivitiesRequest) StartDate(startDate string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.startDate = &startDate
 	return r
 }
 
+// The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;.
 func (r *TransactionsAndReportingApiGetActivitiesRequest) EndDate(endDate string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.endDate = &endDate
 	return r
 }
 
-// Optional comma seperated list of account IDs used to filter the request on specific accounts
+// Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter.
 func (r *TransactionsAndReportingApiGetActivitiesRequest) Accounts(accounts string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.accounts = &accounts
 	return r
 }
 
-// Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
+// Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter.
 func (r *TransactionsAndReportingApiGetActivitiesRequest) BrokerageAuthorizations(brokerageAuthorizations string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.brokerageAuthorizations = &brokerageAuthorizations
 	return r
 }
 
-// Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+// Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
 func (r *TransactionsAndReportingApiGetActivitiesRequest) Type_(type_ string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.type_ = &type_
 	return r
@@ -70,7 +72,12 @@ func (r TransactionsAndReportingApiGetActivitiesRequest) Execute() ([]UniversalA
 /*
 GetActivities Get transaction history for a user
 
-Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -238,7 +245,7 @@ type TransactionsAndReportingApiGetReportingCustomRangeRequest struct {
 	frequency *string
 }
 
-// Optional comma seperated list of account IDs used to filter the request on specific accounts
+// Optional comma separated list of account IDs used to filter the request on specific accounts
 func (r *TransactionsAndReportingApiGetReportingCustomRangeRequest) Accounts(accounts string) *TransactionsAndReportingApiGetReportingCustomRangeRequest {
 	r.accounts = &accounts
 	return r

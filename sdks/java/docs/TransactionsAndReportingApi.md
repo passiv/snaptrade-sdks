@@ -14,7 +14,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Get transaction history for a user
 
-Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
 
 ### Example
 ```java
@@ -40,11 +40,11 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    LocalDate startDate = LocalDate.now();
-    LocalDate endDate = LocalDate.now();
-    String accounts = "accounts_example"; // Optional comma seperated list of account IDs used to filter the request on specific accounts
-    String brokerageAuthorizations = "brokerageAuthorizations_example"; // Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations
-    String type = "DIVIDEND"; // Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
+    LocalDate startDate = LocalDate.now(); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    LocalDate endDate = LocalDate.now(); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    String accounts = "accounts_example"; // Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
+    String brokerageAuthorizations = "brokerageAuthorizations_example"; // Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
+    String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
     try {
       List<UniversalActivity> result = client
               .transactionsAndReporting
@@ -98,11 +98,11 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **startDate** | **LocalDate**|  | [optional] |
-| **endDate** | **LocalDate**|  | [optional] |
-| **accounts** | **String**| Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional] |
-| **brokerageAuthorizations** | **String**| Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations | [optional] |
-| **type** | **String**| Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT | [optional] |
+| **startDate** | **LocalDate**| The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional] |
+| **endDate** | **LocalDate**| The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional] |
+| **accounts** | **String**| Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. | [optional] |
+| **brokerageAuthorizations** | **String**| Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. | [optional] |
+| **type** | **String**| Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE  | [optional] |
 
 ### Return type
 
@@ -120,7 +120,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully retrieved transaction history |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error |  -  |
 
 <a name="getReportingCustomRange"></a>
@@ -157,7 +157,7 @@ public class Example {
     LocalDate endDate = LocalDate.now();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String accounts = "accounts_example"; // Optional comma seperated list of account IDs used to filter the request on specific accounts
+    String accounts = "accounts_example"; // Optional comma separated list of account IDs used to filter the request on specific accounts
     Boolean detailed = true; // Optional, increases frequency of data points for the total value and contribution charts if set to true
     String frequency = "frequency_example"; // Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
     try {
@@ -230,7 +230,7 @@ public class Example {
 | **endDate** | **LocalDate**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accounts** | **String**| Optional comma seperated list of account IDs used to filter the request on specific accounts | [optional] |
+| **accounts** | **String**| Optional comma separated list of account IDs used to filter the request on specific accounts | [optional] |
 | **detailed** | **Boolean**| Optional, increases frequency of data points for the total value and contribution charts if set to true | [optional] |
 | **frequency** | **String**| Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly. | [optional] |
 

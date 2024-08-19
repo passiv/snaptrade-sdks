@@ -194,11 +194,11 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**listUserAccounts**](docs/AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts
 *AccountInformationApi* | [**updateUserAccount**](docs/AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account
 *ApiStatusApi* | [**check**](docs/ApiStatusApi.md#check) | **GET** / | Get API Status
-*AuthenticationApi* | [**deleteSnapTradeUser**](docs/AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete SnapTrade user
-*AuthenticationApi* | [**listSnapTradeUsers**](docs/AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**deleteSnapTradeUser**](docs/AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user
+*AuthenticationApi* | [**listSnapTradeUsers**](docs/AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List all users
 *AuthenticationApi* | [**loginSnapTradeUser**](docs/AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link
-*AuthenticationApi* | [**registerSnapTradeUser**](docs/AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Create SnapTrade user
-*AuthenticationApi* | [**resetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Obtain a new user secret for a user
+*AuthenticationApi* | [**registerSnapTradeUser**](docs/AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user
+*AuthenticationApi* | [**resetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret
 *ConnectionsApi* | [**detailBrokerageAuthorization**](docs/ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**disableBrokerageAuthorization**](docs/ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Manually disable a connection for testing
 *ConnectionsApi* | [**listBrokerageAuthorizations**](docs/ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the User
@@ -284,6 +284,7 @@ Class | Method | HTTP request | Description
  - [OptionsPlaceOptionStrategyRequest](docs/OptionsPlaceOptionStrategyRequest.md)
  - [OptionsPosition](docs/OptionsPosition.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
+ - [OptionsSymbolNullable](docs/OptionsSymbolNullable.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
  - [PartnerData](docs/PartnerData.md)
  - [PastValue](docs/PastValue.md)
@@ -302,6 +303,9 @@ Class | Method | HTTP request | Description
  - [StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
  - [SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [Symbol](docs/Symbol.md)
+ - [SymbolCurrency](docs/SymbolCurrency.md)
+ - [SymbolExchange](docs/SymbolExchange.md)
+ - [SymbolNullable](docs/SymbolNullable.md)
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
@@ -312,9 +316,8 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbolExchange](docs/UnderlyingSymbolExchange.md)
  - [UnderlyingSymbolType](docs/UnderlyingSymbolType.md)
  - [UniversalActivity](docs/UniversalActivity.md)
+ - [UniversalActivityCurrency](docs/UniversalActivityCurrency.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
- - [UniversalSymbolCurrency](docs/UniversalSymbolCurrency.md)
- - [UniversalSymbolExchange](docs/UniversalSymbolExchange.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)
 
