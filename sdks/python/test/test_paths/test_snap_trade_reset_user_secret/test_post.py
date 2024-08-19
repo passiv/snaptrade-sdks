@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeResetUserSecret(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeResetUserSecret unit test stubs
-        Obtain a new user secret for a user
+        Rotate user secret
     """
 
     def setUp(self):

@@ -20,12 +20,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountSimple;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.OptionsSymbol;
-import com.konfigthis.client.model.Symbol;
+import com.konfigthis.client.model.OptionsSymbolNullable;
+import com.konfigthis.client.model.SymbolNullable;
+import com.konfigthis.client.model.UniversalActivityCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -63,17 +64,49 @@ public class UniversalActivity {
   @SerializedName(SERIALIZED_NAME_ACCOUNT)
   private AccountSimple account;
 
+  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
+  @SerializedName(SERIALIZED_NAME_SYMBOL)
+  private SymbolNullable symbol;
+
+  public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
+  @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
+  private OptionsSymbolNullable optionSymbol;
+
+  public static final String SERIALIZED_NAME_PRICE = "price";
+  @SerializedName(SERIALIZED_NAME_PRICE)
+  private Double price;
+
+  public static final String SERIALIZED_NAME_UNITS = "units";
+  @SerializedName(SERIALIZED_NAME_UNITS)
+  private Double units;
+
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
   private Double amount;
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private Currency currency;
+  private UniversalActivityCurrency currency;
+
+  public static final String SERIALIZED_NAME_TYPE = "type";
+  @SerializedName(SERIALIZED_NAME_TYPE)
+  private String type;
+
+  public static final String SERIALIZED_NAME_OPTION_TYPE = "option_type";
+  @SerializedName(SERIALIZED_NAME_OPTION_TYPE)
+  private String optionType;
 
   public static final String SERIALIZED_NAME_DESCRIPTION = "description";
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
+
+  public static final String SERIALIZED_NAME_TRADE_DATE = "trade_date";
+  @SerializedName(SERIALIZED_NAME_TRADE_DATE)
+  private OffsetDateTime tradeDate;
+
+  public static final String SERIALIZED_NAME_SETTLEMENT_DATE = "settlement_date";
+  @SerializedName(SERIALIZED_NAME_SETTLEMENT_DATE)
+  private OffsetDateTime settlementDate;
 
   public static final String SERIALIZED_NAME_FEE = "fee";
   @SerializedName(SERIALIZED_NAME_FEE)
@@ -87,41 +120,9 @@ public class UniversalActivity {
   @SerializedName(SERIALIZED_NAME_INSTITUTION)
   private String institution;
 
-  public static final String SERIALIZED_NAME_OPTION_TYPE = "option_type";
-  @SerializedName(SERIALIZED_NAME_OPTION_TYPE)
-  private String optionType;
-
-  public static final String SERIALIZED_NAME_PRICE = "price";
-  @SerializedName(SERIALIZED_NAME_PRICE)
-  private Double price;
-
-  public static final String SERIALIZED_NAME_SETTLEMENT_DATE = "settlement_date";
-  @SerializedName(SERIALIZED_NAME_SETTLEMENT_DATE)
-  private String settlementDate;
-
   public static final String SERIALIZED_NAME_EXTERNAL_REFERENCE_ID = "external_reference_id";
   @SerializedName(SERIALIZED_NAME_EXTERNAL_REFERENCE_ID)
   private String externalReferenceId;
-
-  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
-  @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private Symbol symbol;
-
-  public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
-  @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
-  private OptionsSymbol optionSymbol;
-
-  public static final String SERIALIZED_NAME_TRADE_DATE = "trade_date";
-  @SerializedName(SERIALIZED_NAME_TRADE_DATE)
-  private String tradeDate;
-
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  private String type;
-
-  public static final String SERIALIZED_NAME_UNITS = "units";
-  @SerializedName(SERIALIZED_NAME_UNITS)
-  private Double units;
 
   public UniversalActivity() {
   }
@@ -136,11 +137,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Get id
+   * Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
    * @return id
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "")
+  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. ")
 
   public String getId() {
     return id;
@@ -184,6 +185,140 @@ public class UniversalActivity {
   }
 
 
+  public UniversalActivity symbol(SymbolNullable symbol) {
+    
+    
+    
+    
+    this.symbol = symbol;
+    return this;
+  }
+
+   /**
+   * Get symbol
+   * @return symbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public SymbolNullable getSymbol() {
+    return symbol;
+  }
+
+
+  public void setSymbol(SymbolNullable symbol) {
+    
+    
+    
+    this.symbol = symbol;
+  }
+
+
+  public UniversalActivity optionSymbol(OptionsSymbolNullable optionSymbol) {
+    
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+    return this;
+  }
+
+   /**
+   * Get optionSymbol
+   * @return optionSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public OptionsSymbolNullable getOptionSymbol() {
+    return optionSymbol;
+  }
+
+
+  public void setOptionSymbol(OptionsSymbolNullable optionSymbol) {
+    
+    
+    
+    this.optionSymbol = optionSymbol;
+  }
+
+
+  public UniversalActivity price(Double price) {
+    
+    
+    
+    
+    this.price = price;
+    return this;
+  }
+
+  public UniversalActivity price(Integer price) {
+    
+    
+    
+    
+    this.price = price.doubleValue();
+    return this;
+  }
+
+   /**
+   * The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions.
+   * @return price
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "0.4", value = "The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.")
+
+  public Double getPrice() {
+    return price;
+  }
+
+
+  public void setPrice(Double price) {
+    
+    
+    
+    this.price = price;
+  }
+
+
+  public UniversalActivity units(Double units) {
+    
+    
+    
+    
+    this.units = units;
+    return this;
+  }
+
+  public UniversalActivity units(Integer units) {
+    
+    
+    
+    
+    this.units = units.doubleValue();
+    return this;
+  }
+
+   /**
+   * The number of units of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions.
+   * @return units
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "5.2", value = "The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.")
+
+  public Double getUnits() {
+    return units;
+  }
+
+
+  public void setUnits(Double units) {
+    
+    
+    
+    this.units = units;
+  }
+
+
   public UniversalActivity amount(Double amount) {
     
     
@@ -203,11 +338,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Get amount
+   * The amount of the transaction denominated in &#x60;currency&#x60;. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
    * @return amount
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "263.82", value = "")
+  @ApiModelProperty(example = "263.82", value = "The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.")
 
   public Double getAmount() {
     return amount;
@@ -222,7 +357,7 @@ public class UniversalActivity {
   }
 
 
-  public UniversalActivity currency(Currency currency) {
+  public UniversalActivity currency(UniversalActivityCurrency currency) {
     
     
     
@@ -238,16 +373,74 @@ public class UniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Currency getCurrency() {
+  public UniversalActivityCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(Currency currency) {
+  public void setCurrency(UniversalActivityCurrency currency) {
     
     
     
     this.currency = currency;
+  }
+
+
+  public UniversalActivity type(String type) {
+    
+    
+    
+    
+    this.type = type;
+    return this;
+  }
+
+   /**
+   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
+   * @return type
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE ")
+
+  public String getType() {
+    return type;
+  }
+
+
+  public void setType(String type) {
+    
+    
+    
+    this.type = type;
+  }
+
+
+  public UniversalActivity optionType(String optionType) {
+    
+    
+    
+    
+    this.optionType = optionType;
+    return this;
+  }
+
+   /**
+   * If an option &#x60;BUY&#x60; or &#x60;SELL&#x60; transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE 
+   * @return optionType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "BUY_TO_OPEN", value = "If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE ")
+
+  public String getOptionType() {
+    return optionType;
+  }
+
+
+  public void setOptionType(String optionType) {
+    
+    
+    
+    this.optionType = optionType;
   }
 
 
@@ -261,11 +454,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Get description
+   * A human-readable description of the transaction. This is usually the brokerage&#39;s description of the transaction.
    * @return description
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22", value = "")
+  @ApiModelProperty(example = "WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22", value = "A human-readable description of the transaction. This is usually the brokerage's description of the transaction.")
 
   public String getDescription() {
     return description;
@@ -277,6 +470,64 @@ public class UniversalActivity {
     
     
     this.description = description;
+  }
+
+
+  public UniversalActivity tradeDate(OffsetDateTime tradeDate) {
+    
+    
+    
+    
+    this.tradeDate = tradeDate;
+    return this;
+  }
+
+   /**
+   * The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named &#x60;trade_date&#x60;, it can represent any type of transaction, not just trades.
+   * @return tradeDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-03-22T16:27:55Z", value = "The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.")
+
+  public OffsetDateTime getTradeDate() {
+    return tradeDate;
+  }
+
+
+  public void setTradeDate(OffsetDateTime tradeDate) {
+    
+    
+    
+    this.tradeDate = tradeDate;
+  }
+
+
+  public UniversalActivity settlementDate(OffsetDateTime settlementDate) {
+    
+    
+    
+    
+    this.settlementDate = settlementDate;
+    return this;
+  }
+
+   /**
+   * The date on which the transaction is settled.
+   * @return settlementDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-03-26T00:00Z", value = "The date on which the transaction is settled.")
+
+  public OffsetDateTime getSettlementDate() {
+    return settlementDate;
+  }
+
+
+  public void setSettlementDate(OffsetDateTime settlementDate) {
+    
+    
+    
+    this.settlementDate = settlementDate;
   }
 
 
@@ -299,11 +550,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Get fee
+   * Any fee associated with the transaction if provided by the brokerage.
    * @return fee
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "0", value = "")
+  @ApiModelProperty(example = "0", value = "Any fee associated with the transaction if provided by the brokerage.")
 
   public Double getFee() {
     return fee;
@@ -366,11 +617,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Get institution
+   * The institution that the transaction is associated with. This is usually the brokerage name.
    * @return institution
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "SnapTrade Investr", value = "")
+  @ApiModelProperty(example = "Robinhood", value = "The institution that the transaction is associated with. This is usually the brokerage name.")
 
   public String getInstitution() {
     return institution;
@@ -385,102 +636,6 @@ public class UniversalActivity {
   }
 
 
-  public UniversalActivity optionType(String optionType) {
-    
-    
-    
-    
-    this.optionType = optionType;
-    return this;
-  }
-
-   /**
-   * If an option transaction, then it&#39;s type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string
-   * @return optionType
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "BUY_TO_OPEN", value = "If an option transaction, then it's type (BUY_TO_OPEN, SELL_TO_CLOSE, etc), otherwise empty string")
-
-  public String getOptionType() {
-    return optionType;
-  }
-
-
-  public void setOptionType(String optionType) {
-    
-    
-    
-    this.optionType = optionType;
-  }
-
-
-  public UniversalActivity price(Double price) {
-    
-    
-    
-    
-    this.price = price;
-    return this;
-  }
-
-  public UniversalActivity price(Integer price) {
-    
-    
-    
-    
-    this.price = price.doubleValue();
-    return this;
-  }
-
-   /**
-   * Get price
-   * @return price
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "0.4", value = "")
-
-  public Double getPrice() {
-    return price;
-  }
-
-
-  public void setPrice(Double price) {
-    
-    
-    
-    this.price = price;
-  }
-
-
-  public UniversalActivity settlementDate(String settlementDate) {
-    
-    
-    
-    
-    this.settlementDate = settlementDate;
-    return this;
-  }
-
-   /**
-   * Get settlementDate
-   * @return settlementDate
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-06T05:00:00.000Z", value = "")
-
-  public String getSettlementDate() {
-    return settlementDate;
-  }
-
-
-  public void setSettlementDate(String settlementDate) {
-    
-    
-    
-    this.settlementDate = settlementDate;
-  }
-
-
   public UniversalActivity externalReferenceId(String externalReferenceId) {
     
     
@@ -491,11 +646,11 @@ public class UniversalActivity {
   }
 
    /**
-   * Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id
+   * Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same &#x60;external_reference_id&#x60;
    * @return externalReferenceId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same external_reference_id")
+  @ApiModelProperty(example = "2f7dc9b3-5c33-4668-3440-2b31e056ebe6", value = "Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`")
 
   public String getExternalReferenceId() {
     return externalReferenceId;
@@ -507,160 +662,6 @@ public class UniversalActivity {
     
     
     this.externalReferenceId = externalReferenceId;
-  }
-
-
-  public UniversalActivity symbol(Symbol symbol) {
-    
-    
-    
-    
-    this.symbol = symbol;
-    return this;
-  }
-
-   /**
-   * Get symbol
-   * @return symbol
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public Symbol getSymbol() {
-    return symbol;
-  }
-
-
-  public void setSymbol(Symbol symbol) {
-    
-    
-    
-    this.symbol = symbol;
-  }
-
-
-  public UniversalActivity optionSymbol(OptionsSymbol optionSymbol) {
-    
-    
-    
-    
-    this.optionSymbol = optionSymbol;
-    return this;
-  }
-
-   /**
-   * Get optionSymbol
-   * @return optionSymbol
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public OptionsSymbol getOptionSymbol() {
-    return optionSymbol;
-  }
-
-
-  public void setOptionSymbol(OptionsSymbol optionSymbol) {
-    
-    
-    
-    this.optionSymbol = optionSymbol;
-  }
-
-
-  public UniversalActivity tradeDate(String tradeDate) {
-    
-    
-    
-    
-    this.tradeDate = tradeDate;
-    return this;
-  }
-
-   /**
-   * Get tradeDate
-   * @return tradeDate
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2022-01-06T05:00:00.000Z", value = "")
-
-  public String getTradeDate() {
-    return tradeDate;
-  }
-
-
-  public void setTradeDate(String tradeDate) {
-    
-    
-    
-    this.tradeDate = tradeDate;
-  }
-
-
-  public UniversalActivity type(String type) {
-    
-    
-    
-    
-    this.type = type;
-    return this;
-  }
-
-   /**
-   * Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT
-   * @return type
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Potential values include (but are not limited to) - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT")
-
-  public String getType() {
-    return type;
-  }
-
-
-  public void setType(String type) {
-    
-    
-    
-    this.type = type;
-  }
-
-
-  public UniversalActivity units(Double units) {
-    
-    
-    
-    
-    this.units = units;
-    return this;
-  }
-
-  public UniversalActivity units(Integer units) {
-    
-    
-    
-    
-    this.units = units.doubleValue();
-    return this;
-  }
-
-   /**
-   * Usually but not necessarily an integer
-   * @return units
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "5", value = "Usually but not necessarily an integer")
-
-  public Double getUnits() {
-    return units;
-  }
-
-
-  public void setUnits(Double units) {
-    
-    
-    
-    this.units = units;
   }
 
   /**
@@ -720,21 +721,21 @@ public class UniversalActivity {
     UniversalActivity universalActivity = (UniversalActivity) o;
     return Objects.equals(this.id, universalActivity.id) &&
         Objects.equals(this.account, universalActivity.account) &&
+        Objects.equals(this.symbol, universalActivity.symbol) &&
+        Objects.equals(this.optionSymbol, universalActivity.optionSymbol) &&
+        Objects.equals(this.price, universalActivity.price) &&
+        Objects.equals(this.units, universalActivity.units) &&
         Objects.equals(this.amount, universalActivity.amount) &&
         Objects.equals(this.currency, universalActivity.currency) &&
+        Objects.equals(this.type, universalActivity.type) &&
+        Objects.equals(this.optionType, universalActivity.optionType) &&
         Objects.equals(this.description, universalActivity.description) &&
+        Objects.equals(this.tradeDate, universalActivity.tradeDate) &&
+        Objects.equals(this.settlementDate, universalActivity.settlementDate) &&
         Objects.equals(this.fee, universalActivity.fee) &&
         Objects.equals(this.fxRate, universalActivity.fxRate) &&
         Objects.equals(this.institution, universalActivity.institution) &&
-        Objects.equals(this.optionType, universalActivity.optionType) &&
-        Objects.equals(this.price, universalActivity.price) &&
-        Objects.equals(this.settlementDate, universalActivity.settlementDate) &&
-        Objects.equals(this.externalReferenceId, universalActivity.externalReferenceId) &&
-        Objects.equals(this.symbol, universalActivity.symbol) &&
-        Objects.equals(this.optionSymbol, universalActivity.optionSymbol) &&
-        Objects.equals(this.tradeDate, universalActivity.tradeDate) &&
-        Objects.equals(this.type, universalActivity.type) &&
-        Objects.equals(this.units, universalActivity.units)&&
+        Objects.equals(this.externalReferenceId, universalActivity.externalReferenceId)&&
         Objects.equals(this.additionalProperties, universalActivity.additionalProperties);
   }
 
@@ -744,7 +745,7 @@ public class UniversalActivity {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, account, amount, currency, description, fee, fxRate, institution, optionType, price, settlementDate, externalReferenceId, symbol, optionSymbol, tradeDate, type, units, additionalProperties);
+    return Objects.hash(id, account, symbol, optionSymbol, price, units, amount, currency, type, optionType, description, tradeDate, settlementDate, fee, fxRate, institution, externalReferenceId, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -760,21 +761,21 @@ public class UniversalActivity {
     sb.append("class UniversalActivity {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    account: ").append(toIndentedString(account)).append("\n");
+    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
+    sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    amount: ").append(toIndentedString(amount)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    optionType: ").append(toIndentedString(optionType)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    tradeDate: ").append(toIndentedString(tradeDate)).append("\n");
+    sb.append("    settlementDate: ").append(toIndentedString(settlementDate)).append("\n");
     sb.append("    fee: ").append(toIndentedString(fee)).append("\n");
     sb.append("    fxRate: ").append(toIndentedString(fxRate)).append("\n");
     sb.append("    institution: ").append(toIndentedString(institution)).append("\n");
-    sb.append("    optionType: ").append(toIndentedString(optionType)).append("\n");
-    sb.append("    price: ").append(toIndentedString(price)).append("\n");
-    sb.append("    settlementDate: ").append(toIndentedString(settlementDate)).append("\n");
     sb.append("    externalReferenceId: ").append(toIndentedString(externalReferenceId)).append("\n");
-    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
-    sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
-    sb.append("    tradeDate: ").append(toIndentedString(tradeDate)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -800,21 +801,21 @@ public class UniversalActivity {
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
     openapiFields.add("account");
+    openapiFields.add("symbol");
+    openapiFields.add("option_symbol");
+    openapiFields.add("price");
+    openapiFields.add("units");
     openapiFields.add("amount");
     openapiFields.add("currency");
+    openapiFields.add("type");
+    openapiFields.add("option_type");
     openapiFields.add("description");
+    openapiFields.add("trade_date");
+    openapiFields.add("settlement_date");
     openapiFields.add("fee");
     openapiFields.add("fx_rate");
     openapiFields.add("institution");
-    openapiFields.add("option_type");
-    openapiFields.add("price");
-    openapiFields.add("settlement_date");
     openapiFields.add("external_reference_id");
-    openapiFields.add("symbol");
-    openapiFields.add("option_symbol");
-    openapiFields.add("trade_date");
-    openapiFields.add("type");
-    openapiFields.add("units");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -839,9 +840,23 @@ public class UniversalActivity {
       if (jsonObj.get("account") != null && !jsonObj.get("account").isJsonNull()) {
         AccountSimple.validateJsonObject(jsonObj.getAsJsonObject("account"));
       }
+      // validate the optional field `symbol`
+      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
+        SymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `option_symbol`
+      if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
+        OptionsSymbolNullable.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+      }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        Currency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        UniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
+      if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
+      }
+      if ((jsonObj.get("option_type") != null && !jsonObj.get("option_type").isJsonNull()) && !jsonObj.get("option_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `option_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("option_type").toString()));
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
@@ -849,28 +864,8 @@ public class UniversalActivity {
       if ((jsonObj.get("institution") != null && !jsonObj.get("institution").isJsonNull()) && !jsonObj.get("institution").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution").toString()));
       }
-      if ((jsonObj.get("option_type") != null && !jsonObj.get("option_type").isJsonNull()) && !jsonObj.get("option_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `option_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("option_type").toString()));
-      }
-      if ((jsonObj.get("settlement_date") != null && !jsonObj.get("settlement_date").isJsonNull()) && !jsonObj.get("settlement_date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `settlement_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("settlement_date").toString()));
-      }
       if (!jsonObj.get("external_reference_id").isJsonNull() && (jsonObj.get("external_reference_id") != null && !jsonObj.get("external_reference_id").isJsonNull()) && !jsonObj.get("external_reference_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `external_reference_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("external_reference_id").toString()));
-      }
-      // validate the optional field `symbol`
-      if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
-        Symbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
-      }
-      // validate the optional field `option_symbol`
-      if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
-        OptionsSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
-      }
-      if (!jsonObj.get("trade_date").isJsonNull() && (jsonObj.get("trade_date") != null && !jsonObj.get("trade_date").isJsonNull()) && !jsonObj.get("trade_date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `trade_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("trade_date").toString()));
-      }
-      if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
   }
 

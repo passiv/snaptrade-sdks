@@ -61,8 +61,8 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         snapTradeLoginUserRequestBody.SetImmediateRedirect(true)
         snapTradeLoginUserRequestBody.SetCustomRedirect("https://snaptrade.com")
         snapTradeLoginUserRequestBody.SetReconnect("8b5f262d-4bb9-365d-888a-202bd3b15fa1")
-        snapTradeLoginUserRequestBody.SetConnectionType("null")
-        snapTradeLoginUserRequestBody.SetConnectionPortalVersion("null")
+        snapTradeLoginUserRequestBody.SetConnectionType("READ")
+        snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V3")
         
         request := client.AuthenticationApi.LoginSnapTradeUser(
             "userId_example",

@@ -25,8 +25,8 @@ type AccountOrderRecordUniversalSymbol struct {
 	RawSymbol string `json:"raw_symbol"`
 	// A human-readable description of the security. This is usually the company name or ETF name.
 	Description NullableString `json:"description,omitempty"`
-	Currency UniversalSymbolCurrency `json:"currency"`
-	Exchange *UniversalSymbolExchange `json:"exchange,omitempty"`
+	Currency SymbolCurrency `json:"currency"`
+	Exchange *SymbolExchange `json:"exchange,omitempty"`
 	Type SecurityType `json:"type"`
 	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
 	// Deprecated
@@ -40,7 +40,7 @@ type AccountOrderRecordUniversalSymbol struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol string, currency UniversalSymbolCurrency, type_ SecurityType, currencies []Currency) *AccountOrderRecordUniversalSymbol {
+func NewAccountOrderRecordUniversalSymbol(id string, symbol string, rawSymbol string, currency SymbolCurrency, type_ SecurityType, currencies []Currency) *AccountOrderRecordUniversalSymbol {
 	this := AccountOrderRecordUniversalSymbol{}
 	this.Id = id
 	this.Symbol = symbol
@@ -174,9 +174,9 @@ func (o *AccountOrderRecordUniversalSymbol) UnsetDescription() {
 }
 
 // GetCurrency returns the Currency field value
-func (o *AccountOrderRecordUniversalSymbol) GetCurrency() UniversalSymbolCurrency {
+func (o *AccountOrderRecordUniversalSymbol) GetCurrency() SymbolCurrency {
 	if o == nil {
-		var ret UniversalSymbolCurrency
+		var ret SymbolCurrency
 		return ret
 	}
 
@@ -185,7 +185,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrency() UniversalSymbolCurrenc
 
 // GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool) {
+func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*SymbolCurrency, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -193,14 +193,14 @@ func (o *AccountOrderRecordUniversalSymbol) GetCurrencyOk() (*UniversalSymbolCur
 }
 
 // SetCurrency sets field value
-func (o *AccountOrderRecordUniversalSymbol) SetCurrency(v UniversalSymbolCurrency) {
+func (o *AccountOrderRecordUniversalSymbol) SetCurrency(v SymbolCurrency) {
 	o.Currency = v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
-func (o *AccountOrderRecordUniversalSymbol) GetExchange() UniversalSymbolExchange {
+func (o *AccountOrderRecordUniversalSymbol) GetExchange() SymbolExchange {
 	if o == nil || isNil(o.Exchange) {
-		var ret UniversalSymbolExchange
+		var ret SymbolExchange
 		return ret
 	}
 	return *o.Exchange
@@ -208,7 +208,7 @@ func (o *AccountOrderRecordUniversalSymbol) GetExchange() UniversalSymbolExchang
 
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*UniversalSymbolExchange, bool) {
+func (o *AccountOrderRecordUniversalSymbol) GetExchangeOk() (*SymbolExchange, bool) {
 	if o == nil || isNil(o.Exchange) {
     return nil, false
 	}
@@ -224,8 +224,8 @@ func (o *AccountOrderRecordUniversalSymbol) HasExchange() bool {
 	return false
 }
 
-// SetExchange gets a reference to the given UniversalSymbolExchange and assigns it to the Exchange field.
-func (o *AccountOrderRecordUniversalSymbol) SetExchange(v UniversalSymbolExchange) {
+// SetExchange gets a reference to the given SymbolExchange and assigns it to the Exchange field.
+func (o *AccountOrderRecordUniversalSymbol) SetExchange(v SymbolExchange) {
 	o.Exchange = &v
 }
 

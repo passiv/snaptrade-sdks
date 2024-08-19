@@ -12,10 +12,10 @@ import type * as buffer from "buffer"
 
 import { Currency } from './currency';
 import { SecurityType } from './security-type';
+import { SymbolCurrency } from './symbol-currency';
+import { SymbolExchange } from './symbol-exchange';
 import { SymbolFigiInstrument } from './symbol-figi-instrument';
 import { UniversalSymbol } from './universal-symbol';
-import { UniversalSymbolCurrency } from './universal-symbol-currency';
-import { UniversalSymbolExchange } from './universal-symbol-exchange';
 
 /**
  * Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
@@ -49,16 +49,16 @@ export interface AccountOrderRecordUniversalSymbol {
     'description'?: string | null;
     /**
      * 
-     * @type {UniversalSymbolCurrency}
+     * @type {SymbolCurrency}
      * @memberof AccountOrderRecordUniversalSymbol
      */
-    'currency': UniversalSymbolCurrency;
+    'currency': SymbolCurrency;
     /**
      * 
-     * @type {UniversalSymbolExchange}
+     * @type {SymbolExchange}
      * @memberof AccountOrderRecordUniversalSymbol
      */
-    'exchange'?: UniversalSymbolExchange;
+    'exchange'?: SymbolExchange;
     /**
      * 
      * @type {SecurityType}

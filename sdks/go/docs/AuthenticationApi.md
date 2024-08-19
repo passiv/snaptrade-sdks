@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**DeleteSnapTradeUser**](AuthenticationApi.md#DeleteSnapTradeUser) | **Delete** /snapTrade/deleteUser | Delete SnapTrade user
-[**ListSnapTradeUsers**](AuthenticationApi.md#ListSnapTradeUsers) | **Get** /snapTrade/listUsers | List SnapTrade users
+[**DeleteSnapTradeUser**](AuthenticationApi.md#DeleteSnapTradeUser) | **Delete** /snapTrade/deleteUser | Delete user
+[**ListSnapTradeUsers**](AuthenticationApi.md#ListSnapTradeUsers) | **Get** /snapTrade/listUsers | List all users
 [**LoginSnapTradeUser**](AuthenticationApi.md#LoginSnapTradeUser) | **Post** /snapTrade/login | Login user &amp; generate connection link
-[**RegisterSnapTradeUser**](AuthenticationApi.md#RegisterSnapTradeUser) | **Post** /snapTrade/registerUser | Create SnapTrade user
-[**ResetSnapTradeUserSecret**](AuthenticationApi.md#ResetSnapTradeUserSecret) | **Post** /snapTrade/resetUserSecret | Obtain a new user secret for a user
+[**RegisterSnapTradeUser**](AuthenticationApi.md#RegisterSnapTradeUser) | **Post** /snapTrade/registerUser | Register user
+[**ResetSnapTradeUserSecret**](AuthenticationApi.md#ResetSnapTradeUserSecret) | **Post** /snapTrade/resetUserSecret | Rotate user secret
 
 
 
 ## DeleteSnapTradeUser
 
-Delete SnapTrade user
+Delete user
 
 
 
@@ -48,6 +48,7 @@ func main() {
     // response from `DeleteSnapTradeUser`: DeleteUserResponse
     fmt.Fprintf(os.Stdout, "Response from `AuthenticationApi.DeleteSnapTradeUser`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `DeleteUserResponse.DeleteSnapTradeUser.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `DeleteUserResponse.DeleteSnapTradeUser.Detail`: %v\n", *resp.Detail)
     fmt.Fprintf(os.Stdout, "Response from `DeleteUserResponse.DeleteSnapTradeUser.UserId`: %v\n", *resp.UserId)
 }
 ```
@@ -59,7 +60,7 @@ func main() {
 
 ## ListSnapTradeUsers
 
-List SnapTrade users
+List all users
 
 
 
@@ -128,8 +129,8 @@ func main() {
     snapTradeLoginUserRequestBody.SetImmediateRedirect(true)
     snapTradeLoginUserRequestBody.SetCustomRedirect("https://snaptrade.com")
     snapTradeLoginUserRequestBody.SetReconnect("8b5f262d-4bb9-365d-888a-202bd3b15fa1")
-    snapTradeLoginUserRequestBody.SetConnectionType("null")
-    snapTradeLoginUserRequestBody.SetConnectionPortalVersion("null")
+    snapTradeLoginUserRequestBody.SetConnectionType("READ")
+    snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V3")
     
     request := client.AuthenticationApi.LoginSnapTradeUser(
         "userId_example",
@@ -159,7 +160,7 @@ func main() {
 
 ## RegisterSnapTradeUser
 
-Create SnapTrade user
+Register user
 
 
 
@@ -208,7 +209,7 @@ func main() {
 
 ## ResetSnapTradeUserSecret
 
-Obtain a new user secret for a user
+Rotate user secret
 
 
 

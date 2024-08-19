@@ -11,15 +11,19 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Symbol
+  # Uniquely describes a single security + exchange combination across all brokerages.
   class Symbol
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :id
 
+    # The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
     attr_accessor :symbol
 
+    # The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
     attr_accessor :raw_symbol
 
-    attr_accessor :name
+    # A human-readable description of the security. This is usually the company name or ETF name.
+    attr_accessor :description
 
     attr_accessor :currency
 
@@ -27,6 +31,7 @@ module SnapTrade
 
     attr_accessor :type
 
+    # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
     attr_accessor :figi_code
 
     attr_accessor :figi_instrument
@@ -37,7 +42,7 @@ module SnapTrade
         :'id' => :'id',
         :'symbol' => :'symbol',
         :'raw_symbol' => :'raw_symbol',
-        :'name' => :'name',
+        :'description' => :'description',
         :'currency' => :'currency',
         :'exchange' => :'exchange',
         :'type' => :'type',
@@ -57,9 +62,9 @@ module SnapTrade
         :'id' => :'String',
         :'symbol' => :'String',
         :'raw_symbol' => :'String',
-        :'name' => :'String',
-        :'currency' => :'Currency',
-        :'exchange' => :'Exchange',
+        :'description' => :'String',
+        :'currency' => :'SymbolCurrency',
+        :'exchange' => :'SymbolExchange',
         :'type' => :'SecurityType',
         :'figi_code' => :'String',
         :'figi_instrument' => :'SymbolFigiInstrument'
@@ -69,6 +74,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'description',
         :'figi_code',
         :'figi_instrument'
       ])
@@ -101,8 +107,8 @@ module SnapTrade
         self.raw_symbol = attributes[:'raw_symbol']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.key?(:'currency')
@@ -147,7 +153,7 @@ module SnapTrade
           id == o.id &&
           symbol == o.symbol &&
           raw_symbol == o.raw_symbol &&
-          name == o.name &&
+          description == o.description &&
           currency == o.currency &&
           exchange == o.exchange &&
           type == o.type &&
@@ -164,7 +170,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, symbol, raw_symbol, name, currency, exchange, type, figi_code, figi_instrument].hash
+      [id, symbol, raw_symbol, description, currency, exchange, type, figi_code, figi_instrument].hash
     end
 
     # Builds the object from hash

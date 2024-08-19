@@ -193,7 +193,7 @@ public class TransactionsAndReportingApiGenerated {
 
         /**
          * Set startDate
-         * @param startDate  (optional)
+         * @param startDate The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder startDate(LocalDate startDate) {
@@ -203,7 +203,7 @@ public class TransactionsAndReportingApiGenerated {
         
         /**
          * Set endDate
-         * @param endDate  (optional)
+         * @param endDate The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder endDate(LocalDate endDate) {
@@ -213,7 +213,7 @@ public class TransactionsAndReportingApiGenerated {
         
         /**
          * Set accounts
-         * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+         * @param accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The &#x60;brokerageAuthorizations&#x60; parameter takes precedence over this parameter. (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder accounts(String accounts) {
@@ -223,7 +223,7 @@ public class TransactionsAndReportingApiGenerated {
         
         /**
          * Set brokerageAuthorizations
-         * @param brokerageAuthorizations Optional comma seperated list of brokerage authorization IDs used to filter the request on only accounts that belong to those authorizations (optional)
+         * @param brokerageAuthorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the &#x60;accounts&#x60; parameter. (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder brokerageAuthorizations(String brokerageAuthorizations) {
@@ -233,7 +233,7 @@ public class TransactionsAndReportingApiGenerated {
         
         /**
          * Set type
-         * @param type Optional comma seperated list of types to filter activities by. This is not an exhaustive list, if we fail to match to these types, we will return the raw description from the brokerage. Potential values include - DIVIDEND - BUY - SELL - CONTRIBUTION - WITHDRAWAL - EXTERNAL_ASSET_TRANSFER_IN - EXTERNAL_ASSET_TRANSFER_OUT - INTERNAL_CASH_TRANSFER_IN - INTERNAL_CASH_TRANSFER_OUT - INTERNAL_ASSET_TRANSFER_IN - INTERNAL_ASSET_TRANSFER_OUT - INTEREST - REBATE - GOV_GRANT - TAX - FEE - REI - FXT (optional)
+         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE  (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder type(String type) {
@@ -249,7 +249,7 @@ public class TransactionsAndReportingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -265,7 +265,7 @@ public class TransactionsAndReportingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -281,7 +281,7 @@ public class TransactionsAndReportingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -297,7 +297,7 @@ public class TransactionsAndReportingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
@@ -308,14 +308,14 @@ public class TransactionsAndReportingApiGenerated {
 
     /**
      * Get transaction history for a user
-     * Returns activities (transactions) for a user. Specifying start and end date is highly recommended for better performance
+     * Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetActivitiesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved transaction history </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
@@ -460,7 +460,7 @@ public class TransactionsAndReportingApiGenerated {
 
         /**
          * Set accounts
-         * @param accounts Optional comma seperated list of account IDs used to filter the request on specific accounts (optional)
+         * @param accounts Optional comma separated list of account IDs used to filter the request on specific accounts (optional)
          * @return TransactionsAndReportingApi.GetReportingCustomRangeRequestBuilder
          */
         public TransactionsAndReportingApi.GetReportingCustomRangeRequestBuilder accounts(String accounts) {

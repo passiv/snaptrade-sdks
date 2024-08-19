@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RedirectURI** | **Object** |  | [optional] 
-**SessionId** | **string** |  | [optional] 
+**RedirectURI** | **string** | Connection Portal link to redirect user to connect a brokerage account. | [optional] 
+**SessionId** | **string** | ID to identify the connection portal session. | [optional] 
 **EncryptedSharedKey** | **string** |  | [optional] 
 **EncryptedMessageData** | [**EncryptedResponseEncryptedMessageData**](EncryptedResponseEncryptedMessageData.md) |  | [optional] 
 

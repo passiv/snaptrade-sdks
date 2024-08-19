@@ -25,7 +25,7 @@ type UnderlyingSymbol struct {
 	RawSymbol *string `json:"raw_symbol,omitempty"`
 	// A human-readable description of the security. This is usually the company name or ETF name.
 	Description NullableString `json:"description,omitempty"`
-	Currency *UniversalSymbolCurrency `json:"currency,omitempty"`
+	Currency *SymbolCurrency `json:"currency,omitempty"`
 	Exchange *UnderlyingSymbolExchange `json:"exchange,omitempty"`
 	Type *UnderlyingSymbolType `json:"type,omitempty"`
 	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
@@ -195,9 +195,9 @@ func (o *UnderlyingSymbol) UnsetDescription() {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *UnderlyingSymbol) GetCurrency() UniversalSymbolCurrency {
+func (o *UnderlyingSymbol) GetCurrency() SymbolCurrency {
 	if o == nil || isNil(o.Currency) {
-		var ret UniversalSymbolCurrency
+		var ret SymbolCurrency
 		return ret
 	}
 	return *o.Currency
@@ -205,7 +205,7 @@ func (o *UnderlyingSymbol) GetCurrency() UniversalSymbolCurrency {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UnderlyingSymbol) GetCurrencyOk() (*UniversalSymbolCurrency, bool) {
+func (o *UnderlyingSymbol) GetCurrencyOk() (*SymbolCurrency, bool) {
 	if o == nil || isNil(o.Currency) {
     return nil, false
 	}
@@ -221,8 +221,8 @@ func (o *UnderlyingSymbol) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given UniversalSymbolCurrency and assigns it to the Currency field.
-func (o *UnderlyingSymbol) SetCurrency(v UniversalSymbolCurrency) {
+// SetCurrency gets a reference to the given SymbolCurrency and assigns it to the Currency field.
+func (o *UnderlyingSymbol) SetCurrency(v SymbolCurrency) {
 	o.Currency = &v
 }
 

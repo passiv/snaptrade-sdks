@@ -33,7 +33,7 @@ describe 'AccountInformationApi' do
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :brokerage_authorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations).
+  # @option opts [String] :brokerage_authorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
   # @return [Array<AccountHoldings>]
   describe 'get_all_user_holdings test' do
     it 'should work' do

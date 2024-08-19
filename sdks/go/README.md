@@ -76,11 +76,11 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **Get** /accounts | List accounts
 *AccountInformationApi* | [**UpdateUserAccount**](docs/AccountInformationApi.md#updateuseraccount) | **Put** /accounts/{accountId} | Update details of an investment account
 *APIStatusApi* | [**Check**](docs/APIStatusApi.md#check) | **Get** / | Get API Status
-*AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **Delete** /snapTrade/deleteUser | Delete SnapTrade user
-*AuthenticationApi* | [**ListSnapTradeUsers**](docs/AuthenticationApi.md#listsnaptradeusers) | **Get** /snapTrade/listUsers | List SnapTrade users
+*AuthenticationApi* | [**DeleteSnapTradeUser**](docs/AuthenticationApi.md#deletesnaptradeuser) | **Delete** /snapTrade/deleteUser | Delete user
+*AuthenticationApi* | [**ListSnapTradeUsers**](docs/AuthenticationApi.md#listsnaptradeusers) | **Get** /snapTrade/listUsers | List all users
 *AuthenticationApi* | [**LoginSnapTradeUser**](docs/AuthenticationApi.md#loginsnaptradeuser) | **Post** /snapTrade/login | Login user &amp; generate connection link
-*AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **Post** /snapTrade/registerUser | Create SnapTrade user
-*AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **Post** /snapTrade/resetUserSecret | Obtain a new user secret for a user
+*AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **Post** /snapTrade/registerUser | Register user
+*AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **Post** /snapTrade/resetUserSecret | Rotate user secret
 *ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **Get** /authorizations/{authorizationId} | Get brokerage authorization details
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **Post** /authorizations/{authorizationId}/disable | Manually disable a connection for testing
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **Get** /authorizations | List all brokerage authorizations for the User
@@ -194,6 +194,8 @@ Class | Method | HTTP request | Description
  - [StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
  - [SubPeriodReturnRate](docs/SubPeriodReturnRate.md)
  - [Symbol](docs/Symbol.md)
+ - [SymbolCurrency](docs/SymbolCurrency.md)
+ - [SymbolExchange](docs/SymbolExchange.md)
  - [SymbolFigiInstrument](docs/SymbolFigiInstrument.md)
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
@@ -205,8 +207,9 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbolExchange](docs/UnderlyingSymbolExchange.md)
  - [UnderlyingSymbolType](docs/UnderlyingSymbolType.md)
  - [UniversalActivity](docs/UniversalActivity.md)
+ - [UniversalActivityCurrency](docs/UniversalActivityCurrency.md)
+ - [UniversalActivityOptionSymbol](docs/UniversalActivityOptionSymbol.md)
+ - [UniversalActivitySymbol](docs/UniversalActivitySymbol.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
- - [UniversalSymbolCurrency](docs/UniversalSymbolCurrency.md)
- - [UniversalSymbolExchange](docs/UniversalSymbolExchange.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)

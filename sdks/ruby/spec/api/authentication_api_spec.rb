@@ -28,8 +28,8 @@ describe 'AuthenticationApi' do
   end
 
   # unit tests for delete_snap_trade_user
-  # Delete SnapTrade user
-  # Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+  # Delete user
+  # Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
   # @param user_id 
   # @param [Hash] opts the optional parameters
   # @return [DeleteUserResponse]
@@ -40,8 +40,8 @@ describe 'AuthenticationApi' do
   end
 
   # unit tests for list_snap_trade_users
-  # List SnapTrade users
-  # Returns a list of users you&#39;ve registered over the SnapTrade API.
+  # List all users
+  # Returns a list of all registered user IDs.
   # @param [Hash] opts the optional parameters
   # @return [Array<String>]
   describe 'list_snap_trade_users test' do
@@ -65,7 +65,7 @@ describe 'AuthenticationApi' do
   end
 
   # unit tests for register_snap_trade_user
-  # Create SnapTrade user
+  # Register user
   # Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
   # @param snap_trade_register_user_request_body 
   # @param [Hash] opts the optional parameters
@@ -77,8 +77,8 @@ describe 'AuthenticationApi' do
   end
 
   # unit tests for reset_snap_trade_user_secret
-  # Obtain a new user secret for a user
-  # This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+  # Rotate user secret
+  # Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
   # @param user_i_dand_secret 
   # @param [Hash] opts the optional parameters
   # @return [UserIDandSecret]

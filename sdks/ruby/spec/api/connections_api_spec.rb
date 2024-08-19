@@ -101,8 +101,8 @@ describe 'ConnectionsApi' do
   # Returns a list of session events associated with a user.
   # @param partner_client_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [String] :user_id Optional comma seperated list of user IDs used to filter the request on specific users
-  # @option opts [String] :session_id Optional comma seperated list of session IDs used to filter the request on specific users
+  # @option opts [String] :user_id Optional comma separated list of user IDs used to filter the request on specific users
+  # @option opts [String] :session_id Optional comma separated list of session IDs used to filter the request on specific users
   # @return [Array<ConnectionsSessionEvents200ResponseInner>]
   describe 'session_events test' do
     it 'should work' do

@@ -8,8 +8,8 @@ Redirect uri upon successful login
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**redirectURI** | **Object** |  |  [optional] |
-|**sessionId** | **String** |  |  [optional] |
+|**redirectURI** | **String** | Connection Portal link to redirect user to connect a brokerage account. |  [optional] |
+|**sessionId** | **String** | ID to identify the connection portal session. |  [optional] |
 
 
 

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RedirectURI** | Pointer to **interface{}** |  | [optional] 
-**SessionId** | Pointer to **string** |  | [optional] 
+**RedirectURI** | Pointer to **string** | Connection Portal link to redirect user to connect a brokerage account. | [optional] 
+**SessionId** | Pointer to **string** | ID to identify the connection portal session. | [optional] 
 **EncryptedSharedKey** | Pointer to **string** |  | [optional] 
 **EncryptedMessageData** | Pointer to [**EncryptedResponseEncryptedMessageData**](EncryptedResponseEncryptedMessageData.md) |  | [optional] 
 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetRedirectURI
 
-`func (o *AuthenticationLoginSnapTradeUser200Response) GetRedirectURI() interface{}`
+`func (o *AuthenticationLoginSnapTradeUser200Response) GetRedirectURI() string`
 
 GetRedirectURI returns the RedirectURI field if non-nil, zero value otherwise.
 
 ### GetRedirectURIOk
 
-`func (o *AuthenticationLoginSnapTradeUser200Response) GetRedirectURIOk() (*interface{}, bool)`
+`func (o *AuthenticationLoginSnapTradeUser200Response) GetRedirectURIOk() (*string, bool)`
 
 GetRedirectURIOk returns a tuple with the RedirectURI field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRedirectURI
 
-`func (o *AuthenticationLoginSnapTradeUser200Response) SetRedirectURI(v interface{})`
+`func (o *AuthenticationLoginSnapTradeUser200Response) SetRedirectURI(v string)`
 
 SetRedirectURI sets RedirectURI field to given value.
 
@@ -53,16 +53,6 @@ SetRedirectURI sets RedirectURI field to given value.
 
 HasRedirectURI returns a boolean if a field has been set.
 
-### SetRedirectURINil
-
-`func (o *AuthenticationLoginSnapTradeUser200Response) SetRedirectURINil(b bool)`
-
- SetRedirectURINil sets the value for RedirectURI to be an explicit nil
-
-### UnsetRedirectURI
-`func (o *AuthenticationLoginSnapTradeUser200Response) UnsetRedirectURI()`
-
-UnsetRedirectURI ensures that no value is present for RedirectURI, not even an explicit nil
 ### GetSessionId
 
 `func (o *AuthenticationLoginSnapTradeUser200Response) GetSessionId() string`

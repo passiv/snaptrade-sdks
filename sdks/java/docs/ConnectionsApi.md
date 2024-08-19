@@ -531,8 +531,8 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     String partnerClientId = "partnerClientId_example";
-    String userId = "userId_example"; // Optional comma seperated list of user IDs used to filter the request on specific users
-    String sessionId = "sessionId_example"; // Optional comma seperated list of session IDs used to filter the request on specific users
+    String userId = "userId_example"; // Optional comma separated list of user IDs used to filter the request on specific users
+    String sessionId = "sessionId_example"; // Optional comma separated list of session IDs used to filter the request on specific users
     try {
       List<SessionEvent> result = client
               .connections
@@ -579,8 +579,8 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **partnerClientId** | **String**|  | |
-| **userId** | **String**| Optional comma seperated list of user IDs used to filter the request on specific users | [optional] |
-| **sessionId** | **String**| Optional comma seperated list of session IDs used to filter the request on specific users | [optional] |
+| **userId** | **String**| Optional comma separated list of user IDs used to filter the request on specific users | [optional] |
+| **sessionId** | **String**| Optional comma separated list of session IDs used to filter the request on specific users | [optional] |
 
 ### Return type
 

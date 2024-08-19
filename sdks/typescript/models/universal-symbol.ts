@@ -12,9 +12,9 @@ import type * as buffer from "buffer"
 
 import { Currency } from './currency';
 import { SecurityType } from './security-type';
+import { SymbolCurrency } from './symbol-currency';
+import { SymbolExchange } from './symbol-exchange';
 import { SymbolFigiInstrument } from './symbol-figi-instrument';
-import { UniversalSymbolCurrency } from './universal-symbol-currency';
-import { UniversalSymbolExchange } from './universal-symbol-exchange';
 
 /**
  * Uniquely describes a single security + exchange combination across all brokerages.
@@ -50,16 +50,16 @@ export interface UniversalSymbol {
     'description'?: string | null;
     /**
      * 
-     * @type {UniversalSymbolCurrency}
+     * @type {SymbolCurrency}
      * @memberof UniversalSymbol
      */
-    'currency': UniversalSymbolCurrency;
+    'currency': SymbolCurrency;
     /**
      * 
-     * @type {UniversalSymbolExchange}
+     * @type {SymbolExchange}
      * @memberof UniversalSymbol
      */
-    'exchange'?: UniversalSymbolExchange;
+    'exchange'?: SymbolExchange;
     /**
      * 
      * @type {SecurityType}

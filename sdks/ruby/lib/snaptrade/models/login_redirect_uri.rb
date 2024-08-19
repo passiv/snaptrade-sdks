@@ -13,8 +13,10 @@ require 'time'
 module SnapTrade
   # Redirect uri upon successful login
   class LoginRedirectURI
+    # Connection Portal link to redirect user to connect a brokerage account.
     attr_accessor :redirect_uri
 
+    # ID to identify the connection portal session.
     attr_accessor :session_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -33,7 +35,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'redirect_uri' => :'Object',
+        :'redirect_uri' => :'String',
         :'session_id' => :'String'
       }
     end
@@ -41,7 +43,6 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'redirect_uri',
       ])
     end
 

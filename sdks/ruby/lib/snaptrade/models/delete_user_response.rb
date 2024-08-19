@@ -11,10 +11,12 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Response when delete user is successful
   class DeleteUserResponse
-    # Delete status
+    # This is always `deleted` when a user is queued for deletion.
     attr_accessor :status
+
+    # Human friendly message about the deletion status.
+    attr_accessor :detail
 
     # SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     attr_accessor :user_id
@@ -23,6 +25,7 @@ module SnapTrade
     def self.attribute_map
       {
         :'status' => :'status',
+        :'detail' => :'detail',
         :'user_id' => :'userId'
       }
     end
@@ -36,6 +39,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'status' => :'String',
+        :'detail' => :'String',
         :'user_id' => :'String'
       }
     end
@@ -65,6 +69,10 @@ module SnapTrade
         self.status = attributes[:'status']
       end
 
+      if attributes.key?(:'detail')
+        self.detail = attributes[:'detail']
+      end
+
       if attributes.key?(:'user_id')
         self.user_id = attributes[:'user_id']
       end
@@ -89,6 +97,7 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           status == o.status &&
+          detail == o.detail &&
           user_id == o.user_id
     end
 
@@ -101,7 +110,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, user_id].hash
+      [status, detail, user_id].hash
     end
 
     # Builds the object from hash

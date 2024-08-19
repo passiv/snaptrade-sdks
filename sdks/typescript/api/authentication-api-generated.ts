@@ -48,8 +48,8 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
-         * @summary Delete SnapTrade user
+         * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
+         * @summary Delete user
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -99,8 +99,8 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of users you\'ve registered over the SnapTrade API.
-         * @summary List SnapTrade users
+         * Returns a list of all registered user IDs.
+         * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -208,7 +208,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
         },
         /**
          * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
-         * @summary Create SnapTrade user
+         * @summary Register user
          * @param {SnapTradeRegisterUserRequestBody} snapTradeRegisterUserRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -259,8 +259,8 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
-         * @summary Obtain a new user secret for a user
+         * Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+         * @summary Rotate user secret
          * @param {UserIDandSecret} userIDandSecret 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -321,8 +321,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AuthenticationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
-         * @summary Delete SnapTrade user
+         * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
+         * @summary Delete user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -332,8 +332,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of users you\'ve registered over the SnapTrade API.
-         * @summary List SnapTrade users
+         * Returns a list of all registered user IDs.
+         * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -362,7 +362,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
         },
         /**
          * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
-         * @summary Create SnapTrade user
+         * @summary Register user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -375,8 +375,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
-         * @summary Obtain a new user secret for a user
+         * Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+         * @summary Rotate user secret
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -400,8 +400,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
     const localVarFp = AuthenticationApiFp(configuration)
     return {
         /**
-         * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
-         * @summary Delete SnapTrade user
+         * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
+         * @summary Delete user
          * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -410,8 +410,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.deleteSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of users you\'ve registered over the SnapTrade API.
-         * @summary List SnapTrade users
+         * Returns a list of all registered user IDs.
+         * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -430,7 +430,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
         },
         /**
          * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
-         * @summary Create SnapTrade user
+         * @summary Register user
          * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -439,8 +439,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.registerSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
-         * @summary Obtain a new user secret for a user
+         * Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+         * @summary Rotate user secret
          * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -516,8 +516,8 @@ export type AuthenticationApiResetSnapTradeUserSecretRequest = {
  */
 export class AuthenticationApiGenerated extends BaseAPI {
     /**
-     * Deletes a user you\'ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
-     * @summary Delete SnapTrade user
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
+     * @summary Delete user
      * @param {AuthenticationApiDeleteSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -528,8 +528,8 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of users you\'ve registered over the SnapTrade API.
-     * @summary List SnapTrade users
+     * Returns a list of all registered user IDs.
+     * @summary List all users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApiGenerated
@@ -552,7 +552,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
 
     /**
      * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
-     * @summary Create SnapTrade user
+     * @summary Register user
      * @param {AuthenticationApiRegisterSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -563,8 +563,8 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
-     * @summary Obtain a new user secret for a user
+     * Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you\'ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+     * @summary Rotate user secret
      * @param {AuthenticationApiResetSnapTradeUserSecretRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -178,7 +178,7 @@ public class AccountInformationApiGenerated {
 
         /**
          * Set brokerageAuthorizations
-         * @param brokerageAuthorizations Optional. Comma seperated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
+         * @param brokerageAuthorizations Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations). (optional)
          * @return AccountInformationApi.GetAllUserHoldingsRequestBuilder
          */
         public AccountInformationApi.GetAllUserHoldingsRequestBuilder brokerageAuthorizations(UUID brokerageAuthorizations) {

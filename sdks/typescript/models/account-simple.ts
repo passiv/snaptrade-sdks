@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { AccountSyncStatus } from './account-sync-status';
 
 /**
- * SnapTradeUser Investment Account
+ * A single brokerage account at a financial institution.
  * @export
  * @interface AccountSimple
  */
@@ -21,19 +21,19 @@ export interface AccountSimple {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      * @type {string}
      * @memberof AccountSimple
      */
     'id'?: string;
     /**
-     * 
+     * A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
      * @type {string}
      * @memberof AccountSimple
      */
     'name'?: string;
     /**
-     * 
+     * The account number assigned by the financial institution.
      * @type {string}
      * @memberof AccountSimple
      */

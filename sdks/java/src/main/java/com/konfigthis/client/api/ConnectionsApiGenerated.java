@@ -1107,7 +1107,7 @@ public class ConnectionsApiGenerated {
 
         /**
          * Set userId
-         * @param userId Optional comma seperated list of user IDs used to filter the request on specific users (optional)
+         * @param userId Optional comma separated list of user IDs used to filter the request on specific users (optional)
          * @return ConnectionsApi.SessionEventsRequestBuilder
          */
         public ConnectionsApi.SessionEventsRequestBuilder userId(String userId) {
@@ -1117,7 +1117,7 @@ public class ConnectionsApiGenerated {
         
         /**
          * Set sessionId
-         * @param sessionId Optional comma seperated list of session IDs used to filter the request on specific users (optional)
+         * @param sessionId Optional comma separated list of session IDs used to filter the request on specific users (optional)
          * @return ConnectionsApi.SessionEventsRequestBuilder
          */
         public ConnectionsApi.SessionEventsRequestBuilder sessionId(String sessionId) {

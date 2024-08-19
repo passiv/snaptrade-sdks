@@ -18,12 +18,13 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountSimple;
-import com.konfigthis.client.model.Currency;
-import com.konfigthis.client.model.OptionsSymbol;
-import com.konfigthis.client.model.Symbol;
+import com.konfigthis.client.model.OptionsSymbolNullable;
+import com.konfigthis.client.model.SymbolNullable;
+import com.konfigthis.client.model.UniversalActivityCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -60,6 +61,38 @@ public class UniversalActivityTest {
     }
 
     /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'optionSymbol'
+     */
+    @Test
+    public void optionSymbolTest() {
+        // TODO: test optionSymbol
+    }
+
+    /**
+     * Test the property 'price'
+     */
+    @Test
+    public void priceTest() {
+        // TODO: test price
+    }
+
+    /**
+     * Test the property 'units'
+     */
+    @Test
+    public void unitsTest() {
+        // TODO: test units
+    }
+
+    /**
      * Test the property 'amount'
      */
     @Test
@@ -76,11 +109,43 @@ public class UniversalActivityTest {
     }
 
     /**
+     * Test the property 'type'
+     */
+    @Test
+    public void typeTest() {
+        // TODO: test type
+    }
+
+    /**
+     * Test the property 'optionType'
+     */
+    @Test
+    public void optionTypeTest() {
+        // TODO: test optionType
+    }
+
+    /**
      * Test the property 'description'
      */
     @Test
     public void descriptionTest() {
         // TODO: test description
+    }
+
+    /**
+     * Test the property 'tradeDate'
+     */
+    @Test
+    public void tradeDateTest() {
+        // TODO: test tradeDate
+    }
+
+    /**
+     * Test the property 'settlementDate'
+     */
+    @Test
+    public void settlementDateTest() {
+        // TODO: test settlementDate
     }
 
     /**
@@ -108,75 +173,11 @@ public class UniversalActivityTest {
     }
 
     /**
-     * Test the property 'optionType'
-     */
-    @Test
-    public void optionTypeTest() {
-        // TODO: test optionType
-    }
-
-    /**
-     * Test the property 'price'
-     */
-    @Test
-    public void priceTest() {
-        // TODO: test price
-    }
-
-    /**
-     * Test the property 'settlementDate'
-     */
-    @Test
-    public void settlementDateTest() {
-        // TODO: test settlementDate
-    }
-
-    /**
      * Test the property 'externalReferenceId'
      */
     @Test
     public void externalReferenceIdTest() {
         // TODO: test externalReferenceId
-    }
-
-    /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
-     * Test the property 'optionSymbol'
-     */
-    @Test
-    public void optionSymbolTest() {
-        // TODO: test optionSymbol
-    }
-
-    /**
-     * Test the property 'tradeDate'
-     */
-    @Test
-    public void tradeDateTest() {
-        // TODO: test tradeDate
-    }
-
-    /**
-     * Test the property 'type'
-     */
-    @Test
-    public void typeTest() {
-        // TODO: test type
-    }
-
-    /**
-     * Test the property 'units'
-     */
-    @Test
-    public void unitsTest() {
-        // TODO: test units
     }
 
 }

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Symbol** | Pointer to **string** |  | [optional] 
-**RawSymbol** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **string** |  | [optional] 
-**Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
-**Exchange** | Pointer to [**Exchange**](Exchange.md) |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | [optional] 
+**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol. For example \&quot;AAPL\&quot; for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. | [optional] 
+**RawSymbol** | Pointer to **string** | The raw symbol is &#x60;symbol&#x60; with the exchange suffix removed. For example, if &#x60;symbol&#x60; is \&quot;VAB.TO\&quot;, then &#x60;raw_symbol&#x60; is \&quot;VAB\&quot;. | [optional] 
+**Description** | Pointer to **NullableString** | A human-readable description of the security. This is usually the company name or ETF name. | [optional] 
+**Currency** | Pointer to [**SymbolCurrency**](SymbolCurrency.md) |  | [optional] 
+**Exchange** | Pointer to [**SymbolExchange**](SymbolExchange.md) |  | [optional] 
 **Type** | Pointer to [**SecurityType**](SecurityType.md) |  | [optional] 
-**FigiCode** | Pointer to **NullableString** |  | [optional] 
+**FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
 
 ## Methods
@@ -108,47 +108,57 @@ SetRawSymbol sets RawSymbol field to given value.
 
 HasRawSymbol returns a boolean if a field has been set.
 
-### GetName
+### GetDescription
 
-`func (o *Symbol) GetName() string`
+`func (o *Symbol) GetDescription() string`
 
-GetName returns the Name field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetNameOk
+### GetDescriptionOk
 
-`func (o *Symbol) GetNameOk() (*string, bool)`
+`func (o *Symbol) GetDescriptionOk() (*string, bool)`
 
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetName
+### SetDescription
 
-`func (o *Symbol) SetName(v string)`
+`func (o *Symbol) SetDescription(v string)`
 
-SetName sets Name field to given value.
+SetDescription sets Description field to given value.
 
-### HasName
+### HasDescription
 
-`func (o *Symbol) HasName() bool`
+`func (o *Symbol) HasDescription() bool`
 
-HasName returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
+### SetDescriptionNil
+
+`func (o *Symbol) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *Symbol) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetCurrency
 
-`func (o *Symbol) GetCurrency() Currency`
+`func (o *Symbol) GetCurrency() SymbolCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *Symbol) GetCurrencyOk() (*Currency, bool)`
+`func (o *Symbol) GetCurrencyOk() (*SymbolCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *Symbol) SetCurrency(v Currency)`
+`func (o *Symbol) SetCurrency(v SymbolCurrency)`
 
 SetCurrency sets Currency field to given value.
 
@@ -160,20 +170,20 @@ HasCurrency returns a boolean if a field has been set.
 
 ### GetExchange
 
-`func (o *Symbol) GetExchange() Exchange`
+`func (o *Symbol) GetExchange() SymbolExchange`
 
 GetExchange returns the Exchange field if non-nil, zero value otherwise.
 
 ### GetExchangeOk
 
-`func (o *Symbol) GetExchangeOk() (*Exchange, bool)`
+`func (o *Symbol) GetExchangeOk() (*SymbolExchange, bool)`
 
 GetExchangeOk returns a tuple with the Exchange field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExchange
 
-`func (o *Symbol) SetExchange(v Exchange)`
+`func (o *Symbol) SetExchange(v SymbolExchange)`
 
 SetExchange sets Exchange field to given value.
 

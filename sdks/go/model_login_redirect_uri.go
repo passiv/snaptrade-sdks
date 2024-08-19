@@ -17,7 +17,9 @@ import (
 
 // LoginRedirectURI Redirect uri upon successful login
 type LoginRedirectURI struct {
-	RedirectURI interface{} `json:"redirectURI,omitempty"`
+	// Connection Portal link to redirect user to connect a brokerage account.
+	RedirectURI *string `json:"redirectURI,omitempty"`
+	// ID to identify the connection portal session.
 	SessionId *string `json:"sessionId,omitempty"`
 }
 
@@ -38,37 +40,36 @@ func NewLoginRedirectURIWithDefaults() *LoginRedirectURI {
 	return &this
 }
 
-// GetRedirectURI returns the RedirectURI field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LoginRedirectURI) GetRedirectURI() interface{} {
-	if o == nil {
-		var ret interface{}
+// GetRedirectURI returns the RedirectURI field value if set, zero value otherwise.
+func (o *LoginRedirectURI) GetRedirectURI() string {
+	if o == nil || isNil(o.RedirectURI) {
+		var ret string
 		return ret
 	}
-	return o.RedirectURI
+	return *o.RedirectURI
 }
 
 // GetRedirectURIOk returns a tuple with the RedirectURI field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LoginRedirectURI) GetRedirectURIOk() (*interface{}, bool) {
+func (o *LoginRedirectURI) GetRedirectURIOk() (*string, bool) {
 	if o == nil || isNil(o.RedirectURI) {
     return nil, false
 	}
-	return &o.RedirectURI, true
+	return o.RedirectURI, true
 }
 
 // HasRedirectURI returns a boolean if a field has been set.
 func (o *LoginRedirectURI) HasRedirectURI() bool {
-	if o != nil && isNil(o.RedirectURI) {
+	if o != nil && !isNil(o.RedirectURI) {
 		return true
 	}
 
 	return false
 }
 
-// SetRedirectURI gets a reference to the given interface{} and assigns it to the RedirectURI field.
-func (o *LoginRedirectURI) SetRedirectURI(v interface{}) {
-	o.RedirectURI = v
+// SetRedirectURI gets a reference to the given string and assigns it to the RedirectURI field.
+func (o *LoginRedirectURI) SetRedirectURI(v string) {
+	o.RedirectURI = &v
 }
 
 // GetSessionId returns the SessionId field value if set, zero value otherwise.
@@ -105,7 +106,7 @@ func (o *LoginRedirectURI) SetSessionId(v string) {
 
 func (o LoginRedirectURI) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RedirectURI != nil {
+	if !isNil(o.RedirectURI) {
 		toSerialize["redirectURI"] = o.RedirectURI
 	}
 	if !isNil(o.SessionId) {

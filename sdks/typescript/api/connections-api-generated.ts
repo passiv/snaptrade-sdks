@@ -355,8 +355,8 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
          * Returns a list of session events associated with a user.
          * @summary Get all session events for a user
          * @param {string} partnerClientId 
-         * @param {string} [userId] Optional comma seperated list of user IDs used to filter the request on specific users
-         * @param {string} [sessionId] Optional comma seperated list of session IDs used to filter the request on specific users
+         * @param {string} [userId] Optional comma separated list of user IDs used to filter the request on specific users
+         * @param {string} [sessionId] Optional comma separated list of session IDs used to filter the request on specific users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -719,14 +719,14 @@ export type ConnectionsApiSessionEventsRequest = {
     readonly partnerClientId: string
     
     /**
-    * Optional comma seperated list of user IDs used to filter the request on specific users
+    * Optional comma separated list of user IDs used to filter the request on specific users
     * @type {string}
     * @memberof ConnectionsApiSessionEvents
     */
     readonly userId?: string
     
     /**
-    * Optional comma seperated list of session IDs used to filter the request on specific users
+    * Optional comma separated list of session IDs used to filter the request on specific users
     * @type {string}
     * @memberof ConnectionsApiSessionEvents
     */

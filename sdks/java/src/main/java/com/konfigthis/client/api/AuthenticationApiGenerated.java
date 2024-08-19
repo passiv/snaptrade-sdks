@@ -164,7 +164,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -180,7 +180,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -196,7 +196,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -212,7 +212,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -222,14 +222,14 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Delete SnapTrade user
-     * Deletes a user you&#39;ve registered over the SnapTrade API, and any data associated with them or their investment accounts.
+     * Delete user
+     * Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a &#x60;USER_DELETED&#x60; webhook will be sent.
      * @param userId  (required)
      * @return DeleteSnapTradeUserRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Delete successful </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
@@ -317,7 +317,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -332,7 +332,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public List<String> execute() throws ApiException {
@@ -347,7 +347,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<String>> executeWithHttpInfo() throws ApiException {
@@ -362,7 +362,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<String>> _callback) throws ApiException {
@@ -371,13 +371,13 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * List SnapTrade users
-     * Returns a list of users you&#39;ve registered over the SnapTrade API.
+     * List all users
+     * Returns a list of all registered user IDs.
      * @return ListSnapTradeUsersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully retrieved a list of users </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public AuthenticationApi.ListSnapTradeUsersRequestBuilder listSnapTradeUsers() throws IllegalArgumentException {
@@ -484,7 +484,7 @@ public class AuthenticationApiGenerated {
 
         /**
          * Set broker
-         * @param broker Slug of the brokerage to connect the user to. See [this document](https://snaptrade.notion.site/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead) for a list of supported brokerages and their slugs. (optional)
+         * @param broker Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder broker(String broker) {
@@ -494,7 +494,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set immediateRedirect
-         * @param immediateRedirect When set to True, user will be redirected back to the partner&#39;s site instead of the connection portal (optional)
+         * @param immediateRedirect When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder immediateRedirect(Boolean immediateRedirect) {
@@ -504,7 +504,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set customRedirect
-         * @param customRedirect URL to redirect the user to after the user connects their brokerage account (optional)
+         * @param customRedirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder customRedirect(String customRedirect) {
@@ -514,7 +514,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set reconnect
-         * @param reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See ‘Reconnecting Accounts’ for more information. (optional)
+         * @param reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder reconnect(String reconnect) {
@@ -524,7 +524,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionType
-         * @param connectionType Sets whether the connection should be read or trade (optional)
+         * @param connectionType Sets whether the connection should be read-only or trade-enabled. (optional, default to read)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {
@@ -534,7 +534,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionPortalVersion
-         * @param connectionPortalVersion Sets the version of the connection portal to render, with a default to &#39;v3&#39; (optional)
+         * @param connectionPortalVersion Sets the version of the connection portal to render. (optional, default to v3)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionPortalVersion(String connectionPortalVersion) {
@@ -550,7 +550,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -579,7 +579,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -596,7 +596,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -613,7 +613,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -632,7 +632,7 @@ public class AuthenticationApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Login successful. Redirect user to provided URI in response </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
@@ -740,7 +740,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -761,7 +761,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public UserIDandSecret execute() throws ApiException {
@@ -777,7 +777,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<UserIDandSecret> executeWithHttpInfo() throws ApiException {
@@ -793,7 +793,7 @@ public class AuthenticationApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserIDandSecret> _callback) throws ApiException {
@@ -803,14 +803,14 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Create SnapTrade user
+     * Register user
      * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
      * @param snapTradeRegisterUserRequestBody  (required)
      * @return RegisterSnapTradeUserRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully registered user </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public AuthenticationApi.RegisterSnapTradeUserRequestBuilder registerSnapTradeUser() throws IllegalArgumentException {
@@ -906,7 +906,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set userSecret
-         * @param userSecret SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the SnapTrade API. (optional)
+         * @param userSecret SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret) (optional)
          * @return AuthenticationApi.ResetSnapTradeUserSecretRequestBuilder
          */
         public AuthenticationApi.ResetSnapTradeUserSecretRequestBuilder userSecret(String userSecret) {
@@ -986,8 +986,8 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Obtain a new user secret for a user
-     * This API is used to rotate the secret for a SnapTrade user. You might use this if a userSecret is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
+     * Rotate user secret
+     * Rotates the secret for a SnapTrade user. You might use this if &#x60;userSecret&#x60; is compromised. Please note that if you call this endpoint and fail to save the new secret, you&#39;ll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect. 
      * @param userIDandSecret  (required)
      * @return ResetSnapTradeUserSecretRequestBuilder
      * @http.response.details

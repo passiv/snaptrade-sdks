@@ -20,8 +20,11 @@ class RequiredDeleteUserResponse(TypedDict):
     pass
 
 class OptionalDeleteUserResponse(TypedDict, total=False):
-    # Delete status
+    # This is always `deleted` when a user is queued for deletion.
     status: str
+
+    # Human friendly message about the deletion status.
+    detail: str
 
     # SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     userId: str

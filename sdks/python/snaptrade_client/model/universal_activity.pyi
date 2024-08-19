@@ -42,6 +42,16 @@ class UniversalActivity(
             @staticmethod
             def account() -> typing.Type['AccountSimple']:
                 return AccountSimple
+        
+            @staticmethod
+            def symbol() -> typing.Type['SymbolNullable']:
+                return SymbolNullable
+        
+            @staticmethod
+            def option_symbol() -> typing.Type['OptionsSymbolNullable']:
+                return OptionsSymbolNullable
+            price = schemas.NumberSchema
+            units = schemas.NumberSchema
             
             
             class amount(
@@ -62,11 +72,71 @@ class UniversalActivity(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def currency() -> typing.Type['Currency']:
-                return Currency
+            
+            
+            class currency(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Currency,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
+            type = schemas.StrSchema
+            option_type = schemas.StrSchema
             description = schemas.StrSchema
+            
+            
+            class trade_date(
+                schemas.DateTimeBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    format = 'date-time'
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, datetime, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'trade_date':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+            settlement_date = schemas.DateTimeSchema
             fee = schemas.NumberSchema
             
             
@@ -89,9 +159,6 @@ class UniversalActivity(
                         _configuration=_configuration,
                     )
             institution = schemas.StrSchema
-            option_type = schemas.StrSchema
-            price = schemas.NumberSchema
-            settlement_date = schemas.StrSchema
             
             
             class external_reference_id(
@@ -112,54 +179,24 @@ class UniversalActivity(
                         *args,
                         _configuration=_configuration,
                     )
-        
-            @staticmethod
-            def symbol() -> typing.Type['Symbol']:
-                return Symbol
-        
-            @staticmethod
-            def option_symbol() -> typing.Type['OptionsSymbol']:
-                return OptionsSymbol
-            
-            
-            class trade_date(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'trade_date':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
-            type = schemas.StrSchema
-            units = schemas.NumberSchema
             __annotations__ = {
                 "id": id,
                 "account": account,
+                "symbol": symbol,
+                "option_symbol": option_symbol,
+                "price": price,
+                "units": units,
                 "amount": amount,
                 "currency": currency,
+                "type": type,
+                "option_type": option_type,
                 "description": description,
+                "trade_date": trade_date,
+                "settlement_date": settlement_date,
                 "fee": fee,
                 "fx_rate": fx_rate,
                 "institution": institution,
-                "option_type": option_type,
-                "price": price,
-                "settlement_date": settlement_date,
                 "external_reference_id": external_reference_id,
-                "symbol": symbol,
-                "option_symbol": option_symbol,
-                "trade_date": trade_date,
-                "type": type,
-                "units": units,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -170,13 +207,37 @@ class UniversalActivity(
     def __getitem__(self, name: typing_extensions.Literal["account"]) -> 'AccountSimple': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'SymbolNullable': ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbolNullable': ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> 'Currency': ...
+    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> MetaOapg.properties.currency: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["option_type"]) -> MetaOapg.properties.option_type: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["description"]) -> MetaOapg.properties.description: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["trade_date"]) -> MetaOapg.properties.trade_date: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["settlement_date"]) -> MetaOapg.properties.settlement_date: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["fee"]) -> MetaOapg.properties.fee: ...
@@ -188,36 +249,12 @@ class UniversalActivity(
     def __getitem__(self, name: typing_extensions.Literal["institution"]) -> MetaOapg.properties.institution: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["option_type"]) -> MetaOapg.properties.option_type: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["settlement_date"]) -> MetaOapg.properties.settlement_date: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["external_reference_id"]) -> MetaOapg.properties.external_reference_id: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> 'Symbol': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> 'OptionsSymbol': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["trade_date"]) -> MetaOapg.properties.trade_date: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["units"]) -> MetaOapg.properties.units: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["account"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["description"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["option_type"], typing_extensions.Literal["price"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["external_reference_id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["type"], typing_extensions.Literal["units"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["account"], typing_extensions.Literal["symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -228,13 +265,37 @@ class UniversalActivity(
     def get_item_oapg(self, name: typing_extensions.Literal["account"]) -> typing.Union['AccountSimple', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['SymbolNullable', schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbolNullable', schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> typing.Union[MetaOapg.properties.amount, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union['Currency', schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union[MetaOapg.properties.currency, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union[MetaOapg.properties.type, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["option_type"]) -> typing.Union[MetaOapg.properties.option_type, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["description"]) -> typing.Union[MetaOapg.properties.description, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["trade_date"]) -> typing.Union[MetaOapg.properties.trade_date, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["settlement_date"]) -> typing.Union[MetaOapg.properties.settlement_date, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["fee"]) -> typing.Union[MetaOapg.properties.fee, schemas.Unset]: ...
@@ -246,36 +307,12 @@ class UniversalActivity(
     def get_item_oapg(self, name: typing_extensions.Literal["institution"]) -> typing.Union[MetaOapg.properties.institution, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["option_type"]) -> typing.Union[MetaOapg.properties.option_type, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["settlement_date"]) -> typing.Union[MetaOapg.properties.settlement_date, schemas.Unset]: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["external_reference_id"]) -> typing.Union[MetaOapg.properties.external_reference_id, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union['Symbol', schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union['OptionsSymbol', schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["trade_date"]) -> typing.Union[MetaOapg.properties.trade_date, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union[MetaOapg.properties.type, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["units"]) -> typing.Union[MetaOapg.properties.units, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["account"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["description"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["option_type"], typing_extensions.Literal["price"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["external_reference_id"], typing_extensions.Literal["symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["type"], typing_extensions.Literal["units"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["account"], typing_extensions.Literal["symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["price"], typing_extensions.Literal["units"], typing_extensions.Literal["amount"], typing_extensions.Literal["currency"], typing_extensions.Literal["type"], typing_extensions.Literal["option_type"], typing_extensions.Literal["description"], typing_extensions.Literal["trade_date"], typing_extensions.Literal["settlement_date"], typing_extensions.Literal["fee"], typing_extensions.Literal["fx_rate"], typing_extensions.Literal["institution"], typing_extensions.Literal["external_reference_id"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -283,21 +320,21 @@ class UniversalActivity(
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, schemas.Unset] = schemas.unset,
         account: typing.Union['AccountSimple', schemas.Unset] = schemas.unset,
+        symbol: typing.Union['SymbolNullable', schemas.Unset] = schemas.unset,
+        option_symbol: typing.Union['OptionsSymbolNullable', schemas.Unset] = schemas.unset,
+        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         amount: typing.Union[MetaOapg.properties.amount, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
+        currency: typing.Union[MetaOapg.properties.currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        type: typing.Union[MetaOapg.properties.type, str, schemas.Unset] = schemas.unset,
+        option_type: typing.Union[MetaOapg.properties.option_type, str, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, str, schemas.Unset] = schemas.unset,
+        trade_date: typing.Union[MetaOapg.properties.trade_date, None, str, datetime, schemas.Unset] = schemas.unset,
+        settlement_date: typing.Union[MetaOapg.properties.settlement_date, str, datetime, schemas.Unset] = schemas.unset,
         fee: typing.Union[MetaOapg.properties.fee, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         fx_rate: typing.Union[MetaOapg.properties.fx_rate, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         institution: typing.Union[MetaOapg.properties.institution, str, schemas.Unset] = schemas.unset,
-        option_type: typing.Union[MetaOapg.properties.option_type, str, schemas.Unset] = schemas.unset,
-        price: typing.Union[MetaOapg.properties.price, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
-        settlement_date: typing.Union[MetaOapg.properties.settlement_date, str, schemas.Unset] = schemas.unset,
         external_reference_id: typing.Union[MetaOapg.properties.external_reference_id, None, str, schemas.Unset] = schemas.unset,
-        symbol: typing.Union['Symbol', schemas.Unset] = schemas.unset,
-        option_symbol: typing.Union['OptionsSymbol', schemas.Unset] = schemas.unset,
-        trade_date: typing.Union[MetaOapg.properties.trade_date, None, str, schemas.Unset] = schemas.unset,
-        type: typing.Union[MetaOapg.properties.type, str, schemas.Unset] = schemas.unset,
-        units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'UniversalActivity':
@@ -306,26 +343,26 @@ class UniversalActivity(
             *args,
             id=id,
             account=account,
+            symbol=symbol,
+            option_symbol=option_symbol,
+            price=price,
+            units=units,
             amount=amount,
             currency=currency,
+            type=type,
+            option_type=option_type,
             description=description,
+            trade_date=trade_date,
+            settlement_date=settlement_date,
             fee=fee,
             fx_rate=fx_rate,
             institution=institution,
-            option_type=option_type,
-            price=price,
-            settlement_date=settlement_date,
             external_reference_id=external_reference_id,
-            symbol=symbol,
-            option_symbol=option_symbol,
-            trade_date=trade_date,
-            type=type,
-            units=units,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.currency import Currency
-from snaptrade_client.model.options_symbol import OptionsSymbol
-from snaptrade_client.model.symbol import Symbol
+from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
+from snaptrade_client.model.symbol_nullable import SymbolNullable

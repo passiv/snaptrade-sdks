@@ -5,8 +5,8 @@ Redirect uri upon successful login
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RedirectURI** | **Object** |  | [optional] 
-**SessionId** | **string** |  | [optional] 
+**RedirectURI** | **string** | Connection Portal link to redirect user to connect a brokerage account. | [optional] 
+**SessionId** | **string** | ID to identify the connection portal session. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

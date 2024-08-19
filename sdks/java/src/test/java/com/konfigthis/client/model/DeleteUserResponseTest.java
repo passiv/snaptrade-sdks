@@ -47,6 +47,14 @@ public class DeleteUserResponseTest {
     }
 
     /**
+     * Test the property 'detail'
+     */
+    @Test
+    public void detailTest() {
+        // TODO: test detail
+    }
+
+    /**
      * Test the property 'userId'
      */
     @Test

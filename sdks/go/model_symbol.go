@@ -15,15 +15,20 @@ import (
 	"encoding/json"
 )
 
-// Symbol Symbol
+// Symbol Uniquely describes a single security + exchange combination across all brokerages.
 type Symbol struct {
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	Id *string `json:"id,omitempty"`
+	// The security's trading ticker symbol. For example \"AAPL\" for Apple Inc. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix.
 	Symbol *string `json:"symbol,omitempty"`
+	// The raw symbol is `symbol` with the exchange suffix removed. For example, if `symbol` is \"VAB.TO\", then `raw_symbol` is \"VAB\".
 	RawSymbol *string `json:"raw_symbol,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Currency *Currency `json:"currency,omitempty"`
-	Exchange *Exchange `json:"exchange,omitempty"`
+	// A human-readable description of the security. This is usually the company name or ETF name.
+	Description NullableString `json:"description,omitempty"`
+	Currency *SymbolCurrency `json:"currency,omitempty"`
+	Exchange *SymbolExchange `json:"exchange,omitempty"`
 	Type *SecurityType `json:"type,omitempty"`
+	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -144,42 +149,52 @@ func (o *Symbol) SetRawSymbol(v string) {
 	o.RawSymbol = &v
 }
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *Symbol) GetName() string {
-	if o == nil || isNil(o.Name) {
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Symbol) GetDescription() string {
+	if o == nil || isNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Name
+	return *o.Description.Get()
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Symbol) GetNameOk() (*string, bool) {
-	if o == nil || isNil(o.Name) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Symbol) GetDescriptionOk() (*string, bool) {
+	if o == nil {
     return nil, false
 	}
-	return o.Name, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Symbol) HasName() bool {
-	if o != nil && !isNil(o.Name) {
+// HasDescription returns a boolean if a field has been set.
+func (o *Symbol) HasDescription() bool {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *Symbol) SetName(v string) {
-	o.Name = &v
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+func (o *Symbol) SetDescription(v string) {
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *Symbol) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *Symbol) UnsetDescription() {
+	o.Description.Unset()
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *Symbol) GetCurrency() Currency {
+func (o *Symbol) GetCurrency() SymbolCurrency {
 	if o == nil || isNil(o.Currency) {
-		var ret Currency
+		var ret SymbolCurrency
 		return ret
 	}
 	return *o.Currency
@@ -187,7 +202,7 @@ func (o *Symbol) GetCurrency() Currency {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Symbol) GetCurrencyOk() (*Currency, bool) {
+func (o *Symbol) GetCurrencyOk() (*SymbolCurrency, bool) {
 	if o == nil || isNil(o.Currency) {
     return nil, false
 	}
@@ -203,15 +218,15 @@ func (o *Symbol) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given Currency and assigns it to the Currency field.
-func (o *Symbol) SetCurrency(v Currency) {
+// SetCurrency gets a reference to the given SymbolCurrency and assigns it to the Currency field.
+func (o *Symbol) SetCurrency(v SymbolCurrency) {
 	o.Currency = &v
 }
 
 // GetExchange returns the Exchange field value if set, zero value otherwise.
-func (o *Symbol) GetExchange() Exchange {
+func (o *Symbol) GetExchange() SymbolExchange {
 	if o == nil || isNil(o.Exchange) {
-		var ret Exchange
+		var ret SymbolExchange
 		return ret
 	}
 	return *o.Exchange
@@ -219,7 +234,7 @@ func (o *Symbol) GetExchange() Exchange {
 
 // GetExchangeOk returns a tuple with the Exchange field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Symbol) GetExchangeOk() (*Exchange, bool) {
+func (o *Symbol) GetExchangeOk() (*SymbolExchange, bool) {
 	if o == nil || isNil(o.Exchange) {
     return nil, false
 	}
@@ -235,8 +250,8 @@ func (o *Symbol) HasExchange() bool {
 	return false
 }
 
-// SetExchange gets a reference to the given Exchange and assigns it to the Exchange field.
-func (o *Symbol) SetExchange(v Exchange) {
+// SetExchange gets a reference to the given SymbolExchange and assigns it to the Exchange field.
+func (o *Symbol) SetExchange(v SymbolExchange) {
 	o.Exchange = &v
 }
 
@@ -367,8 +382,8 @@ func (o Symbol) MarshalJSON() ([]byte, error) {
 	if !isNil(o.RawSymbol) {
 		toSerialize["raw_symbol"] = o.RawSymbol
 	}
-	if !isNil(o.Name) {
-		toSerialize["name"] = o.Name
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
 	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
@@ -406,7 +421,7 @@ func (o *Symbol) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "raw_symbol")
-		delete(additionalProperties, "name")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "exchange")
 		delete(additionalProperties, "type")

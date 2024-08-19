@@ -35,23 +35,25 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LoginRedirectURI" /> class.
         /// </summary>
-        /// <param name="redirectURI">redirectURI.</param>
-        /// <param name="sessionId">sessionId.</param>
-        public LoginRedirectURI(Object redirectURI = default(Object), string sessionId = default(string))
+        /// <param name="redirectURI">Connection Portal link to redirect user to connect a brokerage account..</param>
+        /// <param name="sessionId">ID to identify the connection portal session..</param>
+        public LoginRedirectURI(string redirectURI = default(string), string sessionId = default(string))
         {
             this.RedirectURI = redirectURI;
             this.SessionId = sessionId;
         }
 
         /// <summary>
-        /// Gets or Sets RedirectURI
+        /// Connection Portal link to redirect user to connect a brokerage account.
         /// </summary>
-        [DataMember(Name = "redirectURI", EmitDefaultValue = true)]
-        public Object RedirectURI { get; set; }
+        /// <value>Connection Portal link to redirect user to connect a brokerage account.</value>
+        [DataMember(Name = "redirectURI", EmitDefaultValue = false)]
+        public string RedirectURI { get; set; }
 
         /// <summary>
-        /// Gets or Sets SessionId
+        /// ID to identify the connection portal session.
         /// </summary>
+        /// <value>ID to identify the connection portal session.</value>
         [DataMember(Name = "sessionId", EmitDefaultValue = false)]
         public string SessionId { get; set; }
 
