@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A single brokerage account at a financial institution.
+    /// A single account at a brokerage.
     /// </summary>
     [DataContract(Name = "Account")]
     public partial class Account : IEquatable<Account>, IValidatableObject
@@ -35,14 +35,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
-        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field..</param>
+        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated..</param>
         /// <param name="brokerageAuthorization">Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade..</param>
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
-        /// <param name="name">A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity..</param>
-        /// <param name="number">The account number assigned by the financial institution..</param>
-        /// <param name="institutionName">The name of the financial institution that holds the account..</param>
-        /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution..</param>
-        /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk..</param>
+        /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity..</param>
+        /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons..</param>
+        /// <param name="institutionName">The name of the brokerage that holds the account..</param>
+        /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage..</param>
+        /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. Please use at your own risk..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="syncStatus">syncStatus.</param>
         /// <param name="balance">balance.</param>
@@ -63,9 +63,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field.
+        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
         /// </summary>
-        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the &#x60;number&#x60; field.</value>
+        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
@@ -85,37 +85,37 @@ namespace SnapTrade.Net.Model
         public string PortfolioGroup { get; set; }
 
         /// <summary>
-        /// A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+        /// A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
         /// </summary>
-        /// <value>A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.</value>
+        /// <value>A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.</value>
         [DataMember(Name = "name", EmitDefaultValue = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// The account number assigned by the financial institution.
+        /// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
         /// </summary>
-        /// <value>The account number assigned by the financial institution.</value>
+        /// <value>The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.</value>
         [DataMember(Name = "number", EmitDefaultValue = false)]
         public string Number { get; set; }
 
         /// <summary>
-        /// The name of the financial institution that holds the account.
+        /// The name of the brokerage that holds the account.
         /// </summary>
-        /// <value>The name of the financial institution that holds the account.</value>
+        /// <value>The name of the brokerage that holds the account.</value>
         [DataMember(Name = "institution_name", EmitDefaultValue = false)]
         public string InstitutionName { get; set; }
 
         /// <summary>
-        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
         /// </summary>
-        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.</value>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.</value>
         [DataMember(Name = "created_date", EmitDefaultValue = false)]
         public DateTime CreatedDate { get; set; }
 
         /// <summary>
-        /// Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk.
+        /// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. Please use at your own risk.
         /// </summary>
-        /// <value>Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there&#39;s no standard format for this data. Please use at your own risk.</value>
+        /// <value>Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. Please use at your own risk.</value>
         [DataMember(Name = "meta", EmitDefaultValue = false)]
         [Obsolete]
         public Dictionary<string, Object> Meta { get; set; }

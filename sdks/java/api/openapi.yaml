@@ -2372,7 +2372,7 @@ components:
           $ref: '#/components/schemas/AccountBalance_total'
     Account:
       additionalProperties: true
-      description: A single brokerage account at a financial institution.
+      description: A single account at a brokerage.
       example:
         number: Q6542138443
         balance:
@@ -2405,8 +2405,7 @@ components:
           description: "Unique identifier for the connected brokerage account. This\
             \ is the UUID used to reference the account in SnapTrade. This ID should\
             \ not change for as long as the connection stays active. If the connection\
-            \ is deleted and re-added, a new account ID will be generated. If you\
-            \ want a stable identifier for the account, use the `number` field."
+            \ is deleted and re-added, a new account ID will be generated."
         brokerage_authorization:
           description: Unique identifier for the connection (brokerage authorization).
             This is the UUID used to reference the connection in SnapTrade.
@@ -2426,21 +2425,22 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
         name:
           description: "A display name for the account. Either assigned by the user\
-            \ or by the financial institution itself. For certain institutions, SnapTrade\
-            \ appends the institution name to the account name for clarity."
+            \ or by the brokerage itself. For certain brokerages, SnapTrade appends\
+            \ the brokerage name to the account name for clarity."
           example: Robinhood Individual
           nullable: true
           type: string
           x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-name
         number:
-          description: The account number assigned by the financial institution.
+          description: "The account number assigned by the brokerage. For some brokerages,\
+            \ this field may be masked for security reasons."
           example: Q6542138443
           type: string
           x-konfig-original-example: Q6542138443
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-number
         institution_name:
-          description: The name of the financial institution that holds the account.
+          description: The name of the brokerage that holds the account.
           example: Robinhood
           type: string
           x-konfig-original-example: Robinhood
@@ -2448,7 +2448,7 @@ components:
         created_date:
           description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
             \ format indicating when the account was created in SnapTrade. This is\
-            \ _not_ the account opening date at the financial institution."
+            \ _not_ the account opening date at the brokerage."
           example: 2024-07-23T22:50:22.761Z
           format: date-time
           type: string
@@ -2458,9 +2458,8 @@ components:
           additionalProperties: true
           deprecated: true
           description: "Additional information about the account, such as account\
-            \ type, status, etc. This information is specific to the financial institution\
-            \ and there's no standard format for this data. Please use at your own\
-            \ risk."
+            \ type, status, etc. This information is specific to the brokerage and\
+            \ there's no standard format for this data. Please use at your own risk."
           example:
             type: Margin
             status: ACTIVE
@@ -2488,7 +2487,7 @@ components:
       x-konfig-is-used-in-successful-response: true
     AccountSimple:
       additionalProperties: true
-      description: A single brokerage account at a financial institution.
+      description: A single account at a brokerage.
       example:
         number: Q6542138443
         name: Robinhood Individual
@@ -2512,14 +2511,15 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
         name:
           description: "A display name for the account. Either assigned by the user\
-            \ or by the financial institution itself. For certain institutions, SnapTrade\
-            \ appends the institution name to the account name for clarity."
+            \ or by the brokerage itself. For certain brokerages, SnapTrade appends\
+            \ the brokerage name to the account name for clarity."
           example: Robinhood Individual
           type: string
           x-konfig-original-example: Robinhood Individual
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountSimple-properties-name
         number:
-          description: The account number assigned by the financial institution.
+          description: "The account number assigned by the brokerage. For some brokerages,\
+            \ this field may be masked for security reasons."
           example: Q6542138443
           type: string
           x-konfig-original-example: Q6542138443
