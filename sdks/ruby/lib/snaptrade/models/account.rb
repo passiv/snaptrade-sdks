@@ -11,9 +11,9 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A single brokerage account at a financial institution.
+  # A single account at a brokerage.
   class Account
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
     attr_accessor :id
 
     # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
@@ -22,19 +22,19 @@ module SnapTrade
     # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
     attr_accessor :portfolio_group
 
-    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+    # A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
     attr_accessor :name
 
-    # The account number assigned by the financial institution.
+    # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     attr_accessor :number
 
-    # The name of the financial institution that holds the account.
+    # The name of the brokerage that holds the account.
     attr_accessor :institution_name
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     attr_accessor :created_date
 
-    # Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
+    # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.
     attr_accessor :meta
 
     # This field is deprecated.

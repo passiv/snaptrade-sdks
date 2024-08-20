@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | [optional] 
-**Name** | Pointer to **string** | A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity. | [optional] 
-**Number** | Pointer to **string** | The account number assigned by the financial institution. | [optional] 
+**Name** | Pointer to **string** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. | [optional] 
+**Number** | Pointer to **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | [optional] 
 **SyncStatus** | Pointer to [**AccountSyncStatus**](AccountSyncStatus.md) |  | [optional] 
 
 ## Methods

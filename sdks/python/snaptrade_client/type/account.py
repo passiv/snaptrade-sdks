@@ -24,7 +24,7 @@ class RequiredAccount(TypedDict):
     pass
 
 class OptionalAccount(TypedDict, total=False):
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
     id: str
 
     # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
@@ -34,16 +34,16 @@ class OptionalAccount(TypedDict, total=False):
     # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
     portfolio_group: str
 
-    # A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+    # A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
     name: typing.Optional[str]
 
-    # The account number assigned by the financial institution.
+    # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     number: str
 
-    # The name of the financial institution that holds the account.
+    # The name of the brokerage that holds the account.
     institution_name: str
 
-    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     created_date: datetime
 
     # WARNING: This property is deprecated

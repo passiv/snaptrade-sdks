@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { AccountSyncStatus } from './account-sync-status';
 
 /**
- * A single brokerage account at a financial institution.
+ * A single account at a brokerage.
  * @export
  * @interface AccountSimple
  */
@@ -27,13 +27,13 @@ export interface AccountSimple {
      */
     'id'?: string;
     /**
-     * A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+     * A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
      * @type {string}
      * @memberof AccountSimple
      */
     'name'?: string;
     /**
-     * The account number assigned by the financial institution.
+     * The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
      * @type {string}
      * @memberof AccountSimple
      */
