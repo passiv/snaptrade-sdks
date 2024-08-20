@@ -2044,11 +2044,11 @@ components:
               description: The ISO-4217 currency code for the amount.
               example: USD
     Account:
-      description: A single brokerage account at a financial institution.
+      description: A single account at a brokerage.
       type: object
       properties:
         id:
-          description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. If you want a stable identifier for the account, use the `number` field.
+          description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
           allOf:
             - $ref: "#/components/schemas/AccountID"
         brokerage_authorization:
@@ -2057,26 +2057,26 @@ components:
           $ref: "#/components/schemas/PortfolioGroupID"
         name:
           type: string
-          description: A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+          description: A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
           example: Robinhood Individual
           nullable: true
         number:
           type: string
           example: Q6542138443
-          description: The account number assigned by the financial institution.
+          description: The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
         institution_name:
           type: string
-          description: The name of the financial institution that holds the account.
+          description: The name of the brokerage that holds the account.
           example: Robinhood
         created_date:
-          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the financial institution.
+          description: Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
           type: string
           format: date-time
           example: 2024-07-23T22:50:22.761390Z
         meta:
           type: object
           deprecated: true
-          description: Additional information about the account, such as account type, status, etc. This information is specific to the financial institution and there's no standard format for this data. Please use at your own risk.
+          description: Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.
           example:
             type: Margin
             status: ACTIVE
@@ -2093,19 +2093,19 @@ components:
         balance:
           $ref: "#/components/schemas/AccountBalance"
     AccountSimple:
-      description: A single brokerage account at a financial institution.
+      description: A single account at a brokerage.
       type: object
       properties:
         id:
           $ref: "#/components/schemas/AccountID"
         name:
           type: string
-          description: A display name for the account. Either assigned by the user or by the financial institution itself. For certain institutions, SnapTrade appends the institution name to the account name for clarity.
+          description: A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
           example: Robinhood Individual
         number:
           type: string
           example: Q6542138443
-          description: The account number assigned by the financial institution.
+          description: The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
         sync_status:
           $ref: "#/components/schemas/AccountSyncStatus"
     AccountID:
