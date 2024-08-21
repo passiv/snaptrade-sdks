@@ -104,7 +104,7 @@ public class AuthenticationApiTest {
     /**
      * Register user
      *
-     * Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database. Most SnapTrade operations require a user ID and user secret to be passed as a parameter. 
+     * Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters. 
      *
      * @throws ApiException if the Api call fails
      */

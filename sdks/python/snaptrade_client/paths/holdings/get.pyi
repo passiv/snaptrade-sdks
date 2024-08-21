@@ -450,6 +450,7 @@ class GetAllUserHoldings(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  """
         args = self._get_all_user_holdings_mapped_args(
             query_params=query_params,
             user_id=user_id,
@@ -498,6 +499,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account.  """
         args = self._get_all_user_holdings_mapped_args(
             query_params=query_params,
             user_id=user_id,

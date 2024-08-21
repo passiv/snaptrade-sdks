@@ -310,6 +310,7 @@ class ListAllBrokerages(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of all defined Brokerage objects. """
         args = self._list_all_brokerages_mapped_args(
         )
         return self._list_all_brokerages_oapg(
@@ -340,6 +341,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of all defined Brokerage objects. """
         args = self._list_all_brokerages_mapped_args(
         )
         return self._list_all_brokerages_oapg(

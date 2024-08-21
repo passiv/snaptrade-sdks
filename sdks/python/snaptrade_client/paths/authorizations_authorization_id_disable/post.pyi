@@ -506,6 +506,7 @@ class DisableBrokerageAuthorization(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default. """
         args = self._disable_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -558,6 +559,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default. """
         args = self._disable_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,

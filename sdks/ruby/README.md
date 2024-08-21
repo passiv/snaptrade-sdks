@@ -84,7 +84,7 @@ configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
 snaptrade = SnapTrade::Client.new(configuration)
 result = snaptrade.account_information.get_all_user_holdings(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -97,7 +97,7 @@ To access the raw HTTP response, suffix any method with `_with_http_info`.
 ```ruby
 result = snaptrade.account_information.get_all_user_holdings_with_http_info(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result[0] # [Array<AccountHoldings>] Deserialized data
@@ -123,7 +123,7 @@ account.
 ```ruby
 result = snaptrade.account_information.get_all_user_holdings(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -162,7 +162,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```ruby
 result = snaptrade.account_information.get_user_account_balance(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -198,7 +198,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```ruby
 result = snaptrade.account_information.get_user_account_details(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -234,7 +234,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```ruby
 result = snaptrade.account_information.get_user_account_orders(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   state: "all",
   days: 30,
@@ -279,7 +279,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```ruby
 result = snaptrade.account_information.get_user_account_positions(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -316,7 +316,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 result = snaptrade.account_information.get_user_holdings(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -351,7 +351,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```ruby
 result = snaptrade.account_information.list_user_accounts(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -382,7 +382,7 @@ Updates various properties of a specified account.
 ```ruby
 result = snaptrade.account_information.update_user_account(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "accountId_example",
 )
 p result
@@ -490,7 +490,7 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 ```ruby
 result = snaptrade.authentication.login_snap_trade_user(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   broker: "ALPACA",
   immediate_redirect: true,
   custom_redirect: "https://snaptrade.com",
@@ -552,8 +552,8 @@ Sets the version of the connection portal to render.
 
 ### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
-Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
-Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
+Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system.
+Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -596,7 +596,7 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 ```ruby
 result = snaptrade.authentication.reset_snap_trade_user_secret(
   user_id: "snaptrade-user-123",
-  user_secret: "h81@cx1lkalablakwjaltkejraj11=",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -610,9 +610,9 @@ NOT use email addresses for this property because they are usually not
 immutable.
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
-SnapTrade User Secret randomly generated by SnapTrade. This is privileged
-information and if compromised, should be rotated via the [rotate user secret
-endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
+SnapTrade User Secret. This is a randomly generated string and should be stored
+securely. If compromised, please rotate it via the [rotate user secret
+endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -637,7 +637,7 @@ Returns a single brokerage authorization object for the specified ID.
 result = snaptrade.connections.detail_brokerage_authorization(
   authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -672,7 +672,7 @@ Manually disable a connection. This should only be used for testing a reconnect 
 result = snaptrade.connections.disable_brokerage_authorization(
   authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -706,7 +706,7 @@ Returns a list of Brokerage Authorization objects for the user
 ```ruby
 result = snaptrade.connections.list_brokerage_authorizations(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -738,7 +738,7 @@ Trigger a holdings update for all accounts under this authorization. Updates wil
 result = snaptrade.connections.refresh_brokerage_authorization(
   authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 p result
 ```
@@ -773,7 +773,7 @@ Deletes a specified brokerage authorization given by the ID.
 snaptrade.connections.remove_brokerage_authorization(
   authorization_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -851,7 +851,7 @@ result = snaptrade.options.get_option_strategy(
     ],
   strategy_type: "CUSTOM",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "accountId_example",
 )
 p result
@@ -889,7 +889,7 @@ Returns the option chain for the specified symbol in the specified account.
 ```ruby
 result = snaptrade.options.get_options_chain(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "accountId_example",
   symbol: "symbol_example",
 )
@@ -929,7 +929,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 ```ruby
 result = snaptrade.options.get_options_strategy_quote(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "accountId_example",
   option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
@@ -971,7 +971,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```ruby
 result = snaptrade.options.list_option_holdings(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 p result
@@ -1006,7 +1006,7 @@ result = snaptrade.options.place_option_strategy(
   order_type: "Limit",
   time_in_force: "FOK",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   price: 31.33,
@@ -1328,7 +1328,7 @@ provided search string, matching on ticker and name.
 ```ruby
 result = snaptrade.reference_data.symbol_search_user_account(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   substring: "apple",
 )
@@ -1367,7 +1367,7 @@ This will only work if the order has not yet been executed.
 ```ruby
 result = snaptrade.trading.cancel_user_account_order(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
@@ -1404,7 +1404,7 @@ Return the trade object and it's impact on the account for the specified order.
 ```ruby
 result = snaptrade.trading.get_order_impact(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   action: "BUY",
   order_type: "Limit",
@@ -1464,7 +1464,7 @@ Returns quote(s) from the brokerage for the specified symbol(s).
 ```ruby
 result = snaptrade.trading.get_user_account_quotes(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   symbols: "symbols_example",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   use_ticker: true,
@@ -1507,7 +1507,7 @@ Places a specified trade in the specified account.
 ```ruby
 result = snaptrade.trading.place_force_order(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   action: "BUY",
   order_type: "Limit",
@@ -1570,7 +1570,7 @@ returns the status of the order from the brokerage.
 result = snaptrade.trading.place_order(
   trade_id: "tradeId_example",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   wait_to_confirm: true,
 )
 p result
@@ -1616,7 +1616,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```ruby
 result = snaptrade.transactions_and_reporting.get_activities(
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   start_date: "2022-01-24",
   end_date: "2022-01-24",
   accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
@@ -1683,7 +1683,7 @@ result = snaptrade.transactions_and_reporting.get_reporting_custom_range(
   start_date: "2022-01-24",
   end_date: "2022-01-24",
   user_id: "snaptrade-user-123",
-  user_secret: "USERSECRET123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accounts: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
   detailed: true,
   frequency: "monthly",

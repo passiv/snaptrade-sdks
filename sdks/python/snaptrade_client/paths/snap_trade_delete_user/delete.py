@@ -427,6 +427,7 @@ class DeleteSnapTradeUser(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent. """
         args = self._delete_snap_trade_user_mapped_args(
             query_params=query_params,
             user_id=user_id,
@@ -465,6 +466,7 @@ class ApiFordelete(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent. """
         args = self._delete_snap_trade_user_mapped_args(
             query_params=query_params,
             user_id=user_id,

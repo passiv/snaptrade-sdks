@@ -399,6 +399,7 @@ class ListBrokerageAuthorizations(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of Brokerage Authorization objects for the user """
         args = self._list_brokerage_authorizations_mapped_args(
             query_params=query_params,
             user_id=user_id,
@@ -443,6 +444,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of Brokerage Authorization objects for the user """
         args = self._list_brokerage_authorizations_mapped_args(
             query_params=query_params,
             user_id=user_id,

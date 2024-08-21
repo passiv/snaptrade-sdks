@@ -400,6 +400,7 @@ class RegisterSnapTradeUser(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.  """
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
@@ -438,6 +439,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system. Most SnapTrade operations require a user ID and user secret to be passed in as parameters.  """
         args = self._register_snap_trade_user_mapped_args(
             body=body,
             user_id=user_id,
