@@ -212,7 +212,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Delete brokerage authorization
+        Delete connection
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -341,7 +341,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Delete brokerage authorization
+        Delete connection
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -468,7 +468,7 @@ class RemoveBrokerageAuthorization(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Deletes a specified brokerage authorization given by the ID. """
+        """ Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -523,7 +523,7 @@ class ApiFordelete(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Deletes a specified brokerage authorization given by the ID. """
+        """ Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted. """
         args = self._remove_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,

@@ -4,18 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**DetailBrokerageAuthorization**](ConnectionsApi.md#DetailBrokerageAuthorization) | **Get** /authorizations/{authorizationId} | Get brokerage authorization details
-[**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Manually disable a connection for testing
-[**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all brokerage authorizations for the User
+[**DetailBrokerageAuthorization**](ConnectionsApi.md#DetailBrokerageAuthorization) | **Get** /authorizations/{authorizationId} | Get connection detail
+[**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
+[**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
-[**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete brokerage authorization
+[**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 [**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
 
 
 
 ## DetailBrokerageAuthorization
 
-Get brokerage authorization details
+Get connection detail
 
 
 
@@ -69,7 +69,7 @@ func main() {
 
 ## DisableBrokerageAuthorization
 
-Manually disable a connection for testing
+Force disable connection
 
 
 
@@ -115,7 +115,7 @@ func main() {
 
 ## ListBrokerageAuthorizations
 
-List all brokerage authorizations for the User
+List all connections
 
 
 
@@ -214,7 +214,7 @@ func main() {
 
 ## RemoveBrokerageAuthorization
 
-Delete brokerage authorization
+Delete connection
 
 
 

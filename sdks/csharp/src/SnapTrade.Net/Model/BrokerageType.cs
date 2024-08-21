@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Type of brokerage
+    /// Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
     /// </summary>
     [DataContract(Name = "BrokerageType")]
     public partial class BrokerageType : IEquatable<BrokerageType>, IValidatableObject

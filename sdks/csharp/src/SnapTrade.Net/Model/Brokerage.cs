@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Brokerage
+    /// Describes a brokerage that SnapTrade supports.
     /// </summary>
     [DataContract(Name = "Brokerage")]
     public partial class Brokerage : IEquatable<Brokerage>, IValidatableObject
@@ -35,36 +35,33 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Brokerage" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
+        /// <param name="id">Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade..</param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change..</param>
         /// <param name="name">Full name of the brokerage..</param>
         /// <param name="displayName">A display-friendly name of the brokerage..</param>
-        /// <param name="description">description.</param>
-        /// <param name="awsS3LogoUrl">awsS3LogoUrl.</param>
-        /// <param name="awsS3SquareLogoUrl">awsS3SquareLogoUrl.</param>
-        /// <param name="openUrl">openUrl.</param>
-        /// <param name="slug">A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change..</param>
-        /// <param name="url">url.</param>
-        /// <param name="enabled">enabled.</param>
-        /// <param name="maintenanceMode">maintenanceMode.</param>
-        /// <param name="allowsFractionalUnits">allowsFractionalUnits.</param>
-        /// <param name="allowsTrading">allowsTrading.</param>
-        /// <param name="hasReporting">hasReporting.</param>
-        /// <param name="isRealTimeConnection">isRealTimeConnection.</param>
-        /// <param name="allowsTradingThroughSnaptradeApi">allowsTradingThroughSnaptradeApi.</param>
-        /// <param name="isScrapingIntegration">isScrapingIntegration.</param>
-        /// <param name="defaultCurrency">defaultCurrency.</param>
+        /// <param name="description">A brief description of the brokerage..</param>
+        /// <param name="awsS3LogoUrl">URL to the brokerage&#39;s logo..</param>
+        /// <param name="awsS3SquareLogoUrl">URL to the brokerage&#39;s logo in square format..</param>
+        /// <param name="openUrl">This field is deprecated..</param>
+        /// <param name="url">URL to the brokerage&#39;s website..</param>
+        /// <param name="enabled">Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections..</param>
+        /// <param name="maintenanceMode">Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections..</param>
+        /// <param name="allowsFractionalUnits">This field is deprecated. Please contact us if you have a valid use case for it..</param>
+        /// <param name="allowsTrading">Whether the brokerage allows trading through SnapTrade..</param>
+        /// <param name="hasReporting">This field is deprecated. Please contact us if you have a valid use case for it..</param>
+        /// <param name="isRealTimeConnection">This field is deprecated. Please contact us if you have a valid use case for it..</param>
         /// <param name="brokerageType">brokerageType.</param>
-        /// <param name="exchanges">List of exchange ID supported by brokerage.</param>
-        public Brokerage(string id = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string openUrl = default(string), string slug = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), bool? allowsTradingThroughSnaptradeApi = default(bool?), bool isScrapingIntegration = default(bool), string defaultCurrency = default(string), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
+        /// <param name="exchanges">This field is deprecated. Please contact us if you have a valid use case for it..</param>
+        public Brokerage(string id = default(string), string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string openUrl = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsFractionalUnits = default(bool?), bool? allowsTrading = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>)) : base()
         {
             this.Id = id;
+            this.Slug = slug;
             this.Name = name;
             this.DisplayName = displayName;
             this.Description = description;
             this.AwsS3LogoUrl = awsS3LogoUrl;
             this.AwsS3SquareLogoUrl = awsS3SquareLogoUrl;
             this.OpenUrl = openUrl;
-            this.Slug = slug;
             this.Url = url;
             this.Enabled = enabled;
             this.MaintenanceMode = maintenanceMode;
@@ -72,19 +69,24 @@ namespace SnapTrade.Net.Model
             this.AllowsTrading = allowsTrading;
             this.HasReporting = hasReporting;
             this.IsRealTimeConnection = isRealTimeConnection;
-            this.AllowsTradingThroughSnaptradeApi = allowsTradingThroughSnaptradeApi;
-            this.IsScrapingIntegration = isScrapingIntegration;
-            this.DefaultCurrency = defaultCurrency;
             this.BrokerageType = brokerageType;
             this.Exchanges = exchanges;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
+
+        /// <summary>
+        /// A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+        /// </summary>
+        /// <value>A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</value>
+        [DataMember(Name = "slug", EmitDefaultValue = false)]
+        public string Slug { get; set; }
 
         /// <summary>
         /// Full name of the brokerage.
@@ -101,95 +103,85 @@ namespace SnapTrade.Net.Model
         public string DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// A brief description of the brokerage.
         /// </summary>
+        /// <value>A brief description of the brokerage.</value>
         [DataMember(Name = "description", EmitDefaultValue = false)]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets AwsS3LogoUrl
+        /// URL to the brokerage&#39;s logo.
         /// </summary>
+        /// <value>URL to the brokerage&#39;s logo.</value>
         [DataMember(Name = "aws_s3_logo_url", EmitDefaultValue = false)]
         public string AwsS3LogoUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets AwsS3SquareLogoUrl
+        /// URL to the brokerage&#39;s logo in square format.
         /// </summary>
+        /// <value>URL to the brokerage&#39;s logo in square format.</value>
         [DataMember(Name = "aws_s3_square_logo_url", EmitDefaultValue = true)]
         public string AwsS3SquareLogoUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets OpenUrl
+        /// This field is deprecated.
         /// </summary>
+        /// <value>This field is deprecated.</value>
         [DataMember(Name = "open_url", EmitDefaultValue = true)]
+        [Obsolete]
         public string OpenUrl { get; set; }
 
         /// <summary>
-        /// A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
+        /// URL to the brokerage&#39;s website.
         /// </summary>
-        /// <value>A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.</value>
-        [DataMember(Name = "slug", EmitDefaultValue = false)]
-        public string Slug { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Url
-        /// </summary>
+        /// <value>URL to the brokerage&#39;s website.</value>
         [DataMember(Name = "url", EmitDefaultValue = false)]
         public string Url { get; set; }
 
         /// <summary>
-        /// Gets or Sets Enabled
+        /// Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
         /// </summary>
+        /// <value>Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.</value>
         [DataMember(Name = "enabled", EmitDefaultValue = true)]
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// Gets or Sets MaintenanceMode
+        /// Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
         /// </summary>
+        /// <value>Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.</value>
         [DataMember(Name = "maintenance_mode", EmitDefaultValue = true)]
         public bool MaintenanceMode { get; set; }
 
         /// <summary>
-        /// Gets or Sets AllowsFractionalUnits
+        /// This field is deprecated. Please contact us if you have a valid use case for it.
         /// </summary>
+        /// <value>This field is deprecated. Please contact us if you have a valid use case for it.</value>
         [DataMember(Name = "allows_fractional_units", EmitDefaultValue = true)]
+        [Obsolete]
         public bool? AllowsFractionalUnits { get; set; }
 
         /// <summary>
-        /// Gets or Sets AllowsTrading
+        /// Whether the brokerage allows trading through SnapTrade.
         /// </summary>
+        /// <value>Whether the brokerage allows trading through SnapTrade.</value>
         [DataMember(Name = "allows_trading", EmitDefaultValue = true)]
         public bool? AllowsTrading { get; set; }
 
         /// <summary>
-        /// Gets or Sets HasReporting
+        /// This field is deprecated. Please contact us if you have a valid use case for it.
         /// </summary>
+        /// <value>This field is deprecated. Please contact us if you have a valid use case for it.</value>
         [DataMember(Name = "has_reporting", EmitDefaultValue = true)]
+        [Obsolete]
         public bool? HasReporting { get; set; }
 
         /// <summary>
-        /// Gets or Sets IsRealTimeConnection
+        /// This field is deprecated. Please contact us if you have a valid use case for it.
         /// </summary>
+        /// <value>This field is deprecated. Please contact us if you have a valid use case for it.</value>
         [DataMember(Name = "is_real_time_connection", EmitDefaultValue = true)]
+        [Obsolete]
         public bool IsRealTimeConnection { get; set; }
-
-        /// <summary>
-        /// Gets or Sets AllowsTradingThroughSnaptradeApi
-        /// </summary>
-        [DataMember(Name = "allows_trading_through_snaptrade_api", EmitDefaultValue = true)]
-        public bool? AllowsTradingThroughSnaptradeApi { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IsScrapingIntegration
-        /// </summary>
-        [DataMember(Name = "is_scraping_integration", EmitDefaultValue = true)]
-        public bool IsScrapingIntegration { get; set; }
-
-        /// <summary>
-        /// Gets or Sets DefaultCurrency
-        /// </summary>
-        [DataMember(Name = "default_currency", EmitDefaultValue = false)]
-        public string DefaultCurrency { get; set; }
 
         /// <summary>
         /// Gets or Sets BrokerageType
@@ -198,10 +190,11 @@ namespace SnapTrade.Net.Model
         public BrokerageType BrokerageType { get; set; }
 
         /// <summary>
-        /// List of exchange ID supported by brokerage
+        /// This field is deprecated. Please contact us if you have a valid use case for it.
         /// </summary>
-        /// <value>List of exchange ID supported by brokerage</value>
+        /// <value>This field is deprecated. Please contact us if you have a valid use case for it.</value>
         [DataMember(Name = "exchanges", EmitDefaultValue = false)]
+        [Obsolete]
         public List<Object> Exchanges { get; set; }
 
         /// <summary>
@@ -220,13 +213,13 @@ namespace SnapTrade.Net.Model
             sb.Append("class Brokerage {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
+            sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  DisplayName: ").Append(DisplayName).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  AwsS3LogoUrl: ").Append(AwsS3LogoUrl).Append("\n");
             sb.Append("  AwsS3SquareLogoUrl: ").Append(AwsS3SquareLogoUrl).Append("\n");
             sb.Append("  OpenUrl: ").Append(OpenUrl).Append("\n");
-            sb.Append("  Slug: ").Append(Slug).Append("\n");
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
             sb.Append("  MaintenanceMode: ").Append(MaintenanceMode).Append("\n");
@@ -234,9 +227,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  AllowsTrading: ").Append(AllowsTrading).Append("\n");
             sb.Append("  HasReporting: ").Append(HasReporting).Append("\n");
             sb.Append("  IsRealTimeConnection: ").Append(IsRealTimeConnection).Append("\n");
-            sb.Append("  AllowsTradingThroughSnaptradeApi: ").Append(AllowsTradingThroughSnaptradeApi).Append("\n");
-            sb.Append("  IsScrapingIntegration: ").Append(IsScrapingIntegration).Append("\n");
-            sb.Append("  DefaultCurrency: ").Append(DefaultCurrency).Append("\n");
             sb.Append("  BrokerageType: ").Append(BrokerageType).Append("\n");
             sb.Append("  Exchanges: ").Append(Exchanges).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -281,6 +271,11 @@ namespace SnapTrade.Net.Model
                     this.Id.Equals(input.Id))
                 ) && base.Equals(input) && 
                 (
+                    this.Slug == input.Slug ||
+                    (this.Slug != null &&
+                    this.Slug.Equals(input.Slug))
+                ) && base.Equals(input) && 
+                (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
@@ -309,11 +304,6 @@ namespace SnapTrade.Net.Model
                     this.OpenUrl == input.OpenUrl ||
                     (this.OpenUrl != null &&
                     this.OpenUrl.Equals(input.OpenUrl))
-                ) && base.Equals(input) && 
-                (
-                    this.Slug == input.Slug ||
-                    (this.Slug != null &&
-                    this.Slug.Equals(input.Slug))
                 ) && base.Equals(input) && 
                 (
                     this.Url == input.Url ||
@@ -348,20 +338,6 @@ namespace SnapTrade.Net.Model
                     this.IsRealTimeConnection.Equals(input.IsRealTimeConnection)
                 ) && base.Equals(input) && 
                 (
-                    this.AllowsTradingThroughSnaptradeApi == input.AllowsTradingThroughSnaptradeApi ||
-                    (this.AllowsTradingThroughSnaptradeApi != null &&
-                    this.AllowsTradingThroughSnaptradeApi.Equals(input.AllowsTradingThroughSnaptradeApi))
-                ) && base.Equals(input) && 
-                (
-                    this.IsScrapingIntegration == input.IsScrapingIntegration ||
-                    this.IsScrapingIntegration.Equals(input.IsScrapingIntegration)
-                ) && base.Equals(input) && 
-                (
-                    this.DefaultCurrency == input.DefaultCurrency ||
-                    (this.DefaultCurrency != null &&
-                    this.DefaultCurrency.Equals(input.DefaultCurrency))
-                ) && base.Equals(input) && 
-                (
                     this.BrokerageType == input.BrokerageType ||
                     (this.BrokerageType != null &&
                     this.BrokerageType.Equals(input.BrokerageType))
@@ -388,6 +364,10 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
                 }
+                if (this.Slug != null)
+                {
+                    hashCode = (hashCode * 59) + this.Slug.GetHashCode();
+                }
                 if (this.Name != null)
                 {
                     hashCode = (hashCode * 59) + this.Name.GetHashCode();
@@ -412,10 +392,6 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.OpenUrl.GetHashCode();
                 }
-                if (this.Slug != null)
-                {
-                    hashCode = (hashCode * 59) + this.Slug.GetHashCode();
-                }
                 if (this.Url != null)
                 {
                     hashCode = (hashCode * 59) + this.Url.GetHashCode();
@@ -435,15 +411,6 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.HasReporting.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.IsRealTimeConnection.GetHashCode();
-                if (this.AllowsTradingThroughSnaptradeApi != null)
-                {
-                    hashCode = (hashCode * 59) + this.AllowsTradingThroughSnaptradeApi.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.IsScrapingIntegration.GetHashCode();
-                if (this.DefaultCurrency != null)
-                {
-                    hashCode = (hashCode * 59) + this.DefaultCurrency.GetHashCode();
-                }
                 if (this.BrokerageType != null)
                 {
                     hashCode = (hashCode * 59) + this.BrokerageType.GetHashCode();

@@ -66,6 +66,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Id'
         }
         /// <summary>
+        /// Test the property 'Slug'
+        /// </summary>
+        [Fact]
+        public void SlugTest()
+        {
+            // TODO unit test for the property 'Slug'
+        }
+        /// <summary>
         /// Test the property 'Name'
         /// </summary>
         [Fact]
@@ -112,14 +120,6 @@ namespace SnapTrade.Net.Test.Model
         public void OpenUrlTest()
         {
             // TODO unit test for the property 'OpenUrl'
-        }
-        /// <summary>
-        /// Test the property 'Slug'
-        /// </summary>
-        [Fact]
-        public void SlugTest()
-        {
-            // TODO unit test for the property 'Slug'
         }
         /// <summary>
         /// Test the property 'Url'
@@ -176,30 +176,6 @@ namespace SnapTrade.Net.Test.Model
         public void IsRealTimeConnectionTest()
         {
             // TODO unit test for the property 'IsRealTimeConnection'
-        }
-        /// <summary>
-        /// Test the property 'AllowsTradingThroughSnaptradeApi'
-        /// </summary>
-        [Fact]
-        public void AllowsTradingThroughSnaptradeApiTest()
-        {
-            // TODO unit test for the property 'AllowsTradingThroughSnaptradeApi'
-        }
-        /// <summary>
-        /// Test the property 'IsScrapingIntegration'
-        /// </summary>
-        [Fact]
-        public void IsScrapingIntegrationTest()
-        {
-            // TODO unit test for the property 'IsScrapingIntegration'
-        }
-        /// <summary>
-        /// Test the property 'DefaultCurrency'
-        /// </summary>
-        [Fact]
-        public void DefaultCurrencyTest()
-        {
-            // TODO unit test for the property 'DefaultCurrency'
         }
         /// <summary>
         /// Test the property 'BrokerageType'

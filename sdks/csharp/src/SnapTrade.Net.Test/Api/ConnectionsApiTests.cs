@@ -52,13 +52,13 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void DetailBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Get brokerage authorization details
+                // Get connection detail
                 BrokerageAuthorization result = client.Connections.DetailBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -82,13 +82,13 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void DisableBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Manually disable a connection for testing
+                // Force disable connection
                 BrokerageAuthorizationDisabledConfirmation result = client.Connections.DisableBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -117,7 +117,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List all brokerage authorizations for the User
+                // List all connections
                 List<BrokerageAuthorization> result = client.Connections.ListBrokerageAuthorizations(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -141,7 +141,7 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void RefreshBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
@@ -171,13 +171,13 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void RemoveBrokerageAuthorizationTest()
         {
-            var authorizationId = "authorizationId_example"; // The ID of the Authorization to delete.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Delete brokerage authorization
+                // Delete connection
                 client.Connections.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
             }
             catch (ApiException e)

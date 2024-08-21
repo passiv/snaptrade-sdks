@@ -184,7 +184,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Authorization object for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -200,7 +200,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Authorization object for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -216,7 +216,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Authorization object for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -232,7 +232,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Authorization object for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -242,16 +242,16 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * Get brokerage authorization details
-     * Returns a single brokerage authorization object for the specified ID.
-     * @param authorizationId The ID of a brokerage authorization object. (required)
+     * Get connection detail
+     * Returns a single connection for the specified ID.
+     * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return DetailBrokerageAuthorizationRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Authorization object for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -375,7 +375,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the connection has been disabled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -390,7 +390,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the connection has been disabled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public BrokerageAuthorizationDisabledConfirmation execute() throws ApiException {
@@ -405,7 +405,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the connection has been disabled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<BrokerageAuthorizationDisabledConfirmation> executeWithHttpInfo() throws ApiException {
@@ -420,7 +420,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the connection has been disabled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<BrokerageAuthorizationDisabledConfirmation> _callback) throws ApiException {
@@ -429,16 +429,16 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * Manually disable a connection for testing
-     * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-     * @param authorizationId The ID of a brokerage authorization object. (required)
+     * Force disable connection
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+     * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return DisableBrokerageAuthorizationRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Confirmation that the connection has been disabled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public ConnectionsApi.DisableBrokerageAuthorizationRequestBuilder disableBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
@@ -553,7 +553,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Authorization objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -569,7 +569,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Authorization objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -585,7 +585,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Authorization objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -601,7 +601,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all Authorization objects for the authenticated user. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
          </table>
          */
@@ -611,15 +611,15 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * List all brokerage authorizations for the User
-     * Returns a list of Brokerage Authorization objects for the user
+     * List all connections
+     * Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return ListBrokerageAuthorizationsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all Authorization objects for the authenticated user. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
@@ -740,7 +740,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -755,7 +755,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public BrokerageAuthorizationRefreshConfirmation execute() throws ApiException {
@@ -770,7 +770,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<BrokerageAuthorizationRefreshConfirmation> executeWithHttpInfo() throws ApiException {
@@ -785,7 +785,7 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<BrokerageAuthorizationRefreshConfirmation> _callback) throws ApiException {
@@ -795,15 +795,15 @@ public class ConnectionsApiGenerated {
 
     /**
      * Refresh holdings for a connection
-     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
-     * @param authorizationId The ID of a brokerage authorization object. (required)
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+     * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return RefreshBrokerageAuthorizationRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Confirmation that the syncs have been scheduled </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public ConnectionsApi.RefreshBrokerageAuthorizationRequestBuilder refreshBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {
@@ -923,10 +923,10 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 204 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -940,10 +940,10 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 204 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public void execute() throws ApiException {
@@ -957,10 +957,10 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 204 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
@@ -975,10 +975,10 @@ public class ConnectionsApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-            <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 204 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
@@ -987,19 +987,19 @@ public class ConnectionsApiGenerated {
     }
 
     /**
-     * Delete brokerage authorization
-     * Deletes a specified brokerage authorization given by the ID.
-     * @param authorizationId The ID of the Authorization to delete. (required)
+     * Delete connection
+     * Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+     * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return RemoveBrokerageAuthorizationRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 204 </td><td> Brokerage authorization object has been successfully deleted </td><td>  -  </td></tr>
-        <tr><td> 400 </td><td> The specified authorizationId is invalid (not a UUID string). </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> The specified authorizationId was not found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 204 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
      */
     public ConnectionsApi.RemoveBrokerageAuthorizationRequestBuilder removeBrokerageAuthorization(UUID authorizationId, String userId, String userSecret) throws IllegalArgumentException {

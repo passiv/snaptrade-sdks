@@ -1,4 +1,5 @@
 # SnapTrade.Net.Model.BrokerageAuthorizationRefreshConfirmation
+Confirmation that the syncs have been scheduled.
 
 ## Properties
 

@@ -99,7 +99,7 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Returns a list of all registered user IDs.
+         * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
          * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -332,7 +332,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of all registered user IDs.
+         * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
          * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -410,7 +410,7 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.deleteSnapTradeUser(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all registered user IDs.
+         * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
          * @summary List all users
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -528,7 +528,7 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of all registered user IDs.
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      * @summary List all users
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

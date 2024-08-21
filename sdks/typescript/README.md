@@ -427,7 +427,7 @@ const getUserHoldingsResponse =
 
 ### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
-Returns all brokerage accounts known to SnapTrade for the authenticated user.
+Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
@@ -554,7 +554,7 @@ const deleteSnapTradeUserResponse =
 
 ### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
-Returns a list of all registered user IDs.
+Returns a list of all registered user IDs. Please note that the response is not currently paginated.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -709,14 +709,14 @@ SnapTrade User Secret. This is a randomly generated string and should be stored 
 
 ### `snaptrade.connections.detailBrokerageAuthorization`<a id="snaptradeconnectionsdetailbrokerageauthorization"></a>
 
-Returns a single brokerage authorization object for the specified ID.
+Returns a single connection for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const detailBrokerageAuthorizationResponse =
   await snaptrade.connections.detailBrokerageAuthorization({
-    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -725,8 +725,6 @@ const detailBrokerageAuthorizationResponse =
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -747,14 +745,18 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.disableBrokerageAuthorization`<a id="snaptradeconnectionsdisablebrokerageauthorization"></a>
 
-Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+
+*Please contact us in order to use this endpoint as it is disabled by default.*
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const disableBrokerageAuthorizationResponse =
   await snaptrade.connections.disableBrokerageAuthorization({
-    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -763,8 +765,6 @@ const disableBrokerageAuthorizationResponse =
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -785,7 +785,12 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.listBrokerageAuthorizations`<a id="snaptradeconnectionslistbrokerageauthorizations"></a>
 
-Returns a list of Brokerage Authorization objects for the user
+Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -818,14 +823,17 @@ const listBrokerageAuthorizationsResponse =
 
 ### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+
+*Please contact support for access as this endpoint is not enabled by default.*
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const refreshBrokerageAuthorizationResponse =
   await snaptrade.connections.refreshBrokerageAuthorization({
-    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -834,8 +842,6 @@ const refreshBrokerageAuthorizationResponse =
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-The ID of a brokerage authorization object.
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -856,14 +862,14 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
 
-Deletes a specified brokerage authorization given by the ID.
+Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const removeBrokerageAuthorizationResponse =
   await snaptrade.connections.removeBrokerageAuthorization({
-    authorizationId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   });
@@ -872,8 +878,6 @@ const removeBrokerageAuthorizationResponse =
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorizationId: `string`<a id="authorizationid-string"></a>
-
-The ID of the Authorization to delete.
 
 ##### userId: `string`<a id="userid-string"></a>
 

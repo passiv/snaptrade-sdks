@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**CreatedDate** | Pointer to **string** | Time | [optional] 
-**UpdatedDate** | Pointer to **string** | Time | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. | [optional] 
+**CreatedDate** | Pointer to **time.Time** | Timestamp of when the connection was established in SnapTrade. | [optional] 
+**UpdatedDate** | Pointer to **time.Time** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. | [optional] 
 **Brokerage** | Pointer to [**Brokerage**](Brokerage.md) |  | [optional] 
-**Name** | Pointer to **string** | Connection Name | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
-**Disabled** | Pointer to **bool** |  | [optional] 
-**DisabledDate** | Pointer to **NullableString** | Disabled date | [optional] 
-**Meta** | Pointer to **map[string]interface{}** | Additional data about brokerage authorization | [optional] 
+**Name** | Pointer to **string** | A short, human-readable name for the connection. | [optional] 
+**Type** | Pointer to **string** | Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are &#x60;read&#x60; and &#x60;trade&#x60;. | [optional] 
+**Disabled** | Pointer to **bool** | Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection.  | [optional] 
+**DisabledDate** | Pointer to **NullableTime** | Timestamp of when the connection was disabled in SnapTrade. | [optional] 
+**Meta** | Pointer to **map[string]interface{}** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 
 ## Methods
 
@@ -60,20 +60,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetCreatedDate
 
-`func (o *BrokerageAuthorization) GetCreatedDate() string`
+`func (o *BrokerageAuthorization) GetCreatedDate() time.Time`
 
 GetCreatedDate returns the CreatedDate field if non-nil, zero value otherwise.
 
 ### GetCreatedDateOk
 
-`func (o *BrokerageAuthorization) GetCreatedDateOk() (*string, bool)`
+`func (o *BrokerageAuthorization) GetCreatedDateOk() (*time.Time, bool)`
 
 GetCreatedDateOk returns a tuple with the CreatedDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedDate
 
-`func (o *BrokerageAuthorization) SetCreatedDate(v string)`
+`func (o *BrokerageAuthorization) SetCreatedDate(v time.Time)`
 
 SetCreatedDate sets CreatedDate field to given value.
 
@@ -85,20 +85,20 @@ HasCreatedDate returns a boolean if a field has been set.
 
 ### GetUpdatedDate
 
-`func (o *BrokerageAuthorization) GetUpdatedDate() string`
+`func (o *BrokerageAuthorization) GetUpdatedDate() time.Time`
 
 GetUpdatedDate returns the UpdatedDate field if non-nil, zero value otherwise.
 
 ### GetUpdatedDateOk
 
-`func (o *BrokerageAuthorization) GetUpdatedDateOk() (*string, bool)`
+`func (o *BrokerageAuthorization) GetUpdatedDateOk() (*time.Time, bool)`
 
 GetUpdatedDateOk returns a tuple with the UpdatedDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedDate
 
-`func (o *BrokerageAuthorization) SetUpdatedDate(v string)`
+`func (o *BrokerageAuthorization) SetUpdatedDate(v time.Time)`
 
 SetUpdatedDate sets UpdatedDate field to given value.
 
@@ -210,20 +210,20 @@ HasDisabled returns a boolean if a field has been set.
 
 ### GetDisabledDate
 
-`func (o *BrokerageAuthorization) GetDisabledDate() string`
+`func (o *BrokerageAuthorization) GetDisabledDate() time.Time`
 
 GetDisabledDate returns the DisabledDate field if non-nil, zero value otherwise.
 
 ### GetDisabledDateOk
 
-`func (o *BrokerageAuthorization) GetDisabledDateOk() (*string, bool)`
+`func (o *BrokerageAuthorization) GetDisabledDateOk() (*time.Time, bool)`
 
 GetDisabledDateOk returns a tuple with the DisabledDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDisabledDate
 
-`func (o *BrokerageAuthorization) SetDisabledDate(v string)`
+`func (o *BrokerageAuthorization) SetDisabledDate(v time.Time)`
 
 SetDisabledDate sets DisabledDate field to given value.
 

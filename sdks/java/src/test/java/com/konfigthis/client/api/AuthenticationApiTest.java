@@ -62,7 +62,7 @@ public class AuthenticationApiTest {
     /**
      * List all users
      *
-     * Returns a list of all registered user IDs.
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      *
      * @throws ApiException if the Api call fails
      */

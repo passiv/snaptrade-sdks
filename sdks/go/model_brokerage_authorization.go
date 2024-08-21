@@ -13,23 +13,29 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
-// BrokerageAuthorization struct for BrokerageAuthorization
+// BrokerageAuthorization A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
 type BrokerageAuthorization struct {
+	// Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
 	Id *string `json:"id,omitempty"`
-	// Time
-	CreatedDate *string `json:"created_date,omitempty"`
-	// Time
-	UpdatedDate *string `json:"updated_date,omitempty"`
+	// Timestamp of when the connection was established in SnapTrade.
+	CreatedDate *time.Time `json:"created_date,omitempty"`
+	// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+	// Deprecated
+	UpdatedDate *time.Time `json:"updated_date,omitempty"`
 	Brokerage *Brokerage `json:"brokerage,omitempty"`
-	// Connection Name
+	// A short, human-readable name for the connection.
 	Name *string `json:"name,omitempty"`
+	// Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are `read` and `trade`.
 	Type *string `json:"type,omitempty"`
+	// Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection. 
 	Disabled *bool `json:"disabled,omitempty"`
-	// Disabled date
-	DisabledDate NullableString `json:"disabled_date,omitempty"`
-	// Additional data about brokerage authorization
+	// Timestamp of when the connection was disabled in SnapTrade.
+	DisabledDate NullableTime `json:"disabled_date,omitempty"`
+	// Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
+	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -86,9 +92,9 @@ func (o *BrokerageAuthorization) SetId(v string) {
 }
 
 // GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
-func (o *BrokerageAuthorization) GetCreatedDate() string {
+func (o *BrokerageAuthorization) GetCreatedDate() time.Time {
 	if o == nil || isNil(o.CreatedDate) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.CreatedDate
@@ -96,7 +102,7 @@ func (o *BrokerageAuthorization) GetCreatedDate() string {
 
 // GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BrokerageAuthorization) GetCreatedDateOk() (*string, bool) {
+func (o *BrokerageAuthorization) GetCreatedDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.CreatedDate) {
     return nil, false
 	}
@@ -112,15 +118,16 @@ func (o *BrokerageAuthorization) HasCreatedDate() bool {
 	return false
 }
 
-// SetCreatedDate gets a reference to the given string and assigns it to the CreatedDate field.
-func (o *BrokerageAuthorization) SetCreatedDate(v string) {
+// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
+func (o *BrokerageAuthorization) SetCreatedDate(v time.Time) {
 	o.CreatedDate = &v
 }
 
 // GetUpdatedDate returns the UpdatedDate field value if set, zero value otherwise.
-func (o *BrokerageAuthorization) GetUpdatedDate() string {
+// Deprecated
+func (o *BrokerageAuthorization) GetUpdatedDate() time.Time {
 	if o == nil || isNil(o.UpdatedDate) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.UpdatedDate
@@ -128,7 +135,8 @@ func (o *BrokerageAuthorization) GetUpdatedDate() string {
 
 // GetUpdatedDateOk returns a tuple with the UpdatedDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BrokerageAuthorization) GetUpdatedDateOk() (*string, bool) {
+// Deprecated
+func (o *BrokerageAuthorization) GetUpdatedDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.UpdatedDate) {
     return nil, false
 	}
@@ -144,8 +152,9 @@ func (o *BrokerageAuthorization) HasUpdatedDate() bool {
 	return false
 }
 
-// SetUpdatedDate gets a reference to the given string and assigns it to the UpdatedDate field.
-func (o *BrokerageAuthorization) SetUpdatedDate(v string) {
+// SetUpdatedDate gets a reference to the given time.Time and assigns it to the UpdatedDate field.
+// Deprecated
+func (o *BrokerageAuthorization) SetUpdatedDate(v time.Time) {
 	o.UpdatedDate = &v
 }
 
@@ -278,9 +287,9 @@ func (o *BrokerageAuthorization) SetDisabled(v bool) {
 }
 
 // GetDisabledDate returns the DisabledDate field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BrokerageAuthorization) GetDisabledDate() string {
+func (o *BrokerageAuthorization) GetDisabledDate() time.Time {
 	if o == nil || isNil(o.DisabledDate.Get()) {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.DisabledDate.Get()
@@ -289,7 +298,7 @@ func (o *BrokerageAuthorization) GetDisabledDate() string {
 // GetDisabledDateOk returns a tuple with the DisabledDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BrokerageAuthorization) GetDisabledDateOk() (*string, bool) {
+func (o *BrokerageAuthorization) GetDisabledDateOk() (*time.Time, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -305,8 +314,8 @@ func (o *BrokerageAuthorization) HasDisabledDate() bool {
 	return false
 }
 
-// SetDisabledDate gets a reference to the given NullableString and assigns it to the DisabledDate field.
-func (o *BrokerageAuthorization) SetDisabledDate(v string) {
+// SetDisabledDate gets a reference to the given NullableTime and assigns it to the DisabledDate field.
+func (o *BrokerageAuthorization) SetDisabledDate(v time.Time) {
 	o.DisabledDate.Set(&v)
 }
 // SetDisabledDateNil sets the value for DisabledDate to be an explicit nil
@@ -320,6 +329,7 @@ func (o *BrokerageAuthorization) UnsetDisabledDate() {
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
+// Deprecated
 func (o *BrokerageAuthorization) GetMeta() map[string]interface{} {
 	if o == nil || isNil(o.Meta) {
 		var ret map[string]interface{}
@@ -330,6 +340,7 @@ func (o *BrokerageAuthorization) GetMeta() map[string]interface{} {
 
 // GetMetaOk returns a tuple with the Meta field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *BrokerageAuthorization) GetMetaOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Meta) {
     return map[string]interface{}{}, false
@@ -347,6 +358,7 @@ func (o *BrokerageAuthorization) HasMeta() bool {
 }
 
 // SetMeta gets a reference to the given map[string]interface{} and assigns it to the Meta field.
+// Deprecated
 func (o *BrokerageAuthorization) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }

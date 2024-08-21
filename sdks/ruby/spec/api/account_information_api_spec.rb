@@ -115,7 +115,7 @@ describe 'AccountInformationApi' do
 
   # unit tests for list_user_accounts
   # List accounts
-  # Returns all brokerage accounts known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+  # Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

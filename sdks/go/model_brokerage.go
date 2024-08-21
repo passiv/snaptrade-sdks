@@ -15,31 +15,45 @@ import (
 	"encoding/json"
 )
 
-// Brokerage struct for Brokerage
+// Brokerage Describes a brokerage that SnapTrade supports.
 type Brokerage struct {
+	// Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+	Slug *string `json:"slug,omitempty"`
 	// Full name of the brokerage.
 	Name *string `json:"name,omitempty"`
 	// A display-friendly name of the brokerage.
 	DisplayName *string `json:"display_name,omitempty"`
+	// A brief description of the brokerage.
 	Description *string `json:"description,omitempty"`
+	// URL to the brokerage's logo.
 	AwsS3LogoUrl *string `json:"aws_s3_logo_url,omitempty"`
+	// URL to the brokerage's logo in square format.
 	AwsS3SquareLogoUrl NullableString `json:"aws_s3_square_logo_url,omitempty"`
+	// This field is deprecated.
+	// Deprecated
 	OpenUrl NullableString `json:"open_url,omitempty"`
-	// A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
-	Slug *string `json:"slug,omitempty"`
+	// URL to the brokerage's website.
 	Url *string `json:"url,omitempty"`
+	// Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
 	Enabled *bool `json:"enabled,omitempty"`
+	// Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
 	MaintenanceMode *bool `json:"maintenance_mode,omitempty"`
+	// This field is deprecated. Please contact us if you have a valid use case for it.
+	// Deprecated
 	AllowsFractionalUnits NullableBool `json:"allows_fractional_units,omitempty"`
+	// Whether the brokerage allows trading through SnapTrade.
 	AllowsTrading NullableBool `json:"allows_trading,omitempty"`
+	// This field is deprecated. Please contact us if you have a valid use case for it.
+	// Deprecated
 	HasReporting NullableBool `json:"has_reporting,omitempty"`
+	// This field is deprecated. Please contact us if you have a valid use case for it.
+	// Deprecated
 	IsRealTimeConnection *bool `json:"is_real_time_connection,omitempty"`
-	AllowsTradingThroughSnaptradeApi NullableBool `json:"allows_trading_through_snaptrade_api,omitempty"`
-	IsScrapingIntegration *bool `json:"is_scraping_integration,omitempty"`
-	DefaultCurrency *string `json:"default_currency,omitempty"`
 	BrokerageType *BrokerageType `json:"brokerage_type,omitempty"`
-	// List of exchange ID supported by brokerage
+	// This field is deprecated. Please contact us if you have a valid use case for it.
+	// Deprecated
 	Exchanges []interface{} `json:"exchanges,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -93,6 +107,38 @@ func (o *Brokerage) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Brokerage) SetId(v string) {
 	o.Id = &v
+}
+
+// GetSlug returns the Slug field value if set, zero value otherwise.
+func (o *Brokerage) GetSlug() string {
+	if o == nil || isNil(o.Slug) {
+		var ret string
+		return ret
+	}
+	return *o.Slug
+}
+
+// GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Brokerage) GetSlugOk() (*string, bool) {
+	if o == nil || isNil(o.Slug) {
+    return nil, false
+	}
+	return o.Slug, true
+}
+
+// HasSlug returns a boolean if a field has been set.
+func (o *Brokerage) HasSlug() bool {
+	if o != nil && !isNil(o.Slug) {
+		return true
+	}
+
+	return false
+}
+
+// SetSlug gets a reference to the given string and assigns it to the Slug field.
+func (o *Brokerage) SetSlug(v string) {
+	o.Slug = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -266,6 +312,7 @@ func (o *Brokerage) UnsetAwsS3SquareLogoUrl() {
 }
 
 // GetOpenUrl returns the OpenUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Brokerage) GetOpenUrl() string {
 	if o == nil || isNil(o.OpenUrl.Get()) {
 		var ret string
@@ -277,6 +324,7 @@ func (o *Brokerage) GetOpenUrl() string {
 // GetOpenUrlOk returns a tuple with the OpenUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Brokerage) GetOpenUrlOk() (*string, bool) {
 	if o == nil {
     return nil, false
@@ -294,6 +342,7 @@ func (o *Brokerage) HasOpenUrl() bool {
 }
 
 // SetOpenUrl gets a reference to the given NullableString and assigns it to the OpenUrl field.
+// Deprecated
 func (o *Brokerage) SetOpenUrl(v string) {
 	o.OpenUrl.Set(&v)
 }
@@ -305,38 +354,6 @@ func (o *Brokerage) SetOpenUrlNil() {
 // UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
 func (o *Brokerage) UnsetOpenUrl() {
 	o.OpenUrl.Unset()
-}
-
-// GetSlug returns the Slug field value if set, zero value otherwise.
-func (o *Brokerage) GetSlug() string {
-	if o == nil || isNil(o.Slug) {
-		var ret string
-		return ret
-	}
-	return *o.Slug
-}
-
-// GetSlugOk returns a tuple with the Slug field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Brokerage) GetSlugOk() (*string, bool) {
-	if o == nil || isNil(o.Slug) {
-    return nil, false
-	}
-	return o.Slug, true
-}
-
-// HasSlug returns a boolean if a field has been set.
-func (o *Brokerage) HasSlug() bool {
-	if o != nil && !isNil(o.Slug) {
-		return true
-	}
-
-	return false
-}
-
-// SetSlug gets a reference to the given string and assigns it to the Slug field.
-func (o *Brokerage) SetSlug(v string) {
-	o.Slug = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise.
@@ -436,6 +453,7 @@ func (o *Brokerage) SetMaintenanceMode(v bool) {
 }
 
 // GetAllowsFractionalUnits returns the AllowsFractionalUnits field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Brokerage) GetAllowsFractionalUnits() bool {
 	if o == nil || isNil(o.AllowsFractionalUnits.Get()) {
 		var ret bool
@@ -447,6 +465,7 @@ func (o *Brokerage) GetAllowsFractionalUnits() bool {
 // GetAllowsFractionalUnitsOk returns a tuple with the AllowsFractionalUnits field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Brokerage) GetAllowsFractionalUnitsOk() (*bool, bool) {
 	if o == nil {
     return nil, false
@@ -464,6 +483,7 @@ func (o *Brokerage) HasAllowsFractionalUnits() bool {
 }
 
 // SetAllowsFractionalUnits gets a reference to the given NullableBool and assigns it to the AllowsFractionalUnits field.
+// Deprecated
 func (o *Brokerage) SetAllowsFractionalUnits(v bool) {
 	o.AllowsFractionalUnits.Set(&v)
 }
@@ -520,6 +540,7 @@ func (o *Brokerage) UnsetAllowsTrading() {
 }
 
 // GetHasReporting returns the HasReporting field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *Brokerage) GetHasReporting() bool {
 	if o == nil || isNil(o.HasReporting.Get()) {
 		var ret bool
@@ -531,6 +552,7 @@ func (o *Brokerage) GetHasReporting() bool {
 // GetHasReportingOk returns a tuple with the HasReporting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *Brokerage) GetHasReportingOk() (*bool, bool) {
 	if o == nil {
     return nil, false
@@ -548,6 +570,7 @@ func (o *Brokerage) HasHasReporting() bool {
 }
 
 // SetHasReporting gets a reference to the given NullableBool and assigns it to the HasReporting field.
+// Deprecated
 func (o *Brokerage) SetHasReporting(v bool) {
 	o.HasReporting.Set(&v)
 }
@@ -562,6 +585,7 @@ func (o *Brokerage) UnsetHasReporting() {
 }
 
 // GetIsRealTimeConnection returns the IsRealTimeConnection field value if set, zero value otherwise.
+// Deprecated
 func (o *Brokerage) GetIsRealTimeConnection() bool {
 	if o == nil || isNil(o.IsRealTimeConnection) {
 		var ret bool
@@ -572,6 +596,7 @@ func (o *Brokerage) GetIsRealTimeConnection() bool {
 
 // GetIsRealTimeConnectionOk returns a tuple with the IsRealTimeConnection field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Brokerage) GetIsRealTimeConnectionOk() (*bool, bool) {
 	if o == nil || isNil(o.IsRealTimeConnection) {
     return nil, false
@@ -589,114 +614,9 @@ func (o *Brokerage) HasIsRealTimeConnection() bool {
 }
 
 // SetIsRealTimeConnection gets a reference to the given bool and assigns it to the IsRealTimeConnection field.
+// Deprecated
 func (o *Brokerage) SetIsRealTimeConnection(v bool) {
 	o.IsRealTimeConnection = &v
-}
-
-// GetAllowsTradingThroughSnaptradeApi returns the AllowsTradingThroughSnaptradeApi field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Brokerage) GetAllowsTradingThroughSnaptradeApi() bool {
-	if o == nil || isNil(o.AllowsTradingThroughSnaptradeApi.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowsTradingThroughSnaptradeApi.Get()
-}
-
-// GetAllowsTradingThroughSnaptradeApiOk returns a tuple with the AllowsTradingThroughSnaptradeApi field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Brokerage) GetAllowsTradingThroughSnaptradeApiOk() (*bool, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.AllowsTradingThroughSnaptradeApi.Get(), o.AllowsTradingThroughSnaptradeApi.IsSet()
-}
-
-// HasAllowsTradingThroughSnaptradeApi returns a boolean if a field has been set.
-func (o *Brokerage) HasAllowsTradingThroughSnaptradeApi() bool {
-	if o != nil && o.AllowsTradingThroughSnaptradeApi.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowsTradingThroughSnaptradeApi gets a reference to the given NullableBool and assigns it to the AllowsTradingThroughSnaptradeApi field.
-func (o *Brokerage) SetAllowsTradingThroughSnaptradeApi(v bool) {
-	o.AllowsTradingThroughSnaptradeApi.Set(&v)
-}
-// SetAllowsTradingThroughSnaptradeApiNil sets the value for AllowsTradingThroughSnaptradeApi to be an explicit nil
-func (o *Brokerage) SetAllowsTradingThroughSnaptradeApiNil() {
-	o.AllowsTradingThroughSnaptradeApi.Set(nil)
-}
-
-// UnsetAllowsTradingThroughSnaptradeApi ensures that no value is present for AllowsTradingThroughSnaptradeApi, not even an explicit nil
-func (o *Brokerage) UnsetAllowsTradingThroughSnaptradeApi() {
-	o.AllowsTradingThroughSnaptradeApi.Unset()
-}
-
-// GetIsScrapingIntegration returns the IsScrapingIntegration field value if set, zero value otherwise.
-func (o *Brokerage) GetIsScrapingIntegration() bool {
-	if o == nil || isNil(o.IsScrapingIntegration) {
-		var ret bool
-		return ret
-	}
-	return *o.IsScrapingIntegration
-}
-
-// GetIsScrapingIntegrationOk returns a tuple with the IsScrapingIntegration field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Brokerage) GetIsScrapingIntegrationOk() (*bool, bool) {
-	if o == nil || isNil(o.IsScrapingIntegration) {
-    return nil, false
-	}
-	return o.IsScrapingIntegration, true
-}
-
-// HasIsScrapingIntegration returns a boolean if a field has been set.
-func (o *Brokerage) HasIsScrapingIntegration() bool {
-	if o != nil && !isNil(o.IsScrapingIntegration) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsScrapingIntegration gets a reference to the given bool and assigns it to the IsScrapingIntegration field.
-func (o *Brokerage) SetIsScrapingIntegration(v bool) {
-	o.IsScrapingIntegration = &v
-}
-
-// GetDefaultCurrency returns the DefaultCurrency field value if set, zero value otherwise.
-func (o *Brokerage) GetDefaultCurrency() string {
-	if o == nil || isNil(o.DefaultCurrency) {
-		var ret string
-		return ret
-	}
-	return *o.DefaultCurrency
-}
-
-// GetDefaultCurrencyOk returns a tuple with the DefaultCurrency field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Brokerage) GetDefaultCurrencyOk() (*string, bool) {
-	if o == nil || isNil(o.DefaultCurrency) {
-    return nil, false
-	}
-	return o.DefaultCurrency, true
-}
-
-// HasDefaultCurrency returns a boolean if a field has been set.
-func (o *Brokerage) HasDefaultCurrency() bool {
-	if o != nil && !isNil(o.DefaultCurrency) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultCurrency gets a reference to the given string and assigns it to the DefaultCurrency field.
-func (o *Brokerage) SetDefaultCurrency(v string) {
-	o.DefaultCurrency = &v
 }
 
 // GetBrokerageType returns the BrokerageType field value if set, zero value otherwise.
@@ -732,6 +652,7 @@ func (o *Brokerage) SetBrokerageType(v BrokerageType) {
 }
 
 // GetExchanges returns the Exchanges field value if set, zero value otherwise.
+// Deprecated
 func (o *Brokerage) GetExchanges() []interface{} {
 	if o == nil || isNil(o.Exchanges) {
 		var ret []interface{}
@@ -742,6 +663,7 @@ func (o *Brokerage) GetExchanges() []interface{} {
 
 // GetExchangesOk returns a tuple with the Exchanges field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *Brokerage) GetExchangesOk() ([]interface{}, bool) {
 	if o == nil || isNil(o.Exchanges) {
     return nil, false
@@ -759,6 +681,7 @@ func (o *Brokerage) HasExchanges() bool {
 }
 
 // SetExchanges gets a reference to the given []interface{} and assigns it to the Exchanges field.
+// Deprecated
 func (o *Brokerage) SetExchanges(v []interface{}) {
 	o.Exchanges = v
 }
@@ -767,6 +690,9 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
+	}
+	if !isNil(o.Slug) {
+		toSerialize["slug"] = o.Slug
 	}
 	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
@@ -785,9 +711,6 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	}
 	if o.OpenUrl.IsSet() {
 		toSerialize["open_url"] = o.OpenUrl.Get()
-	}
-	if !isNil(o.Slug) {
-		toSerialize["slug"] = o.Slug
 	}
 	if !isNil(o.Url) {
 		toSerialize["url"] = o.Url
@@ -809,15 +732,6 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.IsRealTimeConnection) {
 		toSerialize["is_real_time_connection"] = o.IsRealTimeConnection
-	}
-	if o.AllowsTradingThroughSnaptradeApi.IsSet() {
-		toSerialize["allows_trading_through_snaptrade_api"] = o.AllowsTradingThroughSnaptradeApi.Get()
-	}
-	if !isNil(o.IsScrapingIntegration) {
-		toSerialize["is_scraping_integration"] = o.IsScrapingIntegration
-	}
-	if !isNil(o.DefaultCurrency) {
-		toSerialize["default_currency"] = o.DefaultCurrency
 	}
 	if !isNil(o.BrokerageType) {
 		toSerialize["brokerage_type"] = o.BrokerageType
@@ -844,13 +758,13 @@ func (o *Brokerage) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
+		delete(additionalProperties, "slug")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "display_name")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "aws_s3_logo_url")
 		delete(additionalProperties, "aws_s3_square_logo_url")
 		delete(additionalProperties, "open_url")
-		delete(additionalProperties, "slug")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "maintenance_mode")
@@ -858,9 +772,6 @@ func (o *Brokerage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "allows_trading")
 		delete(additionalProperties, "has_reporting")
 		delete(additionalProperties, "is_real_time_connection")
-		delete(additionalProperties, "allows_trading_through_snaptrade_api")
-		delete(additionalProperties, "is_scraping_integration")
-		delete(additionalProperties, "default_currency")
 		delete(additionalProperties, "brokerage_type")
 		delete(additionalProperties, "exchanges")
 		o.AdditionalProperties = additionalProperties

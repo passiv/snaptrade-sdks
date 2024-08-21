@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Type of brokerage
+  # Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
   class BrokerageType
     attr_accessor :id
 

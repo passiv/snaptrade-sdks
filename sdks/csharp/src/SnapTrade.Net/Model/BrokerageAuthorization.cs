@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// BrokerageAuthorization
+    /// A single connection with a brokerage. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
     /// </summary>
     [DataContract(Name = "BrokerageAuthorization")]
     public partial class BrokerageAuthorization : IEquatable<BrokerageAuthorization>, IValidatableObject
@@ -35,16 +35,16 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageAuthorization" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="createdDate">Time.</param>
-        /// <param name="updatedDate">Time.</param>
+        /// <param name="id">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade..</param>
+        /// <param name="createdDate">Timestamp of when the connection was established in SnapTrade..</param>
+        /// <param name="updatedDate">Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field..</param>
         /// <param name="brokerage">brokerage.</param>
-        /// <param name="name">Connection Name.</param>
-        /// <param name="type">type.</param>
-        /// <param name="disabled">disabled.</param>
-        /// <param name="disabledDate">Disabled date.</param>
-        /// <param name="meta">Additional data about brokerage authorization.</param>
-        public BrokerageAuthorization(string id = default(string), string createdDate = default(string), string updatedDate = default(string), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), string disabledDate = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        /// <param name="name">A short, human-readable name for the connection..</param>
+        /// <param name="type">Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are &#x60;read&#x60; and &#x60;trade&#x60;..</param>
+        /// <param name="disabled">Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection. .</param>
+        /// <param name="disabledDate">Timestamp of when the connection was disabled in SnapTrade..</param>
+        /// <param name="meta">Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
+        public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), DateTime updatedDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
         {
             this.Id = id;
             this.CreatedDate = createdDate;
@@ -59,24 +59,26 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Time
+        /// Timestamp of when the connection was established in SnapTrade.
         /// </summary>
-        /// <value>Time</value>
+        /// <value>Timestamp of when the connection was established in SnapTrade.</value>
         [DataMember(Name = "created_date", EmitDefaultValue = false)]
-        public string CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         /// <summary>
-        /// Time
+        /// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
         /// </summary>
-        /// <value>Time</value>
+        /// <value>Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.</value>
         [DataMember(Name = "updated_date", EmitDefaultValue = false)]
-        public string UpdatedDate { get; set; }
+        [Obsolete]
+        public DateTime UpdatedDate { get; set; }
 
         /// <summary>
         /// Gets or Sets Brokerage
@@ -85,36 +87,39 @@ namespace SnapTrade.Net.Model
         public Brokerage Brokerage { get; set; }
 
         /// <summary>
-        /// Connection Name
+        /// A short, human-readable name for the connection.
         /// </summary>
-        /// <value>Connection Name</value>
+        /// <value>A short, human-readable name for the connection.</value>
         [DataMember(Name = "name", EmitDefaultValue = false)]
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are &#x60;read&#x60; and &#x60;trade&#x60;.
         /// </summary>
+        /// <value>Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are &#x60;read&#x60; and &#x60;trade&#x60;.</value>
         [DataMember(Name = "type", EmitDefaultValue = false)]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or Sets Disabled
+        /// Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection. 
         /// </summary>
+        /// <value>Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection. </value>
         [DataMember(Name = "disabled", EmitDefaultValue = true)]
         public bool Disabled { get; set; }
 
         /// <summary>
-        /// Disabled date
+        /// Timestamp of when the connection was disabled in SnapTrade.
         /// </summary>
-        /// <value>Disabled date</value>
+        /// <value>Timestamp of when the connection was disabled in SnapTrade.</value>
         [DataMember(Name = "disabled_date", EmitDefaultValue = true)]
-        public string DisabledDate { get; set; }
+        public DateTime? DisabledDate { get; set; }
 
         /// <summary>
-        /// Additional data about brokerage authorization
+        /// Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.
         /// </summary>
-        /// <value>Additional data about brokerage authorization</value>
+        /// <value>Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.</value>
         [DataMember(Name = "meta", EmitDefaultValue = false)]
+        [Obsolete]
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>

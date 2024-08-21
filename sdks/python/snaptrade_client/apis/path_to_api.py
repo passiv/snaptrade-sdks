@@ -19,6 +19,13 @@ from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
 from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
+from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
+from snaptrade_client.apis.paths.accounts_account_id_options_chain import AccountsAccountIdOptionsChain
+from snaptrade_client.apis.paths.accounts_account_id_option_strategy import AccountsAccountIdOptionStrategy
+from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_strategy_id import AccountsAccountIdOptionStrategyOptionStrategyId
+from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_strategy_id_execute import AccountsAccountIdOptionStrategyOptionStrategyIdExecute
+from snaptrade_client.apis.paths.activities import Activities
+from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
 from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
@@ -26,11 +33,6 @@ from snaptrade_client.apis.paths.trade_place import TradePlace
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
-from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
-from snaptrade_client.apis.paths.accounts_account_id_options_chain import AccountsAccountIdOptionsChain
-from snaptrade_client.apis.paths.accounts_account_id_option_strategy import AccountsAccountIdOptionStrategy
-from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_strategy_id import AccountsAccountIdOptionStrategyOptionStrategyId
-from snaptrade_client.apis.paths.accounts_account_id_option_strategy_option_strategy_id_execute import AccountsAccountIdOptionStrategyOptionStrategyIdExecute
 from snaptrade_client.apis.paths.brokerages import Brokerages
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
 from snaptrade_client.apis.paths.currencies import Currencies
@@ -40,8 +42,6 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
-from snaptrade_client.apis.paths.activities import Activities
-from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -64,6 +64,13 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID: AccountsAccountIdOptionStrategyOptionStrategyId,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
+        PathValues.ACTIVITIES: Activities,
+        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
@@ -71,11 +78,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID: AccountsAccountIdOptionStrategyOptionStrategyId,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
@@ -85,8 +87,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACTIVITIES: Activities,
-        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
     }
 )
 
@@ -110,6 +110,13 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID: AccountsAccountIdOptionStrategyOptionStrategyId,
+        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
+        PathValues.ACTIVITIES: Activities,
+        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
@@ -117,11 +124,6 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID: AccountsAccountIdOptionStrategyOptionStrategyId,
-        PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY_OPTION_STRATEGY_ID_EXECUTE: AccountsAccountIdOptionStrategyOptionStrategyIdExecute,
         PathValues.BROKERAGES: Brokerages,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
@@ -131,7 +133,5 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACTIVITIES: Activities,
-        PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
     }
 )

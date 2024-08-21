@@ -4,11 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
-| [**disableBrokerageAuthorization**](ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Manually disable a connection for testing |
-| [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
+| [**detailBrokerageAuthorization**](ConnectionsApi.md#detailBrokerageAuthorization) | **GET** /authorizations/{authorizationId} | Get connection detail |
+| [**disableBrokerageAuthorization**](ConnectionsApi.md#disableBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
+| [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
 | [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
-| [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
+| [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
 | [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 
 
@@ -16,9 +16,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 # **detailBrokerageAuthorization**
 > BrokerageAuthorization detailBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
-Get brokerage authorization details
+Get connection detail
 
-Returns a single brokerage authorization object for the specified ID.
+Returns a single connection for the specified ID.
 
 ### Example
 ```java
@@ -42,7 +42,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID(); // The ID of a brokerage authorization object.
+    UUID authorizationId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
@@ -95,7 +95,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**| The ID of a brokerage authorization object. | |
+| **authorizationId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 
@@ -115,16 +115,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Authorization object for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="disableBrokerageAuthorization"></a>
 # **disableBrokerageAuthorization**
 > BrokerageAuthorizationDisabledConfirmation disableBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
-Manually disable a connection for testing
+Force disable connection
 
-Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
 
 ### Example
 ```java
@@ -148,7 +148,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID(); // The ID of a brokerage authorization object.
+    UUID authorizationId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
@@ -193,7 +193,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**| The ID of a brokerage authorization object. | |
+| **authorizationId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 
@@ -213,15 +213,15 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Confirmation that the connection has been disabled |  -  |
+| **200** | OK |  -  |
 
 <a name="listBrokerageAuthorizations"></a>
 # **listBrokerageAuthorizations**
 > List&lt;BrokerageAuthorization&gt; listBrokerageAuthorizations(userId, userSecret).execute();
 
-List all brokerage authorizations for the User
+List all connections
 
-Returns a list of Brokerage Authorization objects for the user
+Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
 
 ### Example
 ```java
@@ -307,7 +307,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all Authorization objects for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 <a name="refreshBrokerageAuthorization"></a>
@@ -316,7 +316,7 @@ public class Example {
 
 Refresh holdings for a connection
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
 
 ### Example
 ```java
@@ -340,7 +340,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID(); // The ID of a brokerage authorization object.
+    UUID authorizationId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
@@ -385,7 +385,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**| The ID of a brokerage authorization object. | |
+| **authorizationId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 
@@ -405,15 +405,15 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Confirmation that the syncs have been scheduled |  -  |
+| **200** | OK |  -  |
 
 <a name="removeBrokerageAuthorization"></a>
 # **removeBrokerageAuthorization**
 > removeBrokerageAuthorization(authorizationId, userId, userSecret).execute();
 
-Delete brokerage authorization
+Delete connection
 
-Deletes a specified brokerage authorization given by the ID.
+Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
 ### Example
 ```java
@@ -437,7 +437,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID authorizationId = UUID.randomUUID(); // The ID of the Authorization to delete.
+    UUID authorizationId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
@@ -475,7 +475,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **authorizationId** | **UUID**| The ID of the Authorization to delete. | |
+| **authorizationId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 
@@ -495,10 +495,10 @@ null (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Brokerage authorization object has been successfully deleted |  -  |
-| **400** | The specified authorizationId is invalid (not a UUID string). |  -  |
-| **404** | The specified authorizationId was not found. |  -  |
-| **0** | Unexpected error. |  -  |
+| **204** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **0** | Unexpected error |  -  |
 
 <a name="sessionEvents"></a>
 # **sessionEvents**

@@ -11,8 +11,13 @@ require 'date'
 require 'time'
 
 module SnapTrade
+  # Describes a brokerage that SnapTrade supports.
   class Brokerage
+    # Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
     attr_accessor :id
+
+    # A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    attr_accessor :slug
 
     # Full name of the brokerage.
     attr_accessor :name
@@ -20,53 +25,55 @@ module SnapTrade
     # A display-friendly name of the brokerage.
     attr_accessor :display_name
 
+    # A brief description of the brokerage.
     attr_accessor :description
 
+    # URL to the brokerage's logo.
     attr_accessor :aws_s3_logo_url
 
+    # URL to the brokerage's logo in square format.
     attr_accessor :aws_s3_square_logo_url
 
+    # This field is deprecated.
     attr_accessor :open_url
 
-    # A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
-    attr_accessor :slug
-
+    # URL to the brokerage's website.
     attr_accessor :url
 
+    # Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
     attr_accessor :enabled
 
+    # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     attr_accessor :maintenance_mode
 
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :allows_fractional_units
 
+    # Whether the brokerage allows trading through SnapTrade.
     attr_accessor :allows_trading
 
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :has_reporting
 
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :is_real_time_connection
-
-    attr_accessor :allows_trading_through_snaptrade_api
-
-    attr_accessor :is_scraping_integration
-
-    attr_accessor :default_currency
 
     attr_accessor :brokerage_type
 
-    # List of exchange ID supported by brokerage
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :exchanges
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
+        :'slug' => :'slug',
         :'name' => :'name',
         :'display_name' => :'display_name',
         :'description' => :'description',
         :'aws_s3_logo_url' => :'aws_s3_logo_url',
         :'aws_s3_square_logo_url' => :'aws_s3_square_logo_url',
         :'open_url' => :'open_url',
-        :'slug' => :'slug',
         :'url' => :'url',
         :'enabled' => :'enabled',
         :'maintenance_mode' => :'maintenance_mode',
@@ -74,9 +81,6 @@ module SnapTrade
         :'allows_trading' => :'allows_trading',
         :'has_reporting' => :'has_reporting',
         :'is_real_time_connection' => :'is_real_time_connection',
-        :'allows_trading_through_snaptrade_api' => :'allows_trading_through_snaptrade_api',
-        :'is_scraping_integration' => :'is_scraping_integration',
-        :'default_currency' => :'default_currency',
         :'brokerage_type' => :'brokerage_type',
         :'exchanges' => :'exchanges'
       }
@@ -91,13 +95,13 @@ module SnapTrade
     def self.openapi_types
       {
         :'id' => :'String',
+        :'slug' => :'String',
         :'name' => :'String',
         :'display_name' => :'String',
         :'description' => :'String',
         :'aws_s3_logo_url' => :'String',
         :'aws_s3_square_logo_url' => :'String',
         :'open_url' => :'String',
-        :'slug' => :'String',
         :'url' => :'String',
         :'enabled' => :'Boolean',
         :'maintenance_mode' => :'Boolean',
@@ -105,9 +109,6 @@ module SnapTrade
         :'allows_trading' => :'Boolean',
         :'has_reporting' => :'Boolean',
         :'is_real_time_connection' => :'Boolean',
-        :'allows_trading_through_snaptrade_api' => :'Boolean',
-        :'is_scraping_integration' => :'Boolean',
-        :'default_currency' => :'String',
         :'brokerage_type' => :'BrokerageType',
         :'exchanges' => :'Array<Object>'
       }
@@ -121,7 +122,6 @@ module SnapTrade
         :'allows_fractional_units',
         :'allows_trading',
         :'has_reporting',
-        :'allows_trading_through_snaptrade_api',
       ])
     end
 
@@ -142,6 +142,10 @@ module SnapTrade
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'slug')
+        self.slug = attributes[:'slug']
       end
 
       if attributes.key?(:'name')
@@ -166,10 +170,6 @@ module SnapTrade
 
       if attributes.key?(:'open_url')
         self.open_url = attributes[:'open_url']
-      end
-
-      if attributes.key?(:'slug')
-        self.slug = attributes[:'slug']
       end
 
       if attributes.key?(:'url')
@@ -198,18 +198,6 @@ module SnapTrade
 
       if attributes.key?(:'is_real_time_connection')
         self.is_real_time_connection = attributes[:'is_real_time_connection']
-      end
-
-      if attributes.key?(:'allows_trading_through_snaptrade_api')
-        self.allows_trading_through_snaptrade_api = attributes[:'allows_trading_through_snaptrade_api']
-      end
-
-      if attributes.key?(:'is_scraping_integration')
-        self.is_scraping_integration = attributes[:'is_scraping_integration']
-      end
-
-      if attributes.key?(:'default_currency')
-        self.default_currency = attributes[:'default_currency']
       end
 
       if attributes.key?(:'brokerage_type')
@@ -242,13 +230,13 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          slug == o.slug &&
           name == o.name &&
           display_name == o.display_name &&
           description == o.description &&
           aws_s3_logo_url == o.aws_s3_logo_url &&
           aws_s3_square_logo_url == o.aws_s3_square_logo_url &&
           open_url == o.open_url &&
-          slug == o.slug &&
           url == o.url &&
           enabled == o.enabled &&
           maintenance_mode == o.maintenance_mode &&
@@ -256,9 +244,6 @@ module SnapTrade
           allows_trading == o.allows_trading &&
           has_reporting == o.has_reporting &&
           is_real_time_connection == o.is_real_time_connection &&
-          allows_trading_through_snaptrade_api == o.allows_trading_through_snaptrade_api &&
-          is_scraping_integration == o.is_scraping_integration &&
-          default_currency == o.default_currency &&
           brokerage_type == o.brokerage_type &&
           exchanges == o.exchanges
     end
@@ -272,7 +257,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, open_url, slug, url, enabled, maintenance_mode, allows_fractional_units, allows_trading, has_reporting, is_real_time_connection, allows_trading_through_snaptrade_api, is_scraping_integration, default_currency, brokerage_type, exchanges].hash
+      [id, slug, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, open_url, url, enabled, maintenance_mode, allows_fractional_units, allows_trading, has_reporting, is_real_time_connection, brokerage_type, exchanges].hash
     end
 
     # Builds the object from hash

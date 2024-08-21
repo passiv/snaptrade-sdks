@@ -46,9 +46,9 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns a single brokerage authorization object for the specified ID.
-         * @summary Get brokerage authorization details
-         * @param {string} authorizationId The ID of a brokerage authorization object.
+         * Returns a single connection for the specified ID.
+         * @summary Get connection detail
+         * @param {string} authorizationId 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -108,9 +108,9 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-         * @summary Manually disable a connection for testing
-         * @param {string} authorizationId The ID of a brokerage authorization object.
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * @summary Force disable connection
+         * @param {string} authorizationId 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -170,8 +170,8 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Returns a list of Brokerage Authorization objects for the user
-         * @summary List all brokerage authorizations for the User
+         * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
+         * @summary List all connections
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -228,9 +228,9 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
          * @summary Refresh holdings for a connection
-         * @param {string} authorizationId The ID of a brokerage authorization object.
+         * @param {string} authorizationId 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -290,9 +290,9 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Deletes a specified brokerage authorization given by the ID.
-         * @summary Delete brokerage authorization
-         * @param {string} authorizationId The ID of the Authorization to delete.
+         * Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+         * @summary Delete connection
+         * @param {string} authorizationId 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {*} [options] Override http request option.
@@ -423,8 +423,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConnectionsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns a single brokerage authorization object for the specified ID.
-         * @summary Get brokerage authorization details
+         * Returns a single connection for the specified ID.
+         * @summary Get connection detail
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -434,8 +434,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-         * @summary Manually disable a connection for testing
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * @summary Force disable connection
          * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -445,8 +445,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of Brokerage Authorization objects for the user
-         * @summary List all brokerage authorizations for the User
+         * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
+         * @summary List all connections
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -456,7 +456,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -467,8 +467,8 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Deletes a specified brokerage authorization given by the ID.
-         * @summary Delete brokerage authorization
+         * Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+         * @summary Delete connection
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -499,8 +499,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = ConnectionsApiFp(configuration)
     return {
         /**
-         * Returns a single brokerage authorization object for the specified ID.
-         * @summary Get brokerage authorization details
+         * Returns a single connection for the specified ID.
+         * @summary Get connection detail
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -509,8 +509,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.detailBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-         * @summary Manually disable a connection for testing
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * @summary Force disable connection
          * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -519,8 +519,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.disableBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of Brokerage Authorization objects for the user
-         * @summary List all brokerage authorizations for the User
+         * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
+         * @summary List all connections
          * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -529,7 +529,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.listBrokerageAuthorizations(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -539,8 +539,8 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.refreshBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Deletes a specified brokerage authorization given by the ID.
-         * @summary Delete brokerage authorization
+         * Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+         * @summary Delete connection
          * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -569,7 +569,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
 export type ConnectionsApiDetailBrokerageAuthorizationRequest = {
     
     /**
-    * The ID of a brokerage authorization object.
+    * 
     * @type {string}
     * @memberof ConnectionsApiDetailBrokerageAuthorization
     */
@@ -599,7 +599,7 @@ export type ConnectionsApiDetailBrokerageAuthorizationRequest = {
 export type ConnectionsApiDisableBrokerageAuthorizationRequest = {
     
     /**
-    * The ID of a brokerage authorization object.
+    * 
     * @type {string}
     * @memberof ConnectionsApiDisableBrokerageAuthorization
     */
@@ -652,7 +652,7 @@ export type ConnectionsApiListBrokerageAuthorizationsRequest = {
 export type ConnectionsApiRefreshBrokerageAuthorizationRequest = {
     
     /**
-    * The ID of a brokerage authorization object.
+    * 
     * @type {string}
     * @memberof ConnectionsApiRefreshBrokerageAuthorization
     */
@@ -682,7 +682,7 @@ export type ConnectionsApiRefreshBrokerageAuthorizationRequest = {
 export type ConnectionsApiRemoveBrokerageAuthorizationRequest = {
     
     /**
-    * The ID of the Authorization to delete.
+    * 
     * @type {string}
     * @memberof ConnectionsApiRemoveBrokerageAuthorization
     */
@@ -742,8 +742,8 @@ export type ConnectionsApiSessionEventsRequest = {
  */
 export class ConnectionsApiGenerated extends BaseAPI {
     /**
-     * Returns a single brokerage authorization object for the specified ID.
-     * @summary Get brokerage authorization details
+     * Returns a single connection for the specified ID.
+     * @summary Get connection detail
      * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -754,8 +754,8 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-     * @summary Manually disable a connection for testing
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+     * @summary Force disable connection
      * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -766,8 +766,8 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of Brokerage Authorization objects for the user
-     * @summary List all brokerage authorizations for the User
+     * Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
+     * @summary List all connections
      * @param {ConnectionsApiListBrokerageAuthorizationsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -778,7 +778,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
      * @summary Refresh holdings for a connection
      * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -790,8 +790,8 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Deletes a specified brokerage authorization given by the ID.
-     * @summary Delete brokerage authorization
+     * Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+     * @summary Delete connection
      * @param {ConnectionsApiRemoveBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAuthorizationsAuthorizationIdDisable(ApiTestMixin, unittest.TestCase):
     """
     AuthorizationsAuthorizationIdDisable unit test stubs
-        Manually disable a connection for testing
+        Force disable connection
     """
 
     def setUp(self):

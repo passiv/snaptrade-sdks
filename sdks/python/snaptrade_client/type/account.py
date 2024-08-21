@@ -27,7 +27,7 @@ class OptionalAccount(TypedDict, total=False):
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
     id: str
 
-    # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+    # Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
     brokerage_authorization: str
 
     # WARNING: This property is deprecated

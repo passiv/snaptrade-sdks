@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * 
+ * Confirmation that the syncs have been scheduled.
  * @export
  * @interface BrokerageAuthorizationRefreshConfirmation
  */
