@@ -281,6 +281,7 @@ class ListAllCurrenciesRates(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of all Exchange Rate Pairs for all supported Currencies. """
         args = self._list_all_currencies_rates_mapped_args(
         )
         return self._list_all_currencies_rates_oapg(
@@ -309,6 +310,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns a list of all Exchange Rate Pairs for all supported Currencies. """
         args = self._list_all_currencies_rates_mapped_args(
         )
         return self._list_all_currencies_rates_oapg(

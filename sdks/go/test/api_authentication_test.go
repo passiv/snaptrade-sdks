@@ -101,7 +101,7 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         
         userIDandSecret := *snaptrade.NewUserIDandSecret()
         userIDandSecret.SetUserId("snaptrade-user-123")
-        userIDandSecret.SetUserSecret("h81@cx1lkalablakwjaltkejraj11=")
+        userIDandSecret.SetUserSecret("adf2aa34-8219-40f7-a6b3-60156985cc61")
         
         request := client.AuthenticationApi.ResetSnapTradeUserSecret(
             userIDandSecret,

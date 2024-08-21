@@ -481,6 +481,7 @@ class GetUserAccountQuotes(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns quote(s) from the brokerage for the specified symbol(s). """
         args = self._get_user_account_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -541,6 +542,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Returns quote(s) from the brokerage for the specified symbol(s). """
         args = self._get_user_account_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,

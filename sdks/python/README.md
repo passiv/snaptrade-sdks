@@ -148,7 +148,7 @@ async def main():
         get_all_user_holdings_response = (
             await snaptrade.account_information.aget_all_user_holdings(
                 user_id="snaptrade-user-123",
-                user_secret="USERSECRET123",
+                user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
                 brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
             )
         )
@@ -191,7 +191,7 @@ account.
 ```python
 get_all_user_holdings_response = snaptrade.account_information.get_all_user_holdings(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
@@ -231,7 +231,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 get_user_account_balance_response = (
     snaptrade.account_information.get_user_account_balance(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
@@ -270,7 +270,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 get_user_account_details_response = (
     snaptrade.account_information.get_user_account_details(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
@@ -309,7 +309,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 get_user_account_orders_response = (
     snaptrade.account_information.get_user_account_orders(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         state="all",
         days=30,
@@ -358,7 +358,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 get_user_account_positions_response = (
     snaptrade.account_information.get_user_account_positions(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     )
 )
@@ -397,7 +397,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 get_user_holdings_response = snaptrade.account_information.get_user_holdings(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -433,7 +433,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```python
 list_user_accounts_response = snaptrade.account_information.list_user_accounts(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -464,7 +464,7 @@ Updates various properties of a specified account.
 ```python
 update_user_account_response = snaptrade.account_information.update_user_account(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="accountId_example",
 )
 ```
@@ -572,7 +572,7 @@ Logs in a SnapTrade user and returns an authenticated connection portal URL for 
 ```python
 login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     broker="ALPACA",
     immediate_redirect=True,
     custom_redirect="https://snaptrade.com",
@@ -625,8 +625,8 @@ Sets the version of the connection portal to render.
 
 ### `snaptrade.authentication.register_snap_trade_user`<a id="snaptradeauthenticationregister_snap_trade_user"></a>
 
-Registers a new SnapTrade user under your ClientID. A user secret will be automatically generated for you and must be properly stored in your database.
-Most SnapTrade operations require a user ID and user secret to be passed as a parameter.
+Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system.
+Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -669,7 +669,7 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 reset_snap_trade_user_secret_response = (
     snaptrade.authentication.reset_snap_trade_user_secret(
         user_id="snaptrade-user-123",
-        user_secret="h81@cx1lkalablakwjaltkejraj11=",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
@@ -682,7 +682,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
-SnapTrade User Secret randomly generated by SnapTrade. This is privileged information and if compromised, should be rotated via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret)
+SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -710,7 +710,7 @@ detail_brokerage_authorization_response = (
     snaptrade.connections.detail_brokerage_authorization(
         authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
@@ -748,7 +748,7 @@ disable_brokerage_authorization_response = (
     snaptrade.connections.disable_brokerage_authorization(
         authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
@@ -785,7 +785,7 @@ Returns a list of Brokerage Authorization objects for the user
 list_brokerage_authorizations_response = (
     snaptrade.connections.list_brokerage_authorizations(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
@@ -819,7 +819,7 @@ refresh_brokerage_authorization_response = (
     snaptrade.connections.refresh_brokerage_authorization(
         authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
 )
 ```
@@ -856,7 +856,7 @@ Deletes a specified brokerage authorization given by the ID.
 snaptrade.connections.remove_brokerage_authorization(
     authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
 ```
 
@@ -931,7 +931,7 @@ get_option_strategy_response = snaptrade.options.get_option_strategy(
     ],
     strategy_type="CUSTOM",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="accountId_example",
 )
 ```
@@ -976,7 +976,7 @@ Returns the option chain for the specified symbol in the specified account.
 ```python
 get_options_chain_response = snaptrade.options.get_options_chain(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="accountId_example",
     symbol="symbol_example",
 )
@@ -1018,7 +1018,7 @@ Returns a Strategy Quotes object which has latest market data of the specified o
 ```python
 get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="accountId_example",
     option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
@@ -1062,7 +1062,7 @@ The data returned here is cached. How long the data is cached for varies by brok
 ```python
 list_option_holdings_response = snaptrade.options.list_option_holdings(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
 )
 ```
@@ -1098,7 +1098,7 @@ place_option_strategy_response = snaptrade.options.place_option_strategy(
     order_type="Limit",
     time_in_force="FOK",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     price=31.33,
@@ -1415,7 +1415,7 @@ provided search string, matching on ticker and name.
 symbol_search_user_account_response = (
     snaptrade.reference_data.symbol_search_user_account(
         user_id="snaptrade-user-123",
-        user_secret="USERSECRET123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         substring="apple",
     )
@@ -1460,7 +1460,7 @@ This will only work if the order has not yet been executed.
 ```python
 cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
 )
@@ -1504,7 +1504,7 @@ Return the trade object and it's impact on the account for the specified order.
 ```python
 get_order_impact_response = snaptrade.trading.get_order_impact(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     action="BUY",
     order_type="Limit",
@@ -1565,7 +1565,7 @@ Returns quote(s) from the brokerage for the specified symbol(s).
 ```python
 get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     symbols="symbols_example",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     use_ticker=True,
@@ -1611,7 +1611,7 @@ Places a specified trade in the specified account.
 ```python
 place_force_order_response = snaptrade.trading.place_force_order(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     action="BUY",
     order_type="Limit",
@@ -1675,7 +1675,7 @@ returns the status of the order from the brokerage.
 place_order_response = snaptrade.trading.place_order(
     trade_id="tradeId_example",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     wait_to_confirm=True,
 )
 ```
@@ -1723,7 +1723,7 @@ The data returned here is always cached and refreshed once a day. **If you need 
 ```python
 get_activities_response = snaptrade.transactions_and_reporting.get_activities(
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     start_date="2022-01-24",
     end_date="2022-01-24",
     accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
@@ -1782,7 +1782,7 @@ get_reporting_custom_range_response = snaptrade.transactions_and_reporting.get_r
     start_date="2022-01-24",
     end_date="2022-01-24",
     user_id="snaptrade-user-123",
-    user_secret="USERSECRET123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     accounts="917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2",
     detailed=True,
     frequency="monthly",

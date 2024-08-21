@@ -531,6 +531,7 @@ class GetOrderImpact(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Return the trade object and it's impact on the account for the specified order. """
         args = self._get_order_impact_mapped_args(
             body=body,
             query_params=query_params,
@@ -615,6 +616,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
+        """ Return the trade object and it's impact on the account for the specified order. """
         args = self._get_order_impact_mapped_args(
             body=body,
             query_params=query_params,
