@@ -11,6 +11,8 @@ order:
     operations:
       - path: /accounts
         method: get
+  - tag: Options
+  - tag: Transactions And Reporting
   - tag: Trading
     operations:
       - Trading_getUserAccountQuotes
@@ -91,8 +93,6 @@ portal:
     - name: PartnerTimestamp
 filterTags:
   - Webhooks
-  - Development Tools
-  - Custom Brokerage API Credentials
 filterModels:
   - SnapTradePartnerAPICredential
   - WebhookBase
