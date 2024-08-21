@@ -4,11 +4,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get brokerage authorization details |
-| [**DisableBrokerageAuthorization**](ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Manually disable a connection for testing |
-| [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all brokerage authorizations for the User |
+| [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get connection detail |
+| [**DisableBrokerageAuthorization**](ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
+| [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections |
 | [**RefreshBrokerageAuthorization**](ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
-| [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete brokerage authorization |
+| [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user |
 
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 
 
-Returns a single brokerage authorization object for the specified ID.
+Returns a single connection for the specified ID.
 
 ### Example
 ```csharp
@@ -38,13 +38,13 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Get brokerage authorization details
+                // Get connection detail
                 BrokerageAuthorization result = client.Connections.DetailBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -71,7 +71,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get brokerage authorization details
+    // Get connection detail
     ApiResponse<BrokerageAuthorization> response = apiInstance.DetailBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -89,7 +89,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **string** | The ID of a brokerage authorization object. |  |
+| **authorizationId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
@@ -101,7 +101,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Authorization object for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -111,7 +111,7 @@ catch (ApiException e)
 
 
 
-Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
 
 ### Example
 ```csharp
@@ -133,13 +133,13 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Manually disable a connection for testing
+                // Force disable connection
                 BrokerageAuthorizationDisabledConfirmation result = client.Connections.DisableBrokerageAuthorization(authorizationId, userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -166,7 +166,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Manually disable a connection for testing
+    // Force disable connection
     ApiResponse<BrokerageAuthorizationDisabledConfirmation> response = apiInstance.DisableBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -184,7 +184,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **string** | The ID of a brokerage authorization object. |  |
+| **authorizationId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
@@ -196,7 +196,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Confirmation that the connection has been disabled |  -  |
+| **200** | OK |  -  |
 | **401** | Unauthorized, invalid credentials for this resource |  -  |
 | **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
 | **403** | Customer or user does not have access to this feature |  -  |
@@ -209,7 +209,7 @@ catch (ApiException e)
 
 
 
-Returns a list of Brokerage Authorization objects for the user
+Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
 
 ### Example
 ```csharp
@@ -236,7 +236,7 @@ namespace Example
             
             try
             {
-                // List all brokerage authorizations for the User
+                // List all connections
                 List<BrokerageAuthorization> result = client.Connections.ListBrokerageAuthorizations(userId, userSecret);
                 Console.WriteLine(result);
             }
@@ -263,7 +263,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List all brokerage authorizations for the User
+    // List all connections
     ApiResponse<List<BrokerageAuthorization>> response = apiInstance.ListBrokerageAuthorizationsWithHttpInfo(userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -292,7 +292,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all Authorization objects for the authenticated user. |  -  |
+| **200** | OK |  -  |
 | **0** | Unexpected error. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -302,7 +302,7 @@ catch (ApiException e)
 
 
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
 
 ### Example
 ```csharp
@@ -324,7 +324,7 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var authorizationId = "authorizationId_example"; // The ID of a brokerage authorization object.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
@@ -375,7 +375,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **string** | The ID of a brokerage authorization object. |  |
+| **authorizationId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
@@ -387,7 +387,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Confirmation that the syncs have been scheduled |  -  |
+| **200** | OK |  -  |
 | **401** | Unauthorized, invalid credentials for this resource |  -  |
 | **402** | Unable to sync with brokerage account because the connection is disabled. |  -  |
 | **403** | Customer or user does not have access to this feature |  -  |
@@ -400,7 +400,7 @@ catch (ApiException e)
 
 
 
-Deletes a specified brokerage authorization given by the ID.
+Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
 ### Example
 ```csharp
@@ -422,13 +422,13 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var authorizationId = "authorizationId_example"; // The ID of the Authorization to delete.
+            var authorizationId = "authorizationId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             
             try
             {
-                // Delete brokerage authorization
+                // Delete connection
                 client.Connections.RemoveBrokerageAuthorization(authorizationId, userId, userSecret);
             }
             catch (ApiException e)
@@ -454,7 +454,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Delete brokerage authorization
+    // Delete connection
     apiInstance.RemoveBrokerageAuthorizationWithHttpInfo(authorizationId, userId, userSecret);
 }
 catch (ApiException e)
@@ -469,7 +469,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **authorizationId** | **string** | The ID of the Authorization to delete. |  |
+| **authorizationId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 
@@ -481,10 +481,10 @@ void (empty response body)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **204** | Brokerage authorization object has been successfully deleted |  -  |
-| **400** | The specified authorizationId is invalid (not a UUID string). |  -  |
-| **404** | The specified authorizationId was not found. |  -  |
-| **0** | Unexpected error. |  -  |
+| **204** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **0** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

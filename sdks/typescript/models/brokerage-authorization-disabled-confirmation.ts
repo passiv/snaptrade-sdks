@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * 
+ * Confirmation that the connection has been disabled.
  * @export
  * @interface BrokerageAuthorizationDisabledConfirmation
  */

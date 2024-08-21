@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// BrokerageAuthorizationRefreshConfirmation struct for BrokerageAuthorizationRefreshConfirmation
+// BrokerageAuthorizationRefreshConfirmation Confirmation that the syncs have been scheduled.
 type BrokerageAuthorizationRefreshConfirmation struct {
 	// Refresh confirmation details
 	Detail *string `json:"detail,omitempty"`

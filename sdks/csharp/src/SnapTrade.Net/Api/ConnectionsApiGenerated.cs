@@ -28,13 +28,13 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Get brokerage authorization details
+        /// Get connection detail
         /// </summary>
         /// <remarks>
-        /// Returns a single brokerage authorization object for the specified ID.
+        /// Returns a single connection for the specified ID.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -42,26 +42,26 @@ namespace SnapTrade.Net.Api
         BrokerageAuthorization DetailBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Get brokerage authorization details
+        /// Get connection detail
         /// </summary>
         /// <remarks>
-        /// Returns a single brokerage authorization object for the specified ID.
+        /// Returns a single connection for the specified ID.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageAuthorization</returns>
         ApiResponse<BrokerageAuthorization> DetailBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// Manually disable a connection for testing
+        /// Force disable connection
         /// </summary>
         /// <remarks>
-        /// Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -69,23 +69,23 @@ namespace SnapTrade.Net.Api
         BrokerageAuthorizationDisabledConfirmation DisableBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Manually disable a connection for testing
+        /// Force disable connection
         /// </summary>
         /// <remarks>
-        /// Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageAuthorizationDisabledConfirmation</returns>
         ApiResponse<BrokerageAuthorizationDisabledConfirmation> DisableBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// List all brokerage authorizations for the User
+        /// List all connections
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Authorization objects for the user
+        /// Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -95,10 +95,10 @@ namespace SnapTrade.Net.Api
         List<BrokerageAuthorization> ListBrokerageAuthorizations(string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// List all brokerage authorizations for the User
+        /// List all connections
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Authorization objects for the user
+        /// Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -110,10 +110,10 @@ namespace SnapTrade.Net.Api
         /// Refresh holdings for a connection
         /// </summary>
         /// <remarks>
-        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -124,23 +124,23 @@ namespace SnapTrade.Net.Api
         /// Refresh holdings for a connection
         /// </summary>
         /// <remarks>
-        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageAuthorizationRefreshConfirmation</returns>
         ApiResponse<BrokerageAuthorizationRefreshConfirmation> RefreshBrokerageAuthorizationWithHttpInfo(string authorizationId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
-        /// Delete brokerage authorization
+        /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes a specified brokerage authorization given by the ID.
+        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -148,13 +148,13 @@ namespace SnapTrade.Net.Api
         void RemoveBrokerageAuthorization(string authorizationId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
-        /// Delete brokerage authorization
+        /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes a specified brokerage authorization given by the ID.
+        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -197,13 +197,13 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Get brokerage authorization details
+        /// Get connection detail
         /// </summary>
         /// <remarks>
-        /// Returns a single brokerage authorization object for the specified ID.
+        /// Returns a single connection for the specified ID.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -212,13 +212,13 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<BrokerageAuthorization> DetailBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get brokerage authorization details
+        /// Get connection detail
         /// </summary>
         /// <remarks>
-        /// Returns a single brokerage authorization object for the specified ID.
+        /// Returns a single connection for the specified ID.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -226,13 +226,13 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (BrokerageAuthorization)</returns>
         System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorization>> DetailBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Manually disable a connection for testing
+        /// Force disable connection
         /// </summary>
         /// <remarks>
-        /// Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -241,13 +241,13 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<BrokerageAuthorizationDisabledConfirmation> DisableBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Manually disable a connection for testing
+        /// Force disable connection
         /// </summary>
         /// <remarks>
-        /// Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -255,10 +255,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (BrokerageAuthorizationDisabledConfirmation)</returns>
         System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorizationDisabledConfirmation>> DisableBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List all brokerage authorizations for the User
+        /// List all connections
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Authorization objects for the user
+        /// Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -269,10 +269,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<BrokerageAuthorization>> ListBrokerageAuthorizationsAsync(string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List all brokerage authorizations for the User
+        /// List all connections
         /// </summary>
         /// <remarks>
-        /// Returns a list of Brokerage Authorization objects for the user
+        /// Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -285,10 +285,10 @@ namespace SnapTrade.Net.Api
         /// Refresh holdings for a connection
         /// </summary>
         /// <remarks>
-        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -300,10 +300,10 @@ namespace SnapTrade.Net.Api
         /// Refresh holdings for a connection
         /// </summary>
         /// <remarks>
-        /// Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -311,13 +311,13 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (BrokerageAuthorizationRefreshConfirmation)</returns>
         System.Threading.Tasks.Task<ApiResponse<BrokerageAuthorizationRefreshConfirmation>> RefreshBrokerageAuthorizationWithHttpInfoAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Delete brokerage authorization
+        /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes a specified brokerage authorization given by the ID.
+        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -326,13 +326,13 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task RemoveBrokerageAuthorizationAsync(string authorizationId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Delete brokerage authorization
+        /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes a specified brokerage authorization given by the ID.
+        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -489,10 +489,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get brokerage authorization details Returns a single brokerage authorization object for the specified ID.
+        /// Get connection detail Returns a single connection for the specified ID.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -504,10 +504,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get brokerage authorization details Returns a single brokerage authorization object for the specified ID.
+        /// Get connection detail Returns a single connection for the specified ID.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -592,10 +592,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get brokerage authorization details Returns a single brokerage authorization object for the specified ID.
+        /// Get connection detail Returns a single connection for the specified ID.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -608,10 +608,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get brokerage authorization details Returns a single brokerage authorization object for the specified ID.
+        /// Get connection detail Returns a single connection for the specified ID.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -699,10 +699,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Manually disable a connection for testing Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Force disable connection Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -714,10 +714,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Manually disable a connection for testing Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Force disable connection Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -802,10 +802,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Manually disable a connection for testing Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Force disable connection Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -818,10 +818,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Manually disable a connection for testing Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+        /// Force disable connection Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -909,7 +909,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
+        /// List all connections Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -923,7 +923,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
+        /// List all connections Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1003,7 +1003,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
+        /// List all connections Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1018,7 +1018,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all brokerage authorizations for the User Returns a list of Brokerage Authorization objects for the user
+        /// List all connections Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1101,10 +1101,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1116,10 +1116,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1204,10 +1204,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1220,10 +1220,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+        /// Refresh holdings for a connection Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of a brokerage authorization object.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1311,10 +1311,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete brokerage authorization Deletes a specified brokerage authorization given by the ID.
+        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1325,10 +1325,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete brokerage authorization Deletes a specified brokerage authorization given by the ID.
+        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1412,10 +1412,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete brokerage authorization Deletes a specified brokerage authorization given by the ID.
+        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1427,10 +1427,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete brokerage authorization Deletes a specified brokerage authorization given by the ID.
+        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="authorizationId">The ID of the Authorization to delete.</param>
+        /// <param name="authorizationId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>

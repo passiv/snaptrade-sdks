@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// BrokerageAuthorizationDisabledConfirmation
+    /// Confirmation that the connection has been disabled.
     /// </summary>
     [DataContract(Name = "BrokerageAuthorizationDisabledConfirmation")]
     public partial class BrokerageAuthorizationDisabledConfirmation : IEquatable<BrokerageAuthorizationDisabledConfirmation>, IValidatableObject

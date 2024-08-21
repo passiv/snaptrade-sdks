@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// BrokerageAuthorizationRefreshConfirmation
+    /// Confirmation that the syncs have been scheduled.
     /// </summary>
     [DataContract(Name = "BrokerageAuthorizationRefreshConfirmation")]
     public partial class BrokerageAuthorizationRefreshConfirmation : IEquatable<BrokerageAuthorizationRefreshConfirmation>, IValidatableObject

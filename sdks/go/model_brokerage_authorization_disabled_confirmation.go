@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// BrokerageAuthorizationDisabledConfirmation struct for BrokerageAuthorizationDisabledConfirmation
+// BrokerageAuthorizationDisabledConfirmation Confirmation that the connection has been disabled.
 type BrokerageAuthorizationDisabledConfirmation struct {
 	// Connection disabled confirmation
 	Detail *string `json:"detail,omitempty"`

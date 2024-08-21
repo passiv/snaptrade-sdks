@@ -11,6 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
+  # Confirmation that the connection has been disabled.
   class BrokerageAuthorizationDisabledConfirmation
     # Connection disabled confirmation
     attr_accessor :detail

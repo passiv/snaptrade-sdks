@@ -372,7 +372,7 @@ public class AuthenticationApiGenerated {
 
     /**
      * List all users
-     * Returns a list of all registered user IDs.
+     * Returns a list of all registered user IDs. Please note that the response is not currently paginated.
      * @return ListSnapTradeUsersRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

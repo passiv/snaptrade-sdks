@@ -325,7 +325,7 @@ class ListSnapTradeUsers(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of all registered user IDs. """
+        """ Returns a list of all registered user IDs. Please note that the response is not currently paginated. """
         args = self._list_snap_trade_users_mapped_args(
         )
         return self._list_snap_trade_users_oapg(
@@ -354,7 +354,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of all registered user IDs. """
+        """ Returns a list of all registered user IDs. Please note that the response is not currently paginated. """
         args = self._list_snap_trade_users_mapped_args(
         )
         return self._list_snap_trade_users_oapg(

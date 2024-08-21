@@ -17,11 +17,11 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Get brokerage authorization details
+    # Get connection detail
     #
-    # Returns a single brokerage authorization object for the specified ID.
+    # Returns a single connection for the specified ID.
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -30,11 +30,11 @@ module SnapTrade
       data
     end
 
-    # Get brokerage authorization details
+    # Get connection detail
     #
-    # Returns a single brokerage authorization object for the specified ID.
+    # Returns a single connection for the specified ID.
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -42,9 +42,9 @@ module SnapTrade
       detail_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
-    # Get brokerage authorization details
-    # Returns a single brokerage authorization object for the specified ID.
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Get connection detail
+    # Returns a single connection for the specified ID.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -54,9 +54,9 @@ module SnapTrade
       data
     end
 
-    # Get brokerage authorization details
-    # Returns a single brokerage authorization object for the specified ID.
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Get connection detail
+    # Returns a single connection for the specified ID.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -120,11 +120,14 @@ module SnapTrade
     end
 
 
-    # Manually disable a connection for testing
+    # Force disable connection
     #
-    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+    # Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+    # 
+    # *Please contact us in order to use this endpoint as it is disabled by default.*
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -133,11 +136,14 @@ module SnapTrade
       data
     end
 
-    # Manually disable a connection for testing
+    # Force disable connection
     #
-    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+    # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+    # Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+    # 
+    # *Please contact us in order to use this endpoint as it is disabled by default.*
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -145,9 +151,9 @@ module SnapTrade
       disable_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
-    # Manually disable a connection for testing
-    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Force disable connection
+    # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -157,9 +163,9 @@ module SnapTrade
       data
     end
 
-    # Manually disable a connection for testing
-    # Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Force disable connection
+    # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -223,9 +229,13 @@ module SnapTrade
     end
 
 
-    # List all brokerage authorizations for the User
+    # List all connections
     #
-    # Returns a list of Brokerage Authorization objects for the user
+    # Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+    # 
+    # A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+    # 
+    # SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -235,9 +245,13 @@ module SnapTrade
       data
     end
 
-    # List all brokerage authorizations for the User
+    # List all connections
     #
-    # Returns a list of Brokerage Authorization objects for the user
+    # Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+    # 
+    # A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+    # 
+    # SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -246,8 +260,8 @@ module SnapTrade
       list_brokerage_authorizations_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # List all brokerage authorizations for the User
-    # Returns a list of Brokerage Authorization objects for the user
+    # List all connections
+    # Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -257,8 +271,8 @@ module SnapTrade
       data
     end
 
-    # List all brokerage authorizations for the User
-    # Returns a list of Brokerage Authorization objects for the user
+    # List all connections
+    # Returns a list of all connections for the specified user. Note that &#x60;Connection&#x60; and &#x60;Brokerage Authorization&#x60; are interchangeable, but the term &#x60;Connection&#x60; is preferred and used in the doc for consistency.  A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.  SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -320,9 +334,11 @@ module SnapTrade
 
     # Refresh holdings for a connection
     #
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+    # 
+    # *Please contact support for access as this endpoint is not enabled by default.*
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -333,9 +349,11 @@ module SnapTrade
 
     # Refresh holdings for a connection
     #
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+    # 
+    # *Please contact support for access as this endpoint is not enabled by default.*
     #
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -344,8 +362,8 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -356,8 +374,8 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
-    # @param authorization_id [String] The ID of a brokerage authorization object.
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -421,11 +439,11 @@ module SnapTrade
     end
 
 
-    # Delete brokerage authorization
+    # Delete connection
     #
-    # Deletes a specified brokerage authorization given by the ID.
+    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
     #
-    # @param authorization_id [String] The ID of the Authorization to delete.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -434,11 +452,11 @@ module SnapTrade
       nil
     end
 
-    # Delete brokerage authorization
+    # Delete connection
     #
-    # Deletes a specified brokerage authorization given by the ID.
+    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
     #
-    # @param authorization_id [String] The ID of the Authorization to delete.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -446,9 +464,9 @@ module SnapTrade
       remove_brokerage_authorization_with_http_info_impl(authorization_id, user_id, user_secret, extra)
     end
 
-    # Delete brokerage authorization
-    # Deletes a specified brokerage authorization given by the ID.
-    # @param authorization_id [String] The ID of the Authorization to delete.
+    # Delete connection
+    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -458,9 +476,9 @@ module SnapTrade
       nil
     end
 
-    # Delete brokerage authorization
-    # Deletes a specified brokerage authorization given by the ID.
-    # @param authorization_id [String] The ID of the Authorization to delete.
+    # Delete connection
+    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

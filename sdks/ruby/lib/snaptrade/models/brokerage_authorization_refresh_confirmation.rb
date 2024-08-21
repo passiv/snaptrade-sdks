@@ -11,6 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
+  # Confirmation that the syncs have been scheduled.
   class BrokerageAuthorizationRefreshConfirmation
     # Refresh confirmation details
     attr_accessor :detail

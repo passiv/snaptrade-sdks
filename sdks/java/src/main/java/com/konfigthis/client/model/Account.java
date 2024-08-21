@@ -145,11 +145,11 @@ public class Account {
   }
 
    /**
-   * Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+   * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
    * @return brokerageAuthorization
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", value = "Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.")
+  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", value = "Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.")
 
   public UUID getBrokerageAuthorization() {
     return brokerageAuthorization;
@@ -329,13 +329,13 @@ public class Account {
   }
 
    /**
-   * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. Please use at your own risk.
+   * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.
    * @return meta
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "{\"type\":\"Margin\",\"status\":\"ACTIVE\",\"institution_name\":\"Robinhood\"}", value = "Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.")
+  @ApiModelProperty(example = "{\"type\":\"Margin\",\"status\":\"ACTIVE\",\"institution_name\":\"Robinhood\"}", value = "Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.")
 
   public Map<String, Object> getMeta() {
     return meta;

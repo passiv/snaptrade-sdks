@@ -2,7 +2,7 @@
 
 # BrokerageType
 
-Type of brokerage
+Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
 
 ## Properties
 

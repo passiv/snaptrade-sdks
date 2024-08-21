@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// BrokerageType Type of brokerage
+// BrokerageType Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
 type BrokerageType struct {
 	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`

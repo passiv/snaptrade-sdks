@@ -16,7 +16,7 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
     attr_accessor :id
 
-    # Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+    # Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :brokerage_authorization
 
     # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
@@ -34,7 +34,7 @@ module SnapTrade
     # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     attr_accessor :created_date
 
-    # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.
+    # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
     # This field is deprecated.

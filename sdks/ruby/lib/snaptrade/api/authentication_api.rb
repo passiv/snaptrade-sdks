@@ -105,7 +105,7 @@ module SnapTrade
 
     # List all users
     #
-    # Returns a list of all registered user IDs.
+    # Returns a list of all registered user IDs. Please note that the response is not currently paginated.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users(extra: {})
@@ -115,7 +115,7 @@ module SnapTrade
 
     # List all users
     #
-    # Returns a list of all registered user IDs.
+    # Returns a list of all registered user IDs. Please note that the response is not currently paginated.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def list_snap_trade_users_with_http_info(extra: {})
@@ -123,7 +123,7 @@ module SnapTrade
     end
 
     # List all users
-    # Returns a list of all registered user IDs.
+    # Returns a list of all registered user IDs. Please note that the response is not currently paginated.
     # @param [Hash] opts the optional parameters
     # @return [Array<String>]
     private def list_snap_trade_users_impl(opts = {})
@@ -132,7 +132,7 @@ module SnapTrade
     end
 
     # List all users
-    # Returns a list of all registered user IDs.
+    # Returns a list of all registered user IDs. Please note that the response is not currently paginated.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<String>, Integer, Hash)>] Array<String> data, response status code and response headers
     private def list_snap_trade_users_with_http_info_impl(opts = {})

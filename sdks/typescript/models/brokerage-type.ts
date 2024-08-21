@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Type of brokerage
+ * Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
  * @export
  * @interface BrokerageType
  */

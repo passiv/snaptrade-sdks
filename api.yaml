@@ -60,7 +60,7 @@ paths:
         - Authentication
       summary: List all users
       operationId: Authentication_listSnapTradeUsers
-      description: Returns a list of all registered user IDs.
+      description: Returns a list of all registered user IDs. Please note that the response is not currently paginated.
       responses:
         "200":
           description: OK
@@ -396,7 +396,7 @@ paths:
         - Account Information
       summary: List accounts
       description: |
-        Returns all brokerage accounts known to SnapTrade for the authenticated user.
+        Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
         The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_listUserAccounts
@@ -417,6 +417,7 @@ paths:
           content:
             application/json:
               schema:
+                description: List of brokerage accounts across all connections.
                 type: array
                 items:
                   $ref: "#/components/schemas/Account"
@@ -1002,8 +1003,13 @@ paths:
     get:
       tags:
         - Connections
-      summary: List all brokerage authorizations for the User
-      description: Returns a list of Brokerage Authorization objects for the user
+      summary: List all connections
+      description: |
+        Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+        A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+        SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
       operationId: Connections_listBrokerageAuthorizations
       parameters:
         - in: query
@@ -1018,10 +1024,11 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: A list of all Authorization objects for the authenticated user.
+          description: OK
           content:
             application/json:
               schema:
+                description: A list of all connections for the specified user.
                 type: array
                 items:
                   $ref: "#/components/schemas/BrokerageAuthorization"
@@ -1031,16 +1038,15 @@ paths:
     get:
       tags:
         - Connections
-      summary: Get brokerage authorization details
-      description: Returns a single brokerage authorization object for the specified ID.
+      summary: Get connection detail
+      description: Returns a single connection for the specified ID.
       operationId: Connections_detailBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
           required: true
-          description: The ID of a brokerage authorization object.
           schema:
-            $ref: "#/components/schemas/Id"
+            $ref: "#/components/schemas/BrokerageAuthID"
         - in: query
           required: true
           name: userId
@@ -1053,7 +1059,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: Authorization object for the authenticated user.
+          description: OK
           content:
             application/json:
               schema:
@@ -1063,16 +1069,15 @@ paths:
     delete:
       tags:
         - Connections
-      summary: Delete brokerage authorization
-      description: Deletes a specified brokerage authorization given by the ID.
+      summary: Delete connection
+      description: Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
       operationId: Connections_removeBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
           required: true
-          description: The ID of the Authorization to delete.
           schema:
-            $ref: "#/components/schemas/Id"
+            $ref: "#/components/schemas/BrokerageAuthID"
         - in: query
           required: true
           name: userId
@@ -1085,27 +1090,29 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "204":
-          description: Brokerage authorization object has been successfully deleted
+          description: OK
         "400":
-          description: The specified authorizationId is invalid (not a UUID string).
+          description: Bad Request
         "404":
-          description: The specified authorizationId was not found.
+          description: Not Found
         default:
-          description: Unexpected error.
+          description: Unexpected error
   "/authorizations/{authorizationId}/refresh":
     post:
       tags:
         - Connections
       summary: Refresh holdings for a connection
-      description: Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+      description: |
+        Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+        
+        *Please contact support for access as this endpoint is not enabled by default.*
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
           required: true
-          description: The ID of a brokerage authorization object.
           schema:
-            $ref: "#/components/schemas/Id"
+            $ref: "#/components/schemas/BrokerageAuthID"
         - in: query
           required: true
           name: userId
@@ -1118,7 +1125,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: Confirmation that the syncs have been scheduled
+          description: OK
           content:
             application/json:
               schema:
@@ -1151,17 +1158,19 @@ paths:
     post:
       tags:
         - Connections
-      summary: Manually disable a connection for testing
-      description: Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections.
-        Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+      summary: Force disable connection
+      description: |
+        Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+        Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+        
+        *Please contact us in order to use this endpoint as it is disabled by default.*
       operationId: Connections_disableBrokerageAuthorization
       parameters:
         - in: path
           name: authorizationId
           required: true
-          description: The ID of a brokerage authorization object.
           schema:
-            $ref: "#/components/schemas/Id"
+            $ref: "#/components/schemas/BrokerageAuthID"
         - in: query
           required: true
           name: userId
@@ -1174,7 +1183,7 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       responses:
         "200":
-          description: Confirmation that the connection has been disabled
+          description: OK
           content:
             application/json:
               schema:
@@ -2076,7 +2085,7 @@ components:
         meta:
           type: object
           deprecated: true
-          description: Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. Please use at your own risk.
+          description: Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
           example:
             type: Margin
             status: ACTIVE
@@ -2118,7 +2127,7 @@ components:
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
     BrokerageAuthID:
-      description: Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+      description: Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
       type: string
       format: uuid
       example: 87b24961-b51e-4db8-9226-f198f6518a89
@@ -2960,116 +2969,149 @@ components:
                 A unique identifier for that brokerage. It is usually the name of the brokerage in
                 capital letters and will never change.
     Brokerage:
+      description: Describes a brokerage that SnapTrade supports.
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          description: Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
+          type: string
+          format: uuid
+          example: ebf91a5b-0920-4266-9e36-f6cfe8c40946
+        slug:
+          description: A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+          type: string
+          example: ROBINHOOD
         name:
-          type: string
-          example: Questrade
           description: Full name of the brokerage.
+          type: string
+          example: Robinhood
         display_name:
-          type: string
-          example: Questrade
           description: A display-friendly name of the brokerage.
+          type: string
+          example: Robinhood
         description:
+          description: A brief description of the brokerage.
           type: string
-          example: Questrade is an online brokerage firm and wealth management firm based in Canada. It is Canada's largest discount broker.
+          example: Robinhood is an American multinational financial services corporation based in Menlo Park, California.
         aws_s3_logo_url:
+          description: URL to the brokerage's logo.
           type: string
           format: url
-          example: https://www.snaptrade.com/questrade.logo
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
         aws_s3_square_logo_url:
+          description: URL to the brokerage's logo in square format.
           type: string
           format: url
-          example: https://www.snaptrade.com/questrade.logo
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           nullable: true
         open_url:
+          deprecated: true
+          description: This field is deprecated.
           type: string
           format: url
-          example: https://www.brokerage.com
           nullable: true
-        slug:
-          type: string
-          example: QUESTRADE
-          description:
-            A unique identifier for that brokerage. It is usually the name of the brokerage in
-            capital letters and will never change.
         url:
+          description: URL to the brokerage's website.
           type: string
           format: url
-          example: https://www.questrade.com/
+          example: https://robinhood.com
         enabled:
+          description: Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
           type: boolean
           example: true
         maintenance_mode:
+          description: Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
           type: boolean
           example: true
         allows_fractional_units:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: boolean
           nullable: true
           example: true
         allows_trading:
+          description: Whether the brokerage allows trading through SnapTrade.
           type: boolean
           nullable: true
           example: true
         has_reporting:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: boolean
           nullable: true
           example: true
         is_real_time_connection:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: boolean
           example: true
-        allows_trading_through_snaptrade_api:
-          type: boolean
-          nullable: true
-          example: true
-        is_scraping_integration:
-          type: boolean
-          example: true
-        default_currency:
-          $ref: "#/components/schemas/Id"
         brokerage_type:
           $ref: "#/components/schemas/BrokerageType"
         exchanges:
-          description: List of exchange ID supported by brokerage
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: array
           items: {}
           example:
             - 2bcd7cc3-e922-4976-bce1-9858296801c3
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
     BrokerageAuthorization:
+      description: |
+        A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+        A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+        SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/BrokerageAuthID"
         created_date:
-          $ref: "#/components/schemas/Time"
+          description: Timestamp of when the connection was established in SnapTrade.
+          type: string
+          format: date-time
+          example: 2024-08-20T21:56:19.123935Z
         updated_date:
-          $ref: "#/components/schemas/Time"
+          deprecated: true
+          description: Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+          type: string
+          format: date-time
+          example: 2024-08-20T21:56:20.057224Z
         brokerage:
           $ref: "#/components/schemas/Brokerage"
         name:
-          description: Connection Name
+          description: A short, human-readable name for the connection.
           type: string
           example: Connection-1
         type:
+          description: Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are `read` and `trade`.
           type: string
           example: trade
         disabled:
+          description: |
+            Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:
+            
+            - The user has changed their username or password at the brokerage.
+            - The user has explicitly removed the access grant at the brokerage.
+            - The session has expired at the brokerage and now requires explicit user re-authentication.
+
+            Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection.
           type: boolean
           example: false
         disabled_date:
-          description: Disabled date
+          description: Timestamp of when the connection was disabled in SnapTrade.
           type: string
+          format: date-time
           nullable: true
           example: 2022-01-21T15:11:19.217000-05:00
         meta:
-          description: Additional data about brokerage authorization
+          deprecated: true
+          description: Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
           type: object
           example:
             identifier: 123456
     BrokerageAuthorizationRefreshConfirmation:
+      description: Confirmation that the syncs have been scheduled.
       type: object
       properties:
         detail:
@@ -3077,6 +3119,7 @@ components:
           type: string
           example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
     BrokerageAuthorizationDisabledConfirmation:
+      description: Confirmation that the connection has been disabled.
       type: object
       properties:
         detail:
@@ -3850,7 +3893,7 @@ components:
       type: string
       example: 2022-01-21T15:11:19.217000-05:00
     BrokerageType:
-      description: Type of brokerage
+      description: Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
       type: object
       properties:
         id:

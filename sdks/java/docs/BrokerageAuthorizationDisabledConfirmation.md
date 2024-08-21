@@ -2,6 +2,7 @@
 
 # BrokerageAuthorizationDisabledConfirmation
 
+Confirmation that the connection has been disabled.
 
 ## Properties
 

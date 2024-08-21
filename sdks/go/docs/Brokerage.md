@@ -4,26 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade. | [optional] 
+**Slug** | Pointer to **string** | A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. | [optional] 
 **Name** | Pointer to **string** | Full name of the brokerage. | [optional] 
 **DisplayName** | Pointer to **string** | A display-friendly name of the brokerage. | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
-**AwsS3LogoUrl** | Pointer to **string** |  | [optional] 
-**AwsS3SquareLogoUrl** | Pointer to **NullableString** |  | [optional] 
-**OpenUrl** | Pointer to **NullableString** |  | [optional] 
-**Slug** | Pointer to **string** | A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change. | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
-**Enabled** | Pointer to **bool** |  | [optional] 
-**MaintenanceMode** | Pointer to **bool** |  | [optional] 
-**AllowsFractionalUnits** | Pointer to **NullableBool** |  | [optional] 
-**AllowsTrading** | Pointer to **NullableBool** |  | [optional] 
-**HasReporting** | Pointer to **NullableBool** |  | [optional] 
-**IsRealTimeConnection** | Pointer to **bool** |  | [optional] 
-**AllowsTradingThroughSnaptradeApi** | Pointer to **NullableBool** |  | [optional] 
-**IsScrapingIntegration** | Pointer to **bool** |  | [optional] 
-**DefaultCurrency** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** | A brief description of the brokerage. | [optional] 
+**AwsS3LogoUrl** | Pointer to **string** | URL to the brokerage&#39;s logo. | [optional] 
+**AwsS3SquareLogoUrl** | Pointer to **NullableString** | URL to the brokerage&#39;s logo in square format. | [optional] 
+**OpenUrl** | Pointer to **NullableString** | This field is deprecated. | [optional] 
+**Url** | Pointer to **string** | URL to the brokerage&#39;s website. | [optional] 
+**Enabled** | Pointer to **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
+**MaintenanceMode** | Pointer to **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
+**AllowsFractionalUnits** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**AllowsTrading** | Pointer to **NullableBool** | Whether the brokerage allows trading through SnapTrade. | [optional] 
+**HasReporting** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**IsRealTimeConnection** | Pointer to **bool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **BrokerageType** | Pointer to [**BrokerageType**](BrokerageType.md) |  | [optional] 
-**Exchanges** | Pointer to **[]interface{}** | List of exchange ID supported by brokerage | [optional] 
+**Exchanges** | Pointer to **[]interface{}** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 
 ## Methods
 
@@ -68,6 +65,31 @@ SetId sets Id field to given value.
 `func (o *Brokerage) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetSlug
+
+`func (o *Brokerage) GetSlug() string`
+
+GetSlug returns the Slug field if non-nil, zero value otherwise.
+
+### GetSlugOk
+
+`func (o *Brokerage) GetSlugOk() (*string, bool)`
+
+GetSlugOk returns a tuple with the Slug field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSlug
+
+`func (o *Brokerage) SetSlug(v string)`
+
+SetSlug sets Slug field to given value.
+
+### HasSlug
+
+`func (o *Brokerage) HasSlug() bool`
+
+HasSlug returns a boolean if a field has been set.
 
 ### GetName
 
@@ -239,31 +261,6 @@ HasOpenUrl returns a boolean if a field has been set.
 `func (o *Brokerage) UnsetOpenUrl()`
 
 UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
-### GetSlug
-
-`func (o *Brokerage) GetSlug() string`
-
-GetSlug returns the Slug field if non-nil, zero value otherwise.
-
-### GetSlugOk
-
-`func (o *Brokerage) GetSlugOk() (*string, bool)`
-
-GetSlugOk returns a tuple with the Slug field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSlug
-
-`func (o *Brokerage) SetSlug(v string)`
-
-SetSlug sets Slug field to given value.
-
-### HasSlug
-
-`func (o *Brokerage) HasSlug() bool`
-
-HasSlug returns a boolean if a field has been set.
-
 ### GetUrl
 
 `func (o *Brokerage) GetUrl() string`
@@ -468,91 +465,6 @@ SetIsRealTimeConnection sets IsRealTimeConnection field to given value.
 `func (o *Brokerage) HasIsRealTimeConnection() bool`
 
 HasIsRealTimeConnection returns a boolean if a field has been set.
-
-### GetAllowsTradingThroughSnaptradeApi
-
-`func (o *Brokerage) GetAllowsTradingThroughSnaptradeApi() bool`
-
-GetAllowsTradingThroughSnaptradeApi returns the AllowsTradingThroughSnaptradeApi field if non-nil, zero value otherwise.
-
-### GetAllowsTradingThroughSnaptradeApiOk
-
-`func (o *Brokerage) GetAllowsTradingThroughSnaptradeApiOk() (*bool, bool)`
-
-GetAllowsTradingThroughSnaptradeApiOk returns a tuple with the AllowsTradingThroughSnaptradeApi field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowsTradingThroughSnaptradeApi
-
-`func (o *Brokerage) SetAllowsTradingThroughSnaptradeApi(v bool)`
-
-SetAllowsTradingThroughSnaptradeApi sets AllowsTradingThroughSnaptradeApi field to given value.
-
-### HasAllowsTradingThroughSnaptradeApi
-
-`func (o *Brokerage) HasAllowsTradingThroughSnaptradeApi() bool`
-
-HasAllowsTradingThroughSnaptradeApi returns a boolean if a field has been set.
-
-### SetAllowsTradingThroughSnaptradeApiNil
-
-`func (o *Brokerage) SetAllowsTradingThroughSnaptradeApiNil(b bool)`
-
- SetAllowsTradingThroughSnaptradeApiNil sets the value for AllowsTradingThroughSnaptradeApi to be an explicit nil
-
-### UnsetAllowsTradingThroughSnaptradeApi
-`func (o *Brokerage) UnsetAllowsTradingThroughSnaptradeApi()`
-
-UnsetAllowsTradingThroughSnaptradeApi ensures that no value is present for AllowsTradingThroughSnaptradeApi, not even an explicit nil
-### GetIsScrapingIntegration
-
-`func (o *Brokerage) GetIsScrapingIntegration() bool`
-
-GetIsScrapingIntegration returns the IsScrapingIntegration field if non-nil, zero value otherwise.
-
-### GetIsScrapingIntegrationOk
-
-`func (o *Brokerage) GetIsScrapingIntegrationOk() (*bool, bool)`
-
-GetIsScrapingIntegrationOk returns a tuple with the IsScrapingIntegration field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsScrapingIntegration
-
-`func (o *Brokerage) SetIsScrapingIntegration(v bool)`
-
-SetIsScrapingIntegration sets IsScrapingIntegration field to given value.
-
-### HasIsScrapingIntegration
-
-`func (o *Brokerage) HasIsScrapingIntegration() bool`
-
-HasIsScrapingIntegration returns a boolean if a field has been set.
-
-### GetDefaultCurrency
-
-`func (o *Brokerage) GetDefaultCurrency() string`
-
-GetDefaultCurrency returns the DefaultCurrency field if non-nil, zero value otherwise.
-
-### GetDefaultCurrencyOk
-
-`func (o *Brokerage) GetDefaultCurrencyOk() (*string, bool)`
-
-GetDefaultCurrencyOk returns a tuple with the DefaultCurrency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultCurrency
-
-`func (o *Brokerage) SetDefaultCurrency(v string)`
-
-SetDefaultCurrency sets DefaultCurrency field to given value.
-
-### HasDefaultCurrency
-
-`func (o *Brokerage) HasDefaultCurrency() bool`
-
-HasDefaultCurrency returns a boolean if a field has been set.
 
 ### GetBrokerageType
 

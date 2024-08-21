@@ -178,7 +178,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get brokerage authorization details
+        Get connection detail
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -312,7 +312,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get brokerage authorization details
+        Get connection detail
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -443,7 +443,7 @@ class DetailBrokerageAuthorization(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a single brokerage authorization object for the specified ID. """
+        """ Returns a single connection for the specified ID. """
         args = self._detail_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -498,7 +498,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a single brokerage authorization object for the specified ID. """
+        """ Returns a single connection for the specified ID. """
         args = self._detail_brokerage_authorization_mapped_args(
             query_params=query_params,
             path_params=path_params,

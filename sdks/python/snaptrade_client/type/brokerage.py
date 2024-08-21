@@ -22,7 +22,11 @@ class RequiredBrokerage(TypedDict):
     pass
 
 class OptionalBrokerage(TypedDict, total=False):
+    # Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
     id: str
+
+    # A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+    slug: str
 
     # Full name of the brokerage.
     name: str
@@ -30,39 +34,46 @@ class OptionalBrokerage(TypedDict, total=False):
     # A display-friendly name of the brokerage.
     display_name: str
 
+    # A brief description of the brokerage.
     description: str
 
+    # URL to the brokerage's logo.
     aws_s3_logo_url: str
 
+    # URL to the brokerage's logo in square format.
     aws_s3_square_logo_url: typing.Optional[str]
 
+    # WARNING: This property is deprecated
+    # This field is deprecated.
     open_url: typing.Optional[str]
 
-    # A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
-    slug: str
-
+    # URL to the brokerage's website.
     url: str
 
+    # Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
     enabled: bool
 
+    # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     maintenance_mode: bool
 
+    # WARNING: This property is deprecated
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     allows_fractional_units: typing.Optional[bool]
 
+    # Whether the brokerage allows trading through SnapTrade.
     allows_trading: typing.Optional[bool]
 
+    # WARNING: This property is deprecated
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     has_reporting: typing.Optional[bool]
 
+    # WARNING: This property is deprecated
+    # This field is deprecated. Please contact us if you have a valid use case for it.
     is_real_time_connection: bool
-
-    allows_trading_through_snaptrade_api: typing.Optional[bool]
-
-    is_scraping_integration: bool
-
-    default_currency: str
 
     brokerage_type: BrokerageType
 
+    # WARNING: This property is deprecated
     exchanges: BrokerageExchanges
 
 class Brokerage(RequiredBrokerage, OptionalBrokerage):

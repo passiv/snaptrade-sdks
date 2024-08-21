@@ -28,7 +28,7 @@ export interface Account {
      */
     'id'?: string;
     /**
-     * Unique identifier for the connection (brokerage authorization). This is the UUID used to reference the connection in SnapTrade.
+     * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
      * @type {string}
      * @memberof Account
      */
@@ -65,7 +65,7 @@ export interface Account {
      */
     'created_date'?: string;
     /**
-     * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there\'s no standard format for this data. Please use at your own risk.
+     * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there\'s no standard format for this data. This field is deprecated and subject to removal in a future version.
      * @type {{ [key: string]: any; }}
      * @memberof Account
      * @deprecated

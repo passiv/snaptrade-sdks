@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { BrokerageType } from './brokerage-type';
 
 /**
- * 
+ * Describes a brokerage that SnapTrade supports.
  * @export
  * @interface Brokerage
  */
@@ -21,11 +21,17 @@ export interface Brokerage {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade.
      * @type {string}
      * @memberof Brokerage
      */
     'id'?: string;
+    /**
+     * A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+     * @type {string}
+     * @memberof Brokerage
+     */
+    'slug'?: string;
     /**
      * Full name of the brokerage.
      * @type {string}
@@ -39,95 +45,75 @@ export interface Brokerage {
      */
     'display_name'?: string;
     /**
-     * 
+     * A brief description of the brokerage.
      * @type {string}
      * @memberof Brokerage
      */
     'description'?: string;
     /**
-     * 
+     * URL to the brokerage\'s logo.
      * @type {string}
      * @memberof Brokerage
      */
     'aws_s3_logo_url'?: string;
     /**
-     * 
+     * URL to the brokerage\'s logo in square format.
      * @type {string}
      * @memberof Brokerage
      */
     'aws_s3_square_logo_url'?: string | null;
     /**
-     * 
+     * This field is deprecated.
      * @type {string}
      * @memberof Brokerage
+     * @deprecated
      */
     'open_url'?: string | null;
     /**
-     * A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change.
-     * @type {string}
-     * @memberof Brokerage
-     */
-    'slug'?: string;
-    /**
-     * 
+     * URL to the brokerage\'s website.
      * @type {string}
      * @memberof Brokerage
      */
     'url'?: string;
     /**
-     * 
+     * Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
      * @type {boolean}
      * @memberof Brokerage
      */
     'enabled'?: boolean;
     /**
-     * 
+     * Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
      * @type {boolean}
      * @memberof Brokerage
      */
     'maintenance_mode'?: boolean;
     /**
-     * 
+     * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {boolean}
      * @memberof Brokerage
+     * @deprecated
      */
     'allows_fractional_units'?: boolean | null;
     /**
-     * 
+     * Whether the brokerage allows trading through SnapTrade.
      * @type {boolean}
      * @memberof Brokerage
      */
     'allows_trading'?: boolean | null;
     /**
-     * 
+     * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {boolean}
      * @memberof Brokerage
+     * @deprecated
      */
     'has_reporting'?: boolean | null;
     /**
-     * 
+     * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {boolean}
      * @memberof Brokerage
+     * @deprecated
      */
     'is_real_time_connection'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Brokerage
-     */
-    'allows_trading_through_snaptrade_api'?: boolean | null;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Brokerage
-     */
-    'is_scraping_integration'?: boolean;
-    /**
-     * 
-     * @type {string}
-     * @memberof Brokerage
-     */
-    'default_currency'?: string;
     /**
      * 
      * @type {BrokerageType}
@@ -135,9 +121,10 @@ export interface Brokerage {
      */
     'brokerage_type'?: BrokerageType;
     /**
-     * List of exchange ID supported by brokerage
+     * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {Array<any>}
      * @memberof Brokerage
+     * @deprecated
      */
     'exchanges'?: Array<any>;
 }

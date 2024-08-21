@@ -423,7 +423,7 @@ get_user_holdings_response = snaptrade.account_information.get_user_holdings(
 
 ### `snaptrade.account_information.list_user_accounts`<a id="snaptradeaccount_informationlist_user_accounts"></a>
 
-Returns all brokerage accounts known to SnapTrade for the authenticated user.
+Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
@@ -543,7 +543,7 @@ delete_snap_trade_user_response = snaptrade.authentication.delete_snap_trade_use
 
 ### `snaptrade.authentication.list_snap_trade_users`<a id="snaptradeauthenticationlist_snap_trade_users"></a>
 
-Returns a list of all registered user IDs.
+Returns a list of all registered user IDs. Please note that the response is not currently paginated.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -701,14 +701,14 @@ SnapTrade User Secret. This is a randomly generated string and should be stored 
 
 ### `snaptrade.connections.detail_brokerage_authorization`<a id="snaptradeconnectionsdetail_brokerage_authorization"></a>
 
-Returns a single brokerage authorization object for the specified ID.
+Returns a single connection for the specified ID.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 detail_brokerage_authorization_response = (
     snaptrade.connections.detail_brokerage_authorization(
-        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
@@ -718,8 +718,6 @@ detail_brokerage_authorization_response = (
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -739,14 +737,18 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.disable_brokerage_authorization`<a id="snaptradeconnectionsdisable_brokerage_authorization"></a>
 
-Manually disable a connection. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook for the connection. Please contact us in order to use this endpoint as it is disabled by default.
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+
+*Please contact us in order to use this endpoint as it is disabled by default.*
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 disable_brokerage_authorization_response = (
     snaptrade.connections.disable_brokerage_authorization(
-        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
@@ -756,8 +758,6 @@ disable_brokerage_authorization_response = (
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -777,7 +777,12 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.list_brokerage_authorizations`<a id="snaptradeconnectionslist_brokerage_authorizations"></a>
 
-Returns a list of Brokerage Authorization objects for the user
+Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -810,14 +815,17 @@ list_brokerage_authorizations_response = (
 
 ### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
 
-Trigger a holdings update for all accounts under this authorization. Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will be sent once the sync completes. Please contact support for access as this endpoint is not enabled by default
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+
+*Please contact support for access as this endpoint is not enabled by default.*
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 refresh_brokerage_authorization_response = (
     snaptrade.connections.refresh_brokerage_authorization(
-        authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     )
@@ -827,8 +835,6 @@ refresh_brokerage_authorization_response = (
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
-
-The ID of a brokerage authorization object.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -848,13 +854,13 @@ The ID of a brokerage authorization object.
 
 ### `snaptrade.connections.remove_brokerage_authorization`<a id="snaptradeconnectionsremove_brokerage_authorization"></a>
 
-Deletes a specified brokerage authorization given by the ID.
+Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 snaptrade.connections.remove_brokerage_authorization(
-    authorization_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -863,8 +869,6 @@ snaptrade.connections.remove_brokerage_authorization(
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### authorization_id: `str`<a id="authorization_id-str"></a>
-
-The ID of the Authorization to delete.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 

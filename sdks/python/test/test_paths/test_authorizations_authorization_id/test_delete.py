@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAuthorizationsAuthorizationId(ApiTestMixin, unittest.TestCase):
     """
     AuthorizationsAuthorizationId unit test stubs
-        Delete brokerage authorization
+        Delete connection
     """
 
     def setUp(self):

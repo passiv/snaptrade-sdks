@@ -1,29 +1,27 @@
 # SnapTrade.Net.Model.Brokerage
+Describes a brokerage that SnapTrade supports.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** |  | [optional] 
+**Id** | **string** | Unique identifier for the brokerage firm. This is the UUID used to reference the brokerage in SnapTrade. | [optional] 
+**Slug** | **string** | A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. | [optional] 
 **Name** | **string** | Full name of the brokerage. | [optional] 
 **DisplayName** | **string** | A display-friendly name of the brokerage. | [optional] 
-**Description** | **string** |  | [optional] 
-**AwsS3LogoUrl** | **string** |  | [optional] 
-**AwsS3SquareLogoUrl** | **string** |  | [optional] 
-**OpenUrl** | **string** |  | [optional] 
-**Slug** | **string** | A unique identifier for that brokerage. It is usually the name of the brokerage in capital letters and will never change. | [optional] 
-**Url** | **string** |  | [optional] 
-**Enabled** | **bool** |  | [optional] 
-**MaintenanceMode** | **bool** |  | [optional] 
-**AllowsFractionalUnits** | **bool?** |  | [optional] 
-**AllowsTrading** | **bool?** |  | [optional] 
-**HasReporting** | **bool?** |  | [optional] 
-**IsRealTimeConnection** | **bool** |  | [optional] 
-**AllowsTradingThroughSnaptradeApi** | **bool?** |  | [optional] 
-**IsScrapingIntegration** | **bool** |  | [optional] 
-**DefaultCurrency** | **string** |  | [optional] 
+**Description** | **string** | A brief description of the brokerage. | [optional] 
+**AwsS3LogoUrl** | **string** | URL to the brokerage&#39;s logo. | [optional] 
+**AwsS3SquareLogoUrl** | **string** | URL to the brokerage&#39;s logo in square format. | [optional] 
+**OpenUrl** | **string** | This field is deprecated. | [optional] 
+**Url** | **string** | URL to the brokerage&#39;s website. | [optional] 
+**Enabled** | **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
+**MaintenanceMode** | **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
+**AllowsFractionalUnits** | **bool?** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**AllowsTrading** | **bool?** | Whether the brokerage allows trading through SnapTrade. | [optional] 
+**HasReporting** | **bool?** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**IsRealTimeConnection** | **bool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **BrokerageType** | [**BrokerageType**](BrokerageType.md) |  | [optional] 
-**Exchanges** | **List&lt;Object&gt;** | List of exchange ID supported by brokerage | [optional] 
+**Exchanges** | **List&lt;Object&gt;** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

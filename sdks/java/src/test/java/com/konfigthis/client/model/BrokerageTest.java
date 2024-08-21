@@ -52,6 +52,14 @@ public class BrokerageTest {
     }
 
     /**
+     * Test the property 'slug'
+     */
+    @Test
+    public void slugTest() {
+        // TODO: test slug
+    }
+
+    /**
      * Test the property 'name'
      */
     @Test
@@ -97,14 +105,6 @@ public class BrokerageTest {
     @Test
     public void openUrlTest() {
         // TODO: test openUrl
-    }
-
-    /**
-     * Test the property 'slug'
-     */
-    @Test
-    public void slugTest() {
-        // TODO: test slug
     }
 
     /**
@@ -161,30 +161,6 @@ public class BrokerageTest {
     @Test
     public void isRealTimeConnectionTest() {
         // TODO: test isRealTimeConnection
-    }
-
-    /**
-     * Test the property 'allowsTradingThroughSnaptradeApi'
-     */
-    @Test
-    public void allowsTradingThroughSnaptradeApiTest() {
-        // TODO: test allowsTradingThroughSnaptradeApi
-    }
-
-    /**
-     * Test the property 'isScrapingIntegration'
-     */
-    @Test
-    public void isScrapingIntegrationTest() {
-        // TODO: test isScrapingIntegration
-    }
-
-    /**
-     * Test the property 'defaultCurrency'
-     */
-    @Test
-    public void defaultCurrencyTest() {
-        // TODO: test defaultCurrency
     }
 
     /**

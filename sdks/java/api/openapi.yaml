@@ -28,17 +28,17 @@ tags:
   name: Connections
 - description: "Retrieve account information, such as positions, balances, etc."
   name: Account Information
-- description: Manage orders on user accounts.
-  name: Trading
-- description: "Retrieve information on account transactions, performance, dividends,\
-    \ contributions, etc."
-  name: Transactions And Reporting
-- description: "Retrieve basic information for API use, such as supported brokerages,\
-    \ exchanges, currencies, etc."
-  name: Reference Data
 - description: Endpoints to search for options prices and chains as well as place
     options trades if supported.
   name: Options
+- description: "Retrieve information on account transactions, performance, dividends,\
+    \ contributions, etc."
+  name: Transactions And Reporting
+- description: Manage orders on user accounts.
+  name: Trading
+- description: "Retrieve basic information for API use, such as supported brokerages,\
+    \ exchanges, currencies, etc."
+  name: Reference Data
 paths:
   /:
     get:
@@ -163,7 +163,8 @@ paths:
       x-accepts: application/json
   /snapTrade/listUsers:
     get:
-      description: Returns a list of all registered user IDs.
+      description: Returns a list of all registered user IDs. Please note that the
+        response is not currently paginated.
       operationId: Authentication_listSnapTradeUsers
       responses:
         "200":
@@ -296,7 +297,12 @@ paths:
       x-accepts: application/json
   /authorizations:
     get:
-      description: Returns a list of Brokerage Authorization objects for the user
+      description: |
+        Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+        A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+        SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
       operationId: Connections_listBrokerageAuthorizations
       parameters:
       - explode: true
@@ -318,14 +324,15 @@ paths:
           content:
             application/json:
               schema:
+                description: A list of all connections for the specified user.
                 items:
                   $ref: '#/components/schemas/BrokerageAuthorization'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: A list of all Authorization objects for the authenticated user.
+          description: OK
         default:
           description: Unexpected error.
-      summary: List all brokerage authorizations for the User
+      summary: List all connections
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
@@ -333,16 +340,18 @@ paths:
       x-accepts: application/json
   /authorizations/{authorizationId}:
     delete:
-      description: Deletes a specified brokerage authorization given by the ID.
+      description: "Deletes the connection specified by the ID. This will also delete\
+        \ all accounts and holdings associated with the connection. This action is\
+        \ irreversible. This endpoint is synchronous, a 204 response indicates that\
+        \ the connection has been successfully deleted."
       operationId: Connections_removeBrokerageAuthorization
       parameters:
-      - description: The ID of the Authorization to delete.
-        explode: false
+      - explode: false
         in: path
         name: authorizationId
         required: true
         schema:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         style: simple
       - explode: true
         in: query
@@ -360,31 +369,29 @@ paths:
         style: form
       responses:
         "204":
-          description: Brokerage authorization object has been successfully deleted
+          description: OK
         "400":
-          description: The specified authorizationId is invalid (not a UUID string).
+          description: Bad Request
         "404":
-          description: The specified authorizationId was not found.
+          description: Not Found
         default:
-          description: Unexpected error.
-      summary: Delete brokerage authorization
+          description: Unexpected error
+      summary: Delete connection
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--authorizations-authorizationId
       x-accepts: application/json
     get:
-      description: Returns a single brokerage authorization object for the specified
-        ID.
+      description: Returns a single connection for the specified ID.
       operationId: Connections_detailBrokerageAuthorization
       parameters:
-      - description: The ID of a brokerage authorization object.
-        explode: false
+      - explode: false
         in: path
         name: authorizationId
         required: true
         schema:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         style: simple
       - explode: true
         in: query
@@ -406,10 +413,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BrokerageAuthorization'
-          description: Authorization object for the authenticated user.
+          description: OK
         default:
           description: Unexpected error.
-      summary: Get brokerage authorization details
+      summary: Get connection detail
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
@@ -417,19 +424,18 @@ paths:
       x-accepts: application/json
   /authorizations/{authorizationId}/refresh:
     post:
-      description: Trigger a holdings update for all accounts under this authorization.
-        Updates will be queued asynchronously. ACCOUNT_HOLDINGS_UPDATED webhook will
-        be sent once the sync completes. Please contact support for access as this
-        endpoint is not enabled by default
+      description: |
+        Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+
+        *Please contact support for access as this endpoint is not enabled by default.*
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
-      - description: The ID of a brokerage authorization object.
-        explode: false
+      - explode: false
         in: path
         name: authorizationId
         required: true
         schema:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         style: simple
       - explode: true
         in: query
@@ -451,7 +457,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BrokerageAuthorizationRefreshConfirmation'
-          description: Confirmation that the syncs have been scheduled
+          description: OK
         "401":
           content:
             application/json:
@@ -489,20 +495,19 @@ paths:
       x-accepts: application/json
   /authorizations/{authorizationId}/disable:
     post:
-      description: "Manually disable a connection. This should only be used for testing\
-        \ a reconnect flow, and never used on production connections. Will trigger\
-        \ a disconnect as if it happened naturally, and send a CONNECTION_BROKEN webhook\
-        \ for the connection. Please contact us in order to use this endpoint as it\
-        \ is disabled by default."
+      description: |
+        Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
+        Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+
+        *Please contact us in order to use this endpoint as it is disabled by default.*
       operationId: Connections_disableBrokerageAuthorization
       parameters:
-      - description: The ID of a brokerage authorization object.
-        explode: false
+      - explode: false
         in: path
         name: authorizationId
         required: true
         schema:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         style: simple
       - explode: true
         in: query
@@ -524,7 +529,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BrokerageAuthorizationDisabledConfirmation'
-          description: Confirmation that the connection has been disabled
+          description: OK
         "401":
           content:
             application/json:
@@ -554,7 +559,7 @@ paths:
                 $ref: '#/components/schemas/404FailedRequestResponse'
           description: The requested resource does not exist.
           x-do-not-generate: true
-      summary: Manually disable a connection for testing
+      summary: Force disable connection
       tags:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
@@ -611,7 +616,7 @@ paths:
   /accounts:
     get:
       description: |
-        Returns all brokerage accounts known to SnapTrade for the authenticated user.
+        Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
         The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
       operationId: AccountInformation_listUserAccounts
@@ -635,6 +640,7 @@ paths:
           content:
             application/json:
               schema:
+                description: List of brokerage accounts across all connections.
                 items:
                   $ref: '#/components/schemas/Account'
                 type: array
@@ -1037,6 +1043,472 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
       x-accepts: application/json
+  /accounts/{accountId}/options:
+    get:
+      description: |
+        Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
+
+        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+      operationId: Options_listOptionHoldings
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OptionsPosition'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: List account option positions
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options
+      x-accepts: application/json
+  /accounts/{accountId}/optionsChain:
+    get:
+      description: Returns the option chain for the specified symbol in the specified
+        account.
+      operationId: Options_getOptionsChain
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to get the options chain from.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Universal symbol ID if symbol
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionChain'
+          description: List of all Options available for the brokerage symbol
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Get the options chain for a symbol
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy:
+    post:
+      description: |
+        Creates an option strategy object that will be used to place an option strategy order.
+      operationId: Options_getOptionStrategy
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to create the option strategy object in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/OptionStrategyRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyQuotes'
+          description: Order Quotes
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Create options strategy
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+    get:
+      description: |
+        Returns a Strategy Quotes object which has latest market data of the specified option strategy.
+      operationId: Options_getOptionsStrategyQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account the strategy will be placed in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyQuotes'
+          description: Order Quotes
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Get options strategy quotes
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId
+      x-accepts: application/json
+  /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
+    post:
+      description: Places the option strategy order and returns the order record received
+        from the brokerage.
+      operationId: Options_placeOptionStrategy
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The ID of the account to execute the strategy in.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - description: Option strategy id obtained from response when creating option
+          strategy object
+        explode: false
+        in: path
+        name: optionStrategyId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/OrderStrategyExecuteBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StrategyOrderRecord'
+          description: Status of strategy order placed
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Place an option strategy order
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute
+      x-content-type: application/json
+      x-accepts: application/json
+  /activities:
+    get:
+      description: |
+        Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+        There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+      operationId: TransactionsAndReporting_getActivities
+      parameters:
+      - description: "The start date (inclusive) of the transaction history to retrieve.\
+          \ If not provided, the default is the first transaction known to SnapTrade\
+          \ based on `trade_date`."
+        explode: true
+        in: query
+        name: startDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: "The end date (inclusive) of the transaction history to retrieve.\
+          \ If not provided, the default is the last transaction known to SnapTrade\
+          \ based on `trade_date`."
+        explode: true
+        in: query
+        name: endDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: "Optional comma separated list of SnapTrade Account IDs used\
+          \ to filter the request to specific accounts. If not provided, the default\
+          \ is all known brokerage accounts for the user. The `brokerageAuthorizations`\
+          \ parameter takes precedence over this parameter."
+        explode: true
+        in: query
+        name: accounts
+        required: false
+        schema:
+          $ref: '#/components/schemas/AccountIDs'
+        style: form
+      - description: "Optional comma separated list of SnapTrade Connection (Brokerage\
+          \ Authorization) IDs used to filter the request to only accounts that belong\
+          \ to those connections. If not provided, the default is all connections\
+          \ for the user. This parameter takes precedence over the `accounts` parameter."
+        explode: true
+        in: query
+        name: brokerageAuthorizations
+        required: false
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthIDs'
+        style: form
+      - description: |
+          Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
+            - BUY
+            - SELL
+            - DIVIDEND
+            - CONTRIBUTION
+            - WITHDRAWAL
+            - REI
+            - INTEREST
+            - FEE
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          example: "BUY,SELL,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY,SELL,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--activities-get-parameters-4-schema
+        style: form
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UniversalActivity'
+                type: array
+                x-konfig-is-used-in-successful-response: true
+          description: OK
+        default:
+          description: Unexpected error
+      summary: Get transaction history for a user
+      tags:
+      - Transactions And Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--activities
+      x-accepts: application/json
+  /performance/custom:
+    get:
+      deprecated: true
+      description: "Returns performance information (contributions, dividends, rate\
+        \ of return, etc) for a specific timeframe. Please note that Total Equity\
+        \ Timeframe and Rate of Returns are experimental features. Please contact\
+        \ support@snaptrade.com if you notice any inconsistencies."
+      operationId: TransactionsAndReporting_getReportingCustomRange
+      parameters:
+      - explode: true
+        in: query
+        name: startDate
+        required: true
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - explode: true
+        in: query
+        name: endDate
+        required: true
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: Optional comma separated list of account IDs used to filter the
+          request on specific accounts
+        explode: true
+        in: query
+        name: accounts
+        required: false
+        schema:
+          $ref: '#/components/schemas/AccountIDs'
+        style: form
+      - description: "Optional, increases frequency of data points for the total value\
+          \ and contribution charts if set to true"
+        explode: true
+        in: query
+        name: detailed
+        required: false
+        schema:
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-paths--performance-custom-get-parameters-3-schema
+        style: form
+      - description: "Optional frequency for the rate of return chart (defaults to\
+          \ monthly). Possible values are daily, weekly, monthly, quarterly, yearly."
+        explode: true
+        in: query
+        name: frequency
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingFrequency'
+        style: form
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerformanceCustom'
+          description: Successfully retrieved performance data
+        default:
+          description: Unexpected error
+      summary: Get performance information for a specific timeframe
+      tags:
+      - Transactions And Reporting
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--performance-custom
+      x-accepts: application/json
   /accounts/{accountId}/quotes:
     get:
       description: Returns quote(s) from the brokerage for the specified symbol(s).
@@ -1428,286 +1900,6 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols
       x-content-type: application/json
       x-accepts: '*/*'
-  /accounts/{accountId}/options:
-    get:
-      description: |
-        Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
-
-        The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
-      operationId: Options_listOptionHoldings
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/OptionsPosition'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: OK
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: List account option positions
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options
-      x-accepts: application/json
-  /accounts/{accountId}/optionsChain:
-    get:
-      description: Returns the option chain for the specified symbol in the specified
-        account.
-      operationId: Options_getOptionsChain
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account to get the options chain from.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Universal symbol ID if symbol
-        explode: true
-        in: query
-        name: symbol
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OptionChain'
-          description: List of all Options available for the brokerage symbol
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Get the options chain for a symbol
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy:
-    post:
-      description: |
-        Creates an option strategy object that will be used to place an option strategy order.
-      operationId: Options_getOptionStrategy
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account to create the option strategy object in.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/OptionStrategyRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyQuotes'
-          description: Order Quotes
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Create options strategy
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
-    get:
-      description: |
-        Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-      operationId: Options_getOptionsStrategyQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account the strategy will be placed in.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          format: uuid
-          type: string
-        style: simple
-      - description: Option strategy id obtained from response when creating option
-          strategy object
-        explode: false
-        in: path
-        name: optionStrategyId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyQuotes'
-          description: Order Quotes
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Get options strategy quotes
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId
-      x-accepts: application/json
-  /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
-    post:
-      description: Places the option strategy order and returns the order record received
-        from the brokerage.
-      operationId: Options_placeOptionStrategy
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - description: The ID of the account to execute the strategy in.
-        explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      - description: Option strategy id obtained from response when creating option
-          strategy object
-        explode: false
-        in: path
-        name: optionStrategyId
-        required: true
-        schema:
-          $ref: '#/components/schemas/Id'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/OrderStrategyExecuteBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/StrategyOrderRecord'
-          description: Status of strategy order placed
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Place an option strategy order
-      tags:
-      - Options
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute
-      x-content-type: application/json
-      x-accepts: application/json
   /brokerages:
     get:
       description: Returns a list of all defined Brokerage objects.
@@ -1944,192 +2136,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
       x-accepts: '*/*'
-  /activities:
-    get:
-      description: |
-        Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
-
-        There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
-
-        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
-      operationId: TransactionsAndReporting_getActivities
-      parameters:
-      - description: "The start date (inclusive) of the transaction history to retrieve.\
-          \ If not provided, the default is the first transaction known to SnapTrade\
-          \ based on `trade_date`."
-        explode: true
-        in: query
-        name: startDate
-        required: false
-        schema:
-          $ref: '#/components/schemas/ReportingDate'
-        style: form
-      - description: "The end date (inclusive) of the transaction history to retrieve.\
-          \ If not provided, the default is the last transaction known to SnapTrade\
-          \ based on `trade_date`."
-        explode: true
-        in: query
-        name: endDate
-        required: false
-        schema:
-          $ref: '#/components/schemas/ReportingDate'
-        style: form
-      - description: "Optional comma separated list of SnapTrade Account IDs used\
-          \ to filter the request to specific accounts. If not provided, the default\
-          \ is all known brokerage accounts for the user. The `brokerageAuthorizations`\
-          \ parameter takes precedence over this parameter."
-        explode: true
-        in: query
-        name: accounts
-        required: false
-        schema:
-          $ref: '#/components/schemas/AccountIDs'
-        style: form
-      - description: "Optional comma separated list of SnapTrade Connection (Brokerage\
-          \ Authorization) IDs used to filter the request to only accounts that belong\
-          \ to those connections. If not provided, the default is all connections\
-          \ for the user. This parameter takes precedence over the `accounts` parameter."
-        explode: true
-        in: query
-        name: brokerageAuthorizations
-        required: false
-        schema:
-          $ref: '#/components/schemas/BrokerageAuthIDs'
-        style: form
-      - description: |
-          Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
-            - BUY
-            - SELL
-            - DIVIDEND
-            - CONTRIBUTION
-            - WITHDRAWAL
-            - REI
-            - INTEREST
-            - FEE
-        explode: true
-        in: query
-        name: type
-        required: false
-        schema:
-          example: "BUY,SELL,DIVIDEND"
-          type: string
-          x-konfig-original-example: "BUY,SELL,DIVIDEND"
-          x-konfig-generated-schema: konfig-generated-schema-paths--activities-get-parameters-4-schema
-        style: form
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/UniversalActivity'
-                type: array
-                x-konfig-is-used-in-successful-response: true
-          description: OK
-        default:
-          description: Unexpected error
-      summary: Get transaction history for a user
-      tags:
-      - Transactions And Reporting
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--activities
-      x-accepts: application/json
-  /performance/custom:
-    get:
-      deprecated: true
-      description: "Returns performance information (contributions, dividends, rate\
-        \ of return, etc) for a specific timeframe. Please note that Total Equity\
-        \ Timeframe and Rate of Returns are experimental features. Please contact\
-        \ support@snaptrade.com if you notice any inconsistencies."
-      operationId: TransactionsAndReporting_getReportingCustomRange
-      parameters:
-      - explode: true
-        in: query
-        name: startDate
-        required: true
-        schema:
-          $ref: '#/components/schemas/ReportingDate'
-        style: form
-      - explode: true
-        in: query
-        name: endDate
-        required: true
-        schema:
-          $ref: '#/components/schemas/ReportingDate'
-        style: form
-      - description: Optional comma separated list of account IDs used to filter the
-          request on specific accounts
-        explode: true
-        in: query
-        name: accounts
-        required: false
-        schema:
-          $ref: '#/components/schemas/AccountIDs'
-        style: form
-      - description: "Optional, increases frequency of data points for the total value\
-          \ and contribution charts if set to true"
-        explode: true
-        in: query
-        name: detailed
-        required: false
-        schema:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-paths--performance-custom-get-parameters-3-schema
-        style: form
-      - description: "Optional frequency for the rate of return chart (defaults to\
-          \ monthly). Possible values are daily, weekly, monthly, quarterly, yearly."
-        explode: true
-        in: query
-        name: frequency
-        required: false
-        schema:
-          $ref: '#/components/schemas/ReportingFrequency'
-        style: form
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PerformanceCustom'
-          description: Successfully retrieved performance data
-        default:
-          description: Unexpected error
-      summary: Get performance information for a specific timeframe
-      tags:
-      - Transactions And Reporting
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--performance-custom
-      x-accepts: application/json
 components:
   requestBodies:
     RegisterUserRequestBody:
@@ -2407,8 +2413,8 @@ components:
             \ not change for as long as the connection stays active. If the connection\
             \ is deleted and re-added, a new account ID will be generated."
         brokerage_authorization:
-          description: Unique identifier for the connection (brokerage authorization).
-            This is the UUID used to reference the connection in SnapTrade.
+          description: Unique identifier for the connection. This is the UUID used
+            to reference the connection in SnapTrade.
           example: 87b24961-b51e-4db8-9226-f198f6518a89
           format: uuid
           type: string
@@ -2459,7 +2465,8 @@ components:
           deprecated: true
           description: "Additional information about the account, such as account\
             \ type, status, etc. This information is specific to the brokerage and\
-            \ there's no standard format for this data. Please use at your own risk."
+            \ there's no standard format for this data. This field is deprecated and\
+            \ subject to removal in a future version."
           example:
             type: Margin
             status: ACTIVE
@@ -2542,8 +2549,8 @@ components:
       x-konfig-original-example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountIDs
     BrokerageAuthID:
-      description: Unique identifier for the connection (brokerage authorization).
-        This is the UUID used to reference the connection in SnapTrade.
+      description: Unique identifier for the connection. This is the UUID used to
+        reference the connection in SnapTrade.
       example: 87b24961-b51e-4db8-9226-f198f6518a89
       format: uuid
       type: string
@@ -2647,34 +2654,31 @@ components:
               exchanges:
               - 2bcd7cc3-e922-4976-bce1-9858296801c3
               - 4bcd8cc3-c122-4974-dc21-1858296801f4
-              description: Questrade is an online brokerage firm and wealth management
-                firm based in Canada. It is Canada's largest discount broker.
-              open_url: https://www.brokerage.com
-              display_name: Questrade
-              url: https://www.questrade.com/
+              description: "Robinhood is an American multinational financial services\
+                \ corporation based in Menlo Park, California."
+              open_url: http://example.com/aeiou
+              display_name: Robinhood
+              url: https://robinhood.com
               enabled: true
               allows_trading: true
               has_reporting: true
-              aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+              aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
               is_real_time_connection: true
-              name: Questrade
-              allows_trading_through_snaptrade_api: true
-              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              name: Robinhood
+              id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
               brokerage_type:
                 name: Traditional Brokerage
                 id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-              aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-              slug: QUESTRADE
-              is_scraping_integration: true
+              slug: ROBINHOOD
+              aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
             disabled_date: 2022-01-21T20:11:19.217Z
             meta:
               identifier: 123456
             name: Connection-1
             disabled: false
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            created_date: 2022-01-21T20:11:19.217Z
-            updated_date: 2022-01-21T20:11:19.217Z
+            id: 87b24961-b51e-4db8-9226-f198f6518a89
+            created_date: 2024-08-20T21:56:19.123Z
+            updated_date: 2024-08-20T21:56:20.057Z
             type: trade
           meta:
             type: Margin
@@ -3531,34 +3535,31 @@ components:
             exchanges:
             - 2bcd7cc3-e922-4976-bce1-9858296801c3
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
-            description: Questrade is an online brokerage firm and wealth management
-              firm based in Canada. It is Canada's largest discount broker.
-            open_url: https://www.brokerage.com
-            display_name: Questrade
-            url: https://www.questrade.com/
+            description: "Robinhood is an American multinational financial services\
+              \ corporation based in Menlo Park, California."
+            open_url: http://example.com/aeiou
+            display_name: Robinhood
+            url: https://robinhood.com
             enabled: true
             allows_trading: true
             has_reporting: true
-            aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+            aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
             is_real_time_connection: true
-            name: Questrade
-            allows_trading_through_snaptrade_api: true
-            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            name: Robinhood
+            id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
             brokerage_type:
               name: Traditional Brokerage
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-            slug: QUESTRADE
-            is_scraping_integration: true
+            slug: ROBINHOOD
+            aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
           disabled_date: 2022-01-21T20:11:19.217Z
           meta:
             identifier: 123456
           name: Connection-1
           disabled: false
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          created_date: 2022-01-21T20:11:19.217Z
-          updated_date: 2022-01-21T20:11:19.217Z
+          id: 87b24961-b51e-4db8-9226-f198f6518a89
+          created_date: 2024-08-20T21:56:19.123Z
+          updated_date: 2024-08-20T21:56:20.057Z
           type: trade
         meta:
           type: Margin
@@ -4185,51 +4186,45 @@ components:
           exchanges:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
-          description: Questrade is an online brokerage firm and wealth management
-            firm based in Canada. It is Canada's largest discount broker.
-          open_url: https://www.brokerage.com
-          display_name: Questrade
-          url: https://www.questrade.com/
+          description: "Robinhood is an American multinational financial services\
+            \ corporation based in Menlo Park, California."
+          open_url: http://example.com/aeiou
+          display_name: Robinhood
+          url: https://robinhood.com
           enabled: true
           allows_trading: true
           has_reporting: true
-          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+          aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           is_real_time_connection: true
-          name: Questrade
-          allows_trading_through_snaptrade_api: true
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          name: Robinhood
+          id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
           brokerage_type:
             name: Traditional Brokerage
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-          slug: QUESTRADE
-          is_scraping_integration: true
+          slug: ROBINHOOD
+          aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
         - maintenance_mode: true
           allows_fractional_units: true
           exchanges:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
-          description: Questrade is an online brokerage firm and wealth management
-            firm based in Canada. It is Canada's largest discount broker.
-          open_url: https://www.brokerage.com
-          display_name: Questrade
-          url: https://www.questrade.com/
+          description: "Robinhood is an American multinational financial services\
+            \ corporation based in Menlo Park, California."
+          open_url: http://example.com/aeiou
+          display_name: Robinhood
+          url: https://robinhood.com
           enabled: true
           allows_trading: true
           has_reporting: true
-          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+          aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           is_real_time_connection: true
-          name: Questrade
-          allows_trading_through_snaptrade_api: true
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          name: Robinhood
+          id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
           brokerage_type:
             name: Traditional Brokerage
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-          slug: QUESTRADE
-          is_scraping_integration: true
+          slug: ROBINHOOD
+          aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
       properties:
         redirect_uri:
           description: URI to redirect user back to after user is done adding brokerage
@@ -4643,145 +4638,147 @@ components:
       type: object
     Brokerage:
       additionalProperties: true
+      description: Describes a brokerage that SnapTrade supports.
       example:
         maintenance_mode: true
         allows_fractional_units: true
         exchanges:
         - 2bcd7cc3-e922-4976-bce1-9858296801c3
         - 4bcd8cc3-c122-4974-dc21-1858296801f4
-        description: Questrade is an online brokerage firm and wealth management firm
-          based in Canada. It is Canada's largest discount broker.
-        open_url: https://www.brokerage.com
-        display_name: Questrade
-        url: https://www.questrade.com/
+        description: "Robinhood is an American multinational financial services corporation\
+          \ based in Menlo Park, California."
+        open_url: http://example.com/aeiou
+        display_name: Robinhood
+        url: https://robinhood.com
         enabled: true
         allows_trading: true
         has_reporting: true
-        aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+        aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
         is_real_time_connection: true
-        name: Questrade
-        allows_trading_through_snaptrade_api: true
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        name: Robinhood
+        id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
         brokerage_type:
           name: Traditional Brokerage
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-        slug: QUESTRADE
-        is_scraping_integration: true
+        slug: ROBINHOOD
+        aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
       properties:
         id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          description: Unique identifier for the brokerage firm. This is the UUID
+            used to reference the brokerage in SnapTrade.
+          example: ebf91a5b-0920-4266-9e36-f6cfe8c40946
           format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: ebf91a5b-0920-4266-9e36-f6cfe8c40946
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-id
+        slug:
+          description: "A short, unique identifier for the brokerage. It is usually\
+            \ the name of the brokerage in capital letters and will never change."
+          example: ROBINHOOD
+          type: string
+          x-konfig-original-example: ROBINHOOD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-slug
         name:
           description: Full name of the brokerage.
-          example: Questrade
+          example: Robinhood
           type: string
-          x-konfig-original-example: Questrade
+          x-konfig-original-example: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-name
         display_name:
           description: A display-friendly name of the brokerage.
-          example: Questrade
+          example: Robinhood
           type: string
-          x-konfig-original-example: Questrade
+          x-konfig-original-example: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-display_name
         description:
-          example: Questrade is an online brokerage firm and wealth management firm
-            based in Canada. It is Canada's largest discount broker.
+          description: A brief description of the brokerage.
+          example: "Robinhood is an American multinational financial services corporation\
+            \ based in Menlo Park, California."
           type: string
-          x-konfig-original-example: Questrade is an online brokerage firm and wealth
-            management firm based in Canada. It is Canada's largest discount broker.
+          x-konfig-original-example: "Robinhood is an American multinational financial\
+            \ services corporation based in Menlo Park, California."
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-description
         aws_s3_logo_url:
-          example: https://www.snaptrade.com/questrade.logo
+          description: URL to the brokerage's logo.
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
           format: url
           type: string
-          x-konfig-original-example: https://www.snaptrade.com/questrade.logo
+          x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_logo_url
         aws_s3_square_logo_url:
-          example: https://www.snaptrade.com/questrade.logo
+          description: URL to the brokerage's logo in square format.
+          example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           format: url
           nullable: true
           type: string
-          x-konfig-original-example: https://www.snaptrade.com/questrade.logo
+          x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url
         open_url:
-          example: https://www.brokerage.com
+          deprecated: true
+          description: This field is deprecated.
           format: url
           nullable: true
           type: string
-          x-konfig-original-example: https://www.brokerage.com
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-open_url
-        slug:
-          description: A unique identifier for that brokerage. It is usually the name
-            of the brokerage in capital letters and will never change.
-          example: QUESTRADE
-          type: string
-          x-konfig-original-example: QUESTRADE
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-slug
         url:
-          example: https://www.questrade.com/
+          description: URL to the brokerage's website.
+          example: https://robinhood.com
           format: url
           type: string
-          x-konfig-original-example: https://www.questrade.com/
+          x-konfig-original-example: https://robinhood.com
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-url
         enabled:
+          description: Whether the brokerage is enabled in SnapTrade. A disabled brokerage
+            will not be available for new connections.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-enabled
         maintenance_mode:
+          description: Whether the brokerage is currently in maintenance mode. A brokerage
+            in maintenance mode will not be available for new connections.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-maintenance_mode
         allows_fractional_units:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid
+            use case for it.
           example: true
           nullable: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_fractional_units
         allows_trading:
+          description: Whether the brokerage allows trading through SnapTrade.
           example: true
           nullable: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading
         has_reporting:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid
+            use case for it.
           example: true
           nullable: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-has_reporting
         is_real_time_connection:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid
+            use case for it.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-is_real_time_connection
-        allows_trading_through_snaptrade_api:
-          example: true
-          nullable: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading_through_snaptrade_api
-        is_scraping_integration:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-is_scraping_integration
-        default_currency:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         brokerage_type:
           $ref: '#/components/schemas/BrokerageType'
         exchanges:
-          description: List of exchange ID supported by brokerage
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid
+            use case for it.
           example:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
@@ -4794,6 +4791,12 @@ components:
       type: object
     BrokerageAuthorization:
       additionalProperties: true
+      description: |
+        A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
+
+        A connection is usually tied to a single login at a brokerage. A single connection can contain multiple brokerage accounts.
+
+        SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
       example:
         brokerage:
           maintenance_mode: true
@@ -4801,82 +4804,101 @@ components:
           exchanges:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
-          description: Questrade is an online brokerage firm and wealth management
-            firm based in Canada. It is Canada's largest discount broker.
-          open_url: https://www.brokerage.com
-          display_name: Questrade
-          url: https://www.questrade.com/
+          description: "Robinhood is an American multinational financial services\
+            \ corporation based in Menlo Park, California."
+          open_url: http://example.com/aeiou
+          display_name: Robinhood
+          url: https://robinhood.com
           enabled: true
           allows_trading: true
           has_reporting: true
-          aws_s3_square_logo_url: https://www.snaptrade.com/questrade.logo
+          aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           is_real_time_connection: true
-          name: Questrade
-          allows_trading_through_snaptrade_api: true
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          default_currency: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          name: Robinhood
+          id: ebf91a5b-0920-4266-9e36-f6cfe8c40946
           brokerage_type:
             name: Traditional Brokerage
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          aws_s3_logo_url: https://www.snaptrade.com/questrade.logo
-          slug: QUESTRADE
-          is_scraping_integration: true
+          slug: ROBINHOOD
+          aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
         disabled_date: 2022-01-21T20:11:19.217Z
         meta:
           identifier: 123456
         name: Connection-1
         disabled: false
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        created_date: 2022-01-21T20:11:19.217Z
-        updated_date: 2022-01-21T20:11:19.217Z
+        id: 87b24961-b51e-4db8-9226-f198f6518a89
+        created_date: 2024-08-20T21:56:19.123Z
+        updated_date: 2024-08-20T21:56:20.057Z
         type: trade
       properties:
         id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          description: Unique identifier for the connection. This is the UUID used
+            to reference the connection in SnapTrade.
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
           format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
         created_date:
-          description: Time
-          example: 2022-01-21T20:11:19.217Z
+          description: Timestamp of when the connection was established in SnapTrade.
+          example: 2024-08-20T21:56:19.123Z
+          format: date-time
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+          x-konfig-original-example: 2024-08-20T21:56:19.123Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date
         updated_date:
-          description: Time
-          example: 2022-01-21T20:11:19.217Z
+          deprecated: true
+          description: Timestamp of when the connection was last updated in SnapTrade.
+            This field is deprecated. Please let us know if you have a valid use case
+            for this field.
+          example: 2024-08-20T21:56:20.057Z
+          format: date-time
           type: string
-          x-konfig-original-example: 2022-01-21T20:11:19.217Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+          x-konfig-original-example: 2024-08-20T21:56:20.057Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date
         brokerage:
           $ref: '#/components/schemas/Brokerage'
         name:
-          description: Connection Name
+          description: "A short, human-readable name for the connection."
           example: Connection-1
           type: string
           x-konfig-original-example: Connection-1
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-name
         type:
+          description: "Whether the connection is read-only or trade-enabled. A read-only\
+            \ connection can only be used to fetch data, while a trade-enabled connection\
+            \ can be used to place trades. Valid values are `read` and `trade`."
           example: trade
           type: string
           x-konfig-original-example: trade
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-type
         disabled:
+          description: |
+            Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:
+
+            - The user has changed their username or password at the brokerage.
+            - The user has explicitly removed the access grant at the brokerage.
+            - The session has expired at the brokerage and now requires explicit user re-authentication.
+
+            Please see [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) on how to fix a disabled connection.
           example: false
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-disabled
         disabled_date:
-          description: Disabled date
+          description: Timestamp of when the connection was disabled in SnapTrade.
           example: 2022-01-21T20:11:19.217Z
+          format: date-time
           nullable: true
           type: string
           x-konfig-original-example: 2022-01-21T20:11:19.217Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-disabled_date
         meta:
           additionalProperties: true
-          description: Additional data about brokerage authorization
+          deprecated: true
+          description: Additional data about the connection. This information is specific
+            to the brokerage and there's no standard format for this data. This field
+            is deprecated and subject to removal in a future version.
           example:
             identifier: 123456
           type: object
@@ -4887,6 +4909,7 @@ components:
       x-konfig-is-used-in-successful-response: true
     BrokerageAuthorizationRefreshConfirmation:
       additionalProperties: true
+      description: Confirmation that the syncs have been scheduled.
       example:
         detail: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
       properties:
@@ -4901,6 +4924,7 @@ components:
       x-konfig-is-used-in-successful-response: true
     BrokerageAuthorizationDisabledConfirmation:
       additionalProperties: true
+      description: Confirmation that the connection has been disabled.
       example:
         detail: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
       properties:
@@ -6405,7 +6429,8 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
     BrokerageType:
       additionalProperties: true
-      description: Type of brokerage
+      description: Type of brokerage. Currently supports traditional brokerages and
+        crypto exchanges.
       example:
         name: Traditional Brokerage
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -6486,6 +6511,14 @@ components:
       example: 30
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-paths--activities-get-parameters-4-schema:
+      example: "BUY,SELL,DIVIDEND"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-paths--performance-custom-get-parameters-3-schema:
+      example: true
+      type: boolean
+      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -6501,14 +6534,6 @@ components:
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-paths--activities-get-parameters-4-schema:
-      example: "BUY,SELL,DIVIDEND"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-paths--performance-custom-get-parameters-3-schema:
-      example: true
-      type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
       example: true
@@ -7033,37 +7058,37 @@ components:
       example: QUESTRADE
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-name:
-      example: Questrade
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-display_name:
-      example: Questrade
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-description:
-      example: Questrade is an online brokerage firm and wealth management firm based
-        in Canada. It is Canada's largest discount broker.
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_logo_url:
-      example: https://www.snaptrade.com/questrade.logo
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url:
-      example: https://www.snaptrade.com/questrade.logo
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-open_url:
-      example: https://www.brokerage.com
+    konfig-generated-schema-components-schemas-Brokerage-properties-id:
+      example: ebf91a5b-0920-4266-9e36-f6cfe8c40946
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-slug:
-      example: QUESTRADE
+      example: ROBINHOOD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-name:
+      example: Robinhood
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-display_name:
+      example: Robinhood
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-description:
+      example: "Robinhood is an American multinational financial services corporation\
+        \ based in Menlo Park, California."
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_logo_url:
+      example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url:
+      example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-url:
-      example: https://www.questrade.com/
+      example: https://robinhood.com
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-enabled:
@@ -7090,14 +7115,6 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading_through_snaptrade_api:
-      example: true
-      type: boolean
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-is_scraping_integration:
-      example: true
-      type: boolean
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-exchanges:
       example:
       - 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -7106,6 +7123,14 @@ components:
         example: 2bcd7cc3-e922-4976-bce1-9858296801c3
         type: string
       type: array
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date:
+      example: 2024-08-20T21:56:19.123Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date:
+      example: 2024-08-20T21:56:20.057Z
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-name:
       example: Connection-1
@@ -7641,7 +7666,7 @@ components:
       additionalProperties: true
       properties:
         authorizationId:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -7660,7 +7685,7 @@ components:
       additionalProperties: true
       properties:
         authorizationId:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -7679,7 +7704,7 @@ components:
       additionalProperties: true
       properties:
         authorizationId:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -7698,7 +7723,7 @@ components:
       additionalProperties: true
       properties:
         authorizationId:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageAuthID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -7897,6 +7922,206 @@ components:
       - state
       - days
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          format: uuid
+          type: string
+        symbol:
+          format: uuid
+          type: string
+      required:
+      - accountId
+      - symbol
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - symbol
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          format: uuid
+          type: string
+        underlying_symbol_id:
+          $ref: '#/components/schemas/Id'
+        legs:
+          items:
+            $ref: '#/components/schemas/OptionLeg'
+          type: array
+        strategy_type:
+          enum:
+          - CUSTOM
+          type: string
+      required:
+      - accountId
+      - legs
+      - strategy_type
+      - underlying_symbol_id
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          format: uuid
+          type: string
+        optionStrategyId:
+          $ref: '#/components/schemas/Id'
+      required:
+      - accountId
+      - optionStrategyId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - optionStrategyId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/Id'
+        optionStrategyId:
+          $ref: '#/components/schemas/Id'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          $ref: '#/components/schemas/Price'
+      required:
+      - accountId
+      - optionStrategyId
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - optionStrategyId
+    konfig-generated-schema-single-parameter-schema-get--activities:
+      additionalProperties: true
+      properties:
+        startDate:
+          $ref: '#/components/schemas/ReportingDate'
+        endDate:
+          $ref: '#/components/schemas/ReportingDate'
+        accounts:
+          $ref: '#/components/schemas/AccountIDs'
+        brokerageAuthorizations:
+          $ref: '#/components/schemas/BrokerageAuthIDs'
+        type:
+          example: "BUY,SELL,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY,SELL,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--activities-get-parameters-4-schema
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - startDate
+      - endDate
+      - accounts
+      - brokerageAuthorizations
+      - type
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-get--performance-custom:
+      additionalProperties: true
+      properties:
+        startDate:
+          $ref: '#/components/schemas/ReportingDate'
+        endDate:
+          $ref: '#/components/schemas/ReportingDate'
+        accounts:
+          $ref: '#/components/schemas/AccountIDs'
+        detailed:
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-paths--performance-custom-get-parameters-3-schema
+        frequency:
+          $ref: '#/components/schemas/ReportingFrequency'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - endDate
+      - startDate
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - startDate
+      - endDate
+      - accounts
+      - detailed
+      - frequency
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes:
       additionalProperties: true
       properties:
@@ -8082,138 +8307,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          format: uuid
-          type: string
-        symbol:
-          format: uuid
-          type: string
-      required:
-      - accountId
-      - symbol
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - symbol
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          format: uuid
-          type: string
-        underlying_symbol_id:
-          $ref: '#/components/schemas/Id'
-        legs:
-          items:
-            $ref: '#/components/schemas/OptionLeg'
-          type: array
-        strategy_type:
-          enum:
-          - CUSTOM
-          type: string
-      required:
-      - accountId
-      - legs
-      - strategy_type
-      - underlying_symbol_id
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionStrategy-optionStrategyId:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          format: uuid
-          type: string
-        optionStrategyId:
-          $ref: '#/components/schemas/Id'
-      required:
-      - accountId
-      - optionStrategyId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - optionStrategyId
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-optionStrategy-optionStrategyId-execute:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/Id'
-        optionStrategyId:
-          $ref: '#/components/schemas/Id'
-        order_type:
-          $ref: '#/components/schemas/OrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        price:
-          $ref: '#/components/schemas/Price'
-      required:
-      - accountId
-      - optionStrategyId
-      - order_type
-      - time_in_force
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - optionStrategyId
     konfig-generated-schema-single-parameter-schema-get--brokerages:
       additionalProperties: true
       properties: {}
@@ -8289,74 +8382,6 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
-    konfig-generated-schema-single-parameter-schema-get--activities:
-      additionalProperties: true
-      properties:
-        startDate:
-          $ref: '#/components/schemas/ReportingDate'
-        endDate:
-          $ref: '#/components/schemas/ReportingDate'
-        accounts:
-          $ref: '#/components/schemas/AccountIDs'
-        brokerageAuthorizations:
-          $ref: '#/components/schemas/BrokerageAuthIDs'
-        type:
-          example: "BUY,SELL,DIVIDEND"
-          type: string
-          x-konfig-original-example: "BUY,SELL,DIVIDEND"
-          x-konfig-generated-schema: konfig-generated-schema-paths--activities-get-parameters-4-schema
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - startDate
-      - endDate
-      - accounts
-      - brokerageAuthorizations
-      - type
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-get--performance-custom:
-      additionalProperties: true
-      properties:
-        startDate:
-          $ref: '#/components/schemas/ReportingDate'
-        endDate:
-          $ref: '#/components/schemas/ReportingDate'
-        accounts:
-          $ref: '#/components/schemas/AccountIDs'
-        detailed:
-          example: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-paths--performance-custom-get-parameters-3-schema
-        frequency:
-          $ref: '#/components/schemas/ReportingFrequency'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-      required:
-      - endDate
-      - startDate
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - startDate
-      - endDate
-      - accounts
-      - detailed
-      - frequency
-      - userId
-      - userSecret
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:
       additionalProperties: true
       properties:
@@ -8770,15 +8795,6 @@ components:
       - ticker
       - underlying_symbol
       type: object
-    Trading_cancelUserAccountOrder_request:
-      properties:
-        brokerage_order_id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-      type: object
     Options_getOptionStrategy_request:
       properties:
         underlying_symbol_id:
@@ -8816,6 +8832,15 @@ components:
       required:
       - order_type
       - time_in_force
+      type: object
+    Trading_cancelUserAccountOrder_request:
+      properties:
+        brokerage_order_id:
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
       type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\

@@ -113,7 +113,7 @@ public class Example {
 
 List all users
 
-Returns a list of all registered user IDs.
+Returns a list of all registered user IDs. Please note that the response is not currently paginated.
 
 ### Example
 ```java

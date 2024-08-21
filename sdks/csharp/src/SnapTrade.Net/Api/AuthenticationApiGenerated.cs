@@ -54,7 +54,7 @@ namespace SnapTrade.Net.Api
         /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of all registered user IDs.
+        /// Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -65,7 +65,7 @@ namespace SnapTrade.Net.Api
         /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of all registered user IDs.
+        /// Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -182,7 +182,7 @@ namespace SnapTrade.Net.Api
         /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of all registered user IDs.
+        /// Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -194,7 +194,7 @@ namespace SnapTrade.Net.Api
         /// List all users
         /// </summary>
         /// <remarks>
-        /// Returns a list of all registered user IDs.
+        /// Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -575,7 +575,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all users Returns a list of all registered user IDs.
+        /// List all users Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -587,7 +587,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all users Returns a list of all registered user IDs.
+        /// List all users Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -651,7 +651,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all users Returns a list of all registered user IDs.
+        /// List all users Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -664,7 +664,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List all users Returns a list of all registered user IDs.
+        /// List all users Returns a list of all registered user IDs. Please note that the response is not currently paginated.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="operationIndex">Index associated with the operation.</param>
