@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestTradeImpact(ApiTestMixin, unittest.TestCase):
     """
     TradeImpact unit test stubs
-        Check the impact of a trade on an account
+        Check order impact
     """
 
     def setUp(self):

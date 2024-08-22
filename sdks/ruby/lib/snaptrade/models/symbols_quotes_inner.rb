@@ -14,23 +14,28 @@ module SnapTrade
   class SymbolsQuotesInner
     attr_accessor :symbol
 
-    attr_accessor :bid_price
-
-    attr_accessor :ask_price
-
+    # The most recent trade price from the brokerage.
     attr_accessor :last_trade_price
 
+    # The most recent bid price from the brokerage.
+    attr_accessor :bid_price
+
+    # The most recent price from the brokerage.
+    attr_accessor :ask_price
+
+    # The most recent bid size from the brokerage.
     attr_accessor :bid_size
 
+    # The most recent ask size from the brokerage.
     attr_accessor :ask_size
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'symbol' => :'symbol',
+        :'last_trade_price' => :'last_trade_price',
         :'bid_price' => :'bid_price',
         :'ask_price' => :'ask_price',
-        :'last_trade_price' => :'last_trade_price',
         :'bid_size' => :'bid_size',
         :'ask_size' => :'ask_size'
       }
@@ -45,9 +50,9 @@ module SnapTrade
     def self.openapi_types
       {
         :'symbol' => :'UniversalSymbol',
+        :'last_trade_price' => :'Float',
         :'bid_price' => :'Float',
         :'ask_price' => :'Float',
-        :'last_trade_price' => :'Float',
         :'bid_size' => :'Float',
         :'ask_size' => :'Float'
       }
@@ -78,16 +83,16 @@ module SnapTrade
         self.symbol = attributes[:'symbol']
       end
 
+      if attributes.key?(:'last_trade_price')
+        self.last_trade_price = attributes[:'last_trade_price']
+      end
+
       if attributes.key?(:'bid_price')
         self.bid_price = attributes[:'bid_price']
       end
 
       if attributes.key?(:'ask_price')
         self.ask_price = attributes[:'ask_price']
-      end
-
-      if attributes.key?(:'last_trade_price')
-        self.last_trade_price = attributes[:'last_trade_price']
       end
 
       if attributes.key?(:'bid_size')
@@ -118,9 +123,9 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           symbol == o.symbol &&
+          last_trade_price == o.last_trade_price &&
           bid_price == o.bid_price &&
           ask_price == o.ask_price &&
-          last_trade_price == o.last_trade_price &&
           bid_size == o.bid_size &&
           ask_size == o.ask_size
     end
@@ -134,7 +139,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, bid_price, ask_price, last_trade_price, bid_size, ask_size].hash
+      [symbol, last_trade_price, bid_price, ask_price, bid_size, ask_size].hash
     end
 
     # Builds the object from hash

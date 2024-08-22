@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | Pointer to [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
-**BidPrice** | Pointer to **float32** |  | [optional] 
-**AskPrice** | Pointer to **float32** |  | [optional] 
-**LastTradePrice** | Pointer to **float32** |  | [optional] 
-**BidSize** | Pointer to **float32** |  | [optional] 
-**AskSize** | Pointer to **float32** |  | [optional] 
+**LastTradePrice** | Pointer to **float32** | The most recent trade price from the brokerage. | [optional] 
+**BidPrice** | Pointer to **float32** | The most recent bid price from the brokerage. | [optional] 
+**AskPrice** | Pointer to **float32** | The most recent price from the brokerage. | [optional] 
+**BidSize** | Pointer to **float32** | The most recent bid size from the brokerage. | [optional] 
+**AskSize** | Pointer to **float32** | The most recent ask size from the brokerage. | [optional] 
 
 ## Methods
 
@@ -54,6 +54,31 @@ SetSymbol sets Symbol field to given value.
 `func (o *SymbolsQuotesInner) HasSymbol() bool`
 
 HasSymbol returns a boolean if a field has been set.
+
+### GetLastTradePrice
+
+`func (o *SymbolsQuotesInner) GetLastTradePrice() float32`
+
+GetLastTradePrice returns the LastTradePrice field if non-nil, zero value otherwise.
+
+### GetLastTradePriceOk
+
+`func (o *SymbolsQuotesInner) GetLastTradePriceOk() (*float32, bool)`
+
+GetLastTradePriceOk returns a tuple with the LastTradePrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastTradePrice
+
+`func (o *SymbolsQuotesInner) SetLastTradePrice(v float32)`
+
+SetLastTradePrice sets LastTradePrice field to given value.
+
+### HasLastTradePrice
+
+`func (o *SymbolsQuotesInner) HasLastTradePrice() bool`
+
+HasLastTradePrice returns a boolean if a field has been set.
 
 ### GetBidPrice
 
@@ -104,31 +129,6 @@ SetAskPrice sets AskPrice field to given value.
 `func (o *SymbolsQuotesInner) HasAskPrice() bool`
 
 HasAskPrice returns a boolean if a field has been set.
-
-### GetLastTradePrice
-
-`func (o *SymbolsQuotesInner) GetLastTradePrice() float32`
-
-GetLastTradePrice returns the LastTradePrice field if non-nil, zero value otherwise.
-
-### GetLastTradePriceOk
-
-`func (o *SymbolsQuotesInner) GetLastTradePriceOk() (*float32, bool)`
-
-GetLastTradePriceOk returns a tuple with the LastTradePrice field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLastTradePrice
-
-`func (o *SymbolsQuotesInner) SetLastTradePrice(v float32)`
-
-SetLastTradePrice sets LastTradePrice field to given value.
-
-### HasLastTradePrice
-
-`func (o *SymbolsQuotesInner) HasLastTradePrice() bool`
-
-HasLastTradePrice returns a boolean if a field has been set.
 
 ### GetBidSize
 

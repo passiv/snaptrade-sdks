@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ManualTradeSymbol;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;

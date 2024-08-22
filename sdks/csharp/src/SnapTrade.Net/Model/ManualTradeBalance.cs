@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Balance
+    /// Estimated remaining balance of the account after the trade is executed.
     /// </summary>
     [DataContract(Name = "ManualTradeBalance")]
     public partial class ManualTradeBalance : IEquatable<ManualTradeBalance>, IValidatableObject
@@ -37,8 +37,8 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="account">account.</param>
         /// <param name="currency">currency.</param>
-        /// <param name="cash">Cash.</param>
-        public ManualTradeBalance(Account account = default(Account), Currency currency = default(Currency), double? cash = default(double?)) : base()
+        /// <param name="cash">Estimated amount of cash remaining in the account after the trade. At the moment this is the same as &#x60;remaining_cash&#x60; under &#x60;trade_impacts&#x60;..</param>
+        public ManualTradeBalance(AccountSimple account = default(AccountSimple), Currency currency = default(Currency), double? cash = default(double?)) : base()
         {
             this.Account = account;
             this.Currency = currency;
@@ -50,7 +50,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets Account
         /// </summary>
         [DataMember(Name = "account", EmitDefaultValue = false)]
-        public Account Account { get; set; }
+        public AccountSimple Account { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -59,9 +59,9 @@ namespace SnapTrade.Net.Model
         public Currency Currency { get; set; }
 
         /// <summary>
-        /// Cash
+        /// Estimated amount of cash remaining in the account after the trade. At the moment this is the same as &#x60;remaining_cash&#x60; under &#x60;trade_impacts&#x60;.
         /// </summary>
-        /// <value>Cash</value>
+        /// <value>Estimated amount of cash remaining in the account after the trade. At the moment this is the same as &#x60;remaining_cash&#x60; under &#x60;trade_impacts&#x60;.</value>
         [DataMember(Name = "cash", EmitDefaultValue = true)]
         public double? Cash { get; set; }
 

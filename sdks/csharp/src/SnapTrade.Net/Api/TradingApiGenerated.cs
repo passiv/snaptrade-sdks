@@ -28,39 +28,39 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Cancel open order in account
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
         AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
 
         /// <summary>
-        /// Cancel open order in account
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
         /// <summary>
-        /// Check the impact of a trade on an account
+        /// Check order impact
         /// </summary>
         /// <remarks>
-        /// Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -71,10 +71,10 @@ namespace SnapTrade.Net.Api
         ManualTradeAndImpact GetOrderImpact(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
 
         /// <summary>
-        /// Check the impact of a trade on an account
+        /// Check order impact
         /// </summary>
         /// <remarks>
-        /// Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -87,14 +87,14 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;SymbolsQuotesInner&gt;</returns>
         List<SymbolsQuotesInner> GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
@@ -103,22 +103,22 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
         ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
         /// <summary>
-        /// Place a trade with NO validation.
+        /// Place order
         /// </summary>
         /// <remarks>
-        /// Places a specified trade in the specified account.
+        /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -129,10 +129,10 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
 
         /// <summary>
-        /// Place a trade with NO validation.
+        /// Place order
         /// </summary>
         /// <remarks>
-        /// Places a specified trade in the specified account.
+        /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -142,13 +142,13 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
         /// <summary>
-        /// Place order
+        /// Place checked order
         /// </summary>
         /// <remarks>
-        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -157,13 +157,13 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceOrder(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
 
         /// <summary>
-        /// Place order
+        /// Place checked order
         /// </summary>
         /// <remarks>
-        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -180,41 +180,41 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Cancel open order in account
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
         System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Cancel open order in account
+        /// Cancel order
         /// </summary>
         /// <remarks>
-        /// Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Check the impact of a trade on an account
+        /// Check order impact
         /// </summary>
         /// <remarks>
-        /// Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -226,10 +226,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<ManualTradeAndImpact> GetOrderImpactAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Check the impact of a trade on an account
+        /// Check order impact
         /// </summary>
         /// <remarks>
-        /// Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -243,14 +243,14 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;SymbolsQuotesInner&gt;</returns>
@@ -260,23 +260,23 @@ namespace SnapTrade.Net.Api
         /// Get symbol quotes
         /// </summary>
         /// <remarks>
-        /// Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<SymbolsQuotesInner>>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place a trade with NO validation.
+        /// Place order
         /// </summary>
         /// <remarks>
-        /// Places a specified trade in the specified account.
+        /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -288,10 +288,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place a trade with NO validation.
+        /// Place order
         /// </summary>
         /// <remarks>
-        /// Places a specified trade in the specified account.
+        /// Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -302,13 +302,13 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place order
+        /// Place checked order
         /// </summary>
         /// <remarks>
-        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -318,13 +318,13 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceOrderAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place order
+        /// Place checked order
         /// </summary>
         /// <remarks>
-        /// Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -453,13 +453,13 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel open order in account Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
         public AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
@@ -469,13 +469,13 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel open order in account Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
@@ -566,13 +566,13 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel open order in account Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
@@ -583,13 +583,13 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel open order in account Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+        /// Cancel order Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to cancel the order in.</param>
-        /// <param name="tradingCancelUserAccountOrderRequest">The Order ID to be canceled</param>
+        /// <param name="accountId"></param>
+        /// <param name="tradingCancelUserAccountOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
@@ -683,7 +683,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -698,7 +698,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -787,7 +787,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -803,7 +803,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Check the impact of a trade on an account Return the trade object and it&#39;s impact on the account for the specified order.
+        /// Check order impact Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -895,14 +895,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;SymbolsQuotesInner&gt;</returns>
         public List<SymbolsQuotesInner> GetUserAccountQuotes(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
@@ -912,14 +912,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
         public SnapTrade.Net.Client.ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0)
@@ -1013,14 +1013,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of List&lt;SymbolsQuotesInner&gt;</returns>
@@ -1031,14 +1031,14 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get symbol quotes Returns quote(s) from the brokerage for the specified symbol(s).
+        /// Get symbol quotes Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of universal_symbol_id or tickers to get quotes for.</param>
-        /// <param name="accountId">The ID of the account to get quotes.</param>
-        /// <param name="useTicker">Should be set to True if providing tickers. (optional)</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="accountId"></param>
+        /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
@@ -1135,7 +1135,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. Places a specified trade in the specified account.
+        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1150,7 +1150,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. Places a specified trade in the specified account.
+        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1239,7 +1239,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. Places a specified trade in the specified account.
+        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1255,7 +1255,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a trade with NO validation. Places a specified trade in the specified account.
+        /// Place order Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1347,10 +1347,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -1363,10 +1363,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -1454,10 +1454,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>
@@ -1471,10 +1471,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+        /// Place checked order Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="tradeId">The ID of trade object obtained from trade/impact endpoint</param>
+        /// <param name="tradeId">Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="validatedTradeBody"> (optional)</param>

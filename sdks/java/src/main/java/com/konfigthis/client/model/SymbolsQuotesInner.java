@@ -54,6 +54,10 @@ public class SymbolsQuotesInner {
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private UniversalSymbol symbol;
 
+  public static final String SERIALIZED_NAME_LAST_TRADE_PRICE = "last_trade_price";
+  @SerializedName(SERIALIZED_NAME_LAST_TRADE_PRICE)
+  private Double lastTradePrice;
+
   public static final String SERIALIZED_NAME_BID_PRICE = "bid_price";
   @SerializedName(SERIALIZED_NAME_BID_PRICE)
   private Double bidPrice;
@@ -61,10 +65,6 @@ public class SymbolsQuotesInner {
   public static final String SERIALIZED_NAME_ASK_PRICE = "ask_price";
   @SerializedName(SERIALIZED_NAME_ASK_PRICE)
   private Double askPrice;
-
-  public static final String SERIALIZED_NAME_LAST_TRADE_PRICE = "last_trade_price";
-  @SerializedName(SERIALIZED_NAME_LAST_TRADE_PRICE)
-  private Double lastTradePrice;
 
   public static final String SERIALIZED_NAME_BID_SIZE = "bid_size";
   @SerializedName(SERIALIZED_NAME_BID_SIZE)
@@ -106,6 +106,44 @@ public class SymbolsQuotesInner {
   }
 
 
+  public SymbolsQuotesInner lastTradePrice(Double lastTradePrice) {
+    
+    
+    
+    
+    this.lastTradePrice = lastTradePrice;
+    return this;
+  }
+
+  public SymbolsQuotesInner lastTradePrice(Integer lastTradePrice) {
+    
+    
+    
+    
+    this.lastTradePrice = lastTradePrice.doubleValue();
+    return this;
+  }
+
+   /**
+   * The most recent trade price from the brokerage.
+   * @return lastTradePrice
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "8.74", value = "The most recent trade price from the brokerage.")
+
+  public Double getLastTradePrice() {
+    return lastTradePrice;
+  }
+
+
+  public void setLastTradePrice(Double lastTradePrice) {
+    
+    
+    
+    this.lastTradePrice = lastTradePrice;
+  }
+
+
   public SymbolsQuotesInner bidPrice(Double bidPrice) {
     
     
@@ -125,11 +163,11 @@ public class SymbolsQuotesInner {
   }
 
    /**
-   * Get bidPrice
+   * The most recent bid price from the brokerage.
    * @return bidPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "8.43", value = "")
+  @ApiModelProperty(example = "8.43", value = "The most recent bid price from the brokerage.")
 
   public Double getBidPrice() {
     return bidPrice;
@@ -163,11 +201,11 @@ public class SymbolsQuotesInner {
   }
 
    /**
-   * Get askPrice
+   * The most recent price from the brokerage.
    * @return askPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "8.43", value = "")
+  @ApiModelProperty(example = "8.43", value = "The most recent price from the brokerage.")
 
   public Double getAskPrice() {
     return askPrice;
@@ -179,44 +217,6 @@ public class SymbolsQuotesInner {
     
     
     this.askPrice = askPrice;
-  }
-
-
-  public SymbolsQuotesInner lastTradePrice(Double lastTradePrice) {
-    
-    
-    
-    
-    this.lastTradePrice = lastTradePrice;
-    return this;
-  }
-
-  public SymbolsQuotesInner lastTradePrice(Integer lastTradePrice) {
-    
-    
-    
-    
-    this.lastTradePrice = lastTradePrice.doubleValue();
-    return this;
-  }
-
-   /**
-   * Get lastTradePrice
-   * @return lastTradePrice
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "8.74", value = "")
-
-  public Double getLastTradePrice() {
-    return lastTradePrice;
-  }
-
-
-  public void setLastTradePrice(Double lastTradePrice) {
-    
-    
-    
-    this.lastTradePrice = lastTradePrice;
   }
 
 
@@ -239,11 +239,11 @@ public class SymbolsQuotesInner {
   }
 
    /**
-   * Get bidSize
+   * The most recent bid size from the brokerage.
    * @return bidSize
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "260", value = "")
+  @ApiModelProperty(example = "260", value = "The most recent bid size from the brokerage.")
 
   public Double getBidSize() {
     return bidSize;
@@ -277,11 +277,11 @@ public class SymbolsQuotesInner {
   }
 
    /**
-   * Get askSize
+   * The most recent ask size from the brokerage.
    * @return askSize
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "344", value = "")
+  @ApiModelProperty(example = "344", value = "The most recent ask size from the brokerage.")
 
   public Double getAskSize() {
     return askSize;
@@ -351,9 +351,9 @@ public class SymbolsQuotesInner {
     }
     SymbolsQuotesInner symbolsQuotesInner = (SymbolsQuotesInner) o;
     return Objects.equals(this.symbol, symbolsQuotesInner.symbol) &&
+        Objects.equals(this.lastTradePrice, symbolsQuotesInner.lastTradePrice) &&
         Objects.equals(this.bidPrice, symbolsQuotesInner.bidPrice) &&
         Objects.equals(this.askPrice, symbolsQuotesInner.askPrice) &&
-        Objects.equals(this.lastTradePrice, symbolsQuotesInner.lastTradePrice) &&
         Objects.equals(this.bidSize, symbolsQuotesInner.bidSize) &&
         Objects.equals(this.askSize, symbolsQuotesInner.askSize)&&
         Objects.equals(this.additionalProperties, symbolsQuotesInner.additionalProperties);
@@ -361,7 +361,7 @@ public class SymbolsQuotesInner {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, bidPrice, askPrice, lastTradePrice, bidSize, askSize, additionalProperties);
+    return Objects.hash(symbol, lastTradePrice, bidPrice, askPrice, bidSize, askSize, additionalProperties);
   }
 
   @Override
@@ -369,9 +369,9 @@ public class SymbolsQuotesInner {
     StringBuilder sb = new StringBuilder();
     sb.append("class SymbolsQuotesInner {\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    lastTradePrice: ").append(toIndentedString(lastTradePrice)).append("\n");
     sb.append("    bidPrice: ").append(toIndentedString(bidPrice)).append("\n");
     sb.append("    askPrice: ").append(toIndentedString(askPrice)).append("\n");
-    sb.append("    lastTradePrice: ").append(toIndentedString(lastTradePrice)).append("\n");
     sb.append("    bidSize: ").append(toIndentedString(bidSize)).append("\n");
     sb.append("    askSize: ").append(toIndentedString(askSize)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -398,9 +398,9 @@ public class SymbolsQuotesInner {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("symbol");
+    openapiFields.add("last_trade_price");
     openapiFields.add("bid_price");
     openapiFields.add("ask_price");
-    openapiFields.add("last_trade_price");
     openapiFields.add("bid_size");
     openapiFields.add("ask_size");
 

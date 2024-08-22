@@ -17,6 +17,7 @@ import (
 
 // TradingCancelUserAccountOrderRequest struct for TradingCancelUserAccountOrderRequest
 type TradingCancelUserAccountOrderRequest struct {
+	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
 }
 

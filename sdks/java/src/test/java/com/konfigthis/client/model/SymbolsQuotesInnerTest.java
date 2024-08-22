@@ -48,6 +48,14 @@ public class SymbolsQuotesInnerTest {
     }
 
     /**
+     * Test the property 'lastTradePrice'
+     */
+    @Test
+    public void lastTradePriceTest() {
+        // TODO: test lastTradePrice
+    }
+
+    /**
      * Test the property 'bidPrice'
      */
     @Test
@@ -61,14 +69,6 @@ public class SymbolsQuotesInnerTest {
     @Test
     public void askPriceTest() {
         // TODO: test askPrice
-    }
-
-    /**
-     * Test the property 'lastTradePrice'
-     */
-    @Test
-    public void lastTradePriceTest() {
-        // TODO: test lastTradePrice
     }
 
     /**

@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** |  | [optional] 
-**Account** | Pointer to **string** |  | [optional] 
+**Id** | Pointer to **string** | Unique identifier for the submitted order through SnapTrade. | [optional] 
+**Account** | Pointer to **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | [optional] 
 **OrderType** | Pointer to [**OrderTypeStrict**](OrderTypeStrict.md) |  | [optional] 
-**TimeInForce** | Pointer to **string** | Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date  | [optional] 
+**TimeInForce** | Pointer to [**TimeInForceStrict**](TimeInForceStrict.md) |  | [optional] 
 **Symbol** | Pointer to [**ManualTradeSymbol**](ManualTradeSymbol.md) |  | [optional] 
 **Action** | Pointer to [**ActionStrict**](ActionStrict.md) |  | [optional] 
 **Units** | Pointer to **NullableFloat32** |  | [optional] 
@@ -109,20 +109,20 @@ HasOrderType returns a boolean if a field has been set.
 
 ### GetTimeInForce
 
-`func (o *ManualTrade) GetTimeInForce() string`
+`func (o *ManualTrade) GetTimeInForce() TimeInForceStrict`
 
 GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
 
 ### GetTimeInForceOk
 
-`func (o *ManualTrade) GetTimeInForceOk() (*string, bool)`
+`func (o *ManualTrade) GetTimeInForceOk() (*TimeInForceStrict, bool)`
 
 GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeInForce
 
-`func (o *ManualTrade) SetTimeInForce(v string)`
+`func (o *ManualTrade) SetTimeInForce(v TimeInForceStrict)`
 
 SetTimeInForce sets TimeInForce field to given value.
 

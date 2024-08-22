@@ -27,8 +27,8 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class GetOrderImpactRequestBuilder extends GetOrderImpactRequestBuilderGenerated {
-        public GetOrderImpactRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
+        public GetOrderImpactRequestBuilder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+            super(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
         }
     }
     public class GetUserAccountQuotesRequestBuilder extends GetUserAccountQuotesRequestBuilderGenerated {
@@ -37,8 +37,8 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {
-        public PlaceForceOrderRequestBuilder(String userId, String userSecret) {
-            super(userId, userSecret);
+        public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+            super(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
         }
     }
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {

@@ -1123,7 +1123,7 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    order_type: "Limit",
+    order_type: "Market",
     time_in_force: "FOK",
     price: 31.33,
   }
@@ -1134,11 +1134,11 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
 
 ##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
-Order Type
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
 
 ##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1486,8 +1486,7 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
-Sends a signal to the brokerage to cancel the specified order.
-This will only work if the order has not yet been executed.
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1498,7 +1497,7 @@ const cancelUserAccountOrderResponse =
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   });
 ```
 
@@ -1510,9 +1509,9 @@ const cancelUserAccountOrderResponse =
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-The ID of the account to cancel the order in.
-
 ##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1529,7 +1528,7 @@ The ID of the account to cancel the order in.
 
 ### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1537,47 +1536,52 @@ Return the trade object and it's impact on the account for the specified order.
 const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
-  order_type: "Limit",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  order_type: "Market",
+  time_in_force: "FOK",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "FOK",
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  units: 10.5,
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### account_id: `string`<a id="account_id-string"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
-
-Trade Action
-
-##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
-
-Order Type
-
 ##### price: `number`<a id="price-number"></a>
 
-Trade Price if limit or stop limit order
+The limit price for `Limit` and `StopLimit` orders.
 
 ##### stop: `number`<a id="stop-number"></a>
 
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
-
-##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
-
-Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
-
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
@@ -1596,7 +1600,7 @@ Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Goo
 
 ### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1618,15 +1622,13 @@ const getUserAccountQuotesResponse =
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
-List of universal_symbol_id or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for.
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-The ID of the account to get quotes.
-
 ##### useTicker: `boolean`<a id="useticker-boolean"></a>
 
-Should be set to True if providing tickers.
+Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1643,7 +1645,10 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+
+This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1651,47 +1656,52 @@ Places a specified trade in the specified account.
 const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
-  order_type: "Limit",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  order_type: "Market",
+  time_in_force: "FOK",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "FOK",
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  units: 10.5,
 });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### account_id: `string`<a id="account_id-string"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+
+##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
-##### account_id: `string`<a id="account_id-string"></a>
-
-##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
-
-Trade Action
-
-##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
-
-Order Type
-
 ##### price: `number`<a id="price-number"></a>
 
-Trade Price if limit or stop limit order
+The limit price for `Limit` and `StopLimit` orders.
 
 ##### stop: `number`<a id="stop-number"></a>
 
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
-
-##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
-
-Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
-
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
@@ -1710,15 +1720,14 @@ Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Goo
 
 ### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
-Places the specified trade object. This places the order in the account and
-returns the status of the order from the brokerage.
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```typescript
 const placeOrderResponse = await snaptrade.trading.placeOrder({
-  tradeId: "tradeId_example",
+  tradeId: "139e307a-82f7-4402-b39e-4da7baa87758",
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   wait_to_confirm: true,
@@ -1729,7 +1738,7 @@ const placeOrderResponse = await snaptrade.trading.placeOrder({
 
 ##### tradeId: `string`<a id="tradeid-string"></a>
 
-The ID of trade object obtained from trade/impact endpoint
+Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1737,7 +1746,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ##### wait_to_confirm: `boolean`<a id="wait_to_confirm-boolean"></a>
 
-Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

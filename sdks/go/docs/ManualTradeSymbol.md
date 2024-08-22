@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BrokerageSymbolId** | Pointer to **string** |  | [optional] 
-**UniversalSymbolId** | Pointer to **string** |  | [optional] 
+**BrokerageSymbolId** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**UniversalSymbolId** | Pointer to **string** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | [optional] 
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
-**LocalId** | Pointer to **string** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**Symbol** | Pointer to **string** |  | [optional] 
+**LocalId** | Pointer to **string** | This field is deprecated and should not be used. | [optional] 
+**Description** | Pointer to **NullableString** | This field is deprecated and should not be used. | [optional] 
+**Symbol** | Pointer to **string** | This field is deprecated and should not be used. | [optional] 
 
 ## Methods
 

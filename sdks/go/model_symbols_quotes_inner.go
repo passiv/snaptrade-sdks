@@ -18,10 +18,15 @@ import (
 // SymbolsQuotesInner struct for SymbolsQuotesInner
 type SymbolsQuotesInner struct {
 	Symbol *UniversalSymbol `json:"symbol,omitempty"`
-	BidPrice *float32 `json:"bid_price,omitempty"`
-	AskPrice *float32 `json:"ask_price,omitempty"`
+	// The most recent trade price from the brokerage.
 	LastTradePrice *float32 `json:"last_trade_price,omitempty"`
+	// The most recent bid price from the brokerage.
+	BidPrice *float32 `json:"bid_price,omitempty"`
+	// The most recent price from the brokerage.
+	AskPrice *float32 `json:"ask_price,omitempty"`
+	// The most recent bid size from the brokerage.
 	BidSize *float32 `json:"bid_size,omitempty"`
+	// The most recent ask size from the brokerage.
 	AskSize *float32 `json:"ask_size,omitempty"`
 }
 
@@ -72,6 +77,38 @@ func (o *SymbolsQuotesInner) HasSymbol() bool {
 // SetSymbol gets a reference to the given UniversalSymbol and assigns it to the Symbol field.
 func (o *SymbolsQuotesInner) SetSymbol(v UniversalSymbol) {
 	o.Symbol = &v
+}
+
+// GetLastTradePrice returns the LastTradePrice field value if set, zero value otherwise.
+func (o *SymbolsQuotesInner) GetLastTradePrice() float32 {
+	if o == nil || isNil(o.LastTradePrice) {
+		var ret float32
+		return ret
+	}
+	return *o.LastTradePrice
+}
+
+// GetLastTradePriceOk returns a tuple with the LastTradePrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SymbolsQuotesInner) GetLastTradePriceOk() (*float32, bool) {
+	if o == nil || isNil(o.LastTradePrice) {
+    return nil, false
+	}
+	return o.LastTradePrice, true
+}
+
+// HasLastTradePrice returns a boolean if a field has been set.
+func (o *SymbolsQuotesInner) HasLastTradePrice() bool {
+	if o != nil && !isNil(o.LastTradePrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetLastTradePrice gets a reference to the given float32 and assigns it to the LastTradePrice field.
+func (o *SymbolsQuotesInner) SetLastTradePrice(v float32) {
+	o.LastTradePrice = &v
 }
 
 // GetBidPrice returns the BidPrice field value if set, zero value otherwise.
@@ -136,38 +173,6 @@ func (o *SymbolsQuotesInner) HasAskPrice() bool {
 // SetAskPrice gets a reference to the given float32 and assigns it to the AskPrice field.
 func (o *SymbolsQuotesInner) SetAskPrice(v float32) {
 	o.AskPrice = &v
-}
-
-// GetLastTradePrice returns the LastTradePrice field value if set, zero value otherwise.
-func (o *SymbolsQuotesInner) GetLastTradePrice() float32 {
-	if o == nil || isNil(o.LastTradePrice) {
-		var ret float32
-		return ret
-	}
-	return *o.LastTradePrice
-}
-
-// GetLastTradePriceOk returns a tuple with the LastTradePrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SymbolsQuotesInner) GetLastTradePriceOk() (*float32, bool) {
-	if o == nil || isNil(o.LastTradePrice) {
-    return nil, false
-	}
-	return o.LastTradePrice, true
-}
-
-// HasLastTradePrice returns a boolean if a field has been set.
-func (o *SymbolsQuotesInner) HasLastTradePrice() bool {
-	if o != nil && !isNil(o.LastTradePrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastTradePrice gets a reference to the given float32 and assigns it to the LastTradePrice field.
-func (o *SymbolsQuotesInner) SetLastTradePrice(v float32) {
-	o.LastTradePrice = &v
 }
 
 // GetBidSize returns the BidSize field value if set, zero value otherwise.
@@ -239,14 +244,14 @@ func (o SymbolsQuotesInner) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
 	}
+	if !isNil(o.LastTradePrice) {
+		toSerialize["last_trade_price"] = o.LastTradePrice
+	}
 	if !isNil(o.BidPrice) {
 		toSerialize["bid_price"] = o.BidPrice
 	}
 	if !isNil(o.AskPrice) {
 		toSerialize["ask_price"] = o.AskPrice
-	}
-	if !isNil(o.LastTradePrice) {
-		toSerialize["last_trade_price"] = o.LastTradePrice
 	}
 	if !isNil(o.BidSize) {
 		toSerialize["bid_size"] = o.BidSize

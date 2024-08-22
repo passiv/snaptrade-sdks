@@ -13,12 +13,12 @@
 import unittest
 
 import snaptrade_client
-from snaptrade_client.model.cash import Cash
+from snaptrade_client.model.currency_id import CurrencyID
 from snaptrade_client import configuration
 
 
-class TestCash(unittest.TestCase):
-    """Cash unit test stubs"""
+class TestCurrencyID(unittest.TestCase):
+    """CurrencyID unit test stubs"""
     pass
 
 

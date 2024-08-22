@@ -18,30 +18,31 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
-from snaptrade_client.type.price import Price
-from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.units_nullable import UnitsNullable
 
 class RequiredManualTradeForm(TypedDict):
-    pass
-
-class OptionalManualTradeForm(TypedDict, total=False):
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     account_id: str
 
     action: ActionStrict
 
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    universal_symbol_id: str
+
     order_type: OrderTypeStrict
-
-    price: Price
-
-    stop: StopPrice
 
     time_in_force: TimeInForceStrict
 
-    units: UnitsNullable
 
-    universal_symbol_id: str
+class OptionalManualTradeForm(TypedDict, total=False):
+    # The limit price for `Limit` and `StopLimit` orders.
+    price: typing.Optional[typing.Union[int, float]]
+
+    # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    stop: typing.Optional[typing.Union[int, float]]
+
+    units: UnitsNullable
 
     notional_value: typing.Optional[NotionalValueNullable]
 

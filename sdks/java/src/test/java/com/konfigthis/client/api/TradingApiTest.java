@@ -51,9 +51,9 @@ public class TradingApiTest {
     }
 
     /**
-     * Cancel open order in account
+     * Cancel order
      *
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -62,7 +62,7 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        UUID brokerageOrderId = null;
+        String brokerageOrderId = null;
         AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId)
                 .brokerageOrderId(brokerageOrderId)
                 .execute();
@@ -70,34 +70,29 @@ public class TradingApiTest {
     }
 
     /**
-     * Check the impact of a trade on an account
+     * Check order impact
      *
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void getOrderImpactTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
         UUID accountId = null;
         ActionStrict action = null;
+        UUID universalSymbolId = null;
         OrderTypeStrict orderType = null;
+        TimeInForceStrict timeInForce = null;
+        String userId = null;
+        String userSecret = null;
         Double price = null;
         Double stop = null;
-        TimeInForceStrict timeInForce = null;
         Double units = null;
-        UUID universalSymbolId = null;
         Object notionalValue = null;
-        ManualTradeAndImpact response = api.getOrderImpact(userId, userSecret)
-                .accountId(accountId)
-                .action(action)
-                .orderType(orderType)
+        ManualTradeAndImpact response = api.getOrderImpact(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
                 .price(price)
                 .stop(stop)
-                .timeInForce(timeInForce)
                 .units(units)
-                .universalSymbolId(universalSymbolId)
                 .notionalValue(notionalValue)
                 .execute();
         // TODO: test validations
@@ -106,7 +101,7 @@ public class TradingApiTest {
     /**
      * Get symbol quotes
      *
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      *
      * @throws ApiException if the Api call fails
      */
@@ -124,43 +119,38 @@ public class TradingApiTest {
     }
 
     /**
-     * Place a trade with NO validation.
+     * Place order
      *
-     * Places a specified trade in the specified account.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void placeForceOrderTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
         UUID accountId = null;
         ActionStrict action = null;
+        UUID universalSymbolId = null;
         OrderTypeStrict orderType = null;
+        TimeInForceStrict timeInForce = null;
+        String userId = null;
+        String userSecret = null;
         Double price = null;
         Double stop = null;
-        TimeInForceStrict timeInForce = null;
         Double units = null;
-        UUID universalSymbolId = null;
         Object notionalValue = null;
-        AccountOrderRecord response = api.placeForceOrder(userId, userSecret)
-                .accountId(accountId)
-                .action(action)
-                .orderType(orderType)
+        AccountOrderRecord response = api.placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
                 .price(price)
                 .stop(stop)
-                .timeInForce(timeInForce)
                 .units(units)
-                .universalSymbolId(universalSymbolId)
                 .notionalValue(notionalValue)
                 .execute();
         // TODO: test validations
     }
 
     /**
-     * Place order
+     * Place checked order
      *
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
      *
      * @throws ApiException if the Api call fails
      */

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Account** | Pointer to [**Account**](Account.md) |  | [optional] 
+**Account** | Pointer to [**AccountSimple**](AccountSimple.md) |  | [optional] 
 **Currency** | Pointer to [**Currency**](Currency.md) |  | [optional] 
-**Cash** | Pointer to **NullableFloat32** | Cash | [optional] 
+**Cash** | Pointer to **NullableFloat32** | Estimated amount of cash remaining in the account after the trade. At the moment this is the same as &#x60;remaining_cash&#x60; under &#x60;trade_impacts&#x60;. | [optional] 
 
 ## Methods
 
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAccount
 
-`func (o *ManualTradeBalance) GetAccount() Account`
+`func (o *ManualTradeBalance) GetAccount() AccountSimple`
 
 GetAccount returns the Account field if non-nil, zero value otherwise.
 
 ### GetAccountOk
 
-`func (o *ManualTradeBalance) GetAccountOk() (*Account, bool)`
+`func (o *ManualTradeBalance) GetAccountOk() (*AccountSimple, bool)`
 
 GetAccountOk returns a tuple with the Account field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccount
 
-`func (o *ManualTradeBalance) SetAccount(v Account)`
+`func (o *ManualTradeBalance) SetAccount(v AccountSimple)`
 
 SetAccount sets Account field to given value.
 

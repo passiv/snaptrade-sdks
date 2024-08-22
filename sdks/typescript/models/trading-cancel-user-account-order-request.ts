@@ -18,7 +18,7 @@ import type * as buffer from "buffer"
  */
 export interface TradingCancelUserAccountOrderRequest {
     /**
-     * 
+     * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
      * @type {string}
      * @memberof TradingCancelUserAccountOrderRequest
      */

@@ -34,13 +34,11 @@ from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
-from snaptrade_client.model.stop_price import StopPrice as StopPriceSchema
 from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
 from snaptrade_client.model.manual_trade_form import ManualTradeForm as ManualTradeFormSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
-from snaptrade_client.model.price import Price as PriceSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
@@ -50,11 +48,9 @@ from snaptrade_client.type.manual_trade_form import ManualTradeForm
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
-from snaptrade_client.type.stop_price import StopPrice
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
-from snaptrade_client.type.price import Price
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -192,16 +188,16 @@ class BaseApi(api_client.Api):
     def _place_force_order_mapped_args(
         self,
         body: typing.Optional[ManualTradeForm] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrict] = None,
-        order_type: typing.Optional[OrderTypeStrict] = None,
-        price: typing.Optional[Price] = None,
-        stop: typing.Optional[StopPrice] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -212,18 +208,18 @@ class BaseApi(api_client.Api):
             _body["account_id"] = account_id
         if action is not None:
             _body["action"] = action
+        if universal_symbol_id is not None:
+            _body["universal_symbol_id"] = universal_symbol_id
         if order_type is not None:
             _body["order_type"] = order_type
+        if time_in_force is not None:
+            _body["time_in_force"] = time_in_force
         if price is not None:
             _body["price"] = price
         if stop is not None:
             _body["stop"] = stop
-        if time_in_force is not None:
-            _body["time_in_force"] = time_in_force
         if units is not None:
             _body["units"] = units
-        if universal_symbol_id is not None:
-            _body["universal_symbol_id"] = universal_symbol_id
         if notional_value is not None:
             _body["notional_value"] = notional_value
         args.body = body if body is not None else _body
@@ -250,7 +246,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Place a trade with NO validation.
+        Place order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -381,7 +377,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Place a trade with NO validation.
+        Place order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -473,16 +469,16 @@ class PlaceForceOrder(BaseApi):
     async def aplace_force_order(
         self,
         body: typing.Optional[ManualTradeForm] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrict] = None,
-        order_type: typing.Optional[OrderTypeStrict] = None,
-        price: typing.Optional[Price] = None,
-        stop: typing.Optional[StopPrice] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
@@ -494,16 +490,16 @@ class PlaceForceOrder(BaseApi):
         args = self._place_force_order_mapped_args(
             body=body,
             query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             action=action,
+            universal_symbol_id=universal_symbol_id,
             order_type=order_type,
+            time_in_force=time_in_force,
+            user_id=user_id,
+            user_secret=user_secret,
             price=price,
             stop=stop,
-            time_in_force=time_in_force,
             units=units,
-            universal_symbol_id=universal_symbol_id,
             notional_value=notional_value,
         )
         return await self._aplace_force_order_oapg(
@@ -515,36 +511,36 @@ class PlaceForceOrder(BaseApi):
     def place_force_order(
         self,
         body: typing.Optional[ManualTradeForm] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrict] = None,
-        order_type: typing.Optional[OrderTypeStrict] = None,
-        price: typing.Optional[Price] = None,
-        stop: typing.Optional[StopPrice] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a specified trade in the specified account. """
+        """ Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  """
         args = self._place_force_order_mapped_args(
             body=body,
             query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             action=action,
+            universal_symbol_id=universal_symbol_id,
             order_type=order_type,
+            time_in_force=time_in_force,
+            user_id=user_id,
+            user_secret=user_secret,
             price=price,
             stop=stop,
-            time_in_force=time_in_force,
             units=units,
-            universal_symbol_id=universal_symbol_id,
             notional_value=notional_value,
         )
         return self._place_force_order_oapg(
@@ -558,16 +554,16 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         body: typing.Optional[ManualTradeForm] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrict] = None,
-        order_type: typing.Optional[OrderTypeStrict] = None,
-        price: typing.Optional[Price] = None,
-        stop: typing.Optional[StopPrice] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
@@ -579,16 +575,16 @@ class ApiForpost(BaseApi):
         args = self._place_force_order_mapped_args(
             body=body,
             query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             action=action,
+            universal_symbol_id=universal_symbol_id,
             order_type=order_type,
+            time_in_force=time_in_force,
+            user_id=user_id,
+            user_secret=user_secret,
             price=price,
             stop=stop,
-            time_in_force=time_in_force,
             units=units,
-            universal_symbol_id=universal_symbol_id,
             notional_value=notional_value,
         )
         return await self._aplace_force_order_oapg(
@@ -600,36 +596,36 @@ class ApiForpost(BaseApi):
     def post(
         self,
         body: typing.Optional[ManualTradeForm] = None,
-        user_id: typing.Optional[str] = None,
-        user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         action: typing.Optional[ActionStrict] = None,
-        order_type: typing.Optional[OrderTypeStrict] = None,
-        price: typing.Optional[Price] = None,
-        stop: typing.Optional[StopPrice] = None,
-        time_in_force: typing.Optional[TimeInForceStrict] = None,
-        units: typing.Optional[UnitsNullable] = None,
         universal_symbol_id: typing.Optional[str] = None,
+        order_type: typing.Optional[OrderTypeStrict] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
+        user_id: typing.Optional[str] = None,
+        user_secret: typing.Optional[str] = None,
+        price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         notional_value: typing.Optional[NotionalValueNullable] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a specified trade in the specified account. """
+        """ Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  """
         args = self._place_force_order_mapped_args(
             body=body,
             query_params=query_params,
-            user_id=user_id,
-            user_secret=user_secret,
             account_id=account_id,
             action=action,
+            universal_symbol_id=universal_symbol_id,
             order_type=order_type,
+            time_in_force=time_in_force,
+            user_id=user_id,
+            user_secret=user_secret,
             price=price,
             stop=stop,
-            time_in_force=time_in_force,
             units=units,
-            universal_symbol_id=universal_symbol_id,
             notional_value=notional_value,
         )
         return self._place_force_order_oapg(

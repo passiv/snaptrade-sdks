@@ -19,6 +19,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ManualTrade;
 import com.konfigthis.client.model.ManualTradeBalance;
+import com.konfigthis.client.model.ManualTradeImpact;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;

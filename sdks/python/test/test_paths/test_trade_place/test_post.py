@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestTradePlace(ApiTestMixin, unittest.TestCase):
     """
     TradePlace unit test stubs
-        Place a trade with NO validation.
+        Place order
     """
 
     def setUp(self):

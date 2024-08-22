@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A manual trade object
+    /// Contains the details of a submitted order.
     /// </summary>
     [DataContract(Name = "ManualTrade")]
     public partial class ManualTrade : IEquatable<ManualTrade>, IValidatableObject
@@ -40,6 +40,12 @@ namespace SnapTrade.Net.Model
         public OrderTypeStrict? OrderType { get; set; }
 
         /// <summary>
+        /// Gets or Sets TimeInForce
+        /// </summary>
+        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
+        public TimeInForceStrict? TimeInForce { get; set; }
+
+        /// <summary>
         /// Gets or Sets _Action
         /// </summary>
         [DataMember(Name = "action", EmitDefaultValue = false)]
@@ -47,15 +53,15 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTrade" /> class.
         /// </summary>
-        /// <param name="id">id.</param>
-        /// <param name="account">account.</param>
+        /// <param name="id">Unique identifier for the submitted order through SnapTrade..</param>
+        /// <param name="account">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade..</param>
         /// <param name="orderType">orderType.</param>
-        /// <param name="timeInForce">Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date .</param>
+        /// <param name="timeInForce">timeInForce.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="action">action.</param>
-        /// <param name="units">Trade Units. Cannot work with notional value..</param>
+        /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
         /// <param name="price">Trade Price if limit or stop limit order.</param>
-        public ManualTrade(string id = default(string), string account = default(string), OrderTypeStrict? orderType = default(OrderTypeStrict?), string timeInForce = default(string), ManualTradeSymbol symbol = default(ManualTradeSymbol), ActionStrict? action = default(ActionStrict?), double? units = default(double?), double? price = default(double?)) : base()
+        public ManualTrade(string id = default(string), string account = default(string), OrderTypeStrict? orderType = default(OrderTypeStrict?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), ManualTradeSymbol symbol = default(ManualTradeSymbol), ActionStrict? action = default(ActionStrict?), double? units = default(double?), double? price = default(double?)) : base()
         {
             this.Id = id;
             this.Account = account;
@@ -69,23 +75,18 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets Id
+        /// Unique identifier for the submitted order through SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the submitted order through SnapTrade.</value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets or Sets Account
+        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
         /// </summary>
+        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
         [DataMember(Name = "account", EmitDefaultValue = false)]
         public string Account { get; set; }
-
-        /// <summary>
-        /// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
-        /// </summary>
-        /// <value>Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date </value>
-        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public string TimeInForce { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
@@ -94,9 +95,9 @@ namespace SnapTrade.Net.Model
         public ManualTradeSymbol Symbol { get; set; }
 
         /// <summary>
-        /// Trade Units. Cannot work with notional value.
+        /// Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.
         /// </summary>
-        /// <value>Trade Units. Cannot work with notional value.</value>
+        /// <value>Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.</value>
         [DataMember(Name = "units", EmitDefaultValue = true)]
         public double? Units { get; set; }
 
@@ -182,8 +183,7 @@ namespace SnapTrade.Net.Model
                 ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
-                    (this.TimeInForce != null &&
-                    this.TimeInForce.Equals(input.TimeInForce))
+                    this.TimeInForce.Equals(input.TimeInForce)
                 ) && base.Equals(input) && 
                 (
                     this.Symbol == input.Symbol ||
@@ -225,10 +225,7 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Account.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
-                if (this.TimeInForce != null)
-                {
-                    hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
-                }
+                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();

@@ -15,13 +15,22 @@ import (
 	"encoding/json"
 )
 
-// ManualTradeSymbol Manual trade symbol object
+// ManualTradeSymbol Information about the security for the order.
 type ManualTradeSymbol struct {
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
 	BrokerageSymbolId *string `json:"brokerage_symbol_id,omitempty"`
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	UniversalSymbolId *string `json:"universal_symbol_id,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
+	// This field is deprecated and should not be used.
+	// Deprecated
 	LocalId *string `json:"local_id,omitempty"`
+	// This field is deprecated and should not be used.
+	// Deprecated
 	Description NullableString `json:"description,omitempty"`
+	// This field is deprecated and should not be used.
+	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -46,6 +55,7 @@ func NewManualTradeSymbolWithDefaults() *ManualTradeSymbol {
 }
 
 // GetBrokerageSymbolId returns the BrokerageSymbolId field value if set, zero value otherwise.
+// Deprecated
 func (o *ManualTradeSymbol) GetBrokerageSymbolId() string {
 	if o == nil || isNil(o.BrokerageSymbolId) {
 		var ret string
@@ -56,6 +66,7 @@ func (o *ManualTradeSymbol) GetBrokerageSymbolId() string {
 
 // GetBrokerageSymbolIdOk returns a tuple with the BrokerageSymbolId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ManualTradeSymbol) GetBrokerageSymbolIdOk() (*string, bool) {
 	if o == nil || isNil(o.BrokerageSymbolId) {
     return nil, false
@@ -73,6 +84,7 @@ func (o *ManualTradeSymbol) HasBrokerageSymbolId() bool {
 }
 
 // SetBrokerageSymbolId gets a reference to the given string and assigns it to the BrokerageSymbolId field.
+// Deprecated
 func (o *ManualTradeSymbol) SetBrokerageSymbolId(v string) {
 	o.BrokerageSymbolId = &v
 }
@@ -142,6 +154,7 @@ func (o *ManualTradeSymbol) SetCurrency(v Currency) {
 }
 
 // GetLocalId returns the LocalId field value if set, zero value otherwise.
+// Deprecated
 func (o *ManualTradeSymbol) GetLocalId() string {
 	if o == nil || isNil(o.LocalId) {
 		var ret string
@@ -152,6 +165,7 @@ func (o *ManualTradeSymbol) GetLocalId() string {
 
 // GetLocalIdOk returns a tuple with the LocalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ManualTradeSymbol) GetLocalIdOk() (*string, bool) {
 	if o == nil || isNil(o.LocalId) {
     return nil, false
@@ -169,11 +183,13 @@ func (o *ManualTradeSymbol) HasLocalId() bool {
 }
 
 // SetLocalId gets a reference to the given string and assigns it to the LocalId field.
+// Deprecated
 func (o *ManualTradeSymbol) SetLocalId(v string) {
 	o.LocalId = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *ManualTradeSymbol) GetDescription() string {
 	if o == nil || isNil(o.Description.Get()) {
 		var ret string
@@ -185,6 +201,7 @@ func (o *ManualTradeSymbol) GetDescription() string {
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *ManualTradeSymbol) GetDescriptionOk() (*string, bool) {
 	if o == nil {
     return nil, false
@@ -202,6 +219,7 @@ func (o *ManualTradeSymbol) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// Deprecated
 func (o *ManualTradeSymbol) SetDescription(v string) {
 	o.Description.Set(&v)
 }
@@ -216,6 +234,7 @@ func (o *ManualTradeSymbol) UnsetDescription() {
 }
 
 // GetSymbol returns the Symbol field value if set, zero value otherwise.
+// Deprecated
 func (o *ManualTradeSymbol) GetSymbol() string {
 	if o == nil || isNil(o.Symbol) {
 		var ret string
@@ -226,6 +245,7 @@ func (o *ManualTradeSymbol) GetSymbol() string {
 
 // GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ManualTradeSymbol) GetSymbolOk() (*string, bool) {
 	if o == nil || isNil(o.Symbol) {
     return nil, false
@@ -243,6 +263,7 @@ func (o *ManualTradeSymbol) HasSymbol() bool {
 }
 
 // SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// Deprecated
 func (o *ManualTradeSymbol) SetSymbol(v string) {
 	o.Symbol = &v
 }

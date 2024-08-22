@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.OrderTypeStrict
-Order Type
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
 
 ## Properties
 

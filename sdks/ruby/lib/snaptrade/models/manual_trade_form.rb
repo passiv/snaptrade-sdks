@@ -11,28 +11,30 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Manual Trade Form
+  # Inputs for placing an order with the brokerage.
   class ManualTradeForm
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account_id
 
-    # Trade Action
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`
     attr_accessor :action
 
-    # Order Type
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    attr_accessor :universal_symbol_id
+
+    # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
 
-    # Trade Price if limit or stop limit order
-    attr_accessor :price
-
-    # Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    attr_accessor :stop
-
-    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     attr_accessor :time_in_force
 
-    attr_accessor :units
+    # The limit price for `Limit` and `StopLimit` orders.
+    attr_accessor :price
 
-    attr_accessor :universal_symbol_id
+    # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    attr_accessor :stop
+
+    attr_accessor :units
 
     attr_accessor :notional_value
 
@@ -41,12 +43,12 @@ module SnapTrade
       {
         :'account_id' => :'account_id',
         :'action' => :'action',
+        :'universal_symbol_id' => :'universal_symbol_id',
         :'order_type' => :'order_type',
+        :'time_in_force' => :'time_in_force',
         :'price' => :'price',
         :'stop' => :'stop',
-        :'time_in_force' => :'time_in_force',
         :'units' => :'units',
-        :'universal_symbol_id' => :'universal_symbol_id',
         :'notional_value' => :'notional_value'
       }
     end
@@ -61,12 +63,12 @@ module SnapTrade
       {
         :'account_id' => :'String',
         :'action' => :'ActionStrict',
+        :'universal_symbol_id' => :'String',
         :'order_type' => :'OrderTypeStrict',
+        :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float',
         :'stop' => :'Float',
-        :'time_in_force' => :'TimeInForceStrict',
         :'units' => :'Float',
-        :'universal_symbol_id' => :'String',
         :'notional_value' => :'ManualTradeFormNotionalValue'
       }
     end
@@ -104,8 +106,16 @@ module SnapTrade
         self.action = attributes[:'action']
       end
 
+      if attributes.key?(:'universal_symbol_id')
+        self.universal_symbol_id = attributes[:'universal_symbol_id']
+      end
+
       if attributes.key?(:'order_type')
         self.order_type = attributes[:'order_type']
+      end
+
+      if attributes.key?(:'time_in_force')
+        self.time_in_force = attributes[:'time_in_force']
       end
 
       if attributes.key?(:'price')
@@ -116,16 +126,8 @@ module SnapTrade
         self.stop = attributes[:'stop']
       end
 
-      if attributes.key?(:'time_in_force')
-        self.time_in_force = attributes[:'time_in_force']
-      end
-
       if attributes.key?(:'units')
         self.units = attributes[:'units']
-      end
-
-      if attributes.key?(:'universal_symbol_id')
-        self.universal_symbol_id = attributes[:'universal_symbol_id']
       end
 
       if attributes.key?(:'notional_value')
@@ -137,12 +139,37 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @account_id.nil?
+        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
+      end
+
+      if @action.nil?
+        invalid_properties.push('invalid value for "action", action cannot be nil.')
+      end
+
+      if @universal_symbol_id.nil?
+        invalid_properties.push('invalid value for "universal_symbol_id", universal_symbol_id cannot be nil.')
+      end
+
+      if @order_type.nil?
+        invalid_properties.push('invalid value for "order_type", order_type cannot be nil.')
+      end
+
+      if @time_in_force.nil?
+        invalid_properties.push('invalid value for "time_in_force", time_in_force cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @account_id.nil?
+      return false if @action.nil?
+      return false if @universal_symbol_id.nil?
+      return false if @order_type.nil?
+      return false if @time_in_force.nil?
       true
     end
 
@@ -153,12 +180,12 @@ module SnapTrade
       self.class == o.class &&
           account_id == o.account_id &&
           action == o.action &&
+          universal_symbol_id == o.universal_symbol_id &&
           order_type == o.order_type &&
+          time_in_force == o.time_in_force &&
           price == o.price &&
           stop == o.stop &&
-          time_in_force == o.time_in_force &&
           units == o.units &&
-          universal_symbol_id == o.universal_symbol_id &&
           notional_value == o.notional_value
     end
 
@@ -171,7 +198,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, order_type, price, stop, time_in_force, units, universal_symbol_id, notional_value].hash
+      [account_id, action, universal_symbol_id, order_type, time_in_force, price, stop, units, notional_value].hash
     end
 
     # Builds the object from hash

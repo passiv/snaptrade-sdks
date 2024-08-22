@@ -11,21 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # A manual trade object
+  # Contains the details of a submitted order.
   class ManualTrade
+    # Unique identifier for the submitted order through SnapTrade.
     attr_accessor :id
 
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account
 
-    # Order Type
+    # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
 
-    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     attr_accessor :time_in_force
 
     attr_accessor :symbol
 
-    # Trade Action
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`
     attr_accessor :action
 
     attr_accessor :units
@@ -58,7 +60,7 @@ module SnapTrade
         :'id' => :'String',
         :'account' => :'String',
         :'order_type' => :'OrderTypeStrict',
-        :'time_in_force' => :'String',
+        :'time_in_force' => :'TimeInForceStrict',
         :'symbol' => :'ManualTradeSymbol',
         :'action' => :'ActionStrict',
         :'units' => :'Float',

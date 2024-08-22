@@ -36,17 +36,17 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="SymbolsQuotesInner" /> class.
         /// </summary>
         /// <param name="symbol">symbol.</param>
-        /// <param name="bidPrice">bidPrice.</param>
-        /// <param name="askPrice">askPrice.</param>
-        /// <param name="lastTradePrice">lastTradePrice.</param>
-        /// <param name="bidSize">bidSize.</param>
-        /// <param name="askSize">askSize.</param>
-        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), double bidPrice = default(double), double askPrice = default(double), double lastTradePrice = default(double), double bidSize = default(double), double askSize = default(double))
+        /// <param name="lastTradePrice">The most recent trade price from the brokerage..</param>
+        /// <param name="bidPrice">The most recent bid price from the brokerage..</param>
+        /// <param name="askPrice">The most recent price from the brokerage..</param>
+        /// <param name="bidSize">The most recent bid size from the brokerage..</param>
+        /// <param name="askSize">The most recent ask size from the brokerage..</param>
+        public SymbolsQuotesInner(UniversalSymbol symbol = default(UniversalSymbol), double lastTradePrice = default(double), double bidPrice = default(double), double askPrice = default(double), double bidSize = default(double), double askSize = default(double))
         {
             this.Symbol = symbol;
+            this.LastTradePrice = lastTradePrice;
             this.BidPrice = bidPrice;
             this.AskPrice = askPrice;
-            this.LastTradePrice = lastTradePrice;
             this.BidSize = bidSize;
             this.AskSize = askSize;
         }
@@ -58,32 +58,37 @@ namespace SnapTrade.Net.Model
         public UniversalSymbol Symbol { get; set; }
 
         /// <summary>
-        /// Gets or Sets BidPrice
+        /// The most recent trade price from the brokerage.
         /// </summary>
-        [DataMember(Name = "bid_price", EmitDefaultValue = false)]
-        public double BidPrice { get; set; }
-
-        /// <summary>
-        /// Gets or Sets AskPrice
-        /// </summary>
-        [DataMember(Name = "ask_price", EmitDefaultValue = false)]
-        public double AskPrice { get; set; }
-
-        /// <summary>
-        /// Gets or Sets LastTradePrice
-        /// </summary>
+        /// <value>The most recent trade price from the brokerage.</value>
         [DataMember(Name = "last_trade_price", EmitDefaultValue = false)]
         public double LastTradePrice { get; set; }
 
         /// <summary>
-        /// Gets or Sets BidSize
+        /// The most recent bid price from the brokerage.
         /// </summary>
+        /// <value>The most recent bid price from the brokerage.</value>
+        [DataMember(Name = "bid_price", EmitDefaultValue = false)]
+        public double BidPrice { get; set; }
+
+        /// <summary>
+        /// The most recent price from the brokerage.
+        /// </summary>
+        /// <value>The most recent price from the brokerage.</value>
+        [DataMember(Name = "ask_price", EmitDefaultValue = false)]
+        public double AskPrice { get; set; }
+
+        /// <summary>
+        /// The most recent bid size from the brokerage.
+        /// </summary>
+        /// <value>The most recent bid size from the brokerage.</value>
         [DataMember(Name = "bid_size", EmitDefaultValue = false)]
         public double BidSize { get; set; }
 
         /// <summary>
-        /// Gets or Sets AskSize
+        /// The most recent ask size from the brokerage.
         /// </summary>
+        /// <value>The most recent ask size from the brokerage.</value>
         [DataMember(Name = "ask_size", EmitDefaultValue = false)]
         public double AskSize { get; set; }
 
@@ -96,9 +101,9 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class SymbolsQuotesInner {\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  LastTradePrice: ").Append(LastTradePrice).Append("\n");
             sb.Append("  BidPrice: ").Append(BidPrice).Append("\n");
             sb.Append("  AskPrice: ").Append(AskPrice).Append("\n");
-            sb.Append("  LastTradePrice: ").Append(LastTradePrice).Append("\n");
             sb.Append("  BidSize: ").Append(BidSize).Append("\n");
             sb.Append("  AskSize: ").Append(AskSize).Append("\n");
             sb.Append("}\n");
@@ -142,16 +147,16 @@ namespace SnapTrade.Net.Model
                     this.Symbol.Equals(input.Symbol))
                 ) && 
                 (
+                    this.LastTradePrice == input.LastTradePrice ||
+                    this.LastTradePrice.Equals(input.LastTradePrice)
+                ) && 
+                (
                     this.BidPrice == input.BidPrice ||
                     this.BidPrice.Equals(input.BidPrice)
                 ) && 
                 (
                     this.AskPrice == input.AskPrice ||
                     this.AskPrice.Equals(input.AskPrice)
-                ) && 
-                (
-                    this.LastTradePrice == input.LastTradePrice ||
-                    this.LastTradePrice.Equals(input.LastTradePrice)
                 ) && 
                 (
                     this.BidSize == input.BidSize ||
@@ -176,9 +181,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.LastTradePrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.BidPrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.AskPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.LastTradePrice.GetHashCode();
                 hashCode = (hashCode * 59) + this.BidSize.GetHashCode();
                 hashCode = (hashCode * 59) + this.AskSize.GetHashCode();
                 return hashCode;

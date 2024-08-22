@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Manual Trade and Impact object
+    /// ManualTradeAndImpact
     /// </summary>
     [DataContract(Name = "ManualTradeAndImpact")]
     public partial class ManualTradeAndImpact : IEquatable<ManualTradeAndImpact>, IValidatableObject
@@ -36,9 +36,9 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="ManualTradeAndImpact" /> class.
         /// </summary>
         /// <param name="trade">trade.</param>
-        /// <param name="tradeImpacts">tradeImpacts.</param>
+        /// <param name="tradeImpacts">List of impacts of the trade on the account. The list always contains one value at the moment..</param>
         /// <param name="combinedRemainingBalance">combinedRemainingBalance.</param>
-        public ManualTradeAndImpact(ManualTrade trade = default(ManualTrade), List<ManualTrade> tradeImpacts = default(List<ManualTrade>), ManualTradeBalance combinedRemainingBalance = default(ManualTradeBalance)) : base()
+        public ManualTradeAndImpact(ManualTrade trade = default(ManualTrade), List<ManualTradeImpact> tradeImpacts = default(List<ManualTradeImpact>), ManualTradeBalance combinedRemainingBalance = default(ManualTradeBalance)) : base()
         {
             this.Trade = trade;
             this.TradeImpacts = tradeImpacts;
@@ -53,10 +53,11 @@ namespace SnapTrade.Net.Model
         public ManualTrade Trade { get; set; }
 
         /// <summary>
-        /// Gets or Sets TradeImpacts
+        /// List of impacts of the trade on the account. The list always contains one value at the moment.
         /// </summary>
+        /// <value>List of impacts of the trade on the account. The list always contains one value at the moment.</value>
         [DataMember(Name = "trade_impacts", EmitDefaultValue = false)]
-        public List<ManualTrade> TradeImpacts { get; set; }
+        public List<ManualTradeImpact> TradeImpacts { get; set; }
 
         /// <summary>
         /// Gets or Sets CombinedRemainingBalance

@@ -426,19 +426,25 @@ export const operationParameterMap: Record<string, Entry> = {
     '/trade/impact-POST': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'account_id'
             },
             {
                 name: 'action'
             },
             {
+                name: 'universal_symbol_id'
+            },
+            {
                 name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
             },
             {
                 name: 'price'
@@ -447,13 +453,7 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'stop'
             },
             {
-                name: 'time_in_force'
-            },
-            {
                 name: 'units'
-            },
-            {
-                name: 'universal_symbol_id'
             },
             {
                 name: 'notional_value'
@@ -482,19 +482,25 @@ export const operationParameterMap: Record<string, Entry> = {
     '/trade/place-POST': {
         parameters: [
             {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
                 name: 'account_id'
             },
             {
                 name: 'action'
             },
             {
+                name: 'universal_symbol_id'
+            },
+            {
                 name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
             },
             {
                 name: 'price'
@@ -503,13 +509,7 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'stop'
             },
             {
-                name: 'time_in_force'
-            },
-            {
                 name: 'units'
-            },
-            {
-                name: 'universal_symbol_id'
             },
             {
                 name: 'notional_value'

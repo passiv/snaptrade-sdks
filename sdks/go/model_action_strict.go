@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// ActionStrict Trade Action
+// ActionStrict The action describes the intent or side of a trade. This is either `BUY` or `SELL`
 type ActionStrict string
 
 // List of ActionStrict

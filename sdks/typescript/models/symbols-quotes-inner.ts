@@ -25,31 +25,31 @@ export interface SymbolsQuotesInner {
      */
     'symbol'?: UniversalSymbol;
     /**
-     * 
-     * @type {number}
-     * @memberof SymbolsQuotesInner
-     */
-    'bid_price'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof SymbolsQuotesInner
-     */
-    'ask_price'?: number;
-    /**
-     * 
+     * The most recent trade price from the brokerage.
      * @type {number}
      * @memberof SymbolsQuotesInner
      */
     'last_trade_price'?: number;
     /**
-     * 
+     * The most recent bid price from the brokerage.
+     * @type {number}
+     * @memberof SymbolsQuotesInner
+     */
+    'bid_price'?: number;
+    /**
+     * The most recent price from the brokerage.
+     * @type {number}
+     * @memberof SymbolsQuotesInner
+     */
+    'ask_price'?: number;
+    /**
+     * The most recent bid size from the brokerage.
      * @type {number}
      * @memberof SymbolsQuotesInner
      */
     'bid_size'?: number;
     /**
-     * 
+     * The most recent ask size from the brokerage.
      * @type {number}
      * @memberof SymbolsQuotesInner
      */

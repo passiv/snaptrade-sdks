@@ -11,10 +11,10 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Manual Trade and Impact object
   class ManualTradeAndImpact
     attr_accessor :trade
 
+    # List of impacts of the trade on the account. The list always contains one value at the moment.
     attr_accessor :trade_impacts
 
     attr_accessor :combined_remaining_balance
@@ -37,7 +37,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'trade' => :'ManualTrade',
-        :'trade_impacts' => :'Array<ManualTrade>',
+        :'trade_impacts' => :'Array<ManualTradeImpact>',
         :'combined_remaining_balance' => :'ManualTradeBalance'
       }
     end

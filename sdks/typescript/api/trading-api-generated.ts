@@ -54,12 +54,12 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const TradingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
-         * @summary Cancel open order in account
+         * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * @summary Cancel order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account to cancel the order in.
-         * @param {TradingCancelUserAccountOrderRequest} tradingCancelUserAccountOrderRequest The Order ID to be canceled
+         * @param {string} accountId 
+         * @param {TradingCancelUserAccountOrderRequest} tradingCancelUserAccountOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -124,8 +124,8 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Return the trade object and it\'s impact on the account for the specified order.
-         * @summary Check the impact of a trade on an account
+         * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
+         * @summary Check order impact
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeForm} manualTradeForm 
@@ -190,13 +190,13 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns quote(s) from the brokerage for the specified symbol(s).
+         * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
          * @summary Get symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} symbols List of universal_symbol_id or tickers to get quotes for.
-         * @param {string} accountId The ID of the account to get quotes.
-         * @param {boolean} [useTicker] Should be set to True if providing tickers.
+         * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for.
+         * @param {string} accountId 
+         * @param {boolean} [useTicker] Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -264,8 +264,8 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places a specified trade in the specified account.
-         * @summary Place a trade with NO validation.
+         * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
+         * @summary Place order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeForm} manualTradeForm 
@@ -330,9 +330,9 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-         * @summary Place order
-         * @param {string} tradeId The ID of trade object obtained from trade/impact endpoint
+         * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+         * @summary Place checked order
+         * @param {string} tradeId Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ValidatedTradeBody} [validatedTradeBody] 
@@ -408,8 +408,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TradingApiAxiosParamCreator(configuration)
     return {
         /**
-         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
-         * @summary Cancel open order in account
+         * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * @summary Cancel order
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -422,8 +422,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Return the trade object and it\'s impact on the account for the specified order.
-         * @summary Check the impact of a trade on an account
+         * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
+         * @summary Check order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -432,19 +432,19 @@ export const TradingApiFp = function(configuration?: Configuration) {
             const manualTradeForm: ManualTradeForm = {
                 account_id: requestParameters.account_id,
                 action: requestParameters.action,
+                universal_symbol_id: requestParameters.universal_symbol_id,
                 order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
                 price: requestParameters.price,
                 stop: requestParameters.stop,
-                time_in_force: requestParameters.time_in_force,
                 units: requestParameters.units,
-                universal_symbol_id: requestParameters.universal_symbol_id,
                 notional_value: requestParameters.notional_value
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.getOrderImpact(requestParameters.userId, requestParameters.userSecret, manualTradeForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns quote(s) from the brokerage for the specified symbol(s).
+         * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -455,8 +455,8 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Places a specified trade in the specified account.
-         * @summary Place a trade with NO validation.
+         * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
+         * @summary Place order
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -465,20 +465,20 @@ export const TradingApiFp = function(configuration?: Configuration) {
             const manualTradeForm: ManualTradeForm = {
                 account_id: requestParameters.account_id,
                 action: requestParameters.action,
+                universal_symbol_id: requestParameters.universal_symbol_id,
                 order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
                 price: requestParameters.price,
                 stop: requestParameters.stop,
-                time_in_force: requestParameters.time_in_force,
                 units: requestParameters.units,
-                universal_symbol_id: requestParameters.universal_symbol_id,
                 notional_value: requestParameters.notional_value
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, manualTradeForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-         * @summary Place order
+         * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+         * @summary Place checked order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -501,8 +501,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = TradingApiFp(configuration)
     return {
         /**
-         * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
-         * @summary Cancel open order in account
+         * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+         * @summary Cancel order
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -511,8 +511,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.cancelUserAccountOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Return the trade object and it\'s impact on the account for the specified order.
-         * @summary Check the impact of a trade on an account
+         * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
+         * @summary Check order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -521,7 +521,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOrderImpact(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns quote(s) from the brokerage for the specified symbol(s).
+         * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
          * @summary Get symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -531,8 +531,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getUserAccountQuotes(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Places a specified trade in the specified account.
-         * @summary Place a trade with NO validation.
+         * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
+         * @summary Place order
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -541,8 +541,8 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.placeForceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-         * @summary Place order
+         * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+         * @summary Place checked order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -575,7 +575,7 @@ export type TradingApiCancelUserAccountOrderRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account to cancel the order in.
+    * 
     * @type {string}
     * @memberof TradingApiCancelUserAccountOrder
     */
@@ -628,21 +628,21 @@ export type TradingApiGetUserAccountQuotesRequest = {
     readonly userSecret: string
     
     /**
-    * List of universal_symbol_id or tickers to get quotes for.
+    * List of Universal Symbol IDs or tickers to get quotes for.
     * @type {string}
     * @memberof TradingApiGetUserAccountQuotes
     */
     readonly symbols: string
     
     /**
-    * The ID of the account to get quotes.
+    * 
     * @type {string}
     * @memberof TradingApiGetUserAccountQuotes
     */
     readonly accountId: string
     
     /**
-    * Should be set to True if providing tickers.
+    * Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     * @type {boolean}
     * @memberof TradingApiGetUserAccountQuotes
     */
@@ -681,7 +681,7 @@ export type TradingApiPlaceForceOrderRequest = {
 export type TradingApiPlaceOrderRequest = {
     
     /**
-    * The ID of trade object obtained from trade/impact endpoint
+    * Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     * @type {string}
     * @memberof TradingApiPlaceOrder
     */
@@ -711,8 +711,8 @@ export type TradingApiPlaceOrderRequest = {
  */
 export class TradingApiGenerated extends BaseAPI {
     /**
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
-     * @summary Cancel open order in account
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+     * @summary Cancel order
      * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -723,8 +723,8 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Return the trade object and it\'s impact on the account for the specified order.
-     * @summary Check the impact of a trade on an account
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
+     * @summary Check order impact
      * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -735,7 +735,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      * @summary Get symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -747,8 +747,8 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Places a specified trade in the specified account.
-     * @summary Place a trade with NO validation.
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
+     * @summary Place order
      * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -759,8 +759,8 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-     * @summary Place order
+     * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+     * @summary Place checked order
      * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -66,6 +66,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
+        /// Test the property 'LastTradePrice'
+        /// </summary>
+        [Fact]
+        public void LastTradePriceTest()
+        {
+            // TODO unit test for the property 'LastTradePrice'
+        }
+        /// <summary>
         /// Test the property 'BidPrice'
         /// </summary>
         [Fact]
@@ -80,14 +88,6 @@ namespace SnapTrade.Net.Test.Model
         public void AskPriceTest()
         {
             // TODO unit test for the property 'AskPrice'
-        }
-        /// <summary>
-        /// Test the property 'LastTradePrice'
-        /// </summary>
-        [Fact]
-        public void LastTradePriceTest()
-        {
-            // TODO unit test for the property 'LastTradePrice'
         }
         /// <summary>
         /// Test the property 'BidSize'

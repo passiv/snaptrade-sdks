@@ -4,20 +4,20 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account |
-| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check the impact of a trade on an account |
+| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
+| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place a trade with NO validation. |
-| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place order |
+| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
+| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
 
 
 <a name="cancelUserAccountOrder"></a>
 # **cancelUserAccountOrder**
 > AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
 
-Cancel open order in account
+Cancel order
 
-Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
 
 ### Example
 ```java
@@ -43,8 +43,8 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to cancel the order in.
-    UUID brokerageOrderId = UUID.randomUUID();
+    UUID accountId = UUID.randomUUID();
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     try {
       AccountOrderRecord result = client
               .trading
@@ -109,8 +109,8 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to cancel the order in. | |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)| The Order ID to be canceled | |
+| **accountId** | **UUID**|  | |
+| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)|  | |
 
 ### Return type
 
@@ -134,9 +134,9 @@ public class Example {
 # **getOrderImpact**
 > ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm).execute();
 
-Check the impact of a trade on an account
+Check order impact
 
-Return the trade object and it&#39;s impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
 
 ### Example
 ```java
@@ -160,29 +160,24 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    ActionStrict action = ActionStrict.fromValue("BUY");
+    UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    ActionStrict action = ActionStrict.fromValue("BUY");
-    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
-    Double price = 3.4D; // Trade Price if limit or stop limit order
-    Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
-    Double units = 3.4D; // Trade Units. Cannot work with notional value.
-    UUID universalSymbolId = UUID.randomUUID();
+    Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
+    Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     Object notionalValue = null;
     try {
       ManualTradeAndImpact result = client
               .trading
-              .getOrderImpact(userId, userSecret)
-              .accountId(accountId)
-              .action(action)
-              .orderType(orderType)
+              .getOrderImpact(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
               .price(price)
               .stop(stop)
-              .timeInForce(timeInForce)
               .units(units)
-              .universalSymbolId(universalSymbolId)
               .notionalValue(notionalValue)
               .execute();
       System.out.println(result);
@@ -201,15 +196,10 @@ public class Example {
     try {
       ApiResponse<ManualTradeAndImpact> response = client
               .trading
-              .getOrderImpact(userId, userSecret)
-              .accountId(accountId)
-              .action(action)
-              .orderType(orderType)
+              .getOrderImpact(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
               .price(price)
               .stop(stop)
-              .timeInForce(timeInForce)
               .units(units)
-              .universalSymbolId(universalSymbolId)
               .notionalValue(notionalValue)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -253,7 +243,7 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Return trade object and it&#39;s impact on the account |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="getUserAccountQuotes"></a>
@@ -262,7 +252,7 @@ public class Example {
 
 Get symbol quotes
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 ### Example
 ```java
@@ -288,9 +278,9 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to get quotes.
-    Boolean useTicker = true; // Should be set to True if providing tickers.
+    String symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
+    UUID accountId = UUID.randomUUID();
+    Boolean useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     try {
       List<SymbolsQuotesInner> result = client
               .trading
@@ -336,9 +326,9 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **symbols** | **String**| List of universal_symbol_id or tickers to get quotes for. | |
-| **accountId** | **UUID**| The ID of the account to get quotes. | |
-| **useTicker** | **Boolean**| Should be set to True if providing tickers. | [optional] |
+| **symbols** | **String**| List of Universal Symbol IDs or tickers to get quotes for. | |
+| **accountId** | **UUID**|  | |
+| **useTicker** | **Boolean**| Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. | [optional] |
 
 ### Return type
 
@@ -356,15 +346,15 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Returns quotes object with different prices |  -  |
+| **200** | OK |  -  |
 
 <a name="placeForceOrder"></a>
 # **placeForceOrder**
 > AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeForm).execute();
 
-Place a trade with NO validation.
+Place order
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
 
 ### Example
 ```java
@@ -388,29 +378,24 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    ActionStrict action = ActionStrict.fromValue("BUY");
+    UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    ActionStrict action = ActionStrict.fromValue("BUY");
-    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
-    Double price = 3.4D; // Trade Price if limit or stop limit order
-    Double stop = 3.4D; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
-    Double units = 3.4D; // Trade Units. Cannot work with notional value.
-    UUID universalSymbolId = UUID.randomUUID();
+    Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
+    Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     Object notionalValue = null;
     try {
       AccountOrderRecord result = client
               .trading
-              .placeForceOrder(userId, userSecret)
-              .accountId(accountId)
-              .action(action)
-              .orderType(orderType)
+              .placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
               .price(price)
               .stop(stop)
-              .timeInForce(timeInForce)
               .units(units)
-              .universalSymbolId(universalSymbolId)
               .notionalValue(notionalValue)
               .execute();
       System.out.println(result);
@@ -445,15 +430,10 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .placeForceOrder(userId, userSecret)
-              .accountId(accountId)
-              .action(action)
-              .orderType(orderType)
+              .placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
               .price(price)
               .stop(stop)
-              .timeInForce(timeInForce)
               .units(units)
-              .universalSymbolId(universalSymbolId)
               .notionalValue(notionalValue)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -497,16 +477,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Trade sucessfully placed |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="placeOrder"></a>
 # **placeOrder**
 > AccountOrderRecord placeOrder(tradeId, userId, userSecret).validatedTradeBody(validatedTradeBody).execute();
 
-Place order
+Place checked order
 
-Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
 
 ### Example
 ```java
@@ -530,10 +510,10 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID tradeId = UUID.randomUUID(); // The ID of trade object obtained from trade/impact endpoint
+    UUID tradeId = UUID.randomUUID(); // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    Boolean waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+    Boolean waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     try {
       AccountOrderRecord result = client
               .trading
@@ -596,7 +576,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **tradeId** | **UUID**| The ID of trade object obtained from trade/impact endpoint | |
+| **tradeId** | **UUID**| Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **validatedTradeBody** | [**ValidatedTradeBody**](ValidatedTradeBody.md)|  | [optional] |

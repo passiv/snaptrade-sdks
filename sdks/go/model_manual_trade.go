@@ -15,13 +15,14 @@ import (
 	"encoding/json"
 )
 
-// ManualTrade A manual trade object
+// ManualTrade Contains the details of a submitted order.
 type ManualTrade struct {
+	// Unique identifier for the submitted order through SnapTrade.
 	Id *string `json:"id,omitempty"`
+	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 	Account *string `json:"account,omitempty"`
 	OrderType *OrderTypeStrict `json:"order_type,omitempty"`
-	// Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
-	TimeInForce *string `json:"time_in_force,omitempty"`
+	TimeInForce *TimeInForceStrict `json:"time_in_force,omitempty"`
 	Symbol *ManualTradeSymbol `json:"symbol,omitempty"`
 	Action *ActionStrict `json:"action,omitempty"`
 	Units NullableFloat32 `json:"units,omitempty"`
@@ -146,9 +147,9 @@ func (o *ManualTrade) SetOrderType(v OrderTypeStrict) {
 }
 
 // GetTimeInForce returns the TimeInForce field value if set, zero value otherwise.
-func (o *ManualTrade) GetTimeInForce() string {
+func (o *ManualTrade) GetTimeInForce() TimeInForceStrict {
 	if o == nil || isNil(o.TimeInForce) {
-		var ret string
+		var ret TimeInForceStrict
 		return ret
 	}
 	return *o.TimeInForce
@@ -156,7 +157,7 @@ func (o *ManualTrade) GetTimeInForce() string {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualTrade) GetTimeInForceOk() (*string, bool) {
+func (o *ManualTrade) GetTimeInForceOk() (*TimeInForceStrict, bool) {
 	if o == nil || isNil(o.TimeInForce) {
     return nil, false
 	}
@@ -172,8 +173,8 @@ func (o *ManualTrade) HasTimeInForce() bool {
 	return false
 }
 
-// SetTimeInForce gets a reference to the given string and assigns it to the TimeInForce field.
-func (o *ManualTrade) SetTimeInForce(v string) {
+// SetTimeInForce gets a reference to the given TimeInForceStrict and assigns it to the TimeInForce field.
+func (o *ManualTrade) SetTimeInForce(v TimeInForceStrict) {
 	o.TimeInForce = &v
 }
 
