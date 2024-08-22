@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// ManualTradeBalance Balance
+// ManualTradeBalance Estimated remaining balance of the account after the trade is executed.
 type ManualTradeBalance struct {
-	Account *Account `json:"account,omitempty"`
+	Account *AccountSimple `json:"account,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
-	// Cash
+	// Estimated amount of cash remaining in the account after the trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
 	Cash NullableFloat32 `json:"cash,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -44,9 +44,9 @@ func NewManualTradeBalanceWithDefaults() *ManualTradeBalance {
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
-func (o *ManualTradeBalance) GetAccount() Account {
+func (o *ManualTradeBalance) GetAccount() AccountSimple {
 	if o == nil || isNil(o.Account) {
-		var ret Account
+		var ret AccountSimple
 		return ret
 	}
 	return *o.Account
@@ -54,7 +54,7 @@ func (o *ManualTradeBalance) GetAccount() Account {
 
 // GetAccountOk returns a tuple with the Account field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualTradeBalance) GetAccountOk() (*Account, bool) {
+func (o *ManualTradeBalance) GetAccountOk() (*AccountSimple, bool) {
 	if o == nil || isNil(o.Account) {
     return nil, false
 	}
@@ -70,8 +70,8 @@ func (o *ManualTradeBalance) HasAccount() bool {
 	return false
 }
 
-// SetAccount gets a reference to the given Account and assigns it to the Account field.
-func (o *ManualTradeBalance) SetAccount(v Account) {
+// SetAccount gets a reference to the given AccountSimple and assigns it to the Account field.
+func (o *ManualTradeBalance) SetAccount(v AccountSimple) {
 	o.Account = &v
 }
 

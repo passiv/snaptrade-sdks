@@ -1007,7 +1007,7 @@ Places the option strategy order and returns the order record received from the 
 
 ```ruby
 result = snaptrade.options.place_option_strategy(
-  order_type: "Limit",
+  order_type: "Market",
   time_in_force: "FOK",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1021,11 +1021,17 @@ p result
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
-Order Type
+The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
+field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
+required.
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
-Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til
-Canceled
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
@@ -1362,8 +1368,7 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 
-Sends a signal to the brokerage to cancel the specified order.
-This will only work if the order has not yet been executed.
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1373,7 +1378,7 @@ result = snaptrade.trading.cancel_user_account_order(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
@@ -1383,9 +1388,10 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to cancel the order in.
-
 ##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
@@ -1401,22 +1407,22 @@ The ID of the account to cancel the order in.
 
 ### `snaptrade.trading.get_order_impact`<a id="snaptradetradingget_order_impact"></a>
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
 result = snaptrade.trading.get_order_impact(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  order_type: "Market",
+  time_in_force: "FOK",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  action: "BUY",
-  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "FOK",
-  units: 3.14,
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  units: 10.5,
   notional_value: None,
 )
 p result
@@ -1424,27 +1430,40 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+Unique identifier for the connected brokerage account. This is the UUID used to
+reference the account in SnapTrade.
+
 ##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
-Trade Action
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`
+
+##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
+Unique identifier for the symbol within SnapTrade. This is the ID used to
+reference the symbol in SnapTrade API calls.
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
-Order Type
-
-##### price: `Float`<a id="price-float"></a>
-Trade Price if limit or stop limit order
-
-##### stop: `Float`<a id="stop-float"></a>
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
+The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
+field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
+required.
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
-Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til
-Canceled
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### price: `Float`<a id="price-float"></a>
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Float`<a id="stop-float"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
-##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1461,7 +1480,7 @@ Canceled
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1481,13 +1500,12 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### symbols: `String`<a id="symbols-string"></a>
-List of universal_symbol_id or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for.
 
 ##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to get quotes.
-
 ##### use_ticker: `Boolean`<a id="use_ticker-boolean"></a>
-Should be set to True if providing tickers.
+Should be set to `True` if `symbols` are comprised of tickers. Defaults to
+`False` if not provided.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1504,22 +1522,25 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+
+This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
 result = snaptrade.trading.place_force_order(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  order_type: "Market",
+  time_in_force: "FOK",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  action: "BUY",
-  order_type: "Limit",
   price: 31.33,
   stop: 31.33,
-  time_in_force: "FOK",
-  units: 3.14,
-  universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  units: 10.5,
   notional_value: None,
 )
 p result
@@ -1527,27 +1548,40 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+Unique identifier for the connected brokerage account. This is the UUID used to
+reference the account in SnapTrade.
+
 ##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
-Trade Action
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`
+
+##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
+Unique identifier for the symbol within SnapTrade. This is the ID used to
+reference the symbol in SnapTrade API calls.
 
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
-Order Type
-
-##### price: `Float`<a id="price-float"></a>
-Trade Price if limit or stop limit order
-
-##### stop: `Float`<a id="stop-float"></a>
-Stop Price. If stop loss or stop limit order, the price to trigger the stop
+The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
+field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
+required.
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
-Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til
-Canceled
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### price: `Float`<a id="price-float"></a>
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Float`<a id="stop-float"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
-##### universal_symbol_id: `String`<a id="universal_symbol_id-string"></a>
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1564,15 +1598,14 @@ Canceled
 
 ### `snaptrade.trading.place_order`<a id="snaptradetradingplace_order"></a>
 
-Places the specified trade object. This places the order in the account and
-returns the status of the order from the brokerage.
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```ruby
 result = snaptrade.trading.place_order(
-  trade_id: "tradeId_example",
+  trade_id: "139e307a-82f7-4402-b39e-4da7baa87758",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   wait_to_confirm: true,
@@ -1583,15 +1616,16 @@ p result
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### trade_id: `String`<a id="trade_id-string"></a>
-The ID of trade object obtained from trade/impact endpoint
+Obtained from calling the [check order impact
+endpoint](/reference/Trading/Trading_getOrderImpact)
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### wait_to_confirm: `Boolean`<a id="wait_to_confirm-boolean"></a>
 Optional, defaults to true. Determines if a wait is performed to check on order
 status. If false, latency will be reduced but orders returned will be more
-likely to be of status PENDING as we will not wait to check on the status before
-responding to the request
+likely to be of status `PENDING` as we will not wait to check on the status
+before responding to the request.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

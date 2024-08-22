@@ -28,12 +28,12 @@ describe 'TradingApi' do
   end
 
   # unit tests for cancel_user_account_order
-  # Cancel open order in account
-  # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+  # Cancel order
+  # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account to cancel the order in.
-  # @param trading_cancel_user_account_order_request The Order ID to be canceled
+  # @param account_id 
+  # @param trading_cancel_user_account_order_request 
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecord]
   describe 'cancel_user_account_order test' do
@@ -43,8 +43,8 @@ describe 'TradingApi' do
   end
 
   # unit tests for get_order_impact
-  # Check the impact of a trade on an account
-  # Return the trade object and it&#39;s impact on the account for the specified order.
+  # Check order impact
+  # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_form 
@@ -58,13 +58,13 @@ describe 'TradingApi' do
 
   # unit tests for get_user_account_quotes
   # Get symbol quotes
-  # Returns quote(s) from the brokerage for the specified symbol(s).
+  # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
   # @param user_id 
   # @param user_secret 
-  # @param symbols List of universal_symbol_id or tickers to get quotes for.
-  # @param account_id The ID of the account to get quotes.
+  # @param symbols List of Universal Symbol IDs or tickers to get quotes for.
+  # @param account_id 
   # @param [Hash] opts the optional parameters
-  # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
+  # @option opts [Boolean] :use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
   # @return [Array<SymbolsQuotesInner>]
   describe 'get_user_account_quotes test' do
     it 'should work' do
@@ -73,8 +73,8 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_force_order
-  # Place a trade with NO validation.
-  # Places a specified trade in the specified account.
+  # Place order
+  # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_form 
@@ -87,9 +87,9 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_order
-  # Place order
-  # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-  # @param trade_id The ID of trade object obtained from trade/impact endpoint
+  # Place checked order
+  # Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+  # @param trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

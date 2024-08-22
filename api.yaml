@@ -630,7 +630,7 @@ paths:
       tags:
         - Trading
       summary: Get symbol quotes
-      description: Returns quote(s) from the brokerage for the specified symbol(s).
+      description: Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
       operationId: Trading_getUserAccountQuotes
       parameters:
         - in: query
@@ -646,25 +646,22 @@ paths:
         - in: query
           name: symbols
           required: true
-          description: List of universal_symbol_id or tickers to get quotes for.
+          description: List of Universal Symbol IDs or tickers to get quotes for.
           schema:
             type: string
         - in: query
           name: use_ticker
-          description: Should be set to True if providing tickers.
+          description: Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
           schema:
             type: boolean
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to get quotes.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       responses:
         "200":
-          description: Returns quotes object with different prices
+          description: OK
           content:
             application/json:
               schema:
@@ -679,10 +676,9 @@ paths:
     post:
       tags:
         - Trading
-      summary: Cancel open order in account
+      summary: Cancel order
       description: |
-        Sends a signal to the brokerage to cancel the specified order.
-        This will only work if the order has not yet been executed.
+        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
       parameters:
         - in: query
@@ -698,16 +694,10 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to cancel the order in.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-
+            $ref: "#/components/schemas/AccountID"
       requestBody:
         $ref: '#/components/requestBodies/CancelOrderRequestBody'
-
-
       responses:
         "200":
           description: Order Record of canceled order
@@ -1446,8 +1436,11 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place a trade with NO validation.
-      description: Places a specified trade in the specified account.
+      summary: Place order
+      description: |
+        Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+        
+        This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
       operationId: Trading_placeForceOrder
       parameters:
         - in: query
@@ -1460,10 +1453,11 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
-
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
       responses:
         "200":
-          description: Trade sucessfully placed
+          description: OK
           content:
             application/json:
               schema:
@@ -1482,14 +1476,12 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
-      requestBody:
-        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
   /trade/impact:
     post:
       tags:
         - Trading
-      summary: Check the impact of a trade on an account
-      description: Return the trade object and it's impact on the account for the specified order.
+      summary: Check order impact
+      description: Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
       operationId: Trading_getOrderImpact
       parameters:
         - in: query
@@ -1502,46 +1494,44 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
       responses:
         "200":
-          description: Return trade object and it's impact on the account
+          description: OK
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ManualTradeAndImpact"
         "400":
-          description: Missing or wrong data format provided in request body
+          description: Bad Request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "403":
-          description: User does not have permissions to place trades
+          description: Forbidden
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
-      requestBody:
-        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
   /trade/{tradeId}:
     post:
       tags:
         - Trading
-      summary: Place order
+      summary: Place checked order
       description: |
-        Places the specified trade object. This places the order in the account and
-        returns the status of the order from the brokerage.
+        Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
       operationId: Trading_placeOrder
       parameters:
         - in: path
           name: tradeId
           required: true
-          description: The ID of trade object obtained from trade/impact endpoint
+          description: Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
           schema:
-            type: string
-            format: uuid
+            $ref: "#/components/schemas/TradeID"
         - in: query
           required: true
           name: userId
@@ -1552,6 +1542,8 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ValidatedTradeRequestBody"
       responses:
         "200":
           description: Status of order placed
@@ -1567,8 +1559,6 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-      requestBody:
-        $ref: "#/components/requestBodies/ValidatedTradeRequestBody"
   /activities:
     get:
       tags:
@@ -1885,7 +1875,6 @@ components:
           schema:
             $ref: "#/components/schemas/ValidatedTradeBody"
     CancelOrderRequestBody:
-      description: The Order ID to be canceled
       required: true
       content:
         application/json:
@@ -1893,8 +1882,7 @@ components:
             type: object
             properties:
               brokerage_order_id:
-                $ref: '#/components/schemas/Id'
-
+                $ref: '#/components/schemas/BrokerageOrderID'
     OptionStrategyRequestBody:
       required: true
       content:
@@ -2190,8 +2178,7 @@ components:
       type: object
       properties:
         brokerage_order_id:
-          description: Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-          type: string
+          $ref: "#/components/schemas/BrokerageOrderID"
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
         symbol:
@@ -2245,7 +2232,7 @@ components:
           description: The type of order placed. The most common values are `Market`, `Limit`, `Stop`, and `StopLimit`. We try our best to map brokerage order types to these values. When mapping fails, we will return the brokerage's order type value.
           nullable: true
           type: string
-          example: "Market"
+          example: Market
         time_in_force:
           description: >
             The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
@@ -2503,15 +2490,17 @@ components:
           description: Buying power only applies to margin accounts. For non-margin accounts, buying power should be the same as cash. Please note that this field is not always available for all brokerages.
           example: 410.71
           nullable: true
+    CurrencyID:
+        type: string
+        format: uuid
+        description: Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+        example: 87b24961-b51e-4db8-9226-f198f6518a89
     Currency:
       description: Describes a currency object.
       type: object
       properties:
         id:
-          type: string
-          format: uuid
-          description: Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
-          example: 87b24961-b51e-4db8-9226-f198f6518a89
+          $ref: "#/components/schemas/CurrencyID"
         code:
           type: string
           description: The ISO-4217 currency code for the currency.
@@ -3274,6 +3263,15 @@ components:
       type: string
       format: uuid
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+    BrokerageOrderID:
+      description: Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+      type: string
+      example: 66a033fa-da74-4fcf-b527-feefdec9257e
+    TradeID:
+      description: Unique identifier for the submitted order through SnapTrade.
+      type: string
+      format: uuid
+      example: 139e307a-82f7-4402-b39e-4da7baa87758
     UniversalSymbolID:
       description: Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
       type: string
@@ -3392,18 +3390,17 @@ components:
       format: date-time
       nullable: true
     ManualTrade:
-      description: A manual trade object
+      description: Contains the details of a submitted order.
       type: object
       properties:
         id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/TradeID"
         account:
-          type: string
-          example: 2bcd7cc3-e922-4976-bce1-9855556801c3
+          $ref: "#/components/schemas/AccountID"
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
-          $ref: "#/components/schemas/TimeInForce"
+          $ref: "#/components/schemas/TimeInForceStrict"
         symbol:
           $ref: "#/components/schemas/ManualTradeSymbol"
         action:
@@ -3414,112 +3411,159 @@ components:
             - $ref: "#/components/schemas/Units"
         price:
           $ref: "#/components/schemas/Price"
+    ManualTradeImpact:
+      type: object
+      properties:
+        account:
+          $ref: "#/components/schemas/AccountID"
+        currency:
+          $ref: "#/components/schemas/CurrencyID"
+        remaining_cash:
+          description: Estimated amount of cash remaining in the account after the trade.
+          type: number
+          example: 1.11
+          nullable: true
+        estimated_commission:
+          description: Estimated commission for the trade.
+          type: number
+          example: 3.26
+          nullable: true
+        forex_fees:
+          description: Estimated foreign transaction fees for the trade.
+          type: number
+          example: 5.26
+          nullable: true
     ManualTradeSymbol:
-      description: Manual trade symbol object
+      description: Information about the security for the order.
       type: object
       properties:
         brokerage_symbol_id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol_id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/UniversalSymbolID"
         currency:
           $ref: "#/components/schemas/Currency"
         local_id:
+          deprecated: true
+          description: This field is deprecated and should not be used.
           type: string
           example: '1048101'
         description:
+          deprecated: true
+          description: This field is deprecated and should not be used.
           type: string
           example: Metaverse Global ETF
           nullable: true
         symbol:
+          deprecated: true
+          description:  This field is deprecated and should not be used.
           type: string
           example: MVGP.U.TO
     ManualTradeBalance:
-      description: Balance
+      description: Estimated remaining balance of the account after the trade is executed.
       type: object
       properties:
         account:
-          $ref: "#/components/schemas/Account"
+          $ref: "#/components/schemas/AccountSimple"
         currency:
           $ref: "#/components/schemas/Currency"
         cash:
-          $ref: "#/components/schemas/Cash"
+          description: Estimated amount of cash remaining in the account after the trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
+          type: number
+          example: 1.11
+          nullable: true
     ManualTradeAndImpact:
-      description: Manual Trade and Impact object
       type: object
       properties:
         trade:
           $ref: "#/components/schemas/ManualTrade"
         trade_impacts:
+          description: List of impacts of the trade on the account. The list always contains one value at the moment.
           type: array
           items:
-            $ref: "#/components/schemas/ManualTrade"
+            $ref: "#/components/schemas/ManualTradeImpact"
         combined_remaining_balance:
           $ref: "#/components/schemas/ManualTradeBalance"
     SymbolsQuotes:
-      description: Symbols and Tickers Quotes object
+      description: List of symbols with the latest quotes from the brokerage.
       type: array
       items:
         properties:
           symbol:
             $ref: "#/components/schemas/UniversalSymbol"
+          last_trade_price:
+            description: The most recent trade price from the brokerage.
+            type: number
+            example: 8.74
           bid_price:
+            description: The most recent bid price from the brokerage.
             type: number
             example: 8.43
           ask_price:
+            description: The most recent price from the brokerage.
             type: number
             example: 8.43
-          last_trade_price:
-            type: number
-            example: 8.74
           bid_size:
+            description: The most recent bid size from the brokerage.
             type: number
             example: 260
           ask_size:
+            description: The most recent ask size from the brokerage.
             type: number
             example: 344
     ManualTradeForm:
-      description: Manual Trade Form
+      description: Inputs for placing an order with the brokerage.
       type: object
+      required:
+        - account_id
+        - action
+        - order_type
+        - time_in_force
+        - universal_symbol_id
       properties:
         account_id:
-          $ref: "#/components/schemas/Id"
+          $ref: "#/components/schemas/AccountID"
         action:
           $ref: "#/components/schemas/ActionStrict"
+        universal_symbol_id:
+          $ref: "#/components/schemas/UniversalSymbolID"
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
-        price:
-          $ref: "#/components/schemas/Price"
-        stop:
-          $ref: "#/components/schemas/StopPrice"
         time_in_force:
           $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
         units:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Units"
-        universal_symbol_id:
-          $ref: "#/components/schemas/Id"
         notional_value:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
     ValidatedTradeBody:
-      description: Validated Trade Form
       type: object
       properties:
         wait_to_confirm:
           nullable: true
           example: true
           type: boolean
-          description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
-    Cash:
-      description: Cash
-      type: number
-      example: 1.11
-      nullable: true
+          description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     OrderTypeStrict:
-      description: Order Type
+      description: |
+        The type of order to place.
+
+        - For `Limit` and `StopLimit` orders, the `price` field is required.
+        - For `Stop` and `StopLimit` orders, the `stop` field is required.
+      example: Market
       type: string
       enum:
         - Limit
@@ -3535,11 +3579,11 @@ components:
         - StopLimit
         - Stop
     TimeInForceStrict:
-      description: |
-        Trade time in force examples:
-          * FOK - Fill Or Kill
-          * Day - Day
-          * GTC - Good Til Canceled
+      description: >
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
       type: string
       enum:
         - FOK
@@ -3554,7 +3598,7 @@ components:
           * GTD - Good Til Date
       type: string
     ActionStrict:
-      description: Trade Action
+      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL`
       type: string
       enum:
         - BUY
@@ -3572,26 +3616,20 @@ components:
           - SELL_OPEN
           - SELL_CLOSE
     Units:
-      description: Trade Units. Cannot work with notional value.
+      description: Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
       type: number
+      example: 10.5
     Price:
       description: Trade Price if limit or stop limit order
       type: number
       nullable: true
       example: 31.33
     NotionalValue:
-      description: Dollar amount to trade. Cannot work with units. Can only work for market order types and day for time in force. **Only available for Alpaca, Alpaca Paper, and Robinhood.**
+      description: Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687) for more information.
       oneOf:
         - type: string
         - type: number
       example: 100.00
-    StopPrice:
-      description:
-        Stop Price. If stop loss or stop limit order, the price to trigger
-        the stop
-      type: number
-      example: 31.33
-      nullable: true
     UniversalActivity:
       description: A transaction or activity from an institution
       type: object

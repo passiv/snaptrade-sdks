@@ -1437,7 +1437,11 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--performance-custom
   /accounts/{accountId}/quotes:
     get:
-      description: Returns quote(s) from the brokerage for the specified symbol(s).
+      description: Returns quotes from the brokerage for the specified symbols and
+        account. The quotes returned can be delayed depending on the brokerage the
+        account belongs to. It is highly recommended that you use your own market
+        data provider for real-time quotes instead of relying on this endpoint. This
+        endpoint does not work for options quotes.
       operationId: Trading_getUserAccountQuotes
       parameters:
       - explode: true
@@ -1454,7 +1458,7 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: List of universal_symbol_id or tickers to get quotes for.
+      - description: List of Universal Symbol IDs or tickers to get quotes for.
         explode: true
         in: query
         name: symbols
@@ -1462,7 +1466,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: Should be set to True if providing tickers.
+      - description: Should be set to `True` if `symbols` are comprised of tickers.
+          Defaults to `False` if not provided.
         explode: true
         in: query
         name: use_ticker
@@ -1470,17 +1475,12 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: The ID of the account to get quotes.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       responses:
         "200":
@@ -1488,7 +1488,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SymbolsQuotes'
-          description: Returns quotes object with different prices
+          description: OK
         "500":
           content:
             application/json:
@@ -1502,8 +1502,12 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-quotes
   /trade/impact:
     post:
-      description: Return the trade object and it's impact on the account for the
-        specified order.
+      description: "Simulates an order and its impact on the account. This endpoint\
+        \ does not place the order with the brokerage. If successful, it returns a\
+        \ `Trade` object and the ID of the object can be used to place the order with\
+        \ the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder).\
+        \ Please note that the `Trade` object returned expires after 5 minutes. Any\
+        \ order placed using an expired `Trade` will be rejected."
       operationId: Trading_getOrderImpact
       parameters:
       - explode: true
@@ -1528,22 +1532,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ManualTradeAndImpact'
-          description: Return trade object and it's impact on the account
+          description: OK
         "400":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Missing or wrong data format provided in request body
+          description: Bad Request
         "403":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/403FailedRequestResponse'
-          description: User does not have permissions to place trades
+          description: Forbidden
         "500":
           description: Unexpected Error
-      summary: Check the impact of a trade on an account
+      summary: Check order impact
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -1551,18 +1555,16 @@ paths:
   /trade/{tradeId}:
     post:
       description: |
-        Places the specified trade object. This places the order in the account and
-        returns the status of the order from the brokerage.
+        Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
       operationId: Trading_placeOrder
       parameters:
-      - description: The ID of trade object obtained from trade/impact endpoint
+      - description: "Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)"
         explode: false
         in: path
         name: tradeId
         required: true
         schema:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/TradeID'
         style: simple
       - explode: true
         in: query
@@ -1595,14 +1597,19 @@ paths:
           description: Failed to submit order to broker
         "500":
           description: Unexpected Error
-      summary: Place order
+      summary: Place checked order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-tradeId
   /trade/place:
     post:
-      description: Places a specified trade in the specified account.
+      description: "Places a brokerage order in the specified account. The order could\
+        \ be rejected by the brokerage if it is invalid or if the account does not\
+        \ have sufficient funds. \n\nThis endpoint does not compute the impact to\
+        \ the account balance from the order and any potential commissions before\
+        \ submitting the order to the brokerage. If that is desired, you can use the\
+        \ [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).\n"
       operationId: Trading_placeForceOrder
       parameters:
       - explode: true
@@ -1627,7 +1634,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccountOrderRecord'
-          description: Trade sucessfully placed
+          description: OK
         "400":
           content:
             application/json:
@@ -1642,7 +1649,7 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Place a trade with NO validation.
+      summary: Place order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -1650,8 +1657,7 @@ paths:
   /accounts/{accountId}/orders/cancel:
     post:
       description: |
-        Sends a signal to the brokerage to cancel the specified order.
-        This will only work if the order has not yet been executed.
+        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
       parameters:
       - explode: true
@@ -1668,17 +1674,12 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to cancel the order in.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       requestBody:
         $ref: '#/components/requestBodies/CancelOrderRequestBody'
@@ -1702,7 +1703,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
-      summary: Cancel open order in account
+      summary: Cancel order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2057,7 +2058,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Trading_cancelUserAccountOrder_request'
-      description: The Order ID to be canceled
       required: true
     OptionStrategyRequestBody:
       content:
@@ -2723,7 +2723,7 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
-          brokerage_order_id: brokerage_order_id
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
@@ -2742,7 +2742,7 @@ components:
           time_executed: 2024-08-05T00:05:57.409Z
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
-          brokerage_order_id: brokerage_order_id
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
@@ -2827,7 +2827,7 @@ components:
         time_executed: 2024-08-05T00:05:57.409Z
         time_placed: 2024-07-30T22:51:49.746Z
         expiry_date: 2024-08-05T00:05:57.409Z
-        brokerage_order_id: brokerage_order_id
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         limit_price: 12.34
         time_updated: 2024-08-05T00:05:57.409Z
         canceled_quantity: 10
@@ -2846,7 +2846,10 @@ components:
         brokerage_order_id:
           description: Order ID returned by brokerage. This is the unique identifier
             for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
           type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
         symbol:
@@ -3507,6 +3510,14 @@ components:
           x-konfig-original-example: 410.71
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Balance-properties-buying_power
       type: object
+    CurrencyID:
+      description: Unique identifier for the currency. This is the UUID used to reference
+        the currency in SnapTrade.
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
+      format: uuid
+      type: string
+      x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CurrencyID
     Currency:
       additionalProperties: true
       description: Describes a currency object.
@@ -3522,7 +3533,7 @@ components:
           format: uuid
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Currency-properties-id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CurrencyID
         code:
           description: The ISO-4217 currency code for the currency.
           example: USD
@@ -5002,6 +5013,20 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+    BrokerageOrderID:
+      description: Order ID returned by brokerage. This is the unique identifier for
+        the order in the brokerage system.
+      example: 66a033fa-da74-4fcf-b527-feefdec9257e
+      type: string
+      x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+    TradeID:
+      description: Unique identifier for the submitted order through SnapTrade.
+      example: 139e307a-82f7-4402-b39e-4da7baa87758
+      format: uuid
+      type: string
+      x-konfig-original-example: 139e307a-82f7-4402-b39e-4da7baa87758
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeID
     UniversalSymbolID:
       description: Unique identifier for the symbol within SnapTrade. This is the
         ID used to reference the symbol in SnapTrade API calls.
@@ -5229,7 +5254,7 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
     ManualTrade:
       additionalProperties: true
-      description: A manual trade object
+      description: Contains the details of a submitted order.
       example:
         symbol:
           universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -5241,35 +5266,33 @@ components:
             code: USD
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
-        time_in_force: time_in_force
+        time_in_force: null
         price: 31.33
         action: null
-        id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        id: 139e307a-82f7-4402-b39e-4da7baa87758
         units: ""
-        order_type: null
-        account: 2bcd7cc3-e922-4976-bce1-9855556801c3
+        order_type: Market
+        account: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       properties:
         id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          description: Unique identifier for the submitted order through SnapTrade.
+          example: 139e307a-82f7-4402-b39e-4da7baa87758
           format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: 139e307a-82f7-4402-b39e-4da7baa87758
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradeID
         account:
-          example: 2bcd7cc3-e922-4976-bce1-9855556801c3
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9855556801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTrade-properties-account
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
-          description: |
-            Trade time in force examples:
-              * FOK - Fill Or Kill
-              * Day - Day
-              * GTC - Good Til Canceled
-              * GTD - Good Til Date
-          type: string
+          $ref: '#/components/schemas/TimeInForceStrict'
         symbol:
           $ref: '#/components/schemas/ManualTradeSymbol'
         action:
@@ -5286,9 +5309,57 @@ components:
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
       type: object
+    ManualTradeImpact:
+      additionalProperties: true
+      example:
+        remaining_cash: 1.11
+        estimated_commission: 3.26
+        currency: 87b24961-b51e-4db8-9226-f198f6518a89
+        forex_fees: 5.26
+        account: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+      properties:
+        account:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        currency:
+          description: Unique identifier for the currency. This is the UUID used to
+            reference the currency in SnapTrade.
+          example: 87b24961-b51e-4db8-9226-f198f6518a89
+          format: uuid
+          type: string
+          x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CurrencyID
+        remaining_cash:
+          description: Estimated amount of cash remaining in the account after the
+            trade.
+          example: 1.11
+          nullable: true
+          type: number
+          x-konfig-original-example: 1.11
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeImpact-properties-remaining_cash
+        estimated_commission:
+          description: Estimated commission for the trade.
+          example: 3.26
+          nullable: true
+          type: number
+          x-konfig-original-example: 3.26
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeImpact-properties-estimated_commission
+        forex_fees:
+          description: Estimated foreign transaction fees for the trade.
+          example: 5.26
+          nullable: true
+          type: number
+          x-konfig-original-example: 5.26
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeImpact-properties-forex_fees
+      type: object
     ManualTradeSymbol:
       additionalProperties: true
-      description: Manual trade symbol object
+      description: Information about the security for the order.
       example:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         symbol: MVGP.U.TO
@@ -5301,31 +5372,44 @@ components:
           id: 87b24961-b51e-4db8-9226-f198f6518a89
       properties:
         brokerage_symbol_id:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         universal_symbol_id:
+          description: Unique identifier for the symbol within SnapTrade. This is
+            the ID used to reference the symbol in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
         currency:
           $ref: '#/components/schemas/Currency'
         local_id:
+          deprecated: true
+          description: This field is deprecated and should not be used.
           example: "1048101"
           type: string
           x-konfig-original-example: "1048101"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id
         description:
+          deprecated: true
+          description: This field is deprecated and should not be used.
           example: Metaverse Global ETF
           nullable: true
           type: string
           x-konfig-original-example: Metaverse Global ETF
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-description
         symbol:
+          deprecated: true
+          description: This field is deprecated and should not be used.
           example: MVGP.U.TO
           type: string
           x-konfig-original-example: MVGP.U.TO
@@ -5333,7 +5417,7 @@ components:
       type: object
     ManualTradeBalance:
       additionalProperties: true
-      description: Balance
+      description: Estimated remaining balance of the account after the trade is executed.
       example:
         currency:
           code: USD
@@ -5342,15 +5426,6 @@ components:
         cash: 1.11
         account:
           number: Q6542138443
-          balance:
-            total:
-              amount: 15363.23
-              currency: USD
-          brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
-          meta:
-            type: Margin
-            status: ACTIVE
-            institution_name: Robinhood
           name: Robinhood Individual
           sync_status:
             holdings:
@@ -5360,27 +5435,23 @@ components:
               last_successful_sync: ""
               initial_sync_completed: true
               first_transaction_date: ""
-          id: ""
-          portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          created_date: 2024-07-23T22:50:22.761Z
-          institution_name: Robinhood
-          cash_restrictions: []
+          id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       properties:
         account:
-          $ref: '#/components/schemas/Account'
+          $ref: '#/components/schemas/AccountSimple'
         currency:
           $ref: '#/components/schemas/Currency'
         cash:
-          description: Cash
+          description: Estimated amount of cash remaining in the account after the
+            trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
           example: 1.11
           nullable: true
           type: number
           x-konfig-original-example: 1.11
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Cash
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeBalance-properties-cash
       type: object
     ManualTradeAndImpact:
       additionalProperties: true
-      description: Manual Trade and Impact object
       example:
         trade:
           symbol:
@@ -5393,48 +5464,24 @@ components:
               code: USD
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: time_in_force
+          time_in_force: null
           price: 31.33
           action: null
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          id: 139e307a-82f7-4402-b39e-4da7baa87758
           units: ""
-          order_type: null
-          account: 2bcd7cc3-e922-4976-bce1-9855556801c3
+          order_type: Market
+          account: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         trade_impacts:
-        - symbol:
-            universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            symbol: MVGP.U.TO
-            brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            local_id: "1048101"
-            description: Metaverse Global ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: time_in_force
-          price: 31.33
-          action: null
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          units: ""
-          order_type: null
-          account: 2bcd7cc3-e922-4976-bce1-9855556801c3
-        - symbol:
-            universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            symbol: MVGP.U.TO
-            brokerage_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            local_id: "1048101"
-            description: Metaverse Global ETF
-            currency:
-              code: USD
-              name: US Dollar
-              id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: time_in_force
-          price: 31.33
-          action: null
-          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          units: ""
-          order_type: null
-          account: 2bcd7cc3-e922-4976-bce1-9855556801c3
+        - remaining_cash: 1.11
+          estimated_commission: 3.26
+          currency: 87b24961-b51e-4db8-9226-f198f6518a89
+          forex_fees: 5.26
+          account: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        - remaining_cash: 1.11
+          estimated_commission: 3.26
+          currency: 87b24961-b51e-4db8-9226-f198f6518a89
+          forex_fees: 5.26
+          account: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         combined_remaining_balance:
           currency:
             code: USD
@@ -5443,15 +5490,6 @@ components:
           cash: 1.11
           account:
             number: Q6542138443
-            balance:
-              total:
-                amount: 15363.23
-                currency: USD
-            brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
-            meta:
-              type: Margin
-              status: ACTIVE
-              institution_name: Robinhood
             name: Robinhood Individual
             sync_status:
               holdings:
@@ -5461,110 +5499,117 @@ components:
                 last_successful_sync: ""
                 initial_sync_completed: true
                 first_transaction_date: ""
-            id: ""
-            portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-            created_date: 2024-07-23T22:50:22.761Z
-            institution_name: Robinhood
-            cash_restrictions: []
+            id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       properties:
         trade:
           $ref: '#/components/schemas/ManualTrade'
         trade_impacts:
+          description: List of impacts of the trade on the account. The list always
+            contains one value at the moment.
           items:
-            $ref: '#/components/schemas/ManualTrade'
+            $ref: '#/components/schemas/ManualTradeImpact'
           type: array
         combined_remaining_balance:
           $ref: '#/components/schemas/ManualTradeBalance'
       type: object
     SymbolsQuotes:
-      description: Symbols and Tickers Quotes object
+      description: List of symbols with the latest quotes from the brokerage.
       items:
         $ref: '#/components/schemas/SymbolsQuotes_inner'
       type: array
     ManualTradeForm:
-      description: Manual Trade Form
+      description: Inputs for placing an order with the brokerage.
       example:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         time_in_force: null
-        account_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
         price: 31.33
         notional_value: null
         action: null
         units: ""
-        order_type: null
+        order_type: Market
       properties:
         account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        universal_symbol_id:
+          description: Unique identifier for the symbol within SnapTrade. This is
+            the ID used to reference the symbol in SnapTrade API calls.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
-        action:
-          $ref: '#/components/schemas/ActionStrict'
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
-        price:
-          description: Trade Price if limit or stop limit order
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
-        stop:
-          description: "Stop Price. If stop loss or stop limit order, the price to\
-            \ trigger the stop"
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopPrice
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-stop
         units:
           allOf:
           - $ref: '#/components/schemas/Units'
           nullable: true
-        universal_symbol_id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
         notional_value:
           $ref: '#/components/schemas/ManualTradeForm_notional_value'
+      required:
+      - account_id
+      - action
+      - order_type
+      - time_in_force
+      - universal_symbol_id
       type: object
     ValidatedTradeBody:
-      description: Validated Trade Form
       example:
         wait_to_confirm: true
       properties:
         wait_to_confirm:
           description: "Optional, defaults to true. Determines if a wait is performed\
             \ to check on order status. If false, latency will be reduced but orders\
-            \ returned will be more likely to be of status PENDING as we will not\
-            \ wait to check on the status before responding to the request"
+            \ returned will be more likely to be of status `PENDING` as we will not\
+            \ wait to check on the status before responding to the request."
           example: true
           nullable: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm
       type: object
-    Cash:
-      description: Cash
-      example: 1.11
-      nullable: true
-      type: number
-      x-konfig-original-example: 1.11
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Cash
     OrderTypeStrict:
-      description: Order Type
+      description: |
+        The type of order to place.
+
+        - For `Limit` and `StopLimit` orders, the `price` field is required.
+        - For `Stop` and `StopLimit` orders, the `stop` field is required.
       enum:
       - Limit
       - Market
       - StopLimit
       - Stop
+      example: Market
       type: string
+      x-konfig-original-example: Market
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-OrderTypeStrict
     OrderType:
       description: Order Type potential values include (but are not limited to) -
         Limit - Market - StopLimit - Stop
@@ -5572,10 +5617,10 @@ components:
       type: string
     TimeInForceStrict:
       description: |
-        Trade time in force examples:
-          * FOK - Fill Or Kill
-          * Day - Day
-          * GTC - Good Til Canceled
+        The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:
+          - `Day` - Day. The order is valid only for the trading day on which it is placed.
+          - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+          - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
       enum:
       - FOK
       - Day
@@ -5590,7 +5635,8 @@ components:
           * GTD - Good Til Date
       type: string
     ActionStrict:
-      description: Trade Action
+      description: The action describes the intent or side of a trade. This is either
+        `BUY` or `SELL`
       enum:
       - BUY
       - SELL
@@ -5608,8 +5654,12 @@ components:
           - SELL_CLOSE
       type: string
     Units:
-      description: Trade Units. Cannot work with notional value.
+      description: Number of shares for the order. This can be a decimal for fractional
+        orders. Must be `null` if `notional_value` is provided.
+      example: 10.5
       type: number
+      x-konfig-original-example: 10.5
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
     Price:
       description: Trade Price if limit or stop limit order
       example: 31.33
@@ -5618,22 +5668,16 @@ components:
       x-konfig-original-example: 31.33
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Price
     NotionalValue:
-      description: "Dollar amount to trade. Cannot work with units. Can only work\
-        \ for market order types and day for time in force. **Only available for Alpaca,\
-        \ Alpaca Paper, and Robinhood.**"
+      description: "Total notional amount for the order. Must be `null` if `units`\
+        \ is provided. Can only work with `Market` for `order_type` and `Day` for\
+        \ `time_in_force`. This is only available for certain brokerages. Please check\
+        \ the [integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687)\
+        \ for more information."
       example: 100
       oneOf:
       - type: string
       - type: number
       x-konfig-original-example: 100
-    StopPrice:
-      description: "Stop Price. If stop loss or stop limit order, the price to trigger\
-        \ the stop"
-      example: 31.33
-      nullable: true
-      type: number
-      x-konfig-original-example: 31.33
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopPrice
     UniversalActivity:
       additionalProperties: true
       description: A transaction or activity from an institution
@@ -6260,14 +6304,6 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -6521,7 +6557,7 @@ components:
       example: 410.71
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Currency-properties-id:
+    konfig-generated-schema-components-schemas-CurrencyID:
       example: 87b24961-b51e-4db8-9226-f198f6518a89
       type: string
       x-do-not-generate: true
@@ -6979,6 +7015,14 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageOrderID:
+      example: 66a033fa-da74-4fcf-b527-feefdec9257e
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TradeID:
+      example: 139e307a-82f7-4402-b39e-4da7baa87758
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalSymbolID:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
@@ -7055,9 +7099,17 @@ components:
       example: 2024-06-28 18:42:46.561408+00:00
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ManualTrade-properties-account:
-      example: 2bcd7cc3-e922-4976-bce1-9855556801c3
-      type: string
+    konfig-generated-schema-components-schemas-ManualTradeImpact-properties-remaining_cash:
+      example: 1.11
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeImpact-properties-estimated_commission:
+      example: 3.26
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeImpact-properties-forex_fees:
+      example: 5.26
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-local_id:
       example: "1048101"
@@ -7071,16 +7123,20 @@ components:
       example: MVGP.U.TO
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeBalance-properties-cash:
+      example: 1.11
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price:
+      example: 8.74
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_price:
       example: 8.43
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_price:
       example: 8.43
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price:
-      example: 8.74
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_size:
@@ -7091,19 +7147,27 @@ components:
       example: 344
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeForm-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeForm-properties-stop:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Cash:
-      example: 1.11
+    konfig-generated-schema-components-schemas-OrderTypeStrict:
+      example: Market
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Units:
+      example: 10.5
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Price:
-      example: 31.33
-      type: number
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-StopPrice:
       example: 31.33
       type: number
       x-do-not-generate: true
@@ -7875,11 +7939,7 @@ components:
         use_ticker:
           type: boolean
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-quotes-get-parameters-4-schema
+          $ref: '#/components/schemas/AccountID'
       required:
       - accountId
       - symbols
@@ -7901,28 +7961,44 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         account_id:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/AccountID'
         action:
           $ref: '#/components/schemas/ActionStrict'
+        universal_symbol_id:
+          $ref: '#/components/schemas/UniversalSymbolID'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
-        price:
-          $ref: '#/components/schemas/Price'
-        stop:
-          $ref: '#/components/schemas/StopPrice'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-stop
         units:
           allOf:
           - $ref: '#/components/schemas/Units'
           nullable: true
-        universal_symbol_id:
-          $ref: '#/components/schemas/Id'
         notional_value:
           allOf:
           - $ref: '#/components/schemas/NotionalValue'
           nullable: true
       required:
+      - account_id
+      - action
+      - order_type
+      - time_in_force
+      - universal_symbol_id
       - userId
       - userSecret
       type: object
@@ -7934,8 +8010,7 @@ components:
       additionalProperties: true
       properties:
         tradeId:
-          format: uuid
-          type: string
+          $ref: '#/components/schemas/TradeID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -7943,8 +8018,8 @@ components:
         wait_to_confirm:
           description: "Optional, defaults to true. Determines if a wait is performed\
             \ to check on order status. If false, latency will be reduced but orders\
-            \ returned will be more likely to be of status PENDING as we will not\
-            \ wait to check on the status before responding to the request"
+            \ returned will be more likely to be of status `PENDING` as we will not\
+            \ wait to check on the status before responding to the request."
           example: true
           nullable: true
           type: boolean
@@ -7968,28 +8043,44 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         account_id:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/AccountID'
         action:
           $ref: '#/components/schemas/ActionStrict'
+        universal_symbol_id:
+          $ref: '#/components/schemas/UniversalSymbolID'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
-        price:
-          $ref: '#/components/schemas/Price'
-        stop:
-          $ref: '#/components/schemas/StopPrice'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-stop
         units:
           allOf:
           - $ref: '#/components/schemas/Units'
           nullable: true
-        universal_symbol_id:
-          $ref: '#/components/schemas/Id'
         notional_value:
           allOf:
           - $ref: '#/components/schemas/NotionalValue'
           nullable: true
       required:
+      - account_id
+      - action
+      - order_type
+      - time_in_force
+      - universal_symbol_id
       - userId
       - userSecret
       type: object
@@ -8005,13 +8096,9 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-cancel-post-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         brokerage_order_id:
-          $ref: '#/components/schemas/Id'
+          $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
       - userId
@@ -8358,11 +8445,12 @@ components:
     Trading_cancelUserAccountOrder_request:
       properties:
         brokerage_order_id:
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
           type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Id
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
       type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\
@@ -8653,27 +8741,32 @@ components:
       properties:
         symbol:
           $ref: '#/components/schemas/UniversalSymbol'
+        last_trade_price:
+          description: The most recent trade price from the brokerage.
+          example: 8.74
+          type: number
+          x-konfig-original-example: 8.74
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price
         bid_price:
+          description: The most recent bid price from the brokerage.
           example: 8.43
           type: number
           x-konfig-original-example: 8.43
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_price
         ask_price:
+          description: The most recent price from the brokerage.
           example: 8.43
           type: number
           x-konfig-original-example: 8.43
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_price
-        last_trade_price:
-          example: 8.74
-          type: number
-          x-konfig-original-example: 8.74
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-last_trade_price
         bid_size:
+          description: The most recent bid size from the brokerage.
           example: 260
           type: number
           x-konfig-original-example: 260
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-bid_size
         ask_size:
+          description: The most recent ask size from the brokerage.
           example: 344
           type: number
           x-konfig-original-example: 344

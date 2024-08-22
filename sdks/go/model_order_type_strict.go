@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// OrderTypeStrict Order Type
+// OrderTypeStrict The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
 type OrderTypeStrict string
 
 // List of OrderTypeStrict

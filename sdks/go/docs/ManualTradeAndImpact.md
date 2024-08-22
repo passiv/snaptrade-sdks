@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Trade** | Pointer to [**ManualTrade**](ManualTrade.md) |  | [optional] 
-**TradeImpacts** | Pointer to [**[]ManualTrade**](ManualTrade.md) |  | [optional] 
+**TradeImpacts** | Pointer to [**[]ManualTradeImpact**](ManualTradeImpact.md) | List of impacts of the trade on the account. The list always contains one value at the moment. | [optional] 
 **CombinedRemainingBalance** | Pointer to [**ManualTradeBalance**](ManualTradeBalance.md) |  | [optional] 
 
 ## Methods
@@ -54,20 +54,20 @@ HasTrade returns a boolean if a field has been set.
 
 ### GetTradeImpacts
 
-`func (o *ManualTradeAndImpact) GetTradeImpacts() []ManualTrade`
+`func (o *ManualTradeAndImpact) GetTradeImpacts() []ManualTradeImpact`
 
 GetTradeImpacts returns the TradeImpacts field if non-nil, zero value otherwise.
 
 ### GetTradeImpactsOk
 
-`func (o *ManualTradeAndImpact) GetTradeImpactsOk() (*[]ManualTrade, bool)`
+`func (o *ManualTradeAndImpact) GetTradeImpactsOk() (*[]ManualTradeImpact, bool)`
 
 GetTradeImpactsOk returns a tuple with the TradeImpacts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTradeImpacts
 
-`func (o *ManualTradeAndImpact) SetTradeImpacts(v []ManualTrade)`
+`func (o *ManualTradeAndImpact) SetTradeImpacts(v []ManualTradeImpact)`
 
 SetTradeImpacts sets TradeImpacts field to given value.
 

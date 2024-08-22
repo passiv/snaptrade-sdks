@@ -4,17 +4,17 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel open order in account
-[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check the impact of a trade on an account
+[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
+[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check order impact
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
-[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place a trade with NO validation.
-[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place order
+[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
+[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked order
 
 
 
 ## CancelUserAccountOrder
 
-Cancel open order in account
+Cancel order
 
 
 
@@ -37,12 +37,12 @@ func main() {
 
     
     tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
-    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("2bcd7cc3-e922-4976-bce1-9858296801c3")
+    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
     
     request := client.TradingApi.CancelUserAccountOrder(
         "userId_example",
         "userSecret_example",
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         tradingCancelUserAccountOrderRequest,
     )
     
@@ -83,7 +83,7 @@ func main() {
 
 ## GetOrderImpact
 
-Check the impact of a trade on an account
+Check order impact
 
 
 
@@ -107,15 +107,16 @@ func main() {
     units := *snaptrade.Newfloat32()
     notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
     
-    manualTradeForm := *snaptrade.NewManualTradeForm()
-    manualTradeForm.SetAccountId("2bcd7cc3-e922-4976-bce1-9858296801c3")
-    manualTradeForm.SetAction(null)
-    manualTradeForm.SetOrderType(null)
+    manualTradeForm := *snaptrade.NewManualTradeForm(
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        null,
+        "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        null,
+        null,
+    )
     manualTradeForm.SetPrice(31.33)
     manualTradeForm.SetStop(31.33)
-    manualTradeForm.SetTimeInForce(null)
     manualTradeForm.SetUnits(units)
-    manualTradeForm.SetUniversalSymbolId("2bcd7cc3-e922-4976-bce1-9858296801c3")
     manualTradeForm.SetNotionalValue(notionalValue)
     
     request := client.TradingApi.GetOrderImpact(
@@ -170,7 +171,7 @@ func main() {
         "userId_example",
         "userSecret_example",
         "symbols_example",
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
     )
     request.UseTicker(true)
     
@@ -183,9 +184,9 @@ func main() {
     // response from `GetUserAccountQuotes`: []SymbolsQuotesInner
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.GetUserAccountQuotes`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.LastTradePrice`: %v\n", *resp.LastTradePrice)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.BidPrice`: %v\n", *resp.BidPrice)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.AskPrice`: %v\n", *resp.AskPrice)
-    fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.LastTradePrice`: %v\n", *resp.LastTradePrice)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.BidSize`: %v\n", *resp.BidSize)
     fmt.Fprintf(os.Stdout, "Response from `SymbolsQuotesInner.GetUserAccountQuotes.AskSize`: %v\n", *resp.AskSize)
 }
@@ -198,7 +199,7 @@ func main() {
 
 ## PlaceForceOrder
 
-Place a trade with NO validation.
+Place order
 
 
 
@@ -222,15 +223,16 @@ func main() {
     units := *snaptrade.Newfloat32()
     notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
     
-    manualTradeForm := *snaptrade.NewManualTradeForm()
-    manualTradeForm.SetAccountId("2bcd7cc3-e922-4976-bce1-9858296801c3")
-    manualTradeForm.SetAction(null)
-    manualTradeForm.SetOrderType(null)
+    manualTradeForm := *snaptrade.NewManualTradeForm(
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        null,
+        "2bcd7cc3-e922-4976-bce1-9858296801c3",
+        null,
+        null,
+    )
     manualTradeForm.SetPrice(31.33)
     manualTradeForm.SetStop(31.33)
-    manualTradeForm.SetTimeInForce(null)
     manualTradeForm.SetUnits(units)
-    manualTradeForm.SetUniversalSymbolId("2bcd7cc3-e922-4976-bce1-9858296801c3")
     manualTradeForm.SetNotionalValue(notionalValue)
     
     request := client.TradingApi.PlaceForceOrder(
@@ -276,7 +278,7 @@ func main() {
 
 ## PlaceOrder
 
-Place order
+Place checked order
 
 
 

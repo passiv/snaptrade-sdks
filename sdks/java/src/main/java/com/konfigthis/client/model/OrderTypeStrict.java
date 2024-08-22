@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * Order Type
+ * The type of order to place.  - For &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;price&#x60; field is required. - For &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;stop&#x60; field is required. 
  */
 @JsonAdapter(OrderTypeStrict.Adapter.class)public enum OrderTypeStrict {
   

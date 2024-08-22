@@ -4,18 +4,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel open order in account |
-| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check the impact of a trade on an account |
+| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
+| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place a trade with NO validation. |
-| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place order |
+| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place order |
+| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order |
 
 
 # **CancelUserAccountOrder**
 
 
 
-Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
 
 ### Example
 ```csharp
@@ -39,17 +39,16 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to cancel the order in.
-            var brokerageOrderId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "accountId_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            // The Order ID to be canceled
             var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
                 brokerageOrderId
             );
             
             try
             {
-                // Cancel open order in account
+                // Cancel order
                 AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
                 Console.WriteLine(result);
             }
@@ -76,7 +75,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Cancel open order in account
+    // Cancel order
     ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -96,8 +95,8 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to cancel the order in. |  |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) | The Order ID to be canceled |  |
+| **accountId** | **string** |  |  |
+| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) |  |  |
 
 ### Return type
 
@@ -118,7 +117,7 @@ catch (ApiException e)
 
 
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
 ### Example
 ```csharp
@@ -142,31 +141,31 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrict.BUY;
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var orderType = OrderTypeStrict.Limit;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;
-            var units = default(double?); // Trade Units. Cannot work with notional value.
-            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeForm = new ManualTradeForm(
                 accountId,
                 action,
+                universalSymbolId,
                 orderType,
+                timeInForce,
                 price,
                 stop,
-                timeInForce,
                 units,
-                universalSymbolId,
                 notionalValue
             );
             
             try
             {
-                // Check the impact of a trade on an account
+                // Check order impact
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -193,7 +192,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Check the impact of a trade on an account
+    // Check order impact
     ApiResponse<ManualTradeAndImpact> response = apiInstance.GetOrderImpactWithHttpInfo(userId, userSecret, manualTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -223,9 +222,9 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Return trade object and it&#39;s impact on the account |  -  |
-| **400** | Missing or wrong data format provided in request body |  -  |
-| **403** | User does not have permissions to place trades |  -  |
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **403** | Forbidden |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -235,7 +234,7 @@ catch (ApiException e)
 
 
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 ### Example
 ```csharp
@@ -259,9 +258,9 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get quotes.
-            var useTicker = true; // Should be set to True if providing tickers. (optional) 
+            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
+            var accountId = "accountId_example";
+            var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
             try
             {
@@ -312,9 +311,9 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **symbols** | **string** | List of universal_symbol_id or tickers to get quotes for. |  |
-| **accountId** | **string** | The ID of the account to get quotes. |  |
-| **useTicker** | **bool?** | Should be set to True if providing tickers. | [optional]  |
+| **symbols** | **string** | List of Universal Symbol IDs or tickers to get quotes for. |  |
+| **accountId** | **string** |  |  |
+| **useTicker** | **bool?** | Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. | [optional]  |
 
 ### Return type
 
@@ -324,7 +323,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Returns quotes object with different prices |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -334,7 +333,7 @@ catch (ApiException e)
 
 
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
 
 ### Example
 ```csharp
@@ -358,31 +357,31 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrict.BUY;
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var orderType = OrderTypeStrict.Limit;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;
-            var units = default(double?); // Trade Units. Cannot work with notional value.
-            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeForm = new ManualTradeForm(
                 accountId,
                 action,
+                universalSymbolId,
                 orderType,
+                timeInForce,
                 price,
                 stop,
-                timeInForce,
                 units,
-                universalSymbolId,
                 notionalValue
             );
             
             try
             {
-                // Place a trade with NO validation.
+                // Place order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -409,7 +408,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place a trade with NO validation.
+    // Place order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -439,7 +438,7 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Trade sucessfully placed |  -  |
+| **200** | OK |  -  |
 | **400** | Trade could not be placed |  -  |
 | **403** | User does not have permissions to place trades |  -  |
 | **500** | Unexpected Error |  -  |
@@ -451,7 +450,7 @@ catch (ApiException e)
 
 
 
-Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
 
 ### Example
 ```csharp
@@ -473,10 +472,10 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var tradeId = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
+            var tradeId = "tradeId_example"; // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
             
             var validatedTradeBody = new ValidatedTradeBody(
                 waitToConfirm
@@ -484,7 +483,7 @@ namespace Example
             
             try
             {
-                // Place order
+                // Place checked order
                 AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
@@ -511,7 +510,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place order
+    // Place checked order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -529,7 +528,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **tradeId** | **string** | The ID of trade object obtained from trade/impact endpoint |  |
+| **tradeId** | **string** | Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **validatedTradeBody** | [**ValidatedTradeBody**](ValidatedTradeBody.md) |  | [optional]  |

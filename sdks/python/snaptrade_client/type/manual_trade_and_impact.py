@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.manual_trade import ManualTrade
 from snaptrade_client.type.manual_trade_balance import ManualTradeBalance
+from snaptrade_client.type.manual_trade_impact import ManualTradeImpact
 
 class RequiredManualTradeAndImpact(TypedDict):
     pass
@@ -24,7 +25,8 @@ class RequiredManualTradeAndImpact(TypedDict):
 class OptionalManualTradeAndImpact(TypedDict, total=False):
     trade: ManualTrade
 
-    trade_impacts: typing.List[ManualTrade]
+    # List of impacts of the trade on the account. The list always contains one value at the moment.
+    trade_impacts: typing.List[ManualTradeImpact]
 
     combined_remaining_balance: ManualTradeBalance
 

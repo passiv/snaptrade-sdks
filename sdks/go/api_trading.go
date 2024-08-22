@@ -38,17 +38,16 @@ func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord,
 }
 
 /*
-CancelUserAccountOrder Cancel open order in account
+CancelUserAccountOrder Cancel order
 
-Sends a signal to the brokerage to cancel the specified order.
-This will only work if the order has not yet been executed.
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param accountId The ID of the account to cancel the order in.
- @param tradingCancelUserAccountOrderRequest The Order ID to be canceled
+ @param accountId
+ @param tradingCancelUserAccountOrderRequest
  @return TradingApiCancelUserAccountOrderRequest
 */
 func (a *TradingApiService) CancelUserAccountOrder(userId string, userSecret string, accountId string, tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest) TradingApiCancelUserAccountOrderRequest {
@@ -226,9 +225,9 @@ func (r TradingApiGetOrderImpactRequest) Execute() (*ManualTradeAndImpact, *http
 }
 
 /*
-GetOrderImpact Check the impact of a trade on an account
+GetOrderImpact Check order impact
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -407,7 +406,7 @@ type TradingApiGetUserAccountQuotesRequest struct {
 	useTicker *bool
 }
 
-// Should be set to True if providing tickers.
+// Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
 func (r *TradingApiGetUserAccountQuotesRequest) UseTicker(useTicker bool) *TradingApiGetUserAccountQuotesRequest {
 	r.useTicker = &useTicker
 	return r
@@ -420,13 +419,13 @@ func (r TradingApiGetUserAccountQuotesRequest) Execute() ([]SymbolsQuotesInner, 
 /*
 GetUserAccountQuotes Get symbol quotes
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param symbols List of universal_symbol_id or tickers to get quotes for.
- @param accountId The ID of the account to get quotes.
+ @param symbols List of Universal Symbol IDs or tickers to get quotes for.
+ @param accountId
  @return TradingApiGetUserAccountQuotesRequest
 */
 func (a *TradingApiService) GetUserAccountQuotes(userId string, userSecret string, symbols string, accountId string) TradingApiGetUserAccountQuotesRequest {
@@ -593,9 +592,12 @@ func (r TradingApiPlaceForceOrderRequest) Execute() (*AccountOrderRecord, *http.
 }
 
 /*
-PlaceForceOrder Place a trade with NO validation.
+PlaceForceOrder Place order
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+
+This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
@@ -783,14 +785,13 @@ func (r TradingApiPlaceOrderRequest) Execute() (*AccountOrderRecord, *http.Respo
 }
 
 /*
-PlaceOrder Place order
+PlaceOrder Place checked order
 
-Places the specified trade object. This places the order in the account and
-returns the status of the order from the brokerage.
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param tradeId The ID of trade object obtained from trade/impact endpoint
+ @param tradeId Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
  @param userId
  @param userSecret
  @return TradingApiPlaceOrderRequest

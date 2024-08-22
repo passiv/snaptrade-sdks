@@ -13,9 +13,10 @@ import type * as buffer from "buffer"
 import { ActionStrict } from './action-strict';
 import { ManualTradeSymbol } from './manual-trade-symbol';
 import { OrderTypeStrict } from './order-type-strict';
+import { TimeInForceStrict } from './time-in-force-strict';
 
 /**
- * A manual trade object
+ * Contains the details of a submitted order.
  * @export
  * @interface ManualTrade
  */
@@ -23,29 +24,29 @@ export interface ManualTrade {
     [key: string]: any;
 
     /**
-     * 
+     * Unique identifier for the submitted order through SnapTrade.
      * @type {string}
      * @memberof ManualTrade
      */
     'id'?: string;
     /**
-     * 
+     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
      * @type {string}
      * @memberof ManualTrade
      */
     'account'?: string;
     /**
-     * Order Type
+     * The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
      * @type {OrderTypeStrict}
      * @memberof ManualTrade
      */
     'order_type'?: OrderTypeStrict;
     /**
-     * Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
-     * @type {string}
+     * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+     * @type {TimeInForceStrict}
      * @memberof ManualTrade
      */
-    'time_in_force'?: string;
+    'time_in_force'?: TimeInForceStrict;
     /**
      * 
      * @type {ManualTradeSymbol}
@@ -53,7 +54,7 @@ export interface ManualTrade {
      */
     'symbol'?: ManualTradeSymbol;
     /**
-     * Trade Action
+     * The action describes the intent or side of a trade. This is either `BUY` or `SELL`
      * @type {ActionStrict}
      * @memberof ManualTrade
      */

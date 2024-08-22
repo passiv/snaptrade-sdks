@@ -30,12 +30,12 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
         tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
-        tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("2bcd7cc3-e922-4976-bce1-9858296801c3")
+        tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
         
         request := client.TradingApi.CancelUserAccountOrder(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
             tradingCancelUserAccountOrderRequest,
         )
         
@@ -52,15 +52,16 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         units := *snaptrade.Newfloat32()
         notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
         
-        manualTradeForm := *snaptrade.NewManualTradeForm()
-        manualTradeForm.SetAccountId("2bcd7cc3-e922-4976-bce1-9858296801c3")
-        manualTradeForm.SetAction(null)
-        manualTradeForm.SetOrderType(null)
+        manualTradeForm := *snaptrade.NewManualTradeForm(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            null,
+            "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            null,
+            null,
+        )
         manualTradeForm.SetPrice(31.33)
         manualTradeForm.SetStop(31.33)
-        manualTradeForm.SetTimeInForce(null)
         manualTradeForm.SetUnits(units)
-        manualTradeForm.SetUniversalSymbolId("2bcd7cc3-e922-4976-bce1-9858296801c3")
         manualTradeForm.SetNotionalValue(notionalValue)
         
         request := client.TradingApi.GetOrderImpact(
@@ -83,7 +84,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             "userId_example",
             "userSecret_example",
             "symbols_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.UseTicker(true)
         
@@ -100,15 +101,16 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         units := *snaptrade.Newfloat32()
         notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
         
-        manualTradeForm := *snaptrade.NewManualTradeForm()
-        manualTradeForm.SetAccountId("2bcd7cc3-e922-4976-bce1-9858296801c3")
-        manualTradeForm.SetAction(null)
-        manualTradeForm.SetOrderType(null)
+        manualTradeForm := *snaptrade.NewManualTradeForm(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            null,
+            "2bcd7cc3-e922-4976-bce1-9858296801c3",
+            null,
+            null,
+        )
         manualTradeForm.SetPrice(31.33)
         manualTradeForm.SetStop(31.33)
-        manualTradeForm.SetTimeInForce(null)
         manualTradeForm.SetUnits(units)
-        manualTradeForm.SetUniversalSymbolId("2bcd7cc3-e922-4976-bce1-9858296801c3")
         manualTradeForm.SetNotionalValue(notionalValue)
         
         request := client.TradingApi.PlaceForceOrder(

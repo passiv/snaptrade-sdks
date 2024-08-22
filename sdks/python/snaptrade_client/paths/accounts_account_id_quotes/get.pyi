@@ -470,7 +470,7 @@ class GetUserAccountQuotes(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns quote(s) from the brokerage for the specified symbol(s). """
+        """ Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes. """
         args = self._get_user_account_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -531,7 +531,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns quote(s) from the brokerage for the specified symbol(s). """
+        """ Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes. """
         args = self._get_user_account_quotes_mapped_args(
             query_params=query_params,
             path_params=path_params,

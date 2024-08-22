@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Manual Trade Form
+    /// Inputs for placing an order with the brokerage.
     /// </summary>
     [DataContract(Name = "ManualTradeForm")]
     public partial class ManualTradeForm : IEquatable<ManualTradeForm>, IValidatableObject
@@ -36,77 +36,94 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Gets or Sets _Action
         /// </summary>
-        [DataMember(Name = "action", EmitDefaultValue = false)]
-        public ActionStrict? _Action { get; set; }
+        [DataMember(Name = "action", IsRequired = true, EmitDefaultValue = true)]
+        public ActionStrict _Action { get; set; }
 
         /// <summary>
         /// Gets or Sets OrderType
         /// </summary>
-        [DataMember(Name = "order_type", EmitDefaultValue = false)]
-        public OrderTypeStrict? OrderType { get; set; }
+        [DataMember(Name = "order_type", IsRequired = true, EmitDefaultValue = true)]
+        public OrderTypeStrict OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
         /// </summary>
-        [DataMember(Name = "time_in_force", EmitDefaultValue = false)]
-        public TimeInForceStrict? TimeInForce { get; set; }
+        [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
+        public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeForm" /> class.
         /// </summary>
-        /// <param name="accountId">accountId.</param>
-        /// <param name="action">action.</param>
-        /// <param name="orderType">orderType.</param>
-        /// <param name="price">Trade Price if limit or stop limit order.</param>
-        /// <param name="stop">Stop Price. If stop loss or stop limit order, the price to trigger the stop.</param>
-        /// <param name="timeInForce">timeInForce.</param>
-        /// <param name="units">Trade Units. Cannot work with notional value..</param>
-        /// <param name="universalSymbolId">universalSymbolId.</param>
+        [JsonConstructorAttribute]
+        protected ManualTradeForm() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ManualTradeForm" /> class.
+        /// </summary>
+        /// <param name="accountId">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
+        /// <param name="action">action (required).</param>
+        /// <param name="universalSymbolId">Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. (required).</param>
+        /// <param name="orderType">orderType (required).</param>
+        /// <param name="timeInForce">timeInForce (required).</param>
+        /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
         /// <param name="notionalValue">notionalValue.</param>
-        public ManualTradeForm(string accountId = default(string), ActionStrict? action = default(ActionStrict?), OrderTypeStrict? orderType = default(OrderTypeStrict?), double? price = default(double?), double? stop = default(double?), TimeInForceStrict? timeInForce = default(TimeInForceStrict?), double? units = default(double?), string universalSymbolId = default(string), NotionalValueNullable notionalValue = default(NotionalValueNullable))
+        public ManualTradeForm(string accountId = default(string), ActionStrict action = default(ActionStrict), string universalSymbolId = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
         {
+            // to ensure "accountId" is required (not null)
+            if (accountId == null)
+            {
+                throw new ArgumentNullException("accountId is a required property for ManualTradeForm and cannot be null");
+            }
             this.AccountId = accountId;
             this._Action = action;
+            // to ensure "universalSymbolId" is required (not null)
+            if (universalSymbolId == null)
+            {
+                throw new ArgumentNullException("universalSymbolId is a required property for ManualTradeForm and cannot be null");
+            }
+            this.UniversalSymbolId = universalSymbolId;
             this.OrderType = orderType;
+            this.TimeInForce = timeInForce;
             this.Price = price;
             this.Stop = stop;
-            this.TimeInForce = timeInForce;
             this.Units = units;
-            this.UniversalSymbolId = universalSymbolId;
             this.NotionalValue = notionalValue;
         }
 
         /// <summary>
-        /// Gets or Sets AccountId
+        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
         /// </summary>
-        [DataMember(Name = "account_id", EmitDefaultValue = false)]
+        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
+        [DataMember(Name = "account_id", IsRequired = true, EmitDefaultValue = true)]
         public string AccountId { get; set; }
 
         /// <summary>
-        /// Trade Price if limit or stop limit order
+        /// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
         /// </summary>
-        /// <value>Trade Price if limit or stop limit order</value>
+        /// <value>Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.</value>
+        [DataMember(Name = "universal_symbol_id", IsRequired = true, EmitDefaultValue = true)]
+        public string UniversalSymbolId { get; set; }
+
+        /// <summary>
+        /// The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
+        /// </summary>
+        /// <value>The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
         public double? Price { get; set; }
 
         /// <summary>
-        /// Stop Price. If stop loss or stop limit order, the price to trigger the stop
+        /// The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
         /// </summary>
-        /// <value>Stop Price. If stop loss or stop limit order, the price to trigger the stop</value>
+        /// <value>The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "stop", EmitDefaultValue = true)]
         public double? Stop { get; set; }
 
         /// <summary>
-        /// Trade Units. Cannot work with notional value.
+        /// Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.
         /// </summary>
-        /// <value>Trade Units. Cannot work with notional value.</value>
+        /// <value>Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided.</value>
         [DataMember(Name = "units", EmitDefaultValue = true)]
         public double? Units { get; set; }
-
-        /// <summary>
-        /// Gets or Sets UniversalSymbolId
-        /// </summary>
-        [DataMember(Name = "universal_symbol_id", EmitDefaultValue = false)]
-        public string UniversalSymbolId { get; set; }
 
         /// <summary>
         /// Gets or Sets NotionalValue
@@ -124,12 +141,12 @@ namespace SnapTrade.Net.Model
             sb.Append("class ManualTradeForm {\n");
             sb.Append("  AccountId: ").Append(AccountId).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
+            sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
+            sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Stop: ").Append(Stop).Append("\n");
-            sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
-            sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
             sb.Append("  NotionalValue: ").Append(NotionalValue).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -176,8 +193,17 @@ namespace SnapTrade.Net.Model
                     this._Action.Equals(input._Action)
                 ) && 
                 (
+                    this.UniversalSymbolId == input.UniversalSymbolId ||
+                    (this.UniversalSymbolId != null &&
+                    this.UniversalSymbolId.Equals(input.UniversalSymbolId))
+                ) && 
+                (
                     this.OrderType == input.OrderType ||
                     this.OrderType.Equals(input.OrderType)
+                ) && 
+                (
+                    this.TimeInForce == input.TimeInForce ||
+                    this.TimeInForce.Equals(input.TimeInForce)
                 ) && 
                 (
                     this.Price == input.Price ||
@@ -190,18 +216,9 @@ namespace SnapTrade.Net.Model
                     this.Stop.Equals(input.Stop))
                 ) && 
                 (
-                    this.TimeInForce == input.TimeInForce ||
-                    this.TimeInForce.Equals(input.TimeInForce)
-                ) && 
-                (
                     this.Units == input.Units ||
                     (this.Units != null &&
                     this.Units.Equals(input.Units))
-                ) && 
-                (
-                    this.UniversalSymbolId == input.UniversalSymbolId ||
-                    (this.UniversalSymbolId != null &&
-                    this.UniversalSymbolId.Equals(input.UniversalSymbolId))
                 ) && 
                 (
                     this.NotionalValue == input.NotionalValue ||
@@ -224,7 +241,12 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.AccountId.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
+                if (this.UniversalSymbolId != null)
+                {
+                    hashCode = (hashCode * 59) + this.UniversalSymbolId.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
+                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();
@@ -233,14 +255,9 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Stop.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.Units != null)
                 {
                     hashCode = (hashCode * 59) + this.Units.GetHashCode();
-                }
-                if (this.UniversalSymbolId != null)
-                {
-                    hashCode = (hashCode * 59) + this.UniversalSymbolId.GetHashCode();
                 }
                 if (this.NotionalValue != null)
                 {

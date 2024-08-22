@@ -12,9 +12,10 @@ import type * as buffer from "buffer"
 
 import { ManualTrade } from './manual-trade';
 import { ManualTradeBalance } from './manual-trade-balance';
+import { ManualTradeImpact } from './manual-trade-impact';
 
 /**
- * Manual Trade and Impact object
+ * 
  * @export
  * @interface ManualTradeAndImpact
  */
@@ -28,11 +29,11 @@ export interface ManualTradeAndImpact {
      */
     'trade'?: ManualTrade;
     /**
-     * 
-     * @type {Array<ManualTrade>}
+     * List of impacts of the trade on the account. The list always contains one value at the moment.
+     * @type {Array<ManualTradeImpact>}
      * @memberof ManualTradeAndImpact
      */
-    'trade_impacts'?: Array<ManualTrade>;
+    'trade_impacts'?: Array<ManualTradeImpact>;
     /**
      * 
      * @type {ManualTradeBalance}

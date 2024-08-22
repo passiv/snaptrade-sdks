@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Manual trade symbol object
+    /// Information about the security for the order.
     /// </summary>
     [DataContract(Name = "ManualTradeSymbol")]
     public partial class ManualTradeSymbol : IEquatable<ManualTradeSymbol>, IValidatableObject
@@ -35,12 +35,12 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeSymbol" /> class.
         /// </summary>
-        /// <param name="brokerageSymbolId">brokerageSymbolId.</param>
-        /// <param name="universalSymbolId">universalSymbolId.</param>
+        /// <param name="brokerageSymbolId">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
+        /// <param name="universalSymbolId">Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls..</param>
         /// <param name="currency">currency.</param>
-        /// <param name="localId">localId.</param>
-        /// <param name="description">description.</param>
-        /// <param name="symbol">symbol.</param>
+        /// <param name="localId">This field is deprecated and should not be used..</param>
+        /// <param name="description">This field is deprecated and should not be used..</param>
+        /// <param name="symbol">This field is deprecated and should not be used..</param>
         public ManualTradeSymbol(string brokerageSymbolId = default(string), string universalSymbolId = default(string), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
         {
             this.BrokerageSymbolId = brokerageSymbolId;
@@ -53,14 +53,17 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Gets or Sets BrokerageSymbolId
+        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
         /// </summary>
+        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
         [DataMember(Name = "brokerage_symbol_id", EmitDefaultValue = false)]
+        [Obsolete]
         public string BrokerageSymbolId { get; set; }
 
         /// <summary>
-        /// Gets or Sets UniversalSymbolId
+        /// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
         /// </summary>
+        /// <value>Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.</value>
         [DataMember(Name = "universal_symbol_id", EmitDefaultValue = false)]
         public string UniversalSymbolId { get; set; }
 
@@ -71,21 +74,27 @@ namespace SnapTrade.Net.Model
         public Currency Currency { get; set; }
 
         /// <summary>
-        /// Gets or Sets LocalId
+        /// This field is deprecated and should not be used.
         /// </summary>
+        /// <value>This field is deprecated and should not be used.</value>
         [DataMember(Name = "local_id", EmitDefaultValue = false)]
+        [Obsolete]
         public string LocalId { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// This field is deprecated and should not be used.
         /// </summary>
+        /// <value>This field is deprecated and should not be used.</value>
         [DataMember(Name = "description", EmitDefaultValue = true)]
+        [Obsolete]
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Symbol
+        /// This field is deprecated and should not be used.
         /// </summary>
+        /// <value>This field is deprecated and should not be used.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        [Obsolete]
         public string Symbol { get; set; }
 
         /// <summary>

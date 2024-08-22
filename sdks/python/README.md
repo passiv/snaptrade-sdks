@@ -1099,7 +1099,7 @@ Places the option strategy order and returns the order record received from the 
 
 ```python
 place_option_strategy_response = snaptrade.options.place_option_strategy(
-    order_type="Limit",
+    order_type="Market",
     time_in_force="FOK",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -1455,8 +1455,7 @@ The ID of the account to search for symbols within.
 
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 
-Sends a signal to the brokerage to cancel the specified order.
-This will only work if the order has not yet been executed.
+Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1466,7 +1465,7 @@ cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerage_order_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 ```
 
@@ -1478,15 +1477,13 @@ cancel_user_account_order_response = snaptrade.trading.cancel_user_account_order
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
-The ID of the account to cancel the order in.
-
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
 [`Any`](./snaptrade_client/type/typing_any.py)
-The Order ID to be canceled
-
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
@@ -1501,47 +1498,55 @@ The Order ID to be canceled
 
 ### `snaptrade.trading.get_order_impact`<a id="snaptradetradingget_order_impact"></a>
 
-Return the trade object and it's impact on the account for the specified order.
+Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_order_impact_response = snaptrade.trading.get_order_impact(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type="Market",
+    time_in_force="FOK",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    action="BUY",
-    order_type="Limit",
     price=31.33,
     stop=31.33,
-    time_in_force="FOK",
-    units=3.14,
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    units=10.5,
     notional_value=None,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`<a id="account_id-str"></a>
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
-##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+The limit price for `Limit` and `StopLimit` orders.
 
-##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
 
-##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
-
-##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
-
-##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
-
-##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
@@ -1562,7 +1567,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quote(s) from the brokerage for the specified symbol(s).
+Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1584,15 +1589,13 @@ get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
 
 ##### symbols: `str`<a id="symbols-str"></a>
 
-List of universal_symbol_id or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for.
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
-The ID of the account to get quotes.
-
 ##### use_ticker: `bool`<a id="use_ticker-bool"></a>
 
-Should be set to True if providing tickers.
+Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1608,47 +1611,58 @@ Should be set to True if providing tickers.
 
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
-Places a specified trade in the specified account.
+Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+
+This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_force_order_response = snaptrade.trading.place_force_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    order_type="Market",
+    time_in_force="FOK",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    action="BUY",
-    order_type="Limit",
     price=31.33,
     stop=31.33,
-    time_in_force="FOK",
-    units=3.14,
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    units=10.5,
     notional_value=None,
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`<a id="account_id-str"></a>
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
-##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+The limit price for `Limit` and `StopLimit` orders.
 
-##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
 
-##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
-
-##### stop: [`StopPrice`](./snaptrade_client/type/stop_price.py)<a id="stop-stoppricesnaptrade_clienttypestop_pricepy"></a>
-
-##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
-
-##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
@@ -1669,15 +1683,14 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 ### `snaptrade.trading.place_order`<a id="snaptradetradingplace_order"></a>
 
-Places the specified trade object. This places the order in the account and
-returns the status of the order from the brokerage.
+Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 place_order_response = snaptrade.trading.place_order(
-    trade_id="tradeId_example",
+    trade_id="139e307a-82f7-4402-b39e-4da7baa87758",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     wait_to_confirm=True,
@@ -1688,7 +1701,7 @@ place_order_response = snaptrade.trading.place_order(
 
 ##### trade_id: `str`<a id="trade_id-str"></a>
 
-The ID of trade object obtained from trade/impact endpoint
+Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -1696,7 +1709,7 @@ The ID of trade object obtained from trade/impact endpoint
 
 ##### wait_to_confirm: `Optional[bool]`<a id="wait_to_confirm-optionalbool"></a>
 
-Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

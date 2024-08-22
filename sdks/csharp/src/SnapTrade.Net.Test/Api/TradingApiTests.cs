@@ -54,17 +54,16 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to cancel the order in.
-            var brokerageOrderId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "accountId_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            // The Order ID to be canceled
             var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
                 brokerageOrderId
             );
             
             try
             {
-                // Cancel open order in account
+                // Cancel order
                 AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
                 Console.WriteLine(result);
             }
@@ -90,31 +89,31 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrict.BUY;
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var orderType = OrderTypeStrict.Limit;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;
-            var units = default(double?); // Trade Units. Cannot work with notional value.
-            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeForm = new ManualTradeForm(
                 accountId,
                 action,
+                universalSymbolId,
                 orderType,
+                timeInForce,
                 price,
                 stop,
-                timeInForce,
                 units,
-                universalSymbolId,
                 notionalValue
             );
             
             try
             {
-                // Check the impact of a trade on an account
+                // Check order impact
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -140,9 +139,9 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var symbols = "symbols_example"; // List of universal_symbol_id or tickers to get quotes for.
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to get quotes.
-            var useTicker = true; // Should be set to True if providing tickers. (optional) 
+            var symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
+            var accountId = "accountId_example";
+            var useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided. (optional) 
             
             try
             {
@@ -172,31 +171,31 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrict.BUY;
+            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
             var orderType = OrderTypeStrict.Limit;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            var stop = 31.33; // Stop Price. If stop loss or stop limit order, the price to trigger the stop
             var timeInForce = TimeInForceStrict.FOK;
-            var units = default(double?); // Trade Units. Cannot work with notional value.
-            var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeForm = new ManualTradeForm(
                 accountId,
                 action,
+                universalSymbolId,
                 orderType,
+                timeInForce,
                 price,
                 stop,
-                timeInForce,
                 units,
-                universalSymbolId,
                 notionalValue
             );
             
             try
             {
-                // Place a trade with NO validation.
+                // Place order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -220,10 +219,10 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void PlaceOrderTest()
         {
-            var tradeId = "tradeId_example"; // The ID of trade object obtained from trade/impact endpoint
+            var tradeId = "tradeId_example"; // Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+            var waitToConfirm = true; // Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
             
             var validatedTradeBody = new ValidatedTradeBody(
                 waitToConfirm
@@ -231,7 +230,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Place order
+                // Place checked order
                 AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }

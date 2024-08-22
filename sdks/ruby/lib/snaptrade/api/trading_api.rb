@@ -17,15 +17,14 @@ module SnapTrade
       @api_client = api_client
     end
 
-    # Cancel open order in account
+    # Cancel order
     #
-    # Sends a signal to the brokerage to cancel the specified order.
-    # This will only work if the order has not yet been executed.
+    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to cancel the order in.
-    # @param brokerage_order_id [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param body [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
@@ -36,15 +35,14 @@ module SnapTrade
       data
     end
 
-    # Cancel open order in account
+    # Cancel order
     #
-    # Sends a signal to the brokerage to cancel the specified order.
-    # This will only work if the order has not yet been executed.
+    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to cancel the order in.
-    # @param brokerage_order_id [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param body [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
@@ -54,12 +52,12 @@ module SnapTrade
       cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
     end
 
-    # Cancel open order in account
-    # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+    # Cancel order
+    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to cancel the order in.
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
+    # @param account_id [String] 
+    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
     private def cancel_user_account_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
@@ -67,12 +65,12 @@ module SnapTrade
       data
     end
 
-    # Cancel open order in account
-    # Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+    # Cancel order
+    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to cancel the order in.
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] The Order ID to be canceled
+    # @param account_id [String] 
+    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
     private def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
@@ -143,73 +141,73 @@ module SnapTrade
     end
 
 
-    # Check the impact of a trade on an account
+    # Check order impact
     #
-    # Return the trade object and it's impact on the account for the specified order.
+    # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param action [ActionStrict] Trade Action
-    # @param order_type [OrderTypeStrict] Order Type
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param universal_symbol_id [String] 
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
+    def get_order_impact(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
-      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       data, _status_code, _headers = get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
     end
 
-    # Check the impact of a trade on an account
+    # Check order impact
     #
-    # Return the trade object and it's impact on the account for the specified order.
+    # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param action [ActionStrict] Trade Action
-    # @param order_type [OrderTypeStrict] Order Type
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param universal_symbol_id [String] 
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_order_impact_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
+    def get_order_impact_with_http_info(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
-      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
-    # Check the impact of a trade on an account
-    # Return the trade object and it's impact on the account for the specified order.
+    # Check order impact
+    # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -220,8 +218,8 @@ module SnapTrade
       data
     end
 
-    # Check the impact of a trade on an account
-    # Return the trade object and it&#39;s impact on the account for the specified order.
+    # Check order impact
+    # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -293,13 +291,13 @@ module SnapTrade
 
     # Get symbol quotes
     #
-    # Returns quote(s) from the brokerage for the specified symbol(s).
+    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
-    # @param account_id [String] The ID of the account to get quotes.
-    # @param use_ticker [Boolean] Should be set to True if providing tickers.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param account_id [String] 
+    # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_quotes(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
@@ -309,13 +307,13 @@ module SnapTrade
 
     # Get symbol quotes
     #
-    # Returns quote(s) from the brokerage for the specified symbol(s).
+    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
-    # @param account_id [String] The ID of the account to get quotes.
-    # @param use_ticker [Boolean] Should be set to True if providing tickers.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param account_id [String] 
+    # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_user_account_quotes_with_http_info(user_id:, user_secret:, symbols:, account_id:, use_ticker: SENTINEL, extra: {})
       extra[:use_ticker] = use_ticker if use_ticker != SENTINEL
@@ -323,13 +321,13 @@ module SnapTrade
     end
 
     # Get symbol quotes
-    # Returns quote(s) from the brokerage for the specified symbol(s).
+    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
-    # @param account_id [String] The ID of the account to get quotes.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
+    # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @return [Array<SymbolsQuotesInner>]
     private def get_user_account_quotes_impl(user_id, user_secret, symbols, account_id, opts = {})
       data, _status_code, _headers = get_user_account_quotes_with_http_info(user_id, user_secret, symbols, account_id, opts)
@@ -337,13 +335,13 @@ module SnapTrade
     end
 
     # Get symbol quotes
-    # Returns quote(s) from the brokerage for the specified symbol(s).
+    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of universal_symbol_id or tickers to get quotes for.
-    # @param account_id [String] The ID of the account to get quotes.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
-    # @option opts [Boolean] :use_ticker Should be set to True if providing tickers.
+    # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @return [Array<(Array<SymbolsQuotesInner>, Integer, Hash)>] Array<SymbolsQuotesInner> data, response status code and response headers
     private def get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, opts = {})
       if @api_client.config.debugging
@@ -410,73 +408,77 @@ module SnapTrade
     end
 
 
-    # Place a trade with NO validation.
+    # Place order
     #
-    # Places a specified trade in the specified account.
+    # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+    # 
+    # This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
     #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param action [ActionStrict] Trade Action
-    # @param order_type [OrderTypeStrict] Order Type
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param universal_symbol_id [String] 
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
-      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
       data
     end
 
-    # Place a trade with NO validation.
+    # Place order
     #
-    # Places a specified trade in the specified account.
+    # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
+    # 
+    # This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
     #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param action [ActionStrict] Trade Action
-    # @param order_type [OrderTypeStrict] Order Type
-    # @param price [Float] Trade Price if limit or stop limit order
-    # @param stop [Float] Stop Price. If stop loss or stop limit order, the price to trigger the stop
-    # @param time_in_force [TimeInForceStrict] Trade time in force examples: * FOK - Fill Or Kill * Day - Day * GTC - Good Til Canceled 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
-    # @param universal_symbol_id [String] 
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(user_id:, user_secret:, account_id: SENTINEL, action: SENTINEL, order_type: SENTINEL, price: SENTINEL, stop: SENTINEL, time_in_force: SENTINEL, units: SENTINEL, universal_symbol_id: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order_with_http_info(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
+      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:units] = units if units != SENTINEL
-      _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
       manual_trade_form = _body
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
-    # Place a trade with NO validation.
-    # Places a specified trade in the specified account.
+    # Place order
+    # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -487,8 +489,8 @@ module SnapTrade
       data
     end
 
-    # Place a trade with NO validation.
-    # Places a specified trade in the specified account.
+    # Place order
+    # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form [ManualTradeForm] 
@@ -558,15 +560,14 @@ module SnapTrade
     end
 
 
-    # Place order
+    # Place checked order
     #
-    # Places the specified trade object. This places the order in the account and
-    # returns the status of the order from the brokerage.
+    # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
     #
-    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     # @param body [ValidatedTradeBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_order(trade_id:, user_id:, user_secret:, wait_to_confirm: SENTINEL, extra: {})
@@ -577,15 +578,14 @@ module SnapTrade
       data
     end
 
-    # Place order
+    # Place checked order
     #
-    # Places the specified trade object. This places the order in the account and
-    # returns the status of the order from the brokerage.
+    # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
     #
-    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+    # @param wait_to_confirm [Boolean] Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     # @param body [ValidatedTradeBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_order_with_http_info(trade_id:, user_id:, user_secret:, wait_to_confirm: SENTINEL, extra: {})
@@ -595,9 +595,9 @@ module SnapTrade
       place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
     end
 
-    # Place order
-    # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # Place checked order
+    # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+    # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -608,9 +608,9 @@ module SnapTrade
       data
     end
 
-    # Place order
-    # Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-    # @param trade_id [String] The ID of trade object obtained from trade/impact endpoint
+    # Place checked order
+    # Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+    # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

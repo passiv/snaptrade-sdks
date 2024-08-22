@@ -19,20 +19,22 @@ from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.price import Price
+from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.units_nullable import UnitsNullable
 
 class RequiredManualTrade(TypedDict):
     pass
 
 class OptionalManualTrade(TypedDict, total=False):
+    # Unique identifier for the submitted order through SnapTrade.
     id: str
 
+    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     account: str
 
     order_type: OrderTypeStrict
 
-    # Trade time in force examples:   * FOK - Fill Or Kill   * Day - Day   * GTC - Good Til Canceled   * GTD - Good Til Date 
-    time_in_force: str
+    time_in_force: TimeInForceStrict
 
     symbol: ManualTradeSymbol
 

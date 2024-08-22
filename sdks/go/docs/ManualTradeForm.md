@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | Pointer to **string** |  | [optional] 
-**Action** | Pointer to [**ActionStrict**](ActionStrict.md) |  | [optional] 
-**OrderType** | Pointer to [**OrderTypeStrict**](OrderTypeStrict.md) |  | [optional] 
-**Price** | Pointer to **NullableFloat32** | Trade Price if limit or stop limit order | [optional] 
-**Stop** | Pointer to **NullableFloat32** | Stop Price. If stop loss or stop limit order, the price to trigger the stop | [optional] 
-**TimeInForce** | Pointer to [**TimeInForceStrict**](TimeInForceStrict.md) |  | [optional] 
+**AccountId** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
+**Action** | [**ActionStrict**](ActionStrict.md) |  | 
+**UniversalSymbolId** | **string** | Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. | 
+**OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
+**TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
+**Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** |  | [optional] 
-**UniversalSymbolId** | Pointer to **string** |  | [optional] 
 **NotionalValue** | Pointer to [**NullableManualTradeFormNotionalValue**](ManualTradeFormNotionalValue.md) |  | [optional] 
 
 ## Methods
 
 ### NewManualTradeForm
 
-`func NewManualTradeForm() *ManualTradeForm`
+`func NewManualTradeForm(accountId string, action ActionStrict, universalSymbolId string, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeForm`
 
 NewManualTradeForm instantiates a new ManualTradeForm object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetAccountId sets AccountId field to given value.
 
-### HasAccountId
-
-`func (o *ManualTradeForm) HasAccountId() bool`
-
-HasAccountId returns a boolean if a field has been set.
 
 ### GetAction
 
@@ -77,11 +72,26 @@ and a boolean to check if the value has been set.
 
 SetAction sets Action field to given value.
 
-### HasAction
 
-`func (o *ManualTradeForm) HasAction() bool`
+### GetUniversalSymbolId
 
-HasAction returns a boolean if a field has been set.
+`func (o *ManualTradeForm) GetUniversalSymbolId() string`
+
+GetUniversalSymbolId returns the UniversalSymbolId field if non-nil, zero value otherwise.
+
+### GetUniversalSymbolIdOk
+
+`func (o *ManualTradeForm) GetUniversalSymbolIdOk() (*string, bool)`
+
+GetUniversalSymbolIdOk returns a tuple with the UniversalSymbolId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUniversalSymbolId
+
+`func (o *ManualTradeForm) SetUniversalSymbolId(v string)`
+
+SetUniversalSymbolId sets UniversalSymbolId field to given value.
+
 
 ### GetOrderType
 
@@ -102,11 +112,26 @@ and a boolean to check if the value has been set.
 
 SetOrderType sets OrderType field to given value.
 
-### HasOrderType
 
-`func (o *ManualTradeForm) HasOrderType() bool`
+### GetTimeInForce
 
-HasOrderType returns a boolean if a field has been set.
+`func (o *ManualTradeForm) GetTimeInForce() TimeInForceStrict`
+
+GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
+
+### GetTimeInForceOk
+
+`func (o *ManualTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool)`
+
+GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTimeInForce
+
+`func (o *ManualTradeForm) SetTimeInForce(v TimeInForceStrict)`
+
+SetTimeInForce sets TimeInForce field to given value.
+
 
 ### GetPrice
 
@@ -178,31 +203,6 @@ HasStop returns a boolean if a field has been set.
 `func (o *ManualTradeForm) UnsetStop()`
 
 UnsetStop ensures that no value is present for Stop, not even an explicit nil
-### GetTimeInForce
-
-`func (o *ManualTradeForm) GetTimeInForce() TimeInForceStrict`
-
-GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
-
-### GetTimeInForceOk
-
-`func (o *ManualTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool)`
-
-GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTimeInForce
-
-`func (o *ManualTradeForm) SetTimeInForce(v TimeInForceStrict)`
-
-SetTimeInForce sets TimeInForce field to given value.
-
-### HasTimeInForce
-
-`func (o *ManualTradeForm) HasTimeInForce() bool`
-
-HasTimeInForce returns a boolean if a field has been set.
-
 ### GetUnits
 
 `func (o *ManualTradeForm) GetUnits() float32`
@@ -238,31 +238,6 @@ HasUnits returns a boolean if a field has been set.
 `func (o *ManualTradeForm) UnsetUnits()`
 
 UnsetUnits ensures that no value is present for Units, not even an explicit nil
-### GetUniversalSymbolId
-
-`func (o *ManualTradeForm) GetUniversalSymbolId() string`
-
-GetUniversalSymbolId returns the UniversalSymbolId field if non-nil, zero value otherwise.
-
-### GetUniversalSymbolIdOk
-
-`func (o *ManualTradeForm) GetUniversalSymbolIdOk() (*string, bool)`
-
-GetUniversalSymbolIdOk returns a tuple with the UniversalSymbolId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUniversalSymbolId
-
-`func (o *ManualTradeForm) SetUniversalSymbolId(v string)`
-
-SetUniversalSymbolId sets UniversalSymbolId field to given value.
-
-### HasUniversalSymbolId
-
-`func (o *ManualTradeForm) HasUniversalSymbolId() bool`
-
-HasUniversalSymbolId returns a boolean if a field has been set.
-
 ### GetNotionalValue
 
 `func (o *ManualTradeForm) GetNotionalValue() ManualTradeFormNotionalValue`

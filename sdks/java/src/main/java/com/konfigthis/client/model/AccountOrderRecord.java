@@ -149,7 +149,7 @@ public class AccountOrderRecord {
    * @return brokerageOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.")
+  @ApiModelProperty(example = "66a033fa-da74-4fcf-b527-feefdec9257e", value = "Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.")
 
   public String getBrokerageOrderId() {
     return brokerageOrderId;

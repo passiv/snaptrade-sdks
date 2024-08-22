@@ -115,7 +115,7 @@ class SchemaForRequestBodyApplicationJson(
     class MetaOapg:
         
         class properties:
-            brokerage_order_id = schemas.UUIDSchema
+            brokerage_order_id = schemas.StrSchema
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
             }
@@ -144,7 +144,7 @@ class SchemaForRequestBodyApplicationJson(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':
@@ -288,7 +288,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Cancel open order in account
+        Cancel order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -434,7 +434,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Cancel open order in account
+        Cancel order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -581,7 +581,7 @@ class CancelUserAccountOrder(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.  """
+        """ Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             query_params=query_params,
@@ -644,7 +644,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed.  """
+        """ Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.  """
         args = self._cancel_user_account_order_mapped_args(
             body=body,
             query_params=query_params,

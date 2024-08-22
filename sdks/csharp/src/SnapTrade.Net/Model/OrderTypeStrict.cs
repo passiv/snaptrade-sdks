@@ -27,9 +27,9 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Order Type
+    /// The type of order to place.  - For &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;price&#x60; field is required. - For &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;stop&#x60; field is required. 
     /// </summary>
-    /// <value>Order Type</value>
+    /// <value>The type of order to place.  - For &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;price&#x60; field is required. - For &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders, the &#x60;stop&#x60; field is required. </value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum OrderTypeStrict
     {

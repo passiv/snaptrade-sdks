@@ -420,19 +420,25 @@ operation_parameter_map = {
     '/trade/impact-POST': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'account_id'
             },
             {
                 'name': 'action'
             },
             {
+                'name': 'universal_symbol_id'
+            },
+            {
                 'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
             },
             {
                 'name': 'price'
@@ -441,13 +447,7 @@ operation_parameter_map = {
                 'name': 'stop'
             },
             {
-                'name': 'time_in_force'
-            },
-            {
                 'name': 'units'
-            },
-            {
-                'name': 'universal_symbol_id'
             },
             {
                 'name': 'notional_value'
@@ -476,19 +476,25 @@ operation_parameter_map = {
     '/trade/place-POST': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
                 'name': 'account_id'
             },
             {
                 'name': 'action'
             },
             {
+                'name': 'universal_symbol_id'
+            },
+            {
                 'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
             },
             {
                 'name': 'price'
@@ -497,13 +503,7 @@ operation_parameter_map = {
                 'name': 'stop'
             },
             {
-                'name': 'time_in_force'
-            },
-            {
                 'name': 'units'
-            },
-            {
-                'name': 'universal_symbol_id'
             },
             {
                 'name': 'notional_value'

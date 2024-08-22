@@ -13,12 +13,12 @@
 import unittest
 
 import snaptrade_client
-from snaptrade_client.model.stop_price import StopPrice
+from snaptrade_client.model.trade_id import TradeID
 from snaptrade_client import configuration
 
 
-class TestStopPrice(unittest.TestCase):
-    """StopPrice unit test stubs"""
+class TestTradeID(unittest.TestCase):
+    """TradeID unit test stubs"""
     pass
 
 

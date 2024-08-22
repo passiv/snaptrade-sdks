@@ -12,6 +12,7 @@ require 'time'
 
 module SnapTrade
   class TradingCancelUserAccountOrderRequest
+    # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     attr_accessor :brokerage_order_id
 
     # Attribute mapping from ruby-style variable name to JSON key.

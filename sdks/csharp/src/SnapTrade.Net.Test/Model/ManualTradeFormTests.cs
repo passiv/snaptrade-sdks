@@ -74,12 +74,28 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property '_Action'
         }
         /// <summary>
+        /// Test the property 'UniversalSymbolId'
+        /// </summary>
+        [Fact]
+        public void UniversalSymbolIdTest()
+        {
+            // TODO unit test for the property 'UniversalSymbolId'
+        }
+        /// <summary>
         /// Test the property 'OrderType'
         /// </summary>
         [Fact]
         public void OrderTypeTest()
         {
             // TODO unit test for the property 'OrderType'
+        }
+        /// <summary>
+        /// Test the property 'TimeInForce'
+        /// </summary>
+        [Fact]
+        public void TimeInForceTest()
+        {
+            // TODO unit test for the property 'TimeInForce'
         }
         /// <summary>
         /// Test the property 'Price'
@@ -98,28 +114,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Stop'
         }
         /// <summary>
-        /// Test the property 'TimeInForce'
-        /// </summary>
-        [Fact]
-        public void TimeInForceTest()
-        {
-            // TODO unit test for the property 'TimeInForce'
-        }
-        /// <summary>
         /// Test the property 'Units'
         /// </summary>
         [Fact]
         public void UnitsTest()
         {
             // TODO unit test for the property 'Units'
-        }
-        /// <summary>
-        /// Test the property 'UniversalSymbolId'
-        /// </summary>
-        [Fact]
-        public void UniversalSymbolIdTest()
-        {
-            // TODO unit test for the property 'UniversalSymbolId'
         }
         /// <summary>
         /// Test the property 'NotionalValue'

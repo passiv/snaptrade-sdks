@@ -15,19 +15,19 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
-from snaptrade_client.type.account import Account
-from snaptrade_client.type.cash import Cash
+from snaptrade_client.type.account_simple import AccountSimple
 from snaptrade_client.type.currency import Currency
 
 class RequiredManualTradeBalance(TypedDict):
     pass
 
 class OptionalManualTradeBalance(TypedDict, total=False):
-    account: Account
+    account: AccountSimple
 
     currency: Currency
 
-    cash: Cash
+    # Estimated amount of cash remaining in the account after the trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
+    cash: typing.Optional[typing.Union[int, float]]
 
 class ManualTradeBalance(RequiredManualTradeBalance, OptionalManualTradeBalance):
     pass

@@ -36,11 +36,12 @@ from snaptrade_client.model.brokerage_authorization_refresh_confirmation import 
 from snaptrade_client.model.brokerage_authorization_type_read_only import BrokerageAuthorizationTypeReadOnly
 from snaptrade_client.model.brokerage_authorization_type_read_only_brokerage import BrokerageAuthorizationTypeReadOnlyBrokerage
 from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
+from snaptrade_client.model.brokerage_order_id import BrokerageOrderID
 from snaptrade_client.model.brokerage_symbol_id import BrokerageSymbolID
 from snaptrade_client.model.brokerage_type import BrokerageType
-from snaptrade_client.model.cash import Cash
 from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.currency import Currency
+from snaptrade_client.model.currency_id import CurrencyID
 from snaptrade_client.model.currency_nullable import CurrencyNullable
 from snaptrade_client.model.delete_user_response import DeleteUserResponse
 from snaptrade_client.model.dividend_at_date import DividendAtDate
@@ -59,6 +60,7 @@ from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance
 from snaptrade_client.model.manual_trade_form import ManualTradeForm
+from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse
@@ -108,7 +110,6 @@ from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHold
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.status import Status
-from snaptrade_client.model.stop_price import StopPrice
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
@@ -121,6 +122,7 @@ from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.trade_id import TradeID
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol

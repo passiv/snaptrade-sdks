@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * Trade Action
+ * The action describes the intent or side of a trade. This is either `BUY` or `SELL`
  * @export
  * @enum {string}
  */

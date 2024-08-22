@@ -60,11 +60,27 @@ public class ManualTradeFormTest {
     }
 
     /**
+     * Test the property 'universalSymbolId'
+     */
+    @Test
+    public void universalSymbolIdTest() {
+        // TODO: test universalSymbolId
+    }
+
+    /**
      * Test the property 'orderType'
      */
     @Test
     public void orderTypeTest() {
         // TODO: test orderType
+    }
+
+    /**
+     * Test the property 'timeInForce'
+     */
+    @Test
+    public void timeInForceTest() {
+        // TODO: test timeInForce
     }
 
     /**
@@ -84,27 +100,11 @@ public class ManualTradeFormTest {
     }
 
     /**
-     * Test the property 'timeInForce'
-     */
-    @Test
-    public void timeInForceTest() {
-        // TODO: test timeInForce
-    }
-
-    /**
      * Test the property 'units'
      */
     @Test
     public void unitsTest() {
         // TODO: test units
-    }
-
-    /**
-     * Test the property 'universalSymbolId'
-     */
-    @Test
-    public void universalSymbolIdTest() {
-        // TODO: test universalSymbolId
     }
 
     /**

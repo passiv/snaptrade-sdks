@@ -180,7 +180,7 @@ public class TradingApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
-        UUID brokerageOrderId;
+        String brokerageOrderId;
 
         public CancelUserAccountOrderRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
             this.userId = userId;
@@ -190,10 +190,10 @@ public class TradingApiGenerated {
 
         /**
          * Set brokerageOrderId
-         * @param brokerageOrderId  (optional)
+         * @param brokerageOrderId Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (optional)
          * @return TradingApi.CancelUserAccountOrderRequestBuilder
          */
-        public TradingApi.CancelUserAccountOrderRequestBuilder brokerageOrderId(UUID brokerageOrderId) {
+        public TradingApi.CancelUserAccountOrderRequestBuilder brokerageOrderId(String brokerageOrderId) {
             this.brokerageOrderId = brokerageOrderId;
             return (TradingApi.CancelUserAccountOrderRequestBuilder) this;
         }
@@ -269,12 +269,12 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Cancel open order in account
-     * Sends a signal to the brokerage to cancel the specified order. This will only work if the order has not yet been executed. 
+     * Cancel order
+     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to cancel the order in. (required)
-     * @param tradingCancelUserAccountOrderRequest The Order ID to be canceled (required)
+     * @param accountId  (required)
+     * @param tradingCancelUserAccountOrderRequest  (required)
      * @return CancelUserAccountOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -384,56 +384,31 @@ public class TradingApiGenerated {
     }
 
     public abstract class GetOrderImpactRequestBuilderGenerated {
+        final UUID accountId;
+        final ActionStrict action;
+        final UUID universalSymbolId;
+        final OrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
         final String userId;
         final String userSecret;
-        UUID accountId;
-        ActionStrict action;
-        OrderTypeStrict orderType;
         Double price;
         Double stop;
-        TimeInForceStrict timeInForce;
         Double units;
-        UUID universalSymbolId;
         Object notionalValue;
 
-        public GetOrderImpactRequestBuilderGenerated(String userId, String userSecret) {
+        public GetOrderImpactRequestBuilderGenerated(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+            this.accountId = accountId;
+            this.action = action;
+            this.universalSymbolId = universalSymbolId;
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
             this.userId = userId;
             this.userSecret = userSecret;
         }
 
         /**
-         * Set accountId
-         * @param accountId  (optional)
-         * @return TradingApi.GetOrderImpactRequestBuilder
-         */
-        public TradingApi.GetOrderImpactRequestBuilder accountId(UUID accountId) {
-            this.accountId = accountId;
-            return (TradingApi.GetOrderImpactRequestBuilder) this;
-        }
-        
-        /**
-         * Set action
-         * @param action  (optional)
-         * @return TradingApi.GetOrderImpactRequestBuilder
-         */
-        public TradingApi.GetOrderImpactRequestBuilder action(ActionStrict action) {
-            this.action = action;
-            return (TradingApi.GetOrderImpactRequestBuilder) this;
-        }
-        
-        /**
-         * Set orderType
-         * @param orderType  (optional)
-         * @return TradingApi.GetOrderImpactRequestBuilder
-         */
-        public TradingApi.GetOrderImpactRequestBuilder orderType(OrderTypeStrict orderType) {
-            this.orderType = orderType;
-            return (TradingApi.GetOrderImpactRequestBuilder) this;
-        }
-        
-        /**
          * Set price
-         * @param price Trade Price if limit or stop limit order (optional)
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder price(Double price) {
@@ -444,7 +419,7 @@ public class TradingApiGenerated {
 
         /**
          * Set price
-         * @param price Trade Price if limit or stop limit order (optional)
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder price(Integer price) {
@@ -454,7 +429,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stop
-         * @param stop Stop Price. If stop loss or stop limit order, the price to trigger the stop (optional)
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder stop(Double stop) {
@@ -465,7 +440,7 @@ public class TradingApiGenerated {
 
         /**
          * Set stop
-         * @param stop Stop Price. If stop loss or stop limit order, the price to trigger the stop (optional)
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder stop(Integer stop) {
@@ -474,18 +449,8 @@ public class TradingApiGenerated {
         }
         
         /**
-         * Set timeInForce
-         * @param timeInForce  (optional)
-         * @return TradingApi.GetOrderImpactRequestBuilder
-         */
-        public TradingApi.GetOrderImpactRequestBuilder timeInForce(TimeInForceStrict timeInForce) {
-            this.timeInForce = timeInForce;
-            return (TradingApi.GetOrderImpactRequestBuilder) this;
-        }
-        
-        /**
          * Set units
-         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder units(Double units) {
@@ -496,21 +461,11 @@ public class TradingApiGenerated {
 
         /**
          * Set units
-         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
          * @return TradingApi.GetOrderImpactRequestBuilder
          */
         public TradingApi.GetOrderImpactRequestBuilder units(Integer units) {
             this.units = units.doubleValue();
-            return (TradingApi.GetOrderImpactRequestBuilder) this;
-        }
-        
-        /**
-         * Set universalSymbolId
-         * @param universalSymbolId  (optional)
-         * @return TradingApi.GetOrderImpactRequestBuilder
-         */
-        public TradingApi.GetOrderImpactRequestBuilder universalSymbolId(UUID universalSymbolId) {
-            this.universalSymbolId = universalSymbolId;
             return (TradingApi.GetOrderImpactRequestBuilder) this;
         }
         
@@ -532,7 +487,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -545,12 +500,12 @@ public class TradingApiGenerated {
             ManualTradeForm manualTradeForm = new ManualTradeForm();
             manualTradeForm.accountId(this.accountId);
             manualTradeForm.action(this.action);
+            manualTradeForm.universalSymbolId(this.universalSymbolId);
             manualTradeForm.orderType(this.orderType);
+            manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.price(this.price);
             manualTradeForm.stop(this.stop);
-            manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.units(this.units);
-            manualTradeForm.universalSymbolId(this.universalSymbolId);
             manualTradeForm.notionalValue(this.notionalValue);
             return manualTradeForm;
         }
@@ -562,7 +517,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -579,7 +534,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -596,7 +551,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -607,8 +562,8 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Check the impact of a trade on an account
-     * Return the trade object and it&#39;s impact on the account for the specified order.
+     * Check order impact
+     * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
      * @param userId  (required)
      * @param userSecret  (required)
      * @param manualTradeForm  (required)
@@ -616,18 +571,27 @@ public class TradingApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Return trade object and it&#39;s impact on the account </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.GetOrderImpactRequestBuilder getOrderImpact(String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.GetOrderImpactRequestBuilder getOrderImpact(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
+        if (universalSymbolId == null) throw new IllegalArgumentException("\"universalSymbolId\" is required but got null");
+            
+
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((TradingApi) this).new GetOrderImpactRequestBuilder(userId, userSecret);
+        return ((TradingApi) this).new GetOrderImpactRequestBuilder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
     }
     private okhttp3.Call getUserAccountQuotesCall(String userId, String userSecret, String symbols, UUID accountId, Boolean useTicker, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -747,7 +711,7 @@ public class TradingApiGenerated {
 
         /**
          * Set useTicker
-         * @param useTicker Should be set to True if providing tickers. (optional)
+         * @param useTicker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)
          * @return TradingApi.GetUserAccountQuotesRequestBuilder
          */
         public TradingApi.GetUserAccountQuotesRequestBuilder useTicker(Boolean useTicker) {
@@ -763,7 +727,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -778,7 +742,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public List<SymbolsQuotesInner> execute() throws ApiException {
@@ -793,7 +757,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<SymbolsQuotesInner>> executeWithHttpInfo() throws ApiException {
@@ -808,7 +772,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<SymbolsQuotesInner>> _callback) throws ApiException {
@@ -818,16 +782,16 @@ public class TradingApiGenerated {
 
     /**
      * Get symbol quotes
-     * Returns quote(s) from the brokerage for the specified symbol(s).
+     * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param symbols List of universal_symbol_id or tickers to get quotes for. (required)
-     * @param accountId The ID of the account to get quotes. (required)
+     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param accountId  (required)
      * @return GetUserAccountQuotesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns quotes object with different prices </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
     public TradingApi.GetUserAccountQuotesRequestBuilder getUserAccountQuotes(String userId, String userSecret, String symbols, UUID accountId) throws IllegalArgumentException {
@@ -935,56 +899,31 @@ public class TradingApiGenerated {
     }
 
     public abstract class PlaceForceOrderRequestBuilderGenerated {
+        final UUID accountId;
+        final ActionStrict action;
+        final UUID universalSymbolId;
+        final OrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
         final String userId;
         final String userSecret;
-        UUID accountId;
-        ActionStrict action;
-        OrderTypeStrict orderType;
         Double price;
         Double stop;
-        TimeInForceStrict timeInForce;
         Double units;
-        UUID universalSymbolId;
         Object notionalValue;
 
-        public PlaceForceOrderRequestBuilderGenerated(String userId, String userSecret) {
+        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+            this.accountId = accountId;
+            this.action = action;
+            this.universalSymbolId = universalSymbolId;
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
             this.userId = userId;
             this.userSecret = userSecret;
         }
 
         /**
-         * Set accountId
-         * @param accountId  (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder accountId(UUID accountId) {
-            this.accountId = accountId;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-        /**
-         * Set action
-         * @param action  (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder action(ActionStrict action) {
-            this.action = action;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-        /**
-         * Set orderType
-         * @param orderType  (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder orderType(OrderTypeStrict orderType) {
-            this.orderType = orderType;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-        /**
          * Set price
-         * @param price Trade Price if limit or stop limit order (optional)
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder price(Double price) {
@@ -995,7 +934,7 @@ public class TradingApiGenerated {
 
         /**
          * Set price
-         * @param price Trade Price if limit or stop limit order (optional)
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder price(Integer price) {
@@ -1005,7 +944,7 @@ public class TradingApiGenerated {
         
         /**
          * Set stop
-         * @param stop Stop Price. If stop loss or stop limit order, the price to trigger the stop (optional)
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder stop(Double stop) {
@@ -1016,7 +955,7 @@ public class TradingApiGenerated {
 
         /**
          * Set stop
-         * @param stop Stop Price. If stop loss or stop limit order, the price to trigger the stop (optional)
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder stop(Integer stop) {
@@ -1025,18 +964,8 @@ public class TradingApiGenerated {
         }
         
         /**
-         * Set timeInForce
-         * @param timeInForce  (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder timeInForce(TimeInForceStrict timeInForce) {
-            this.timeInForce = timeInForce;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-        /**
          * Set units
-         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder units(Double units) {
@@ -1047,21 +976,11 @@ public class TradingApiGenerated {
 
         /**
          * Set units
-         * @param units Trade Units. Cannot work with notional value. (optional)
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder units(Integer units) {
             this.units = units.doubleValue();
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-        /**
-         * Set universalSymbolId
-         * @param universalSymbolId  (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder universalSymbolId(UUID universalSymbolId) {
-            this.universalSymbolId = universalSymbolId;
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         
@@ -1083,7 +1002,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Trade sucessfully placed </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1096,12 +1015,12 @@ public class TradingApiGenerated {
             ManualTradeForm manualTradeForm = new ManualTradeForm();
             manualTradeForm.accountId(this.accountId);
             manualTradeForm.action(this.action);
+            manualTradeForm.universalSymbolId(this.universalSymbolId);
             manualTradeForm.orderType(this.orderType);
+            manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.price(this.price);
             manualTradeForm.stop(this.stop);
-            manualTradeForm.timeInForce(this.timeInForce);
             manualTradeForm.units(this.units);
-            manualTradeForm.universalSymbolId(this.universalSymbolId);
             manualTradeForm.notionalValue(this.notionalValue);
             return manualTradeForm;
         }
@@ -1113,7 +1032,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Trade sucessfully placed </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1130,7 +1049,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Trade sucessfully placed </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1147,7 +1066,7 @@ public class TradingApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Trade sucessfully placed </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -1158,8 +1077,8 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Place a trade with NO validation.
-     * Places a specified trade in the specified account.
+     * Place order
+     * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.   This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param manualTradeForm  (required)
@@ -1167,18 +1086,27 @@ public class TradingApiGenerated {
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Trade sucessfully placed </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
+        if (universalSymbolId == null) throw new IllegalArgumentException("\"universalSymbolId\" is required but got null");
+            
+
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(userId, userSecret);
+        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
     }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -1284,7 +1212,7 @@ public class TradingApiGenerated {
 
         /**
          * Set waitToConfirm
-         * @param waitToConfirm Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request (optional)
+         * @param waitToConfirm Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status &#x60;PENDING&#x60; as we will not wait to check on the status before responding to the request. (optional)
          * @return TradingApi.PlaceOrderRequestBuilder
          */
         public TradingApi.PlaceOrderRequestBuilder waitToConfirm(Boolean waitToConfirm) {
@@ -1367,9 +1295,9 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Place order
-     * Places the specified trade object. This places the order in the account and returns the status of the order from the brokerage. 
-     * @param tradeId The ID of trade object obtained from trade/impact endpoint (required)
+     * Place checked order
+     * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder). 
+     * @param tradeId Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact) (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @return PlaceOrderRequestBuilder

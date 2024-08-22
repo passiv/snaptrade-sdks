@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Validated Trade Form
+    /// ValidatedTradeBody
     /// </summary>
     [DataContract(Name = "ValidatedTradeBody")]
     public partial class ValidatedTradeBody : IEquatable<ValidatedTradeBody>, IValidatableObject
@@ -35,16 +35,16 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidatedTradeBody" /> class.
         /// </summary>
-        /// <param name="waitToConfirm">Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request.</param>
+        /// <param name="waitToConfirm">Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status &#x60;PENDING&#x60; as we will not wait to check on the status before responding to the request..</param>
         public ValidatedTradeBody(bool? waitToConfirm = default(bool?))
         {
             this.WaitToConfirm = waitToConfirm;
         }
 
         /// <summary>
-        /// Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request
+        /// Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status &#x60;PENDING&#x60; as we will not wait to check on the status before responding to the request.
         /// </summary>
-        /// <value>Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status PENDING as we will not wait to check on the status before responding to the request</value>
+        /// <value>Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status &#x60;PENDING&#x60; as we will not wait to check on the status before responding to the request.</value>
         [DataMember(Name = "wait_to_confirm", EmitDefaultValue = true)]
         public bool? WaitToConfirm { get; set; }
 

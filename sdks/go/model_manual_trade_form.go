@@ -15,18 +15,20 @@ import (
 	"encoding/json"
 )
 
-// ManualTradeForm Manual Trade Form
+// ManualTradeForm Inputs for placing an order with the brokerage.
 type ManualTradeForm struct {
-	AccountId *string `json:"account_id,omitempty"`
-	Action *ActionStrict `json:"action,omitempty"`
-	OrderType *OrderTypeStrict `json:"order_type,omitempty"`
-	// Trade Price if limit or stop limit order
+	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+	AccountId string `json:"account_id"`
+	Action ActionStrict `json:"action"`
+	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+	UniversalSymbolId string `json:"universal_symbol_id"`
+	OrderType OrderTypeStrict `json:"order_type"`
+	TimeInForce TimeInForceStrict `json:"time_in_force"`
+	// The limit price for `Limit` and `StopLimit` orders.
 	Price NullableFloat32 `json:"price,omitempty"`
-	// Stop Price. If stop loss or stop limit order, the price to trigger the stop
+	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 	Stop NullableFloat32 `json:"stop,omitempty"`
-	TimeInForce *TimeInForceStrict `json:"time_in_force,omitempty"`
 	Units NullableFloat32 `json:"units,omitempty"`
-	UniversalSymbolId *string `json:"universal_symbol_id,omitempty"`
 	NotionalValue NullableManualTradeFormNotionalValue `json:"notional_value,omitempty"`
 }
 
@@ -34,8 +36,13 @@ type ManualTradeForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManualTradeForm() *ManualTradeForm {
+func NewManualTradeForm(accountId string, action ActionStrict, universalSymbolId string, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeForm {
 	this := ManualTradeForm{}
+	this.AccountId = accountId
+	this.Action = action
+	this.UniversalSymbolId = universalSymbolId
+	this.OrderType = orderType
+	this.TimeInForce = timeInForce
 	return &this
 }
 
@@ -47,100 +54,124 @@ func NewManualTradeFormWithDefaults() *ManualTradeForm {
 	return &this
 }
 
-// GetAccountId returns the AccountId field value if set, zero value otherwise.
+// GetAccountId returns the AccountId field value
 func (o *ManualTradeForm) GetAccountId() string {
-	if o == nil || isNil(o.AccountId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.AccountId
+
+	return o.AccountId
 }
 
-// GetAccountIdOk returns a tuple with the AccountId field value if set, nil otherwise
+// GetAccountIdOk returns a tuple with the AccountId field value
 // and a boolean to check if the value has been set.
 func (o *ManualTradeForm) GetAccountIdOk() (*string, bool) {
-	if o == nil || isNil(o.AccountId) {
+	if o == nil {
     return nil, false
 	}
-	return o.AccountId, true
+	return &o.AccountId, true
 }
 
-// HasAccountId returns a boolean if a field has been set.
-func (o *ManualTradeForm) HasAccountId() bool {
-	if o != nil && !isNil(o.AccountId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccountId gets a reference to the given string and assigns it to the AccountId field.
+// SetAccountId sets field value
 func (o *ManualTradeForm) SetAccountId(v string) {
-	o.AccountId = &v
+	o.AccountId = v
 }
 
-// GetAction returns the Action field value if set, zero value otherwise.
+// GetAction returns the Action field value
 func (o *ManualTradeForm) GetAction() ActionStrict {
-	if o == nil || isNil(o.Action) {
+	if o == nil {
 		var ret ActionStrict
 		return ret
 	}
-	return *o.Action
+
+	return o.Action
 }
 
-// GetActionOk returns a tuple with the Action field value if set, nil otherwise
+// GetActionOk returns a tuple with the Action field value
 // and a boolean to check if the value has been set.
 func (o *ManualTradeForm) GetActionOk() (*ActionStrict, bool) {
-	if o == nil || isNil(o.Action) {
+	if o == nil {
     return nil, false
 	}
-	return o.Action, true
+	return &o.Action, true
 }
 
-// HasAction returns a boolean if a field has been set.
-func (o *ManualTradeForm) HasAction() bool {
-	if o != nil && !isNil(o.Action) {
-		return true
+// SetAction sets field value
+func (o *ManualTradeForm) SetAction(v ActionStrict) {
+	o.Action = v
+}
+
+// GetUniversalSymbolId returns the UniversalSymbolId field value
+func (o *ManualTradeForm) GetUniversalSymbolId() string {
+	if o == nil {
+		var ret string
+		return ret
 	}
 
-	return false
+	return o.UniversalSymbolId
 }
 
-// SetAction gets a reference to the given ActionStrict and assigns it to the Action field.
-func (o *ManualTradeForm) SetAction(v ActionStrict) {
-	o.Action = &v
+// GetUniversalSymbolIdOk returns a tuple with the UniversalSymbolId field value
+// and a boolean to check if the value has been set.
+func (o *ManualTradeForm) GetUniversalSymbolIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.UniversalSymbolId, true
 }
 
-// GetOrderType returns the OrderType field value if set, zero value otherwise.
+// SetUniversalSymbolId sets field value
+func (o *ManualTradeForm) SetUniversalSymbolId(v string) {
+	o.UniversalSymbolId = v
+}
+
+// GetOrderType returns the OrderType field value
 func (o *ManualTradeForm) GetOrderType() OrderTypeStrict {
-	if o == nil || isNil(o.OrderType) {
+	if o == nil {
 		var ret OrderTypeStrict
 		return ret
 	}
-	return *o.OrderType
+
+	return o.OrderType
 }
 
-// GetOrderTypeOk returns a tuple with the OrderType field value if set, nil otherwise
+// GetOrderTypeOk returns a tuple with the OrderType field value
 // and a boolean to check if the value has been set.
 func (o *ManualTradeForm) GetOrderTypeOk() (*OrderTypeStrict, bool) {
-	if o == nil || isNil(o.OrderType) {
+	if o == nil {
     return nil, false
 	}
-	return o.OrderType, true
+	return &o.OrderType, true
 }
 
-// HasOrderType returns a boolean if a field has been set.
-func (o *ManualTradeForm) HasOrderType() bool {
-	if o != nil && !isNil(o.OrderType) {
-		return true
+// SetOrderType sets field value
+func (o *ManualTradeForm) SetOrderType(v OrderTypeStrict) {
+	o.OrderType = v
+}
+
+// GetTimeInForce returns the TimeInForce field value
+func (o *ManualTradeForm) GetTimeInForce() TimeInForceStrict {
+	if o == nil {
+		var ret TimeInForceStrict
+		return ret
 	}
 
-	return false
+	return o.TimeInForce
 }
 
-// SetOrderType gets a reference to the given OrderTypeStrict and assigns it to the OrderType field.
-func (o *ManualTradeForm) SetOrderType(v OrderTypeStrict) {
-	o.OrderType = &v
+// GetTimeInForceOk returns a tuple with the TimeInForce field value
+// and a boolean to check if the value has been set.
+func (o *ManualTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.TimeInForce, true
+}
+
+// SetTimeInForce sets field value
+func (o *ManualTradeForm) SetTimeInForce(v TimeInForceStrict) {
+	o.TimeInForce = v
 }
 
 // GetPrice returns the Price field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -227,38 +258,6 @@ func (o *ManualTradeForm) UnsetStop() {
 	o.Stop.Unset()
 }
 
-// GetTimeInForce returns the TimeInForce field value if set, zero value otherwise.
-func (o *ManualTradeForm) GetTimeInForce() TimeInForceStrict {
-	if o == nil || isNil(o.TimeInForce) {
-		var ret TimeInForceStrict
-		return ret
-	}
-	return *o.TimeInForce
-}
-
-// GetTimeInForceOk returns a tuple with the TimeInForce field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ManualTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool) {
-	if o == nil || isNil(o.TimeInForce) {
-    return nil, false
-	}
-	return o.TimeInForce, true
-}
-
-// HasTimeInForce returns a boolean if a field has been set.
-func (o *ManualTradeForm) HasTimeInForce() bool {
-	if o != nil && !isNil(o.TimeInForce) {
-		return true
-	}
-
-	return false
-}
-
-// SetTimeInForce gets a reference to the given TimeInForceStrict and assigns it to the TimeInForce field.
-func (o *ManualTradeForm) SetTimeInForce(v TimeInForceStrict) {
-	o.TimeInForce = &v
-}
-
 // GetUnits returns the Units field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManualTradeForm) GetUnits() float32 {
 	if o == nil || isNil(o.Units.Get()) {
@@ -299,38 +298,6 @@ func (o *ManualTradeForm) SetUnitsNil() {
 // UnsetUnits ensures that no value is present for Units, not even an explicit nil
 func (o *ManualTradeForm) UnsetUnits() {
 	o.Units.Unset()
-}
-
-// GetUniversalSymbolId returns the UniversalSymbolId field value if set, zero value otherwise.
-func (o *ManualTradeForm) GetUniversalSymbolId() string {
-	if o == nil || isNil(o.UniversalSymbolId) {
-		var ret string
-		return ret
-	}
-	return *o.UniversalSymbolId
-}
-
-// GetUniversalSymbolIdOk returns a tuple with the UniversalSymbolId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ManualTradeForm) GetUniversalSymbolIdOk() (*string, bool) {
-	if o == nil || isNil(o.UniversalSymbolId) {
-    return nil, false
-	}
-	return o.UniversalSymbolId, true
-}
-
-// HasUniversalSymbolId returns a boolean if a field has been set.
-func (o *ManualTradeForm) HasUniversalSymbolId() bool {
-	if o != nil && !isNil(o.UniversalSymbolId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUniversalSymbolId gets a reference to the given string and assigns it to the UniversalSymbolId field.
-func (o *ManualTradeForm) SetUniversalSymbolId(v string) {
-	o.UniversalSymbolId = &v
 }
 
 // GetNotionalValue returns the NotionalValue field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -377,14 +344,20 @@ func (o *ManualTradeForm) UnsetNotionalValue() {
 
 func (o ManualTradeForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.AccountId) {
+	if true {
 		toSerialize["account_id"] = o.AccountId
 	}
-	if !isNil(o.Action) {
+	if true {
 		toSerialize["action"] = o.Action
 	}
-	if !isNil(o.OrderType) {
+	if true {
+		toSerialize["universal_symbol_id"] = o.UniversalSymbolId
+	}
+	if true {
 		toSerialize["order_type"] = o.OrderType
+	}
+	if true {
+		toSerialize["time_in_force"] = o.TimeInForce
 	}
 	if o.Price.IsSet() {
 		toSerialize["price"] = o.Price.Get()
@@ -392,14 +365,8 @@ func (o ManualTradeForm) MarshalJSON() ([]byte, error) {
 	if o.Stop.IsSet() {
 		toSerialize["stop"] = o.Stop.Get()
 	}
-	if !isNil(o.TimeInForce) {
-		toSerialize["time_in_force"] = o.TimeInForce
-	}
 	if o.Units.IsSet() {
 		toSerialize["units"] = o.Units.Get()
-	}
-	if !isNil(o.UniversalSymbolId) {
-		toSerialize["universal_symbol_id"] = o.UniversalSymbolId
 	}
 	if o.NotionalValue.IsSet() {
 		toSerialize["notional_value"] = o.NotionalValue.Get()

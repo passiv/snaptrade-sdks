@@ -11,18 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Manual trade symbol object
+  # Information about the security for the order.
   class ManualTradeSymbol
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :brokerage_symbol_id
 
+    # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :universal_symbol_id
 
     attr_accessor :currency
 
+    # This field is deprecated and should not be used.
     attr_accessor :local_id
 
+    # This field is deprecated and should not be used.
     attr_accessor :description
 
+    # This field is deprecated and should not be used.
     attr_accessor :symbol
 
     # Attribute mapping from ruby-style variable name to JSON key.

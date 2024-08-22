@@ -11,13 +11,13 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Balance
+  # Estimated remaining balance of the account after the trade is executed.
   class ManualTradeBalance
     attr_accessor :account
 
     attr_accessor :currency
 
-    # Cash
+    # Estimated amount of cash remaining in the account after the trade. At the moment this is the same as `remaining_cash` under `trade_impacts`.
     attr_accessor :cash
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -37,7 +37,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account' => :'Account',
+        :'account' => :'AccountSimple',
         :'currency' => :'Currency',
         :'cash' => :'Float'
       }

@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.UUID;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,12 +51,12 @@ import com.konfigthis.client.JSON;
 public class TradingCancelUserAccountOrderRequest {
   public static final String SERIALIZED_NAME_BROKERAGE_ORDER_ID = "brokerage_order_id";
   @SerializedName(SERIALIZED_NAME_BROKERAGE_ORDER_ID)
-  private UUID brokerageOrderId;
+  private String brokerageOrderId;
 
   public TradingCancelUserAccountOrderRequest() {
   }
 
-  public TradingCancelUserAccountOrderRequest brokerageOrderId(UUID brokerageOrderId) {
+  public TradingCancelUserAccountOrderRequest brokerageOrderId(String brokerageOrderId) {
     
     
     
@@ -67,18 +66,18 @@ public class TradingCancelUserAccountOrderRequest {
   }
 
    /**
-   * Get brokerageOrderId
+   * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
    * @return brokerageOrderId
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "")
+  @ApiModelProperty(example = "66a033fa-da74-4fcf-b527-feefdec9257e", value = "Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.")
 
-  public UUID getBrokerageOrderId() {
+  public String getBrokerageOrderId() {
     return brokerageOrderId;
   }
 
 
-  public void setBrokerageOrderId(UUID brokerageOrderId) {
+  public void setBrokerageOrderId(String brokerageOrderId) {
     
     
     

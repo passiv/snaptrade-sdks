@@ -36,6 +36,7 @@ export * from './manual-trade-and-impact';
 export * from './manual-trade-balance';
 export * from './manual-trade-form';
 export * from './manual-trade-form-notional-value';
+export * from './manual-trade-impact';
 export * from './manual-trade-symbol';
 export * from './model400-failed-request-response';
 export * from './model401-failed-request-response';

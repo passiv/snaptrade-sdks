@@ -15,10 +15,11 @@ import (
 	"encoding/json"
 )
 
-// ManualTradeAndImpact Manual Trade and Impact object
+// ManualTradeAndImpact struct for ManualTradeAndImpact
 type ManualTradeAndImpact struct {
 	Trade *ManualTrade `json:"trade,omitempty"`
-	TradeImpacts []ManualTrade `json:"trade_impacts,omitempty"`
+	// List of impacts of the trade on the account. The list always contains one value at the moment.
+	TradeImpacts []ManualTradeImpact `json:"trade_impacts,omitempty"`
 	CombinedRemainingBalance *ManualTradeBalance `json:"combined_remaining_balance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -75,9 +76,9 @@ func (o *ManualTradeAndImpact) SetTrade(v ManualTrade) {
 }
 
 // GetTradeImpacts returns the TradeImpacts field value if set, zero value otherwise.
-func (o *ManualTradeAndImpact) GetTradeImpacts() []ManualTrade {
+func (o *ManualTradeAndImpact) GetTradeImpacts() []ManualTradeImpact {
 	if o == nil || isNil(o.TradeImpacts) {
-		var ret []ManualTrade
+		var ret []ManualTradeImpact
 		return ret
 	}
 	return o.TradeImpacts
@@ -85,7 +86,7 @@ func (o *ManualTradeAndImpact) GetTradeImpacts() []ManualTrade {
 
 // GetTradeImpactsOk returns a tuple with the TradeImpacts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ManualTradeAndImpact) GetTradeImpactsOk() ([]ManualTrade, bool) {
+func (o *ManualTradeAndImpact) GetTradeImpactsOk() ([]ManualTradeImpact, bool) {
 	if o == nil || isNil(o.TradeImpacts) {
     return nil, false
 	}
@@ -101,8 +102,8 @@ func (o *ManualTradeAndImpact) HasTradeImpacts() bool {
 	return false
 }
 
-// SetTradeImpacts gets a reference to the given []ManualTrade and assigns it to the TradeImpacts field.
-func (o *ManualTradeAndImpact) SetTradeImpacts(v []ManualTrade) {
+// SetTradeImpacts gets a reference to the given []ManualTradeImpact and assigns it to the TradeImpacts field.
+func (o *ManualTradeAndImpact) SetTradeImpacts(v []ManualTradeImpact) {
 	o.TradeImpacts = v
 }
 
