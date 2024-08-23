@@ -32,6 +32,7 @@ portal:
   logo:
     light: portal-logo-light.svg
     dark: portal-logo-dark.svg
+  customSnippet: docs/script.html
   socials:
     website: https://snaptrade.com
   documentation:
