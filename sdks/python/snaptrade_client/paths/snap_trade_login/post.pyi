@@ -287,7 +287,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Login user &amp; generate connection link
+        Generate Connection Portal URL
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -416,7 +416,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Login user &amp; generate connection link
+        Generate Connection Portal URL
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -555,7 +555,7 @@ class LoginSnapTradeUser(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account. """
+        """ Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.  """
         args = self._login_snap_trade_user_mapped_args(
             body=body,
             query_params=query_params,
@@ -628,7 +628,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account. """
+        """ Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes.  """
         args = self._login_snap_trade_user_mapped_args(
             body=body,
             query_params=query_params,

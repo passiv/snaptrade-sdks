@@ -143,8 +143,8 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             };
         },
         /**
-         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
-         * @summary Login user & generate connection link
+         * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
+         * @summary Generate Connection Portal URL
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {SnapTradeLoginUserRequestBody} [snapTradeLoginUserRequestBody] 
@@ -342,8 +342,8 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
-         * @summary Login user & generate connection link
+         * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
+         * @summary Generate Connection Portal URL
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -419,8 +419,8 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
             return localVarFp.listSnapTradeUsers(options).then((request) => request(axios, basePath));
         },
         /**
-         * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
-         * @summary Login user & generate connection link
+         * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
+         * @summary Generate Connection Portal URL
          * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -539,8 +539,8 @@ export class AuthenticationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
-     * @summary Login user & generate connection link
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
+     * @summary Generate Connection Portal URL
      * @param {AuthenticationApiLoginSnapTradeUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

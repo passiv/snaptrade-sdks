@@ -6,7 +6,7 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**DeleteSnapTradeUser**](AuthenticationApi.md#DeleteSnapTradeUser) | **Delete** /snapTrade/deleteUser | Delete user
 [**ListSnapTradeUsers**](AuthenticationApi.md#ListSnapTradeUsers) | **Get** /snapTrade/listUsers | List all users
-[**LoginSnapTradeUser**](AuthenticationApi.md#LoginSnapTradeUser) | **Post** /snapTrade/login | Login user &amp; generate connection link
+[**LoginSnapTradeUser**](AuthenticationApi.md#LoginSnapTradeUser) | **Post** /snapTrade/login | Generate Connection Portal URL
 [**RegisterSnapTradeUser**](AuthenticationApi.md#RegisterSnapTradeUser) | **Post** /snapTrade/registerUser | Register user
 [**ResetSnapTradeUserSecret**](AuthenticationApi.md#ResetSnapTradeUserSecret) | **Post** /snapTrade/resetUserSecret | Rotate user secret
 
@@ -102,7 +102,7 @@ func main() {
 
 ## LoginSnapTradeUser
 
-Login user & generate connection link
+Generate Connection Portal URL
 
 
 

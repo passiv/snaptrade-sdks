@@ -494,7 +494,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set immediateRedirect
-         * @param immediateRedirect When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information. (optional)
+         * @param immediateRedirect When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder immediateRedirect(Boolean immediateRedirect) {
@@ -504,7 +504,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set customRedirect
-         * @param customRedirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information. (optional)
+         * @param customRedirect URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder customRedirect(String customRedirect) {
@@ -514,7 +514,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set reconnect
-         * @param reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information. (optional)
+         * @param reconnect The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder reconnect(String reconnect) {
@@ -624,8 +624,8 @@ public class AuthenticationApiGenerated {
     }
 
     /**
-     * Login user &amp; generate connection link
-     * Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+     * Generate Connection Portal URL
+     * Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return LoginSnapTradeUserRequestBuilder

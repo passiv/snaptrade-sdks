@@ -72,10 +72,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;string&gt;</returns>
         ApiResponse<List<string>> ListSnapTradeUsersWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Login user &amp; generate connection link
+        /// Generate Connection Portal URL
         /// </summary>
         /// <remarks>
-        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -86,10 +86,10 @@ namespace SnapTrade.Net.Api
         AuthenticationLoginSnapTradeUser200Response LoginSnapTradeUser(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0);
 
         /// <summary>
-        /// Login user &amp; generate connection link
+        /// Generate Connection Portal URL
         /// </summary>
         /// <remarks>
-        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -202,10 +202,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;string&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<string>>> ListSnapTradeUsersWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Login user &amp; generate connection link
+        /// Generate Connection Portal URL
         /// </summary>
         /// <remarks>
-        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -217,10 +217,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AuthenticationLoginSnapTradeUser200Response> LoginSnapTradeUserAsync(string userId, string userSecret, SnapTradeLoginUserRequestBody snapTradeLoginUserRequestBody = default(SnapTradeLoginUserRequestBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Login user &amp; generate connection link
+        /// Generate Connection Portal URL
         /// </summary>
         /// <remarks>
-        /// Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -731,7 +731,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Generate Connection Portal URL Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -746,7 +746,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Generate Connection Portal URL Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -829,7 +829,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Generate Connection Portal URL Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -845,7 +845,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Login user &amp; generate connection link Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+        /// Generate Connection Portal URL Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
