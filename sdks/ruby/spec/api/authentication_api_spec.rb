@@ -51,8 +51,8 @@ describe 'AuthenticationApi' do
   end
 
   # unit tests for login_snap_trade_user
-  # Login user &amp; generate connection link
-  # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+  # Generate Connection Portal URL
+  # Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
   # @param user_id 
   # @param user_secret 
   # @param [Hash] opts the optional parameters

@@ -574,7 +574,10 @@ const listSnapTradeUsersResponse =
 
 ### `snaptrade.authentication.loginSnapTradeUser`<a id="snaptradeauthenticationloginsnaptradeuser"></a>
 
-Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.
+
+Please note that the returned URL expires in 5 minutes.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -604,15 +607,15 @@ Slug of the brokerage to connect the user to. See [the integrations page](https:
 
 ##### immediateRedirect: `boolean`<a id="immediateredirect-boolean"></a>
 
-When set to `true`, user will be redirected back to the partner\\\'s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+When set to `true`, user will be redirected back to the partner\\\'s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
 ##### customRedirect: `string`<a id="customredirect-string"></a>
 
-URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
 ##### reconnect: `string`<a id="reconnect-string"></a>
 
-The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
 
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
@@ -746,7 +749,7 @@ const detailBrokerageAuthorizationResponse =
 ### `snaptrade.connections.disableBrokerageAuthorization`<a id="snaptradeconnectionsdisablebrokerageauthorization"></a>
 
 Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
-Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_broken) for the connection.
+Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
 
 *Please contact us in order to use this endpoint as it is disabled by default.*
 
@@ -823,7 +826,7 @@ const listBrokerageAuthorizationsResponse =
 
 ### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
-Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
 
 *Please contact support for access as this endpoint is not enabled by default.*
 
@@ -1649,6 +1652,8 @@ Places a brokerage order in the specified account. The order could be rejected b
 
 This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
 
+It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1721,6 +1726,8 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 ### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
 Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
+
+It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

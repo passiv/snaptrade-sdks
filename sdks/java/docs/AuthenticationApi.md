@@ -6,7 +6,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |------------- | ------------- | -------------|
 | [**deleteSnapTradeUser**](AuthenticationApi.md#deleteSnapTradeUser) | **DELETE** /snapTrade/deleteUser | Delete user |
 | [**listSnapTradeUsers**](AuthenticationApi.md#listSnapTradeUsers) | **GET** /snapTrade/listUsers | List all users |
-| [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Login user &amp; generate connection link |
+| [**loginSnapTradeUser**](AuthenticationApi.md#loginSnapTradeUser) | **POST** /snapTrade/login | Generate Connection Portal URL |
 | [**registerSnapTradeUser**](AuthenticationApi.md#registerSnapTradeUser) | **POST** /snapTrade/registerUser | Register user |
 | [**resetSnapTradeUserSecret**](AuthenticationApi.md#resetSnapTradeUserSecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret |
 
@@ -198,9 +198,9 @@ This endpoint does not need any parameter.
 # **loginSnapTradeUser**
 > Object loginSnapTradeUser(userId, userSecret).snapTradeLoginUserRequestBody(snapTradeLoginUserRequestBody).execute();
 
-Login user &amp; generate connection link
+Generate Connection Portal URL
 
-Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
 
 ### Example
 ```java
@@ -227,9 +227,9 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     String broker = "broker_example"; // Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
-    Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled.
     String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render.
     try {

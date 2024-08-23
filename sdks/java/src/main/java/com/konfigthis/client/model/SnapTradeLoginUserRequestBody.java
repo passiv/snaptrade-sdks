@@ -210,11 +210,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+   * When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
    * @return immediateRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.")
+  @ApiModelProperty(example = "true", value = "When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.")
 
   public Boolean getImmediateRedirect() {
     return immediateRedirect;
@@ -239,11 +239,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
+   * URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
    * @return customRedirect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://snaptrade.com", value = "URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.")
+  @ApiModelProperty(example = "https://snaptrade.com", value = "URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.")
 
   public String getCustomRedirect() {
     return customRedirect;
@@ -268,11 +268,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+   * The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
    * @return reconnect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.")
+  @ApiModelProperty(example = "8b5f262d-4bb9-365d-888a-202bd3b15fa1", value = "The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.")
 
   public String getReconnect() {
     return reconnect;

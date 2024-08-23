@@ -180,16 +180,18 @@ module SnapTrade
     end
 
 
-    # Login user & generate connection link
+    # Generate Connection Portal URL
     #
-    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    # Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.
+    # 
+    # Please note that the returned URL expires in 5 minutes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
-    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
     # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
@@ -207,16 +209,18 @@ module SnapTrade
       data
     end
 
-    # Login user & generate connection link
+    # Generate Connection Portal URL
     #
-    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    # Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.
+    # 
+    # Please note that the returned URL expires in 5 minutes.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param broker [String] Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
-    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](https://docs.snaptrade.com/docs/implement-connection-portal) for more information.
-    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](https://docs.snaptrade.com/docs/fix-broken-connections) for more information.
+    # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
+    # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
     # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
@@ -233,8 +237,8 @@ module SnapTrade
       login_snap_trade_user_with_http_info_impl(user_id, user_secret, extra)
     end
 
-    # Login user & generate connection link
-    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    # Generate Connection Portal URL
+    # Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -245,8 +249,8 @@ module SnapTrade
       data
     end
 
-    # Login user &amp; generate connection link
-    # Logs in a SnapTrade user and returns an authenticated connection portal URL for them to use to connect a brokerage account.
+    # Generate Connection Portal URL
+    # Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.  Please note that the returned URL expires in 5 minutes. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradeLogin(ApiTestMixin, unittest.TestCase):
     """
     SnapTradeLogin unit test stubs
-        Login user & generate connection link
+        Generate Connection Portal URL
     """
 
     def setUp(self):
