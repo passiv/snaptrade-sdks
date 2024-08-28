@@ -35,7 +35,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="UniversalActivity" /> class.
         /// </summary>
-        /// <param name="id">Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. .</param>
+        /// <param name="id">Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. .</param>
         /// <param name="account">account.</param>
         /// <param name="symbol">symbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
@@ -75,9 +75,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
+        /// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
         /// </summary>
-        /// <value>Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. </value>
+        /// <value>Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. </value>
         [DataMember(Name = "id", EmitDefaultValue = false)]
         public string Id { get; set; }
 

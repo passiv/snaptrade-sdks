@@ -56,6 +56,6 @@ export interface SnapTradeLoginUserRequestBody {
 }
 
 type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade'
-type SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum = 'v2' | 'v3'
+type SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum = 'v4' | 'v3' | 'v2'
 
 

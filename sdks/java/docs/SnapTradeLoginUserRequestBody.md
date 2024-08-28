@@ -30,8 +30,9 @@ Data to login a user via SnapTrade Partner
 
 | Name | Value |
 |---- | -----|
-| V2 | &quot;v2&quot; |
+| V4 | &quot;v4&quot; |
 | V3 | &quot;v3&quot; |
+| V2 | &quot;v2&quot; |
 
 
 

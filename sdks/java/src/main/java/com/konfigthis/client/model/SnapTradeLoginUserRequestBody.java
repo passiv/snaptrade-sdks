@@ -122,9 +122,11 @@ public class SnapTradeLoginUserRequestBody {
    */
   @JsonAdapter(ConnectionPortalVersionEnum.Adapter.class)
  public enum ConnectionPortalVersionEnum {
-    V2("v2"),
+    V4("v4"),
     
-    V3("v3");
+    V3("v3"),
+    
+    V2("v2");
 
     private String value;
 
