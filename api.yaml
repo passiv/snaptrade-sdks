@@ -1097,7 +1097,7 @@ paths:
       summary: Refresh holdings for a connection
       description: |
         Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
-        
+
         *Please contact support for access as this endpoint is not enabled by default.*
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
@@ -1155,7 +1155,7 @@ paths:
       description: |
         Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
         Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
-        
+
         *Please contact us in order to use this endpoint as it is disabled by default.*
       operationId: Connections_disableBrokerageAuthorization
       parameters:
@@ -1441,8 +1441,8 @@ paths:
         - Trading
       summary: Place order
       description: |
-        Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds. 
-        
+        Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
+
         This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).
 
         It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
@@ -1574,7 +1574,7 @@ paths:
       operationId: TransactionsAndReporting_getActivities
       description: |
         Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
-        
+
         There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
         The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
@@ -2861,8 +2861,9 @@ components:
           type: string
           example: v3
           enum:
-            - v2
-            - v3
+           - v4
+           - v3
+           - v2
           default: v3
     Symbol:
       # FIXME Merge this with UniversalSymbol
@@ -3086,7 +3087,7 @@ components:
         disabled:
           description: |
             Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:
-            
+
             - The user has changed their username or password at the brokerage.
             - The user has explicitly removed the access grant at the brokerage.
             - The session has expired at the brokerage and now requires explicit user re-authentication.
@@ -3643,7 +3644,7 @@ components:
       properties:
         id:
           description: |
-            Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade. 
+            Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.
 
             Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.
           type: string
