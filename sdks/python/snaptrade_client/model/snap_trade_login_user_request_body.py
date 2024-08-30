@@ -72,17 +72,22 @@ class SnapTradeLoginUserRequestBody(
             
                 class MetaOapg:
                     enum_value_to_name = {
-                        "v2": "V2",
+                        "v4": "V4",
                         "v3": "V3",
+                        "v2": "V2",
                     }
                 
                 @schemas.classproperty
-                def V2(cls):
-                    return cls("v2")
+                def V4(cls):
+                    return cls("v4")
                 
                 @schemas.classproperty
                 def V3(cls):
                     return cls("v3")
+                
+                @schemas.classproperty
+                def V2(cls):
+                    return cls("v2")
             __annotations__ = {
                 "broker": broker,
                 "immediateRedirect": immediateRedirect,

@@ -68,16 +68,22 @@ namespace SnapTrade.Net.Model
         public enum ConnectionPortalVersionEnum
         {
             /// <summary>
-            /// Enum V2 for value: v2
+            /// Enum V4 for value: v4
             /// </summary>
-            [EnumMember(Value = "v2")]
-            V2 = 1,
+            [EnumMember(Value = "v4")]
+            V4 = 1,
 
             /// <summary>
             /// Enum V3 for value: v3
             /// </summary>
             [EnumMember(Value = "v3")]
-            V3 = 2
+            V3 = 2,
+
+            /// <summary>
+            /// Enum V2 for value: v2
+            /// </summary>
+            [EnumMember(Value = "v2")]
+            V2 = 3
 
         }
 

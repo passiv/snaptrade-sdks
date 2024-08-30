@@ -18,7 +18,7 @@ import (
 // OptionsPosition Describes a single option position in an account.
 type OptionsPosition struct {
 	Symbol *OptionBrokerageSymbol `json:"symbol,omitempty"`
-	// Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+	// Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
 	Units *float32 `json:"units,omitempty"`
