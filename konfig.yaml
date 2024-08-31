@@ -90,6 +90,20 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
+    /snapTrade/partners:
+      get: true
+    /brokerageAuthorizationTypes:
+      get: true
+    /currencies:
+      get: true
+    /currencies/rates:
+      get: true
+    /currencies/rates/{currencyPair}:
+      get: true
+    /exchanges:
+      get: true
+    /securityTypes:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
