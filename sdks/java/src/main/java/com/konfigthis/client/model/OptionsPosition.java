@@ -124,11 +124,11 @@ public class OptionsPosition {
   }
 
    /**
-   * Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+   * Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
    * @return price
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "113.15", value = "Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.")
+  @ApiModelProperty(example = "38.4", value = "Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.")
 
   public Double getPrice() {
     return price;
@@ -166,7 +166,7 @@ public class OptionsPosition {
    * @return units
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "10", value = "The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.")
+  @ApiModelProperty(example = "-50", value = "The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.")
 
   public Double getUnits() {
     return units;
@@ -233,7 +233,7 @@ public class OptionsPosition {
    * @return averagePurchasePrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "108.3353", value = "Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).")
+  @ApiModelProperty(example = "4126", value = "Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).")
 
   public Double getAveragePurchasePrice() {
     return averagePurchasePrice;

@@ -231,7 +231,7 @@ public class Example {
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled.
-    String connectionPortalVersion = "v2"; // Sets the version of the connection portal to render.
+    String connectionPortalVersion = "v4"; // Sets the version of the connection portal to render.
     try {
       Object result = client
               .authentication

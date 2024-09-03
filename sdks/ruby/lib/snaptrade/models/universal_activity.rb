@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   # A transaction or activity from an institution
   class UniversalActivity
-    # Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.   Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
+    # Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
     attr_accessor :id
 
     attr_accessor :account

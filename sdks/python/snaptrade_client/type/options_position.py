@@ -24,7 +24,7 @@ class RequiredOptionsPosition(TypedDict):
 class OptionalOptionsPosition(TypedDict, total=False):
     symbol: OptionBrokerageSymbol
 
-    # Last known market price for the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
+    # Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
     price: typing.Optional[typing.Union[int, float]]
 
     # The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.

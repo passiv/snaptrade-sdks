@@ -12,11 +12,12 @@ require 'time'
 
 module SnapTrade
   class ConnectionPortalVersion
-    V2 = "v2".freeze
+    V4 = "v4".freeze
     V3 = "v3".freeze
+    V2 = "v2".freeze
 
     def self.all_vars
-      @all_vars ||= [V2, V3].freeze
+      @all_vars ||= [V4, V3, V2].freeze
     end
 
     # Builds the enum from string
