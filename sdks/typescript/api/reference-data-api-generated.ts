@@ -100,8 +100,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
-         * @summary Get metadata related to Snaptrade partner
+         * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
+         * @summary Get Client Info
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -144,8 +144,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * List security types available on SnapTrade.
-         * @summary List of all security types
+         * Return all available security types supported by SnapTrade.
+         * @summary List security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -600,8 +600,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
-         * @summary Get metadata related to Snaptrade partner
+         * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
+         * @summary Get Client Info
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -610,8 +610,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * List security types available on SnapTrade.
-         * @summary List of all security types
+         * Return all available security types supported by SnapTrade.
+         * @summary List security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -730,8 +730,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getCurrencyExchangeRatePair(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
-         * @summary Get metadata related to Snaptrade partner
+         * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
+         * @summary Get Client Info
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -739,8 +739,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getPartnerInfo(options).then((request) => request(axios, basePath));
         },
         /**
-         * List security types available on SnapTrade.
-         * @summary List of all security types
+         * Return all available security types supported by SnapTrade.
+         * @summary List security types
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -933,8 +933,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
-     * @summary Get metadata related to Snaptrade partner
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
+     * @summary Get Client Info
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated
@@ -944,8 +944,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * List security types available on SnapTrade.
-     * @summary List of all security types
+     * Return all available security types supported by SnapTrade.
+     * @summary List security types
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReferenceDataApiGenerated

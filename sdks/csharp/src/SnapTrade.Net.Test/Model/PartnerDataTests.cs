@@ -58,20 +58,12 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
-        /// Test the property 'RedirectUri'
+        /// Test the property 'Slug'
         /// </summary>
         [Fact]
-        public void RedirectUriTest()
+        public void SlugTest()
         {
-            // TODO unit test for the property 'RedirectUri'
-        }
-        /// <summary>
-        /// Test the property 'AllowedBrokerages'
-        /// </summary>
-        [Fact]
-        public void AllowedBrokeragesTest()
-        {
-            // TODO unit test for the property 'AllowedBrokerages'
+            // TODO unit test for the property 'Slug'
         }
         /// <summary>
         /// Test the property 'Name'
@@ -82,14 +74,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Name'
         }
         /// <summary>
-        /// Test the property 'Slug'
-        /// </summary>
-        [Fact]
-        public void SlugTest()
-        {
-            // TODO unit test for the property 'Slug'
-        }
-        /// <summary>
         /// Test the property 'LogoUrl'
         /// </summary>
         [Fact]
@@ -98,12 +82,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'LogoUrl'
         }
         /// <summary>
-        /// Test the property 'PinRequired'
+        /// Test the property 'AllowedBrokerages'
         /// </summary>
         [Fact]
-        public void PinRequiredTest()
+        public void AllowedBrokeragesTest()
         {
-            // TODO unit test for the property 'PinRequired'
+            // TODO unit test for the property 'AllowedBrokerages'
         }
         /// <summary>
         /// Test the property 'CanAccessTrades'
@@ -152,6 +136,22 @@ namespace SnapTrade.Net.Test.Model
         public void CanAccessOrdersTest()
         {
             // TODO unit test for the property 'CanAccessOrders'
+        }
+        /// <summary>
+        /// Test the property 'RedirectUri'
+        /// </summary>
+        [Fact]
+        public void RedirectUriTest()
+        {
+            // TODO unit test for the property 'RedirectUri'
+        }
+        /// <summary>
+        /// Test the property 'PinRequired'
+        /// </summary>
+        [Fact]
+        public void PinRequiredTest()
+        {
+            // TODO unit test for the property 'PinRequired'
         }
 
     }

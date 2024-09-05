@@ -168,7 +168,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get metadata related to Snaptrade partner
+        Get Client Info
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -264,7 +264,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get metadata related to Snaptrade partner
+        Get Client Info
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -341,7 +341,7 @@ class GetPartnerInfo(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns useful data related to the specified ClientID, including allowed brokerages and data access. """
+        """ Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access. """
         args = self._get_partner_info_mapped_args(
         )
         return self._get_partner_info_oapg(
@@ -370,7 +370,7 @@ class ApiForget(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns useful data related to the specified ClientID, including allowed brokerages and data access. """
+        """ Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access. """
         args = self._get_partner_info_mapped_args(
         )
         return self._get_partner_info_oapg(

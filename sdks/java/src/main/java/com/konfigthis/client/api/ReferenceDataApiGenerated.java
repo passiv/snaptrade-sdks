@@ -315,7 +315,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -331,7 +331,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -347,7 +347,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -363,7 +363,7 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
@@ -373,13 +373,13 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Get metadata related to Snaptrade partner
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Get Client Info
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      * @return GetPartnerInfoRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully obtained encrypted JWT data. See description on how to object JWT token </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
@@ -464,8 +464,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -480,8 +480,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public List<SecurityType> execute() throws ApiException {
@@ -496,8 +496,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<SecurityType>> executeWithHttpInfo() throws ApiException {
@@ -512,8 +512,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<SecurityType>> _callback) throws ApiException {
@@ -522,14 +522,14 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * List of all security types
-     * List security types available on SnapTrade.
+     * List security types
+     * Return all available security types supported by SnapTrade.
      * @return GetSecurityTypesRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of all defined Security Type objects. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
     public ReferenceDataApi.GetSecurityTypesRequestBuilder getSecurityTypes() throws IllegalArgumentException {

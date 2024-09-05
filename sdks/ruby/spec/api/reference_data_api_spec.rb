@@ -40,8 +40,8 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_partner_info
-  # Get metadata related to Snaptrade partner
-  # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+  # Get Client Info
+  # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
   # @param [Hash] opts the optional parameters
   # @return [PartnerData]
   describe 'get_partner_info test' do
@@ -51,8 +51,8 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_security_types
-  # List of all security types
-  # List security types available on SnapTrade.
+  # List security types
+  # Return all available security types supported by SnapTrade.
   # @param [Hash] opts the optional parameters
   # @return [Array<SecurityType>]
   describe 'get_security_types test' do

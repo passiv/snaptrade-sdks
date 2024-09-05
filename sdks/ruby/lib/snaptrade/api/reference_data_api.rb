@@ -102,9 +102,9 @@ module SnapTrade
     end
 
 
-    # Get metadata related to Snaptrade partner
+    # Get Client Info
     #
-    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info(extra: {})
@@ -112,17 +112,17 @@ module SnapTrade
       data
     end
 
-    # Get metadata related to Snaptrade partner
+    # Get Client Info
     #
-    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_partner_info_with_http_info(extra: {})
       get_partner_info_with_http_info_impl(extra)
     end
 
-    # Get metadata related to Snaptrade partner
-    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    # Get Client Info
+    # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
     # @param [Hash] opts the optional parameters
     # @return [PartnerData]
     private def get_partner_info_impl(opts = {})
@@ -130,8 +130,8 @@ module SnapTrade
       data
     end
 
-    # Get metadata related to Snaptrade partner
-    # Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+    # Get Client Info
+    # Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
     # @param [Hash] opts the optional parameters
     # @return [Array<(PartnerData, Integer, Hash)>] PartnerData data, response status code and response headers
     private def get_partner_info_with_http_info_impl(opts = {})
@@ -179,9 +179,9 @@ module SnapTrade
     end
 
 
-    # List of all security types
+    # List security types
     #
-    # List security types available on SnapTrade.
+    # Return all available security types supported by SnapTrade.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types(extra: {})
@@ -189,17 +189,17 @@ module SnapTrade
       data
     end
 
-    # List of all security types
+    # List security types
     #
-    # List security types available on SnapTrade.
+    # Return all available security types supported by SnapTrade.
     #
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_security_types_with_http_info(extra: {})
       get_security_types_with_http_info_impl(extra)
     end
 
-    # List of all security types
-    # List security types available on SnapTrade.
+    # List security types
+    # Return all available security types supported by SnapTrade.
     # @param [Hash] opts the optional parameters
     # @return [Array<SecurityType>]
     private def get_security_types_impl(opts = {})
@@ -207,8 +207,8 @@ module SnapTrade
       data
     end
 
-    # List of all security types
-    # List security types available on SnapTrade.
+    # List security types
+    # Return all available security types supported by SnapTrade.
     # @param [Hash] opts the optional parameters
     # @return [Array<(Array<SecurityType>, Integer, Hash)>] Array<SecurityType> data, response status code and response headers
     private def get_security_types_with_http_info_impl(opts = {})

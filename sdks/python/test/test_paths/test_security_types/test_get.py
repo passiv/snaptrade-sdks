@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSecurityTypes(ApiTestMixin, unittest.TestCase):
     """
     SecurityTypes unit test stubs
-        List of all security types
+        List security types
     """
 
     def setUp(self):

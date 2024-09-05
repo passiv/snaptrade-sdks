@@ -5,8 +5,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 Method | Path | Description
 ------------- | ------------- | -------------
 [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#GetCurrencyExchangeRatePair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
-[**GetPartnerInfo**](ReferenceDataApi.md#GetPartnerInfo) | **Get** /snapTrade/partners | Get metadata related to Snaptrade partner
-[**GetSecurityTypes**](ReferenceDataApi.md#GetSecurityTypes) | **Get** /securityTypes | List of all security types
+[**GetPartnerInfo**](ReferenceDataApi.md#GetPartnerInfo) | **Get** /snapTrade/partners | Get Client Info
+[**GetSecurityTypes**](ReferenceDataApi.md#GetSecurityTypes) | **Get** /securityTypes | List security types
 [**GetStockExchanges**](ReferenceDataApi.md#GetStockExchanges) | **Get** /exchanges | Get exchanges
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
@@ -66,7 +66,7 @@ func main() {
 
 ## GetPartnerInfo
 
-Get metadata related to Snaptrade partner
+Get Client Info
 
 
 
@@ -98,18 +98,18 @@ func main() {
     }
     // response from `GetPartnerInfo`: PartnerData
     fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.GetPartnerInfo`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.RedirectUri`: %v\n", *resp.RedirectUri)
-    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.AllowedBrokerages`: %v\n", *resp.AllowedBrokerages)
-    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.Slug`: %v\n", *resp.Slug)
+    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.LogoUrl`: %v\n", *resp.LogoUrl)
-    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.PinRequired`: %v\n", *resp.PinRequired)
+    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.AllowedBrokerages`: %v\n", *resp.AllowedBrokerages)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessTrades`: %v\n", *resp.CanAccessTrades)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessHoldings`: %v\n", *resp.CanAccessHoldings)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessAccountHistory`: %v\n", *resp.CanAccessAccountHistory)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessReferenceData`: %v\n", *resp.CanAccessReferenceData)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessPortfolioManagement`: %v\n", *resp.CanAccessPortfolioManagement)
     fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.CanAccessOrders`: %v\n", *resp.CanAccessOrders)
+    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.RedirectUri`: %v\n", *resp.RedirectUri)
+    fmt.Fprintf(os.Stdout, "Response from `PartnerData.GetPartnerInfo.PinRequired`: %v\n", *resp.PinRequired)
 }
 ```
 
@@ -120,7 +120,7 @@ func main() {
 
 ## GetSecurityTypes
 
-List of all security types
+List security types
 
 
 

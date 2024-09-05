@@ -185,9 +185,9 @@ func (r ReferenceDataApiGetPartnerInfoRequest) Execute() (*PartnerData, *http.Re
 }
 
 /*
-GetPartnerInfo Get metadata related to Snaptrade partner
+GetPartnerInfo Get Client Info
 
-Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ReferenceDataApiGetPartnerInfoRequest
@@ -365,9 +365,9 @@ func (r ReferenceDataApiGetSecurityTypesRequest) Execute() ([]SecurityType, *htt
 }
 
 /*
-GetSecurityTypes List of all security types
+GetSecurityTypes List security types
 
-List security types available on SnapTrade.
+Return all available security types supported by SnapTrade.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ReferenceDataApiGetSecurityTypesRequest

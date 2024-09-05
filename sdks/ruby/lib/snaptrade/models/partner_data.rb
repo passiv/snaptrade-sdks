@@ -11,59 +11,59 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # SnapTrade Partner metadata
+  # Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
   class PartnerData
-    # URI to redirect user back to after user is done adding brokerage connections
-    attr_accessor :redirect_uri
-
-    # Brokerages that can be accessed by partners
-    attr_accessor :allowed_brokerages
-
-    # Name of Snaptrade Partner
-    attr_accessor :name
-
-    # Slug of Snaptrade Partner
+    # A short, unique identifier for your company or product.
     attr_accessor :slug
 
-    # URL to partner's logo
+    # Your company or product name.
+    attr_accessor :name
+
+    # URL to your company or product logo.
     attr_accessor :logo_url
 
-    # Shows if pin is required by users to access connection page
-    attr_accessor :pin_required
+    # Brokerages that can be accessed by your Client ID.
+    attr_accessor :allowed_brokerages
 
-    # Shows if users of Snaptrade partners can access trade endpoints
+    # Whether trading is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_trades
 
-    # Shows if Snaptrade partners can get user holdings data
+    # Whether holdings data is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_holdings
 
-    # Shows if Snaptrade partners can get users account history data
+    # Whether account historical transactions is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_account_history
 
-    # Shows if Snaptrade partners can get users holdings data
+    # Whether reference data is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_reference_data
 
-    # Shows if users Snaptrade partners can access portfolio group management features
+    # Whether portfolio management is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_portfolio_management
 
-    # Shows if Snaptrade partners can get users account order history
+    # Whether recent order history is enabled for your SnapTrade Client ID.
     attr_accessor :can_access_orders
+
+    # URI to redirect user back to after user is done adding brokerage connections.
+    attr_accessor :redirect_uri
+
+    # Shows if pin is required by users to access connection page. This field has been deprecated.
+    attr_accessor :pin_required
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'redirect_uri' => :'redirect_uri',
-        :'allowed_brokerages' => :'allowed_brokerages',
-        :'name' => :'name',
         :'slug' => :'slug',
+        :'name' => :'name',
         :'logo_url' => :'logo_url',
-        :'pin_required' => :'pin_required',
+        :'allowed_brokerages' => :'allowed_brokerages',
         :'can_access_trades' => :'can_access_trades',
         :'can_access_holdings' => :'can_access_holdings',
         :'can_access_account_history' => :'can_access_account_history',
         :'can_access_reference_data' => :'can_access_reference_data',
         :'can_access_portfolio_management' => :'can_access_portfolio_management',
-        :'can_access_orders' => :'can_access_orders'
+        :'can_access_orders' => :'can_access_orders',
+        :'redirect_uri' => :'redirect_uri',
+        :'pin_required' => :'pin_required'
       }
     end
 
@@ -75,18 +75,18 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'redirect_uri' => :'String',
-        :'allowed_brokerages' => :'Array<Brokerage>',
-        :'name' => :'String',
         :'slug' => :'String',
+        :'name' => :'String',
         :'logo_url' => :'String',
-        :'pin_required' => :'Boolean',
+        :'allowed_brokerages' => :'Array<Brokerage>',
         :'can_access_trades' => :'Boolean',
         :'can_access_holdings' => :'Boolean',
         :'can_access_account_history' => :'Boolean',
         :'can_access_reference_data' => :'Boolean',
         :'can_access_portfolio_management' => :'Boolean',
-        :'can_access_orders' => :'Boolean'
+        :'can_access_orders' => :'Boolean',
+        :'redirect_uri' => :'String',
+        :'pin_required' => :'Boolean'
       }
     end
 
@@ -111,30 +111,22 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'redirect_uri')
-        self.redirect_uri = attributes[:'redirect_uri']
-      end
-
-      if attributes.key?(:'allowed_brokerages')
-        if (value = attributes[:'allowed_brokerages']).is_a?(Array)
-          self.allowed_brokerages = value
-        end
+      if attributes.key?(:'slug')
+        self.slug = attributes[:'slug']
       end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
 
-      if attributes.key?(:'slug')
-        self.slug = attributes[:'slug']
-      end
-
       if attributes.key?(:'logo_url')
         self.logo_url = attributes[:'logo_url']
       end
 
-      if attributes.key?(:'pin_required')
-        self.pin_required = attributes[:'pin_required']
+      if attributes.key?(:'allowed_brokerages')
+        if (value = attributes[:'allowed_brokerages']).is_a?(Array)
+          self.allowed_brokerages = value
+        end
       end
 
       if attributes.key?(:'can_access_trades')
@@ -160,6 +152,14 @@ module SnapTrade
       if attributes.key?(:'can_access_orders')
         self.can_access_orders = attributes[:'can_access_orders']
       end
+
+      if attributes.key?(:'redirect_uri')
+        self.redirect_uri = attributes[:'redirect_uri']
+      end
+
+      if attributes.key?(:'pin_required')
+        self.pin_required = attributes[:'pin_required']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -180,18 +180,18 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          redirect_uri == o.redirect_uri &&
-          allowed_brokerages == o.allowed_brokerages &&
-          name == o.name &&
           slug == o.slug &&
+          name == o.name &&
           logo_url == o.logo_url &&
-          pin_required == o.pin_required &&
+          allowed_brokerages == o.allowed_brokerages &&
           can_access_trades == o.can_access_trades &&
           can_access_holdings == o.can_access_holdings &&
           can_access_account_history == o.can_access_account_history &&
           can_access_reference_data == o.can_access_reference_data &&
           can_access_portfolio_management == o.can_access_portfolio_management &&
-          can_access_orders == o.can_access_orders
+          can_access_orders == o.can_access_orders &&
+          redirect_uri == o.redirect_uri &&
+          pin_required == o.pin_required
     end
 
     # @see the `==` method
@@ -203,7 +203,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [redirect_uri, allowed_brokerages, name, slug, logo_url, pin_required, can_access_trades, can_access_holdings, can_access_account_history, can_access_reference_data, can_access_portfolio_management, can_access_orders].hash
+      [slug, name, logo_url, allowed_brokerages, can_access_trades, can_access_holdings, can_access_account_history, can_access_reference_data, can_access_portfolio_management, can_access_orders, redirect_uri, pin_required].hash
     end
 
     # Builds the object from hash
