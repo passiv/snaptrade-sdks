@@ -665,11 +665,9 @@ func (r ReferenceDataApiGetSymbolsRequest) Execute() ([]UniversalSymbol, *http.R
 }
 
 /*
-GetSymbols Search for symbols
+GetSymbols Search symbols
 
-Returns a list of Universal Symbol objects that match a defined string.
-
-Matches on ticker or name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -820,12 +818,13 @@ func (r ReferenceDataApiGetSymbolsByTickerRequest) Execute() (*UniversalSymbol, 
 }
 
 /*
-GetSymbolsByTicker Get details of a symbol
+GetSymbolsByTicker Get symbol detail
 
-Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param query The ticker or universal_symbol_id of the UniversalSymbol to get.
+ @param query The ticker or Universal Symbol ID to look up the symbol with.
  @return ReferenceDataApiGetSymbolsByTickerRequest
 */
 func (a *ReferenceDataApiService) GetSymbolsByTicker(query string) ReferenceDataApiGetSymbolsByTickerRequest {
@@ -872,7 +871,7 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -944,6 +943,17 @@ func (a *ReferenceDataApiService) GetSymbolsByTickerExecute(r ReferenceDataApiGe
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1577,17 +1587,17 @@ func (r ReferenceDataApiSymbolSearchUserAccountRequest) Execute() ([]UniversalSy
 }
 
 /*
-SymbolSearchUserAccount Search for symbols available in an account
+SymbolSearchUserAccount Search account symbols
 
-Returns a list of universal symbols that are supported by
-the specificied account. Returned symbols are based on the
-provided search string, matching on ticker and name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+
+The search results are further limited to the symbols supported by the brokerage for which the account is under.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param accountId The ID of the account to search for symbols within.
+ @param accountId
  @return ReferenceDataApiSymbolSearchUserAccountRequest
 */
 func (a *ReferenceDataApiService) SymbolSearchUserAccount(userId string, userSecret string, accountId string) ReferenceDataApiSymbolSearchUserAccountRequest {
@@ -1638,7 +1648,7 @@ func (a *ReferenceDataApiService) SymbolSearchUserAccountExecute(r ReferenceData
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"*/*"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

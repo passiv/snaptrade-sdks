@@ -12,13 +12,13 @@ import type * as buffer from "buffer"
 
 
 /**
- * Symbol query for searching for symbols
+ * 
  * @export
  * @interface SymbolQuery
  */
 export interface SymbolQuery {
     /**
-     * 
+     * The search query for symbols.
      * @type {string}
      * @memberof SymbolQuery
      */

@@ -73,8 +73,8 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_symbols
-  # Search for symbols
-  # Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+  # Search symbols
+  # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
   # @param [Hash] opts the optional parameters
   # @option opts [SymbolQuery] :symbol_query 
   # @return [Array<UniversalSymbol>]
@@ -85,9 +85,9 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for get_symbols_by_ticker
-  # Get details of a symbol
-  # Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-  # @param query The ticker or universal_symbol_id of the UniversalSymbol to get.
+  # Get symbol detail
+  # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+  # @param query The ticker or Universal Symbol ID to look up the symbol with.
   # @param [Hash] opts the optional parameters
   # @return [UniversalSymbol]
   describe 'get_symbols_by_ticker test' do
@@ -142,11 +142,11 @@ describe 'ReferenceDataApi' do
   end
 
   # unit tests for symbol_search_user_account
-  # Search for symbols available in an account
-  # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+  # Search account symbols
+  # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
   # @param user_id 
   # @param user_secret 
-  # @param account_id The ID of the account to search for symbols within.
+  # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [SymbolQuery] :symbol_query 
   # @return [Array<UniversalSymbol>]

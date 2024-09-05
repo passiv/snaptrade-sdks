@@ -32,9 +32,11 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
+from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 from snaptrade_client.model.universal_symbol import UniversalSymbol as UniversalSymbolSchema
 
 from snaptrade_client.type.universal_symbol import UniversalSymbol
+from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
 
 from . import path
 
@@ -69,7 +71,7 @@ _auth = [
     'PartnerSignature',
     'PartnerTimestamp',
 ]
-SchemaFor200ResponseBody = UniversalSymbolSchema
+SchemaFor200ResponseBodyApplicationJson = UniversalSymbolSchema
 
 
 @dataclass
@@ -86,25 +88,30 @@ _response_for_200 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor200,
     response_cls_async=ApiResponseFor200Async,
     content={
-        '*/*': api_client.MediaType(
-            schema=SchemaFor200ResponseBody),
+        'application/json': api_client.MediaType(
+            schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
+SchemaFor404ResponseBodyApplicationJson = Model404FailedRequestResponseSchema
 
 
 @dataclass
 class ApiResponseFor404(api_client.ApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model404FailedRequestResponse
 
 
 @dataclass
 class ApiResponseFor404Async(api_client.AsyncApiResponse):
-    body: schemas.Unset = schemas.unset
+    body: Model404FailedRequestResponse
 
 
 _response_for_404 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor404,
     response_cls_async=ApiResponseFor404Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor404ResponseBodyApplicationJson),
+    },
 )
 
 
@@ -127,7 +134,7 @@ _status_code_to_response = {
     'default': _response_for_default,
 }
 _all_accept_content_types = (
-    '*/*',
+    'application/json',
 )
 
 
@@ -160,7 +167,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get details of a symbol
+        Get symbol detail
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -277,7 +284,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get details of a symbol
+        Get symbol detail
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -382,7 +389,7 @@ class GetSymbolsByTicker(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the Universal Symbol object specified by the ticker or the universal_symbol_id. """
+        """ Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.  """
         args = self._get_symbols_by_ticker_mapped_args(
             path_params=path_params,
             query=query,
@@ -423,7 +430,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the Universal Symbol object specified by the ticker or the universal_symbol_id. """
+        """ Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.  """
         args = self._get_symbols_by_ticker_mapped_args(
             path_params=path_params,
             query=query,

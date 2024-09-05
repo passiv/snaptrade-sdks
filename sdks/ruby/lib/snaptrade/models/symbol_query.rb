@@ -11,8 +11,8 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Symbol query for searching for symbols
   class SymbolQuery
+    # The search query for symbols.
     attr_accessor :substring
 
     # Attribute mapping from ruby-style variable name to JSON key.

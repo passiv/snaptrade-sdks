@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Symbol query for searching for symbols
+    /// SymbolQuery
     /// </summary>
     [DataContract(Name = "SymbolQuery")]
     public partial class SymbolQuery : IEquatable<SymbolQuery>, IValidatableObject
@@ -35,15 +35,16 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SymbolQuery" /> class.
         /// </summary>
-        /// <param name="substring">substring.</param>
+        /// <param name="substring">The search query for symbols..</param>
         public SymbolQuery(string substring = default(string))
         {
             this.Substring = substring;
         }
 
         /// <summary>
-        /// Gets or Sets Substring
+        /// The search query for symbols.
         /// </summary>
+        /// <value>The search query for symbols.</value>
         [DataMember(Name = "substring", EmitDefaultValue = false)]
         public string Substring { get; set; }
 

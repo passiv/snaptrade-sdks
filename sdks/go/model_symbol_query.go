@@ -15,8 +15,9 @@ import (
 	"encoding/json"
 )
 
-// SymbolQuery Symbol query for searching for symbols
+// SymbolQuery struct for SymbolQuery
 type SymbolQuery struct {
+	// The search query for symbols.
 	Substring *string `json:"substring,omitempty"`
 }
 

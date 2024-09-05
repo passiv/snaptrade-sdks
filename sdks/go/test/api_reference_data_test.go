@@ -83,7 +83,7 @@ func Test_snaptrade_ReferenceDataApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
         symbolQuery := *snaptrade.NewSymbolQuery()
-        symbolQuery.SetSubstring("apple")
+        symbolQuery.SetSubstring("AAPL")
         
         request := client.ReferenceDataApi.GetSymbols(
         )
@@ -168,12 +168,12 @@ func Test_snaptrade_ReferenceDataApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
         symbolQuery := *snaptrade.NewSymbolQuery()
-        symbolQuery.SetSubstring("apple")
+        symbolQuery.SetSubstring("AAPL")
         
         request := client.ReferenceDataApi.SymbolSearchUserAccount(
             "userId_example",
             "userSecret_example",
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         )
         request.SymbolQuery(symbolQuery)
         

@@ -20,6 +20,7 @@ class RequiredSymbolQuery(TypedDict):
     pass
 
 class OptionalSymbolQuery(TypedDict, total=False):
+    # The search query for symbols.
     substring: str
 
 class SymbolQuery(RequiredSymbolQuery, OptionalSymbolQuery):
