@@ -104,6 +104,8 @@ portal:
       get: true
     /securityTypes:
       get: true
+    /accounts/{accountId}/symbols:
+      post: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
