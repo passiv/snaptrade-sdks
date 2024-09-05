@@ -66,9 +66,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Get metadata related to Snaptrade partner
+     * Get Client Info
      *
-     * Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+     * Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
      *
      * @throws ApiException if the Api call fails
      */
@@ -80,9 +80,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * List of all security types
+     * List security types
      *
-     * List security types available on SnapTrade.
+     * Return all available security types supported by SnapTrade.
      *
      * @throws ApiException if the Api call fails
      */

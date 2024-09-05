@@ -83,7 +83,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get metadata related to Snaptrade partner
+                // Get Client Info
                 PartnerData result = client.ReferenceData.GetPartnerInfo();
                 Console.WriteLine(result);
             }
@@ -110,7 +110,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List of all security types
+                // List security types
                 List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
                 Console.WriteLine(result);
             }

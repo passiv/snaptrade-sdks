@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSnapTradePartners(ApiTestMixin, unittest.TestCase):
     """
     SnapTradePartners unit test stubs
-        Get metadata related to Snaptrade partner
+        Get Client Info
     """
 
     def setUp(self):

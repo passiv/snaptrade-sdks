@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { Brokerage } from './brokerage';
 
 /**
- * SnapTrade Partner metadata
+ * Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
  * @export
  * @interface PartnerData
  */
@@ -21,76 +21,77 @@ export interface PartnerData {
     [key: string]: any;
 
     /**
-     * URI to redirect user back to after user is done adding brokerage connections
-     * @type {string}
-     * @memberof PartnerData
-     */
-    'redirect_uri'?: string;
-    /**
-     * Brokerages that can be accessed by partners
-     * @type {Array<Brokerage>}
-     * @memberof PartnerData
-     */
-    'allowed_brokerages'?: Array<Brokerage>;
-    /**
-     * Name of Snaptrade Partner
-     * @type {string}
-     * @memberof PartnerData
-     */
-    'name'?: string;
-    /**
-     * Slug of Snaptrade Partner
+     * A short, unique identifier for your company or product.
      * @type {string}
      * @memberof PartnerData
      */
     'slug'?: string;
     /**
-     * URL to partner\'s logo
+     * Your company or product name.
+     * @type {string}
+     * @memberof PartnerData
+     */
+    'name'?: string;
+    /**
+     * URL to your company or product logo.
      * @type {string}
      * @memberof PartnerData
      */
     'logo_url'?: string;
     /**
-     * Shows if pin is required by users to access connection page
-     * @type {boolean}
+     * Brokerages that can be accessed by your Client ID.
+     * @type {Array<Brokerage>}
      * @memberof PartnerData
      */
-    'pin_required'?: boolean;
+    'allowed_brokerages'?: Array<Brokerage>;
     /**
-     * Shows if users of Snaptrade partners can access trade endpoints
+     * Whether trading is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_trades'?: boolean;
     /**
-     * Shows if Snaptrade partners can get user holdings data
+     * Whether holdings data is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_holdings'?: boolean;
     /**
-     * Shows if Snaptrade partners can get users account history data
+     * Whether account historical transactions is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_account_history'?: boolean;
     /**
-     * Shows if Snaptrade partners can get users holdings data
+     * Whether reference data is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_reference_data'?: boolean;
     /**
-     * Shows if users Snaptrade partners can access portfolio group management features
+     * Whether portfolio management is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_portfolio_management'?: boolean;
     /**
-     * Shows if Snaptrade partners can get users account order history
+     * Whether recent order history is enabled for your SnapTrade Client ID.
      * @type {boolean}
      * @memberof PartnerData
      */
     'can_access_orders'?: boolean;
+    /**
+     * URI to redirect user back to after user is done adding brokerage connections.
+     * @type {string}
+     * @memberof PartnerData
+     */
+    'redirect_uri'?: string;
+    /**
+     * Shows if pin is required by users to access connection page. This field has been deprecated.
+     * @type {boolean}
+     * @memberof PartnerData
+     * @deprecated
+     */
+    'pin_required'?: boolean;
 }
 

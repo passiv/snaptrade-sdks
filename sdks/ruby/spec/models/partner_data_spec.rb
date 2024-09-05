@@ -20,13 +20,7 @@ describe SnapTrade::PartnerData do
       expect(instance).to be_instance_of(SnapTrade::PartnerData)
     end
   end
-  describe 'test attribute "redirect_uri"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "allowed_brokerages"' do
+  describe 'test attribute "slug"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -38,19 +32,13 @@ describe SnapTrade::PartnerData do
     end
   end
 
-  describe 'test attribute "slug"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "logo_url"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "pin_required"' do
+  describe 'test attribute "allowed_brokerages"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -87,6 +75,18 @@ describe SnapTrade::PartnerData do
   end
 
   describe 'test attribute "can_access_orders"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "redirect_uri"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "pin_required"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

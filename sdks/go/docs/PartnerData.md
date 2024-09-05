@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RedirectUri** | Pointer to **string** | URI to redirect user back to after user is done adding brokerage connections | [optional] 
-**AllowedBrokerages** | Pointer to [**[]Brokerage**](Brokerage.md) | Brokerages that can be accessed by partners | [optional] 
-**Name** | Pointer to **string** | Name of Snaptrade Partner | [optional] 
-**Slug** | Pointer to **string** | Slug of Snaptrade Partner | [optional] 
-**LogoUrl** | Pointer to **string** | URL to partner&#39;s logo | [optional] 
-**PinRequired** | Pointer to **bool** | Shows if pin is required by users to access connection page | [optional] 
-**CanAccessTrades** | Pointer to **bool** | Shows if users of Snaptrade partners can access trade endpoints | [optional] 
-**CanAccessHoldings** | Pointer to **bool** | Shows if Snaptrade partners can get user holdings data | [optional] 
-**CanAccessAccountHistory** | Pointer to **bool** | Shows if Snaptrade partners can get users account history data | [optional] 
-**CanAccessReferenceData** | Pointer to **bool** | Shows if Snaptrade partners can get users holdings data | [optional] 
-**CanAccessPortfolioManagement** | Pointer to **bool** | Shows if users Snaptrade partners can access portfolio group management features | [optional] 
-**CanAccessOrders** | Pointer to **bool** | Shows if Snaptrade partners can get users account order history | [optional] 
+**Slug** | Pointer to **string** | A short, unique identifier for your company or product. | [optional] 
+**Name** | Pointer to **string** | Your company or product name. | [optional] 
+**LogoUrl** | Pointer to **string** | URL to your company or product logo. | [optional] 
+**AllowedBrokerages** | Pointer to [**[]Brokerage**](Brokerage.md) | Brokerages that can be accessed by your Client ID. | [optional] 
+**CanAccessTrades** | Pointer to **bool** | Whether trading is enabled for your SnapTrade Client ID. | [optional] 
+**CanAccessHoldings** | Pointer to **bool** | Whether holdings data is enabled for your SnapTrade Client ID. | [optional] 
+**CanAccessAccountHistory** | Pointer to **bool** | Whether account historical transactions is enabled for your SnapTrade Client ID. | [optional] 
+**CanAccessReferenceData** | Pointer to **bool** | Whether reference data is enabled for your SnapTrade Client ID. | [optional] 
+**CanAccessPortfolioManagement** | Pointer to **bool** | Whether portfolio management is enabled for your SnapTrade Client ID. | [optional] 
+**CanAccessOrders** | Pointer to **bool** | Whether recent order history is enabled for your SnapTrade Client ID. | [optional] 
+**RedirectUri** | Pointer to **string** | URI to redirect user back to after user is done adding brokerage connections. | [optional] 
+**PinRequired** | Pointer to **bool** | Shows if pin is required by users to access connection page. This field has been deprecated. | [optional] 
 
 ## Methods
 
@@ -35,81 +35,6 @@ will change when the set of required properties is changed
 NewPartnerDataWithDefaults instantiates a new PartnerData object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetRedirectUri
-
-`func (o *PartnerData) GetRedirectUri() string`
-
-GetRedirectUri returns the RedirectUri field if non-nil, zero value otherwise.
-
-### GetRedirectUriOk
-
-`func (o *PartnerData) GetRedirectUriOk() (*string, bool)`
-
-GetRedirectUriOk returns a tuple with the RedirectUri field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectUri
-
-`func (o *PartnerData) SetRedirectUri(v string)`
-
-SetRedirectUri sets RedirectUri field to given value.
-
-### HasRedirectUri
-
-`func (o *PartnerData) HasRedirectUri() bool`
-
-HasRedirectUri returns a boolean if a field has been set.
-
-### GetAllowedBrokerages
-
-`func (o *PartnerData) GetAllowedBrokerages() []Brokerage`
-
-GetAllowedBrokerages returns the AllowedBrokerages field if non-nil, zero value otherwise.
-
-### GetAllowedBrokeragesOk
-
-`func (o *PartnerData) GetAllowedBrokeragesOk() (*[]Brokerage, bool)`
-
-GetAllowedBrokeragesOk returns a tuple with the AllowedBrokerages field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowedBrokerages
-
-`func (o *PartnerData) SetAllowedBrokerages(v []Brokerage)`
-
-SetAllowedBrokerages sets AllowedBrokerages field to given value.
-
-### HasAllowedBrokerages
-
-`func (o *PartnerData) HasAllowedBrokerages() bool`
-
-HasAllowedBrokerages returns a boolean if a field has been set.
-
-### GetName
-
-`func (o *PartnerData) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *PartnerData) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *PartnerData) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *PartnerData) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### GetSlug
 
@@ -136,6 +61,31 @@ SetSlug sets Slug field to given value.
 
 HasSlug returns a boolean if a field has been set.
 
+### GetName
+
+`func (o *PartnerData) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *PartnerData) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *PartnerData) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *PartnerData) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
 ### GetLogoUrl
 
 `func (o *PartnerData) GetLogoUrl() string`
@@ -161,30 +111,30 @@ SetLogoUrl sets LogoUrl field to given value.
 
 HasLogoUrl returns a boolean if a field has been set.
 
-### GetPinRequired
+### GetAllowedBrokerages
 
-`func (o *PartnerData) GetPinRequired() bool`
+`func (o *PartnerData) GetAllowedBrokerages() []Brokerage`
 
-GetPinRequired returns the PinRequired field if non-nil, zero value otherwise.
+GetAllowedBrokerages returns the AllowedBrokerages field if non-nil, zero value otherwise.
 
-### GetPinRequiredOk
+### GetAllowedBrokeragesOk
 
-`func (o *PartnerData) GetPinRequiredOk() (*bool, bool)`
+`func (o *PartnerData) GetAllowedBrokeragesOk() (*[]Brokerage, bool)`
 
-GetPinRequiredOk returns a tuple with the PinRequired field if it's non-nil, zero value otherwise
+GetAllowedBrokeragesOk returns a tuple with the AllowedBrokerages field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPinRequired
+### SetAllowedBrokerages
 
-`func (o *PartnerData) SetPinRequired(v bool)`
+`func (o *PartnerData) SetAllowedBrokerages(v []Brokerage)`
 
-SetPinRequired sets PinRequired field to given value.
+SetAllowedBrokerages sets AllowedBrokerages field to given value.
 
-### HasPinRequired
+### HasAllowedBrokerages
 
-`func (o *PartnerData) HasPinRequired() bool`
+`func (o *PartnerData) HasAllowedBrokerages() bool`
 
-HasPinRequired returns a boolean if a field has been set.
+HasAllowedBrokerages returns a boolean if a field has been set.
 
 ### GetCanAccessTrades
 
@@ -335,6 +285,56 @@ SetCanAccessOrders sets CanAccessOrders field to given value.
 `func (o *PartnerData) HasCanAccessOrders() bool`
 
 HasCanAccessOrders returns a boolean if a field has been set.
+
+### GetRedirectUri
+
+`func (o *PartnerData) GetRedirectUri() string`
+
+GetRedirectUri returns the RedirectUri field if non-nil, zero value otherwise.
+
+### GetRedirectUriOk
+
+`func (o *PartnerData) GetRedirectUriOk() (*string, bool)`
+
+GetRedirectUriOk returns a tuple with the RedirectUri field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectUri
+
+`func (o *PartnerData) SetRedirectUri(v string)`
+
+SetRedirectUri sets RedirectUri field to given value.
+
+### HasRedirectUri
+
+`func (o *PartnerData) HasRedirectUri() bool`
+
+HasRedirectUri returns a boolean if a field has been set.
+
+### GetPinRequired
+
+`func (o *PartnerData) GetPinRequired() bool`
+
+GetPinRequired returns the PinRequired field if non-nil, zero value otherwise.
+
+### GetPinRequiredOk
+
+`func (o *PartnerData) GetPinRequiredOk() (*bool, bool)`
+
+GetPinRequiredOk returns a tuple with the PinRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPinRequired
+
+`func (o *PartnerData) SetPinRequired(v bool)`
+
+SetPinRequired sets PinRequired field to given value.
+
+### HasPinRequired
+
+`func (o *PartnerData) HasPinRequired() bool`
+
+HasPinRequired returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

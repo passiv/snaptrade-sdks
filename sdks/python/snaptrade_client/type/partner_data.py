@@ -21,41 +21,42 @@ class RequiredPartnerData(TypedDict):
     pass
 
 class OptionalPartnerData(TypedDict, total=False):
-    # URI to redirect user back to after user is done adding brokerage connections
-    redirect_uri: str
-
-    # Brokerages that can be accessed by partners
-    allowed_brokerages: typing.List[Brokerage]
-
-    # Name of Snaptrade Partner
-    name: str
-
-    # Slug of Snaptrade Partner
+    # A short, unique identifier for your company or product.
     slug: str
 
-    # URL to partner's logo
+    # Your company or product name.
+    name: str
+
+    # URL to your company or product logo.
     logo_url: str
 
-    # Shows if pin is required by users to access connection page
-    pin_required: bool
+    # Brokerages that can be accessed by your Client ID.
+    allowed_brokerages: typing.List[Brokerage]
 
-    # Shows if users of Snaptrade partners can access trade endpoints
+    # Whether trading is enabled for your SnapTrade Client ID.
     can_access_trades: bool
 
-    # Shows if Snaptrade partners can get user holdings data
+    # Whether holdings data is enabled for your SnapTrade Client ID.
     can_access_holdings: bool
 
-    # Shows if Snaptrade partners can get users account history data
+    # Whether account historical transactions is enabled for your SnapTrade Client ID.
     can_access_account_history: bool
 
-    # Shows if Snaptrade partners can get users holdings data
+    # Whether reference data is enabled for your SnapTrade Client ID.
     can_access_reference_data: bool
 
-    # Shows if users Snaptrade partners can access portfolio group management features
+    # Whether portfolio management is enabled for your SnapTrade Client ID.
     can_access_portfolio_management: bool
 
-    # Shows if Snaptrade partners can get users account order history
+    # Whether recent order history is enabled for your SnapTrade Client ID.
     can_access_orders: bool
+
+    # URI to redirect user back to after user is done adding brokerage connections.
+    redirect_uri: str
+
+    # WARNING: This property is deprecated
+    # Shows if pin is required by users to access connection page. This field has been deprecated.
+    pin_required: bool
 
 class PartnerData(RequiredPartnerData, OptionalPartnerData):
     pass

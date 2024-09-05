@@ -5,8 +5,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**GetCurrencyExchangeRatePair**](ReferenceDataApi.md#getcurrencyexchangeratepair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair |
-| [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
-| [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types |
+| [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get Client Info |
+| [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List security types |
 | [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges |
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail |
@@ -111,7 +111,7 @@ catch (ApiException e)
 
 
 
-Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
 ### Example
 ```csharp
@@ -136,7 +136,7 @@ namespace Example
             
             try
             {
-                // Get metadata related to Snaptrade partner
+                // Get Client Info
                 PartnerData result = client.ReferenceData.GetPartnerInfo();
                 Console.WriteLine(result);
             }
@@ -163,7 +163,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get metadata related to Snaptrade partner
+    // Get Client Info
     ApiResponse<PartnerData> response = apiInstance.GetPartnerInfoWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -187,7 +187,7 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully obtained encrypted JWT data. See description on how to object JWT token |  -  |
+| **200** | OK |  -  |
 | **400** | Bad Request |  -  |
 | **401** | Unauthorized |  -  |
 | **404** | Not Found |  -  |
@@ -200,7 +200,7 @@ This endpoint does not need any parameter.
 
 
 
-List security types available on SnapTrade.
+Return all available security types supported by SnapTrade.
 
 ### Example
 ```csharp
@@ -225,7 +225,7 @@ namespace Example
             
             try
             {
-                // List of all security types
+                // List security types
                 List<SecurityType> result = client.ReferenceData.GetSecurityTypes();
                 Console.WriteLine(result);
             }
@@ -252,7 +252,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List of all security types
+    // List security types
     ApiResponse<List<SecurityType>> response = apiInstance.GetSecurityTypesWithHttpInfo();
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -276,8 +276,8 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all defined Security Type objects. |  -  |
-| **0** | Unexpected error. |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1805,7 +1805,7 @@ paths:
       x-accepts: application/json
   /snapTrade/partners:
     get:
-      description: "Returns useful data related to the specified ClientID, including\
+      description: "Returns configurations for your SnapTrade Client ID, including\
         \ allowed brokerages and data access."
       operationId: ReferenceData_getPartnerInfo
       parameters: []
@@ -1815,8 +1815,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartnerData'
-          description: Successfully obtained encrypted JWT data. See description on
-            how to object JWT token
+          description: OK
         "400":
           content:
             application/json:
@@ -1840,7 +1839,7 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Get metadata related to Snaptrade partner
+      summary: Get Client Info
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -2052,7 +2051,7 @@ paths:
       x-accepts: application/json
   /securityTypes:
     get:
-      description: List security types available on SnapTrade.
+      description: Return all available security types supported by SnapTrade.
       operationId: ReferenceData_getSecurityTypes
       parameters: []
       responses:
@@ -2064,10 +2063,10 @@ paths:
                   $ref: '#/components/schemas/SecurityType'
                 type: array
                 x-konfig-is-used-in-successful-response: true
-          description: A list of all defined Security Type objects.
+          description: OK
         default:
-          description: Unexpected error.
-      summary: List of all security types
+          description: Unexpected Error
+      summary: List security types
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -4182,19 +4181,20 @@ components:
       type: object
     PartnerData:
       additionalProperties: true
-      description: SnapTrade Partner metadata
+      description: "Configurations for your SnapTrade Client ID, including allowed\
+        \ brokerages and data access."
       example:
         can_access_trades: true
         can_access_holdings: true
-        pin_required: false
         can_access_account_history: true
         can_access_orders: true
+        pin_required: false
         logo_url: https://example.com/logo.png
         can_access_reference_data: true
-        name: Wealthy Chimpmunk
+        name: Wealthly
         can_access_portfolio_management: true
         redirect_uri: https://example.com/oauth/snaptrade
-        slug: WEALTHYCHIPMUNK
+        slug: WEALTHLY
         allowed_brokerages:
         - maintenance_mode: true
           allows_fractional_units: true
@@ -4241,79 +4241,85 @@ components:
           slug: ROBINHOOD
           aws_s3_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo.png
       properties:
-        redirect_uri:
-          description: URI to redirect user back to after user is done adding brokerage
-            connections
-          example: https://example.com/oauth/snaptrade
-          type: string
-          x-konfig-original-example: https://example.com/oauth/snaptrade
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-redirect_uri
-        allowed_brokerages:
-          description: Brokerages that can be accessed by partners
-          items:
-            $ref: '#/components/schemas/Brokerage'
-          type: array
-        name:
-          description: Name of Snaptrade Partner
-          example: Wealthy Chimpmunk
-          type: string
-          x-konfig-original-example: Wealthy Chimpmunk
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-name
         slug:
-          description: Slug of Snaptrade Partner
-          example: WEALTHYCHIPMUNK
+          description: "A short, unique identifier for your company or product."
+          example: WEALTHLY
           type: string
-          x-konfig-original-example: WEALTHYCHIPMUNK
+          x-konfig-original-example: WEALTHLY
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-slug
+        name:
+          description: Your company or product name.
+          example: Wealthly
+          type: string
+          x-konfig-original-example: Wealthly
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-name
         logo_url:
-          description: URL to partner's logo
+          description: URL to your company or product logo.
           example: https://example.com/logo.png
           type: string
           x-konfig-original-example: https://example.com/logo.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-logo_url
-        pin_required:
-          description: Shows if pin is required by users to access connection page
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-pin_required
+        allowed_brokerages:
+          description: Brokerages that can be accessed by your Client ID.
+          items:
+            $ref: '#/components/schemas/Brokerage'
+          type: array
         can_access_trades:
-          description: Shows if users of Snaptrade partners can access trade endpoints
+          description: Whether trading is enabled for your SnapTrade Client ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_trades
         can_access_holdings:
-          description: Shows if Snaptrade partners can get user holdings data
+          description: Whether holdings data is enabled for your SnapTrade Client
+            ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_holdings
         can_access_account_history:
-          description: Shows if Snaptrade partners can get users account history data
+          description: Whether account historical transactions is enabled for your
+            SnapTrade Client ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_account_history
         can_access_reference_data:
-          description: Shows if Snaptrade partners can get users holdings data
+          description: Whether reference data is enabled for your SnapTrade Client
+            ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_reference_data
         can_access_portfolio_management:
-          description: Shows if users Snaptrade partners can access portfolio group
-            management features
+          description: Whether portfolio management is enabled for your SnapTrade
+            Client ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_portfolio_management
         can_access_orders:
-          description: Shows if Snaptrade partners can get users account order history
+          description: Whether recent order history is enabled for your SnapTrade
+            Client ID.
           example: true
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-can_access_orders
+        redirect_uri:
+          description: URI to redirect user back to after user is done adding brokerage
+            connections.
+          example: https://example.com/oauth/snaptrade
+          type: string
+          x-konfig-original-example: https://example.com/oauth/snaptrade
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-redirect_uri
+        pin_required:
+          deprecated: true
+          description: Shows if pin is required by users to access connection page.
+            This field has been deprecated.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PartnerData-properties-pin_required
       type: object
       x-konfig-is-used-in-successful-response: true
     Position:
@@ -6967,25 +6973,17 @@ components:
       example: CAD
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PartnerData-properties-redirect_uri:
-      example: https://example.com/oauth/snaptrade
+    konfig-generated-schema-components-schemas-PartnerData-properties-slug:
+      example: WEALTHLY
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerData-properties-name:
-      example: Wealthy Chimpmunk
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PartnerData-properties-slug:
-      example: WEALTHYCHIPMUNK
+      example: Wealthly
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerData-properties-logo_url:
       example: https://example.com/logo.png
       type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-PartnerData-properties-pin_required:
-      example: false
-      type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerData-properties-can_access_trades:
       example: true
@@ -7009,6 +7007,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PartnerData-properties-can_access_orders:
       example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PartnerData-properties-redirect_uri:
+      example: https://example.com/oauth/snaptrade
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PartnerData-properties-pin_required:
+      example: false
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Position-properties-units:

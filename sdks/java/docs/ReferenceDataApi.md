@@ -5,8 +5,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getCurrencyExchangeRatePair**](ReferenceDataApi.md#getCurrencyExchangeRatePair) | **GET** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair |
-| [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
-| [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types |
+| [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get Client Info |
+| [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List security types |
 | [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Get exchanges |
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
@@ -116,9 +116,9 @@ public class Example {
 # **getPartnerInfo**
 > PartnerData getPartnerInfo().execute();
 
-Get metadata related to Snaptrade partner
+Get Client Info
 
-Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
 ### Example
 ```java
@@ -148,18 +148,18 @@ public class Example {
               .getPartnerInfo()
               .execute();
       System.out.println(result);
-      System.out.println(result.getRedirectUri());
-      System.out.println(result.getAllowedBrokerages());
-      System.out.println(result.getName());
       System.out.println(result.getSlug());
+      System.out.println(result.getName());
       System.out.println(result.getLogoUrl());
-      System.out.println(result.getPinRequired());
+      System.out.println(result.getAllowedBrokerages());
       System.out.println(result.getCanAccessTrades());
       System.out.println(result.getCanAccessHoldings());
       System.out.println(result.getCanAccessAccountHistory());
       System.out.println(result.getCanAccessReferenceData());
       System.out.println(result.getCanAccessPortfolioManagement());
       System.out.println(result.getCanAccessOrders());
+      System.out.println(result.getRedirectUri());
+      System.out.println(result.getPinRequired());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getPartnerInfo");
       System.err.println("Status code: " + e.getStatusCode());
@@ -210,16 +210,16 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully obtained encrypted JWT data. See description on how to object JWT token |  -  |
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 
 <a name="getSecurityTypes"></a>
 # **getSecurityTypes**
 > List&lt;SecurityType&gt; getSecurityTypes().execute();
 
-List of all security types
+List security types
 
-List security types available on SnapTrade.
+Return all available security types supported by SnapTrade.
 
 ### Example
 ```java
@@ -299,8 +299,8 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of all defined Security Type objects. |  -  |
-| **0** | Unexpected error. |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 <a name="getStockExchanges"></a>
 # **getStockExchanges**

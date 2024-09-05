@@ -42,19 +42,11 @@ public class PartnerDataTest {
     }
 
     /**
-     * Test the property 'redirectUri'
+     * Test the property 'slug'
      */
     @Test
-    public void redirectUriTest() {
-        // TODO: test redirectUri
-    }
-
-    /**
-     * Test the property 'allowedBrokerages'
-     */
-    @Test
-    public void allowedBrokeragesTest() {
-        // TODO: test allowedBrokerages
+    public void slugTest() {
+        // TODO: test slug
     }
 
     /**
@@ -66,14 +58,6 @@ public class PartnerDataTest {
     }
 
     /**
-     * Test the property 'slug'
-     */
-    @Test
-    public void slugTest() {
-        // TODO: test slug
-    }
-
-    /**
      * Test the property 'logoUrl'
      */
     @Test
@@ -82,11 +66,11 @@ public class PartnerDataTest {
     }
 
     /**
-     * Test the property 'pinRequired'
+     * Test the property 'allowedBrokerages'
      */
     @Test
-    public void pinRequiredTest() {
-        // TODO: test pinRequired
+    public void allowedBrokeragesTest() {
+        // TODO: test allowedBrokerages
     }
 
     /**
@@ -135,6 +119,22 @@ public class PartnerDataTest {
     @Test
     public void canAccessOrdersTest() {
         // TODO: test canAccessOrders
+    }
+
+    /**
+     * Test the property 'redirectUri'
+     */
+    @Test
+    public void redirectUriTest() {
+        // TODO: test redirectUri
+    }
+
+    /**
+     * Test the property 'pinRequired'
+     */
+    @Test
+    public void pinRequiredTest() {
+        // TODO: test pinRequired
     }
 
 }

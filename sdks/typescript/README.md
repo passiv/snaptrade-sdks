@@ -1206,7 +1206,7 @@ A currency pair based on currency code for example, {CAD-USD}
 
 ### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
-Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1229,7 +1229,7 @@ const getPartnerInfoResponse = await snaptrade.referenceData.getPartnerInfo();
 
 ### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
 
-List security types available on SnapTrade.
+Return all available security types supported by SnapTrade.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
