@@ -255,15 +255,13 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Get metadata related to Snaptrade partner
-      description: Returns useful data related to the specified ClientID, including allowed brokerages and data access.
+      summary: Get Client Info
+      description: Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
       operationId: ReferenceData_getPartnerInfo
       parameters: []
       responses:
         "200":
-          description:
-            Successfully obtained encrypted JWT data. See description on how to
-            object JWT token
+          description: OK
           content:
             application/json:
               schema:
@@ -700,7 +698,7 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountID"
       requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+        $ref: "#/components/requestBodies/CancelOrderRequestBody"
       responses:
         "200":
           description: Order Record of canceled order
@@ -726,8 +724,7 @@ paths:
     post:
       tags:
         - Reference Data
-      summary:
-        Search account symbols
+      summary: Search account symbols
       description: |
         Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
@@ -796,11 +793,11 @@ paths:
         "200":
           description: OK
           content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/OptionsPosition"
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OptionsPosition"
         "500":
           description: Unexpected error
           content:
@@ -894,7 +891,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-
 
   /accounts/{accountId}/optionStrategy/{optionStrategyId}:
     get:
@@ -1218,14 +1214,16 @@ paths:
         - in: query
           required: false
           name: userId
-          description: Optional comma separated list of user IDs used to filter the
+          description:
+            Optional comma separated list of user IDs used to filter the
             request on specific users
           schema:
             $ref: "#/components/schemas/AccountIDs"
         - in: query
           required: false
           name: sessionId
-          description: Optional comma separated list of session IDs used to filter the
+          description:
+            Optional comma separated list of session IDs used to filter the
             request on specific users
           schema:
             $ref: "#/components/schemas/AccountIDs"
@@ -1238,7 +1236,7 @@ paths:
                 type: array
                 items:
                   anyOf:
-                  - $ref: "#/components/schemas/SessionEvent"
+                    - $ref: "#/components/schemas/SessionEvent"
         default:
           description: Unexpected error.
   "/brokerages":
@@ -1364,13 +1362,13 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: List of all security types
+      summary: List security types
       operationId: ReferenceData_getSecurityTypes
-      description: List security types available on SnapTrade.
+      description: Return all available security types supported by SnapTrade.
       parameters: []
       responses:
         "200":
-          description: A list of all defined Security Type objects.
+          description: OK
           content:
             application/json:
               schema:
@@ -1378,7 +1376,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/SecurityType"
         default:
-          description: Unexpected error.
+          description: Unexpected Error
   /symbols:
     post:
       tags:
@@ -1798,7 +1796,8 @@ paths:
             Return a 200 status to indicate that the account was added
             successfully
         "201":
-          description: Return a 201 status to indicate that the account was added
+          description:
+            Return a 201 status to indicate that the account was added
             successfully
   /accountDeleted:
     post:
@@ -1818,7 +1817,8 @@ paths:
             Return a 200 status to indicate that the account was deleted
             successfully
         "201":
-          description: Return a 201 status to indicate that the account was deleted
+          description:
+            Return a 201 status to indicate that the account was deleted
             successfully
   /transactionsUpdated:
     post:
@@ -1889,7 +1889,7 @@ components:
             type: object
             properties:
               brokerage_order_id:
-                $ref: '#/components/schemas/BrokerageOrderID'
+                $ref: "#/components/schemas/BrokerageOrderID"
     OptionStrategyRequestBody:
       required: true
       content:
@@ -1907,7 +1907,7 @@ components:
               strategy_type:
                 type: string
                 enum:
-                - CUSTOM
+                  - CUSTOM
 
     OrderStrategyExecuteBody:
       required: true
@@ -2189,7 +2189,7 @@ components:
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
         symbol:
-         $ref: "#/components/schemas/BrokerageSymbolID"
+          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol:
           description: Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
           allOf:
@@ -2319,7 +2319,7 @@ components:
           description: The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
           nullable: true
           allOf:
-           - $ref: "#/components/schemas/Currency"
+            - $ref: "#/components/schemas/Currency"
         average_purchase_price:
           type: number
           nullable: true
@@ -2372,20 +2372,20 @@ components:
           type: object
           properties:
             delta:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             gamma:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             theta:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             vega:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
             rho:
-                type: number
-                example: 0.1
+              type: number
+              example: 0.1
     StrategyOrderRecord:
       description: Strategy order record
       type: object
@@ -2498,10 +2498,10 @@ components:
           example: 410.71
           nullable: true
     CurrencyID:
-        type: string
-        format: uuid
-        description: Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
-        example: 87b24961-b51e-4db8-9226-f198f6518a89
+      type: string
+      format: uuid
+      description: Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
     Currency:
       description: Describes a currency object.
       type: object
@@ -2732,62 +2732,59 @@ components:
           example: CAD
           description: The currency of the amount
     PartnerData:
-      description: SnapTrade Partner metadata
+      description: Configurations for your SnapTrade Client ID, including allowed brokerages and data access.
       type: object
       properties:
-        redirect_uri:
-          type: string
-          description:
-            URI to redirect user back to after user is done adding brokerage
-            connections
-          example: https://example.com/oauth/snaptrade
-        allowed_brokerages:
-          type: array
-          description: Brokerages that can be accessed by partners
-          items:
-            $ref: "#/components/schemas/Brokerage"
-        name:
-          type: string
-          description: Name of Snaptrade Partner
-          example: Wealthy Chimpmunk
         slug:
           type: string
-          description: Slug of Snaptrade Partner
-          example: WEALTHYCHIPMUNK
+          description: A short, unique identifier for your company or product.
+          example: WEALTHLY
+        name:
+          type: string
+          description: Your company or product name.
+          example: Wealthly
         logo_url:
           type: string
-          description: URL to partner's logo
+          description: URL to your company or product logo.
           example: https://example.com/logo.png
-        pin_required:
-          type: boolean
-          description: Shows if pin is required by users to access connection page
-          example: false
+        allowed_brokerages:
+          type: array
+          description: Brokerages that can be accessed by your Client ID.
+          items:
+            $ref: "#/components/schemas/Brokerage"
         can_access_trades:
           type: boolean
-          description: Shows if users of Snaptrade partners can access trade endpoints
+          description: Whether trading is enabled for your SnapTrade Client ID.
           example: true
         can_access_holdings:
           type: boolean
-          description: Shows if Snaptrade partners can get user holdings data
+          description: Whether holdings data is enabled for your SnapTrade Client ID.
           example: true
         can_access_account_history:
           type: boolean
-          description: Shows if Snaptrade partners can get users account history data
+          description: Whether account historical transactions is enabled for your SnapTrade Client ID.
           example: true
         can_access_reference_data:
           type: boolean
-          description: Shows if Snaptrade partners can get users holdings data
+          description: Whether reference data is enabled for your SnapTrade Client ID.
           example: true
         can_access_portfolio_management:
           type: boolean
-          description:
-            Shows if users Snaptrade partners can access portfolio group
-            management features
+          description: Whether portfolio management is enabled for your SnapTrade Client ID.
           example: true
         can_access_orders:
           type: boolean
-          description: Shows if Snaptrade partners can get users account order history
+          description: Whether recent order history is enabled for your SnapTrade Client ID.
           example: true
+        redirect_uri:
+          type: string
+          description: URI to redirect user back to after user is done adding brokerage connections.
+          example: https://example.com/oauth/snaptrade
+        pin_required:
+          deprecated: true
+          type: boolean
+          description: Shows if pin is required by users to access connection page. This field has been deprecated.
+          example: false
     Position:
       description: Describes a single stock/ETF/crypto/mutual fund position in an account.
       type: object
@@ -2821,8 +2818,7 @@ components:
           type: number
           nullable: true
           example: 108.3353
-          description:
-            Cost basis _per share_ of this position.
+          description: Cost basis _per share_ of this position.
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
@@ -2861,9 +2857,9 @@ components:
           type: string
           example: v3
           enum:
-           - v4
-           - v3
-           - v2
+            - v4
+            - v3
+            - v2
           default: v3
     Symbol:
       # FIXME Merge this with UniversalSymbol
@@ -2903,7 +2899,7 @@ components:
         figi_instrument:
           nullable: true
           allOf:
-           - $ref: "#/components/schemas/FigiInstrument"
+            - $ref: "#/components/schemas/FigiInstrument"
     UserIDandSecret:
       type: object
       properties:
@@ -3384,15 +3380,13 @@ components:
           type: string
           example: AAPL
     SyncStatusDate:
-      description:
-        Date in YYYY-MM-DD format or null
+      description: Date in YYYY-MM-DD format or null
       type: string
       example: "2022-01-24"
       format: date
       nullable: true
     HoldingsSyncStatusDate:
-      description:
-        Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
+      description: Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
       type: string
       example: "2024-06-28 18:42:46.561408+00:00"
       format: date-time
@@ -3455,7 +3449,7 @@ components:
           deprecated: true
           description: This field is deprecated and should not be used.
           type: string
-          example: '1048101'
+          example: "1048101"
         description:
           deprecated: true
           description: This field is deprecated and should not be used.
@@ -3464,7 +3458,7 @@ components:
           nullable: true
         symbol:
           deprecated: true
-          description:  This field is deprecated and should not be used.
+          description: This field is deprecated and should not be used.
           type: string
           example: MVGP.U.TO
     ManualTradeBalance:
@@ -3789,7 +3783,7 @@ components:
         figi_instrument:
           nullable: true
           allOf:
-           - $ref: "#/components/schemas/FigiInstrument"
+            - $ref: "#/components/schemas/FigiInstrument"
       required:
         - id
         - symbol
@@ -3843,17 +3837,17 @@ components:
         figi_instrument:
           nullable: true
           allOf:
-           - $ref: "#/components/schemas/FigiInstrument"
+            - $ref: "#/components/schemas/FigiInstrument"
     OptionsSymbol:
       description: Uniquely describes an option security + exchange combination across all brokerages.
       type: object
       required:
-       - id
-       - ticker
-       - option_type
-       - strike_price
-       - expiration_date
-       - underlying_symbol
+        - id
+        - ticker
+        - option_type
+        - strike_price
+        - expiration_date
+        - underlying_symbol
       properties:
         id:
           $ref: "#/components/schemas/OptionSymbolID"
