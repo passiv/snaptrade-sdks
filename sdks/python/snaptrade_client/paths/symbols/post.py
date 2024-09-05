@@ -155,7 +155,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Search for symbols
+        Search symbols
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -273,7 +273,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Search for symbols
+        Search symbols
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -378,7 +378,7 @@ class GetSymbols(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name.  """
+        """ Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  """
         args = self._get_symbols_mapped_args(
             body=body,
             substring=substring,
@@ -419,7 +419,7 @@ class ApiForpost(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name.  """
+        """ Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  """
         args = self._get_symbols_mapped_args(
             body=body,
             substring=substring,

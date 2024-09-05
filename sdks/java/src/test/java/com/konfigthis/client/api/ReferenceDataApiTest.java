@@ -108,9 +108,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Search for symbols
+     * Search symbols
      *
-     * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -124,9 +124,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Get details of a symbol
+     * Get symbol detail
      *
-     * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -197,9 +197,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Search for symbols available in an account
+     * Search account symbols
      *
-     * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
      *
      * @throws ApiException if the Api call fails
      */

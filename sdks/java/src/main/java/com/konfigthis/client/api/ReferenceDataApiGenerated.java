@@ -753,7 +753,7 @@ public class ReferenceDataApiGenerated {
 
         /**
          * Set substring
-         * @param substring  (optional)
+         * @param substring The search query for symbols. (optional)
          * @return ReferenceDataApi.GetSymbolsRequestBuilder
          */
         public ReferenceDataApi.GetSymbolsRequestBuilder substring(String substring) {
@@ -769,8 +769,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -791,8 +791,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public List<UniversalSymbol> execute() throws ApiException {
@@ -808,8 +808,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<UniversalSymbol>> executeWithHttpInfo() throws ApiException {
@@ -825,8 +825,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
@@ -836,14 +836,14 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Search for symbols
-     * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+     * Search symbols
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
      * @return GetSymbolsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> A list of UniversalSymbol objects which match the specified substring </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
     public ReferenceDataApi.GetSymbolsRequestBuilder getSymbols() throws IllegalArgumentException {
@@ -876,7 +876,7 @@ public class ReferenceDataApiGenerated {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            "*/*"
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -935,9 +935,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -952,9 +951,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public UniversalSymbol execute() throws ApiException {
@@ -969,9 +967,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<UniversalSymbol> executeWithHttpInfo() throws ApiException {
@@ -986,9 +983,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-            <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<UniversalSymbol> _callback) throws ApiException {
@@ -997,16 +993,15 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Get details of a symbol
-     * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-     * @param query The ticker or universal_symbol_id of the UniversalSymbol to get. (required)
+     * Get symbol detail
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+     * @param query The ticker or Universal Symbol ID to look up the symbol with. (required)
      * @return GetSymbolsByTickerRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Successfully gets a symbol </td><td>  -  </td></tr>
-        <tr><td> 404 </td><td> No symbol with the specified ticker found. </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
     public ReferenceDataApi.GetSymbolsByTickerRequestBuilder getSymbolsByTicker(String query) throws IllegalArgumentException {
@@ -1656,7 +1651,7 @@ public class ReferenceDataApiGenerated {
         }
 
         final String[] localVarAccepts = {
-            "*/*"
+            "application/json"
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -1725,7 +1720,7 @@ public class ReferenceDataApiGenerated {
 
         /**
          * Set substring
-         * @param substring  (optional)
+         * @param substring The search query for symbols. (optional)
          * @return ReferenceDataApi.SymbolSearchUserAccountRequestBuilder
          */
         public ReferenceDataApi.SymbolSearchUserAccountRequestBuilder substring(String substring) {
@@ -1741,8 +1736,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
@@ -1763,8 +1758,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public List<UniversalSymbol> execute() throws ApiException {
@@ -1780,8 +1775,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public ApiResponse<List<UniversalSymbol>> executeWithHttpInfo() throws ApiException {
@@ -1797,8 +1792,8 @@ public class ReferenceDataApiGenerated {
          * @http.response.details
          <table summary="Response Details" border="1">
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-            <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UniversalSymbol>> _callback) throws ApiException {
@@ -1808,17 +1803,17 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Search for symbols available in an account
-     * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+     * Search account symbols
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountId The ID of the account to search for symbols within. (required)
+     * @param accountId  (required)
      * @return SymbolSearchUserAccountRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> List of universal symbol supported by account based on substring sent it </td><td>  -  </td></tr>
-        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
     public ReferenceDataApi.SymbolSearchUserAccountRequestBuilder symbolSearchUserAccount(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {

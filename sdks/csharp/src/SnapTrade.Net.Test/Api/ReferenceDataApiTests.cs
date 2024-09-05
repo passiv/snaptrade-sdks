@@ -161,7 +161,7 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetSymbolsTest()
         {
-            var substring = "apple";
+            var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(
                 substring
@@ -169,7 +169,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Search for symbols
+                // Search symbols
                 List<UniversalSymbol> result = client.ReferenceData.GetSymbols(symbolQuery);
                 Console.WriteLine(result);
             }
@@ -193,11 +193,11 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetSymbolsByTickerTest()
         {
-            var query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
+            var query = "query_example"; // The ticker or Universal Symbol ID to look up the symbol with.
             
             try
             {
-                // Get details of a symbol
+                // Get symbol detail
                 UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
@@ -332,8 +332,8 @@ namespace SnapTrade.Net.Test.Api
         {
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to search for symbols within.
-            var substring = "apple";
+            var accountId = "accountId_example";
+            var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(
                 substring
@@ -341,7 +341,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Search for symbols available in an account
+                // Search account symbols
                 List<UniversalSymbol> result = client.ReferenceData.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
                 Console.WriteLine(result);
             }

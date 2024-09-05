@@ -114,10 +114,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;Exchange&gt;</returns>
         ApiResponse<List<Exchange>> GetStockExchangesWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Search for symbols
+        /// Search symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -126,10 +126,10 @@ namespace SnapTrade.Net.Api
         List<UniversalSymbol> GetSymbols(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0);
 
         /// <summary>
-        /// Search for symbols
+        /// Search symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -137,25 +137,25 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;UniversalSymbol&gt;</returns>
         ApiResponse<List<UniversalSymbol>> GetSymbolsWithHttpInfo(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0);
         /// <summary>
-        /// Get details of a symbol
+        /// Get symbol detail
         /// </summary>
         /// <remarks>
-        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UniversalSymbol</returns>
         UniversalSymbol GetSymbolsByTicker(string query, int operationIndex = 0);
 
         /// <summary>
-        /// Get details of a symbol
+        /// Get symbol detail
         /// </summary>
         /// <remarks>
-        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UniversalSymbol</returns>
         ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(string query, int operationIndex = 0);
@@ -246,30 +246,30 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;ExchangeRatePairs&gt;</returns>
         ApiResponse<List<ExchangeRatePairs>> ListAllCurrenciesRatesWithHttpInfo(int operationIndex = 0);
         /// <summary>
-        /// Search for symbols available in an account
+        /// Search account symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalSymbol&gt;</returns>
         List<UniversalSymbol> SymbolSearchUserAccount(string userId, string userSecret, string accountId, SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0);
 
         /// <summary>
-        /// Search for symbols available in an account
+        /// Search account symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalSymbol&gt;</returns>
@@ -378,10 +378,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Exchange&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Exchange>>> GetStockExchangesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Search for symbols
+        /// Search symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -391,10 +391,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<UniversalSymbol>> GetSymbolsAsync(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Search for symbols
+        /// Search symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -403,26 +403,26 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;UniversalSymbol&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<UniversalSymbol>>> GetSymbolsWithHttpInfoAsync(SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get details of a symbol
+        /// Get symbol detail
         /// </summary>
         /// <remarks>
-        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UniversalSymbol</returns>
         System.Threading.Tasks.Task<UniversalSymbol> GetSymbolsByTickerAsync(string query, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get details of a symbol
+        /// Get symbol detail
         /// </summary>
         /// <remarks>
-        /// Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UniversalSymbol)</returns>
@@ -522,15 +522,15 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;ExchangeRatePairs&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<ExchangeRatePairs>>> ListAllCurrenciesRatesWithHttpInfoAsync(int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Search for symbols available in an account
+        /// Search account symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -538,15 +538,15 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<List<UniversalSymbol>> SymbolSearchUserAccountAsync(string userId, string userSecret, string accountId, SymbolQuery symbolQuery = default(SymbolQuery), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Search for symbols available in an account
+        /// Search account symbols
         /// </summary>
         /// <remarks>
-        /// Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1315,7 +1315,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Search symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1328,7 +1328,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Search symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1395,7 +1395,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Search symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1409,7 +1409,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+        /// Search symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="symbolQuery"> (optional)</param>
@@ -1479,10 +1479,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Get symbol detail Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>UniversalSymbol</returns>
         public UniversalSymbol GetSymbolsByTicker(string query, int operationIndex = 0)
@@ -1492,10 +1492,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Get symbol detail Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of UniversalSymbol</returns>
         public SnapTrade.Net.Client.ApiResponse<UniversalSymbol> GetSymbolsByTickerWithHttpInfo(string query, int operationIndex = 0)
@@ -1513,7 +1513,7 @@ namespace SnapTrade.Net.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
-                "*/*"
+                "application/json"
             };
 
             var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -1564,10 +1564,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Get symbol detail Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of UniversalSymbol</returns>
@@ -1578,10 +1578,10 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get details of a symbol Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+        /// Get symbol detail Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="query">The ticker or universal_symbol_id of the UniversalSymbol to get.</param>
+        /// <param name="query">The ticker or Universal Symbol ID to look up the symbol with.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (UniversalSymbol)</returns>
@@ -1601,7 +1601,7 @@ namespace SnapTrade.Net.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
-                "*/*"
+                "application/json"
             };
 
             var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -2289,12 +2289,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Search account symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>List&lt;UniversalSymbol&gt;</returns>
@@ -2305,12 +2305,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Search account symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of List&lt;UniversalSymbol&gt;</returns>
@@ -2342,7 +2342,7 @@ namespace SnapTrade.Net.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
-                "*/*"
+                "application/json"
             };
 
             var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
@@ -2396,12 +2396,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Search account symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2413,12 +2413,12 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Search for symbols available in an account Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+        /// Search account symbols Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to search for symbols within.</param>
+        /// <param name="accountId"></param>
         /// <param name="symbolQuery"> (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2452,7 +2452,7 @@ namespace SnapTrade.Net.Api
 
             // to determine the Accept header
             string[] _accepts = new string[] {
-                "*/*"
+                "application/json"
             };
 
             var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestSymbols(ApiTestMixin, unittest.TestCase):
     """
     Symbols unit test stubs
-        Search for symbols
+        Search symbols
     """
 
     def setUp(self):

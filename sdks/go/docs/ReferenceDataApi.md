@@ -8,13 +8,13 @@ Method | Path | Description
 [**GetPartnerInfo**](ReferenceDataApi.md#GetPartnerInfo) | **Get** /snapTrade/partners | Get metadata related to Snaptrade partner
 [**GetSecurityTypes**](ReferenceDataApi.md#GetSecurityTypes) | **Get** /securityTypes | List of all security types
 [**GetStockExchanges**](ReferenceDataApi.md#GetStockExchanges) | **Get** /exchanges | Get exchanges
-[**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search for symbols
-[**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get details of a symbol
+[**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
+[**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
 [**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
 [**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
-[**SymbolSearchUserAccount**](ReferenceDataApi.md#SymbolSearchUserAccount) | **Post** /accounts/{accountId}/symbols | Search for symbols available in an account
+[**SymbolSearchUserAccount**](ReferenceDataApi.md#SymbolSearchUserAccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
 
 
 
@@ -216,7 +216,7 @@ func main() {
 
 ## GetSymbols
 
-Search for symbols
+Search symbols
 
 
 
@@ -239,7 +239,7 @@ func main() {
 
     
     symbolQuery := *snaptrade.NewSymbolQuery()
-    symbolQuery.SetSubstring("apple")
+    symbolQuery.SetSubstring("AAPL")
     
     request := client.ReferenceDataApi.GetSymbols(
     )
@@ -273,7 +273,7 @@ func main() {
 
 ## GetSymbolsByTicker
 
-Get details of a symbol
+Get symbol detail
 
 
 
@@ -522,7 +522,7 @@ func main() {
 
 ## SymbolSearchUserAccount
 
-Search for symbols available in an account
+Search account symbols
 
 
 
@@ -545,12 +545,12 @@ func main() {
 
     
     symbolQuery := *snaptrade.NewSymbolQuery()
-    symbolQuery.SetSubstring("apple")
+    symbolQuery.SetSubstring("AAPL")
     
     request := client.ReferenceDataApi.SymbolSearchUserAccount(
         "userId_example",
         "userSecret_example",
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
     )
     request.SymbolQuery(symbolQuery)
     

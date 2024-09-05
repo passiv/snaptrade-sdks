@@ -119,7 +119,7 @@ _auth = [
 ]
 
 
-class SchemaFor200ResponseBody(
+class SchemaFor200ResponseBodyApplicationJson(
     schemas.ListSchema
 ):
 
@@ -134,7 +134,7 @@ class SchemaFor200ResponseBody(
         cls,
         arg: typing.Union[typing.Tuple['UniversalSymbol'], typing.List['UniversalSymbol']],
         _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'SchemaFor200ResponseBody':
+    ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
             arg,
@@ -159,8 +159,8 @@ _response_for_200 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor200,
     response_cls_async=ApiResponseFor200Async,
     content={
-        '*/*': api_client.MediaType(
-            schema=SchemaFor200ResponseBody),
+        'application/json': api_client.MediaType(
+            schema=SchemaFor200ResponseBodyApplicationJson),
     },
 )
 
@@ -183,7 +183,7 @@ _status_code_to_response = {
     'default': _response_for_default,
 }
 _all_accept_content_types = (
-    '*/*',
+    'application/json',
 )
 
 
@@ -234,7 +234,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Search for symbols available in an account
+        Search account symbols
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -384,7 +384,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Search for symbols available in an account
+        Search account symbols
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -536,7 +536,7 @@ class SymbolSearchUserAccount(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name.  """
+        """ Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.  """
         args = self._symbol_search_user_account_mapped_args(
             body=body,
             query_params=query_params,
@@ -601,7 +601,7 @@ class ApiForpost(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name.  """
+        """ Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under.  """
         args = self._symbol_search_user_account_mapped_args(
             body=body,
             query_params=query_params,

@@ -1754,9 +1754,9 @@ paths:
   /accounts/{accountId}/symbols:
     post:
       description: |
-        Returns a list of universal symbols that are supported by
-        the specificied account. Returned symbols are based on the
-        provided search string, matching on ticker and name.
+        Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+
+        The search results are further limited to the symbols supported by the brokerage for which the account is under.
       operationId: ReferenceData_symbolSearchUserAccount
       parameters:
       - explode: true
@@ -1773,17 +1773,12 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: The ID of the account to search for symbols within.
-        explode: false
+      - explode: false
         in: path
         name: accountId
         required: true
         schema:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         style: simple
       requestBody:
         content:
@@ -1793,16 +1788,17 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
+                description: A list of Universal Symbol objects that match the given
+                  query.
                 items:
                   $ref: '#/components/schemas/UniversalSymbol'
                 type: array
-          description: List of universal symbol supported by account based on substring
-            sent it
+          description: OK
         default:
-          description: Unexpected error
-      summary: Search for symbols available in an account
+          description: Unexpected Error
+      summary: Search account symbols
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -1969,9 +1965,7 @@ paths:
   /symbols:
     post:
       description: |
-        Returns a list of Universal Symbol objects that match a defined string.
-
-        Matches on ticker or name.
+        Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
       operationId: ReferenceData_getSymbols
       parameters: []
       requestBody:
@@ -1984,25 +1978,26 @@ paths:
           content:
             application/json:
               schema:
+                description: A list of Universal Symbol objects that match the given
+                  query.
                 items:
                   $ref: '#/components/schemas/UniversalSymbol'
                 type: array
-          description: A list of UniversalSymbol objects which match the specified
-            substring
+          description: OK
         default:
-          description: Unexpected error.
-      summary: Search for symbols
+          description: Unexpected Error
+      summary: Search symbols
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--symbols
   /symbols/{query}:
     get:
-      description: Returns the Universal Symbol object specified by the ticker or
-        the universal_symbol_id.
+      description: |
+        Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
-      - description: The ticker or universal_symbol_id of the UniversalSymbol to get.
+      - description: The ticker or Universal Symbol ID to look up the symbol with.
         explode: false
         in: path
         name: query
@@ -2013,15 +2008,19 @@ paths:
       responses:
         "200":
           content:
-            '*/*':
+            application/json:
               schema:
                 $ref: '#/components/schemas/UniversalSymbol'
-          description: Successfully gets a symbol
+          description: OK
         "404":
-          description: No symbol with the specified ticker found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
         default:
-          description: Unexpected error
-      summary: Get details of a symbol
+          description: Unexpected Error
+      summary: Get symbol detail
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
@@ -5231,14 +5230,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Status-properties-online
       type: object
     SymbolQuery:
-      description: Symbol query for searching for symbols
       example:
-        substring: apple
+        substring: AAPL
       properties:
         substring:
-          example: apple
+          description: The search query for symbols.
+          example: AAPL
           type: string
-          x-konfig-original-example: apple
+          x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolQuery-properties-substring
       type: object
     SyncStatusDate:
@@ -6305,10 +6304,6 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema:
-      example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-      type: string
-      x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
       type: string
@@ -7089,7 +7084,7 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SymbolQuery-properties-substring:
-      example: apple
+      example: AAPL
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SyncStatusDate:
@@ -8124,15 +8119,12 @@ components:
         userSecret:
           $ref: '#/components/schemas/UserSecret'
         accountId:
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-symbols-post-parameters-2-schema
+          $ref: '#/components/schemas/AccountID'
         substring:
-          example: apple
+          description: The search query for symbols.
+          example: AAPL
           type: string
-          x-konfig-original-example: apple
+          x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolQuery-properties-substring
       required:
       - accountId
@@ -8201,9 +8193,10 @@ components:
       additionalProperties: true
       properties:
         substring:
-          example: apple
+          description: The search query for symbols.
+          example: AAPL
           type: string
-          x-konfig-original-example: apple
+          x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolQuery-properties-substring
       type: object
       x-do-not-generate: true

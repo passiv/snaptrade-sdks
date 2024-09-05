@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Substring** | Pointer to **string** |  | [optional] 
+**Substring** | Pointer to **string** | The search query for symbols. | [optional] 
 
 ## Methods
 

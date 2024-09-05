@@ -8,13 +8,13 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetPartnerInfo**](ReferenceDataApi.md#getpartnerinfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**GetSecurityTypes**](ReferenceDataApi.md#getsecuritytypes) | **GET** /securityTypes | List of all security types |
 | [**GetStockExchanges**](ReferenceDataApi.md#getstockexchanges) | **GET** /exchanges | Get exchanges |
-| [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search for symbols |
-| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get details of a symbol |
+| [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols |
+| [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
 | [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages |
 | [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies |
 | [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates |
-| [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
+| [**SymbolSearchUserAccount**](ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search account symbols |
 
 
 # **GetCurrencyExchangeRatePair**
@@ -371,7 +371,7 @@ This endpoint does not need any parameter.
 
 
 
-Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
 
 ### Example
 ```csharp
@@ -393,7 +393,7 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var substring = "apple";
+            var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(
                 substring
@@ -401,7 +401,7 @@ namespace Example
             
             try
             {
-                // Search for symbols
+                // Search symbols
                 List<UniversalSymbol> result = client.ReferenceData.GetSymbols(symbolQuery);
                 Console.WriteLine(result);
             }
@@ -428,7 +428,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search for symbols
+    // Search symbols
     ApiResponse<List<UniversalSymbol>> response = apiInstance.GetSymbolsWithHttpInfo(symbolQuery);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -456,8 +456,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of UniversalSymbol objects which match the specified substring |  -  |
-| **0** | Unexpected error. |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -466,7 +466,7 @@ catch (ApiException e)
 
 
 
-Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
 
 ### Example
 ```csharp
@@ -488,11 +488,11 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
+            var query = "query_example"; // The ticker or Universal Symbol ID to look up the symbol with.
             
             try
             {
-                // Get details of a symbol
+                // Get symbol detail
                 UniversalSymbol result = client.ReferenceData.GetSymbolsByTicker(query);
                 Console.WriteLine(result);
             }
@@ -519,7 +519,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get details of a symbol
+    // Get symbol detail
     ApiResponse<UniversalSymbol> response = apiInstance.GetSymbolsByTickerWithHttpInfo(query);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -537,7 +537,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **query** | **string** | The ticker or universal_symbol_id of the UniversalSymbol to get. |  |
+| **query** | **string** | The ticker or Universal Symbol ID to look up the symbol with. |  |
 
 ### Return type
 
@@ -547,9 +547,9 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully gets a symbol |  -  |
-| **404** | No symbol with the specified ticker found. |  -  |
-| **0** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **404** | Not Found |  -  |
+| **0** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -906,7 +906,7 @@ This endpoint does not need any parameter.
 
 
 
-Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
 
 ### Example
 ```csharp
@@ -930,8 +930,8 @@ namespace Example
 
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // The ID of the account to search for symbols within.
-            var substring = "apple";
+            var accountId = "accountId_example";
+            var substring = "AAPL"; // The search query for symbols.
             
             var symbolQuery = new SymbolQuery(
                 substring
@@ -939,7 +939,7 @@ namespace Example
             
             try
             {
-                // Search for symbols available in an account
+                // Search account symbols
                 List<UniversalSymbol> result = client.ReferenceData.SymbolSearchUserAccount(userId, userSecret, accountId, symbolQuery);
                 Console.WriteLine(result);
             }
@@ -966,7 +966,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search for symbols available in an account
+    // Search account symbols
     ApiResponse<List<UniversalSymbol>> response = apiInstance.SymbolSearchUserAccountWithHttpInfo(userId, userSecret, accountId, symbolQuery);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -986,7 +986,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountId** | **string** | The ID of the account to search for symbols within. |  |
+| **accountId** | **string** |  |  |
 | **symbolQuery** | [**SymbolQuery**](SymbolQuery.md) |  | [optional]  |
 
 ### Return type
@@ -997,8 +997,8 @@ catch (ApiException e)
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of universal symbol supported by account based on substring sent it |  -  |
-| **0** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

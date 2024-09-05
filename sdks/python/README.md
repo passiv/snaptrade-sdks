@@ -1247,22 +1247,22 @@ get_stock_exchanges_response = snaptrade.reference_data.get_stock_exchanges()
 
 ### `snaptrade.reference_data.get_symbols`<a id="snaptradereference_dataget_symbols"></a>
 
-Returns a list of Universal Symbol objects that match a defined string.
-
-Matches on ticker or name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
 get_symbols_response = snaptrade.reference_data.get_symbols(
-    substring="apple",
+    substring="AAPL",
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
 ##### substring: `str`<a id="substring-str"></a>
+
+The search query for symbols.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -1281,7 +1281,8 @@ get_symbols_response = snaptrade.reference_data.get_symbols(
 
 ### `snaptrade.reference_data.get_symbols_by_ticker`<a id="snaptradereference_dataget_symbols_by_ticker"></a>
 
-Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
@@ -1295,7 +1296,7 @@ get_symbols_by_ticker_response = snaptrade.reference_data.get_symbols_by_ticker(
 
 ##### query: `str`<a id="query-str"></a>
 
-The ticker or universal_symbol_id of the UniversalSymbol to get.
+The ticker or Universal Symbol ID to look up the symbol with.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1411,9 +1412,9 @@ list_all_currencies_rates_response = (
 
 ### `snaptrade.reference_data.symbol_search_user_account`<a id="snaptradereference_datasymbol_search_user_account"></a>
 
-Returns a list of universal symbols that are supported by
-the specificied account. Returned symbols are based on the
-provided search string, matching on ticker and name.
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+
+The search results are further limited to the symbols supported by the brokerage for which the account is under.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1424,7 +1425,7 @@ symbol_search_user_account_response = (
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        substring="apple",
+        substring="AAPL",
     )
 )
 ```
@@ -1437,9 +1438,9 @@ symbol_search_user_account_response = (
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
-The ID of the account to search for symbols within.
-
 ##### substring: `str`<a id="substring-str"></a>
+
+The search query for symbols.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

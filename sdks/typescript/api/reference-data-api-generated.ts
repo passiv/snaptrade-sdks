@@ -232,8 +232,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
-         * @summary Search for symbols
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
+         * @summary Search symbols
          * @param {SymbolQuery} [symbolQuery] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -282,9 +282,9 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-         * @summary Get details of a symbol
-         * @param {string} query The ticker or universal_symbol_id of the UniversalSymbol to get.
+         * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+         * @summary Get symbol detail
+         * @param {string} query The ticker or Universal Symbol ID to look up the symbol with.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -511,11 +511,11 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
-         * @summary Search for symbols available in an account
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
+         * @summary Search account symbols
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId The ID of the account to search for symbols within.
+         * @param {string} accountId 
          * @param {SymbolQuery} [symbolQuery] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -630,8 +630,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
-         * @summary Search for symbols
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
+         * @summary Search symbols
          * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -644,8 +644,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-         * @summary Get details of a symbol
+         * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+         * @summary Get symbol detail
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -696,8 +696,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
-         * @summary Search for symbols available in an account
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
+         * @summary Search account symbols
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -757,8 +757,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getStockExchanges(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
-         * @summary Search for symbols
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
+         * @summary Search symbols
          * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -767,8 +767,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.getSymbols(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-         * @summary Get details of a symbol
+         * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+         * @summary Get symbol detail
          * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -814,8 +814,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllCurrenciesRates(options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
-         * @summary Search for symbols available in an account
+         * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
+         * @summary Search account symbols
          * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -859,7 +859,7 @@ export type ReferenceDataApiGetSymbolsRequest = {
 export type ReferenceDataApiGetSymbolsByTickerRequest = {
     
     /**
-    * The ticker or universal_symbol_id of the UniversalSymbol to get.
+    * The ticker or Universal Symbol ID to look up the symbol with.
     * @type {string}
     * @memberof ReferenceDataApiGetSymbolsByTicker
     */
@@ -905,7 +905,7 @@ export type ReferenceDataApiSymbolSearchUserAccountRequest = {
     readonly userSecret: string
     
     /**
-    * The ID of the account to search for symbols within.
+    * 
     * @type {string}
     * @memberof ReferenceDataApiSymbolSearchUserAccount
     */
@@ -966,8 +966,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
-     * @summary Search for symbols
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
+     * @summary Search symbols
      * @param {ReferenceDataApiGetSymbolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -978,8 +978,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-     * @summary Get details of a symbol
+     * Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a \'.TO\' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+     * @summary Get symbol detail
      * @param {ReferenceDataApiGetSymbolsByTickerRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1035,8 +1035,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
-     * @summary Search for symbols available in an account
+     * Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
+     * @summary Search account symbols
      * @param {ReferenceDataApiSymbolSearchUserAccountRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

@@ -333,13 +333,11 @@ module SnapTrade
     end
 
 
-    # Search for symbols
+    # Search symbols
     #
-    # Returns a list of Universal Symbol objects that match a defined string.
-    # 
-    # Matches on ticker or name.
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
     #
-    # @param substring [String] 
+    # @param substring [String] The search query for symbols.
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols(substring: SENTINEL, extra: {})
@@ -350,13 +348,11 @@ module SnapTrade
       data
     end
 
-    # Search for symbols
+    # Search symbols
     #
-    # Returns a list of Universal Symbol objects that match a defined string.
-    # 
-    # Matches on ticker or name.
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
     #
-    # @param substring [String] 
+    # @param substring [String] The search query for symbols.
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_with_http_info(substring: SENTINEL, extra: {})
@@ -366,8 +362,8 @@ module SnapTrade
       get_symbols_with_http_info_impl(extra)
     end
 
-    # Search for symbols
-    # Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+    # Search symbols
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<UniversalSymbol>]
@@ -376,8 +372,8 @@ module SnapTrade
       data
     end
 
-    # Search for symbols
-    # Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+    # Search symbols
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<(Array<UniversalSymbol>, Integer, Hash)>] Array<UniversalSymbol> data, response status code and response headers
@@ -431,30 +427,30 @@ module SnapTrade
     end
 
 
-    # Get details of a symbol
+    # Get symbol detail
     #
-    # Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
     #
-    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
+    # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_by_ticker(query:, extra: {})
       data, _status_code, _headers = get_symbols_by_ticker_with_http_info_impl(query, extra)
       data
     end
 
-    # Get details of a symbol
+    # Get symbol detail
     #
-    # Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
     #
-    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
+    # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_symbols_by_ticker_with_http_info(query:, extra: {})
       get_symbols_by_ticker_with_http_info_impl(query, extra)
     end
 
-    # Get details of a symbol
-    # Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
+    # Get symbol detail
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \"Yahoo Finance Market Coverage and Data Delays\"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+    # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] opts the optional parameters
     # @return [UniversalSymbol]
     private def get_symbols_by_ticker_impl(query, opts = {})
@@ -462,9 +458,9 @@ module SnapTrade
       data
     end
 
-    # Get details of a symbol
-    # Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
-    # @param query [String] The ticker or universal_symbol_id of the UniversalSymbol to get.
+    # Get symbol detail
+    # Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
+    # @param query [String] The ticker or Universal Symbol ID to look up the symbol with.
     # @param [Hash] opts the optional parameters
     # @return [Array<(UniversalSymbol, Integer, Hash)>] UniversalSymbol data, response status code and response headers
     private def get_symbols_by_ticker_with_http_info_impl(query, opts = {})
@@ -484,7 +480,7 @@ module SnapTrade
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
 
       # form parameters
       form_params = opts[:form_params] || {}
@@ -831,16 +827,16 @@ module SnapTrade
     end
 
 
-    # Search for symbols available in an account
+    # Search account symbols
     #
-    # Returns a list of universal symbols that are supported by
-    # the specificied account. Returned symbols are based on the
-    # provided search string, matching on ticker and name.
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+    # 
+    # The search results are further limited to the symbols supported by the brokerage for which the account is under.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to search for symbols within.
-    # @param substring [String] 
+    # @param account_id [String] 
+    # @param substring [String] The search query for symbols.
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def symbol_search_user_account(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
@@ -851,16 +847,16 @@ module SnapTrade
       data
     end
 
-    # Search for symbols available in an account
+    # Search account symbols
     #
-    # Returns a list of universal symbols that are supported by
-    # the specificied account. Returned symbols are based on the
-    # provided search string, matching on ticker and name.
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+    # 
+    # The search results are further limited to the symbols supported by the brokerage for which the account is under.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to search for symbols within.
-    # @param substring [String] 
+    # @param account_id [String] 
+    # @param substring [String] The search query for symbols.
     # @param body [SymbolQuery] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def symbol_search_user_account_with_http_info(user_id:, user_secret:, account_id:, substring: SENTINEL, extra: {})
@@ -870,11 +866,11 @@ module SnapTrade
       symbol_search_user_account_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Search for symbols available in an account
-    # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+    # Search account symbols
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to search for symbols within.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<UniversalSymbol>]
@@ -883,11 +879,11 @@ module SnapTrade
       data
     end
 
-    # Search for symbols available in an account
-    # Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+    # Search account symbols
+    # Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param account_id [String] The ID of the account to search for symbols within.
+    # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [SymbolQuery] :symbol_query 
     # @return [Array<(Array<UniversalSymbol>, Integer, Hash)>] Array<UniversalSymbol> data, response status code and response headers
@@ -918,7 +914,7 @@ module SnapTrade
       # header parameters
       header_params = opts[:header_params] || {}
       # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['*/*'])
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
       # HTTP header 'Content-Type'
       content_type = @api_client.select_header_content_type(['application/json'])
       if !content_type.nil?

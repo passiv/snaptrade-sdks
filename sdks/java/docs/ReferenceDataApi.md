@@ -8,13 +8,13 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getPartnerInfo**](ReferenceDataApi.md#getPartnerInfo) | **GET** /snapTrade/partners | Get metadata related to Snaptrade partner |
 | [**getSecurityTypes**](ReferenceDataApi.md#getSecurityTypes) | **GET** /securityTypes | List of all security types |
 | [**getStockExchanges**](ReferenceDataApi.md#getStockExchanges) | **GET** /exchanges | Get exchanges |
-| [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search for symbols |
-| [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get details of a symbol |
+| [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
+| [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
 | [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
 | [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
 | [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates |
-| [**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search for symbols available in an account |
+| [**symbolSearchUserAccount**](ReferenceDataApi.md#symbolSearchUserAccount) | **POST** /accounts/{accountId}/symbols | Search account symbols |
 
 
 <a name="getCurrencyExchangeRatePair"></a>
@@ -394,9 +394,9 @@ This endpoint does not need any parameter.
 # **getSymbols**
 > List&lt;UniversalSymbol&gt; getSymbols().symbolQuery(symbolQuery).execute();
 
-Search for symbols
+Search symbols
 
-Returns a list of Universal Symbol objects that match a defined string.  Matches on ticker or name. 
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned. 
 
 ### Example
 ```java
@@ -420,7 +420,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String substring = "substring_example";
+    String substring = "substring_example"; // The search query for symbols.
     try {
       List<UniversalSymbol> result = client
               .referenceData
@@ -482,16 +482,16 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | A list of UniversalSymbol objects which match the specified substring |  -  |
-| **0** | Unexpected error. |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 <a name="getSymbolsByTicker"></a>
 # **getSymbolsByTicker**
 > UniversalSymbol getSymbolsByTicker(query).execute();
 
-Get details of a symbol
+Get symbol detail
 
-Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on \&quot;Yahoo Finance Market Coverage and Data Delays\&quot;). For example, for securities traded on the Toronto Stock Exchange, the symbol has a &#39;.TO&#39; suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results. 
 
 ### Example
 ```java
@@ -515,7 +515,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String query = "query_example"; // The ticker or universal_symbol_id of the UniversalSymbol to get.
+    String query = "query_example"; // The ticker or Universal Symbol ID to look up the symbol with.
     try {
       UniversalSymbol result = client
               .referenceData
@@ -567,7 +567,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **query** | **String**| The ticker or universal_symbol_id of the UniversalSymbol to get. | |
+| **query** | **String**| The ticker or Universal Symbol ID to look up the symbol with. | |
 
 ### Return type
 
@@ -580,14 +580,13 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: */*
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Successfully gets a symbol |  -  |
-| **404** | No symbol with the specified ticker found. |  -  |
-| **0** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
 <a name="listAllBrokerageAuthorizationType"></a>
 # **listAllBrokerageAuthorizationType**
@@ -954,9 +953,9 @@ This endpoint does not need any parameter.
 # **symbolSearchUserAccount**
 > List&lt;UniversalSymbol&gt; symbolSearchUserAccount(userId, userSecret, accountId).symbolQuery(symbolQuery).execute();
 
-Search for symbols available in an account
+Search account symbols
 
-Returns a list of universal symbols that are supported by the specificied account. Returned symbols are based on the provided search string, matching on ticker and name. 
+Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.  The search results are further limited to the symbols supported by the brokerage for which the account is under. 
 
 ### Example
 ```java
@@ -982,8 +981,8 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.fromString("917c8734-8470-4a3e-a18f-57c3f2ee6631"); // The ID of the account to search for symbols within.
-    String substring = "substring_example";
+    UUID accountId = UUID.randomUUID();
+    String substring = "substring_example"; // The search query for symbols.
     try {
       List<UniversalSymbol> result = client
               .referenceData
@@ -1029,7 +1028,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**| The ID of the account to search for symbols within. | |
+| **accountId** | **UUID**|  | |
 | **symbolQuery** | [**SymbolQuery**](SymbolQuery.md)|  | [optional] |
 
 ### Return type
@@ -1043,11 +1042,11 @@ public class Example {
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: */*
+ - **Accept**: application/json
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | List of universal symbol supported by account based on substring sent it |  -  |
-| **0** | Unexpected error |  -  |
+| **200** | OK |  -  |
+| **0** | Unexpected Error |  -  |
 
