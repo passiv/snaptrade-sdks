@@ -727,11 +727,11 @@ paths:
       tags:
         - Reference Data
       summary:
-        Search for symbols available in an account
+        Search account symbols
       description: |
-        Returns a list of universal symbols that are supported by
-        the specificied account. Returned symbols are based on the
-        provided search string, matching on ticker and name.
+        Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
+
+        The search results are further limited to the symbols supported by the brokerage for which the account is under.
       operationId: ReferenceData_symbolSearchUserAccount
       parameters:
         - in: query
@@ -747,11 +747,8 @@ paths:
         - in: path
           name: accountId
           required: true
-          description: The ID of the account to search for symbols within.
           schema:
-            type: string
-            format: uuid
-            example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            $ref: "#/components/schemas/AccountID"
       requestBody:
         content:
           application/json:
@@ -759,17 +756,16 @@ paths:
               $ref: "#/components/schemas/SymbolQuery"
       responses:
         "200":
-          description:
-            List of universal symbol supported by account based on substring
-            sent it
+          description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 type: array
+                description: A list of Universal Symbol objects that match the given query.
                 items:
                   $ref: "#/components/schemas/UniversalSymbol"
         default:
-          description: Unexpected error
+          description: Unexpected Error
   "/accounts/{accountId}/options":
     get:
       tags:
@@ -1387,24 +1383,23 @@ paths:
     post:
       tags:
         - Reference Data
-      summary: Search for symbols
+      summary: Search symbols
       description: |
-        Returns a list of Universal Symbol objects that match a defined string.
-
-        Matches on ticker or name.
+        Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
       operationId: ReferenceData_getSymbols
       parameters: []
       responses:
         "200":
-          description: A list of UniversalSymbol objects which match the specified substring
+          description: OK
           content:
             application/json:
               schema:
                 type: array
+                description: A list of Universal Symbol objects that match the given query.
                 items:
                   $ref: "#/components/schemas/UniversalSymbol"
         default:
-          description: Unexpected error.
+          description: Unexpected Error
       requestBody:
         content:
           application/json:
@@ -1414,27 +1409,32 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Get details of a symbol
-      description: Returns the Universal Symbol object specified by the ticker or the universal_symbol_id.
+      summary: Get symbol detail
+      description: |
+        Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
       operationId: ReferenceData_getSymbolsByTicker
       parameters:
         - in: path
           name: query
           required: true
-          description: The ticker or universal_symbol_id of the UniversalSymbol to get.
+          description: The ticker or Universal Symbol ID to look up the symbol with.
           schema:
             type: string
       responses:
         "200":
-          description: Successfully gets a symbol
+          description: OK
           content:
-            "*/*":
+            application/json:
               schema:
                 $ref: "#/components/schemas/UniversalSymbol"
         "404":
-          description: No symbol with the specified ticker found.
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
         default:
-          description: Unexpected error
+          description: Unexpected Error
   /trade/place:
     post:
       tags:
@@ -3377,12 +3377,12 @@ components:
           type: boolean
           example: true
     SymbolQuery:
-      description: Symbol query for searching for symbols
       type: object
       properties:
         substring:
+          description: The search query for symbols.
           type: string
-          example: apple
+          example: AAPL
     SyncStatusDate:
       description:
         Date in YYYY-MM-DD format or null
