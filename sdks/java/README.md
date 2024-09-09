@@ -2,7 +2,7 @@
 
 [![Visit SnapTrade](https://raw.githubusercontent.com/passiv/snaptrade-sdks/HEAD/sdks/java/header.png)](https://snaptrade.com)
 
-# [SnapTrade](https://snaptrade.com)
+# [SnapTrade](https://snaptrade.com)<a id="snaptrade"></a>
 
 Connect brokerage accounts to your app for live positions and trading
 
@@ -11,11 +11,65 @@ Connect brokerage accounts to your app for live positions and trading
 
 </div>
 
-## Table of Contents
+## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
 
-## Requirements
+- [Requirements](#requirements)
+- [Installation](#installation)
+  * [Maven users](#maven-users)
+  * [Gradle users](#gradle-users)
+  * [Android users](#android-users)
+  * [Others](#others)
+- [Getting Started](#getting-started)
+- [Reference](#reference)
+  * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
+  * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
+  * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
+  * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
+  * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
+  * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
+  * [`snaptrade.accountInformation.listUserAccounts`](#snaptradeaccountinformationlistuseraccounts)
+  * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
+  * [`snaptrade.apiStatus.check`](#snaptradeapistatuscheck)
+  * [`snaptrade.authentication.deleteSnapTradeUser`](#snaptradeauthenticationdeletesnaptradeuser)
+  * [`snaptrade.authentication.listSnapTradeUsers`](#snaptradeauthenticationlistsnaptradeusers)
+  * [`snaptrade.authentication.loginSnapTradeUser`](#snaptradeauthenticationloginsnaptradeuser)
+  * [`snaptrade.authentication.registerSnapTradeUser`](#snaptradeauthenticationregistersnaptradeuser)
+  * [`snaptrade.authentication.resetSnapTradeUserSecret`](#snaptradeauthenticationresetsnaptradeusersecret)
+  * [`snaptrade.connections.detailBrokerageAuthorization`](#snaptradeconnectionsdetailbrokerageauthorization)
+  * [`snaptrade.connections.disableBrokerageAuthorization`](#snaptradeconnectionsdisablebrokerageauthorization)
+  * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
+  * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
+  * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
+  * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
+  * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
+  * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
+  * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
+  * [`snaptrade.options.placeOptionStrategy`](#snaptradeoptionsplaceoptionstrategy)
+  * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
+  * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
+  * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
+  * [`snaptrade.referenceData.getStockExchanges`](#snaptradereferencedatagetstockexchanges)
+  * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
+  * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
+  * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
+  * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
+  * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
+  * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
+  * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
+  * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
+  * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
+  * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
+  * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
+  * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
+  * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
+
+<!-- tocstop -->
+
+## Requirements<a id="requirements"></a>
 
 Building the API client library requires:
 
@@ -26,7 +80,7 @@ If you are adding this library to an Android Application or Library:
 
 3. Android 8.0+ (API Level 26+)
 
-## Installation
+## Installation<a id="installation"></a>
 
 To install the API client library to your local Maven repository, simply execute:
 
@@ -42,7 +96,7 @@ mvn clean deploy
 
 Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
 
-### Maven users
+### Maven users<a id="maven-users"></a>
 
 Add this dependency to your project's POM:
 
@@ -55,7 +109,7 @@ Add this dependency to your project's POM:
 </dependency>
 ```
 
-### Gradle users
+### Gradle users<a id="gradle-users"></a>
 
 Add this dependency to your `build.gradle`:
 
@@ -70,7 +124,7 @@ dependencies {
 }
 ```
 
-### Android users
+### Android users<a id="android-users"></a>
 
 Make sure your `build.gradle` file as a `minSdk` version of at least 26:
 ```groovy
@@ -93,7 +147,7 @@ Also make sure your library or application has internet permissions in your `And
 </manifest>
 ```
 
-### Others
+### Others<a id="others"></a>
 
 At first generate the JAR by executing:
 
@@ -106,7 +160,7 @@ Then manually install the following JARs:
 * `target/snaptrade-java-sdk-5.0.42.jar`
 * `target/lib/*.jar`
 
-## Getting Started
+## Getting Started<a id="getting-started"></a>
 
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
@@ -182,10 +236,10 @@ public class Example {
 }
 
 ```
-## Reference
+## Reference<a id="reference"></a>
 
 
-### `snaptrade.accountInformation.getAllUserHoldings`
+### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 **Deprecated, please use the account-specific holdings endpoint instead.**
@@ -194,7 +248,7 @@ List all accounts for the user, plus balances, positions, and orders for each
 account.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<AccountHoldings> result = client
@@ -204,21 +258,21 @@ List<AccountHoldings> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### brokerageAuthorizations: `UUID`
+##### brokerageAuthorizations: `UUID`<a id="brokerageauthorizations-uuid"></a>
 
 Optional. Comma separated list of authorization IDs (only use if filtering is needed on one or more authorizations).
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountHoldings](./src/main/java/com/konfigthis/client/model/AccountHoldings.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/holdings` `GET`
 
@@ -227,14 +281,14 @@ Optional. Comma separated list of authorization IDs (only use if filtering is ne
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountBalance`
+### `snaptrade.accountInformation.getUserAccountBalance`<a id="snaptradeaccountinformationgetuseraccountbalance"></a>
 
 Returns a list of balances for the account. Each element of the list has a distinct currency. Some brokerages like Questrade [allows holding multiple currencies in the same account](https://www.questrade.com/learning/questrade-basics/balances-and-reports/understanding-your-account-balances).
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Balance> result = client
@@ -243,19 +297,19 @@ List<Balance> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Balance](./src/main/java/com/konfigthis/client/model/Balance.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/balances` `GET`
 
@@ -264,14 +318,14 @@ List<Balance> result = client
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountDetails`
+### `snaptrade.accountInformation.getUserAccountDetails`<a id="snaptradeaccountinformationgetuseraccountdetails"></a>
 
 Returns account detail known to SnapTrade for the specified account.
 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 Account result = client
@@ -280,19 +334,19 @@ Account result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./src/main/java/com/konfigthis/client/model/Account.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `GET`
 
@@ -301,14 +355,14 @@ Account result = client
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountOrders`
+### `snaptrade.accountInformation.getUserAccountOrders`<a id="snaptradeaccountinformationgetuseraccountorders"></a>
 
 Returns a list of recent orders in the specified account.
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<AccountOrderRecord> result = client
@@ -319,27 +373,27 @@ List<AccountOrderRecord> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### state: `String`
+##### state: `String`<a id="state-string"></a>
 
 defaults value is set to \"all\"
 
-##### days: `Integer`
+##### days: `Integer`<a id="days-integer"></a>
 
 Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders` `GET`
 
@@ -348,14 +402,14 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 ---
 
 
-### `snaptrade.accountInformation.getUserAccountPositions`
+### `snaptrade.accountInformation.getUserAccountPositions`<a id="snaptradeaccountinformationgetuseraccountpositions"></a>
 
 Returns a list of stock/ETF/crypto/mutual fund positions in the specified account. For option positions, please use the [options endpoint](/reference/Options/Options_listOptionHoldings).
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Position> result = client
@@ -364,19 +418,19 @@ List<Position> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Position](./src/main/java/com/konfigthis/client/model/Position.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions` `GET`
 
@@ -385,14 +439,14 @@ List<Position> result = client
 ---
 
 
-### `snaptrade.accountInformation.getUserHoldings`
+### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
 Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 AccountHoldingsAccount result = client
@@ -401,19 +455,19 @@ AccountHoldingsAccount result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountHoldingsAccount](./src/main/java/com/konfigthis/client/model/AccountHoldingsAccount.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/holdings` `GET`
 
@@ -422,14 +476,14 @@ AccountHoldingsAccount result = client
 ---
 
 
-### `snaptrade.accountInformation.listUserAccounts`
+### `snaptrade.accountInformation.listUserAccounts`<a id="snaptradeaccountinformationlistuseraccounts"></a>
 
 Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Account> result = client
@@ -438,17 +492,17 @@ List<Account> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./src/main/java/com/konfigthis/client/model/Account.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts` `GET`
 
@@ -457,11 +511,11 @@ List<Account> result = client
 ---
 
 
-### `snaptrade.accountInformation.updateUserAccount`
+### `snaptrade.accountInformation.updateUserAccount`<a id="snaptradeaccountinformationupdateuseraccount"></a>
 
 Updates various properties of a specified account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Account> result = client
@@ -470,21 +524,21 @@ List<Account> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account to update.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Account](./src/main/java/com/konfigthis/client/model/Account.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `PUT`
 
@@ -493,11 +547,11 @@ The ID of the account to update.
 ---
 
 
-### `snaptrade.apiStatus.check`
+### `snaptrade.apiStatus.check`<a id="snaptradeapistatuscheck"></a>
 
 Check whether the API is operational and verify timestamps.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 Status result = client
@@ -506,11 +560,11 @@ Status result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Status](./src/main/java/com/konfigthis/client/model/Status.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/` `GET`
 
@@ -519,11 +573,11 @@ Status result = client
 ---
 
 
-### `snaptrade.authentication.deleteSnapTradeUser`
+### `snaptrade.authentication.deleteSnapTradeUser`<a id="snaptradeauthenticationdeletesnaptradeuser"></a>
 
 Deletes a registered user and all associated data. This action is irreversible. This API is asynchronous and will return a 200 status code if the request is accepted. The user and all associated data will be queued for deletion. Once deleted, a `USER_DELETED` webhook will be sent.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 DeleteUserResponse result = client
@@ -532,15 +586,15 @@ DeleteUserResponse result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [DeleteUserResponse](./src/main/java/com/konfigthis/client/model/DeleteUserResponse.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/deleteUser` `DELETE`
 
@@ -549,11 +603,11 @@ DeleteUserResponse result = client
 ---
 
 
-### `snaptrade.authentication.listSnapTradeUsers`
+### `snaptrade.authentication.listSnapTradeUsers`<a id="snaptradeauthenticationlistsnaptradeusers"></a>
 
 Returns a list of all registered user IDs. Please note that the response is not currently paginated.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<String> result = client
@@ -562,7 +616,7 @@ List<String> result = client
         .execute();
 ```
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/listUsers` `GET`
 
@@ -571,14 +625,14 @@ List<String> result = client
 ---
 
 
-### `snaptrade.authentication.loginSnapTradeUser`
+### `snaptrade.authentication.loginSnapTradeUser`<a id="snaptradeauthenticationloginsnaptradeuser"></a>
 
 Authenticates a SnapTrade user and returns the Connection Portal URL used for connecting brokerage accounts. Please check [this guide](/docs/implement-connection-portal) for how to integrate the Connection Portal into your app.
 
 Please note that the returned URL expires in 5 minutes.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 Object result = client
@@ -593,37 +647,37 @@ Object result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### broker: `String`
+##### broker: `String`<a id="broker-string"></a>
 
 Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
 
-##### immediateRedirect: `Boolean`
+##### immediateRedirect: `Boolean`<a id="immediateredirect-boolean"></a>
 
 When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
-##### customRedirect: `String`
+##### customRedirect: `String`<a id="customredirect-string"></a>
 
 URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 
-##### reconnect: `String`
+##### reconnect: `String`<a id="reconnect-string"></a>
 
 The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
 
-##### connectionType: `String`
+##### connectionType: `String`<a id="connectiontype-string"></a>
 
 Sets whether the connection should be read-only or trade-enabled.
 
-##### connectionPortalVersion: `String`
+##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 
 Sets the version of the connection portal to render.
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/login` `POST`
 
@@ -632,13 +686,13 @@ Sets the version of the connection portal to render.
 ---
 
 
-### `snaptrade.authentication.registerSnapTradeUser`
+### `snaptrade.authentication.registerSnapTradeUser`<a id="snaptradeauthenticationregistersnaptradeuser"></a>
 
 Registers a new SnapTrade user under your Client ID. A user secret will be automatically generated for you and must be properly stored in your system.
 Most SnapTrade operations require a user ID and user secret to be passed in as parameters.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 UserIDandSecret result = client
@@ -648,17 +702,17 @@ UserIDandSecret result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
 SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UserIDandSecret](./src/main/java/com/konfigthis/client/model/UserIDandSecret.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/registerUser` `POST`
 
@@ -667,12 +721,12 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 ---
 
 
-### `snaptrade.authentication.resetSnapTradeUserSecret`
+### `snaptrade.authentication.resetSnapTradeUserSecret`<a id="snaptradeauthenticationresetsnaptradeusersecret"></a>
 
 Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 UserIDandSecret result = client
@@ -683,21 +737,21 @@ UserIDandSecret result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
 SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
 SnapTrade User Secret. This is a randomly generated string and should be stored securely. If compromised, please rotate it via the [rotate user secret endpoint](/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UserIDandSecret](./src/main/java/com/konfigthis/client/model/UserIDandSecret.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/resetUserSecret` `POST`
 
@@ -706,11 +760,11 @@ SnapTrade User Secret. This is a randomly generated string and should be stored 
 ---
 
 
-### `snaptrade.connections.detailBrokerageAuthorization`
+### `snaptrade.connections.detailBrokerageAuthorization`<a id="snaptradeconnectionsdetailbrokerageauthorization"></a>
 
 Returns a single connection for the specified ID.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 BrokerageAuthorization result = client
@@ -719,19 +773,19 @@ BrokerageAuthorization result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `UUID`
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorization](./src/main/java/com/konfigthis/client/model/BrokerageAuthorization.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `GET`
 
@@ -740,7 +794,7 @@ BrokerageAuthorization result = client
 ---
 
 
-### `snaptrade.connections.disableBrokerageAuthorization`
+### `snaptrade.connections.disableBrokerageAuthorization`<a id="snaptradeconnectionsdisablebrokerageauthorization"></a>
 
 Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
 Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
@@ -748,7 +802,7 @@ Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_B
 *Please contact us in order to use this endpoint as it is disabled by default.*
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 BrokerageAuthorizationDisabledConfirmation result = client
@@ -757,19 +811,19 @@ BrokerageAuthorizationDisabledConfirmation result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `UUID`
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorizationDisabledConfirmation](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationDisabledConfirmation.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/disable` `POST`
 
@@ -778,7 +832,7 @@ BrokerageAuthorizationDisabledConfirmation result = client
 ---
 
 
-### `snaptrade.connections.listBrokerageAuthorizations`
+### `snaptrade.connections.listBrokerageAuthorizations`<a id="snaptradeconnectionslistbrokerageauthorizations"></a>
 
 Returns a list of all connections for the specified user. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
 
@@ -787,7 +841,7 @@ A connection is usually tied to a single login at a brokerage. A single connecti
 SnapTrade performs de-duping on connections for a given user. If the user has an existing connection with the brokerage, when connecting the brokerage with the same credentials, SnapTrade will return the existing connection instead of creating a new one.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<BrokerageAuthorization> result = client
@@ -796,17 +850,17 @@ List<BrokerageAuthorization> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorization](./src/main/java/com/konfigthis/client/model/BrokerageAuthorization.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations` `GET`
 
@@ -815,14 +869,14 @@ List<BrokerageAuthorization> result = client
 ---
 
 
-### `snaptrade.connections.refreshBrokerageAuthorization`
+### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
 
 *Please contact support for access as this endpoint is not enabled by default.*
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 BrokerageAuthorizationRefreshConfirmation result = client
@@ -831,19 +885,19 @@ BrokerageAuthorizationRefreshConfirmation result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `UUID`
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorizationRefreshConfirmation](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationRefreshConfirmation.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}/refresh` `POST`
 
@@ -852,11 +906,11 @@ BrokerageAuthorizationRefreshConfirmation result = client
 ---
 
 
-### `snaptrade.connections.removeBrokerageAuthorization`
+### `snaptrade.connections.removeBrokerageAuthorization`<a id="snaptradeconnectionsremovebrokerageauthorization"></a>
 
 Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 client
@@ -865,15 +919,15 @@ client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### authorizationId: `UUID`
+##### authorizationId: `UUID`<a id="authorizationid-uuid"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `DELETE`
 
@@ -882,11 +936,11 @@ client
 ---
 
 
-### `snaptrade.connections.sessionEvents`
+### `snaptrade.connections.sessionEvents`<a id="snaptradeconnectionssessionevents"></a>
 
 Returns a list of session events associated with a user.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<SessionEvent> result = client
@@ -897,23 +951,23 @@ List<SessionEvent> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### partnerClientId: `String`
+##### partnerClientId: `String`<a id="partnerclientid-string"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
 Optional comma separated list of user IDs used to filter the request on specific users
 
-##### sessionId: `String`
+##### sessionId: `String`<a id="sessionid-string"></a>
 
 Optional comma separated list of session IDs used to filter the request on specific users
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [SessionEvent](./src/main/java/com/konfigthis/client/model/SessionEvent.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
 
@@ -922,12 +976,12 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.options.getOptionStrategy`
+### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 StrategyQuotes result = client
@@ -936,27 +990,27 @@ StrategyQuotes result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### underlying_symbol_id: `UUID`
+##### underlying_symbol_id: `UUID`<a id="underlying_symbol_id-uuid"></a>
 
-##### legs: List<[`OptionLeg`](./src/main/java/com/konfigthis/client/model/OptionLeg.java)>
+##### legs: List<[`OptionLeg`](./src/main/java/com/konfigthis/client/model/OptionLeg.java)><a id="legs-list"></a>
 
-##### strategy_type: `String`
+##### strategy_type: `String`<a id="strategy_type-string"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account to create the option strategy object in.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyQuotes](./src/main/java/com/konfigthis/client/model/StrategyQuotes.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy` `POST`
 
@@ -965,11 +1019,11 @@ The ID of the account to create the option strategy object in.
 ---
 
 
-### `snaptrade.options.getOptionsChain`
+### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<OptionChainInner> result = client
@@ -978,25 +1032,25 @@ List<OptionChainInner> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account to get the options chain from.
 
-##### symbol: `UUID`
+##### symbol: `UUID`<a id="symbol-uuid"></a>
 
 Universal symbol ID if symbol
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [OptionChainInner](./src/main/java/com/konfigthis/client/model/OptionChainInner.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionsChain` `GET`
 
@@ -1005,12 +1059,12 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.getOptionsStrategyQuote`
+### `snaptrade.options.getOptionsStrategyQuote`<a id="snaptradeoptionsgetoptionsstrategyquote"></a>
 
 Returns a Strategy Quotes object which has latest market data of the specified option strategy.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 StrategyQuotes result = client
@@ -1019,25 +1073,25 @@ StrategyQuotes result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account the strategy will be placed in.
 
-##### optionStrategyId: `UUID`
+##### optionStrategyId: `UUID`<a id="optionstrategyid-uuid"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyQuotes](./src/main/java/com/konfigthis/client/model/StrategyQuotes.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
 
@@ -1046,14 +1100,14 @@ Option strategy id obtained from response when creating option strategy object
 ---
 
 
-### `snaptrade.options.listOptionHoldings`
+### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
 The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<OptionsPosition> result = client
@@ -1062,19 +1116,19 @@ List<OptionsPosition> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [OptionsPosition](./src/main/java/com/konfigthis/client/model/OptionsPosition.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
 
@@ -1083,11 +1137,11 @@ List<OptionsPosition> result = client
 ---
 
 
-### `snaptrade.options.placeOptionStrategy`
+### `snaptrade.options.placeOptionStrategy`<a id="snaptradeoptionsplaceoptionstrategy"></a>
 
 Places the option strategy order and returns the order record received from the brokerage.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 StrategyOrderRecord result = client
@@ -1097,33 +1151,33 @@ StrategyOrderRecord result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account to execute the strategy in.
 
-##### optionStrategyId: `UUID`
+##### optionStrategyId: `UUID`<a id="optionstrategyid-uuid"></a>
 
 Option strategy id obtained from response when creating option strategy object
 
-##### price: `Double`
+##### price: `Double`<a id="price-double"></a>
 
 Trade Price if limit or stop limit order
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [StrategyOrderRecord](./src/main/java/com/konfigthis/client/model/StrategyOrderRecord.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
@@ -1132,11 +1186,11 @@ Trade Price if limit or stop limit order
 ---
 
 
-### `snaptrade.referenceData.getCurrencyExchangeRatePair`
+### `snaptrade.referenceData.getCurrencyExchangeRatePair`<a id="snaptradereferencedatagetcurrencyexchangeratepair"></a>
 
 Returns an Exchange Rate Pair object for the specified Currency Pair.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 ExchangeRatePairs result = client
@@ -1145,17 +1199,17 @@ ExchangeRatePairs result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### currencyPair: `String`
+##### currencyPair: `String`<a id="currencypair-string"></a>
 
 A currency pair based on currency code for example, {CAD-USD}
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ExchangeRatePairs](./src/main/java/com/konfigthis/client/model/ExchangeRatePairs.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates/{currencyPair}` `GET`
 
@@ -1164,11 +1218,11 @@ A currency pair based on currency code for example, {CAD-USD}
 ---
 
 
-### `snaptrade.referenceData.getPartnerInfo`
+### `snaptrade.referenceData.getPartnerInfo`<a id="snaptradereferencedatagetpartnerinfo"></a>
 
 Returns configurations for your SnapTrade Client ID, including allowed brokerages and data access.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 PartnerData result = client
@@ -1177,11 +1231,11 @@ PartnerData result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [PartnerData](./src/main/java/com/konfigthis/client/model/PartnerData.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/partners` `GET`
 
@@ -1190,11 +1244,11 @@ PartnerData result = client
 ---
 
 
-### `snaptrade.referenceData.getSecurityTypes`
+### `snaptrade.referenceData.getSecurityTypes`<a id="snaptradereferencedatagetsecuritytypes"></a>
 
 Return all available security types supported by SnapTrade.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<SecurityType> result = client
@@ -1203,11 +1257,11 @@ List<SecurityType> result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [SecurityType](./src/main/java/com/konfigthis/client/model/SecurityType.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/securityTypes` `GET`
 
@@ -1216,11 +1270,11 @@ List<SecurityType> result = client
 ---
 
 
-### `snaptrade.referenceData.getStockExchanges`
+### `snaptrade.referenceData.getStockExchanges`<a id="snaptradereferencedatagetstockexchanges"></a>
 
 Returns a list of all supported Exchanges.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Exchange> result = client
@@ -1229,11 +1283,11 @@ List<Exchange> result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Exchange](./src/main/java/com/konfigthis/client/model/Exchange.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/exchanges` `GET`
 
@@ -1242,12 +1296,12 @@ List<Exchange> result = client
 ---
 
 
-### `snaptrade.referenceData.getSymbols`
+### `snaptrade.referenceData.getSymbols`<a id="snaptradereferencedatagetsymbols"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<UniversalSymbol> result = client
@@ -1257,17 +1311,17 @@ List<UniversalSymbol> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### substring: `String`
+##### substring: `String`<a id="substring-string"></a>
 
 The search query for symbols.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols` `POST`
 
@@ -1276,12 +1330,12 @@ The search query for symbols.
 ---
 
 
-### `snaptrade.referenceData.getSymbolsByTicker`
+### `snaptrade.referenceData.getSymbolsByTicker`<a id="snaptradereferencedatagetsymbolsbyticker"></a>
 
 Returns the Universal Symbol object specified by the ticker or the Universal Symbol ID. When a ticker is specified, the first matching result is returned. We largely follow the [Yahoo Finance ticker format](https://help.yahoo.com/kb/SLN2310.html)(click on "Yahoo Finance Market Coverage and Data Delays"). For example, for securities traded on the Toronto Stock Exchange, the symbol has a '.TO' suffix. For securities traded on NASDAQ or NYSE, the symbol does not have a suffix. Please use the ticker with the proper suffix for the best results.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 UniversalSymbol result = client
@@ -1290,17 +1344,17 @@ UniversalSymbol result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### query: `String`
+##### query: `String`<a id="query-string"></a>
 
 The ticker or Universal Symbol ID to look up the symbol with.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/symbols/{query}` `GET`
 
@@ -1309,11 +1363,11 @@ The ticker or Universal Symbol ID to look up the symbol with.
 ---
 
 
-### `snaptrade.referenceData.listAllBrokerageAuthorizationType`
+### `snaptrade.referenceData.listAllBrokerageAuthorizationType`<a id="snaptradereferencedatalistallbrokerageauthorizationtype"></a>
 
 Returns a list of all defined Brokerage authorization Type objects.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<BrokerageAuthorizationTypeReadOnly> result = client
@@ -1323,17 +1377,17 @@ List<BrokerageAuthorizationTypeReadOnly> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage: `String`
+##### brokerage: `String`<a id="brokerage-string"></a>
 
 Comma separated value of brokerage slugs
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageAuthorizationTypeReadOnly](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationTypeReadOnly.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `GET`
 
@@ -1342,11 +1396,11 @@ Comma separated value of brokerage slugs
 ---
 
 
-### `snaptrade.referenceData.listAllBrokerages`
+### `snaptrade.referenceData.listAllBrokerages`<a id="snaptradereferencedatalistallbrokerages"></a>
 
 Returns a list of all defined Brokerage objects.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Brokerage> result = client
@@ -1355,11 +1409,11 @@ List<Brokerage> result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Brokerage](./src/main/java/com/konfigthis/client/model/Brokerage.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerages` `GET`
 
@@ -1368,11 +1422,11 @@ List<Brokerage> result = client
 ---
 
 
-### `snaptrade.referenceData.listAllCurrencies`
+### `snaptrade.referenceData.listAllCurrencies`<a id="snaptradereferencedatalistallcurrencies"></a>
 
 Returns a list of all defined Currency objects.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<Currency> result = client
@@ -1381,11 +1435,11 @@ List<Currency> result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [Currency](./src/main/java/com/konfigthis/client/model/Currency.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies` `GET`
 
@@ -1394,11 +1448,11 @@ List<Currency> result = client
 ---
 
 
-### `snaptrade.referenceData.listAllCurrenciesRates`
+### `snaptrade.referenceData.listAllCurrenciesRates`<a id="snaptradereferencedatalistallcurrenciesrates"></a>
 
 Returns a list of all Exchange Rate Pairs for all supported Currencies.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<ExchangeRatePairs> result = client
@@ -1407,11 +1461,11 @@ List<ExchangeRatePairs> result = client
         .execute();
 ```
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ExchangeRatePairs](./src/main/java/com/konfigthis/client/model/ExchangeRatePairs.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/currencies/rates` `GET`
 
@@ -1420,14 +1474,14 @@ List<ExchangeRatePairs> result = client
 ---
 
 
-### `snaptrade.referenceData.symbolSearchUserAccount`
+### `snaptrade.referenceData.symbolSearchUserAccount`<a id="snaptradereferencedatasymbolsearchuseraccount"></a>
 
 Returns a list of Universal Symbol objects that match the given query. The matching takes into consideration both the ticker and the name of the symbol. Only the first 20 results are returned.
 
 The search results are further limited to the symbols supported by the brokerage for which the account is under.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<UniversalSymbol> result = client
@@ -1437,23 +1491,23 @@ List<UniversalSymbol> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### substring: `String`
+##### substring: `String`<a id="substring-string"></a>
 
 The search query for symbols.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/symbols` `POST`
 
@@ -1462,12 +1516,12 @@ The search query for symbols.
 ---
 
 
-### `snaptrade.trading.cancelUserAccountOrder`
+### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 AccountOrderRecord result = client
@@ -1477,23 +1531,23 @@ AccountOrderRecord result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### brokerage_order_id: `String`
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/cancel` `POST`
 
@@ -1502,11 +1556,11 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 
-### `snaptrade.trading.getOrderImpact`
+### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 ManualTradeAndImpact result = client
@@ -1519,45 +1573,45 @@ ManualTradeAndImpact result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `UUID`
+##### account_id: `UUID`<a id="account_id-uuid"></a>
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action:
+##### action:<a id="action"></a>
 
-##### universal_symbol_id: `UUID`
+##### universal_symbol_id: `UUID`<a id="universal_symbol_id-uuid"></a>
 
 Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### price: `Double`
+##### price: `Double`<a id="price-double"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
 
-##### stop: `Double`
+##### stop: `Double`<a id="stop-double"></a>
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: `Double`
+##### units: `Double`<a id="units-double"></a>
 
 Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
-##### notional_value: `Object`
+##### notional_value: `Object`<a id="notional_value-object"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [ManualTradeAndImpact](./src/main/java/com/konfigthis/client/model/ManualTradeAndImpact.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/impact` `POST`
 
@@ -1566,11 +1620,11 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 ---
 
 
-### `snaptrade.trading.getUserAccountQuotes`
+### `snaptrade.trading.getUserAccountQuotes`<a id="snaptradetradinggetuseraccountquotes"></a>
 
 Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<SymbolsQuotesInner> result = client
@@ -1580,27 +1634,27 @@ List<SymbolsQuotesInner> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### symbols: `String`
+##### symbols: `String`<a id="symbols-string"></a>
 
 List of Universal Symbol IDs or tickers to get quotes for.
 
-##### accountId: `UUID`
+##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### useTicker: `Boolean`
+##### useTicker: `Boolean`<a id="useticker-boolean"></a>
 
 Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [SymbolsQuotesInner](./src/main/java/com/konfigthis/client/model/SymbolsQuotesInner.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
 
@@ -1609,7 +1663,7 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 ---
 
 
-### `snaptrade.trading.placeForceOrder`
+### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 
@@ -1618,7 +1672,7 @@ This endpoint does not compute the impact to the account balance from the order 
 It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 AccountOrderRecord result = client
@@ -1631,45 +1685,45 @@ AccountOrderRecord result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `UUID`
+##### account_id: `UUID`<a id="account_id-uuid"></a>
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action:
+##### action:<a id="action"></a>
 
-##### universal_symbol_id: `UUID`
+##### universal_symbol_id: `UUID`<a id="universal_symbol_id-uuid"></a>
 
 Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 
-##### order_type:
+##### order_type:<a id="order_type"></a>
 
-##### time_in_force:
+##### time_in_force:<a id="time_in_force"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### price: `Double`
+##### price: `Double`<a id="price-double"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
 
-##### stop: `Double`
+##### stop: `Double`<a id="stop-double"></a>
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: `Double`
+##### units: `Double`<a id="units-double"></a>
 
 Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
 
-##### notional_value: `Object`
+##### notional_value: `Object`<a id="notional_value-object"></a>
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
 
@@ -1678,14 +1732,14 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 ---
 
 
-### `snaptrade.trading.placeOrder`
+### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
 Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
 It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 AccountOrderRecord result = client
@@ -1695,25 +1749,25 @@ AccountOrderRecord result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### tradeId: `UUID`
+##### tradeId: `UUID`<a id="tradeid-uuid"></a>
 
 Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### wait_to_confirm: `Boolean`
+##### wait_to_confirm: `Boolean`<a id="wait_to_confirm-boolean"></a>
 
 Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
 
@@ -1722,7 +1776,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 ---
 
 
-### `snaptrade.transactionsAndReporting.getActivities`
+### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
@@ -1731,7 +1785,7 @@ There is no guarantee to the ordering of the transactions returned. Please sort 
 The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
 
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 List<UniversalActivity> result = client
@@ -1745,37 +1799,37 @@ List<UniversalActivity> result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### startDate: `LocalDate`
+##### startDate: `LocalDate`<a id="startdate-localdate"></a>
 
 The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
 
-##### endDate: `LocalDate`
+##### endDate: `LocalDate`<a id="enddate-localdate"></a>
 
 The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
 
-##### accounts: `String`
+##### accounts: `String`<a id="accounts-string"></a>
 
 Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
 
-##### brokerageAuthorizations: `String`
+##### brokerageAuthorizations: `String`<a id="brokerageauthorizations-string"></a>
 
 Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
 
-##### type: `String`
+##### type: `String`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - BUY   - SELL   - DIVIDEND   - CONTRIBUTION   - WITHDRAWAL   - REI   - INTEREST   - FEE 
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [UniversalActivity](./src/main/java/com/konfigthis/client/model/UniversalActivity.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/activities` `GET`
 
@@ -1784,12 +1838,12 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 ---
 
 
-### `snaptrade.transactionsAndReporting.getReportingCustomRange`
+### `snaptrade.transactionsAndReporting.getReportingCustomRange`<a id="snaptradetransactionsandreportinggetreportingcustomrange"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns performance information (contributions, dividends, rate of return, etc) for a specific timeframe. Please note that Total Equity Timeframe and Rate of Returns are experimental features. Please contact support@snaptrade.com if you notice any inconsistencies.
 
-#### 🛠️ Usage
+#### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
 PerformanceCustom result = client
@@ -1801,33 +1855,33 @@ PerformanceCustom result = client
         .execute();
 ```
 
-#### ⚙️ Parameters
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### startDate: `LocalDate`
+##### startDate: `LocalDate`<a id="startdate-localdate"></a>
 
-##### endDate: `LocalDate`
+##### endDate: `LocalDate`<a id="enddate-localdate"></a>
 
-##### userId: `String`
+##### userId: `String`<a id="userid-string"></a>
 
-##### userSecret: `String`
+##### userSecret: `String`<a id="usersecret-string"></a>
 
-##### accounts: `String`
+##### accounts: `String`<a id="accounts-string"></a>
 
 Optional comma separated list of account IDs used to filter the request on specific accounts
 
-##### detailed: `Boolean`
+##### detailed: `Boolean`<a id="detailed-boolean"></a>
 
 Optional, increases frequency of data points for the total value and contribution charts if set to true
 
-##### frequency: `String`
+##### frequency: `String`<a id="frequency-string"></a>
 
 Optional frequency for the rate of return chart (defaults to monthly). Possible values are daily, weekly, monthly, quarterly, yearly.
 
-#### 🔄 Return
+#### 🔄 Return<a id="🔄-return"></a>
 
 [PerformanceCustom](./src/main/java/com/konfigthis/client/model/PerformanceCustom.java)
 
-#### 🌐 Endpoint
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/performance/custom` `GET`
 
@@ -1836,5 +1890,5 @@ Optional frequency for the rate of return chart (defaults to monthly). Possible 
 ---
 
 
-## Author
+## Author<a id="author"></a>
 This Java package is automatically generated by [Konfig](https://konfigthis.com)

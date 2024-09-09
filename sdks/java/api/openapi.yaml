@@ -1377,16 +1377,14 @@ paths:
         schema:
           $ref: '#/components/schemas/BrokerageAuthIDs'
         style: form
-      - description: |
-          Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
-            - BUY
-            - SELL
-            - DIVIDEND
-            - CONTRIBUTION
-            - WITHDRAWAL
-            - REI
-            - INTEREST
-            - FEE
+      - description: "Optional comma separated list of transaction types to filter\
+          \ by. SnapTrade does a best effort to categorize brokerage transaction types\
+          \ into a common set of values. Here are some of the most popular values:\n\
+          \  - `BUY` - Asset bought.\n  - `SELL` - Asset sold.\n  - `DIVIDEND` - Dividend\
+          \ payout.\n  - `CONTRIBUTION` - Cash contribution.\n  - `WITHDRAWAL` - Cash\
+          \ withdrawal.\n  - `REI` - Dividend reinvestment.\n  - `INTEREST` - Interest\
+          \ deposited into the account.\n  - `FEE` - Fee withdrawn from the account.\
+          \ \n"
         explode: true
         in: query
         name: type
@@ -6008,16 +6006,14 @@ components:
         currency:
           $ref: '#/components/schemas/UniversalActivity_currency'
         type:
-          description: |
-            A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
-              - BUY
-              - SELL
-              - DIVIDEND
-              - CONTRIBUTION
-              - WITHDRAWAL
-              - REI
-              - INTEREST
-              - FEE
+          description: "A string representing the type of transaction. SnapTrade does\
+            \ a best effort to categorize the brokerage transaction types into a common\
+            \ set of values. Here are some of the most popular values:\n  - `BUY`\
+            \ - Asset bought.\n  - `SELL` - Asset sold.\n  - `DIVIDEND` - Dividend\
+            \ payout.\n  - `CONTRIBUTION` - Cash contribution.\n  - `WITHDRAWAL` -\
+            \ Cash withdrawal.\n  - `REI` - Dividend reinvestment.\n  - `INTEREST`\
+            \ - Interest deposited into the account.\n  - `FEE` - Fee withdrawn from\
+            \ the account. \n"
           type: string
         option_type:
           description: |
