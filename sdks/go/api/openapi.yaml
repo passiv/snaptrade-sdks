@@ -2595,7 +2595,7 @@ components:
             description: SPY CALL 7/17 200
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
-              ticker: SPY 220819P00200000
+              ticker: AAPL  261218C00240000
               is_mini_option: false
               option_type: CALL
               underlying_symbol:
@@ -2617,7 +2617,7 @@ components:
                   id: 87b24961-b51e-4db8-9226-f198f6518a89
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               expiration_date: 2026-12-18T00:00:00.000+00:00
-              strike_price: 200
+              strike_price: 240
           price: 38.4
           currency: null
           units: -50
@@ -2626,7 +2626,7 @@ components:
             description: SPY CALL 7/17 200
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             option_symbol:
-              ticker: SPY 220819P00200000
+              ticker: AAPL  261218C00240000
               is_mini_option: false
               option_type: CALL
               underlying_symbol:
@@ -2648,7 +2648,7 @@ components:
                   id: 87b24961-b51e-4db8-9226-f198f6518a89
               id: 2bcd7cc3-e922-4976-bce1-9858296801c3
               expiration_date: 2026-12-18T00:00:00.000+00:00
-              strike_price: 200
+              strike_price: 240
           price: 38.4
           currency: null
           units: -50
@@ -3026,7 +3026,7 @@ components:
           description: SPY CALL 7/17 200
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           option_symbol:
-            ticker: SPY 220819P00200000
+            ticker: AAPL  261218C00240000
             is_mini_option: false
             option_type: CALL
             underlying_symbol:
@@ -3048,7 +3048,7 @@ components:
                 id: 87b24961-b51e-4db8-9226-f198f6518a89
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
             expiration_date: 2026-12-18T00:00:00.000+00:00
-            strike_price: 200
+            strike_price: 240
         price: 38.4
         currency: null
         units: -50
@@ -4847,7 +4847,7 @@ components:
         description: SPY CALL 7/17 200
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         option_symbol:
-          ticker: SPY 220819P00200000
+          ticker: AAPL  261218C00240000
           is_mini_option: false
           option_type: CALL
           underlying_symbol:
@@ -4869,7 +4869,7 @@ components:
               id: 87b24961-b51e-4db8-9226-f198f6518a89
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
           expiration_date: 2026-12-18T00:00:00.000+00:00
-          strike_price: 200
+          strike_price: 240
       properties:
         id:
           deprecated: true
@@ -6054,7 +6054,7 @@ components:
       description: Uniquely describes an option security + exchange combination across
         all brokerages.
       example:
-        ticker: SPY 220819P00200000
+        ticker: AAPL  261218C00240000
         is_mini_option: false
         option_type: CALL
         underlying_symbol:
@@ -6076,7 +6076,7 @@ components:
             id: 87b24961-b51e-4db8-9226-f198f6518a89
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         expiration_date: 2026-12-18T00:00:00.000+00:00
-        strike_price: 200
+        strike_price: 240
       properties:
         id:
           description: Unique identifier for the option symbol within SnapTrade. This
@@ -6089,9 +6089,9 @@ components:
         ticker:
           description: "The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol)\
             \ for the option."
-          example: SPY 220819P00200000
+          example: AAPL  261218C00240000
           type: string
-          x-konfig-original-example: SPY 220819P00200000
+          x-konfig-original-example: AAPL  261218C00240000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker
         option_type:
           description: The type of option. Either "CALL" or "PUT".
@@ -6104,9 +6104,9 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-option_type
         strike_price:
           description: The option strike price.
-          example: 200
+          example: 240
           type: number
-          x-konfig-original-example: 200
+          x-konfig-original-example: 240
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsSymbol-properties-strike_price
         expiration_date:
           description: The option expiration date.
@@ -7258,7 +7258,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-ticker:
-      example: SPY 220819P00200000
+      example: AAPL  261218C00240000
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-option_type:
@@ -7266,7 +7266,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-strike_price:
-      example: 200
+      example: 240
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsSymbol-properties-expiration_date:

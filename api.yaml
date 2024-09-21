@@ -3854,7 +3854,7 @@ components:
         ticker:
           description: The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.
           type: string
-          example: SPY 220819P00200000
+          example: AAPL  261218C00240000
         option_type:
           description: The type of option. Either "CALL" or "PUT".
           type: string
@@ -3865,7 +3865,7 @@ components:
         strike_price:
           description: The option strike price.
           type: number
-          example: 200
+          example: 240
         expiration_date:
           description: The option expiration date.
           type: string

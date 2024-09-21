@@ -174,7 +174,7 @@ public class OptionsSymbol {
    * @return ticker
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "SPY 220819P00200000", required = true, value = "The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.")
+  @ApiModelProperty(example = "AAPL  261218C00240000", required = true, value = "The [OCC symbol](https://en.wikipedia.org/wiki/Option_symbol) for the option.")
 
   public String getTicker() {
     return ticker;
@@ -241,7 +241,7 @@ public class OptionsSymbol {
    * @return strikePrice
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "200", required = true, value = "The option strike price.")
+  @ApiModelProperty(example = "240", required = true, value = "The option strike price.")
 
   public Double getStrikePrice() {
     return strikePrice;
