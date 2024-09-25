@@ -2269,8 +2269,8 @@ components:
             initial_sync_completed: true
             first_transaction_date: ""
         id: ""
-        portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         created_date: 2024-07-23T22:50:22.761Z
+        portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         institution_name: Robinhood
         cash_restrictions: []
       properties:
@@ -2289,15 +2289,6 @@ components:
           type: string
           x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthID
-        portfolio_group:
-          deprecated: true
-          description: Portfolio Group ID. Portfolio Groups have been deprecated.
-            Please contact support if you have a usecase for it.
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
         name:
           description: "A display name for the account. Either assigned by the user\
             \ or by the brokerage itself. For certain brokerages, SnapTrade appends\
@@ -2329,6 +2320,10 @@ components:
           type: string
           x-konfig-original-example: 2024-07-23T22:50:22.761Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-created_date
+        sync_status:
+          $ref: '#/components/schemas/AccountSyncStatus'
+        balance:
+          $ref: '#/components/schemas/AccountBalance'
         meta:
           additionalProperties: true
           deprecated: true
@@ -2346,6 +2341,15 @@ components:
             status: ACTIVE
             institution_name: Robinhood
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-meta
+        portfolio_group:
+          deprecated: true
+          description: Portfolio Group ID. Portfolio Groups have been deprecated.
+            Please contact support if you have a usecase for it.
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PortfolioGroupID
         cash_restrictions:
           deprecated: true
           description: This field is deprecated.
@@ -2355,10 +2359,15 @@ components:
           type: array
           x-konfig-original-example: []
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-cash_restrictions
-        sync_status:
-          $ref: '#/components/schemas/AccountSyncStatus'
-        balance:
-          $ref: '#/components/schemas/AccountBalance'
+      required:
+      - balance
+      - brokerage_authorization
+      - created_date
+      - id
+      - institution_name
+      - name
+      - number
+      - sync_status
       type: object
     AccountSimple:
       additionalProperties: true
@@ -2778,8 +2787,8 @@ components:
               initial_sync_completed: true
               first_transaction_date: ""
           id: ""
-          portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           created_date: 2024-07-23T22:50:22.761Z
+          portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           institution_name: Robinhood
           cash_restrictions: []
       properties:

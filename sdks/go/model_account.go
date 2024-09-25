@@ -19,28 +19,28 @@ import (
 // Account A single account at a brokerage.
 type Account struct {
 	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
-	BrokerageAuthorization *string `json:"brokerage_authorization,omitempty"`
-	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
-	// Deprecated
-	PortfolioGroup *string `json:"portfolio_group,omitempty"`
+	BrokerageAuthorization string `json:"brokerage_authorization"`
 	// A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
-	Name NullableString `json:"name,omitempty"`
+	Name NullableString `json:"name"`
 	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
-	Number *string `json:"number,omitempty"`
+	Number string `json:"number"`
 	// The name of the brokerage that holds the account.
-	InstitutionName *string `json:"institution_name,omitempty"`
+	InstitutionName string `json:"institution_name"`
 	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
-	CreatedDate *time.Time `json:"created_date,omitempty"`
+	CreatedDate time.Time `json:"created_date"`
+	SyncStatus AccountSyncStatus `json:"sync_status"`
+	Balance AccountBalance `json:"balance"`
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
+	// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+	// Deprecated
+	PortfolioGroup *string `json:"portfolio_group,omitempty"`
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
-	SyncStatus *AccountSyncStatus `json:"sync_status,omitempty"`
-	Balance *AccountBalance `json:"balance,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,8 +50,16 @@ type _Account Account
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccount() *Account {
+func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance) *Account {
 	this := Account{}
+	this.Id = id
+	this.BrokerageAuthorization = brokerageAuthorization
+	this.Name = name
+	this.Number = number
+	this.InstitutionName = institutionName
+	this.CreatedDate = createdDate
+	this.SyncStatus = syncStatus
+	this.Balance = balance
 	return &this
 }
 
@@ -63,115 +71,66 @@ func NewAccountWithDefaults() *Account {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *Account) GetId() string {
-	if o == nil || isNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *Account) GetIdOk() (*string, bool) {
-	if o == nil || isNil(o.Id) {
+	if o == nil {
     return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *Account) HasId() bool {
-	if o != nil && !isNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *Account) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetBrokerageAuthorization returns the BrokerageAuthorization field value if set, zero value otherwise.
+// GetBrokerageAuthorization returns the BrokerageAuthorization field value
 func (o *Account) GetBrokerageAuthorization() string {
-	if o == nil || isNil(o.BrokerageAuthorization) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.BrokerageAuthorization
+
+	return o.BrokerageAuthorization
 }
 
-// GetBrokerageAuthorizationOk returns a tuple with the BrokerageAuthorization field value if set, nil otherwise
+// GetBrokerageAuthorizationOk returns a tuple with the BrokerageAuthorization field value
 // and a boolean to check if the value has been set.
 func (o *Account) GetBrokerageAuthorizationOk() (*string, bool) {
-	if o == nil || isNil(o.BrokerageAuthorization) {
+	if o == nil {
     return nil, false
 	}
-	return o.BrokerageAuthorization, true
+	return &o.BrokerageAuthorization, true
 }
 
-// HasBrokerageAuthorization returns a boolean if a field has been set.
-func (o *Account) HasBrokerageAuthorization() bool {
-	if o != nil && !isNil(o.BrokerageAuthorization) {
-		return true
-	}
-
-	return false
-}
-
-// SetBrokerageAuthorization gets a reference to the given string and assigns it to the BrokerageAuthorization field.
+// SetBrokerageAuthorization sets field value
 func (o *Account) SetBrokerageAuthorization(v string) {
-	o.BrokerageAuthorization = &v
+	o.BrokerageAuthorization = v
 }
 
-// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
-// Deprecated
-func (o *Account) GetPortfolioGroup() string {
-	if o == nil || isNil(o.PortfolioGroup) {
-		var ret string
-		return ret
-	}
-	return *o.PortfolioGroup
-}
-
-// GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *Account) GetPortfolioGroupOk() (*string, bool) {
-	if o == nil || isNil(o.PortfolioGroup) {
-    return nil, false
-	}
-	return o.PortfolioGroup, true
-}
-
-// HasPortfolioGroup returns a boolean if a field has been set.
-func (o *Account) HasPortfolioGroup() bool {
-	if o != nil && !isNil(o.PortfolioGroup) {
-		return true
-	}
-
-	return false
-}
-
-// SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
-// Deprecated
-func (o *Account) SetPortfolioGroup(v string) {
-	o.PortfolioGroup = &v
-}
-
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *Account) GetName() string {
-	if o == nil || isNil(o.Name.Get()) {
+	if o == nil || o.Name.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Name.Get()
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Account) GetNameOk() (*string, bool) {
@@ -181,123 +140,129 @@ func (o *Account) GetNameOk() (*string, bool) {
 	return o.Name.Get(), o.Name.IsSet()
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *Account) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *Account) SetName(v string) {
 	o.Name.Set(&v)
 }
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *Account) SetNameNil() {
-	o.Name.Set(nil)
-}
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *Account) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetNumber returns the Number field value if set, zero value otherwise.
+// GetNumber returns the Number field value
 func (o *Account) GetNumber() string {
-	if o == nil || isNil(o.Number) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Number
+
+	return o.Number
 }
 
-// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
+// GetNumberOk returns a tuple with the Number field value
 // and a boolean to check if the value has been set.
 func (o *Account) GetNumberOk() (*string, bool) {
-	if o == nil || isNil(o.Number) {
+	if o == nil {
     return nil, false
 	}
-	return o.Number, true
+	return &o.Number, true
 }
 
-// HasNumber returns a boolean if a field has been set.
-func (o *Account) HasNumber() bool {
-	if o != nil && !isNil(o.Number) {
-		return true
-	}
-
-	return false
-}
-
-// SetNumber gets a reference to the given string and assigns it to the Number field.
+// SetNumber sets field value
 func (o *Account) SetNumber(v string) {
-	o.Number = &v
+	o.Number = v
 }
 
-// GetInstitutionName returns the InstitutionName field value if set, zero value otherwise.
+// GetInstitutionName returns the InstitutionName field value
 func (o *Account) GetInstitutionName() string {
-	if o == nil || isNil(o.InstitutionName) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.InstitutionName
+
+	return o.InstitutionName
 }
 
-// GetInstitutionNameOk returns a tuple with the InstitutionName field value if set, nil otherwise
+// GetInstitutionNameOk returns a tuple with the InstitutionName field value
 // and a boolean to check if the value has been set.
 func (o *Account) GetInstitutionNameOk() (*string, bool) {
-	if o == nil || isNil(o.InstitutionName) {
+	if o == nil {
     return nil, false
 	}
-	return o.InstitutionName, true
+	return &o.InstitutionName, true
 }
 
-// HasInstitutionName returns a boolean if a field has been set.
-func (o *Account) HasInstitutionName() bool {
-	if o != nil && !isNil(o.InstitutionName) {
-		return true
-	}
-
-	return false
-}
-
-// SetInstitutionName gets a reference to the given string and assigns it to the InstitutionName field.
+// SetInstitutionName sets field value
 func (o *Account) SetInstitutionName(v string) {
-	o.InstitutionName = &v
+	o.InstitutionName = v
 }
 
-// GetCreatedDate returns the CreatedDate field value if set, zero value otherwise.
+// GetCreatedDate returns the CreatedDate field value
 func (o *Account) GetCreatedDate() time.Time {
-	if o == nil || isNil(o.CreatedDate) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedDate
+
+	return o.CreatedDate
 }
 
-// GetCreatedDateOk returns a tuple with the CreatedDate field value if set, nil otherwise
+// GetCreatedDateOk returns a tuple with the CreatedDate field value
 // and a boolean to check if the value has been set.
 func (o *Account) GetCreatedDateOk() (*time.Time, bool) {
-	if o == nil || isNil(o.CreatedDate) {
+	if o == nil {
     return nil, false
 	}
-	return o.CreatedDate, true
+	return &o.CreatedDate, true
 }
 
-// HasCreatedDate returns a boolean if a field has been set.
-func (o *Account) HasCreatedDate() bool {
-	if o != nil && !isNil(o.CreatedDate) {
-		return true
+// SetCreatedDate sets field value
+func (o *Account) SetCreatedDate(v time.Time) {
+	o.CreatedDate = v
+}
+
+// GetSyncStatus returns the SyncStatus field value
+func (o *Account) GetSyncStatus() AccountSyncStatus {
+	if o == nil {
+		var ret AccountSyncStatus
+		return ret
 	}
 
-	return false
+	return o.SyncStatus
 }
 
-// SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
-func (o *Account) SetCreatedDate(v time.Time) {
-	o.CreatedDate = &v
+// GetSyncStatusOk returns a tuple with the SyncStatus field value
+// and a boolean to check if the value has been set.
+func (o *Account) GetSyncStatusOk() (*AccountSyncStatus, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.SyncStatus, true
+}
+
+// SetSyncStatus sets field value
+func (o *Account) SetSyncStatus(v AccountSyncStatus) {
+	o.SyncStatus = v
+}
+
+// GetBalance returns the Balance field value
+func (o *Account) GetBalance() AccountBalance {
+	if o == nil {
+		var ret AccountBalance
+		return ret
+	}
+
+	return o.Balance
+}
+
+// GetBalanceOk returns a tuple with the Balance field value
+// and a boolean to check if the value has been set.
+func (o *Account) GetBalanceOk() (*AccountBalance, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.Balance, true
+}
+
+// SetBalance sets field value
+func (o *Account) SetBalance(v AccountBalance) {
+	o.Balance = v
 }
 
 // GetMeta returns the Meta field value if set, zero value otherwise.
@@ -335,6 +300,41 @@ func (o *Account) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
 
+// GetPortfolioGroup returns the PortfolioGroup field value if set, zero value otherwise.
+// Deprecated
+func (o *Account) GetPortfolioGroup() string {
+	if o == nil || isNil(o.PortfolioGroup) {
+		var ret string
+		return ret
+	}
+	return *o.PortfolioGroup
+}
+
+// GetPortfolioGroupOk returns a tuple with the PortfolioGroup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *Account) GetPortfolioGroupOk() (*string, bool) {
+	if o == nil || isNil(o.PortfolioGroup) {
+    return nil, false
+	}
+	return o.PortfolioGroup, true
+}
+
+// HasPortfolioGroup returns a boolean if a field has been set.
+func (o *Account) HasPortfolioGroup() bool {
+	if o != nil && !isNil(o.PortfolioGroup) {
+		return true
+	}
+
+	return false
+}
+
+// SetPortfolioGroup gets a reference to the given string and assigns it to the PortfolioGroup field.
+// Deprecated
+func (o *Account) SetPortfolioGroup(v string) {
+	o.PortfolioGroup = &v
+}
+
 // GetCashRestrictions returns the CashRestrictions field value if set, zero value otherwise.
 // Deprecated
 func (o *Account) GetCashRestrictions() []string {
@@ -370,104 +370,40 @@ func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 
-// GetSyncStatus returns the SyncStatus field value if set, zero value otherwise.
-func (o *Account) GetSyncStatus() AccountSyncStatus {
-	if o == nil || isNil(o.SyncStatus) {
-		var ret AccountSyncStatus
-		return ret
-	}
-	return *o.SyncStatus
-}
-
-// GetSyncStatusOk returns a tuple with the SyncStatus field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Account) GetSyncStatusOk() (*AccountSyncStatus, bool) {
-	if o == nil || isNil(o.SyncStatus) {
-    return nil, false
-	}
-	return o.SyncStatus, true
-}
-
-// HasSyncStatus returns a boolean if a field has been set.
-func (o *Account) HasSyncStatus() bool {
-	if o != nil && !isNil(o.SyncStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetSyncStatus gets a reference to the given AccountSyncStatus and assigns it to the SyncStatus field.
-func (o *Account) SetSyncStatus(v AccountSyncStatus) {
-	o.SyncStatus = &v
-}
-
-// GetBalance returns the Balance field value if set, zero value otherwise.
-func (o *Account) GetBalance() AccountBalance {
-	if o == nil || isNil(o.Balance) {
-		var ret AccountBalance
-		return ret
-	}
-	return *o.Balance
-}
-
-// GetBalanceOk returns a tuple with the Balance field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Account) GetBalanceOk() (*AccountBalance, bool) {
-	if o == nil || isNil(o.Balance) {
-    return nil, false
-	}
-	return o.Balance, true
-}
-
-// HasBalance returns a boolean if a field has been set.
-func (o *Account) HasBalance() bool {
-	if o != nil && !isNil(o.Balance) {
-		return true
-	}
-
-	return false
-}
-
-// SetBalance gets a reference to the given AccountBalance and assigns it to the Balance field.
-func (o *Account) SetBalance(v AccountBalance) {
-	o.Balance = &v
-}
-
 func (o Account) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Id) {
+	if true {
 		toSerialize["id"] = o.Id
 	}
-	if !isNil(o.BrokerageAuthorization) {
+	if true {
 		toSerialize["brokerage_authorization"] = o.BrokerageAuthorization
 	}
-	if !isNil(o.PortfolioGroup) {
-		toSerialize["portfolio_group"] = o.PortfolioGroup
-	}
-	if o.Name.IsSet() {
+	if true {
 		toSerialize["name"] = o.Name.Get()
 	}
-	if !isNil(o.Number) {
+	if true {
 		toSerialize["number"] = o.Number
 	}
-	if !isNil(o.InstitutionName) {
+	if true {
 		toSerialize["institution_name"] = o.InstitutionName
 	}
-	if !isNil(o.CreatedDate) {
+	if true {
 		toSerialize["created_date"] = o.CreatedDate
+	}
+	if true {
+		toSerialize["sync_status"] = o.SyncStatus
+	}
+	if true {
+		toSerialize["balance"] = o.Balance
 	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
+	if !isNil(o.PortfolioGroup) {
+		toSerialize["portfolio_group"] = o.PortfolioGroup
+	}
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
-	}
-	if !isNil(o.SyncStatus) {
-		toSerialize["sync_status"] = o.SyncStatus
-	}
-	if !isNil(o.Balance) {
-		toSerialize["balance"] = o.Balance
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -489,15 +425,15 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "brokerage_authorization")
-		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "number")
 		delete(additionalProperties, "institution_name")
 		delete(additionalProperties, "created_date")
-		delete(additionalProperties, "meta")
-		delete(additionalProperties, "cash_restrictions")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "balance")
+		delete(additionalProperties, "meta")
+		delete(additionalProperties, "portfolio_group")
+		delete(additionalProperties, "cash_restrictions")
 		o.AdditionalProperties = additionalProperties
 	}
 

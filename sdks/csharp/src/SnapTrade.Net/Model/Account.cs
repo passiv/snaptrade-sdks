@@ -35,30 +35,73 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
-        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated..</param>
-        /// <param name="brokerageAuthorization">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade..</param>
-        /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
-        /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity..</param>
-        /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons..</param>
-        /// <param name="institutionName">The name of the brokerage that holds the account..</param>
-        /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage..</param>
-        /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
-        /// <param name="cashRestrictions">This field is deprecated..</param>
-        /// <param name="syncStatus">syncStatus.</param>
-        /// <param name="balance">balance.</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string portfolioGroup = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), Dictionary<string, Object> meta = default(Dictionary<string, Object>), List<string> cashRestrictions = default(List<string>), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance)) : base()
+        [JsonConstructorAttribute]
+        protected Account()
         {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Account" /> class.
+        /// </summary>
+        /// <param name="id">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated. (required).</param>
+        /// <param name="brokerageAuthorization">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. (required).</param>
+        /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. (required).</param>
+        /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
+        /// <param name="institutionName">The name of the brokerage that holds the account. (required).</param>
+        /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. (required).</param>
+        /// <param name="syncStatus">syncStatus (required).</param>
+        /// <param name="balance">balance (required).</param>
+        /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
+        /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
+        /// <param name="cashRestrictions">This field is deprecated..</param>
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>)) : base()
+        {
+            // to ensure "id" is required (not null)
+            if (id == null)
+            {
+                throw new ArgumentNullException("id is a required property for Account and cannot be null");
+            }
             this.Id = id;
+            // to ensure "brokerageAuthorization" is required (not null)
+            if (brokerageAuthorization == null)
+            {
+                throw new ArgumentNullException("brokerageAuthorization is a required property for Account and cannot be null");
+            }
             this.BrokerageAuthorization = brokerageAuthorization;
-            this.PortfolioGroup = portfolioGroup;
+            // to ensure "name" is required (not null)
+            if (name == null)
+            {
+                throw new ArgumentNullException("name is a required property for Account and cannot be null");
+            }
             this.Name = name;
+            // to ensure "number" is required (not null)
+            if (number == null)
+            {
+                throw new ArgumentNullException("number is a required property for Account and cannot be null");
+            }
             this.Number = number;
+            // to ensure "institutionName" is required (not null)
+            if (institutionName == null)
+            {
+                throw new ArgumentNullException("institutionName is a required property for Account and cannot be null");
+            }
             this.InstitutionName = institutionName;
             this.CreatedDate = createdDate;
-            this.Meta = meta;
-            this.CashRestrictions = cashRestrictions;
+            // to ensure "syncStatus" is required (not null)
+            if (syncStatus == null)
+            {
+                throw new ArgumentNullException("syncStatus is a required property for Account and cannot be null");
+            }
             this.SyncStatus = syncStatus;
+            // to ensure "balance" is required (not null)
+            if (balance == null)
+            {
+                throw new ArgumentNullException("balance is a required property for Account and cannot be null");
+            }
             this.Balance = balance;
+            this.Meta = meta;
+            this.PortfolioGroup = portfolioGroup;
+            this.CashRestrictions = cashRestrictions;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -66,51 +109,55 @@ namespace SnapTrade.Net.Model
         /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
         /// </summary>
         /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.</value>
-        [DataMember(Name = "id", EmitDefaultValue = false)]
+        [DataMember(Name = "id", IsRequired = true, EmitDefaultValue = true)]
         public string Id { get; set; }
 
         /// <summary>
         /// Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
         /// </summary>
         /// <value>Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.</value>
-        [DataMember(Name = "brokerage_authorization", EmitDefaultValue = false)]
+        [DataMember(Name = "brokerage_authorization", IsRequired = true, EmitDefaultValue = true)]
         public string BrokerageAuthorization { get; set; }
-
-        /// <summary>
-        /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
-        /// </summary>
-        /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.</value>
-        [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
-        [Obsolete]
-        public string PortfolioGroup { get; set; }
 
         /// <summary>
         /// A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
         /// </summary>
         /// <value>A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.</value>
-        [DataMember(Name = "name", EmitDefaultValue = true)]
+        [DataMember(Name = "name", IsRequired = true, EmitDefaultValue = true)]
         public string Name { get; set; }
 
         /// <summary>
         /// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
         /// </summary>
         /// <value>The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.</value>
-        [DataMember(Name = "number", EmitDefaultValue = false)]
+        [DataMember(Name = "number", IsRequired = true, EmitDefaultValue = true)]
         public string Number { get; set; }
 
         /// <summary>
         /// The name of the brokerage that holds the account.
         /// </summary>
         /// <value>The name of the brokerage that holds the account.</value>
-        [DataMember(Name = "institution_name", EmitDefaultValue = false)]
+        [DataMember(Name = "institution_name", IsRequired = true, EmitDefaultValue = true)]
         public string InstitutionName { get; set; }
 
         /// <summary>
         /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
         /// </summary>
         /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.</value>
-        [DataMember(Name = "created_date", EmitDefaultValue = false)]
+        [DataMember(Name = "created_date", IsRequired = true, EmitDefaultValue = true)]
         public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or Sets SyncStatus
+        /// </summary>
+        [DataMember(Name = "sync_status", IsRequired = true, EmitDefaultValue = true)]
+        public AccountSyncStatus SyncStatus { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Balance
+        /// </summary>
+        [DataMember(Name = "balance", IsRequired = true, EmitDefaultValue = true)]
+        public AccountBalance Balance { get; set; }
 
         /// <summary>
         /// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.
@@ -121,24 +168,20 @@ namespace SnapTrade.Net.Model
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
+        /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+        /// </summary>
+        /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.</value>
+        [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
+        [Obsolete]
+        public string PortfolioGroup { get; set; }
+
+        /// <summary>
         /// This field is deprecated.
         /// </summary>
         /// <value>This field is deprecated.</value>
         [DataMember(Name = "cash_restrictions", EmitDefaultValue = false)]
         [Obsolete]
         public List<string> CashRestrictions { get; set; }
-
-        /// <summary>
-        /// Gets or Sets SyncStatus
-        /// </summary>
-        [DataMember(Name = "sync_status", EmitDefaultValue = false)]
-        public AccountSyncStatus SyncStatus { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Balance
-        /// </summary>
-        [DataMember(Name = "balance", EmitDefaultValue = false)]
-        public AccountBalance Balance { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -157,15 +200,15 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  BrokerageAuthorization: ").Append(BrokerageAuthorization).Append("\n");
-            sb.Append("  PortfolioGroup: ").Append(PortfolioGroup).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  InstitutionName: ").Append(InstitutionName).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
-            sb.Append("  Meta: ").Append(Meta).Append("\n");
-            sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  Balance: ").Append(Balance).Append("\n");
+            sb.Append("  Meta: ").Append(Meta).Append("\n");
+            sb.Append("  PortfolioGroup: ").Append(PortfolioGroup).Append("\n");
+            sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -213,11 +256,6 @@ namespace SnapTrade.Net.Model
                     this.BrokerageAuthorization.Equals(input.BrokerageAuthorization))
                 ) && base.Equals(input) && 
                 (
-                    this.PortfolioGroup == input.PortfolioGroup ||
-                    (this.PortfolioGroup != null &&
-                    this.PortfolioGroup.Equals(input.PortfolioGroup))
-                ) && base.Equals(input) && 
-                (
                     this.Name == input.Name ||
                     (this.Name != null &&
                     this.Name.Equals(input.Name))
@@ -238,18 +276,6 @@ namespace SnapTrade.Net.Model
                     this.CreatedDate.Equals(input.CreatedDate))
                 ) && base.Equals(input) && 
                 (
-                    this.Meta == input.Meta ||
-                    this.Meta != null &&
-                    input.Meta != null &&
-                    this.Meta.SequenceEqual(input.Meta)
-                ) && base.Equals(input) && 
-                (
-                    this.CashRestrictions == input.CashRestrictions ||
-                    this.CashRestrictions != null &&
-                    input.CashRestrictions != null &&
-                    this.CashRestrictions.SequenceEqual(input.CashRestrictions)
-                ) && base.Equals(input) && 
-                (
                     this.SyncStatus == input.SyncStatus ||
                     (this.SyncStatus != null &&
                     this.SyncStatus.Equals(input.SyncStatus))
@@ -258,6 +284,23 @@ namespace SnapTrade.Net.Model
                     this.Balance == input.Balance ||
                     (this.Balance != null &&
                     this.Balance.Equals(input.Balance))
+                ) && base.Equals(input) && 
+                (
+                    this.Meta == input.Meta ||
+                    this.Meta != null &&
+                    input.Meta != null &&
+                    this.Meta.SequenceEqual(input.Meta)
+                ) && base.Equals(input) && 
+                (
+                    this.PortfolioGroup == input.PortfolioGroup ||
+                    (this.PortfolioGroup != null &&
+                    this.PortfolioGroup.Equals(input.PortfolioGroup))
+                ) && base.Equals(input) && 
+                (
+                    this.CashRestrictions == input.CashRestrictions ||
+                    this.CashRestrictions != null &&
+                    input.CashRestrictions != null &&
+                    this.CashRestrictions.SequenceEqual(input.CashRestrictions)
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -279,10 +322,6 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.BrokerageAuthorization.GetHashCode();
                 }
-                if (this.PortfolioGroup != null)
-                {
-                    hashCode = (hashCode * 59) + this.PortfolioGroup.GetHashCode();
-                }
                 if (this.Name != null)
                 {
                     hashCode = (hashCode * 59) + this.Name.GetHashCode();
@@ -299,14 +338,6 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.CreatedDate.GetHashCode();
                 }
-                if (this.Meta != null)
-                {
-                    hashCode = (hashCode * 59) + this.Meta.GetHashCode();
-                }
-                if (this.CashRestrictions != null)
-                {
-                    hashCode = (hashCode * 59) + this.CashRestrictions.GetHashCode();
-                }
                 if (this.SyncStatus != null)
                 {
                     hashCode = (hashCode * 59) + this.SyncStatus.GetHashCode();
@@ -314,6 +345,18 @@ namespace SnapTrade.Net.Model
                 if (this.Balance != null)
                 {
                     hashCode = (hashCode * 59) + this.Balance.GetHashCode();
+                }
+                if (this.Meta != null)
+                {
+                    hashCode = (hashCode * 59) + this.Meta.GetHashCode();
+                }
+                if (this.PortfolioGroup != null)
+                {
+                    hashCode = (hashCode * 59) + this.PortfolioGroup.GetHashCode();
+                }
+                if (this.CashRestrictions != null)
+                {
+                    hashCode = (hashCode * 59) + this.CashRestrictions.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

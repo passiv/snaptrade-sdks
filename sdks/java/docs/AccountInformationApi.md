@@ -251,15 +251,15 @@ public class Example {
       System.out.println(result);
       System.out.println(result.getId());
       System.out.println(result.getBrokerageAuthorization());
-      System.out.println(result.getPortfolioGroup());
       System.out.println(result.getName());
       System.out.println(result.getNumber());
       System.out.println(result.getInstitutionName());
       System.out.println(result.getCreatedDate());
-      System.out.println(result.getMeta());
-      System.out.println(result.getCashRestrictions());
       System.out.println(result.getSyncStatus());
       System.out.println(result.getBalance());
+      System.out.println(result.getMeta());
+      System.out.println(result.getPortfolioGroup());
+      System.out.println(result.getCashRestrictions());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getUserAccountDetails");
       System.err.println("Status code: " + e.getStatusCode());

@@ -19,9 +19,6 @@ module SnapTrade
     # Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
     attr_accessor :brokerage_authorization
 
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
-    attr_accessor :portfolio_group
-
     # A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
     attr_accessor :name
 
@@ -34,30 +31,33 @@ module SnapTrade
     # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     attr_accessor :created_date
 
-    # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
-    attr_accessor :meta
-
-    # This field is deprecated.
-    attr_accessor :cash_restrictions
-
     attr_accessor :sync_status
 
     attr_accessor :balance
+
+    # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
+    attr_accessor :meta
+
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+    attr_accessor :portfolio_group
+
+    # This field is deprecated.
+    attr_accessor :cash_restrictions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'brokerage_authorization' => :'brokerage_authorization',
-        :'portfolio_group' => :'portfolio_group',
         :'name' => :'name',
         :'number' => :'number',
         :'institution_name' => :'institution_name',
         :'created_date' => :'created_date',
-        :'meta' => :'meta',
-        :'cash_restrictions' => :'cash_restrictions',
         :'sync_status' => :'sync_status',
-        :'balance' => :'balance'
+        :'balance' => :'balance',
+        :'meta' => :'meta',
+        :'portfolio_group' => :'portfolio_group',
+        :'cash_restrictions' => :'cash_restrictions'
       }
     end
 
@@ -71,15 +71,15 @@ module SnapTrade
       {
         :'id' => :'String',
         :'brokerage_authorization' => :'String',
-        :'portfolio_group' => :'String',
         :'name' => :'String',
         :'number' => :'String',
         :'institution_name' => :'String',
         :'created_date' => :'Time',
-        :'meta' => :'Hash<String, Object>',
-        :'cash_restrictions' => :'Array<String>',
         :'sync_status' => :'AccountSyncStatus',
-        :'balance' => :'AccountBalance'
+        :'balance' => :'AccountBalance',
+        :'meta' => :'Hash<String, Object>',
+        :'portfolio_group' => :'String',
+        :'cash_restrictions' => :'Array<String>'
       }
     end
 
@@ -113,10 +113,6 @@ module SnapTrade
         self.brokerage_authorization = attributes[:'brokerage_authorization']
       end
 
-      if attributes.key?(:'portfolio_group')
-        self.portfolio_group = attributes[:'portfolio_group']
-      end
-
       if attributes.key?(:'name')
         self.name = attributes[:'name']
       end
@@ -133,18 +129,6 @@ module SnapTrade
         self.created_date = attributes[:'created_date']
       end
 
-      if attributes.key?(:'meta')
-        if (value = attributes[:'meta']).is_a?(Hash)
-          self.meta = value
-        end
-      end
-
-      if attributes.key?(:'cash_restrictions')
-        if (value = attributes[:'cash_restrictions']).is_a?(Array)
-          self.cash_restrictions = value
-        end
-      end
-
       if attributes.key?(:'sync_status')
         self.sync_status = attributes[:'sync_status']
       end
@@ -152,18 +136,69 @@ module SnapTrade
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
       end
+
+      if attributes.key?(:'meta')
+        if (value = attributes[:'meta']).is_a?(Hash)
+          self.meta = value
+        end
+      end
+
+      if attributes.key?(:'portfolio_group')
+        self.portfolio_group = attributes[:'portfolio_group']
+      end
+
+      if attributes.key?(:'cash_restrictions')
+        if (value = attributes[:'cash_restrictions']).is_a?(Array)
+          self.cash_restrictions = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @id.nil?
+        invalid_properties.push('invalid value for "id", id cannot be nil.')
+      end
+
+      if @brokerage_authorization.nil?
+        invalid_properties.push('invalid value for "brokerage_authorization", brokerage_authorization cannot be nil.')
+      end
+
+      if @number.nil?
+        invalid_properties.push('invalid value for "number", number cannot be nil.')
+      end
+
+      if @institution_name.nil?
+        invalid_properties.push('invalid value for "institution_name", institution_name cannot be nil.')
+      end
+
+      if @created_date.nil?
+        invalid_properties.push('invalid value for "created_date", created_date cannot be nil.')
+      end
+
+      if @sync_status.nil?
+        invalid_properties.push('invalid value for "sync_status", sync_status cannot be nil.')
+      end
+
+      if @balance.nil?
+        invalid_properties.push('invalid value for "balance", balance cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @brokerage_authorization.nil?
+      return false if @number.nil?
+      return false if @institution_name.nil?
+      return false if @created_date.nil?
+      return false if @sync_status.nil?
+      return false if @balance.nil?
       true
     end
 
@@ -174,15 +209,15 @@ module SnapTrade
       self.class == o.class &&
           id == o.id &&
           brokerage_authorization == o.brokerage_authorization &&
-          portfolio_group == o.portfolio_group &&
           name == o.name &&
           number == o.number &&
           institution_name == o.institution_name &&
           created_date == o.created_date &&
-          meta == o.meta &&
-          cash_restrictions == o.cash_restrictions &&
           sync_status == o.sync_status &&
-          balance == o.balance
+          balance == o.balance &&
+          meta == o.meta &&
+          portfolio_group == o.portfolio_group &&
+          cash_restrictions == o.cash_restrictions
     end
 
     # @see the `==` method
@@ -194,7 +229,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, portfolio_group, name, number, institution_name, created_date, meta, cash_restrictions, sync_status, balance].hash
+      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, meta, portfolio_group, cash_restrictions].hash
     end
 
     # Builds the object from hash

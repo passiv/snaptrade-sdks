@@ -74,14 +74,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'BrokerageAuthorization'
         }
         /// <summary>
-        /// Test the property 'PortfolioGroup'
-        /// </summary>
-        [Fact]
-        public void PortfolioGroupTest()
-        {
-            // TODO unit test for the property 'PortfolioGroup'
-        }
-        /// <summary>
         /// Test the property 'Name'
         /// </summary>
         [Fact]
@@ -114,22 +106,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'CreatedDate'
         }
         /// <summary>
-        /// Test the property 'Meta'
-        /// </summary>
-        [Fact]
-        public void MetaTest()
-        {
-            // TODO unit test for the property 'Meta'
-        }
-        /// <summary>
-        /// Test the property 'CashRestrictions'
-        /// </summary>
-        [Fact]
-        public void CashRestrictionsTest()
-        {
-            // TODO unit test for the property 'CashRestrictions'
-        }
-        /// <summary>
         /// Test the property 'SyncStatus'
         /// </summary>
         [Fact]
@@ -144,6 +120,30 @@ namespace SnapTrade.Net.Test.Model
         public void BalanceTest()
         {
             // TODO unit test for the property 'Balance'
+        }
+        /// <summary>
+        /// Test the property 'Meta'
+        /// </summary>
+        [Fact]
+        public void MetaTest()
+        {
+            // TODO unit test for the property 'Meta'
+        }
+        /// <summary>
+        /// Test the property 'PortfolioGroup'
+        /// </summary>
+        [Fact]
+        public void PortfolioGroupTest()
+        {
+            // TODO unit test for the property 'PortfolioGroup'
+        }
+        /// <summary>
+        /// Test the property 'CashRestrictions'
+        /// </summary>
+        [Fact]
+        public void CashRestrictionsTest()
+        {
+            // TODO unit test for the property 'CashRestrictions'
         }
 
     }

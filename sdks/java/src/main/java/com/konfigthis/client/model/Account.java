@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -67,10 +66,6 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_BROKERAGE_AUTHORIZATION)
   private UUID brokerageAuthorization;
 
-  public static final String SERIALIZED_NAME_PORTFOLIO_GROUP = "portfolio_group";
-  @SerializedName(SERIALIZED_NAME_PORTFOLIO_GROUP)
-  private UUID portfolioGroup;
-
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
@@ -87,14 +82,6 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_CREATED_DATE)
   private OffsetDateTime createdDate;
 
-  public static final String SERIALIZED_NAME_META = "meta";
-  @SerializedName(SERIALIZED_NAME_META)
-  private Map<String, Object> meta = null;
-
-  public static final String SERIALIZED_NAME_CASH_RESTRICTIONS = "cash_restrictions";
-  @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
-  private List<String> cashRestrictions = null;
-
   public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
   @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
   private AccountSyncStatus syncStatus;
@@ -102,6 +89,18 @@ public class Account {
   public static final String SERIALIZED_NAME_BALANCE = "balance";
   @SerializedName(SERIALIZED_NAME_BALANCE)
   private AccountBalance balance;
+
+  public static final String SERIALIZED_NAME_META = "meta";
+  @SerializedName(SERIALIZED_NAME_META)
+  private Map<String, Object> meta = null;
+
+  public static final String SERIALIZED_NAME_PORTFOLIO_GROUP = "portfolio_group";
+  @SerializedName(SERIALIZED_NAME_PORTFOLIO_GROUP)
+  private UUID portfolioGroup;
+
+  public static final String SERIALIZED_NAME_CASH_RESTRICTIONS = "cash_restrictions";
+  @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
+  private List<String> cashRestrictions = null;
 
   public Account() {
   }
@@ -119,8 +118,8 @@ public class Account {
    * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
    * @return id
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.")
 
   public UUID getId() {
     return id;
@@ -148,8 +147,8 @@ public class Account {
    * Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
    * @return brokerageAuthorization
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", value = "Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "87b24961-b51e-4db8-9226-f198f6518a89", required = true, value = "Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.")
 
   public UUID getBrokerageAuthorization() {
     return brokerageAuthorization;
@@ -161,37 +160,6 @@ public class Account {
     
     
     this.brokerageAuthorization = brokerageAuthorization;
-  }
-
-
-  public Account portfolioGroup(UUID portfolioGroup) {
-    
-    
-    
-    
-    this.portfolioGroup = portfolioGroup;
-    return this;
-  }
-
-   /**
-   * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
-   * @return portfolioGroup
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.")
-
-  public UUID getPortfolioGroup() {
-    return portfolioGroup;
-  }
-
-
-  public void setPortfolioGroup(UUID portfolioGroup) {
-    
-    
-    
-    this.portfolioGroup = portfolioGroup;
   }
 
 
@@ -209,7 +177,7 @@ public class Account {
    * @return name
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "Robinhood Individual", value = "A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.")
+  @ApiModelProperty(example = "Robinhood Individual", required = true, value = "A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.")
 
   public String getName() {
     return name;
@@ -237,8 +205,8 @@ public class Account {
    * The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
    * @return number
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "Q6542138443", value = "The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "Q6542138443", required = true, value = "The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.")
 
   public String getNumber() {
     return number;
@@ -266,8 +234,8 @@ public class Account {
    * The name of the brokerage that holds the account.
    * @return institutionName
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "Robinhood", value = "The name of the brokerage that holds the account.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "Robinhood", required = true, value = "The name of the brokerage that holds the account.")
 
   public String getInstitutionName() {
     return institutionName;
@@ -295,8 +263,8 @@ public class Account {
    * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
    * @return createdDate
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-07-23T22:50:22.761Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "2024-07-23T22:50:22.761Z", required = true, value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.")
 
   public OffsetDateTime getCreatedDate() {
     return createdDate;
@@ -308,6 +276,64 @@ public class Account {
     
     
     this.createdDate = createdDate;
+  }
+
+
+  public Account syncStatus(AccountSyncStatus syncStatus) {
+    
+    
+    
+    
+    this.syncStatus = syncStatus;
+    return this;
+  }
+
+   /**
+   * Get syncStatus
+   * @return syncStatus
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
+
+  public AccountSyncStatus getSyncStatus() {
+    return syncStatus;
+  }
+
+
+  public void setSyncStatus(AccountSyncStatus syncStatus) {
+    
+    
+    
+    this.syncStatus = syncStatus;
+  }
+
+
+  public Account balance(AccountBalance balance) {
+    
+    
+    
+    
+    this.balance = balance;
+    return this;
+  }
+
+   /**
+   * Get balance
+   * @return balance
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
+
+  public AccountBalance getBalance() {
+    return balance;
+  }
+
+
+  public void setBalance(AccountBalance balance) {
+    
+    
+    
+    this.balance = balance;
   }
 
 
@@ -350,6 +376,37 @@ public class Account {
   }
 
 
+  public Account portfolioGroup(UUID portfolioGroup) {
+    
+    
+    
+    
+    this.portfolioGroup = portfolioGroup;
+    return this;
+  }
+
+   /**
+   * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+   * @return portfolioGroup
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.")
+
+  public UUID getPortfolioGroup() {
+    return portfolioGroup;
+  }
+
+
+  public void setPortfolioGroup(UUID portfolioGroup) {
+    
+    
+    
+    this.portfolioGroup = portfolioGroup;
+  }
+
+
   public Account cashRestrictions(List<String> cashRestrictions) {
     
     
@@ -386,64 +443,6 @@ public class Account {
     
     
     this.cashRestrictions = cashRestrictions;
-  }
-
-
-  public Account syncStatus(AccountSyncStatus syncStatus) {
-    
-    
-    
-    
-    this.syncStatus = syncStatus;
-    return this;
-  }
-
-   /**
-   * Get syncStatus
-   * @return syncStatus
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public AccountSyncStatus getSyncStatus() {
-    return syncStatus;
-  }
-
-
-  public void setSyncStatus(AccountSyncStatus syncStatus) {
-    
-    
-    
-    this.syncStatus = syncStatus;
-  }
-
-
-  public Account balance(AccountBalance balance) {
-    
-    
-    
-    
-    this.balance = balance;
-    return this;
-  }
-
-   /**
-   * Get balance
-   * @return balance
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public AccountBalance getBalance() {
-    return balance;
-  }
-
-
-  public void setBalance(AccountBalance balance) {
-    
-    
-    
-    this.balance = balance;
   }
 
   /**
@@ -503,32 +502,21 @@ public class Account {
     Account account = (Account) o;
     return Objects.equals(this.id, account.id) &&
         Objects.equals(this.brokerageAuthorization, account.brokerageAuthorization) &&
-        Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
         Objects.equals(this.name, account.name) &&
         Objects.equals(this.number, account.number) &&
         Objects.equals(this.institutionName, account.institutionName) &&
         Objects.equals(this.createdDate, account.createdDate) &&
-        Objects.equals(this.meta, account.meta) &&
-        Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
         Objects.equals(this.syncStatus, account.syncStatus) &&
-        Objects.equals(this.balance, account.balance)&&
+        Objects.equals(this.balance, account.balance) &&
+        Objects.equals(this.meta, account.meta) &&
+        Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
+        Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
-  }
-
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, portfolioGroup, name, number, institutionName, createdDate, meta, cashRestrictions, syncStatus, balance, additionalProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, meta, portfolioGroup, cashRestrictions, additionalProperties);
   }
 
   @Override
@@ -537,15 +525,15 @@ public class Account {
     sb.append("class Account {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    brokerageAuthorization: ").append(toIndentedString(brokerageAuthorization)).append("\n");
-    sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    institutionName: ").append(toIndentedString(institutionName)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
-    sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
-    sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
+    sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
+    sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
+    sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -571,18 +559,26 @@ public class Account {
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
     openapiFields.add("brokerage_authorization");
-    openapiFields.add("portfolio_group");
     openapiFields.add("name");
     openapiFields.add("number");
     openapiFields.add("institution_name");
     openapiFields.add("created_date");
-    openapiFields.add("meta");
-    openapiFields.add("cash_restrictions");
     openapiFields.add("sync_status");
     openapiFields.add("balance");
+    openapiFields.add("meta");
+    openapiFields.add("portfolio_group");
+    openapiFields.add("cash_restrictions");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("id");
+    openapiRequiredFields.add("brokerage_authorization");
+    openapiRequiredFields.add("name");
+    openapiRequiredFields.add("number");
+    openapiRequiredFields.add("institution_name");
+    openapiRequiredFields.add("created_date");
+    openapiRequiredFields.add("sync_status");
+    openapiRequiredFields.add("balance");
   }
 
  /**
@@ -597,32 +593,35 @@ public class Account {
           throw new IllegalArgumentException(String.format("The required field(s) %s in Account is not found in the empty JSON string", Account.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("brokerage_authorization") != null && !jsonObj.get("brokerage_authorization").isJsonNull()) && !jsonObj.get("brokerage_authorization").isJsonPrimitive()) {
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : Account.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("brokerage_authorization").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_authorization` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_authorization").toString()));
       }
-      if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
-      }
-      if (!jsonObj.get("name").isJsonNull() && (jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+      if (!jsonObj.get("name").isJsonNull() && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
-      if ((jsonObj.get("number") != null && !jsonObj.get("number").isJsonNull()) && !jsonObj.get("number").isJsonPrimitive()) {
+      if (!jsonObj.get("number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
       }
-      if ((jsonObj.get("institution_name") != null && !jsonObj.get("institution_name").isJsonNull()) && !jsonObj.get("institution_name").isJsonPrimitive()) {
+      if (!jsonObj.get("institution_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_name").toString()));
+      }
+      // validate the required field `sync_status`
+      AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
+      // validate the required field `balance`
+      AccountBalance.validateJsonObject(jsonObj.getAsJsonObject("balance"));
+      if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
-      }
-      // validate the optional field `sync_status`
-      if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {
-        AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
-      }
-      // validate the optional field `balance`
-      if (jsonObj.get("balance") != null && !jsonObj.get("balance").isJsonNull()) {
-        AccountBalance.validateJsonObject(jsonObj.getAsJsonObject("balance"));
       }
   }
 
