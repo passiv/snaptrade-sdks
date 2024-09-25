@@ -2050,6 +2050,15 @@ components:
     Account:
       description: A single account at a brokerage.
       type: object
+      required:
+        - id
+        - brokerage_authorization
+        - name
+        - number
+        - institution_name
+        - created_date
+        - sync_status
+        - balance
       properties:
         id:
           description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
@@ -2057,8 +2066,6 @@ components:
             - $ref: "#/components/schemas/AccountID"
         brokerage_authorization:
           $ref: "#/components/schemas/BrokerageAuthID"
-        portfolio_group:
-          $ref: "#/components/schemas/PortfolioGroupID"
         name:
           type: string
           description: A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity.
@@ -2077,6 +2084,10 @@ components:
           type: string
           format: date-time
           example: 2024-07-23T22:50:22.761390Z
+        sync_status:
+          $ref: "#/components/schemas/AccountSyncStatus"
+        balance:
+          $ref: "#/components/schemas/AccountBalance"
         meta:
           type: object
           deprecated: true
@@ -2085,6 +2096,8 @@ components:
             type: Margin
             status: ACTIVE
             institution_name: Robinhood
+        portfolio_group:
+          $ref: "#/components/schemas/PortfolioGroupID"
         cash_restrictions:
           deprecated: true
           description: This field is deprecated.
@@ -2092,10 +2105,6 @@ components:
           items:
             type: string
           example: []
-        sync_status:
-          $ref: "#/components/schemas/AccountSyncStatus"
-        balance:
-          $ref: "#/components/schemas/AccountBalance"
     AccountSimple:
       description: A single account at a brokerage.
       type: object

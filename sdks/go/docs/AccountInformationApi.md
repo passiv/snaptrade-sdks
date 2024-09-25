@@ -150,17 +150,17 @@ func main() {
     }
     // response from `GetUserAccountDetails`: Account
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountDetails`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.BrokerageAuthorization`: %v\n", *resp.BrokerageAuthorization)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Name`: %v\n", *resp.Name)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Number`: %v\n", *resp.Number)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.InstitutionName`: %v\n", *resp.InstitutionName)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CreatedDate`: %v\n", *resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Name`: %v\n", resp.Name)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.InstitutionName`: %v\n", resp.InstitutionName)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CashRestrictions`: %v\n", *resp.CashRestrictions)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.SyncStatus`: %v\n", *resp.SyncStatus)
-    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Balance`: %v\n", *resp.Balance)
 }
 ```
 
@@ -373,17 +373,17 @@ func main() {
     }
     // response from `ListUserAccounts`: []Account
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.ListUserAccounts`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.BrokerageAuthorization`: %v\n", *resp.BrokerageAuthorization)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Name`: %v\n", *resp.Name)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Number`: %v\n", *resp.Number)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.InstitutionName`: %v\n", *resp.InstitutionName)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CreatedDate`: %v\n", *resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Name`: %v\n", resp.Name)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.InstitutionName`: %v\n", resp.InstitutionName)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CashRestrictions`: %v\n", *resp.CashRestrictions)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.SyncStatus`: %v\n", *resp.SyncStatus)
-    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Balance`: %v\n", *resp.Balance)
 }
 ```
 
@@ -429,17 +429,17 @@ func main() {
     }
     // response from `UpdateUserAccount`: []Account
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.UpdateUserAccount`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.BrokerageAuthorization`: %v\n", *resp.BrokerageAuthorization)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Name`: %v\n", *resp.Name)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Number`: %v\n", *resp.Number)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.InstitutionName`: %v\n", *resp.InstitutionName)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CreatedDate`: %v\n", *resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Id`: %v\n", resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.BrokerageAuthorization`: %v\n", resp.BrokerageAuthorization)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Name`: %v\n", resp.Name)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Number`: %v\n", resp.Number)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.InstitutionName`: %v\n", resp.InstitutionName)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CreatedDate`: %v\n", resp.CreatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.SyncStatus`: %v\n", resp.SyncStatus)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Balance`: %v\n", resp.Balance)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CashRestrictions`: %v\n", *resp.CashRestrictions)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.SyncStatus`: %v\n", *resp.SyncStatus)
-    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Balance`: %v\n", *resp.Balance)
 }
 ```
 

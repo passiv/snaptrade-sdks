@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -64,14 +63,6 @@ public class AccountTest {
     }
 
     /**
-     * Test the property 'portfolioGroup'
-     */
-    @Test
-    public void portfolioGroupTest() {
-        // TODO: test portfolioGroup
-    }
-
-    /**
      * Test the property 'name'
      */
     @Test
@@ -104,22 +95,6 @@ public class AccountTest {
     }
 
     /**
-     * Test the property 'meta'
-     */
-    @Test
-    public void metaTest() {
-        // TODO: test meta
-    }
-
-    /**
-     * Test the property 'cashRestrictions'
-     */
-    @Test
-    public void cashRestrictionsTest() {
-        // TODO: test cashRestrictions
-    }
-
-    /**
      * Test the property 'syncStatus'
      */
     @Test
@@ -133,6 +108,30 @@ public class AccountTest {
     @Test
     public void balanceTest() {
         // TODO: test balance
+    }
+
+    /**
+     * Test the property 'meta'
+     */
+    @Test
+    public void metaTest() {
+        // TODO: test meta
+    }
+
+    /**
+     * Test the property 'portfolioGroup'
+     */
+    @Test
+    public void portfolioGroupTest() {
+        // TODO: test portfolioGroup
+    }
+
+    /**
+     * Test the property 'cashRestrictions'
+     */
+    @Test
+    public void cashRestrictionsTest() {
+        // TODO: test cashRestrictions
     }
 
 }
