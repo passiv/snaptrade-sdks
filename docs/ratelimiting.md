@@ -6,6 +6,17 @@ Sending many requests in quick succession might trigger error responses that sho
 
 Every SnapTrade client is ratelimited to 250 requests per minute by default. If you have a large number of users and would like to request a higher ratelimit, please contact your Customer Success Manager.
 
+## What Happens When You Hit a Ratelimit
+
+When you hit a ratelimit, the API will return an HTTP status code 429. This means that you have exceeded the maximum number of requests you can make in a given time period.
+
+The response body will have data on how long you should wait before making more requests. Here is an example of what the response body looks like:
+
+```json
+{"detail":"Request was throttled. Expected available in 7 seconds.","status_code":429,"code":"0000"}
+```
+
+
 ## Common Causes and Mitigations
 
 There are a number of situations that may cause your ratelimiting to kick in. Here are a few scenarios and suggested mitigations:
