@@ -179,7 +179,7 @@ namespace SnapTrade.Net.Test.Api
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-            var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+            var units = 31.33; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
             var notionalValue = new NotionalValueNullable(100);
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
