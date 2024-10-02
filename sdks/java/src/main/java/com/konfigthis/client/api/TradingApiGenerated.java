@@ -28,8 +28,10 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
+import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
+import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
@@ -809,7 +811,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new GetUserAccountQuotesRequestBuilder(userId, userSecret, symbols, accountId);
     }
-    private okhttp3.Call placeForceOrderCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeForceOrderCall(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -823,7 +825,7 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = manualTradeForm;
+        Object localVarPostBody = manualTradeFormWithOptions;
 
         // create path and map variables
         String localVarPath = "/trade/place";
@@ -863,7 +865,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeForceOrderValidateBeforeCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeForceOrderValidateBeforeCall(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling placeForceOrder(Async)");
@@ -874,25 +876,25 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling placeForceOrder(Async)");
         }
 
-        // verify the required parameter 'manualTradeForm' is set
-        if (manualTradeForm == null) {
-            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling placeForceOrder(Async)");
+        // verify the required parameter 'manualTradeFormWithOptions' is set
+        if (manualTradeFormWithOptions == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeFormWithOptions' when calling placeForceOrder(Async)");
         }
 
-        return placeForceOrderCall(userId, userSecret, manualTradeForm, _callback);
+        return placeForceOrderCall(userId, userSecret, manualTradeFormWithOptions, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecord> placeForceOrderWithHttpInfo(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
-        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeForm, null);
+    private ApiResponse<AccountOrderRecord> placeForceOrderWithHttpInfo(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions) throws ApiException {
+        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeFormWithOptions, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeForceOrderAsync(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call placeForceOrderAsync(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeForm, _callback);
+        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeFormWithOptions, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -900,27 +902,47 @@ public class TradingApiGenerated {
 
     public abstract class PlaceForceOrderRequestBuilderGenerated {
         final UUID accountId;
-        final ActionStrict action;
-        final UUID universalSymbolId;
+        final ActionStrictWithOptions action;
         final OrderTypeStrict orderType;
         final TimeInForceStrict timeInForce;
         final String userId;
         final String userSecret;
+        UUID universalSymbolId;
+        String symbol;
         Double price;
         Double stop;
         Double units;
         Object notionalValue;
 
-        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
             this.accountId = accountId;
             this.action = action;
-            this.universalSymbolId = universalSymbolId;
             this.orderType = orderType;
             this.timeInForce = timeInForce;
             this.userId = userId;
             this.userSecret = userSecret;
         }
 
+        /**
+         * Set universalSymbolId
+         * @param universalSymbolId Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder universalSymbolId(UUID universalSymbolId) {
+            this.universalSymbolId = universalSymbolId;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\&quot;AAPL  131124C00240000\\\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
         /**
          * Set price
          * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
@@ -965,22 +987,11 @@ public class TradingApiGenerated {
         
         /**
          * Set units
-         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @param units For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder units(Double units) {
             this.units = units;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-
-        /**
-         * Set units
-         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder units(Integer units) {
-            this.units = units.doubleValue();
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         
@@ -1007,22 +1018,23 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderCall(userId, userSecret, manualTradeForm, _callback);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderCall(userId, userSecret, manualTradeFormWithOptions, _callback);
         }
 
-        private ManualTradeForm buildBodyParams() {
-            ManualTradeForm manualTradeForm = new ManualTradeForm();
-            manualTradeForm.accountId(this.accountId);
-            manualTradeForm.action(this.action);
-            manualTradeForm.universalSymbolId(this.universalSymbolId);
-            manualTradeForm.orderType(this.orderType);
-            manualTradeForm.timeInForce(this.timeInForce);
-            manualTradeForm.price(this.price);
-            manualTradeForm.stop(this.stop);
-            manualTradeForm.units(this.units);
-            manualTradeForm.notionalValue(this.notionalValue);
-            return manualTradeForm;
+        private ManualTradeFormWithOptions buildBodyParams() {
+            ManualTradeFormWithOptions manualTradeFormWithOptions = new ManualTradeFormWithOptions();
+            manualTradeFormWithOptions.accountId(this.accountId);
+            manualTradeFormWithOptions.action(this.action);
+            manualTradeFormWithOptions.universalSymbolId(this.universalSymbolId);
+            manualTradeFormWithOptions.symbol(this.symbol);
+            manualTradeFormWithOptions.orderType(this.orderType);
+            manualTradeFormWithOptions.timeInForce(this.timeInForce);
+            manualTradeFormWithOptions.price(this.price);
+            manualTradeFormWithOptions.stop(this.stop);
+            manualTradeFormWithOptions.units(this.units);
+            manualTradeFormWithOptions.notionalValue(this.notionalValue);
+            return manualTradeFormWithOptions;
         }
 
         /**
@@ -1037,8 +1049,8 @@ public class TradingApiGenerated {
          </table>
          */
         public AccountOrderRecord execute() throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = placeForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = placeForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
             return localVarResp.getResponseBody();
         }
 
@@ -1054,8 +1066,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
         }
 
         /**
@@ -1071,8 +1083,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderAsync(userId, userSecret, manualTradeForm, _callback);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderAsync(userId, userSecret, manualTradeFormWithOptions, _callback);
         }
     }
 
@@ -1081,7 +1093,7 @@ public class TradingApiGenerated {
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param manualTradeForm  (required)
+     * @param manualTradeFormWithOptions  (required)
      * @return PlaceForceOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1090,14 +1102,11 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
         if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
-        if (universalSymbolId == null) throw new IllegalArgumentException("\"universalSymbolId\" is required but got null");
-            
-
         if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
@@ -1106,7 +1115,7 @@ public class TradingApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
+        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, orderType, timeInForce, userId, userSecret);
     }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;

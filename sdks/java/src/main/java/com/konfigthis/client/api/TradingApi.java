@@ -3,8 +3,10 @@ package com.konfigthis.client.api;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
+import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
+import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
@@ -37,8 +39,8 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {
-        public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
-            super(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
+        public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+            super(accountId, action, orderType, timeInForce, userId, userSecret);
         }
     }
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {

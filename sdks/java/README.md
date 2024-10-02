@@ -1677,7 +1677,9 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 ```java
 AccountOrderRecord result = client
         .trading
-        .placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
+        .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
+        .universalSymbolId(universalSymbolId)
+        .symbol(symbol)
         .price(price)
         .stop(stop)
         .units(units)
@@ -1693,10 +1695,6 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ##### action:<a id="action"></a>
 
-##### universal_symbol_id: `UUID`<a id="universal_symbol_id-uuid"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-
 ##### order_type:<a id="order_type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
@@ -1704,6 +1702,14 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### universal_symbol_id: `UUID`<a id="universal_symbol_id-uuid"></a>
+
+Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+
+##### symbol: `String`<a id="symbol-string"></a>
+
+The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `Double`<a id="price-double"></a>
 
@@ -1713,9 +1719,9 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: `Double`<a id="units-double"></a>
+##### units: [`Double`](./src/main/java/com/konfigthis/client/model/ModelDouble.java)<a id="units-doublesrcmainjavacomkonfigthisclientmodelmodeldoublejava"></a>
 
-Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `Object`<a id="notional_value-object"></a>
 
@@ -1823,7 +1829,7 @@ Optional comma separated list of SnapTrade Connection (Brokerage Authorization) 
 
 ##### type: `String`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -1306,14 +1306,16 @@ paths:
         schema:
           $ref: '#/components/schemas/BrokerageAuthIDs'
         style: form
-      - description: "Optional comma separated list of transaction types to filter\
-          \ by. SnapTrade does a best effort to categorize brokerage transaction types\
-          \ into a common set of values. Here are some of the most popular values:\n\
-          \  - `BUY` - Asset bought.\n  - `SELL` - Asset sold.\n  - `DIVIDEND` - Dividend\
-          \ payout.\n  - `CONTRIBUTION` - Cash contribution.\n  - `WITHDRAWAL` - Cash\
-          \ withdrawal.\n  - `REI` - Dividend reinvestment.\n  - `INTEREST` - Interest\
-          \ deposited into the account.\n  - `FEE` - Fee withdrawn from the account.\
-          \ \n"
+      - description: |
+          Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
+            - `BUY` - Asset bought.
+            - `SELL` - Asset sold.
+            - `DIVIDEND` - Dividend payout.
+            - `CONTRIBUTION` - Cash contribution.
+            - `WITHDRAWAL` - Cash withdrawal.
+            - `REI` - Dividend reinvestment.
+            - `INTEREST` - Interest deposited into the account.
+            - `FEE` - Fee withdrawn from the account.
         explode: true
         in: query
         name: type
@@ -1629,7 +1631,7 @@ paths:
           $ref: '#/components/schemas/UserSecret'
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/ManualTradeFormRequestBody'
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBodyWithOptions'
       responses:
         "200":
           content:
@@ -2047,6 +2049,12 @@ components:
           schema:
             $ref: '#/components/schemas/ManualTradeForm'
       required: true
+    ManualTradeFormRequestBodyWithOptions:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ManualTradeFormWithOptions'
+      required: true
     ValidatedTradeRequestBody:
       content:
         application/json:
@@ -2208,6 +2216,7 @@ components:
           description: "All transactions up to this date have been successfully synced.\
             \ Please note that this is not the date of the last transaction, nor the\
             \ last time SnapTrade attempted to sync transactions."
+          nullable: true
         first_transaction_date:
           allOf:
           - $ref: '#/components/schemas/SyncStatusDate'
@@ -2236,6 +2245,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/HoldingsSyncStatusDate'
           description: The last time holdings were successfully synced by SnapTrade.
+          nullable: true
     AccountBalance:
       description: Contains balance related information for the account.
       example:
@@ -5596,6 +5606,84 @@ components:
       - time_in_force
       - universal_symbol_id
       type: object
+    ManualTradeFormWithOptions:
+      description: Inputs for placing an order with the brokerage.
+      example:
+        universal_symbol_id: ""
+        symbol: AAPL  131124C00240000
+        time_in_force: null
+        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        stop: 31.33
+        price: 31.33
+        notional_value: null
+        action: null
+        units: ""
+        order_type: Market
+      properties:
+        account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        action:
+          $ref: '#/components/schemas/ActionStrictWithOptions'
+        universal_symbol_id:
+          allOf:
+          - $ref: '#/components/schemas/UniversalSymbolID'
+          description: "The universal symbol ID of the security to trade. Must be\
+            \ 'null' if `symbol` is provided, otherwise must be provided."
+          nullable: true
+        symbol:
+          description: "The security's trading ticker symbol. This currently only\
+            \ support Options symbols in the 21 character OCC format. For example\
+            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ on 2024-11-13 with a strike price of $240. For more information on the\
+            \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
+            \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
+          example: AAPL  131124C00240000
+          nullable: true
+          type: string
+          x-konfig-original-example: AAPL  131124C00240000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-symbol
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-stop
+        units:
+          allOf:
+          - $ref: '#/components/schemas/Units'
+          description: "For Equity orders, this represents the number of shares for\
+            \ the order. This can be a decimal for fractional orders. Must be `null`\
+            \ if `notional_value` is provided. If placing an Option order, this field\
+            \ represents the number of contracts to buy or sell. (e.g., 1 contract\
+            \ = 100 shares)."
+          nullable: true
+        notional_value:
+          $ref: '#/components/schemas/ManualTradeForm_notional_value'
+      required:
+      - account_id
+      - action
+      - order_type
+      - time_in_force
+      type: object
     ValidatedTradeBody:
       example:
         wait_to_confirm: true
@@ -5652,10 +5740,22 @@ components:
       type: string
     ActionStrict:
       description: The action describes the intent or side of a trade. This is either
-        `BUY` or `SELL`
+        `BUY` or `SELL`.
       enum:
       - BUY
       - SELL
+      type: string
+    ActionStrictWithOptions:
+      description: "The action describes the intent or side of a trade. This is either\
+        \ `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN`\
+        \ or `SELL_TO_CLOSE` for Options."
+      enum:
+      - BUY
+      - SELL
+      - BUY_TO_OPEN
+      - BUY_TO_CLOSE
+      - SELL_TO_OPEN
+      - SELL_TO_CLOSE
       type: string
     Action:
       description: |
@@ -5771,14 +5871,16 @@ components:
         currency:
           $ref: '#/components/schemas/UniversalActivity_currency'
         type:
-          description: "A string representing the type of transaction. SnapTrade does\
-            \ a best effort to categorize the brokerage transaction types into a common\
-            \ set of values. Here are some of the most popular values:\n  - `BUY`\
-            \ - Asset bought.\n  - `SELL` - Asset sold.\n  - `DIVIDEND` - Dividend\
-            \ payout.\n  - `CONTRIBUTION` - Cash contribution.\n  - `WITHDRAWAL` -\
-            \ Cash withdrawal.\n  - `REI` - Dividend reinvestment.\n  - `INTEREST`\
-            \ - Interest deposited into the account.\n  - `FEE` - Fee withdrawn from\
-            \ the account. \n"
+          description: |
+            A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
+              - `BUY` - Asset bought.
+              - `SELL` - Asset sold.
+              - `DIVIDEND` - Dividend payout.
+              - `CONTRIBUTION` - Cash contribution.
+              - `WITHDRAWAL` - Cash withdrawal.
+              - `REI` - Dividend reinvestment.
+              - `INTEREST` - Interest deposited into the account.
+              - `FEE` - Fee withdrawn from the account.
           type: string
         option_type:
           description: |
@@ -7162,6 +7264,18 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-symbol:
+      example: AAPL  131124C00240000
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-stop:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
       type: boolean
@@ -8052,9 +8166,25 @@ components:
         account_id:
           $ref: '#/components/schemas/AccountID'
         action:
-          $ref: '#/components/schemas/ActionStrict'
+          $ref: '#/components/schemas/ActionStrictWithOptions'
         universal_symbol_id:
-          $ref: '#/components/schemas/UniversalSymbolID'
+          allOf:
+          - $ref: '#/components/schemas/UniversalSymbolID'
+          description: "The universal symbol ID of the security to trade. Must be\
+            \ 'null' if `symbol` is provided, otherwise must be provided."
+          nullable: true
+        symbol:
+          description: "The security's trading ticker symbol. This currently only\
+            \ support Options symbols in the 21 character OCC format. For example\
+            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ on 2024-11-13 with a strike price of $240. For more information on the\
+            \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
+            \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
+          example: AAPL  131124C00240000
+          nullable: true
+          type: string
+          x-konfig-original-example: AAPL  131124C00240000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-symbol
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
@@ -8065,7 +8195,7 @@ components:
           nullable: true
           type: number
           x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-price
         stop:
           description: The price at which a stop order is triggered for `Stop` and
             `StopLimit` orders.
@@ -8073,10 +8203,15 @@ components:
           nullable: true
           type: number
           x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeForm-properties-stop
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-stop
         units:
           allOf:
           - $ref: '#/components/schemas/Units'
+          description: "For Equity orders, this represents the number of shares for\
+            \ the order. This can be a decimal for fractional orders. Must be `null`\
+            \ if `notional_value` is provided. If placing an Option order, this field\
+            \ represents the number of contracts to buy or sell. (e.g., 1 contract\
+            \ = 100 shares)."
           nullable: true
         notional_value:
           allOf:
@@ -8087,7 +8222,6 @@ components:
       - action
       - order_type
       - time_in_force
-      - universal_symbol_id
       - userId
       - userSecret
       type: object

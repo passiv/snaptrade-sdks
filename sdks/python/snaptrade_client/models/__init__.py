@@ -25,6 +25,7 @@ from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.action_strict import ActionStrict
+from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.model.balance import Balance
 from snaptrade_client.model.brokerage import Brokerage
 from snaptrade_client.model.brokerage_auth_id import BrokerageAuthID
@@ -54,12 +55,14 @@ from snaptrade_client.model.figi_instrument import FigiInstrument
 from snaptrade_client.model.figi_instrument_nullable import FigiInstrumentNullable
 from snaptrade_client.model.holdings_status import HoldingsStatus
 from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
+from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable
 from snaptrade_client.model.id import Id
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI
 from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance
 from snaptrade_client.model.manual_trade_form import ManualTradeForm
+from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
@@ -119,6 +122,7 @@ from snaptrade_client.model.symbol_nullable import SymbolNullable
 from snaptrade_client.model.symbol_query import SymbolQuery
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.sync_status_date import SyncStatusDate
+from snaptrade_client.model.sync_status_date_nullable import SyncStatusDateNullable
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
@@ -131,6 +135,7 @@ from snaptrade_client.model.units_nullable import UnitsNullable
 from snaptrade_client.model.universal_activity import UniversalActivity
 from snaptrade_client.model.universal_symbol import UniversalSymbol
 from snaptrade_client.model.universal_symbol_id import UniversalSymbolID
+from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable
 from snaptrade_client.model.user_id import UserID
 from snaptrade_client.model.user_i_dand_secret import UserIDandSecret
 from snaptrade_client.model.user_list import UserList

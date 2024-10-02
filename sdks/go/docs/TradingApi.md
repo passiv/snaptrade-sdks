@@ -220,25 +220,27 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
+    universalSymbolId := *snaptrade.Newstring()
     units := *snaptrade.Newfloat32()
     notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
     
-    manualTradeForm := *snaptrade.NewManualTradeForm(
+    manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         null,
-        "2bcd7cc3-e922-4976-bce1-9858296801c3",
         null,
         null,
     )
-    manualTradeForm.SetPrice(31.33)
-    manualTradeForm.SetStop(31.33)
-    manualTradeForm.SetUnits(units)
-    manualTradeForm.SetNotionalValue(notionalValue)
+    manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
+    manualTradeFormWithOptions.SetSymbol("AAPL  131124C00240000")
+    manualTradeFormWithOptions.SetPrice(31.33)
+    manualTradeFormWithOptions.SetStop(31.33)
+    manualTradeFormWithOptions.SetUnits(units)
+    manualTradeFormWithOptions.SetNotionalValue(notionalValue)
     
     request := client.TradingApi.PlaceForceOrder(
         "userId_example",
         "userSecret_example",
-        manualTradeForm,
+        manualTradeFormWithOptions,
     )
     
     resp, httpRes, err := request.Execute()

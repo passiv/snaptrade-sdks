@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.ActionStrict
-The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
 
 ## Properties
 

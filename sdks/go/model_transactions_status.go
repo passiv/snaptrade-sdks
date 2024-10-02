@@ -20,7 +20,7 @@ type TransactionsStatus struct {
 	// Indicates if the initial sync of transactions has been completed. For accounts with a large number of transactions, the initial sync may take a while to complete.
 	InitialSyncCompleted *bool `json:"initial_sync_completed,omitempty"`
 	// All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
-	LastSuccessfulSync *string `json:"last_successful_sync,omitempty"`
+	LastSuccessfulSync NullableString `json:"last_successful_sync,omitempty"`
 	// The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
 	FirstTransactionDate *string `json:"first_transaction_date,omitempty"`
 }
@@ -74,36 +74,46 @@ func (o *TransactionsStatus) SetInitialSyncCompleted(v bool) {
 	o.InitialSyncCompleted = &v
 }
 
-// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionsStatus) GetLastSuccessfulSync() string {
-	if o == nil || isNil(o.LastSuccessfulSync) {
+	if o == nil || isNil(o.LastSuccessfulSync.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.LastSuccessfulSync
+	return *o.LastSuccessfulSync.Get()
 }
 
 // GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionsStatus) GetLastSuccessfulSyncOk() (*string, bool) {
-	if o == nil || isNil(o.LastSuccessfulSync) {
+	if o == nil {
     return nil, false
 	}
-	return o.LastSuccessfulSync, true
+	return o.LastSuccessfulSync.Get(), o.LastSuccessfulSync.IsSet()
 }
 
 // HasLastSuccessfulSync returns a boolean if a field has been set.
 func (o *TransactionsStatus) HasLastSuccessfulSync() bool {
-	if o != nil && !isNil(o.LastSuccessfulSync) {
+	if o != nil && o.LastSuccessfulSync.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastSuccessfulSync gets a reference to the given string and assigns it to the LastSuccessfulSync field.
+// SetLastSuccessfulSync gets a reference to the given NullableString and assigns it to the LastSuccessfulSync field.
 func (o *TransactionsStatus) SetLastSuccessfulSync(v string) {
-	o.LastSuccessfulSync = &v
+	o.LastSuccessfulSync.Set(&v)
+}
+// SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
+func (o *TransactionsStatus) SetLastSuccessfulSyncNil() {
+	o.LastSuccessfulSync.Set(nil)
+}
+
+// UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
+func (o *TransactionsStatus) UnsetLastSuccessfulSync() {
+	o.LastSuccessfulSync.Unset()
 }
 
 // GetFirstTransactionDate returns the FirstTransactionDate field value if set, zero value otherwise.
@@ -143,8 +153,8 @@ func (o TransactionsStatus) MarshalJSON() ([]byte, error) {
 	if !isNil(o.InitialSyncCompleted) {
 		toSerialize["initial_sync_completed"] = o.InitialSyncCompleted
 	}
-	if !isNil(o.LastSuccessfulSync) {
-		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
+	if o.LastSuccessfulSync.IsSet() {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync.Get()
 	}
 	if !isNil(o.FirstTransactionDate) {
 		toSerialize["first_transaction_date"] = o.FirstTransactionDate

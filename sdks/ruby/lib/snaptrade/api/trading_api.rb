@@ -146,7 +146,7 @@ module SnapTrade
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
@@ -179,7 +179,7 @@ module SnapTrade
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
@@ -417,31 +417,33 @@ module SnapTrade
     # It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
-    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+    # @param symbol [String] The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    # @param units [Float] 
+    # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
-    # @param body [ManualTradeForm] 
+    # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
-      manual_trade_form = _body
-      data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+      manual_trade_form_with_options = _body
+      data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
       data
     end
 
@@ -454,42 +456,44 @@ module SnapTrade
     # It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this.
     #
     # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`
-    # @param universal_symbol_id [String] Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+    # @param symbol [String] The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    # @param units [Float] 
+    # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
-    # @param body [ManualTradeForm] 
+    # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(account_id:, action:, universal_symbol_id:, order_type:, time_in_force:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:universal_symbol_id] = universal_symbol_id if universal_symbol_id != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
-      manual_trade_form = _body
-      place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
+      manual_trade_form_with_options = _body
+      place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
     end
 
     # Place order
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param manual_trade_form [ManualTradeForm] 
+    # @param manual_trade_form_with_options [ManualTradeFormWithOptions] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    private def place_force_order_impl(user_id, user_secret, manual_trade_form, opts = {})
-      data, _status_code, _headers = place_force_order_with_http_info(user_id, user_secret, manual_trade_form, opts)
+    private def place_force_order_impl(user_id, user_secret, manual_trade_form_with_options, opts = {})
+      data, _status_code, _headers = place_force_order_with_http_info(user_id, user_secret, manual_trade_form_with_options, opts)
       data
     end
 
@@ -497,10 +501,10 @@ module SnapTrade
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param manual_trade_form [ManualTradeForm] 
+    # @param manual_trade_form_with_options [ManualTradeFormWithOptions] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form, opts = {})
+    private def place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_force_order ...'
       end
@@ -512,9 +516,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && user_secret.nil?
         fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_force_order"
       end
-      # verify the required parameter 'manual_trade_form' is set
-      if @api_client.config.client_side_validation && manual_trade_form.nil?
-        fail ArgumentError, "Missing the required parameter 'manual_trade_form' when calling TradingApi.place_force_order"
+      # verify the required parameter 'manual_trade_form_with_options' is set
+      if @api_client.config.client_side_validation && manual_trade_form_with_options.nil?
+        fail ArgumentError, "Missing the required parameter 'manual_trade_form_with_options' when calling TradingApi.place_force_order"
       end
       # resource path
       local_var_path = '/trade/place'
@@ -538,7 +542,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_form)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_form_with_options)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AccountOrderRecord'

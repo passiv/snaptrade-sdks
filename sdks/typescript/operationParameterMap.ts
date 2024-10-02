@@ -488,9 +488,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'action'
             },
             {
-                name: 'universal_symbol_id'
-            },
-            {
                 name: 'order_type'
             },
             {
@@ -501,6 +498,12 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'userSecret'
+            },
+            {
+                name: 'universal_symbol_id'
+            },
+            {
+                name: 'symbol'
             },
             {
                 name: 'price'

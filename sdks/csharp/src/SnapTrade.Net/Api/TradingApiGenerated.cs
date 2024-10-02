@@ -123,10 +123,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
+        AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0);
 
         /// <summary>
         /// Place order
@@ -137,10 +137,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0);
         /// <summary>
         /// Place checked order
         /// </summary>
@@ -281,11 +281,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place order
@@ -296,11 +296,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place checked order
         /// </summary>
@@ -1140,12 +1140,12 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0)
+        public AccountOrderRecord PlaceForceOrder(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
             return localVarResponse.Data;
         }
 
@@ -1155,10 +1155,10 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceForceOrderWithHttpInfo(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1172,10 +1172,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceForceOrder");
             }
 
-            // verify the required parameter 'manualTradeForm' is set
-            if (manualTradeForm == null)
+            // verify the required parameter 'manualTradeFormWithOptions' is set
+            if (manualTradeFormWithOptions == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeForm' when calling TradingApi->PlaceForceOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeFormWithOptions' when calling TradingApi->PlaceForceOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1203,7 +1203,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = manualTradeForm;
+            localVarRequestOptions.Data = manualTradeFormWithOptions;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceForceOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1244,13 +1244,13 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceForceOrderAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceForceOrderWithHttpInfoAsync(userId, userSecret, manualTradeForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceForceOrderWithHttpInfoAsync(userId, userSecret, manualTradeFormWithOptions, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1260,11 +1260,11 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="manualTradeForm"></param>
+        /// <param name="manualTradeFormWithOptions"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeForm manualTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceForceOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1278,10 +1278,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->PlaceForceOrder");
             }
 
-            // verify the required parameter 'manualTradeForm' is set
-            if (manualTradeForm == null)
+            // verify the required parameter 'manualTradeFormWithOptions' is set
+            if (manualTradeFormWithOptions == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeForm' when calling TradingApi->PlaceForceOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeFormWithOptions' when calling TradingApi->PlaceForceOrder");
             }
 
 
@@ -1310,7 +1310,7 @@ namespace SnapTrade.Net.Api
 
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = manualTradeForm;
+            localVarRequestOptions.Data = manualTradeFormWithOptions;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceForceOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
