@@ -21,7 +21,7 @@ type HoldingsStatus struct {
 	// Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
 	InitialSyncCompleted *bool `json:"initial_sync_completed,omitempty"`
 	// The last time holdings were successfully synced by SnapTrade.
-	LastSuccessfulSync NullableTime.Time `json:"last_successful_sync,omitempty"`
+	LastSuccessfulSync NullableTime `json:"last_successful_sync,omitempty"`
 }
 
 // NewHoldingsStatus instantiates a new HoldingsStatus object
