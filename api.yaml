@@ -1457,7 +1457,7 @@ paths:
           schema:
             $ref: "#/components/schemas/UserSecret"
       requestBody:
-        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBodyWithOptions"
       responses:
         "200":
           description: OK
@@ -1613,7 +1613,7 @@ paths:
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
-              - `FEE` - Fee withdrawn from the account. 
+              - `FEE` - Fee withdrawn from the account.
           schema:
             type: string
             example: BUY,SELL,DIVIDEND
@@ -1875,6 +1875,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeForm"
+    ManualTradeFormRequestBodyWithOptions:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeFormWithOptions"
     ValidatedTradeRequestBody:
       required: false
       content:
@@ -2011,6 +2017,7 @@ components:
           example: true
         last_successful_sync:
           description: All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/SyncStatusDate"
         first_transaction_date:
@@ -2030,6 +2037,7 @@ components:
           example: true
         last_successful_sync:
           description: The last time holdings were successfully synced by SnapTrade.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/HoldingsSyncStatusDate"
     AccountBalance:
@@ -3560,6 +3568,52 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    ManualTradeFormWithOptions:
+      description: Inputs for placing an order with the brokerage.
+      type: object
+      required:
+        - account_id
+        - action
+        - order_type
+        - time_in_force
+      properties:
+        account_id:
+          $ref: "#/components/schemas/AccountID"
+        action:
+          $ref: "#/components/schemas/ActionStrictWithOptions"
+        universal_symbol_id:
+          description: The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UniversalSymbolID"
+        symbol:
+          description: The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example "AAPL  131124C00240000" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+          type: string
+          example: AAPL  131124C00240000
+          nullable: true
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          description: For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Units"
+        notional_value:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/NotionalValue"
     ValidatedTradeBody:
       type: object
       properties:
@@ -3609,11 +3663,21 @@ components:
           * GTD - Good Til Date
       type: string
     ActionStrict:
-      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
       type: string
       enum:
         - BUY
         - SELL
+    ActionStrictWithOptions:
+      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+      type: string
+      enum:
+        - BUY
+        - SELL
+        - BUY_TO_OPEN
+        - BUY_TO_CLOSE
+        - SELL_TO_OPEN
+        - SELL_TO_CLOSE
     Action:
       type: string
       description: >
@@ -3692,7 +3756,7 @@ components:
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
-              - `FEE` - Fee withdrawn from the account. 
+              - `FEE` - Fee withdrawn from the account.
         option_type:
           type: string
           example: BUY_TO_OPEN
