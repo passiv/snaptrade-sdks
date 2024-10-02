@@ -54,7 +54,7 @@ export interface ManualTrade {
      */
     'symbol'?: ManualTradeSymbol;
     /**
-     * The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+     * The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
      * @type {ActionStrict}
      * @memberof ManualTrade
      */

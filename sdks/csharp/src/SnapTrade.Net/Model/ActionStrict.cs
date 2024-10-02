@@ -27,9 +27,9 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;
+    /// The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;.
     /// </summary>
-    /// <value>The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;</value>
+    /// <value>The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;.</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum ActionStrict
     {

@@ -18,8 +18,10 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
+import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
+import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TimeInForceStrict;
@@ -128,17 +130,20 @@ public class TradingApiTest {
     @Test
     public void placeForceOrderTest() throws ApiException {
         UUID accountId = null;
-        ActionStrict action = null;
-        UUID universalSymbolId = null;
+        ActionStrictWithOptions action = null;
         OrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         String userId = null;
         String userSecret = null;
+        UUID universalSymbolId = null;
+        String symbol = null;
         Double price = null;
         Double stop = null;
         Double units = null;
         Object notionalValue = null;
-        AccountOrderRecord response = api.placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
+        AccountOrderRecord response = api.placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
+                .universalSymbolId(universalSymbolId)
+                .symbol(symbol)
                 .price(price)
                 .stop(stop)
                 .units(units)

@@ -1628,11 +1628,12 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 place_force_order_response = snaptrade.trading.place_force_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type="Market",
     time_in_force="FOK",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol="AAPL  131124C00240000",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -1646,11 +1647,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
-
-##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
@@ -1660,6 +1657,14 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
+##### universal_symbol_id: [`UniversalSymbolIDNullable`](./snaptrade_client/type/universal_symbol_id_nullable.py)<a id="universal_symbol_id-universalsymbolidnullablesnaptrade_clienttypeuniversal_symbol_id_nullablepy"></a>
+
+The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
+
+The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -1668,13 +1673,15 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`ManualTradeForm`](./snaptrade_client/type/manual_trade_form.py)
+[`ManualTradeFormWithOptions`](./snaptrade_client/type/manual_trade_form_with_options.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
@@ -1781,7 +1788,7 @@ Optional comma separated list of SnapTrade Connection (Brokerage Authorization) 
 
 ##### type: `str`<a id="type-str"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

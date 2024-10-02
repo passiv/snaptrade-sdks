@@ -28,7 +28,7 @@ export interface ManualTradeForm {
      */
     'account_id': string;
     /**
-     * The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+     * The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
      * @type {ActionStrict}
      * @memberof ManualTradeForm
      */

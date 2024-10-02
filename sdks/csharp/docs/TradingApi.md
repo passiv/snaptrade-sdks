@@ -358,19 +358,21 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-            var action = ActionStrict.BUY;
+            var action = ActionStrictWithOptions.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+            var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+            var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
             var notionalValue = new NotionalValueNullable(100);
             
-            var manualTradeForm = new ManualTradeForm(
+            var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
                 accountId,
                 action,
                 universalSymbolId,
+                symbol,
                 orderType,
                 timeInForce,
                 price,
@@ -382,7 +384,7 @@ namespace Example
             try
             {
                 // Place order
-                AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeForm);
+                AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeFormWithOptions);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -409,7 +411,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place order
-    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -428,7 +430,7 @@ catch (ApiException e)
 |------|------|-------------|-------|
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **manualTradeForm** | [**ManualTradeForm**](ManualTradeForm.md) |  |  |
+| **manualTradeFormWithOptions** | [**ManualTradeFormWithOptions**](ManualTradeFormWithOptions.md) |  |  |
 
 ### Return type
 

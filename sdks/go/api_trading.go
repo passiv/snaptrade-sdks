@@ -584,7 +584,7 @@ type TradingApiPlaceForceOrderRequest struct {
 	ApiService *TradingApiService
 	userId string
 	userSecret string
-	manualTradeForm ManualTradeForm
+	manualTradeFormWithOptions ManualTradeFormWithOptions
 }
 
 func (r TradingApiPlaceForceOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
@@ -604,16 +604,16 @@ It's recommended to trigger a manual refresh of the account after placing an ord
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param manualTradeForm
+ @param manualTradeFormWithOptions
  @return TradingApiPlaceForceOrderRequest
 */
-func (a *TradingApiService) PlaceForceOrder(userId string, userSecret string, manualTradeForm ManualTradeForm) TradingApiPlaceForceOrderRequest {
+func (a *TradingApiService) PlaceForceOrder(userId string, userSecret string, manualTradeFormWithOptions ManualTradeFormWithOptions) TradingApiPlaceForceOrderRequest {
 	return TradingApiPlaceForceOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
-		manualTradeForm: manualTradeForm,
+		manualTradeFormWithOptions: manualTradeFormWithOptions,
 	}
 }
 
@@ -662,8 +662,8 @@ func (a *TradingApiService) PlaceForceOrderExecute(r TradingApiPlaceForceOrderRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.manualTradeForm) {
-        localVarPostBody = r.manualTradeForm
+    if !checkNilInterface(r.manualTradeFormWithOptions) {
+        localVarPostBody = r.manualTradeFormWithOptions
     }
 	if r.ctx != nil {
 		// API Key Authentication

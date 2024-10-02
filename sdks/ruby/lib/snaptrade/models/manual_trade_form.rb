@@ -16,7 +16,7 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account_id
 
-    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     attr_accessor :action
 
     # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.

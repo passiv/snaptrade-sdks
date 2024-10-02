@@ -1559,7 +1559,7 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
 
-The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
@@ -1665,6 +1665,7 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  symbol: "AAPL  131124C00240000",
   order_type: "Market",
   time_in_force: "FOK",
   price: 31.33,
@@ -1679,13 +1680,9 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
 
-The action describes the intent or side of a trade. This is either `BUY` or `SELL`
-
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
 
 ##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
@@ -1699,6 +1696,14 @@ The Time in Force type for the order. This field indicates how long the order wi
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
+##### universal_symbol_id: [`string`](./models/model-string.ts)<a id="universal_symbol_id-stringmodelsmodel-stringts"></a>
+
+The universal symbol ID of the security to trade. Must be \\\'null\\\' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \\\'symbol\\\' is provided, then \\\'universal_symbol_id\\\' must be \\\'null\\\'.
+
 ##### price: `number`<a id="price-number"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -1708,6 +1713,8 @@ The limit price for `Limit` and `StopLimit` orders.
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
@@ -1819,7 +1826,7 @@ Optional comma separated list of SnapTrade Connection (Brokerage Authorization) 
 
 ##### type: `string`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account. 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

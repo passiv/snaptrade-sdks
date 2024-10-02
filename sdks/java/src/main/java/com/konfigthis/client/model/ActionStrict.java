@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;
+ * The action describes the intent or side of a trade. This is either &#x60;BUY&#x60; or &#x60;SELL&#x60;.
  */
 @JsonAdapter(ActionStrict.Adapter.class)public enum ActionStrict {
   

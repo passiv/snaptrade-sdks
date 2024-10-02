@@ -482,9 +482,6 @@ operation_parameter_map = {
                 'name': 'action'
             },
             {
-                'name': 'universal_symbol_id'
-            },
-            {
                 'name': 'order_type'
             },
             {
@@ -495,6 +492,12 @@ operation_parameter_map = {
             },
             {
                 'name': 'userSecret'
+            },
+            {
+                'name': 'universal_symbol_id'
+            },
+            {
+                'name': 'symbol'
             },
             {
                 'name': 'price'

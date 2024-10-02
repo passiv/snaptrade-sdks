@@ -27,7 +27,7 @@ module SnapTrade
 
     attr_accessor :symbol
 
-    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     attr_accessor :action
 
     attr_accessor :units

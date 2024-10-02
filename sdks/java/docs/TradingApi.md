@@ -350,7 +350,7 @@ public class Example {
 
 <a name="placeForceOrder"></a>
 # **placeForceOrder**
-> AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeForm).execute();
+> AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeFormWithOptions).execute();
 
 Place order
 
@@ -379,20 +379,23 @@ public class Example {
     
     Snaptrade client = new Snaptrade(configuration);
     UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    ActionStrict action = ActionStrict.fromValue("BUY");
-    UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     String userId = "userId_example";
     String userSecret = "userSecret_example";
+    UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+    String symbol = "symbol_example"; // The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
-    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     Object notionalValue = null;
     try {
       AccountOrderRecord result = client
               .trading
-              .placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
+              .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
+              .universalSymbolId(universalSymbolId)
+              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -430,7 +433,9 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .placeForceOrder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret)
+              .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
+              .universalSymbolId(universalSymbolId)
+              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -459,7 +464,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **manualTradeForm** | [**ManualTradeForm**](ManualTradeForm.md)|  | |
+| **manualTradeFormWithOptions** | [**ManualTradeFormWithOptions**](ManualTradeFormWithOptions.md)|  | |
 
 ### Return type
 

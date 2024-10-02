@@ -42,42 +42,10 @@ class HoldingsStatus(
         
         class properties:
             initial_sync_completed = schemas.BoolSchema
-            
-            
-            class last_successful_sync(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            HoldingsSyncStatusDate,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'last_successful_sync':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+        
+            @staticmethod
+            def last_successful_sync() -> typing.Type['HoldingsSyncStatusDateNullable']:
+                return HoldingsSyncStatusDateNullable
             __annotations__ = {
                 "initial_sync_completed": initial_sync_completed,
                 "last_successful_sync": last_successful_sync,
@@ -88,7 +56,7 @@ class HoldingsStatus(
     def __getitem__(self, name: typing_extensions.Literal["initial_sync_completed"]) -> MetaOapg.properties.initial_sync_completed: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["last_successful_sync"]) -> MetaOapg.properties.last_successful_sync: ...
+    def __getitem__(self, name: typing_extensions.Literal["last_successful_sync"]) -> 'HoldingsSyncStatusDateNullable': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
@@ -102,7 +70,7 @@ class HoldingsStatus(
     def get_item_oapg(self, name: typing_extensions.Literal["initial_sync_completed"]) -> typing.Union[MetaOapg.properties.initial_sync_completed, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["last_successful_sync"]) -> typing.Union[MetaOapg.properties.last_successful_sync, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["last_successful_sync"]) -> typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -115,7 +83,7 @@ class HoldingsStatus(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
         initial_sync_completed: typing.Union[MetaOapg.properties.initial_sync_completed, bool, schemas.Unset] = schemas.unset,
-        last_successful_sync: typing.Union[MetaOapg.properties.last_successful_sync, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        last_successful_sync: typing.Union['HoldingsSyncStatusDateNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'HoldingsStatus':
@@ -128,4 +96,4 @@ class HoldingsStatus(
             **kwargs,
         )
 
-from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
+from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable

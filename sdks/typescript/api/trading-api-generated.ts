@@ -23,11 +23,15 @@ import { AccountOrderRecord } from '../models';
 // @ts-ignore
 import { ActionStrict } from '../models';
 // @ts-ignore
+import { ActionStrictWithOptions } from '../models';
+// @ts-ignore
 import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
 import { ManualTradeForm } from '../models';
 // @ts-ignore
 import { ManualTradeFormNotionalValue } from '../models';
+// @ts-ignore
+import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
@@ -268,17 +272,17 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Place order
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {ManualTradeForm} manualTradeForm 
+         * @param {ManualTradeFormWithOptions} manualTradeFormWithOptions 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeForceOrder: async (userId: string, userSecret: string, manualTradeForm: ManualTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeForceOrder: async (userId: string, userSecret: string, manualTradeFormWithOptions: ManualTradeFormWithOptions, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('placeForceOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('placeForceOrder', 'userSecret', userSecret)
-            // verify required parameter 'manualTradeForm' is not null or undefined
-            assertParamExists('placeForceOrder', 'manualTradeForm', manualTradeForm)
+            // verify required parameter 'manualTradeFormWithOptions' is not null or undefined
+            assertParamExists('placeForceOrder', 'manualTradeFormWithOptions', manualTradeFormWithOptions)
             const localVarPath = `/trade/place`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -313,7 +317,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: manualTradeForm,
+                requestBody: manualTradeFormWithOptions,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -321,7 +325,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 pathTemplate: '/trade/place',
                 httpMethod: 'POST'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeForm, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormWithOptions, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -462,10 +466,11 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const manualTradeForm: ManualTradeForm = {
+            const manualTradeFormWithOptions: ManualTradeFormWithOptions = {
                 account_id: requestParameters.account_id,
                 action: requestParameters.action,
                 universal_symbol_id: requestParameters.universal_symbol_id,
+                symbol: requestParameters.symbol,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 price: requestParameters.price,
@@ -473,7 +478,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 units: requestParameters.units,
                 notional_value: requestParameters.notional_value
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, manualTradeForm, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, manualTradeFormWithOptions, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -671,7 +676,7 @@ export type TradingApiPlaceForceOrderRequest = {
     */
     readonly userSecret: string
     
-} & ManualTradeForm
+} & ManualTradeFormWithOptions
 
 /**
  * Request parameters for placeOrder operation in TradingApi.
