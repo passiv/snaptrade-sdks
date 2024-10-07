@@ -87,10 +87,6 @@ public class UniversalSymbol {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private SecurityType type;
 
-  public static final String SERIALIZED_NAME_CURRENCIES = "currencies";
-  @SerializedName(SERIALIZED_NAME_CURRENCIES)
-  private List<Currency> currencies = new ArrayList<>();
-
   public static final String SERIALIZED_NAME_FIGI_CODE = "figi_code";
   @SerializedName(SERIALIZED_NAME_FIGI_CODE)
   private String figiCode;
@@ -98,6 +94,10 @@ public class UniversalSymbol {
   public static final String SERIALIZED_NAME_FIGI_INSTRUMENT = "figi_instrument";
   @SerializedName(SERIALIZED_NAME_FIGI_INSTRUMENT)
   private FigiInstrumentNullable figiInstrument;
+
+  public static final String SERIALIZED_NAME_CURRENCIES = "currencies";
+  @SerializedName(SERIALIZED_NAME_CURRENCIES)
+  private List<Currency> currencies = new ArrayList<>();
 
   public UniversalSymbol() {
   }
@@ -305,42 +305,6 @@ public class UniversalSymbol {
   }
 
 
-  public UniversalSymbol currencies(List<Currency> currencies) {
-    
-    
-    
-    
-    this.currencies = currencies;
-    return this;
-  }
-
-  public UniversalSymbol addCurrenciesItem(Currency currenciesItem) {
-    this.currencies.add(currenciesItem);
-    return this;
-  }
-
-   /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-   * @return currencies
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
-
-  public List<Currency> getCurrencies() {
-    return currencies;
-  }
-
-
-  public void setCurrencies(List<Currency> currencies) {
-    
-    
-    
-    this.currencies = currencies;
-  }
-
-
   public UniversalSymbol figiCode(String figiCode) {
     
     
@@ -396,6 +360,42 @@ public class UniversalSymbol {
     
     
     this.figiInstrument = figiInstrument;
+  }
+
+
+  public UniversalSymbol currencies(List<Currency> currencies) {
+    
+    
+    
+    
+    this.currencies = currencies;
+    return this;
+  }
+
+  public UniversalSymbol addCurrenciesItem(Currency currenciesItem) {
+    this.currencies.add(currenciesItem);
+    return this;
+  }
+
+   /**
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * @return currencies
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+
+  public List<Currency> getCurrencies() {
+    return currencies;
+  }
+
+
+  public void setCurrencies(List<Currency> currencies) {
+    
+    
+    
+    this.currencies = currencies;
   }
 
   /**
@@ -460,9 +460,9 @@ public class UniversalSymbol {
         Objects.equals(this.currency, universalSymbol.currency) &&
         Objects.equals(this.exchange, universalSymbol.exchange) &&
         Objects.equals(this.type, universalSymbol.type) &&
-        Objects.equals(this.currencies, universalSymbol.currencies) &&
         Objects.equals(this.figiCode, universalSymbol.figiCode) &&
-        Objects.equals(this.figiInstrument, universalSymbol.figiInstrument)&&
+        Objects.equals(this.figiInstrument, universalSymbol.figiInstrument) &&
+        Objects.equals(this.currencies, universalSymbol.currencies)&&
         Objects.equals(this.additionalProperties, universalSymbol.additionalProperties);
   }
 
@@ -472,7 +472,7 @@ public class UniversalSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, rawSymbol, description, currency, exchange, type, currencies, figiCode, figiInstrument, additionalProperties);
+    return Objects.hash(id, symbol, rawSymbol, description, currency, exchange, type, figiCode, figiInstrument, currencies, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -493,9 +493,9 @@ public class UniversalSymbol {
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    exchange: ").append(toIndentedString(exchange)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    figiCode: ").append(toIndentedString(figiCode)).append("\n");
     sb.append("    figiInstrument: ").append(toIndentedString(figiInstrument)).append("\n");
+    sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -526,9 +526,9 @@ public class UniversalSymbol {
     openapiFields.add("currency");
     openapiFields.add("exchange");
     openapiFields.add("type");
-    openapiFields.add("currencies");
     openapiFields.add("figi_code");
     openapiFields.add("figi_instrument");
+    openapiFields.add("currencies");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -579,6 +579,13 @@ public class UniversalSymbol {
       }
       // validate the required field `type`
       SecurityType.validateJsonObject(jsonObj.getAsJsonObject("type"));
+      if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
+      }
+      // validate the optional field `figi_instrument`
+      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
+        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
+      }
       // ensure the json data is an array
       if (!jsonObj.get("currencies").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `currencies` to be an array in the JSON string but got `%s`", jsonObj.get("currencies").toString()));
@@ -589,13 +596,6 @@ public class UniversalSymbol {
       for (int i = 0; i < jsonArraycurrencies.size(); i++) {
         Currency.validateJsonObject(jsonArraycurrencies.get(i).getAsJsonObject());
       };
-      if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
-      }
-      // validate the optional field `figi_instrument`
-      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
-        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
-      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

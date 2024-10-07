@@ -15,9 +15,9 @@ Symbol object for the underlying security of an option.
 |**currency** | [**SymbolCurrency**](SymbolCurrency.md) |  |  [optional] |
 |**exchange** | [**UnderlyingSymbolExchange**](UnderlyingSymbolExchange.md) |  |  [optional] |
 |**type** | [**UnderlyingSymbolType**](UnderlyingSymbolType.md) |  |  [optional] |
-|**currencies** | [**List&lt;Currency&gt;**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. |  [optional] |
 |**figiCode** | **String** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. |  [optional] |
 |**figiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  |  [optional] |
+|**currencies** | [**List&lt;Currency&gt;**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. |  [optional] |
 
 
 

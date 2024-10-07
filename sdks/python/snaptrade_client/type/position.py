@@ -32,12 +32,12 @@ class OptionalPosition(TypedDict, total=False):
     # The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
     open_pnl: typing.Optional[typing.Union[int, float]]
 
+    # Cost basis _per share_ of this position.
+    average_purchase_price: typing.Optional[typing.Union[int, float]]
+
     # WARNING: This property is deprecated
     # Deprecated, use the `units` field for both fractional and integer units going forward
     fractional_units: typing.Optional[typing.Union[int, float]]
-
-    # Cost basis _per share_ of this position.
-    average_purchase_price: typing.Optional[typing.Union[int, float]]
 
 class Position(RequiredPosition, OptionalPosition):
     pass

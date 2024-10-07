@@ -44,7 +44,6 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
         class properties:
             id = schemas.UUIDSchema
             created_date = schemas.DateTimeSchema
-            updated_date = schemas.DateTimeSchema
         
             @staticmethod
             def brokerage() -> typing.Type['Brokerage']:
@@ -81,16 +80,17 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
             @staticmethod
             def meta() -> typing.Type['BrokerageAuthorizationMeta']:
                 return BrokerageAuthorizationMeta
+            updated_date = schemas.DateTimeSchema
             __annotations__ = {
                 "id": id,
                 "created_date": created_date,
-                "updated_date": updated_date,
                 "brokerage": brokerage,
                 "name": name,
                 "type": type,
                 "disabled": disabled,
                 "disabled_date": disabled_date,
                 "meta": meta,
+                "updated_date": updated_date,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -99,9 +99,6 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["created_date"]) -> MetaOapg.properties.created_date: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["updated_date"]) -> MetaOapg.properties.updated_date: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["brokerage"]) -> 'Brokerage': ...
@@ -122,9 +119,12 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     def __getitem__(self, name: typing_extensions.Literal["meta"]) -> 'BrokerageAuthorizationMeta': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["updated_date"]) -> MetaOapg.properties.updated_date: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["updated_date"], typing_extensions.Literal["brokerage"], typing_extensions.Literal["name"], typing_extensions.Literal["type"], typing_extensions.Literal["disabled"], typing_extensions.Literal["disabled_date"], typing_extensions.Literal["meta"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["brokerage"], typing_extensions.Literal["name"], typing_extensions.Literal["type"], typing_extensions.Literal["disabled"], typing_extensions.Literal["disabled_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["updated_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -133,9 +133,6 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["created_date"]) -> typing.Union[MetaOapg.properties.created_date, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["updated_date"]) -> typing.Union[MetaOapg.properties.updated_date, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["brokerage"]) -> typing.Union['Brokerage', schemas.Unset]: ...
@@ -156,9 +153,12 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
     def get_item_oapg(self, name: typing_extensions.Literal["meta"]) -> typing.Union['BrokerageAuthorizationMeta', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["updated_date"]) -> typing.Union[MetaOapg.properties.updated_date, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["updated_date"], typing_extensions.Literal["brokerage"], typing_extensions.Literal["name"], typing_extensions.Literal["type"], typing_extensions.Literal["disabled"], typing_extensions.Literal["disabled_date"], typing_extensions.Literal["meta"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["created_date"], typing_extensions.Literal["brokerage"], typing_extensions.Literal["name"], typing_extensions.Literal["type"], typing_extensions.Literal["disabled"], typing_extensions.Literal["disabled_date"], typing_extensions.Literal["meta"], typing_extensions.Literal["updated_date"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -166,13 +166,13 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
         *args: typing.Union[dict, frozendict.frozendict, ],
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         created_date: typing.Union[MetaOapg.properties.created_date, str, datetime, schemas.Unset] = schemas.unset,
-        updated_date: typing.Union[MetaOapg.properties.updated_date, str, datetime, schemas.Unset] = schemas.unset,
         brokerage: typing.Union['Brokerage', schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         type: typing.Union[MetaOapg.properties.type, str, schemas.Unset] = schemas.unset,
         disabled: typing.Union[MetaOapg.properties.disabled, bool, schemas.Unset] = schemas.unset,
         disabled_date: typing.Union[MetaOapg.properties.disabled_date, None, str, datetime, schemas.Unset] = schemas.unset,
         meta: typing.Union['BrokerageAuthorizationMeta', schemas.Unset] = schemas.unset,
+        updated_date: typing.Union[MetaOapg.properties.updated_date, str, datetime, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'BrokerageAuthorization':
@@ -181,13 +181,13 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
             *args,
             id=id,
             created_date=created_date,
-            updated_date=updated_date,
             brokerage=brokerage,
             name=name,
             type=type,
             disabled=disabled,
             disabled_date=disabled_date,
             meta=meta,
+            updated_date=updated_date,
             _configuration=_configuration,
             **kwargs,
         )

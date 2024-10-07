@@ -28,12 +28,12 @@ type AccountOrderRecordUniversalSymbol struct {
 	Currency SymbolCurrency `json:"currency"`
 	Exchange *SymbolExchange `json:"exchange,omitempty"`
 	Type SecurityType `json:"type"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-	// Deprecated
-	Currencies []Currency `json:"currencies"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
+	Currencies []Currency `json:"currencies"`
 }
 
 // NewAccountOrderRecordUniversalSymbol instantiates a new AccountOrderRecordUniversalSymbol object
@@ -253,33 +253,6 @@ func (o *AccountOrderRecordUniversalSymbol) SetType(v SecurityType) {
 	o.Type = v
 }
 
-// GetCurrencies returns the Currencies field value
-// Deprecated
-func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency {
-	if o == nil {
-		var ret []Currency
-		return ret
-	}
-
-	return o.Currencies
-}
-
-// GetCurrenciesOk returns a tuple with the Currencies field value
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() ([]Currency, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.Currencies, true
-}
-
-// SetCurrencies sets field value
-// Deprecated
-func (o *AccountOrderRecordUniversalSymbol) SetCurrencies(v []Currency) {
-	o.Currencies = v
-}
-
 // GetFigiCode returns the FigiCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AccountOrderRecordUniversalSymbol) GetFigiCode() string {
 	if o == nil || isNil(o.FigiCode.Get()) {
@@ -364,6 +337,33 @@ func (o *AccountOrderRecordUniversalSymbol) UnsetFigiInstrument() {
 	o.FigiInstrument.Unset()
 }
 
+// GetCurrencies returns the Currencies field value
+// Deprecated
+func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency {
+	if o == nil {
+		var ret []Currency
+		return ret
+	}
+
+	return o.Currencies
+}
+
+// GetCurrenciesOk returns a tuple with the Currencies field value
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() ([]Currency, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.Currencies, true
+}
+
+// SetCurrencies sets field value
+// Deprecated
+func (o *AccountOrderRecordUniversalSymbol) SetCurrencies(v []Currency) {
+	o.Currencies = v
+}
+
 func (o AccountOrderRecordUniversalSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -387,14 +387,14 @@ func (o AccountOrderRecordUniversalSymbol) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["type"] = o.Type
 	}
-	if true {
-		toSerialize["currencies"] = o.Currencies
-	}
 	if o.FigiCode.IsSet() {
 		toSerialize["figi_code"] = o.FigiCode.Get()
 	}
 	if o.FigiInstrument.IsSet() {
 		toSerialize["figi_instrument"] = o.FigiInstrument.Get()
+	}
+	if true {
+		toSerialize["currencies"] = o.Currencies
 	}
 	return json.Marshal(toSerialize)
 }

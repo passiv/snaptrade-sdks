@@ -1614,6 +1614,9 @@ paths:
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event.
+              - `OPTIONASSIGNMENT` - Option assignment event.
+              - `OPTIONEXERCISE` - Option exercise event.
           schema:
             type: string
             example: BUY,SELL,DIVIDEND
@@ -2205,8 +2208,6 @@ components:
           $ref: "#/components/schemas/BrokerageOrderID"
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
-        symbol:
-          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol:
           description: Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
           allOf:
@@ -2291,6 +2292,8 @@ components:
           type: string
           format: date-time
           example: 2024-08-05T00:05:57.409000Z
+        symbol:
+          $ref: "#/components/schemas/BrokerageSymbolID"
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
       type: string
@@ -2331,17 +2334,17 @@ components:
           type: number
           description: The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
           example: -50
+        average_purchase_price:
+          type: number
+          nullable: true
+          example: 4126
+          description: Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
         currency:
           deprecated: true
           description: The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
-        average_purchase_price:
-          type: number
-          nullable: true
-          example: 4126
-          description: Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     OptionStrategy:
       type: object
       properties:
@@ -2823,6 +2826,11 @@ components:
           description: The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
           example: 0.44
           nullable: true
+        average_purchase_price:
+          type: number
+          nullable: true
+          example: 108.3353
+          description: Cost basis _per share_ of this position.
         fractional_units:
           deprecated: true
           description:
@@ -2831,11 +2839,6 @@ components:
           type: number
           nullable: true
           example: 1.44
-        average_purchase_price:
-          type: number
-          nullable: true
-          example: 108.3353
-          description: Cost basis _per share_ of this position.
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
@@ -3014,12 +3017,6 @@ components:
           format: url
           example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           nullable: true
-        open_url:
-          deprecated: true
-          description: This field is deprecated.
-          type: string
-          format: url
-          nullable: true
         url:
           description: URL to the brokerage's website.
           type: string
@@ -3033,14 +3030,14 @@ components:
           description: Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
           type: boolean
           example: true
-        allows_fractional_units:
-          deprecated: true
-          description: This field is deprecated. Please contact us if you have a valid use case for it.
+        allows_trading:
+          description: Whether the brokerage allows trading through SnapTrade.
           type: boolean
           nullable: true
           example: true
-        allows_trading:
-          description: Whether the brokerage allows trading through SnapTrade.
+        allows_fractional_units:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: boolean
           nullable: true
           example: true
@@ -3065,6 +3062,12 @@ components:
           example:
             - 2bcd7cc3-e922-4976-bce1-9858296801c3
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
+        open_url:
+          deprecated: true
+          description: This field is deprecated.
+          type: string
+          format: url
+          nullable: true
     BrokerageAuthorization:
       description: |
         A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
@@ -3081,12 +3084,6 @@ components:
           type: string
           format: date-time
           example: 2024-08-20T21:56:19.123935Z
-        updated_date:
-          deprecated: true
-          description: Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-          type: string
-          format: date-time
-          example: 2024-08-20T21:56:20.057224Z
         brokerage:
           $ref: "#/components/schemas/Brokerage"
         name:
@@ -3120,6 +3117,12 @@ components:
           type: object
           example:
             identifier: 123456
+        updated_date:
+          deprecated: true
+          description: Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+          type: string
+          format: date-time
+          example: 2024-08-20T21:56:20.057224Z
     BrokerageAuthorizationRefreshConfirmation:
       description: Confirmation that the syncs have been scheduled.
       type: object
@@ -3175,6 +3178,8 @@ components:
       description: Uniquely describes a security for the option position within an account. The distinction between this and the `option_symbol` child property is that this object is specific to a position within an account, while the `option_symbol` child property is universal across all brokerage accounts. The caller should rely on the `option_symbol` child property for most use cases.
       type: object
       properties:
+        option_symbol:
+          $ref: "#/components/schemas/OptionsSymbol"
         id:
           $ref: "#/components/schemas/BrokerageSymbolID"
         description:
@@ -3182,12 +3187,12 @@ components:
           description: This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
           type: string
           example: SPY CALL 7/17 200
-        option_symbol:
-          $ref: "#/components/schemas/OptionsSymbol"
     PositionSymbol:
       description: Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
       type: object
       properties:
+        symbol:
+          $ref: "#/components/schemas/UniversalSymbol"
         id:
           $ref: "#/components/schemas/BrokerageSymbolID"
         description:
@@ -3195,8 +3200,6 @@ components:
           description: This field is deprecated and the caller should use the `symbol` child property's `description` instead.
           type: string
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-        symbol:
-          $ref: "#/components/schemas/UniversalSymbol"
         local_id:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
@@ -3456,8 +3459,6 @@ components:
       description: Information about the security for the order.
       type: object
       properties:
-        brokerage_symbol_id:
-          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol_id:
           $ref: "#/components/schemas/UniversalSymbolID"
         currency:
@@ -3478,6 +3479,8 @@ components:
           description: This field is deprecated and should not be used.
           type: string
           example: MVGP.U.TO
+        brokerage_symbol_id:
+          $ref: "#/components/schemas/BrokerageSymbolID"
     ManualTradeBalance:
       description: Estimated remaining balance of the account after the trade is executed.
       type: object
@@ -3757,6 +3760,10 @@ components:
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
         option_type:
           type: string
           example: BUY_TO_OPEN
@@ -3842,12 +3849,6 @@ components:
             - $ref: "#/components/schemas/Exchange"
         type:
           $ref: "#/components/schemas/SecurityType"
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-          type: array
-          items:
-            $ref: "#/components/schemas/Currency"
         figi_code:
           description: This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
           type: string
@@ -3857,6 +3858,12 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/FigiInstrument"
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          type: array
+          items:
+            $ref: "#/components/schemas/Currency"
       required:
         - id
         - symbol
@@ -3896,12 +3903,6 @@ components:
           description: The type of security. For example, "Common Stock" or "ETF".
           allOf:
             - $ref: "#/components/schemas/SecurityType"
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-          type: array
-          items:
-            $ref: "#/components/schemas/Currency"
         figi_code:
           description: This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
           type: string
@@ -3911,6 +3912,12 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/FigiInstrument"
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          type: array
+          items:
+            $ref: "#/components/schemas/Currency"
     OptionsSymbol:
       description: Uniquely describes an option security + exchange combination across all brokerages.
       type: object

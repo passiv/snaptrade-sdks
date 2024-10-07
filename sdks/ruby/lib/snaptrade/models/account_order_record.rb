@@ -19,9 +19,6 @@ module SnapTrade
     # Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
     attr_accessor :status
 
-    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-    attr_accessor :symbol
-
     attr_accessor :universal_symbol
 
     attr_accessor :option_symbol
@@ -68,12 +65,14 @@ module SnapTrade
     # The time the order expires. This value is not always available from the brokerage.
     attr_accessor :expiry_date
 
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+    attr_accessor :symbol
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'brokerage_order_id' => :'brokerage_order_id',
         :'status' => :'status',
-        :'symbol' => :'symbol',
         :'universal_symbol' => :'universal_symbol',
         :'option_symbol' => :'option_symbol',
         :'action' => :'action',
@@ -89,7 +88,8 @@ module SnapTrade
         :'time_placed' => :'time_placed',
         :'time_updated' => :'time_updated',
         :'time_executed' => :'time_executed',
-        :'expiry_date' => :'expiry_date'
+        :'expiry_date' => :'expiry_date',
+        :'symbol' => :'symbol'
       }
     end
 
@@ -103,7 +103,6 @@ module SnapTrade
       {
         :'brokerage_order_id' => :'String',
         :'status' => :'AccountOrderRecordStatus',
-        :'symbol' => :'String',
         :'universal_symbol' => :'AccountOrderRecordUniversalSymbol',
         :'option_symbol' => :'AccountOrderRecordOptionSymbol',
         :'action' => :'String',
@@ -119,7 +118,8 @@ module SnapTrade
         :'time_placed' => :'Time',
         :'time_updated' => :'Time',
         :'time_executed' => :'Time',
-        :'expiry_date' => :'Time'
+        :'expiry_date' => :'Time',
+        :'symbol' => :'String'
       }
     end
 
@@ -136,7 +136,7 @@ module SnapTrade
         :'order_type',
         :'time_updated',
         :'time_executed',
-        :'expiry_date'
+        :'expiry_date',
       ])
     end
 
@@ -161,10 +161,6 @@ module SnapTrade
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
-      end
-
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
       end
 
       if attributes.key?(:'universal_symbol')
@@ -230,6 +226,10 @@ module SnapTrade
       if attributes.key?(:'expiry_date')
         self.expiry_date = attributes[:'expiry_date']
       end
+
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -252,7 +252,6 @@ module SnapTrade
       self.class == o.class &&
           brokerage_order_id == o.brokerage_order_id &&
           status == o.status &&
-          symbol == o.symbol &&
           universal_symbol == o.universal_symbol &&
           option_symbol == o.option_symbol &&
           action == o.action &&
@@ -268,7 +267,8 @@ module SnapTrade
           time_placed == o.time_placed &&
           time_updated == o.time_updated &&
           time_executed == o.time_executed &&
-          expiry_date == o.expiry_date
+          expiry_date == o.expiry_date &&
+          symbol == o.symbol
     end
 
     # @see the `==` method
@@ -280,7 +280,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, symbol, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date].hash
+      [brokerage_order_id, status, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol].hash
     end
 
     # Builds the object from hash

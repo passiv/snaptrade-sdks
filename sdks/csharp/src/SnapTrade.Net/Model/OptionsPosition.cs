@@ -38,15 +38,15 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">symbol.</param>
         /// <param name="price">Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices..</param>
         /// <param name="units">The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position..</param>
-        /// <param name="currency">currency.</param>
         /// <param name="averagePurchasePrice">Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100)..</param>
-        public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), CurrencyNullable currency = default(CurrencyNullable), double? averagePurchasePrice = default(double?)) : base()
+        /// <param name="currency">currency.</param>
+        public OptionsPosition(OptionBrokerageSymbol symbol = default(OptionBrokerageSymbol), double? price = default(double?), double units = default(double), double? averagePurchasePrice = default(double?), CurrencyNullable currency = default(CurrencyNullable)) : base()
         {
             this.Symbol = symbol;
             this.Price = price;
             this.Units = units;
-            this.Currency = currency;
             this.AveragePurchasePrice = averagePurchasePrice;
+            this.Currency = currency;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -71,17 +71,17 @@ namespace SnapTrade.Net.Model
         public double Units { get; set; }
 
         /// <summary>
-        /// Gets or Sets Currency
-        /// </summary>
-        [DataMember(Name = "currency", EmitDefaultValue = true)]
-        public CurrencyNullable Currency { get; set; }
-
-        /// <summary>
         /// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
         /// </summary>
         /// <value>Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).</value>
         [DataMember(Name = "average_purchase_price", EmitDefaultValue = true)]
         public double? AveragePurchasePrice { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Currency
+        /// </summary>
+        [DataMember(Name = "currency", EmitDefaultValue = true)]
+        public CurrencyNullable Currency { get; set; }
 
         /// <summary>
         /// Gets or Sets additional properties
@@ -101,8 +101,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
-            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -154,14 +154,14 @@ namespace SnapTrade.Net.Model
                     this.Units.Equals(input.Units)
                 ) && base.Equals(input) && 
                 (
-                    this.Currency == input.Currency ||
-                    (this.Currency != null &&
-                    this.Currency.Equals(input.Currency))
-                ) && base.Equals(input) && 
-                (
                     this.AveragePurchasePrice == input.AveragePurchasePrice ||
                     (this.AveragePurchasePrice != null &&
                     this.AveragePurchasePrice.Equals(input.AveragePurchasePrice))
+                ) && base.Equals(input) && 
+                (
+                    this.Currency == input.Currency ||
+                    (this.Currency != null &&
+                    this.Currency.Equals(input.Currency))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -184,13 +184,13 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Units.GetHashCode();
-                if (this.Currency != null)
-                {
-                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
-                }
                 if (this.AveragePurchasePrice != null)
                 {
                     hashCode = (hashCode * 59) + this.AveragePurchasePrice.GetHashCode();
+                }
+                if (this.Currency != null)
+                {
+                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

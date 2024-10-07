@@ -53,13 +53,13 @@ public class Example {
       System.out.println(result);
       System.out.println(result.getId());
       System.out.println(result.getCreatedDate());
-      System.out.println(result.getUpdatedDate());
       System.out.println(result.getBrokerage());
       System.out.println(result.getName());
       System.out.println(result.getType());
       System.out.println(result.getDisabled());
       System.out.println(result.getDisabledDate());
       System.out.println(result.getMeta());
+      System.out.println(result.getUpdatedDate());
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#detailBrokerageAuthorization");
       System.err.println("Status code: " + e.getStatusCode());

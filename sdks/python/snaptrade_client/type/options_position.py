@@ -30,10 +30,10 @@ class OptionalOptionsPosition(TypedDict, total=False):
     # The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
     units: typing.Union[int, float]
 
-    currency: typing.Optional[CurrencyNullable]
-
     # Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     average_purchase_price: typing.Optional[typing.Union[int, float]]
+
+    currency: typing.Optional[CurrencyNullable]
 
 class OptionsPosition(RequiredOptionsPosition, OptionalOptionsPosition):
     pass

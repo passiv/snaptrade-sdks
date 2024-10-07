@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Currency** | Pointer to [**SymbolCurrency**](SymbolCurrency.md) |  | [optional] 
 **Exchange** | Pointer to [**UnderlyingSymbolExchange**](UnderlyingSymbolExchange.md) |  | [optional] 
 **Type** | Pointer to [**UnderlyingSymbolType**](UnderlyingSymbolType.md) |  | [optional] 
-**Currencies** | Pointer to [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
 **FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
+**Currencies** | Pointer to [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
 
 ## Methods
 
@@ -219,31 +219,6 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
-### GetCurrencies
-
-`func (o *UnderlyingSymbol) GetCurrencies() []Currency`
-
-GetCurrencies returns the Currencies field if non-nil, zero value otherwise.
-
-### GetCurrenciesOk
-
-`func (o *UnderlyingSymbol) GetCurrenciesOk() (*[]Currency, bool)`
-
-GetCurrenciesOk returns a tuple with the Currencies field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrencies
-
-`func (o *UnderlyingSymbol) SetCurrencies(v []Currency)`
-
-SetCurrencies sets Currencies field to given value.
-
-### HasCurrencies
-
-`func (o *UnderlyingSymbol) HasCurrencies() bool`
-
-HasCurrencies returns a boolean if a field has been set.
-
 ### GetFigiCode
 
 `func (o *UnderlyingSymbol) GetFigiCode() string`
@@ -314,6 +289,31 @@ HasFigiInstrument returns a boolean if a field has been set.
 `func (o *UnderlyingSymbol) UnsetFigiInstrument()`
 
 UnsetFigiInstrument ensures that no value is present for FigiInstrument, not even an explicit nil
+### GetCurrencies
+
+`func (o *UnderlyingSymbol) GetCurrencies() []Currency`
+
+GetCurrencies returns the Currencies field if non-nil, zero value otherwise.
+
+### GetCurrenciesOk
+
+`func (o *UnderlyingSymbol) GetCurrenciesOk() (*[]Currency, bool)`
+
+GetCurrenciesOk returns a tuple with the Currencies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrencies
+
+`func (o *UnderlyingSymbol) SetCurrencies(v []Currency)`
+
+SetCurrencies sets Currencies field to given value.
+
+### HasCurrencies
+
+`func (o *UnderlyingSymbol) HasCurrencies() bool`
+
+HasCurrencies returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

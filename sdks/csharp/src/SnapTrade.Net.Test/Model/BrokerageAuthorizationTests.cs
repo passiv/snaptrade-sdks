@@ -74,14 +74,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'CreatedDate'
         }
         /// <summary>
-        /// Test the property 'UpdatedDate'
-        /// </summary>
-        [Fact]
-        public void UpdatedDateTest()
-        {
-            // TODO unit test for the property 'UpdatedDate'
-        }
-        /// <summary>
         /// Test the property 'Brokerage'
         /// </summary>
         [Fact]
@@ -128,6 +120,14 @@ namespace SnapTrade.Net.Test.Model
         public void MetaTest()
         {
             // TODO unit test for the property 'Meta'
+        }
+        /// <summary>
+        /// Test the property 'UpdatedDate'
+        /// </summary>
+        [Fact]
+        public void UpdatedDateTest()
+        {
+            // TODO unit test for the property 'UpdatedDate'
         }
 
     }

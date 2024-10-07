@@ -45,14 +45,14 @@ class OptionalUnderlyingSymbol(TypedDict, total=False):
     # The type of security. For example, \"Common Stock\" or \"ETF\".
     type: SecurityType
 
-    # WARNING: This property is deprecated
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-    currencies: typing.List[Currency]
-
     # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
     figi_code: typing.Optional[str]
 
     figi_instrument: typing.Optional[FigiInstrumentNullable]
+
+    # WARNING: This property is deprecated
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    currencies: typing.List[Currency]
 
 class UnderlyingSymbol(RequiredUnderlyingSymbol, OptionalUnderlyingSymbol):
     pass

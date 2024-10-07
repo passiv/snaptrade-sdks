@@ -17,13 +17,13 @@ import (
 
 // PositionSymbol Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
 type PositionSymbol struct {
+	Symbol *UniversalSymbol `json:"symbol,omitempty"`
 	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
 	// Deprecated
 	Id *string `json:"id,omitempty"`
 	// This field is deprecated and the caller should use the `symbol` child property's `description` instead.
 	// Deprecated
 	Description *string `json:"description,omitempty"`
-	Symbol *UniversalSymbol `json:"symbol,omitempty"`
 	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
 	// Deprecated
 	LocalId NullableString `json:"local_id,omitempty"`
@@ -53,6 +53,38 @@ func NewPositionSymbol() *PositionSymbol {
 func NewPositionSymbolWithDefaults() *PositionSymbol {
 	this := PositionSymbol{}
 	return &this
+}
+
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
+func (o *PositionSymbol) GetSymbol() UniversalSymbol {
+	if o == nil || isNil(o.Symbol) {
+		var ret UniversalSymbol
+		return ret
+	}
+	return *o.Symbol
+}
+
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PositionSymbol) GetSymbolOk() (*UniversalSymbol, bool) {
+	if o == nil || isNil(o.Symbol) {
+    return nil, false
+	}
+	return o.Symbol, true
+}
+
+// HasSymbol returns a boolean if a field has been set.
+func (o *PositionSymbol) HasSymbol() bool {
+	if o != nil && !isNil(o.Symbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetSymbol gets a reference to the given UniversalSymbol and assigns it to the Symbol field.
+func (o *PositionSymbol) SetSymbol(v UniversalSymbol) {
+	o.Symbol = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -123,38 +155,6 @@ func (o *PositionSymbol) HasDescription() bool {
 // Deprecated
 func (o *PositionSymbol) SetDescription(v string) {
 	o.Description = &v
-}
-
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
-func (o *PositionSymbol) GetSymbol() UniversalSymbol {
-	if o == nil || isNil(o.Symbol) {
-		var ret UniversalSymbol
-		return ret
-	}
-	return *o.Symbol
-}
-
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PositionSymbol) GetSymbolOk() (*UniversalSymbol, bool) {
-	if o == nil || isNil(o.Symbol) {
-    return nil, false
-	}
-	return o.Symbol, true
-}
-
-// HasSymbol returns a boolean if a field has been set.
-func (o *PositionSymbol) HasSymbol() bool {
-	if o != nil && !isNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given UniversalSymbol and assigns it to the Symbol field.
-func (o *PositionSymbol) SetSymbol(v UniversalSymbol) {
-	o.Symbol = &v
 }
 
 // GetLocalId returns the LocalId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -274,14 +274,14 @@ func (o *PositionSymbol) SetIsTradable(v bool) {
 
 func (o PositionSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.Symbol) {
+		toSerialize["symbol"] = o.Symbol
+	}
 	if !isNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
 	if !isNil(o.Description) {
 		toSerialize["description"] = o.Description
-	}
-	if !isNil(o.Symbol) {
-		toSerialize["symbol"] = o.Symbol
 	}
 	if o.LocalId.IsSet() {
 		toSerialize["local_id"] = o.LocalId.Get()
@@ -310,9 +310,9 @@ func (o *PositionSymbol) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "local_id")
 		delete(additionalProperties, "is_quotable")
 		delete(additionalProperties, "is_tradable")

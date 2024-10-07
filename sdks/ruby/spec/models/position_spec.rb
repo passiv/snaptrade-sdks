@@ -44,13 +44,13 @@ describe SnapTrade::Position do
     end
   end
 
-  describe 'test attribute "fractional_units"' do
+  describe 'test attribute "average_purchase_price"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "average_purchase_price"' do
+  describe 'test attribute "fractional_units"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

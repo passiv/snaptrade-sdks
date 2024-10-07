@@ -65,13 +65,13 @@ public class OptionsPosition {
   @SerializedName(SERIALIZED_NAME_UNITS)
   private Double units;
 
-  public static final String SERIALIZED_NAME_CURRENCY = "currency";
-  @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private CurrencyNullable currency;
-
   public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
   @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
   private Double averagePurchasePrice;
+
+  public static final String SERIALIZED_NAME_CURRENCY = "currency";
+  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  private CurrencyNullable currency;
 
   public OptionsPosition() {
   }
@@ -181,35 +181,6 @@ public class OptionsPosition {
   }
 
 
-  public OptionsPosition currency(CurrencyNullable currency) {
-    
-    
-    
-    
-    this.currency = currency;
-    return this;
-  }
-
-   /**
-   * Get currency
-   * @return currency
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public CurrencyNullable getCurrency() {
-    return currency;
-  }
-
-
-  public void setCurrency(CurrencyNullable currency) {
-    
-    
-    
-    this.currency = currency;
-  }
-
-
   public OptionsPosition averagePurchasePrice(Double averagePurchasePrice) {
     
     
@@ -245,6 +216,35 @@ public class OptionsPosition {
     
     
     this.averagePurchasePrice = averagePurchasePrice;
+  }
+
+
+  public OptionsPosition currency(CurrencyNullable currency) {
+    
+    
+    
+    
+    this.currency = currency;
+    return this;
+  }
+
+   /**
+   * Get currency
+   * @return currency
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public CurrencyNullable getCurrency() {
+    return currency;
+  }
+
+
+  public void setCurrency(CurrencyNullable currency) {
+    
+    
+    
+    this.currency = currency;
   }
 
   /**
@@ -305,8 +305,8 @@ public class OptionsPosition {
     return Objects.equals(this.symbol, optionsPosition.symbol) &&
         Objects.equals(this.price, optionsPosition.price) &&
         Objects.equals(this.units, optionsPosition.units) &&
-        Objects.equals(this.currency, optionsPosition.currency) &&
-        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice)&&
+        Objects.equals(this.averagePurchasePrice, optionsPosition.averagePurchasePrice) &&
+        Objects.equals(this.currency, optionsPosition.currency)&&
         Objects.equals(this.additionalProperties, optionsPosition.additionalProperties);
   }
 
@@ -316,7 +316,7 @@ public class OptionsPosition {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, price, units, currency, averagePurchasePrice, additionalProperties);
+    return Objects.hash(symbol, price, units, averagePurchasePrice, currency, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -333,8 +333,8 @@ public class OptionsPosition {
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
-    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -361,8 +361,8 @@ public class OptionsPosition {
     openapiFields.add("symbol");
     openapiFields.add("price");
     openapiFields.add("units");
-    openapiFields.add("currency");
     openapiFields.add("average_purchase_price");
+    openapiFields.add("currency");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

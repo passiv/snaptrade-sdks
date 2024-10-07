@@ -19,9 +19,6 @@ module SnapTrade
     # Timestamp of when the connection was established in SnapTrade.
     attr_accessor :created_date
 
-    # Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-    attr_accessor :updated_date
-
     attr_accessor :brokerage
 
     # A short, human-readable name for the connection.
@@ -39,18 +36,21 @@ module SnapTrade
     # Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
+    # Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+    attr_accessor :updated_date
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
         :'created_date' => :'created_date',
-        :'updated_date' => :'updated_date',
         :'brokerage' => :'brokerage',
         :'name' => :'name',
         :'type' => :'type',
         :'disabled' => :'disabled',
         :'disabled_date' => :'disabled_date',
-        :'meta' => :'meta'
+        :'meta' => :'meta',
+        :'updated_date' => :'updated_date'
       }
     end
 
@@ -64,13 +64,13 @@ module SnapTrade
       {
         :'id' => :'String',
         :'created_date' => :'Time',
-        :'updated_date' => :'Time',
         :'brokerage' => :'Brokerage',
         :'name' => :'String',
         :'type' => :'String',
         :'disabled' => :'Boolean',
         :'disabled_date' => :'Time',
-        :'meta' => :'Hash<String, Object>'
+        :'meta' => :'Hash<String, Object>',
+        :'updated_date' => :'Time'
       }
     end
 
@@ -104,10 +104,6 @@ module SnapTrade
         self.created_date = attributes[:'created_date']
       end
 
-      if attributes.key?(:'updated_date')
-        self.updated_date = attributes[:'updated_date']
-      end
-
       if attributes.key?(:'brokerage')
         self.brokerage = attributes[:'brokerage']
       end
@@ -133,6 +129,10 @@ module SnapTrade
           self.meta = value
         end
       end
+
+      if attributes.key?(:'updated_date')
+        self.updated_date = attributes[:'updated_date']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -155,13 +155,13 @@ module SnapTrade
       self.class == o.class &&
           id == o.id &&
           created_date == o.created_date &&
-          updated_date == o.updated_date &&
           brokerage == o.brokerage &&
           name == o.name &&
           type == o.type &&
           disabled == o.disabled &&
           disabled_date == o.disabled_date &&
-          meta == o.meta
+          meta == o.meta &&
+          updated_date == o.updated_date
     end
 
     # @see the `==` method
@@ -173,7 +173,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_date, updated_date, brokerage, name, type, disabled, disabled_date, meta].hash
+      [id, created_date, brokerage, name, type, disabled, disabled_date, meta, updated_date].hash
     end
 
     # Builds the object from hash

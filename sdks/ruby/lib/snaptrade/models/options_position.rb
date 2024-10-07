@@ -21,10 +21,10 @@ module SnapTrade
     # The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
     attr_accessor :units
 
-    attr_accessor :currency
-
     # Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     attr_accessor :average_purchase_price
+
+    attr_accessor :currency
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -32,8 +32,8 @@ module SnapTrade
         :'symbol' => :'symbol',
         :'price' => :'price',
         :'units' => :'units',
-        :'currency' => :'currency',
-        :'average_purchase_price' => :'average_purchase_price'
+        :'average_purchase_price' => :'average_purchase_price',
+        :'currency' => :'currency'
       }
     end
 
@@ -48,8 +48,8 @@ module SnapTrade
         :'symbol' => :'OptionBrokerageSymbol',
         :'price' => :'Float',
         :'units' => :'Float',
-        :'currency' => :'OptionsPositionCurrency',
-        :'average_purchase_price' => :'Float'
+        :'average_purchase_price' => :'Float',
+        :'currency' => :'OptionsPositionCurrency'
       }
     end
 
@@ -57,8 +57,8 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'price',
-        :'currency',
-        :'average_purchase_price'
+        :'average_purchase_price',
+        :'currency'
       ])
     end
 
@@ -89,12 +89,12 @@ module SnapTrade
         self.units = attributes[:'units']
       end
 
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
-      end
-
       if attributes.key?(:'average_purchase_price')
         self.average_purchase_price = attributes[:'average_purchase_price']
+      end
+
+      if attributes.key?(:'currency')
+        self.currency = attributes[:'currency']
       end
     end
 
@@ -119,8 +119,8 @@ module SnapTrade
           symbol == o.symbol &&
           price == o.price &&
           units == o.units &&
-          currency == o.currency &&
-          average_purchase_price == o.average_purchase_price
+          average_purchase_price == o.average_purchase_price &&
+          currency == o.currency
     end
 
     # @see the `==` method
@@ -132,7 +132,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, price, units, currency, average_purchase_price].hash
+      [symbol, price, units, average_purchase_price, currency].hash
     end
 
     # Builds the object from hash

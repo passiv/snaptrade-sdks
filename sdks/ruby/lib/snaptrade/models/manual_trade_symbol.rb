@@ -13,9 +13,6 @@ require 'time'
 module SnapTrade
   # Information about the security for the order.
   class ManualTradeSymbol
-    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-    attr_accessor :brokerage_symbol_id
-
     # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     attr_accessor :universal_symbol_id
 
@@ -30,15 +27,18 @@ module SnapTrade
     # This field is deprecated and should not be used.
     attr_accessor :symbol
 
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+    attr_accessor :brokerage_symbol_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'brokerage_symbol_id' => :'brokerage_symbol_id',
         :'universal_symbol_id' => :'universal_symbol_id',
         :'currency' => :'currency',
         :'local_id' => :'local_id',
         :'description' => :'description',
-        :'symbol' => :'symbol'
+        :'symbol' => :'symbol',
+        :'brokerage_symbol_id' => :'brokerage_symbol_id'
       }
     end
 
@@ -50,12 +50,12 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'brokerage_symbol_id' => :'String',
         :'universal_symbol_id' => :'String',
         :'currency' => :'Currency',
         :'local_id' => :'String',
         :'description' => :'String',
-        :'symbol' => :'String'
+        :'symbol' => :'String',
+        :'brokerage_symbol_id' => :'String'
       }
     end
 
@@ -81,10 +81,6 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'brokerage_symbol_id')
-        self.brokerage_symbol_id = attributes[:'brokerage_symbol_id']
-      end
-
       if attributes.key?(:'universal_symbol_id')
         self.universal_symbol_id = attributes[:'universal_symbol_id']
       end
@@ -103,6 +99,10 @@ module SnapTrade
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'brokerage_symbol_id')
+        self.brokerage_symbol_id = attributes[:'brokerage_symbol_id']
       end
     end
 
@@ -124,12 +124,12 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          brokerage_symbol_id == o.brokerage_symbol_id &&
           universal_symbol_id == o.universal_symbol_id &&
           currency == o.currency &&
           local_id == o.local_id &&
           description == o.description &&
-          symbol == o.symbol
+          symbol == o.symbol &&
+          brokerage_symbol_id == o.brokerage_symbol_id
     end
 
     # @see the `==` method
@@ -141,7 +141,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_symbol_id, universal_symbol_id, currency, local_id, description, symbol].hash
+      [universal_symbol_id, currency, local_id, description, symbol, brokerage_symbol_id].hash
     end
 
     # Builds the object from hash

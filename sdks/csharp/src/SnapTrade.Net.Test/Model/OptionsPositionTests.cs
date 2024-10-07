@@ -82,20 +82,20 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Units'
         }
         /// <summary>
-        /// Test the property 'Currency'
-        /// </summary>
-        [Fact]
-        public void CurrencyTest()
-        {
-            // TODO unit test for the property 'Currency'
-        }
-        /// <summary>
         /// Test the property 'AveragePurchasePrice'
         /// </summary>
         [Fact]
         public void AveragePurchasePriceTest()
         {
             // TODO unit test for the property 'AveragePurchasePrice'
+        }
+        /// <summary>
+        /// Test the property 'Currency'
+        /// </summary>
+        [Fact]
+        public void CurrencyTest()
+        {
+            // TODO unit test for the property 'Currency'
         }
 
     }

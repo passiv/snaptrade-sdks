@@ -1316,6 +1316,9 @@ paths:
             - `REI` - Dividend reinvestment.
             - `INTEREST` - Interest deposited into the account.
             - `FEE` - Fee withdrawn from the account.
+            - `OPTIONEXPIRATION` - Option expiration event.
+            - `OPTIONASSIGNMENT` - Option assignment event.
+            - `OPTIONEXERCISE` - Option exercise event.
         explode: true
         in: query
         name: type
@@ -2738,8 +2741,8 @@ components:
           units: 40
           average_purchase_price: 108.3353
         orders:
-        - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_executed: 2024-08-05T00:05:57.409Z
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -2757,8 +2760,8 @@ components:
           order_type: Market
           open_quantity: 10
           status: null
-        - symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          time_executed: 2024-08-05T00:05:57.409Z
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -2842,8 +2845,8 @@ components:
         \ represents a single order leg. For multi-leg orders, there will be multiple\
         \ records."
       example:
-        symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         time_executed: 2024-08-05T00:05:57.409Z
+        symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
         time_placed: 2024-07-30T22:51:49.746Z
         expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -2871,17 +2874,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
         status:
           $ref: '#/components/schemas/AccountOrderRecordStatus'
-        symbol:
-          deprecated: true
-          description: "A unique ID for the security within SnapTrade, scoped to the\
-            \ brokerage account that the security belongs to. This is a legacy field\
-            \ and should not be used. Do not rely on this being a stable ID as it\
-            \ can change."
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         universal_symbol:
           $ref: '#/components/schemas/AccountOrderRecord_universal_symbol'
         option_symbol:
@@ -3011,6 +3003,17 @@ components:
           type: string
           x-konfig-original-example: 2024-08-05T00:05:57.409Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date
+        symbol:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
       type: object
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort
@@ -3094,8 +3097,6 @@ components:
           type: number
           x-konfig-original-example: -50
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-units
-        currency:
-          $ref: '#/components/schemas/OptionsPosition_currency'
         average_purchase_price:
           description: "Cost basis _per contract_ of this option position. To get\
             \ the cost basis _per share_, divide this value by the number of shares\
@@ -3105,6 +3106,8 @@ components:
           type: number
           x-konfig-original-example: 4126
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionsPosition-properties-average_purchase_price
+        currency:
+          $ref: '#/components/schemas/OptionsPosition_currency'
       type: object
     OptionStrategy:
       additionalProperties: true
@@ -4229,6 +4232,13 @@ components:
           type: number
           x-konfig-original-example: 0.44
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-open_pnl
+        average_purchase_price:
+          description: Cost basis _per share_ of this position.
+          example: 108.3353
+          nullable: true
+          type: number
+          x-konfig-original-example: 108.3353
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-average_purchase_price
         fractional_units:
           deprecated: true
           description: "Deprecated, use the `units` field for both fractional and\
@@ -4238,13 +4248,6 @@ components:
           type: number
           x-konfig-original-example: 1.44
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-fractional_units
-        average_purchase_price:
-          description: Cost basis _per share_ of this position.
-          example: 108.3353
-          nullable: true
-          type: number
-          x-konfig-original-example: 108.3353
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-average_purchase_price
       type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
@@ -4564,12 +4567,6 @@ components:
           type: string
           x-konfig-original-example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-aws_s3_square_logo_url
-        open_url:
-          deprecated: true
-          description: This field is deprecated.
-          format: url
-          nullable: true
-          type: string
         url:
           description: URL to the brokerage's website.
           example: https://robinhood.com
@@ -4591,6 +4588,13 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-maintenance_mode
+        allows_trading:
+          description: Whether the brokerage allows trading through SnapTrade.
+          example: true
+          nullable: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading
         allows_fractional_units:
           deprecated: true
           description: This field is deprecated. Please contact us if you have a valid
@@ -4600,13 +4604,6 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_fractional_units
-        allows_trading:
-          description: Whether the brokerage allows trading through SnapTrade.
-          example: true
-          nullable: true
-          type: boolean
-          x-konfig-original-example: true
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading
         has_reporting:
           deprecated: true
           description: This field is deprecated. Please contact us if you have a valid
@@ -4639,6 +4636,12 @@ components:
           - 2bcd7cc3-e922-4976-bce1-9858296801c3
           - 4bcd8cc3-c122-4974-dc21-1858296801f4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-exchanges
+        open_url:
+          deprecated: true
+          description: This field is deprecated.
+          format: url
+          nullable: true
+          type: string
       type: object
     BrokerageAuthorization:
       additionalProperties: true
@@ -4697,16 +4700,6 @@ components:
           type: string
           x-konfig-original-example: 2024-08-20T21:56:19.123Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date
-        updated_date:
-          deprecated: true
-          description: Timestamp of when the connection was last updated in SnapTrade.
-            This field is deprecated. Please let us know if you have a valid use case
-            for this field.
-          example: 2024-08-20T21:56:20.057Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-08-20T21:56:20.057Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date
         brokerage:
           $ref: '#/components/schemas/Brokerage'
         name:
@@ -4756,6 +4749,16 @@ components:
           x-konfig-original-example:
             identifier: 123456
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-meta
+        updated_date:
+          deprecated: true
+          description: Timestamp of when the connection was last updated in SnapTrade.
+            This field is deprecated. Please let us know if you have a valid use case
+            for this field.
+          example: 2024-08-20T21:56:20.057Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-08-20T21:56:20.057Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date
       type: object
     BrokerageAuthorizationRefreshConfirmation:
       additionalProperties: true
@@ -4890,6 +4893,8 @@ components:
           expiration_date: 2026-12-18T00:00:00.000+00:00
           strike_price: 240
       properties:
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbol'
         id:
           deprecated: true
           description: "A unique ID for the security within SnapTrade, scoped to the\
@@ -4909,8 +4914,6 @@ components:
           type: string
           x-konfig-original-example: SPY CALL 7/17 200
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionBrokerageSymbol-properties-description
-        option_symbol:
-          $ref: '#/components/schemas/OptionsSymbol'
       type: object
     PositionSymbol:
       additionalProperties: true
@@ -4947,6 +4950,8 @@ components:
         description: VANGUARD CDN AGGREGATE BOND INDEX ETF
         id: 2bcd7cc3-e922-4976-bce1-9858296801c3
       properties:
+        symbol:
+          $ref: '#/components/schemas/UniversalSymbol'
         id:
           deprecated: true
           description: "A unique ID for the security within SnapTrade, scoped to the\
@@ -4966,8 +4971,6 @@ components:
           type: string
           x-konfig-original-example: VANGUARD CDN AGGREGATE BOND INDEX ETF
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PositionSymbol-properties-description
-        symbol:
-          $ref: '#/components/schemas/UniversalSymbol'
         local_id:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
@@ -5397,17 +5400,6 @@ components:
           name: US Dollar
           id: 87b24961-b51e-4db8-9226-f198f6518a89
       properties:
-        brokerage_symbol_id:
-          deprecated: true
-          description: "A unique ID for the security within SnapTrade, scoped to the\
-            \ brokerage account that the security belongs to. This is a legacy field\
-            \ and should not be used. Do not rely on this being a stable ID as it\
-            \ can change."
-          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          format: uuid
-          type: string
-          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
         universal_symbol_id:
           description: Unique identifier for the symbol within SnapTrade. This is
             the ID used to reference the symbol in SnapTrade API calls.
@@ -5440,6 +5432,17 @@ components:
           type: string
           x-konfig-original-example: MVGP.U.TO
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeSymbol-properties-symbol
+        brokerage_symbol_id:
+          deprecated: true
+          description: "A unique ID for the security within SnapTrade, scoped to the\
+            \ brokerage account that the security belongs to. This is a legacy field\
+            \ and should not be used. Do not rely on this being a stable ID as it\
+            \ can change."
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
       type: object
     ManualTradeBalance:
       additionalProperties: true
@@ -5806,7 +5809,7 @@ components:
         description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
         external_reference_id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
         units: 5.2
-        type: type
+        type: BUY
         trade_date: 2024-03-22T16:27:55Z
         institution: Robinhood
         price: 0.4
@@ -5881,7 +5884,13 @@ components:
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
           type: string
+          x-konfig-original-example: BUY
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-type
         option_type:
           description: |
             If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are:
@@ -6051,13 +6060,6 @@ components:
           $ref: '#/components/schemas/Symbol_exchange'
         type:
           $ref: '#/components/schemas/SecurityType'
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
-          items:
-            $ref: '#/components/schemas/Currency'
-          type: array
         figi_code:
           description: "This identifier is unique per security per trading venue.\
             \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
@@ -6070,6 +6072,13 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbol-properties-figi_code
         figi_instrument:
           $ref: '#/components/schemas/Symbol_figi_instrument'
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
+          items:
+            $ref: '#/components/schemas/Currency'
+          type: array
       required:
       - currencies
       - currency
@@ -6140,13 +6149,6 @@ components:
           $ref: '#/components/schemas/UnderlyingSymbol_exchange'
         type:
           $ref: '#/components/schemas/UnderlyingSymbol_type'
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
-          items:
-            $ref: '#/components/schemas/Currency'
-          type: array
         figi_code:
           description: "This identifier is unique per security per trading venue.\
             \ See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf)\
@@ -6159,6 +6161,13 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UnderlyingSymbol-properties-figi_code
         figi_instrument:
           $ref: '#/components/schemas/Symbol_figi_instrument'
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach
+            out to SnapTrade support if you have a valid usecase for this.
+          items:
+            $ref: '#/components/schemas/Currency'
+          type: array
       type: object
     OptionsSymbol:
       additionalProperties: true
@@ -6870,12 +6879,12 @@ components:
       example: 0.44
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Position-properties-fractional_units:
-      example: 1.44
-      type: number
-      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Position-properties-average_purchase_price:
       example: 108.3353
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Position-properties-fractional_units:
+      example: 1.44
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:
@@ -6985,11 +6994,11 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-allows_fractional_units:
+    konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading:
       example: true
       type: boolean
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Brokerage-properties-allows_trading:
+    konfig-generated-schema-components-schemas-Brokerage-properties-allows_fractional_units:
       example: true
       type: boolean
       x-do-not-generate: true
@@ -7012,10 +7021,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-created_date:
       example: 2024-08-20T21:56:19.123Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date:
-      example: 2024-08-20T21:56:20.057Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-name:
@@ -7043,6 +7048,10 @@ components:
           example: 123456
           type: number
       type: object
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date:
+      example: 2024-08-20T21:56:20.057Z
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
@@ -7307,6 +7316,10 @@ components:
     konfig-generated-schema-components-schemas-UniversalActivity-properties-amount:
       example: 263.82
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-UniversalActivity-properties-type:
+      example: BUY
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-option_type:
       example: BUY_TO_OPEN

@@ -37,24 +37,24 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="id">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade..</param>
         /// <param name="createdDate">Timestamp of when the connection was established in SnapTrade..</param>
-        /// <param name="updatedDate">Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field..</param>
         /// <param name="brokerage">brokerage.</param>
         /// <param name="name">A short, human-readable name for the connection..</param>
         /// <param name="type">Whether the connection is read-only or trade-enabled. A read-only connection can only be used to fetch data, while a trade-enabled connection can be used to place trades. Valid values are &#x60;read&#x60; and &#x60;trade&#x60;..</param>
         /// <param name="disabled">Whether the connection is disabled. A disabled connection can no longer access the latest data from the brokerage, but will continue to return the last cached state. A connection can become disabled for many reasons and differs by brokerage. Here are some common scenarios:  - The user has changed their username or password at the brokerage. - The user has explicitly removed the access grant at the brokerage. - The session has expired at the brokerage and now requires explicit user re-authentication.  Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. .</param>
         /// <param name="disabledDate">Timestamp of when the connection was disabled in SnapTrade..</param>
         /// <param name="meta">Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
-        public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), DateTime updatedDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>)) : base()
+        /// <param name="updatedDate">Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field..</param>
+        public BrokerageAuthorization(string id = default(string), DateTime createdDate = default(DateTime), Brokerage brokerage = default(Brokerage), string name = default(string), string type = default(string), bool disabled = default(bool), DateTime? disabledDate = default(DateTime?), Dictionary<string, Object> meta = default(Dictionary<string, Object>), DateTime updatedDate = default(DateTime)) : base()
         {
             this.Id = id;
             this.CreatedDate = createdDate;
-            this.UpdatedDate = updatedDate;
             this.Brokerage = brokerage;
             this.Name = name;
             this.Type = type;
             this.Disabled = disabled;
             this.DisabledDate = disabledDate;
             this.Meta = meta;
+            this.UpdatedDate = updatedDate;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -71,14 +71,6 @@ namespace SnapTrade.Net.Model
         /// <value>Timestamp of when the connection was established in SnapTrade.</value>
         [DataMember(Name = "created_date", EmitDefaultValue = false)]
         public DateTime CreatedDate { get; set; }
-
-        /// <summary>
-        /// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-        /// </summary>
-        /// <value>Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.</value>
-        [DataMember(Name = "updated_date", EmitDefaultValue = false)]
-        [Obsolete]
-        public DateTime UpdatedDate { get; set; }
 
         /// <summary>
         /// Gets or Sets Brokerage
@@ -123,6 +115,14 @@ namespace SnapTrade.Net.Model
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
+        /// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+        /// </summary>
+        /// <value>Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.</value>
+        [DataMember(Name = "updated_date", EmitDefaultValue = false)]
+        [Obsolete]
+        public DateTime UpdatedDate { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -139,13 +139,13 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
-            sb.Append("  UpdatedDate: ").Append(UpdatedDate).Append("\n");
             sb.Append("  Brokerage: ").Append(Brokerage).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
             sb.Append("  Disabled: ").Append(Disabled).Append("\n");
             sb.Append("  DisabledDate: ").Append(DisabledDate).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
+            sb.Append("  UpdatedDate: ").Append(UpdatedDate).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -193,11 +193,6 @@ namespace SnapTrade.Net.Model
                     this.CreatedDate.Equals(input.CreatedDate))
                 ) && base.Equals(input) && 
                 (
-                    this.UpdatedDate == input.UpdatedDate ||
-                    (this.UpdatedDate != null &&
-                    this.UpdatedDate.Equals(input.UpdatedDate))
-                ) && base.Equals(input) && 
-                (
                     this.Brokerage == input.Brokerage ||
                     (this.Brokerage != null &&
                     this.Brokerage.Equals(input.Brokerage))
@@ -226,6 +221,11 @@ namespace SnapTrade.Net.Model
                     this.Meta != null &&
                     input.Meta != null &&
                     this.Meta.SequenceEqual(input.Meta)
+                ) && base.Equals(input) && 
+                (
+                    this.UpdatedDate == input.UpdatedDate ||
+                    (this.UpdatedDate != null &&
+                    this.UpdatedDate.Equals(input.UpdatedDate))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -247,10 +247,6 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.CreatedDate.GetHashCode();
                 }
-                if (this.UpdatedDate != null)
-                {
-                    hashCode = (hashCode * 59) + this.UpdatedDate.GetHashCode();
-                }
                 if (this.Brokerage != null)
                 {
                     hashCode = (hashCode * 59) + this.Brokerage.GetHashCode();
@@ -271,6 +267,10 @@ namespace SnapTrade.Net.Model
                 if (this.Meta != null)
                 {
                     hashCode = (hashCode * 59) + this.Meta.GetHashCode();
+                }
+                if (this.UpdatedDate != null)
+                {
+                    hashCode = (hashCode * 59) + this.UpdatedDate.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

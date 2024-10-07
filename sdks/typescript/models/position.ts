@@ -45,17 +45,17 @@ export interface Position {
      */
     'open_pnl'?: number | null;
     /**
+     * Cost basis _per share_ of this position.
+     * @type {number}
+     * @memberof Position
+     */
+    'average_purchase_price'?: number | null;
+    /**
      * Deprecated, use the `units` field for both fractional and integer units going forward
      * @type {number}
      * @memberof Position
      * @deprecated
      */
     'fractional_units'?: number | null;
-    /**
-     * Cost basis _per share_ of this position.
-     * @type {number}
-     * @memberof Position
-     */
-    'average_purchase_price'?: number | null;
 }
 

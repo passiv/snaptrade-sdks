@@ -42,6 +42,14 @@ public class PositionSymbolTest {
     }
 
     /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
+    }
+
+    /**
      * Test the property 'id'
      */
     @Test
@@ -55,14 +63,6 @@ public class PositionSymbolTest {
     @Test
     public void descriptionTest() {
         // TODO: test description
-    }
-
-    /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
     }
 
     /**

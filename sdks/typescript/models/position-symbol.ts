@@ -21,6 +21,12 @@ export interface PositionSymbol {
     [key: string]: any;
 
     /**
+     * 
+     * @type {UniversalSymbol}
+     * @memberof PositionSymbol
+     */
+    'symbol'?: UniversalSymbol;
+    /**
      * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      * @type {string}
      * @memberof PositionSymbol
@@ -34,12 +40,6 @@ export interface PositionSymbol {
      * @deprecated
      */
     'description'?: string;
-    /**
-     * 
-     * @type {UniversalSymbol}
-     * @memberof PositionSymbol
-     */
-    'symbol'?: UniversalSymbol;
     /**
      * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
      * @type {string}

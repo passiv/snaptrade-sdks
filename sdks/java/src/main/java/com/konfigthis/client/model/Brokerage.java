@@ -83,10 +83,6 @@ public class Brokerage {
   @SerializedName(SERIALIZED_NAME_AWS_S3_SQUARE_LOGO_URL)
   private String awsS3SquareLogoUrl;
 
-  public static final String SERIALIZED_NAME_OPEN_URL = "open_url";
-  @SerializedName(SERIALIZED_NAME_OPEN_URL)
-  private String openUrl;
-
   public static final String SERIALIZED_NAME_URL = "url";
   @SerializedName(SERIALIZED_NAME_URL)
   private String url;
@@ -99,13 +95,13 @@ public class Brokerage {
   @SerializedName(SERIALIZED_NAME_MAINTENANCE_MODE)
   private Boolean maintenanceMode;
 
-  public static final String SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS = "allows_fractional_units";
-  @SerializedName(SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS)
-  private Boolean allowsFractionalUnits;
-
   public static final String SERIALIZED_NAME_ALLOWS_TRADING = "allows_trading";
   @SerializedName(SERIALIZED_NAME_ALLOWS_TRADING)
   private Boolean allowsTrading;
+
+  public static final String SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS = "allows_fractional_units";
+  @SerializedName(SERIALIZED_NAME_ALLOWS_FRACTIONAL_UNITS)
+  private Boolean allowsFractionalUnits;
 
   public static final String SERIALIZED_NAME_HAS_REPORTING = "has_reporting";
   @SerializedName(SERIALIZED_NAME_HAS_REPORTING)
@@ -122,6 +118,10 @@ public class Brokerage {
   public static final String SERIALIZED_NAME_EXCHANGES = "exchanges";
   @SerializedName(SERIALIZED_NAME_EXCHANGES)
   private List<Object> exchanges = null;
+
+  public static final String SERIALIZED_NAME_OPEN_URL = "open_url";
+  @SerializedName(SERIALIZED_NAME_OPEN_URL)
+  private String openUrl;
 
   public Brokerage() {
   }
@@ -329,37 +329,6 @@ public class Brokerage {
   }
 
 
-  public Brokerage openUrl(String openUrl) {
-    
-    
-    
-    
-    this.openUrl = openUrl;
-    return this;
-  }
-
-   /**
-   * This field is deprecated.
-   * @return openUrl
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "This field is deprecated.")
-
-  public String getOpenUrl() {
-    return openUrl;
-  }
-
-
-  public void setOpenUrl(String openUrl) {
-    
-    
-    
-    this.openUrl = openUrl;
-  }
-
-
   public Brokerage url(String url) {
     
     
@@ -447,6 +416,35 @@ public class Brokerage {
   }
 
 
+  public Brokerage allowsTrading(Boolean allowsTrading) {
+    
+    
+    
+    
+    this.allowsTrading = allowsTrading;
+    return this;
+  }
+
+   /**
+   * Whether the brokerage allows trading through SnapTrade.
+   * @return allowsTrading
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Whether the brokerage allows trading through SnapTrade.")
+
+  public Boolean getAllowsTrading() {
+    return allowsTrading;
+  }
+
+
+  public void setAllowsTrading(Boolean allowsTrading) {
+    
+    
+    
+    this.allowsTrading = allowsTrading;
+  }
+
+
   public Brokerage allowsFractionalUnits(Boolean allowsFractionalUnits) {
     
     
@@ -475,35 +473,6 @@ public class Brokerage {
     
     
     this.allowsFractionalUnits = allowsFractionalUnits;
-  }
-
-
-  public Brokerage allowsTrading(Boolean allowsTrading) {
-    
-    
-    
-    
-    this.allowsTrading = allowsTrading;
-    return this;
-  }
-
-   /**
-   * Whether the brokerage allows trading through SnapTrade.
-   * @return allowsTrading
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "Whether the brokerage allows trading through SnapTrade.")
-
-  public Boolean getAllowsTrading() {
-    return allowsTrading;
-  }
-
-
-  public void setAllowsTrading(Boolean allowsTrading) {
-    
-    
-    
-    this.allowsTrading = allowsTrading;
   }
 
 
@@ -636,6 +605,37 @@ public class Brokerage {
     this.exchanges = exchanges;
   }
 
+
+  public Brokerage openUrl(String openUrl) {
+    
+    
+    
+    
+    this.openUrl = openUrl;
+    return this;
+  }
+
+   /**
+   * This field is deprecated.
+   * @return openUrl
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "This field is deprecated.")
+
+  public String getOpenUrl() {
+    return openUrl;
+  }
+
+
+  public void setOpenUrl(String openUrl) {
+    
+    
+    
+    this.openUrl = openUrl;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -698,16 +698,16 @@ public class Brokerage {
         Objects.equals(this.description, brokerage.description) &&
         Objects.equals(this.awsS3LogoUrl, brokerage.awsS3LogoUrl) &&
         Objects.equals(this.awsS3SquareLogoUrl, brokerage.awsS3SquareLogoUrl) &&
-        Objects.equals(this.openUrl, brokerage.openUrl) &&
         Objects.equals(this.url, brokerage.url) &&
         Objects.equals(this.enabled, brokerage.enabled) &&
         Objects.equals(this.maintenanceMode, brokerage.maintenanceMode) &&
-        Objects.equals(this.allowsFractionalUnits, brokerage.allowsFractionalUnits) &&
         Objects.equals(this.allowsTrading, brokerage.allowsTrading) &&
+        Objects.equals(this.allowsFractionalUnits, brokerage.allowsFractionalUnits) &&
         Objects.equals(this.hasReporting, brokerage.hasReporting) &&
         Objects.equals(this.isRealTimeConnection, brokerage.isRealTimeConnection) &&
         Objects.equals(this.brokerageType, brokerage.brokerageType) &&
-        Objects.equals(this.exchanges, brokerage.exchanges)&&
+        Objects.equals(this.exchanges, brokerage.exchanges) &&
+        Objects.equals(this.openUrl, brokerage.openUrl)&&
         Objects.equals(this.additionalProperties, brokerage.additionalProperties);
   }
 
@@ -717,7 +717,7 @@ public class Brokerage {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, slug, name, displayName, description, awsS3LogoUrl, awsS3SquareLogoUrl, openUrl, url, enabled, maintenanceMode, allowsFractionalUnits, allowsTrading, hasReporting, isRealTimeConnection, brokerageType, exchanges, additionalProperties);
+    return Objects.hash(id, slug, name, displayName, description, awsS3LogoUrl, awsS3SquareLogoUrl, url, enabled, maintenanceMode, allowsTrading, allowsFractionalUnits, hasReporting, isRealTimeConnection, brokerageType, exchanges, openUrl, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -738,16 +738,16 @@ public class Brokerage {
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    awsS3LogoUrl: ").append(toIndentedString(awsS3LogoUrl)).append("\n");
     sb.append("    awsS3SquareLogoUrl: ").append(toIndentedString(awsS3SquareLogoUrl)).append("\n");
-    sb.append("    openUrl: ").append(toIndentedString(openUrl)).append("\n");
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("    maintenanceMode: ").append(toIndentedString(maintenanceMode)).append("\n");
-    sb.append("    allowsFractionalUnits: ").append(toIndentedString(allowsFractionalUnits)).append("\n");
     sb.append("    allowsTrading: ").append(toIndentedString(allowsTrading)).append("\n");
+    sb.append("    allowsFractionalUnits: ").append(toIndentedString(allowsFractionalUnits)).append("\n");
     sb.append("    hasReporting: ").append(toIndentedString(hasReporting)).append("\n");
     sb.append("    isRealTimeConnection: ").append(toIndentedString(isRealTimeConnection)).append("\n");
     sb.append("    brokerageType: ").append(toIndentedString(brokerageType)).append("\n");
     sb.append("    exchanges: ").append(toIndentedString(exchanges)).append("\n");
+    sb.append("    openUrl: ").append(toIndentedString(openUrl)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -778,16 +778,16 @@ public class Brokerage {
     openapiFields.add("description");
     openapiFields.add("aws_s3_logo_url");
     openapiFields.add("aws_s3_square_logo_url");
-    openapiFields.add("open_url");
     openapiFields.add("url");
     openapiFields.add("enabled");
     openapiFields.add("maintenance_mode");
-    openapiFields.add("allows_fractional_units");
     openapiFields.add("allows_trading");
+    openapiFields.add("allows_fractional_units");
     openapiFields.add("has_reporting");
     openapiFields.add("is_real_time_connection");
     openapiFields.add("brokerage_type");
     openapiFields.add("exchanges");
+    openapiFields.add("open_url");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -826,9 +826,6 @@ public class Brokerage {
       if (!jsonObj.get("aws_s3_square_logo_url").isJsonNull() && (jsonObj.get("aws_s3_square_logo_url") != null && !jsonObj.get("aws_s3_square_logo_url").isJsonNull()) && !jsonObj.get("aws_s3_square_logo_url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `aws_s3_square_logo_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("aws_s3_square_logo_url").toString()));
       }
-      if (!jsonObj.get("open_url").isJsonNull() && (jsonObj.get("open_url") != null && !jsonObj.get("open_url").isJsonNull()) && !jsonObj.get("open_url").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `open_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open_url").toString()));
-      }
       if ((jsonObj.get("url") != null && !jsonObj.get("url").isJsonNull()) && !jsonObj.get("url").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("url").toString()));
       }
@@ -839,6 +836,9 @@ public class Brokerage {
       // ensure the optional json data is an array if present
       if (jsonObj.get("exchanges") != null && !jsonObj.get("exchanges").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `exchanges` to be an array in the JSON string but got `%s`", jsonObj.get("exchanges").toString()));
+      }
+      if (!jsonObj.get("open_url").isJsonNull() && (jsonObj.get("open_url") != null && !jsonObj.get("open_url").isJsonNull()) && !jsonObj.get("open_url").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `open_url` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open_url").toString()));
       }
   }
 

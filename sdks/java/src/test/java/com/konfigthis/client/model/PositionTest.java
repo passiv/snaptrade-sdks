@@ -73,19 +73,19 @@ public class PositionTest {
     }
 
     /**
-     * Test the property 'fractionalUnits'
-     */
-    @Test
-    public void fractionalUnitsTest() {
-        // TODO: test fractionalUnits
-    }
-
-    /**
      * Test the property 'averagePurchasePrice'
      */
     @Test
     public void averagePurchasePriceTest() {
         // TODO: test averagePurchasePrice
+    }
+
+    /**
+     * Test the property 'fractionalUnits'
+     */
+    @Test
+    public void fractionalUnitsTest() {
+        // TODO: test fractionalUnits
     }
 
 }

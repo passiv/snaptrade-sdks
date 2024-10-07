@@ -56,7 +56,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelUserAccountOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Action`: %v\n", *resp.Action)
@@ -73,6 +72,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Symbol`: %v\n", *resp.Symbol)
 }
 ```
 
@@ -253,7 +253,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceForceOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Action`: %v\n", *resp.Action)
@@ -270,6 +269,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Symbol`: %v\n", *resp.Symbol)
 }
 ```
 
@@ -322,7 +322,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceOrder`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Action`: %v\n", *resp.Action)
@@ -339,6 +338,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Symbol`: %v\n", *resp.Symbol)
 }
 ```
 

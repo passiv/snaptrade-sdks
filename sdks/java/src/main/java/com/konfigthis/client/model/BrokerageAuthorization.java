@@ -64,10 +64,6 @@ public class BrokerageAuthorization {
   @SerializedName(SERIALIZED_NAME_CREATED_DATE)
   private OffsetDateTime createdDate;
 
-  public static final String SERIALIZED_NAME_UPDATED_DATE = "updated_date";
-  @SerializedName(SERIALIZED_NAME_UPDATED_DATE)
-  private OffsetDateTime updatedDate;
-
   public static final String SERIALIZED_NAME_BROKERAGE = "brokerage";
   @SerializedName(SERIALIZED_NAME_BROKERAGE)
   private Brokerage brokerage;
@@ -91,6 +87,10 @@ public class BrokerageAuthorization {
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
   private Map<String, Object> meta = null;
+
+  public static final String SERIALIZED_NAME_UPDATED_DATE = "updated_date";
+  @SerializedName(SERIALIZED_NAME_UPDATED_DATE)
+  private OffsetDateTime updatedDate;
 
   public BrokerageAuthorization() {
   }
@@ -150,37 +150,6 @@ public class BrokerageAuthorization {
     
     
     this.createdDate = createdDate;
-  }
-
-
-  public BrokerageAuthorization updatedDate(OffsetDateTime updatedDate) {
-    
-    
-    
-    
-    this.updatedDate = updatedDate;
-    return this;
-  }
-
-   /**
-   * Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-   * @return updatedDate
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2024-08-20T21:56:20.057Z", value = "Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.")
-
-  public OffsetDateTime getUpdatedDate() {
-    return updatedDate;
-  }
-
-
-  public void setUpdatedDate(OffsetDateTime updatedDate) {
-    
-    
-    
-    this.updatedDate = updatedDate;
   }
 
 
@@ -367,6 +336,37 @@ public class BrokerageAuthorization {
     this.meta = meta;
   }
 
+
+  public BrokerageAuthorization updatedDate(OffsetDateTime updatedDate) {
+    
+    
+    
+    
+    this.updatedDate = updatedDate;
+    return this;
+  }
+
+   /**
+   * Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+   * @return updatedDate
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-08-20T21:56:20.057Z", value = "Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.")
+
+  public OffsetDateTime getUpdatedDate() {
+    return updatedDate;
+  }
+
+
+  public void setUpdatedDate(OffsetDateTime updatedDate) {
+    
+    
+    
+    this.updatedDate = updatedDate;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -424,13 +424,13 @@ public class BrokerageAuthorization {
     BrokerageAuthorization brokerageAuthorization = (BrokerageAuthorization) o;
     return Objects.equals(this.id, brokerageAuthorization.id) &&
         Objects.equals(this.createdDate, brokerageAuthorization.createdDate) &&
-        Objects.equals(this.updatedDate, brokerageAuthorization.updatedDate) &&
         Objects.equals(this.brokerage, brokerageAuthorization.brokerage) &&
         Objects.equals(this.name, brokerageAuthorization.name) &&
         Objects.equals(this.type, brokerageAuthorization.type) &&
         Objects.equals(this.disabled, brokerageAuthorization.disabled) &&
         Objects.equals(this.disabledDate, brokerageAuthorization.disabledDate) &&
-        Objects.equals(this.meta, brokerageAuthorization.meta)&&
+        Objects.equals(this.meta, brokerageAuthorization.meta) &&
+        Objects.equals(this.updatedDate, brokerageAuthorization.updatedDate)&&
         Objects.equals(this.additionalProperties, brokerageAuthorization.additionalProperties);
   }
 
@@ -440,7 +440,7 @@ public class BrokerageAuthorization {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdDate, updatedDate, brokerage, name, type, disabled, disabledDate, meta, additionalProperties);
+    return Objects.hash(id, createdDate, brokerage, name, type, disabled, disabledDate, meta, updatedDate, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -456,13 +456,13 @@ public class BrokerageAuthorization {
     sb.append("class BrokerageAuthorization {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
-    sb.append("    updatedDate: ").append(toIndentedString(updatedDate)).append("\n");
     sb.append("    brokerage: ").append(toIndentedString(brokerage)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    disabled: ").append(toIndentedString(disabled)).append("\n");
     sb.append("    disabledDate: ").append(toIndentedString(disabledDate)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
+    sb.append("    updatedDate: ").append(toIndentedString(updatedDate)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -488,13 +488,13 @@ public class BrokerageAuthorization {
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
     openapiFields.add("created_date");
-    openapiFields.add("updated_date");
     openapiFields.add("brokerage");
     openapiFields.add("name");
     openapiFields.add("type");
     openapiFields.add("disabled");
     openapiFields.add("disabled_date");
     openapiFields.add("meta");
+    openapiFields.add("updated_date");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

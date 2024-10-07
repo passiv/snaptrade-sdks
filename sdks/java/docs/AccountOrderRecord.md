@@ -10,7 +10,6 @@ Describes a single recent order in an account. Each record here represents a sin
 |------------ | ------------- | ------------- | -------------|
 |**brokerageOrderId** | **String** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. |  [optional] |
 |**status** | **AccountOrderRecordStatus** |  |  [optional] |
-|**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
 |**universalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  |  [optional] |
 |**optionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  |  [optional] |
 |**action** | **String** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  |  [optional] |
@@ -27,6 +26,7 @@ Describes a single recent order in an account. Each record here represents a sin
 |**timeUpdated** | **OffsetDateTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. |  [optional] |
 |**timeExecuted** | **OffsetDateTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. |  [optional] |
 |**expiryDate** | **OffsetDateTime** | The time the order expires. This value is not always available from the brokerage. |  [optional] |
+|**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
 
 
 

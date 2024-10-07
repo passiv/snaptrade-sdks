@@ -64,10 +64,6 @@ public class AccountOrderRecord {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private AccountOrderRecordStatus status;
 
-  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
-  @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private UUID symbol;
-
   public static final String SERIALIZED_NAME_UNIVERSAL_SYMBOL = "universal_symbol";
   @SerializedName(SERIALIZED_NAME_UNIVERSAL_SYMBOL)
   private AccountOrderRecordUniversalSymbol universalSymbol;
@@ -132,6 +128,10 @@ public class AccountOrderRecord {
   @SerializedName(SERIALIZED_NAME_EXPIRY_DATE)
   private OffsetDateTime expiryDate;
 
+  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
+  @SerializedName(SERIALIZED_NAME_SYMBOL)
+  private UUID symbol;
+
   public AccountOrderRecord() {
   }
 
@@ -190,37 +190,6 @@ public class AccountOrderRecord {
     
     
     this.status = status;
-  }
-
-
-  public AccountOrderRecord symbol(UUID symbol) {
-    
-    
-    
-    
-    this.symbol = symbol;
-    return this;
-  }
-
-   /**
-   * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-   * @return symbol
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.")
-
-  public UUID getSymbol() {
-    return symbol;
-  }
-
-
-  public void setSymbol(UUID symbol) {
-    
-    
-    
-    this.symbol = symbol;
   }
 
 
@@ -750,6 +719,37 @@ public class AccountOrderRecord {
     this.expiryDate = expiryDate;
   }
 
+
+  public AccountOrderRecord symbol(UUID symbol) {
+    
+    
+    
+    
+    this.symbol = symbol;
+    return this;
+  }
+
+   /**
+   * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+   * @return symbol
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.")
+
+  public UUID getSymbol() {
+    return symbol;
+  }
+
+
+  public void setSymbol(UUID symbol) {
+    
+    
+    
+    this.symbol = symbol;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -807,7 +807,6 @@ public class AccountOrderRecord {
     AccountOrderRecord accountOrderRecord = (AccountOrderRecord) o;
     return Objects.equals(this.brokerageOrderId, accountOrderRecord.brokerageOrderId) &&
         Objects.equals(this.status, accountOrderRecord.status) &&
-        Objects.equals(this.symbol, accountOrderRecord.symbol) &&
         Objects.equals(this.universalSymbol, accountOrderRecord.universalSymbol) &&
         Objects.equals(this.optionSymbol, accountOrderRecord.optionSymbol) &&
         Objects.equals(this.action, accountOrderRecord.action) &&
@@ -823,7 +822,8 @@ public class AccountOrderRecord {
         Objects.equals(this.timePlaced, accountOrderRecord.timePlaced) &&
         Objects.equals(this.timeUpdated, accountOrderRecord.timeUpdated) &&
         Objects.equals(this.timeExecuted, accountOrderRecord.timeExecuted) &&
-        Objects.equals(this.expiryDate, accountOrderRecord.expiryDate)&&
+        Objects.equals(this.expiryDate, accountOrderRecord.expiryDate) &&
+        Objects.equals(this.symbol, accountOrderRecord.symbol)&&
         Objects.equals(this.additionalProperties, accountOrderRecord.additionalProperties);
   }
 
@@ -833,7 +833,7 @@ public class AccountOrderRecord {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, symbol, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -849,7 +849,6 @@ public class AccountOrderRecord {
     sb.append("class AccountOrderRecord {\n");
     sb.append("    brokerageOrderId: ").append(toIndentedString(brokerageOrderId)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    universalSymbol: ").append(toIndentedString(universalSymbol)).append("\n");
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
@@ -866,6 +865,7 @@ public class AccountOrderRecord {
     sb.append("    timeUpdated: ").append(toIndentedString(timeUpdated)).append("\n");
     sb.append("    timeExecuted: ").append(toIndentedString(timeExecuted)).append("\n");
     sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
+    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -891,7 +891,6 @@ public class AccountOrderRecord {
     openapiFields = new HashSet<String>();
     openapiFields.add("brokerage_order_id");
     openapiFields.add("status");
-    openapiFields.add("symbol");
     openapiFields.add("universal_symbol");
     openapiFields.add("option_symbol");
     openapiFields.add("action");
@@ -908,6 +907,7 @@ public class AccountOrderRecord {
     openapiFields.add("time_updated");
     openapiFields.add("time_executed");
     openapiFields.add("expiry_date");
+    openapiFields.add("symbol");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -928,9 +928,6 @@ public class AccountOrderRecord {
       if ((jsonObj.get("brokerage_order_id") != null && !jsonObj.get("brokerage_order_id").isJsonNull()) && !jsonObj.get("brokerage_order_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `brokerage_order_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("brokerage_order_id").toString()));
       }
-      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
-      }
       // validate the optional field `universal_symbol`
       if (jsonObj.get("universal_symbol") != null && !jsonObj.get("universal_symbol").isJsonNull()) {
         AccountOrderRecordUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("universal_symbol"));
@@ -947,6 +944,9 @@ public class AccountOrderRecord {
       }
       if ((jsonObj.get("time_in_force") != null && !jsonObj.get("time_in_force").isJsonNull()) && !jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
+      }
+      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
   }
 
