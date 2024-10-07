@@ -6,6 +6,14 @@ Sending many requests in quick succession might trigger error responses that sho
 
 Every SnapTrade client is ratelimited to 250 requests per minute by default. If you have a large number of users and would like to request a higher ratelimit, please contact your Customer Success Manager.
 
+## Keeping Track of Your Ratelimit
+
+The SnapTrade API returns several helpful response headers that you can use to keep track of your ratelimit usage:
+
+- `X-RateLimit-Limit`: the maximum number of requests you can make in a given minute
+- `X-RateLimit-Remaining`: the number of requests remaining in the current minute
+- `X-RateLimit-Reset`: the number of seconds until the next minutely ratelimit resets
+
 ## Common Causes and Mitigations
 
 There are a number of situations that may cause your ratelimiting to kick in. Here are a few scenarios and suggested mitigations:
