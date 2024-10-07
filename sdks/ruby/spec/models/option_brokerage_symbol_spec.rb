@@ -20,6 +20,12 @@ describe SnapTrade::OptionBrokerageSymbol do
       expect(instance).to be_instance_of(SnapTrade::OptionBrokerageSymbol)
     end
   end
+  describe 'test attribute "option_symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -27,12 +33,6 @@ describe SnapTrade::OptionBrokerageSymbol do
   end
 
   describe 'test attribute "description"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "option_symbol"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

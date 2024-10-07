@@ -24,11 +24,11 @@ type Position struct {
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
 	OpenPnl NullableFloat32 `json:"open_pnl,omitempty"`
+	// Cost basis _per share_ of this position.
+	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
 	// Deprecated, use the `units` field for both fractional and integer units going forward
 	// Deprecated
 	FractionalUnits NullableFloat32 `json:"fractional_units,omitempty"`
-	// Cost basis _per share_ of this position.
-	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -209,6 +209,48 @@ func (o *Position) UnsetOpenPnl() {
 	o.OpenPnl.Unset()
 }
 
+// GetAveragePurchasePrice returns the AveragePurchasePrice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Position) GetAveragePurchasePrice() float32 {
+	if o == nil || isNil(o.AveragePurchasePrice.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.AveragePurchasePrice.Get()
+}
+
+// GetAveragePurchasePriceOk returns a tuple with the AveragePurchasePrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Position) GetAveragePurchasePriceOk() (*float32, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AveragePurchasePrice.Get(), o.AveragePurchasePrice.IsSet()
+}
+
+// HasAveragePurchasePrice returns a boolean if a field has been set.
+func (o *Position) HasAveragePurchasePrice() bool {
+	if o != nil && o.AveragePurchasePrice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAveragePurchasePrice gets a reference to the given NullableFloat32 and assigns it to the AveragePurchasePrice field.
+func (o *Position) SetAveragePurchasePrice(v float32) {
+	o.AveragePurchasePrice.Set(&v)
+}
+// SetAveragePurchasePriceNil sets the value for AveragePurchasePrice to be an explicit nil
+func (o *Position) SetAveragePurchasePriceNil() {
+	o.AveragePurchasePrice.Set(nil)
+}
+
+// UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
+func (o *Position) UnsetAveragePurchasePrice() {
+	o.AveragePurchasePrice.Unset()
+}
+
 // GetFractionalUnits returns the FractionalUnits field value if set, zero value otherwise (both if not set or set to explicit null).
 // Deprecated
 func (o *Position) GetFractionalUnits() float32 {
@@ -254,48 +296,6 @@ func (o *Position) UnsetFractionalUnits() {
 	o.FractionalUnits.Unset()
 }
 
-// GetAveragePurchasePrice returns the AveragePurchasePrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Position) GetAveragePurchasePrice() float32 {
-	if o == nil || isNil(o.AveragePurchasePrice.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.AveragePurchasePrice.Get()
-}
-
-// GetAveragePurchasePriceOk returns a tuple with the AveragePurchasePrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Position) GetAveragePurchasePriceOk() (*float32, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.AveragePurchasePrice.Get(), o.AveragePurchasePrice.IsSet()
-}
-
-// HasAveragePurchasePrice returns a boolean if a field has been set.
-func (o *Position) HasAveragePurchasePrice() bool {
-	if o != nil && o.AveragePurchasePrice.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAveragePurchasePrice gets a reference to the given NullableFloat32 and assigns it to the AveragePurchasePrice field.
-func (o *Position) SetAveragePurchasePrice(v float32) {
-	o.AveragePurchasePrice.Set(&v)
-}
-// SetAveragePurchasePriceNil sets the value for AveragePurchasePrice to be an explicit nil
-func (o *Position) SetAveragePurchasePriceNil() {
-	o.AveragePurchasePrice.Set(nil)
-}
-
-// UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
-func (o *Position) UnsetAveragePurchasePrice() {
-	o.AveragePurchasePrice.Unset()
-}
-
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -310,11 +310,11 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	if o.OpenPnl.IsSet() {
 		toSerialize["open_pnl"] = o.OpenPnl.Get()
 	}
-	if o.FractionalUnits.IsSet() {
-		toSerialize["fractional_units"] = o.FractionalUnits.Get()
-	}
 	if o.AveragePurchasePrice.IsSet() {
 		toSerialize["average_purchase_price"] = o.AveragePurchasePrice.Get()
+	}
+	if o.FractionalUnits.IsSet() {
+		toSerialize["fractional_units"] = o.FractionalUnits.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -338,8 +338,8 @@ func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "units")
 		delete(additionalProperties, "price")
 		delete(additionalProperties, "open_pnl")
-		delete(additionalProperties, "fractional_units")
 		delete(additionalProperties, "average_purchase_price")
+		delete(additionalProperties, "fractional_units")
 		o.AdditionalProperties = additionalProperties
 	}
 

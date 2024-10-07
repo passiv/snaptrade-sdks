@@ -21,6 +21,12 @@ export interface OptionBrokerageSymbol {
     [key: string]: any;
 
     /**
+     * 
+     * @type {OptionsSymbol}
+     * @memberof OptionBrokerageSymbol
+     */
+    'option_symbol'?: OptionsSymbol;
+    /**
      * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
      * @type {string}
      * @memberof OptionBrokerageSymbol
@@ -34,11 +40,5 @@ export interface OptionBrokerageSymbol {
      * @deprecated
      */
     'description'?: string;
-    /**
-     * 
-     * @type {OptionsSymbol}
-     * @memberof OptionBrokerageSymbol
-     */
-    'option_symbol'?: OptionsSymbol;
 }
 

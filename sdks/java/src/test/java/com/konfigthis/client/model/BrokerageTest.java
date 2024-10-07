@@ -100,14 +100,6 @@ public class BrokerageTest {
     }
 
     /**
-     * Test the property 'openUrl'
-     */
-    @Test
-    public void openUrlTest() {
-        // TODO: test openUrl
-    }
-
-    /**
      * Test the property 'url'
      */
     @Test
@@ -132,19 +124,19 @@ public class BrokerageTest {
     }
 
     /**
-     * Test the property 'allowsFractionalUnits'
-     */
-    @Test
-    public void allowsFractionalUnitsTest() {
-        // TODO: test allowsFractionalUnits
-    }
-
-    /**
      * Test the property 'allowsTrading'
      */
     @Test
     public void allowsTradingTest() {
         // TODO: test allowsTrading
+    }
+
+    /**
+     * Test the property 'allowsFractionalUnits'
+     */
+    @Test
+    public void allowsFractionalUnitsTest() {
+        // TODO: test allowsFractionalUnits
     }
 
     /**
@@ -177,6 +169,14 @@ public class BrokerageTest {
     @Test
     public void exchangesTest() {
         // TODO: test exchanges
+    }
+
+    /**
+     * Test the property 'openUrl'
+     */
+    @Test
+    public void openUrlTest() {
+        // TODO: test openUrl
     }
 
 }

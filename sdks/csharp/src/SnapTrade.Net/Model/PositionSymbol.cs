@@ -35,22 +35,28 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PositionSymbol" /> class.
         /// </summary>
+        /// <param name="symbol">symbol.</param>
         /// <param name="id">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="description">This field is deprecated and the caller should use the &#x60;symbol&#x60; child property&#39;s &#x60;description&#x60; instead..</param>
-        /// <param name="symbol">symbol.</param>
         /// <param name="localId">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
         /// <param name="isQuotable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
         /// <param name="isTradable">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
-        public PositionSymbol(string id = default(string), string description = default(string), UniversalSymbol symbol = default(UniversalSymbol), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
+        public PositionSymbol(UniversalSymbol symbol = default(UniversalSymbol), string id = default(string), string description = default(string), string localId = default(string), bool isQuotable = default(bool), bool isTradable = default(bool)) : base()
         {
+            this.Symbol = symbol;
             this.Id = id;
             this.Description = description;
-            this.Symbol = symbol;
             this.LocalId = localId;
             this.IsQuotable = isQuotable;
             this.IsTradable = isTradable;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Gets or Sets Symbol
+        /// </summary>
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        public UniversalSymbol Symbol { get; set; }
 
         /// <summary>
         /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
@@ -67,12 +73,6 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "description", EmitDefaultValue = false)]
         [Obsolete]
         public string Description { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Symbol
-        /// </summary>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public UniversalSymbol Symbol { get; set; }
 
         /// <summary>
         /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
@@ -113,9 +113,9 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class PositionSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  IsQuotable: ").Append(IsQuotable).Append("\n");
             sb.Append("  IsTradable: ").Append(IsTradable).Append("\n");
@@ -156,6 +156,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.Symbol == input.Symbol ||
+                    (this.Symbol != null &&
+                    this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -164,11 +169,6 @@ namespace SnapTrade.Net.Model
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
-                    this.Symbol == input.Symbol ||
-                    (this.Symbol != null &&
-                    this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
                     this.LocalId == input.LocalId ||
@@ -195,6 +195,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Symbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -202,10 +206,6 @@ namespace SnapTrade.Net.Model
                 if (this.Description != null)
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.Symbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
                 if (this.LocalId != null)
                 {

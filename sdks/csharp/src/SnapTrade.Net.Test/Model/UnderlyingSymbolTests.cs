@@ -114,14 +114,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Type'
         }
         /// <summary>
-        /// Test the property 'Currencies'
-        /// </summary>
-        [Fact]
-        public void CurrenciesTest()
-        {
-            // TODO unit test for the property 'Currencies'
-        }
-        /// <summary>
         /// Test the property 'FigiCode'
         /// </summary>
         [Fact]
@@ -136,6 +128,14 @@ namespace SnapTrade.Net.Test.Model
         public void FigiInstrumentTest()
         {
             // TODO unit test for the property 'FigiInstrument'
+        }
+        /// <summary>
+        /// Test the property 'Currencies'
+        /// </summary>
+        [Fact]
+        public void CurrenciesTest()
+        {
+            // TODO unit test for the property 'Currencies'
         }
 
     }

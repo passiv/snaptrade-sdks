@@ -28,10 +28,6 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     status: AccountOrderRecordStatus
 
-    # WARNING: This property is deprecated
-    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-    symbol: str
-
     # Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
     universal_symbol: UniversalSymbol
 
@@ -79,6 +75,10 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     # The time the order expires. This value is not always available from the brokerage.
     expiry_date: typing.Optional[datetime]
+
+    # WARNING: This property is deprecated
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+    symbol: str
 
 class AccountOrderRecord(RequiredAccountOrderRecord, OptionalAccountOrderRecord):
     pass

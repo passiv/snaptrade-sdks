@@ -63,13 +63,6 @@ export interface Brokerage {
      */
     'aws_s3_square_logo_url'?: string | null;
     /**
-     * This field is deprecated.
-     * @type {string}
-     * @memberof Brokerage
-     * @deprecated
-     */
-    'open_url'?: string | null;
-    /**
      * URL to the brokerage\'s website.
      * @type {string}
      * @memberof Brokerage
@@ -88,18 +81,18 @@ export interface Brokerage {
      */
     'maintenance_mode'?: boolean;
     /**
+     * Whether the brokerage allows trading through SnapTrade.
+     * @type {boolean}
+     * @memberof Brokerage
+     */
+    'allows_trading'?: boolean | null;
+    /**
      * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {boolean}
      * @memberof Brokerage
      * @deprecated
      */
     'allows_fractional_units'?: boolean | null;
-    /**
-     * Whether the brokerage allows trading through SnapTrade.
-     * @type {boolean}
-     * @memberof Brokerage
-     */
-    'allows_trading'?: boolean | null;
     /**
      * This field is deprecated. Please contact us if you have a valid use case for it.
      * @type {boolean}
@@ -127,5 +120,12 @@ export interface Brokerage {
      * @deprecated
      */
     'exchanges'?: Array<any>;
+    /**
+     * This field is deprecated.
+     * @type {string}
+     * @memberof Brokerage
+     * @deprecated
+     */
+    'open_url'?: string | null;
 }
 

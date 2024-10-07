@@ -40,17 +40,17 @@ export interface OptionsPosition {
      */
     'units'?: number;
     /**
+     * Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
+     * @type {number}
+     * @memberof OptionsPosition
+     */
+    'average_purchase_price'?: number | null;
+    /**
      * 
      * @type {OptionsPositionCurrency}
      * @memberof OptionsPosition
      * @deprecated
      */
     'currency'?: OptionsPositionCurrency | null;
-    /**
-     * Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
-     * @type {number}
-     * @memberof OptionsPosition
-     */
-    'average_purchase_price'?: number | null;
 }
 

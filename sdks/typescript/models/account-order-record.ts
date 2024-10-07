@@ -35,13 +35,6 @@ export interface AccountOrderRecord {
      */
     'status'?: AccountOrderRecordStatus;
     /**
-     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-     * @type {string}
-     * @memberof AccountOrderRecord
-     * @deprecated
-     */
-    'symbol'?: string;
-    /**
      * 
      * @type {AccountOrderRecordUniversalSymbol}
      * @memberof AccountOrderRecord
@@ -137,5 +130,12 @@ export interface AccountOrderRecord {
      * @memberof AccountOrderRecord
      */
     'expiry_date'?: string | null;
+    /**
+     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+     * @type {string}
+     * @memberof AccountOrderRecord
+     * @deprecated
+     */
+    'symbol'?: string;
 }
 

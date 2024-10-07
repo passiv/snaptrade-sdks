@@ -74,14 +74,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Status'
         }
         /// <summary>
-        /// Test the property 'Symbol'
-        /// </summary>
-        [Fact]
-        public void SymbolTest()
-        {
-            // TODO unit test for the property 'Symbol'
-        }
-        /// <summary>
         /// Test the property 'UniversalSymbol'
         /// </summary>
         [Fact]
@@ -208,6 +200,14 @@ namespace SnapTrade.Net.Test.Model
         public void ExpiryDateTest()
         {
             // TODO unit test for the property 'ExpiryDate'
+        }
+        /// <summary>
+        /// Test the property 'Symbol'
+        /// </summary>
+        [Fact]
+        public void SymbolTest()
+        {
+            // TODO unit test for the property 'Symbol'
         }
 
     }

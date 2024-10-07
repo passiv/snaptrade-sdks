@@ -35,16 +35,22 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionBrokerageSymbol" /> class.
         /// </summary>
+        /// <param name="optionSymbol">optionSymbol.</param>
         /// <param name="id">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="description">This field is deprecated and the caller should use the &#x60;option_symbol&#x60; child property&#39;s &#x60;description&#x60; instead..</param>
-        /// <param name="optionSymbol">optionSymbol.</param>
-        public OptionBrokerageSymbol(string id = default(string), string description = default(string), OptionsSymbol optionSymbol = default(OptionsSymbol)) : base()
+        public OptionBrokerageSymbol(OptionsSymbol optionSymbol = default(OptionsSymbol), string id = default(string), string description = default(string)) : base()
         {
+            this.OptionSymbol = optionSymbol;
             this.Id = id;
             this.Description = description;
-            this.OptionSymbol = optionSymbol;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Gets or Sets OptionSymbol
+        /// </summary>
+        [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
+        public OptionsSymbol OptionSymbol { get; set; }
 
         /// <summary>
         /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
@@ -63,12 +69,6 @@ namespace SnapTrade.Net.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets OptionSymbol
-        /// </summary>
-        [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
-        public OptionsSymbol OptionSymbol { get; set; }
-
-        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -83,9 +83,9 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class OptionBrokerageSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -123,6 +123,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.OptionSymbol == input.OptionSymbol ||
+                    (this.OptionSymbol != null &&
+                    this.OptionSymbol.Equals(input.OptionSymbol))
+                ) && base.Equals(input) && 
+                (
                     this.Id == input.Id ||
                     (this.Id != null &&
                     this.Id.Equals(input.Id))
@@ -131,11 +136,6 @@ namespace SnapTrade.Net.Model
                     this.Description == input.Description ||
                     (this.Description != null &&
                     this.Description.Equals(input.Description))
-                ) && base.Equals(input) && 
-                (
-                    this.OptionSymbol == input.OptionSymbol ||
-                    (this.OptionSymbol != null &&
-                    this.OptionSymbol.Equals(input.OptionSymbol))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -149,6 +149,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.OptionSymbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
+                }
                 if (this.Id != null)
                 {
                     hashCode = (hashCode * 59) + this.Id.GetHashCode();
@@ -156,10 +160,6 @@ namespace SnapTrade.Net.Model
                 if (this.Description != null)
                 {
                     hashCode = (hashCode * 59) + this.Description.GetHashCode();
-                }
-                if (this.OptionSymbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

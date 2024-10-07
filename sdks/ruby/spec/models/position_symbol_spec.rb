@@ -20,6 +20,12 @@ describe SnapTrade::PositionSymbol do
       expect(instance).to be_instance_of(SnapTrade::PositionSymbol)
     end
   end
+  describe 'test attribute "symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -27,12 +33,6 @@ describe SnapTrade::PositionSymbol do
   end
 
   describe 'test attribute "description"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  describe 'test attribute "symbol"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

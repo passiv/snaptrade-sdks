@@ -61,14 +61,6 @@ public class AccountOrderRecordTest {
     }
 
     /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
      * Test the property 'universalSymbol'
      */
     @Test
@@ -194,6 +186,14 @@ public class AccountOrderRecordTest {
     @Test
     public void expiryDateTest() {
         // TODO: test expiryDate
+    }
+
+    /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
     }
 
 }

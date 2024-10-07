@@ -214,8 +214,8 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.Price`: %v\n", *resp.Price)
     fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.Units`: %v\n", *resp.Units)
-    fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.Currency`: %v\n", *resp.Currency)
     fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.AveragePurchasePrice`: %v\n", *resp.AveragePurchasePrice)
+    fmt.Fprintf(os.Stdout, "Response from `OptionsPosition.ListOptionHoldings.Currency`: %v\n", *resp.Currency)
 }
 ```
 

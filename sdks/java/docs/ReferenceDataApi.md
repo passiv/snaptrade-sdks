@@ -529,9 +529,9 @@ public class Example {
       System.out.println(result.getCurrency());
       System.out.println(result.getExchange());
       System.out.println(result.getType());
-      System.out.println(result.getCurrencies());
       System.out.println(result.getFigiCode());
       System.out.println(result.getFigiInstrument());
+      System.out.println(result.getCurrencies());
     } catch (ApiException e) {
       System.err.println("Exception when calling ReferenceDataApi#getSymbolsByTicker");
       System.err.println("Status code: " + e.getStatusCode());

@@ -87,10 +87,6 @@ public class UnderlyingSymbol {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private UnderlyingSymbolType type;
 
-  public static final String SERIALIZED_NAME_CURRENCIES = "currencies";
-  @SerializedName(SERIALIZED_NAME_CURRENCIES)
-  private List<Currency> currencies = null;
-
   public static final String SERIALIZED_NAME_FIGI_CODE = "figi_code";
   @SerializedName(SERIALIZED_NAME_FIGI_CODE)
   private String figiCode;
@@ -98,6 +94,10 @@ public class UnderlyingSymbol {
   public static final String SERIALIZED_NAME_FIGI_INSTRUMENT = "figi_instrument";
   @SerializedName(SERIALIZED_NAME_FIGI_INSTRUMENT)
   private FigiInstrumentNullable figiInstrument;
+
+  public static final String SERIALIZED_NAME_CURRENCIES = "currencies";
+  @SerializedName(SERIALIZED_NAME_CURRENCIES)
+  private List<Currency> currencies = null;
 
   public UnderlyingSymbol() {
   }
@@ -305,45 +305,6 @@ public class UnderlyingSymbol {
   }
 
 
-  public UnderlyingSymbol currencies(List<Currency> currencies) {
-    
-    
-    
-    
-    this.currencies = currencies;
-    return this;
-  }
-
-  public UnderlyingSymbol addCurrenciesItem(Currency currenciesItem) {
-    if (this.currencies == null) {
-      this.currencies = new ArrayList<>();
-    }
-    this.currencies.add(currenciesItem);
-    return this;
-  }
-
-   /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-   * @return currencies
-   * @deprecated
-  **/
-  @Deprecated
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
-
-  public List<Currency> getCurrencies() {
-    return currencies;
-  }
-
-
-  public void setCurrencies(List<Currency> currencies) {
-    
-    
-    
-    this.currencies = currencies;
-  }
-
-
   public UnderlyingSymbol figiCode(String figiCode) {
     
     
@@ -399,6 +360,45 @@ public class UnderlyingSymbol {
     
     
     this.figiInstrument = figiInstrument;
+  }
+
+
+  public UnderlyingSymbol currencies(List<Currency> currencies) {
+    
+    
+    
+    
+    this.currencies = currencies;
+    return this;
+  }
+
+  public UnderlyingSymbol addCurrenciesItem(Currency currenciesItem) {
+    if (this.currencies == null) {
+      this.currencies = new ArrayList<>();
+    }
+    this.currencies.add(currenciesItem);
+    return this;
+  }
+
+   /**
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * @return currencies
+   * @deprecated
+  **/
+  @Deprecated
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+
+  public List<Currency> getCurrencies() {
+    return currencies;
+  }
+
+
+  public void setCurrencies(List<Currency> currencies) {
+    
+    
+    
+    this.currencies = currencies;
   }
 
   /**
@@ -463,9 +463,9 @@ public class UnderlyingSymbol {
         Objects.equals(this.currency, underlyingSymbol.currency) &&
         Objects.equals(this.exchange, underlyingSymbol.exchange) &&
         Objects.equals(this.type, underlyingSymbol.type) &&
-        Objects.equals(this.currencies, underlyingSymbol.currencies) &&
         Objects.equals(this.figiCode, underlyingSymbol.figiCode) &&
-        Objects.equals(this.figiInstrument, underlyingSymbol.figiInstrument)&&
+        Objects.equals(this.figiInstrument, underlyingSymbol.figiInstrument) &&
+        Objects.equals(this.currencies, underlyingSymbol.currencies)&&
         Objects.equals(this.additionalProperties, underlyingSymbol.additionalProperties);
   }
 
@@ -475,7 +475,7 @@ public class UnderlyingSymbol {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, symbol, rawSymbol, description, currency, exchange, type, currencies, figiCode, figiInstrument, additionalProperties);
+    return Objects.hash(id, symbol, rawSymbol, description, currency, exchange, type, figiCode, figiInstrument, currencies, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -496,9 +496,9 @@ public class UnderlyingSymbol {
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    exchange: ").append(toIndentedString(exchange)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
-    sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    figiCode: ").append(toIndentedString(figiCode)).append("\n");
     sb.append("    figiInstrument: ").append(toIndentedString(figiInstrument)).append("\n");
+    sb.append("    currencies: ").append(toIndentedString(currencies)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -529,9 +529,9 @@ public class UnderlyingSymbol {
     openapiFields.add("currency");
     openapiFields.add("exchange");
     openapiFields.add("type");
-    openapiFields.add("currencies");
     openapiFields.add("figi_code");
     openapiFields.add("figi_instrument");
+    openapiFields.add("currencies");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -573,6 +573,13 @@ public class UnderlyingSymbol {
       if (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) {
         UnderlyingSymbolType.validateJsonObject(jsonObj.getAsJsonObject("type"));
       }
+      if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
+      }
+      // validate the optional field `figi_instrument`
+      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
+        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
+      }
       if (jsonObj.get("currencies") != null && !jsonObj.get("currencies").isJsonNull()) {
         JsonArray jsonArraycurrencies = jsonObj.getAsJsonArray("currencies");
         if (jsonArraycurrencies != null) {
@@ -586,13 +593,6 @@ public class UnderlyingSymbol {
             Currency.validateJsonObject(jsonArraycurrencies.get(i).getAsJsonObject());
           };
         }
-      }
-      if (!jsonObj.get("figi_code").isJsonNull() && (jsonObj.get("figi_code") != null && !jsonObj.get("figi_code").isJsonNull()) && !jsonObj.get("figi_code").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `figi_code` to be a primitive type in the JSON string but got `%s`", jsonObj.get("figi_code").toString()));
-      }
-      // validate the optional field `figi_instrument`
-      if (jsonObj.get("figi_instrument") != null && !jsonObj.get("figi_instrument").isJsonNull()) {
-        FigiInstrumentNullable.validateJsonObject(jsonObj.getAsJsonObject("figi_instrument"));
       }
   }
 

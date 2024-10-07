@@ -104,14 +104,6 @@ public class AccountOrderRecordUniversalSymbolTest {
     }
 
     /**
-     * Test the property 'currencies'
-     */
-    @Test
-    public void currenciesTest() {
-        // TODO: test currencies
-    }
-
-    /**
      * Test the property 'figiCode'
      */
     @Test
@@ -125,6 +117,14 @@ public class AccountOrderRecordUniversalSymbolTest {
     @Test
     public void figiInstrumentTest() {
         // TODO: test figiInstrument
+    }
+
+    /**
+     * Test the property 'currencies'
+     */
+    @Test
+    public void currenciesTest() {
+        // TODO: test currencies
     }
 
 }

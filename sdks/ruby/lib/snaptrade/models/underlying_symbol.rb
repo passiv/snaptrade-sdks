@@ -31,13 +31,13 @@ module SnapTrade
 
     attr_accessor :type
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-    attr_accessor :currencies
-
     # This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
     attr_accessor :figi_code
 
     attr_accessor :figi_instrument
+
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    attr_accessor :currencies
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -49,9 +49,9 @@ module SnapTrade
         :'currency' => :'currency',
         :'exchange' => :'exchange',
         :'type' => :'type',
-        :'currencies' => :'currencies',
         :'figi_code' => :'figi_code',
-        :'figi_instrument' => :'figi_instrument'
+        :'figi_instrument' => :'figi_instrument',
+        :'currencies' => :'currencies'
       }
     end
 
@@ -70,9 +70,9 @@ module SnapTrade
         :'currency' => :'SymbolCurrency',
         :'exchange' => :'UnderlyingSymbolExchange',
         :'type' => :'UnderlyingSymbolType',
-        :'currencies' => :'Array<Currency>',
         :'figi_code' => :'String',
-        :'figi_instrument' => :'SymbolFigiInstrument'
+        :'figi_instrument' => :'SymbolFigiInstrument',
+        :'currencies' => :'Array<Currency>'
       }
     end
 
@@ -81,7 +81,7 @@ module SnapTrade
       Set.new([
         :'description',
         :'figi_code',
-        :'figi_instrument'
+        :'figi_instrument',
       ])
     end
 
@@ -128,18 +128,18 @@ module SnapTrade
         self.type = attributes[:'type']
       end
 
-      if attributes.key?(:'currencies')
-        if (value = attributes[:'currencies']).is_a?(Array)
-          self.currencies = value
-        end
-      end
-
       if attributes.key?(:'figi_code')
         self.figi_code = attributes[:'figi_code']
       end
 
       if attributes.key?(:'figi_instrument')
         self.figi_instrument = attributes[:'figi_instrument']
+      end
+
+      if attributes.key?(:'currencies')
+        if (value = attributes[:'currencies']).is_a?(Array)
+          self.currencies = value
+        end
       end
     end
 
@@ -168,9 +168,9 @@ module SnapTrade
           currency == o.currency &&
           exchange == o.exchange &&
           type == o.type &&
-          currencies == o.currencies &&
           figi_code == o.figi_code &&
-          figi_instrument == o.figi_instrument
+          figi_instrument == o.figi_instrument &&
+          currencies == o.currencies
     end
 
     # @see the `==` method
@@ -182,7 +182,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, symbol, raw_symbol, description, currency, exchange, type, currencies, figi_code, figi_instrument].hash
+      [id, symbol, raw_symbol, description, currency, exchange, type, figi_code, figi_instrument, currencies].hash
     end
 
     # Builds the object from hash

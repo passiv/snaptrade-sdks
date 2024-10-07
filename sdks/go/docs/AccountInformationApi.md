@@ -210,7 +210,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrders`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OptionSymbol`: %v\n", *resp.OptionSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Action`: %v\n", *resp.Action)
@@ -227,6 +226,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.TimeUpdated`: %v\n", *resp.TimeUpdated)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Symbol`: %v\n", *resp.Symbol)
 }
 ```
 
@@ -276,8 +276,8 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Units`: %v\n", *resp.Units)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Price`: %v\n", *resp.Price)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.OpenPnl`: %v\n", *resp.OpenPnl)
-    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.FractionalUnits`: %v\n", *resp.FractionalUnits)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.AveragePurchasePrice`: %v\n", *resp.AveragePurchasePrice)
+    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.FractionalUnits`: %v\n", *resp.FractionalUnits)
 }
 ```
 

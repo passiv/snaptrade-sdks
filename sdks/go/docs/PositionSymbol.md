@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Symbol** | Pointer to [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **Id** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
 **Description** | Pointer to **string** | This field is deprecated and the caller should use the &#x60;symbol&#x60; child property&#39;s &#x60;description&#x60; instead. | [optional] 
-**Symbol** | Pointer to [**UniversalSymbol**](UniversalSymbol.md) |  | [optional] 
 **LocalId** | Pointer to **NullableString** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
 **IsQuotable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
 **IsTradable** | Pointer to **bool** | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
@@ -29,6 +29,31 @@ will change when the set of required properties is changed
 NewPositionSymbolWithDefaults instantiates a new PositionSymbol object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSymbol
+
+`func (o *PositionSymbol) GetSymbol() UniversalSymbol`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *PositionSymbol) GetSymbolOk() (*UniversalSymbol, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *PositionSymbol) SetSymbol(v UniversalSymbol)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *PositionSymbol) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
 
 ### GetId
 
@@ -79,31 +104,6 @@ SetDescription sets Description field to given value.
 `func (o *PositionSymbol) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
-
-### GetSymbol
-
-`func (o *PositionSymbol) GetSymbol() UniversalSymbol`
-
-GetSymbol returns the Symbol field if non-nil, zero value otherwise.
-
-### GetSymbolOk
-
-`func (o *PositionSymbol) GetSymbolOk() (*UniversalSymbol, bool)`
-
-GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSymbol
-
-`func (o *PositionSymbol) SetSymbol(v UniversalSymbol)`
-
-SetSymbol sets Symbol field to given value.
-
-### HasSymbol
-
-`func (o *PositionSymbol) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetLocalId
 

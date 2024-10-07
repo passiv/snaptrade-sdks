@@ -52,13 +52,13 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.DetailBrokerageAuthorization`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.CreatedDate`: %v\n", *resp.CreatedDate)
-    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.UpdatedDate`: %v\n", *resp.UpdatedDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Brokerage`: %v\n", *resp.Brokerage)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Type`: %v\n", *resp.Type)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Disabled`: %v\n", *resp.Disabled)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.UpdatedDate`: %v\n", *resp.UpdatedDate)
 }
 ```
 
@@ -151,13 +151,13 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ListBrokerageAuthorizations`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.CreatedDate`: %v\n", *resp.CreatedDate)
-    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Brokerage`: %v\n", *resp.Brokerage)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Type`: %v\n", *resp.Type)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Disabled`: %v\n", *resp.Disabled)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
 }
 ```
 

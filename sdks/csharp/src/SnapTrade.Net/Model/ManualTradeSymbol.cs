@@ -35,30 +35,22 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeSymbol" /> class.
         /// </summary>
-        /// <param name="brokerageSymbolId">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="universalSymbolId">Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls..</param>
         /// <param name="currency">currency.</param>
         /// <param name="localId">This field is deprecated and should not be used..</param>
         /// <param name="description">This field is deprecated and should not be used..</param>
         /// <param name="symbol">This field is deprecated and should not be used..</param>
-        public ManualTradeSymbol(string brokerageSymbolId = default(string), string universalSymbolId = default(string), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string)) : base()
+        /// <param name="brokerageSymbolId">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
+        public ManualTradeSymbol(string universalSymbolId = default(string), Currency currency = default(Currency), string localId = default(string), string description = default(string), string symbol = default(string), string brokerageSymbolId = default(string)) : base()
         {
-            this.BrokerageSymbolId = brokerageSymbolId;
             this.UniversalSymbolId = universalSymbolId;
             this.Currency = currency;
             this.LocalId = localId;
             this.Description = description;
             this.Symbol = symbol;
+            this.BrokerageSymbolId = brokerageSymbolId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
-
-        /// <summary>
-        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-        /// </summary>
-        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
-        [DataMember(Name = "brokerage_symbol_id", EmitDefaultValue = false)]
-        [Obsolete]
-        public string BrokerageSymbolId { get; set; }
 
         /// <summary>
         /// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
@@ -98,6 +90,14 @@ namespace SnapTrade.Net.Model
         public string Symbol { get; set; }
 
         /// <summary>
+        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+        /// </summary>
+        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
+        [DataMember(Name = "brokerage_symbol_id", EmitDefaultValue = false)]
+        [Obsolete]
+        public string BrokerageSymbolId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -112,12 +112,12 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeSymbol {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
-            sb.Append("  BrokerageSymbolId: ").Append(BrokerageSymbolId).Append("\n");
             sb.Append("  UniversalSymbolId: ").Append(UniversalSymbolId).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  LocalId: ").Append(LocalId).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  BrokerageSymbolId: ").Append(BrokerageSymbolId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -155,11 +155,6 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
-                    this.BrokerageSymbolId == input.BrokerageSymbolId ||
-                    (this.BrokerageSymbolId != null &&
-                    this.BrokerageSymbolId.Equals(input.BrokerageSymbolId))
-                ) && base.Equals(input) && 
-                (
                     this.UniversalSymbolId == input.UniversalSymbolId ||
                     (this.UniversalSymbolId != null &&
                     this.UniversalSymbolId.Equals(input.UniversalSymbolId))
@@ -183,6 +178,11 @@ namespace SnapTrade.Net.Model
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
+                    this.BrokerageSymbolId == input.BrokerageSymbolId ||
+                    (this.BrokerageSymbolId != null &&
+                    this.BrokerageSymbolId.Equals(input.BrokerageSymbolId))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -196,10 +196,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
-                if (this.BrokerageSymbolId != null)
-                {
-                    hashCode = (hashCode * 59) + this.BrokerageSymbolId.GetHashCode();
-                }
                 if (this.UniversalSymbolId != null)
                 {
                     hashCode = (hashCode * 59) + this.UniversalSymbolId.GetHashCode();
@@ -219,6 +215,10 @@ namespace SnapTrade.Net.Model
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
+                if (this.BrokerageSymbolId != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageSymbolId.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {
