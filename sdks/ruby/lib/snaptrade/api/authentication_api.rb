@@ -192,7 +192,7 @@ module SnapTrade
     # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
+    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
     # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -221,7 +221,7 @@ module SnapTrade
     # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
+    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
     # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name

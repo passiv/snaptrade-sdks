@@ -4497,6 +4497,7 @@ components:
         connectionType:
           default: read
           description: Sets whether the connection should be read-only or trade-enabled.
+            Defaults to read-only if not specified.
           enum:
           - read
           - trade
@@ -7816,6 +7817,7 @@ components:
         connectionType:
           default: read
           description: Sets whether the connection should be read-only or trade-enabled.
+            Defaults to read-only if not specified.
           enum:
           - read
           - trade

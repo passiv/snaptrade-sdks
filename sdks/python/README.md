@@ -609,7 +609,7 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 
 ##### connection_type: `str`<a id="connection_type-str"></a>
 
-Sets whether the connection should be read-only or trade-enabled.
+Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 

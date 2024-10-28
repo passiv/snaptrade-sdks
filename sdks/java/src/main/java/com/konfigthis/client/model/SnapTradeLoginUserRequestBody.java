@@ -67,7 +67,7 @@ public class SnapTradeLoginUserRequestBody {
   private String reconnect;
 
   /**
-   * Sets whether the connection should be read-only or trade-enabled.
+   * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
    */
   @JsonAdapter(ConnectionTypeEnum.Adapter.class)
  public enum ConnectionTypeEnum {
@@ -299,11 +299,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets whether the connection should be read-only or trade-enabled.
+   * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
    * @return connectionType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "READ", value = "Sets whether the connection should be read-only or trade-enabled.")
+  @ApiModelProperty(example = "READ", value = "Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.")
 
   public ConnectionTypeEnum getConnectionType() {
     return connectionType;
