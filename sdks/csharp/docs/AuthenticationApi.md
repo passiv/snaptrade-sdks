@@ -225,7 +225,7 @@ namespace Example
             var immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
             var customRedirect = "https://snaptrade.com"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
             var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read-only or trade-enabled.
+            var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
             var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V3; // Sets the version of the connection portal to render.
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(

@@ -531,7 +531,8 @@ left empty unless you are reconnecting a disabled connection. See the [guide on
 fixing broken connections](/docs/fix-broken-connections) for more information.
 
 ##### connectionType: [`ConnectionType`](./lib/snaptrade/models/connection_type.rb)<a id="connectiontype-connectiontypelibsnaptrademodelsconnection_typerb"></a>
-Sets whether the connection should be read-only or trade-enabled.
+Sets whether the connection should be read-only or trade-enabled. Defaults to
+read-only if not specified.
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
 Sets the version of the connection portal to render.

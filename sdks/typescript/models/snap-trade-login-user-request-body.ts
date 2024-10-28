@@ -42,7 +42,7 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'reconnect'?: string;
     /**
-     * Sets whether the connection should be read-only or trade-enabled.
+     * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
