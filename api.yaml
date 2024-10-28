@@ -2866,7 +2866,7 @@ components:
           type: string
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         connectionType:
-          description: Sets whether the connection should be read-only or trade-enabled.
+          description: Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
           type: string
           enum:
             - read
