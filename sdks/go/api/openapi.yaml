@@ -2226,6 +2226,7 @@ components:
           description: "The date of the first transaction in the account known to\
             \ SnapTrade. It's possible that the account has transactions before this\
             \ date, but they are not known to SnapTrade."
+          nullable: true
     HoldingsStatus:
       description: |
         Status of account holdings sync. SnapTrade syncs holdings from the brokerage under the following conditions:

@@ -34,6 +34,6 @@ export interface TransactionsStatus {
      * @type {string}
      * @memberof TransactionsStatus
      */
-    'first_transaction_date'?: string;
+    'first_transaction_date'?: string | null;
 }
 
