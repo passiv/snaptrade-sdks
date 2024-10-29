@@ -49,6 +49,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'last_successful_sync',
+        :'first_transaction_date'
       ])
     end
 

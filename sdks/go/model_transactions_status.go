@@ -22,7 +22,7 @@ type TransactionsStatus struct {
 	// All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
 	LastSuccessfulSync NullableString `json:"last_successful_sync,omitempty"`
 	// The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
-	FirstTransactionDate *string `json:"first_transaction_date,omitempty"`
+	FirstTransactionDate NullableString `json:"first_transaction_date,omitempty"`
 }
 
 // NewTransactionsStatus instantiates a new TransactionsStatus object
@@ -116,36 +116,46 @@ func (o *TransactionsStatus) UnsetLastSuccessfulSync() {
 	o.LastSuccessfulSync.Unset()
 }
 
-// GetFirstTransactionDate returns the FirstTransactionDate field value if set, zero value otherwise.
+// GetFirstTransactionDate returns the FirstTransactionDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionsStatus) GetFirstTransactionDate() string {
-	if o == nil || isNil(o.FirstTransactionDate) {
+	if o == nil || isNil(o.FirstTransactionDate.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.FirstTransactionDate
+	return *o.FirstTransactionDate.Get()
 }
 
 // GetFirstTransactionDateOk returns a tuple with the FirstTransactionDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionsStatus) GetFirstTransactionDateOk() (*string, bool) {
-	if o == nil || isNil(o.FirstTransactionDate) {
+	if o == nil {
     return nil, false
 	}
-	return o.FirstTransactionDate, true
+	return o.FirstTransactionDate.Get(), o.FirstTransactionDate.IsSet()
 }
 
 // HasFirstTransactionDate returns a boolean if a field has been set.
 func (o *TransactionsStatus) HasFirstTransactionDate() bool {
-	if o != nil && !isNil(o.FirstTransactionDate) {
+	if o != nil && o.FirstTransactionDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFirstTransactionDate gets a reference to the given string and assigns it to the FirstTransactionDate field.
+// SetFirstTransactionDate gets a reference to the given NullableString and assigns it to the FirstTransactionDate field.
 func (o *TransactionsStatus) SetFirstTransactionDate(v string) {
-	o.FirstTransactionDate = &v
+	o.FirstTransactionDate.Set(&v)
+}
+// SetFirstTransactionDateNil sets the value for FirstTransactionDate to be an explicit nil
+func (o *TransactionsStatus) SetFirstTransactionDateNil() {
+	o.FirstTransactionDate.Set(nil)
+}
+
+// UnsetFirstTransactionDate ensures that no value is present for FirstTransactionDate, not even an explicit nil
+func (o *TransactionsStatus) UnsetFirstTransactionDate() {
+	o.FirstTransactionDate.Unset()
 }
 
 func (o TransactionsStatus) MarshalJSON() ([]byte, error) {
@@ -156,8 +166,8 @@ func (o TransactionsStatus) MarshalJSON() ([]byte, error) {
 	if o.LastSuccessfulSync.IsSet() {
 		toSerialize["last_successful_sync"] = o.LastSuccessfulSync.Get()
 	}
-	if !isNil(o.FirstTransactionDate) {
-		toSerialize["first_transaction_date"] = o.FirstTransactionDate
+	if o.FirstTransactionDate.IsSet() {
+		toSerialize["first_transaction_date"] = o.FirstTransactionDate.Get()
 	}
 	return json.Marshal(toSerialize)
 }
