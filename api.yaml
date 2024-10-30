@@ -2611,7 +2611,7 @@ components:
         redirectURI:
           description: Connection Portal link to redirect user to connect a brokerage account.
           type: string
-          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
+          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
         sessionId:
           description: ID to identify the connection portal session.
           type: string
@@ -2874,14 +2874,14 @@ components:
             - trade
           default: read
         connectionPortalVersion:
-          description: Sets the version of the connection portal to render.
+          description: Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
           type: string
-          example: v3
+          example: v4
           enum:
             - v4
             - v3
             - v2
-          default: v3
+          default: v4
     Symbol:
       # FIXME Merge this with UniversalSymbol
       description: Uniquely describes a single security + exchange combination across all brokerages.
