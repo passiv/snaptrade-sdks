@@ -534,7 +534,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionPortalVersion
-         * @param connectionPortalVersion Sets the version of the connection portal to render. (optional, default to v3)
+         * @param connectionPortalVersion Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (optional, default to v4)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionPortalVersion(String connectionPortalVersion) {

@@ -3698,9 +3698,9 @@ components:
         redirectURI:
           description: Connection Portal link to redirect user to connect a brokerage
             account.
-          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
+          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
           type: string
-          x-konfig-original-example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
+          x-konfig-original-example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-LoginRedirectURI-properties-redirectURI
         sessionId:
           description: ID to identify the connection portal session.
@@ -4268,7 +4268,7 @@ components:
     SnapTradeLoginUserRequestBody:
       description: Data to login a user via SnapTrade Partner
       example:
-        connectionPortalVersion: v3
+        connectionPortalVersion: v4
         reconnect: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         immediateRedirect: true
         customRedirect: https://snaptrade.com
@@ -4323,15 +4323,17 @@ components:
           x-konfig-original-example: read
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionType
         connectionPortalVersion:
-          default: v3
-          description: Sets the version of the connection portal to render.
+          default: v4
+          description: Sets the connection portal version to render. Currently only
+            v4 is supported and is the default. All other versions are deprecated
+            and will automatically be set to v4.
           enum:
           - v4
           - v3
           - v2
-          example: v3
+          example: v4
           type: string
-          x-konfig-original-example: v3
+          x-konfig-original-example: v4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion
       type: object
     Symbol:
@@ -6750,7 +6752,7 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-LoginRedirectURI-properties-redirectURI:
-      example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
+      example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-LoginRedirectURI-properties-sessionId:
@@ -6910,7 +6912,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion:
-      example: v3
+      example: v4
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Symbol-properties-symbol:
@@ -7544,15 +7546,17 @@ components:
           x-konfig-original-example: read
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionType
         connectionPortalVersion:
-          default: v3
-          description: Sets the version of the connection portal to render.
+          default: v4
+          description: Sets the connection portal version to render. Currently only
+            v4 is supported and is the default. All other versions are deprecated
+            and will automatically be set to v4.
           enum:
           - v4
           - v3
           - v2
-          example: v3
+          example: v4
           type: string
-          x-konfig-original-example: v3
+          x-konfig-original-example: v4
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion
       required:
       - userId

@@ -48,7 +48,7 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'connectionType'?: SnapTradeLoginUserRequestBodyConnectionTypeEnum;
     /**
-     * Sets the version of the connection portal to render.
+     * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
