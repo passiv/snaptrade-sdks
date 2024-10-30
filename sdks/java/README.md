@@ -675,7 +675,7 @@ Sets whether the connection should be read-only or trade-enabled. Defaults to re
 
 ##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 
-Sets the version of the connection portal to render.
+Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 

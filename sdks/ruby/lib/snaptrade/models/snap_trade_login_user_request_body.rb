@@ -28,7 +28,7 @@ module SnapTrade
     # Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
     attr_accessor :connection_type
 
-    # Sets the version of the connection portal to render.
+    # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -106,7 +106,7 @@ module SnapTrade
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
       else
-        self.connection_portal_version = 'v3'
+        self.connection_portal_version = 'v4'
       end
     end
 

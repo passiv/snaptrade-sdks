@@ -499,7 +499,7 @@ result = snaptrade.authentication.login_snap_trade_user(
   custom_redirect: "https://snaptrade.com",
   reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
   connection_type: "read",
-  connection_portal_version: "v3",
+  connection_portal_version: "v4",
 )
 p result
 ```
@@ -535,7 +535,9 @@ Sets whether the connection should be read-only or trade-enabled. Defaults to
 read-only if not specified.
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
-Sets the version of the connection portal to render.
+Sets the connection portal version to render. Currently only v4 is supported and
+is the default. All other versions are deprecated and will automatically be set
+to v4.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
