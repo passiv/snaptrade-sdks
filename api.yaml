@@ -342,6 +342,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
+        "425":
+          description: Too Early
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/425FailedRequestResponse"
         "500":
           description: Unexpected Error
   /accounts/{accountId}/holdings:
@@ -389,6 +395,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
+        "425":
+          description: Too Early
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/425FailedRequestResponse"
         "500":
           description: Unexpected Error
   /accounts:
@@ -1990,6 +2002,14 @@ components:
           example: The requested resource does not exist.
         default_code:
           example: 1011
+    425FailedRequestResponse:
+      description: Example for failed request response
+      type: object
+      properties:
+        detail:
+          example: The resource is currently being populated. Please try again later.
+        code:
+          example: 3012
     500UnexpectedExceptionResponse:
       description: Example for a response that failed for unexpected reasons
       type: object
