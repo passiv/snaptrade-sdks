@@ -1,6 +1,6 @@
 # SnapTrade.Net - C#
 
-[![NuGet](https://img.shields.io/badge/NuGet-5.0.54-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.54)
+[![NuGet](https://img.shields.io/badge/NuGet-5.0.55-blue.svg)](https://www.nuget.org/packages/SnapTrade.Net/5.0.55)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 Connect brokerage accounts to your app for live positions and trading
