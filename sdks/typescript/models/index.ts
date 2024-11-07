@@ -47,6 +47,7 @@ export * from './model402-brokerage-auth-disabled-response';
 export * from './model403-failed-request-response';
 export * from './model403-feature-not-enabled-response';
 export * from './model404-failed-request-response';
+export * from './model425-failed-request-response';
 export * from './model500-unexpected-exception-response';
 export * from './monthly-dividends';
 export * from './net-contributions';

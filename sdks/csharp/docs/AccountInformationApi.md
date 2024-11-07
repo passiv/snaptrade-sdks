@@ -106,6 +106,7 @@ catch (ApiException e)
 | **200** | Returns list of accounts and holdings |  -  |
 | **400** | Bad Request |  -  |
 | **403** | Forbidden |  -  |
+| **425** | Too Early |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -587,6 +588,7 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **400** | Bad Request |  -  |
 | **403** | Forbidden |  -  |
+| **425** | Too Early |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

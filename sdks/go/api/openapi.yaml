@@ -673,6 +673,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
+        "425":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/425FailedRequestResponse'
+          description: Too Early
         "500":
           description: Unexpected Error
       summary: "List all accounts for the user, plus balances, positions, and orders\
@@ -729,6 +735,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
+        "425":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/425FailedRequestResponse'
+          description: Too Early
         "500":
           description: Unexpected Error
       summary: List account holdings
@@ -2163,6 +2175,18 @@ components:
         default_code:
           example: 1011
           x-konfig-original-example: 1011
+      type: object
+    "425FailedRequestResponse":
+      additionalProperties: true
+      description: Example for failed request response
+      properties:
+        detail:
+          example: The resource is currently being populated. Please try again later.
+          x-konfig-original-example: The resource is currently being populated. Please
+            try again later.
+        code:
+          example: 3012
+          x-konfig-original-example: 3012
       type: object
     "500UnexpectedExceptionResponse":
       additionalProperties: true
