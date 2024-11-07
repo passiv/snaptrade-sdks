@@ -20,6 +20,7 @@ type AccountHoldings struct {
 	Account *SnapTradeHoldingsAccount `json:"account,omitempty"`
 	Balances []Balance `json:"balances,omitempty"`
 	Positions []Position `json:"positions,omitempty"`
+	// Deprecated
 	TotalValue *SnapTradeHoldingsTotalValue `json:"total_value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -142,6 +143,7 @@ func (o *AccountHoldings) SetPositions(v []Position) {
 }
 
 // GetTotalValue returns the TotalValue field value if set, zero value otherwise.
+// Deprecated
 func (o *AccountHoldings) GetTotalValue() SnapTradeHoldingsTotalValue {
 	if o == nil || isNil(o.TotalValue) {
 		var ret SnapTradeHoldingsTotalValue
@@ -152,6 +154,7 @@ func (o *AccountHoldings) GetTotalValue() SnapTradeHoldingsTotalValue {
 
 // GetTotalValueOk returns a tuple with the TotalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AccountHoldings) GetTotalValueOk() (*SnapTradeHoldingsTotalValue, bool) {
 	if o == nil || isNil(o.TotalValue) {
     return nil, false
@@ -169,6 +172,7 @@ func (o *AccountHoldings) HasTotalValue() bool {
 }
 
 // SetTotalValue gets a reference to the given SnapTradeHoldingsTotalValue and assigns it to the TotalValue field.
+// Deprecated
 func (o *AccountHoldings) SetTotalValue(v SnapTradeHoldingsTotalValue) {
 	o.TotalValue = &v
 }
