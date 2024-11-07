@@ -162,6 +162,7 @@ Class | Method | HTTP request | Description
  - [Model403FailedRequestResponse](docs/Model403FailedRequestResponse.md)
  - [Model403FeatureNotEnabledResponse](docs/Model403FeatureNotEnabledResponse.md)
  - [Model404FailedRequestResponse](docs/Model404FailedRequestResponse.md)
+ - [Model425FailedRequestResponse](docs/Model425FailedRequestResponse.md)
  - [Model500UnexpectedExceptionResponse](docs/Model500UnexpectedExceptionResponse.md)
  - [MonthlyDividends](docs/MonthlyDividends.md)
  - [NetContributions](docs/NetContributions.md)

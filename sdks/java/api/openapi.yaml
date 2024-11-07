@@ -717,6 +717,13 @@ paths:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
           x-do-not-generate: true
+        "425":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/425FailedRequestResponse'
+          description: Too Early
+          x-do-not-generate: true
         "500":
           description: Unexpected Error
       summary: "List all accounts for the user, plus balances, positions, and orders\
@@ -775,6 +782,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/403FailedRequestResponse'
           description: Forbidden
+          x-do-not-generate: true
+        "425":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/425FailedRequestResponse'
+          description: Too Early
           x-do-not-generate: true
         "500":
           description: Unexpected Error
@@ -2291,6 +2305,20 @@ components:
         default_code:
           example: 1011
           x-konfig-original-example: 1011
+      type: object
+      x-konfig-is-used-in-non-successful-response: true
+      x-do-not-generate: true
+    "425FailedRequestResponse":
+      additionalProperties: true
+      description: Example for failed request response
+      properties:
+        detail:
+          example: The resource is currently being populated. Please try again later.
+          x-konfig-original-example: The resource is currently being populated. Please
+            try again later.
+        code:
+          example: 3012
+          x-konfig-original-example: 3012
       type: object
       x-konfig-is-used-in-non-successful-response: true
       x-do-not-generate: true

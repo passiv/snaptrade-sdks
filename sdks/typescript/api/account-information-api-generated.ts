@@ -33,6 +33,8 @@ import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model425FailedRequestResponse } from '../models';
+// @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { Position } from '../models';
