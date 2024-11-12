@@ -15,6 +15,7 @@ import (
 	"encoding/json"
     "reflect"
 	"time"
+	"strconv"
 )
 
 // PtrBool is a helper routine that returns a pointer to given boolean value.
@@ -216,8 +217,26 @@ func (v NullableFloat32) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableFloat32) UnmarshalJSON(src []byte) error {
+func (v *NullableFloat32) UnmarshalJSON(src []byte) error {	
 	v.isSet = true
+
+	var stringValue string
+    if err := json.Unmarshal(src, &stringValue); err == nil {
+		if stringValue == "" {
+			v.isSet = false
+			v.value = nil
+			return nil
+		}
+
+        if parsed, err := strconv.ParseFloat(stringValue, 32); err == nil {
+			f32 := float32(parsed)
+			v.value = &f32
+			return nil
+        } else {
+			return err
+		}
+    }
+
 	return json.Unmarshal(src, &v.value)
 }
 
@@ -254,6 +273,23 @@ func (v NullableFloat64) MarshalJSON() ([]byte, error) {
 
 func (v *NullableFloat64) UnmarshalJSON(src []byte) error {
 	v.isSet = true
+
+	var stringValue string
+    if err := json.Unmarshal(src, &stringValue); err == nil {
+		if stringValue == "" {
+			v.isSet = false
+			v.value = nil
+			return nil
+		}
+
+        if parsed, err := strconv.ParseFloat(stringValue, 64); err == nil {
+			v.value = &parsed
+			return nil
+        } else {
+			return err
+		}
+    }
+
 	return json.Unmarshal(src, &v.value)
 }
 
