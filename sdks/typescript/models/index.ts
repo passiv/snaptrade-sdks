@@ -71,6 +71,7 @@ export * from './past-value';
 export * from './performance-custom';
 export * from './position';
 export * from './position-symbol';
+export * from './recent-orders-response';
 export * from './security-type';
 export * from './session-event';
 export * from './snap-trade-holdings-account';

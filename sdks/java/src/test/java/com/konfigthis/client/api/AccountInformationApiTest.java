@@ -22,6 +22,7 @@ import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.Position;
+import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -133,6 +134,23 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List account recent executed orders
+     *
+     * Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountRecentOrdersTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        RecentOrdersResponse response = api.getUserAccountRecentOrders(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

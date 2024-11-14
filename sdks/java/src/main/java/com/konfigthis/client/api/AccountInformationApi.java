@@ -7,6 +7,7 @@ import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.Position;
+import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +41,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     }
     public class GetUserAccountPositionsRequestBuilder extends GetUserAccountPositionsRequestBuilderGenerated {
         public GetUserAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetUserAccountRecentOrdersRequestBuilder extends GetUserAccountRecentOrdersRequestBuilderGenerated {
+        public GetUserAccountRecentOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }
