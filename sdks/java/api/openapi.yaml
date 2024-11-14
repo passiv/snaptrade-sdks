@@ -1059,6 +1059,63 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
       x-accepts: application/json
+  /accounts/{accountId}/recentOrders:
+    get:
+      description: |
+        Returns a list of orders executed in the last 24 hours in the specified account.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution
+        Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old
+        *Please contact support for access as this endpoint is not enabled by default.*
+      operationId: AccountInformation_getUserAccountRecentOrders
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecentOrdersResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: List account recent executed orders
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders
+      x-accepts: application/json
   /accounts/{accountId}/options:
     get:
       description: |
@@ -3021,6 +3078,57 @@ components:
           type: array
         total_value:
           $ref: '#/components/schemas/SnapTradeHoldingsTotalValue'
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    RecentOrdersResponse:
+      additionalProperties: true
+      description: List of orders executed within the last 24 hours
+      example:
+        orders:
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
+          time_in_force: time_in_force
+          execution_price: 12.34
+          stop_price: 12.5
+          action: action
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
+          status: null
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
+          time_in_force: time_in_force
+          execution_price: 12.34
+          stop_price: 12.5
+          action: action
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
+          status: null
+      properties:
+        orders:
+          description: List of orders executed in the last 24 hours
+          items:
+            $ref: '#/components/schemas/AccountOrderRecord'
+          type: array
       type: object
       x-konfig-is-used-in-successful-response: true
     AccountOrderRecord:
@@ -8175,6 +8283,25 @@ components:
       - userSecret
       - state
       - days
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
       additionalProperties: true

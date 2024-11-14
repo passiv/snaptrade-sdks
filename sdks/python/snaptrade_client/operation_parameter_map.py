@@ -70,6 +70,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/recentOrders-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/holdings-GET': {
         'parameters': [
             {

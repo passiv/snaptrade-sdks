@@ -168,6 +168,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.PerformanceCustom.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Position.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.PositionSymbol.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.RecentOrdersResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SecurityType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SessionEvent.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SnapTradeHoldingsAccount.CustomTypeAdapterFactory());

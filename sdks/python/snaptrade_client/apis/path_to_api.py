@@ -19,6 +19,7 @@ from snaptrade_client.apis.paths.accounts_account_id import AccountsAccountId
 from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAccountIdBalances
 from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
+from snaptrade_client.apis.paths.accounts_account_id_recent_orders import AccountsAccountIdRecentOrders
 from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
 from snaptrade_client.apis.paths.accounts_account_id_options_chain import AccountsAccountIdOptionsChain
 from snaptrade_client.apis.paths.accounts_account_id_option_strategy import AccountsAccountIdOptionStrategy
@@ -64,6 +65,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
@@ -110,6 +112,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_BALANCES: AccountsAccountIdBalances,
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,

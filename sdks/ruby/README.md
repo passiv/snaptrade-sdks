@@ -24,6 +24,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_positions`](#snaptradeaccount_informationget_user_account_positions)
+  * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
   * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
   * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
@@ -297,6 +298,43 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/positions` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.account_information.get_user_account_recent_orders`<a id="snaptradeaccount_informationget_user_account_recent_orders"></a>
+
+Returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution
+Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old
+*Please contact support for access as this endpoint is not enabled by default.*
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_user_account_recent_orders(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[RecentOrdersResponse](./lib/snaptrade/models/recent_orders_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

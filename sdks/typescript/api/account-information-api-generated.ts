@@ -33,11 +33,15 @@ import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
+import { Model403FeatureNotEnabledResponse } from '../models';
+// @ts-ignore
 import { Model425FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { Position } from '../models';
+// @ts-ignore
+import { RecentOrdersResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -370,6 +374,68 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
+         * Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+         * @summary List account recent executed orders
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountRecentOrders: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserAccountRecentOrders', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getUserAccountRecentOrders', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getUserAccountRecentOrders', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/recentOrders`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/recentOrders',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary List account holdings
          * @param {string} accountId 
@@ -618,6 +684,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+         * @summary List account recent executed orders
+         * @param {AccountInformationApiGetUserAccountRecentOrdersRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecentOrdersResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrders(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary List account holdings
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
@@ -710,6 +787,16 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          */
         getUserAccountPositions(requestParameters: AccountInformationApiGetUserAccountPositionsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<Position>> {
             return localVarFp.getUserAccountPositions(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+         * @summary List account recent executed orders
+         * @param {AccountInformationApiGetUserAccountRecentOrdersRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig): AxiosPromise<RecentOrdersResponse> {
+            return localVarFp.getUserAccountRecentOrders(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
@@ -909,6 +996,36 @@ export type AccountInformationApiGetUserAccountPositionsRequest = {
 }
 
 /**
+ * Request parameters for getUserAccountRecentOrders operation in AccountInformationApi.
+ * @export
+ * @interface AccountInformationApiGetUserAccountRecentOrdersRequest
+ */
+export type AccountInformationApiGetUserAccountRecentOrdersRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountRecentOrders
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountRecentOrders
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountRecentOrders
+    */
+    readonly accountId: string
+    
+}
+
+/**
  * Request parameters for getUserHoldings operation in AccountInformationApi.
  * @export
  * @interface AccountInformationApiGetUserHoldingsRequest
@@ -1057,6 +1174,18 @@ export class AccountInformationApiGenerated extends BaseAPI {
      */
     public getUserAccountPositions(requestParameters: AccountInformationApiGetUserAccountPositionsRequest, options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getUserAccountPositions(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+     * @summary List account recent executed orders
+     * @param {AccountInformationApiGetUserAccountRecentOrdersRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountRecentOrders(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

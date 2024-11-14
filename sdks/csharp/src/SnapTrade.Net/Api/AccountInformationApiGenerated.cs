@@ -169,6 +169,33 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
+        /// List account recent executed orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>RecentOrdersResponse</returns>
+        RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, int operationIndex = 0);
+
+        /// <summary>
+        /// List account recent executed orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of RecentOrdersResponse</returns>
+        ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
+        /// <summary>
         /// List account holdings
         /// </summary>
         /// <remarks>
@@ -407,6 +434,35 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Position>>> GetUserAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// List account recent executed orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of RecentOrdersResponse</returns>
+        System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// List account recent executed orders
+        /// </summary>
+        /// <remarks>
+        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (RecentOrdersResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account holdings
         /// </summary>
@@ -1675,6 +1731,216 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountPositions", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>RecentOrdersResponse</returns>
+        public RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of RecentOrdersResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountRecentOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Get<RecentOrdersResponse>("/accounts/{accountId}/recentOrders", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserAccountRecentOrders", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of RecentOrdersResponse</returns>
+        public async System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = await GetUserAccountRecentOrdersWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (RecentOrdersResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountRecentOrders");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+
+            localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountRecentOrders";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.GetAsync<RecentOrdersResponse>("/accounts/{accountId}/recentOrders", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetUserAccountRecentOrders", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
