@@ -61,8 +61,8 @@ portal:
   demos:
     - id: getting-started
       path: demos/getting-started.md
-    - id: handling-user-data
-      path: demos/handling-user-data.md
+    - id: get-transactions
+      path: demos/get-transactions.md
     - id: placing-trades
       path: demos/placing-trades.md
   hideOperations:
