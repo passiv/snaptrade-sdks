@@ -297,6 +297,60 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--snapTrade-resetUserSecret
       x-content-type: application/json
       x-accepts: application/json
+  /authorizations/{authorizationId}/returnRates:
+    get:
+      description: |
+        Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      operationId: Connections_returnRates
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: authorizationId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateOfReturnResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: List connection rate of returns
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId-returnRates
+      x-accepts: application/json
   /authorizations:
     get:
       description: |
@@ -1115,6 +1169,60 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders
+      x-accepts: application/json
+  /accounts/{accountId}/returnRates:
+    get:
+      description: |
+        Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      operationId: AccountInformation_getUserAccountReturnRates
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateOfReturnResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: List account rate of returns
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates
       x-accepts: application/json
   /accounts/{accountId}/options:
     get:
@@ -3131,6 +3239,60 @@ components:
           type: array
       type: object
       x-konfig-is-used-in-successful-response: true
+    RateOfReturnResponse:
+      additionalProperties: true
+      description: List of return rates with their timeframe
+      example:
+        data:
+        - timeframe: ALL
+          return_percent: 5.97
+          created_date: 2024-07-30T22:51:49.746Z
+        - timeframe: ALL
+          return_percent: 5.97
+          created_date: 2024-07-30T22:51:49.746Z
+      properties:
+        data:
+          description: List of return percentages
+          items:
+            $ref: '#/components/schemas/RateOfReturnObject'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    RateOfReturnObject:
+      additionalProperties: true
+      description: Individual rate of return object with return percent and timeframe
+      example:
+        timeframe: ALL
+        return_percent: 5.97
+        created_date: 2024-07-30T22:51:49.746Z
+      properties:
+        timeframe:
+          description: The timeframe this return percent is reflecting
+          enum:
+          - ALL
+          - 1Y
+          - 6M
+          - 3M
+          - 1M
+          example: ALL
+          type: string
+          x-konfig-original-example: ALL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RateOfReturnObject-properties-timeframe
+        return_percent:
+          description: "The percent return of the portfolio, directly from the brokerage.\
+            \ 5.97 indicates a 5.97% return over the timeframe"
+          example: 5.97
+          type: number
+          x-konfig-original-example: 5.97
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RateOfReturnObject-properties-return_percent
+        created_date:
+          description: The date this was fetched
+          example: 2024-07-30T22:51:49.746Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-RateOfReturnObject-properties-created_date
+      type: object
     AccountOrderRecord:
       additionalProperties: true
       description: "Describes a single recent order in an account. Each record here\
@@ -6929,6 +7091,18 @@ components:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RateOfReturnObject-properties-timeframe:
+      example: ALL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RateOfReturnObject-properties-return_percent:
+      example: 5.97
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-RateOfReturnObject-properties-created_date:
+      example: 2024-07-30T22:51:49.746Z
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity:
       example: 100
       type: number
@@ -8009,6 +8183,25 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId-returnRates:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        authorizationId:
+          $ref: '#/components/schemas/BrokerageAuthID'
+      required:
+      - authorizationId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - authorizationId
     konfig-generated-schema-single-parameter-schema-get--authorizations:
       additionalProperties: true
       properties:
@@ -8285,6 +8478,25 @@ components:
       - days
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates:
       additionalProperties: true
       properties:
         userId:

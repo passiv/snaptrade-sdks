@@ -36,6 +36,10 @@ import { Model402BrokerageAuthDisabledResponse } from '../models';
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
+import { RateOfReturnResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -352,6 +356,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} authorizationId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        returnRates: async (userId: string, userSecret: string, authorizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('returnRates', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('returnRates', 'userSecret', userSecret)
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('returnRates', 'authorizationId', authorizationId)
+            const localVarPath = `/authorizations/{authorizationId}/returnRates`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/returnRates',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of session events associated with a user.
          * @summary Get all session events for a user
          * @param {string} partnerClientId 
@@ -478,6 +544,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of session events associated with a user.
          * @summary Get all session events for a user
          * @param {ConnectionsApiSessionEventsRequest} requestParameters Request parameters.
@@ -547,6 +624,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
+            return localVarFp.returnRates(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of session events associated with a user.
@@ -705,6 +792,36 @@ export type ConnectionsApiRemoveBrokerageAuthorizationRequest = {
 }
 
 /**
+ * Request parameters for returnRates operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiReturnRatesRequest
+ */
+export type ConnectionsApiReturnRatesRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly authorizationId: string
+    
+}
+
+/**
  * Request parameters for sessionEvents operation in ConnectionsApi.
  * @export
  * @interface ConnectionsApiSessionEventsRequest
@@ -799,6 +916,18 @@ export class ConnectionsApiGenerated extends BaseAPI {
      */
     public removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).removeBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * @summary List connection rate of returns
+     * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).returnRates(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

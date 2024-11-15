@@ -10,6 +10,7 @@ Method | Path | Description
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account recent orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent executed orders
+[**GetUserAccountReturnRates**](AccountInformationApi.md#GetUserAccountReturnRates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 [**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
 [**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
 [**UpdateUserAccount**](AccountInformationApi.md#UpdateUserAccount) | **Put** /accounts/{accountId} | Update details of an investment account
@@ -325,6 +326,52 @@ func main() {
     // response from `GetUserAccountRecentOrders`: RecentOrdersResponse
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountRecentOrders`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `RecentOrdersResponse.GetUserAccountRecentOrders.Orders`: %v\n", *resp.Orders)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAccountReturnRates
+
+List account rate of returns
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetUserAccountReturnRates(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetUserAccountReturnRates``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAccountReturnRates`: RateOfReturnResponse
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountReturnRates`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `RateOfReturnResponse.GetUserAccountReturnRates.Data`: %v\n", *resp.Data)
 }
 ```
 

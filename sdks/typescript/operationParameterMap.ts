@@ -89,6 +89,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/returnRates-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/holdings-GET': {
         parameters: [
             {
@@ -244,6 +257,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'userSecret'
+            },
+        ]
+    },
+    '/authorizations/{authorizationId}/returnRates-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'authorizationId'
             },
         ]
     },

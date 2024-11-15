@@ -22,6 +22,7 @@ import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import com.konfigthis.client.model.Position;
+import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -151,6 +152,23 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         RecentOrdersResponse response = api.getUserAccountRecentOrders(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountReturnRatesTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        RateOfReturnResponse response = api.getUserAccountReturnRates(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

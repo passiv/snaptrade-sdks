@@ -195,6 +195,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ReturnRates
+        /// </summary>
+        [Fact]
+        public void ReturnRatesTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var authorizationId = "authorizationId_example";
+            
+            try
+            {
+                // List connection rate of returns
+                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.ReturnRates: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test SessionEvents
         /// </summary>
         [Fact]

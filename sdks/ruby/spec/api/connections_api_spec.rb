@@ -96,6 +96,20 @@ describe 'ConnectionsApi' do
     end
   end
 
+  # unit tests for return_rates
+  # List connection rate of returns
+  # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+  # @param user_id 
+  # @param user_secret 
+  # @param authorization_id 
+  # @param [Hash] opts the optional parameters
+  # @return [RateOfReturnResponse]
+  describe 'return_rates test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for session_events
   # Get all session events for a user
   # Returns a list of session events associated with a user.
