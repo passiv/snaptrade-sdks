@@ -96,6 +96,10 @@ portal:
       get: true
     /exchanges:
       get: true
+    /accounts/{accountId}/returnRates:
+      get: true
+    /authorizations/{authorizationId}/returnRates:
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
