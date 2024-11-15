@@ -61,10 +61,6 @@ portal:
   demos:
     - id: getting-started
       path: demos/getting-started.md
-    - id: registering-users
-      path: demos/registering-users.md
-    - id: list-accounts
-      path: demos/list-accounts.md
     - id: handling-user-data
       path: demos/handling-user-data.md
     - id: placing-trades
