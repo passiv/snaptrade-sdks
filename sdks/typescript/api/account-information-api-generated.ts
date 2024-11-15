@@ -41,6 +41,8 @@ import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { Position } from '../models';
 // @ts-ignore
+import { RateOfReturnResponse } from '../models';
+// @ts-ignore
 import { RecentOrdersResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
@@ -436,6 +438,68 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
+         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List account rate of returns
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountReturnRates: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserAccountReturnRates', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getUserAccountReturnRates', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getUserAccountReturnRates', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/returnRates`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/returnRates',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary List account holdings
          * @param {string} accountId 
@@ -695,6 +759,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List account rate of returns
+         * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountReturnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary List account holdings
          * @param {AccountInformationApiGetUserHoldingsRequest} requestParameters Request parameters.
@@ -797,6 +872,16 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          */
         getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig): AxiosPromise<RecentOrdersResponse> {
             return localVarFp.getUserAccountRecentOrders(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List account rate of returns
+         * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest, options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
+            return localVarFp.getUserAccountReturnRates(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
@@ -1026,6 +1111,36 @@ export type AccountInformationApiGetUserAccountRecentOrdersRequest = {
 }
 
 /**
+ * Request parameters for getUserAccountReturnRates operation in AccountInformationApi.
+ * @export
+ * @interface AccountInformationApiGetUserAccountReturnRatesRequest
+ */
+export type AccountInformationApiGetUserAccountReturnRatesRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountReturnRates
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountReturnRates
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountReturnRates
+    */
+    readonly accountId: string
+    
+}
+
+/**
  * Request parameters for getUserHoldings operation in AccountInformationApi.
  * @export
  * @interface AccountInformationApiGetUserHoldingsRequest
@@ -1186,6 +1301,18 @@ export class AccountInformationApiGenerated extends BaseAPI {
      */
     public getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getUserAccountRecentOrders(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * @summary List account rate of returns
+     * @param {AccountInformationApiGetUserAccountReturnRatesRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getUserAccountReturnRates(requestParameters: AccountInformationApiGetUserAccountReturnRatesRequest, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountReturnRates(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

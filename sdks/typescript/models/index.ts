@@ -71,6 +71,8 @@ export * from './past-value';
 export * from './performance-custom';
 export * from './position';
 export * from './position-symbol';
+export * from './rate-of-return-object';
+export * from './rate-of-return-response';
 export * from './recent-orders-response';
 export * from './security-type';
 export * from './session-event';

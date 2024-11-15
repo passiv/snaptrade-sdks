@@ -7,6 +7,7 @@ from snaptrade_client.apis.paths.snap_trade_login import SnapTradeLogin
 from snaptrade_client.apis.paths.snap_trade_list_users import SnapTradeListUsers
 from snaptrade_client.apis.paths.snap_trade_delete_user import SnapTradeDeleteUser
 from snaptrade_client.apis.paths.snap_trade_reset_user_secret import SnapTradeResetUserSecret
+from snaptrade_client.apis.paths.authorizations_authorization_id_return_rates import AuthorizationsAuthorizationIdReturnRates
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
 from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import AuthorizationsAuthorizationIdRefresh
@@ -20,6 +21,7 @@ from snaptrade_client.apis.paths.accounts_account_id_balances import AccountsAcc
 from snaptrade_client.apis.paths.accounts_account_id_positions import AccountsAccountIdPositions
 from snaptrade_client.apis.paths.accounts_account_id_orders import AccountsAccountIdOrders
 from snaptrade_client.apis.paths.accounts_account_id_recent_orders import AccountsAccountIdRecentOrders
+from snaptrade_client.apis.paths.accounts_account_id_return_rates import AccountsAccountIdReturnRates
 from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
 from snaptrade_client.apis.paths.accounts_account_id_options_chain import AccountsAccountIdOptionsChain
 from snaptrade_client.apis.paths.accounts_account_id_option_strategy import AccountsAccountIdOptionStrategy
@@ -53,6 +55,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_RETURN_RATES: AuthorizationsAuthorizationIdReturnRates,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
@@ -66,6 +69,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,
@@ -100,6 +104,7 @@ path_to_api = PathToApi(
         PathValues.SNAP_TRADE_LIST_USERS: SnapTradeListUsers,
         PathValues.SNAP_TRADE_DELETE_USER: SnapTradeDeleteUser,
         PathValues.SNAP_TRADE_RESET_USER_SECRET: SnapTradeResetUserSecret,
+        PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_RETURN_RATES: AuthorizationsAuthorizationIdReturnRates,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
@@ -113,6 +118,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_POSITIONS: AccountsAccountIdPositions,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS: AccountsAccountIdOrders,
         PathValues.ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS: AccountsAccountIdRecentOrders,
+        PathValues.ACCOUNTS_ACCOUNT_ID_RETURN_RATES: AccountsAccountIdReturnRates,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTION_STRATEGY: AccountsAccountIdOptionStrategy,

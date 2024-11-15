@@ -19,6 +19,7 @@ import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import com.konfigthis.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -125,6 +126,23 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         api.removeBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List connection rate of returns
+     *
+     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void returnRatesTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID authorizationId = null;
+        RateOfReturnResponse response = api.returnRates(userId, userSecret, authorizationId)
                 .execute();
         // TODO: test validations
     }

@@ -4,6 +4,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import com.konfigthis.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -39,6 +40,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
     public class RemoveBrokerageAuthorizationRequestBuilder extends RemoveBrokerageAuthorizationRequestBuilderGenerated {
         public RemoveBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {
             super(authorizationId, userId, userSecret);
+        }
+    }
+    public class ReturnRatesRequestBuilder extends ReturnRatesRequestBuilderGenerated {
+        public ReturnRatesRequestBuilder(String userId, String userSecret, UUID authorizationId) {
+            super(userId, userSecret, authorizationId);
         }
     }
     public class SessionEventsRequestBuilder extends SessionEventsRequestBuilderGenerated {

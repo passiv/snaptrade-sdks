@@ -229,6 +229,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetUserAccountReturnRates
+        /// </summary>
+        [Fact]
+        public void GetUserAccountReturnRatesTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            
+            try
+            {
+                // List account rate of returns
+                RateOfReturnResponse result = client.AccountInformation.GetUserAccountReturnRates(userId, userSecret, accountId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling AccountInformationApi.GetUserAccountReturnRates: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetUserHoldings
         /// </summary>
         [Fact]

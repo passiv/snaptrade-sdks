@@ -684,6 +684,92 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/returnRates:
+    get:
+      tags:
+        - Account Information
+      summary: List account rate of returns
+      operationId: AccountInformation_getUserAccountReturnRates
+      description: |
+        Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateOfReturnResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /authorizations/{authorizationId}/returnRates:
+    get:
+      tags:
+        - Connections
+      summary: List connection rate of returns
+      operationId: Connections_returnRates
+      description: |
+        Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: authorizationId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageAuthID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateOfReturnResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/quotes":
     get:
       tags:
@@ -2276,6 +2362,38 @@ components:
           description: List of orders executed in the last 24 hours
           items:
             $ref: "#/components/schemas/AccountOrderRecord"
+    RateOfReturnResponse:
+      description: List of return rates with their timeframe
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of return percentages
+          items:
+            $ref: "#/components/schemas/RateOfReturnObject"
+    RateOfReturnObject:
+      description: Individual rate of return object with return percent and timeframe
+      type: object
+      properties:
+        timeframe:
+          type: string
+          enum:
+            - ALL
+            - 1Y
+            - 6M
+            - 3M
+            - 1M
+          description: The timeframe this return percent is reflecting
+          example: ALL
+        return_percent:
+          type: number
+          description: The percent return of the portfolio, directly from the brokerage. 5.97 indicates a 5.97% return over the timeframe
+          example: 5.97
+        created_date:
+          type: string
+          description: The date this was fetched
+          format: date-time
+          example: 2024-07-30T22:51:49.746270Z
     AccountOrderRecord:
       description: Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
       type: object

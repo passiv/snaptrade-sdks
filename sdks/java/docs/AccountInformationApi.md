@@ -10,6 +10,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account recent orders |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserAccountRecentOrders**](AccountInformationApi.md#getUserAccountRecentOrders) | **GET** /accounts/{accountId}/recentOrders | List account recent executed orders |
+| [**getUserAccountReturnRates**](AccountInformationApi.md#getUserAccountReturnRates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
 | [**getUserHoldings**](AccountInformationApi.md#getUserHoldings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**listUserAccounts**](AccountInformationApi.md#listUserAccounts) | **GET** /accounts | List accounts |
 | [**updateUserAccount**](AccountInformationApi.md#updateUserAccount) | **PUT** /accounts/{accountId} | Update details of an investment account |
@@ -602,6 +603,103 @@ public class Example {
 ### Return type
 
 [**RecentOrdersResponse**](RecentOrdersResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+
+<a name="getUserAccountReturnRates"></a>
+# **getUserAccountReturnRates**
+> RateOfReturnResponse getUserAccountReturnRates(userId, userSecret, accountId).execute();
+
+List account rate of returns
+
+Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.AccountInformationApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    try {
+      RateOfReturnResponse result = client
+              .accountInformation
+              .getUserAccountReturnRates(userId, userSecret, accountId)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getData());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountReturnRates");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<RateOfReturnResponse> response = client
+              .accountInformation
+              .getUserAccountReturnRates(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AccountInformationApi#getUserAccountReturnRates");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+
+### Return type
+
+[**RateOfReturnResponse**](RateOfReturnResponse.md)
 
 ### Authorization
 

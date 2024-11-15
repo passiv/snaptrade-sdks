@@ -83,6 +83,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/returnRates-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/holdings-GET': {
         'parameters': [
             {
@@ -238,6 +251,19 @@ operation_parameter_map = {
             },
             {
                 'name': 'userSecret'
+            },
+        ]
+    },
+    '/authorizations/{authorizationId}/returnRates-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'authorizationId'
             },
         ]
     },
