@@ -135,14 +135,14 @@ async function main() {
   if (!("redirectURI" in data)) throw Error("Should have gotten redirect URI");
   console.log("redirectURI:", data.redirectURI);
 
-  // 5) Obtaining account holdings data
-  const holdings = (
-    await snaptrade.accountInformation.getAllUserHoldings({
+  // 5) Obtaining list of user's accounts
+  const accountList = (
+    await snaptrade.accountInformation.listUserAccounts({
       userId,
       userSecret,
     })
   ).data;
-  console.log("holdings:", holdings);
+  console.log("accounts:", accountList);
 
   // 6) Deleting a user
   const deleteResponse = (
