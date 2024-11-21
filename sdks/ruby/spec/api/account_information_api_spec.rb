@@ -106,6 +106,7 @@ describe 'AccountInformationApi' do
   # @param user_secret 
   # @param account_id 
   # @param [Hash] opts the optional parameters
+  # @option opts [Boolean] :only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
   # @return [RecentOrdersResponse]
   describe 'get_user_account_recent_orders test' do
     it 'should work' do

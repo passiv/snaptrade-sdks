@@ -198,7 +198,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @summary Get symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for.
+         * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
          * @param {string} accountId 
          * @param {boolean} [useTicker] Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.
          * @param {*} [options] Override http request option.
@@ -633,7 +633,7 @@ export type TradingApiGetUserAccountQuotesRequest = {
     readonly userSecret: string
     
     /**
-    * List of Universal Symbol IDs or tickers to get quotes for.
+    * List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     * @type {string}
     * @memberof TradingApiGetUserAccountQuotes
     */

@@ -87,6 +87,9 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'accountId'
             },
+            {
+                name: 'only_executed'
+            },
         ]
     },
     '/accounts/{accountId}/returnRates-GET': {

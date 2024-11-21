@@ -92,7 +92,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -108,7 +108,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -248,7 +248,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -265,7 +265,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -900,7 +900,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -917,7 +917,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1018,7 +1018,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
@@ -1036,7 +1036,7 @@ namespace SnapTrade.Net.Api
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for.</param>
+        /// <param name="symbols">List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator</param>
         /// <param name="accountId"></param>
         /// <param name="useTicker">Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>

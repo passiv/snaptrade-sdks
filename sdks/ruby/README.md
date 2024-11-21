@@ -321,6 +321,7 @@ result = snaptrade.account_information.get_user_account_recent_orders(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  only_executed: true,
 )
 p result
 ```
@@ -330,6 +331,10 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
+##### only_executed: `Boolean`<a id="only_executed-boolean"></a>
+Defaults to true. Indicates if request should fetch only executed orders. Set to
+false to retrieve non executed orders as well
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RecentOrdersResponse](./lib/snaptrade/models/recent_orders_response.rb)
@@ -1611,7 +1616,8 @@ p result
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### symbols: `String`<a id="symbols-string"></a>
-List of Universal Symbol IDs or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing
+multiple values, use a comma as separator
 
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### use_ticker: `Boolean`<a id="use_ticker-boolean"></a>

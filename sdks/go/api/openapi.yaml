@@ -1073,6 +1073,15 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
+      - description: Defaults to true. Indicates if request should fetch only executed
+          orders. Set to false to retrieve non executed orders as well
+        explode: true
+        in: query
+        name: only_executed
+        required: false
+        schema:
+          type: boolean
+        style: form
       - explode: false
         in: path
         name: accountId
@@ -1631,7 +1640,8 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      - description: List of Universal Symbol IDs or tickers to get quotes for.
+      - description: "List of Universal Symbol IDs or tickers to get quotes for. When\
+          \ providing multiple values, use a comma as separator"
         explode: true
         in: query
         name: symbols
@@ -8186,6 +8196,8 @@ components:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
+        only_executed:
+          type: boolean
         accountId:
           $ref: '#/components/schemas/AccountID'
       required:
@@ -8197,6 +8209,7 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+      - only_executed
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates:
       additionalProperties: true

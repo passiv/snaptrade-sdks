@@ -45,6 +45,7 @@ from . import path
 # Query params
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
+OnlyExecutedSchema = schemas.BoolSchema
 RequestRequiredQueryParams = typing_extensions.TypedDict(
     'RequestRequiredQueryParams',
     {
@@ -55,6 +56,7 @@ RequestRequiredQueryParams = typing_extensions.TypedDict(
 RequestOptionalQueryParams = typing_extensions.TypedDict(
     'RequestOptionalQueryParams',
     {
+        'only_executed': typing.Union[OnlyExecutedSchema, bool, ],
     },
     total=False
 )
@@ -76,6 +78,12 @@ request_query_user_secret = api_client.QueryParameter(
     style=api_client.ParameterStyle.FORM,
     schema=UserSecretSchema,
     required=True,
+    explode=True,
+)
+request_query_only_executed = api_client.QueryParameter(
+    name="only_executed",
+    style=api_client.ParameterStyle.FORM,
+    schema=OnlyExecutedSchema,
     explode=True,
 )
 # Path params
@@ -189,6 +197,7 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -199,6 +208,8 @@ class BaseApi(api_client.Api):
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
+        if only_executed is not None:
+            _query_params["only_executed"] = only_executed
         if account_id is not None:
             _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
@@ -246,6 +257,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
+            request_query_only_executed,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -374,6 +386,7 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_user_id,
             request_query_user_secret,
+            request_query_only_executed,
         ):
             parameter_data = query_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -440,6 +453,7 @@ class GetUserAccountRecentOrders(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -454,6 +468,7 @@ class GetUserAccountRecentOrders(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
+            only_executed=only_executed,
         )
         return await self._aget_user_account_recent_orders_oapg(
             query_params=args.query,
@@ -466,6 +481,7 @@ class GetUserAccountRecentOrders(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -479,6 +495,7 @@ class GetUserAccountRecentOrders(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
+            only_executed=only_executed,
         )
         return self._get_user_account_recent_orders_oapg(
             query_params=args.query,
@@ -493,6 +510,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -507,6 +525,7 @@ class ApiForget(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
+            only_executed=only_executed,
         )
         return await self._aget_user_account_recent_orders_oapg(
             query_params=args.query,
@@ -519,6 +538,7 @@ class ApiForget(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        only_executed: typing.Optional[bool] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -532,6 +552,7 @@ class ApiForget(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             account_id=account_id,
+            only_executed=only_executed,
         )
         return self._get_user_account_recent_orders_oapg(
             query_params=args.query,

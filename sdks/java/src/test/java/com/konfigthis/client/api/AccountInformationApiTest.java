@@ -151,7 +151,9 @@ public class AccountInformationApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
+        Boolean onlyExecuted = null;
         RecentOrdersResponse response = api.getUserAccountRecentOrders(userId, userSecret, accountId)
+                .onlyExecuted(onlyExecuted)
                 .execute();
         // TODO: test validations
     }

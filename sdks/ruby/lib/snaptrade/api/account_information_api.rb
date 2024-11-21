@@ -585,8 +585,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param only_executed [Boolean] Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_recent_orders(user_id:, user_secret:, account_id:, extra: {})
+    def get_user_account_recent_orders(user_id:, user_secret:, account_id:, only_executed: SENTINEL, extra: {})
+      extra[:only_executed] = only_executed if only_executed != SENTINEL
       data, _status_code, _headers = get_user_account_recent_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
       data
     end
@@ -601,8 +603,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
+    # @param only_executed [Boolean] Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_recent_orders_with_http_info(user_id:, user_secret:, account_id:, extra: {})
+    def get_user_account_recent_orders_with_http_info(user_id:, user_secret:, account_id:, only_executed: SENTINEL, extra: {})
+      extra[:only_executed] = only_executed if only_executed != SENTINEL
       get_user_account_recent_orders_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
@@ -612,6 +616,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     # @return [RecentOrdersResponse]
     private def get_user_account_recent_orders_impl(user_id, user_secret, account_id, opts = {})
       data, _status_code, _headers = get_user_account_recent_orders_with_http_info(user_id, user_secret, account_id, opts)
@@ -624,6 +629,7 @@ module SnapTrade
     # @param user_secret [String] 
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
+    # @option opts [Boolean] :only_executed Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     # @return [Array<(RecentOrdersResponse, Integer, Hash)>] RecentOrdersResponse data, response status code and response headers
     private def get_user_account_recent_orders_with_http_info_impl(user_id, user_secret, account_id, opts = {})
       if @api_client.config.debugging
@@ -648,6 +654,7 @@ module SnapTrade
       query_params = opts[:query_params] || {}
       query_params[:'userId'] = user_id
       query_params[:'userSecret'] = user_secret
+      query_params[:'only_executed'] = opts[:'only_executed'] if !opts[:'only_executed'].nil?
 
       # header parameters
       header_params = opts[:header_params] || {}

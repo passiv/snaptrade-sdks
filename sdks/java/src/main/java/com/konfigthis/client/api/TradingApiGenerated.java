@@ -787,7 +787,7 @@ public class TradingApiGenerated {
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param accountId  (required)
      * @return GetUserAccountQuotesRequestBuilder
      * @http.response.details
