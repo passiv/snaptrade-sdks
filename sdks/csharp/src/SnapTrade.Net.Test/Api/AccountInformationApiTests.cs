@@ -207,11 +207,12 @@ namespace SnapTrade.Net.Test.Api
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
+            var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
             
             try
             {
                 // List account recent executed orders
-                RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId);
+                RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId, onlyExecuted);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

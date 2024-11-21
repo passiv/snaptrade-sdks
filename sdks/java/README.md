@@ -456,6 +456,7 @@ Differs from /orders in that it only returns orders that have been *executed* in
 RecentOrdersResponse result = client
         .accountInformation
         .getUserAccountRecentOrders(userId, userSecret, accountId)
+        .onlyExecuted(onlyExecuted)
         .execute();
 ```
 
@@ -466,6 +467,10 @@ RecentOrdersResponse result = client
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### onlyExecuted: `Boolean`<a id="onlyexecuted-boolean"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1753,7 +1758,7 @@ List<SymbolsQuotesInner> result = client
 
 ##### symbols: `String`<a id="symbols-string"></a>
 
-List of Universal Symbol IDs or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
 

@@ -278,7 +278,7 @@ public class Example {
     Snaptrade client = new Snaptrade(configuration);
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for.
+    String symbols = "symbols_example"; // List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     UUID accountId = UUID.randomUUID();
     Boolean useTicker = true; // Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     try {
@@ -326,7 +326,7 @@ public class Example {
 |------------- | ------------- | ------------- | -------------|
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **symbols** | **String**| List of Universal Symbol IDs or tickers to get quotes for. | |
+| **symbols** | **String**| List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator | |
 | **accountId** | **UUID**|  | |
 | **useTicker** | **Boolean**| Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided. | [optional] |
 

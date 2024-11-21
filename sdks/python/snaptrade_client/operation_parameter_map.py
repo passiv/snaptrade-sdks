@@ -81,6 +81,9 @@ operation_parameter_map = {
             {
                 'name': 'accountId'
             },
+            {
+                'name': 'only_executed'
+            },
         ]
     },
     '/accounts/{accountId}/returnRates-GET': {

@@ -523,7 +523,7 @@ public class Example {
 
 <a name="getUserAccountRecentOrders"></a>
 # **getUserAccountRecentOrders**
-> RecentOrdersResponse getUserAccountRecentOrders(userId, userSecret, accountId).execute();
+> RecentOrdersResponse getUserAccountRecentOrders(userId, userSecret, accountId).onlyExecuted(onlyExecuted).execute();
 
 List account recent executed orders
 
@@ -554,10 +554,12 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
+    Boolean onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
     try {
       RecentOrdersResponse result = client
               .accountInformation
               .getUserAccountRecentOrders(userId, userSecret, accountId)
+              .onlyExecuted(onlyExecuted)
               .execute();
       System.out.println(result);
       System.out.println(result.getOrders());
@@ -574,6 +576,7 @@ public class Example {
       ApiResponse<RecentOrdersResponse> response = client
               .accountInformation
               .getUserAccountRecentOrders(userId, userSecret, accountId)
+              .onlyExecuted(onlyExecuted)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -599,6 +602,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
+| **onlyExecuted** | **Boolean**| Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well | [optional] |
 
 ### Return type
 

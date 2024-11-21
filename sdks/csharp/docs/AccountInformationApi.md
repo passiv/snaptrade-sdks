@@ -527,11 +527,12 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
+            var onlyExecuted = true; // Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional) 
             
             try
             {
                 // List account recent executed orders
-                RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId);
+                RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId, onlyExecuted);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -558,7 +559,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List account recent executed orders
-    ApiResponse<RecentOrdersResponse> response = apiInstance.GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId);
+    ApiResponse<RecentOrdersResponse> response = apiInstance.GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -578,6 +579,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
+| **onlyExecuted** | **bool?** | Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well | [optional]  |
 
 ### Return type
 

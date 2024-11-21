@@ -178,9 +178,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RecentOrdersResponse</returns>
-        RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, int operationIndex = 0);
+        RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
 
         /// <summary>
         /// List account recent executed orders
@@ -192,9 +193,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RecentOrdersResponse</returns>
-        ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
+        ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
         /// <summary>
         /// List account rate of returns
         /// </summary>
@@ -471,10 +473,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RecentOrdersResponse</returns>
-        System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account recent executed orders
@@ -486,10 +489,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RecentOrdersResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account rate of returns
         /// </summary>
@@ -1803,11 +1807,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>RecentOrdersResponse</returns>
-        public RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, int operationIndex = 0)
+        public RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId);
+            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
             return localVarResponse.Data;
         }
 
@@ -1818,9 +1823,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of RecentOrdersResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> GetUserAccountRecentOrdersWithHttpInfo(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1865,6 +1871,10 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (onlyExecuted != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "only_executed", onlyExecuted, ""));
+            }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountRecentOrders";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1906,12 +1916,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of RecentOrdersResponse</returns>
-        public async System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = await GetUserAccountRecentOrdersWithHttpInfoAsync(userId, userSecret, accountId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse> localVarResponse = await GetUserAccountRecentOrdersWithHttpInfoAsync(userId, userSecret, accountId, onlyExecuted, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1922,10 +1933,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
+        /// <param name="onlyExecuted">Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (RecentOrdersResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<RecentOrdersResponse>> GetUserAccountRecentOrdersWithHttpInfoAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1971,6 +1983,10 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            if (onlyExecuted != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "only_executed", onlyExecuted, ""));
+            }
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountRecentOrders";
             localVarRequestOptions.OperationIndex = operationIndex;

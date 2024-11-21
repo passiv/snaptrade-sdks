@@ -416,6 +416,10 @@ const getUserAccountRecentOrdersResponse =
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
+##### onlyExecuted: `boolean`<a id="onlyexecuted-boolean"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [RecentOrdersResponse](./models/recent-orders-response.ts)
@@ -1742,7 +1746,7 @@ const getUserAccountQuotesResponse =
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
-List of Universal Symbol IDs or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
 
 ##### accountId: `string`<a id="accountid-string"></a>
 

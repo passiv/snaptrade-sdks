@@ -295,7 +295,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     # @param account_id [String] 
     # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -311,7 +311,7 @@ module SnapTrade
     #
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     # @param account_id [String] 
     # @param use_ticker [Boolean] Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -324,7 +324,7 @@ module SnapTrade
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.
@@ -338,7 +338,7 @@ module SnapTrade
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for.
+    # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
     # @param account_id [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [Boolean] :use_ticker Should be set to `True` if `symbols` are comprised of tickers. Defaults to `False` if not provided.

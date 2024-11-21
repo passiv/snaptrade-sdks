@@ -61,7 +61,7 @@ describe 'TradingApi' do
   # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
   # @param user_id 
   # @param user_secret 
-  # @param symbols List of Universal Symbol IDs or tickers to get quotes for.
+  # @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
   # @param account_id 
   # @param [Hash] opts the optional parameters
   # @option opts [Boolean] :use_ticker Should be set to &#x60;True&#x60; if &#x60;symbols&#x60; are comprised of tickers. Defaults to &#x60;False&#x60; if not provided.

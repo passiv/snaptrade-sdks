@@ -916,6 +916,13 @@ type AccountInformationApiGetUserAccountRecentOrdersRequest struct {
 	userId string
 	userSecret string
 	accountId string
+	onlyExecuted *bool
+}
+
+// Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+func (r *AccountInformationApiGetUserAccountRecentOrdersRequest) OnlyExecuted(onlyExecuted bool) *AccountInformationApiGetUserAccountRecentOrdersRequest {
+	r.onlyExecuted = &onlyExecuted
+	return r
 }
 
 func (r AccountInformationApiGetUserAccountRecentOrdersRequest) Execute() (*RecentOrdersResponse, *http.Response, error) {
@@ -975,6 +982,9 @@ func (a *AccountInformationApiService) GetUserAccountRecentOrdersExecute(r Accou
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	if r.onlyExecuted != nil {
+		localVarQueryParams.Add("only_executed", parameterToString(*r.onlyExecuted, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

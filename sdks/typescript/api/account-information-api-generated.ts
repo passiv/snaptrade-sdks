@@ -381,10 +381,11 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
+         * @param {boolean} [onlyExecuted] Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountRecentOrders: async (userId: string, userSecret: string, accountId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountRecentOrders: async (userId: string, userSecret: string, accountId: string, onlyExecuted?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getUserAccountRecentOrders', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
@@ -416,6 +417,10 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
             if (userSecret !== undefined) {
                 localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (onlyExecuted !== undefined) {
+                localVarQueryParameter['only_executed'] = onlyExecuted;
             }
 
 
@@ -755,7 +760,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async getUserAccountRecentOrders(requestParameters: AccountInformationApiGetUserAccountRecentOrdersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RecentOrdersResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrders(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountRecentOrders(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.onlyExecuted, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1107,6 +1112,13 @@ export type AccountInformationApiGetUserAccountRecentOrdersRequest = {
     * @memberof AccountInformationApiGetUserAccountRecentOrders
     */
     readonly accountId: string
+    
+    /**
+    * Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+    * @type {boolean}
+    * @memberof AccountInformationApiGetUserAccountRecentOrders
+    */
+    readonly onlyExecuted?: boolean
     
 }
 

@@ -660,6 +660,11 @@ paths:
           name: userSecret
           schema:
             $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: only_executed
+          description: Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+          schema:
+            type: boolean
         - in: path
           name: accountId
           required: true
@@ -791,7 +796,7 @@ paths:
         - in: query
           name: symbols
           required: true
-          description: List of Universal Symbol IDs or tickers to get quotes for.
+          description: List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
           schema:
             type: string
         - in: query

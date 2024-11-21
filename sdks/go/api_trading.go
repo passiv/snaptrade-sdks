@@ -424,7 +424,7 @@ Returns quotes from the brokerage for the specified symbols and account. The quo
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param symbols List of Universal Symbol IDs or tickers to get quotes for.
+ @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
  @param accountId
  @return TradingApiGetUserAccountQuotesRequest
 */
