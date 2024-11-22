@@ -1496,6 +1496,7 @@ paths:
             - `OPTIONEXPIRATION` - Option expiration event.
             - `OPTIONASSIGNMENT` - Option assignment event.
             - `OPTIONEXERCISE` - Option exercise event.
+            - `TRANSFER` - Transfer of assets from one account to another
         explode: true
         in: query
         name: type

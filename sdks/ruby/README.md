@@ -1835,7 +1835,7 @@ contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment.
 - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from
 the account. - `OPTIONEXPIRATION` - Option expiration event. -
 `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option
-exercise event.
+exercise event. - `TRANSFER` - Transfer of assets from one account to another
 
 #### 🔄 Return<a id="🔄-return"></a>
 
