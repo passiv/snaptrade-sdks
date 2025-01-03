@@ -214,43 +214,43 @@ paths:
                 $ref: "#/components/schemas/404FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /snapTrade/resetUserSecret:
-    post:
-      tags:
-        - Authentication
-      summary: Rotate user secret
-      description: |
-        Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
-      operationId: Authentication_resetSnapTradeUserSecret
-      requestBody:
-        $ref: "#/components/requestBodies/ResetUserSecretRequestBody"
-      responses:
-        "200":
-          description: New user secret is generated
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UserIDandSecret"
-        "400":
-          description:
-            Bad Request. Could be caused by various reasons. Error message is
-            provided in response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/400FailedRequestResponse"
-        "401":
-          description: Failed authentication. Wrong clientId, userId or userSecret provided
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/401FailedRequestResponse"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  # /snapTrade/resetUserSecret:
+  #   post:
+  #     tags:
+  #       - Authentication
+  #     summary: Rotate user secret
+  #     description: |
+  #       Rotates the secret for a SnapTrade user. You might use this if `userSecret` is compromised. Please note that if you call this endpoint and fail to save the new secret, you'll no longer be able to access any data for this user, and your only option will be to delete and recreate the user, then ask them to reconnect.
+  #     operationId: Authentication_resetSnapTradeUserSecret
+  #     requestBody:
+  #       $ref: "#/components/requestBodies/ResetUserSecretRequestBody"
+  #     responses:
+  #       "200":
+  #         description: New user secret is generated
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/UserIDandSecret"
+  #       "400":
+  #         description:
+  #           Bad Request. Could be caused by various reasons. Error message is
+  #           provided in response
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/400FailedRequestResponse"
+  #       "401":
+  #         description: Failed authentication. Wrong clientId, userId or userSecret provided
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/401FailedRequestResponse"
+  #       "500":
+  #         description: Unexpected error
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /snapTrade/partners:
     get:
       tags:
