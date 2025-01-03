@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: Connect brokerage accounts to your app for live positions and trading
-  version: 1.0.0
+  version: 1.0.1
   title: SnapTrade
   termsOfService: N/A
   contact:
