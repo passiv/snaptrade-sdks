@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    uses: konfig-dev/automation/.github/workflows/release.yaml@main
+    uses: passiv/konfig-snaptrade/.github/workflows/release.yaml@main
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
