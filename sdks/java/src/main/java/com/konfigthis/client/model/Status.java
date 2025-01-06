@@ -79,7 +79,7 @@ public class Status {
    * @return version
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "153", value = "")
+  @ApiModelProperty(example = "154", value = "")
 
   public Integer getVersion() {
     return version;
