@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install Konfig CLI
-        uses: passiv/konfig-snaptrade/.github/actions/install-cli
+        uses: passiv/konfig-workflows/.github/actions/install-cli@main
 
       - name: Initialize Linting Rules
         run: konfig init -s
