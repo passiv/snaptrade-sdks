@@ -14,5 +14,7 @@ jobs:
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
+      KONFIG_GITHUB_APP_ID: ${{ secrets.KONFIG_GITHUB_APP_ID }}
+      KONFIG_GITHUB_APP_PRIVATE_KEY: ${{ secrets.KONFIG_GITHUB_APP_PRIVATE_KEY }}
       SUBMODULE_DEPLOY_KEY_PHP: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP }}
       SUBMODULE_DEPLOY_KEY_PHP7: ${{ secrets.SUBMODULE_DEPLOY_KEY_PHP7 }}
