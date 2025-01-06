@@ -5748,13 +5748,13 @@ components:
       description: Status of API
       example:
         online: true
-        version: 154
+        version: 155
         timestamp: 2022-11-04T01:47:00.377Z
       properties:
         version:
-          example: 154
+          example: 155
           type: integer
-          x-konfig-original-example: 154
+          x-konfig-original-example: 155
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Status-properties-version
         timestamp:
           example: 2022-11-04T01:47:00.377Z
@@ -7800,7 +7800,7 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Status-properties-version:
-      example: 154
+      example: 155
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Status-properties-timestamp:
