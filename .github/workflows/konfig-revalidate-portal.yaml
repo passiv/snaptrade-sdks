@@ -1,0 +1,17 @@
+name: konfig-revalidate-portal
+on:
+  push:
+    branches:
+      - master
+jobs:
+  konfig-revalidate-portal:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Konfig CLI
+        uses: passiv/konfig-workflows/.github/actions/install-cli@main
+
+      - name: Revalidate Portal
+        run: konfig revalidate-portal -o passiv -r snaptrade-sdks
