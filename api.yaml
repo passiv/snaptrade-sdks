@@ -3589,7 +3589,7 @@ components:
       properties:
         version:
           type: integer
-          example: 152
+          example: 153
         timestamp:
           type: string
           example: 2022-11-04T01:47:00.377969Z
