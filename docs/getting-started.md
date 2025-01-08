@@ -33,6 +33,7 @@ Easily integrate with SnapTrade in your programming language of choice by using 
 | Ruby       | https://rubygems.org/gems/snaptrade                                     |
 | C#         | https://nuget.org/packages/SnapTrade.Net                                |
 | PHP        | https://packagist.org/packages/konfig/snaptrade-php-sdk                 |
+| Go         | https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go             |
 
 ---
 
