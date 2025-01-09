@@ -44,7 +44,7 @@ Example payload is below:
 
 ## USER_DELETED
 
-Sent when a new user is successfully deleted through the `/deleteUser/` endpoint.
+Sent when a user is successfully deleted through the `/deleteUser/` endpoint.
 
 Example payload is below:
 
