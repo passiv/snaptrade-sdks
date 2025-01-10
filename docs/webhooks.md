@@ -42,6 +42,23 @@ Example payload is below:
 }
 ```
 
+## USER_DELETED
+
+Sent when a user is successfully deleted through the `/deleteUser/` endpoint.
+
+Example payload is below:
+
+```json
+{
+   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9_deleted",
+   "clientId":"phjBdpKfpN",
+   "eventType":"USER_DELETED",
+   "webhookId":"dbaee13a-1184-4677-9741-b6845e60ee3a",
+   "webhookSecret":"lgCQWztweEFcHvjdLhHc",
+   "eventTimestamp":"2025-01-08T14:32:59.979214+00:00"
+}
+```
+
 ## CONNECTION_ATTEMPTED
 
 Sent when a user a user attempts to make a brokerage connection, will also report the result of the attempt.
