@@ -211,7 +211,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List account recent executed orders
+                // List account recent orders (last 24 hours only)
                 RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId, onlyExecuted);
                 Console.WriteLine(result);
             }

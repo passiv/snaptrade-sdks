@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdRecentOrders(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdRecentOrders unit test stubs
-        List account recent executed orders
+        List account recent orders (last 24 hours only)
     """
 
     def setUp(self):
