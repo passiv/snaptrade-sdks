@@ -169,10 +169,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;Position&gt;</returns>
         ApiResponse<List<Position>> GetUserAccountPositionsWithHttpInfo(string userId, string userSecret, string accountId, int operationIndex = 0);
         /// <summary>
-        /// List account recent executed orders
+        /// List account recent orders (last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -184,10 +184,10 @@ namespace SnapTrade.Net.Api
         RecentOrdersResponse GetUserAccountRecentOrders(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0);
 
         /// <summary>
-        /// List account recent executed orders
+        /// List account recent orders (last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -464,10 +464,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;Position&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Position>>> GetUserAccountPositionsWithHttpInfoAsync(string userId, string userSecret, string accountId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// List account recent executed orders
+        /// List account recent orders (last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -480,10 +480,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<RecentOrdersResponse> GetUserAccountRecentOrdersAsync(string userId, string userSecret, string accountId, bool? onlyExecuted = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// List account recent executed orders
+        /// List account recent orders (last 24 hours only)
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1801,7 +1801,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// List account recent orders (last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1817,7 +1817,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// List account recent orders (last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1910,7 +1910,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// List account recent orders (last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1927,7 +1927,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account recent executed orders Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+        /// List account recent orders (last 24 hours only) A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

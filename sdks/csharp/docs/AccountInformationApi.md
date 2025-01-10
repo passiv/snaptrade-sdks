@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetUserAccountDetails**](AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail |
 | [**GetUserAccountOrders**](AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account recent orders |
 | [**GetUserAccountPositions**](AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions |
-| [**GetUserAccountRecentOrders**](AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent executed orders |
+| [**GetUserAccountRecentOrders**](AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
 | [**GetUserAccountReturnRates**](AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns |
 | [**GetUserHoldings**](AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings |
 | [**ListUserAccounts**](AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts |
@@ -502,7 +502,7 @@ catch (ApiException e)
 
 
 
-Returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old *Please contact support for access as this endpoint is not enabled by default.* 
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
 
 ### Example
 ```csharp
@@ -531,7 +531,7 @@ namespace Example
             
             try
             {
-                // List account recent executed orders
+                // List account recent orders (last 24 hours only)
                 RecentOrdersResponse result = client.AccountInformation.GetUserAccountRecentOrders(userId, userSecret, accountId, onlyExecuted);
                 Console.WriteLine(result);
             }
@@ -558,7 +558,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // List account recent executed orders
+    // List account recent orders (last 24 hours only)
     ApiResponse<RecentOrdersResponse> response = apiInstance.GetUserAccountRecentOrdersWithHttpInfo(userId, userSecret, accountId, onlyExecuted);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

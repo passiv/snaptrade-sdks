@@ -9,7 +9,7 @@ Method | Path | Description
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account recent orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
-[**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent executed orders
+[**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 [**GetUserAccountReturnRates**](AccountInformationApi.md#GetUserAccountReturnRates) | **Get** /accounts/{accountId}/returnRates | List account rate of returns
 [**GetUserHoldings**](AccountInformationApi.md#GetUserHoldings) | **Get** /accounts/{accountId}/holdings | List account holdings
 [**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
@@ -290,7 +290,7 @@ func main() {
 
 ## GetUserAccountRecentOrders
 
-List account recent executed orders
+List account recent orders (last 24 hours only)
 
 
 

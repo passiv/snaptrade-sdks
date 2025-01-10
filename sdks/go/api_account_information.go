@@ -930,12 +930,13 @@ func (r AccountInformationApiGetUserAccountRecentOrdersRequest) Execute() (*Rece
 }
 
 /*
-GetUserAccountRecentOrders List account recent executed orders
+GetUserAccountRecentOrders List account recent orders (last 24 hours only)
 
-Returns a list of orders executed in the last 24 hours in the specified account.
-This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution
-Differs from /orders in that it only returns orders that have been *executed* in the last 24 hours as opposed to pending or cancelled orders up to 30 days old
-*Please contact support for access as this endpoint is not enabled by default.*
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
+Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+By default only returns executed orders, but that can be changed by setting *only_executed* to false
+**Please contact support for access as this endpoint is not enabled by default.**
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

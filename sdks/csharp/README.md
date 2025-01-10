@@ -98,7 +98,7 @@ Class | Method | HTTP request | Description
 *AccountInformationApi* | [**GetUserAccountDetails**](docs/AccountInformationApi.md#getuseraccountdetails) | **GET** /accounts/{accountId} | Get account detail
 *AccountInformationApi* | [**GetUserAccountOrders**](docs/AccountInformationApi.md#getuseraccountorders) | **GET** /accounts/{accountId}/orders | List account recent orders
 *AccountInformationApi* | [**GetUserAccountPositions**](docs/AccountInformationApi.md#getuseraccountpositions) | **GET** /accounts/{accountId}/positions | List account positions
-*AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent executed orders
+*AccountInformationApi* | [**GetUserAccountRecentOrders**](docs/AccountInformationApi.md#getuseraccountrecentorders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
 *AccountInformationApi* | [**GetUserAccountReturnRates**](docs/AccountInformationApi.md#getuseraccountreturnrates) | **GET** /accounts/{accountId}/returnRates | List account rate of returns
 *AccountInformationApi* | [**GetUserHoldings**](docs/AccountInformationApi.md#getuserholdings) | **GET** /accounts/{accountId}/holdings | List account holdings
 *AccountInformationApi* | [**ListUserAccounts**](docs/AccountInformationApi.md#listuseraccounts) | **GET** /accounts | List accounts
