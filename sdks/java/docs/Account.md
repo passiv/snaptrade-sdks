@@ -19,6 +19,7 @@ A single account at a brokerage.
 |**meta** | **Map&lt;String, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. |  [optional] |
 |**portfolioGroup** | **UUID** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. |  [optional] |
 |**cashRestrictions** | **List&lt;String&gt;** | This field is deprecated. |  [optional] |
+|**rawType** | **String** | The account type as provided by the brokerage |  [optional] |
 
 
 

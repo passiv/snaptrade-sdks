@@ -2276,6 +2276,11 @@ components:
           items:
             type: string
           example: []
+        raw_type:
+          type: string
+          description: The account type as provided by the brokerage
+          example: Margin
+          nullable: true
     AccountSimple:
       description: A single account at a brokerage.
       type: object

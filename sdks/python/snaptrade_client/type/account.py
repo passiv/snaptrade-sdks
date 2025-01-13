@@ -55,5 +55,8 @@ class OptionalAccount(TypedDict, total=False):
     # WARNING: This property is deprecated
     cash_restrictions: AccountCashRestrictions
 
+    # The account type as provided by the brokerage
+    raw_type: typing.Optional[str]
+
 class Account(RequiredAccount, OptionalAccount):
     pass

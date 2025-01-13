@@ -54,7 +54,8 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>)) : base()
+        /// <param name="rawType">The account type as provided by the brokerage.</param>
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), string rawType = default(string)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -102,6 +103,7 @@ namespace SnapTrade.Net.Model
             this.Meta = meta;
             this.PortfolioGroup = portfolioGroup;
             this.CashRestrictions = cashRestrictions;
+            this.RawType = rawType;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -184,6 +186,13 @@ namespace SnapTrade.Net.Model
         public List<string> CashRestrictions { get; set; }
 
         /// <summary>
+        /// The account type as provided by the brokerage
+        /// </summary>
+        /// <value>The account type as provided by the brokerage</value>
+        [DataMember(Name = "raw_type", EmitDefaultValue = true)]
+        public string RawType { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -209,6 +218,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  PortfolioGroup: ").Append(PortfolioGroup).Append("\n");
             sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
+            sb.Append("  RawType: ").Append(RawType).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -301,6 +311,11 @@ namespace SnapTrade.Net.Model
                     this.CashRestrictions != null &&
                     input.CashRestrictions != null &&
                     this.CashRestrictions.SequenceEqual(input.CashRestrictions)
+                ) && base.Equals(input) && 
+                (
+                    this.RawType == input.RawType ||
+                    (this.RawType != null &&
+                    this.RawType.Equals(input.RawType))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -357,6 +372,10 @@ namespace SnapTrade.Net.Model
                 if (this.CashRestrictions != null)
                 {
                     hashCode = (hashCode * 59) + this.CashRestrictions.GetHashCode();
+                }
+                if (this.RawType != null)
+                {
+                    hashCode = (hashCode * 59) + this.RawType.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

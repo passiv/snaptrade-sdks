@@ -90,5 +90,11 @@ export interface Account {
      * @deprecated
      */
     'cash_restrictions'?: Array<string>;
+    /**
+     * The account type as provided by the brokerage
+     * @type {string}
+     * @memberof Account
+     */
+    'raw_type'?: string | null;
 }
 

@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -132,6 +133,14 @@ public class AccountTest {
     @Test
     public void cashRestrictionsTest() {
         // TODO: test cashRestrictions
+    }
+
+    /**
+     * Test the property 'rawType'
+     */
+    @Test
+    public void rawTypeTest() {
+        // TODO: test rawType
     }
 
 }

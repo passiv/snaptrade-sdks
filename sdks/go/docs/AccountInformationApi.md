@@ -163,6 +163,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.RawType`: %v\n", *resp.RawType)
 }
 ```
 
@@ -479,6 +480,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.ListUserAccounts.RawType`: %v\n", *resp.RawType)
 }
 ```
 
@@ -535,6 +537,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.CashRestrictions`: %v\n", *resp.CashRestrictions)
+    fmt.Fprintf(os.Stdout, "Response from `Account.UpdateUserAccount.RawType`: %v\n", *resp.RawType)
 }
 ```
 
