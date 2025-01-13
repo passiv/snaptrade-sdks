@@ -125,6 +125,26 @@ class Account(
             @staticmethod
             def cash_restrictions() -> typing.Type['AccountCashRestrictions']:
                 return AccountCashRestrictions
+            
+            
+            class raw_type(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'raw_type':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "id": id,
                 "brokerage_authorization": brokerage_authorization,
@@ -137,6 +157,7 @@ class Account(
                 "meta": meta,
                 "portfolio_group": portfolio_group,
                 "cash_restrictions": cash_restrictions,
+                "raw_type": raw_type,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -183,9 +204,12 @@ class Account(
     def __getitem__(self, name: typing_extensions.Literal["cash_restrictions"]) -> 'AccountCashRestrictions': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["raw_type"]) -> MetaOapg.properties.raw_type: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["raw_type"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -223,9 +247,12 @@ class Account(
     def get_item_oapg(self, name: typing_extensions.Literal["cash_restrictions"]) -> typing.Union['AccountCashRestrictions', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["raw_type"]) -> typing.Union[MetaOapg.properties.raw_type, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["number"], typing_extensions.Literal["balance"], typing_extensions.Literal["brokerage_authorization"], typing_extensions.Literal["name"], typing_extensions.Literal["sync_status"], typing_extensions.Literal["created_date"], typing_extensions.Literal["id"], typing_extensions.Literal["institution_name"], typing_extensions.Literal["meta"], typing_extensions.Literal["portfolio_group"], typing_extensions.Literal["cash_restrictions"], typing_extensions.Literal["raw_type"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -242,6 +269,7 @@ class Account(
         meta: typing.Union['AccountMeta', schemas.Unset] = schemas.unset,
         portfolio_group: typing.Union[MetaOapg.properties.portfolio_group, str, uuid.UUID, schemas.Unset] = schemas.unset,
         cash_restrictions: typing.Union['AccountCashRestrictions', schemas.Unset] = schemas.unset,
+        raw_type: typing.Union[MetaOapg.properties.raw_type, None, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Account':
@@ -259,6 +287,7 @@ class Account(
             meta=meta,
             portfolio_group=portfolio_group,
             cash_restrictions=cash_restrictions,
+            raw_type=raw_type,
             _configuration=_configuration,
             **kwargs,
         )

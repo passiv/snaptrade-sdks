@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -101,6 +102,10 @@ public class Account {
   public static final String SERIALIZED_NAME_CASH_RESTRICTIONS = "cash_restrictions";
   @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
   private List<String> cashRestrictions = null;
+
+  public static final String SERIALIZED_NAME_RAW_TYPE = "raw_type";
+  @SerializedName(SERIALIZED_NAME_RAW_TYPE)
+  private String rawType;
 
   public Account() {
   }
@@ -445,6 +450,35 @@ public class Account {
     this.cashRestrictions = cashRestrictions;
   }
 
+
+  public Account rawType(String rawType) {
+    
+    
+    
+    
+    this.rawType = rawType;
+    return this;
+  }
+
+   /**
+   * The account type as provided by the brokerage
+   * @return rawType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "Margin", value = "The account type as provided by the brokerage")
+
+  public String getRawType() {
+    return rawType;
+  }
+
+
+  public void setRawType(String rawType) {
+    
+    
+    
+    this.rawType = rawType;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -510,13 +544,25 @@ public class Account {
         Objects.equals(this.balance, account.balance) &&
         Objects.equals(this.meta, account.meta) &&
         Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
-        Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
+        Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
+        Objects.equals(this.rawType, account.rawType)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, meta, portfolioGroup, cashRestrictions, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, meta, portfolioGroup, cashRestrictions, rawType, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -534,6 +580,7 @@ public class Account {
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
+    sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -568,6 +615,7 @@ public class Account {
     openapiFields.add("meta");
     openapiFields.add("portfolio_group");
     openapiFields.add("cash_restrictions");
+    openapiFields.add("raw_type");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -622,6 +670,9 @@ public class Account {
       // ensure the optional json data is an array if present
       if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
+      }
+      if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
       }
   }
 

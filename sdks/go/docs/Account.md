@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
+**RawType** | Pointer to **NullableString** | The account type as provided by the brokerage | [optional] 
 
 ## Methods
 
@@ -280,6 +281,41 @@ SetCashRestrictions sets CashRestrictions field to given value.
 
 HasCashRestrictions returns a boolean if a field has been set.
 
+### GetRawType
+
+`func (o *Account) GetRawType() string`
+
+GetRawType returns the RawType field if non-nil, zero value otherwise.
+
+### GetRawTypeOk
+
+`func (o *Account) GetRawTypeOk() (*string, bool)`
+
+GetRawTypeOk returns a tuple with the RawType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawType
+
+`func (o *Account) SetRawType(v string)`
+
+SetRawType sets RawType field to given value.
+
+### HasRawType
+
+`func (o *Account) HasRawType() bool`
+
+HasRawType returns a boolean if a field has been set.
+
+### SetRawTypeNil
+
+`func (o *Account) SetRawTypeNil(b bool)`
+
+ SetRawTypeNil sets the value for RawType to be an explicit nil
+
+### UnsetRawType
+`func (o *Account) UnsetRawType()`
+
+UnsetRawType ensures that no value is present for RawType, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

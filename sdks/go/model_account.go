@@ -41,6 +41,8 @@ type Account struct {
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
+	// The account type as provided by the brokerage
+	RawType NullableString `json:"raw_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -370,6 +372,48 @@ func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 
+// GetRawType returns the RawType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetRawType() string {
+	if o == nil || isNil(o.RawType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RawType.Get()
+}
+
+// GetRawTypeOk returns a tuple with the RawType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetRawTypeOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.RawType.Get(), o.RawType.IsSet()
+}
+
+// HasRawType returns a boolean if a field has been set.
+func (o *Account) HasRawType() bool {
+	if o != nil && o.RawType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawType gets a reference to the given NullableString and assigns it to the RawType field.
+func (o *Account) SetRawType(v string) {
+	o.RawType.Set(&v)
+}
+// SetRawTypeNil sets the value for RawType to be an explicit nil
+func (o *Account) SetRawTypeNil() {
+	o.RawType.Set(nil)
+}
+
+// UnsetRawType ensures that no value is present for RawType, not even an explicit nil
+func (o *Account) UnsetRawType() {
+	o.RawType.Unset()
+}
+
 func (o Account) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -405,6 +449,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
 	}
+	if o.RawType.IsSet() {
+		toSerialize["raw_type"] = o.RawType.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -434,6 +481,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")
+		delete(additionalProperties, "raw_type")
 		o.AdditionalProperties = additionalProperties
 	}
 
