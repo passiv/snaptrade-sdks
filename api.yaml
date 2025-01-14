@@ -3827,6 +3827,22 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+        order_class:
+          description: The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+          type: string
+          example: BRACKET
+          nullable: true
+          enum:
+            - SIMPLE
+            - BRACKET
+        stop_loss:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/StopLoss"
+        take_profit:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/TakeProfit"
     ValidatedTradeBody:
       type: object
       properties:
@@ -3918,6 +3934,24 @@ components:
         - type: string
         - type: number
       example: 100.00
+    StopLoss:
+      description: Details of the stop loss order. Only to be used when order_class = BRACKET. stop_price is required, limit_price is optional
+      type: object
+      properties:
+        stop_price:
+          type: string
+          example: "48.55"
+        limit_price:
+          type: string
+          nullable: true
+          example: "48.50"
+    TakeProfit:
+      description: Details of the take profit order. Only to be used when order_class = BRACKET.
+      type: object
+      properties:
+        limit_price:
+          type: string
+          example: "49.95"
     UniversalActivity:
       description: A transaction or activity from an institution
       type: object
