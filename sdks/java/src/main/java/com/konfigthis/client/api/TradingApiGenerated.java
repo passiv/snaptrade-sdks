@@ -33,7 +33,9 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.StopLossNullable;
 import com.konfigthis.client.model.SymbolsQuotesInner;
+import com.konfigthis.client.model.TakeProfitNullable;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import java.util.UUID;
@@ -913,6 +915,9 @@ public class TradingApiGenerated {
         Double stop;
         Double units;
         Object notionalValue;
+        String orderClass;
+        StopLossNullable stopLoss;
+        TakeProfitNullable takeProfit;
 
         public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
             this.accountId = accountId;
@@ -1006,6 +1011,36 @@ public class TradingApiGenerated {
         }
         
         /**
+         * Set orderClass
+         * @param orderClass The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder orderClass(String orderClass) {
+            this.orderClass = orderClass;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopLoss
+         * @param stopLoss  (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder stopLoss(StopLossNullable stopLoss) {
+            this.stopLoss = stopLoss;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set takeProfit
+         * @param takeProfit  (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder takeProfit(TakeProfitNullable takeProfit) {
+            this.takeProfit = takeProfit;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
          * Build call for placeForceOrder
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1034,6 +1069,10 @@ public class TradingApiGenerated {
             manualTradeFormWithOptions.stop(this.stop);
             manualTradeFormWithOptions.units(this.units);
             manualTradeFormWithOptions.notionalValue(this.notionalValue);
+            if (this.orderClass != null)
+            manualTradeFormWithOptions.orderClass(ManualTradeFormWithOptions.OrderClassEnum.fromValue(this.orderClass));
+            manualTradeFormWithOptions.stopLoss(this.stopLoss);
+            manualTradeFormWithOptions.takeProfit(this.takeProfit);
             return manualTradeFormWithOptions;
         }
 

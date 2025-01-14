@@ -23,7 +23,9 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.StopLossNullable;
 import com.konfigthis.client.model.SymbolsQuotesInner;
+import com.konfigthis.client.model.TakeProfitNullable;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import java.util.UUID;
@@ -141,6 +143,9 @@ public class TradingApiTest {
         Double stop = null;
         Double units = null;
         Object notionalValue = null;
+        String orderClass = null;
+        StopLossNullable stopLoss = null;
+        TakeProfitNullable takeProfit = null;
         AccountOrderRecord response = api.placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
                 .universalSymbolId(universalSymbolId)
                 .symbol(symbol)
@@ -148,6 +153,9 @@ public class TradingApiTest {
                 .stop(stop)
                 .units(units)
                 .notionalValue(notionalValue)
+                .orderClass(orderClass)
+                .stopLoss(stopLoss)
+                .takeProfit(takeProfit)
                 .execute();
         // TODO: test validations
     }

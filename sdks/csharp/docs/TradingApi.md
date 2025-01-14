@@ -367,6 +367,9 @@ namespace Example
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = "units_example"; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
             var notionalValue = new NotionalValueNullable(100);
+            var orderClass = ManualTradeFormWithOptions.OrderClassEnum.BRACKET; // The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+            var stopLoss = new StopLossNullable();
+            var takeProfit = new TakeProfitNullable();
             
             var manualTradeFormWithOptions = new ManualTradeFormWithOptions(
                 accountId,
@@ -378,7 +381,10 @@ namespace Example
                 price,
                 stop,
                 units,
-                notionalValue
+                notionalValue,
+                orderClass,
+                stopLoss,
+                takeProfit
             );
             
             try

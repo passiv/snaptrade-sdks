@@ -161,6 +161,50 @@ class ManualTradeFormWithOptions(
             @staticmethod
             def notional_value() -> typing.Type['NotionalValueNullable']:
                 return NotionalValueNullable
+            
+            
+            class order_class(
+                schemas.EnumBase,
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                class MetaOapg:
+                    enum_value_to_name = {
+                        "SIMPLE": "SIMPLE",
+                        "BRACKET": "BRACKET",
+                    }
+                
+                @schemas.classproperty
+                def SIMPLE(cls):
+                    return cls("SIMPLE")
+                
+                @schemas.classproperty
+                def BRACKET(cls):
+                    return cls("BRACKET")
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'order_class':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
+        
+            @staticmethod
+            def stop_loss() -> typing.Type['StopLossNullable']:
+                return StopLossNullable
+        
+            @staticmethod
+            def take_profit() -> typing.Type['TakeProfitNullable']:
+                return TakeProfitNullable
             __annotations__ = {
                 "account_id": account_id,
                 "action": action,
@@ -172,6 +216,9 @@ class ManualTradeFormWithOptions(
                 "stop": stop,
                 "units": units,
                 "notional_value": notional_value,
+                "order_class": order_class,
+                "stop_loss": stop_loss,
+                "take_profit": take_profit,
             }
     
     time_in_force: 'TimeInForceStrict'
@@ -210,9 +257,18 @@ class ManualTradeFormWithOptions(
     def __getitem__(self, name: typing_extensions.Literal["notional_value"]) -> 'NotionalValueNullable': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["order_class"]) -> MetaOapg.properties.order_class: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["stop_loss"]) -> 'StopLossNullable': ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["take_profit"]) -> 'TakeProfitNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", "order_class", "stop_loss", "take_profit", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -248,9 +304,18 @@ class ManualTradeFormWithOptions(
     def get_item_oapg(self, name: typing_extensions.Literal["notional_value"]) -> typing.Union['NotionalValueNullable', schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["order_class"]) -> typing.Union[MetaOapg.properties.order_class, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["stop_loss"]) -> typing.Union['StopLossNullable', schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["take_profit"]) -> typing.Union['TakeProfitNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "order_type", "time_in_force", "universal_symbol_id", "symbol", "price", "stop", "units", "notional_value", "order_class", "stop_loss", "take_profit", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -267,6 +332,9 @@ class ManualTradeFormWithOptions(
         stop: typing.Union[MetaOapg.properties.stop, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         notional_value: typing.Union['NotionalValueNullable', schemas.Unset] = schemas.unset,
+        order_class: typing.Union[MetaOapg.properties.order_class, None, str, schemas.Unset] = schemas.unset,
+        stop_loss: typing.Union['StopLossNullable', schemas.Unset] = schemas.unset,
+        take_profit: typing.Union['TakeProfitNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'ManualTradeFormWithOptions':
@@ -283,6 +351,9 @@ class ManualTradeFormWithOptions(
             stop=stop,
             units=units,
             notional_value=notional_value,
+            order_class=order_class,
+            stop_loss=stop_loss,
+            take_profit=take_profit,
             _configuration=_configuration,
             **kwargs,
         )
@@ -290,5 +361,7 @@ class ManualTradeFormWithOptions(
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
+from snaptrade_client.model.stop_loss_nullable import StopLossNullable
+from snaptrade_client.model.take_profit_nullable import TakeProfitNullable
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable

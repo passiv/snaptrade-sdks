@@ -19,6 +19,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.StopLossNullable;
+import com.konfigthis.client.model.TakeProfitNullable;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -121,6 +123,30 @@ public class ManualTradeFormWithOptionsTest {
     @Test
     public void notionalValueTest() {
         // TODO: test notionalValue
+    }
+
+    /**
+     * Test the property 'orderClass'
+     */
+    @Test
+    public void orderClassTest() {
+        // TODO: test orderClass
+    }
+
+    /**
+     * Test the property 'stopLoss'
+     */
+    @Test
+    public void stopLossTest() {
+        // TODO: test stopLoss
+    }
+
+    /**
+     * Test the property 'takeProfit'
+     */
+    @Test
+    public void takeProfitTest() {
+        // TODO: test takeProfit
     }
 
 }

@@ -428,9 +428,12 @@ module SnapTrade
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param order_class [OrderClass] The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+    # @param stop_loss [ManualTradeFormWithOptionsStopLoss] 
+    # @param take_profit [ManualTradeFormWithOptionsTakeProfit] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, order_class: SENTINEL, stop_loss: SENTINEL, take_profit: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -442,6 +445,9 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
+      _body[:order_class] = order_class if order_class != SENTINEL
+      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
+      _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_with_options = _body
       data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
       data
@@ -467,9 +473,12 @@ module SnapTrade
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
+    # @param order_class [OrderClass] The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+    # @param stop_loss [ManualTradeFormWithOptionsStopLoss] 
+    # @param take_profit [ManualTradeFormWithOptionsTakeProfit] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, order_class: SENTINEL, stop_loss: SENTINEL, take_profit: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -481,6 +490,9 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
+      _body[:order_class] = order_class if order_class != SENTINEL
+      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
+      _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_with_options = _body
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
     end

@@ -21,6 +21,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.StopLossNullable;
+import com.konfigthis.client.model.TakeProfitNullable;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -94,6 +96,65 @@ public class ManualTradeFormWithOptions {
   public static final String SERIALIZED_NAME_NOTIONAL_VALUE = "notional_value";
   @SerializedName(SERIALIZED_NAME_NOTIONAL_VALUE)
   private Object notionalValue = null;
+
+  /**
+   * The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+   */
+  @JsonAdapter(OrderClassEnum.Adapter.class)
+ public enum OrderClassEnum {
+    SIMPLE("SIMPLE"),
+    
+    BRACKET("BRACKET");
+
+    private String value;
+
+    OrderClassEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static OrderClassEnum fromValue(String value) {
+      for (OrderClassEnum b : OrderClassEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<OrderClassEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final OrderClassEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public OrderClassEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return OrderClassEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ORDER_CLASS = "order_class";
+  @SerializedName(SERIALIZED_NAME_ORDER_CLASS)
+  private OrderClassEnum orderClass;
+
+  public static final String SERIALIZED_NAME_STOP_LOSS = "stop_loss";
+  @SerializedName(SERIALIZED_NAME_STOP_LOSS)
+  private StopLossNullable stopLoss;
+
+  public static final String SERIALIZED_NAME_TAKE_PROFIT = "take_profit";
+  @SerializedName(SERIALIZED_NAME_TAKE_PROFIT)
+  private TakeProfitNullable takeProfit;
 
   public ManualTradeFormWithOptions() {
   }
@@ -405,6 +466,93 @@ public class ManualTradeFormWithOptions {
     this.notionalValue = notionalValue;
   }
 
+
+  public ManualTradeFormWithOptions orderClass(OrderClassEnum orderClass) {
+    
+    
+    
+    
+    this.orderClass = orderClass;
+    return this;
+  }
+
+   /**
+   * The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+   * @return orderClass
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "BRACKET", value = "The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details")
+
+  public OrderClassEnum getOrderClass() {
+    return orderClass;
+  }
+
+
+  public void setOrderClass(OrderClassEnum orderClass) {
+    
+    
+    
+    this.orderClass = orderClass;
+  }
+
+
+  public ManualTradeFormWithOptions stopLoss(StopLossNullable stopLoss) {
+    
+    
+    
+    
+    this.stopLoss = stopLoss;
+    return this;
+  }
+
+   /**
+   * Get stopLoss
+   * @return stopLoss
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public StopLossNullable getStopLoss() {
+    return stopLoss;
+  }
+
+
+  public void setStopLoss(StopLossNullable stopLoss) {
+    
+    
+    
+    this.stopLoss = stopLoss;
+  }
+
+
+  public ManualTradeFormWithOptions takeProfit(TakeProfitNullable takeProfit) {
+    
+    
+    
+    
+    this.takeProfit = takeProfit;
+    return this;
+  }
+
+   /**
+   * Get takeProfit
+   * @return takeProfit
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TakeProfitNullable getTakeProfit() {
+    return takeProfit;
+  }
+
+
+  public void setTakeProfit(TakeProfitNullable takeProfit) {
+    
+    
+    
+    this.takeProfit = takeProfit;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -469,7 +617,10 @@ public class ManualTradeFormWithOptions {
         Objects.equals(this.price, manualTradeFormWithOptions.price) &&
         Objects.equals(this.stop, manualTradeFormWithOptions.stop) &&
         Objects.equals(this.units, manualTradeFormWithOptions.units) &&
-        Objects.equals(this.notionalValue, manualTradeFormWithOptions.notionalValue)&&
+        Objects.equals(this.notionalValue, manualTradeFormWithOptions.notionalValue) &&
+        Objects.equals(this.orderClass, manualTradeFormWithOptions.orderClass) &&
+        Objects.equals(this.stopLoss, manualTradeFormWithOptions.stopLoss) &&
+        Objects.equals(this.takeProfit, manualTradeFormWithOptions.takeProfit)&&
         Objects.equals(this.additionalProperties, manualTradeFormWithOptions.additionalProperties);
   }
 
@@ -479,7 +630,7 @@ public class ManualTradeFormWithOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, price, stop, units, notionalValue, additionalProperties);
+    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, price, stop, units, notionalValue, orderClass, stopLoss, takeProfit, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -503,6 +654,9 @@ public class ManualTradeFormWithOptions {
     sb.append("    stop: ").append(toIndentedString(stop)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    notionalValue: ").append(toIndentedString(notionalValue)).append("\n");
+    sb.append("    orderClass: ").append(toIndentedString(orderClass)).append("\n");
+    sb.append("    stopLoss: ").append(toIndentedString(stopLoss)).append("\n");
+    sb.append("    takeProfit: ").append(toIndentedString(takeProfit)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -536,6 +690,9 @@ public class ManualTradeFormWithOptions {
     openapiFields.add("stop");
     openapiFields.add("units");
     openapiFields.add("notional_value");
+    openapiFields.add("order_class");
+    openapiFields.add("stop_loss");
+    openapiFields.add("take_profit");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -572,6 +729,17 @@ public class ManualTradeFormWithOptions {
       }
       if (!jsonObj.get("symbol").isJsonNull() && (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
+      }
+      if (!jsonObj.get("order_class").isJsonNull() && (jsonObj.get("order_class") != null && !jsonObj.get("order_class").isJsonNull()) && !jsonObj.get("order_class").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `order_class` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_class").toString()));
+      }
+      // validate the optional field `stop_loss`
+      if (jsonObj.get("stop_loss") != null && !jsonObj.get("stop_loss").isJsonNull()) {
+        StopLossNullable.validateJsonObject(jsonObj.getAsJsonObject("stop_loss"));
+      }
+      // validate the optional field `take_profit`
+      if (jsonObj.get("take_profit") != null && !jsonObj.get("take_profit").isJsonNull()) {
+        TakeProfitNullable.validateJsonObject(jsonObj.getAsJsonObject("take_profit"));
       }
   }
 

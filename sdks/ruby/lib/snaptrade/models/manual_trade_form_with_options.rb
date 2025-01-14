@@ -42,6 +42,13 @@ module SnapTrade
 
     attr_accessor :notional_value
 
+    # The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+    attr_accessor :order_class
+
+    attr_accessor :stop_loss
+
+    attr_accessor :take_profit
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -54,7 +61,10 @@ module SnapTrade
         :'price' => :'price',
         :'stop' => :'stop',
         :'units' => :'units',
-        :'notional_value' => :'notional_value'
+        :'notional_value' => :'notional_value',
+        :'order_class' => :'order_class',
+        :'stop_loss' => :'stop_loss',
+        :'take_profit' => :'take_profit'
       }
     end
 
@@ -75,7 +85,10 @@ module SnapTrade
         :'price' => :'Float',
         :'stop' => :'Float',
         :'units' => :'Float',
-        :'notional_value' => :'ManualTradeFormNotionalValue'
+        :'notional_value' => :'ManualTradeFormNotionalValue',
+        :'order_class' => :'OrderClass',
+        :'stop_loss' => :'ManualTradeFormWithOptionsStopLoss',
+        :'take_profit' => :'ManualTradeFormWithOptionsTakeProfit'
       }
     end
 
@@ -87,7 +100,10 @@ module SnapTrade
         :'price',
         :'stop',
         :'units',
-        :'notional_value'
+        :'notional_value',
+        :'order_class',
+        :'stop_loss',
+        :'take_profit'
       ])
     end
 
@@ -145,6 +161,18 @@ module SnapTrade
       if attributes.key?(:'notional_value')
         self.notional_value = attributes[:'notional_value']
       end
+
+      if attributes.key?(:'order_class')
+        self.order_class = attributes[:'order_class']
+      end
+
+      if attributes.key?(:'stop_loss')
+        self.stop_loss = attributes[:'stop_loss']
+      end
+
+      if attributes.key?(:'take_profit')
+        self.take_profit = attributes[:'take_profit']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -194,7 +222,10 @@ module SnapTrade
           price == o.price &&
           stop == o.stop &&
           units == o.units &&
-          notional_value == o.notional_value
+          notional_value == o.notional_value &&
+          order_class == o.order_class &&
+          stop_loss == o.stop_loss &&
+          take_profit == o.take_profit
     end
 
     # @see the `==` method
@@ -206,7 +237,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, price, stop, units, notional_value].hash
+      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, price, stop, units, notional_value, order_class, stop_loss, take_profit].hash
     end
 
     # Builds the object from hash

@@ -553,6 +553,15 @@ operation_parameter_map = {
             {
                 'name': 'notional_value'
             },
+            {
+                'name': 'order_class'
+            },
+            {
+                'name': 'stop_loss'
+            },
+            {
+                'name': 'take_profit'
+            },
         ]
     },
     '/trade/{tradeId}-POST': {

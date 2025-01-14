@@ -51,6 +51,34 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
+        /// The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+        /// </summary>
+        /// <value>The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum OrderClassEnum
+        {
+            /// <summary>
+            /// Enum SIMPLE for value: SIMPLE
+            /// </summary>
+            [EnumMember(Value = "SIMPLE")]
+            SIMPLE = 1,
+
+            /// <summary>
+            /// Enum BRACKET for value: BRACKET
+            /// </summary>
+            [EnumMember(Value = "BRACKET")]
+            BRACKET = 2
+
+        }
+
+
+        /// <summary>
+        /// The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+        /// </summary>
+        /// <value>The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details</value>
+        [DataMember(Name = "order_class", EmitDefaultValue = true)]
+        public OrderClassEnum? OrderClass { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeFormWithOptions" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -68,7 +96,10 @@ namespace SnapTrade.Net.Model
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares)..</param>
         /// <param name="notionalValue">notionalValue.</param>
-        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
+        /// <param name="orderClass">The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details.</param>
+        /// <param name="stopLoss">stopLoss.</param>
+        /// <param name="takeProfit">takeProfit.</param>
+        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable), OrderClassEnum? orderClass = default(OrderClassEnum?), StopLossNullable stopLoss = default(StopLossNullable), TakeProfitNullable takeProfit = default(TakeProfitNullable))
         {
             // to ensure "accountId" is required (not null)
             if (accountId == null)
@@ -85,6 +116,9 @@ namespace SnapTrade.Net.Model
             this.Stop = stop;
             this.Units = units;
             this.NotionalValue = notionalValue;
+            this.OrderClass = orderClass;
+            this.StopLoss = stopLoss;
+            this.TakeProfit = takeProfit;
         }
 
         /// <summary>
@@ -136,6 +170,18 @@ namespace SnapTrade.Net.Model
         public NotionalValueNullable NotionalValue { get; set; }
 
         /// <summary>
+        /// Gets or Sets StopLoss
+        /// </summary>
+        [DataMember(Name = "stop_loss", EmitDefaultValue = true)]
+        public StopLossNullable StopLoss { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TakeProfit
+        /// </summary>
+        [DataMember(Name = "take_profit", EmitDefaultValue = true)]
+        public TakeProfitNullable TakeProfit { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -153,6 +199,9 @@ namespace SnapTrade.Net.Model
             sb.Append("  Stop: ").Append(Stop).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  NotionalValue: ").Append(NotionalValue).Append("\n");
+            sb.Append("  OrderClass: ").Append(OrderClass).Append("\n");
+            sb.Append("  StopLoss: ").Append(StopLoss).Append("\n");
+            sb.Append("  TakeProfit: ").Append(TakeProfit).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -234,6 +283,20 @@ namespace SnapTrade.Net.Model
                     this.NotionalValue == input.NotionalValue ||
                     (this.NotionalValue != null &&
                     this.NotionalValue.Equals(input.NotionalValue))
+                ) && 
+                (
+                    this.OrderClass == input.OrderClass ||
+                    this.OrderClass.Equals(input.OrderClass)
+                ) && 
+                (
+                    this.StopLoss == input.StopLoss ||
+                    (this.StopLoss != null &&
+                    this.StopLoss.Equals(input.StopLoss))
+                ) && 
+                (
+                    this.TakeProfit == input.TakeProfit ||
+                    (this.TakeProfit != null &&
+                    this.TakeProfit.Equals(input.TakeProfit))
                 );
         }
 
@@ -276,6 +339,15 @@ namespace SnapTrade.Net.Model
                 if (this.NotionalValue != null)
                 {
                     hashCode = (hashCode * 59) + this.NotionalValue.GetHashCode();
+                }
+                hashCode = (hashCode * 59) + this.OrderClass.GetHashCode();
+                if (this.StopLoss != null)
+                {
+                    hashCode = (hashCode * 59) + this.StopLoss.GetHashCode();
+                }
+                if (this.TakeProfit != null)
+                {
+                    hashCode = (hashCode * 59) + this.TakeProfit.GetHashCode();
                 }
                 return hashCode;
             }

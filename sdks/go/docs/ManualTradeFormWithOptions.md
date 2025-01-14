@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 
 **NotionalValue** | Pointer to [**NullableManualTradeFormNotionalValue**](ManualTradeFormNotionalValue.md) |  | [optional] 
+**OrderClass** | Pointer to **NullableString** | The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details | [optional] 
+**StopLoss** | Pointer to [**NullableManualTradeFormWithOptionsStopLoss**](ManualTradeFormWithOptionsStopLoss.md) |  | [optional] 
+**TakeProfit** | Pointer to [**NullableManualTradeFormWithOptionsTakeProfit**](ManualTradeFormWithOptionsTakeProfit.md) |  | [optional] 
 
 ## Methods
 
@@ -324,6 +327,111 @@ HasNotionalValue returns a boolean if a field has been set.
 `func (o *ManualTradeFormWithOptions) UnsetNotionalValue()`
 
 UnsetNotionalValue ensures that no value is present for NotionalValue, not even an explicit nil
+### GetOrderClass
+
+`func (o *ManualTradeFormWithOptions) GetOrderClass() string`
+
+GetOrderClass returns the OrderClass field if non-nil, zero value otherwise.
+
+### GetOrderClassOk
+
+`func (o *ManualTradeFormWithOptions) GetOrderClassOk() (*string, bool)`
+
+GetOrderClassOk returns a tuple with the OrderClass field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderClass
+
+`func (o *ManualTradeFormWithOptions) SetOrderClass(v string)`
+
+SetOrderClass sets OrderClass field to given value.
+
+### HasOrderClass
+
+`func (o *ManualTradeFormWithOptions) HasOrderClass() bool`
+
+HasOrderClass returns a boolean if a field has been set.
+
+### SetOrderClassNil
+
+`func (o *ManualTradeFormWithOptions) SetOrderClassNil(b bool)`
+
+ SetOrderClassNil sets the value for OrderClass to be an explicit nil
+
+### UnsetOrderClass
+`func (o *ManualTradeFormWithOptions) UnsetOrderClass()`
+
+UnsetOrderClass ensures that no value is present for OrderClass, not even an explicit nil
+### GetStopLoss
+
+`func (o *ManualTradeFormWithOptions) GetStopLoss() ManualTradeFormWithOptionsStopLoss`
+
+GetStopLoss returns the StopLoss field if non-nil, zero value otherwise.
+
+### GetStopLossOk
+
+`func (o *ManualTradeFormWithOptions) GetStopLossOk() (*ManualTradeFormWithOptionsStopLoss, bool)`
+
+GetStopLossOk returns a tuple with the StopLoss field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStopLoss
+
+`func (o *ManualTradeFormWithOptions) SetStopLoss(v ManualTradeFormWithOptionsStopLoss)`
+
+SetStopLoss sets StopLoss field to given value.
+
+### HasStopLoss
+
+`func (o *ManualTradeFormWithOptions) HasStopLoss() bool`
+
+HasStopLoss returns a boolean if a field has been set.
+
+### SetStopLossNil
+
+`func (o *ManualTradeFormWithOptions) SetStopLossNil(b bool)`
+
+ SetStopLossNil sets the value for StopLoss to be an explicit nil
+
+### UnsetStopLoss
+`func (o *ManualTradeFormWithOptions) UnsetStopLoss()`
+
+UnsetStopLoss ensures that no value is present for StopLoss, not even an explicit nil
+### GetTakeProfit
+
+`func (o *ManualTradeFormWithOptions) GetTakeProfit() ManualTradeFormWithOptionsTakeProfit`
+
+GetTakeProfit returns the TakeProfit field if non-nil, zero value otherwise.
+
+### GetTakeProfitOk
+
+`func (o *ManualTradeFormWithOptions) GetTakeProfitOk() (*ManualTradeFormWithOptionsTakeProfit, bool)`
+
+GetTakeProfitOk returns a tuple with the TakeProfit field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTakeProfit
+
+`func (o *ManualTradeFormWithOptions) SetTakeProfit(v ManualTradeFormWithOptionsTakeProfit)`
+
+SetTakeProfit sets TakeProfit field to given value.
+
+### HasTakeProfit
+
+`func (o *ManualTradeFormWithOptions) HasTakeProfit() bool`
+
+HasTakeProfit returns a boolean if a field has been set.
+
+### SetTakeProfitNil
+
+`func (o *ManualTradeFormWithOptions) SetTakeProfitNil(b bool)`
+
+ SetTakeProfitNil sets the value for TakeProfit to be an explicit nil
+
+### UnsetTakeProfit
+`func (o *ManualTradeFormWithOptions) UnsetTakeProfit()`
+
+UnsetTakeProfit ensures that no value is present for TakeProfit, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
