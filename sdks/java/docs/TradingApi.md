@@ -390,6 +390,9 @@ public class Example {
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     Object notionalValue = null;
+    String orderClass = "SIMPLE"; // The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+    StopLossNullable stopLoss = new StopLossNullable();
+    TakeProfitNullable takeProfit = new TakeProfitNullable();
     try {
       AccountOrderRecord result = client
               .trading
@@ -400,6 +403,9 @@ public class Example {
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
+              .orderClass(orderClass)
+              .stopLoss(stopLoss)
+              .takeProfit(takeProfit)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -440,6 +446,9 @@ public class Example {
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
+              .orderClass(orderClass)
+              .stopLoss(stopLoss)
+              .takeProfit(takeProfit)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

@@ -1759,6 +1759,14 @@ place_force_order_response = snaptrade.trading.place_force_order(
     stop=31.33,
     units=10.5,
     notional_value=None,
+    order_class="BRACKET",
+    stop_loss={
+        "stop_price": "48.55",
+        "limit_price": "48.50",
+    },
+    take_profit={
+        "limit_price": "49.95",
+    },
 )
 ```
 
@@ -1799,6 +1807,16 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
+
+##### order_class: `Optional[str]`<a id="order_class-optionalstr"></a>
+
+The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+
+##### stop_loss: [`StopLossNullable`](./snaptrade_client/type/stop_loss_nullable.py)<a id="stop_loss-stoplossnullablesnaptrade_clienttypestop_loss_nullablepy"></a>
+
+
+##### take_profit: [`TakeProfitNullable`](./snaptrade_client/type/take_profit_nullable.py)<a id="take_profit-takeprofitnullablesnaptrade_clienttypetake_profit_nullablepy"></a>
+
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

@@ -5920,14 +5920,17 @@ components:
       example:
         universal_symbol_id: ""
         symbol: AAPL  131124C00240000
+        stop_loss: null
+        units: ""
         time_in_force: null
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        take_profit: null
         stop: 31.33
         price: 31.33
         notional_value: null
         action: null
-        units: ""
         order_type: Market
+        order_class: BRACKET
       properties:
         account_id:
           description: Unique identifier for the connected brokerage account. This
@@ -5987,6 +5990,24 @@ components:
           nullable: true
         notional_value:
           $ref: '#/components/schemas/ManualTradeForm_notional_value'
+        order_class:
+          description: "The class of order intended to be placed. Defaults to SIMPLE\
+            \ for regular, one legged trades. Set to BRACKET if looking to place a\
+            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
+            \ profit and stop loss conditions. Bracket orders currently only supported\
+            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
+          enum:
+          - SIMPLE
+          - BRACKET
+          example: BRACKET
+          nullable: true
+          type: string
+          x-konfig-original-example: BRACKET
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
+        stop_loss:
+          $ref: '#/components/schemas/ManualTradeFormWithOptions_stop_loss'
+        take_profit:
+          $ref: '#/components/schemas/ManualTradeFormWithOptions_take_profit'
       required:
       - account_id
       - action
@@ -6103,6 +6124,34 @@ components:
       - type: string
       - type: number
       x-konfig-original-example: 100
+    StopLoss:
+      additionalProperties: true
+      description: "Details of the stop loss order. Only to be used when order_class\
+        \ = BRACKET. stop_price is required, limit_price is optional"
+      properties:
+        stop_price:
+          example: "48.55"
+          type: string
+          x-konfig-original-example: "48.55"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopLoss-properties-stop_price
+        limit_price:
+          example: "48.50"
+          nullable: true
+          type: string
+          x-konfig-original-example: "48.50"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopLoss-properties-limit_price
+      type: object
+    TakeProfit:
+      additionalProperties: true
+      description: Details of the take profit order. Only to be used when order_class
+        = BRACKET.
+      properties:
+        limit_price:
+          example: "49.95"
+          type: string
+          x-konfig-original-example: "49.95"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price
+      type: object
     UniversalActivity:
       additionalProperties: true
       description: A transaction or activity from an institution
@@ -7607,6 +7656,10 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class:
+      example: BRACKET
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
       type: boolean
@@ -7622,6 +7675,18 @@ components:
     konfig-generated-schema-components-schemas-Price:
       example: 31.33
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StopLoss-properties-stop_price:
+      example: "48.55"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-StopLoss-properties-limit_price:
+      example: "48.50"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price:
+      example: "49.95"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-id:
       example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
@@ -8615,6 +8680,28 @@ components:
           allOf:
           - $ref: '#/components/schemas/NotionalValue'
           nullable: true
+        order_class:
+          description: "The class of order intended to be placed. Defaults to SIMPLE\
+            \ for regular, one legged trades. Set to BRACKET if looking to place a\
+            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
+            \ profit and stop loss conditions. Bracket orders currently only supported\
+            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
+          enum:
+          - SIMPLE
+          - BRACKET
+          example: BRACKET
+          nullable: true
+          type: string
+          x-konfig-original-example: BRACKET
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
+        stop_loss:
+          allOf:
+          - $ref: '#/components/schemas/StopLoss'
+          nullable: true
+        take_profit:
+          allOf:
+          - $ref: '#/components/schemas/TakeProfit'
+          nullable: true
       required:
       - account_id
       - action
@@ -9311,6 +9398,14 @@ components:
     ManualTradeForm_notional_value:
       allOf:
       - $ref: '#/components/schemas/NotionalValue'
+      nullable: true
+    ManualTradeFormWithOptions_stop_loss:
+      allOf:
+      - $ref: '#/components/schemas/StopLoss'
+      nullable: true
+    ManualTradeFormWithOptions_take_profit:
+      allOf:
+      - $ref: '#/components/schemas/TakeProfit'
       nullable: true
     UniversalActivity_symbol:
       allOf:

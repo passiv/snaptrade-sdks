@@ -18,6 +18,18 @@ Inputs for placing an order with the brokerage.
 |**stop** | **Double** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |
 |**units** | [**Double**](Double.md) | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). |  [optional] |
 |**notionalValue** | **Object** |  |  [optional] |
+|**orderClass** | [**OrderClassEnum**](#OrderClassEnum) | The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details |  [optional] |
+|**stopLoss** | [**StopLossNullable**](StopLossNullable.md) |  |  [optional] |
+|**takeProfit** | [**TakeProfitNullable**](TakeProfitNullable.md) |  |  [optional] |
+
+
+
+## Enum: OrderClassEnum
+
+| Name | Value |
+|---- | -----|
+| SIMPLE | &quot;SIMPLE&quot; |
+| BRACKET | &quot;BRACKET&quot; |
 
 
 

@@ -1663,6 +1663,14 @@ result = snaptrade.trading.place_force_order(
   stop: 31.33,
   units: 10.5,
   notional_value: None,
+  order_class: "BRACKET",
+  stop_loss: {
+        "stop_price" => "48.55",
+        "limit_price" => "48.50",
+    },
+  take_profit: {
+        "limit_price" => "49.95",
+    },
 )
 p result
 ```
@@ -1718,6 +1726,15 @@ provided. If placing an Option order, this field represents the number of
 contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
+##### order_class: [`OrderClass`](./lib/snaptrade/models/order_class.rb)<a id="order_class-orderclasslibsnaptrademodelsorder_classrb"></a>
+The class of order intended to be placed. Defaults to SIMPLE for regular, one
+legged trades. Set to BRACKET if looking to place a bracket
+(One-triggers-a-one-cancels-the-other) order, then specify take profit and stop
+loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and
+Tradestation, contact us for more details
+
+##### stop_loss: [`ManualTradeFormWithOptionsStopLoss`](./lib/snaptrade/models/manual_trade_form_with_options_stop_loss.rb)<a id="stop_loss-manualtradeformwithoptionsstoplosslibsnaptrademodelsmanual_trade_form_with_options_stop_lossrb"></a>
+##### take_profit: [`ManualTradeFormWithOptionsTakeProfit`](./lib/snaptrade/models/manual_trade_form_with_options_take_profit.rb)<a id="take_profit-manualtradeformwithoptionstakeprofitlibsnaptrademodelsmanual_trade_form_with_options_take_profitrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)

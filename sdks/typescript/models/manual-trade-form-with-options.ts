@@ -12,6 +12,8 @@ import type * as buffer from "buffer"
 
 import { ActionStrictWithOptions } from './action-strict-with-options';
 import { ManualTradeFormNotionalValue } from './manual-trade-form-notional-value';
+import { ManualTradeFormWithOptionsStopLoss } from './manual-trade-form-with-options-stop-loss';
+import { ManualTradeFormWithOptionsTakeProfit } from './manual-trade-form-with-options-take-profit';
 import { OrderTypeStrict } from './order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
 
@@ -81,5 +83,26 @@ export interface ManualTradeFormWithOptions {
      * @memberof ManualTradeFormWithOptions
      */
     'notional_value'?: ManualTradeFormNotionalValue | null;
+    /**
+     * The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+     * @type {string}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'order_class'?: ManualTradeFormWithOptionsOrderClassEnum;
+    /**
+     * 
+     * @type {ManualTradeFormWithOptionsStopLoss}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'stop_loss'?: ManualTradeFormWithOptionsStopLoss | null;
+    /**
+     * 
+     * @type {ManualTradeFormWithOptionsTakeProfit}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'take_profit'?: ManualTradeFormWithOptionsTakeProfit | null;
 }
+
+type ManualTradeFormWithOptionsOrderClassEnum = 'SIMPLE' | 'BRACKET'
+
 

@@ -1801,6 +1801,9 @@ AccountOrderRecord result = client
         .stop(stop)
         .units(units)
         .notionalValue(notionalValue)
+        .orderClass(orderClass)
+        .stopLoss(stopLoss)
+        .takeProfit(takeProfit)
         .execute();
 ```
 
@@ -1841,6 +1844,14 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `Object`<a id="notional_value-object"></a>
+
+##### order_class: `String`<a id="order_class-string"></a>
+
+The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+
+##### stop_loss: [`StopLossNullable`](./src/main/java/com/konfigthis/client/model/StopLossNullable.java)<a id="stop_loss-stoplossnullablesrcmainjavacomkonfigthisclientmodelstoplossnullablejava"></a>
+
+##### take_profit: [`TakeProfitNullable`](./src/main/java/com/konfigthis/client/model/TakeProfitNullable.java)<a id="take_profit-takeprofitnullablesrcmainjavacomkonfigthisclientmodeltakeprofitnullablejava"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

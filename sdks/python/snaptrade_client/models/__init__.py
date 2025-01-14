@@ -117,6 +117,8 @@ from snaptrade_client.model.snap_trade_holdings_total_value import SnapTradeHold
 from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeLoginUserRequestBody
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.status import Status
+from snaptrade_client.model.stop_loss import StopLoss
+from snaptrade_client.model.stop_loss_nullable import StopLossNullable
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
@@ -127,6 +129,8 @@ from snaptrade_client.model.symbol_query import SymbolQuery
 from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.sync_status_date_nullable import SyncStatusDateNullable
+from snaptrade_client.model.take_profit import TakeProfit
+from snaptrade_client.model.take_profit_nullable import TakeProfitNullable
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict

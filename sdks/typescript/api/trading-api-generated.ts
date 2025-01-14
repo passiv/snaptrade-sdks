@@ -33,6 +33,10 @@ import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
 import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
+import { ManualTradeFormWithOptionsStopLoss } from '../models';
+// @ts-ignore
+import { ManualTradeFormWithOptionsTakeProfit } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
@@ -476,7 +480,10 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 price: requestParameters.price,
                 stop: requestParameters.stop,
                 units: requestParameters.units,
-                notional_value: requestParameters.notional_value
+                notional_value: requestParameters.notional_value,
+                order_class: requestParameters.order_class,
+                stop_loss: requestParameters.stop_loss,
+                take_profit: requestParameters.take_profit
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, manualTradeFormWithOptions, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);

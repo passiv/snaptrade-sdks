@@ -559,6 +559,15 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'notional_value'
             },
+            {
+                name: 'order_class'
+            },
+            {
+                name: 'stop_loss'
+            },
+            {
+                name: 'take_profit'
+            },
         ]
     },
     '/trade/{tradeId}-POST': {

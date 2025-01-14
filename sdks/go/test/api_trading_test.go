@@ -101,6 +101,8 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         universalSymbolId := *snaptrade.Newstring()
         units := *snaptrade.Newfloat32()
         notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
+        stopLoss := *snaptrade.NewManualTradeFormWithOptionsStopLoss()
+        takeProfit := *snaptrade.NewManualTradeFormWithOptionsTakeProfit()
         
         manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -114,6 +116,9 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeFormWithOptions.SetStop(31.33)
         manualTradeFormWithOptions.SetUnits(units)
         manualTradeFormWithOptions.SetNotionalValue(notionalValue)
+        manualTradeFormWithOptions.SetOrderClass("BRACKET")
+        manualTradeFormWithOptions.SetStopLoss(stopLoss)
+        manualTradeFormWithOptions.SetTakeProfit(takeProfit)
         
         request := client.TradingApi.PlaceForceOrder(
             "userId_example",

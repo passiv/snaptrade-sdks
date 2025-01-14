@@ -1792,6 +1792,7 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   price: 31.33,
   stop: 31.33,
   units: 10.5,
+  order_class: "BRACKET",
 });
 ```
 
@@ -1838,6 +1839,14 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
+
+##### order_class: `string`<a id="order_class-string"></a>
+
+The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+
+##### stop_loss: [`ManualTradeFormWithOptionsStopLoss`](./models/manual-trade-form-with-options-stop-loss.ts)<a id="stop_loss-manualtradeformwithoptionsstoplossmodelsmanual-trade-form-with-options-stop-lossts"></a>
+
+##### take_profit: [`ManualTradeFormWithOptionsTakeProfit`](./models/manual-trade-form-with-options-take-profit.ts)<a id="take_profit-manualtradeformwithoptionstakeprofitmodelsmanual-trade-form-with-options-take-profitts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
