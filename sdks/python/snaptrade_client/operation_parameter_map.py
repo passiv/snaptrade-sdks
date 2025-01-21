@@ -1,4 +1,26 @@
 operation_parameter_map = {
+    '/accounts/{accountId}/activities-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'startDate'
+            },
+            {
+                'name': 'endDate'
+            },
+            {
+                'name': 'type'
+            },
+        ]
+    },
     '/holdings-GET': {
         'parameters': [
             {

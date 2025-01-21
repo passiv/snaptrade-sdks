@@ -1165,6 +1165,97 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-returnRates
+  /accounts/{accountId}/activities:
+    get:
+      description: |
+        Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+        There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+        The data returned here is always cached and refreshed once a day.
+      operationId: AccountInformation_getAccountActivities
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - description: "The start date (inclusive) of the transaction history to retrieve.\
+          \ If not provided, the default is the first transaction known to SnapTrade\
+          \ based on `trade_date`."
+        explode: true
+        in: query
+        name: startDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: "The end date (inclusive) of the transaction history to retrieve.\
+          \ If not provided, the default is the last transaction known to SnapTrade\
+          \ based on `trade_date`."
+        explode: true
+        in: query
+        name: endDate
+        required: false
+        schema:
+          $ref: '#/components/schemas/ReportingDate'
+        style: form
+      - description: |
+          Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
+            - `BUY` - Asset bought.
+            - `SELL` - Asset sold.
+            - `DIVIDEND` - Dividend payout.
+            - `CONTRIBUTION` - Cash contribution.
+            - `WITHDRAWAL` - Cash withdrawal.
+            - `REI` - Dividend reinvestment.
+            - `INTEREST` - Interest deposited into the account.
+            - `FEE` - Fee withdrawn from the account.
+            - `OPTIONEXPIRATION` - Option expiration event.
+            - `OPTIONASSIGNMENT` - Option assignment event.
+            - `OPTIONEXERCISE` - Option exercise event.
+            - `TRANSFER` - Transfer of assets from one account to another
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          example: "BUY,SELL,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY,SELL,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema
+        style: form
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/UniversalActivity'
+                type: array
+          description: OK
+        default:
+          description: Unexpected error
+      summary: List account activities
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-activities
   /accounts/{accountId}/options:
     get:
       description: |
@@ -1439,7 +1530,7 @@ paths:
 
         There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+        The data returned here is always cached and refreshed once a day.
       operationId: TransactionsAndReporting_getActivities
       parameters:
       - description: "The start date (inclusive) of the transaction history to retrieve.\
@@ -6773,6 +6864,10 @@ components:
       example: 30
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema:
+      example: "BUY,SELL,DIVIDEND"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--activities-get-parameters-4-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
@@ -8311,6 +8406,37 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-activities:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        startDate:
+          $ref: '#/components/schemas/ReportingDate'
+        endDate:
+          $ref: '#/components/schemas/ReportingDate'
+        type:
+          example: "BUY,SELL,DIVIDEND"
+          type: string
+          x-konfig-original-example: "BUY,SELL,DIVIDEND"
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - startDate
+      - endDate
+      - type
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
       additionalProperties: true
       properties:

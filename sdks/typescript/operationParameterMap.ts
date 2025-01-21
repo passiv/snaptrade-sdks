@@ -5,6 +5,28 @@ type Entry = {
     parameters: Parameter[]
 }
 export const operationParameterMap: Record<string, Entry> = {
+    '/accounts/{accountId}/activities-GET': {
+        parameters: [
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'startDate'
+            },
+            {
+                name: 'endDate'
+            },
+            {
+                name: 'type'
+            },
+        ]
+    },
     '/holdings-GET': {
         parameters: [
             {

@@ -26,6 +26,25 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
+    t.Run("Test AccountInformationApiService GetAccountActivities", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.AccountInformationApi.GetAccountActivities(
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "userId_example",
+            "userSecret_example",
+        )
+        request.StartDate(2013-10-20)
+        request.EndDate(2013-10-20)
+        request.Type(""BUY,SELL,DIVIDEND"")
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test AccountInformationApiService GetAllUserHoldings", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetAllUserHoldings(

@@ -22,6 +22,7 @@ Connect brokerage accounts to your app for live positions and trading
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
+  * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
@@ -147,25 +148,41 @@ snaptrade = SnapTrade(
 
 async def main():
     try:
-        # List all accounts for the user, plus balances, positions, and orders for each account.
-        get_all_user_holdings_response = (
-            await snaptrade.account_information.aget_all_user_holdings(
+        # List account activities
+        get_account_activities_response = (
+            await snaptrade.account_information.aget_account_activities(
+                account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
                 user_id="snaptrade-user-123",
                 user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-                brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+                start_date="2022-01-24",
+                end_date="2022-01-24",
+                type="BUY,SELL,DIVIDEND",
             )
         )
-        pprint(get_all_user_holdings_response.body)
-        pprint(get_all_user_holdings_response.body["account"])
-        pprint(get_all_user_holdings_response.body["balances"])
-        pprint(get_all_user_holdings_response.body["positions"])
-        pprint(get_all_user_holdings_response.body["total_value"])
-        pprint(get_all_user_holdings_response.headers)
-        pprint(get_all_user_holdings_response.status)
-        pprint(get_all_user_holdings_response.round_trip_time)
+        pprint(get_account_activities_response.body)
+        pprint(get_account_activities_response.body["id"])
+        pprint(get_account_activities_response.body["account"])
+        pprint(get_account_activities_response.body["symbol"])
+        pprint(get_account_activities_response.body["option_symbol"])
+        pprint(get_account_activities_response.body["price"])
+        pprint(get_account_activities_response.body["units"])
+        pprint(get_account_activities_response.body["amount"])
+        pprint(get_account_activities_response.body["currency"])
+        pprint(get_account_activities_response.body["type"])
+        pprint(get_account_activities_response.body["option_type"])
+        pprint(get_account_activities_response.body["description"])
+        pprint(get_account_activities_response.body["trade_date"])
+        pprint(get_account_activities_response.body["settlement_date"])
+        pprint(get_account_activities_response.body["fee"])
+        pprint(get_account_activities_response.body["fx_rate"])
+        pprint(get_account_activities_response.body["institution"])
+        pprint(get_account_activities_response.body["external_reference_id"])
+        pprint(get_account_activities_response.headers)
+        pprint(get_account_activities_response.status)
+        pprint(get_account_activities_response.round_trip_time)
     except ApiException as e:
         print(
-            "Exception when calling AccountInformationApi.get_all_user_holdings: %s\n"
+            "Exception when calling AccountInformationApi.get_account_activities: %s\n"
             % e
         )
         pprint(e.body)
@@ -180,6 +197,60 @@ asyncio.run(main())
 
 
 ## Reference<a id="reference"></a>
+### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
+
+Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_account_activities_response = snaptrade.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    type="BUY,SELL,DIVIDEND",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### start_date: `date`<a id="start_date-date"></a>
+
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
+##### end_date: `date`<a id="end_date-date"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+
+##### type: `str`<a id="type-str"></a>
+
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`UniversalActivity`](./snaptrade_client/type/universal_activity.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/activities` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -1886,7 +1957,7 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
