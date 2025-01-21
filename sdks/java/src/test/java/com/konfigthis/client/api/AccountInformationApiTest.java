@@ -21,10 +21,12 @@ import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import java.time.LocalDate;
 import com.konfigthis.client.model.Position;
 import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
+import com.konfigthis.client.model.UniversalActivity;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -47,6 +49,29 @@ public class AccountInformationApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new AccountInformationApi(apiClient);
+    }
+
+    /**
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountActivitiesTest() throws ApiException {
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        String type = null;
+        List<UniversalActivity> response = api.getAccountActivities(accountId, userId, userSecret)
+                .startDate(startDate)
+                .endDate(endDate)
+                .type(type)
+                .execute();
+        // TODO: test validations
     }
 
     /**

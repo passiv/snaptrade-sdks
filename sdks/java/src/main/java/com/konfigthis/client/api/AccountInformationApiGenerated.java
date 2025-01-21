@@ -31,10 +31,12 @@ import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import java.time.LocalDate;
 import com.konfigthis.client.model.Position;
 import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
+import com.konfigthis.client.model.UniversalActivity;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -80,6 +82,242 @@ public class AccountInformationApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    private okhttp3.Call getAccountActivitiesCall(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, String type, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/activities"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (startDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("startDate", startDate));
+        }
+
+        if (endDate != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("endDate", endDate));
+        }
+
+        if (type != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("type", type));
+        }
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getAccountActivitiesValidateBeforeCall(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, String type, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getAccountActivities(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getAccountActivities(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getAccountActivities(Async)");
+        }
+
+        return getAccountActivitiesCall(accountId, userId, userSecret, startDate, endDate, type, _callback);
+
+    }
+
+
+    private ApiResponse<List<UniversalActivity>> getAccountActivitiesWithHttpInfo(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, String type) throws ApiException {
+        okhttp3.Call localVarCall = getAccountActivitiesValidateBeforeCall(accountId, userId, userSecret, startDate, endDate, type, null);
+        Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getAccountActivitiesAsync(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, String type, final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getAccountActivitiesValidateBeforeCall(accountId, userId, userSecret, startDate, endDate, type, _callback);
+        Type localVarReturnType = new TypeToken<List<UniversalActivity>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetAccountActivitiesRequestBuilderGenerated {
+        final UUID accountId;
+        final String userId;
+        final String userSecret;
+        LocalDate startDate;
+        LocalDate endDate;
+        String type;
+
+        public GetAccountActivitiesRequestBuilderGenerated(UUID accountId, String userId, String userSecret) {
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set startDate
+         * @param startDate The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+         * @return AccountInformationApi.GetAccountActivitiesRequestBuilder
+         */
+        public AccountInformationApi.GetAccountActivitiesRequestBuilder startDate(LocalDate startDate) {
+            this.startDate = startDate;
+            return (AccountInformationApi.GetAccountActivitiesRequestBuilder) this;
+        }
+        
+        /**
+         * Set endDate
+         * @param endDate The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)
+         * @return AccountInformationApi.GetAccountActivitiesRequestBuilder
+         */
+        public AccountInformationApi.GetAccountActivitiesRequestBuilder endDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return (AccountInformationApi.GetAccountActivitiesRequestBuilder) this;
+        }
+        
+        /**
+         * Set type
+         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)
+         * @return AccountInformationApi.GetAccountActivitiesRequestBuilder
+         */
+        public AccountInformationApi.GetAccountActivitiesRequestBuilder type(String type) {
+            this.type = type;
+            return (AccountInformationApi.GetAccountActivitiesRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for getAccountActivities
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getAccountActivitiesCall(accountId, userId, userSecret, startDate, endDate, type, _callback);
+        }
+
+
+        /**
+         * Execute getAccountActivities request
+         * @return List&lt;UniversalActivity&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UniversalActivity> execute() throws ApiException {
+            ApiResponse<List<UniversalActivity>> localVarResp = getAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getAccountActivities request with HTTP info returned
+         * @return ApiResponse&lt;List&lt;UniversalActivity&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UniversalActivity>> executeWithHttpInfo() throws ApiException {
+            return getAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type);
+        }
+
+        /**
+         * Execute getAccountActivities request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
+            return getAccountActivitiesAsync(accountId, userId, userSecret, startDate, endDate, type, _callback);
+        }
+    }
+
+    /**
+     * List account activities
+     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+     * @param accountId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return GetAccountActivitiesRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public AccountInformationApi.GetAccountActivitiesRequestBuilder getAccountActivities(UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((AccountInformationApi) this).new GetAccountActivitiesRequestBuilder(accountId, userId, userSecret);
+    }
     private okhttp3.Call getAllUserHoldingsCall(String userId, String userSecret, UUID brokerageAuthorizations, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

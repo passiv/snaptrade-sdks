@@ -44,6 +44,8 @@ import { Position } from '../models';
 import { RateOfReturnResponse } from '../models';
 // @ts-ignore
 import { RecentOrdersResponse } from '../models';
+// @ts-ignore
+import { UniversalActivity } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -53,6 +55,87 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const AccountInformationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Returns all historical transactions for the specified account. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+         * @summary List account activities
+         * @param {string} accountId 
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string | Date} [startDate] The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;.
+         * @param {string | Date} [endDate] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;.
+         * @param {string} [type] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountActivities: async (accountId: string, userId: string, userSecret: string, startDate?: string | Date, endDate?: string | Date, type?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getAccountActivities', 'accountId', accountId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getAccountActivities', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getAccountActivities', 'userSecret', userSecret)
+            const localVarPath = `/accounts/{accountId}/activities`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (startDate !== undefined) {
+                localVarQueryParameter['startDate'] = (startDate as any instanceof Date) ?
+                    (startDate as any).toISOString().substr(0,10) :
+                    startDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['endDate'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substr(0,10) :
+                    endDate;
+            }
+
+            if (type !== undefined) {
+                localVarQueryParameter['type'] = type;
+            }
+
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/activities',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
@@ -697,6 +780,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AccountInformationApiAxiosParamCreator(configuration)
     return {
         /**
+         * Returns all historical transactions for the specified account. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+         * @summary List account activities
+         * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<UniversalActivity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountActivities(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.type, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
@@ -818,6 +912,16 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     const localVarFp = AccountInformationApiFp(configuration)
     return {
         /**
+         * Returns all historical transactions for the specified account. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+         * @summary List account activities
+         * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<UniversalActivity>> {
+            return localVarFp.getAccountActivities(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
          * @summary List all accounts for the user, plus balances, positions, and orders for each account.
          * @param {AccountInformationApiGetAllUserHoldingsRequest} requestParameters Request parameters.
@@ -920,6 +1024,57 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
         },
     };
 };
+
+/**
+ * Request parameters for getAccountActivities operation in AccountInformationApi.
+ * @export
+ * @interface AccountInformationApiGetAccountActivitiesRequest
+ */
+export type AccountInformationApiGetAccountActivitiesRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly userSecret: string
+    
+    /**
+    * The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+    * @type {string | Date}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly startDate?: string | Date
+    
+    /**
+    * The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    * @type {string | Date}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly endDate?: string | Date
+    
+    /**
+    * Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+    * @type {string}
+    * @memberof AccountInformationApiGetAccountActivities
+    */
+    readonly type?: string
+    
+}
 
 /**
  * Request parameters for getAllUserHoldings operation in AccountInformationApi.
@@ -1242,6 +1397,18 @@ export type AccountInformationApiUpdateUserAccountRequest = {
  * @extends {BaseAPI}
  */
 export class AccountInformationApiGenerated extends BaseAPI {
+    /**
+     * Returns all historical transactions for the specified account. It\'s recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There\'s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+     * @summary List account activities
+     * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getAccountActivities(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * **Deprecated, please use the account-specific holdings endpoint instead.**  List all accounts for the user, plus balances, positions, and orders for each account. 
      * @summary List all accounts for the user, plus balances, positions, and orders for each account.

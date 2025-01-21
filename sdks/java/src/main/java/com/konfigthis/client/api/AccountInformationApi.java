@@ -6,10 +6,12 @@ import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import java.time.LocalDate;
 import com.konfigthis.client.model.Position;
 import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
+import com.konfigthis.client.model.UniversalActivity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
 
     public AccountInformationApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
+    }
+    public class GetAccountActivitiesRequestBuilder extends GetAccountActivitiesRequestBuilderGenerated {
+        public GetAccountActivitiesRequestBuilder(UUID accountId, String userId, String userSecret) {
+            super(accountId, userId, userSecret);
+        }
     }
     public class GetAllUserHoldingsRequestBuilder extends GetAllUserHoldingsRequestBuilderGenerated {
         public GetAllUserHoldingsRequestBuilder(String userId, String userSecret) {

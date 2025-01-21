@@ -19,6 +19,7 @@ Connect brokerage accounts to your app for live positions and trading
 - [Getting Started](#getting-started)
 - [Raw HTTP Response](#raw-http-response)
 - [Reference](#reference)
+  * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
@@ -85,10 +86,13 @@ configuration = SnapTrade::Configuration.new
 configuration.client_id = ENV["SNAPTRADE_CLIENT_ID"]
 configuration.consumer_key = ENV["SNAPTRADE_CONSUMER_KEY"]
 snaptrade = SnapTrade::Client.new(configuration)
-result = snaptrade.account_information.get_all_user_holdings(
+result = snaptrade.account_information.get_account_activities(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  start_date: "2022-01-24",
+  end_date: "2022-01-24",
+  type: "BUY,SELL,DIVIDEND",
 )
 p result
 ```
@@ -98,18 +102,83 @@ p result
 To access the raw HTTP response, suffix any method with `_with_http_info`.
 
 ```ruby
-result = snaptrade.account_information.get_all_user_holdings_with_http_info(
+result = snaptrade.account_information.get_account_activities_with_http_info(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  brokerage_authorizations: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  start_date: "2022-01-24",
+  end_date: "2022-01-24",
+  type: "BUY,SELL,DIVIDEND",
 )
-p result[0] # [Array<AccountHoldings>] Deserialized data
+p result[0] # [Array<UniversalActivity>] Deserialized data
 p.result[1] # [Integer] HTTP status code
 p.result[2] # [Hash] HTTP headers
 p.result[3] # [Faraday::Response] Raw HTTP response
 ```
 
 ## Reference<a id="reference"></a>
+
+
+### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
+
+Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_account_activities(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  start_date: "2022-01-24",
+  end_date: "2022-01-24",
+  type: "BUY,SELL,DIVIDEND",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `String`<a id="account_id-string"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### start_date: `Date`<a id="start_date-date"></a>
+The start date (inclusive) of the transaction history to retrieve. If not
+provided, the default is the first transaction known to SnapTrade based on
+`trade_date`.
+
+##### end_date: `Date`<a id="end_date-date"></a>
+The end date (inclusive) of the transaction history to retrieve. If not
+provided, the default is the last transaction known to SnapTrade based on
+`trade_date`.
+
+##### type: `String`<a id="type-string"></a>
+Optional comma separated list of transaction types to filter by. SnapTrade does
+a best effort to categorize brokerage transaction types into a common set of
+values. Here are some of the most popular values: - `BUY` - Asset bought. -
+`SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash
+contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment.
+- `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from
+the account. - `OPTIONEXPIRATION` - Option expiration event. -
+`OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option
+exercise event. - `TRANSFER` - Transfer of assets from one account to another
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[UniversalActivity](./lib/snaptrade/models/universal_activity.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/activities` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
 
 
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
@@ -1800,7 +1869,7 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

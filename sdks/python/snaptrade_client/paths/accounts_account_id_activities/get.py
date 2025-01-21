@@ -36,11 +36,11 @@ from snaptrade_client.model.universal_activity import UniversalActivity as Unive
 
 from snaptrade_client.type.universal_activity import UniversalActivity
 
+from . import path
+
 # Query params
 StartDateSchema = schemas.DateSchema
 EndDateSchema = schemas.DateSchema
-AccountsSchema = schemas.StrSchema
-BrokerageAuthorizationsSchema = schemas.StrSchema
 TypeSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
@@ -56,8 +56,6 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'startDate': typing.Union[StartDateSchema, str, date, ],
         'endDate': typing.Union[EndDateSchema, str, date, ],
-        'accounts': typing.Union[AccountsSchema, str, ],
-        'brokerageAuthorizations': typing.Union[BrokerageAuthorizationsSchema, str, ],
         'type': typing.Union[TypeSchema, str, ],
     },
     total=False
@@ -80,18 +78,6 @@ request_query_end_date = api_client.QueryParameter(
     schema=EndDateSchema,
     explode=True,
 )
-request_query_accounts = api_client.QueryParameter(
-    name="accounts",
-    style=api_client.ParameterStyle.FORM,
-    schema=AccountsSchema,
-    explode=True,
-)
-request_query_brokerage_authorizations = api_client.QueryParameter(
-    name="brokerageAuthorizations",
-    style=api_client.ParameterStyle.FORM,
-    schema=BrokerageAuthorizationsSchema,
-    explode=True,
-)
 request_query_type = api_client.QueryParameter(
     name="type",
     style=api_client.ParameterStyle.FORM,
@@ -112,6 +98,37 @@ request_query_user_secret = api_client.QueryParameter(
     required=True,
     explode=True,
 )
+# Path params
+AccountIdSchema = schemas.UUIDSchema
+RequestRequiredPathParams = typing_extensions.TypedDict(
+    'RequestRequiredPathParams',
+    {
+        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+    }
+)
+RequestOptionalPathParams = typing_extensions.TypedDict(
+    'RequestOptionalPathParams',
+    {
+    },
+    total=False
+)
+
+
+class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
+    pass
+
+
+request_path_account_id = api_client.PathParameter(
+    name="accountId",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=AccountIdSchema,
+    required=True,
+)
+_auth = [
+    'PartnerClientId',
+    'PartnerSignature',
+    'PartnerTimestamp',
+]
 
 
 class SchemaFor200ResponseBodyApplicationJson(
@@ -173,6 +190,10 @@ class ApiResponseForDefaultAsync(api_client.AsyncApiResponse):
 _response_for_default = api_client.OpenApiResponse(
     response_cls=ApiResponseForDefault,
 )
+_status_code_to_response = {
+    '200': _response_for_200,
+    'default': _response_for_default,
+}
 _all_accept_content_types = (
     'application/json',
 )
@@ -180,39 +201,40 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _get_activities_mapped_args(
+    def _get_account_activities_mapped_args(
         self,
+        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
-        accounts: typing.Optional[str] = None,
-        brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _path_params = {}
         if start_date is not None:
             _query_params["startDate"] = start_date
         if end_date is not None:
             _query_params["endDate"] = end_date
-        if accounts is not None:
-            _query_params["accounts"] = accounts
-        if brokerage_authorizations is not None:
-            _query_params["brokerageAuthorizations"] = brokerage_authorizations
         if type is not None:
             _query_params["type"] = type
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
+        if account_id is not None:
+            _path_params["accountId"] = account_id
         args.query = query_params if query_params else _query_params
+        args.path = path_params if path_params else _path_params
         return args
 
-    async def _aget_activities_oapg(
+    async def _aget_account_activities_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -225,20 +247,32 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get transaction history for a user
+        List account activities
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
             request_query_start_date,
             request_query_end_date,
-            request_query_accounts,
-            request_query_brokerage_authorizations,
             request_query_type,
             request_query_user_id,
             request_query_user_secret,
@@ -262,7 +296,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/activities',
+            path_template='/accounts/{accountId}/activities',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -336,9 +370,10 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _get_activities_oapg(
+    def _get_account_activities_oapg(
         self,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -349,20 +384,32 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get transaction history for a user
+        List account activities
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
             request_query_start_date,
             request_query_end_date,
-            request_query_accounts,
-            request_query_brokerage_authorizations,
             request_query_type,
             request_query_user_id,
             request_query_user_secret,
@@ -386,7 +433,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/activities',
+            path_template='/accounts/{accountId}/activities',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -429,19 +476,19 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class GetActivities(BaseApi):
+class GetAccountActivities(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aget_activities(
+    async def aget_account_activities(
         self,
+        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
-        accounts: typing.Optional[str] = None,
-        brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -449,49 +496,51 @@ class GetActivities(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_activities_mapped_args(
+        args = self._get_account_activities_mapped_args(
             query_params=query_params,
+            path_params=path_params,
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
-            accounts=accounts,
-            brokerage_authorizations=brokerage_authorizations,
             type=type,
         )
-        return await self._aget_activities_oapg(
+        return await self._aget_account_activities_oapg(
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
-    def get_activities(
+    def get_account_activities(
         self,
+        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
-        accounts: typing.Optional[str] = None,
-        brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
-        args = self._get_activities_mapped_args(
+        """ Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
+        args = self._get_account_activities_mapped_args(
             query_params=query_params,
+            path_params=path_params,
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
-            accounts=accounts,
-            brokerage_authorizations=brokerage_authorizations,
             type=type,
         )
-        return self._get_activities_oapg(
+        return self._get_account_activities_oapg(
             query_params=args.query,
+            path_params=args.path,
         )
 
 class ApiForget(BaseApi):
@@ -499,14 +548,14 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
+        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
-        accounts: typing.Optional[str] = None,
-        brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
@@ -514,48 +563,50 @@ class ApiForget(BaseApi):
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._get_activities_mapped_args(
+        args = self._get_account_activities_mapped_args(
             query_params=query_params,
+            path_params=path_params,
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
-            accounts=accounts,
-            brokerage_authorizations=brokerage_authorizations,
             type=type,
         )
-        return await self._aget_activities_oapg(
+        return await self._aget_account_activities_oapg(
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
     def get(
         self,
+        account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
-        accounts: typing.Optional[str] = None,
-        brokerage_authorizations: typing.Optional[str] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
-        args = self._get_activities_mapped_args(
+        """ Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
+        args = self._get_account_activities_mapped_args(
             query_params=query_params,
+            path_params=path_params,
+            account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
-            accounts=accounts,
-            brokerage_authorizations=brokerage_authorizations,
             type=type,
         )
-        return self._get_activities_oapg(
+        return self._get_account_activities_oapg(
             query_params=args.query,
+            path_params=args.path,
         )
 

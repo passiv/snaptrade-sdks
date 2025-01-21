@@ -4,6 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
+[**GetAccountActivities**](AccountInformationApi.md#GetAccountActivities) | **Get** /accounts/{accountId}/activities | List account activities
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
@@ -15,6 +16,72 @@ Method | Path | Description
 [**ListUserAccounts**](AccountInformationApi.md#ListUserAccounts) | **Get** /accounts | List accounts
 [**UpdateUserAccount**](AccountInformationApi.md#UpdateUserAccount) | **Put** /accounts/{accountId} | Update details of an investment account
 
+
+
+## GetAccountActivities
+
+List account activities
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+        "time"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetAccountActivities(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    request.StartDate(2013-10-20)
+    request.EndDate(2013-10-20)
+    request.Type(""BUY,SELL,DIVIDEND"")
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountActivities``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetAccountActivities`: []UniversalActivity
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountActivities`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Id`: %v\n", *resp.Id)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Account`: %v\n", *resp.Account)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Price`: %v\n", *resp.Price)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Units`: %v\n", *resp.Units)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Amount`: %v\n", *resp.Amount)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Currency`: %v\n", *resp.Currency)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Type`: %v\n", *resp.Type)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.OptionType`: %v\n", *resp.OptionType)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Description`: %v\n", *resp.Description)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.TradeDate`: %v\n", *resp.TradeDate)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.SettlementDate`: %v\n", *resp.SettlementDate)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Fee`: %v\n", *resp.Fee)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.FxRate`: %v\n", *resp.FxRate)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Institution`: %v\n", *resp.Institution)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.ExternalReferenceId`: %v\n", *resp.ExternalReferenceId)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetAllUserHoldings

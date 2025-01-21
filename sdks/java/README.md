@@ -23,6 +23,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [Others](#others)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
+  * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
@@ -240,6 +241,60 @@ public class Example {
 
 ```
 ## Reference<a id="reference"></a>
+
+
+### `snaptrade.accountInformation.getAccountActivities`<a id="snaptradeaccountinformationgetaccountactivities"></a>
+
+Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+
+There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+
+The data returned here is always cached and refreshed once a day.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+List<UniversalActivity> result = client
+        .accountInformation
+        .getAccountActivities(accountId, userId, userSecret)
+        .startDate(startDate)
+        .endDate(endDate)
+        .type(type)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### startDate: `LocalDate`<a id="startdate-localdate"></a>
+
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
+##### endDate: `LocalDate`<a id="enddate-localdate"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+
+##### type: `String`<a id="type-string"></a>
+
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[UniversalActivity](./src/main/java/com/konfigthis/client/model/UniversalActivity.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/activities` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
 
 
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
@@ -1916,7 +1971,7 @@ Returns all historical transactions for the specified user and filtering criteri
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
