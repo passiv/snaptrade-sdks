@@ -16,7 +16,7 @@ This method is suitable for applications aiming to open external links in a sepa
 
 **Key Considerations**:
 
-- To monitor window messages for successful connections or failures, the connection portal must be opened in a new window using `window.opener`; otherwise, capturing client-side window messages is not feasible. Find guidance on how to monitor window messages [here](#window-messages-to-monitor-on-the-client-side).
+- To monitor window messages for successful connections or failures, the connection portal must be opened in a new window using `window.opener`; otherwise, capturing client-side window messages is not feasible. Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
 - You can provide a custom redirect to navigate the user back to a specific page in your app post-connection.
 - Enable `immediateRedirect` by setting it to `true` within the login link to automatically redirect users back to your application (either to the custom or default redirect page) upon
   successfully connecting or in the case of a connection failure.
@@ -74,7 +74,7 @@ export default MyModal;
 
 **Key Considerations:**
 
-- Find guidance on how to monitor window messages [here](#window-messages-to-monitor-on-the-client-side).
+- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
 - This method may require additional styling and layout considerations to ensure the iframe fits appropriately within your application's design.
 
 ## 4. Implementation in a React Native WebView
@@ -117,7 +117,7 @@ const MyWebView = () => {
 
 **Key Considerations:**
 
-- Find guidance on how to monitor window messages [here](#window-messages-to-monitor-on-the-client-side).
+- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
 
 ## 5. Implementation in an iOS WebView
 
@@ -161,7 +161,7 @@ class MyWebViewController: UIViewController, WKNavigationDelegate {
 
 **Key Considerations:**
 
-- Find guidance on how to monitor window messages [here](#window-messages-to-monitor-on-the-client-side).
+- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
 
 ## 6. Implementation in an Android WebView
 
@@ -201,9 +201,9 @@ public class MyWebViewActivity extends AppCompatActivity {
 
 **Key Considerations:**
 
-- Find guidance on how to monitor window messages [here](#window-messages-to-monitor-on-the-client-side).
+- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
 
-## **Window Messages to Monitor on the client side**:
+## Window Messages to Monitor on the client side:
 
 - `SUCCESS`: Indicates successful institution connection. The message contains the authorization ID.
 
@@ -227,10 +227,10 @@ public class MyWebViewActivity extends AppCompatActivity {
 
 - `CLOSED`: Sent when the user closes the OAuth connection window that opens in a new tab.
 
-  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#3-implementation-via-an-iframe)
+  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#implement-connection-portal-3-implementation-via-an-iframe)
 
 - `CLOSE_MODAL`: Sent when the user opts to exit the connection flow or clicks `Done` after successful connection (if the portal is not already closed when listening for `SUCCESS`).
-  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#3-implementation-via-an-iframe).
+  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#implement-connection-portal-3-implementation-via-an-iframe).
 - `ABANDONED`: Functions the same as `CLOSE_MODAL` but only triggers for non-iframe implementations.
 <aside>
 💡 **Note**: When loading the connection portal in an iframe, your application is responsible for closing the modal and displaying success/error messages post <u>OAuth connections</u>.
