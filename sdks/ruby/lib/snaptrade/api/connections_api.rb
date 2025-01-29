@@ -335,6 +335,7 @@ module SnapTrade
     # Refresh holdings for a connection
     #
     # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+    # This endpoint will also trigger a transaction sync for the past day if one has not yet occured.
     # 
     # *Please contact support for access as this endpoint is not enabled by default.*
     #
@@ -350,6 +351,7 @@ module SnapTrade
     # Refresh holdings for a connection
     #
     # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+    # This endpoint will also trigger a transaction sync for the past day if one has not yet occured.
     # 
     # *Please contact support for access as this endpoint is not enabled by default.*
     #
@@ -362,7 +364,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occured.  *Please contact support for access as this endpoint is not enabled by default.* 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -374,7 +376,7 @@ module SnapTrade
     end
 
     # Refresh holdings for a connection
-    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+    # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occured.  *Please contact support for access as this endpoint is not enabled by default.* 
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
