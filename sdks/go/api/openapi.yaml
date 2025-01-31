@@ -6747,6 +6747,7 @@ components:
               - `bnd` - Bond
               - `cs` - Common Stock
               - `cef` - Closed End Fund
+              - `crypto` - Cryptocurrency
               - `et` - ETF
               - `oef` - Open Ended Fund
               - `ps` - Preferred Stock
