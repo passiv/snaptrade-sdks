@@ -32,6 +32,8 @@ type AccountInformationApiGetAccountActivitiesRequest struct {
 	userSecret string
 	startDate *string
 	endDate *string
+	offset *int32
+	limit *int32
 	type_ *string
 }
 
@@ -47,22 +49,36 @@ func (r *AccountInformationApiGetAccountActivitiesRequest) EndDate(endDate strin
 	return r
 }
 
+// An integer that specifies the starting point of the paginated results. Default is 0.
+func (r *AccountInformationApiGetAccountActivitiesRequest) Offset(offset int32) *AccountInformationApiGetAccountActivitiesRequest {
+	r.offset = &offset
+	return r
+}
+
+// An integer that specifies the maximum number of transactions to return. Default of 1000.
+func (r *AccountInformationApiGetAccountActivitiesRequest) Limit(limit int32) *AccountInformationApiGetAccountActivitiesRequest {
+	r.limit = &limit
+	return r
+}
+
 // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another 
 func (r *AccountInformationApiGetAccountActivitiesRequest) Type_(type_ string) *AccountInformationApiGetAccountActivitiesRequest {
 	r.type_ = &type_
 	return r
 }
 
-func (r AccountInformationApiGetAccountActivitiesRequest) Execute() ([]UniversalActivity, *http.Response, error) {
+func (r AccountInformationApiGetAccountActivitiesRequest) Execute() ([]PaginatedUniversalActivity, *http.Response, error) {
 	return r.ApiService.GetAccountActivitiesExecute(r)
 }
 
 /*
 GetAccountActivities List account activities
 
-Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+Returns all historical transactions for the specified account.
 
-There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+Transaction are returned in reverse chronological order, using the `trade_date` field.
 
 The data returned here is always cached and refreshed once a day.
 
@@ -84,13 +100,13 @@ func (a *AccountInformationApiService) GetAccountActivities(accountId string, us
 }
 
 // Execute executes the request
-//  @return []UniversalActivity
-func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInformationApiGetAccountActivitiesRequest) ([]UniversalActivity, *http.Response, error) {
+//  @return []PaginatedUniversalActivity
+func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInformationApiGetAccountActivitiesRequest) ([]PaginatedUniversalActivity, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []UniversalActivity
+		localVarReturnValue  []PaginatedUniversalActivity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountInformationApiService.GetAccountActivities")
@@ -108,12 +124,24 @@ func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInfo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.offset != nil && *r.offset < 0 {
+		return localVarReturnValue, nil, reportError("offset must be greater than 0")
+	}
+	if r.limit != nil && *r.limit < 1 {
+		return localVarReturnValue, nil, reportError("limit must be greater than 1")
+	}
 
 	if r.startDate != nil {
 		localVarQueryParams.Add("startDate", parameterToString(*r.startDate, ""))
 	}
 	if r.endDate != nil {
 		localVarQueryParams.Add("endDate", parameterToString(*r.endDate, ""))
+	}
+	if r.offset != nil {
+		localVarQueryParams.Add("offset", parameterToString(*r.offset, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
 	}
 	if r.type_ != nil {
 		localVarQueryParams.Add("type", parameterToString(*r.type_, ""))

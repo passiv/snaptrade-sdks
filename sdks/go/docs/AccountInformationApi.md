@@ -49,6 +49,8 @@ func main() {
     )
     request.StartDate(2013-10-20)
     request.EndDate(2013-10-20)
+    request.Offset(56)
+    request.Limit(56)
     request.Type(""BUY,SELL,DIVIDEND"")
     
     resp, httpRes, err := request.Execute()
@@ -57,25 +59,10 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountActivities``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `GetAccountActivities`: []UniversalActivity
+    // response from `GetAccountActivities`: []PaginatedUniversalActivity
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountActivities`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Id`: %v\n", *resp.Id)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Account`: %v\n", *resp.Account)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Price`: %v\n", *resp.Price)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Units`: %v\n", *resp.Units)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Amount`: %v\n", *resp.Amount)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Currency`: %v\n", *resp.Currency)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Type`: %v\n", *resp.Type)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.OptionType`: %v\n", *resp.OptionType)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Description`: %v\n", *resp.Description)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.TradeDate`: %v\n", *resp.TradeDate)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.SettlementDate`: %v\n", *resp.SettlementDate)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Fee`: %v\n", *resp.Fee)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.FxRate`: %v\n", *resp.FxRate)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.Institution`: %v\n", *resp.Institution)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalActivity.GetAccountActivities.ExternalReferenceId`: %v\n", *resp.ExternalReferenceId)
+    fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Data`: %v\n", *resp.Data)
+    fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Pagination`: %v\n", *resp.Pagination)
 }
 ```
 

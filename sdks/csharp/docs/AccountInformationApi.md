@@ -21,7 +21,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 
 
-Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
 
 ### Example
 ```csharp
@@ -48,12 +48,14 @@ namespace Example
             var userSecret = "userSecret_example";
             var startDate = DateTime.Parse("2013-10-20"); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`. (optional) 
             var endDate = DateTime.Parse("2013-10-20"); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`. (optional) 
+            var offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0. (optional) 
+            var limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000. (optional) 
             var type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another  (optional) 
             
             try
             {
                 // List account activities
-                List<UniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, type);
+                List<PaginatedUniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -80,7 +82,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List account activities
-    ApiResponse<List<UniversalActivity>> response = apiInstance.GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type);
+    ApiResponse<List<PaginatedUniversalActivity>> response = apiInstance.GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -102,11 +104,13 @@ catch (ApiException e)
 | **userSecret** | **string** |  |  |
 | **startDate** | **DateTime?** | The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional]  |
 | **endDate** | **DateTime?** | The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional]  |
+| **offset** | **int?** | An integer that specifies the starting point of the paginated results. Default is 0. | [optional]  |
+| **limit** | **int?** | An integer that specifies the maximum number of transactions to return. Default of 1000. | [optional]  |
 | **type** | **string** | Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  | [optional]  |
 
 ### Return type
 
-[**List&lt;UniversalActivity&gt;**](UniversalActivity.md)
+[**List&lt;PaginatedUniversalActivity&gt;**](PaginatedUniversalActivity.md)
 
 
 ### HTTP response details

@@ -1238,9 +1238,11 @@ paths:
   /accounts/{accountId}/activities:
     get:
       description: |
-        Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+        Returns all historical transactions for the specified account.
 
-        There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+        This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+        Transaction are returned in reverse chronological order, using the `trade_date` field.
 
         The data returned here is always cached and refreshed once a day.
       operationId: AccountInformation_getAccountActivities
@@ -1272,6 +1274,28 @@ paths:
         schema:
           $ref: '#/components/schemas/ReportingDate'
         style: form
+      - description: An integer that specifies the starting point of the paginated
+          results. Default is 0.
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+        style: form
+      - description: An integer that specifies the maximum number of transactions
+          to return. Default of 1000.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          minimum: 1
+          type: integer
+        style: form
       - description: |
           Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
             - `BUY` - Asset bought.
@@ -1294,7 +1318,7 @@ paths:
           example: "BUY,SELL,DIVIDEND"
           type: string
           x-konfig-original-example: "BUY,SELL,DIVIDEND"
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-5-schema
         style: form
       - explode: true
         in: query
@@ -1316,7 +1340,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/UniversalActivity'
+                  $ref: '#/components/schemas/PaginatedUniversalActivity'
                 type: array
                 x-konfig-is-used-in-successful-response: true
           description: OK
@@ -6489,6 +6513,364 @@ components:
           x-konfig-original-example: "49.95"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price
       type: object
+    PaginationDetails:
+      additionalProperties: true
+      description: Details about the pagination of the results.
+      example:
+        offset: 0
+        limit: 100
+      properties:
+        offset:
+          description: The starting point of the paginated results.
+          example: 0
+          type: integer
+          x-konfig-original-example: 0
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PaginationDetails-properties-offset
+        limit:
+          description: The maximum number of items to return in the response.
+          example: 100
+          type: integer
+          x-konfig-original-example: 100
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PaginationDetails-properties-limit
+      type: object
+    PaginatedUniversalActivity:
+      additionalProperties: true
+      description: A paginated list of UniversalActivity objects.
+      example:
+        pagination:
+          offset: 0
+          limit: 100
+        data:
+        - symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          amount: 263.82
+          settlement_date: 2024-03-26T00:00:00Z
+          option_type: BUY_TO_OPEN
+          fee: 0
+          description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+          external_reference_id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          units: 5.2
+          type: BUY
+          trade_date: 2024-03-22T16:27:55Z
+          institution: Robinhood
+          price: 0.4
+          currency: null
+          id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          fx_rate: 1.032
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
+        - symbol:
+            figi_code: BBG000B9XRY4
+            symbol: VAB.TO
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type:
+              is_supported: true
+              code: cs
+              description: Common Stock
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          amount: 263.82
+          settlement_date: 2024-03-26T00:00:00Z
+          option_type: BUY_TO_OPEN
+          fee: 0
+          description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+          external_reference_id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          units: 5.2
+          type: BUY
+          trade_date: 2024-03-22T16:27:55Z
+          institution: Robinhood
+          price: 0.4
+          currency: null
+          id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          fx_rate: 1.032
+          option_symbol:
+            ticker: AAPL  261218C00240000
+            is_mini_option: false
+            option_type: CALL
+            underlying_symbol:
+              figi_code: BBG000B9XRY4
+              symbol: SPY
+              figi_instrument:
+                figi_code: BBG000B9Y5X2
+                figi_share_class: BBG001S5N8V8
+              raw_symbol: VAB
+              description: SPDR S&P 500 ETF Trust
+              currency: null
+              exchange: null
+              id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+              type: null
+              currencies:
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+              - code: USD
+                name: US Dollar
+                id: 87b24961-b51e-4db8-9226-f198f6518a89
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            expiration_date: 2026-12-18T00:00:00.000+00:00
+            strike_price: 240
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AccountUniversalActivity'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/PaginationDetails'
+      type: object
+    AccountUniversalActivity:
+      additionalProperties: true
+      description: A transaction or activity from an institution
+      example:
+        symbol:
+          figi_code: BBG000B9XRY4
+          symbol: VAB.TO
+          figi_instrument:
+            figi_code: BBG000B9Y5X2
+            figi_share_class: BBG001S5N8V8
+          raw_symbol: VAB
+          description: VANGUARD CDN AGGREGATE BOND INDEX ETF
+          currency: null
+          exchange: null
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          type:
+            is_supported: true
+            code: cs
+            description: Common Stock
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        amount: 263.82
+        settlement_date: 2024-03-26T00:00:00Z
+        option_type: BUY_TO_OPEN
+        fee: 0
+        description: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+        external_reference_id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+        units: 5.2
+        type: BUY
+        trade_date: 2024-03-22T16:27:55Z
+        institution: Robinhood
+        price: 0.4
+        currency: null
+        id: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+        fx_rate: 1.032
+        option_symbol:
+          ticker: AAPL  261218C00240000
+          is_mini_option: false
+          option_type: CALL
+          underlying_symbol:
+            figi_code: BBG000B9XRY4
+            symbol: SPY
+            figi_instrument:
+              figi_code: BBG000B9Y5X2
+              figi_share_class: BBG001S5N8V8
+            raw_symbol: VAB
+            description: SPDR S&P 500 ETF Trust
+            currency: null
+            exchange: null
+            id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+            type: null
+            currencies:
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+            - code: USD
+              name: US Dollar
+              id: 87b24961-b51e-4db8-9226-f198f6518a89
+          id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          expiration_date: 2026-12-18T00:00:00.000+00:00
+          strike_price: 240
+      properties:
+        id:
+          description: |
+            Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.
+
+            Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          type: string
+          x-konfig-original-example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id
+        symbol:
+          $ref: '#/components/schemas/SymbolNullable'
+        option_symbol:
+          $ref: '#/components/schemas/OptionsSymbolNullable'
+        price:
+          description: "The price of the security for the transaction. This is mostly\
+            \ applicable to `BUY`, `SELL`, and `DIVIDEND` transactions."
+          example: 0.4
+          type: number
+          x-konfig-original-example: 0.4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-price
+        units:
+          description: "The number of units of the security for the transaction. This\
+            \ is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions."
+          example: 5.2
+          type: number
+          x-konfig-original-example: 5.2
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-units
+        amount:
+          description: "The amount of the transaction denominated in `currency`. This\
+            \ can be positive or negative. In general, transactions that positively\
+            \ affect the account balance (like sell, deposits, dividends, etc) will\
+            \ have a positive amount, while transactions that negatively affect the\
+            \ account balance (like buy, withdrawals, fees, etc) will have a negative\
+            \ amount."
+          example: 263.82
+          nullable: true
+          type: number
+          x-konfig-original-example: 263.82
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-amount
+        currency:
+          $ref: '#/components/schemas/AccountUniversalActivity_currency'
+        type:
+          description: |
+            A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
+              - `BUY` - Asset bought.
+              - `SELL` - Asset sold.
+              - `DIVIDEND` - Dividend payout.
+              - `CONTRIBUTION` - Cash contribution.
+              - `WITHDRAWAL` - Cash withdrawal.
+              - `REI` - Dividend reinvestment.
+              - `INTEREST` - Interest deposited into the account.
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
+          type: string
+          x-konfig-original-example: BUY
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-type
+        option_type:
+          description: |
+            If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are:
+            - BUY_TO_OPEN
+            - BUY_TO_CLOSE
+            - SELL_TO_OPEN
+            - SELL_TO_CLOSE
+          example: BUY_TO_OPEN
+          type: string
+          x-konfig-original-example: BUY_TO_OPEN
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-option_type
+        description:
+          description: A human-readable description of the transaction. This is usually
+            the brokerage's description of the transaction.
+          example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+          type: string
+          x-konfig-original-example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21
+            PAY 01/06/22
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-description
+        trade_date:
+          description: "The recorded time for the transaction. The granularity of\
+            \ this timestamp depends on the brokerage. Some brokerages provide the\
+            \ exact time of the transaction, while others provide only the date. Please\
+            \ check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a)\
+            \ for the specific brokerage to see the granularity of the timestamps.\
+            \ Note that even though the field is named `trade_date`, it can represent\
+            \ any type of transaction, not just trades."
+          example: 2024-03-22T16:27:55Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-03-22T16:27:55.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-trade_date
+        settlement_date:
+          description: The date on which the transaction is settled.
+          example: 2024-03-26T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-03-26T00:00:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-settlement_date
+        fee:
+          description: Any fee associated with the transaction if provided by the
+            brokerage.
+          example: 0
+          type: number
+          x-konfig-original-example: 0
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-fee
+        fx_rate:
+          description: "The forex conversion rate involved in the transaction if provided\
+            \ by the brokerage. Used in cases where securities of one currency are\
+            \ purchased in a different currency, and the forex conversion is automatic.\
+            \ In those cases, price, amount and fee will be in the top level currency\
+            \ (activity -> currency)"
+          example: 1.032
+          nullable: true
+          type: number
+          x-konfig-original-example: 1.032
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-fx_rate
+        institution:
+          description: The institution that the transaction is associated with. This
+            is usually the brokerage name.
+          example: Robinhood
+          type: string
+          x-konfig-original-example: Robinhood
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-institution
+        external_reference_id:
+          description: "Reference ID from brokerage used to identify related transactions.\
+            \ For example if an order comprises of several transactions (buy, fee,\
+            \ fx), they can be grouped if they share the same `external_reference_id`"
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          nullable: true
+          type: string
+          x-konfig-original-example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-external_reference_id
+      type: object
+      x-konfig-properties:
+        symbol:
+          description: "The security for the transaction. The field is `null` if the\
+            \ transaction is not related to a security (like a deposit, withdrawal,\
+            \ fee, etc). SnapTrade does a best effort to map the brokerage's symbol.\
+            \ In cases where the brokerage symbol is not recognized, the field will\
+            \ be set to `null`."
+          nullable: true
+        option_symbol:
+          description: "The option security for the transaction. The field is `null`\
+            \ if the transaction is not related to an option security (like a deposit,\
+            \ withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's\
+            \ option symbol. In cases where the brokerage option symbol is not recognized,\
+            \ the field will be set to `null`."
+          nullable: true
     UniversalActivity:
       additionalProperties: true
       description: A transaction or activity from an institution
@@ -6604,7 +6986,7 @@ components:
           x-konfig-original-example: 263.82
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-amount
         currency:
-          $ref: '#/components/schemas/UniversalActivity_currency'
+          $ref: '#/components/schemas/AccountUniversalActivity_currency'
         type:
           description: |
             A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
@@ -6698,21 +7080,6 @@ components:
           x-konfig-original-example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalActivity-properties-external_reference_id
       type: object
-      x-konfig-properties:
-        symbol:
-          description: "The security for the transaction. The field is `null` if the\
-            \ transaction is not related to a security (like a deposit, withdrawal,\
-            \ fee, etc). SnapTrade does a best effort to map the brokerage's symbol.\
-            \ In cases where the brokerage symbol is not recognized, the field will\
-            \ be set to `null`."
-          nullable: true
-        option_symbol:
-          description: "The option security for the transaction. The field is `null`\
-            \ if the transaction is not related to an option security (like a deposit,\
-            \ withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's\
-            \ option symbol. In cases where the brokerage option symbol is not recognized,\
-            \ the field will be set to `null`."
-          nullable: true
     FigiInstrument:
       additionalProperties: true
       description: "Financial Instrument Global Identifier (FIGI) information for\
@@ -7173,7 +7540,7 @@ components:
       example: 30
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema:
+    konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-5-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
       x-do-not-generate: true
@@ -8092,6 +8459,66 @@ components:
       example: "49.95"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PaginationDetails-properties-offset:
+      example: 0
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PaginationDetails-properties-limit:
+      example: 100
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id:
+      example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-price:
+      example: 0.4
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-units:
+      example: 5.2
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-amount:
+      example: 263.82
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-type:
+      example: BUY
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-option_type:
+      example: BUY_TO_OPEN
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-description:
+      example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-trade_date:
+      example: 2024-03-22T16:27:55.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-settlement_date:
+      example: 2024-03-26T00:00:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-fee:
+      example: 0
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-fx_rate:
+      example: 1.032
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-institution:
+      example: Robinhood
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-external_reference_id:
+      example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-UniversalActivity-properties-id:
       example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
       type: string
@@ -8724,11 +9151,19 @@ components:
           $ref: '#/components/schemas/ReportingDate'
         endDate:
           $ref: '#/components/schemas/ReportingDate'
+        offset:
+          format: int32
+          minimum: 0
+          type: integer
+        limit:
+          format: int32
+          minimum: 1
+          type: integer
         type:
           example: "BUY,SELL,DIVIDEND"
           type: string
           x-konfig-original-example: "BUY,SELL,DIVIDEND"
-          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-3-schema
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-activities-get-parameters-5-schema
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
@@ -8743,6 +9178,8 @@ components:
       - accountId
       - startDate
       - endDate
+      - offset
+      - limit
       - type
       - userId
       - userSecret
@@ -10104,7 +10541,7 @@ components:
           type: number
           x-konfig-original-example: 344
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
-    UniversalActivity_currency:
+    AccountUniversalActivity_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
       description: The currency in which the transaction `price` and `amount` is denominated.

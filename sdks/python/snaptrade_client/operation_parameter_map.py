@@ -17,6 +17,12 @@ operation_parameter_map = {
                 'name': 'endDate'
             },
             {
+                'name': 'offset'
+            },
+            {
+                'name': 'limit'
+            },
+            {
                 'name': 'type'
             },
         ]

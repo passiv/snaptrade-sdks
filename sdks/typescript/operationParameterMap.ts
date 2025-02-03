@@ -23,6 +23,12 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'endDate'
             },
             {
+                name: 'offset'
+            },
+            {
+                name: 'limit'
+            },
+            {
                 name: 'type'
             },
         ]

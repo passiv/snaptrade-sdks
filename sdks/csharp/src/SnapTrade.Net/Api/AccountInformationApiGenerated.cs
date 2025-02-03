@@ -31,7 +31,7 @@ namespace SnapTrade.Net.Api
         /// List account activities
         /// </summary>
         /// <remarks>
-        /// Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -39,16 +39,18 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;UniversalActivity&gt;</returns>
-        List<UniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0);
+        /// <returns>List&lt;PaginatedUniversalActivity&gt;</returns>
+        List<PaginatedUniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
 
         /// <summary>
         /// List account activities
         /// </summary>
         /// <remarks>
-        /// Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -56,10 +58,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        ApiResponse<List<UniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0);
+        /// <returns>ApiResponse of List&lt;PaginatedUniversalActivity&gt;</returns>
+        ApiResponse<List<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
         /// <summary>
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
@@ -349,7 +353,7 @@ namespace SnapTrade.Net.Api
         /// List account activities
         /// </summary>
         /// <remarks>
-        /// Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -357,17 +361,19 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        System.Threading.Tasks.Task<List<UniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of List&lt;PaginatedUniversalActivity&gt;</returns>
+        System.Threading.Tasks.Task<List<PaginatedUniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account activities
         /// </summary>
         /// <remarks>
-        /// Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -375,11 +381,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<UniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (List&lt;PaginatedUniversalActivity&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<PaginatedUniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
@@ -797,7 +805,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account activities Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// List account activities Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -805,17 +813,19 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;UniversalActivity&gt;</returns>
-        public List<UniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0)
+        /// <returns>List&lt;PaginatedUniversalActivity&gt;</returns>
+        public List<PaginatedUniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, type);
+            SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> localVarResponse = GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List account activities Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// List account activities Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -823,10 +833,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;UniversalActivity&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0)
+        /// <returns>ApiResponse of List&lt;PaginatedUniversalActivity&gt;</returns>
+        public SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
@@ -877,6 +889,14 @@ namespace SnapTrade.Net.Api
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "offset", offset, "int32"));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "limit", limit, "int32"));
+            }
             if (type != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
@@ -904,7 +924,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<UniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<List<PaginatedUniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetAccountActivities", localVarResponse);
@@ -918,7 +938,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account activities Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// List account activities Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -926,18 +946,20 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;UniversalActivity&gt;</returns>
-        public async System.Threading.Tasks.Task<List<UniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of List&lt;PaginatedUniversalActivity&gt;</returns>
+        public async System.Threading.Tasks.Task<List<PaginatedUniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>> localVarResponse = await GetAccountActivitiesWithHttpInfoAsync(accountId, userId, userSecret, startDate, endDate, type, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> localVarResponse = await GetAccountActivitiesWithHttpInfoAsync(accountId, userId, userSecret, startDate, endDate, offset, limit, type, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// List account activities Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+        /// List account activities Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
@@ -945,11 +967,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userSecret"></param>
         /// <param name="startDate">The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
         /// <param name="endDate">The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. (optional)</param>
+        /// <param name="offset">An integer that specifies the starting point of the paginated results. Default is 0. (optional)</param>
+        /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;UniversalActivity&gt;)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<UniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (List&lt;PaginatedUniversalActivity&gt;)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
@@ -1001,6 +1025,14 @@ namespace SnapTrade.Net.Api
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "endDate", endDate, "date"));
             }
+            if (offset != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "offset", offset, "int32"));
+            }
+            if (limit != null)
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "limit", limit, "int32"));
+            }
             if (type != null)
             {
                 localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "type", type, ""));
@@ -1028,7 +1060,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<UniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<List<PaginatedUniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

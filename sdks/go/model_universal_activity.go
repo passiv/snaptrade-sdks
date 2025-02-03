@@ -21,15 +21,15 @@ type UniversalActivity struct {
 	// Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one. 
 	Id *string `json:"id,omitempty"`
 	Account *AccountSimple `json:"account,omitempty"`
-	Symbol NullableUniversalActivitySymbol `json:"symbol,omitempty"`
-	OptionSymbol NullableUniversalActivityOptionSymbol `json:"option_symbol,omitempty"`
+	Symbol NullableAccountUniversalActivitySymbol `json:"symbol,omitempty"`
+	OptionSymbol NullableAccountUniversalActivityOptionSymbol `json:"option_symbol,omitempty"`
 	// The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
 	Price *float32 `json:"price,omitempty"`
 	// The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
 	Units *float32 `json:"units,omitempty"`
 	// The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
 	Amount NullableFloat32 `json:"amount,omitempty"`
-	Currency *UniversalActivityCurrency `json:"currency,omitempty"`
+	Currency *AccountUniversalActivityCurrency `json:"currency,omitempty"`
 	// A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.   - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.   - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info. 
 	Type *string `json:"type,omitempty"`
 	// If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE 
@@ -135,9 +135,9 @@ func (o *UniversalActivity) SetAccount(v AccountSimple) {
 }
 
 // GetSymbol returns the Symbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UniversalActivity) GetSymbol() UniversalActivitySymbol {
+func (o *UniversalActivity) GetSymbol() AccountUniversalActivitySymbol {
 	if o == nil || isNil(o.Symbol.Get()) {
-		var ret UniversalActivitySymbol
+		var ret AccountUniversalActivitySymbol
 		return ret
 	}
 	return *o.Symbol.Get()
@@ -146,7 +146,7 @@ func (o *UniversalActivity) GetSymbol() UniversalActivitySymbol {
 // GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UniversalActivity) GetSymbolOk() (*UniversalActivitySymbol, bool) {
+func (o *UniversalActivity) GetSymbolOk() (*AccountUniversalActivitySymbol, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -162,8 +162,8 @@ func (o *UniversalActivity) HasSymbol() bool {
 	return false
 }
 
-// SetSymbol gets a reference to the given NullableUniversalActivitySymbol and assigns it to the Symbol field.
-func (o *UniversalActivity) SetSymbol(v UniversalActivitySymbol) {
+// SetSymbol gets a reference to the given NullableAccountUniversalActivitySymbol and assigns it to the Symbol field.
+func (o *UniversalActivity) SetSymbol(v AccountUniversalActivitySymbol) {
 	o.Symbol.Set(&v)
 }
 // SetSymbolNil sets the value for Symbol to be an explicit nil
@@ -177,9 +177,9 @@ func (o *UniversalActivity) UnsetSymbol() {
 }
 
 // GetOptionSymbol returns the OptionSymbol field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UniversalActivity) GetOptionSymbol() UniversalActivityOptionSymbol {
+func (o *UniversalActivity) GetOptionSymbol() AccountUniversalActivityOptionSymbol {
 	if o == nil || isNil(o.OptionSymbol.Get()) {
-		var ret UniversalActivityOptionSymbol
+		var ret AccountUniversalActivityOptionSymbol
 		return ret
 	}
 	return *o.OptionSymbol.Get()
@@ -188,7 +188,7 @@ func (o *UniversalActivity) GetOptionSymbol() UniversalActivityOptionSymbol {
 // GetOptionSymbolOk returns a tuple with the OptionSymbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UniversalActivity) GetOptionSymbolOk() (*UniversalActivityOptionSymbol, bool) {
+func (o *UniversalActivity) GetOptionSymbolOk() (*AccountUniversalActivityOptionSymbol, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -204,8 +204,8 @@ func (o *UniversalActivity) HasOptionSymbol() bool {
 	return false
 }
 
-// SetOptionSymbol gets a reference to the given NullableUniversalActivityOptionSymbol and assigns it to the OptionSymbol field.
-func (o *UniversalActivity) SetOptionSymbol(v UniversalActivityOptionSymbol) {
+// SetOptionSymbol gets a reference to the given NullableAccountUniversalActivityOptionSymbol and assigns it to the OptionSymbol field.
+func (o *UniversalActivity) SetOptionSymbol(v AccountUniversalActivityOptionSymbol) {
 	o.OptionSymbol.Set(&v)
 }
 // SetOptionSymbolNil sets the value for OptionSymbol to be an explicit nil
@@ -325,9 +325,9 @@ func (o *UniversalActivity) UnsetAmount() {
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *UniversalActivity) GetCurrency() UniversalActivityCurrency {
+func (o *UniversalActivity) GetCurrency() AccountUniversalActivityCurrency {
 	if o == nil || isNil(o.Currency) {
-		var ret UniversalActivityCurrency
+		var ret AccountUniversalActivityCurrency
 		return ret
 	}
 	return *o.Currency
@@ -335,7 +335,7 @@ func (o *UniversalActivity) GetCurrency() UniversalActivityCurrency {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UniversalActivity) GetCurrencyOk() (*UniversalActivityCurrency, bool) {
+func (o *UniversalActivity) GetCurrencyOk() (*AccountUniversalActivityCurrency, bool) {
 	if o == nil || isNil(o.Currency) {
     return nil, false
 	}
@@ -351,8 +351,8 @@ func (o *UniversalActivity) HasCurrency() bool {
 	return false
 }
 
-// SetCurrency gets a reference to the given UniversalActivityCurrency and assigns it to the Currency field.
-func (o *UniversalActivity) SetCurrency(v UniversalActivityCurrency) {
+// SetCurrency gets a reference to the given AccountUniversalActivityCurrency and assigns it to the Currency field.
+func (o *UniversalActivity) SetCurrency(v AccountUniversalActivityCurrency) {
 	o.Currency = &v
 }
 

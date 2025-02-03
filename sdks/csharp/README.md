@@ -65,12 +65,14 @@ namespace Example
             var userSecret = "userSecret_example";
             var startDate = DateTime.Parse("2013-10-20"); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`. (optional) 
             var endDate = DateTime.Parse("2013-10-20"); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`. (optional) 
+            var offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0. (optional) 
+            var limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000. (optional) 
             var type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another  (optional) 
             
             try
             {
                 // List account activities
-                List<UniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, type);
+                List<PaginatedUniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -158,6 +160,8 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecordUniversalSymbol](docs/AccountOrderRecordUniversalSymbol.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
+ - [AccountUniversalActivity](docs/AccountUniversalActivity.md)
+ - [AccountUniversalActivityCurrency](docs/AccountUniversalActivityCurrency.md)
  - [ActionStrict](docs/ActionStrict.md)
  - [ActionStrictWithOptions](docs/ActionStrictWithOptions.md)
  - [AuthenticationLoginSnapTradeUser200Response](docs/AuthenticationLoginSnapTradeUser200Response.md)
@@ -217,6 +221,8 @@ Class | Method | HTTP request | Description
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OptionsSymbolNullable](docs/OptionsSymbolNullable.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
+ - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
+ - [PaginationDetails](docs/PaginationDetails.md)
  - [PartnerData](docs/PartnerData.md)
  - [PastValue](docs/PastValue.md)
  - [PerformanceCustom](docs/PerformanceCustom.md)
@@ -254,7 +260,6 @@ Class | Method | HTTP request | Description
  - [UnderlyingSymbolExchange](docs/UnderlyingSymbolExchange.md)
  - [UnderlyingSymbolType](docs/UnderlyingSymbolType.md)
  - [UniversalActivity](docs/UniversalActivity.md)
- - [UniversalActivityCurrency](docs/UniversalActivityCurrency.md)
  - [UniversalSymbol](docs/UniversalSymbol.md)
  - [UserIDandSecret](docs/UserIDandSecret.md)
  - [ValidatedTradeBody](docs/ValidatedTradeBody.md)

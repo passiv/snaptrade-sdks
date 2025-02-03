@@ -20,9 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountSimple;
+import com.konfigthis.client.model.AccountUniversalActivityCurrency;
 import com.konfigthis.client.model.OptionsSymbolNullable;
 import com.konfigthis.client.model.SymbolNullable;
-import com.konfigthis.client.model.UniversalActivityCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -86,7 +86,7 @@ public class UniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private UniversalActivityCurrency currency;
+  private AccountUniversalActivityCurrency currency;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -357,7 +357,7 @@ public class UniversalActivity {
   }
 
 
-  public UniversalActivity currency(UniversalActivityCurrency currency) {
+  public UniversalActivity currency(AccountUniversalActivityCurrency currency) {
     
     
     
@@ -373,12 +373,12 @@ public class UniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public UniversalActivityCurrency getCurrency() {
+  public AccountUniversalActivityCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(UniversalActivityCurrency currency) {
+  public void setCurrency(AccountUniversalActivityCurrency currency) {
     
     
     
@@ -850,7 +850,7 @@ public class UniversalActivity {
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        UniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        AccountUniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

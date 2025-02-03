@@ -22,11 +22,11 @@ import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import java.time.LocalDate;
+import com.konfigthis.client.model.PaginatedUniversalActivity;
 import com.konfigthis.client.model.Position;
 import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
-import com.konfigthis.client.model.UniversalActivity;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
@@ -54,7 +54,7 @@ public class AccountInformationApiTest {
     /**
      * List account activities
      *
-     * Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -65,10 +65,14 @@ public class AccountInformationApiTest {
         String userSecret = null;
         LocalDate startDate = null;
         LocalDate endDate = null;
+        Integer offset = null;
+        Integer limit = null;
         String type = null;
-        List<UniversalActivity> response = api.getAccountActivities(accountId, userId, userSecret)
+        List<PaginatedUniversalActivity> response = api.getAccountActivities(accountId, userId, userSecret)
                 .startDate(startDate)
                 .endDate(endDate)
+                .offset(offset)
+                .limit(limit)
                 .type(type)
                 .execute();
         // TODO: test validations

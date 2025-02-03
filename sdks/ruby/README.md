@@ -92,6 +92,8 @@ result = snaptrade.account_information.get_account_activities(
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   start_date: "2022-01-24",
   end_date: "2022-01-24",
+  offset: 0,
+  limit: 1,
   type: "BUY,SELL,DIVIDEND",
 )
 p result
@@ -108,9 +110,11 @@ result = snaptrade.account_information.get_account_activities_with_http_info(
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   start_date: "2022-01-24",
   end_date: "2022-01-24",
+  offset: 0,
+  limit: 1,
   type: "BUY,SELL,DIVIDEND",
 )
-p result[0] # [Array<UniversalActivity>] Deserialized data
+p result[0] # [Array<PaginatedUniversalActivity>] Deserialized data
 p.result[1] # [Integer] HTTP status code
 p.result[2] # [Hash] HTTP headers
 p.result[3] # [Faraday::Response] Raw HTTP response
@@ -121,9 +125,11 @@ p.result[3] # [Faraday::Response] Raw HTTP response
 
 ### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
 
-Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+Returns all historical transactions for the specified account.
 
-There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+Transaction are returned in reverse chronological order, using the `trade_date` field.
 
 The data returned here is always cached and refreshed once a day.
 
@@ -137,6 +143,8 @@ result = snaptrade.account_information.get_account_activities(
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   start_date: "2022-01-24",
   end_date: "2022-01-24",
+  offset: 0,
+  limit: 1,
   type: "BUY,SELL,DIVIDEND",
 )
 p result
@@ -157,6 +165,14 @@ The end date (inclusive) of the transaction history to retrieve. If not
 provided, the default is the last transaction known to SnapTrade based on
 `trade_date`.
 
+##### offset: `Integer`<a id="offset-integer"></a>
+An integer that specifies the starting point of the paginated results. Default
+is 0.
+
+##### limit: `Integer`<a id="limit-integer"></a>
+An integer that specifies the maximum number of transactions to return. Default
+of 1000.
+
 ##### type: `String`<a id="type-string"></a>
 Optional comma separated list of transaction types to filter by. SnapTrade does
 a best effort to categorize brokerage transaction types into a common set of
@@ -170,7 +186,7 @@ exercise event. - `TRANSFER` - Transfer of assets from one account to another
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalActivity](./lib/snaptrade/models/universal_activity.rb)
+[PaginatedUniversalActivity](./lib/snaptrade/models/paginated_universal_activity.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
