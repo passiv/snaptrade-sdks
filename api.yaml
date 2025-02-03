@@ -740,9 +740,11 @@ paths:
       summary: List account activities
       operationId: AccountInformation_getAccountActivities
       description: |
-        Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
+        Returns all historical transactions for the specified account.
 
-        There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
+        This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+        Transaction are returned in reverse chronological order, using the `trade_date` field.
 
         The data returned here is always cached and refreshed once a day.
       parameters:
@@ -763,6 +765,22 @@ paths:
           description: The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
           schema:
             $ref: "#/components/schemas/ReportingDate"
+        - in: query
+          required: false
+          name: offset
+          description: An integer that specifies the starting point of the paginated results. Default is 0.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          required: false
+          name: limit
+          description: An integer that specifies the maximum number of transactions to return. Default of 1000.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
         - in: query
           required: false
           name: type
@@ -801,7 +819,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/UniversalActivity"
+                  $ref: "#/components/schemas/PaginatedUniversalActivity"
         default:
           description: Unexpected error
   /authorizations/{authorizationId}/returnRates:
@@ -4024,6 +4042,124 @@ components:
         limit_price:
           type: string
           example: "49.95"
+    PaginationDetails:
+      description: Details about the pagination of the results.
+      type: object
+      properties:
+        offset:
+          type: integer
+          example: 0
+          description: The starting point of the paginated results.
+        limit:
+          type: integer
+          example: 100
+          description: The maximum number of items to return in the response.
+    PaginatedUniversalActivity:
+      description: A paginated list of UniversalActivity objects.
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountUniversalActivity"
+        pagination:
+          $ref: "#/components/schemas/PaginationDetails"
+    AccountUniversalActivity:
+      description: A transaction or activity from an institution
+      type: object
+      properties:
+        id:
+          description: |
+            Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.
+
+            Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.
+          type: string
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+        symbol:
+          description: The security for the transaction. The field is `null` if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's symbol. In cases where the brokerage symbol is not recognized, the field will be set to `null`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
+        option_symbol:
+          description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/OptionsSymbol"
+        price:
+          description: The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+          type: number
+          example: 0.4
+        units:
+          description: The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+          type: number
+          example: 5.2
+        amount:
+          description: The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
+          type: number
+          example: 263.82
+          nullable: true
+        currency:
+          description: The currency in which the transaction `price` and `amount` is denominated.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
+        type:
+          type: string
+          description: |
+            A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
+              - `BUY` - Asset bought.
+              - `SELL` - Asset sold.
+              - `DIVIDEND` - Dividend payout.
+              - `CONTRIBUTION` - Cash contribution.
+              - `WITHDRAWAL` - Cash withdrawal.
+              - `REI` - Dividend reinvestment.
+              - `INTEREST` - Interest deposited into the account.
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
+        option_type:
+          type: string
+          example: BUY_TO_OPEN
+          description: |
+            If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are:
+            - BUY_TO_OPEN
+            - BUY_TO_CLOSE
+            - SELL_TO_OPEN
+            - SELL_TO_CLOSE
+        description:
+          description: A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
+          type: string
+          example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+        trade_date:
+          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+          type: string
+          format: date-time
+          example: 2024-03-22T16:27:55Z
+          nullable: true
+        settlement_date:
+          description: The date on which the transaction is settled.
+          type: string
+          format: date-time
+          example: 2024-03-26T00:00:00Z
+        fee:
+          description: Any fee associated with the transaction if provided by the brokerage.
+          type: number
+          example: 0
+        fx_rate:
+          type: number
+          example: 1.032
+          nullable: true
+          description: The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
+        institution:
+          description: The institution that the transaction is associated with. This is usually the brokerage name.
+          type: string
+          example: Robinhood
+        external_reference_id:
+          type: string
+          nullable: true
+          description: Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
     UniversalActivity:
       description: A transaction or activity from an institution
       type: object
