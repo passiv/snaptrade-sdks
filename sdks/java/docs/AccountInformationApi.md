@@ -19,11 +19,11 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getAccountActivities"></a>
 # **getAccountActivities**
-> List&lt;UniversalActivity&gt; getAccountActivities(accountId, userId, userSecret).startDate(startDate).endDate(endDate).type(type).execute();
+> List&lt;PaginatedUniversalActivity&gt; getAccountActivities(accountId, userId, userSecret).startDate(startDate).endDate(endDate).offset(offset).limit(limit).type(type).execute();
 
 List account activities
 
-Returns all historical transactions for the specified account. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
+Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
 
 ### Example
 ```java
@@ -52,13 +52,17 @@ public class Example {
     String userSecret = "userSecret_example";
     LocalDate startDate = LocalDate.now(); // The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
     LocalDate endDate = LocalDate.now(); // The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+    Integer offset = 56; // An integer that specifies the starting point of the paginated results. Default is 0.
+    Integer limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000.
     String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
     try {
-      List<UniversalActivity> result = client
+      List<PaginatedUniversalActivity> result = client
               .accountInformation
               .getAccountActivities(accountId, userId, userSecret)
               .startDate(startDate)
               .endDate(endDate)
+              .offset(offset)
+              .limit(limit)
               .type(type)
               .execute();
       System.out.println(result);
@@ -72,11 +76,13 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<UniversalActivity>> response = client
+      ApiResponse<List<PaginatedUniversalActivity>> response = client
               .accountInformation
               .getAccountActivities(accountId, userId, userSecret)
               .startDate(startDate)
               .endDate(endDate)
+              .offset(offset)
+              .limit(limit)
               .type(type)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
@@ -105,11 +111,13 @@ public class Example {
 | **userSecret** | **String**|  | |
 | **startDate** | **LocalDate**| The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional] |
 | **endDate** | **LocalDate**| The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on &#x60;trade_date&#x60;. | [optional] |
+| **offset** | **Integer**| An integer that specifies the starting point of the paginated results. Default is 0. | [optional] |
+| **limit** | **Integer**| An integer that specifies the maximum number of transactions to return. Default of 1000. | [optional] |
 | **type** | **String**| Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  | [optional] |
 
 ### Return type
 
-[**List&lt;UniversalActivity&gt;**](UniversalActivity.md)
+[**List&lt;PaginatedUniversalActivity&gt;**](PaginatedUniversalActivity.md)
 
 ### Authorization
 

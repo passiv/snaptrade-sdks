@@ -23,6 +23,7 @@ from snaptrade_client.model.account_order_record import AccountOrderRecord
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
+from snaptrade_client.model.account_universal_activity import AccountUniversalActivity
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions
@@ -95,6 +96,8 @@ from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
+from snaptrade_client.model.paginated_universal_activity import PaginatedUniversalActivity
+from snaptrade_client.model.pagination_details import PaginationDetails
 from snaptrade_client.model.partner_data import PartnerData
 from snaptrade_client.model.past_value import PastValue
 from snaptrade_client.model.performance_custom import PerformanceCustom

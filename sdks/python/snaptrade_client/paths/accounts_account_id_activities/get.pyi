@@ -32,13 +32,25 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.universal_activity import UniversalActivity as UniversalActivitySchema
+from snaptrade_client.model.paginated_universal_activity import PaginatedUniversalActivity as PaginatedUniversalActivitySchema
 
-from snaptrade_client.type.universal_activity import UniversalActivity
+from snaptrade_client.type.paginated_universal_activity import PaginatedUniversalActivity
 
 # Query params
 StartDateSchema = schemas.DateSchema
 EndDateSchema = schemas.DateSchema
+
+
+class OffsetSchema(
+    schemas.Int32Schema
+):
+    pass
+
+
+class LimitSchema(
+    schemas.Int32Schema
+):
+    pass
 TypeSchema = schemas.StrSchema
 UserIdSchema = schemas.StrSchema
 UserSecretSchema = schemas.StrSchema
@@ -54,6 +66,8 @@ RequestOptionalQueryParams = typing_extensions.TypedDict(
     {
         'startDate': typing.Union[StartDateSchema, str, date, ],
         'endDate': typing.Union[EndDateSchema, str, date, ],
+        'offset': typing.Union[OffsetSchema, decimal.Decimal, int, ],
+        'limit': typing.Union[LimitSchema, decimal.Decimal, int, ],
         'type': typing.Union[TypeSchema, str, ],
     },
     total=False
@@ -74,6 +88,18 @@ request_query_end_date = api_client.QueryParameter(
     name="endDate",
     style=api_client.ParameterStyle.FORM,
     schema=EndDateSchema,
+    explode=True,
+)
+request_query_offset = api_client.QueryParameter(
+    name="offset",
+    style=api_client.ParameterStyle.FORM,
+    schema=OffsetSchema,
+    explode=True,
+)
+request_query_limit = api_client.QueryParameter(
+    name="limit",
+    style=api_client.ParameterStyle.FORM,
+    schema=LimitSchema,
     explode=True,
 )
 request_query_type = api_client.QueryParameter(
@@ -132,12 +158,12 @@ class SchemaFor200ResponseBodyApplicationJson(
     class MetaOapg:
         
         @staticmethod
-        def items() -> typing.Type['UniversalActivitySchema']:
-            return UniversalActivitySchema
+        def items() -> typing.Type['PaginatedUniversalActivitySchema']:
+            return PaginatedUniversalActivitySchema
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['UniversalActivity'], typing.List['UniversalActivity']],
+        arg: typing.Union[typing.Tuple['PaginatedUniversalActivity'], typing.List['PaginatedUniversalActivity']],
         _configuration: typing.Optional[schemas.Configuration] = None,
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
@@ -146,18 +172,18 @@ class SchemaFor200ResponseBodyApplicationJson(
             _configuration=_configuration,
         )
 
-    def __getitem__(self, i: int) -> 'UniversalActivity':
+    def __getitem__(self, i: int) -> 'PaginatedUniversalActivity':
         return super().__getitem__(i)
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[UniversalActivity]
+    body: typing.List[PaginatedUniversalActivity]
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[UniversalActivity]
+    body: typing.List[PaginatedUniversalActivity]
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -197,6 +223,8 @@ class BaseApi(api_client.Api):
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -208,6 +236,10 @@ class BaseApi(api_client.Api):
             _query_params["startDate"] = start_date
         if end_date is not None:
             _query_params["endDate"] = end_date
+        if offset is not None:
+            _query_params["offset"] = offset
+        if limit is not None:
+            _query_params["limit"] = limit
         if type is not None:
             _query_params["type"] = type
         if user_id is not None:
@@ -262,6 +294,8 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_start_date,
             request_query_end_date,
+            request_query_offset,
+            request_query_limit,
             request_query_type,
             request_query_user_id,
             request_query_user_secret,
@@ -399,6 +433,8 @@ class BaseApi(api_client.Api):
         for parameter in (
             request_query_start_date,
             request_query_end_date,
+            request_query_offset,
+            request_query_limit,
             request_query_type,
             request_query_user_id,
             request_query_user_secret,
@@ -475,6 +511,8 @@ class GetAccountActivities(BaseApi):
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -493,6 +531,8 @@ class GetAccountActivities(BaseApi):
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
+            offset=offset,
+            limit=limit,
             type=type,
         )
         return await self._aget_account_activities_oapg(
@@ -508,6 +548,8 @@ class GetAccountActivities(BaseApi):
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -516,7 +558,7 @@ class GetAccountActivities(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
+        """ Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day.  """
         args = self._get_account_activities_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -525,6 +567,8 @@ class GetAccountActivities(BaseApi):
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
+            offset=offset,
+            limit=limit,
             type=type,
         )
         return self._get_account_activities_oapg(
@@ -542,6 +586,8 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -560,6 +606,8 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
+            offset=offset,
+            limit=limit,
             type=type,
         )
         return await self._aget_account_activities_oapg(
@@ -575,6 +623,8 @@ class ApiForget(BaseApi):
         user_secret: typing.Optional[str] = None,
         start_date: typing.Optional[date] = None,
         end_date: typing.Optional[date] = None,
+        offset: typing.Optional[int] = None,
+        limit: typing.Optional[int] = None,
         type: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
@@ -583,7 +633,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified account. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
+        """ Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day.  """
         args = self._get_account_activities_mapped_args(
             query_params=query_params,
             path_params=path_params,
@@ -592,6 +642,8 @@ class ApiForget(BaseApi):
             user_secret=user_secret,
             start_date=start_date,
             end_date=end_date,
+            offset=offset,
+            limit=limit,
             type=type,
         )
         return self._get_account_activities_oapg(

@@ -35,6 +35,8 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         )
         request.StartDate(2013-10-20)
         request.EndDate(2013-10-20)
+        request.Offset(56)
+        request.Limit(56)
         request.Type(""BUY,SELL,DIVIDEND"")
         
         resp, httpRes, err := request.Execute()
