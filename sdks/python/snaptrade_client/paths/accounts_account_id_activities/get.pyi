@@ -148,42 +148,17 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-
-
-class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
-):
-
-
-    class MetaOapg:
-        
-        @staticmethod
-        def items() -> typing.Type['PaginatedUniversalActivitySchema']:
-            return PaginatedUniversalActivitySchema
-
-    def __new__(
-        cls,
-        arg: typing.Union[typing.Tuple['PaginatedUniversalActivity'], typing.List['PaginatedUniversalActivity']],
-        _configuration: typing.Optional[schemas.Configuration] = None,
-    ) -> 'SchemaFor200ResponseBodyApplicationJson':
-        return super().__new__(
-            cls,
-            arg,
-            _configuration=_configuration,
-        )
-
-    def __getitem__(self, i: int) -> 'PaginatedUniversalActivity':
-        return super().__getitem__(i)
+SchemaFor200ResponseBodyApplicationJson = PaginatedUniversalActivitySchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[PaginatedUniversalActivity]
+    body: PaginatedUniversalActivity
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[PaginatedUniversalActivity]
+    body: PaginatedUniversalActivity
 
 
 _response_for_200 = api_client.OpenApiResponse(

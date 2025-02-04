@@ -43,8 +43,8 @@ namespace SnapTrade.Net.Api
         /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;PaginatedUniversalActivity&gt;</returns>
-        List<PaginatedUniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
+        /// <returns>PaginatedUniversalActivity</returns>
+        PaginatedUniversalActivity GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
 
         /// <summary>
         /// List account activities
@@ -62,8 +62,8 @@ namespace SnapTrade.Net.Api
         /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;PaginatedUniversalActivity&gt;</returns>
-        ApiResponse<List<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
+        /// <returns>ApiResponse of PaginatedUniversalActivity</returns>
+        ApiResponse<PaginatedUniversalActivity> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0);
         /// <summary>
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
@@ -366,8 +366,8 @@ namespace SnapTrade.Net.Api
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;PaginatedUniversalActivity&gt;</returns>
-        System.Threading.Tasks.Task<List<PaginatedUniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of PaginatedUniversalActivity</returns>
+        System.Threading.Tasks.Task<PaginatedUniversalActivity> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// List account activities
@@ -386,8 +386,8 @@ namespace SnapTrade.Net.Api
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;PaginatedUniversalActivity&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<PaginatedUniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (PaginatedUniversalActivity)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List all accounts for the user, plus balances, positions, and orders for each account.
         /// </summary>
@@ -817,10 +817,10 @@ namespace SnapTrade.Net.Api
         /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;PaginatedUniversalActivity&gt;</returns>
-        public List<PaginatedUniversalActivity> GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
+        /// <returns>PaginatedUniversalActivity</returns>
+        public PaginatedUniversalActivity GetAccountActivities(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> localVarResponse = GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
+            SnapTrade.Net.Client.ApiResponse<PaginatedUniversalActivity> localVarResponse = GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
             return localVarResponse.Data;
         }
 
@@ -837,8 +837,8 @@ namespace SnapTrade.Net.Api
         /// <param name="limit">An integer that specifies the maximum number of transactions to return. Default of 1000. (optional)</param>
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;PaginatedUniversalActivity&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
+        /// <returns>ApiResponse of PaginatedUniversalActivity</returns>
+        public SnapTrade.Net.Client.ApiResponse<PaginatedUniversalActivity> GetAccountActivitiesWithHttpInfo(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
@@ -924,7 +924,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<List<PaginatedUniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<PaginatedUniversalActivity>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetAccountActivities", localVarResponse);
@@ -951,10 +951,10 @@ namespace SnapTrade.Net.Api
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;PaginatedUniversalActivity&gt;</returns>
-        public async System.Threading.Tasks.Task<List<PaginatedUniversalActivity>> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of PaginatedUniversalActivity</returns>
+        public async System.Threading.Tasks.Task<PaginatedUniversalActivity> GetAccountActivitiesAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>> localVarResponse = await GetAccountActivitiesWithHttpInfoAsync(accountId, userId, userSecret, startDate, endDate, offset, limit, type, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<PaginatedUniversalActivity> localVarResponse = await GetAccountActivitiesWithHttpInfoAsync(accountId, userId, userSecret, startDate, endDate, offset, limit, type, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -972,8 +972,8 @@ namespace SnapTrade.Net.Api
         /// <param name="type">Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;PaginatedUniversalActivity&gt;)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<PaginatedUniversalActivity>>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (PaginatedUniversalActivity)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<PaginatedUniversalActivity>> GetAccountActivitiesWithHttpInfoAsync(string accountId, string userId, string userSecret, DateTime? startDate = default(DateTime?), DateTime? endDate = default(DateTime?), int? offset = default(int?), int? limit = default(int?), string type = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
@@ -1060,7 +1060,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<PaginatedUniversalActivity>>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<PaginatedUniversalActivity>("/accounts/{accountId}/activities", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

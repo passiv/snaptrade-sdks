@@ -85,7 +85,7 @@ module SnapTrade
     # @option opts [Integer] :offset An integer that specifies the starting point of the paginated results. Default is 0.
     # @option opts [Integer] :limit An integer that specifies the maximum number of transactions to return. Default of 1000.
     # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
-    # @return [Array<PaginatedUniversalActivity>]
+    # @return [PaginatedUniversalActivity]
     private def get_account_activities_impl(account_id, user_id, user_secret, opts = {})
       data, _status_code, _headers = get_account_activities_with_http_info(account_id, user_id, user_secret, opts)
       data
@@ -102,7 +102,7 @@ module SnapTrade
     # @option opts [Integer] :offset An integer that specifies the starting point of the paginated results. Default is 0.
     # @option opts [Integer] :limit An integer that specifies the maximum number of transactions to return. Default of 1000.
     # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
-    # @return [Array<(Array<PaginatedUniversalActivity>, Integer, Hash)>] Array<PaginatedUniversalActivity> data, response status code and response headers
+    # @return [Array<(PaginatedUniversalActivity, Integer, Hash)>] PaginatedUniversalActivity data, response status code and response headers
     private def get_account_activities_with_http_info_impl(account_id, user_id, user_secret, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_account_activities ...'
@@ -152,7 +152,7 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<PaginatedUniversalActivity>'
+      return_type = opts[:debug_return_type] || 'PaginatedUniversalActivity'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']

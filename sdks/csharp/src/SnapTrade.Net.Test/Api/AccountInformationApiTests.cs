@@ -64,7 +64,7 @@ namespace SnapTrade.Net.Test.Api
             try
             {
                 // List account activities
-                List<PaginatedUniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
+                PaginatedUniversalActivity result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)

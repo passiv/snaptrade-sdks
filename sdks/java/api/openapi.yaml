@@ -1339,10 +1339,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/PaginatedUniversalActivity'
-                type: array
-                x-konfig-is-used-in-successful-response: true
+                $ref: '#/components/schemas/PaginatedUniversalActivity'
           description: OK
         default:
           description: Unexpected error
@@ -6661,6 +6658,7 @@ components:
         pagination:
           $ref: '#/components/schemas/PaginationDetails'
       type: object
+      x-konfig-is-used-in-successful-response: true
     AccountUniversalActivity:
       additionalProperties: true
       description: A transaction or activity from an institution

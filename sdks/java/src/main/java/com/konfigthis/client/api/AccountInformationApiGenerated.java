@@ -177,16 +177,16 @@ public class AccountInformationApiGenerated {
     }
 
 
-    private ApiResponse<List<PaginatedUniversalActivity>> getAccountActivitiesWithHttpInfo(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, Integer offset, Integer limit, String type) throws ApiException {
+    private ApiResponse<PaginatedUniversalActivity> getAccountActivitiesWithHttpInfo(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, Integer offset, Integer limit, String type) throws ApiException {
         okhttp3.Call localVarCall = getAccountActivitiesValidateBeforeCall(accountId, userId, userSecret, startDate, endDate, offset, limit, type, null);
-        Type localVarReturnType = new TypeToken<List<PaginatedUniversalActivity>>(){}.getType();
+        Type localVarReturnType = new TypeToken<PaginatedUniversalActivity>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getAccountActivitiesAsync(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, Integer offset, Integer limit, String type, final ApiCallback<List<PaginatedUniversalActivity>> _callback) throws ApiException {
+    private okhttp3.Call getAccountActivitiesAsync(UUID accountId, String userId, String userSecret, LocalDate startDate, LocalDate endDate, Integer offset, Integer limit, String type, final ApiCallback<PaginatedUniversalActivity> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getAccountActivitiesValidateBeforeCall(accountId, userId, userSecret, startDate, endDate, offset, limit, type, _callback);
-        Type localVarReturnType = new TypeToken<List<PaginatedUniversalActivity>>(){}.getType();
+        Type localVarReturnType = new TypeToken<PaginatedUniversalActivity>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -276,7 +276,7 @@ public class AccountInformationApiGenerated {
 
         /**
          * Execute getAccountActivities request
-         * @return List&lt;PaginatedUniversalActivity&gt;
+         * @return PaginatedUniversalActivity
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -285,14 +285,14 @@ public class AccountInformationApiGenerated {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public List<PaginatedUniversalActivity> execute() throws ApiException {
-            ApiResponse<List<PaginatedUniversalActivity>> localVarResp = getAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
+        public PaginatedUniversalActivity execute() throws ApiException {
+            ApiResponse<PaginatedUniversalActivity> localVarResp = getAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute getAccountActivities request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;PaginatedUniversalActivity&gt;&gt;
+         * @return ApiResponse&lt;PaginatedUniversalActivity&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -301,7 +301,7 @@ public class AccountInformationApiGenerated {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<List<PaginatedUniversalActivity>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<PaginatedUniversalActivity> executeWithHttpInfo() throws ApiException {
             return getAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
         }
 
@@ -317,7 +317,7 @@ public class AccountInformationApiGenerated {
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<List<PaginatedUniversalActivity>> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<PaginatedUniversalActivity> _callback) throws ApiException {
             return getAccountActivitiesAsync(accountId, userId, userSecret, startDate, endDate, offset, limit, type, _callback);
         }
     }

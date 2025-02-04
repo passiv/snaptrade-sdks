@@ -19,7 +19,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="getAccountActivities"></a>
 # **getAccountActivities**
-> List&lt;PaginatedUniversalActivity&gt; getAccountActivities(accountId, userId, userSecret).startDate(startDate).endDate(endDate).offset(offset).limit(limit).type(type).execute();
+> PaginatedUniversalActivity getAccountActivities(accountId, userId, userSecret).startDate(startDate).endDate(endDate).offset(offset).limit(limit).type(type).execute();
 
 List account activities
 
@@ -56,7 +56,7 @@ public class Example {
     Integer limit = 56; // An integer that specifies the maximum number of transactions to return. Default of 1000.
     String type = "BUY,SELL,DIVIDEND"; // Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
     try {
-      List<PaginatedUniversalActivity> result = client
+      PaginatedUniversalActivity result = client
               .accountInformation
               .getAccountActivities(accountId, userId, userSecret)
               .startDate(startDate)
@@ -66,6 +66,8 @@ public class Example {
               .type(type)
               .execute();
       System.out.println(result);
+      System.out.println(result.getData());
+      System.out.println(result.getPagination());
     } catch (ApiException e) {
       System.err.println("Exception when calling AccountInformationApi#getAccountActivities");
       System.err.println("Status code: " + e.getStatusCode());
@@ -76,7 +78,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<List<PaginatedUniversalActivity>> response = client
+      ApiResponse<PaginatedUniversalActivity> response = client
               .accountInformation
               .getAccountActivities(accountId, userId, userSecret)
               .startDate(startDate)
@@ -117,7 +119,7 @@ public class Example {
 
 ### Return type
 
-[**List&lt;PaginatedUniversalActivity&gt;**](PaginatedUniversalActivity.md)
+[**PaginatedUniversalActivity**](PaginatedUniversalActivity.md)
 
 ### Authorization
 

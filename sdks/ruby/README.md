@@ -114,7 +114,7 @@ result = snaptrade.account_information.get_account_activities_with_http_info(
   limit: 1,
   type: "BUY,SELL,DIVIDEND",
 )
-p result[0] # [Array<PaginatedUniversalActivity>] Deserialized data
+p result[0] # [PaginatedUniversalActivity] Deserialized data
 p.result[1] # [Integer] HTTP status code
 p.result[2] # [Hash] HTTP headers
 p.result[3] # [Faraday::Response] Raw HTTP response
