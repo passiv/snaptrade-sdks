@@ -68,7 +68,7 @@ Returns a list of transactions/activities for the given user. Activities will in
 Pros:
 
 - Includes all types of transactions, not just trades
-- History goes all the way back to the date the account was opened
+- History goes all the way back to the date the account was opened (with some exceptions, see Transaction History Limit tab on https://www.notion.so/snaptrade/SnapTrade-Brokerage-Integrations-f83946a714a84c3caf599f6a945f0ead for brokerage specific information)
 
 Cons:
 
