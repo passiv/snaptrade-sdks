@@ -817,9 +817,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/PaginatedUniversalActivity"
+                $ref: "#/components/schemas/PaginatedUniversalActivity"
         default:
           description: Unexpected error
   /authorizations/{authorizationId}/returnRates:
