@@ -796,7 +796,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<PaginatedUniversalActivity>>> {
+        async getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PaginatedUniversalActivity>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.getAccountActivities(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, requestParameters.startDate, requestParameters.endDate, requestParameters.offset, requestParameters.limit, requestParameters.type, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -928,7 +928,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<PaginatedUniversalActivity>> {
+        getAccountActivities(requestParameters: AccountInformationApiGetAccountActivitiesRequest, options?: AxiosRequestConfig): AxiosPromise<PaginatedUniversalActivity> {
             return localVarFp.getAccountActivities(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**

@@ -55,7 +55,7 @@ namespace Example
             try
             {
                 // List account activities
-                List<PaginatedUniversalActivity> result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
+                PaginatedUniversalActivity result = client.AccountInformation.GetAccountActivities(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -82,7 +82,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // List account activities
-    ApiResponse<List<PaginatedUniversalActivity>> response = apiInstance.GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
+    ApiResponse<PaginatedUniversalActivity> response = apiInstance.GetAccountActivitiesWithHttpInfo(accountId, userId, userSecret, startDate, endDate, offset, limit, type);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -110,7 +110,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**List&lt;PaginatedUniversalActivity&gt;**](PaginatedUniversalActivity.md)
+[**PaginatedUniversalActivity**](PaginatedUniversalActivity.md)
 
 
 ### HTTP response details

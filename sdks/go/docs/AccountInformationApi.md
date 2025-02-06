@@ -59,7 +59,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetAccountActivities``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `GetAccountActivities`: []PaginatedUniversalActivity
+    // response from `GetAccountActivities`: PaginatedUniversalActivity
     fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetAccountActivities`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Data`: %v\n", *resp.Data)
     fmt.Fprintf(os.Stdout, "Response from `PaginatedUniversalActivity.GetAccountActivities.Pagination`: %v\n", *resp.Pagination)

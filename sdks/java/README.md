@@ -257,7 +257,7 @@ The data returned here is always cached and refreshed once a day.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
-List<PaginatedUniversalActivity> result = client
+PaginatedUniversalActivity result = client
         .accountInformation
         .getAccountActivities(accountId, userId, userSecret)
         .startDate(startDate)

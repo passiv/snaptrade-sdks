@@ -67,7 +67,7 @@ func (r *AccountInformationApiGetAccountActivitiesRequest) Type_(type_ string) *
 	return r
 }
 
-func (r AccountInformationApiGetAccountActivitiesRequest) Execute() ([]PaginatedUniversalActivity, *http.Response, error) {
+func (r AccountInformationApiGetAccountActivitiesRequest) Execute() (*PaginatedUniversalActivity, *http.Response, error) {
 	return r.ApiService.GetAccountActivitiesExecute(r)
 }
 
@@ -100,13 +100,13 @@ func (a *AccountInformationApiService) GetAccountActivities(accountId string, us
 }
 
 // Execute executes the request
-//  @return []PaginatedUniversalActivity
-func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInformationApiGetAccountActivitiesRequest) ([]PaginatedUniversalActivity, *http.Response, error) {
+//  @return PaginatedUniversalActivity
+func (a *AccountInformationApiService) GetAccountActivitiesExecute(r AccountInformationApiGetAccountActivitiesRequest) (*PaginatedUniversalActivity, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []PaginatedUniversalActivity
+		localVarReturnValue  *PaginatedUniversalActivity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountInformationApiService.GetAccountActivities")

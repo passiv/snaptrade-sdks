@@ -68,7 +68,7 @@ public class AccountInformationApiTest {
         Integer offset = null;
         Integer limit = null;
         String type = null;
-        List<PaginatedUniversalActivity> response = api.getAccountActivities(accountId, userId, userSecret)
+        PaginatedUniversalActivity response = api.getAccountActivities(accountId, userId, userSecret)
                 .startDate(startDate)
                 .endDate(endDate)
                 .offset(offset)
