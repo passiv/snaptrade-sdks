@@ -56,7 +56,7 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const AccountInformationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
+         * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
          * @summary List account activities
          * @param {string} accountId 
          * @param {string} userId 
@@ -790,7 +790,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = AccountInformationApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
+         * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
          * @summary List account activities
          * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -922,7 +922,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
     const localVarFp = AccountInformationApiFp(configuration)
     return {
         /**
-         * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
+         * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
          * @summary List account activities
          * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1422,7 +1422,7 @@ export type AccountInformationApiUpdateUserAccountRequest = {
  */
 export class AccountInformationApiGenerated extends BaseAPI {
     /**
-     * Returns all historical transactions for the specified account.  This endpoint is paginated and will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the `trade_date` field.  The data returned here is always cached and refreshed once a day. 
      * @summary List account activities
      * @param {AccountInformationApiGetAccountActivitiesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
