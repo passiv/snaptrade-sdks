@@ -2,13 +2,13 @@
 
 The SnapTrade API can be configured to send you webhook notifications when certain events happen.
 
-To get started with webhooks, contact your Customer Success Manager. They will need the URL of your webhook handler for webhook notifications to begin to be sent.
+To get started with webhooks, visit the webhook tab of the SnapTrade Dashbaord to configure a webhook listener.
 
 # Verifying Webhook Authenticity
 
 You can verify the authenticity of any SnapTrade webhook by verifying the `webhookSecret` field contained in the body of any webhook.
 
-Contact your customer success manager to get the correct value of this secret.
+The correct value of this secret can be found when you configure a webhook listener in the SnapTrade Dashboard.
 
 Aside from webhook secrets:
 
