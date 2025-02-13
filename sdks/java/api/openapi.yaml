@@ -1304,6 +1304,7 @@ paths:
             - `CONTRIBUTION` - Cash contribution.
             - `WITHDRAWAL` - Cash withdrawal.
             - `REI` - Dividend reinvestment.
+            - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
             - `INTEREST` - Interest deposited into the account.
             - `FEE` - Fee withdrawn from the account.
             - `OPTIONEXPIRATION` - Option expiration event.
