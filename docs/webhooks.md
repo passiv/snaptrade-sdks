@@ -2,7 +2,7 @@
 
 The SnapTrade API can be configured to send you webhook notifications when certain events happen.
 
-To get started with webhooks, visit the webhook tab of the SnapTrade Dashbaord to configure a webhook listener.
+To get started with webhooks, visit the webhook tab of the SnapTrade Dashboard to configure a webhook listener.
 
 # Verifying Webhook Authenticity
 
