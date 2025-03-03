@@ -10,6 +10,7 @@ Method | Path | Description
 
 
 ## GetActivities
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Get transaction history for a user
 

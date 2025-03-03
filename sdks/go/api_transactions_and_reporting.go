@@ -83,6 +83,8 @@ The data returned here is always cached and refreshed once a day.
  @param userId
  @param userSecret
  @return TransactionsAndReportingApiGetActivitiesRequest
+
+Deprecated
 */
 func (a *TransactionsAndReportingApiService) GetActivities(userId string, userSecret string) TransactionsAndReportingApiGetActivitiesRequest {
 	return TransactionsAndReportingApiGetActivitiesRequest{
@@ -95,6 +97,7 @@ func (a *TransactionsAndReportingApiService) GetActivities(userId string, userSe
 
 // Execute executes the request
 //  @return []UniversalActivity
+// Deprecated
 func (a *TransactionsAndReportingApiService) GetActivitiesExecute(r TransactionsAndReportingApiGetActivitiesRequest) ([]UniversalActivity, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

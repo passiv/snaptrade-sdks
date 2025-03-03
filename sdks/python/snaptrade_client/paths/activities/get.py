@@ -443,6 +443,7 @@ class BaseApi(api_client.Api):
 class GetActivities(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget_activities(
         self,
         user_id: typing.Optional[str] = None,
@@ -475,6 +476,7 @@ class GetActivities(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get_activities(
         self,
         user_id: typing.Optional[str] = None,
@@ -508,6 +510,7 @@ class GetActivities(BaseApi):
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget(
         self,
         user_id: typing.Optional[str] = None,
@@ -540,6 +543,7 @@ class ApiForget(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get(
         self,
         user_id: typing.Optional[str] = None,
