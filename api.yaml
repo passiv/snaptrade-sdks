@@ -1805,6 +1805,7 @@ paths:
           description: Unexpected Error
   /activities:
     get:
+      deprecated: true
       tags:
         - Transactions And Reporting
       summary: Get transaction history for a user
