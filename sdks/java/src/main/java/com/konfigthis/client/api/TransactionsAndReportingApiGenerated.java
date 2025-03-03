@@ -146,6 +146,7 @@ public class TransactionsAndReportingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getActivitiesValidateBeforeCall(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -252,7 +253,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
         }
@@ -268,7 +271,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<UniversalActivity> execute() throws ApiException {
             ApiResponse<List<UniversalActivity>> localVarResp = getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
             return localVarResp.getResponseBody();
@@ -284,7 +289,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<UniversalActivity>> executeWithHttpInfo() throws ApiException {
             return getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
         }
@@ -300,7 +307,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
             return getActivitiesAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
         }
@@ -318,7 +327,9 @@ public class TransactionsAndReportingApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public TransactionsAndReportingApi.GetActivitiesRequestBuilder getActivities(String userId, String userSecret) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
