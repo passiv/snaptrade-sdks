@@ -74,7 +74,7 @@ Connect brokerage accounts to your app for live positions and trading
 
 ## Requirements<a id="requirements"></a>
 
-Python >=3.7
+Python >=3.8
 
 ## Installation<a id="installation"></a>
 
