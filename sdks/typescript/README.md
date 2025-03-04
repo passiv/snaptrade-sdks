@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.80-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.80)
+[![npm](https://img.shields.io/badge/npm-v9.0.81-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.81)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -1975,6 +1975,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 

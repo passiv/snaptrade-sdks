@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.76-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.76)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.77-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.77)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -108,7 +108,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.76</version>
+  <version>5.0.77</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -124,7 +124,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.76"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.77"
 }
 ```
 
@@ -161,7 +161,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.76.jar`
+* `target/snaptrade-java-sdk-5.0.77.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -1979,6 +1979,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 

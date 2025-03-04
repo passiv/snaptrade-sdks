@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.77-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.77)
+[![npm](https://img.shields.io/badge/gem-v2.0.78-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.78)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -74,7 +74,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.77'
+gem 'snaptrade', '~> 2.0.78'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1882,6 +1882,7 @@ before responding to the request.
 
 
 ### `snaptrade.transactions_and_reporting.get_activities`<a id="snaptradetransactions_and_reportingget_activities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
