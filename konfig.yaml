@@ -218,7 +218,6 @@ generators:
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
-    useAiohttp3_8: true
     setSkipSerializationToTrueByDefault: true
     pypiApiTokenEnvironmentVariable: PYPI_TOKEN_1
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
