@@ -8,10 +8,6 @@ Please see the FAQ of each section, as any questions you might have should be an
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us at [support@snaptrade.com](mailto:support@snaptrade.com) or through <https://discord.gg/UDwzZUuQ>.
 
-## Table of Contents
-
----
-
 ## API Keys
 
 ![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image.png)
