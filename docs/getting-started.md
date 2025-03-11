@@ -1,4 +1,6 @@
-# Guide: Getting Started with SnapTrade
+# Getting Started with SnapTrade
+
+[https://docs.snaptrade.com/docs/implement-connection-portal](https://docs.snaptrade.com/docs/implement-connection-portal)
 
 ![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image.png)
 
@@ -158,7 +160,6 @@ The order will now show over the <https://docs.snaptrade.com/reference/Account%2
 
 ## Next Steps
 
-- <https://docs.snaptrade.com/docs/essential-functionalities>
-- <https://docs.snaptrade.com/docs/recommended-endpoints-to-get-started>
-- <https://docs.snaptrade.com/docs/implement-connection-portal>
-- <https://docs.snaptrade.com/docs/webhooks>
+- For a live demo, see <https://docs.snaptrade.com/demo/getting-started>
+- To get started with Webhooks, see <https://docs.snaptrade.com/docs/webhooks>
+- To get started with implementing the SnapTrade Connection Portal, see <https://docs.snaptrade.com/docs/implement-connection-portal>
