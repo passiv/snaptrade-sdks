@@ -1,4 +1,6 @@
-# Getting Started with SnapTrade
+# Guide: Getting Started with SnapTrade
+
+![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image.png)
 
 ## Introduction
 
@@ -8,11 +10,13 @@ Please see the FAQ of each section, as any questions you might have should be an
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us at [support@snaptrade.com](mailto:support@snaptrade.com) or through <https://discord.gg/UDwzZUuQ>.
 
+---
+
 ## API Keys
 
-![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image.png)
+![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%201.png)
 
-Your `API key` consists of a `clientId` and `consumerKey`. Please note that your `consumerKey` is sensitive information and should be kept secure at all times. This `API key` is used to make any requests to the SnapTrade API, and is the first thing required to get started.
+Your `API key` consists of a `clientId` and `consumerKey`. Please note that your `consumerKey` is sensitive information and should be kept secure at all times. This `API key` is used to make any requests to the SnapTrade API, and is the first thing required to get started.
 
 ### How to: Create a new API Key
 
@@ -21,14 +25,14 @@ When you are ready to get started with SnapTrade and want to start making reques
 1. Create a SnapTrade account at <https://dashboard.snaptrade.com/home>.
 2. Verify your email (You cannot create any `API Keys` until your account is verified).
 3. Generate your free `API Key` through <https://dashboard.snaptrade.com/api-key>.
-4. Add a payment method through the Settings>Billing page of <https://dashboard.snaptrade.com/settings/billing>.
-5. Upgrade to Pay-as-you-Go through Settings>Billing page of <https://dashboard.snaptrade.com/settings/billing>.
-6. Generate your paid `API Key` through <https://dashboard.snaptrade.com/api-key>.
+4. [OPTIONAL] Add a payment method through the Settings>Billing page of <https://dashboard.snaptrade.com/settings/billing>.
+5. [OPTIONAL] Upgrade to Pay-as-you-Go through Settings>Billing page of <https://dashboard.snaptrade.com/settings/billing>.
+6. [OPTIONAL] Generate your paid `API Key` through <https://dashboard.snaptrade.com/api-key>.
 
 After completing these steps, you will have two SnapTrade `API Keys`:
 
 - A free `API Key` that limits the number of concurrent connections.
-- A paid `API Key` that allows for unlimited connections.
+- Optionally, a paid `API Key` that allows for unlimited connections.
 
 These two `API keys` are essentially the same in terms of functionality, and the core difference between them is that the free `API key` is limited in terms of the number of concurrent connections you can have. You can use these `API keys` to make requests to the SnapTrade API.
 
@@ -37,9 +41,9 @@ These two `API keys` are essentially the same in terms of functionality, and the
 When you have an `API Key` and want to start using the SnapTrade API, you will need to use your `API Key` to make requests to the SnapTrade API.
 
 1. With your Free `API Key`, enter your `clientId` and `consumerKey` into the corresponding fields of <https://docs.snaptrade.com/reference/API%20Status/ApiStatus_check>.
-2. Press 'Send'.
+2. Press ‘Send’.
 
-In the box below the 'request' you should receive a response from the SnapTrade API. The <https://docs.snaptrade.com/reference/API%20Status/ApiStatus_check> endpoint is the most basic request you can make to the SnapTrade API.
+In the box below the ‘request’ you should receive a response from the SnapTrade API. The <https://docs.snaptrade.com/reference/API%20Status/ApiStatus_check> endpoint is the most basic request you can make to the SnapTrade API.
 
 You can also make this request with any of the SnapTrade SDKs.
 
@@ -57,9 +61,7 @@ You can also make this request with any of the SnapTrade SDKs.
 
 ### API Keys FAQ
 
-- **I have lost the consumerKey to my free API Key. What should I do?**
-  - You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
-- **I have lost the consumerKey to my paid API Key. What should I do?**
+- **I have lost the consumerKey to my API Key. What should I do?**
   - You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
 - **I am getting a 'Unable to verify signature sent' error when hitting the API. What should I do?**
   - The API request is failing when comparing the expected signature to the signature provided by your client. This can happen for many reasons, but is likely caused by attempting to configure the signature without an SDK, or an invalid consumerKey. If you need to reset your consumerKey, reach out to someone at SnapTrade.
@@ -68,20 +70,20 @@ You can also make this request with any of the SnapTrade SDKs.
 
 ## Users
 
-![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%201.png)
+![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%202.png)
 
 Your `API key` will be used to manage a set of SnapTrade `users`. A SnapTrade `user` consists of a `userId` and a `userSecret`. The `userSecret` is a randomly generated string and is sensitive information. It should be kept secure at all times.
 
-Typically if you have an application that manages end-users, each end-user of your application will get one SnapTrade `user` that will be used to manage that end-user's `connections`. This way, SnapTrade `users` will be one-to-one with the end-users of your application.
+Typically if you have an application that manages end-users, each end-user of your application will get one SnapTrade `user` that will be used to manage that end-user’s `connections`. This way, SnapTrade `users` will be one-to-one with the end-users of your application.
 
 ### How to: Create a new SnapTrade User
 
 When you have a working `API Key` and want to create a new `connection` for a `user`, you will first need to register a SnapTrade `user`.
 
-1. Using your API Key, create a request to the <https://docs.snaptrade.com/reference/Authentication/Authentication_registerSnapTradeUser> endpoint. You will need to provide a unique SnapTrade `userId`. This can be anything that is immutable. For this reason, it is recommended to NOT use email addresses for a SnapTrade `userId`.
+1. Using your API Key, create a request to the <https://docs.snaptrade.com/reference/Authentication/Authentication_registerSnapTradeUser> endpoint. You will need to provide a unique SnapTrade `userId` . This can be anything that is immutable. For this reason, it is recommended to NOT use email addresses for a SnapTrade `userId`.
 2. The response you receive from the SnapTrade API will contain the `userId` you provided and the `userSecret` generated by SnapTrade. The `userSecret` is a randomly generated string and is sensitive information.
 
-You can list your created users by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_listSnapTradeUsers> endpoint, and you can delete created users by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_deleteSnapTradeUser> endpoint. If needed, you may reset a user's userSecret by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_resetSnapTradeUserSecret> endpoint. Now that you have one or more SnapTrade `users` under your `API Key`, you are ready to create `connections` under these `users`.
+You can list your created users by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_listSnapTradeUsers> endpoint, and you can delete created users by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_deleteSnapTradeUser> endpoint. If needed, you may reset a user’s userSecret by using the <https://docs.snaptrade.com/reference/Authentication/Authentication_resetSnapTradeUserSecret> endpoint. Now that you have one or more SnapTrade `users` under your `API Key`, you are ready to create `connections` under these `users`.
 
 ### Users FAQ
 
@@ -94,13 +96,13 @@ You can list your created users by using the <https://docs.snaptrade.com/referen
 
 ## Connections
 
-![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%202.png)
+![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%203.png)
 
 Each `user` under your SnapTrade API key will be used to create and manage `connections` associated with that user. Each connection is associated one-to-one with a set of credentials to an institution.
 
 💡
 
-**Note**: `Connections` and `Brokerage Authorizations` are the same thing, and the terms are interchangeable. In this document, the term `connection` is used.
+**Note**: The terms `Connections` and `Brokerage Authorizations` are interchangeable. In most documents, the term `connection` is used.
 
 ### How to: Create a new connection for a user
 
@@ -109,20 +111,41 @@ When you have a SnapTrade user and want to get access to their account data and/
 1. Generate a new redirectURI for the SnapTrade Connection Portal <https://docs.snaptrade.com/reference/Authentication/Authentication_loginSnapTradeUser>
 2. Open the generated link. Depending on your application, there are different ways to open this link. See <https://docs.snaptrade.com/docs/implement-connection-portal>.
 
+Once you have successfully completed the Connection Portal Flow, you should have an active connection to work with, and should have access to the accounts under that connection.
+
 ### Connections FAQ
 
 - **How do I enable connecting to 'X' broker on my API Key?**
-  - By default, all brokers which can be enabled for you are enabled. For now this is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
+  - By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
 
 ---
 
 ## Accounts
 
-![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%203.png)
+![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%204.png)
 
-When you create a `connection`, SnapTrade will sync all `accounts` under the set of credentials to the brokerage. For example, if you made a new `connection` to Questrade (a Canadian brokerage) and that `connection` had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these `accounts` accessible over the SnapTrade API.
+When you create a `connection`, SnapTrade will automatically sync all `accounts` under the set of credentials to the brokerage. For example, if you made a new `connection` to Questrade (a Canadian brokerage) and that `connection` had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these `accounts` accessible over the SnapTrade API.
 
-Once you have an `accountId`, you are ready to move on to [pulling account data](https://docs.snaptrade.com/docs/recommended-endpoints-to-get-started), and [placing trades](https://docs.snaptrade.com/docs/trading-with-snaptrade) for that account.
+Once you have a connected `account`, you are ready to move on to pulling account data, and placing trades for that account.
+
+### How to: Get positions for an account
+
+When you have at least one connected `account` and want to start making use of the `positions`, you will first need to get the `accountId`.
+
+1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, use the <https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts> endpoint to get the `accountId` of the account you wish to pull `positions` for.
+2. With the `accountId`, call <https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions>. This will return a list of positions in the specified account.
+
+Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in.
+
+### How to: Place a checked trade for an account
+
+When you have at least one connected `account` and want to place a trade in the account, you will need to follow these steps to place a checked order. Note that you may also place an order without checking it.
+
+1. You need to get the `universalSymbolId` for the instrument that you wish to place an order for. You can find this using <https://docs.snaptrade.com/reference/Reference%20Data/ReferenceData_symbolSearchUserAccount>.
+2. Validate the order with <https://docs.snaptrade.com/reference/Trading/Trading_getOrderImpact>. This is a safe way to check the impact that the trade will have on the account if it is executed, and this is recommended to show on a screen to your user to have them confirm the order. Save the `tradeId` returned by this endpoint, it will be used in the next step. This `tradeId` will expire after a few minutes.
+3. Using the `tradeId` returned from <https://docs.snaptrade.com/reference/Trading/Trading_getOrderImpact>, place the checked order using <https://docs.snaptrade.com/reference/Trading/Trading_placeOrder>. This will place the order at the brokerage for the account, and return the response given by the broker.
+
+The order will now show over the <https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders> endpoint. If it does not, you may need to trigger a refresh for the connection using <https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization>.
 
 ### Accounts FAQ
 
@@ -133,4 +156,9 @@ Once you have an `accountId`, you are ready to move on to [pulling account data]
 
 ---
 
-![image.png](Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%204.png)
+## Next Steps
+
+- <https://docs.snaptrade.com/docs/essential-functionalities>
+- <https://docs.snaptrade.com/docs/recommended-endpoints-to-get-started>
+- <https://docs.snaptrade.com/docs/implement-connection-portal>
+- <https://docs.snaptrade.com/docs/webhooks>
