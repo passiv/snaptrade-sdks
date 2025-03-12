@@ -1,6 +1,6 @@
 # Guide: Getting Started with SnapTrade
 
-![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image.png)
+![image.png](./assets/250312_model.png)
 
 ## Introduction
 
@@ -14,7 +14,8 @@ If after reading this document you still have questions or need help, please do 
 
 ## API Keys
 
-![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%201.png)
+![image.png](./assets/250312_apikey.png)
+
 
 Your `API key` consists of a `clientId` and `consumerKey`. Please note that your `consumerKey` is sensitive information and should be kept secure at all times. This `API key` is used to make any requests to the SnapTrade API, and is the first thing required to get started.
 
@@ -70,7 +71,7 @@ You can also make this request with any of the SnapTrade SDKs.
 
 ## Users
 
-![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%202.png)
+![image.png](./assets/250312_apikey2users.png)
 
 Your `API key` will be used to manage a set of SnapTrade `users`. A SnapTrade `user` consists of a `userId` and a `userSecret`. The `userSecret` is a randomly generated string and is sensitive information. It should be kept secure at all times.
 
@@ -96,7 +97,7 @@ You can list your created users by using the <https://docs.snaptrade.com/referen
 
 ## Connections
 
-![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%203.png)
+![image.png](./assets/250312_users2connections.png)
 
 Each `user` under your SnapTrade API key will be used to create and manage `connections` associated with that user. Each connection is associated one-to-one with a set of credentials to an institution.
 
@@ -122,7 +123,7 @@ Once you have successfully completed the Connection Portal Flow, you should have
 
 ## Accounts
 
-![image.png](Guide%20Getting%20Started%20with%20SnapTrade%201abfeaa69a1c808d9d92d671e5a5c95e/image%204.png)
+![image.png](./assets/250312_connections2accounts.png)
 
 When you create a `connection`, SnapTrade will automatically sync all `accounts` under the set of credentials to the brokerage. For example, if you made a new `connection` to Questrade (a Canadian brokerage) and that `connection` had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these `accounts` accessible over the SnapTrade API.
 
