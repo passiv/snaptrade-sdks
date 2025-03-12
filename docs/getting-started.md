@@ -10,6 +10,8 @@ Please see the FAQ of each section, as any questions you might have should be an
 
 If after reading this document you still have questions or need help, please do not hesitate to contact us at [support@snaptrade.com](mailto:support@snaptrade.com) or through <https://discord.gg/UDwzZUuQ>.
 
+For a live demo, see <https://docs.snaptrade.com/demo/getting-started>.
+
 ---
 
 ## API Keys
@@ -159,6 +161,5 @@ The order will now show over the <https://docs.snaptrade.com/reference/Account%2
 
 ## Next Steps
 
-- For a live demo, see <https://docs.snaptrade.com/demo/getting-started>
 - To get started with Webhooks, see <https://docs.snaptrade.com/docs/webhooks>
 - To get started with implementing the SnapTrade Connection Portal, see <https://docs.snaptrade.com/docs/implement-connection-portal>
