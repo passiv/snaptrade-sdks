@@ -27,7 +27,7 @@ When you are ready to get started with SnapTrade and want to start making reques
 
 1. Create a SnapTrade account at the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
 2. Verify your email (You cannot create any `API Keys` until your account is verified).
-3. Generate your free `API Key` through (https://dashboard.snaptrade.com/api-key).
+3. Generate your free `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
 4. [OPTIONAL] Add a payment method through the Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
 5. [OPTIONAL] Upgrade to Pay-as-you-Go through Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
 6. [OPTIONAL] Generate your paid `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
