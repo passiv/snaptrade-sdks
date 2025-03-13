@@ -311,6 +311,121 @@ operation_parameter_map = {
             },
         ]
     },
+    '/trading/crypto/spot/placeOrder-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
+    '/trading/crypto/spot/previewOrder-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
+    '/trading/crypto/spot/quote-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
+    '/trading/crypto/spot/searchMarkets-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
+            },
+            {
+                'name': 'base'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'quote'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionStrategy-POST': {
         'parameters': [
             {
