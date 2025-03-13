@@ -51,3 +51,7 @@ class PathValues(str, enum.Enum):
     SECURITY_TYPES = "/securityTypes"
     SYMBOLS = "/symbols"
     SYMBOLS_QUERY = "/symbols/{query}"
+    TRADING_CRYPTO_SPOT_PLACE_ORDER = "/trading/crypto/spot/placeOrder"
+    TRADING_CRYPTO_SPOT_PREVIEW_ORDER = "/trading/crypto/spot/previewOrder"
+    TRADING_CRYPTO_SPOT_SEARCH_MARKETS = "/trading/crypto/spot/searchMarkets"
+    TRADING_CRYPTO_SPOT_QUOTE = "/trading/crypto/spot/quote"

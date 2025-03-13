@@ -46,6 +46,10 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
+from snaptrade_client.apis.paths.trading_crypto_spot_place_order import TradingCryptoSpotPlaceOrder
+from snaptrade_client.apis.paths.trading_crypto_spot_preview_order import TradingCryptoSpotPreviewOrder
+from snaptrade_client.apis.paths.trading_crypto_spot_search_markets import TradingCryptoSpotSearchMarkets
+from snaptrade_client.apis.paths.trading_crypto_spot_quote import TradingCryptoSpotQuote
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -95,6 +99,10 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.TRADING_CRYPTO_SPOT_PLACE_ORDER: TradingCryptoSpotPlaceOrder,
+        PathValues.TRADING_CRYPTO_SPOT_PREVIEW_ORDER: TradingCryptoSpotPreviewOrder,
+        PathValues.TRADING_CRYPTO_SPOT_SEARCH_MARKETS: TradingCryptoSpotSearchMarkets,
+        PathValues.TRADING_CRYPTO_SPOT_QUOTE: TradingCryptoSpotQuote,
     }
 )
 
@@ -145,5 +153,9 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.TRADING_CRYPTO_SPOT_PLACE_ORDER: TradingCryptoSpotPlaceOrder,
+        PathValues.TRADING_CRYPTO_SPOT_PREVIEW_ORDER: TradingCryptoSpotPreviewOrder,
+        PathValues.TRADING_CRYPTO_SPOT_SEARCH_MARKETS: TradingCryptoSpotSearchMarkets,
+        PathValues.TRADING_CRYPTO_SPOT_QUOTE: TradingCryptoSpotQuote,
     }
 )

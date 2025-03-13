@@ -15,6 +15,7 @@ import {
   ApiStatusApi,
   AuthenticationApi,
   ConnectionsApi,
+  CryptoSpotTradingApi,
   OptionsApi,
   ReferenceDataApi,
   TradingApi,
@@ -28,6 +29,7 @@ export class Snaptrade extends SnaptradeCustom {
   readonly apiStatus: ApiStatusApi;
   readonly authentication: AuthenticationApi;
   readonly connections: ConnectionsApi;
+  readonly cryptoSpotTrading: CryptoSpotTradingApi;
   readonly options: OptionsApi;
   readonly referenceData: ReferenceDataApi;
   readonly trading: TradingApi;
@@ -40,6 +42,7 @@ export class Snaptrade extends SnaptradeCustom {
     this.apiStatus = new ApiStatusApi(configuration);
     this.authentication = new AuthenticationApi(configuration);
     this.connections = new ConnectionsApi(configuration);
+    this.cryptoSpotTrading = new CryptoSpotTradingApi(configuration);
     this.options = new OptionsApi(configuration);
     this.referenceData = new ReferenceDataApi(configuration);
     this.trading = new TradingApi(configuration);
