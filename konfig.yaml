@@ -46,16 +46,24 @@ portal:
               path: docs/essential-functionalities.md
             - id: recommended-endpoints-to-get-started
               path: docs/recommended-endpoints-to-get-started.md
+        - label: Requests
+          links:
             - id: request-ids
               path: docs/request-ids.md
             - id: ratelimiting
               path: docs/ratelimiting.md
+        - label: Connections
+          links:
             - id: fix-broken-connections
               path: docs/fix-broken-connections.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
+        - label: Trading
+          links:
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+        - label: Webhooks
+          links:
             - id: webhooks
               path: docs/webhooks.md
   demos:
