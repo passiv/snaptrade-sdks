@@ -1,4 +1,4 @@
-# Guide: Getting Started with SnapTrade
+# Getting Started with SnapTrade
 
 ![image.png](./assets/250312_model.png)
 
