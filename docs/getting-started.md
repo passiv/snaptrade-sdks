@@ -138,8 +138,7 @@ When you have at least one connected `account` and want to start making use of t
 1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, use the [List accounts](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts) endpoint to get the `accountId` of the account you wish to pull `positions` for.
 2. With the `accountId`, call [List account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions). This will return a list of positions in the specified account.
 
-Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include [List account balances
-](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance) and [https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include [List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance) and [List account recent orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders).
 
 ### How to: Place a checked trade for an account
 
