@@ -23,7 +23,7 @@ In order to generate your paid keys, you will need to have your app profile fill
 
 You don't call the Holdings API more than 4 times per day per user in the background, or more frequently than once per end-user login and at set intervals while the user is actively using your app.
 
-You don't call the activities (transactions) endpoint more than once per account every 24 hours.
+You don't call the activities (transactions) endpoint more than once per account every 24 hours for an account.
 
 If your app uses webhooks, you poll the API correctly (using the proper endpoint and payload data) in response to the specific webhook type received.
 
