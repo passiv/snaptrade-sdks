@@ -14,6 +14,8 @@ jobs:
   regenerate-sdks-on-oas-change:
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
     if: github.event.pull_request.draft == false
+    with:
+      konfig_yaml_dir: ${{ github.workspace }}
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}
