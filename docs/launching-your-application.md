@@ -13,7 +13,7 @@ The goal of this review is to:
 
 ### 1. SnapTrade Compliance Policy
 
-You have read the [SnapTrade Compliance Policy]([https://snaptrade.com/compliance-policy](https://snaptrade.com/compliance-policy)) and your application is in compliance.
+You have read the [SnapTrade Compliance Policy](https://snaptrade.com/compliance-policy) and your application is in compliance.
 
 ### 2. App Profile
 
@@ -48,19 +48,19 @@ The following endpoints have the information you need for this:
 
 You have a system for detecting disabled end-user brokerage connections (via webhook) and a defined re-connection flow to fix broken connections. This includes at least one method of detection and one way to notify users (such as in-app notifications or emails).
 
-See [How to Fix Broken Connections]([https://docs.snaptrade.com/docs/fix-broken-connections](https://docs.snaptrade.com/docs/fix-broken-connections))
+See [How to Fix Broken Connections](https://docs.snaptrade.com/docs/fix-broken-connections)
 
 ### 7. Rate-limiting
 
 You are aware of the general rate limit and have a way of gracefully handling rate-limit 429 errors in your app. If youʼre using trading functionality, youʼre not executing trades faster than 1 trade per connected account per second.
 
-See [Ratelimiting]([https://docs.snaptrade.com/docs/ratelimiting](https://docs.snaptrade.com/docs/ratelimiting)).
+See [Ratelimiting](https://docs.snaptrade.com/docs/ratelimiting).
 
 ### 8. Trading
 
 If you're using trading functionality, you must have either clear user consent for automated trading or a trade preview flow that shows all expected fees and commissions. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
 
-See [Trading with SnapTrade]([https://docs.snaptrade.com/docs/trading-with-snaptrade](https://docs.snaptrade.com/docs/trading-with-snaptrade)).
+See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
 
 ### 9. Webhooks
 
@@ -69,4 +69,4 @@ You have set your webhook listener URL in the [SnapTrade Dashboard](https://dash
 ## Next Steps
 
 - Get your Production Keys through the [SnapTrade Dashboard](https://dashboard.snaptrade.com)
-- Reach out to us at [support@snaptrade.com](mailto:support@snaptrade.com) or over [Discord]([https://discord.gg/UDwzZUuQ](https://discord.gg/UDwzZUuQ))
+- Reach out to us at [support@snaptrade.com](mailto:support@snaptrade.com) or over [Discord](https://discord.gg/UDwzZUuQ)
