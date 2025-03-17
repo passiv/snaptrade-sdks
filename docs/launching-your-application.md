@@ -21,9 +21,11 @@ In order to generate your paid keys, you will need to have your app profile fill
 
 ### 3. API polling patterns
 
-You don't call the Holdings API more than 4 times per day per user in the background, or more frequently than once per end-user login and at set intervals while the user is actively using your app.
+You don't call the Holdings API more than 4 times per day per user in the background, or more frequently than once per end-user login and at set intervals while the user is actively using your app. 
 
 You don't call the activities (transactions) endpoint more than once per account every 24 hours for an account.
+
+If you run a daily job to pull data, you spread the calls out as much as possible over the period.  
 
 If your app uses webhooks, you poll the API correctly (using the proper endpoint and payload data) in response to the specific webhook type received.
 
@@ -56,7 +58,7 @@ See [Ratelimiting]([https://docs.snaptrade.com/docs/ratelimiting](https://docs.s
 
 ### 8. Trading
 
-If you're using trading functionality, you must have either a trade preview flow or clear user consent for automated trading. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
+If you're using trading functionality, you must have either clear user consent for automated trading or a trade preview flow that shows all expected fees and commissions. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
 
 See [Trading with SnapTrade]([https://docs.snaptrade.com/docs/trading-with-snaptrade](https://docs.snaptrade.com/docs/trading-with-snaptrade)).
 
