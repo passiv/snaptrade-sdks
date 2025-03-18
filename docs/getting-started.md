@@ -101,9 +101,9 @@ You can list your created users by using the [List all users](https://docs.snapt
 
 Each `user` under your SnapTrade API key will be used to create and manage `connections` associated with that user. Each connection is associated one-to-one with a set of credentials to an institution.
 
-💡
-
-**Note**: The terms `Connections` and `Brokerage Authorizations` are interchangeable. In most documents, the term `connection` is used.
+:::info
+The terms `Connections` and `Brokerage Authorizations` are interchangeable. In most documents, the term `connection` is used.
+:::
 
 ### How to: Create a new connection for a user
 
