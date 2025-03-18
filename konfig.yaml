@@ -42,20 +42,20 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
-            - id: launch-guide
-              path: docs/launching-your-application.md
-            - id: request-ids
-              path: docs/request-ids.md
-            - id: ratelimiting
-              path: docs/ratelimiting.md
-            - id: fix-broken-connections
-              path: docs/fix-broken-connections.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
             - id: webhooks
               path: docs/webhooks.md
+            - id: request-ids
+              path: docs/request-ids.md
+            - id: fix-broken-connections
+              path: docs/fix-broken-connections.md
+            - id: ratelimiting
+              path: docs/ratelimiting.md
+            - id: launch-guide
+              path: docs/launching-your-application.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
