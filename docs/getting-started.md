@@ -1,7 +1,5 @@
 # Getting Started with SnapTrade
 
-![image.png](./assets/250312_model.png)
-
 ## Introduction
 
 Welcome to SnapTrade! This is intended to be one of the first documents you read when learning how to use the SnapTrade API and will answer many questions you might have while getting started. This document when read from top-to-bottom is also a guide for making your first connection, and will get you set up to start pulling account data and placing trades.
@@ -158,6 +156,8 @@ The order will now show over the [List account recent orders](https://docs.snapt
   - It is not consistent at the same time every day, but guaranteed once per day.
 
 ---
+
+![image.png](./assets/250312_model.png)
 
 ## Next Steps
 
