@@ -1,4 +1,4 @@
-# Methods to Integrate the Connection Portal into Your Application
+# Integrate the Connection Portal into Your Application
 
 This document outlines the various methods for integrating the connection portal with your application. You can choose from the following methods:
 
