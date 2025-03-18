@@ -5,12 +5,18 @@ on:
     types:
       - opened
       - synchronize
+      - ready_for_review
     branches:
       - master
+    paths:
+      - api.yaml
 
 jobs:
   regenerate-sdks-on-oas-change:
-    uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks-on-oas-change.yaml@main
+    uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
+    if: github.event.pull_request.draft == false
+    with:
+      konfig_yaml_dir: ./
     secrets:
       TEST_ENV: ${{ secrets.TEST_ENV }}
       KONFIG_API_KEY: ${{ secrets.KONFIG_API_KEY }}

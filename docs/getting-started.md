@@ -1,276 +1,165 @@
-# Getting Started
+# Getting Started with SnapTrade
 
-Welcome to the SnapTrade developer hub. You'll find comprehensive documentation for all our endpoints, as well as detailed guides to help you in your build.
+![image.png](./assets/250312_model.png)
 
-If you need further assistance or have any questions, please send us an email at api@snaptrade.com.
+## Introduction
 
-If you already have API Keys, you can use [our demo
-tool](demo:) to start making requests.
+Welcome to SnapTrade! This is intended to be one of the first documents you read when learning how to use the SnapTrade API and will answer many questions you might have while getting started. This document when read from top-to-bottom is also a guide for making your first connection, and will get you set up to start pulling account data and placing trades.
 
----
+Please see the FAQ of each section, as any questions you might have should be answered there.
 
-## API Status
+If after reading this document you still have questions or need help, please do not hesitate to contact us at [support@snaptrade.com](mailto:support@snaptrade.com) or through our [Discord](https://discord.gg/UDwzZUuQ).
 
-Call the :api[ApiStatus_check] endpoint to make sure the API is live and that you can make the most basic request. You should receive a response indicating the API status, current server timestamp, and internal API minor version number.
-
-Example:
-
-```json
-{ "version": 151, "timestamp": "2022-01-24T19:02:46.440074Z", "online": true }
-```
+For a live demo, see the [Getting Started Demo](https://docs.snaptrade.com/demo/getting-started).
 
 ---
 
-## Developer SDKs
+## API Keys
 
-Easily integrate with SnapTrade in your programming language of choice by using one of our SDKs:
+![image.png](./assets/250312_apikey.png)
 
-| Language     | SDK Link                           |
-|------------|-------------------------------------------------------------------------|
-| Python     | https://pypi.org/project/snaptrade-python-sdk                           |
-| TypeScript | https://www.npmjs.com/package/snaptrade-typescript-sdk                  |
-| Java       | https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk |
-| Ruby       | https://rubygems.org/gems/snaptrade                                     |
-| C#         | https://nuget.org/packages/SnapTrade.Net                                |
-| PHP        | https://packagist.org/packages/konfig/snaptrade-php-sdk                 |
-| Go         | https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go             |
 
----
+Your `API key` consists of a `clientId` and `consumerKey`. Please note that your `consumerKey` is sensitive information and should be kept secure at all times. This `API key` is used to make any requests to the SnapTrade API, and is the first thing required to get started.
 
-## Register a test user
+### How to: Create a new API Key
 
-To create a secure brokerage authorization, you first need to register a user.
+When you are ready to get started with SnapTrade and want to start making requests to our API, you will need to create your free and paid `API keys`. You may create only your free key if preferred.
 
-Call the :api[Authentication_registerSnapTradeUser] endpoint with a `userId` which can be any string as long as it's unique to a user. Upon receiving a 200 response, the user is registered successfully and you should receive a response with a user id and a randomly generated user secret. 
+1. Create a SnapTrade account at the [SnapTrade Dashboard](https://dashboard.snaptrade.com/home).
+2. Verify your email (You cannot create any `API Keys` until your account is verified).
+3. Generate your free `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
+4. [OPTIONAL] Add a payment method through the Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
+5. [OPTIONAL] Upgrade to Pay-as-you-Go through Settings > Billing page of the [SnapTrade Dashboard](https://dashboard.snaptrade.com/settings/billing).
+6. [OPTIONAL] Generate your paid `API Key` through the [SnapTrade Dashboard](https://dashboard.snaptrade.com/api-key).
 
-You can think of the user secret as a password that you will store on your users’ behalf. This, combined with your consumerKey provides additional security for your users’ data. The user id and user secret need to be passed along to all SnapTrade API endpoints that involve access to user data.
+After completing these steps, you will have two SnapTrade `API Keys`:
 
-Example:
+- A free `API Key` that limits the number of concurrent connections.
+- Optionally, a paid `API Key` that allows for unlimited connections.
 
-```json
-{ "userId": "USERID123", "userSecret": "AYSEY8726837292873" }
-```
+These two `API keys` are essentially the same in terms of functionality, and the core difference between them is that the free `API key` is limited in terms of the number of concurrent connections you can have. You can use these `API keys` to make requests to the SnapTrade API.
 
----
+### How to: Make a request to the SnapTrade API
 
-## Generate a login link
+When you have an `API Key` and want to start using the SnapTrade API, you will need to use your `API Key` to make requests to the SnapTrade API.
 
-To initiate a brokerage authorization for one of your users, you first create a redirect URI for that user to securely login to the SnapTrade Connection Portal and make brokerage connections.
+1. With your Free `API Key`, enter your `clientId` and `consumerKey` into the corresponding fields of [Get API Status](https://docs.snaptrade.com/reference/API%20Status/ApiStatus_check).
+2. Press ‘Send’.
 
-The redirect URI can be generated by sending a `POST` request to the
-:api[Authentication_loginSnapTradeUser] endpoint. `userId` and
-`userSecret` (previously generated through calling the `registerUser` endpoint)
-have to be in the query parameters of the POST request.
+In the box below the ‘request’ you should receive a response from the SnapTrade API. The [Get API Status](https://docs.snaptrade.com/reference/API%20Status/ApiStatus_check) endpoint is the most basic request you can make to the SnapTrade API.
 
-The response includes a redirectURI to be used to login a user to the connection portal.
+You can also make this request with any of the SnapTrade SDKs.
 
-Example:
+### SnapTrade SDKs
 
-```json
-{
-  "redirectURI": "https://app.snaptrade.com/snapTrade/redeemToken?token=TOKEN&clientId=PASSIVTEST"
-}
-```
+| **Language** | **SDK Link** |
+| --- | --- |
+| Python | [**https://pypi.org/project/snaptrade-python-sdk**](https://pypi.org/project/snaptrade-python-sdk) |
+| TypeScript | [**https://www.npmjs.com/package/snaptrade-typescript-sdk**](https://www.npmjs.com/package/snaptrade-typescript-sdk) |
+| Java | [**https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk**](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk) |
+| Ruby | [**https://rubygems.org/gems/snaptrade**](https://rubygems.org/gems/snaptrade) |
+| C# | [**https://nuget.org/packages/SnapTrade.Net**](https://nuget.org/packages/SnapTrade.Net) |
+| PHP | [**https://packagist.org/packages/konfig/snaptrade-php-sdk**](https://packagist.org/packages/konfig/snaptrade-php-sdk) |
+| Go | [**https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go**](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go) |
 
----
+### API Keys FAQ
 
-## Connect an account through the Connection Portal
-
-Once a user successfully logs into the connection portal, they can select their brokerage and go through the connection flow to connect their brokerage accounts.
-
-:::note
-For the initial connection, partners can pass in a broker name in the URI so users can go directly to the selected brokerage and make a connection.
-
-Example: https://app.snaptrade.com/snapTrade/redeemToken?token=TOKEN&clientId=PASSIVTEST&broker=Questrade
-:::
+- **I have lost the consumerKey to my API Key. What should I do?**
+  - You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
+- **I am getting a 'Unable to verify signature sent' error when hitting the API. What should I do?**
+  - The API request is failing when comparing the expected signature to the signature provided by your client. This can happen for many reasons, but is likely caused by attempting to configure the signature without an SDK, or an invalid consumerKey. If you need to reset your consumerKey, reach out to someone at SnapTrade.
 
 ---
 
-## Pull user holdings
+## Users
 
-In order to retrieve user holdings for a specific account, you can call the :api[AccountInformation_getUserHoldings] endpoint by passing the `clientId`, `timestamp`, `userId` and list of account numbers (`accounts`) to filter the holdings.
+![image.png](./assets/250312_apikey2users.png)
 
-In the response, you should get an array of objects containing each account holdings data.
+Your `API key` will be used to manage a set of SnapTrade `users`. A SnapTrade `user` consists of a `userId` and a `userSecret`. The `userSecret` is a randomly generated string and is sensitive information. It should be kept secure at all times.
 
-Example:
+Typically if you have an application that manages end-users, each end-user of your application will get one SnapTrade `user` that will be used to manage that end-user’s `connections`. This way, SnapTrade `users` will be one-to-one with the end-users of your application.
 
-```json
-[
-  {
-    "account": {
-      "id": "908192",
-      "brokerage": "X",
-      "number": "123456",
-      "name": "Y"
-    },
-    "balances": [
-      {
-        "currency": {
-          "id": "123",
-          "code": "CA",
-          "name": "Canadian dollar"
-        },
-        "cash": 1200
-      }
-    ],
-    "positions": [
-      {
-        "symbol": {
-          "symbol": "SYMBL",
-          "name": "Symbol name",
-          "currency": {
-            "id": "123",
-            "code": "CA",
-            "name": "Canadian dollar"
-          },
-          "exchange": {
-            "code": "123123",
-            "name": "X"
-          }
-        },
-        "units": "1",
-        "price": 12
-      }
-    ]
-  }
-]
-```
+### How to: Create a new SnapTrade User
+
+When you have a working `API Key` and want to create a new `connection` for a `user`, you will first need to register a SnapTrade `user`.
+
+1. Using your API Key, create a request to the [Register user](https://docs.snaptrade.com/reference/Authentication/Authentication_registerSnapTradeUser) endpoint. You will need to provide a unique SnapTrade `userId` . This can be anything that is immutable. For this reason, it is recommended to NOT use email addresses for a SnapTrade `userId`.
+2. The response you receive from the SnapTrade API will contain the `userId` you provided and the `userSecret` generated by SnapTrade. The `userSecret` is a randomly generated string and is sensitive information.
+
+You can list your created users by using the [List all users](https://docs.snaptrade.com/reference/Authentication/Authentication_listSnapTradeUsers) endpoint, and you can delete created users by using the [Delete user](https://docs.snaptrade.com/reference/Authentication/Authentication_deleteSnapTradeUser) endpoint. If needed, you may reset a user’s userSecret by using the [Rotate user secret](https://docs.snaptrade.com/reference/Authentication/Authentication_resetSnapTradeUserSecret) endpoint. Now that you have one or more SnapTrade `users` under your `API Key`, you are ready to create `connections` under these `users`.
+
+### Users FAQ
+
+- **I have lost the userSecret to one of my SnapTrade users. What should I do?**
+  - If you lose the userSecret the easiest thing to do is create a new user and ask the end user to reconnect.
+- **The userSecret to one of my SnapTrade users has been compromised. What should I do?**
+  - The best thing to do in this case is to rotate the user secret using [Rotate user secret](https://docs.snaptrade.com/reference/Authentication/Authentication_resetSnapTradeUserSecret).
 
 ---
 
-## Place a limit order
+## Connections
 
-To place an order through SnapTrade API, you need to go through the following two steps:
+![image.png](./assets/250312_users2connections.png)
 
-1- To receive information on how a specific order will impact an account, send a
-`POST` request to :api[Trading_getOrderImpact] endpoint. The
-following example is how the body of the request should look like:
+Each `user` under your SnapTrade API key will be used to create and manage `connections` associated with that user. Each connection is associated one-to-one with a set of credentials to an institution.
 
-```json
-{
-  "account_id": "123456",
-  "universal_symbol_id": "78910",
-  "order_type": "Limit",
-  "time_in_force": "Day",
-  "action": "BUY",
-  "units": 1,
-  "price": 12.9
-}
-```
+💡
 
-Example of the response:
+**Note**: The terms `Connections` and `Brokerage Authorizations` are interchangeable. In most documents, the term `connection` is used.
 
-```json
-{
-  "trade": {
-    "id": "0987654321",
-    "account": "ACCOUNTID",
-    "order_type": "Limit",
-    "time_in_force": "Day",
-    "symbol": {
-      "brokerage_symbol_id": "1234567",
-      "universal_symbol_id": "8912345",
-      "currency": {
-        "id": "012345",
-        "code": "USD"
-      },
-      "local_id": "121314",
-      "description": "SYMBOL",
-      "symbol": "SYMBL"
-    },
-    "action": "BUY",
-    "units": 1,
-    "price": 12.9
-  },
-  "trade_impacts": [
-    {
-      "account": "778899",
-      "currency": "023901",
-      "remaining_cash": -466.0569,
-      "estimated_commissions": 0.0,
-      "forex_fees": 0.0
-    },
-    {
-      "account": "12132214",
-      "currency": "f123123",
-      "remaining_cash": 667.8219,
-      "estimated_commissions": 0.0,
-      "forex_fees": 0.0
-    }
-  ],
-  "combined_remaining_balance": {
-    "account": "99881882",
-    "currency": "57fs1223",
-    "cash": 64.5564
-  }
-}
-```
+### How to: Create a new connection for a user
 
-:::warn
-An order impact request can fail with a 400 response code due to reasons such as `Markets are not open`, `Not enough cash to place trades`, `Exchange does not support market orders`, etc. The reason for a failed request would be in the body of the response.
-:::
+When you have a SnapTrade user and want to get access to their account data and/or place trades for an account, you will need to create a `connection` for that user.
 
-Example of the response for a failed request:
+1. Generate a new redirectURI for the SnapTrade Connection Portal using [Generate Connection Portal URL](https://docs.snaptrade.com/reference/Authentication/Authentication_loginSnapTradeUser)
+3. Open the generated link. Depending on your application, there are different ways to open this link. See [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal).
 
-```json
-{
-  "detail": "Not enough cash to place trades",
-  "status_code": 400,
-  "code": "1068"
-}
-```
+Once you have successfully completed the Connection Portal Flow, you should have an active connection to work with, and should have access to the accounts under that connection.
+
+### Connections FAQ
+
+- **How do I enable connecting to 'X' broker on my API Key?**
+  - By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
 
 ---
 
-2- To place the order you need to send in the trade id (received through calling
-the `Trade Impact` endpoint) as a query parameter to the :api[Trading_placeOrder] endpoint.
-The successful request would indicate the status of the order (`EXECUTED`,
-`ACCEPTED`, `FAILED`, `REJECTED`, `PENDING`, etc.) along with other information related
-to the order placed.
+## Accounts
 
-Example of the response:
+![image.png](./assets/250312_connections2accounts.png)
 
-```json
-{
-  "brokerage_order_id": "123456",
-  "status": "ACCEPTED",
-  "symbol": "7891011",
-  "universal_symbol": {
-    "id": "123456",
-    "symbol": "SYMBL",
-    "description": "Symbol",
-    "currency": {
-      "id": "1021993",
-      "code": "USD",
-      "name": "US Dollar"
-    },
-    "currencies": [],
-    "type": {
-      "id": "ceb92399",
-      "code": "code",
-      "is_supported": true
-    }
-  },
-  "action": "BUY",
-  "total_quantity": "1.00000000",
-  "open_quantity": "1.00000000",
-  "canceled_quantity": "0.00000000",
-  "filled_quantity": "0.00000000",
-  "execution_price": "0.0000",
-  "limit_price": "12.9000",
-  "stop_price": null,
-  "order_type": "Limit",
-  "time_in_force": "Day",
-  "time_placed": "2022-01-01T10:08:09.044000-05:00",
-  "time_updated": "2022-01-01T10:08:09.113000-05:00",
-  "expiry_date": null
-}
-```
+When you create a `connection`, SnapTrade will automatically sync all `accounts` under the set of credentials to the brokerage. For example, if you made a new `connection` to Questrade (a Canadian brokerage) and that `connection` had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these `accounts` accessible over the SnapTrade API.
+
+Once you have a connected `account`, you are ready to move on to pulling account data, and placing trades for that account.
+
+### How to: Get positions for an account
+
+When you have at least one connected `account` and want to start making use of the `positions`, you will first need to get the `accountId`.
+
+1. You can find the `accountId` anywhere over the API where the `account` object is returned. In this example, use the [List accounts](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts) endpoint to get the `accountId` of the account you wish to pull `positions` for.
+2. With the `accountId`, call [List account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions). This will return a list of positions in the specified account.
+
+Once you have `positions` returned, you’re able to make use of the data in analysis, monitoring, or another use-case you might be interested in. Other core endpoints for retrieving account information include [List account balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance) and [List account recent orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders).
+
+### How to: Place a checked trade for an account
+
+When you have at least one connected `account` and want to place a trade in the account, you will need to follow these steps to place a checked order. Note that you may also place an order without checking it.
+
+1. You need to get the `universalSymbolId` for the instrument that you wish to place an order for. You can find this using [Search account symbols](https://docs.snaptrade.com/reference/Reference%20Data/ReferenceData_symbolSearchUserAccount).
+2. Validate the order with [Check order impact](https://docs.snaptrade.com/reference/Trading/Trading_getOrderImpact). This is a safe way to check the impact that the trade will have on the account if it is executed, and this is recommended to show on a screen to your user to have them confirm the order. Save the `tradeId` returned by this endpoint, it will be used in the next step. This `tradeId` will expire after a few minutes.
+3. Using the `tradeId` returned from [Check order impact](https://docs.snaptrade.com/reference/Trading/Trading_getOrderImpact), place the checked order using [Place checked order](https://docs.snaptrade.com/reference/Trading/Trading_placeOrder). This will place the order at the brokerage for the account, and return the response given by the broker.
+
+The order will now show over the [List account recent orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoint. If it does not, you may need to trigger a refresh for the connection using [https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization).
+
+### Accounts FAQ
+
+- **My account data is stale, why is my account not syncing every day?**
+  - The connection is probably disabled, this happens when the access token is no longer valid. Please check using the [connection detail endpoint](https://docs.snaptrade.com/reference/Connections/Connections_detailBrokerageAuthorization) and follow [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) to repair the connection.
+- **When does the account data actually get synced daily?**
+  - It is not consistent at the same time every day, but guaranteed once per day.
 
 ---
 
-## Delete an open order
+## Next Steps
 
-To cancel an open order, you need to `POST` to the
-:api[Trading_cancelUserAccountOrder] endpoint with the `account id` in the query
-params and the `brokerage order id` in the body of the request.
+- To get started with Webhooks, see [Webhooks](https://docs.snaptrade.com/docs/webhooks)
+- To get started with implementing the SnapTrade Connection Portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal)

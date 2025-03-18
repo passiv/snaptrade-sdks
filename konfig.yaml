@@ -42,10 +42,8 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
-            - id: essential-functionalities
-              path: docs/essential-functionalities.md
-            - id: recommended-endpoints-to-get-started
-              path: docs/recommended-endpoints-to-get-started.md
+            - id: launch-guide
+              path: docs/launching-your-application.md
             - id: request-ids
               path: docs/request-ids.md
             - id: ratelimiting
