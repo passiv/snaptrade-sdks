@@ -120,7 +120,7 @@ Once you have successfully completed the Connection Portal Flow, you should have
   - By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
 
 ---
-:api[Connections_detailBrokerageAuthorization]
+
 ## Accounts
 
 ![image.png](./assets/250312_connections2accounts.png)
