@@ -62,6 +62,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
+  * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
@@ -1725,6 +1726,91 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to
 ---
 
 
+### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.place_bracket_order(
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  symbol: "AAPL",
+  order_type: "Market",
+  time_in_force: "FOK",
+  stop_loss: {
+        "stop_price" => "48.55",
+        "limit_price" => "48.50",
+    },
+  take_profit: {
+        "limit_price" => "49.95",
+    },
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `String`<a id="account_id-string"></a>
+Unique identifier for the connected brokerage account. This is the UUID used to
+reference the account in SnapTrade.
+
+##### action: [`ActionStrictWithOptions`](./lib/snaptrade/models/action_strict_with_options.rb)<a id="action-actionstrictwithoptionslibsnaptrademodelsaction_strict_with_optionsrb"></a>
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or
+`SELL_TO_CLOSE` for Options.
+
+##### symbol: `String`<a id="symbol-string"></a>
+The security's trading ticker symbol.
+
+##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
+The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
+field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
+required.
+
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely.
+
+##### stop_loss: [`StopLoss`](./lib/snaptrade/models/stop_loss.rb)<a id="stop_loss-stoplosslibsnaptrademodelsstop_lossrb"></a>
+##### take_profit: [`TakeProfit`](./lib/snaptrade/models/take_profit.rb)<a id="take_profit-takeprofitlibsnaptrademodelstake_profitrb"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### price: `Float`<a id="price-float"></a>
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Float`<a id="stop-float"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `Float`<a id="units-float"></a>
+Number of shares for the order. This can be a decimal for fractional orders.
+Must be `null` if `notional_value` is provided.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/trade/placeBracketOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -1750,14 +1836,6 @@ result = snaptrade.trading.place_force_order(
   stop: 31.33,
   units: 10.5,
   notional_value: None,
-  order_class: "BRACKET",
-  stop_loss: {
-        "stop_price" => "48.55",
-        "limit_price" => "48.50",
-    },
-  take_profit: {
-        "limit_price" => "49.95",
-    },
 )
 p result
 ```
@@ -1793,10 +1871,10 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is
 provided, otherwise must be provided.
 
 ##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol. This currently only support Options
-symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\"
-represents a call option on AAPL expiring on 2024-11-13 with a strike price of
-$240. For more information on the OCC format, see
+The security's trading ticker symbol. This currently supports stock symbols and
+Options symbols in the 21 character OCC format. For example \"AAPL
+131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a
+strike price of $240. For more information on the OCC format, see
 [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is
 provided, then 'universal_symbol_id' must be 'null'.
 
@@ -1813,15 +1891,6 @@ provided. If placing an Option order, this field represents the number of
 contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./lib/snaptrade/models/manual_trade_form_notional_value.rb)<a id="notional_value-manualtradeformnotionalvaluelibsnaptrademodelsmanual_trade_form_notional_valuerb"></a>
-##### order_class: [`OrderClass`](./lib/snaptrade/models/order_class.rb)<a id="order_class-orderclasslibsnaptrademodelsorder_classrb"></a>
-The class of order intended to be placed. Defaults to SIMPLE for regular, one
-legged trades. Set to BRACKET if looking to place a bracket
-(One-triggers-a-one-cancels-the-other) order, then specify take profit and stop
-loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and
-Tradestation, contact us for more details
-
-##### stop_loss: [`ManualTradeFormWithOptionsStopLoss`](./lib/snaptrade/models/manual_trade_form_with_options_stop_loss.rb)<a id="stop_loss-manualtradeformwithoptionsstoplosslibsnaptrademodelsmanual_trade_form_with_options_stop_lossrb"></a>
-##### take_profit: [`ManualTradeFormWithOptionsTakeProfit`](./lib/snaptrade/models/manual_trade_form_with_options_take_profit.rb)<a id="take_profit-manualtradeformwithoptionstakeprofitlibsnaptrademodelsmanual_trade_form_with_options_take_profitrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)

@@ -41,6 +41,8 @@ from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.model.brokerage_order_id import BrokerageOrderID
 from snaptrade_client.model.brokerage_symbol_id import BrokerageSymbolID
 from snaptrade_client.model.brokerage_type import BrokerageType
+from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
+from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.currency_id import CurrencyID
@@ -63,6 +65,7 @@ from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact
 from snaptrade_client.model.manual_trade_balance import ManualTradeBalance
 from snaptrade_client.model.manual_trade_form import ManualTradeForm
+from snaptrade_client.model.manual_trade_form_bracket import ManualTradeFormBracket
 from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
@@ -121,7 +124,6 @@ from snaptrade_client.model.snap_trade_login_user_request_body import SnapTradeL
 from snaptrade_client.model.snap_trade_register_user_request_body import SnapTradeRegisterUserRequestBody
 from snaptrade_client.model.status import Status
 from snaptrade_client.model.stop_loss import StopLoss
-from snaptrade_client.model.stop_loss_nullable import StopLossNullable
 from snaptrade_client.model.strategy_order_record import StrategyOrderRecord
 from snaptrade_client.model.strategy_quotes import StrategyQuotes
 from snaptrade_client.model.strategy_quotes_greek import StrategyQuotesGreek
@@ -133,7 +135,6 @@ from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.sync_status_date_nullable import SyncStatusDateNullable
 from snaptrade_client.model.take_profit import TakeProfit
-from snaptrade_client.model.take_profit_nullable import TakeProfitNullable
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
