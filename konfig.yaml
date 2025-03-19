@@ -98,6 +98,8 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
+    /trade/placeBracketOrder:
+      post: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
