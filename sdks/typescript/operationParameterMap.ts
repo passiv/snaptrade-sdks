@@ -317,6 +317,140 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/crypto/spot/cancelOrder-POST': {
+        parameters: [
+            {
+                name: 'brokerage_order_id'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/placeOrder-POST': {
+        parameters: [
+            {
+                name: 'symbol'
+            },
+            {
+                name: 'side'
+            },
+            {
+                name: 'type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'amount'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'post_only'
+            },
+            {
+                name: 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/previewOrder-POST': {
+        parameters: [
+            {
+                name: 'symbol'
+            },
+            {
+                name: 'side'
+            },
+            {
+                name: 'type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'amount'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'post_only'
+            },
+            {
+                name: 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/quote-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'base'
+            },
+            {
+                name: 'quote'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/symbols-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'base'
+            },
+            {
+                name: 'quote'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionStrategy-POST': {
         parameters: [
             {
@@ -549,6 +683,46 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/trade/placeBracketOrder-POST': {
+        parameters: [
+            {
+                name: 'account_id'
+            },
+            {
+                name: 'action'
+            },
+            {
+                name: 'symbol'
+            },
+            {
+                name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'stop_loss'
+            },
+            {
+                name: 'take_profit'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'price'
+            },
+            {
+                name: 'stop'
+            },
+            {
+                name: 'units'
+            },
+        ]
+    },
     '/trade/place-POST': {
         parameters: [
             {
@@ -586,15 +760,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'notional_value'
-            },
-            {
-                name: 'order_class'
-            },
-            {
-                name: 'stop_loss'
-            },
-            {
-                name: 'take_profit'
             },
         ]
     },

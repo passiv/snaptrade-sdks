@@ -46,6 +46,11 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_cancel_order`](#snaptradecrypto_spot_tradingcrypto_spot_cancel_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_place_order`](#snaptradecrypto_spot_tradingcrypto_spot_place_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_preview_order`](#snaptradecrypto_spot_tradingcrypto_spot_preview_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_quote`](#snaptradecrypto_spot_tradingcrypto_spot_quote)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_symbols`](#snaptradecrypto_spot_tradingcrypto_spot_symbols)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -65,6 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
+  * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
@@ -1111,6 +1117,300 @@ Optional comma separated list of session IDs used to filter the request on speci
 
 ---
 
+### `snaptrade.crypto_spot_trading.crypto_spot_cancel_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_cancel_order"></a>
+
+Cancels a cryptocurrency spot order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crypto_spot_cancel_order_response = (
+    snaptrade.crypto_spot_trading.crypto_spot_cancel_order(
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/cancelOrder` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.crypto_spot_trading.crypto_spot_place_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_place_order"></a>
+
+Places a spot cryptocurrency order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crypto_spot_place_order_response = (
+    snaptrade.crypto_spot_trading.crypto_spot_place_order(
+        symbol={
+            "base": "BTC",
+            "quote": "BTC",
+        },
+        side="BUY",
+        type="MARKET",
+        time_in_force="GTC",
+        amount="123.45",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        limit_price="123.45",
+        stop_price="123.45",
+        post_only=False,
+        expiration_date="2024-01-01T00:00:00Z",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./snaptrade_client/type/cryptocurrency_pair.py)<a id="symbol-cryptocurrencypairsnaptrade_clienttypecryptocurrency_pairpy"></a>
+
+
+##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### type: `str`<a id="type-str"></a>
+
+The type of order to place.
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `str`<a id="amount-str"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `str`<a id="limit_price-str"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `str`<a id="stop_price-str"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/placeOrder` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.crypto_spot_trading.crypto_spot_preview_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_preview_order"></a>
+
+Previews a cryptocurrency spot order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crypto_spot_preview_order_response = (
+    snaptrade.crypto_spot_trading.crypto_spot_preview_order(
+        symbol={
+            "base": "BTC",
+            "quote": "BTC",
+        },
+        side="BUY",
+        type="MARKET",
+        time_in_force="GTC",
+        amount="123.45",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        limit_price="123.45",
+        stop_price="123.45",
+        post_only=False,
+        expiration_date="2024-01-01T00:00:00Z",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./snaptrade_client/type/cryptocurrency_pair.py)<a id="symbol-cryptocurrencypairsnaptrade_clienttypecryptocurrency_pairpy"></a>
+
+
+##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### type: `str`<a id="type-str"></a>
+
+The type of order to place.
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `str`<a id="amount-str"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `str`<a id="limit_price-str"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `str`<a id="stop_price-str"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`CryptoSpotOrderPreview`](./snaptrade_client/type/crypto_spot_order_preview.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/previewOrder` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.crypto_spot_trading.crypto_spot_quote`<a id="snaptradecrypto_spot_tradingcrypto_spot_quote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crypto_spot_quote_response = snaptrade.crypto_spot_trading.crypto_spot_quote(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="BTC",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### base: `str`<a id="base-str"></a>
+
+##### quote: `str`<a id="quote-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`CryptoSpotQuote`](./snaptrade_client/type/crypto_spot_quote.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/quote` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.crypto_spot_trading.crypto_spot_symbols`<a id="snaptradecrypto_spot_tradingcrypto_spot_symbols"></a>
+
+Searches cryptocurrency spot symbols accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+crypto_spot_symbols_response = snaptrade.crypto_spot_trading.crypto_spot_symbols(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base="BTC",
+    quote="BTC",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### base: `str`<a id="base-str"></a>
+
+##### quote: `str`<a id="quote-str"></a>
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/symbols` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -1805,6 +2105,89 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 
 ---
 
+### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_bracket_order_response = snaptrade.trading.place_bracket_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    symbol="AAPL",
+    order_type="Market",
+    time_in_force="FOK",
+    stop_loss={
+        "stop_price": "48.55",
+        "limit_price": "48.50",
+    },
+    take_profit={
+        "limit_price": "49.95",
+    },
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The security's trading ticker symbol.
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### stop_loss: [`StopLoss`](./snaptrade_client/type/stop_loss.py)<a id="stop_loss-stoplosssnaptrade_clienttypestop_losspy"></a>
+
+
+##### take_profit: [`TakeProfit`](./snaptrade_client/type/take_profit.py)<a id="take_profit-takeprofitsnaptrade_clienttypetake_profitpy"></a>
+
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ManualTradeFormBracket`](./snaptrade_client/type/manual_trade_form_bracket.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/trade/placeBracketOrder` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -1830,14 +2213,6 @@ place_force_order_response = snaptrade.trading.place_force_order(
     stop=31.33,
     units=10.5,
     notional_value=None,
-    order_class="BRACKET",
-    stop_loss={
-        "stop_price": "48.55",
-        "limit_price": "48.50",
-    },
-    take_profit={
-        "limit_price": "49.95",
-    },
 )
 ```
 
@@ -1863,7 +2238,7 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 
 ##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
 
-The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -1878,16 +2253,6 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
-
-##### order_class: `Optional[str]`<a id="order_class-optionalstr"></a>
-
-The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-
-##### stop_loss: [`StopLossNullable`](./snaptrade_client/type/stop_loss_nullable.py)<a id="stop_loss-stoplossnullablesnaptrade_clienttypestop_loss_nullablepy"></a>
-
-
-##### take_profit: [`TakeProfitNullable`](./snaptrade_client/type/take_profit_nullable.py)<a id="take_profit-takeprofitnullablesnaptrade_clienttypetake_profit_nullablepy"></a>
-
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

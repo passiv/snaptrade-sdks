@@ -408,6 +408,160 @@ module SnapTrade
     end
 
 
+    # Place a Bracket Order
+    #
+    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+    # use. Only supported on certain brokerages
+    #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+    # @param symbol [String] The security's trading ticker symbol.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+    # @param stop_loss [StopLoss] 
+    # @param take_profit [TakeProfit] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    # @param body [ManualTradeFormBracket] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_bracket_order(account_id:, action:, symbol:, order_type:, time_in_force:, stop_loss:, take_profit:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
+      _body[:take_profit] = take_profit if take_profit != SENTINEL
+      manual_trade_form_bracket = _body
+      data, _status_code, _headers = place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, extra)
+      data
+    end
+
+    # Place a Bracket Order
+    #
+    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+    # use. Only supported on certain brokerages
+    #
+    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+    # @param symbol [String] The security's trading ticker symbol.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+    # @param stop_loss [StopLoss] 
+    # @param take_profit [TakeProfit] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    # @param body [ManualTradeFormBracket] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_bracket_order_with_http_info(account_id:, action:, symbol:, order_type:, time_in_force:, stop_loss:, take_profit:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+      _body = {}
+      _body[:account_id] = account_id if account_id != SENTINEL
+      _body[:action] = action if action != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
+      _body[:take_profit] = take_profit if take_profit != SENTINEL
+      manual_trade_form_bracket = _body
+      place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, extra)
+    end
+
+    # Place a Bracket Order
+    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_form_bracket [ManualTradeFormBracket] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountOrderRecord]
+    private def place_bracket_order_impl(user_id, user_secret, manual_trade_form_bracket, opts = {})
+      data, _status_code, _headers = place_bracket_order_with_http_info(user_id, user_secret, manual_trade_form_bracket, opts)
+      data
+    end
+
+    # Place a Bracket Order
+    # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_form_bracket [ManualTradeFormBracket] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
+    private def place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.place_bracket_order ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_bracket_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_bracket_order"
+      end
+      # verify the required parameter 'manual_trade_form_bracket' is set
+      if @api_client.config.client_side_validation && manual_trade_form_bracket.nil?
+        fail ArgumentError, "Missing the required parameter 'manual_trade_form_bracket' when calling TradingApi.place_bracket_order"
+      end
+      # resource path
+      local_var_path = '/trade/placeBracketOrder'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_form_bracket)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.place_bracket_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#place_bracket_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Place order
     #
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -423,17 +577,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
-    # @param symbol [String] The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param symbol [String] The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
-    # @param order_class [OrderClass] The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-    # @param stop_loss [ManualTradeFormWithOptionsStopLoss] 
-    # @param take_profit [ManualTradeFormWithOptionsTakeProfit] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, order_class: SENTINEL, stop_loss: SENTINEL, take_profit: SENTINEL, extra: {})
+    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -445,9 +596,6 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
-      _body[:order_class] = order_class if order_class != SENTINEL
-      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
-      _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_with_options = _body
       data, _status_code, _headers = place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
       data
@@ -468,17 +616,14 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
-    # @param symbol [String] The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param symbol [String] The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL 131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
-    # @param order_class [OrderClass] The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-    # @param stop_loss [ManualTradeFormWithOptionsStopLoss] 
-    # @param take_profit [ManualTradeFormWithOptionsTakeProfit] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, order_class: SENTINEL, stop_loss: SENTINEL, take_profit: SENTINEL, extra: {})
+    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -490,9 +635,6 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       _body[:notional_value] = notional_value if notional_value != SENTINEL
-      _body[:order_class] = order_class if order_class != SENTINEL
-      _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
-      _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_with_options = _body
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
     end

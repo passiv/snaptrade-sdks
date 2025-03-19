@@ -12,8 +12,6 @@ import type * as buffer from "buffer"
 
 import { ActionStrictWithOptions } from './action-strict-with-options';
 import { ManualTradeFormNotionalValue } from './manual-trade-form-notional-value';
-import { ManualTradeFormWithOptionsStopLoss } from './manual-trade-form-with-options-stop-loss';
-import { ManualTradeFormWithOptionsTakeProfit } from './manual-trade-form-with-options-take-profit';
 import { OrderTypeStrict } from './order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
 
@@ -42,7 +40,7 @@ export interface ManualTradeFormWithOptions {
      */
     'universal_symbol_id'?: string | null;
     /**
-     * The security\'s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \'symbol\' is provided, then \'universal_symbol_id\' must be \'null\'.
+     * The security\'s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \'symbol\' is provided, then \'universal_symbol_id\' must be \'null\'.
      * @type {string}
      * @memberof ManualTradeFormWithOptions
      */
@@ -83,26 +81,5 @@ export interface ManualTradeFormWithOptions {
      * @memberof ManualTradeFormWithOptions
      */
     'notional_value'?: ManualTradeFormNotionalValue | null;
-    /**
-     * The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-     * @type {string}
-     * @memberof ManualTradeFormWithOptions
-     */
-    'order_class'?: ManualTradeFormWithOptionsOrderClassEnum;
-    /**
-     * 
-     * @type {ManualTradeFormWithOptionsStopLoss}
-     * @memberof ManualTradeFormWithOptions
-     */
-    'stop_loss'?: ManualTradeFormWithOptionsStopLoss | null;
-    /**
-     * 
-     * @type {ManualTradeFormWithOptionsTakeProfit}
-     * @memberof ManualTradeFormWithOptions
-     */
-    'take_profit'?: ManualTradeFormWithOptionsTakeProfit | null;
 }
-
-type ManualTradeFormWithOptionsOrderClassEnum = 'SIMPLE' | 'BRACKET'
-
 

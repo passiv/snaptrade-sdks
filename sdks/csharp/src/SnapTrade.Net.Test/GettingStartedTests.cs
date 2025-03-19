@@ -43,6 +43,8 @@ namespace SnapTrade.Net.Test.Api
 
         private OptionsApi optionsApi;
 
+        private CryptoSpotTradingApi cryptoSpotTradingApi;
+
         private string testUserId;
 
         private string testUserSecret;
@@ -53,19 +55,28 @@ namespace SnapTrade.Net.Test.Api
 
         public GettingStartedTests()
         {
-            Configuration configuration = new Configuration();
-            this.clientId = System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
-            this.consumerKey = System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
-            this.testUserId = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_ID");
-            this.testUserSecret = System.Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_SECRET");
-            configuration.ApiKey.Add("clientId", clientId);
-            configuration.ConsumerKey = consumerKey;
+            this.clientId = Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID");
+            this.consumerKey = Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY");
+            this.testUserId = Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_ID");
+            this.testUserSecret = Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_SECRET");
+            var basePathOverride = Environment.GetEnvironmentVariable("SNAPTRADE_API_URL_OVERRIDE");
+
+            var configuration = new Configuration
+            {
+                ApiKey = {
+                    { "clientId", clientId }
+                },
+                BasePath = string.IsNullOrEmpty(basePathOverride) ? null : basePathOverride,
+                ConsumerKey = this.consumerKey
+            };
+
             apiStatusApi = new APIStatusApi(configuration);
             authenticationApi = new AuthenticationApi(configuration);
             accountInformationApi = new AccountInformationApi(configuration);
             transactionsAndReportingApi = new TransactionsAndReportingApi(configuration);
             referenceDataApi = new ReferenceDataApi(configuration);
             optionsApi = new OptionsApi(configuration);
+            cryptoSpotTradingApi = new CryptoSpotTradingApi(configuration);
         }
 
         public void Dispose()
@@ -186,5 +197,100 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(optionsChain);
         }
 
+        // TODO: Disable or delete
+        [Fact]
+        public void CryptoSpotOrderExample() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            // Get a quote
+            var symbol = new CryptocurrencyPair("DOGE", "USDC");
+            var quote = cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: symbol.Base,
+                quote: symbol.Quote
+            );
+            Console.WriteLine("quote: {0}", quote);
+
+            // Place a limit order
+            var placeOrderResult = cryptoSpotTradingApi.CryptoSpotPlaceOrder(
+                testUserId,
+                testUserSecret,
+                accountId: accountId,
+                new TradingCryptoSpotPlaceOrderRequest(
+                    symbol: symbol,
+                    side: ActionStrict.SELL,
+                    type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.LIMIT,
+                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTD,
+                    expirationDate: DateTime.UtcNow.AddHours(1),
+                    amount:42.2m,
+                    limitPrice: quote.Ask + 0.1m,
+                    postOnly: true
+                )
+            );
+
+            Console.WriteLine("placeOrderResult: {0}", placeOrderResult);
+
+            // Cancel the order
+            var cancelOrderResult = cryptoSpotTradingApi.CryptoSpotCancelOrder(
+                testUserId,
+                testUserSecret,
+                accountId: accountId,
+                new TradingCryptoSpotCancelOrderRequest(placeOrderResult.BrokerageOrderId)
+            );
+
+            Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);
+        }
+
+        [Fact]
+        public void PreviewCryptoSpotOrder() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotPreviewOrder(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                new TradingCryptoSpotPlaceOrderRequest(
+                    symbol: new CryptocurrencyPair("DOGE", "USDC"),
+                    side: ActionStrict.BUY,
+                    type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.MARKET,
+                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.IOC,
+                    amount:20.2m
+                )
+            );
+
+            Console.WriteLine(response);
+        }
+
+        [Fact]
+        public void CryptoSpotQuote() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: "BTC",
+                quote: "USDT"
+            );
+
+            Console.WriteLine(response);
+        }
+
+        [Fact]
+        public void SearchSymbols() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: "BTC",
+                quote: "USDT"
+            );
+
+            Console.WriteLine(response);
+        }
     }
 }

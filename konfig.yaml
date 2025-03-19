@@ -84,6 +84,16 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
+    /accounts/{accountId}/trading/crypto/spot/symbols:
+      get: true
+    /accounts/{accountId}/trading/crypto/spot/quote:
+      get: true
+    /accounts/{accountId}/trading/crypto/spot/previewOrder:
+      post: true
+    /accounts/{accountId}/trading/crypto/spot/placeOrder:
+      post: true
+    /accounts/{accountId}/trading/crypto/spot/cancelOrder:
+      post: true
     /brokerageAuthorizationTypes:
       get: true
     /currencies:

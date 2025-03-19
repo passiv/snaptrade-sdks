@@ -60,7 +60,8 @@ namespace SnapTrade.Net.Model
         /// <param name="timeExecuted">The time the order was executed in the brokerage system. This value is not always available from the brokerage..</param>
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
         /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string)) : base()
+        /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
@@ -81,6 +82,7 @@ namespace SnapTrade.Net.Model
             this.TimeExecuted = timeExecuted;
             this.ExpiryDate = expiryDate;
             this.Symbol = symbol;
+            this.ChildBrokerageOrderIds = childBrokerageOrderIds;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -210,6 +212,12 @@ namespace SnapTrade.Net.Model
         public string Symbol { get; set; }
 
         /// <summary>
+        /// Gets or Sets ChildBrokerageOrderIds
+        /// </summary>
+        [DataMember(Name = "child_brokerage_order_ids", EmitDefaultValue = true)]
+        public ChildBrokerageOrderIDsNullable ChildBrokerageOrderIds { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -243,6 +251,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeExecuted: ").Append(TimeExecuted).Append("\n");
             sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  ChildBrokerageOrderIds: ").Append(ChildBrokerageOrderIds).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -372,6 +381,11 @@ namespace SnapTrade.Net.Model
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
+                    this.ChildBrokerageOrderIds == input.ChildBrokerageOrderIds ||
+                    (this.ChildBrokerageOrderIds != null &&
+                    this.ChildBrokerageOrderIds.Equals(input.ChildBrokerageOrderIds))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -457,6 +471,10 @@ namespace SnapTrade.Net.Model
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
+                if (this.ChildBrokerageOrderIds != null)
+                {
+                    hashCode = (hashCode * 59) + this.ChildBrokerageOrderIds.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

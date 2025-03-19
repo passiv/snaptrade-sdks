@@ -2,3 +2,4 @@ src/SnapTrade.Net.Test/GettingStartedTests.cs
 src/SnapTrade.Net.Test/MockedTest.cs
 src/SnapTrade.Net/Client/ApiClientCustom.cs
 src/SnapTrade.Net.Test/Api/TradingApiTests.cs
+src/SnapTrade.Net.Test/Api/CryptoSpotTradingApiTests.cs

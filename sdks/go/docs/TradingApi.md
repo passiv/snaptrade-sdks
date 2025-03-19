@@ -7,6 +7,7 @@ Method | Path | Description
 [**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check order impact
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
+[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /trade/placeBracketOrder | Place a Bracket Order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked order
 
@@ -73,6 +74,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CancelUserAccountOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 
@@ -197,6 +199,87 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## PlaceBracketOrder
+
+Place a Bracket Order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    stopLoss := *snaptrade.NewStopLoss()
+    takeProfit := *snaptrade.NewTakeProfit()
+    
+    manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
+        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        null,
+        "AAPL",
+        null,
+        null,
+        stopLoss,
+        takeProfit,
+    )
+    manualTradeFormBracket.SetPrice(31.33)
+    manualTradeFormBracket.SetStop(31.33)
+    manualTradeFormBracket.SetUnits(10.5)
+    
+    request := client.TradingApi.PlaceBracketOrder(
+        "userId_example",
+        "userSecret_example",
+        manualTradeFormBracket,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceBracketOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceBracketOrder`: AccountOrderRecord
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceBracketOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Action`: %v\n", *resp.Action)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.LimitPrice`: %v\n", *resp.LimitPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.StopPrice`: %v\n", *resp.StopPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.OrderType`: %v\n", *resp.OrderType)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeInForce`: %v\n", *resp.TimeInForce)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimePlaced`: %v\n", *resp.TimePlaced)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceBracketOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PlaceForceOrder
 
 Place order
@@ -223,8 +306,6 @@ func main() {
     universalSymbolId := *snaptrade.Newstring()
     units := *snaptrade.Newfloat32()
     notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
-    stopLoss := *snaptrade.NewManualTradeFormWithOptionsStopLoss()
-    takeProfit := *snaptrade.NewManualTradeFormWithOptionsTakeProfit()
     
     manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
         "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -238,9 +319,6 @@ func main() {
     manualTradeFormWithOptions.SetStop(31.33)
     manualTradeFormWithOptions.SetUnits(units)
     manualTradeFormWithOptions.SetNotionalValue(notionalValue)
-    manualTradeFormWithOptions.SetOrderClass("BRACKET")
-    manualTradeFormWithOptions.SetStopLoss(stopLoss)
-    manualTradeFormWithOptions.SetTakeProfit(takeProfit)
     
     request := client.TradingApi.PlaceForceOrder(
         "userId_example",
@@ -275,6 +353,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceForceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 
@@ -344,6 +423,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 

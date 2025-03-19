@@ -51,34 +51,6 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
-        /// The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-        /// </summary>
-        /// <value>The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum OrderClassEnum
-        {
-            /// <summary>
-            /// Enum SIMPLE for value: SIMPLE
-            /// </summary>
-            [EnumMember(Value = "SIMPLE")]
-            SIMPLE = 1,
-
-            /// <summary>
-            /// Enum BRACKET for value: BRACKET
-            /// </summary>
-            [EnumMember(Value = "BRACKET")]
-            BRACKET = 2
-
-        }
-
-
-        /// <summary>
-        /// The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-        /// </summary>
-        /// <value>The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details</value>
-        [DataMember(Name = "order_class", EmitDefaultValue = true)]
-        public OrderClassEnum? OrderClass { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeFormWithOptions" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -89,17 +61,14 @@ namespace SnapTrade.Net.Model
         /// <param name="accountId">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="action">action (required).</param>
         /// <param name="universalSymbolId">Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls..</param>
-        /// <param name="symbol">The security&#39;s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;..</param>
+        /// <param name="symbol">The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;..</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares)..</param>
         /// <param name="notionalValue">notionalValue.</param>
-        /// <param name="orderClass">The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details.</param>
-        /// <param name="stopLoss">stopLoss.</param>
-        /// <param name="takeProfit">takeProfit.</param>
-        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable), OrderClassEnum? orderClass = default(OrderClassEnum?), StopLossNullable stopLoss = default(StopLossNullable), TakeProfitNullable takeProfit = default(TakeProfitNullable))
+        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
         {
             // to ensure "accountId" is required (not null)
             if (accountId == null)
@@ -116,9 +85,6 @@ namespace SnapTrade.Net.Model
             this.Stop = stop;
             this.Units = units;
             this.NotionalValue = notionalValue;
-            this.OrderClass = orderClass;
-            this.StopLoss = stopLoss;
-            this.TakeProfit = takeProfit;
         }
 
         /// <summary>
@@ -136,9 +102,9 @@ namespace SnapTrade.Net.Model
         public string UniversalSymbolId { get; set; }
 
         /// <summary>
-        /// The security&#39;s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;.
+        /// The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;.
         /// </summary>
-        /// <value>The security&#39;s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;.</value>
+        /// <value>The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;.</value>
         [DataMember(Name = "symbol", EmitDefaultValue = true)]
         public string Symbol { get; set; }
 
@@ -170,18 +136,6 @@ namespace SnapTrade.Net.Model
         public NotionalValueNullable NotionalValue { get; set; }
 
         /// <summary>
-        /// Gets or Sets StopLoss
-        /// </summary>
-        [DataMember(Name = "stop_loss", EmitDefaultValue = true)]
-        public StopLossNullable StopLoss { get; set; }
-
-        /// <summary>
-        /// Gets or Sets TakeProfit
-        /// </summary>
-        [DataMember(Name = "take_profit", EmitDefaultValue = true)]
-        public TakeProfitNullable TakeProfit { get; set; }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -199,9 +153,6 @@ namespace SnapTrade.Net.Model
             sb.Append("  Stop: ").Append(Stop).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("  NotionalValue: ").Append(NotionalValue).Append("\n");
-            sb.Append("  OrderClass: ").Append(OrderClass).Append("\n");
-            sb.Append("  StopLoss: ").Append(StopLoss).Append("\n");
-            sb.Append("  TakeProfit: ").Append(TakeProfit).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -283,20 +234,6 @@ namespace SnapTrade.Net.Model
                     this.NotionalValue == input.NotionalValue ||
                     (this.NotionalValue != null &&
                     this.NotionalValue.Equals(input.NotionalValue))
-                ) && 
-                (
-                    this.OrderClass == input.OrderClass ||
-                    this.OrderClass.Equals(input.OrderClass)
-                ) && 
-                (
-                    this.StopLoss == input.StopLoss ||
-                    (this.StopLoss != null &&
-                    this.StopLoss.Equals(input.StopLoss))
-                ) && 
-                (
-                    this.TakeProfit == input.TakeProfit ||
-                    (this.TakeProfit != null &&
-                    this.TakeProfit.Equals(input.TakeProfit))
                 );
         }
 
@@ -339,15 +276,6 @@ namespace SnapTrade.Net.Model
                 if (this.NotionalValue != null)
                 {
                     hashCode = (hashCode * 59) + this.NotionalValue.GetHashCode();
-                }
-                hashCode = (hashCode * 59) + this.OrderClass.GetHashCode();
-                if (this.StopLoss != null)
-                {
-                    hashCode = (hashCode * 59) + this.StopLoss.GetHashCode();
-                }
-                if (this.TakeProfit != null)
-                {
-                    hashCode = (hashCode * 59) + this.TakeProfit.GetHashCode();
                 }
                 return hashCode;
             }

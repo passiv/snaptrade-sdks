@@ -353,6 +353,10 @@ class AccountOrderRecord(
                         _configuration=_configuration,
                     )
             symbol = schemas.UUIDSchema
+        
+            @staticmethod
+            def child_brokerage_order_ids() -> typing.Type['ChildBrokerageOrderIDsNullable']:
+                return ChildBrokerageOrderIDsNullable
             __annotations__ = {
                 "brokerage_order_id": brokerage_order_id,
                 "status": status,
@@ -373,6 +377,7 @@ class AccountOrderRecord(
                 "time_executed": time_executed,
                 "expiry_date": expiry_date,
                 "symbol": symbol,
+                "child_brokerage_order_ids": child_brokerage_order_ids,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -434,9 +439,12 @@ class AccountOrderRecord(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["child_brokerage_order_ids"]) -> 'ChildBrokerageOrderIDsNullable': ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -498,9 +506,12 @@ class AccountOrderRecord(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["child_brokerage_order_ids"]) -> typing.Union['ChildBrokerageOrderIDsNullable', schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -525,6 +536,7 @@ class AccountOrderRecord(
         time_executed: typing.Union[MetaOapg.properties.time_executed, None, str, datetime, schemas.Unset] = schemas.unset,
         expiry_date: typing.Union[MetaOapg.properties.expiry_date, None, str, datetime, schemas.Unset] = schemas.unset,
         symbol: typing.Union[MetaOapg.properties.symbol, str, uuid.UUID, schemas.Unset] = schemas.unset,
+        child_brokerage_order_ids: typing.Union['ChildBrokerageOrderIDsNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'AccountOrderRecord':
@@ -550,10 +562,12 @@ class AccountOrderRecord(
             time_executed=time_executed,
             expiry_date=expiry_date,
             symbol=symbol,
+            child_brokerage_order_ids=child_brokerage_order_ids,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.universal_symbol import UniversalSymbol

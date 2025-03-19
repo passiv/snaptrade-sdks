@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
 **Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**ChildBrokerageOrderIds** | Pointer to [**NullableAccountOrderRecordChildBrokerageOrderIds**](AccountOrderRecordChildBrokerageOrderIds.md) |  | [optional] 
 
 ## Methods
 
@@ -628,6 +629,41 @@ SetSymbol sets Symbol field to given value.
 
 HasSymbol returns a boolean if a field has been set.
 
+### GetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds`
+
+GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field if non-nil, zero value otherwise.
+
+### GetChildBrokerageOrderIdsOk
+
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool)`
+
+GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds)`
+
+SetChildBrokerageOrderIds sets ChildBrokerageOrderIds field to given value.
+
+### HasChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) HasChildBrokerageOrderIds() bool`
+
+HasChildBrokerageOrderIds returns a boolean if a field has been set.
+
+### SetChildBrokerageOrderIdsNil
+
+`func (o *AccountOrderRecord) SetChildBrokerageOrderIdsNil(b bool)`
+
+ SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+
+### UnsetChildBrokerageOrderIds
+`func (o *AccountOrderRecord) UnsetChildBrokerageOrderIds()`
+
+UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

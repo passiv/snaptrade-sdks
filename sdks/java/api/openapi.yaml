@@ -36,6 +36,8 @@ tags:
   name: Transactions And Reporting
 - description: Manage orders on user accounts.
   name: Trading
+- description: Advanced cryptocurrencies spot trading API.
+  name: Crypto Spot Trading
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
@@ -2116,6 +2118,59 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
       x-content-type: application/json
       x-accepts: application/json
+  /trade/placeBracketOrder:
+    post:
+      description: |
+        Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+        use. Only supported on certain brokerages
+      operationId: Trading_placeBracketOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBodyBracket'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place a Bracket Order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder
+      x-content-type: application/json
+      x-accepts: application/json
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -2453,6 +2508,289 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
       x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/spot/placeOrder:
+    post:
+      description: |
+        Places a spot cryptocurrency order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
+      operationId: Trading_cryptoSpotPlaceOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoSpotOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place a spot order on a crypto exchange
+      tags:
+      - Crypto Spot Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-placeOrder
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/spot/cancelOrder:
+    post:
+      description: |
+        Cancels a cryptocurrency spot order in the specified account.
+      operationId: Trading_cryptoSpotCancelOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoSpotCancelOrder'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Cancel a crypto spot order.
+      tags:
+      - Crypto Spot Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-cancelOrder
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/spot/previewOrder:
+    post:
+      description: |
+        Previews a cryptocurrency spot order using the specified account.
+      operationId: Trading_cryptoSpotPreviewOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoSpotOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoSpotOrderPreview'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place a spot order on a crypto exchange
+      tags:
+      - Crypto Spot Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-previewOrder
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/spot/symbols:
+    get:
+      description: |
+        Searches cryptocurrency spot symbols accessible to the specified account.
+      operationId: Trading_cryptoSpotSymbols
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: base
+        required: true
+        schema:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        style: form
+      - explode: true
+        in: query
+        name: quote
+        required: false
+        schema:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trading_cryptoSpotSymbols_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Search crypto spot symbols
+      tags:
+      - Crypto Spot Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-crypto-spot-symbols
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/spot/quote:
+    get:
+      description: |
+        Gets a quote for the specified account.
+      operationId: Trading_cryptoSpotQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: base
+        required: true
+        schema:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        style: form
+      - explode: true
+        in: query
+        name: quote
+        required: true
+        schema:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoSpotQuote'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Get a quote for a cyrptocurrency market
+      tags:
+      - Crypto Spot Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-crypto-spot-quote
+      x-accepts: application/json
 components:
   requestBodies:
     RegisterUserRequestBody:
@@ -2484,6 +2822,12 @@ components:
           schema:
             $ref: '#/components/schemas/ManualTradeFormWithOptions'
       required: true
+    ManualTradeFormRequestBodyBracket:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ManualTradeFormBracket'
+      required: true
     ValidatedTradeRequestBody:
       content:
         application/json:
@@ -2507,6 +2851,18 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Options_placeOptionStrategy_request'
+      required: true
+    CryptoSpotOrderRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Trading_cryptoSpotPlaceOrder_request'
+      required: true
+    CryptoSpotCancelOrder:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Trading_cryptoSpotCancelOrder_request'
       required: true
   schemas:
     "400FailedRequestResponse":
@@ -3230,6 +3586,9 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3249,6 +3608,9 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3335,6 +3697,9 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3354,6 +3719,9 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3441,6 +3809,9 @@ components:
       example:
         time_executed: 2024-08-05T00:05:57.409Z
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        child_brokerage_order_ids:
+          stop_loss_order_id: "12345678"
+          take_profit_order_id: "12345678"
         time_placed: 2024-07-30T22:51:49.746Z
         expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3608,8 +3979,13 @@ components:
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+        child_brokerage_order_ids:
+          $ref: '#/components/schemas/ChildBrokerageOrderIDsNullable'
       type: object
       x-konfig-is-used-in-successful-response: true
+      x-konfig-properties:
+        child_brokerage_order_ids:
+          nullable: true
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort
         to map brokerage statuses to statuses in this enum.
@@ -5681,6 +6057,24 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+    ChildBrokerageOrderIDs:
+      additionalProperties: true
+      properties:
+        take_profit_order_id:
+          description: The brokerage order ID for the take profit leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id
+        stop_loss_order_id:
+          description: The brokerage order ID for the stop loss leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
+      type: object
     BrokerageOrderID:
       description: Order ID returned by brokerage. This is the unique identifier for
         the order in the brokerage system.
@@ -6271,20 +6665,14 @@ components:
       example:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         symbol: AAPL  131124C00240000
-        stop_loss:
-          stop_price: "48.55"
-          limit_price: "48.50"
-        units: ""
         time_in_force: null
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-        take_profit:
-          limit_price: "49.95"
         stop: 31.33
         price: 31.33
         notional_value: ""
         action: null
+        units: ""
         order_type: Market
-        order_class: BRACKET
       properties:
         account_id:
           description: Unique identifier for the connected brokerage account. This
@@ -6306,9 +6694,9 @@ components:
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
         symbol:
-          description: "The security's trading ticker symbol. This currently only\
-            \ support Options symbols in the 21 character OCC format. For example\
-            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+          description: "The security's trading ticker symbol. This currently supports\
+            \ stock symbols and Options symbols in the 21 character OCC format. For\
+            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -6346,24 +6734,6 @@ components:
             \ = 100 shares)."
           nullable: true
         notional_value: {}
-        order_class:
-          description: "The class of order intended to be placed. Defaults to SIMPLE\
-            \ for regular, one legged trades. Set to BRACKET if looking to place a\
-            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
-            \ profit and stop loss conditions. Bracket orders currently only supported\
-            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
-          enum:
-          - SIMPLE
-          - BRACKET
-          example: BRACKET
-          nullable: true
-          type: string
-          x-konfig-original-example: BRACKET
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
-        stop_loss:
-          $ref: '#/components/schemas/StopLossNullable'
-        take_profit:
-          $ref: '#/components/schemas/TakeProfitNullable'
       required:
       - account_id
       - action
@@ -6382,10 +6752,78 @@ components:
             \ represents the number of contracts to buy or sell. (e.g., 1 contract\
             \ = 100 shares)."
           nullable: true
-        stop_loss:
-          nullable: true
+    ManualTradeFormBracket:
+      description: Inputs for placing an order with the brokerage.
+      example:
+        symbol: AAPL
+        time_in_force: null
+        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         take_profit:
+          limit_price: "49.95"
+        stop: 31.33
+        price: 31.33
+        stop_loss:
+          stop_price: "48.55"
+          limit_price: "48.50"
+        action: null
+        units: 10.5
+        order_type: Market
+      properties:
+        account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        action:
+          $ref: '#/components/schemas/ActionStrictWithOptions'
+        symbol:
+          description: The security's trading ticker symbol.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
           nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop
+        units:
+          description: Number of shares for the order. This can be a decimal for fractional
+            orders. Must be `null` if `notional_value` is provided.
+          example: 10.5
+          type: number
+          x-konfig-original-example: 10.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+        stop_loss:
+          $ref: '#/components/schemas/StopLoss'
+        take_profit:
+          $ref: '#/components/schemas/TakeProfit'
+      required:
+      - account_id
+      - action
+      - order_type
+      - stop_loss
+      - symbol
+      - take_profit
+      - time_in_force
+      type: object
     ValidatedTradeBody:
       example:
         wait_to_confirm: true
@@ -6490,6 +6928,9 @@ components:
       additionalProperties: true
       description: "Details of the stop loss order. Only to be used when order_class\
         \ = BRACKET. stop_price is required, limit_price is optional"
+      example:
+        stop_price: "48.55"
+        limit_price: "48.50"
       properties:
         stop_price:
           example: "48.55"
@@ -6507,6 +6948,8 @@ components:
       additionalProperties: true
       description: Details of the take profit order. Only to be used when order_class
         = BRACKET.
+      example:
+        limit_price: "49.95"
       properties:
         limit_price:
           example: "49.95"
@@ -6514,6 +6957,78 @@ components:
           x-konfig-original-example: "49.95"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price
       type: object
+    CryptocurrencySymbol:
+      description: Symbol to identify a cryptocurrency or fiat currency on a crypto
+        exchange. Fiat currencies symbols are ISO-4217 codes.
+      example: BTC
+      type: string
+      x-konfig-original-example: BTC
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencySymbol
+    CryptocurrencyPair:
+      additionalProperties: true
+      description: A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+      example:
+        quote: ""
+        base: ""
+      properties:
+        base:
+          allOf:
+          - $ref: '#/components/schemas/CryptocurrencySymbol'
+          description: "The base currency (e.g., \"BTC\" in BTC/USD). Can be a fiat\
+            \ or crypto code."
+        quote:
+          allOf:
+          - $ref: '#/components/schemas/CryptocurrencySymbol'
+          description: "The quote currency (e.g., \"USD\" in BTC/USD). Can be a fiat\
+            \ or crypto code."
+      required:
+      - base
+      - quote
+      type: object
+    CryptoSpotQuote:
+      additionalProperties: true
+      example:
+        ask: ""
+        mid: ""
+        bid: ""
+        timestamp: 2024-01-24T15:00:00Z
+      properties:
+        bid:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The highest price a buyer is willing to pay.
+        ask:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The lowest price a seller is willing to accept.
+        mid:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The market mid price.
+        timestamp:
+          description: The timestamp of the quote.
+          example: 2024-01-24T15:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-24T15:00:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-timestamp
+      required:
+      - ask
+      - bid
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    CryptoSpotOrderPreview:
+      additionalProperties: true
+      description: Preview of a cryptocurrency spot order.
+      example:
+        estimated_fee:
+          amount: "123.45"
+          currency: BTC
+      properties:
+        estimated_fee:
+          $ref: '#/components/schemas/CryptoSpotOrderPreview_estimated_fee'
+      type: object
+      x-konfig-is-used-in-successful-response: true
     PaginationDetails:
       additionalProperties: true
       description: Details about the pagination of the results.
@@ -7458,6 +7973,13 @@ components:
       type: string
       x-konfig-original-example: 2022-01-21T20:11:19.217Z
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
+    JsonDecimal:
+      description: A decimal number represented as a string to avoid precision loss.
+      example: "123.45"
+      format: decimal
+      type: string
+      x-konfig-original-example: "123.45"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-JsonDecimal
     BrokerageType:
       additionalProperties: true
       description: Type of brokerage. Currently supports traditional brokerages and
@@ -7556,6 +8078,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-post_only
+    : example: false
+      type: boolean
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-expiration_date
+    : example: 2024-01-01T00:00:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
@@ -8277,6 +8807,14 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id:
+      example: "12345678"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id:
+      example: "12345678"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageOrderID:
       example: 66a033fa-da74-4fcf-b527-feefdec9257e
       type: string
@@ -8429,9 +8967,17 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class:
-      example: BRACKET
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol:
+      example: AAPL
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop:
+      example: 31.33
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
@@ -8459,6 +9005,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price:
       example: "49.95"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptocurrencySymbol:
+      example: BTC
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-timestamp:
+      example: 2024-01-24T15:00:00.000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PaginationDetails-properties-offset:
@@ -8655,6 +9209,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Time:
       example: 2022-01-21T20:11:19.217Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-JsonDecimal:
+      example: "123.45"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageType-properties-name:
@@ -9503,9 +10061,9 @@ components:
         universal_symbol_id:
           $ref: '#/components/schemas/UniversalSymbolIDNullable'
         symbol:
-          description: "The security's trading ticker symbol. This currently only\
-            \ support Options symbols in the 21 character OCC format. For example\
-            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+          description: "The security's trading ticker symbol. This currently supports\
+            \ stock symbols and Options symbols in the 21 character OCC format. For\
+            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -9544,24 +10102,6 @@ components:
           nullable: true
         notional_value:
           $ref: '#/components/schemas/NotionalValueNullable'
-        order_class:
-          description: "The class of order intended to be placed. Defaults to SIMPLE\
-            \ for regular, one legged trades. Set to BRACKET if looking to place a\
-            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
-            \ profit and stop loss conditions. Bracket orders currently only supported\
-            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
-          enum:
-          - SIMPLE
-          - BRACKET
-          example: BRACKET
-          nullable: true
-          type: string
-          x-konfig-original-example: BRACKET
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
-        stop_loss:
-          $ref: '#/components/schemas/StopLossNullable'
-        take_profit:
-          $ref: '#/components/schemas/TakeProfitNullable'
       required:
       - account_id
       - action
@@ -9603,6 +10143,63 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        account_id:
+          $ref: '#/components/schemas/AccountID'
+        action:
+          $ref: '#/components/schemas/ActionStrictWithOptions'
+        symbol:
+          description: The security's trading ticker symbol.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop
+        units:
+          $ref: '#/components/schemas/Units'
+        stop_loss:
+          $ref: '#/components/schemas/StopLoss'
+        take_profit:
+          $ref: '#/components/schemas/TakeProfit'
+      required:
+      - account_id
+      - action
+      - order_type
+      - stop_loss
+      - symbol
+      - take_profit
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}
@@ -9710,6 +10307,241 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-placeOrder:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          $ref: '#/components/schemas/CryptocurrencyPair'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The amount of the base currency to buy or sell.
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+        post_only:
+          description: Required for order type LIMIT. If true orders that would be
+            filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-expiration_date
+      required:
+      - accountId
+      - amount
+      - side
+      - symbol
+      - time_in_force
+      - type
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-cancelOrder:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - brokerage_order_id
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-spot-previewOrder:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        symbol:
+          $ref: '#/components/schemas/CryptocurrencyPair'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The amount of the base currency to buy or sell.
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+        post_only:
+          description: Required for order type LIMIT. If true orders that would be
+            filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-expiration_date
+      required:
+      - accountId
+      - amount
+      - side
+      - symbol
+      - time_in_force
+      - type
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-crypto-spot-symbols:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        base:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        quote:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+      required:
+      - accountId
+      - base
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - base
+      - quote
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-crypto-spot-quote:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        base:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+        quote:
+          $ref: '#/components/schemas/CryptocurrencySymbol'
+      required:
+      - accountId
+      - base
+      - quote
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - base
+      - quote
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:
       additionalProperties: true
       properties:
@@ -9907,6 +10739,28 @@ components:
       type: string
       x-konfig-original-example: 2024-06-28 18:42:46.561408+00:00
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-HoldingsSyncStatusDate
+    ChildBrokerageOrderIDsNullable:
+      additionalProperties: true
+      example:
+        stop_loss_order_id: "12345678"
+        take_profit_order_id: "12345678"
+      nullable: true
+      properties:
+        take_profit_order_id:
+          description: The brokerage order ID for the take profit leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id
+        stop_loss_order_id:
+          description: The brokerage order ID for the stop loss leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
+      type: object
     CurrencyNullable:
       additionalProperties: true
       description: Describes a currency object.
@@ -9986,41 +10840,6 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
-    StopLossNullable:
-      additionalProperties: true
-      description: "Details of the stop loss order. Only to be used when order_class\
-        \ = BRACKET. stop_price is required, limit_price is optional"
-      example:
-        stop_price: "48.55"
-        limit_price: "48.50"
-      nullable: true
-      properties:
-        stop_price:
-          example: "48.55"
-          type: string
-          x-konfig-original-example: "48.55"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopLoss-properties-stop_price
-        limit_price:
-          example: "48.50"
-          nullable: true
-          type: string
-          x-konfig-original-example: "48.50"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-StopLoss-properties-limit_price
-      type: object
-    TakeProfitNullable:
-      additionalProperties: true
-      description: Details of the take profit order. Only to be used when order_class
-        = BRACKET.
-      example:
-        limit_price: "49.95"
-      nullable: true
-      properties:
-        limit_price:
-          example: "49.95"
-          type: string
-          x-konfig-original-example: "49.95"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TakeProfit-properties-limit_price
-      type: object
     SymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across
@@ -10234,6 +11053,101 @@ components:
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
       type: object
+    Trading_cryptoSpotPlaceOrder_request:
+      properties:
+        symbol:
+          $ref: '#/components/schemas/CryptocurrencyPair'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: The amount of the base currency to buy or sell.
+        limit_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+        stop_price:
+          allOf:
+          - $ref: '#/components/schemas/JsonDecimal'
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+        post_only:
+          description: Required for order type LIMIT. If true orders that would be
+            filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-expiration_date
+      required:
+      - amount
+      - side
+      - symbol
+      - time_in_force
+      - type
+      type: object
+    Trading_cryptoSpotCancelOrder_request:
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+      required:
+      - brokerage_order_id
+      type: object
+    Trading_cryptoSpotSymbols_200_response:
+      additionalProperties: true
+      description: The symbols
+      example:
+        items:
+        - quote: ""
+          base: ""
+        - quote: ""
+          base: ""
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CryptocurrencyPair'
+          type: array
+      required:
+      - items
+      type: object
+      x-konfig-is-used-in-successful-response: true
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\
         \ income, etc). This value is directly obtained from the brokerage and should\
@@ -10543,6 +11457,32 @@ components:
           type: number
           x-konfig-original-example: 344
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
+    CryptoSpotOrderPreview_estimated_fee:
+      additionalProperties: true
+      description: The estimated order fee.
+      example:
+        amount: "123.45"
+        currency: BTC
+      properties:
+        currency:
+          description: Symbol to identify a cryptocurrency or fiat currency on a crypto
+            exchange. Fiat currencies symbols are ISO-4217 codes.
+          example: BTC
+          type: string
+          x-konfig-original-example: BTC
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencySymbol
+        amount:
+          description: A decimal number represented as a string to avoid precision
+            loss.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-JsonDecimal
+      required:
+      - amount
+      - currency
+      type: object
     AccountUniversalActivity_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

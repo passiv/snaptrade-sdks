@@ -134,4 +134,10 @@ describe SnapTrade::AccountOrderRecord do
     end
   end
 
+  describe 'test attribute "child_brokerage_order_ids"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end
