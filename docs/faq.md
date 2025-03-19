@@ -2,7 +2,7 @@
 
 ## API Keys
 
-### **I have lost the consumerKey to my API Key. What should I do?**
+### I have lost the consumerKey to my API Key. What should I do?
 
 You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
 
@@ -40,17 +40,17 @@ The best thing to do in this case is to rotate the user secret using :api[Authe
 
 All of our timestamp fields return datetime in ISO-8601 format.
 
-### **What is the difference between an account and a connection?**
+### What is the difference between an account and a connection?
 
 ![image.png](attachment:738d81dc-a7b9-4db1-ac34-ccb082f159f9:image.png)
 
 The accounts live under the connection to the brokerage. Each connection is associated one-to-one with a set of credentials to the brokerage. When you create a connection, SnapTrade will automatically sync all accounts under the set of credentials to the brokerage. For example, if you made a new connection to Questrade (a Canadian brokerage) and that connection had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these accounts accessible over the SnapTrade API.
 
-### **If I want to remove an account do I need to delete the connection?**
+### If I want to remove an account do I need to delete the connection?
 
 If you want to remove an account, you will need to delete the corresponding connection. You can do this using :api[Connections_removeBrokerageAuthorization].
 
-### **If I delete connection, will it delete all accounts from that Connection? Can I delete only one account?**
+### If I delete connection, will it delete all accounts from that Connection? Can I delete only one account?
 
 Deleting the connection will remove all accounts under that connection. Instead of deleting individual accounts, you could mark them as hidden on your end and only pull information from accounts that are not hidden.
 
@@ -58,7 +58,7 @@ Deleting the connection will remove all accounts under that connection. Instead 
 
 You can do this with the :api[Connections_disableBrokerageAuthorization] endpoint.
 
-### **How do I enable connecting to 'X' broker on my API Key?**
+### How do I enable connecting to 'X' broker on my API Key?
 
 By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
 
@@ -74,7 +74,7 @@ We support all kinds of accounts and it is brokerage dependent. In general, if t
 
 If the activity resulted in a gain in position to the account (long), the activity will have a positive unit. If the activity resulted in a loss of position to the account (short), the activity will have a negative unit.
 
-### **Is it possible to know a stock's first purchase date?**
+### Is it possible to know a stock's first purchase date?
 
 Determining a stock's first purchase date varies by brokerage. Two key requirements must be met:
 
