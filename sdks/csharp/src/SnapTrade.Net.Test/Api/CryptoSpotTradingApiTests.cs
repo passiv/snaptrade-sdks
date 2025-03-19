@@ -47,6 +47,7 @@ namespace SnapTrade.Net.Test.Api
         [Fact(Skip = "requires placing an order")]
         public void OrderFlowExample() {
 
+            // Find the symbol
             var symbolsResult = cryptoSpotTradingApi.CryptoSpotSymbols(
                 testUserId,
                 testUserSecret,
@@ -82,7 +83,6 @@ namespace SnapTrade.Net.Test.Api
                     postOnly: true
                 )
             );
-
             Console.WriteLine("placeOrderResult: {0}", placeOrderResult);
 
             // Cancel the order
@@ -92,7 +92,6 @@ namespace SnapTrade.Net.Test.Api
                 accountId: accountId,
                 new TradingCryptoSpotCancelOrderRequest(placeOrderResult.BrokerageOrderId)
             );
-
             Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);
         }
 
