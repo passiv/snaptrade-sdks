@@ -2020,7 +2020,7 @@ paths:
                   items:
                     type: array
                     items:
-                      $ref: "#/components/schemas/CryptocurrencyPair"                
+                      $ref: "#/components/schemas/CryptocurrencyPair"
         "400":
           description: Invalid request
           content:

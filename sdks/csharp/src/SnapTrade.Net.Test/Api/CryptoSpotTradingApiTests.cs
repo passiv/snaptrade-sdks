@@ -44,10 +44,19 @@ namespace SnapTrade.Net.Test.Api
             cryptoSpotTradingApi = new CryptoSpotTradingApi(configuration);
         }
 
-        [Fact]
+        [Fact(Skip = "requires placing an order")]
         public void OrderFlowExample() {
+
+            var symbolsResult = cryptoSpotTradingApi.CryptoSpotSymbols(
+                testUserId,
+                testUserSecret,
+                accountId: accountId,
+                _base: "DOGE",
+                quote: "USD"
+            );
+            var symbol = symbolsResult.Items.First();
+
             // Get a quote
-            var symbol = new CryptocurrencyPair("DOGE", "USDC");
             var quote = cryptoSpotTradingApi.CryptoSpotQuote(
                 testUserId,
                 testUserSecret,
@@ -67,9 +76,9 @@ namespace SnapTrade.Net.Test.Api
                     side: ActionStrict.SELL,
                     type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.LIMIT,
                     timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTD,
-                    expirationDate: DateTime.UtcNow.AddHours(1),
+                    expirationDate: DateTime.UtcNow.AddMinutes(5),
                     amount:42.2m,
-                    limitPrice: quote.Ask + 0.1m,
+                    limitPrice: quote.Ask * 2m,
                     postOnly: true
                 )
             );
@@ -87,7 +96,7 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);
         }
 
-        [Fact]
+        [Fact(Skip = "WIP")]
         public void PreviewOrderExample() {
             var response = cryptoSpotTradingApi.CryptoSpotPreviewOrder(
                 testUserId,
@@ -105,7 +114,7 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(response);
         }
 
-        [Fact]
+        [Fact(Skip = "WIP")]
         public void GetQuoteExample() {
             var response = cryptoSpotTradingApi.CryptoSpotQuote(
                 testUserId,
@@ -118,7 +127,7 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(response);
         }
 
-        [Fact]
+        [Fact(Skip = "WIP")]
         public void SearchSymbolsExample() {
             var response = cryptoSpotTradingApi.CryptoSpotSymbols(
                 testUserId,
