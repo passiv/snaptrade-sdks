@@ -45,10 +45,14 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="bid">The highest price a buyer is willing to pay. (required).</param>
         /// <param name="ask">The lowest price a seller is willing to accept. (required).</param>
-        public CryptoSpotQuote(decimal bid = default(decimal), decimal ask = default(decimal)) : base()
+        /// <param name="mid">The market mid price..</param>
+        /// <param name="timestamp">The timestamp of the quote..</param>
+        public CryptoSpotQuote(decimal bid = default(decimal), decimal ask = default(decimal), decimal mid = default(decimal), DateTime timestamp = default(DateTime)) : base()
         {
             this.Bid = bid;
             this.Ask = ask;
+            this.Mid = mid;
+            this.Timestamp = timestamp;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -67,6 +71,20 @@ namespace SnapTrade.Net.Model
         public decimal Ask { get; set; }
 
         /// <summary>
+        /// The market mid price.
+        /// </summary>
+        /// <value>The market mid price.</value>
+        [DataMember(Name = "mid", EmitDefaultValue = false)]
+        public decimal Mid { get; set; }
+
+        /// <summary>
+        /// The timestamp of the quote.
+        /// </summary>
+        /// <value>The timestamp of the quote.</value>
+        [DataMember(Name = "timestamp", EmitDefaultValue = false)]
+        public DateTime Timestamp { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -83,6 +101,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Bid: ").Append(Bid).Append("\n");
             sb.Append("  Ask: ").Append(Ask).Append("\n");
+            sb.Append("  Mid: ").Append(Mid).Append("\n");
+            sb.Append("  Timestamp: ").Append(Timestamp).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -126,6 +146,15 @@ namespace SnapTrade.Net.Model
                 (
                     this.Ask == input.Ask ||
                     this.Ask.Equals(input.Ask)
+                ) && base.Equals(input) && 
+                (
+                    this.Mid == input.Mid ||
+                    this.Mid.Equals(input.Mid)
+                ) && base.Equals(input) && 
+                (
+                    this.Timestamp == input.Timestamp ||
+                    (this.Timestamp != null &&
+                    this.Timestamp.Equals(input.Timestamp))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -141,6 +170,11 @@ namespace SnapTrade.Net.Model
                 int hashCode = base.GetHashCode();
                 hashCode = (hashCode * 59) + this.Bid.GetHashCode();
                 hashCode = (hashCode * 59) + this.Ask.GetHashCode();
+                hashCode = (hashCode * 59) + this.Mid.GetHashCode();
+                if (this.Timestamp != null)
+                {
+                    hashCode = (hashCode * 59) + this.Timestamp.GetHashCode();
+                }
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

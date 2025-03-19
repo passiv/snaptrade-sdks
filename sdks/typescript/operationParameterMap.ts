@@ -317,11 +317,24 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/trading/crypto/spot/placeOrder-POST': {
+    '/accounts/{accountId}/trading/crypto/spot/cancelOrder-POST': {
         parameters: [
             {
-                name: 'account_id'
+                name: 'brokerage_order_id'
             },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/placeOrder-POST': {
+        parameters: [
             {
                 name: 'symbol'
             },
@@ -344,6 +357,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'userSecret'
             },
             {
+                name: 'accountId'
+            },
+            {
                 name: 'limit_price'
             },
             {
@@ -357,11 +373,8 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/trading/crypto/spot/previewOrder-POST': {
+    '/accounts/{accountId}/trading/crypto/spot/previewOrder-POST': {
         parameters: [
-            {
-                name: 'account_id'
-            },
             {
                 name: 'symbol'
             },
@@ -384,6 +397,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'userSecret'
             },
             {
+                name: 'accountId'
+            },
+            {
                 name: 'limit_price'
             },
             {
@@ -397,35 +413,38 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/trading/crypto/spot/quote-POST': {
+    '/accounts/{accountId}/trading/crypto/spot/quote-GET': {
         parameters: [
-            {
-                name: 'account_id'
-            },
-            {
-                name: 'symbol'
-            },
             {
                 name: 'userId'
             },
             {
                 name: 'userSecret'
             },
-        ]
-    },
-    '/trading/crypto/spot/searchMarkets-POST': {
-        parameters: [
             {
-                name: 'account_id'
+                name: 'accountId'
             },
             {
                 name: 'base'
             },
             {
+                name: 'quote'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/crypto/spot/symbols-GET': {
+        parameters: [
+            {
                 name: 'userId'
             },
             {
                 name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'base'
             },
             {
                 name: 'quote'
@@ -664,6 +683,46 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/trade/placeBracketOrder-POST': {
+        parameters: [
+            {
+                name: 'account_id'
+            },
+            {
+                name: 'action'
+            },
+            {
+                name: 'symbol'
+            },
+            {
+                name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'stop_loss'
+            },
+            {
+                name: 'take_profit'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'price'
+            },
+            {
+                name: 'stop'
+            },
+            {
+                name: 'units'
+            },
+        ]
+    },
     '/trade/place-POST': {
         parameters: [
             {
@@ -701,15 +760,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'notional_value'
-            },
-            {
-                name: 'order_class'
-            },
-            {
-                name: 'stop_loss'
-            },
-            {
-                name: 'take_profit'
             },
         ]
     },

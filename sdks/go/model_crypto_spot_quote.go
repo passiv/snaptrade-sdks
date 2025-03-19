@@ -13,6 +13,7 @@ package snaptrade
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // CryptoSpotQuote struct for CryptoSpotQuote
@@ -21,6 +22,10 @@ type CryptoSpotQuote struct {
 	Bid float64 `json:"bid"`
 	// The lowest price a seller is willing to accept.
 	Ask float64 `json:"ask"`
+	// The market mid price.
+	Mid *float64 `json:"mid,omitempty"`
+	// The timestamp of the quote.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -93,6 +98,70 @@ func (o *CryptoSpotQuote) SetAsk(v float64) {
 	o.Ask = v
 }
 
+// GetMid returns the Mid field value if set, zero value otherwise.
+func (o *CryptoSpotQuote) GetMid() float64 {
+	if o == nil || isNil(o.Mid) {
+		var ret float64
+		return ret
+	}
+	return *o.Mid
+}
+
+// GetMidOk returns a tuple with the Mid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CryptoSpotQuote) GetMidOk() (*float64, bool) {
+	if o == nil || isNil(o.Mid) {
+    return nil, false
+	}
+	return o.Mid, true
+}
+
+// HasMid returns a boolean if a field has been set.
+func (o *CryptoSpotQuote) HasMid() bool {
+	if o != nil && !isNil(o.Mid) {
+		return true
+	}
+
+	return false
+}
+
+// SetMid gets a reference to the given float64 and assigns it to the Mid field.
+func (o *CryptoSpotQuote) SetMid(v float64) {
+	o.Mid = &v
+}
+
+// GetTimestamp returns the Timestamp field value if set, zero value otherwise.
+func (o *CryptoSpotQuote) GetTimestamp() time.Time {
+	if o == nil || isNil(o.Timestamp) {
+		var ret time.Time
+		return ret
+	}
+	return *o.Timestamp
+}
+
+// GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CryptoSpotQuote) GetTimestampOk() (*time.Time, bool) {
+	if o == nil || isNil(o.Timestamp) {
+    return nil, false
+	}
+	return o.Timestamp, true
+}
+
+// HasTimestamp returns a boolean if a field has been set.
+func (o *CryptoSpotQuote) HasTimestamp() bool {
+	if o != nil && !isNil(o.Timestamp) {
+		return true
+	}
+
+	return false
+}
+
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *CryptoSpotQuote) SetTimestamp(v time.Time) {
+	o.Timestamp = &v
+}
+
 func (o CryptoSpotQuote) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -100,6 +169,12 @@ func (o CryptoSpotQuote) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["ask"] = o.Ask
+	}
+	if !isNil(o.Mid) {
+		toSerialize["mid"] = o.Mid
+	}
+	if !isNil(o.Timestamp) {
+		toSerialize["timestamp"] = o.Timestamp
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -121,6 +196,8 @@ func (o *CryptoSpotQuote) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "bid")
 		delete(additionalProperties, "ask")
+		delete(additionalProperties, "mid")
+		delete(additionalProperties, "timestamp")
 		o.AdditionalProperties = additionalProperties
 	}
 

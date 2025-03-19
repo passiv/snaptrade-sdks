@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -57,6 +58,14 @@ public class CryptoSpotQuote {
   public static final String SERIALIZED_NAME_ASK = "ask";
   @SerializedName(SERIALIZED_NAME_ASK)
   private BigDecimal ask;
+
+  public static final String SERIALIZED_NAME_MID = "mid";
+  @SerializedName(SERIALIZED_NAME_MID)
+  private BigDecimal mid;
+
+  public static final String SERIALIZED_NAME_TIMESTAMP = "timestamp";
+  @SerializedName(SERIALIZED_NAME_TIMESTAMP)
+  private OffsetDateTime timestamp;
 
   public CryptoSpotQuote() {
   }
@@ -118,6 +127,64 @@ public class CryptoSpotQuote {
     this.ask = ask;
   }
 
+
+  public CryptoSpotQuote mid(BigDecimal mid) {
+    
+    
+    
+    
+    this.mid = mid;
+    return this;
+  }
+
+   /**
+   * The market mid price.
+   * @return mid
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "The market mid price.")
+
+  public BigDecimal getMid() {
+    return mid;
+  }
+
+
+  public void setMid(BigDecimal mid) {
+    
+    
+    
+    this.mid = mid;
+  }
+
+
+  public CryptoSpotQuote timestamp(OffsetDateTime timestamp) {
+    
+    
+    
+    
+    this.timestamp = timestamp;
+    return this;
+  }
+
+   /**
+   * The timestamp of the quote.
+   * @return timestamp
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-01-24T15:00Z", value = "The timestamp of the quote.")
+
+  public OffsetDateTime getTimestamp() {
+    return timestamp;
+  }
+
+
+  public void setTimestamp(OffsetDateTime timestamp) {
+    
+    
+    
+    this.timestamp = timestamp;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -174,13 +241,15 @@ public class CryptoSpotQuote {
     }
     CryptoSpotQuote cryptoSpotQuote = (CryptoSpotQuote) o;
     return Objects.equals(this.bid, cryptoSpotQuote.bid) &&
-        Objects.equals(this.ask, cryptoSpotQuote.ask)&&
+        Objects.equals(this.ask, cryptoSpotQuote.ask) &&
+        Objects.equals(this.mid, cryptoSpotQuote.mid) &&
+        Objects.equals(this.timestamp, cryptoSpotQuote.timestamp)&&
         Objects.equals(this.additionalProperties, cryptoSpotQuote.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(bid, ask, additionalProperties);
+    return Objects.hash(bid, ask, mid, timestamp, additionalProperties);
   }
 
   @Override
@@ -189,6 +258,8 @@ public class CryptoSpotQuote {
     sb.append("class CryptoSpotQuote {\n");
     sb.append("    bid: ").append(toIndentedString(bid)).append("\n");
     sb.append("    ask: ").append(toIndentedString(ask)).append("\n");
+    sb.append("    mid: ").append(toIndentedString(mid)).append("\n");
+    sb.append("    timestamp: ").append(toIndentedString(timestamp)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -214,6 +285,8 @@ public class CryptoSpotQuote {
     openapiFields = new HashSet<String>();
     openapiFields.add("bid");
     openapiFields.add("ask");
+    openapiFields.add("mid");
+    openapiFields.add("timestamp");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -244,6 +317,10 @@ public class CryptoSpotQuote {
       BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("bid"));
       // validate the required field `ask`
       BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("ask"));
+      // validate the optional field `mid`
+      if (jsonObj.get("mid") != null && !jsonObj.get("mid").isJsonNull()) {
+        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("mid"));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

@@ -31,5 +31,17 @@ export interface CryptoSpotQuote {
      * @memberof CryptoSpotQuote
      */
     'ask': string;
+    /**
+     * The market mid price.
+     * @type {string}
+     * @memberof CryptoSpotQuote
+     */
+    'mid'?: string;
+    /**
+     * The timestamp of the quote.
+     * @type {string}
+     * @memberof CryptoSpotQuote
+     */
+    'timestamp'?: string;
 }
 

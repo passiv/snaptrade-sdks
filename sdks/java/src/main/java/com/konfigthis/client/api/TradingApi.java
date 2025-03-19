@@ -6,11 +6,12 @@ import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
+import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
-import com.konfigthis.client.model.StopLossNullable;
+import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
-import com.konfigthis.client.model.TakeProfitNullable;
+import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import java.util.UUID;
@@ -38,6 +39,11 @@ public class TradingApi extends TradingApiGenerated {
     public class GetUserAccountQuotesRequestBuilder extends GetUserAccountQuotesRequestBuilderGenerated {
         public GetUserAccountQuotesRequestBuilder(String userId, String userSecret, String symbols, UUID accountId) {
             super(userId, userSecret, symbols, accountId);
+        }
+    }
+    public class PlaceBracketOrderRequestBuilder extends PlaceBracketOrderRequestBuilderGenerated {
+        public PlaceBracketOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, String symbol, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, String userId, String userSecret) {
+            super(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret);
         }
     }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {

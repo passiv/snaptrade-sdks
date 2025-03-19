@@ -96,13 +96,43 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test TradingApiService PlaceBracketOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        stopLoss := *snaptrade.NewStopLoss()
+        takeProfit := *snaptrade.NewTakeProfit()
+        
+        manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
+            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+            null,
+            "AAPL",
+            null,
+            null,
+            stopLoss,
+            takeProfit,
+        )
+        manualTradeFormBracket.SetPrice(31.33)
+        manualTradeFormBracket.SetStop(31.33)
+        manualTradeFormBracket.SetUnits(10.5)
+        
+        request := client.TradingApi.PlaceBracketOrder(
+            "userId_example",
+            "userSecret_example",
+            manualTradeFormBracket,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService PlaceForceOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         universalSymbolId := *snaptrade.Newstring()
         units := *snaptrade.Newfloat32()
         notionalValue := *snaptrade.NewManualTradeFormNotionalValue()
-        stopLoss := *snaptrade.NewManualTradeFormWithOptionsStopLoss()
-        takeProfit := *snaptrade.NewManualTradeFormWithOptionsTakeProfit()
         
         manualTradeFormWithOptions := *snaptrade.NewManualTradeFormWithOptions(
             "917c8734-8470-4a3e-a18f-57c3f2ee6631",
@@ -116,9 +146,6 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         manualTradeFormWithOptions.SetStop(31.33)
         manualTradeFormWithOptions.SetUnits(units)
         manualTradeFormWithOptions.SetNotionalValue(notionalValue)
-        manualTradeFormWithOptions.SetOrderClass("BRACKET")
-        manualTradeFormWithOptions.SetStopLoss(stopLoss)
-        manualTradeFormWithOptions.SetTakeProfit(takeProfit)
         
         request := client.TradingApi.PlaceForceOrder(
             "userId_example",

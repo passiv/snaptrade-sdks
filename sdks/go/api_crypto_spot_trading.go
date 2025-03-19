@@ -17,17 +17,197 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
 // CryptoSpotTradingApiService CryptoSpotTradingApi service
 type CryptoSpotTradingApiService service
 
+type CryptoSpotTradingApiCryptoSpotCancelOrderRequest struct {
+	ctx context.Context
+	ApiService *CryptoSpotTradingApiService
+	userId string
+	userSecret string
+	accountId string
+	tradingCryptoSpotCancelOrderRequest TradingCryptoSpotCancelOrderRequest
+}
+
+func (r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
+	return r.ApiService.CryptoSpotCancelOrderExecute(r)
+}
+
+/*
+CryptoSpotCancelOrder Cancel a crypto spot order.
+
+Cancels a cryptocurrency spot order in the specified account.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param userId
+ @param userSecret
+ @param accountId
+ @param tradingCryptoSpotCancelOrderRequest
+ @return CryptoSpotTradingApiCryptoSpotCancelOrderRequest
+*/
+func (a *CryptoSpotTradingApiService) CryptoSpotCancelOrder(userId string, userSecret string, accountId string, tradingCryptoSpotCancelOrderRequest TradingCryptoSpotCancelOrderRequest) CryptoSpotTradingApiCryptoSpotCancelOrderRequest {
+	return CryptoSpotTradingApiCryptoSpotCancelOrderRequest{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		userId: userId,
+		userSecret: userSecret,
+		accountId: accountId,
+		tradingCryptoSpotCancelOrderRequest: tradingCryptoSpotCancelOrderRequest,
+	}
+}
+
+// Execute executes the request
+//  @return AccountOrderRecord
+func (a *CryptoSpotTradingApiService) CryptoSpotCancelOrderExecute(r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) (*AccountOrderRecord, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccountOrderRecord
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotCancelOrder")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/trading/crypto/spot/cancelOrder"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.tradingCryptoSpotCancelOrderRequest) {
+        localVarPostBody = r.tradingCryptoSpotCancelOrderRequest
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type CryptoSpotTradingApiCryptoSpotPlaceOrderRequest struct {
 	ctx context.Context
 	ApiService *CryptoSpotTradingApiService
 	userId string
 	userSecret string
+	accountId string
 	tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest
 }
 
@@ -45,15 +225,17 @@ This endpoint does not compute the impact to the account balance from the order 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
+ @param accountId
  @param tradingCryptoSpotPlaceOrderRequest
  @return CryptoSpotTradingApiCryptoSpotPlaceOrderRequest
 */
-func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrder(userId string, userSecret string, tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest) CryptoSpotTradingApiCryptoSpotPlaceOrderRequest {
+func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrder(userId string, userSecret string, accountId string, tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest) CryptoSpotTradingApiCryptoSpotPlaceOrderRequest {
 	return CryptoSpotTradingApiCryptoSpotPlaceOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
+		accountId: accountId,
 		tradingCryptoSpotPlaceOrderRequest: tradingCryptoSpotPlaceOrderRequest,
 	}
 }
@@ -73,11 +255,12 @@ func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrderExecute(r CryptoSpotTr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/trading/crypto/spot/placeOrder"
+    subpath := "/accounts/{accountId}/trading/crypto/spot/placeOrder"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -203,6 +386,7 @@ type CryptoSpotTradingApiCryptoSpotPreviewOrderRequest struct {
 	ApiService *CryptoSpotTradingApiService
 	userId string
 	userSecret string
+	accountId string
 	tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest
 }
 
@@ -219,15 +403,17 @@ Previews a cryptocurrency spot order using the specified account.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
+ @param accountId
  @param tradingCryptoSpotPlaceOrderRequest
  @return CryptoSpotTradingApiCryptoSpotPreviewOrderRequest
 */
-func (a *CryptoSpotTradingApiService) CryptoSpotPreviewOrder(userId string, userSecret string, tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest) CryptoSpotTradingApiCryptoSpotPreviewOrderRequest {
+func (a *CryptoSpotTradingApiService) CryptoSpotPreviewOrder(userId string, userSecret string, accountId string, tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest) CryptoSpotTradingApiCryptoSpotPreviewOrderRequest {
 	return CryptoSpotTradingApiCryptoSpotPreviewOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
+		accountId: accountId,
 		tradingCryptoSpotPlaceOrderRequest: tradingCryptoSpotPlaceOrderRequest,
 	}
 }
@@ -247,11 +433,12 @@ func (a *CryptoSpotTradingApiService) CryptoSpotPreviewOrderExecute(r CryptoSpot
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/trading/crypto/spot/previewOrder"
+    subpath := "/accounts/{accountId}/trading/crypto/spot/previewOrder"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -377,7 +564,9 @@ type CryptoSpotTradingApiCryptoSpotQuoteRequest struct {
 	ApiService *CryptoSpotTradingApiService
 	userId string
 	userSecret string
-	tradingCryptoSpotQuoteRequest TradingCryptoSpotQuoteRequest
+	accountId string
+	base string
+	quote string
 }
 
 func (r CryptoSpotTradingApiCryptoSpotQuoteRequest) Execute() (*CryptoSpotQuote, *http.Response, error) {
@@ -393,16 +582,20 @@ Gets a quote for the specified account.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param tradingCryptoSpotQuoteRequest
+ @param accountId
+ @param base
+ @param quote
  @return CryptoSpotTradingApiCryptoSpotQuoteRequest
 */
-func (a *CryptoSpotTradingApiService) CryptoSpotQuote(userId string, userSecret string, tradingCryptoSpotQuoteRequest TradingCryptoSpotQuoteRequest) CryptoSpotTradingApiCryptoSpotQuoteRequest {
+func (a *CryptoSpotTradingApiService) CryptoSpotQuote(userId string, userSecret string, accountId string, base string, quote string) CryptoSpotTradingApiCryptoSpotQuoteRequest {
 	return CryptoSpotTradingApiCryptoSpotQuoteRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
-		tradingCryptoSpotQuoteRequest: tradingCryptoSpotQuoteRequest,
+		accountId: accountId,
+		base: base,
+		quote: quote,
 	}
 }
 
@@ -410,7 +603,7 @@ func (a *CryptoSpotTradingApiService) CryptoSpotQuote(userId string, userSecret 
 //  @return CryptoSpotQuote
 func (a *CryptoSpotTradingApiService) CryptoSpotQuoteExecute(r CryptoSpotTradingApiCryptoSpotQuoteRequest) (*CryptoSpotQuote, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *CryptoSpotQuote
@@ -421,11 +614,12 @@ func (a *CryptoSpotTradingApiService) CryptoSpotQuoteExecute(r CryptoSpotTrading
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/trading/crypto/spot/quote"
+    subpath := "/accounts/{accountId}/trading/crypto/spot/quote"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -433,8 +627,10 @@ func (a *CryptoSpotTradingApiService) CryptoSpotQuoteExecute(r CryptoSpotTrading
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	localVarQueryParams.Add("base", parameterToString(r.base, ""))
+	localVarQueryParams.Add("quote", parameterToString(r.quote, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -450,10 +646,6 @@ func (a *CryptoSpotTradingApiService) CryptoSpotQuoteExecute(r CryptoSpotTrading
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-    if !checkNilInterface(r.tradingCryptoSpotQuoteRequest) {
-        localVarPostBody = r.tradingCryptoSpotQuoteRequest
-    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -546,60 +738,70 @@ func (a *CryptoSpotTradingApiService) CryptoSpotQuoteExecute(r CryptoSpotTrading
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type CryptoSpotTradingApiCryptoSpotSearchMarketsRequest struct {
+type CryptoSpotTradingApiCryptoSpotSymbolsRequest struct {
 	ctx context.Context
 	ApiService *CryptoSpotTradingApiService
 	userId string
 	userSecret string
-	tradingCryptoSpotSearchMarketsRequest TradingCryptoSpotSearchMarketsRequest
+	accountId string
+	base string
+	quote *string
 }
 
-func (r CryptoSpotTradingApiCryptoSpotSearchMarketsRequest) Execute() ([]CryptocurrencyMarket, *http.Response, error) {
-	return r.ApiService.CryptoSpotSearchMarketsExecute(r)
+func (r *CryptoSpotTradingApiCryptoSpotSymbolsRequest) Quote(quote string) *CryptoSpotTradingApiCryptoSpotSymbolsRequest {
+	r.quote = &quote
+	return r
+}
+
+func (r CryptoSpotTradingApiCryptoSpotSymbolsRequest) Execute() ([]CryptocurrencyMarket, *http.Response, error) {
+	return r.ApiService.CryptoSpotSymbolsExecute(r)
 }
 
 /*
-CryptoSpotSearchMarkets Search crypto spot markets
+CryptoSpotSymbols Search crypto spot symbols
 
-Searches cryptocurrency spot markets accessible to the specified account.
+Searches cryptocurrency spot symbols accessible to the specified account.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
- @param tradingCryptoSpotSearchMarketsRequest
- @return CryptoSpotTradingApiCryptoSpotSearchMarketsRequest
+ @param accountId
+ @param base
+ @return CryptoSpotTradingApiCryptoSpotSymbolsRequest
 */
-func (a *CryptoSpotTradingApiService) CryptoSpotSearchMarkets(userId string, userSecret string, tradingCryptoSpotSearchMarketsRequest TradingCryptoSpotSearchMarketsRequest) CryptoSpotTradingApiCryptoSpotSearchMarketsRequest {
-	return CryptoSpotTradingApiCryptoSpotSearchMarketsRequest{
+func (a *CryptoSpotTradingApiService) CryptoSpotSymbols(userId string, userSecret string, accountId string, base string) CryptoSpotTradingApiCryptoSpotSymbolsRequest {
+	return CryptoSpotTradingApiCryptoSpotSymbolsRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
-		tradingCryptoSpotSearchMarketsRequest: tradingCryptoSpotSearchMarketsRequest,
+		accountId: accountId,
+		base: base,
 	}
 }
 
 // Execute executes the request
 //  @return []CryptocurrencyMarket
-func (a *CryptoSpotTradingApiService) CryptoSpotSearchMarketsExecute(r CryptoSpotTradingApiCryptoSpotSearchMarketsRequest) ([]CryptocurrencyMarket, *http.Response, error) {
+func (a *CryptoSpotTradingApiService) CryptoSpotSymbolsExecute(r CryptoSpotTradingApiCryptoSpotSymbolsRequest) ([]CryptocurrencyMarket, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  []CryptocurrencyMarket
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotSearchMarkets")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotSymbols")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/trading/crypto/spot/searchMarkets"
+    subpath := "/accounts/{accountId}/trading/crypto/spot/symbols"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -607,8 +809,12 @@ func (a *CryptoSpotTradingApiService) CryptoSpotSearchMarketsExecute(r CryptoSpo
 
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	localVarQueryParams.Add("base", parameterToString(r.base, ""))
+	if r.quote != nil {
+		localVarQueryParams.Add("quote", parameterToString(*r.quote, ""))
+	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -624,10 +830,6 @@ func (a *CryptoSpotTradingApiService) CryptoSpotSearchMarketsExecute(r CryptoSpo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-    if !checkNilInterface(r.tradingCryptoSpotSearchMarketsRequest) {
-        localVarPostBody = r.tradingCryptoSpotSearchMarketsRequest
-    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

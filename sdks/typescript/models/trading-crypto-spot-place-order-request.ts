@@ -20,12 +20,6 @@ import { CryptocurrencyPair } from './cryptocurrency-pair';
  */
 export interface TradingCryptoSpotPlaceOrderRequest {
     /**
-     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-     * @type {string}
-     * @memberof TradingCryptoSpotPlaceOrderRequest
-     */
-    'account_id': string;
-    /**
      * 
      * @type {CryptocurrencyPair}
      * @memberof TradingCryptoSpotPlaceOrderRequest

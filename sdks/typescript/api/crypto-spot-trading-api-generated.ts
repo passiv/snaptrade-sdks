@@ -33,11 +33,9 @@ import { CryptocurrencyPair } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
+import { TradingCryptoSpotCancelOrderRequest } from '../models';
+// @ts-ignore
 import { TradingCryptoSpotPlaceOrderRequest } from '../models';
-// @ts-ignore
-import { TradingCryptoSpotQuoteRequest } from '../models';
-// @ts-ignore
-import { TradingCryptoSpotSearchMarketsRequest } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -48,22 +46,96 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Cancels a cryptocurrency spot order in the specified account. 
+         * @summary Cancel a crypto spot order.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {TradingCryptoSpotCancelOrderRequest} tradingCryptoSpotCancelOrderRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cryptoSpotCancelOrder: async (userId: string, userSecret: string, accountId: string, tradingCryptoSpotCancelOrderRequest: TradingCryptoSpotCancelOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('cryptoSpotCancelOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('cryptoSpotCancelOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cryptoSpotCancelOrder', 'accountId', accountId)
+            // verify required parameter 'tradingCryptoSpotCancelOrderRequest' is not null or undefined
+            assertParamExists('cryptoSpotCancelOrder', 'tradingCryptoSpotCancelOrderRequest', tradingCryptoSpotCancelOrderRequest)
+            const localVarPath = `/accounts/{accountId}/trading/crypto/spot/cancelOrder`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: tradingCryptoSpotCancelOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/crypto/spot/cancelOrder',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingCryptoSpotCancelOrderRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Places a spot cryptocurrency order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange. 
          * @summary Place a spot order on a crypto exchange
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId 
          * @param {TradingCryptoSpotPlaceOrderRequest} tradingCryptoSpotPlaceOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotPlaceOrder: async (userId: string, userSecret: string, tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cryptoSpotPlaceOrder: async (userId: string, userSecret: string, accountId: string, tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('cryptoSpotPlaceOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('cryptoSpotPlaceOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cryptoSpotPlaceOrder', 'accountId', accountId)
             // verify required parameter 'tradingCryptoSpotPlaceOrderRequest' is not null or undefined
             assertParamExists('cryptoSpotPlaceOrder', 'tradingCryptoSpotPlaceOrderRequest', tradingCryptoSpotPlaceOrderRequest)
-            const localVarPath = `/trading/crypto/spot/placeOrder`;
+            const localVarPath = `/accounts/{accountId}/trading/crypto/spot/placeOrder`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -102,7 +174,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/trading/crypto/spot/placeOrder',
+                pathTemplate: '/accounts/{accountId}/trading/crypto/spot/placeOrder',
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradingCryptoSpotPlaceOrderRequest, localVarRequestOptions, configuration)
@@ -118,18 +190,22 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
          * @summary Place a spot order on a crypto exchange
          * @param {string} userId 
          * @param {string} userSecret 
+         * @param {string} accountId 
          * @param {TradingCryptoSpotPlaceOrderRequest} tradingCryptoSpotPlaceOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotPreviewOrder: async (userId: string, userSecret: string, tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cryptoSpotPreviewOrder: async (userId: string, userSecret: string, accountId: string, tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('cryptoSpotPreviewOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('cryptoSpotPreviewOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cryptoSpotPreviewOrder', 'accountId', accountId)
             // verify required parameter 'tradingCryptoSpotPlaceOrderRequest' is not null or undefined
             assertParamExists('cryptoSpotPreviewOrder', 'tradingCryptoSpotPlaceOrderRequest', tradingCryptoSpotPlaceOrderRequest)
-            const localVarPath = `/trading/crypto/spot/previewOrder`;
+            const localVarPath = `/accounts/{accountId}/trading/crypto/spot/previewOrder`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -168,7 +244,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/trading/crypto/spot/previewOrder',
+                pathTemplate: '/accounts/{accountId}/trading/crypto/spot/previewOrder',
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradingCryptoSpotPlaceOrderRequest, localVarRequestOptions, configuration)
@@ -184,18 +260,25 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
          * @summary Get a quote for a cyrptocurrency market
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {TradingCryptoSpotQuoteRequest} tradingCryptoSpotQuoteRequest 
+         * @param {string} accountId 
+         * @param {string} base 
+         * @param {string} quote 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotQuote: async (userId: string, userSecret: string, tradingCryptoSpotQuoteRequest: TradingCryptoSpotQuoteRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cryptoSpotQuote: async (userId: string, userSecret: string, accountId: string, base: string, quote: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('cryptoSpotQuote', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('cryptoSpotQuote', 'userSecret', userSecret)
-            // verify required parameter 'tradingCryptoSpotQuoteRequest' is not null or undefined
-            assertParamExists('cryptoSpotQuote', 'tradingCryptoSpotQuoteRequest', tradingCryptoSpotQuoteRequest)
-            const localVarPath = `/trading/crypto/spot/quote`;
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cryptoSpotQuote', 'accountId', accountId)
+            // verify required parameter 'base' is not null or undefined
+            assertParamExists('cryptoSpotQuote', 'base', base)
+            // verify required parameter 'quote' is not null or undefined
+            assertParamExists('cryptoSpotQuote', 'quote', quote)
+            const localVarPath = `/accounts/{accountId}/trading/crypto/spot/quote`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -203,7 +286,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -221,23 +304,26 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
+            if (base !== undefined) {
+                localVarQueryParameter['base'] = base;
+            }
+
+            if (quote !== undefined) {
+                localVarQueryParameter['quote'] = quote;
+            }
+
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradingCryptoSpotQuoteRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/trading/crypto/spot/quote',
-                httpMethod: 'POST'
+                pathTemplate: '/accounts/{accountId}/trading/crypto/spot/quote',
+                httpMethod: 'GET'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingCryptoSpotQuoteRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -246,22 +332,27 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
             };
         },
         /**
-         * Searches cryptocurrency spot markets accessible to the specified account. 
-         * @summary Search crypto spot markets
+         * Searches cryptocurrency spot symbols accessible to the specified account. 
+         * @summary Search crypto spot symbols
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {TradingCryptoSpotSearchMarketsRequest} tradingCryptoSpotSearchMarketsRequest 
+         * @param {string} accountId 
+         * @param {string} base 
+         * @param {string} [quote] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotSearchMarkets: async (userId: string, userSecret: string, tradingCryptoSpotSearchMarketsRequest: TradingCryptoSpotSearchMarketsRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cryptoSpotSymbols: async (userId: string, userSecret: string, accountId: string, base: string, quote?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
-            assertParamExists('cryptoSpotSearchMarkets', 'userId', userId)
+            assertParamExists('cryptoSpotSymbols', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('cryptoSpotSearchMarkets', 'userSecret', userSecret)
-            // verify required parameter 'tradingCryptoSpotSearchMarketsRequest' is not null or undefined
-            assertParamExists('cryptoSpotSearchMarkets', 'tradingCryptoSpotSearchMarketsRequest', tradingCryptoSpotSearchMarketsRequest)
-            const localVarPath = `/trading/crypto/spot/searchMarkets`;
+            assertParamExists('cryptoSpotSymbols', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cryptoSpotSymbols', 'accountId', accountId)
+            // verify required parameter 'base' is not null or undefined
+            assertParamExists('cryptoSpotSymbols', 'base', base)
+            const localVarPath = `/accounts/{accountId}/trading/crypto/spot/symbols`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -269,7 +360,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -287,23 +378,26 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
                 localVarQueryParameter['userSecret'] = userSecret;
             }
 
+            if (base !== undefined) {
+                localVarQueryParameter['base'] = base;
+            }
+
+            if (quote !== undefined) {
+                localVarQueryParameter['quote'] = quote;
+            }
+
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradingCryptoSpotSearchMarketsRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/trading/crypto/spot/searchMarkets',
-                httpMethod: 'POST'
+                pathTemplate: '/accounts/{accountId}/trading/crypto/spot/symbols',
+                httpMethod: 'GET'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingCryptoSpotSearchMarketsRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -322,6 +416,20 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = CryptoSpotTradingApiAxiosParamCreator(configuration)
     return {
         /**
+         * Cancels a cryptocurrency spot order in the specified account. 
+         * @summary Cancel a crypto spot order.
+         * @param {CryptoSpotTradingApiCryptoSpotCancelOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const tradingCryptoSpotCancelOrderRequest: TradingCryptoSpotCancelOrderRequest = {
+                brokerage_order_id: requestParameters.brokerage_order_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotCancelOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingCryptoSpotCancelOrderRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Places a spot cryptocurrency order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange. 
          * @summary Place a spot order on a crypto exchange
          * @param {CryptoSpotTradingApiCryptoSpotPlaceOrderRequest} requestParameters Request parameters.
@@ -330,7 +438,6 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          */
         async cryptoSpotPlaceOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPlaceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
             const tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest = {
-                account_id: requestParameters.account_id,
                 symbol: requestParameters.symbol,
                 side: requestParameters.side,
                 type: requestParameters.type,
@@ -341,7 +448,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
                 post_only: requestParameters.post_only,
                 expiration_date: requestParameters.expiration_date
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotPlaceOrder(requestParameters.userId, requestParameters.userSecret, tradingCryptoSpotPlaceOrderRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotPlaceOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingCryptoSpotPlaceOrderRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -353,7 +460,6 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          */
         async cryptoSpotPreviewOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPreviewOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptoSpotOrderPreview>> {
             const tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest = {
-                account_id: requestParameters.account_id,
                 symbol: requestParameters.symbol,
                 side: requestParameters.side,
                 type: requestParameters.type,
@@ -364,7 +470,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
                 post_only: requestParameters.post_only,
                 expiration_date: requestParameters.expiration_date
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotPreviewOrder(requestParameters.userId, requestParameters.userSecret, tradingCryptoSpotPlaceOrderRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotPreviewOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingCryptoSpotPlaceOrderRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -375,27 +481,18 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async cryptoSpotQuote(requestParameters: CryptoSpotTradingApiCryptoSpotQuoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptoSpotQuote>> {
-            const tradingCryptoSpotQuoteRequest: TradingCryptoSpotQuoteRequest = {
-                account_id: requestParameters.account_id,
-                symbol: requestParameters.symbol
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotQuote(requestParameters.userId, requestParameters.userSecret, tradingCryptoSpotQuoteRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotQuote(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.base, requestParameters.quote, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Searches cryptocurrency spot markets accessible to the specified account. 
-         * @summary Search crypto spot markets
-         * @param {CryptoSpotTradingApiCryptoSpotSearchMarketsRequest} requestParameters Request parameters.
+         * Searches cryptocurrency spot symbols accessible to the specified account. 
+         * @summary Search crypto spot symbols
+         * @param {CryptoSpotTradingApiCryptoSpotSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cryptoSpotSearchMarkets(requestParameters: CryptoSpotTradingApiCryptoSpotSearchMarketsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CryptocurrencyMarket>>> {
-            const tradingCryptoSpotSearchMarketsRequest: TradingCryptoSpotSearchMarketsRequest = {
-                account_id: requestParameters.account_id,
-                base: requestParameters.base,
-                quote: requestParameters.quote
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotSearchMarkets(requestParameters.userId, requestParameters.userSecret, tradingCryptoSpotSearchMarketsRequest, options);
+        async cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CryptocurrencyMarket>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotSymbols(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.base, requestParameters.quote, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -408,6 +505,16 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
 export const CryptoSpotTradingApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = CryptoSpotTradingApiFp(configuration)
     return {
+        /**
+         * Cancels a cryptocurrency spot order in the specified account. 
+         * @summary Cancel a crypto spot order.
+         * @param {CryptoSpotTradingApiCryptoSpotCancelOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.cryptoSpotCancelOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
         /**
          * Places a spot cryptocurrency order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange. 
          * @summary Place a spot order on a crypto exchange
@@ -439,17 +546,47 @@ export const CryptoSpotTradingApiFactory = function (configuration?: Configurati
             return localVarFp.cryptoSpotQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches cryptocurrency spot markets accessible to the specified account. 
-         * @summary Search crypto spot markets
-         * @param {CryptoSpotTradingApiCryptoSpotSearchMarketsRequest} requestParameters Request parameters.
+         * Searches cryptocurrency spot symbols accessible to the specified account. 
+         * @summary Search crypto spot symbols
+         * @param {CryptoSpotTradingApiCryptoSpotSymbolsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotSearchMarkets(requestParameters: CryptoSpotTradingApiCryptoSpotSearchMarketsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<CryptocurrencyMarket>> {
-            return localVarFp.cryptoSpotSearchMarkets(requestParameters, options).then((request) => request(axios, basePath));
+        cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<CryptocurrencyMarket>> {
+            return localVarFp.cryptoSpotSymbols(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for cryptoSpotCancelOrder operation in CryptoSpotTradingApi.
+ * @export
+ * @interface CryptoSpotTradingApiCryptoSpotCancelOrderRequest
+ */
+export type CryptoSpotTradingApiCryptoSpotCancelOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotCancelOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotCancelOrder
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotCancelOrder
+    */
+    readonly accountId: string
+    
+} & TradingCryptoSpotCancelOrderRequest
 
 /**
  * Request parameters for cryptoSpotPlaceOrder operation in CryptoSpotTradingApi.
@@ -471,6 +608,13 @@ export type CryptoSpotTradingApiCryptoSpotPlaceOrderRequest = {
     * @memberof CryptoSpotTradingApiCryptoSpotPlaceOrder
     */
     readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotPlaceOrder
+    */
+    readonly accountId: string
     
 } & TradingCryptoSpotPlaceOrderRequest
 
@@ -495,6 +639,13 @@ export type CryptoSpotTradingApiCryptoSpotPreviewOrderRequest = {
     */
     readonly userSecret: string
     
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotPreviewOrder
+    */
+    readonly accountId: string
+    
 } & TradingCryptoSpotPlaceOrderRequest
 
 /**
@@ -518,30 +669,72 @@ export type CryptoSpotTradingApiCryptoSpotQuoteRequest = {
     */
     readonly userSecret: string
     
-} & TradingCryptoSpotQuoteRequest
-
-/**
- * Request parameters for cryptoSpotSearchMarkets operation in CryptoSpotTradingApi.
- * @export
- * @interface CryptoSpotTradingApiCryptoSpotSearchMarketsRequest
- */
-export type CryptoSpotTradingApiCryptoSpotSearchMarketsRequest = {
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotQuote
+    */
+    readonly accountId: string
     
     /**
     * 
     * @type {string}
-    * @memberof CryptoSpotTradingApiCryptoSpotSearchMarkets
+    * @memberof CryptoSpotTradingApiCryptoSpotQuote
+    */
+    readonly base: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotQuote
+    */
+    readonly quote: string
+    
+}
+
+/**
+ * Request parameters for cryptoSpotSymbols operation in CryptoSpotTradingApi.
+ * @export
+ * @interface CryptoSpotTradingApiCryptoSpotSymbolsRequest
+ */
+export type CryptoSpotTradingApiCryptoSpotSymbolsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotSymbols
     */
     readonly userId: string
     
     /**
     * 
     * @type {string}
-    * @memberof CryptoSpotTradingApiCryptoSpotSearchMarkets
+    * @memberof CryptoSpotTradingApiCryptoSpotSymbols
     */
     readonly userSecret: string
     
-} & TradingCryptoSpotSearchMarketsRequest
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotSymbols
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotSymbols
+    */
+    readonly base: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof CryptoSpotTradingApiCryptoSpotSymbols
+    */
+    readonly quote?: string
+    
+}
 
 /**
  * CryptoSpotTradingApiGenerated - object-oriented interface
@@ -550,6 +743,18 @@ export type CryptoSpotTradingApiCryptoSpotSearchMarketsRequest = {
  * @extends {BaseAPI}
  */
 export class CryptoSpotTradingApiGenerated extends BaseAPI {
+    /**
+     * Cancels a cryptocurrency spot order in the specified account. 
+     * @summary Cancel a crypto spot order.
+     * @param {CryptoSpotTradingApiCryptoSpotCancelOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CryptoSpotTradingApiGenerated
+     */
+    public cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig) {
+        return CryptoSpotTradingApiFp(this.configuration).cryptoSpotCancelOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Places a spot cryptocurrency order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange. 
      * @summary Place a spot order on a crypto exchange
@@ -587,14 +792,14 @@ export class CryptoSpotTradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Searches cryptocurrency spot markets accessible to the specified account. 
-     * @summary Search crypto spot markets
-     * @param {CryptoSpotTradingApiCryptoSpotSearchMarketsRequest} requestParameters Request parameters.
+     * Searches cryptocurrency spot symbols accessible to the specified account. 
+     * @summary Search crypto spot symbols
+     * @param {CryptoSpotTradingApiCryptoSpotSymbolsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CryptoSpotTradingApiGenerated
      */
-    public cryptoSpotSearchMarkets(requestParameters: CryptoSpotTradingApiCryptoSpotSearchMarketsRequest, options?: AxiosRequestConfig) {
-        return CryptoSpotTradingApiFp(this.configuration).cryptoSpotSearchMarkets(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    public cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig) {
+        return CryptoSpotTradingApiFp(this.configuration).cryptoSpotSymbols(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

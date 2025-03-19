@@ -18,8 +18,6 @@ import (
 
 // TradingCryptoSpotPlaceOrderRequest struct for TradingCryptoSpotPlaceOrderRequest
 type TradingCryptoSpotPlaceOrderRequest struct {
-	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-	AccountId string `json:"account_id"`
 	Symbol CryptocurrencyPair `json:"symbol"`
 	Side ActionStrict `json:"side"`
 	// The type of order to place.
@@ -42,9 +40,8 @@ type TradingCryptoSpotPlaceOrderRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingCryptoSpotPlaceOrderRequest(accountId string, symbol CryptocurrencyPair, side ActionStrict, type_ string, timeInForce string, amount float64) *TradingCryptoSpotPlaceOrderRequest {
+func NewTradingCryptoSpotPlaceOrderRequest(symbol CryptocurrencyPair, side ActionStrict, type_ string, timeInForce string, amount float64) *TradingCryptoSpotPlaceOrderRequest {
 	this := TradingCryptoSpotPlaceOrderRequest{}
-	this.AccountId = accountId
 	this.Symbol = symbol
 	this.Side = side
 	this.Type = type_
@@ -59,30 +56,6 @@ func NewTradingCryptoSpotPlaceOrderRequest(accountId string, symbol Cryptocurren
 func NewTradingCryptoSpotPlaceOrderRequestWithDefaults() *TradingCryptoSpotPlaceOrderRequest {
 	this := TradingCryptoSpotPlaceOrderRequest{}
 	return &this
-}
-
-// GetAccountId returns the AccountId field value
-func (o *TradingCryptoSpotPlaceOrderRequest) GetAccountId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AccountId
-}
-
-// GetAccountIdOk returns a tuple with the AccountId field value
-// and a boolean to check if the value has been set.
-func (o *TradingCryptoSpotPlaceOrderRequest) GetAccountIdOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return &o.AccountId, true
-}
-
-// SetAccountId sets field value
-func (o *TradingCryptoSpotPlaceOrderRequest) SetAccountId(v string) {
-	o.AccountId = v
 }
 
 // GetSymbol returns the Symbol field value
@@ -335,9 +308,6 @@ func (o *TradingCryptoSpotPlaceOrderRequest) SetExpirationDate(v time.Time) {
 
 func (o TradingCryptoSpotPlaceOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["account_id"] = o.AccountId
-	}
 	if true {
 		toSerialize["symbol"] = o.Symbol
 	}

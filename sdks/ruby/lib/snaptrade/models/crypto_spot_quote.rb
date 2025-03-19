@@ -18,11 +18,19 @@ module SnapTrade
     # The lowest price a seller is willing to accept.
     attr_accessor :ask
 
+    # The market mid price.
+    attr_accessor :mid
+
+    # The timestamp of the quote.
+    attr_accessor :timestamp
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'bid' => :'bid',
-        :'ask' => :'ask'
+        :'ask' => :'ask',
+        :'mid' => :'mid',
+        :'timestamp' => :'timestamp'
       }
     end
 
@@ -35,7 +43,9 @@ module SnapTrade
     def self.openapi_types
       {
         :'bid' => :'Float',
-        :'ask' => :'Float'
+        :'ask' => :'Float',
+        :'mid' => :'Float',
+        :'timestamp' => :'Time'
       }
     end
 
@@ -66,6 +76,14 @@ module SnapTrade
 
       if attributes.key?(:'ask')
         self.ask = attributes[:'ask']
+      end
+
+      if attributes.key?(:'mid')
+        self.mid = attributes[:'mid']
+      end
+
+      if attributes.key?(:'timestamp')
+        self.timestamp = attributes[:'timestamp']
       end
     end
 
@@ -98,7 +116,9 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           bid == o.bid &&
-          ask == o.ask
+          ask == o.ask &&
+          mid == o.mid &&
+          timestamp == o.timestamp
     end
 
     # @see the `==` method
@@ -110,7 +130,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [bid, ask].hash
+      [bid, ask, mid, timestamp].hash
     end
 
     # Builds the object from hash

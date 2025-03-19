@@ -137,30 +137,6 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'NotionalValue'
         }
-        /// <summary>
-        /// Test the property 'OrderClass'
-        /// </summary>
-        [Fact]
-        public void OrderClassTest()
-        {
-            // TODO unit test for the property 'OrderClass'
-        }
-        /// <summary>
-        /// Test the property 'StopLoss'
-        /// </summary>
-        [Fact]
-        public void StopLossTest()
-        {
-            // TODO unit test for the property 'StopLoss'
-        }
-        /// <summary>
-        /// Test the property 'TakeProfit'
-        /// </summary>
-        [Fact]
-        public void TakeProfitTest()
-        {
-            // TODO unit test for the property 'TakeProfit'
-        }
 
     }
 

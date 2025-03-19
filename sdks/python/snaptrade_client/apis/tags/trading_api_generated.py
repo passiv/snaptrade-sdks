@@ -12,6 +12,7 @@
 from snaptrade_client.paths.accounts_account_id_orders_cancel.post import CancelUserAccountOrder
 from snaptrade_client.paths.trade_impact.post import GetOrderImpact
 from snaptrade_client.paths.accounts_account_id_quotes.get import GetUserAccountQuotes
+from snaptrade_client.paths.trade_place_bracket_order.post import PlaceBracketOrder
 from snaptrade_client.paths.trade_place.post import PlaceForceOrder
 from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
 
@@ -20,6 +21,7 @@ class TradingApiGenerated(
     CancelUserAccountOrder,
     GetOrderImpact,
     GetUserAccountQuotes,
+    PlaceBracketOrder,
     PlaceForceOrder,
     PlaceOrder,
 ):

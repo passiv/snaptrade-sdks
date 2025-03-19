@@ -12,9 +12,6 @@ require 'time'
 
 module SnapTrade
   class TradingCryptoSpotPlaceOrderRequest
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    attr_accessor :account_id
-
     attr_accessor :symbol
 
     # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
@@ -44,7 +41,6 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'account_id',
         :'symbol' => :'symbol',
         :'side' => :'side',
         :'type' => :'type',
@@ -65,7 +61,6 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
         :'symbol' => :'CryptocurrencyPair',
         :'side' => :'ActionStrict',
         :'type' => :'Type',
@@ -98,10 +93,6 @@ module SnapTrade
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
@@ -144,10 +135,6 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
       if @symbol.nil?
         invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
       end
@@ -174,7 +161,6 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_id.nil?
       return false if @symbol.nil?
       return false if @side.nil?
       return false if @type.nil?
@@ -188,7 +174,6 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
           symbol == o.symbol &&
           side == o.side &&
           type == o.type &&
@@ -209,7 +194,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, symbol, side, type, time_in_force, amount, limit_price, stop_price, post_only, expiration_date].hash
+      [symbol, side, type, time_in_force, amount, limit_price, stop_price, post_only, expiration_date].hash
     end
 
     # Builds the object from hash

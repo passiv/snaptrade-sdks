@@ -29,7 +29,7 @@ namespace SnapTrade.Net.Model
     /// <summary>
     /// TradingCryptoSpotPlaceOrderRequest
     /// </summary>
-    [DataContract(Name = "Trading_crypto_spot_placeOrder_request")]
+    [DataContract(Name = "Trading_cryptoSpotPlaceOrder_request")]
     public partial class TradingCryptoSpotPlaceOrderRequest : IEquatable<TradingCryptoSpotPlaceOrderRequest>, IValidatableObject
     {
 
@@ -138,7 +138,6 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingCryptoSpotPlaceOrderRequest" /> class.
         /// </summary>
-        /// <param name="accountId">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="symbol">symbol (required).</param>
         /// <param name="side">side (required).</param>
         /// <param name="type">The type of order to place. (required).</param>
@@ -148,14 +147,8 @@ namespace SnapTrade.Net.Model
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
         /// <param name="postOnly">Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees..</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
-        public TradingCryptoSpotPlaceOrderRequest(string accountId = default(string), CryptocurrencyPair symbol = default(CryptocurrencyPair), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
+        public TradingCryptoSpotPlaceOrderRequest(CryptocurrencyPair symbol = default(CryptocurrencyPair), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
         {
-            // to ensure "accountId" is required (not null)
-            if (accountId == null)
-            {
-                throw new ArgumentNullException("accountId is a required property for TradingCryptoSpotPlaceOrderRequest and cannot be null");
-            }
-            this.AccountId = accountId;
             // to ensure "symbol" is required (not null)
             if (symbol == null)
             {
@@ -171,13 +164,6 @@ namespace SnapTrade.Net.Model
             this.PostOnly = postOnly;
             this.ExpirationDate = expirationDate;
         }
-
-        /// <summary>
-        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-        /// </summary>
-        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
-        [DataMember(Name = "account_id", IsRequired = true, EmitDefaultValue = true)]
-        public string AccountId { get; set; }
 
         /// <summary>
         /// Gets or Sets Symbol
@@ -228,7 +214,6 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class TradingCryptoSpotPlaceOrderRequest {\n");
-            sb.Append("  AccountId: ").Append(AccountId).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Side: ").Append(Side).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -273,11 +258,6 @@ namespace SnapTrade.Net.Model
                 return false;
             }
             return 
-                (
-                    this.AccountId == input.AccountId ||
-                    (this.AccountId != null &&
-                    this.AccountId.Equals(input.AccountId))
-                ) && 
                 (
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
@@ -327,10 +307,6 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.AccountId != null)
-                {
-                    hashCode = (hashCode * 59) + this.AccountId.GetHashCode();
-                }
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();

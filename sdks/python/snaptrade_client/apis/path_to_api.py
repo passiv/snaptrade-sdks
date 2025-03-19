@@ -35,6 +35,7 @@ from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
+from snaptrade_client.apis.paths.trade_place_bracket_order import TradePlaceBracketOrder
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -46,10 +47,11 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
-from snaptrade_client.apis.paths.trading_crypto_spot_place_order import TradingCryptoSpotPlaceOrder
-from snaptrade_client.apis.paths.trading_crypto_spot_preview_order import TradingCryptoSpotPreviewOrder
-from snaptrade_client.apis.paths.trading_crypto_spot_search_markets import TradingCryptoSpotSearchMarkets
-from snaptrade_client.apis.paths.trading_crypto_spot_quote import TradingCryptoSpotQuote
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_place_order import AccountsAccountIdTradingCryptoSpotPlaceOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_cancel_order import AccountsAccountIdTradingCryptoSpotCancelOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_preview_order import AccountsAccountIdTradingCryptoSpotPreviewOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_symbols import AccountsAccountIdTradingCryptoSpotSymbols
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_quote import AccountsAccountIdTradingCryptoSpotQuote
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -88,6 +90,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
+        PathValues.TRADE_PLACE_BRACKET_ORDER: TradePlaceBracketOrder,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -99,10 +102,11 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.TRADING_CRYPTO_SPOT_PLACE_ORDER: TradingCryptoSpotPlaceOrder,
-        PathValues.TRADING_CRYPTO_SPOT_PREVIEW_ORDER: TradingCryptoSpotPreviewOrder,
-        PathValues.TRADING_CRYPTO_SPOT_SEARCH_MARKETS: TradingCryptoSpotSearchMarkets,
-        PathValues.TRADING_CRYPTO_SPOT_QUOTE: TradingCryptoSpotQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )
 
@@ -142,6 +146,7 @@ path_to_api = PathToApi(
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
+        PathValues.TRADE_PLACE_BRACKET_ORDER: TradePlaceBracketOrder,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -153,9 +158,10 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.TRADING_CRYPTO_SPOT_PLACE_ORDER: TradingCryptoSpotPlaceOrder,
-        PathValues.TRADING_CRYPTO_SPOT_PREVIEW_ORDER: TradingCryptoSpotPreviewOrder,
-        PathValues.TRADING_CRYPTO_SPOT_SEARCH_MARKETS: TradingCryptoSpotSearchMarkets,
-        PathValues.TRADING_CRYPTO_SPOT_QUOTE: TradingCryptoSpotQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )

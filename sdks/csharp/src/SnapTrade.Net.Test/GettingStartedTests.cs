@@ -197,23 +197,97 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(optionsChain);
         }
 
+        // TODO: Disable or delete
         [Fact]
-        public void PlaceCryptoSpotOrder() {
+        public void CryptoSpotOrderExample() {
             var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
 
-            var response = this.cryptoSpotTradingApi.CryptoSpotPlaceOrder(
-                this.testUserId,
-                this.testUserSecret,
+            // Get a quote
+            var symbol = new CryptocurrencyPair("DOGE", "USDC");
+            var quote = cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: symbol.Base,
+                quote: symbol.Quote
+            );
+            Console.WriteLine("quote: {0}", quote);
+
+            // Place a limit order
+            var placeOrderResult = cryptoSpotTradingApi.CryptoSpotPlaceOrder(
+                testUserId,
+                testUserSecret,
+                accountId: accountId,
                 new TradingCryptoSpotPlaceOrderRequest(
-                    accountId:accountId,
-                    symbol: new CryptocurrencyPair("DOGE", "USD"),
+                    symbol: symbol,
                     side: ActionStrict.SELL,
                     type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.LIMIT,
-                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTC,
-                    amount:100.2m,
-                    limitPrice: 0.3m,
+                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTD,
+                    expirationDate: DateTime.UtcNow.AddHours(1),
+                    amount:42.2m,
+                    limitPrice: quote.Ask + 0.1m,
                     postOnly: true
                 )
+            );
+
+            Console.WriteLine("placeOrderResult: {0}", placeOrderResult);
+
+            // Cancel the order
+            var cancelOrderResult = cryptoSpotTradingApi.CryptoSpotCancelOrder(
+                testUserId,
+                testUserSecret,
+                accountId: accountId,
+                new TradingCryptoSpotCancelOrderRequest(placeOrderResult.BrokerageOrderId)
+            );
+
+            Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);
+        }
+
+        [Fact]
+        public void PreviewCryptoSpotOrder() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotPreviewOrder(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                new TradingCryptoSpotPlaceOrderRequest(
+                    symbol: new CryptocurrencyPair("DOGE", "USDC"),
+                    side: ActionStrict.BUY,
+                    type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.MARKET,
+                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.IOC,
+                    amount:20.2m
+                )
+            );
+
+            Console.WriteLine(response);
+        }
+
+        [Fact]
+        public void CryptoSpotQuote() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: "BTC",
+                quote: "USDT"
+            );
+
+            Console.WriteLine(response);
+        }
+
+        [Fact]
+        public void SearchSymbols() {
+            var accountId = "83d6e010-759d-4e36-bc1d-65b8f855720f";
+
+            var response = this.cryptoSpotTradingApi.CryptoSpotQuote(
+                testUserId,
+                testUserSecret,
+                accountId:accountId,
+                _base: "BTC",
+                quote: "USDT"
             );
 
             Console.WriteLine(response);

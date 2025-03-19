@@ -23,8 +23,13 @@ class RequiredCryptoSpotQuote(TypedDict):
     # The lowest price a seller is willing to accept.
     ask: str
 
+
 class OptionalCryptoSpotQuote(TypedDict, total=False):
-    pass
+    # The market mid price.
+    mid: str
+
+    # The timestamp of the quote.
+    timestamp: datetime
 
 class CryptoSpotQuote(RequiredCryptoSpotQuote, OptionalCryptoSpotQuote):
     pass

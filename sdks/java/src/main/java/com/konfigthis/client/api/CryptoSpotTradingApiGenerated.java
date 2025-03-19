@@ -34,9 +34,8 @@ import com.konfigthis.client.model.CryptoSpotQuote;
 import com.konfigthis.client.model.CryptocurrencyMarket;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
+import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
-import com.konfigthis.client.model.TradingCryptoSpotQuoteRequest;
-import com.konfigthis.client.model.TradingCryptoSpotSearchMarketsRequest;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -83,7 +82,7 @@ public class CryptoSpotTradingApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call cryptoSpotPlaceOrderCall(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotCancelOrderCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -97,10 +96,11 @@ public class CryptoSpotTradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingCryptoSpotPlaceOrderRequest;
+        Object localVarPostBody = tradingCryptoSpotCancelOrderRequest;
 
         // create path and map variables
-        String localVarPath = "/trading/crypto/spot/placeOrder";
+        String localVarPath = "/accounts/{accountId}/trading/crypto/spot/cancelOrder"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -137,7 +137,219 @@ public class CryptoSpotTradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cryptoSpotPlaceOrderValidateBeforeCall(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotCancelOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotCancelOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotCancelOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cryptoSpotCancelOrder(Async)");
+        }
+
+        // verify the required parameter 'tradingCryptoSpotCancelOrderRequest' is set
+        if (tradingCryptoSpotCancelOrderRequest == null) {
+            throw new ApiException("Missing the required parameter 'tradingCryptoSpotCancelOrderRequest' when calling cryptoSpotCancelOrder(Async)");
+        }
+
+        return cryptoSpotCancelOrderCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
+
+    }
+
+
+    private ApiResponse<AccountOrderRecord> cryptoSpotCancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = cryptoSpotCancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, null);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call cryptoSpotCancelOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = cryptoSpotCancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class CryptoSpotCancelOrderRequestBuilderGenerated {
+        final String brokerageOrderId;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+
+        public CryptoSpotCancelOrderRequestBuilderGenerated(String brokerageOrderId, String userId, String userSecret, UUID accountId) {
+            this.brokerageOrderId = brokerageOrderId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Build call for cryptoSpotCancelOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
+            return cryptoSpotCancelOrderCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
+        }
+
+        private TradingCryptoSpotCancelOrderRequest buildBodyParams() {
+            TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = new TradingCryptoSpotCancelOrderRequest();
+            tradingCryptoSpotCancelOrderRequest.brokerageOrderId(this.brokerageOrderId);
+            return tradingCryptoSpotCancelOrderRequest;
+        }
+
+        /**
+         * Execute cryptoSpotCancelOrder request
+         * @return AccountOrderRecord
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountOrderRecord execute() throws ApiException {
+            TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = cryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute cryptoSpotCancelOrder request with HTTP info returned
+         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+            TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
+            return cryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+        }
+
+        /**
+         * Execute cryptoSpotCancelOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+            TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
+            return cryptoSpotCancelOrderAsync(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
+        }
+    }
+
+    /**
+     * Cancel a crypto spot order.
+     * Cancels a cryptocurrency spot order in the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param tradingCryptoSpotCancelOrderRequest  (required)
+     * @return CryptoSpotCancelOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public CryptoSpotTradingApi.CryptoSpotCancelOrderRequestBuilder cryptoSpotCancelOrder(String brokerageOrderId, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((CryptoSpotTradingApi) this).new CryptoSpotCancelOrderRequestBuilder(brokerageOrderId, userId, userSecret, accountId);
+    }
+    private okhttp3.Call cryptoSpotPlaceOrderCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = tradingCryptoSpotPlaceOrderRequest;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/crypto/spot/placeOrder"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call cryptoSpotPlaceOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotPlaceOrder(Async)");
@@ -148,32 +360,36 @@ public class CryptoSpotTradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotPlaceOrder(Async)");
         }
 
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cryptoSpotPlaceOrder(Async)");
+        }
+
         // verify the required parameter 'tradingCryptoSpotPlaceOrderRequest' is set
         if (tradingCryptoSpotPlaceOrderRequest == null) {
             throw new ApiException("Missing the required parameter 'tradingCryptoSpotPlaceOrderRequest' when calling cryptoSpotPlaceOrder(Async)");
         }
 
-        return cryptoSpotPlaceOrderCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+        return cryptoSpotPlaceOrderCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecord> cryptoSpotPlaceOrderWithHttpInfo(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, null);
+    private ApiResponse<AccountOrderRecord> cryptoSpotPlaceOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotPlaceOrderAsync(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotPlaceOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+        okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class CryptoSpotPlaceOrderRequestBuilderGenerated {
-        final UUID accountId;
         final CryptocurrencyPair symbol;
         final ActionStrict side;
         final String type;
@@ -181,13 +397,13 @@ public class CryptoSpotTradingApiGenerated {
         final BigDecimal amount;
         final String userId;
         final String userSecret;
+        final UUID accountId;
         BigDecimal limitPrice;
         BigDecimal stopPrice;
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public CryptoSpotPlaceOrderRequestBuilderGenerated(UUID accountId, CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret) {
-            this.accountId = accountId;
+        public CryptoSpotPlaceOrderRequestBuilderGenerated(CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             this.symbol = symbol;
             this.side = side;
             this.type = type;
@@ -195,6 +411,7 @@ public class CryptoSpotTradingApiGenerated {
             this.amount = amount;
             this.userId = userId;
             this.userSecret = userSecret;
+            this.accountId = accountId;
         }
 
         /**
@@ -251,12 +468,11 @@ public class CryptoSpotTradingApiGenerated {
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPlaceOrderCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+            return cryptoSpotPlaceOrderCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         }
 
         private TradingCryptoSpotPlaceOrderRequest buildBodyParams() {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = new TradingCryptoSpotPlaceOrderRequest();
-            tradingCryptoSpotPlaceOrderRequest.accountId(this.accountId);
             tradingCryptoSpotPlaceOrderRequest.symbol(this.symbol);
             tradingCryptoSpotPlaceOrderRequest.side(this.side);
             if (this.type != null)
@@ -284,7 +500,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public AccountOrderRecord execute() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, tradingCryptoSpotPlaceOrderRequest);
+            ApiResponse<AccountOrderRecord> localVarResp = cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
             return localVarResp.getResponseBody();
         }
 
@@ -301,7 +517,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, tradingCryptoSpotPlaceOrderRequest);
+            return cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
         }
 
         /**
@@ -318,7 +534,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPlaceOrderAsync(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+            return cryptoSpotPlaceOrderAsync(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         }
     }
 
@@ -327,6 +543,7 @@ public class CryptoSpotTradingApiGenerated {
      * Places a spot cryptocurrency order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange. 
      * @param userId  (required)
      * @param userSecret  (required)
+     * @param accountId  (required)
      * @param tradingCryptoSpotPlaceOrderRequest  (required)
      * @return CryptoSpotPlaceOrderRequestBuilder
      * @http.response.details
@@ -336,10 +553,7 @@ public class CryptoSpotTradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public CryptoSpotTradingApi.CryptoSpotPlaceOrderRequestBuilder cryptoSpotPlaceOrder(UUID accountId, CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret) throws IllegalArgumentException {
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
+    public CryptoSpotTradingApi.CryptoSpotPlaceOrderRequestBuilder cryptoSpotPlaceOrder(CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
@@ -355,9 +569,12 @@ public class CryptoSpotTradingApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((CryptoSpotTradingApi) this).new CryptoSpotPlaceOrderRequestBuilder(accountId, symbol, side, type, timeInForce, amount, userId, userSecret);
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((CryptoSpotTradingApi) this).new CryptoSpotPlaceOrderRequestBuilder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId);
     }
-    private okhttp3.Call cryptoSpotPreviewOrderCall(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotPreviewOrderCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -374,7 +591,8 @@ public class CryptoSpotTradingApiGenerated {
         Object localVarPostBody = tradingCryptoSpotPlaceOrderRequest;
 
         // create path and map variables
-        String localVarPath = "/trading/crypto/spot/previewOrder";
+        String localVarPath = "/accounts/{accountId}/trading/crypto/spot/previewOrder"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -411,7 +629,7 @@ public class CryptoSpotTradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cryptoSpotPreviewOrderValidateBeforeCall(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotPreviewOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotPreviewOrder(Async)");
@@ -422,32 +640,36 @@ public class CryptoSpotTradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotPreviewOrder(Async)");
         }
 
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cryptoSpotPreviewOrder(Async)");
+        }
+
         // verify the required parameter 'tradingCryptoSpotPlaceOrderRequest' is set
         if (tradingCryptoSpotPlaceOrderRequest == null) {
             throw new ApiException("Missing the required parameter 'tradingCryptoSpotPlaceOrderRequest' when calling cryptoSpotPreviewOrder(Async)");
         }
 
-        return cryptoSpotPreviewOrderCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+        return cryptoSpotPreviewOrderCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
 
     }
 
 
-    private ApiResponse<CryptoSpotOrderPreview> cryptoSpotPreviewOrderWithHttpInfo(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = cryptoSpotPreviewOrderValidateBeforeCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, null);
+    private ApiResponse<CryptoSpotOrderPreview> cryptoSpotPreviewOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = cryptoSpotPreviewOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, null);
         Type localVarReturnType = new TypeToken<CryptoSpotOrderPreview>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotPreviewOrderAsync(String userId, String userSecret, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<CryptoSpotOrderPreview> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotPreviewOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<CryptoSpotOrderPreview> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cryptoSpotPreviewOrderValidateBeforeCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+        okhttp3.Call localVarCall = cryptoSpotPreviewOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         Type localVarReturnType = new TypeToken<CryptoSpotOrderPreview>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class CryptoSpotPreviewOrderRequestBuilderGenerated {
-        final UUID accountId;
         final CryptocurrencyPair symbol;
         final ActionStrict side;
         final String type;
@@ -455,13 +677,13 @@ public class CryptoSpotTradingApiGenerated {
         final BigDecimal amount;
         final String userId;
         final String userSecret;
+        final UUID accountId;
         BigDecimal limitPrice;
         BigDecimal stopPrice;
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public CryptoSpotPreviewOrderRequestBuilderGenerated(UUID accountId, CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret) {
-            this.accountId = accountId;
+        public CryptoSpotPreviewOrderRequestBuilderGenerated(CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             this.symbol = symbol;
             this.side = side;
             this.type = type;
@@ -469,6 +691,7 @@ public class CryptoSpotTradingApiGenerated {
             this.amount = amount;
             this.userId = userId;
             this.userSecret = userSecret;
+            this.accountId = accountId;
         }
 
         /**
@@ -525,12 +748,11 @@ public class CryptoSpotTradingApiGenerated {
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPreviewOrderCall(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+            return cryptoSpotPreviewOrderCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         }
 
         private TradingCryptoSpotPlaceOrderRequest buildBodyParams() {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = new TradingCryptoSpotPlaceOrderRequest();
-            tradingCryptoSpotPlaceOrderRequest.accountId(this.accountId);
             tradingCryptoSpotPlaceOrderRequest.symbol(this.symbol);
             tradingCryptoSpotPlaceOrderRequest.side(this.side);
             if (this.type != null)
@@ -558,7 +780,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public CryptoSpotOrderPreview execute() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            ApiResponse<CryptoSpotOrderPreview> localVarResp = cryptoSpotPreviewOrderWithHttpInfo(userId, userSecret, tradingCryptoSpotPlaceOrderRequest);
+            ApiResponse<CryptoSpotOrderPreview> localVarResp = cryptoSpotPreviewOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
             return localVarResp.getResponseBody();
         }
 
@@ -575,7 +797,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public ApiResponse<CryptoSpotOrderPreview> executeWithHttpInfo() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPreviewOrderWithHttpInfo(userId, userSecret, tradingCryptoSpotPlaceOrderRequest);
+            return cryptoSpotPreviewOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
         }
 
         /**
@@ -592,7 +814,7 @@ public class CryptoSpotTradingApiGenerated {
          */
         public okhttp3.Call executeAsync(final ApiCallback<CryptoSpotOrderPreview> _callback) throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            return cryptoSpotPreviewOrderAsync(userId, userSecret, tradingCryptoSpotPlaceOrderRequest, _callback);
+            return cryptoSpotPreviewOrderAsync(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         }
     }
 
@@ -601,6 +823,7 @@ public class CryptoSpotTradingApiGenerated {
      * Previews a cryptocurrency spot order using the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
+     * @param accountId  (required)
      * @param tradingCryptoSpotPlaceOrderRequest  (required)
      * @return CryptoSpotPreviewOrderRequestBuilder
      * @http.response.details
@@ -610,10 +833,7 @@ public class CryptoSpotTradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public CryptoSpotTradingApi.CryptoSpotPreviewOrderRequestBuilder cryptoSpotPreviewOrder(UUID accountId, CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret) throws IllegalArgumentException {
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
+    public CryptoSpotTradingApi.CryptoSpotPreviewOrderRequestBuilder cryptoSpotPreviewOrder(CryptocurrencyPair symbol, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
@@ -629,9 +849,12 @@ public class CryptoSpotTradingApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((CryptoSpotTradingApi) this).new CryptoSpotPreviewOrderRequestBuilder(accountId, symbol, side, type, timeInForce, amount, userId, userSecret);
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((CryptoSpotTradingApi) this).new CryptoSpotPreviewOrderRequestBuilder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId);
     }
-    private okhttp3.Call cryptoSpotQuoteCall(String userId, String userSecret, TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotQuoteCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -645,10 +868,11 @@ public class CryptoSpotTradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingCryptoSpotQuoteRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/trading/crypto/spot/quote";
+        String localVarPath = "/accounts/{accountId}/trading/crypto/spot/quote"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -664,6 +888,14 @@ public class CryptoSpotTradingApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
+        if (base != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("base", base));
+        }
+
+        if (quote != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quote", quote));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -673,7 +905,6 @@ public class CryptoSpotTradingApiGenerated {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -681,11 +912,11 @@ public class CryptoSpotTradingApiGenerated {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cryptoSpotQuoteValidateBeforeCall(String userId, String userSecret, TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotQuoteValidateBeforeCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotQuote(Async)");
@@ -696,41 +927,53 @@ public class CryptoSpotTradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotQuote(Async)");
         }
 
-        // verify the required parameter 'tradingCryptoSpotQuoteRequest' is set
-        if (tradingCryptoSpotQuoteRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingCryptoSpotQuoteRequest' when calling cryptoSpotQuote(Async)");
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cryptoSpotQuote(Async)");
         }
 
-        return cryptoSpotQuoteCall(userId, userSecret, tradingCryptoSpotQuoteRequest, _callback);
+        // verify the required parameter 'base' is set
+        if (base == null) {
+            throw new ApiException("Missing the required parameter 'base' when calling cryptoSpotQuote(Async)");
+        }
+
+        // verify the required parameter 'quote' is set
+        if (quote == null) {
+            throw new ApiException("Missing the required parameter 'quote' when calling cryptoSpotQuote(Async)");
+        }
+
+        return cryptoSpotQuoteCall(userId, userSecret, accountId, base, quote, _callback);
 
     }
 
 
-    private ApiResponse<CryptoSpotQuote> cryptoSpotQuoteWithHttpInfo(String userId, String userSecret, TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest) throws ApiException {
-        okhttp3.Call localVarCall = cryptoSpotQuoteValidateBeforeCall(userId, userSecret, tradingCryptoSpotQuoteRequest, null);
+    private ApiResponse<CryptoSpotQuote> cryptoSpotQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
+        okhttp3.Call localVarCall = cryptoSpotQuoteValidateBeforeCall(userId, userSecret, accountId, base, quote, null);
         Type localVarReturnType = new TypeToken<CryptoSpotQuote>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotQuoteAsync(String userId, String userSecret, TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest, final ApiCallback<CryptoSpotQuote> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotQuoteAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<CryptoSpotQuote> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cryptoSpotQuoteValidateBeforeCall(userId, userSecret, tradingCryptoSpotQuoteRequest, _callback);
+        okhttp3.Call localVarCall = cryptoSpotQuoteValidateBeforeCall(userId, userSecret, accountId, base, quote, _callback);
         Type localVarReturnType = new TypeToken<CryptoSpotQuote>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class CryptoSpotQuoteRequestBuilderGenerated {
-        final UUID accountId;
-        final CryptocurrencyPair symbol;
         final String userId;
         final String userSecret;
+        final UUID accountId;
+        final String base;
+        final String quote;
 
-        public CryptoSpotQuoteRequestBuilderGenerated(UUID accountId, CryptocurrencyPair symbol, String userId, String userSecret) {
-            this.accountId = accountId;
-            this.symbol = symbol;
+        public CryptoSpotQuoteRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String base, String quote) {
             this.userId = userId;
             this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.base = base;
+            this.quote = quote;
         }
 
         /**
@@ -746,16 +989,9 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest = buildBodyParams();
-            return cryptoSpotQuoteCall(userId, userSecret, tradingCryptoSpotQuoteRequest, _callback);
+            return cryptoSpotQuoteCall(userId, userSecret, accountId, base, quote, _callback);
         }
 
-        private TradingCryptoSpotQuoteRequest buildBodyParams() {
-            TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest = new TradingCryptoSpotQuoteRequest();
-            tradingCryptoSpotQuoteRequest.accountId(this.accountId);
-            tradingCryptoSpotQuoteRequest.symbol(this.symbol);
-            return tradingCryptoSpotQuoteRequest;
-        }
 
         /**
          * Execute cryptoSpotQuote request
@@ -769,8 +1005,7 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public CryptoSpotQuote execute() throws ApiException {
-            TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest = buildBodyParams();
-            ApiResponse<CryptoSpotQuote> localVarResp = cryptoSpotQuoteWithHttpInfo(userId, userSecret, tradingCryptoSpotQuoteRequest);
+            ApiResponse<CryptoSpotQuote> localVarResp = cryptoSpotQuoteWithHttpInfo(userId, userSecret, accountId, base, quote);
             return localVarResp.getResponseBody();
         }
 
@@ -786,8 +1021,7 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public ApiResponse<CryptoSpotQuote> executeWithHttpInfo() throws ApiException {
-            TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest = buildBodyParams();
-            return cryptoSpotQuoteWithHttpInfo(userId, userSecret, tradingCryptoSpotQuoteRequest);
+            return cryptoSpotQuoteWithHttpInfo(userId, userSecret, accountId, base, quote);
         }
 
         /**
@@ -803,8 +1037,7 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<CryptoSpotQuote> _callback) throws ApiException {
-            TradingCryptoSpotQuoteRequest tradingCryptoSpotQuoteRequest = buildBodyParams();
-            return cryptoSpotQuoteAsync(userId, userSecret, tradingCryptoSpotQuoteRequest, _callback);
+            return cryptoSpotQuoteAsync(userId, userSecret, accountId, base, quote, _callback);
         }
     }
 
@@ -813,7 +1046,9 @@ public class CryptoSpotTradingApiGenerated {
      * Gets a quote for the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param tradingCryptoSpotQuoteRequest  (required)
+     * @param accountId  (required)
+     * @param base  (required)
+     * @param quote  (required)
      * @return CryptoSpotQuoteRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -822,20 +1057,25 @@ public class CryptoSpotTradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public CryptoSpotTradingApi.CryptoSpotQuoteRequestBuilder cryptoSpotQuote(UUID accountId, CryptocurrencyPair symbol, String userId, String userSecret) throws IllegalArgumentException {
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
-        if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
+    public CryptoSpotTradingApi.CryptoSpotQuoteRequestBuilder cryptoSpotQuote(String userId, String userSecret, UUID accountId, String base, String quote) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((CryptoSpotTradingApi) this).new CryptoSpotQuoteRequestBuilder(accountId, symbol, userId, userSecret);
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (base == null) throw new IllegalArgumentException("\"base\" is required but got null");
+            
+
+        if (quote == null) throw new IllegalArgumentException("\"quote\" is required but got null");
+            
+
+        return ((CryptoSpotTradingApi) this).new CryptoSpotQuoteRequestBuilder(userId, userSecret, accountId, base, quote);
     }
-    private okhttp3.Call cryptoSpotSearchMarketsCall(String userId, String userSecret, TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotSymbolsCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -849,10 +1089,11 @@ public class CryptoSpotTradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingCryptoSpotSearchMarketsRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/trading/crypto/spot/searchMarkets";
+        String localVarPath = "/accounts/{accountId}/trading/crypto/spot/symbols"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -868,6 +1109,14 @@ public class CryptoSpotTradingApiGenerated {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
         }
 
+        if (base != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("base", base));
+        }
+
+        if (quote != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quote", quote));
+        }
+
         final String[] localVarAccepts = {
             "application/json"
         };
@@ -877,7 +1126,6 @@ public class CryptoSpotTradingApiGenerated {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -885,71 +1133,76 @@ public class CryptoSpotTradingApiGenerated {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cryptoSpotSearchMarketsValidateBeforeCall(String userId, String userSecret, TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotSymbolsValidateBeforeCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
-            throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotSearchMarkets(Async)");
+            throw new ApiException("Missing the required parameter 'userId' when calling cryptoSpotSymbols(Async)");
         }
 
         // verify the required parameter 'userSecret' is set
         if (userSecret == null) {
-            throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotSearchMarkets(Async)");
+            throw new ApiException("Missing the required parameter 'userSecret' when calling cryptoSpotSymbols(Async)");
         }
 
-        // verify the required parameter 'tradingCryptoSpotSearchMarketsRequest' is set
-        if (tradingCryptoSpotSearchMarketsRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingCryptoSpotSearchMarketsRequest' when calling cryptoSpotSearchMarkets(Async)");
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cryptoSpotSymbols(Async)");
         }
 
-        return cryptoSpotSearchMarketsCall(userId, userSecret, tradingCryptoSpotSearchMarketsRequest, _callback);
+        // verify the required parameter 'base' is set
+        if (base == null) {
+            throw new ApiException("Missing the required parameter 'base' when calling cryptoSpotSymbols(Async)");
+        }
+
+        return cryptoSpotSymbolsCall(userId, userSecret, accountId, base, quote, _callback);
 
     }
 
 
-    private ApiResponse<List<CryptocurrencyMarket>> cryptoSpotSearchMarketsWithHttpInfo(String userId, String userSecret, TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest) throws ApiException {
-        okhttp3.Call localVarCall = cryptoSpotSearchMarketsValidateBeforeCall(userId, userSecret, tradingCryptoSpotSearchMarketsRequest, null);
+    private ApiResponse<List<CryptocurrencyMarket>> cryptoSpotSymbolsWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
+        okhttp3.Call localVarCall = cryptoSpotSymbolsValidateBeforeCall(userId, userSecret, accountId, base, quote, null);
         Type localVarReturnType = new TypeToken<List<CryptocurrencyMarket>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotSearchMarketsAsync(String userId, String userSecret, TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest, final ApiCallback<List<CryptocurrencyMarket>> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotSymbolsAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<List<CryptocurrencyMarket>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cryptoSpotSearchMarketsValidateBeforeCall(userId, userSecret, tradingCryptoSpotSearchMarketsRequest, _callback);
+        okhttp3.Call localVarCall = cryptoSpotSymbolsValidateBeforeCall(userId, userSecret, accountId, base, quote, _callback);
         Type localVarReturnType = new TypeToken<List<CryptocurrencyMarket>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
-    public abstract class CryptoSpotSearchMarketsRequestBuilderGenerated {
-        final UUID accountId;
-        final String base;
+    public abstract class CryptoSpotSymbolsRequestBuilderGenerated {
         final String userId;
         final String userSecret;
+        final UUID accountId;
+        final String base;
         String quote;
 
-        public CryptoSpotSearchMarketsRequestBuilderGenerated(UUID accountId, String base, String userId, String userSecret) {
-            this.accountId = accountId;
-            this.base = base;
+        public CryptoSpotSymbolsRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String base) {
             this.userId = userId;
             this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.base = base;
         }
 
         /**
          * Set quote
-         * @param quote The quote currency (e.g., \\\&quot;USD\\\&quot; in BTC/USD). Can be a fiat or crypto code. (optional)
-         * @return CryptoSpotTradingApi.CryptoSpotSearchMarketsRequestBuilder
+         * @param quote  (optional)
+         * @return CryptoSpotTradingApi.CryptoSpotSymbolsRequestBuilder
          */
-        public CryptoSpotTradingApi.CryptoSpotSearchMarketsRequestBuilder quote(String quote) {
+        public CryptoSpotTradingApi.CryptoSpotSymbolsRequestBuilder quote(String quote) {
             this.quote = quote;
-            return (CryptoSpotTradingApi.CryptoSpotSearchMarketsRequestBuilder) this;
+            return (CryptoSpotTradingApi.CryptoSpotSymbolsRequestBuilder) this;
         }
         
         /**
-         * Build call for cryptoSpotSearchMarkets
+         * Build call for cryptoSpotSymbols
          * @param _callback ApiCallback API callback
          * @return Call to execute
          * @throws ApiException If fail to serialize the request body object
@@ -961,20 +1214,12 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest = buildBodyParams();
-            return cryptoSpotSearchMarketsCall(userId, userSecret, tradingCryptoSpotSearchMarketsRequest, _callback);
+            return cryptoSpotSymbolsCall(userId, userSecret, accountId, base, quote, _callback);
         }
 
-        private TradingCryptoSpotSearchMarketsRequest buildBodyParams() {
-            TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest = new TradingCryptoSpotSearchMarketsRequest();
-            tradingCryptoSpotSearchMarketsRequest.accountId(this.accountId);
-            tradingCryptoSpotSearchMarketsRequest.base(this.base);
-            tradingCryptoSpotSearchMarketsRequest.quote(this.quote);
-            return tradingCryptoSpotSearchMarketsRequest;
-        }
 
         /**
-         * Execute cryptoSpotSearchMarkets request
+         * Execute cryptoSpotSymbols request
          * @return List&lt;CryptocurrencyMarket&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -985,13 +1230,12 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public List<CryptocurrencyMarket> execute() throws ApiException {
-            TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest = buildBodyParams();
-            ApiResponse<List<CryptocurrencyMarket>> localVarResp = cryptoSpotSearchMarketsWithHttpInfo(userId, userSecret, tradingCryptoSpotSearchMarketsRequest);
+            ApiResponse<List<CryptocurrencyMarket>> localVarResp = cryptoSpotSymbolsWithHttpInfo(userId, userSecret, accountId, base, quote);
             return localVarResp.getResponseBody();
         }
 
         /**
-         * Execute cryptoSpotSearchMarkets request with HTTP info returned
+         * Execute cryptoSpotSymbols request with HTTP info returned
          * @return ApiResponse&lt;List&lt;CryptocurrencyMarket&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
@@ -1002,12 +1246,11 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public ApiResponse<List<CryptocurrencyMarket>> executeWithHttpInfo() throws ApiException {
-            TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest = buildBodyParams();
-            return cryptoSpotSearchMarketsWithHttpInfo(userId, userSecret, tradingCryptoSpotSearchMarketsRequest);
+            return cryptoSpotSymbolsWithHttpInfo(userId, userSecret, accountId, base, quote);
         }
 
         /**
-         * Execute cryptoSpotSearchMarkets request (asynchronously)
+         * Execute cryptoSpotSymbols request (asynchronously)
          * @param _callback The callback to be executed when the API call finishes
          * @return The request call
          * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -1019,18 +1262,18 @@ public class CryptoSpotTradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<CryptocurrencyMarket>> _callback) throws ApiException {
-            TradingCryptoSpotSearchMarketsRequest tradingCryptoSpotSearchMarketsRequest = buildBodyParams();
-            return cryptoSpotSearchMarketsAsync(userId, userSecret, tradingCryptoSpotSearchMarketsRequest, _callback);
+            return cryptoSpotSymbolsAsync(userId, userSecret, accountId, base, quote, _callback);
         }
     }
 
     /**
-     * Search crypto spot markets
-     * Searches cryptocurrency spot markets accessible to the specified account. 
+     * Search crypto spot symbols
+     * Searches cryptocurrency spot symbols accessible to the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param tradingCryptoSpotSearchMarketsRequest  (required)
-     * @return CryptoSpotSearchMarketsRequestBuilder
+     * @param accountId  (required)
+     * @param base  (required)
+     * @return CryptoSpotSymbolsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
@@ -1038,17 +1281,19 @@ public class CryptoSpotTradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public CryptoSpotTradingApi.CryptoSpotSearchMarketsRequestBuilder cryptoSpotSearchMarkets(UUID accountId, String base, String userId, String userSecret) throws IllegalArgumentException {
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
-        if (base == null) throw new IllegalArgumentException("\"base\" is required but got null");
+    public CryptoSpotTradingApi.CryptoSpotSymbolsRequestBuilder cryptoSpotSymbols(String userId, String userSecret, UUID accountId, String base) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((CryptoSpotTradingApi) this).new CryptoSpotSearchMarketsRequestBuilder(accountId, base, userId, userSecret);
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (base == null) throw new IllegalArgumentException("\"base\" is required but got null");
+            
+
+        return ((CryptoSpotTradingApi) this).new CryptoSpotSymbolsRequestBuilder(userId, userSecret, accountId, base);
     }
 }

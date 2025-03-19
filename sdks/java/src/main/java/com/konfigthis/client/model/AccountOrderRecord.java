@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordOptionSymbol;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.AccountOrderRecordUniversalSymbol;
+import com.konfigthis.client.model.ChildBrokerageOrderIDsNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -131,6 +132,10 @@ public class AccountOrderRecord {
   public static final String SERIALIZED_NAME_SYMBOL = "symbol";
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private UUID symbol;
+
+  public static final String SERIALIZED_NAME_CHILD_BROKERAGE_ORDER_IDS = "child_brokerage_order_ids";
+  @SerializedName(SERIALIZED_NAME_CHILD_BROKERAGE_ORDER_IDS)
+  private ChildBrokerageOrderIDsNullable childBrokerageOrderIds;
 
   public AccountOrderRecord() {
   }
@@ -750,6 +755,35 @@ public class AccountOrderRecord {
     this.symbol = symbol;
   }
 
+
+  public AccountOrderRecord childBrokerageOrderIds(ChildBrokerageOrderIDsNullable childBrokerageOrderIds) {
+    
+    
+    
+    
+    this.childBrokerageOrderIds = childBrokerageOrderIds;
+    return this;
+  }
+
+   /**
+   * Get childBrokerageOrderIds
+   * @return childBrokerageOrderIds
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public ChildBrokerageOrderIDsNullable getChildBrokerageOrderIds() {
+    return childBrokerageOrderIds;
+  }
+
+
+  public void setChildBrokerageOrderIds(ChildBrokerageOrderIDsNullable childBrokerageOrderIds) {
+    
+    
+    
+    this.childBrokerageOrderIds = childBrokerageOrderIds;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -823,7 +857,8 @@ public class AccountOrderRecord {
         Objects.equals(this.timeUpdated, accountOrderRecord.timeUpdated) &&
         Objects.equals(this.timeExecuted, accountOrderRecord.timeExecuted) &&
         Objects.equals(this.expiryDate, accountOrderRecord.expiryDate) &&
-        Objects.equals(this.symbol, accountOrderRecord.symbol)&&
+        Objects.equals(this.symbol, accountOrderRecord.symbol) &&
+        Objects.equals(this.childBrokerageOrderIds, accountOrderRecord.childBrokerageOrderIds)&&
         Objects.equals(this.additionalProperties, accountOrderRecord.additionalProperties);
   }
 
@@ -833,7 +868,7 @@ public class AccountOrderRecord {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -866,6 +901,7 @@ public class AccountOrderRecord {
     sb.append("    timeExecuted: ").append(toIndentedString(timeExecuted)).append("\n");
     sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
+    sb.append("    childBrokerageOrderIds: ").append(toIndentedString(childBrokerageOrderIds)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -908,6 +944,7 @@ public class AccountOrderRecord {
     openapiFields.add("time_executed");
     openapiFields.add("expiry_date");
     openapiFields.add("symbol");
+    openapiFields.add("child_brokerage_order_ids");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -947,6 +984,10 @@ public class AccountOrderRecord {
       }
       if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
+      }
+      // validate the optional field `child_brokerage_order_ids`
+      if (jsonObj.get("child_brokerage_order_ids") != null && !jsonObj.get("child_brokerage_order_ids").isJsonNull()) {
+        ChildBrokerageOrderIDsNullable.validateJsonObject(jsonObj.getAsJsonObject("child_brokerage_order_ids"));
       }
   }
 
