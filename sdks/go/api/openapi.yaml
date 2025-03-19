@@ -2013,6 +2013,55 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
+  /trade/placeBracketOrder:
+    post:
+      description: |
+        Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+        use. Only supported on certain brokerages
+      operationId: Trading_placeBracketOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeFormRequestBodyBracket'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+        "500":
+          description: Unexpected Error
+      summary: Place a Bracket Order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -2355,6 +2404,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ManualTradeFormWithOptions'
+      required: true
+    ManualTradeFormRequestBodyBracket:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ManualTradeFormBracket'
       required: true
     ValidatedTradeRequestBody:
       content:
@@ -3062,6 +3117,7 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3081,6 +3137,7 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3166,6 +3223,7 @@ components:
         orders:
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3185,6 +3243,7 @@ components:
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids: null
           time_placed: 2024-07-30T22:51:49.746Z
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3270,6 +3329,7 @@ components:
       example:
         time_executed: 2024-08-05T00:05:57.409Z
         symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        child_brokerage_order_ids: null
         time_placed: 2024-07-30T22:51:49.746Z
         expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -3437,6 +3497,8 @@ components:
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+        child_brokerage_order_ids:
+          $ref: '#/components/schemas/AccountOrderRecord_child_brokerage_order_ids'
       type: object
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort
@@ -5466,6 +5528,24 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageSymbolID
+    ChildBrokerageOrderIDs:
+      additionalProperties: true
+      properties:
+        take_profit_order_id:
+          description: The brokerage order ID for the take profit leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id
+        stop_loss_order_id:
+          description: The brokerage order ID for the stop loss leg of the bracket
+            order
+          example: "12345678"
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
+      type: object
     BrokerageOrderID:
       description: Order ID returned by brokerage. This is the unique identifier for
         the order in the brokerage system.
@@ -6038,17 +6118,14 @@ components:
       example:
         universal_symbol_id: ""
         symbol: AAPL  131124C00240000
-        stop_loss: null
-        units: ""
         time_in_force: null
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-        take_profit: null
         stop: 31.33
         price: 31.33
         notional_value: null
         action: null
+        units: ""
         order_type: Market
-        order_class: BRACKET
       properties:
         account_id:
           description: Unique identifier for the connected brokerage account. This
@@ -6067,9 +6144,9 @@ components:
             \ 'null' if `symbol` is provided, otherwise must be provided."
           nullable: true
         symbol:
-          description: "The security's trading ticker symbol. This currently only\
-            \ support Options symbols in the 21 character OCC format. For example\
-            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+          description: "The security's trading ticker symbol. This currently supports\
+            \ stock symbols and Options symbols in the 21 character OCC format. For\
+            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -6108,28 +6185,82 @@ components:
           nullable: true
         notional_value:
           $ref: '#/components/schemas/ManualTradeForm_notional_value'
-        order_class:
-          description: "The class of order intended to be placed. Defaults to SIMPLE\
-            \ for regular, one legged trades. Set to BRACKET if looking to place a\
-            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
-            \ profit and stop loss conditions. Bracket orders currently only supported\
-            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
-          enum:
-          - SIMPLE
-          - BRACKET
-          example: BRACKET
-          nullable: true
-          type: string
-          x-konfig-original-example: BRACKET
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
-        stop_loss:
-          $ref: '#/components/schemas/ManualTradeFormWithOptions_stop_loss'
-        take_profit:
-          $ref: '#/components/schemas/ManualTradeFormWithOptions_take_profit'
       required:
       - account_id
       - action
       - order_type
+      - time_in_force
+      type: object
+    ManualTradeFormBracket:
+      description: Inputs for placing an order with the brokerage.
+      example:
+        symbol: AAPL
+        time_in_force: null
+        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        take_profit:
+          limit_price: "49.95"
+        stop: 31.33
+        price: 31.33
+        stop_loss:
+          stop_price: "48.55"
+          limit_price: "48.50"
+        action: null
+        units: 10.5
+        order_type: Market
+      properties:
+        account_id:
+          description: Unique identifier for the connected brokerage account. This
+            is the UUID used to reference the account in SnapTrade.
+          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          format: uuid
+          type: string
+          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
+        action:
+          $ref: '#/components/schemas/ActionStrictWithOptions'
+        symbol:
+          description: The security's trading ticker symbol.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop
+        units:
+          description: Number of shares for the order. This can be a decimal for fractional
+            orders. Must be `null` if `notional_value` is provided.
+          example: 10.5
+          type: number
+          x-konfig-original-example: 10.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+        stop_loss:
+          $ref: '#/components/schemas/StopLoss'
+        take_profit:
+          $ref: '#/components/schemas/TakeProfit'
+      required:
+      - account_id
+      - action
+      - order_type
+      - stop_loss
+      - symbol
+      - take_profit
       - time_in_force
       type: object
     ValidatedTradeBody:
@@ -6246,6 +6377,9 @@ components:
       additionalProperties: true
       description: "Details of the stop loss order. Only to be used when order_class\
         \ = BRACKET. stop_price is required, limit_price is optional"
+      example:
+        stop_price: "48.55"
+        limit_price: "48.50"
       properties:
         stop_price:
           example: "48.55"
@@ -6263,6 +6397,8 @@ components:
       additionalProperties: true
       description: Details of the take profit order. Only to be used when order_class
         = BRACKET.
+      example:
+        limit_price: "49.95"
       properties:
         limit_price:
           example: "49.95"
@@ -7850,6 +7986,14 @@ components:
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-take_profit_order_id:
+      example: "12345678"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id:
+      example: "12345678"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageOrderID:
       example: 66a033fa-da74-4fcf-b527-feefdec9257e
       type: string
@@ -8002,9 +8146,17 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class:
-      example: BRACKET
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol:
+      example: AAPL
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop:
+      example: 31.33
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
@@ -9084,9 +9236,9 @@ components:
             \ 'null' if `symbol` is provided, otherwise must be provided."
           nullable: true
         symbol:
-          description: "The security's trading ticker symbol. This currently only\
-            \ support Options symbols in the 21 character OCC format. For example\
-            \ \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+          description: "The security's trading ticker symbol. This currently supports\
+            \ stock symbols and Options symbols in the 21 character OCC format. For\
+            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -9127,28 +9279,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/NotionalValue'
           nullable: true
-        order_class:
-          description: "The class of order intended to be placed. Defaults to SIMPLE\
-            \ for regular, one legged trades. Set to BRACKET if looking to place a\
-            \ bracket (One-triggers-a-one-cancels-the-other) order, then specify take\
-            \ profit and stop loss conditions. Bracket orders currently only supported\
-            \ on Alpaca, Tradier, and Tradestation, contact us for more details"
-          enum:
-          - SIMPLE
-          - BRACKET
-          example: BRACKET
-          nullable: true
-          type: string
-          x-konfig-original-example: BRACKET
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-order_class
-        stop_loss:
-          allOf:
-          - $ref: '#/components/schemas/StopLoss'
-          nullable: true
-        take_profit:
-          allOf:
-          - $ref: '#/components/schemas/TakeProfit'
-          nullable: true
       required:
       - account_id
       - action
@@ -9182,6 +9312,63 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        account_id:
+          $ref: '#/components/schemas/AccountID'
+        action:
+          $ref: '#/components/schemas/ActionStrictWithOptions'
+        symbol:
+          description: The security's trading ticker symbol.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-stop
+        units:
+          $ref: '#/components/schemas/Units'
+        stop_loss:
+          $ref: '#/components/schemas/StopLoss'
+        take_profit:
+          $ref: '#/components/schemas/TakeProfit'
+      required:
+      - account_id
+      - action
+      - order_type
+      - stop_loss
+      - symbol
+      - take_profit
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}
@@ -9558,6 +9745,10 @@ components:
         \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
         \ fund orders, this field will be null and the `universal_symbol` field will\
         \ be populated."
+    AccountOrderRecord_child_brokerage_order_ids:
+      allOf:
+      - $ref: '#/components/schemas/ChildBrokerageOrderIDs'
+      nullable: true
     OptionsPosition_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'
@@ -9845,14 +10036,6 @@ components:
     ManualTradeForm_notional_value:
       allOf:
       - $ref: '#/components/schemas/NotionalValue'
-      nullable: true
-    ManualTradeFormWithOptions_stop_loss:
-      allOf:
-      - $ref: '#/components/schemas/StopLoss'
-      nullable: true
-    ManualTradeFormWithOptions_take_profit:
-      allOf:
-      - $ref: '#/components/schemas/TakeProfit'
       nullable: true
     AccountUniversalActivity_symbol:
       allOf:

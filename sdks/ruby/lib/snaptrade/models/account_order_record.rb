@@ -68,6 +68,8 @@ module SnapTrade
     # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :symbol
 
+    attr_accessor :child_brokerage_order_ids
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -89,7 +91,8 @@ module SnapTrade
         :'time_updated' => :'time_updated',
         :'time_executed' => :'time_executed',
         :'expiry_date' => :'expiry_date',
-        :'symbol' => :'symbol'
+        :'symbol' => :'symbol',
+        :'child_brokerage_order_ids' => :'child_brokerage_order_ids'
       }
     end
 
@@ -119,7 +122,8 @@ module SnapTrade
         :'time_updated' => :'Time',
         :'time_executed' => :'Time',
         :'expiry_date' => :'Time',
-        :'symbol' => :'String'
+        :'symbol' => :'String',
+        :'child_brokerage_order_ids' => :'AccountOrderRecordChildBrokerageOrderIds'
       }
     end
 
@@ -137,6 +141,7 @@ module SnapTrade
         :'time_updated',
         :'time_executed',
         :'expiry_date',
+        :'child_brokerage_order_ids'
       ])
     end
 
@@ -230,6 +235,10 @@ module SnapTrade
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
       end
+
+      if attributes.key?(:'child_brokerage_order_ids')
+        self.child_brokerage_order_ids = attributes[:'child_brokerage_order_ids']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -268,7 +277,8 @@ module SnapTrade
           time_updated == o.time_updated &&
           time_executed == o.time_executed &&
           expiry_date == o.expiry_date &&
-          symbol == o.symbol
+          symbol == o.symbol &&
+          child_brokerage_order_ids == o.child_brokerage_order_ids
     end
 
     # @see the `==` method
@@ -280,7 +290,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol].hash
+      [brokerage_order_id, status, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
     end
 
     # Builds the object from hash

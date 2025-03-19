@@ -27,6 +27,7 @@ Describes a single recent order in an account. Each record here represents a sin
 |**timeExecuted** | **OffsetDateTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. |  [optional] |
 |**expiryDate** | **OffsetDateTime** | The time the order expires. This value is not always available from the brokerage. |  [optional] |
 |**symbol** | **UUID** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. |  [optional] |
+|**childBrokerageOrderIds** | [**ChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  |  [optional] |
 
 
 

@@ -284,6 +284,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.TimeExecuted`: %v\n", *resp.TimeExecuted)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 

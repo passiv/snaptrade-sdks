@@ -7,6 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
+| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /trade/placeBracketOrder | Place a Bracket Order |
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
 
@@ -71,6 +72,7 @@ public class Example {
       System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
       System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelUserAccountOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -348,6 +350,138 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 
+<a name="placeBracketOrder"></a>
+# **placeBracketOrder**
+> AccountOrderRecord placeBracketOrder(userId, userSecret, manualTradeFormBracket).execute();
+
+Place a Bracket Order
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+    ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
+    String symbol = "symbol_example"; // The security's trading ticker symbol.
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
+    StopLoss stopLoss = new StopLoss();
+    TakeProfit takeProfit = new TakeProfit();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
+    Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    try {
+      AccountOrderRecord result = client
+              .trading
+              .placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+              .price(price)
+              .stop(stop)
+              .units(units)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getStatus());
+      System.out.println(result.getUniversalSymbol());
+      System.out.println(result.getOptionSymbol());
+      System.out.println(result.getAction());
+      System.out.println(result.getTotalQuantity());
+      System.out.println(result.getOpenQuantity());
+      System.out.println(result.getCanceledQuantity());
+      System.out.println(result.getFilledQuantity());
+      System.out.println(result.getExecutionPrice());
+      System.out.println(result.getLimitPrice());
+      System.out.println(result.getStopPrice());
+      System.out.println(result.getOrderType());
+      System.out.println(result.getTimeInForce());
+      System.out.println(result.getTimePlaced());
+      System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
+      System.out.println(result.getExpiryDate());
+      System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeBracketOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
+              .placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+              .price(price)
+              .stop(stop)
+              .units(units)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#placeBracketOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **manualTradeFormBracket** | [**ManualTradeFormBracket**](ManualTradeFormBracket.md)|  | |
+
+### Return type
+
+[**AccountOrderRecord**](AccountOrderRecord.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+
 <a name="placeForceOrder"></a>
 # **placeForceOrder**
 > AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeFormWithOptions).execute();
@@ -385,14 +519,11 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-    String symbol = "symbol_example"; // The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    String symbol = "symbol_example"; // The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     Object notionalValue = null;
-    String orderClass = "SIMPLE"; // The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-    StopLossNullable stopLoss = new StopLossNullable();
-    TakeProfitNullable takeProfit = new TakeProfitNullable();
     try {
       AccountOrderRecord result = client
               .trading
@@ -403,9 +534,6 @@ public class Example {
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
-              .orderClass(orderClass)
-              .stopLoss(stopLoss)
-              .takeProfit(takeProfit)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -427,6 +555,7 @@ public class Example {
       System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
       System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeForceOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -446,9 +575,6 @@ public class Example {
               .stop(stop)
               .units(units)
               .notionalValue(notionalValue)
-              .orderClass(orderClass)
-              .stopLoss(stopLoss)
-              .takeProfit(takeProfit)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -554,6 +680,7 @@ public class Example {
       System.out.println(result.getTimeExecuted());
       System.out.println(result.getExpiryDate());
       System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#placeOrder");
       System.err.println("Status code: " + e.getStatusCode());

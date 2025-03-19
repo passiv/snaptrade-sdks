@@ -65,6 +65,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
+  * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
@@ -1805,6 +1806,89 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 
 ---
 
+### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_bracket_order_response = snaptrade.trading.place_bracket_order(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    action="BUY",
+    symbol="AAPL",
+    order_type="Market",
+    time_in_force="FOK",
+    stop_loss={
+        "stop_price": "48.55",
+        "limit_price": "48.50",
+    },
+    take_profit={
+        "limit_price": "49.95",
+    },
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The security's trading ticker symbol.
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### stop_loss: [`StopLoss`](./snaptrade_client/type/stop_loss.py)<a id="stop_loss-stoplosssnaptrade_clienttypestop_losspy"></a>
+
+
+##### take_profit: [`TakeProfit`](./snaptrade_client/type/take_profit.py)<a id="take_profit-takeprofitsnaptrade_clienttypetake_profitpy"></a>
+
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ManualTradeFormBracket`](./snaptrade_client/type/manual_trade_form_bracket.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/trade/placeBracketOrder` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -1830,14 +1914,6 @@ place_force_order_response = snaptrade.trading.place_force_order(
     stop=31.33,
     units=10.5,
     notional_value=None,
-    order_class="BRACKET",
-    stop_loss={
-        "stop_price": "48.55",
-        "limit_price": "48.50",
-    },
-    take_profit={
-        "limit_price": "49.95",
-    },
 )
 ```
 
@@ -1863,7 +1939,7 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 
 ##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
 
-The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -1878,16 +1954,6 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
-
-##### order_class: `Optional[str]`<a id="order_class-optionalstr"></a>
-
-The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-
-##### stop_loss: [`StopLossNullable`](./snaptrade_client/type/stop_loss_nullable.py)<a id="stop_loss-stoplossnullablesnaptrade_clienttypestop_loss_nullablepy"></a>
-
-
-##### take_profit: [`TakeProfitNullable`](./snaptrade_client/type/take_profit_nullable.py)<a id="take_profit-takeprofitnullablesnaptrade_clienttypetake_profit_nullablepy"></a>
-
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 

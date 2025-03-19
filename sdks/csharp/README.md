@@ -141,6 +141,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
+*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /trade/placeBracketOrder | Place a Bracket Order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
@@ -174,6 +175,8 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
  - [BrokerageType](docs/BrokerageType.md)
+ - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
+ - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
  - [Currency](docs/Currency.md)
  - [CurrencyNullable](docs/CurrencyNullable.md)
@@ -191,6 +194,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
  - [ManualTradeBalance](docs/ManualTradeBalance.md)
  - [ManualTradeForm](docs/ManualTradeForm.md)
+ - [ManualTradeFormBracket](docs/ManualTradeFormBracket.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
@@ -239,7 +243,6 @@ Class | Method | HTTP request | Description
  - [SnapTradeRegisterUserRequestBody](docs/SnapTradeRegisterUserRequestBody.md)
  - [Status](docs/Status.md)
  - [StopLoss](docs/StopLoss.md)
- - [StopLossNullable](docs/StopLossNullable.md)
  - [StrategyOrderRecord](docs/StrategyOrderRecord.md)
  - [StrategyQuotes](docs/StrategyQuotes.md)
  - [StrategyQuotesGreek](docs/StrategyQuotesGreek.md)
@@ -251,7 +254,6 @@ Class | Method | HTTP request | Description
  - [SymbolQuery](docs/SymbolQuery.md)
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TakeProfit](docs/TakeProfit.md)
- - [TakeProfitNullable](docs/TakeProfitNullable.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
  - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)

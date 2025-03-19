@@ -543,6 +543,46 @@ operation_parameter_map = {
             },
         ]
     },
+    '/trade/placeBracketOrder-POST': {
+        'parameters': [
+            {
+                'name': 'account_id'
+            },
+            {
+                'name': 'action'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'stop_loss'
+            },
+            {
+                'name': 'take_profit'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'price'
+            },
+            {
+                'name': 'stop'
+            },
+            {
+                'name': 'units'
+            },
+        ]
+    },
     '/trade/place-POST': {
         'parameters': [
             {
@@ -580,15 +620,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'notional_value'
-            },
-            {
-                'name': 'order_class'
-            },
-            {
-                'name': 'stop_loss'
-            },
-            {
-                'name': 'take_profit'
             },
         ]
     },

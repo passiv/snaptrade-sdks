@@ -16,6 +16,7 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
+from snaptrade_client.type.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
@@ -79,6 +80,8 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
     # WARNING: This property is deprecated
     # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     symbol: str
+
+    child_brokerage_order_ids: typing.Optional[ChildBrokerageOrderIDsNullable]
 
 class AccountOrderRecord(RequiredAccountOrderRecord, OptionalAccountOrderRecord):
     pass

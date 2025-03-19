@@ -110,6 +110,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
+*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /trade/placeBracketOrder | Place a Bracket Order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked order
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
@@ -124,6 +125,7 @@ Class | Method | HTTP request | Description
  - [AccountHoldings](docs/AccountHoldings.md)
  - [AccountHoldingsAccount](docs/AccountHoldingsAccount.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
+ - [AccountOrderRecordChildBrokerageOrderIds](docs/AccountOrderRecordChildBrokerageOrderIds.md)
  - [AccountOrderRecordOptionSymbol](docs/AccountOrderRecordOptionSymbol.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountOrderRecordUniversalSymbol](docs/AccountOrderRecordUniversalSymbol.md)
@@ -145,6 +147,7 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
  - [BrokerageType](docs/BrokerageType.md)
+ - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
  - [Currency](docs/Currency.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)
@@ -159,10 +162,9 @@ Class | Method | HTTP request | Description
  - [ManualTradeAndImpact](docs/ManualTradeAndImpact.md)
  - [ManualTradeBalance](docs/ManualTradeBalance.md)
  - [ManualTradeForm](docs/ManualTradeForm.md)
+ - [ManualTradeFormBracket](docs/ManualTradeFormBracket.md)
  - [ManualTradeFormNotionalValue](docs/ManualTradeFormNotionalValue.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
- - [ManualTradeFormWithOptionsStopLoss](docs/ManualTradeFormWithOptionsStopLoss.md)
- - [ManualTradeFormWithOptionsTakeProfit](docs/ManualTradeFormWithOptionsTakeProfit.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)

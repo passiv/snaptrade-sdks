@@ -22,7 +22,7 @@ type ManualTradeFormWithOptions struct {
 	Action ActionStrictWithOptions `json:"action"`
 	// The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
 	UniversalSymbolId NullableString `json:"universal_symbol_id,omitempty"`
-	// The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+	// The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 	Symbol NullableString `json:"symbol,omitempty"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
@@ -33,10 +33,6 @@ type ManualTradeFormWithOptions struct {
 	// For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 	Units NullableFloat32 `json:"units,omitempty"`
 	NotionalValue NullableManualTradeFormNotionalValue `json:"notional_value,omitempty"`
-	// The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-	OrderClass NullableString `json:"order_class,omitempty"`
-	StopLoss NullableManualTradeFormWithOptionsStopLoss `json:"stop_loss,omitempty"`
-	TakeProfit NullableManualTradeFormWithOptionsTakeProfit `json:"take_profit,omitempty"`
 }
 
 // NewManualTradeFormWithOptions instantiates a new ManualTradeFormWithOptions object
@@ -408,132 +404,6 @@ func (o *ManualTradeFormWithOptions) UnsetNotionalValue() {
 	o.NotionalValue.Unset()
 }
 
-// GetOrderClass returns the OrderClass field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ManualTradeFormWithOptions) GetOrderClass() string {
-	if o == nil || isNil(o.OrderClass.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.OrderClass.Get()
-}
-
-// GetOrderClassOk returns a tuple with the OrderClass field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ManualTradeFormWithOptions) GetOrderClassOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.OrderClass.Get(), o.OrderClass.IsSet()
-}
-
-// HasOrderClass returns a boolean if a field has been set.
-func (o *ManualTradeFormWithOptions) HasOrderClass() bool {
-	if o != nil && o.OrderClass.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOrderClass gets a reference to the given NullableString and assigns it to the OrderClass field.
-func (o *ManualTradeFormWithOptions) SetOrderClass(v string) {
-	o.OrderClass.Set(&v)
-}
-// SetOrderClassNil sets the value for OrderClass to be an explicit nil
-func (o *ManualTradeFormWithOptions) SetOrderClassNil() {
-	o.OrderClass.Set(nil)
-}
-
-// UnsetOrderClass ensures that no value is present for OrderClass, not even an explicit nil
-func (o *ManualTradeFormWithOptions) UnsetOrderClass() {
-	o.OrderClass.Unset()
-}
-
-// GetStopLoss returns the StopLoss field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ManualTradeFormWithOptions) GetStopLoss() ManualTradeFormWithOptionsStopLoss {
-	if o == nil || isNil(o.StopLoss.Get()) {
-		var ret ManualTradeFormWithOptionsStopLoss
-		return ret
-	}
-	return *o.StopLoss.Get()
-}
-
-// GetStopLossOk returns a tuple with the StopLoss field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ManualTradeFormWithOptions) GetStopLossOk() (*ManualTradeFormWithOptionsStopLoss, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.StopLoss.Get(), o.StopLoss.IsSet()
-}
-
-// HasStopLoss returns a boolean if a field has been set.
-func (o *ManualTradeFormWithOptions) HasStopLoss() bool {
-	if o != nil && o.StopLoss.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStopLoss gets a reference to the given NullableManualTradeFormWithOptionsStopLoss and assigns it to the StopLoss field.
-func (o *ManualTradeFormWithOptions) SetStopLoss(v ManualTradeFormWithOptionsStopLoss) {
-	o.StopLoss.Set(&v)
-}
-// SetStopLossNil sets the value for StopLoss to be an explicit nil
-func (o *ManualTradeFormWithOptions) SetStopLossNil() {
-	o.StopLoss.Set(nil)
-}
-
-// UnsetStopLoss ensures that no value is present for StopLoss, not even an explicit nil
-func (o *ManualTradeFormWithOptions) UnsetStopLoss() {
-	o.StopLoss.Unset()
-}
-
-// GetTakeProfit returns the TakeProfit field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ManualTradeFormWithOptions) GetTakeProfit() ManualTradeFormWithOptionsTakeProfit {
-	if o == nil || isNil(o.TakeProfit.Get()) {
-		var ret ManualTradeFormWithOptionsTakeProfit
-		return ret
-	}
-	return *o.TakeProfit.Get()
-}
-
-// GetTakeProfitOk returns a tuple with the TakeProfit field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ManualTradeFormWithOptions) GetTakeProfitOk() (*ManualTradeFormWithOptionsTakeProfit, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.TakeProfit.Get(), o.TakeProfit.IsSet()
-}
-
-// HasTakeProfit returns a boolean if a field has been set.
-func (o *ManualTradeFormWithOptions) HasTakeProfit() bool {
-	if o != nil && o.TakeProfit.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetTakeProfit gets a reference to the given NullableManualTradeFormWithOptionsTakeProfit and assigns it to the TakeProfit field.
-func (o *ManualTradeFormWithOptions) SetTakeProfit(v ManualTradeFormWithOptionsTakeProfit) {
-	o.TakeProfit.Set(&v)
-}
-// SetTakeProfitNil sets the value for TakeProfit to be an explicit nil
-func (o *ManualTradeFormWithOptions) SetTakeProfitNil() {
-	o.TakeProfit.Set(nil)
-}
-
-// UnsetTakeProfit ensures that no value is present for TakeProfit, not even an explicit nil
-func (o *ManualTradeFormWithOptions) UnsetTakeProfit() {
-	o.TakeProfit.Unset()
-}
-
 func (o ManualTradeFormWithOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -565,15 +435,6 @@ func (o ManualTradeFormWithOptions) MarshalJSON() ([]byte, error) {
 	}
 	if o.NotionalValue.IsSet() {
 		toSerialize["notional_value"] = o.NotionalValue.Get()
-	}
-	if o.OrderClass.IsSet() {
-		toSerialize["order_class"] = o.OrderClass.Get()
-	}
-	if o.StopLoss.IsSet() {
-		toSerialize["stop_loss"] = o.StopLoss.Get()
-	}
-	if o.TakeProfit.IsSet() {
-		toSerialize["take_profit"] = o.TakeProfit.Get()
 	}
 	return json.Marshal(toSerialize)
 }

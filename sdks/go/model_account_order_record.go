@@ -54,6 +54,7 @@ type AccountOrderRecord struct {
 	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
 	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
+	ChildBrokerageOrderIds NullableAccountOrderRecordChildBrokerageOrderIds `json:"child_brokerage_order_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -797,6 +798,48 @@ func (o *AccountOrderRecord) SetSymbol(v string) {
 	o.Symbol = &v
 }
 
+// GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds {
+	if o == nil || isNil(o.ChildBrokerageOrderIds.Get()) {
+		var ret AccountOrderRecordChildBrokerageOrderIds
+		return ret
+	}
+	return *o.ChildBrokerageOrderIds.Get()
+}
+
+// GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.ChildBrokerageOrderIds.Get(), o.ChildBrokerageOrderIds.IsSet()
+}
+
+// HasChildBrokerageOrderIds returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasChildBrokerageOrderIds() bool {
+	if o != nil && o.ChildBrokerageOrderIds.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChildBrokerageOrderIds gets a reference to the given NullableAccountOrderRecordChildBrokerageOrderIds and assigns it to the ChildBrokerageOrderIds field.
+func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds) {
+	o.ChildBrokerageOrderIds.Set(&v)
+}
+// SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+func (o *AccountOrderRecord) SetChildBrokerageOrderIdsNil() {
+	o.ChildBrokerageOrderIds.Set(nil)
+}
+
+// UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
+func (o *AccountOrderRecord) UnsetChildBrokerageOrderIds() {
+	o.ChildBrokerageOrderIds.Unset()
+}
+
 func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.BrokerageOrderId) {
@@ -856,6 +899,9 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
 	}
+	if o.ChildBrokerageOrderIds.IsSet() {
+		toSerialize["child_brokerage_order_ids"] = o.ChildBrokerageOrderIds.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -893,6 +939,7 @@ func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "time_executed")
 		delete(additionalProperties, "expiry_date")
 		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "child_brokerage_order_ids")
 		o.AdditionalProperties = additionalProperties
 	}
 

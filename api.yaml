@@ -1718,6 +1718,49 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /trade/placeBracketOrder:
+    post:
+      tags:
+        - Trading
+      summary: Place a Bracket Order
+      description: |
+        Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+        use. Only supported on certain brokerages
+      operationId: Trading_placeBracketOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBodyBracket"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
   /trade/impact:
     post:
       tags:
@@ -2127,6 +2170,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeFormWithOptions"
+    ManualTradeFormRequestBodyBracket:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeFormBracket"
     ValidatedTradeRequestBody:
       required: false
       content:
@@ -2592,6 +2641,10 @@ components:
           example: 2024-08-05T00:05:57.409000Z
         symbol:
           $ref: "#/components/schemas/BrokerageSymbolID"
+        child_brokerage_order_ids:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ChildBrokerageOrderIDs"
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
       type: string
@@ -3589,6 +3642,17 @@ components:
       type: string
       format: uuid
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+    ChildBrokerageOrderIDs:
+      type: object
+      properties:
+        take_profit_order_id:
+          type: string
+          description: The brokerage order ID for the take profit leg of the bracket order
+          example: "12345678"
+        stop_loss_order_id:
+          type: string
+          description: The brokerage order ID for the stop loss leg of the bracket order
+          example: "12345678"
     BrokerageOrderID:
       description: Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
       type: string
@@ -3892,7 +3956,7 @@ components:
           allOf:
             - $ref: "#/components/schemas/UniversalSymbolID"
         symbol:
-          description: The security's trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example "AAPL  131124C00240000" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+          description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example "AAPL  131124C00240000" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
           type: string
           example: AAPL  131124C00240000
           nullable: true
@@ -3919,22 +3983,46 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
-        order_class:
-          description: The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
+    ManualTradeFormBracket:
+      description: Inputs for placing an order with the brokerage.
+      type: object
+      required:
+        - account_id
+        - action
+        - order_type
+        - time_in_force
+        - stop_loss
+        - take_profit
+        - symbol
+      properties:
+        account_id:
+          $ref: "#/components/schemas/AccountID"
+        action:
+          $ref: "#/components/schemas/ActionStrictWithOptions"
+        symbol:
+          description: The security's trading ticker symbol.
           type: string
-          example: BRACKET
+          example: AAPL
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
           nullable: true
-          enum:
-            - SIMPLE
-            - BRACKET
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          $ref: "#/components/schemas/Units"
         stop_loss:
-          nullable: true
-          allOf:
-            - $ref: "#/components/schemas/StopLoss"
+          $ref: "#/components/schemas/StopLoss"
         take_profit:
-          nullable: true
-          allOf:
-            - $ref: "#/components/schemas/TakeProfit"
+          $ref: "#/components/schemas/TakeProfit"
     ValidatedTradeBody:
       type: object
       properties:

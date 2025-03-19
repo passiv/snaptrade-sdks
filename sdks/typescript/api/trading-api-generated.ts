@@ -29,13 +29,11 @@ import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
 import { ManualTradeForm } from '../models';
 // @ts-ignore
+import { ManualTradeFormBracket } from '../models';
+// @ts-ignore
 import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
 import { ManualTradeFormWithOptions } from '../models';
-// @ts-ignore
-import { ManualTradeFormWithOptionsStopLoss } from '../models';
-// @ts-ignore
-import { ManualTradeFormWithOptionsTakeProfit } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
@@ -45,7 +43,11 @@ import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { OrderTypeStrict } from '../models';
 // @ts-ignore
+import { StopLoss } from '../models';
+// @ts-ignore
 import { SymbolsQuotesInner } from '../models';
+// @ts-ignore
+import { TakeProfit } from '../models';
 // @ts-ignore
 import { TimeInForceStrict } from '../models';
 // @ts-ignore
@@ -272,6 +274,72 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * @summary Place a Bracket Order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeFormBracket} manualTradeFormBracket 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeBracketOrder: async (userId: string, userSecret: string, manualTradeFormBracket: ManualTradeFormBracket, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeBracketOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeBracketOrder', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeFormBracket' is not null or undefined
+            assertParamExists('placeBracketOrder', 'manualTradeFormBracket', manualTradeFormBracket)
+            const localVarPath = `/trade/placeBracketOrder`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: manualTradeFormBracket,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/trade/placeBracketOrder',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormBracket, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
          * @summary Place order
          * @param {string} userId 
@@ -463,6 +531,29 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * @summary Place a Bracket Order
+         * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const manualTradeFormBracket: ManualTradeFormBracket = {
+                account_id: requestParameters.account_id,
+                action: requestParameters.action,
+                symbol: requestParameters.symbol,
+                order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
+                price: requestParameters.price,
+                stop: requestParameters.stop,
+                units: requestParameters.units,
+                stop_loss: requestParameters.stop_loss,
+                take_profit: requestParameters.take_profit
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeBracketOrder(requestParameters.userId, requestParameters.userSecret, manualTradeFormBracket, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
          * @summary Place order
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
@@ -480,10 +571,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 price: requestParameters.price,
                 stop: requestParameters.stop,
                 units: requestParameters.units,
-                notional_value: requestParameters.notional_value,
-                order_class: requestParameters.order_class,
-                stop_loss: requestParameters.stop_loss,
-                take_profit: requestParameters.take_profit
+                notional_value: requestParameters.notional_value
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeForceOrder(requestParameters.userId, requestParameters.userSecret, manualTradeFormWithOptions, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
@@ -541,6 +629,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig): AxiosPromise<Array<SymbolsQuotesInner>> {
             return localVarFp.getUserAccountQuotes(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+         * @summary Place a Bracket Order
+         * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.placeBracketOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -663,6 +761,29 @@ export type TradingApiGetUserAccountQuotesRequest = {
 }
 
 /**
+ * Request parameters for placeBracketOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPlaceBracketOrderRequest
+ */
+export type TradingApiPlaceBracketOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceBracketOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceBracketOrder
+    */
+    readonly userSecret: string
+    
+} & ManualTradeFormBracket
+
+/**
  * Request parameters for placeForceOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceForceOrderRequest
@@ -756,6 +877,18 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public getUserAccountQuotes(requestParameters: TradingApiGetUserAccountQuotesRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).getUserAccountQuotes(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * @summary Place a Bracket Order
+     * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeBracketOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
