@@ -30,7 +30,7 @@ If you lose the userSecret the easiest thing to do is create a new user and ask 
 
 ### **The userSecret to one of my SnapTrade users has been compromised. What should I do?**
 
-The best thing to do in this case is to rotate the user secret using [**Rotate user secret**](https://docs.snaptrade.com/reference/Authentication/Authentication_resetSnapTradeUserSecret).
+The best thing to do in this case is to rotate the user secret using :api[Authentication_resetSnapTradeUserSecret].
 
 ---
 
@@ -48,7 +48,7 @@ The accounts live under the connection to the brokerage. Each connection is asso
 
 ### **If I want to remove an account do I need to delete the connection?**
 
-If you want to remove an account, you will need to delete the corresponding connection. You can do this using <https://docs.snaptrade.com/reference/Connections/Connections_removeBrokerageAuthorization>.
+If you want to remove an account, you will need to delete the corresponding connection. You can do this using :api[Connections_removeBrokerageAuthorization].
 
 ### **If I delete connection, will it delete all accounts from that Connection? Can I delete only one account?**
 
@@ -56,7 +56,7 @@ Deleting the connection will remove all accounts under that connection. Instead 
 
 ### How can I force a connection to become disabled for testing?
 
-You can do this with the <https://docs.snaptrade.com/reference/Connections/Connections_disableBrokerageAuthorization> endpoint.
+You can do this with the :api[Connections_disableBrokerageAuthorization] endpoint.
 
 ### **How do I enable connecting to 'X' broker on my API Key?**
 
@@ -68,7 +68,7 @@ By default, all brokers which can be enabled for you are enabled. For now, broke
 
 ### What kind of accounts does SnapTrade support?
 
-We support all kinds of accounts and it is brokerage dependent. In general, if the brokerage returns it to us, we will return it over the API. You can refer to <https://snaptrade.notion.site/brokerages> and the field will be returned over the `raw_type` on the account object.
+We support all kinds of accounts and it is brokerage dependent. In general, if the brokerage returns it to us, we will return it over the API. You can refer to the [SnapTrade Broker Support Matrix](https://snaptrade.notion.site/brokerages) and the field will be returned over the `raw_type` on the account object.
 
 ### How do I determine if an activity indicates the position was bought or sold?
 
@@ -81,7 +81,7 @@ Determining a stock's first purchase date varies by brokerage. Two key requireme
 1. The brokerage must provide activities or transaction data that includes historical buy/sell records.
 2. The brokerage must include complete transaction history in the account data.
 
-Some brokerages have data retention limits—for example, Schwab only provides up to 4 years of historical data. You can check this here <https://snaptrade.notion.site/brokerages>
+Some brokerages have data retention limits—for example, Schwab only provides up to 4 years of historical data. You can check this here [SnapTrade Broker Support Matrix](https://snaptrade.notion.site/brokerages)
 
 ### When does account data get synced daily?
 
@@ -89,7 +89,7 @@ It is not consistent at the same time every day, but guarunteed once per day.
 
 ### My account data is stale, why is my account not syncing every day?
 
-The connection is probably disabled, this happens when the access token is no longer valid. Please check using the [connection detail endpoint](https://docs.snaptrade.com/reference/Connections/Connections_detailBrokerageAuthorization) and follow [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) to repair the connection.
+The connection is probably disabled, this happens when the access token is no longer valid. Please check using the :api[Connections_detailBrokerageAuthorization] and follow [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) to repair the connection.
 
 ---
 
@@ -97,6 +97,6 @@ The connection is probably disabled, this happens when the access token is no lo
 
 ### Is there a comprehensive list of symbol IDs that I can use for submitting trades?
 
-A symbol is not guaranteed to be stable. Since a stock is able to be traded on multiple exchanges, you should get the symbol with <https://docs.snaptrade.com/reference/Trading/Trading_getUserAccountQuotes> at the time you want to place the trade.
+A symbol is not guaranteed to be stable. Since a stock is able to be traded on multiple exchanges, you should get the symbol with :api[Trading_getUserAccountQuotes] at the time you want to place the trade.
 
 ---
