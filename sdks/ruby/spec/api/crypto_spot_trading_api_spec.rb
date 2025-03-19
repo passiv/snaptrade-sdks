@@ -97,7 +97,7 @@ describe 'CryptoSpotTradingApi' do
   # @param base 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :quote 
-  # @return [Array<CryptocurrencyMarket>]
+  # @return [TradingCryptoSpotSymbols200Response]
   describe 'crypto_spot_symbols test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

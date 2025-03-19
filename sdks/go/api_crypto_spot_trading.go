@@ -753,7 +753,7 @@ func (r *CryptoSpotTradingApiCryptoSpotSymbolsRequest) Quote(quote string) *Cryp
 	return r
 }
 
-func (r CryptoSpotTradingApiCryptoSpotSymbolsRequest) Execute() ([]CryptocurrencyMarket, *http.Response, error) {
+func (r CryptoSpotTradingApiCryptoSpotSymbolsRequest) Execute() (*TradingCryptoSpotSymbols200Response, *http.Response, error) {
 	return r.ApiService.CryptoSpotSymbolsExecute(r)
 }
 
@@ -782,13 +782,13 @@ func (a *CryptoSpotTradingApiService) CryptoSpotSymbols(userId string, userSecre
 }
 
 // Execute executes the request
-//  @return []CryptocurrencyMarket
-func (a *CryptoSpotTradingApiService) CryptoSpotSymbolsExecute(r CryptoSpotTradingApiCryptoSpotSymbolsRequest) ([]CryptocurrencyMarket, *http.Response, error) {
+//  @return TradingCryptoSpotSymbols200Response
+func (a *CryptoSpotTradingApiService) CryptoSpotSymbolsExecute(r CryptoSpotTradingApiCryptoSpotSymbolsRequest) (*TradingCryptoSpotSymbols200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []CryptocurrencyMarket
+		localVarReturnValue  *TradingCryptoSpotSymbols200Response
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotSymbols")

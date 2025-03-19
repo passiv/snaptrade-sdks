@@ -21,38 +21,32 @@ import com.konfigthis.client.model.CryptocurrencyPair;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for CryptocurrencyMarket
+ * Model tests for TradingCryptoSpotSymbols200Response
  */
-public class CryptocurrencyMarketTest {
-    private final CryptocurrencyMarket model = new CryptocurrencyMarket();
+public class TradingCryptoSpotSymbols200ResponseTest {
+    private final TradingCryptoSpotSymbols200Response model = new TradingCryptoSpotSymbols200Response();
 
     /**
-     * Model tests for CryptocurrencyMarket
+     * Model tests for TradingCryptoSpotSymbols200Response
      */
     @Test
-    public void testCryptocurrencyMarket() {
-        // TODO: test CryptocurrencyMarket
+    public void testTradingCryptoSpotSymbols200Response() {
+        // TODO: test TradingCryptoSpotSymbols200Response
     }
 
     /**
-     * Test the property 'symbol'
+     * Test the property 'items'
      */
     @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
-     * Test the property 'tradingAllowed'
-     */
-    @Test
-    public void tradingAllowedTest() {
-        // TODO: test tradingAllowed
+    public void itemsTest() {
+        // TODO: test items
     }
 
 }

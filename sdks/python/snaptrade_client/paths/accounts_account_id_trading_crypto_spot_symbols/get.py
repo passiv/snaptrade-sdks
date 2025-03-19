@@ -33,9 +33,9 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.cryptocurrency_market import CryptocurrencyMarket as CryptocurrencyMarketSchema
+from snaptrade_client.model.cryptocurrency_pair import CryptocurrencyPair as CryptocurrencyPairSchema
 
-from snaptrade_client.type.cryptocurrency_market import CryptocurrencyMarket
+from snaptrade_client.type.cryptocurrency_pair import CryptocurrencyPair
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 
 from . import path
@@ -127,39 +127,92 @@ _auth = [
 
 
 class SchemaFor200ResponseBodyApplicationJson(
-    schemas.ListSchema
+    schemas.DictSchema
 ):
 
 
     class MetaOapg:
+        required = {
+            "items",
+        }
         
-        @staticmethod
-        def items() -> typing.Type['CryptocurrencyMarketSchema']:
-            return CryptocurrencyMarketSchema
+        class properties:
+            
+            
+            class items(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['CryptocurrencyPairSchema']:
+                        return CryptocurrencyPairSchema
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['CryptocurrencyPair'], typing.List['CryptocurrencyPair']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'items':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'CryptocurrencyPair':
+                    return super().__getitem__(i)
+            __annotations__ = {
+                "items": items,
+            }
+        additional_properties = schemas.AnyTypeSchema
+    
+    items: MetaOapg.properties.items
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["items"]) -> MetaOapg.properties.items: ...
+    
+    @typing.overload
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["items"], str, ]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["items"]) -> MetaOapg.properties.items: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
+    
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["items"], str, ]):
+        return super().get_item_oapg(name)
 
     def __new__(
         cls,
-        arg: typing.Union[typing.Tuple['CryptocurrencyMarket'], typing.List['CryptocurrencyMarket']],
+        *args: typing.Union[dict, frozendict.frozendict, ],
+        items: typing.Union[MetaOapg.properties.items, list, tuple, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'SchemaFor200ResponseBodyApplicationJson':
         return super().__new__(
             cls,
-            arg,
+            *args,
+            items=items,
             _configuration=_configuration,
+            **kwargs,
         )
-
-    def __getitem__(self, i: int) -> 'CryptocurrencyMarket':
-        return super().__getitem__(i)
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: typing.List[CryptocurrencyMarket]
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: typing.List[CryptocurrencyMarket]
+    body: typing.Dict[str, typing.Union[bool, date, datetime, dict, float, int, list, str, None]]
 
 
 _response_for_200 = api_client.OpenApiResponse(

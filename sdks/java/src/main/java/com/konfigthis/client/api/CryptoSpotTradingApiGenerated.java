@@ -31,11 +31,11 @@ import com.konfigthis.client.model.ActionStrict;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptoSpotOrderPreview;
 import com.konfigthis.client.model.CryptoSpotQuote;
-import com.konfigthis.client.model.CryptocurrencyMarket;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
+import com.konfigthis.client.model.TradingCryptoSpotSymbols200Response;
 import java.util.UUID;
 
 import java.lang.reflect.Type;
@@ -1163,16 +1163,16 @@ public class CryptoSpotTradingApiGenerated {
     }
 
 
-    private ApiResponse<List<CryptocurrencyMarket>> cryptoSpotSymbolsWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
+    private ApiResponse<TradingCryptoSpotSymbols200Response> cryptoSpotSymbolsWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
         okhttp3.Call localVarCall = cryptoSpotSymbolsValidateBeforeCall(userId, userSecret, accountId, base, quote, null);
-        Type localVarReturnType = new TypeToken<List<CryptocurrencyMarket>>(){}.getType();
+        Type localVarReturnType = new TypeToken<TradingCryptoSpotSymbols200Response>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotSymbolsAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<List<CryptocurrencyMarket>> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotSymbolsAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<TradingCryptoSpotSymbols200Response> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = cryptoSpotSymbolsValidateBeforeCall(userId, userSecret, accountId, base, quote, _callback);
-        Type localVarReturnType = new TypeToken<List<CryptocurrencyMarket>>(){}.getType();
+        Type localVarReturnType = new TypeToken<TradingCryptoSpotSymbols200Response>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -1220,7 +1220,7 @@ public class CryptoSpotTradingApiGenerated {
 
         /**
          * Execute cryptoSpotSymbols request
-         * @return List&lt;CryptocurrencyMarket&gt;
+         * @return TradingCryptoSpotSymbols200Response
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1229,14 +1229,14 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public List<CryptocurrencyMarket> execute() throws ApiException {
-            ApiResponse<List<CryptocurrencyMarket>> localVarResp = cryptoSpotSymbolsWithHttpInfo(userId, userSecret, accountId, base, quote);
+        public TradingCryptoSpotSymbols200Response execute() throws ApiException {
+            ApiResponse<TradingCryptoSpotSymbols200Response> localVarResp = cryptoSpotSymbolsWithHttpInfo(userId, userSecret, accountId, base, quote);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute cryptoSpotSymbols request with HTTP info returned
-         * @return ApiResponse&lt;List&lt;CryptocurrencyMarket&gt;&gt;
+         * @return ApiResponse&lt;TradingCryptoSpotSymbols200Response&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1245,7 +1245,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<List<CryptocurrencyMarket>> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<TradingCryptoSpotSymbols200Response> executeWithHttpInfo() throws ApiException {
             return cryptoSpotSymbolsWithHttpInfo(userId, userSecret, accountId, base, quote);
         }
 
@@ -1261,7 +1261,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<List<CryptocurrencyMarket>> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<TradingCryptoSpotSymbols200Response> _callback) throws ApiException {
             return cryptoSpotSymbolsAsync(userId, userSecret, accountId, base, quote, _callback);
         }
     }

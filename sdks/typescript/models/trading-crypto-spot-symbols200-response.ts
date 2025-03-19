@@ -13,24 +13,18 @@ import type * as buffer from "buffer"
 import { CryptocurrencyPair } from './cryptocurrency-pair';
 
 /**
- * Details of a cryptocurrency market
+ * The symbols
  * @export
- * @interface CryptocurrencyMarket
+ * @interface TradingCryptoSpotSymbols200Response
  */
-export interface CryptocurrencyMarket {
+export interface TradingCryptoSpotSymbols200Response {
     [key: string]: any;
 
     /**
      * 
-     * @type {CryptocurrencyPair}
-     * @memberof CryptocurrencyMarket
+     * @type {Array<CryptocurrencyPair>}
+     * @memberof TradingCryptoSpotSymbols200Response
      */
-    'symbol': CryptocurrencyPair;
-    /**
-     * True if the account can trade on this market.
-     * @type {boolean}
-     * @memberof CryptocurrencyMarket
-     */
-    'trading_allowed': boolean;
+    'items': Array<CryptocurrencyPair>;
 }
 

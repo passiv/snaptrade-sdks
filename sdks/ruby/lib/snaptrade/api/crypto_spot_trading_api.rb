@@ -615,7 +615,7 @@ module SnapTrade
     # @param base [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :quote 
-    # @return [Array<CryptocurrencyMarket>]
+    # @return [TradingCryptoSpotSymbols200Response]
     private def crypto_spot_symbols_impl(user_id, user_secret, account_id, base, opts = {})
       data, _status_code, _headers = crypto_spot_symbols_with_http_info(user_id, user_secret, account_id, base, opts)
       data
@@ -629,7 +629,7 @@ module SnapTrade
     # @param base [String] 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :quote 
-    # @return [Array<(Array<CryptocurrencyMarket>, Integer, Hash)>] Array<CryptocurrencyMarket> data, response status code and response headers
+    # @return [Array<(TradingCryptoSpotSymbols200Response, Integer, Hash)>] TradingCryptoSpotSymbols200Response data, response status code and response headers
     private def crypto_spot_symbols_with_http_info_impl(user_id, user_secret, account_id, base, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CryptoSpotTradingApi.crypto_spot_symbols ...'
@@ -672,7 +672,7 @@ module SnapTrade
       post_body = opts[:debug_body]
 
       # return_type
-      return_type = opts[:debug_return_type] || 'Array<CryptocurrencyMarket>'
+      return_type = opts[:debug_return_type] || 'TradingCryptoSpotSymbols200Response'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']

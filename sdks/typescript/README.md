@@ -42,6 +42,11 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.cryptoSpotTrading.cryptoSpotCancelOrder`](#snaptradecryptospottradingcryptospotcancelorder)
+  * [`snaptrade.cryptoSpotTrading.cryptoSpotPlaceOrder`](#snaptradecryptospottradingcryptospotplaceorder)
+  * [`snaptrade.cryptoSpotTrading.cryptoSpotPreviewOrder`](#snaptradecryptospottradingcryptospotprevieworder)
+  * [`snaptrade.cryptoSpotTrading.cryptoSpotQuote`](#snaptradecryptospottradingcryptospotquote)
+  * [`snaptrade.cryptoSpotTrading.cryptoSpotSymbols`](#snaptradecryptospottradingcryptospotsymbols)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -61,6 +66,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
+  * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
@@ -1125,6 +1131,301 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
+### `snaptrade.cryptoSpotTrading.cryptoSpotCancelOrder`<a id="snaptradecryptospottradingcryptospotcancelorder"></a>
+
+Cancels a cryptocurrency spot order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cryptoSpotCancelOrderResponse =
+  await snaptrade.cryptoSpotTrading.cryptoSpotCancelOrder({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/cancelOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoSpotTrading.cryptoSpotPlaceOrder`<a id="snaptradecryptospottradingcryptospotplaceorder"></a>
+
+Places a spot cryptocurrency order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cryptoSpotPlaceOrderResponse =
+  await snaptrade.cryptoSpotTrading.cryptoSpotPlaceOrder({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol: {
+      base: "BTC",
+      quote: "BTC",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00Z",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./models/cryptocurrency-pair.ts)<a id="symbol-cryptocurrencypairmodelscryptocurrency-pairts"></a>
+
+##### side: [`ActionStrict`](./models/action-strict.ts)<a id="side-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: [`string`](./models/model-string.ts)<a id="amount-stringmodelsmodel-stringts"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: [`string`](./models/model-string.ts)<a id="limit_price-stringmodelsmodel-stringts"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: [`string`](./models/model-string.ts)<a id="stop_price-stringmodelsmodel-stringts"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `boolean`<a id="post_only-boolean"></a>
+
+Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `string`<a id="expiration_date-string"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/placeOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoSpotTrading.cryptoSpotPreviewOrder`<a id="snaptradecryptospottradingcryptospotprevieworder"></a>
+
+Previews a cryptocurrency spot order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cryptoSpotPreviewOrderResponse =
+  await snaptrade.cryptoSpotTrading.cryptoSpotPreviewOrder({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    symbol: {
+      base: "BTC",
+      quote: "BTC",
+    },
+    side: "BUY",
+    type: "MARKET",
+    time_in_force: "GTC",
+    amount: "123.45",
+    limit_price: "123.45",
+    stop_price: "123.45",
+    post_only: false,
+    expiration_date: "2024-01-01T00:00:00Z",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./models/cryptocurrency-pair.ts)<a id="symbol-cryptocurrencypairmodelscryptocurrency-pairts"></a>
+
+##### side: [`ActionStrict`](./models/action-strict.ts)<a id="side-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: [`string`](./models/model-string.ts)<a id="amount-stringmodelsmodel-stringts"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: [`string`](./models/model-string.ts)<a id="limit_price-stringmodelsmodel-stringts"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: [`string`](./models/model-string.ts)<a id="stop_price-stringmodelsmodel-stringts"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `boolean`<a id="post_only-boolean"></a>
+
+Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `string`<a id="expiration_date-string"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptoSpotOrderPreview](./models/crypto-spot-order-preview.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/previewOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoSpotTrading.cryptoSpotQuote`<a id="snaptradecryptospottradingcryptospotquote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cryptoSpotQuoteResponse =
+  await snaptrade.cryptoSpotTrading.cryptoSpotQuote({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base: "BTC",
+    quote: "BTC",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### base: `string`<a id="base-string"></a>
+
+##### quote: `string`<a id="quote-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptoSpotQuote](./models/crypto-spot-quote.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.cryptoSpotTrading.cryptoSpotSymbols`<a id="snaptradecryptospottradingcryptospotsymbols"></a>
+
+Searches cryptocurrency spot symbols accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cryptoSpotSymbolsResponse =
+  await snaptrade.cryptoSpotTrading.cryptoSpotSymbols({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base: "BTC",
+    quote: "BTC",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### base: `string`<a id="base-string"></a>
+
+##### quote: `string`<a id="quote-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingCryptoSpotSymbols200Response](./models/trading-crypto-spot-symbols200-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/symbols` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -1836,6 +2137,91 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 ---
 
 
+### `snaptrade.trading.placeBracketOrder`<a id="snaptradetradingplacebracketorder"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  action: "BUY",
+  symbol: "AAPL",
+  order_type: "Market",
+  time_in_force: "FOK",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+  stop_loss: {
+    stop_price: "48.55",
+    limit_price: "48.50",
+  },
+  take_profit: {
+    limit_price: "49.95",
+  },
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `string`<a id="account_id-string"></a>
+
+Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
+
+##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol.
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+
+##### stop_loss: [`StopLoss`](./models/stop-loss.ts)<a id="stop_loss-stoplossmodelsstop-lossts"></a>
+
+##### take_profit: [`TakeProfit`](./models/take-profit.ts)<a id="take_profit-takeprofitmodelstake-profitts"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### price: `number`<a id="price-number"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `number`<a id="stop-number"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `number`<a id="units-number"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/trade/placeBracketOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -1860,7 +2246,6 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   price: 31.33,
   stop: 31.33,
   units: 10.5,
-  order_class: "BRACKET",
 });
 ```
 
@@ -1892,7 +2277,7 @@ The universal symbol ID of the security to trade. Must be \\\'null\\\' if `symbo
 
 ##### symbol: `string`<a id="symbol-string"></a>
 
-The security\\\'s trading ticker symbol. This currently only support Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \\\'symbol\\\' is provided, then \\\'universal_symbol_id\\\' must be \\\'null\\\'.
+The security\\\'s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \\\'symbol\\\' is provided, then \\\'universal_symbol_id\\\' must be \\\'null\\\'.
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -1907,14 +2292,6 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
-
-##### order_class: `string`<a id="order_class-string"></a>
-
-The class of order intended to be placed. Defaults to SIMPLE for regular, one legged trades. Set to BRACKET if looking to place a bracket (One-triggers-a-one-cancels-the-other) order, then specify take profit and stop loss conditions. Bracket orders currently only supported on Alpaca, Tradier, and Tradestation, contact us for more details
-
-##### stop_loss: [`ManualTradeFormWithOptionsStopLoss`](./models/manual-trade-form-with-options-stop-loss.ts)<a id="stop_loss-manualtradeformwithoptionsstoplossmodelsmanual-trade-form-with-options-stop-lossts"></a>
-
-##### take_profit: [`ManualTradeFormWithOptionsTakeProfit`](./models/manual-trade-form-with-options-take-profit.ts)<a id="take_profit-manualtradeformwithoptionstakeprofitmodelsmanual-trade-form-with-options-take-profitts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

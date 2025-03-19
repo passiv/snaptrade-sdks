@@ -21,11 +21,11 @@ import com.konfigthis.client.model.ActionStrict;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptoSpotOrderPreview;
 import com.konfigthis.client.model.CryptoSpotQuote;
-import com.konfigthis.client.model.CryptocurrencyMarket;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
+import com.konfigthis.client.model.TradingCryptoSpotSymbols200Response;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -162,7 +162,7 @@ public class CryptoSpotTradingApiTest {
         UUID accountId = null;
         String base = null;
         String quote = null;
-        List<CryptocurrencyMarket> response = api.cryptoSpotSymbols(userId, userSecret, accountId, base)
+        TradingCryptoSpotSymbols200Response response = api.cryptoSpotSymbols(userId, userSecret, accountId, base)
                 .quote(quote)
                 .execute();
         // TODO: test validations

@@ -47,7 +47,6 @@ from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.crypto_spot_order_preview import CryptoSpotOrderPreview
 from snaptrade_client.model.crypto_spot_order_preview_estimated_fee import CryptoSpotOrderPreviewEstimatedFee
 from snaptrade_client.model.crypto_spot_quote import CryptoSpotQuote
-from snaptrade_client.model.cryptocurrency_market import CryptocurrencyMarket
 from snaptrade_client.model.cryptocurrency_pair import CryptocurrencyPair
 from snaptrade_client.model.cryptocurrency_symbol import CryptocurrencySymbol
 from snaptrade_client.model.currency import Currency

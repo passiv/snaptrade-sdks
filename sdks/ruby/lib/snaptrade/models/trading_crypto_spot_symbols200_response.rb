@@ -11,18 +11,14 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Details of a cryptocurrency market
-  class CryptocurrencyMarket
-    attr_accessor :symbol
-
-    # True if the account can trade on this market.
-    attr_accessor :trading_allowed
+  # The symbols
+  class TradingCryptoSpotSymbols200Response
+    attr_accessor :items
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'symbol' => :'symbol',
-        :'trading_allowed' => :'trading_allowed'
+        :'items' => :'items'
       }
     end
 
@@ -34,8 +30,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'symbol' => :'CryptocurrencyPair',
-        :'trading_allowed' => :'Boolean'
+        :'items' => :'Array<CryptocurrencyPair>'
       }
     end
 
@@ -49,23 +44,21 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::CryptocurrencyMarket` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::TradingCryptoSpotSymbols200Response` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::CryptocurrencyMarket`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::TradingCryptoSpotSymbols200Response`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
-      end
-
-      if attributes.key?(:'trading_allowed')
-        self.trading_allowed = attributes[:'trading_allowed']
+      if attributes.key?(:'items')
+        if (value = attributes[:'items']).is_a?(Array)
+          self.items = value
+        end
       end
     end
 
@@ -73,12 +66,8 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @symbol.nil?
-        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
-      end
-
-      if @trading_allowed.nil?
-        invalid_properties.push('invalid value for "trading_allowed", trading_allowed cannot be nil.')
+      if @items.nil?
+        invalid_properties.push('invalid value for "items", items cannot be nil.')
       end
 
       invalid_properties
@@ -87,8 +76,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @symbol.nil?
-      return false if @trading_allowed.nil?
+      return false if @items.nil?
       true
     end
 
@@ -97,8 +85,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          symbol == o.symbol &&
-          trading_allowed == o.trading_allowed
+          items == o.items
     end
 
     # @see the `==` method
@@ -110,7 +97,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, trading_allowed].hash
+      [items].hash
     end
 
     # Builds the object from hash

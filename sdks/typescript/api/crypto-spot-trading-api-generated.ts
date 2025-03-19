@@ -27,8 +27,6 @@ import { CryptoSpotOrderPreview } from '../models';
 // @ts-ignore
 import { CryptoSpotQuote } from '../models';
 // @ts-ignore
-import { CryptocurrencyMarket } from '../models';
-// @ts-ignore
 import { CryptocurrencyPair } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
@@ -36,6 +34,8 @@ import { Model400FailedRequestResponse } from '../models';
 import { TradingCryptoSpotCancelOrderRequest } from '../models';
 // @ts-ignore
 import { TradingCryptoSpotPlaceOrderRequest } from '../models';
+// @ts-ignore
+import { TradingCryptoSpotSymbols200Response } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -491,7 +491,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<CryptocurrencyMarket>>> {
+        async cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradingCryptoSpotSymbols200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.cryptoSpotSymbols(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.base, requestParameters.quote, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -552,7 +552,7 @@ export const CryptoSpotTradingApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): AxiosPromise<Array<CryptocurrencyMarket>> {
+        cryptoSpotSymbols(requestParameters: CryptoSpotTradingApiCryptoSpotSymbolsRequest, options?: AxiosRequestConfig): AxiosPromise<TradingCryptoSpotSymbols200Response> {
             return localVarFp.cryptoSpotSymbols(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
