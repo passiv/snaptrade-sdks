@@ -1,4 +1,4 @@
-# How to Fix Broken Connections
+# Fix Broken Connections
 
 A SnapTrade connection provides direct access to a user's trading account. Users choose to make a brokerage connection, and the connection is established in one of the following ways:
 
