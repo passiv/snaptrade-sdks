@@ -60,12 +60,7 @@ You can also make this request with any of the SnapTrade SDKs.
 | PHP | [**https://packagist.org/packages/konfig/snaptrade-php-sdk**](https://packagist.org/packages/konfig/snaptrade-php-sdk) |
 | Go | [**https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go**](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go) |
 
-### API Keys FAQ
-
-- **I have lost the consumerKey to my API Key. What should I do?**
-  - You should reach out to SnapTrade support. If it is compromised, your users are still safe due to also requiring a user secret to get account data or place trades.
-- **I am getting a 'Unable to verify signature sent' error when hitting the API. What should I do?**
-  - The API request is failing when comparing the expected signature to the signature provided by your client. This can happen for many reasons, but is likely caused by attempting to configure the signature without an SDK, or an invalid consumerKey. If you need to reset your consumerKey, reach out to someone at SnapTrade.
+### [API Keys FAQ](https://docs.snaptrade.com/docs/faq#faq-api-keys)
 
 ---
 
@@ -86,12 +81,7 @@ When you have a working `API Key` and want to create a new `connection` for a `u
 
 You can list your created users by using the :api[Authentication_listSnapTradeUsers] endpoint, and you can delete created users by using the :api[Authentication_deleteSnapTradeUser] endpoint. If needed, you may reset a user’s userSecret by using the :api[Authentication_resetSnapTradeUserSecret] endpoint. Now that you have one or more SnapTrade `users` under your `API Key`, you are ready to create `connections` under these `users`.
 
-### Users FAQ
-
-- **I have lost the userSecret to one of my SnapTrade users. What should I do?**
-  - If you lose the userSecret the easiest thing to do is create a new user and ask the end user to reconnect.
-- **The userSecret to one of my SnapTrade users has been compromised. What should I do?**
-  - The best thing to do in this case is to rotate the user secret using :api[Authentication_resetSnapTradeUserSecret].
+### [Users FAQ](https://docs.snaptrade.com/docs/faq#faq-users)
 
 ---
 
@@ -114,10 +104,7 @@ When you have a SnapTrade user and want to get access to their account data and/
 
 Once you have successfully completed the Connection Portal Flow, you should have an active connection to work with, and should have access to the accounts under that connection.
 
-### Connections FAQ
-
-- **How do I enable connecting to 'X' broker on my API Key?**
-  - By default, all brokers which can be enabled for you are enabled. For now, broker configuration is done manually on our end. Certain brokers require an application to enable the integration (Alpaca, Tradier, Tradestation, Questrade, Fidelity). Please reach out if you need access to one of these.
+### [Connections FAQ](https://docs.snaptrade.com/docs/faq#faq-connections)
 
 ---
 
@@ -148,12 +135,7 @@ When you have at least one connected `account` and want to place a trade in the 
 
 The order will now show over the :api[AccountInformation_getUserAccountOrders] endpoint. If it does not, you may need to trigger a refresh for the connection using :api[Connections_refreshBrokerageAuthorization].
 
-### Accounts FAQ
-
-- **My account data is stale, why is my account not syncing every day?**
-  - The connection is probably disabled, this happens when the access token is no longer valid. Please check using the :api[Connections_detailBrokerageAuthorization] and follow [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) to repair the connection.
-- **When does the account data actually get synced daily?**
-  - It is not consistent at the same time every day, but guaranteed once per day.
+### [Accounts FAQ](https://docs.snaptrade.com/docs/faq#faq-account-information)
 
 ---
 
