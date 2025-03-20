@@ -52,8 +52,6 @@ portal:
               path: docs/ratelimiting.md
             - id: launch-guide
               path: docs/launching-your-application.md
-        - label: Troubleshooting
-          links:
             - id: request-ids
               path: docs/request-ids.md
             - id: fix-broken-connections
