@@ -42,7 +42,7 @@ All of our timestamp fields return datetime in ISO-8601 format.
 
 ### What is the difference between an account and a connection?
 
-![image.png](attachment:738d81dc-a7b9-4db1-ac34-ccb082f159f9:image.png)
+![image.png](./assets/250312_model.png)
 
 The accounts live under the connection to the brokerage. Each connection is associated one-to-one with a set of credentials to the brokerage. When you create a connection, SnapTrade will automatically sync all accounts under the set of credentials to the brokerage. For example, if you made a new connection to Questrade (a Canadian brokerage) and that connection had a TFSA, an RRSP and an FHSA account under those credentials, SnapTrade would make all these accounts accessible over the SnapTrade API.
 
