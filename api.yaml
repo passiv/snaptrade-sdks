@@ -2501,16 +2501,19 @@ components:
                   - GTD
               amount:
                 description: The amount of the base currency to buy or sell.
-                allOf:
-                  - $ref: "#/components/schemas/JsonDecimal"
+                type: string
+                format: decimal
+                example: "123.45"
               limit_price:
                 description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-                allOf:
-                  - $ref: "#/components/schemas/JsonDecimal"
+                type: string
+                format: decimal
+                example: "123.45"
               stop_price:
                 description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-                allOf:
-                  - $ref: "#/components/schemas/JsonDecimal"
+                type: string
+                format: decimal
+                example: "123.45"
               post_only:
                 type: boolean
                 example: false
@@ -4462,16 +4465,19 @@ components:
       properties:
         bid:
           description: The highest price a buyer is willing to pay.
-          allOf:
-            - $ref: "#/components/schemas/JsonDecimal"
+          type: string
+          format: decimal
+          example: "123.45"
         ask:
           description: The lowest price a seller is willing to accept.
-          allOf:
-            - $ref: "#/components/schemas/JsonDecimal"
+          type: string
+          format: decimal
+          example: "123.45"
         mid:
           description: The market mid price.
-          allOf:
-            - $ref: "#/components/schemas/JsonDecimal"
+          type: string
+          format: decimal
+          example: "123.45"
         timestamp:
           description: The timestamp of the quote.
           type: string
@@ -4489,7 +4495,9 @@ components:
             currency:
               $ref: "#/components/schemas/CryptocurrencySymbol"
             amount:
-              $ref: "#/components/schemas/JsonDecimal"
+              type: string
+              format: decimal
+              example: "123.45"
 
     PaginationDetails:
       description: Details about the pagination of the results.
@@ -4914,11 +4922,6 @@ components:
       description: Time
       type: string
       example: 2022-01-21T15:11:19.217000-05:00
-    JsonDecimal:
-      description: A decimal number represented as a string to avoid precision loss.
-      type: string
-      format: decimal
-      example: "123.45"
     BrokerageType:
       description: Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
       type: object
