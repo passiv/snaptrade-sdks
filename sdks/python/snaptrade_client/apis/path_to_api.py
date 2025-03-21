@@ -47,6 +47,11 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_place_order import AccountsAccountIdTradingCryptoSpotPlaceOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_cancel_order import AccountsAccountIdTradingCryptoSpotCancelOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_preview_order import AccountsAccountIdTradingCryptoSpotPreviewOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_symbols import AccountsAccountIdTradingCryptoSpotSymbols
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_quote import AccountsAccountIdTradingCryptoSpotQuote
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -97,6 +102,11 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )
 
@@ -148,5 +158,10 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )

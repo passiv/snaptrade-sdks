@@ -44,11 +44,17 @@ require 'snaptrade/models/brokerage_authorization_disabled_confirmation'
 require 'snaptrade/models/brokerage_authorization_refresh_confirmation'
 require 'snaptrade/models/brokerage_authorization_type_read_only'
 require 'snaptrade/models/brokerage_authorization_type_read_only_brokerage'
+require 'snaptrade/models/brokerage_authorization_type_read_only_type'
 require 'snaptrade/models/brokerage_type'
 require 'snaptrade/models/child_brokerage_order_ids'
 require 'snaptrade/models/connection_portal_version'
 require 'snaptrade/models/connection_type'
 require 'snaptrade/models/connections_session_events200_response_inner'
+require 'snaptrade/models/crypto_spot_order_preview'
+require 'snaptrade/models/crypto_spot_order_preview_estimated_fee'
+require 'snaptrade/models/crypto_spot_order_request_body_time_in_force'
+require 'snaptrade/models/crypto_spot_quote'
+require 'snaptrade/models/cryptocurrency_pair'
 require 'snaptrade/models/currency'
 require 'snaptrade/models/delete_user_response'
 require 'snaptrade/models/dividend_at_date'
@@ -131,6 +137,9 @@ require 'snaptrade/models/take_profit'
 require 'snaptrade/models/time_in_force_strict'
 require 'snaptrade/models/timeframe'
 require 'snaptrade/models/trading_cancel_user_account_order_request'
+require 'snaptrade/models/trading_crypto_spot_cancel_order_request'
+require 'snaptrade/models/trading_crypto_spot_place_order_request'
+require 'snaptrade/models/trading_crypto_spot_symbols200_response'
 require 'snaptrade/models/transactions_status'
 require 'snaptrade/models/type'
 require 'snaptrade/models/us_exchange'
@@ -147,6 +156,7 @@ require 'snaptrade/api/account_information_api'
 require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
+require 'snaptrade/api/crypto_spot_trading_api'
 require 'snaptrade/api/options_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
@@ -220,6 +230,7 @@ module SnapTrade
     attr_reader :api_status
     attr_reader :authentication
     attr_reader :connections
+    attr_reader :crypto_spot_trading
     attr_reader :options
     attr_reader :reference_data
     attr_reader :trading
@@ -231,6 +242,7 @@ module SnapTrade
       @api_status = SnapTrade::APIStatusApi.new(@api_client)
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
+      @crypto_spot_trading = SnapTrade::CryptoSpotTradingApi.new(@api_client)
       @options = SnapTrade::OptionsApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)

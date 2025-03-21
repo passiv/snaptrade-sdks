@@ -43,6 +43,11 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_cancel_order`](#snaptradecrypto_spot_tradingcrypto_spot_cancel_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_place_order`](#snaptradecrypto_spot_tradingcrypto_spot_place_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_preview_order`](#snaptradecrypto_spot_tradingcrypto_spot_preview_order)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_quote`](#snaptradecrypto_spot_tradingcrypto_spot_quote)
+  * [`snaptrade.crypto_spot_trading.crypto_spot_symbols`](#snaptradecrypto_spot_tradingcrypto_spot_symbols)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -1034,6 +1039,284 @@ specific users
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.crypto_spot_trading.crypto_spot_cancel_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_cancel_order"></a>
+
+Cancels a cryptocurrency spot order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_spot_trading.crypto_spot_cancel_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/cancelOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.crypto_spot_trading.crypto_spot_place_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_place_order"></a>
+
+Places a spot cryptocurrency order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_spot_trading.crypto_spot_place_order(
+  symbol: {
+        "base" => "BTC",
+        "quote" => "BTC",
+    },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00Z",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./lib/snaptrade/models/cryptocurrency_pair.rb)<a id="symbol-cryptocurrencypairlibsnaptrademodelscryptocurrency_pairrb"></a>
+##### side: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="side-actionstrictlibsnaptrademodelsaction_strictrb"></a>
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`.
+
+##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+The type of order to place.
+
+##### time_in_force: [`CryptoSpotOrderRequestBodyTimeInForce`](./lib/snaptrade/models/crypto_spot_order_request_body_time_in_force.rb)<a id="time_in_force-cryptospotorderrequestbodytimeinforcelibsnaptrademodelscrypto_spot_order_request_body_time_in_forcerb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. - `GTC` - Good Til
+Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
+Kill. The order must be executed in its entirety immediately or be canceled
+completely. - `IOC` - Immediate Or Cancel. The order must be executed
+immediately. Any portion of the order that cannot be filled immediately will be
+canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
+
+##### amount: [`Float`](./lib/snaptrade/models/float.rb)<a id="amount-floatlibsnaptrademodelsfloatrb"></a>
+The amount of the base currency to buy or sell.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="limit_price-floatlibsnaptrademodelsfloatrb"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
+TAKE_PROFIT_LIMIT.
+
+##### stop_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="stop_price-floatlibsnaptrademodelsfloatrb"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
+TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+Required for order type LIMIT. If true orders that would be filled immediately
+are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `Time`<a id="expiration_date-time"></a>
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/placeOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.crypto_spot_trading.crypto_spot_preview_order`<a id="snaptradecrypto_spot_tradingcrypto_spot_preview_order"></a>
+
+Previews a cryptocurrency spot order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_spot_trading.crypto_spot_preview_order(
+  symbol: {
+        "base" => "BTC",
+        "quote" => "BTC",
+    },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00Z",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### symbol: [`CryptocurrencyPair`](./lib/snaptrade/models/cryptocurrency_pair.rb)<a id="symbol-cryptocurrencypairlibsnaptrademodelscryptocurrency_pairrb"></a>
+##### side: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="side-actionstrictlibsnaptrademodelsaction_strictrb"></a>
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`.
+
+##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+The type of order to place.
+
+##### time_in_force: [`CryptoSpotOrderRequestBodyTimeInForce`](./lib/snaptrade/models/crypto_spot_order_request_body_time_in_force.rb)<a id="time_in_force-cryptospotorderrequestbodytimeinforcelibsnaptrademodelscrypto_spot_order_request_body_time_in_forcerb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. - `GTC` - Good Til
+Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
+Kill. The order must be executed in its entirety immediately or be canceled
+completely. - `IOC` - Immediate Or Cancel. The order must be executed
+immediately. Any portion of the order that cannot be filled immediately will be
+canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
+
+##### amount: [`Float`](./lib/snaptrade/models/float.rb)<a id="amount-floatlibsnaptrademodelsfloatrb"></a>
+The amount of the base currency to buy or sell.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="limit_price-floatlibsnaptrademodelsfloatrb"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
+TAKE_PROFIT_LIMIT.
+
+##### stop_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="stop_price-floatlibsnaptrademodelsfloatrb"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
+TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+Required for order type LIMIT. If true orders that would be filled immediately
+are rejected to avoid incurring TAKER fees.
+
+##### expiration_date: `Time`<a id="expiration_date-time"></a>
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptoSpotOrderPreview](./lib/snaptrade/models/crypto_spot_order_preview.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/previewOrder` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.crypto_spot_trading.crypto_spot_quote`<a id="snaptradecrypto_spot_tradingcrypto_spot_quote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_spot_trading.crypto_spot_quote(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  base: "BTC",
+  quote: "BTC",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### base: `String`<a id="base-string"></a>
+##### quote: `String`<a id="quote-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptoSpotQuote](./lib/snaptrade/models/crypto_spot_quote.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.crypto_spot_trading.crypto_spot_symbols`<a id="snaptradecrypto_spot_tradingcrypto_spot_symbols"></a>
+
+Searches cryptocurrency spot symbols accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_spot_trading.crypto_spot_symbols(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  base: "BTC",
+  quote: "BTC",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### base: `String`<a id="base-string"></a>
+##### quote: `String`<a id="quote-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingCryptoSpotSymbols200Response](./lib/snaptrade/models/trading_crypto_spot_symbols200_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto/spot/symbols` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
