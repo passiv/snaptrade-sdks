@@ -30,6 +30,8 @@ tags:
     description: Retrieve information on account transactions, performance, dividends, contributions, etc.
   - name: Trading
     description: Manage orders on user accounts.
+  - name: Crypto Spot Trading
+    description: Advanced cryptocurrencies spot trading API.
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported brokerages, exchanges, currencies, etc.
   - name: Webhooks
@@ -1846,6 +1848,238 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
+
+  /accounts/{accountId}/trading/crypto/spot/placeOrder:
+    post:
+      tags:
+        - Crypto Spot Trading
+      summary: Place a spot order on a crypto exchange
+      description: |
+        Places a spot cryptocurrency order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
+      operationId: Trading_cryptoSpotPlaceOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CryptoSpotOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/crypto/spot/cancelOrder:
+    post:
+      tags:
+        - Crypto Spot Trading
+      summary: Cancel a crypto spot order.
+      description: |
+        Cancels a cryptocurrency spot order in the specified account.
+      operationId: Trading_cryptoSpotCancelOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CryptoSpotCancelOrder"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/crypto/spot/previewOrder:
+    post:
+      tags:
+        - Crypto Spot Trading
+      summary: Place a spot order on a crypto exchange
+      description: |
+        Previews a cryptocurrency spot order using the specified account.
+      operationId: Trading_cryptoSpotPreviewOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CryptoSpotOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CryptoSpotOrderPreview"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/crypto/spot/symbols:
+    get:
+      tags:
+        - Crypto Spot Trading
+      summary: Search crypto spot symbols
+      description: |
+        Searches cryptocurrency spot symbols accessible to the specified account.
+      operationId: Trading_cryptoSpotSymbols
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: false
+          name: base
+          schema:
+            $ref: "#/components/schemas/CryptocurrencySymbol"
+        - in: query
+          required: false
+          name: quote
+          schema:
+            $ref: "#/components/schemas/CryptocurrencySymbol"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["items"]
+                description: The symbols
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CryptocurrencyPair"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/crypto/spot/quote:
+    get:
+      tags:
+        - Crypto Spot Trading
+      summary: Get a quote for a cyrptocurrency market
+      description: |
+        Gets a quote for the specified account.
+      operationId: Trading_cryptoSpotQuote
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: true
+          name: base
+          schema:
+            $ref: "#/components/schemas/CryptocurrencySymbol"
+        - in: query
+          required: true
+          name: quote
+          schema:
+            $ref: "#/components/schemas/CryptocurrencySymbol"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CryptoSpotQuote"
+
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+
   /activities:
     get:
       deprecated: true
@@ -2224,6 +2458,78 @@ components:
                 $ref: "#/components/schemas/TimeInForceStrict"
               price:
                 $ref: "#/components/schemas/Price"
+
+    CryptoSpotOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - "symbol"
+              - "side"
+              - "type"
+              - "time_in_force"
+              - "amount"
+            properties:
+              symbol:
+                $ref: "#/components/schemas/CryptocurrencyPair"
+              side:
+                $ref: "#/components/schemas/ActionStrict"
+              type:
+                type: string
+                enum:
+                  - MARKET
+                  - LIMIT
+                  - STOP_LOSS_MARKET
+                  - STOP_LOSS_LIMIT
+                  - TAKE_PROFIT_MARKET
+                  - TAKE_PROFIT_LIMIT
+                description: The type of order to place.
+              time_in_force:
+                description: >
+                  The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+                    - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+                    - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+                    - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+                    - `GTD` - Good Til Date. The order is valid until the specified date.
+                type: string
+                enum:
+                  - GTC
+                  - FOK
+                  - IOC
+                  - GTD
+              amount:
+                description: The amount of the base currency to buy or sell.
+                allOf:
+                  - $ref: "#/components/schemas/JsonDecimal"
+              limit_price:
+                description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+                allOf:
+                  - $ref: "#/components/schemas/JsonDecimal"
+              stop_price:
+                description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+                allOf:
+                  - $ref: "#/components/schemas/JsonDecimal"
+              post_only:
+                type: boolean
+                example: false
+                description: Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+              expiration_date:
+                type: string
+                format: date-time
+                example: "2024-01-01T00:00:00Z"
+                description: The expiration date of the order. Required if the time_in_force is GTD.
+    CryptoSpotCancelOrder:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["brokerage_order_id"]
+            properties:
+              brokerage_order_id:
+                $ref: "#/components/schemas/BrokerageOrderID"
 
   schemas:
     400FailedRequestResponse:
@@ -4132,6 +4438,59 @@ components:
         limit_price:
           type: string
           example: "49.95"
+
+    CryptocurrencySymbol:
+      description: Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
+      type: string
+      example: BTC
+    CryptocurrencyPair:
+      description: A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+      type: object
+      required: ["base", "quote"]
+      properties:
+        base:
+          description: The base currency (e.g., "BTC" in BTC/USD). Can be a fiat or crypto code.
+          allOf:
+            - $ref: "#/components/schemas/CryptocurrencySymbol"
+        quote:
+          description: The quote currency (e.g., "USD" in BTC/USD). Can be a fiat or crypto code.
+          allOf:
+            - $ref: "#/components/schemas/CryptocurrencySymbol"
+    CryptoSpotQuote:
+      type: object
+      required: ["bid", "ask"]
+      properties:
+        bid:
+          description: The highest price a buyer is willing to pay.
+          allOf:
+            - $ref: "#/components/schemas/JsonDecimal"
+        ask:
+          description: The lowest price a seller is willing to accept.
+          allOf:
+            - $ref: "#/components/schemas/JsonDecimal"
+        mid:
+          description: The market mid price.
+          allOf:
+            - $ref: "#/components/schemas/JsonDecimal"
+        timestamp:
+          description: The timestamp of the quote.
+          type: string
+          format: date-time
+          example: 2024-01-24T15:00:00Z
+    CryptoSpotOrderPreview:
+      description: Preview of a cryptocurrency spot order.
+      type: object
+      properties:
+        estimated_fee:
+          type: object
+          required: ["currency", "amount"]
+          description: The estimated order fee.
+          properties:
+            currency:
+              $ref: "#/components/schemas/CryptocurrencySymbol"
+            amount:
+              $ref: "#/components/schemas/JsonDecimal"
+
     PaginationDetails:
       description: Details about the pagination of the results.
       type: object
@@ -4555,6 +4914,11 @@ components:
       description: Time
       type: string
       example: 2022-01-21T15:11:19.217000-05:00
+    JsonDecimal:
+      description: A decimal number represented as a string to avoid precision loss.
+      type: string
+      format: decimal
+      example: "123.45"
     BrokerageType:
       description: Type of brokerage. Currently supports traditional brokerages and crypto exchanges.
       type: object
