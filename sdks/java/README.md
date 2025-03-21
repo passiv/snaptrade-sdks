@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.82-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.82)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.83-blue)](https://central.sonatype.com/artifact/com.konfigthis/snaptrade-java-sdk/5.0.83)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -114,7 +114,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.konfigthis</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.82</version>
+  <version>5.0.83</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -130,7 +130,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.konfigthis:snaptrade-java-sdk:5.0.82"
+   implementation "com.konfigthis:snaptrade-java-sdk:5.0.83"
 }
 ```
 
@@ -167,7 +167,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.82.jar`
+* `target/snaptrade-java-sdk-5.0.83.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
