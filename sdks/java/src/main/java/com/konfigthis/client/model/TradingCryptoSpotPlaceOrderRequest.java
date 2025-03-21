@@ -328,7 +328,7 @@ public class TradingCryptoSpotPlaceOrderRequest {
    * @return amount
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The amount of the base currency to buy or sell.")
+  @ApiModelProperty(example = "123.45", required = true, value = "The amount of the base currency to buy or sell.")
 
   public BigDecimal getAmount() {
     return amount;
@@ -357,7 +357,7 @@ public class TradingCryptoSpotPlaceOrderRequest {
    * @return limitPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.")
+  @ApiModelProperty(example = "123.45", value = "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.")
 
   public BigDecimal getLimitPrice() {
     return limitPrice;
@@ -386,7 +386,7 @@ public class TradingCryptoSpotPlaceOrderRequest {
    * @return stopPrice
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.")
+  @ApiModelProperty(example = "123.45", value = "The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.")
 
   public BigDecimal getStopPrice() {
     return stopPrice;
@@ -612,15 +612,14 @@ public class TradingCryptoSpotPlaceOrderRequest {
       if (!jsonObj.get("time_in_force").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
       }
-      // validate the required field `amount`
-      BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("amount"));
-      // validate the optional field `limit_price`
-      if (jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("limit_price"));
+      if (!jsonObj.get("amount").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));
       }
-      // validate the optional field `stop_price`
-      if (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("stop_price"));
+      if ((jsonObj.get("limit_price") != null && !jsonObj.get("limit_price").isJsonNull()) && !jsonObj.get("limit_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `limit_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("limit_price").toString()));
+      }
+      if ((jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) && !jsonObj.get("stop_price").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `stop_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_price").toString()));
       }
   }
 

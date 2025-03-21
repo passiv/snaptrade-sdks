@@ -1132,17 +1132,17 @@ completely. - `IOC` - Immediate Or Cancel. The order must be executed
 immediately. Any portion of the order that cannot be filled immediately will be
 canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
 
-##### amount: [`Float`](./lib/snaptrade/models/float.rb)<a id="amount-floatlibsnaptrademodelsfloatrb"></a>
+##### amount: `Float`<a id="amount-float"></a>
 The amount of the base currency to buy or sell.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### limit_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="limit_price-floatlibsnaptrademodelsfloatrb"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
 The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
 TAKE_PROFIT_LIMIT.
 
-##### stop_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="stop_price-floatlibsnaptrademodelsfloatrb"></a>
+##### stop_price: `Float`<a id="stop_price-float"></a>
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
 
@@ -1213,17 +1213,17 @@ completely. - `IOC` - Immediate Or Cancel. The order must be executed
 immediately. Any portion of the order that cannot be filled immediately will be
 canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
 
-##### amount: [`Float`](./lib/snaptrade/models/float.rb)<a id="amount-floatlibsnaptrademodelsfloatrb"></a>
+##### amount: `Float`<a id="amount-float"></a>
 The amount of the base currency to buy or sell.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
-##### limit_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="limit_price-floatlibsnaptrademodelsfloatrb"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
 The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or
 TAKE_PROFIT_LIMIT.
 
-##### stop_price: [`Float`](./lib/snaptrade/models/float.rb)<a id="stop_price-floatlibsnaptrademodelsfloatrb"></a>
+##### stop_price: `Float`<a id="stop_price-float"></a>
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
 

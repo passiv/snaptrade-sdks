@@ -101,11 +101,11 @@ public class CryptoSpotOrderPreviewEstimatedFee {
   }
 
    /**
-   * A decimal number represented as a string to avoid precision loss.
+   * Get amount
    * @return amount
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "123.45", required = true, value = "A decimal number represented as a string to avoid precision loss.")
+  @ApiModelProperty(example = "123.45", required = true, value = "")
 
   public BigDecimal getAmount() {
     return amount;

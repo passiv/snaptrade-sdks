@@ -16,7 +16,6 @@ module SnapTrade
     # Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
     attr_accessor :currency
 
-    # A decimal number represented as a string to avoid precision loss.
     attr_accessor :amount
 
     # Attribute mapping from ruby-style variable name to JSON key.

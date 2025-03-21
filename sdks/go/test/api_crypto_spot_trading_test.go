@@ -51,19 +51,16 @@ func Test_snaptrade_CryptoSpotTradingApiService(t *testing.T) {
     t.Run("Test CryptoSpotTradingApiService CryptoSpotPlaceOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         symbol := *snaptrade.NewCryptocurrencyPair()
-        amount := *snaptrade.Newfloat64()
-        limitPrice := *snaptrade.Newfloat64()
-        stopPrice := *snaptrade.Newfloat64()
         
         tradingCryptoSpotPlaceOrderRequest := *snaptrade.NewTradingCryptoSpotPlaceOrderRequest(
             symbol,
             null,
             "null",
             "null",
-            amount,
+            "123.45",
         )
-        tradingCryptoSpotPlaceOrderRequest.SetLimitPrice(limitPrice)
-        tradingCryptoSpotPlaceOrderRequest.SetStopPrice(stopPrice)
+        tradingCryptoSpotPlaceOrderRequest.SetLimitPrice("123.45")
+        tradingCryptoSpotPlaceOrderRequest.SetStopPrice("123.45")
         tradingCryptoSpotPlaceOrderRequest.SetPostOnly(false)
         tradingCryptoSpotPlaceOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
         
@@ -85,19 +82,16 @@ func Test_snaptrade_CryptoSpotTradingApiService(t *testing.T) {
     t.Run("Test CryptoSpotTradingApiService CryptoSpotPreviewOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         symbol := *snaptrade.NewCryptocurrencyPair()
-        amount := *snaptrade.Newfloat64()
-        limitPrice := *snaptrade.Newfloat64()
-        stopPrice := *snaptrade.Newfloat64()
         
         tradingCryptoSpotPlaceOrderRequest := *snaptrade.NewTradingCryptoSpotPlaceOrderRequest(
             symbol,
             null,
             "null",
             "null",
-            amount,
+            "123.45",
         )
-        tradingCryptoSpotPlaceOrderRequest.SetLimitPrice(limitPrice)
-        tradingCryptoSpotPlaceOrderRequest.SetStopPrice(stopPrice)
+        tradingCryptoSpotPlaceOrderRequest.SetLimitPrice("123.45")
+        tradingCryptoSpotPlaceOrderRequest.SetStopPrice("123.45")
         tradingCryptoSpotPlaceOrderRequest.SetPostOnly(false)
         tradingCryptoSpotPlaceOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
         

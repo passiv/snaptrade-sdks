@@ -19,7 +19,6 @@ import (
 type CryptoSpotOrderPreviewEstimatedFee struct {
 	// Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
 	Currency string `json:"currency"`
-	// A decimal number represented as a string to avoid precision loss.
 	Amount float64 `json:"amount"`
 	AdditionalProperties map[string]interface{}
 }

@@ -6721,23 +6721,32 @@ components:
     CryptoSpotQuote:
       additionalProperties: true
       example:
-        ask: ""
-        mid: ""
-        bid: ""
+        ask: "123.45"
+        mid: "123.45"
+        bid: "123.45"
         timestamp: 2024-01-24T15:00:00Z
       properties:
         bid:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The highest price a buyer is willing to pay.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-bid
         ask:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The lowest price a seller is willing to accept.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-ask
         mid:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The market mid price.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-mid
         timestamp:
           description: The timestamp of the quote.
           example: 2024-01-24T15:00:00Z
@@ -7521,13 +7530,6 @@ components:
       type: string
       x-konfig-original-example: 2022-01-21T20:11:19.217Z
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Time
-    JsonDecimal:
-      description: A decimal number represented as a string to avoid precision loss.
-      example: "123.45"
-      format: decimal
-      type: string
-      x-konfig-original-example: "123.45"
-      x-konfig-generated-schema: konfig-generated-schema-components-schemas-JsonDecimal
     BrokerageType:
       additionalProperties: true
       description: Type of brokerage. Currently supports traditional brokerages and
@@ -7626,6 +7628,18 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-amount:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-limit_price
+    : example: "123.45"
+      type: string
+      x-do-not-generate: true
+    ? konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
+    : example: "123.45"
       type: string
       x-do-not-generate: true
     ? konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-post_only
@@ -8559,8 +8573,24 @@ components:
       example: BTC
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-bid:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-ask:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-mid:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-timestamp:
       example: 2024-01-24T15:00:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoSpotOrderPreview-properties-estimated_fee-properties-amount:
+      example: "123.45"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PaginationDetails-properties-offset:
@@ -8757,10 +8787,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Time:
       example: 2022-01-21T20:11:19.217Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-JsonDecimal:
-      example: "123.45"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageType-properties-name:
@@ -9894,19 +9920,28 @@ components:
           - GTD
           type: string
         amount:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-amount
         limit_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-limit_price
         stop_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
           description: Required for order type LIMIT. If true orders that would be
             filled immediately are rejected to avoid incurring TAKER fees.
@@ -9996,19 +10031,28 @@ components:
           - GTD
           type: string
         amount:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-amount
         limit_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-limit_price
         stop_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
           description: Required for order type LIMIT. If true orders that would be
             filled immediately are rejected to avoid incurring TAKER fees.
@@ -10355,19 +10399,28 @@ components:
           - GTD
           type: string
         amount:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-amount
         limit_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-limit_price
         stop_price:
-          allOf:
-          - $ref: '#/components/schemas/JsonDecimal'
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
           description: Required for order type LIMIT. If true orders that would be
             filled immediately are rejected to avoid incurring TAKER fees.
@@ -10761,13 +10814,11 @@ components:
           x-konfig-original-example: BTC
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencySymbol
         amount:
-          description: A decimal number represented as a string to avoid precision
-            loss.
           example: "123.45"
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-JsonDecimal
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoSpotOrderPreview-properties-estimated_fee-properties-amount
       required:
       - amount
       - currency

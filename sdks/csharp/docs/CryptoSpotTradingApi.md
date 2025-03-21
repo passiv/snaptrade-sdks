@@ -146,9 +146,9 @@ namespace Example
             var side = ActionStrict.BUY;
             var type = TradingCryptoSpotPlaceOrderRequest.TypeEnum.MARKET; // The type of order to place.
             var timeInForce = TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-            var amount = "amount_example"; // The amount of the base currency to buy or sell.
-            var limitPrice = "limitPrice_example"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-            var stopPrice = "stopPrice_example"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+            var amount = "123.45"; // The amount of the base currency to buy or sell.
+            var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+            var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
             var postOnly = false; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
@@ -264,9 +264,9 @@ namespace Example
             var side = ActionStrict.BUY;
             var type = TradingCryptoSpotPlaceOrderRequest.TypeEnum.MARKET; // The type of order to place.
             var timeInForce = TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-            var amount = "amount_example"; // The amount of the base currency to buy or sell.
-            var limitPrice = "limitPrice_example"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-            var stopPrice = "stopPrice_example"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+            var amount = "123.45"; // The amount of the base currency to buy or sell.
+            var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+            var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
             var postOnly = false; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             

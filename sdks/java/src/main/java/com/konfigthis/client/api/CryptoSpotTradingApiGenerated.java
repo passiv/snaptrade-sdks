@@ -563,6 +563,8 @@ public class CryptoSpotTradingApiGenerated {
             
 
         if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
+            
+
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
@@ -843,6 +845,8 @@ public class CryptoSpotTradingApiGenerated {
             
 
         if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
+            
+
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 

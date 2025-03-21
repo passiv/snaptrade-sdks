@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes. | 
-**Amount** | **float64** | A decimal number represented as a string to avoid precision loss. | 
+**Amount** | **float64** |  | 
 
 ## Methods
 

@@ -107,19 +107,16 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     symbol := *snaptrade.NewCryptocurrencyPair()
-    amount := *snaptrade.Newfloat64()
-    limitPrice := *snaptrade.Newfloat64()
-    stopPrice := *snaptrade.Newfloat64()
     
     tradingCryptoSpotPlaceOrderRequest := *snaptrade.NewTradingCryptoSpotPlaceOrderRequest(
         symbol,
         null,
         "null",
         "null",
-        amount,
+        "123.45",
     )
-    tradingCryptoSpotPlaceOrderRequest.SetLimitPrice(limitPrice)
-    tradingCryptoSpotPlaceOrderRequest.SetStopPrice(stopPrice)
+    tradingCryptoSpotPlaceOrderRequest.SetLimitPrice("123.45")
+    tradingCryptoSpotPlaceOrderRequest.SetStopPrice("123.45")
     tradingCryptoSpotPlaceOrderRequest.SetPostOnly(false)
     tradingCryptoSpotPlaceOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
     
@@ -190,19 +187,16 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     symbol := *snaptrade.NewCryptocurrencyPair()
-    amount := *snaptrade.Newfloat64()
-    limitPrice := *snaptrade.Newfloat64()
-    stopPrice := *snaptrade.Newfloat64()
     
     tradingCryptoSpotPlaceOrderRequest := *snaptrade.NewTradingCryptoSpotPlaceOrderRequest(
         symbol,
         null,
         "null",
         "null",
-        amount,
+        "123.45",
     )
-    tradingCryptoSpotPlaceOrderRequest.SetLimitPrice(limitPrice)
-    tradingCryptoSpotPlaceOrderRequest.SetStopPrice(stopPrice)
+    tradingCryptoSpotPlaceOrderRequest.SetLimitPrice("123.45")
+    tradingCryptoSpotPlaceOrderRequest.SetStopPrice("123.45")
     tradingCryptoSpotPlaceOrderRequest.SetPostOnly(false)
     tradingCryptoSpotPlaceOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
     

@@ -1218,7 +1218,7 @@ The type of order to place.
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
 
-##### amount: [`string`](./models/model-string.ts)<a id="amount-stringmodelsmodel-stringts"></a>
+##### amount: `string`<a id="amount-string"></a>
 
 The amount of the base currency to buy or sell.
 
@@ -1228,11 +1228,11 @@ The amount of the base currency to buy or sell.
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-##### limit_price: [`string`](./models/model-string.ts)<a id="limit_price-stringmodelsmodel-stringts"></a>
+##### limit_price: `string`<a id="limit_price-string"></a>
 
 The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
 
-##### stop_price: [`string`](./models/model-string.ts)<a id="stop_price-stringmodelsmodel-stringts"></a>
+##### stop_price: `string`<a id="stop_price-string"></a>
 
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
 
@@ -1301,7 +1301,7 @@ The type of order to place.
 
 The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
 
-##### amount: [`string`](./models/model-string.ts)<a id="amount-stringmodelsmodel-stringts"></a>
+##### amount: `string`<a id="amount-string"></a>
 
 The amount of the base currency to buy or sell.
 
@@ -1311,11 +1311,11 @@ The amount of the base currency to buy or sell.
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-##### limit_price: [`string`](./models/model-string.ts)<a id="limit_price-stringmodelsmodel-stringts"></a>
+##### limit_price: `string`<a id="limit_price-string"></a>
 
 The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
 
-##### stop_price: [`string`](./models/model-string.ts)<a id="stop_price-stringmodelsmodel-stringts"></a>
+##### stop_price: `string`<a id="stop_price-string"></a>
 
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
 

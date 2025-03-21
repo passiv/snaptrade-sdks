@@ -65,7 +65,6 @@ from snaptrade_client.model.holdings_status import HoldingsStatus
 from snaptrade_client.model.holdings_sync_status_date import HoldingsSyncStatusDate
 from snaptrade_client.model.holdings_sync_status_date_nullable import HoldingsSyncStatusDateNullable
 from snaptrade_client.model.id import Id
-from snaptrade_client.model.json_decimal import JsonDecimal
 from snaptrade_client.model.login_redirect_uri import LoginRedirectURI
 from snaptrade_client.model.manual_trade import ManualTrade
 from snaptrade_client.model.manual_trade_and_impact import ManualTradeAndImpact

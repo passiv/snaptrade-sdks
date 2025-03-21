@@ -20,7 +20,6 @@ class RequiredCryptoSpotOrderPreviewEstimatedFee(TypedDict):
     # Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
     currency: str
 
-    # A decimal number represented as a string to avoid precision loss.
     amount: str
 
 class OptionalCryptoSpotOrderPreviewEstimatedFee(TypedDict, total=False):

@@ -204,117 +204,9 @@ class SchemaForRequestBodyApplicationJson(
                 @schemas.classproperty
                 def GTD(cls):
                     return cls("GTD")
-            
-            
-            class amount(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    all_of_0 = schemas.StrSchema
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            cls.all_of_0,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'amount':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
-            
-            
-            class limit_price(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    all_of_0 = schemas.StrSchema
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            cls.all_of_0,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'limit_price':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
-            
-            
-            class stop_price(
-                schemas.ComposedSchema,
-            ):
-            
-            
-                class MetaOapg:
-                    all_of_0 = schemas.StrSchema
-                    
-                    @classmethod
-                    @functools.lru_cache()
-                    def all_of(cls):
-                        # we need this here to make our import statements work
-                        # we must store _composed_schemas in here so the code is only run
-                        # when we invoke this method. If we kept this at the class
-                        # level we would get an error because the class level
-                        # code would be run when this module is imported, and these composed
-                        # classes don't exist yet because their module has not finished
-                        # loading
-                        return [
-                            cls.all_of_0,
-                        ]
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-                ) -> 'stop_price':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                        **kwargs,
-                    )
+            amount = schemas.StrSchema
+            limit_price = schemas.StrSchema
+            stop_price = schemas.StrSchema
             post_only = schemas.BoolSchema
             expiration_date = schemas.DateTimeSchema
             __annotations__ = {
@@ -408,12 +300,12 @@ class SchemaForRequestBodyApplicationJson(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
         symbol: 'CryptocurrencyPair',
-        amount: typing.Union[MetaOapg.properties.amount, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+        amount: typing.Union[MetaOapg.properties.amount, str, ],
         side: 'ActionStrict',
         time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
         type: typing.Union[MetaOapg.properties.type, str, ],
-        limit_price: typing.Union[MetaOapg.properties.limit_price, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
-        stop_price: typing.Union[MetaOapg.properties.stop_price, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        limit_price: typing.Union[MetaOapg.properties.limit_price, str, schemas.Unset] = schemas.unset,
+        stop_price: typing.Union[MetaOapg.properties.stop_price, str, schemas.Unset] = schemas.unset,
         post_only: typing.Union[MetaOapg.properties.post_only, bool, schemas.Unset] = schemas.unset,
         expiration_date: typing.Union[MetaOapg.properties.expiration_date, str, datetime, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,

@@ -84,7 +84,7 @@ public class CryptoSpotQuote {
    * @return bid
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The highest price a buyer is willing to pay.")
+  @ApiModelProperty(example = "123.45", required = true, value = "The highest price a buyer is willing to pay.")
 
   public BigDecimal getBid() {
     return bid;
@@ -113,7 +113,7 @@ public class CryptoSpotQuote {
    * @return ask
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The lowest price a seller is willing to accept.")
+  @ApiModelProperty(example = "123.45", required = true, value = "The lowest price a seller is willing to accept.")
 
   public BigDecimal getAsk() {
     return ask;
@@ -142,7 +142,7 @@ public class CryptoSpotQuote {
    * @return mid
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "The market mid price.")
+  @ApiModelProperty(example = "123.45", value = "The market mid price.")
 
   public BigDecimal getMid() {
     return mid;
@@ -313,13 +313,14 @@ public class CryptoSpotQuote {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
       }
-      // validate the required field `bid`
-      BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("bid"));
-      // validate the required field `ask`
-      BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("ask"));
-      // validate the optional field `mid`
-      if (jsonObj.get("mid") != null && !jsonObj.get("mid").isJsonNull()) {
-        BigDecimal.validateJsonObject(jsonObj.getAsJsonObject("mid"));
+      if (!jsonObj.get("bid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `bid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("bid").toString()));
+      }
+      if (!jsonObj.get("ask").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `ask` to be a primitive type in the JSON string but got `%s`", jsonObj.get("ask").toString()));
+      }
+      if ((jsonObj.get("mid") != null && !jsonObj.get("mid").isJsonNull()) && !jsonObj.get("mid").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `mid` to be a primitive type in the JSON string but got `%s`", jsonObj.get("mid").toString()));
       }
   }
 

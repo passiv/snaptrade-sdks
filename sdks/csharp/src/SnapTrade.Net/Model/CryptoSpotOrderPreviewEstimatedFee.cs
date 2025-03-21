@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="CryptoSpotOrderPreviewEstimatedFee" /> class.
         /// </summary>
         /// <param name="currency">Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes. (required).</param>
-        /// <param name="amount">A decimal number represented as a string to avoid precision loss. (required).</param>
+        /// <param name="amount">amount (required).</param>
         public CryptoSpotOrderPreviewEstimatedFee(string currency = default(string), decimal amount = default(decimal)) : base()
         {
             // to ensure "currency" is required (not null)
@@ -65,9 +65,8 @@ namespace SnapTrade.Net.Model
         public string Currency { get; set; }
 
         /// <summary>
-        /// A decimal number represented as a string to avoid precision loss.
+        /// Gets or Sets Amount
         /// </summary>
-        /// <value>A decimal number represented as a string to avoid precision loss.</value>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
         public decimal Amount { get; set; }
 

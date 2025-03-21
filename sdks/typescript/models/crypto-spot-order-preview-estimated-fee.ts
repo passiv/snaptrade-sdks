@@ -26,7 +26,7 @@ export interface CryptoSpotOrderPreviewEstimatedFee {
      */
     'currency': string;
     /**
-     * A decimal number represented as a string to avoid precision loss.
+     * 
      * @type {string}
      * @memberof CryptoSpotOrderPreviewEstimatedFee
      */
