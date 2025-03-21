@@ -52,3 +52,8 @@ class PathValues(str, enum.Enum):
     SECURITY_TYPES = "/securityTypes"
     SYMBOLS = "/symbols"
     SYMBOLS_QUERY = "/symbols/{query}"
+    ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER = "/accounts/{accountId}/trading/crypto/spot/placeOrder"
+    ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER = "/accounts/{accountId}/trading/crypto/spot/cancelOrder"
+    ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER = "/accounts/{accountId}/trading/crypto/spot/previewOrder"
+    ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS = "/accounts/{accountId}/trading/crypto/spot/symbols"
+    ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE = "/accounts/{accountId}/trading/crypto/spot/quote"

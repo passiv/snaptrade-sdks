@@ -44,6 +44,11 @@ from snaptrade_client.model.brokerage_type import BrokerageType
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID
+from snaptrade_client.model.crypto_spot_order_preview import CryptoSpotOrderPreview
+from snaptrade_client.model.crypto_spot_order_preview_estimated_fee import CryptoSpotOrderPreviewEstimatedFee
+from snaptrade_client.model.crypto_spot_quote import CryptoSpotQuote
+from snaptrade_client.model.cryptocurrency_pair import CryptocurrencyPair
+from snaptrade_client.model.cryptocurrency_symbol import CryptocurrencySymbol
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.currency_id import CurrencyID
 from snaptrade_client.model.currency_nullable import CurrencyNullable
