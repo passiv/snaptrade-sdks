@@ -1882,7 +1882,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccountOrderRecord"
+                $ref: "#/components/schemas/OrderUpdatedResponse"
         "400":
           description: Invalid request
           content:
@@ -1923,7 +1923,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccountOrderRecord"
+                $ref: "#/components/schemas/OrderUpdatedResponse"
         "400":
           description: Invalid request
           content:
@@ -1936,7 +1936,7 @@ paths:
     post:
       tags:
         - Crypto Spot Trading
-      summary: Place a spot order on a crypto exchange
+      summary: Preview a crypto spot order
       description: |
         Previews a cryptocurrency spot order using the specified account.
       operationId: Trading_cryptoSpotPreviewOrder
@@ -2001,12 +2001,12 @@ paths:
           required: false
           name: base
           schema:
-            $ref: "#/components/schemas/CryptocurrencySymbol"
+            $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
         - in: query
           required: false
           name: quote
           schema:
-            $ref: "#/components/schemas/CryptocurrencySymbol"
+            $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
       responses:
         "200":
           description: OK
@@ -2033,7 +2033,7 @@ paths:
     get:
       tags:
         - Crypto Spot Trading
-      summary: Get a quote for a cyrptocurrency market
+      summary: Get a cryptocurrency spot market quote
       description: |
         Gets a quote for the specified account.
       operationId: Trading_cryptoSpotQuote
@@ -2057,12 +2057,12 @@ paths:
           required: true
           name: base
           schema:
-            $ref: "#/components/schemas/CryptocurrencySymbol"
+            $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
         - in: query
           required: true
           name: quote
           schema:
-            $ref: "#/components/schemas/CryptocurrencySymbol"
+            $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
       responses:
         "200":
           description: OK
@@ -2517,7 +2517,9 @@ components:
               post_only:
                 type: boolean
                 example: false
-                description: Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+                description: >
+                  Valid and required only for order type LIMIT.
+                  If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
               expiration_date:
                 type: string
                 format: date-time
@@ -4446,19 +4448,27 @@ components:
       description: Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
       type: string
       example: BTC
+    CryptocurrencyBaseSymbol:
+      description: >
+        The base currency of a pair (e.g., "BTC" in BTC/USD).
+        Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      type: string
+      example: BTC
+    CryptocurrencyQuoteSymbol:
+      description: >
+        The quote currency of a pair (e.g., "USD" in BTC/USD).
+        Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      type: string
+      example: USD
     CryptocurrencyPair:
       description: A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
       type: object
       required: ["base", "quote"]
       properties:
         base:
-          description: The base currency (e.g., "BTC" in BTC/USD). Can be a fiat or crypto code.
-          allOf:
-            - $ref: "#/components/schemas/CryptocurrencySymbol"
+          $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
         quote:
-          description: The quote currency (e.g., "USD" in BTC/USD). Can be a fiat or crypto code.
-          allOf:
-            - $ref: "#/components/schemas/CryptocurrencySymbol"
+          $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
     CryptoSpotQuote:
       type: object
       required: ["bid", "ask"]
@@ -4498,6 +4508,15 @@ components:
               type: string
               format: decimal
               example: "123.45"
+    OrderUpdatedResponse:
+      type: object
+      required:
+        - brokerage_order_id
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        order:
+          $ref: "#/components/schemas/AccountOrderRecord"
 
     PaginationDetails:
       description: Details about the pagination of the results.
