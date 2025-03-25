@@ -1162,7 +1162,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./models/account-order-record.ts)
+[OrderUpdatedResponse](./models/order-updated-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1189,7 +1189,7 @@ const cryptoSpotPlaceOrderResponse =
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     symbol: {
       base: "BTC",
-      quote: "BTC",
+      quote: "USD",
     },
     side: "BUY",
     type: "MARKET",
@@ -1238,7 +1238,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `boolean`<a id="post_only-boolean"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `string`<a id="expiration_date-string"></a>
 
@@ -1246,7 +1246,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./models/account-order-record.ts)
+[OrderUpdatedResponse](./models/order-updated-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1272,7 +1272,7 @@ const cryptoSpotPreviewOrderResponse =
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     symbol: {
       base: "BTC",
-      quote: "BTC",
+      quote: "USD",
     },
     side: "BUY",
     type: "MARKET",
@@ -1321,7 +1321,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `boolean`<a id="post_only-boolean"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `string`<a id="expiration_date-string"></a>
 
@@ -1354,7 +1354,7 @@ const cryptoSpotQuoteResponse =
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base: "BTC",
-    quote: "BTC",
+    quote: "USD",
   });
 ```
 
@@ -1397,7 +1397,7 @@ const cryptoSpotSymbolsResponse =
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
     accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base: "BTC",
-    quote: "BTC",
+    quote: "USD",
   });
 ```
 

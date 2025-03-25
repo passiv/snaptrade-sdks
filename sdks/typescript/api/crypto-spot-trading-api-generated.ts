@@ -19,8 +19,6 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AccountOrderRecord } from '../models';
-// @ts-ignore
 import { ActionStrict } from '../models';
 // @ts-ignore
 import { CryptoSpotOrderPreview } from '../models';
@@ -30,6 +28,8 @@ import { CryptoSpotQuote } from '../models';
 import { CryptocurrencyPair } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
+// @ts-ignore
+import { OrderUpdatedResponse } from '../models';
 // @ts-ignore
 import { TradingCryptoSpotCancelOrderRequest } from '../models';
 // @ts-ignore
@@ -187,7 +187,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * Previews a cryptocurrency spot order using the specified account. 
-         * @summary Place a spot order on a crypto exchange
+         * @summary Preview a crypto spot order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -257,7 +257,7 @@ export const CryptoSpotTradingApiAxiosParamCreator = function (configuration?: C
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get a quote for a cyrptocurrency market
+         * @summary Get a cryptocurrency spot market quote
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -420,7 +420,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
             const tradingCryptoSpotCancelOrderRequest: TradingCryptoSpotCancelOrderRequest = {
                 brokerage_order_id: requestParameters.brokerage_order_id
             };
@@ -434,7 +434,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cryptoSpotPlaceOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPlaceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+        async cryptoSpotPlaceOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPlaceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
             const tradingCryptoSpotPlaceOrderRequest: TradingCryptoSpotPlaceOrderRequest = {
                 symbol: requestParameters.symbol,
                 side: requestParameters.side,
@@ -451,7 +451,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Previews a cryptocurrency spot order using the specified account. 
-         * @summary Place a spot order on a crypto exchange
+         * @summary Preview a crypto spot order
          * @param {CryptoSpotTradingApiCryptoSpotPreviewOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -473,7 +473,7 @@ export const CryptoSpotTradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get a quote for a cyrptocurrency market
+         * @summary Get a cryptocurrency spot market quote
          * @param {CryptoSpotTradingApiCryptoSpotQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -510,7 +510,7 @@ export const CryptoSpotTradingApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+        cryptoSpotCancelOrder(requestParameters: CryptoSpotTradingApiCryptoSpotCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
             return localVarFp.cryptoSpotCancelOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -520,12 +520,12 @@ export const CryptoSpotTradingApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cryptoSpotPlaceOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPlaceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+        cryptoSpotPlaceOrder(requestParameters: CryptoSpotTradingApiCryptoSpotPlaceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
             return localVarFp.cryptoSpotPlaceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Previews a cryptocurrency spot order using the specified account. 
-         * @summary Place a spot order on a crypto exchange
+         * @summary Preview a crypto spot order
          * @param {CryptoSpotTradingApiCryptoSpotPreviewOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -535,7 +535,7 @@ export const CryptoSpotTradingApiFactory = function (configuration?: Configurati
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get a quote for a cyrptocurrency market
+         * @summary Get a cryptocurrency spot market quote
          * @param {CryptoSpotTradingApiCryptoSpotQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -767,7 +767,7 @@ export class CryptoSpotTradingApiGenerated extends BaseAPI {
 
     /**
      * Previews a cryptocurrency spot order using the specified account. 
-     * @summary Place a spot order on a crypto exchange
+     * @summary Preview a crypto spot order
      * @param {CryptoSpotTradingApiCryptoSpotPreviewOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -779,7 +779,7 @@ export class CryptoSpotTradingApiGenerated extends BaseAPI {
 
     /**
      * Gets a quote for the specified account. 
-     * @summary Get a quote for a cyrptocurrency market
+     * @summary Get a cryptocurrency spot market quote
      * @param {CryptoSpotTradingApiCryptoSpotQuoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

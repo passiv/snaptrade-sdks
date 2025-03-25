@@ -2411,7 +2411,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
+                $ref: '#/components/schemas/OrderUpdatedResponse'
           description: OK
         "400":
           content:
@@ -2460,7 +2460,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
+                $ref: '#/components/schemas/OrderUpdatedResponse'
           description: OK
         "400":
           content:
@@ -2519,7 +2519,7 @@ paths:
           description: Invalid request
         "500":
           description: Unexpected Error
-      summary: Place a spot order on a crypto exchange
+      summary: Preview a crypto spot order
       tags:
       - Crypto Spot Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2556,14 +2556,14 @@ paths:
         name: base
         required: false
         schema:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
         style: form
       - explode: true
         in: query
         name: quote
         required: false
         schema:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
         style: form
       responses:
         "200":
@@ -2617,14 +2617,14 @@ paths:
         name: base
         required: true
         schema:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
         style: form
       - explode: true
         in: query
         name: quote
         required: true
         schema:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
         style: form
       responses:
         "200":
@@ -2641,7 +2641,7 @@ paths:
           description: Invalid request
         "500":
           description: Unexpected Error
-      summary: Get a quote for a cyrptocurrency market
+      summary: Get a cryptocurrency spot market quote
       tags:
       - Crypto Spot Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -6697,23 +6697,41 @@ components:
       type: string
       x-konfig-original-example: BTC
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencySymbol
+    CryptocurrencyBaseSymbol:
+      description: |
+        The base currency of a pair (e.g., "BTC" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      example: BTC
+      type: string
+      x-konfig-original-example: BTC
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyBaseSymbol
+    CryptocurrencyQuoteSymbol:
+      description: |
+        The quote currency of a pair (e.g., "USD" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      example: USD
+      type: string
+      x-konfig-original-example: USD
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyQuoteSymbol
     CryptocurrencyPair:
       additionalProperties: true
       description: A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
       example:
-        quote: ""
-        base: ""
+        quote: USD
+        base: BTC
       properties:
         base:
-          allOf:
-          - $ref: '#/components/schemas/CryptocurrencySymbol'
-          description: "The base currency (e.g., \"BTC\" in BTC/USD). Can be a fiat\
-            \ or crypto code."
+          description: |
+            The base currency of a pair (e.g., "BTC" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+          example: BTC
+          type: string
+          x-konfig-original-example: BTC
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyBaseSymbol
         quote:
-          allOf:
-          - $ref: '#/components/schemas/CryptocurrencySymbol'
-          description: "The quote currency (e.g., \"USD\" in BTC/USD). Can be a fiat\
-            \ or crypto code."
+          description: |
+            The quote currency of a pair (e.g., "USD" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyQuoteSymbol
       required:
       - base
       - quote
@@ -6768,6 +6786,44 @@ components:
       properties:
         estimated_fee:
           $ref: '#/components/schemas/CryptoSpotOrderPreview_estimated_fee'
+      type: object
+    OrderUpdatedResponse:
+      additionalProperties: true
+      example:
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        order:
+          time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids: null
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
+          time_in_force: time_in_force
+          execution_price: 12.34
+          stop_price: 12.5
+          action: action
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
+          status: null
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        order:
+          $ref: '#/components/schemas/AccountOrderRecord'
+      required:
+      - brokerage_order_id
       type: object
     PaginationDetails:
       additionalProperties: true
@@ -8573,6 +8629,14 @@ components:
       example: BTC
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptocurrencyBaseSymbol:
+      example: BTC
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptocurrencyQuoteSymbol:
+      example: USD
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptoSpotQuote-properties-bid:
       example: "123.45"
       type: string
@@ -9943,8 +10007,8 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
-          description: Required for order type LIMIT. If true orders that would be
-            filled immediately are rejected to avoid incurring TAKER fees.
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
@@ -10054,8 +10118,8 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
-          description: Required for order type LIMIT. If true orders that would be
-            filled immediately are rejected to avoid incurring TAKER fees.
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
@@ -10093,9 +10157,9 @@ components:
         accountId:
           $ref: '#/components/schemas/AccountID'
         base:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
         quote:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
       required:
       - accountId
       - userId
@@ -10118,9 +10182,9 @@ components:
         accountId:
           $ref: '#/components/schemas/AccountID'
         base:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
         quote:
-          $ref: '#/components/schemas/CryptocurrencySymbol'
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
       required:
       - accountId
       - base
@@ -10422,8 +10486,8 @@ components:
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-CryptoSpotOrderRequestBody-content-application-json-schema-properties-stop_price
         post_only:
-          description: Required for order type LIMIT. If true orders that would be
-            filled immediately are rejected to avoid incurring TAKER fees.
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
@@ -10460,10 +10524,10 @@ components:
       description: The symbols
       example:
         items:
-        - quote: ""
-          base: ""
-        - quote: ""
-          base: ""
+        - quote: USD
+          base: BTC
+        - quote: USD
+          base: BTC
       properties:
         items:
           items:

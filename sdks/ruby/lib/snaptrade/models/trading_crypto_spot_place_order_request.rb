@@ -32,7 +32,7 @@ module SnapTrade
     # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     attr_accessor :stop_price
 
-    # Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    # Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     attr_accessor :post_only
 
     # The expiration date of the order. Required if the time_in_force is GTD.

@@ -26,13 +26,13 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptoSpotOrderPreview;
 import com.konfigthis.client.model.CryptoSpotQuote;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
+import com.konfigthis.client.model.OrderUpdatedResponse;
 import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotSymbols200Response;
@@ -163,16 +163,16 @@ public class CryptoSpotTradingApiGenerated {
     }
 
 
-    private ApiResponse<AccountOrderRecord> cryptoSpotCancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest) throws ApiException {
+    private ApiResponse<OrderUpdatedResponse> cryptoSpotCancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest) throws ApiException {
         okhttp3.Call localVarCall = cryptoSpotCancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, null);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotCancelOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotCancelOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = cryptoSpotCancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -215,7 +215,7 @@ public class CryptoSpotTradingApiGenerated {
 
         /**
          * Execute cryptoSpotCancelOrder request
-         * @return AccountOrderRecord
+         * @return OrderUpdatedResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -224,15 +224,15 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public AccountOrderRecord execute() throws ApiException {
+        public OrderUpdatedResponse execute() throws ApiException {
             TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = cryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+            ApiResponse<OrderUpdatedResponse> localVarResp = cryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute cryptoSpotCancelOrder request with HTTP info returned
-         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @return ApiResponse&lt;OrderUpdatedResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -241,7 +241,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
             TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
             return cryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
         }
@@ -258,7 +258,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
             TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest = buildBodyParams();
             return cryptoSpotCancelOrderAsync(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, _callback);
         }
@@ -375,16 +375,16 @@ public class CryptoSpotTradingApiGenerated {
     }
 
 
-    private ApiResponse<AccountOrderRecord> cryptoSpotPlaceOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
+    private ApiResponse<OrderUpdatedResponse> cryptoSpotPlaceOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest) throws ApiException {
         okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, null);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cryptoSpotPlaceOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call cryptoSpotPlaceOrderAsync(String userId, String userSecret, UUID accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = cryptoSpotPlaceOrderValidateBeforeCall(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
-        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -436,7 +436,7 @@ public class CryptoSpotTradingApiGenerated {
         
         /**
          * Set postOnly
-         * @param postOnly Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. (optional)
+         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
          * @return CryptoSpotTradingApi.CryptoSpotPlaceOrderRequestBuilder
          */
         public CryptoSpotTradingApi.CryptoSpotPlaceOrderRequestBuilder postOnly(Boolean postOnly) {
@@ -489,7 +489,7 @@ public class CryptoSpotTradingApiGenerated {
 
         /**
          * Execute cryptoSpotPlaceOrder request
-         * @return AccountOrderRecord
+         * @return OrderUpdatedResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -498,15 +498,15 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public AccountOrderRecord execute() throws ApiException {
+        public OrderUpdatedResponse execute() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
+            ApiResponse<OrderUpdatedResponse> localVarResp = cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute cryptoSpotPlaceOrder request with HTTP info returned
-         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @return ApiResponse&lt;OrderUpdatedResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -515,7 +515,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
             return cryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
         }
@@ -532,7 +532,7 @@ public class CryptoSpotTradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
             TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest = buildBodyParams();
             return cryptoSpotPlaceOrderAsync(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, _callback);
         }
@@ -718,7 +718,7 @@ public class CryptoSpotTradingApiGenerated {
         
         /**
          * Set postOnly
-         * @param postOnly Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. (optional)
+         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
          * @return CryptoSpotTradingApi.CryptoSpotPreviewOrderRequestBuilder
          */
         public CryptoSpotTradingApi.CryptoSpotPreviewOrderRequestBuilder postOnly(Boolean postOnly) {
@@ -821,7 +821,7 @@ public class CryptoSpotTradingApiGenerated {
     }
 
     /**
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      * Previews a cryptocurrency spot order using the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1046,7 +1046,7 @@ public class CryptoSpotTradingApiGenerated {
     }
 
     /**
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      * Gets a quote for the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)

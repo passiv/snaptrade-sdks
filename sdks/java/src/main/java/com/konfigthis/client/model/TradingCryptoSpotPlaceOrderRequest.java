@@ -411,11 +411,11 @@ public class TradingCryptoSpotPlaceOrderRequest {
   }
 
    /**
-   * Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+   * Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
    * @return postOnly
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "false", value = "Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.")
+  @ApiModelProperty(example = "false", value = "Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. ")
 
   public Boolean getPostOnly() {
     return postOnly;

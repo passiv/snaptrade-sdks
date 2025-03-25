@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **Amount** | **float64** | The amount of the base currency to buy or sell. | 
 **LimitPrice** | Pointer to **float64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. | [optional] 
 **StopPrice** | Pointer to **float64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. | [optional] 
-**PostOnly** | Pointer to **bool** | Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. | [optional] 
+**PostOnly** | Pointer to **bool** | Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  | [optional] 
 **ExpirationDate** | Pointer to **time.Time** | The expiration date of the order. Required if the time_in_force is GTD. | [optional] 
 
 ## Methods

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingCryptoSpotQuote(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingCryptoSpotQuote unit test stubs
-        Get a quote for a cyrptocurrency market
+        Get a cryptocurrency spot market quote
     """
 
     def setUp(self):

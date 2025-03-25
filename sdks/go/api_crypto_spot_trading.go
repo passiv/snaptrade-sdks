@@ -33,7 +33,7 @@ type CryptoSpotTradingApiCryptoSpotCancelOrderRequest struct {
 	tradingCryptoSpotCancelOrderRequest TradingCryptoSpotCancelOrderRequest
 }
 
-func (r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
+func (r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
 	return r.ApiService.CryptoSpotCancelOrderExecute(r)
 }
 
@@ -62,13 +62,13 @@ func (a *CryptoSpotTradingApiService) CryptoSpotCancelOrder(userId string, userS
 }
 
 // Execute executes the request
-//  @return AccountOrderRecord
-func (a *CryptoSpotTradingApiService) CryptoSpotCancelOrderExecute(r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) (*AccountOrderRecord, *http.Response, error) {
+//  @return OrderUpdatedResponse
+func (a *CryptoSpotTradingApiService) CryptoSpotCancelOrderExecute(r CryptoSpotTradingApiCryptoSpotCancelOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AccountOrderRecord
+		localVarReturnValue  *OrderUpdatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotCancelOrder")
@@ -211,7 +211,7 @@ type CryptoSpotTradingApiCryptoSpotPlaceOrderRequest struct {
 	tradingCryptoSpotPlaceOrderRequest TradingCryptoSpotPlaceOrderRequest
 }
 
-func (r CryptoSpotTradingApiCryptoSpotPlaceOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
+func (r CryptoSpotTradingApiCryptoSpotPlaceOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
 	return r.ApiService.CryptoSpotPlaceOrderExecute(r)
 }
 
@@ -241,13 +241,13 @@ func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrder(userId string, userSe
 }
 
 // Execute executes the request
-//  @return AccountOrderRecord
-func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrderExecute(r CryptoSpotTradingApiCryptoSpotPlaceOrderRequest) (*AccountOrderRecord, *http.Response, error) {
+//  @return OrderUpdatedResponse
+func (a *CryptoSpotTradingApiService) CryptoSpotPlaceOrderExecute(r CryptoSpotTradingApiCryptoSpotPlaceOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AccountOrderRecord
+		localVarReturnValue  *OrderUpdatedResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CryptoSpotTradingApiService.CryptoSpotPlaceOrder")
@@ -395,7 +395,7 @@ func (r CryptoSpotTradingApiCryptoSpotPreviewOrderRequest) Execute() (*CryptoSpo
 }
 
 /*
-CryptoSpotPreviewOrder Place a spot order on a crypto exchange
+CryptoSpotPreviewOrder Preview a crypto spot order
 
 Previews a cryptocurrency spot order using the specified account.
 
@@ -574,7 +574,7 @@ func (r CryptoSpotTradingApiCryptoSpotQuoteRequest) Execute() (*CryptoSpotQuote,
 }
 
 /*
-CryptoSpotQuote Get a quote for a cyrptocurrency market
+CryptoSpotQuote Get a cryptocurrency spot market quote
 
 Gets a quote for the specified account.
 

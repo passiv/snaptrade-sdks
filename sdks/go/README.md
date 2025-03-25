@@ -93,8 +93,8 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
 *CryptoSpotTradingApi* | [**CryptoSpotCancelOrder**](docs/CryptoSpotTradingApi.md#cryptospotcancelorder) | **Post** /accounts/{accountId}/trading/crypto/spot/cancelOrder | Cancel a crypto spot order.
 *CryptoSpotTradingApi* | [**CryptoSpotPlaceOrder**](docs/CryptoSpotTradingApi.md#cryptospotplaceorder) | **Post** /accounts/{accountId}/trading/crypto/spot/placeOrder | Place a spot order on a crypto exchange
-*CryptoSpotTradingApi* | [**CryptoSpotPreviewOrder**](docs/CryptoSpotTradingApi.md#cryptospotprevieworder) | **Post** /accounts/{accountId}/trading/crypto/spot/previewOrder | Place a spot order on a crypto exchange
-*CryptoSpotTradingApi* | [**CryptoSpotQuote**](docs/CryptoSpotTradingApi.md#cryptospotquote) | **Get** /accounts/{accountId}/trading/crypto/spot/quote | Get a quote for a cyrptocurrency market
+*CryptoSpotTradingApi* | [**CryptoSpotPreviewOrder**](docs/CryptoSpotTradingApi.md#cryptospotprevieworder) | **Post** /accounts/{accountId}/trading/crypto/spot/previewOrder | Preview a crypto spot order
+*CryptoSpotTradingApi* | [**CryptoSpotQuote**](docs/CryptoSpotTradingApi.md#cryptospotquote) | **Get** /accounts/{accountId}/trading/crypto/spot/quote | Get a cryptocurrency spot market quote
 *CryptoSpotTradingApi* | [**CryptoSpotSymbols**](docs/CryptoSpotTradingApi.md#cryptospotsymbols) | **Get** /accounts/{accountId}/trading/crypto/spot/symbols | Search crypto spot symbols
 *OptionsApi* | [**GetOptionStrategy**](docs/OptionsApi.md#getoptionstrategy) | **Post** /accounts/{accountId}/optionStrategy | Create options strategy
 *OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
@@ -202,6 +202,7 @@ Class | Method | HTTP request | Description
  - [OptionsPositionCurrency](docs/OptionsPositionCurrency.md)
  - [OptionsSymbol](docs/OptionsSymbol.md)
  - [OrderTypeStrict](docs/OrderTypeStrict.md)
+ - [OrderUpdatedResponse](docs/OrderUpdatedResponse.md)
  - [PaginatedUniversalActivity](docs/PaginatedUniversalActivity.md)
  - [PaginationDetails](docs/PaginationDetails.md)
  - [PartnerData](docs/PartnerData.md)

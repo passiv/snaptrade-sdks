@@ -145,7 +145,7 @@ namespace SnapTrade.Net.Model
         /// <param name="amount">The amount of the base currency to buy or sell. (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
-        /// <param name="postOnly">Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees..</param>
+        /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
         public TradingCryptoSpotPlaceOrderRequest(CryptocurrencyPair symbol = default(CryptocurrencyPair), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
         {
@@ -193,9 +193,9 @@ namespace SnapTrade.Net.Model
         public decimal StopPrice { get; set; }
 
         /// <summary>
-        /// Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+        /// Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
         /// </summary>
-        /// <value>Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.</value>
+        /// <value>Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. </value>
         [DataMember(Name = "post_only", EmitDefaultValue = true)]
         public bool PostOnly { get; set; }
 

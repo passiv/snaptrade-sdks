@@ -33,10 +33,10 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
+from snaptrade_client.model.order_updated_response import OrderUpdatedResponse as OrderUpdatedResponseSchema
 
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.account_order_record import AccountOrderRecord
+from snaptrade_client.type.order_updated_response import OrderUpdatedResponse
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -165,17 +165,17 @@ request_body_typing_any = api_client.RequestBody(
     },
     required=True,
 )
-SchemaFor200ResponseBodyApplicationJson = AccountOrderRecordSchema
+SchemaFor200ResponseBodyApplicationJson = OrderUpdatedResponseSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: AccountOrderRecord
+    body: OrderUpdatedResponse
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: AccountOrderRecord
+    body: OrderUpdatedResponse
 
 
 _response_for_200 = api_client.OpenApiResponse(

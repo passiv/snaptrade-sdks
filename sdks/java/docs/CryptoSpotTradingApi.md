@@ -6,14 +6,14 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |------------- | ------------- | -------------|
 | [**cryptoSpotCancelOrder**](CryptoSpotTradingApi.md#cryptoSpotCancelOrder) | **POST** /accounts/{accountId}/trading/crypto/spot/cancelOrder | Cancel a crypto spot order. |
 | [**cryptoSpotPlaceOrder**](CryptoSpotTradingApi.md#cryptoSpotPlaceOrder) | **POST** /accounts/{accountId}/trading/crypto/spot/placeOrder | Place a spot order on a crypto exchange |
-| [**cryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#cryptoSpotPreviewOrder) | **POST** /accounts/{accountId}/trading/crypto/spot/previewOrder | Place a spot order on a crypto exchange |
-| [**cryptoSpotQuote**](CryptoSpotTradingApi.md#cryptoSpotQuote) | **GET** /accounts/{accountId}/trading/crypto/spot/quote | Get a quote for a cyrptocurrency market |
+| [**cryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#cryptoSpotPreviewOrder) | **POST** /accounts/{accountId}/trading/crypto/spot/previewOrder | Preview a crypto spot order |
+| [**cryptoSpotQuote**](CryptoSpotTradingApi.md#cryptoSpotQuote) | **GET** /accounts/{accountId}/trading/crypto/spot/quote | Get a cryptocurrency spot market quote |
 | [**cryptoSpotSymbols**](CryptoSpotTradingApi.md#cryptoSpotSymbols) | **GET** /accounts/{accountId}/trading/crypto/spot/symbols | Search crypto spot symbols |
 
 
 <a name="cryptoSpotCancelOrder"></a>
 # **cryptoSpotCancelOrder**
-> AccountOrderRecord cryptoSpotCancelOrder(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest).execute();
+> OrderUpdatedResponse cryptoSpotCancelOrder(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest).execute();
 
 Cancel a crypto spot order.
 
@@ -46,31 +46,13 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
     try {
-      AccountOrderRecord result = client
+      OrderUpdatedResponse result = client
               .cryptoSpotTrading
               .cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
-      System.out.println(result.getStatus());
-      System.out.println(result.getUniversalSymbol());
-      System.out.println(result.getOptionSymbol());
-      System.out.println(result.getAction());
-      System.out.println(result.getTotalQuantity());
-      System.out.println(result.getOpenQuantity());
-      System.out.println(result.getCanceledQuantity());
-      System.out.println(result.getFilledQuantity());
-      System.out.println(result.getExecutionPrice());
-      System.out.println(result.getLimitPrice());
-      System.out.println(result.getStopPrice());
-      System.out.println(result.getOrderType());
-      System.out.println(result.getTimeInForce());
-      System.out.println(result.getTimePlaced());
-      System.out.println(result.getTimeUpdated());
-      System.out.println(result.getTimeExecuted());
-      System.out.println(result.getExpiryDate());
-      System.out.println(result.getSymbol());
-      System.out.println(result.getChildBrokerageOrderIds());
+      System.out.println(result.getOrder());
     } catch (ApiException e) {
       System.err.println("Exception when calling CryptoSpotTradingApi#cryptoSpotCancelOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -81,7 +63,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = client
+      ApiResponse<OrderUpdatedResponse> response = client
               .cryptoSpotTrading
               .cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .executeWithHttpInfo();
@@ -113,7 +95,7 @@ public class Example {
 
 ### Return type
 
-[**AccountOrderRecord**](AccountOrderRecord.md)
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
 
 ### Authorization
 
@@ -132,7 +114,7 @@ public class Example {
 
 <a name="cryptoSpotPlaceOrder"></a>
 # **cryptoSpotPlaceOrder**
-> AccountOrderRecord cryptoSpotPlaceOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest).execute();
+> OrderUpdatedResponse cryptoSpotPlaceOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest).execute();
 
 Place a spot order on a crypto exchange
 
@@ -170,10 +152,10 @@ public class Example {
     UUID accountId = UUID.randomUUID();
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    Boolean postOnly = true; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
     try {
-      AccountOrderRecord result = client
+      OrderUpdatedResponse result = client
               .cryptoSpotTrading
               .cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
               .limitPrice(limitPrice)
@@ -183,25 +165,7 @@ public class Example {
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
-      System.out.println(result.getStatus());
-      System.out.println(result.getUniversalSymbol());
-      System.out.println(result.getOptionSymbol());
-      System.out.println(result.getAction());
-      System.out.println(result.getTotalQuantity());
-      System.out.println(result.getOpenQuantity());
-      System.out.println(result.getCanceledQuantity());
-      System.out.println(result.getFilledQuantity());
-      System.out.println(result.getExecutionPrice());
-      System.out.println(result.getLimitPrice());
-      System.out.println(result.getStopPrice());
-      System.out.println(result.getOrderType());
-      System.out.println(result.getTimeInForce());
-      System.out.println(result.getTimePlaced());
-      System.out.println(result.getTimeUpdated());
-      System.out.println(result.getTimeExecuted());
-      System.out.println(result.getExpiryDate());
-      System.out.println(result.getSymbol());
-      System.out.println(result.getChildBrokerageOrderIds());
+      System.out.println(result.getOrder());
     } catch (ApiException e) {
       System.err.println("Exception when calling CryptoSpotTradingApi#cryptoSpotPlaceOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -212,7 +176,7 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<AccountOrderRecord> response = client
+      ApiResponse<OrderUpdatedResponse> response = client
               .cryptoSpotTrading
               .cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
               .limitPrice(limitPrice)
@@ -248,7 +212,7 @@ public class Example {
 
 ### Return type
 
-[**AccountOrderRecord**](AccountOrderRecord.md)
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
 
 ### Authorization
 
@@ -269,7 +233,7 @@ public class Example {
 # **cryptoSpotPreviewOrder**
 > CryptoSpotOrderPreview cryptoSpotPreviewOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest).execute();
 
-Place a spot order on a crypto exchange
+Preview a crypto spot order
 
 Previews a cryptocurrency spot order using the specified account. 
 
@@ -305,7 +269,7 @@ public class Example {
     UUID accountId = UUID.randomUUID();
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    Boolean postOnly = true; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    Boolean postOnly = true; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     OffsetDateTime expirationDate = OffsetDateTime.now(); // The expiration date of the order. Required if the time_in_force is GTD.
     try {
       CryptoSpotOrderPreview result = client
@@ -385,7 +349,7 @@ public class Example {
 # **cryptoSpotQuote**
 > CryptoSpotQuote cryptoSpotQuote(userId, userSecret, accountId, base, quote).execute();
 
-Get a quote for a cyrptocurrency market
+Get a cryptocurrency spot market quote
 
 Gets a quote for the specified account. 
 

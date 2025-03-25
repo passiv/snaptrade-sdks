@@ -35,7 +35,7 @@ describe 'CryptoSpotTradingApi' do
   # @param account_id 
   # @param trading_crypto_spot_cancel_order_request 
   # @param [Hash] opts the optional parameters
-  # @return [AccountOrderRecord]
+  # @return [OrderUpdatedResponse]
   describe 'crypto_spot_cancel_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -50,7 +50,7 @@ describe 'CryptoSpotTradingApi' do
   # @param account_id 
   # @param trading_crypto_spot_place_order_request 
   # @param [Hash] opts the optional parameters
-  # @return [AccountOrderRecord]
+  # @return [OrderUpdatedResponse]
   describe 'crypto_spot_place_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -58,7 +58,7 @@ describe 'CryptoSpotTradingApi' do
   end
 
   # unit tests for crypto_spot_preview_order
-  # Place a spot order on a crypto exchange
+  # Preview a crypto spot order
   # Previews a cryptocurrency spot order using the specified account. 
   # @param user_id 
   # @param user_secret 
@@ -73,7 +73,7 @@ describe 'CryptoSpotTradingApi' do
   end
 
   # unit tests for crypto_spot_quote
-  # Get a quote for a cyrptocurrency market
+  # Get a cryptocurrency spot market quote
   # Gets a quote for the specified account. 
   # @param user_id 
   # @param user_secret 

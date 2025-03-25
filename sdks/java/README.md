@@ -1175,7 +1175,7 @@ Cancels a cryptocurrency spot order in the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
-AccountOrderRecord result = client
+OrderUpdatedResponse result = client
         .cryptoSpotTrading
         .cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
         .execute();
@@ -1195,7 +1195,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1215,7 +1215,7 @@ This endpoint does not compute the impact to the account balance from the order 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
-AccountOrderRecord result = client
+OrderUpdatedResponse result = client
         .cryptoSpotTrading
         .cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
         .limitPrice(limitPrice)
@@ -1259,7 +1259,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
 
@@ -1267,7 +1267,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1330,7 +1330,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `Boolean`<a id="post_only-boolean"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
 

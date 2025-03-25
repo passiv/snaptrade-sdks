@@ -47,7 +47,9 @@ from snaptrade_client.model.client_id import ClientID
 from snaptrade_client.model.crypto_spot_order_preview import CryptoSpotOrderPreview
 from snaptrade_client.model.crypto_spot_order_preview_estimated_fee import CryptoSpotOrderPreviewEstimatedFee
 from snaptrade_client.model.crypto_spot_quote import CryptoSpotQuote
+from snaptrade_client.model.cryptocurrency_base_symbol import CryptocurrencyBaseSymbol
 from snaptrade_client.model.cryptocurrency_pair import CryptocurrencyPair
+from snaptrade_client.model.cryptocurrency_quote_symbol import CryptocurrencyQuoteSymbol
 from snaptrade_client.model.cryptocurrency_symbol import CryptocurrencySymbol
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.currency_id import CurrencyID
@@ -104,6 +106,7 @@ from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.options_symbol_nullable import OptionsSymbolNullable
 from snaptrade_client.model.order_type import OrderType
 from snaptrade_client.model.order_type_strict import OrderTypeStrict
+from snaptrade_client.model.order_updated_response import OrderUpdatedResponse
 from snaptrade_client.model.paginated_universal_activity import PaginatedUniversalActivity
 from snaptrade_client.model.pagination_details import PaginationDetails
 from snaptrade_client.model.partner_data import PartnerData

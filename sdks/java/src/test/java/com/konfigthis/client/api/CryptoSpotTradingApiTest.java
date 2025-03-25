@@ -16,13 +16,13 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
-import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptoSpotOrderPreview;
 import com.konfigthis.client.model.CryptoSpotQuote;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
+import com.konfigthis.client.model.OrderUpdatedResponse;
 import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotSymbols200Response;
@@ -64,7 +64,7 @@ public class CryptoSpotTradingApiTest {
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        AccountOrderRecord response = api.cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
+        OrderUpdatedResponse response = api.cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }
@@ -90,7 +90,7 @@ public class CryptoSpotTradingApiTest {
         BigDecimal stopPrice = null;
         Boolean postOnly = null;
         OffsetDateTime expirationDate = null;
-        AccountOrderRecord response = api.cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
+        OrderUpdatedResponse response = api.cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
                 .postOnly(postOnly)
@@ -100,7 +100,7 @@ public class CryptoSpotTradingApiTest {
     }
 
     /**
-     * Place a spot order on a crypto exchange
+     * Preview a crypto spot order
      *
      * Previews a cryptocurrency spot order using the specified account. 
      *
@@ -130,7 +130,7 @@ public class CryptoSpotTradingApiTest {
     }
 
     /**
-     * Get a quote for a cyrptocurrency market
+     * Get a cryptocurrency spot market quote
      *
      * Gets a quote for the specified account. 
      *

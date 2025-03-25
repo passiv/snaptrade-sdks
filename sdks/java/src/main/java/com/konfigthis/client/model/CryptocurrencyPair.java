@@ -71,11 +71,11 @@ public class CryptocurrencyPair {
   }
 
    /**
-   * The base currency (e.g., \&quot;BTC\&quot; in BTC/USD). Can be a fiat or crypto code.
+   * The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
    * @return base
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The base currency (e.g., \"BTC\" in BTC/USD). Can be a fiat or crypto code.")
+  @ApiModelProperty(example = "BTC", required = true, value = "The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. ")
 
   public String getBase() {
     return base;
@@ -100,11 +100,11 @@ public class CryptocurrencyPair {
   }
 
    /**
-   * The quote currency (e.g., \&quot;USD\&quot; in BTC/USD). Can be a fiat or crypto code.
+   * The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
    * @return quote
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The quote currency (e.g., \"USD\" in BTC/USD). Can be a fiat or crypto code.")
+  @ApiModelProperty(example = "USD", required = true, value = "The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. ")
 
   public String getQuote() {
     return quote;
@@ -239,6 +239,12 @@ public class CryptocurrencyPair {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
+      }
+      if (!jsonObj.get("base").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `base` to be a primitive type in the JSON string but got `%s`", jsonObj.get("base").toString()));
+      }
+      if (!jsonObj.get("quote").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `quote` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote").toString()));
       }
   }
 
