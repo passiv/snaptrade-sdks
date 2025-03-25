@@ -39,8 +39,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord CryptoSpotCancelOrder(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0);
+        /// <returns>OrderUpdatedResponse</returns>
+        OrderUpdatedResponse CryptoSpotCancelOrder(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0);
 
         /// <summary>
         /// Cancel a crypto spot order.
@@ -54,8 +54,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> CryptoSpotCancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0);
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        ApiResponse<OrderUpdatedResponse> CryptoSpotCancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0);
         /// <summary>
         /// Place a spot order on a crypto exchange
         /// </summary>
@@ -68,8 +68,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord CryptoSpotPlaceOrder(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
+        /// <returns>OrderUpdatedResponse</returns>
+        OrderUpdatedResponse CryptoSpotPlaceOrder(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
 
         /// <summary>
         /// Place a spot order on a crypto exchange
@@ -83,10 +83,10 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> CryptoSpotPlaceOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        ApiResponse<OrderUpdatedResponse> CryptoSpotPlaceOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
         /// <summary>
-        /// Place a spot order on a crypto exchange
+        /// Preview a crypto spot order
         /// </summary>
         /// <remarks>
         /// Previews a cryptocurrency spot order using the specified account. 
@@ -101,7 +101,7 @@ namespace SnapTrade.Net.Api
         CryptoSpotOrderPreview CryptoSpotPreviewOrder(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
 
         /// <summary>
-        /// Place a spot order on a crypto exchange
+        /// Preview a crypto spot order
         /// </summary>
         /// <remarks>
         /// Previews a cryptocurrency spot order using the specified account. 
@@ -115,7 +115,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of CryptoSpotOrderPreview</returns>
         ApiResponse<CryptoSpotOrderPreview> CryptoSpotPreviewOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0);
         /// <summary>
-        /// Get a quote for a cyrptocurrency market
+        /// Get a cryptocurrency spot market quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -131,7 +131,7 @@ namespace SnapTrade.Net.Api
         CryptoSpotQuote CryptoSpotQuote(string userId, string userSecret, string accountId, string _base, string quote, int operationIndex = 0);
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market
+        /// Get a cryptocurrency spot market quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -198,8 +198,8 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> CryptoSpotCancelOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        System.Threading.Tasks.Task<OrderUpdatedResponse> CryptoSpotCancelOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel a crypto spot order.
@@ -214,8 +214,8 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CryptoSpotCancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> CryptoSpotCancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place a spot order on a crypto exchange
         /// </summary>
@@ -229,8 +229,8 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> CryptoSpotPlaceOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        System.Threading.Tasks.Task<OrderUpdatedResponse> CryptoSpotPlaceOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place a spot order on a crypto exchange
@@ -245,10 +245,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CryptoSpotPlaceOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> CryptoSpotPlaceOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place a spot order on a crypto exchange
+        /// Preview a crypto spot order
         /// </summary>
         /// <remarks>
         /// Previews a cryptocurrency spot order using the specified account. 
@@ -264,7 +264,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<CryptoSpotOrderPreview> CryptoSpotPreviewOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place a spot order on a crypto exchange
+        /// Preview a crypto spot order
         /// </summary>
         /// <remarks>
         /// Previews a cryptocurrency spot order using the specified account. 
@@ -279,7 +279,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (CryptoSpotOrderPreview)</returns>
         System.Threading.Tasks.Task<ApiResponse<CryptoSpotOrderPreview>> CryptoSpotPreviewOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get a quote for a cyrptocurrency market
+        /// Get a cryptocurrency spot market quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -296,7 +296,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<CryptoSpotQuote> CryptoSpotQuoteAsync(string userId, string userSecret, string accountId, string _base, string quote, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market
+        /// Get a cryptocurrency spot market quote
         /// </summary>
         /// <remarks>
         /// Gets a quote for the specified account. 
@@ -473,10 +473,10 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord CryptoSpotCancelOrder(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0)
+        /// <returns>OrderUpdatedResponse</returns>
+        public OrderUpdatedResponse CryptoSpotCancelOrder(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = CryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
             return localVarResponse.Data;
         }
 
@@ -489,8 +489,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CryptoSpotCancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0)
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> CryptoSpotCancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -564,7 +564,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<AccountOrderRecord>("/accounts/{accountId}/trading/crypto/spot/cancelOrder", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto/spot/cancelOrder", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CryptoSpotCancelOrder", localVarResponse);
@@ -587,10 +587,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> CryptoSpotCancelOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        public async System.Threading.Tasks.Task<OrderUpdatedResponse> CryptoSpotCancelOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CryptoSpotCancelOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await CryptoSpotCancelOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -604,8 +604,8 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotCancelOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CryptoSpotCancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> CryptoSpotCancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotCancelOrderRequest tradingCryptoSpotCancelOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -680,7 +680,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/accounts/{accountId}/trading/crypto/spot/cancelOrder", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto/spot/cancelOrder", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -703,10 +703,10 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord CryptoSpotPlaceOrder(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0)
+        /// <returns>OrderUpdatedResponse</returns>
+        public OrderUpdatedResponse CryptoSpotPlaceOrder(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = CryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
             return localVarResponse.Data;
         }
 
@@ -719,8 +719,8 @@ namespace SnapTrade.Net.Api
         /// <param name="accountId"></param>
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CryptoSpotPlaceOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0)
+        /// <returns>ApiResponse of OrderUpdatedResponse</returns>
+        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> CryptoSpotPlaceOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -794,7 +794,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<AccountOrderRecord>("/accounts/{accountId}/trading/crypto/spot/placeOrder", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto/spot/placeOrder", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("CryptoSpotPlaceOrder", localVarResponse);
@@ -817,10 +817,10 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> CryptoSpotPlaceOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of OrderUpdatedResponse</returns>
+        public async System.Threading.Tasks.Task<OrderUpdatedResponse> CryptoSpotPlaceOrderAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CryptoSpotPlaceOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await CryptoSpotPlaceOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -834,8 +834,8 @@ namespace SnapTrade.Net.Api
         /// <param name="tradingCryptoSpotPlaceOrderRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CryptoSpotPlaceOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> CryptoSpotPlaceOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCryptoSpotPlaceOrderRequest tradingCryptoSpotPlaceOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -910,7 +910,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/accounts/{accountId}/trading/crypto/spot/placeOrder", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OrderUpdatedResponse>("/accounts/{accountId}/trading/crypto/spot/placeOrder", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -925,7 +925,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a spot order on a crypto exchange Previews a cryptocurrency spot order using the specified account. 
+        /// Preview a crypto spot order Previews a cryptocurrency spot order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -941,7 +941,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a spot order on a crypto exchange Previews a cryptocurrency spot order using the specified account. 
+        /// Preview a crypto spot order Previews a cryptocurrency spot order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1038,7 +1038,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a spot order on a crypto exchange Previews a cryptocurrency spot order using the specified account. 
+        /// Preview a crypto spot order Previews a cryptocurrency spot order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1055,7 +1055,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place a spot order on a crypto exchange Previews a cryptocurrency spot order using the specified account. 
+        /// Preview a crypto spot order Previews a cryptocurrency spot order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1155,7 +1155,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market Gets a quote for the specified account. 
+        /// Get a cryptocurrency spot market quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1172,7 +1172,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market Gets a quote for the specified account. 
+        /// Get a cryptocurrency spot market quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1276,7 +1276,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market Gets a quote for the specified account. 
+        /// Get a cryptocurrency spot market quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1294,7 +1294,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a quote for a cyrptocurrency market Gets a quote for the specified account. 
+        /// Get a cryptocurrency spot market quote Gets a quote for the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

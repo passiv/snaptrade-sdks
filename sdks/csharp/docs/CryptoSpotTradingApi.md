@@ -6,8 +6,8 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 |--------|--------------|-------------|
 | [**CryptoSpotCancelOrder**](CryptoSpotTradingApi.md#cryptospotcancelorder) | **POST** /accounts/{accountId}/trading/crypto/spot/cancelOrder | Cancel a crypto spot order. |
 | [**CryptoSpotPlaceOrder**](CryptoSpotTradingApi.md#cryptospotplaceorder) | **POST** /accounts/{accountId}/trading/crypto/spot/placeOrder | Place a spot order on a crypto exchange |
-| [**CryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#cryptospotprevieworder) | **POST** /accounts/{accountId}/trading/crypto/spot/previewOrder | Place a spot order on a crypto exchange |
-| [**CryptoSpotQuote**](CryptoSpotTradingApi.md#cryptospotquote) | **GET** /accounts/{accountId}/trading/crypto/spot/quote | Get a quote for a cyrptocurrency market |
+| [**CryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#cryptospotprevieworder) | **POST** /accounts/{accountId}/trading/crypto/spot/previewOrder | Preview a crypto spot order |
+| [**CryptoSpotQuote**](CryptoSpotTradingApi.md#cryptospotquote) | **GET** /accounts/{accountId}/trading/crypto/spot/quote | Get a cryptocurrency spot market quote |
 | [**CryptoSpotSymbols**](CryptoSpotTradingApi.md#cryptospotsymbols) | **GET** /accounts/{accountId}/trading/crypto/spot/symbols | Search crypto spot symbols |
 
 
@@ -49,7 +49,7 @@ namespace Example
             try
             {
                 // Cancel a crypto spot order.
-                AccountOrderRecord result = client.CryptoSpotTrading.CryptoSpotCancelOrder(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+                OrderUpdatedResponse result = client.CryptoSpotTrading.CryptoSpotCancelOrder(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -76,7 +76,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Cancel a crypto spot order.
-    ApiResponse<AccountOrderRecord> response = apiInstance.CryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
+    ApiResponse<OrderUpdatedResponse> response = apiInstance.CryptoSpotCancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotCancelOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -100,7 +100,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**AccountOrderRecord**](AccountOrderRecord.md)
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
 
 
 ### HTTP response details
@@ -149,7 +149,7 @@ namespace Example
             var amount = "123.45"; // The amount of the base currency to buy or sell.
             var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
             var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-            var postOnly = false; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
             var tradingCryptoSpotPlaceOrderRequest = new TradingCryptoSpotPlaceOrderRequest(
@@ -167,7 +167,7 @@ namespace Example
             try
             {
                 // Place a spot order on a crypto exchange
-                AccountOrderRecord result = client.CryptoSpotTrading.CryptoSpotPlaceOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
+                OrderUpdatedResponse result = client.CryptoSpotTrading.CryptoSpotPlaceOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -194,7 +194,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place a spot order on a crypto exchange
-    ApiResponse<AccountOrderRecord> response = apiInstance.CryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
+    ApiResponse<OrderUpdatedResponse> response = apiInstance.CryptoSpotPlaceOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -218,7 +218,7 @@ catch (ApiException e)
 
 ### Return type
 
-[**AccountOrderRecord**](AccountOrderRecord.md)
+[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
 
 
 ### HTTP response details
@@ -267,7 +267,7 @@ namespace Example
             var amount = "123.45"; // The amount of the base currency to buy or sell.
             var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
             var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-            var postOnly = false; // Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+            var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
             var tradingCryptoSpotPlaceOrderRequest = new TradingCryptoSpotPlaceOrderRequest(
@@ -284,7 +284,7 @@ namespace Example
             
             try
             {
-                // Place a spot order on a crypto exchange
+                // Preview a crypto spot order
                 CryptoSpotOrderPreview result = client.CryptoSpotTrading.CryptoSpotPreviewOrder(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
                 Console.WriteLine(result);
             }
@@ -311,7 +311,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place a spot order on a crypto exchange
+    // Preview a crypto spot order
     ApiResponse<CryptoSpotOrderPreview> response = apiInstance.CryptoSpotPreviewOrderWithHttpInfo(userId, userSecret, accountId, tradingCryptoSpotPlaceOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -383,7 +383,7 @@ namespace Example
             
             try
             {
-                // Get a quote for a cyrptocurrency market
+                // Get a cryptocurrency spot market quote
                 CryptoSpotQuote result = client.CryptoSpotTrading.CryptoSpotQuote(userId, userSecret, accountId, _base, quote);
                 Console.WriteLine(result);
             }
@@ -410,7 +410,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get a quote for a cyrptocurrency market
+    // Get a cryptocurrency spot market quote
     ApiResponse<CryptoSpotQuote> response = apiInstance.CryptoSpotQuoteWithHttpInfo(userId, userSecret, accountId, _base, quote);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

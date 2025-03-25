@@ -1,13 +1,13 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiClient;
-import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptoSpotOrderPreview;
 import com.konfigthis.client.model.CryptoSpotQuote;
 import com.konfigthis.client.model.CryptocurrencyPair;
 import java.time.OffsetDateTime;
+import com.konfigthis.client.model.OrderUpdatedResponse;
 import com.konfigthis.client.model.TradingCryptoSpotCancelOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotPlaceOrderRequest;
 import com.konfigthis.client.model.TradingCryptoSpotSymbols200Response;

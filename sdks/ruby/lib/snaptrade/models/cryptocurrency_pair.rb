@@ -13,10 +13,10 @@ require 'time'
 module SnapTrade
   # A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
   class CryptocurrencyPair
-    # The base currency (e.g., \"BTC\" in BTC/USD). Can be a fiat or crypto code.
+    # The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     attr_accessor :base
 
-    # The quote currency (e.g., \"USD\" in BTC/USD). Can be a fiat or crypto code.
+    # The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     attr_accessor :quote
 
     # Attribute mapping from ruby-style variable name to JSON key.

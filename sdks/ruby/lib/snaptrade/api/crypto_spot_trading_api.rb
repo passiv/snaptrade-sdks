@@ -59,7 +59,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param trading_crypto_spot_cancel_order_request [TradingCryptoSpotCancelOrderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AccountOrderRecord]
+    # @return [OrderUpdatedResponse]
     private def crypto_spot_cancel_order_impl(user_id, user_secret, account_id, trading_crypto_spot_cancel_order_request, opts = {})
       data, _status_code, _headers = crypto_spot_cancel_order_with_http_info(user_id, user_secret, account_id, trading_crypto_spot_cancel_order_request, opts)
       data
@@ -72,7 +72,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param trading_crypto_spot_cancel_order_request [TradingCryptoSpotCancelOrderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
+    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
     private def crypto_spot_cancel_order_with_http_info_impl(user_id, user_secret, account_id, trading_crypto_spot_cancel_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CryptoSpotTradingApi.crypto_spot_cancel_order ...'
@@ -118,7 +118,7 @@ module SnapTrade
       post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_crypto_spot_cancel_order_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
+      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
@@ -156,7 +156,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
     # @param body [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -191,7 +191,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
     # @param body [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -217,7 +217,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param trading_crypto_spot_place_order_request [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [AccountOrderRecord]
+    # @return [OrderUpdatedResponse]
     private def crypto_spot_place_order_impl(user_id, user_secret, account_id, trading_crypto_spot_place_order_request, opts = {})
       data, _status_code, _headers = crypto_spot_place_order_with_http_info(user_id, user_secret, account_id, trading_crypto_spot_place_order_request, opts)
       data
@@ -230,7 +230,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param trading_crypto_spot_place_order_request [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
+    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
     private def crypto_spot_place_order_with_http_info_impl(user_id, user_secret, account_id, trading_crypto_spot_place_order_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: CryptoSpotTradingApi.crypto_spot_place_order ...'
@@ -276,7 +276,7 @@ module SnapTrade
       post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_crypto_spot_place_order_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
+      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
@@ -299,7 +299,7 @@ module SnapTrade
     end
 
 
-    # Place a spot order on a crypto exchange
+    # Preview a crypto spot order
     #
     # Previews a cryptocurrency spot order using the specified account.
     #
@@ -313,7 +313,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
     # @param body [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -333,7 +333,7 @@ module SnapTrade
       data
     end
 
-    # Place a spot order on a crypto exchange
+    # Preview a crypto spot order
     #
     # Previews a cryptocurrency spot order using the specified account.
     #
@@ -347,7 +347,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
     # @param body [TradingCryptoSpotPlaceOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -366,7 +366,7 @@ module SnapTrade
       crypto_spot_preview_order_with_http_info_impl(user_id, user_secret, account_id, trading_crypto_spot_place_order_request, extra)
     end
 
-    # Place a spot order on a crypto exchange
+    # Preview a crypto spot order
     # Previews a cryptocurrency spot order using the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -379,7 +379,7 @@ module SnapTrade
       data
     end
 
-    # Place a spot order on a crypto exchange
+    # Preview a crypto spot order
     # Previews a cryptocurrency spot order using the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -455,7 +455,7 @@ module SnapTrade
     end
 
 
-    # Get a quote for a cyrptocurrency market
+    # Get a cryptocurrency spot market quote
     #
     # Gets a quote for the specified account.
     #
@@ -470,7 +470,7 @@ module SnapTrade
       data
     end
 
-    # Get a quote for a cyrptocurrency market
+    # Get a cryptocurrency spot market quote
     #
     # Gets a quote for the specified account.
     #
@@ -484,7 +484,7 @@ module SnapTrade
       crypto_spot_quote_with_http_info_impl(user_id, user_secret, account_id, base, quote, extra)
     end
 
-    # Get a quote for a cyrptocurrency market
+    # Get a cryptocurrency spot market quote
     # Gets a quote for the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -498,7 +498,7 @@ module SnapTrade
       data
     end
 
-    # Get a quote for a cyrptocurrency market
+    # Get a cryptocurrency spot market quote
     # Gets a quote for the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 

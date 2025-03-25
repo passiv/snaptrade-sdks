@@ -8,8 +8,8 @@ A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**base** | [**String**](String.md) | The base currency (e.g., \&quot;BTC\&quot; in BTC/USD). Can be a fiat or crypto code. |  |
-|**quote** | [**String**](String.md) | The quote currency (e.g., \&quot;USD\&quot; in BTC/USD). Can be a fiat or crypto code. |  |
+|**base** | **String** | The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  |  |
+|**quote** | **String** | The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  |  |
 
 
 

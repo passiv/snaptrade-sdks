@@ -1152,7 +1152,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 [`Any`](./snaptrade_client/type/typing_any.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1175,7 +1175,7 @@ crypto_spot_place_order_response = (
     snaptrade.crypto_spot_trading.crypto_spot_place_order(
         symbol={
             "base": "BTC",
-            "quote": "BTC",
+            "quote": "USD",
         },
         side="BUY",
         type="MARKET",
@@ -1227,7 +1227,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `bool`<a id="post_only-bool"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
 
@@ -1238,7 +1238,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 [`Any`](./snaptrade_client/type/typing_any.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1260,7 +1260,7 @@ crypto_spot_preview_order_response = (
     snaptrade.crypto_spot_trading.crypto_spot_preview_order(
         symbol={
             "base": "BTC",
-            "quote": "BTC",
+            "quote": "USD",
         },
         side="BUY",
         type="MARKET",
@@ -1312,7 +1312,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT,
 
 ##### post_only: `bool`<a id="post_only-bool"></a>
 
-Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 
 ##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
 
@@ -1346,7 +1346,7 @@ crypto_spot_quote_response = snaptrade.crypto_spot_trading.crypto_spot_quote(
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base="BTC",
-    quote="BTC",
+    quote="USD",
 )
 ```
 
@@ -1387,7 +1387,7 @@ crypto_spot_symbols_response = snaptrade.crypto_spot_trading.crypto_spot_symbols
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     base="BTC",
-    quote="BTC",
+    quote="USD",
 )
 ```
 

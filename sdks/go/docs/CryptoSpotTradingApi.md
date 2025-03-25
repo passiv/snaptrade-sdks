@@ -6,8 +6,8 @@ Method | Path | Description
 ------------- | ------------- | -------------
 [**CryptoSpotCancelOrder**](CryptoSpotTradingApi.md#CryptoSpotCancelOrder) | **Post** /accounts/{accountId}/trading/crypto/spot/cancelOrder | Cancel a crypto spot order.
 [**CryptoSpotPlaceOrder**](CryptoSpotTradingApi.md#CryptoSpotPlaceOrder) | **Post** /accounts/{accountId}/trading/crypto/spot/placeOrder | Place a spot order on a crypto exchange
-[**CryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#CryptoSpotPreviewOrder) | **Post** /accounts/{accountId}/trading/crypto/spot/previewOrder | Place a spot order on a crypto exchange
-[**CryptoSpotQuote**](CryptoSpotTradingApi.md#CryptoSpotQuote) | **Get** /accounts/{accountId}/trading/crypto/spot/quote | Get a quote for a cyrptocurrency market
+[**CryptoSpotPreviewOrder**](CryptoSpotTradingApi.md#CryptoSpotPreviewOrder) | **Post** /accounts/{accountId}/trading/crypto/spot/previewOrder | Preview a crypto spot order
+[**CryptoSpotQuote**](CryptoSpotTradingApi.md#CryptoSpotQuote) | **Get** /accounts/{accountId}/trading/crypto/spot/quote | Get a cryptocurrency spot market quote
 [**CryptoSpotSymbols**](CryptoSpotTradingApi.md#CryptoSpotSymbols) | **Get** /accounts/{accountId}/trading/crypto/spot/symbols | Search crypto spot symbols
 
 
@@ -53,28 +53,10 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CryptoSpotTradingApi.CryptoSpotCancelOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `CryptoSpotCancelOrder`: AccountOrderRecord
+    // response from `CryptoSpotCancelOrder`: OrderUpdatedResponse
     fmt.Fprintf(os.Stdout, "Response from `CryptoSpotTradingApi.CryptoSpotCancelOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.Action`: %v\n", *resp.Action)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.LimitPrice`: %v\n", *resp.LimitPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.StopPrice`: %v\n", *resp.StopPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.OrderType`: %v\n", *resp.OrderType)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.TimeInForce`: %v\n", *resp.TimeInForce)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.TimePlaced`: %v\n", *resp.TimePlaced)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotCancelOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CryptoSpotCancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CryptoSpotCancelOrder.Order`: %v\n", *resp.Order)
 }
 ```
 
@@ -133,28 +115,10 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `CryptoSpotTradingApi.CryptoSpotPlaceOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `CryptoSpotPlaceOrder`: AccountOrderRecord
+    // response from `CryptoSpotPlaceOrder`: OrderUpdatedResponse
     fmt.Fprintf(os.Stdout, "Response from `CryptoSpotTradingApi.CryptoSpotPlaceOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.Status`: %v\n", *resp.Status)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.Action`: %v\n", *resp.Action)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.LimitPrice`: %v\n", *resp.LimitPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.StopPrice`: %v\n", *resp.StopPrice)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.OrderType`: %v\n", *resp.OrderType)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.TimeInForce`: %v\n", *resp.TimeInForce)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.TimePlaced`: %v\n", *resp.TimePlaced)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.Symbol`: %v\n", *resp.Symbol)
-    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.CryptoSpotPlaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CryptoSpotPlaceOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CryptoSpotPlaceOrder.Order`: %v\n", *resp.Order)
 }
 ```
 
@@ -165,7 +129,7 @@ func main() {
 
 ## CryptoSpotPreviewOrder
 
-Place a spot order on a crypto exchange
+Preview a crypto spot order
 
 
 
@@ -226,7 +190,7 @@ func main() {
 
 ## CryptoSpotQuote
 
-Get a quote for a cyrptocurrency market
+Get a cryptocurrency spot market quote
 
 
 

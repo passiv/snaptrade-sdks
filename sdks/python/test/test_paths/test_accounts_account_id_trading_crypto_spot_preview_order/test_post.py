@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingCryptoSpotPreviewOrder(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingCryptoSpotPreviewOrder unit test stubs
-        Place a spot order on a crypto exchange
+        Preview a crypto spot order
     """
 
     def setUp(self):

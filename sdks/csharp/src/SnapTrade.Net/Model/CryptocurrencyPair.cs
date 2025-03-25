@@ -43,8 +43,8 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CryptocurrencyPair" /> class.
         /// </summary>
-        /// <param name="_base">The base currency (e.g., \&quot;BTC\&quot; in BTC/USD). Can be a fiat or crypto code. (required).</param>
-        /// <param name="quote">The quote currency (e.g., \&quot;USD\&quot; in BTC/USD). Can be a fiat or crypto code. (required).</param>
+        /// <param name="_base">The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
+        /// <param name="quote">The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
         public CryptocurrencyPair(string _base = default(string), string quote = default(string)) : base()
         {
             // to ensure "_base" is required (not null)
@@ -63,16 +63,16 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// The base currency (e.g., \&quot;BTC\&quot; in BTC/USD). Can be a fiat or crypto code.
+        /// The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
         /// </summary>
-        /// <value>The base currency (e.g., \&quot;BTC\&quot; in BTC/USD). Can be a fiat or crypto code.</value>
+        /// <value>The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. </value>
         [DataMember(Name = "base", IsRequired = true, EmitDefaultValue = true)]
         public string Base { get; set; }
 
         /// <summary>
-        /// The quote currency (e.g., \&quot;USD\&quot; in BTC/USD). Can be a fiat or crypto code.
+        /// The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
         /// </summary>
-        /// <value>The quote currency (e.g., \&quot;USD\&quot; in BTC/USD). Can be a fiat or crypto code.</value>
+        /// <value>The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. </value>
         [DataMember(Name = "quote", IsRequired = true, EmitDefaultValue = true)]
         public string Quote { get; set; }
 

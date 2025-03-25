@@ -62,7 +62,7 @@ export interface TradingCryptoSpotPlaceOrderRequest {
      */
     'stop_price'?: string;
     /**
-     * Required for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+     * Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
      * @type {boolean}
      * @memberof TradingCryptoSpotPlaceOrderRequest
      */

@@ -17,10 +17,10 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredCryptocurrencyPair(TypedDict):
-    # The base currency (e.g., \"BTC\" in BTC/USD). Can be a fiat or crypto code.
+    # The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     base: str
 
-    # The quote currency (e.g., \"USD\" in BTC/USD). Can be a fiat or crypto code.
+    # The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     quote: str
 
 class OptionalCryptocurrencyPair(TypedDict, total=False):
