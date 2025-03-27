@@ -1720,7 +1720,7 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /trade/placeBracketOrder:
+  /accounts/{accountId}/trading/bracket:
     post:
       tags:
         - Trading
@@ -1730,6 +1730,12 @@ paths:
         use. Only supported on certain brokerages
       operationId: Trading_placeBracketOrder
       parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/AccountID"
         - in: query
           required: true
           name: userId
@@ -1742,6 +1748,62 @@ paths:
             $ref: "#/components/schemas/UserSecret"
       requestBody:
         $ref: "#/components/requestBodies/ManualTradeFormRequestBodyBracket"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
+    patch:
+      tags:
+        - Trading
+      summary: Replaces an order with a new one
+      description: |
+        Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+        the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+        returned in the response going forward. Only supported on some brokerages
+      operationId: Trading_replaceOrder
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/Id"
+        - in: path
+          name: brokerageOrderId
+          required: true
+          description: The Brokerage Order ID of the order to replace.
+          schema:
+            $ref: "#/components/schemas/BrokerageOrderID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeReplaceFormRequestBody"
       responses:
         "200":
           description: OK
@@ -2410,6 +2472,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeFormBracket"
+    ManualTradeReplaceFormRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeReplaceForm"
     ValidatedTradeRequestBody:
       required: false
       content:
@@ -4256,6 +4324,34 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    ManualTradeReplaceForm:
+      description: Inputs for placing an order with the brokerage.
+      type: object
+      required:
+        - action
+        - order_type
+        - time_in_force
+      properties:
+        action:
+          $ref: "#/components/schemas/ActionStrict"
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Units"
     ManualTradeFormWithOptions:
       description: Inputs for placing an order with the brokerage.
       type: object
@@ -4306,22 +4402,21 @@ components:
       description: Inputs for placing an order with the brokerage.
       type: object
       required:
-        - account_id
         - action
         - order_type
         - time_in_force
         - stop_loss
         - take_profit
-        - symbol
+        - instrument
       properties:
-        account_id:
-          $ref: "#/components/schemas/AccountID"
         action:
           $ref: "#/components/schemas/ActionStrictWithOptions"
         symbol:
           description: The security's trading ticker symbol.
           type: string
           example: AAPL
+        instrument:
+          $ref: "#/components/schemas/TradingInstrument"
         order_type:
           $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
@@ -4350,6 +4445,20 @@ components:
           example: true
           type: boolean
           description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
+    TradingInstrument:
+      type: object
+      properties:
+        symbol:
+          description: The security's trading ticker symbol
+          type: string
+          example: AAPL
+        type:
+          nullable: true
+          type: string
+          enum:
+            - EQUITY
+            - CRYPTOCURRENCY
+            - CRYPTOCURRENCY_PAIR
     OrderTypeStrict:
       description: |
         The type of order to place.
