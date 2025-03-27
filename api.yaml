@@ -2874,6 +2874,14 @@ components:
           description: Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
           allOf:
             - $ref: "#/components/schemas/OptionsSymbol"
+        quote_universal_symbol:
+          description: Quote cryptocurrency. This field is only present for cryptocurrency pair orders with a cryptocurrency as quote.
+          allOf:
+            - $ref: "#/components/schemas/UniversalSymbol"
+        quote_currency:
+          description: Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         action:
           $ref: "#/components/schemas/Action"
         total_quantity:

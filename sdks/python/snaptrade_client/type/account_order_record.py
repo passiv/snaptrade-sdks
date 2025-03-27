@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.type.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
+from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.options_symbol import OptionsSymbol
 from snaptrade_client.type.universal_symbol import UniversalSymbol
 
@@ -34,6 +35,12 @@ class OptionalAccountOrderRecord(TypedDict, total=False):
 
     # Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
     option_symbol: OptionsSymbol
+
+    # Quote cryptocurrency. This field is only present for cryptocurrency pair orders with a cryptocurrency as quote.
+    quote_universal_symbol: UniversalSymbol
+
+    # Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
+    quote_currency: Currency
 
     # The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
     action: str

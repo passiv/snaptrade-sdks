@@ -18,6 +18,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordOptionSymbol;
+import com.konfigthis.client.model.AccountOrderRecordQuoteCurrency;
+import com.konfigthis.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.AccountOrderRecordUniversalSymbol;
 import com.konfigthis.client.model.ChildBrokerageOrderIDsNullable;
@@ -75,6 +77,22 @@ public class AccountOrderRecordTest {
     @Test
     public void optionSymbolTest() {
         // TODO: test optionSymbol
+    }
+
+    /**
+     * Test the property 'quoteUniversalSymbol'
+     */
+    @Test
+    public void quoteUniversalSymbolTest() {
+        // TODO: test quoteUniversalSymbol
+    }
+
+    /**
+     * Test the property 'quoteCurrency'
+     */
+    @Test
+    public void quoteCurrencyTest() {
+        // TODO: test quoteCurrency
     }
 
     /**

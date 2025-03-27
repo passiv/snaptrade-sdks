@@ -132,6 +132,8 @@ Class | Method | HTTP request | Description
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordChildBrokerageOrderIds](docs/AccountOrderRecordChildBrokerageOrderIds.md)
  - [AccountOrderRecordOptionSymbol](docs/AccountOrderRecordOptionSymbol.md)
+ - [AccountOrderRecordQuoteCurrency](docs/AccountOrderRecordQuoteCurrency.md)
+ - [AccountOrderRecordQuoteUniversalSymbol](docs/AccountOrderRecordQuoteUniversalSymbol.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
  - [AccountOrderRecordUniversalSymbol](docs/AccountOrderRecordUniversalSymbol.md)
  - [AccountSimple](docs/AccountSimple.md)

@@ -269,6 +269,8 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Status`: %v\n", *resp.Status)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.Action`: %v\n", *resp.Action)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.TotalQuantity`: %v\n", *resp.TotalQuantity)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrders.OpenQuantity`: %v\n", *resp.OpenQuantity)

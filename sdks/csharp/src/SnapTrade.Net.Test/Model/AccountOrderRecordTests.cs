@@ -90,6 +90,22 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'OptionSymbol'
         }
         /// <summary>
+        /// Test the property 'QuoteUniversalSymbol'
+        /// </summary>
+        [Fact]
+        public void QuoteUniversalSymbolTest()
+        {
+            // TODO unit test for the property 'QuoteUniversalSymbol'
+        }
+        /// <summary>
+        /// Test the property 'QuoteCurrency'
+        /// </summary>
+        [Fact]
+        public void QuoteCurrencyTest()
+        {
+            // TODO unit test for the property 'QuoteCurrency'
+        }
+        /// <summary>
         /// Test the property '_Action'
         /// </summary>
         [Fact]
