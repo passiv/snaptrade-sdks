@@ -112,8 +112,10 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
-    /trade/placeBracketOrder:
+    /accounts/{accountId}/trading/bracket:
       post: true
+    /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
+      patch: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
