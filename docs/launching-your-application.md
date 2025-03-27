@@ -50,6 +50,10 @@ You have a system for detecting disabled end-user brokerage connections (via web
 
 See [How to Fix Broken Connections](https://docs.snaptrade.com/docs/fix-broken-connections)
 
+### 7. New Integrations
+
+You have a strategy for handling newly released integrations. If you are making use of the `broker` parameter when calling :api[Authentication_loginSnapTradeUser], you will need to manually add any new brokerage integrations that are released. If you are not using this parameter, newly released integrations will appear automatically in the Connection Portal. You can call :api[ReferenceData_getPartnerInfo] to stay up to date. This returns the configuration for your Clint ID, including allowed brokerage integrations and data access.
+
 ### 7. Rate-limiting
 
 You are aware of the general rate limit and have a way of gracefully handling rate-limit 429 errors in your app. If youʼre using trading functionality, youʼre not executing trades faster than 1 trade per connected account per second.
