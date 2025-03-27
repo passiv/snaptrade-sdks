@@ -54,19 +54,19 @@ See [How to Fix Broken Connections](https://docs.snaptrade.com/docs/fix-broken-c
 
 You have a strategy for handling newly released integrations. If you are making use of the `broker` parameter when calling :api[Authentication_loginSnapTradeUser], you will need to manually add any new brokerage integrations that are released. If you are not using this parameter, newly released integrations will appear automatically in the Connection Portal. You can call :api[ReferenceData_getPartnerInfo] to stay up to date. This returns the configuration for your Clint ID, including allowed brokerage integrations and data access.
 
-### 7. Rate-limiting
+### 8. Rate-limiting
 
 You are aware of the general rate limit and have a way of gracefully handling rate-limit 429 errors in your app. If youʼre using trading functionality, youʼre not executing trades faster than 1 trade per connected account per second.
 
 See [Ratelimiting](https://docs.snaptrade.com/docs/ratelimiting).
 
-### 8. Trading
+### 9. Trading
 
 If you're using trading functionality, you must have either clear user consent for automated trading or a trade preview flow that shows all expected fees and commissions. Users must also have the ability to opt out of SnapTrade functionality and delete their brokerage connection at any time. It’s recommended to not execute trades faster than 1 trade per connected account per second.
 
 See [Trading with SnapTrade](https://docs.snaptrade.com/docs/trading-with-snaptrade).
 
-### 9. Webhooks
+### 10. Webhooks
 
 You have set your webhook listener URL in the [SnapTrade Dashboard](https://dashboard.snaptrade.com).
 
