@@ -12,6 +12,8 @@ import type * as buffer from "buffer"
 
 import { AccountOrderRecordChildBrokerageOrderIds } from './account-order-record-child-brokerage-order-ids';
 import { AccountOrderRecordOptionSymbol } from './account-order-record-option-symbol';
+import { AccountOrderRecordQuoteCurrency } from './account-order-record-quote-currency';
+import { AccountOrderRecordQuoteUniversalSymbol } from './account-order-record-quote-universal-symbol';
 import { AccountOrderRecordStatus } from './account-order-record-status';
 import { AccountOrderRecordUniversalSymbol } from './account-order-record-universal-symbol';
 
@@ -47,6 +49,18 @@ export interface AccountOrderRecord {
      * @memberof AccountOrderRecord
      */
     'option_symbol'?: AccountOrderRecordOptionSymbol;
+    /**
+     * 
+     * @type {AccountOrderRecordQuoteUniversalSymbol}
+     * @memberof AccountOrderRecord
+     */
+    'quote_universal_symbol'?: AccountOrderRecordQuoteUniversalSymbol;
+    /**
+     * 
+     * @type {AccountOrderRecordQuoteCurrency}
+     * @memberof AccountOrderRecord
+     */
+    'quote_currency'?: AccountOrderRecordQuoteCurrency;
     /**
      * The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
      * @type {string}

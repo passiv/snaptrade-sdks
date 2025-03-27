@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
 **UniversalSymbol** | Pointer to [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | Pointer to [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
+**QuoteUniversalSymbol** | Pointer to [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
+**QuoteCurrency** | Pointer to [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
 **Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
 **TotalQuantity** | Pointer to **NullableFloat32** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
 **OpenQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
@@ -143,6 +145,56 @@ SetOptionSymbol sets OptionSymbol field to given value.
 `func (o *AccountOrderRecord) HasOptionSymbol() bool`
 
 HasOptionSymbol returns a boolean if a field has been set.
+
+### GetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol`
+
+GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field if non-nil, zero value otherwise.
+
+### GetQuoteUniversalSymbolOk
+
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool)`
+
+GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol)`
+
+SetQuoteUniversalSymbol sets QuoteUniversalSymbol field to given value.
+
+### HasQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool`
+
+HasQuoteUniversalSymbol returns a boolean if a field has been set.
+
+### GetQuoteCurrency
+
+`func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency`
+
+GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
+
+### GetQuoteCurrencyOk
+
+`func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool)`
+
+GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteCurrency
+
+`func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency)`
+
+SetQuoteCurrency sets QuoteCurrency field to given value.
+
+### HasQuoteCurrency
+
+`func (o *AccountOrderRecord) HasQuoteCurrency() bool`
+
+HasQuoteCurrency returns a boolean if a field has been set.
 
 ### GetAction
 

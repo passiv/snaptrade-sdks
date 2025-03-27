@@ -3406,11 +3406,13 @@ components:
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
+          quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
+          quote_universal_symbol: null
           action: action
           total_quantity: 100
           universal_symbol: null
@@ -3426,11 +3428,13 @@ components:
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
+          quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
+          quote_universal_symbol: null
           action: action
           total_quantity: 100
           universal_symbol: null
@@ -3512,11 +3516,13 @@ components:
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
+          quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
+          quote_universal_symbol: null
           action: action
           total_quantity: 100
           universal_symbol: null
@@ -3532,11 +3538,13 @@ components:
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
+          quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
+          quote_universal_symbol: null
           action: action
           total_quantity: 100
           universal_symbol: null
@@ -3618,11 +3626,13 @@ components:
         expiry_date: 2024-08-05T00:05:57.409Z
         brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         limit_price: 12.34
+        quote_currency: null
         time_updated: 2024-08-05T00:05:57.409Z
         canceled_quantity: 10
         time_in_force: time_in_force
         execution_price: 12.34
         stop_price: 12.5
+        quote_universal_symbol: null
         action: action
         total_quantity: 100
         universal_symbol: null
@@ -3645,6 +3655,10 @@ components:
           $ref: '#/components/schemas/AccountOrderRecord_universal_symbol'
         option_symbol:
           $ref: '#/components/schemas/AccountOrderRecord_option_symbol'
+        quote_universal_symbol:
+          $ref: '#/components/schemas/AccountOrderRecord_quote_universal_symbol'
+        quote_currency:
+          $ref: '#/components/schemas/AccountOrderRecord_quote_currency'
         action:
           description: |
             The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.
@@ -6799,11 +6813,13 @@ components:
           expiry_date: 2024-08-05T00:05:57.409Z
           brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
           limit_price: 12.34
+          quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
           canceled_quantity: 10
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
+          quote_universal_symbol: null
           action: action
           total_quantity: 100
           universal_symbol: null
@@ -10571,6 +10587,16 @@ components:
         \ is for. This field is only present for option orders. For stock/ETF/crypto/mutual\
         \ fund orders, this field will be null and the `universal_symbol` field will\
         \ be populated."
+    AccountOrderRecord_quote_universal_symbol:
+      allOf:
+      - $ref: '#/components/schemas/UniversalSymbol'
+      description: Quote cryptocurrency. This field is only present for cryptocurrency
+        pair orders with a cryptocurrency as quote.
+    AccountOrderRecord_quote_currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency'
+      description: Quote currency. This field is only present for cryptocurrency pair
+        orders with a fiat currency as quote.
     AccountOrderRecord_child_brokerage_order_ids:
       allOf:
       - $ref: '#/components/schemas/ChildBrokerageOrderIDs'

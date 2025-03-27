@@ -20,6 +20,8 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordOptionSymbol;
+import com.konfigthis.client.model.AccountOrderRecordQuoteCurrency;
+import com.konfigthis.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.AccountOrderRecordUniversalSymbol;
 import com.konfigthis.client.model.ChildBrokerageOrderIDsNullable;
@@ -72,6 +74,14 @@ public class AccountOrderRecord {
   public static final String SERIALIZED_NAME_OPTION_SYMBOL = "option_symbol";
   @SerializedName(SERIALIZED_NAME_OPTION_SYMBOL)
   private AccountOrderRecordOptionSymbol optionSymbol;
+
+  public static final String SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL = "quote_universal_symbol";
+  @SerializedName(SERIALIZED_NAME_QUOTE_UNIVERSAL_SYMBOL)
+  private AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol;
+
+  public static final String SERIALIZED_NAME_QUOTE_CURRENCY = "quote_currency";
+  @SerializedName(SERIALIZED_NAME_QUOTE_CURRENCY)
+  private AccountOrderRecordQuoteCurrency quoteCurrency;
 
   public static final String SERIALIZED_NAME_ACTION = "action";
   @SerializedName(SERIALIZED_NAME_ACTION)
@@ -253,6 +263,64 @@ public class AccountOrderRecord {
     
     
     this.optionSymbol = optionSymbol;
+  }
+
+
+  public AccountOrderRecord quoteUniversalSymbol(AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol) {
+    
+    
+    
+    
+    this.quoteUniversalSymbol = quoteUniversalSymbol;
+    return this;
+  }
+
+   /**
+   * Get quoteUniversalSymbol
+   * @return quoteUniversalSymbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountOrderRecordQuoteUniversalSymbol getQuoteUniversalSymbol() {
+    return quoteUniversalSymbol;
+  }
+
+
+  public void setQuoteUniversalSymbol(AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol) {
+    
+    
+    
+    this.quoteUniversalSymbol = quoteUniversalSymbol;
+  }
+
+
+  public AccountOrderRecord quoteCurrency(AccountOrderRecordQuoteCurrency quoteCurrency) {
+    
+    
+    
+    
+    this.quoteCurrency = quoteCurrency;
+    return this;
+  }
+
+   /**
+   * Get quoteCurrency
+   * @return quoteCurrency
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public AccountOrderRecordQuoteCurrency getQuoteCurrency() {
+    return quoteCurrency;
+  }
+
+
+  public void setQuoteCurrency(AccountOrderRecordQuoteCurrency quoteCurrency) {
+    
+    
+    
+    this.quoteCurrency = quoteCurrency;
   }
 
 
@@ -843,6 +911,8 @@ public class AccountOrderRecord {
         Objects.equals(this.status, accountOrderRecord.status) &&
         Objects.equals(this.universalSymbol, accountOrderRecord.universalSymbol) &&
         Objects.equals(this.optionSymbol, accountOrderRecord.optionSymbol) &&
+        Objects.equals(this.quoteUniversalSymbol, accountOrderRecord.quoteUniversalSymbol) &&
+        Objects.equals(this.quoteCurrency, accountOrderRecord.quoteCurrency) &&
         Objects.equals(this.action, accountOrderRecord.action) &&
         Objects.equals(this.totalQuantity, accountOrderRecord.totalQuantity) &&
         Objects.equals(this.openQuantity, accountOrderRecord.openQuantity) &&
@@ -868,7 +938,7 @@ public class AccountOrderRecord {
 
   @Override
   public int hashCode() {
-    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
+    return Objects.hash(brokerageOrderId, status, universalSymbol, optionSymbol, quoteUniversalSymbol, quoteCurrency, action, totalQuantity, openQuantity, canceledQuantity, filledQuantity, executionPrice, limitPrice, stopPrice, orderType, timeInForce, timePlaced, timeUpdated, timeExecuted, expiryDate, symbol, childBrokerageOrderIds, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -886,6 +956,8 @@ public class AccountOrderRecord {
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    universalSymbol: ").append(toIndentedString(universalSymbol)).append("\n");
     sb.append("    optionSymbol: ").append(toIndentedString(optionSymbol)).append("\n");
+    sb.append("    quoteUniversalSymbol: ").append(toIndentedString(quoteUniversalSymbol)).append("\n");
+    sb.append("    quoteCurrency: ").append(toIndentedString(quoteCurrency)).append("\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
     sb.append("    totalQuantity: ").append(toIndentedString(totalQuantity)).append("\n");
     sb.append("    openQuantity: ").append(toIndentedString(openQuantity)).append("\n");
@@ -929,6 +1001,8 @@ public class AccountOrderRecord {
     openapiFields.add("status");
     openapiFields.add("universal_symbol");
     openapiFields.add("option_symbol");
+    openapiFields.add("quote_universal_symbol");
+    openapiFields.add("quote_currency");
     openapiFields.add("action");
     openapiFields.add("total_quantity");
     openapiFields.add("open_quantity");
@@ -972,6 +1046,14 @@ public class AccountOrderRecord {
       // validate the optional field `option_symbol`
       if (jsonObj.get("option_symbol") != null && !jsonObj.get("option_symbol").isJsonNull()) {
         AccountOrderRecordOptionSymbol.validateJsonObject(jsonObj.getAsJsonObject("option_symbol"));
+      }
+      // validate the optional field `quote_universal_symbol`
+      if (jsonObj.get("quote_universal_symbol") != null && !jsonObj.get("quote_universal_symbol").isJsonNull()) {
+        AccountOrderRecordQuoteUniversalSymbol.validateJsonObject(jsonObj.getAsJsonObject("quote_universal_symbol"));
+      }
+      // validate the optional field `quote_currency`
+      if (jsonObj.get("quote_currency") != null && !jsonObj.get("quote_currency").isJsonNull()) {
+        AccountOrderRecordQuoteCurrency.validateJsonObject(jsonObj.getAsJsonObject("quote_currency"));
       }
       if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));

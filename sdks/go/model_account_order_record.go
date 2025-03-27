@@ -23,6 +23,8 @@ type AccountOrderRecord struct {
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
 	UniversalSymbol *AccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
 	OptionSymbol *AccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
+	QuoteUniversalSymbol *AccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
+	QuoteCurrency *AccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
@@ -203,6 +205,70 @@ func (o *AccountOrderRecord) HasOptionSymbol() bool {
 // SetOptionSymbol gets a reference to the given AccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
 func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
 	o.OptionSymbol = &v
+}
+
+// GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise.
+func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol {
+	if o == nil || isNil(o.QuoteUniversalSymbol) {
+		var ret AccountOrderRecordQuoteUniversalSymbol
+		return ret
+	}
+	return *o.QuoteUniversalSymbol
+}
+
+// GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool) {
+	if o == nil || isNil(o.QuoteUniversalSymbol) {
+    return nil, false
+	}
+	return o.QuoteUniversalSymbol, true
+}
+
+// HasQuoteUniversalSymbol returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool {
+	if o != nil && !isNil(o.QuoteUniversalSymbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuoteUniversalSymbol gets a reference to the given AccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
+func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol) {
+	o.QuoteUniversalSymbol = &v
+}
+
+// GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise.
+func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency {
+	if o == nil || isNil(o.QuoteCurrency) {
+		var ret AccountOrderRecordQuoteCurrency
+		return ret
+	}
+	return *o.QuoteCurrency
+}
+
+// GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool) {
+	if o == nil || isNil(o.QuoteCurrency) {
+    return nil, false
+	}
+	return o.QuoteCurrency, true
+}
+
+// HasQuoteCurrency returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasQuoteCurrency() bool {
+	if o != nil && !isNil(o.QuoteCurrency) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuoteCurrency gets a reference to the given AccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
+func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency) {
+	o.QuoteCurrency = &v
 }
 
 // GetAction returns the Action field value if set, zero value otherwise.
@@ -854,6 +920,12 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.OptionSymbol) {
 		toSerialize["option_symbol"] = o.OptionSymbol
 	}
+	if !isNil(o.QuoteUniversalSymbol) {
+		toSerialize["quote_universal_symbol"] = o.QuoteUniversalSymbol
+	}
+	if !isNil(o.QuoteCurrency) {
+		toSerialize["quote_currency"] = o.QuoteCurrency
+	}
 	if !isNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
@@ -924,6 +996,8 @@ func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "universal_symbol")
 		delete(additionalProperties, "option_symbol")
+		delete(additionalProperties, "quote_universal_symbol")
+		delete(additionalProperties, "quote_currency")
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "total_quantity")
 		delete(additionalProperties, "open_quantity")

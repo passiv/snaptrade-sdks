@@ -23,6 +23,10 @@ module SnapTrade
 
     attr_accessor :option_symbol
 
+    attr_accessor :quote_universal_symbol
+
+    attr_accessor :quote_currency
+
     # The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
     attr_accessor :action
 
@@ -77,6 +81,8 @@ module SnapTrade
         :'status' => :'status',
         :'universal_symbol' => :'universal_symbol',
         :'option_symbol' => :'option_symbol',
+        :'quote_universal_symbol' => :'quote_universal_symbol',
+        :'quote_currency' => :'quote_currency',
         :'action' => :'action',
         :'total_quantity' => :'total_quantity',
         :'open_quantity' => :'open_quantity',
@@ -108,6 +114,8 @@ module SnapTrade
         :'status' => :'AccountOrderRecordStatus',
         :'universal_symbol' => :'AccountOrderRecordUniversalSymbol',
         :'option_symbol' => :'AccountOrderRecordOptionSymbol',
+        :'quote_universal_symbol' => :'AccountOrderRecordQuoteUniversalSymbol',
+        :'quote_currency' => :'AccountOrderRecordQuoteCurrency',
         :'action' => :'String',
         :'total_quantity' => :'Float',
         :'open_quantity' => :'Float',
@@ -174,6 +182,14 @@ module SnapTrade
 
       if attributes.key?(:'option_symbol')
         self.option_symbol = attributes[:'option_symbol']
+      end
+
+      if attributes.key?(:'quote_universal_symbol')
+        self.quote_universal_symbol = attributes[:'quote_universal_symbol']
+      end
+
+      if attributes.key?(:'quote_currency')
+        self.quote_currency = attributes[:'quote_currency']
       end
 
       if attributes.key?(:'action')
@@ -263,6 +279,8 @@ module SnapTrade
           status == o.status &&
           universal_symbol == o.universal_symbol &&
           option_symbol == o.option_symbol &&
+          quote_universal_symbol == o.quote_universal_symbol &&
+          quote_currency == o.quote_currency &&
           action == o.action &&
           total_quantity == o.total_quantity &&
           open_quantity == o.open_quantity &&
@@ -290,7 +308,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [brokerage_order_id, status, universal_symbol, option_symbol, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
+      [brokerage_order_id, status, universal_symbol, option_symbol, quote_universal_symbol, quote_currency, action, total_quantity, open_quantity, canceled_quantity, filled_quantity, execution_price, limit_price, stop_price, order_type, time_in_force, time_placed, time_updated, time_executed, expiry_date, symbol, child_brokerage_order_ids].hash
     end
 
     # Builds the object from hash

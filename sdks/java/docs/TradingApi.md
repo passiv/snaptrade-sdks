@@ -57,6 +57,8 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getUniversalSymbol());
       System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
       System.out.println(result.getAction());
       System.out.println(result.getTotalQuantity());
       System.out.println(result.getOpenQuantity());
@@ -405,6 +407,8 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getUniversalSymbol());
       System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
       System.out.println(result.getAction());
       System.out.println(result.getTotalQuantity());
       System.out.println(result.getOpenQuantity());
@@ -540,6 +544,8 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getUniversalSymbol());
       System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
       System.out.println(result.getAction());
       System.out.println(result.getTotalQuantity());
       System.out.println(result.getOpenQuantity());
@@ -665,6 +671,8 @@ public class Example {
       System.out.println(result.getStatus());
       System.out.println(result.getUniversalSymbol());
       System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
       System.out.println(result.getAction());
       System.out.println(result.getTotalQuantity());
       System.out.println(result.getOpenQuantity());

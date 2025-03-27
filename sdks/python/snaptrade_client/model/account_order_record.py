@@ -114,6 +114,78 @@ class AccountOrderRecord(
                         _configuration=_configuration,
                         **kwargs,
                     )
+            
+            
+            class quote_universal_symbol(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            UniversalSymbol,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'quote_universal_symbol':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
+            
+            
+            class quote_currency(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Currency,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'quote_currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             action = schemas.StrSchema
             
             
@@ -362,6 +434,8 @@ class AccountOrderRecord(
                 "status": status,
                 "universal_symbol": universal_symbol,
                 "option_symbol": option_symbol,
+                "quote_universal_symbol": quote_universal_symbol,
+                "quote_currency": quote_currency,
                 "action": action,
                 "total_quantity": total_quantity,
                 "open_quantity": open_quantity,
@@ -392,6 +466,12 @@ class AccountOrderRecord(
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["option_symbol"]) -> MetaOapg.properties.option_symbol: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> MetaOapg.properties.quote_universal_symbol: ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["quote_currency"]) -> MetaOapg.properties.quote_currency: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["action"]) -> MetaOapg.properties.action: ...
@@ -444,7 +524,7 @@ class AccountOrderRecord(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -459,6 +539,12 @@ class AccountOrderRecord(
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["option_symbol"]) -> typing.Union[MetaOapg.properties.option_symbol, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["quote_universal_symbol"]) -> typing.Union[MetaOapg.properties.quote_universal_symbol, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["quote_currency"]) -> typing.Union[MetaOapg.properties.quote_currency, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> typing.Union[MetaOapg.properties.action, schemas.Unset]: ...
@@ -511,7 +597,7 @@ class AccountOrderRecord(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id"], typing_extensions.Literal["status"], typing_extensions.Literal["universal_symbol"], typing_extensions.Literal["option_symbol"], typing_extensions.Literal["quote_universal_symbol"], typing_extensions.Literal["quote_currency"], typing_extensions.Literal["action"], typing_extensions.Literal["total_quantity"], typing_extensions.Literal["open_quantity"], typing_extensions.Literal["canceled_quantity"], typing_extensions.Literal["filled_quantity"], typing_extensions.Literal["execution_price"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["order_type"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["time_placed"], typing_extensions.Literal["time_updated"], typing_extensions.Literal["time_executed"], typing_extensions.Literal["expiry_date"], typing_extensions.Literal["symbol"], typing_extensions.Literal["child_brokerage_order_ids"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -521,6 +607,8 @@ class AccountOrderRecord(
         status: typing.Union['AccountOrderRecordStatus', schemas.Unset] = schemas.unset,
         universal_symbol: typing.Union[MetaOapg.properties.universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         option_symbol: typing.Union[MetaOapg.properties.option_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        quote_universal_symbol: typing.Union[MetaOapg.properties.quote_universal_symbol, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
+        quote_currency: typing.Union[MetaOapg.properties.quote_currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         action: typing.Union[MetaOapg.properties.action, str, schemas.Unset] = schemas.unset,
         total_quantity: typing.Union[MetaOapg.properties.total_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         open_quantity: typing.Union[MetaOapg.properties.open_quantity, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -547,6 +635,8 @@ class AccountOrderRecord(
             status=status,
             universal_symbol=universal_symbol,
             option_symbol=option_symbol,
+            quote_universal_symbol=quote_universal_symbol,
+            quote_currency=quote_currency,
             action=action,
             total_quantity=total_quantity,
             open_quantity=open_quantity,
@@ -569,5 +659,6 @@ class AccountOrderRecord(
 
 from snaptrade_client.model.account_order_record_status import AccountOrderRecordStatus
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
+from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.options_symbol import OptionsSymbol
 from snaptrade_client.model.universal_symbol import UniversalSymbol

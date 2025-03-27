@@ -6,6 +6,8 @@ export * from './account-holdings-account';
 export * from './account-order-record';
 export * from './account-order-record-child-brokerage-order-ids';
 export * from './account-order-record-option-symbol';
+export * from './account-order-record-quote-currency';
+export * from './account-order-record-quote-universal-symbol';
 export * from './account-order-record-status';
 export * from './account-order-record-universal-symbol';
 export * from './account-simple';
