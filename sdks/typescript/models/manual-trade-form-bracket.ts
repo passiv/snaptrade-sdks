@@ -15,6 +15,7 @@ import { OrderTypeStrict } from './order-type-strict';
 import { StopLoss } from './stop-loss';
 import { TakeProfit } from './take-profit';
 import { TimeInForceStrict } from './time-in-force-strict';
+import { TradingInstrument } from './trading-instrument';
 
 /**
  * Inputs for placing an order with the brokerage.
@@ -22,12 +23,6 @@ import { TimeInForceStrict } from './time-in-force-strict';
  * @interface ManualTradeFormBracket
  */
 export interface ManualTradeFormBracket {
-    /**
-     * Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-     * @type {string}
-     * @memberof ManualTradeFormBracket
-     */
-    'account_id': string;
     /**
      * The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
      * @type {ActionStrictWithOptions}
@@ -39,7 +34,13 @@ export interface ManualTradeFormBracket {
      * @type {string}
      * @memberof ManualTradeFormBracket
      */
-    'symbol': string;
+    'symbol'?: string;
+    /**
+     * 
+     * @type {TradingInstrument}
+     * @memberof ManualTradeFormBracket
+     */
+    'instrument': TradingInstrument;
     /**
      * The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
      * @type {OrderTypeStrict}

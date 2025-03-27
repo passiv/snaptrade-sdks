@@ -7,9 +7,10 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /trade/placeBracketOrder | Place a Bracket Order |
+| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
+| [**replaceOrder**](TradingApi.md#replaceOrder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one |
 
 
 <a name="cancelUserAccountOrder"></a>
@@ -354,7 +355,7 @@ public class Example {
 
 <a name="placeBracketOrder"></a>
 # **placeBracketOrder**
-> AccountOrderRecord placeBracketOrder(userId, userSecret, manualTradeFormBracket).execute();
+> AccountOrderRecord placeBracketOrder(accountId, userId, userSecret, manualTradeFormBracket).execute();
 
 Place a Bracket Order
 
@@ -382,22 +383,24 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID accountId = UUID.randomUUID(); // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     ActionStrictWithOptions action = ActionStrictWithOptions.fromValue("BUY");
-    String symbol = "symbol_example"; // The security's trading ticker symbol.
+    TradingInstrument instrument = new TradingInstrument();
     OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     StopLoss stopLoss = new StopLoss();
     TakeProfit takeProfit = new TakeProfit();
+    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
+    String symbol = "symbol_example"; // The security's trading ticker symbol.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     try {
       AccountOrderRecord result = client
               .trading
-              .placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+              .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
+              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -437,7 +440,8 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+              .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
+              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -463,6 +467,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**| The ID of the account to execute the trade on. | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **manualTradeFormBracket** | [**ManualTradeFormBracket**](ManualTradeFormBracket.md)|  | |
@@ -747,5 +752,139 @@ public class Example {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Status of order placed |  -  |
+| **500** | Unexpected Error |  -  |
+
+<a name="replaceOrder"></a>
+# **replaceOrder**
+> AccountOrderRecord replaceOrder(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm).execute();
+
+Replaces an order with a new one
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    ActionStrict action = ActionStrict.fromValue("BUY");
+    OrderTypeStrict orderType = OrderTypeStrict.fromValue("Limit");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
+    UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
+    String brokerageOrderId = "brokerageOrderId_example"; // The Brokerage Order ID of the order to replace.
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
+    Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+    try {
+      AccountOrderRecord result = client
+              .trading
+              .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+              .price(price)
+              .stop(stop)
+              .units(units)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getBrokerageOrderId());
+      System.out.println(result.getStatus());
+      System.out.println(result.getUniversalSymbol());
+      System.out.println(result.getOptionSymbol());
+      System.out.println(result.getQuoteUniversalSymbol());
+      System.out.println(result.getQuoteCurrency());
+      System.out.println(result.getAction());
+      System.out.println(result.getTotalQuantity());
+      System.out.println(result.getOpenQuantity());
+      System.out.println(result.getCanceledQuantity());
+      System.out.println(result.getFilledQuantity());
+      System.out.println(result.getExecutionPrice());
+      System.out.println(result.getLimitPrice());
+      System.out.println(result.getStopPrice());
+      System.out.println(result.getOrderType());
+      System.out.println(result.getTimeInForce());
+      System.out.println(result.getTimePlaced());
+      System.out.println(result.getTimeUpdated());
+      System.out.println(result.getTimeExecuted());
+      System.out.println(result.getExpiryDate());
+      System.out.println(result.getSymbol());
+      System.out.println(result.getChildBrokerageOrderIds());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#replaceOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountOrderRecord> response = client
+              .trading
+              .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+              .price(price)
+              .stop(stop)
+              .units(units)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#replaceOrder");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**| The ID of the account to execute the trade on. | |
+| **brokerageOrderId** | **String**| The Brokerage Order ID of the order to replace. | |
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **manualTradeReplaceForm** | [**ManualTradeReplaceForm**](ManualTradeReplaceForm.md)|  | |
+
+### Return type
+
+[**AccountOrderRecord**](AccountOrderRecord.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
 

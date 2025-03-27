@@ -13,14 +13,13 @@ require 'time'
 module SnapTrade
   # Inputs for placing an order with the brokerage.
   class ManualTradeFormBracket
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    attr_accessor :account_id
-
     # The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     attr_accessor :action
 
     # The security's trading ticker symbol.
     attr_accessor :symbol
+
+    attr_accessor :instrument
 
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
@@ -44,9 +43,9 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'account_id' => :'account_id',
         :'action' => :'action',
         :'symbol' => :'symbol',
+        :'instrument' => :'instrument',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'price' => :'price',
@@ -65,9 +64,9 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'account_id' => :'String',
         :'action' => :'ActionStrictWithOptions',
         :'symbol' => :'String',
+        :'instrument' => :'TradingInstrument',
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float',
@@ -101,16 +100,16 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'account_id')
-        self.account_id = attributes[:'account_id']
-      end
-
       if attributes.key?(:'action')
         self.action = attributes[:'action']
       end
 
       if attributes.key?(:'symbol')
         self.symbol = attributes[:'symbol']
+      end
+
+      if attributes.key?(:'instrument')
+        self.instrument = attributes[:'instrument']
       end
 
       if attributes.key?(:'order_type')
@@ -146,16 +145,12 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @account_id.nil?
-        invalid_properties.push('invalid value for "account_id", account_id cannot be nil.')
-      end
-
       if @action.nil?
         invalid_properties.push('invalid value for "action", action cannot be nil.')
       end
 
-      if @symbol.nil?
-        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
+      if @instrument.nil?
+        invalid_properties.push('invalid value for "instrument", instrument cannot be nil.')
       end
 
       if @order_type.nil?
@@ -180,9 +175,8 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @account_id.nil?
       return false if @action.nil?
-      return false if @symbol.nil?
+      return false if @instrument.nil?
       return false if @order_type.nil?
       return false if @time_in_force.nil?
       return false if @stop_loss.nil?
@@ -195,9 +189,9 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          account_id == o.account_id &&
           action == o.action &&
           symbol == o.symbol &&
+          instrument == o.instrument &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           price == o.price &&
@@ -216,7 +210,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, symbol, order_type, time_in_force, price, stop, units, stop_loss, take_profit].hash
+      [action, symbol, instrument, order_type, time_in_force, price, stop, units, stop_loss, take_profit].hash
     end
 
     # Builds the object from hash

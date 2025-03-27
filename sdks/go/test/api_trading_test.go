@@ -98,23 +98,25 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
 
     t.Run("Test TradingApiService PlaceBracketOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        instrument := *snaptrade.NewTradingInstrument()
         stopLoss := *snaptrade.NewStopLoss()
         takeProfit := *snaptrade.NewTakeProfit()
         
         manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
-            "917c8734-8470-4a3e-a18f-57c3f2ee6631",
             null,
-            "AAPL",
+            instrument,
             null,
             null,
             stopLoss,
             takeProfit,
         )
+        manualTradeFormBracket.SetSymbol("AAPL")
         manualTradeFormBracket.SetPrice(31.33)
         manualTradeFormBracket.SetStop(31.33)
         manualTradeFormBracket.SetUnits(10.5)
         
         request := client.TradingApi.PlaceBracketOrder(
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
             "userId_example",
             "userSecret_example",
             manualTradeFormBracket,
@@ -173,6 +175,35 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             "userSecret_example",
         )
         request.ValidatedTradeBody(validatedTradeBody)
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test TradingApiService ReplaceOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        units := *snaptrade.Newfloat32()
+        
+        manualTradeReplaceForm := *snaptrade.NewManualTradeReplaceForm(
+            null,
+            null,
+            null,
+        )
+        manualTradeReplaceForm.SetPrice(31.33)
+        manualTradeReplaceForm.SetStop(31.33)
+        manualTradeReplaceForm.SetUnits(units)
+        
+        request := client.TradingApi.ReplaceOrder(
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "brokerageOrderId_example",
+            "userId_example",
+            "userSecret_example",
+            manualTradeReplaceForm,
+        )
         
         resp, httpRes, err := request.Execute()
 

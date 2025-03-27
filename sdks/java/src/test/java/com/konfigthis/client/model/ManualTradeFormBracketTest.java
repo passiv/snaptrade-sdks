@@ -22,10 +22,10 @@ import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
+import com.konfigthis.client.model.TradingInstrument;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.util.UUID;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -46,14 +46,6 @@ public class ManualTradeFormBracketTest {
     }
 
     /**
-     * Test the property 'accountId'
-     */
-    @Test
-    public void accountIdTest() {
-        // TODO: test accountId
-    }
-
-    /**
      * Test the property 'action'
      */
     @Test
@@ -67,6 +59,14 @@ public class ManualTradeFormBracketTest {
     @Test
     public void symbolTest() {
         // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'instrument'
+     */
+    @Test
+    public void instrumentTest() {
+        // TODO: test instrument
     }
 
     /**

@@ -69,6 +69,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -2147,11 +2148,15 @@ use. Only supported on certain brokerages
 
 ```typescript
 const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   symbol: "AAPL",
+  instrument: {
+    symbol: "AAPL",
+    type: "EQUITY",
+  },
   order_type: "Market",
   time_in_force: "FOK",
   price: 31.33,
@@ -2169,17 +2174,11 @@ const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `string`<a id="account_id-string"></a>
-
-Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-
 ##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
 
 The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
 
-##### symbol: `string`<a id="symbol-string"></a>
-
-The security\\\'s trading ticker symbol.
+##### instrument: [`TradingInstrument`](./models/trading-instrument.ts)<a id="instrument-tradinginstrumentmodelstrading-instrumentts"></a>
 
 ##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
@@ -2193,9 +2192,17 @@ The Time in Force type for the order. This field indicates how long the order wi
 
 ##### take_profit: [`TakeProfit`](./models/take-profit.ts)<a id="take_profit-takeprofitmodelstake-profitts"></a>
 
+##### accountId: `string`<a id="accountid-string"></a>
+
+The ID of the account to execute the trade on.
+
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol.
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -2215,7 +2222,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/trade/placeBracketOrder` `POST`
+`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2345,6 +2352,79 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.replaceOrder`<a id="snaptradetradingreplaceorder"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const replaceOrderResponse = await snaptrade.trading.replaceOrder({
+  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "FOK",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### price: `number`<a id="price-number"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `number`<a id="stop-number"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

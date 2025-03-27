@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountId** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
 **Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
-**Symbol** | **string** | The security&#39;s trading ticker symbol. | 
+**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol. | [optional] 
+**Instrument** | [**TradingInstrument**](TradingInstrument.md) |  | 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewManualTradeFormBracket
 
-`func NewManualTradeFormBracket(accountId string, action ActionStrictWithOptions, symbol string, orderType OrderTypeStrict, timeInForce TimeInForceStrict, stopLoss StopLoss, takeProfit TakeProfit, ) *ManualTradeFormBracket`
+`func NewManualTradeFormBracket(action ActionStrictWithOptions, instrument TradingInstrument, orderType OrderTypeStrict, timeInForce TimeInForceStrict, stopLoss StopLoss, takeProfit TakeProfit, ) *ManualTradeFormBracket`
 
 NewManualTradeFormBracket instantiates a new ManualTradeFormBracket object
 This constructor will assign default values to properties that have it defined,
@@ -33,26 +33,6 @@ will change when the set of required properties is changed
 NewManualTradeFormBracketWithDefaults instantiates a new ManualTradeFormBracket object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAccountId
-
-`func (o *ManualTradeFormBracket) GetAccountId() string`
-
-GetAccountId returns the AccountId field if non-nil, zero value otherwise.
-
-### GetAccountIdOk
-
-`func (o *ManualTradeFormBracket) GetAccountIdOk() (*string, bool)`
-
-GetAccountIdOk returns a tuple with the AccountId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountId
-
-`func (o *ManualTradeFormBracket) SetAccountId(v string)`
-
-SetAccountId sets AccountId field to given value.
-
 
 ### GetAction
 
@@ -92,6 +72,31 @@ and a boolean to check if the value has been set.
 `func (o *ManualTradeFormBracket) SetSymbol(v string)`
 
 SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *ManualTradeFormBracket) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
+
+### GetInstrument
+
+`func (o *ManualTradeFormBracket) GetInstrument() TradingInstrument`
+
+GetInstrument returns the Instrument field if non-nil, zero value otherwise.
+
+### GetInstrumentOk
+
+`func (o *ManualTradeFormBracket) GetInstrumentOk() (*TradingInstrument, bool)`
+
+GetInstrumentOk returns a tuple with the Instrument field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstrument
+
+`func (o *ManualTradeFormBracket) SetInstrument(v TradingInstrument)`
+
+SetInstrument sets Instrument field to given value.
 
 
 ### GetOrderType

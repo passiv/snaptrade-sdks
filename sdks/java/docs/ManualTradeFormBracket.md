@@ -8,9 +8,9 @@ Inputs for placing an order with the brokerage.
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**accountId** | **UUID** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. |  |
 |**action** | **ActionStrictWithOptions** |  |  |
-|**symbol** | **String** | The security&#39;s trading ticker symbol. |  |
+|**symbol** | **String** | The security&#39;s trading ticker symbol. |  [optional] |
+|**instrument** | [**TradingInstrument**](TradingInstrument.md) |  |  |
 |**orderType** | **OrderTypeStrict** |  |  |
 |**timeInForce** | **TimeInForceStrict** |  |  |
 |**price** | **Double** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. |  [optional] |

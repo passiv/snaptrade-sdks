@@ -70,6 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
+  * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -2019,9 +2020,11 @@ use. Only supported on certain brokerages
 
 ```ruby
 result = snaptrade.trading.place_bracket_order(
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
-  symbol: "AAPL",
+  instrument: {
+        "symbol" => "AAPL",
+        "type" => "EQUITY",
+    },
   order_type: "Market",
   time_in_force: "FOK",
   stop_loss: {
@@ -2031,8 +2034,10 @@ result = snaptrade.trading.place_bracket_order(
   take_profit: {
         "limit_price" => "49.95",
     },
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  symbol: "AAPL",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -2042,18 +2047,12 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `String`<a id="account_id-string"></a>
-Unique identifier for the connected brokerage account. This is the UUID used to
-reference the account in SnapTrade.
-
 ##### action: [`ActionStrictWithOptions`](./lib/snaptrade/models/action_strict_with_options.rb)<a id="action-actionstrictwithoptionslibsnaptrademodelsaction_strict_with_optionsrb"></a>
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or
 `SELL_TO_CLOSE` for Options.
 
-##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol.
-
+##### instrument: [`TradingInstrument`](./lib/snaptrade/models/trading_instrument.rb)<a id="instrument-tradinginstrumentlibsnaptrademodelstrading_instrumentrb"></a>
 ##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
 The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
 field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
@@ -2069,8 +2068,14 @@ immediately or be canceled completely.
 
 ##### stop_loss: [`StopLoss`](./lib/snaptrade/models/stop_loss.rb)<a id="stop_loss-stoplosslibsnaptrademodelsstop_lossrb"></a>
 ##### take_profit: [`TakeProfit`](./lib/snaptrade/models/take_profit.rb)<a id="take_profit-takeprofitlibsnaptrademodelstake_profitrb"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+The ID of the account to execute the trade on.
+
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
+##### symbol: `String`<a id="symbol-string"></a>
+The security's trading ticker symbol.
+
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.
 
@@ -2087,7 +2092,7 @@ Must be `null` if `notional_value` is provided.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/trade/placeBracketOrder` `POST`
+`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2227,6 +2232,78 @@ before responding to the request.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.replace_order`<a id="snaptradetradingreplace_order"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.replace_order(
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "FOK",
+  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrict`](./lib/snaptrade/models/action_strict.rb)<a id="action-actionstrictlibsnaptrademodelsaction_strictrb"></a>
+The action describes the intent or side of a trade. This is either `BUY` or
+`SELL`.
+
+##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
+The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
+field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
+required.
+
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely.
+
+##### account_id: `String`<a id="account_id-string"></a>
+The ID of the account to execute the trade on.
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+The Brokerage Order ID of the order to replace.
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### price: `Float`<a id="price-float"></a>
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Float`<a id="stop-float"></a>
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`Float`](./lib/snaptrade/models/float.rb)<a id="units-floatlibsnaptrademodelsfloatrb"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

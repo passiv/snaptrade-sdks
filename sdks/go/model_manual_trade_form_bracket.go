@@ -17,11 +17,10 @@ import (
 
 // ManualTradeFormBracket Inputs for placing an order with the brokerage.
 type ManualTradeFormBracket struct {
-	// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-	AccountId string `json:"account_id"`
 	Action ActionStrictWithOptions `json:"action"`
 	// The security's trading ticker symbol.
-	Symbol string `json:"symbol"`
+	Symbol *string `json:"symbol,omitempty"`
+	Instrument TradingInstrument `json:"instrument"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price for `Limit` and `StopLimit` orders.
@@ -38,11 +37,10 @@ type ManualTradeFormBracket struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManualTradeFormBracket(accountId string, action ActionStrictWithOptions, symbol string, orderType OrderTypeStrict, timeInForce TimeInForceStrict, stopLoss StopLoss, takeProfit TakeProfit) *ManualTradeFormBracket {
+func NewManualTradeFormBracket(action ActionStrictWithOptions, instrument TradingInstrument, orderType OrderTypeStrict, timeInForce TimeInForceStrict, stopLoss StopLoss, takeProfit TakeProfit) *ManualTradeFormBracket {
 	this := ManualTradeFormBracket{}
-	this.AccountId = accountId
 	this.Action = action
-	this.Symbol = symbol
+	this.Instrument = instrument
 	this.OrderType = orderType
 	this.TimeInForce = timeInForce
 	this.StopLoss = stopLoss
@@ -56,30 +54,6 @@ func NewManualTradeFormBracket(accountId string, action ActionStrictWithOptions,
 func NewManualTradeFormBracketWithDefaults() *ManualTradeFormBracket {
 	this := ManualTradeFormBracket{}
 	return &this
-}
-
-// GetAccountId returns the AccountId field value
-func (o *ManualTradeFormBracket) GetAccountId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AccountId
-}
-
-// GetAccountIdOk returns a tuple with the AccountId field value
-// and a boolean to check if the value has been set.
-func (o *ManualTradeFormBracket) GetAccountIdOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return &o.AccountId, true
-}
-
-// SetAccountId sets field value
-func (o *ManualTradeFormBracket) SetAccountId(v string) {
-	o.AccountId = v
 }
 
 // GetAction returns the Action field value
@@ -106,28 +80,60 @@ func (o *ManualTradeFormBracket) SetAction(v ActionStrictWithOptions) {
 	o.Action = v
 }
 
-// GetSymbol returns the Symbol field value
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
 func (o *ManualTradeFormBracket) GetSymbol() string {
-	if o == nil {
+	if o == nil || isNil(o.Symbol) {
 		var ret string
 		return ret
 	}
-
-	return o.Symbol
+	return *o.Symbol
 }
 
-// GetSymbolOk returns a tuple with the Symbol field value
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *ManualTradeFormBracket) GetSymbolOk() (*string, bool) {
+	if o == nil || isNil(o.Symbol) {
+    return nil, false
+	}
+	return o.Symbol, true
+}
+
+// HasSymbol returns a boolean if a field has been set.
+func (o *ManualTradeFormBracket) HasSymbol() bool {
+	if o != nil && !isNil(o.Symbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+func (o *ManualTradeFormBracket) SetSymbol(v string) {
+	o.Symbol = &v
+}
+
+// GetInstrument returns the Instrument field value
+func (o *ManualTradeFormBracket) GetInstrument() TradingInstrument {
+	if o == nil {
+		var ret TradingInstrument
+		return ret
+	}
+
+	return o.Instrument
+}
+
+// GetInstrumentOk returns a tuple with the Instrument field value
+// and a boolean to check if the value has been set.
+func (o *ManualTradeFormBracket) GetInstrumentOk() (*TradingInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.Symbol, true
+	return &o.Instrument, true
 }
 
-// SetSymbol sets field value
-func (o *ManualTradeFormBracket) SetSymbol(v string) {
-	o.Symbol = v
+// SetInstrument sets field value
+func (o *ManualTradeFormBracket) SetInstrument(v TradingInstrument) {
+	o.Instrument = v
 }
 
 // GetOrderType returns the OrderType field value
@@ -345,13 +351,13 @@ func (o *ManualTradeFormBracket) SetTakeProfit(v TakeProfit) {
 func (o ManualTradeFormBracket) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["account_id"] = o.AccountId
-	}
-	if true {
 		toSerialize["action"] = o.Action
 	}
-	if true {
+	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
+	}
+	if true {
+		toSerialize["instrument"] = o.Instrument
 	}
 	if true {
 		toSerialize["order_type"] = o.OrderType

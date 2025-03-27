@@ -16,16 +16,16 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.trade_place_bracket_order import post
+from snaptrade_client.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import patch
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestTradePlaceBracketOrder(ApiTestMixin, unittest.TestCase):
+class TestAccountsAccountIdTradingSimpleBrokerageOrderIdReplace(ApiTestMixin, unittest.TestCase):
     """
-    TradePlaceBracketOrder unit test stubs
-        Place a Bracket Order
+    AccountsAccountIdTradingSimpleBrokerageOrderIdReplace unit test stubs
+        Replaces an order with a new one
     """
 
     def setUp(self):

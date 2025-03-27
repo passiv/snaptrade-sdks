@@ -33,12 +33,14 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
+import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
+import com.konfigthis.client.model.TradingInstrument;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 
@@ -814,7 +816,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new GetUserAccountQuotesRequestBuilder(userId, userSecret, symbols, accountId);
     }
-    private okhttp3.Call placeBracketOrderCall(String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeBracketOrderCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -831,7 +833,8 @@ public class TradingApiGenerated {
         Object localVarPostBody = manualTradeFormBracket;
 
         // create path and map variables
-        String localVarPath = "/trade/placeBracketOrder";
+        String localVarPath = "/accounts/{accountId}/trading/bracket"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -868,7 +871,12 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeBracketOrderValidateBeforeCall(String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeBracketOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeBracketOrder(Async)");
+        }
+
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling placeBracketOrder(Async)");
@@ -884,51 +892,62 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'manualTradeFormBracket' when calling placeBracketOrder(Async)");
         }
 
-        return placeBracketOrderCall(userId, userSecret, manualTradeFormBracket, _callback);
+        return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecord> placeBracketOrderWithHttpInfo(String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket) throws ApiException {
-        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(userId, userSecret, manualTradeFormBracket, null);
+    private ApiResponse<AccountOrderRecord> placeBracketOrderWithHttpInfo(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket) throws ApiException {
+        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormBracket, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeBracketOrderAsync(String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call placeBracketOrderAsync(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(userId, userSecret, manualTradeFormBracket, _callback);
+        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class PlaceBracketOrderRequestBuilderGenerated {
-        final UUID accountId;
         final ActionStrictWithOptions action;
-        final String symbol;
+        final TradingInstrument instrument;
         final OrderTypeStrict orderType;
         final TimeInForceStrict timeInForce;
         final StopLoss stopLoss;
         final TakeProfit takeProfit;
+        final UUID accountId;
         final String userId;
         final String userSecret;
+        String symbol;
         Double price;
         Double stop;
         Double units;
 
-        public PlaceBracketOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, String symbol, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, String userId, String userSecret) {
-            this.accountId = accountId;
+        public PlaceBracketOrderRequestBuilderGenerated(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) {
             this.action = action;
-            this.symbol = symbol;
+            this.instrument = instrument;
             this.orderType = orderType;
             this.timeInForce = timeInForce;
             this.stopLoss = stopLoss;
             this.takeProfit = takeProfit;
+            this.accountId = accountId;
             this.userId = userId;
             this.userSecret = userSecret;
         }
 
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
         /**
          * Set price
          * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
@@ -995,14 +1014,14 @@ public class TradingApiGenerated {
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
-            return placeBracketOrderCall(userId, userSecret, manualTradeFormBracket, _callback);
+            return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
         }
 
         private ManualTradeFormBracket buildBodyParams() {
             ManualTradeFormBracket manualTradeFormBracket = new ManualTradeFormBracket();
-            manualTradeFormBracket.accountId(this.accountId);
             manualTradeFormBracket.action(this.action);
             manualTradeFormBracket.symbol(this.symbol);
+            manualTradeFormBracket.instrument(this.instrument);
             manualTradeFormBracket.orderType(this.orderType);
             manualTradeFormBracket.timeInForce(this.timeInForce);
             manualTradeFormBracket.price(this.price);
@@ -1026,7 +1045,7 @@ public class TradingApiGenerated {
          */
         public AccountOrderRecord execute() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = placeBracketOrderWithHttpInfo(userId, userSecret, manualTradeFormBracket);
+            ApiResponse<AccountOrderRecord> localVarResp = placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
             return localVarResp.getResponseBody();
         }
 
@@ -1043,7 +1062,7 @@ public class TradingApiGenerated {
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
-            return placeBracketOrderWithHttpInfo(userId, userSecret, manualTradeFormBracket);
+            return placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
         }
 
         /**
@@ -1060,13 +1079,14 @@ public class TradingApiGenerated {
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
             ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
-            return placeBracketOrderAsync(userId, userSecret, manualTradeFormBracket, _callback);
+            return placeBracketOrderAsync(accountId, userId, userSecret, manualTradeFormBracket, _callback);
         }
     }
 
     /**
      * Place a Bracket Order
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * @param accountId The ID of the account to execute the trade on. (required)
      * @param userId  (required)
      * @param userSecret  (required)
      * @param manualTradeFormBracket  (required)
@@ -1078,25 +1098,23 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceBracketOrderRequestBuilder placeBracketOrder(UUID accountId, ActionStrictWithOptions action, String symbol, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, String userId, String userSecret) throws IllegalArgumentException {
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
-            
-
+    public TradingApi.PlaceBracketOrderRequestBuilder placeBracketOrder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
         if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
-        if (symbol == null) throw new IllegalArgumentException("\"symbol\" is required but got null");
-            
-
+        if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
         if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (stopLoss == null) throw new IllegalArgumentException("\"stopLoss\" is required but got null");
         if (takeProfit == null) throw new IllegalArgumentException("\"takeProfit\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((TradingApi) this).new PlaceBracketOrderRequestBuilder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret);
+        return ((TradingApi) this).new PlaceBracketOrderRequestBuilder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
     }
     private okhttp3.Call placeForceOrderCall(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -1615,5 +1633,304 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new PlaceOrderRequestBuilder(tradeId, userId, userSecret);
+    }
+    private okhttp3.Call replaceOrderCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manualTradeReplaceForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
+            .replace("{" + "brokerageOrderId" + "}", localVarApiClient.escapeString(brokerageOrderId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call replaceOrderValidateBeforeCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'brokerageOrderId' is set
+        if (brokerageOrderId == null) {
+            throw new ApiException("Missing the required parameter 'brokerageOrderId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'manualTradeReplaceForm' is set
+        if (manualTradeReplaceForm == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeReplaceForm' when calling replaceOrder(Async)");
+        }
+
+        return replaceOrderCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+
+    }
+
+
+    private ApiResponse<AccountOrderRecord> replaceOrderWithHttpInfo(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm) throws ApiException {
+        okhttp3.Call localVarCall = replaceOrderValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, null);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call replaceOrderAsync(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = replaceOrderValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ReplaceOrderRequestBuilderGenerated {
+        final ActionStrict action;
+        final OrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
+        final UUID accountId;
+        final String brokerageOrderId;
+        final String userId;
+        final String userSecret;
+        Double price;
+        Double stop;
+        Double units;
+
+        public ReplaceOrderRequestBuilderGenerated(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
+            this.action = action;
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.accountId = accountId;
+            this.brokerageOrderId = brokerageOrderId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder price(Double price) {
+            this.price = price;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder price(Integer price) {
+            this.price = price.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder stop(Double stop) {
+            this.stop = stop;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder stop(Integer stop) {
+            this.stop = stop.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder units(Double units) {
+            this.units = units;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder units(Integer units) {
+            this.units = units.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for replaceOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        }
+
+        private ManualTradeReplaceForm buildBodyParams() {
+            ManualTradeReplaceForm manualTradeReplaceForm = new ManualTradeReplaceForm();
+            manualTradeReplaceForm.action(this.action);
+            manualTradeReplaceForm.orderType(this.orderType);
+            manualTradeReplaceForm.timeInForce(this.timeInForce);
+            manualTradeReplaceForm.price(this.price);
+            manualTradeReplaceForm.stop(this.stop);
+            manualTradeReplaceForm.units(this.units);
+            return manualTradeReplaceForm;
+        }
+
+        /**
+         * Execute replaceOrder request
+         * @return AccountOrderRecord
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountOrderRecord execute() throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = replaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute replaceOrder request with HTTP info returned
+         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+        }
+
+        /**
+         * Execute replaceOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderAsync(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        }
+    }
+
+    /**
+     * Replaces an order with a new one
+     * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+     * @param accountId The ID of the account to execute the trade on. (required)
+     * @param brokerageOrderId The Brokerage Order ID of the order to replace. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeReplaceForm  (required)
+     * @return ReplaceOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.ReplaceOrderRequestBuilder replaceOrder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) throws IllegalArgumentException {
+        if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((TradingApi) this).new ReplaceOrderRequestBuilder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
     }
 }
