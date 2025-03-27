@@ -115,9 +115,10 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
-*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /trade/placeBracketOrder | Place a Bracket Order
+*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place a Bracket Order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked order
+*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe
 
@@ -177,6 +178,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeFormNotionalValue](docs/ManualTradeFormNotionalValue.md)
  - [ManualTradeFormWithOptions](docs/ManualTradeFormWithOptions.md)
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
+ - [ManualTradeReplaceForm](docs/ManualTradeReplaceForm.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
  - [Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)
@@ -239,6 +241,7 @@ Class | Method | HTTP request | Description
  - [TradingCryptoSpotCancelOrderRequest](docs/TradingCryptoSpotCancelOrderRequest.md)
  - [TradingCryptoSpotPlaceOrderRequest](docs/TradingCryptoSpotPlaceOrderRequest.md)
  - [TradingCryptoSpotSymbols200Response](docs/TradingCryptoSpotSymbols200Response.md)
+ - [TradingInstrument](docs/TradingInstrument.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)

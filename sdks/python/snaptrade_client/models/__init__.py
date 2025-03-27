@@ -75,6 +75,7 @@ from snaptrade_client.model.manual_trade_form import ManualTradeForm
 from snaptrade_client.model.manual_trade_form_bracket import ManualTradeFormBracket
 from snaptrade_client.model.manual_trade_form_with_options import ManualTradeFormWithOptions
 from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
+from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse
@@ -147,6 +148,7 @@ from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.model.trade_id import TradeID
+from snaptrade_client.model.trading_instrument import TradingInstrument
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol

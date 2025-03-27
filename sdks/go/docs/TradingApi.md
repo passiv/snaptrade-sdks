@@ -7,9 +7,10 @@ Method | Path | Description
 [**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check order impact
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
-[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /trade/placeBracketOrder | Place a Bracket Order
+[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place a Bracket Order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked order
+[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one
 
 
 
@@ -224,23 +225,25 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
+    instrument := *snaptrade.NewTradingInstrument()
     stopLoss := *snaptrade.NewStopLoss()
     takeProfit := *snaptrade.NewTakeProfit()
     
     manualTradeFormBracket := *snaptrade.NewManualTradeFormBracket(
-        "917c8734-8470-4a3e-a18f-57c3f2ee6631",
         null,
-        "AAPL",
+        instrument,
         null,
         null,
         stopLoss,
         takeProfit,
     )
+    manualTradeFormBracket.SetSymbol("AAPL")
     manualTradeFormBracket.SetPrice(31.33)
     manualTradeFormBracket.SetStop(31.33)
     manualTradeFormBracket.SetUnits(10.5)
     
     request := client.TradingApi.PlaceBracketOrder(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         "userId_example",
         "userSecret_example",
         manualTradeFormBracket,
@@ -432,6 +435,86 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.Symbol`: %v\n", *resp.Symbol)
     fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.PlaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReplaceOrder
+
+Replaces an order with a new one
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    units := *snaptrade.Newfloat32()
+    
+    manualTradeReplaceForm := *snaptrade.NewManualTradeReplaceForm(
+        null,
+        null,
+        null,
+    )
+    manualTradeReplaceForm.SetPrice(31.33)
+    manualTradeReplaceForm.SetStop(31.33)
+    manualTradeReplaceForm.SetUnits(units)
+    
+    request := client.TradingApi.ReplaceOrder(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "brokerageOrderId_example",
+        "userId_example",
+        "userSecret_example",
+        manualTradeReplaceForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.ReplaceOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ReplaceOrder`: AccountOrderRecord
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.ReplaceOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.Action`: %v\n", *resp.Action)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.TotalQuantity`: %v\n", *resp.TotalQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.OpenQuantity`: %v\n", *resp.OpenQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.FilledQuantity`: %v\n", *resp.FilledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.LimitPrice`: %v\n", *resp.LimitPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.StopPrice`: %v\n", *resp.StopPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.OrderType`: %v\n", *resp.OrderType)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.TimeInForce`: %v\n", *resp.TimeInForce)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.TimePlaced`: %v\n", *resp.TimePlaced)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.TimeUpdated`: %v\n", *resp.TimeUpdated)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.TimeExecuted`: %v\n", *resp.TimeExecuted)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.ReplaceOrder.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 

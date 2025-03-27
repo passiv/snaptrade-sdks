@@ -75,6 +75,7 @@ describe 'TradingApi' do
   # unit tests for place_bracket_order
   # Place a Bracket Order
   # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+  # @param account_id The ID of the account to execute the trade on.
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_form_bracket 
@@ -110,6 +111,22 @@ describe 'TradingApi' do
   # @option opts [ValidatedTradeBody] :validated_trade_body 
   # @return [AccountOrderRecord]
   describe 'place_order test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for replace_order
+  # Replaces an order with a new one
+  # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+  # @param account_id The ID of the account to execute the trade on.
+  # @param brokerage_order_id The Brokerage Order ID of the order to replace.
+  # @param user_id 
+  # @param user_secret 
+  # @param manual_trade_replace_form 
+  # @param [Hash] opts the optional parameters
+  # @return [AccountOrderRecord]
+  describe 'replace_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

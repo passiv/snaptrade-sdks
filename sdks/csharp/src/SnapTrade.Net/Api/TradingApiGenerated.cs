@@ -121,12 +121,13 @@ namespace SnapTrade.Net.Api
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord PlaceBracketOrder(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
+        AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
 
         /// <summary>
         /// Place a Bracket Order
@@ -135,12 +136,13 @@ namespace SnapTrade.Net.Api
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
         /// <summary>
         /// Place order
         /// </summary>
@@ -197,6 +199,37 @@ namespace SnapTrade.Net.Api
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
+        /// <summary>
+        /// Replaces an order with a new one
+        /// </summary>
+        /// <remarks>
+        /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountOrderRecord</returns>
+        AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
+
+        /// <summary>
+        /// Replaces an order with a new one
+        /// </summary>
+        /// <remarks>
+        /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountOrderRecord</returns>
+        ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
         #endregion Synchronous Operations
     }
 
@@ -306,13 +339,14 @@ namespace SnapTrade.Net.Api
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place a Bracket Order
@@ -321,13 +355,14 @@ namespace SnapTrade.Net.Api
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Place order
         /// </summary>
@@ -388,6 +423,39 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Replaces an order with a new one
+        /// </summary>
+        /// <remarks>
+        /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountOrderRecord</returns>
+        System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Replaces an order with a new one
+        /// </summary>
+        /// <remarks>
+        /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         #endregion Asynchronous Operations
     }
 
@@ -1194,14 +1262,15 @@ namespace SnapTrade.Net.Api
         /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord PlaceBracketOrder(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
+        public AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceBracketOrderWithHttpInfo(userId, userSecret, manualTradeFormBracket);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = PlaceBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
             return localVarResponse.Data;
         }
 
@@ -1209,13 +1278,20 @@ namespace SnapTrade.Net.Api
         /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> PlaceBracketOrderWithHttpInfo(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0)
         {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceBracketOrder");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -1257,6 +1333,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = manualTradeFormBracket;
@@ -1281,7 +1358,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<AccountOrderRecord>("/trade/placeBracketOrder", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<AccountOrderRecord>("/accounts/{accountId}/trading/bracket", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("PlaceBracketOrder", localVarResponse);
@@ -1298,15 +1375,16 @@ namespace SnapTrade.Net.Api
         /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceBracketOrderWithHttpInfoAsync(userId, userSecret, manualTradeFormBracket, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await PlaceBracketOrderWithHttpInfoAsync(accountId, userId, userSecret, manualTradeFormBracket, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1314,14 +1392,21 @@ namespace SnapTrade.Net.Api
         /// Place a Bracket Order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="manualTradeFormBracket"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> PlaceBracketOrderWithHttpInfoAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceBracketOrder");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -1364,6 +1449,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
             localVarRequestOptions.Data = manualTradeFormBracket;
@@ -1388,7 +1474,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/trade/placeBracketOrder", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/accounts/{accountId}/trading/bracket", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
@@ -1823,6 +1909,254 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("PlaceOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>AccountOrderRecord</returns>
+        public AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = ReplaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of AccountOrderRecord</returns>
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> ReplaceOrderWithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0)
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'manualTradeReplaceForm' is set
+            if (manualTradeReplaceForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeReplaceForm' when calling TradingApi->ReplaceOrder");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = manualTradeReplaceForm;
+
+            localVarRequestOptions.Operation = "TradingApi.ReplaceOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Patch<AccountOrderRecord>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ReplaceOrder", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of AccountOrderRecord</returns>
+        public async System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await ReplaceOrderWithHttpInfoAsync(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId">The ID of the account to execute the trade on.</param>
+        /// <param name="brokerageOrderId">The Brokerage Order ID of the order to replace.</param>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="manualTradeReplaceForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> ReplaceOrderWithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->ReplaceOrder");
+            }
+
+            // verify the required parameter 'manualTradeReplaceForm' is set
+            if (manualTradeReplaceForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'manualTradeReplaceForm' when calling TradingApi->ReplaceOrder");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = manualTradeReplaceForm;
+
+            localVarRequestOptions.Operation = "TradingApi.ReplaceOrder";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PatchAsync<AccountOrderRecord>("/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("ReplaceOrder", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;

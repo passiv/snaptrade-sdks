@@ -413,25 +413,26 @@ module SnapTrade
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
     #
-    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
-    # @param symbol [String] The security's trading ticker symbol.
+    # @param instrument [TradingInstrument] 
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param stop_loss [StopLoss] 
     # @param take_profit [TakeProfit] 
+    # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param symbol [String] The security's trading ticker symbol.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     # @param body [ManualTradeFormBracket] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order(account_id:, action:, symbol:, order_type:, time_in_force:, stop_loss:, take_profit:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def place_bracket_order(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
-      _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:instrument] = instrument if instrument != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
@@ -440,7 +441,7 @@ module SnapTrade
       _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
       _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_bracket = _body
-      data, _status_code, _headers = place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, extra)
+      data, _status_code, _headers = place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
       data
     end
 
@@ -449,25 +450,26 @@ module SnapTrade
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
     #
-    # @param account_id [String] Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     # @param action [ActionStrictWithOptions] The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
-    # @param symbol [String] The security's trading ticker symbol.
+    # @param instrument [TradingInstrument] 
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
     # @param stop_loss [StopLoss] 
     # @param take_profit [TakeProfit] 
+    # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
+    # @param symbol [String] The security's trading ticker symbol.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     # @param body [ManualTradeFormBracket] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order_with_http_info(account_id:, action:, symbol:, order_type:, time_in_force:, stop_loss:, take_profit:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def place_bracket_order_with_http_info(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
-      _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:symbol] = symbol if symbol != SENTINEL
+      _body[:instrument] = instrument if instrument != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
@@ -476,31 +478,37 @@ module SnapTrade
       _body[:stop_loss] = stop_loss if stop_loss != SENTINEL
       _body[:take_profit] = take_profit if take_profit != SENTINEL
       manual_trade_form_bracket = _body
-      place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, extra)
+      place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
     end
 
     # Place a Bracket Order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form_bracket [ManualTradeFormBracket] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    private def place_bracket_order_impl(user_id, user_secret, manual_trade_form_bracket, opts = {})
-      data, _status_code, _headers = place_bracket_order_with_http_info(user_id, user_secret, manual_trade_form_bracket, opts)
+    private def place_bracket_order_impl(account_id, user_id, user_secret, manual_trade_form_bracket, opts = {})
+      data, _status_code, _headers = place_bracket_order_with_http_info(account_id, user_id, user_secret, manual_trade_form_bracket, opts)
       data
     end
 
     # Place a Bracket Order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+    # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_form_bracket [ManualTradeFormBracket] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def place_bracket_order_with_http_info_impl(user_id, user_secret, manual_trade_form_bracket, opts = {})
+    private def place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_bracket_order ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_bracket_order"
       end
       # verify the required parameter 'user_id' is set
       if @api_client.config.client_side_validation && user_id.nil?
@@ -515,7 +523,7 @@ module SnapTrade
         fail ArgumentError, "Missing the required parameter 'manual_trade_form_bracket' when calling TradingApi.place_bracket_order"
       end
       # resource path
-      local_var_path = '/trade/placeBracketOrder'
+      local_var_path = '/accounts/{accountId}/trading/bracket'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -841,6 +849,162 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#place_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Replaces an order with a new one
+    #
+    # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+    # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+    # returned in the response going forward. Only supported on some brokerages
+    #
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    # @param units [Float] 
+    # @param body [ManualTradeReplaceForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def replace_order(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+      _body = {}
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      manual_trade_replace_form = _body
+      data, _status_code, _headers = replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, extra)
+      data
+    end
+
+    # Replaces an order with a new one
+    #
+    # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+    # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+    # returned in the response going forward. Only supported on some brokerages
+    #
+    # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+    # @param units [Float] 
+    # @param body [ManualTradeReplaceForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def replace_order_with_http_info(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+      _body = {}
+      _body[:action] = action if action != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:price] = price if price != SENTINEL
+      _body[:stop] = stop if stop != SENTINEL
+      _body[:units] = units if units != SENTINEL
+      manual_trade_replace_form = _body
+      replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, extra)
+    end
+
+    # Replaces an order with a new one
+    # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_replace_form [ManualTradeReplaceForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountOrderRecord]
+    private def replace_order_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts = {})
+      data, _status_code, _headers = replace_order_with_http_info(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts)
+      data
+    end
+
+    # Replaces an order with a new one
+    # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+    # @param account_id [String] The ID of the account to execute the trade on.
+    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param manual_trade_replace_form [ManualTradeReplaceForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
+    private def replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.replace_order ...'
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.replace_order"
+      end
+      # verify the required parameter 'brokerage_order_id' is set
+      if @api_client.config.client_side_validation && brokerage_order_id.nil?
+        fail ArgumentError, "Missing the required parameter 'brokerage_order_id' when calling TradingApi.replace_order"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.replace_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.replace_order"
+      end
+      # verify the required parameter 'manual_trade_replace_form' is set
+      if @api_client.config.client_side_validation && manual_trade_replace_form.nil?
+        fail ArgumentError, "Missing the required parameter 'manual_trade_replace_form' when calling TradingApi.replace_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'brokerageOrderId' + '}', CGI.escape(brokerage_order_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(manual_trade_replace_form)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.replace_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#replace_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

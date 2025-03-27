@@ -677,16 +677,13 @@ operation_parameter_map = {
             },
         ]
     },
-    '/trade/placeBracketOrder-POST': {
+    '/accounts/{accountId}/trading/bracket-POST': {
         'parameters': [
-            {
-                'name': 'account_id'
-            },
             {
                 'name': 'action'
             },
             {
-                'name': 'symbol'
+                'name': 'instrument'
             },
             {
                 'name': 'order_type'
@@ -701,10 +698,16 @@ operation_parameter_map = {
                 'name': 'take_profit'
             },
             {
+                'name': 'accountId'
+            },
+            {
                 'name': 'userId'
             },
             {
                 'name': 'userSecret'
+            },
+            {
+                'name': 'symbol'
             },
             {
                 'name': 'price'
@@ -770,6 +773,40 @@ operation_parameter_map = {
             },
             {
                 'name': 'wait_to_confirm'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace-PATCH': {
+        'parameters': [
+            {
+                'name': 'action'
+            },
+            {
+                'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'price'
+            },
+            {
+                'name': 'stop'
+            },
+            {
+                'name': 'units'
             },
         ]
     },

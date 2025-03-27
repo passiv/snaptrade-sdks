@@ -73,6 +73,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
+  * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -2115,9 +2116,11 @@ use. Only supported on certain brokerages
 
 ```python
 place_bracket_order_response = snaptrade.trading.place_bracket_order(
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
-    symbol="AAPL",
+    instrument={
+        "symbol": "AAPL",
+        "type": "EQUITY",
+    },
     order_type="Market",
     time_in_force="FOK",
     stop_loss={
@@ -2127,8 +2130,10 @@ place_bracket_order_response = snaptrade.trading.place_bracket_order(
     take_profit={
         "limit_price": "49.95",
     },
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    symbol="AAPL",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -2137,15 +2142,10 @@ place_bracket_order_response = snaptrade.trading.place_bracket_order(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `str`<a id="account_id-str"></a>
-
-Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-
 ##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
 
-##### symbol: `str`<a id="symbol-str"></a>
+##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
 
-The security's trading ticker symbol.
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
@@ -2157,9 +2157,17 @@ The security's trading ticker symbol.
 ##### take_profit: [`TakeProfit`](./snaptrade_client/type/take_profit.py)<a id="take_profit-takeprofitsnaptrade_clienttypetake_profitpy"></a>
 
 
+##### account_id: `str`<a id="account_id-str"></a>
+
+The ID of the account to execute the trade on.
+
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The security's trading ticker symbol.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -2182,7 +2190,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/trade/placeBracketOrder` `post`
+`/accounts/{accountId}/trading/bracket` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2311,6 +2319,75 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.replace_order`<a id="snaptradetradingreplace_order"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+replace_order_response = snaptrade.trading.replace_order(
+    action="BUY",
+    order_type="Market",
+    time_in_force="FOK",
+    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ManualTradeReplaceForm`](./snaptrade_client/type/manual_trade_replace_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `patch`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

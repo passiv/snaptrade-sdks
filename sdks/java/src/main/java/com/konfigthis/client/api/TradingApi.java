@@ -8,12 +8,14 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
+import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
+import com.konfigthis.client.model.TradingInstrument;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import java.util.ArrayList;
@@ -42,8 +44,8 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceBracketOrderRequestBuilder extends PlaceBracketOrderRequestBuilderGenerated {
-        public PlaceBracketOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, String symbol, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, String userId, String userSecret) {
-            super(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret);
+        public PlaceBracketOrderRequestBuilder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) {
+            super(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
         }
     }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {
@@ -54,6 +56,11 @@ public class TradingApi extends TradingApiGenerated {
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {
         public PlaceOrderRequestBuilder(UUID tradeId, String userId, String userSecret) {
             super(tradeId, userId, userSecret);
+        }
+    }
+    public class ReplaceOrderRequestBuilder extends ReplaceOrderRequestBuilderGenerated {
+        public ReplaceOrderRequestBuilder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
+            super(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
         }
     }
 }

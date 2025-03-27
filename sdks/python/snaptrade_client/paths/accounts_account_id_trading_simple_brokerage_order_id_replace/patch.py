@@ -33,24 +33,24 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.take_profit import TakeProfit as TakeProfitSchema
-from snaptrade_client.model.stop_loss import StopLoss as StopLossSchema
+from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
+from snaptrade_client.model.units_nullable import UnitsNullable as UnitsNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
-from snaptrade_client.model.manual_trade_form_bracket import ManualTradeFormBracket as ManualTradeFormBracketSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
-from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions as ActionStrictWithOptionsSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
+from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm as ManualTradeReplaceFormSchema
 from snaptrade_client.model.order_type_strict import OrderTypeStrict as OrderTypeStrictSchema
 
-from snaptrade_client.type.manual_trade_form_bracket import ManualTradeFormBracket
+from snaptrade_client.type.units_nullable import UnitsNullable
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.take_profit import TakeProfit
+from snaptrade_client.type.action_strict import ActionStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
-from snaptrade_client.type.stop_loss import StopLoss
-from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
+from snaptrade_client.type.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
+
+from . import path
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -88,17 +88,56 @@ request_query_user_secret = api_client.QueryParameter(
     required=True,
     explode=True,
 )
+# Path params
+AccountIdSchema = schemas.UUIDSchema
+BrokerageOrderIdSchema = schemas.StrSchema
+RequestRequiredPathParams = typing_extensions.TypedDict(
+    'RequestRequiredPathParams',
+    {
+        'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+        'brokerageOrderId': typing.Union[BrokerageOrderIdSchema, str, ],
+    }
+)
+RequestOptionalPathParams = typing_extensions.TypedDict(
+    'RequestOptionalPathParams',
+    {
+    },
+    total=False
+)
+
+
+class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
+    pass
+
+
+request_path_account_id = api_client.PathParameter(
+    name="accountId",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=AccountIdSchema,
+    required=True,
+)
+request_path_brokerage_order_id = api_client.PathParameter(
+    name="brokerageOrderId",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=BrokerageOrderIdSchema,
+    required=True,
+)
 # body param
-SchemaForRequestBodyApplicationJson = ManualTradeFormBracketSchema
+SchemaForRequestBodyApplicationJson = ManualTradeReplaceFormSchema
 
 
-request_body_manual_trade_form_bracket = api_client.RequestBody(
+request_body_manual_trade_replace_form = api_client.RequestBody(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaForRequestBodyApplicationJson),
     },
     required=True,
 )
+_auth = [
+    'PartnerClientId',
+    'PartnerSignature',
+    'PartnerTimestamp',
+]
 SchemaFor200ResponseBodyApplicationJson = AccountOrderRecordSchema
 
 
@@ -178,6 +217,12 @@ _response_for_500 = api_client.OpenApiResponse(
     response_cls=ApiResponseFor500,
     response_cls_async=ApiResponseFor500Async,
 )
+_status_code_to_response = {
+    '200': _response_for_200,
+    '400': _response_for_400,
+    '403': _response_for_403,
+    '500': _response_for_500,
+}
 _all_accept_content_types = (
     'application/json',
 )
@@ -185,32 +230,28 @@ _all_accept_content_types = (
 
 class BaseApi(api_client.Api):
 
-    def _place_bracket_order_mapped_args(
+    def _replace_order_mapped_args(
         self,
-        body: typing.Optional[ManualTradeFormBracket] = None,
-        account_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrictWithOptions] = None,
-        symbol: typing.Optional[str] = None,
+        body: typing.Optional[ManualTradeReplaceForm] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        stop_loss: typing.Optional[StopLoss] = None,
-        take_profit: typing.Optional[TakeProfit] = None,
+        account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[typing.Union[int, float]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
+        _path_params = {}
         _body = {}
-        if account_id is not None:
-            _body["account_id"] = account_id
         if action is not None:
             _body["action"] = action
-        if symbol is not None:
-            _body["symbol"] = symbol
         if order_type is not None:
             _body["order_type"] = order_type
         if time_in_force is not None:
@@ -221,22 +262,24 @@ class BaseApi(api_client.Api):
             _body["stop"] = stop
         if units is not None:
             _body["units"] = units
-        if stop_loss is not None:
-            _body["stop_loss"] = stop_loss
-        if take_profit is not None:
-            _body["take_profit"] = take_profit
         args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
+        if account_id is not None:
+            _path_params["accountId"] = account_id
+        if brokerage_order_id is not None:
+            _path_params["brokerageOrderId"] = brokerage_order_id
         args.query = query_params if query_params else _query_params
+        args.path = path_params if path_params else _path_params
         return args
 
-    async def _aplace_bracket_order_oapg(
+    async def _areplace_order_oapg(
         self,
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -249,13 +292,28 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Place a Bracket Order
+        Replaces an order with a new one
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+            request_path_brokerage_order_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
@@ -276,7 +334,7 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'post'.upper()
+        method = 'patch'.upper()
         _headers.add('Content-Type', content_type)
     
         if body is schemas.unset:
@@ -288,12 +346,12 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/trade/placeBracketOrder',
+            path_template='/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace',
             body=body,
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_manual_trade_form_bracket.serialize(body, content_type)
+        serialized_data = request_body_manual_trade_replace_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -366,10 +424,11 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-    def _place_bracket_order_oapg(
+    def _replace_order_oapg(
         self,
         body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
@@ -380,13 +439,28 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Place a Bracket Order
+        Replaces an order with a new one
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
         """
         self._verify_typed_dict_inputs_oapg(RequestQueryParams, query_params)
+        self._verify_typed_dict_inputs_oapg(RequestPathParams, path_params)
         used_path = path.value
+    
+        _path_params = {}
+        for parameter in (
+            request_path_account_id,
+            request_path_brokerage_order_id,
+        ):
+            parameter_data = path_params.get(parameter.name, schemas.unset)
+            if parameter_data is schemas.unset:
+                continue
+            serialized_data = parameter.serialize(parameter_data)
+            _path_params.update(serialized_data)
+    
+        for k, v in _path_params.items():
+            used_path = used_path.replace('{%s}' % k, v)
     
         prefix_separator_iterator = None
         for parameter in (
@@ -407,7 +481,7 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'post'.upper()
+        method = 'patch'.upper()
         _headers.add('Content-Type', content_type)
     
         if body is schemas.unset:
@@ -419,12 +493,12 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/trade/placeBracketOrder',
+            path_template='/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace',
             body=body,
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_manual_trade_form_bracket.serialize(body, content_type)
+        serialized_data = request_body_manual_trade_replace_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -466,181 +540,177 @@ class BaseApi(api_client.Api):
         return api_response
 
 
-class PlaceBracketOrder(BaseApi):
+class ReplaceOrder(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
-    async def aplace_bracket_order(
+    async def areplace_order(
         self,
-        body: typing.Optional[ManualTradeFormBracket] = None,
-        account_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrictWithOptions] = None,
-        symbol: typing.Optional[str] = None,
+        body: typing.Optional[ManualTradeReplaceForm] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        stop_loss: typing.Optional[StopLoss] = None,
-        take_profit: typing.Optional[TakeProfit] = None,
+        account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[typing.Union[int, float]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._place_bracket_order_mapped_args(
+        args = self._replace_order_mapped_args(
             body=body,
             query_params=query_params,
-            account_id=account_id,
+            path_params=path_params,
             action=action,
-            symbol=symbol,
             order_type=order_type,
             time_in_force=time_in_force,
-            stop_loss=stop_loss,
-            take_profit=take_profit,
+            account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             price=price,
             stop=stop,
             units=units,
         )
-        return await self._aplace_bracket_order_oapg(
+        return await self._areplace_order_oapg(
             body=args.body,
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
-    def place_bracket_order(
+    def replace_order(
         self,
-        body: typing.Optional[ManualTradeFormBracket] = None,
-        account_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrictWithOptions] = None,
-        symbol: typing.Optional[str] = None,
+        body: typing.Optional[ManualTradeReplaceForm] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        stop_loss: typing.Optional[StopLoss] = None,
-        take_profit: typing.Optional[TakeProfit] = None,
+        account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[typing.Union[int, float]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
-        args = self._place_bracket_order_mapped_args(
+        """ Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages  """
+        args = self._replace_order_mapped_args(
             body=body,
             query_params=query_params,
-            account_id=account_id,
+            path_params=path_params,
             action=action,
-            symbol=symbol,
             order_type=order_type,
             time_in_force=time_in_force,
-            stop_loss=stop_loss,
-            take_profit=take_profit,
+            account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             price=price,
             stop=stop,
             units=units,
         )
-        return self._place_bracket_order_oapg(
+        return self._replace_order_oapg(
             body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
 
-class ApiForpost(BaseApi):
+class ApiForpatch(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    async def apost(
+    async def apatch(
         self,
-        body: typing.Optional[ManualTradeFormBracket] = None,
-        account_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrictWithOptions] = None,
-        symbol: typing.Optional[str] = None,
+        body: typing.Optional[ManualTradeReplaceForm] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        stop_loss: typing.Optional[StopLoss] = None,
-        take_profit: typing.Optional[TakeProfit] = None,
+        account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[typing.Union[int, float]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
         ApiResponseFor200Async,
         api_client.ApiResponseWithoutDeserializationAsync,
         AsyncGeneratorResponse,
     ]:
-        args = self._place_bracket_order_mapped_args(
+        args = self._replace_order_mapped_args(
             body=body,
             query_params=query_params,
-            account_id=account_id,
+            path_params=path_params,
             action=action,
-            symbol=symbol,
             order_type=order_type,
             time_in_force=time_in_force,
-            stop_loss=stop_loss,
-            take_profit=take_profit,
+            account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             price=price,
             stop=stop,
             units=units,
         )
-        return await self._aplace_bracket_order_oapg(
+        return await self._areplace_order_oapg(
             body=args.body,
             query_params=args.query,
+            path_params=args.path,
             **kwargs,
         )
     
-    def post(
+    def patch(
         self,
-        body: typing.Optional[ManualTradeFormBracket] = None,
-        account_id: typing.Optional[str] = None,
-        action: typing.Optional[ActionStrictWithOptions] = None,
-        symbol: typing.Optional[str] = None,
+        body: typing.Optional[ManualTradeReplaceForm] = None,
+        action: typing.Optional[ActionStrict] = None,
         order_type: typing.Optional[OrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
-        stop_loss: typing.Optional[StopLoss] = None,
-        take_profit: typing.Optional[TakeProfit] = None,
+        account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
-        units: typing.Optional[typing.Union[int, float]] = None,
+        units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
+        path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages  """
-        args = self._place_bracket_order_mapped_args(
+        """ Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages  """
+        args = self._replace_order_mapped_args(
             body=body,
             query_params=query_params,
-            account_id=account_id,
+            path_params=path_params,
             action=action,
-            symbol=symbol,
             order_type=order_type,
             time_in_force=time_in_force,
-            stop_loss=stop_loss,
-            take_profit=take_profit,
+            account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
             price=price,
             stop=stop,
             units=units,
         )
-        return self._place_bracket_order_oapg(
+        return self._replace_order_oapg(
             body=args.body,
             query_params=args.query,
+            path_params=args.path,
         )
 

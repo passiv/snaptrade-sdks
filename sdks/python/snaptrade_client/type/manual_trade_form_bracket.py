@@ -20,15 +20,12 @@ from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.stop_loss import StopLoss
 from snaptrade_client.type.take_profit import TakeProfit
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.type.trading_instrument import TradingInstrument
 
 class RequiredManualTradeFormBracket(TypedDict):
-    # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-    account_id: str
-
     action: ActionStrictWithOptions
 
-    # The security's trading ticker symbol.
-    symbol: str
+    instrument: TradingInstrument
 
     order_type: OrderTypeStrict
 
@@ -40,6 +37,9 @@ class RequiredManualTradeFormBracket(TypedDict):
 
 
 class OptionalManualTradeFormBracket(TypedDict, total=False):
+    # The security's trading ticker symbol.
+    symbol: str
+
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]
 

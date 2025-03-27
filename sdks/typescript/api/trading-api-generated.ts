@@ -35,6 +35,8 @@ import { ManualTradeFormNotionalValue } from '../models';
 // @ts-ignore
 import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
+import { ManualTradeReplaceForm } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
@@ -52,6 +54,8 @@ import { TakeProfit } from '../models';
 import { TimeInForceStrict } from '../models';
 // @ts-ignore
 import { TradingCancelUserAccountOrderRequest } from '../models';
+// @ts-ignore
+import { TradingInstrument } from '../models';
 // @ts-ignore
 import { ValidatedTradeBody } from '../models';
 import { paginate } from "../pagination/paginate";
@@ -276,20 +280,24 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
          * @summary Place a Bracket Order
+         * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeFormBracket} manualTradeFormBracket 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeBracketOrder: async (userId: string, userSecret: string, manualTradeFormBracket: ManualTradeFormBracket, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeBracketOrder: async (accountId: string, userId: string, userSecret: string, manualTradeFormBracket: ManualTradeFormBracket, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeBracketOrder', 'accountId', accountId)
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('placeBracketOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('placeBracketOrder', 'userSecret', userSecret)
             // verify required parameter 'manualTradeFormBracket' is not null or undefined
             assertParamExists('placeBracketOrder', 'manualTradeFormBracket', manualTradeFormBracket)
-            const localVarPath = `/trade/placeBracketOrder`;
+            const localVarPath = `/accounts/{accountId}/trading/bracket`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -328,7 +336,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/trade/placeBracketOrder',
+                pathTemplate: '/accounts/{accountId}/trading/bracket',
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(manualTradeFormBracket, localVarRequestOptions, configuration)
@@ -473,6 +481,80 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+         * @summary Replaces an order with a new one
+         * @param {string} accountId The ID of the account to execute the trade on.
+         * @param {string} brokerageOrderId The Brokerage Order ID of the order to replace.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {ManualTradeReplaceForm} manualTradeReplaceForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        replaceOrder: async (accountId: string, brokerageOrderId: string, userId: string, userSecret: string, manualTradeReplaceForm: ManualTradeReplaceForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('replaceOrder', 'accountId', accountId)
+            // verify required parameter 'brokerageOrderId' is not null or undefined
+            assertParamExists('replaceOrder', 'brokerageOrderId', brokerageOrderId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('replaceOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('replaceOrder', 'userSecret', userSecret)
+            // verify required parameter 'manualTradeReplaceForm' is not null or undefined
+            assertParamExists('replaceOrder', 'manualTradeReplaceForm', manualTradeReplaceForm)
+            const localVarPath = `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: manualTradeReplaceForm,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace',
+                httpMethod: 'PATCH'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(manualTradeReplaceForm, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -539,9 +621,9 @@ export const TradingApiFp = function(configuration?: Configuration) {
          */
         async placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
             const manualTradeFormBracket: ManualTradeFormBracket = {
-                account_id: requestParameters.account_id,
                 action: requestParameters.action,
                 symbol: requestParameters.symbol,
+                instrument: requestParameters.instrument,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 price: requestParameters.price,
@@ -550,7 +632,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 stop_loss: requestParameters.stop_loss,
                 take_profit: requestParameters.take_profit
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeBracketOrder(requestParameters.userId, requestParameters.userSecret, manualTradeFormBracket, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeBracketOrder(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, manualTradeFormBracket, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -588,6 +670,25 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 wait_to_confirm: requestParameters.wait_to_confirm
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeOrder(requestParameters.tradeId, requestParameters.userId, requestParameters.userSecret, validatedTradeBody, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+         * @summary Replaces an order with a new one
+         * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async replaceOrder(requestParameters: TradingApiReplaceOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const manualTradeReplaceForm: ManualTradeReplaceForm = {
+                action: requestParameters.action,
+                order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
+                price: requestParameters.price,
+                stop: requestParameters.stop,
+                units: requestParameters.units
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.replaceOrder(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, manualTradeReplaceForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -659,6 +760,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         placeOrder(requestParameters: TradingApiPlaceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.placeOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+         * @summary Replaces an order with a new one
+         * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        replaceOrder(requestParameters: TradingApiReplaceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.replaceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -768,6 +879,13 @@ export type TradingApiGetUserAccountQuotesRequest = {
 export type TradingApiPlaceBracketOrderRequest = {
     
     /**
+    * The ID of the account to execute the trade on.
+    * @type {string}
+    * @memberof TradingApiPlaceBracketOrder
+    */
+    readonly accountId: string
+    
+    /**
     * 
     * @type {string}
     * @memberof TradingApiPlaceBracketOrder
@@ -835,6 +953,43 @@ export type TradingApiPlaceOrderRequest = {
     readonly userSecret: string
     
 } & ValidatedTradeBody
+
+/**
+ * Request parameters for replaceOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiReplaceOrderRequest
+ */
+export type TradingApiReplaceOrderRequest = {
+    
+    /**
+    * The ID of the account to execute the trade on.
+    * @type {string}
+    * @memberof TradingApiReplaceOrder
+    */
+    readonly accountId: string
+    
+    /**
+    * The Brokerage Order ID of the order to replace.
+    * @type {string}
+    * @memberof TradingApiReplaceOrder
+    */
+    readonly brokerageOrderId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiReplaceOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiReplaceOrder
+    */
+    readonly userSecret: string
+    
+} & ManualTradeReplaceForm
 
 /**
  * TradingApiGenerated - object-oriented interface
@@ -913,5 +1068,17 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public placeOrder(requestParameters: TradingApiPlaceOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+     * @summary Replaces an order with a new one
+     * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public replaceOrder(requestParameters: TradingApiReplaceOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).replaceOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

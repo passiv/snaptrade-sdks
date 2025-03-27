@@ -2118,13 +2118,21 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
       x-content-type: application/json
       x-accepts: application/json
-  /trade/placeBracketOrder:
+  /accounts/{accountId}/trading/bracket:
     post:
       description: |
         Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
         use. Only supported on certain brokerages
       operationId: Trading_placeBracketOrder
       parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
       - explode: true
         in: query
         name: userId
@@ -2168,7 +2176,77 @@ paths:
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
+    patch:
+      description: |
+        Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+        the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+        returned in the response going forward. Only supported on some brokerages
+      operationId: Trading_replaceOrder
+      parameters:
+      - description: The ID of the account to execute the trade on.
+        explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/Id'
+        style: simple
+      - description: The Brokerage Order ID of the order to replace.
+        explode: false
+        in: path
+        name: brokerageOrderId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/ManualTradeReplaceFormRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Trade could not be placed
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: User does not have permissions to place trades
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Replaces an order with a new one
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace
       x-content-type: application/json
       x-accepts: application/json
   /snapTrade/partners:
@@ -2827,6 +2905,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ManualTradeFormBracket'
+      required: true
+    ManualTradeReplaceFormRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ManualTradeReplaceForm'
       required: true
     ValidatedTradeRequestBody:
       content:
@@ -6674,6 +6758,50 @@ components:
       x-konfig-properties:
         notional_value:
           nullable: true
+    ManualTradeReplaceForm:
+      description: Inputs for placing an order with the brokerage.
+      example:
+        time_in_force: null
+        stop: 31.33
+        price: 31.33
+        action: null
+        units: 10.5
+        order_type: Market
+      properties:
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
+        units:
+          description: Number of shares for the order. This can be a decimal for fractional
+            orders. Must be `null` if `notional_value` is provided.
+          example: 10.5
+          nullable: true
+          type: number
+          x-konfig-original-example: 10.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
+      required:
+      - action
+      - order_type
+      - time_in_force
+      type: object
     ManualTradeFormWithOptions:
       description: Inputs for placing an order with the brokerage.
       example:
@@ -6771,7 +6899,6 @@ components:
       example:
         symbol: AAPL
         time_in_force: null
-        account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         take_profit:
           limit_price: "49.95"
         stop: 31.33
@@ -6780,17 +6907,12 @@ components:
           stop_price: "48.55"
           limit_price: "48.50"
         action: null
+        instrument:
+          symbol: AAPL
+          type: EQUITY
         units: 10.5
         order_type: Market
       properties:
-        account_id:
-          description: Unique identifier for the connected brokerage account. This
-            is the UUID used to reference the account in SnapTrade.
-          example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          format: uuid
-          type: string
-          x-konfig-original-example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountID
         action:
           $ref: '#/components/schemas/ActionStrictWithOptions'
         symbol:
@@ -6799,6 +6921,8 @@ components:
           type: string
           x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        instrument:
+          $ref: '#/components/schemas/TradingInstrument'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
@@ -6830,11 +6954,10 @@ components:
         take_profit:
           $ref: '#/components/schemas/TakeProfit'
       required:
-      - account_id
       - action
+      - instrument
       - order_type
       - stop_loss
-      - symbol
       - take_profit
       - time_in_force
       type: object
@@ -6852,6 +6975,26 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm
+      type: object
+    TradingInstrument:
+      additionalProperties: true
+      example:
+        symbol: AAPL
+        type: EQUITY
+      properties:
+        symbol:
+          description: The security's trading ticker symbol
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradingInstrument-properties-symbol
+        type:
+          enum:
+          - EQUITY
+          - CRYPTOCURRENCY
+          - CRYPTOCURRENCY_PAIR
+          nullable: true
+          type: string
       type: object
     OrderTypeStrict:
       description: |
@@ -9044,6 +9187,14 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop:
+      example: 31.33
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeFormWithOptions-properties-symbol:
       example: AAPL  131124C00240000
       type: string
@@ -9071,6 +9222,10 @@ components:
     konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm:
       example: true
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TradingInstrument-properties-symbol:
+      example: AAPL
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OrderTypeStrict:
       example: Market
@@ -10252,15 +10407,15 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-post--trade-placeBracketOrder:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket:
       additionalProperties: true
       properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
-        account_id:
-          $ref: '#/components/schemas/AccountID'
         action:
           $ref: '#/components/schemas/ActionStrictWithOptions'
         symbol:
@@ -10269,6 +10424,8 @@ components:
           type: string
           x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeFormBracket-properties-symbol
+        instrument:
+          $ref: '#/components/schemas/TradingInstrument'
         order_type:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
@@ -10295,11 +10452,11 @@ components:
         take_profit:
           $ref: '#/components/schemas/TakeProfit'
       required:
-      - account_id
+      - accountId
       - action
+      - instrument
       - order_type
       - stop_loss
-      - symbol
       - take_profit
       - time_in_force
       - userId
@@ -10307,6 +10464,56 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/Id'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
+        units:
+          $ref: '#/components/schemas/UnitsNullable'
+      required:
+      - accountId
+      - action
+      - brokerageOrderId
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - brokerageOrderId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:

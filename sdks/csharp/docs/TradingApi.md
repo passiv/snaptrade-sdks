@@ -7,9 +7,10 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
 | [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /trade/placeBracketOrder | Place a Bracket Order |
+| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
 | [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place order |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order |
+| [**ReplaceOrder**](TradingApi.md#replaceorder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one |
 
 
 # **CancelUserAccountOrder**
@@ -356,11 +357,12 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrictWithOptions.BUY;
             var symbol = "AAPL"; // The security's trading ticker symbol.
+            var instrument = new TradingInstrument();
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
@@ -370,9 +372,9 @@ namespace Example
             var takeProfit = new TakeProfit();
             
             var manualTradeFormBracket = new ManualTradeFormBracket(
-                accountId,
                 action,
                 symbol,
+                instrument,
                 orderType,
                 timeInForce,
                 price,
@@ -385,7 +387,7 @@ namespace Example
             try
             {
                 // Place a Bracket Order
-                AccountOrderRecord result = client.Trading.PlaceBracketOrder(userId, userSecret, manualTradeFormBracket);
+                AccountOrderRecord result = client.Trading.PlaceBracketOrder(accountId, userId, userSecret, manualTradeFormBracket);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -412,7 +414,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place a Bracket Order
-    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceBracketOrderWithHttpInfo(userId, userSecret, manualTradeFormBracket);
+    ApiResponse<AccountOrderRecord> response = apiInstance.PlaceBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -429,6 +431,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
+| **accountId** | **string** | The ID of the account to execute the trade on. |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **manualTradeFormBracket** | [**ManualTradeFormBracket**](ManualTradeFormBracket.md) |  |  |
@@ -665,6 +668,121 @@ catch (ApiException e)
 |-------------|-------------|------------------|
 | **200** | Status of order placed |  -  |
 | **400** | Failed to submit order to broker |  -  |
+| **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ReplaceOrder**
+
+
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ReplaceOrderExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var accountId = "accountId_example"; // The ID of the account to execute the trade on.
+            var brokerageOrderId = "brokerageOrderId_example"; // The Brokerage Order ID of the order to replace.
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var action = ActionStrict.BUY;
+            var orderType = OrderTypeStrict.Limit;
+            var timeInForce = TimeInForceStrict.FOK;
+            var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+            var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+            
+            var manualTradeReplaceForm = new ManualTradeReplaceForm(
+                action,
+                orderType,
+                timeInForce,
+                price,
+                stop,
+                units
+            );
+            
+            try
+            {
+                // Replaces an order with a new one
+                AccountOrderRecord result = client.Trading.ReplaceOrder(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.ReplaceOrder: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ReplaceOrderWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Replaces an order with a new one
+    ApiResponse<AccountOrderRecord> response = apiInstance.ReplaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.ReplaceOrderWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **accountId** | **string** | The ID of the account to execute the trade on. |  |
+| **brokerageOrderId** | **string** | The Brokerage Order ID of the order to replace. |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **manualTradeReplaceForm** | [**ManualTradeReplaceForm**](ManualTradeReplaceForm.md) |  |  |
+
+### Return type
+
+[**AccountOrderRecord**](AccountOrderRecord.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Trade could not be placed |  -  |
+| **403** | User does not have permissions to place trades |  -  |
 | **500** | Unexpected Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

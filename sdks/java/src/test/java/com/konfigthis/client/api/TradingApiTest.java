@@ -23,12 +23,14 @@ import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
+import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
+import com.konfigthis.client.model.TradingInstrument;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
@@ -132,19 +134,21 @@ public class TradingApiTest {
      */
     @Test
     public void placeBracketOrderTest() throws ApiException {
-        UUID accountId = null;
         ActionStrictWithOptions action = null;
-        String symbol = null;
+        TradingInstrument instrument = null;
         OrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         StopLoss stopLoss = null;
         TakeProfit takeProfit = null;
+        UUID accountId = null;
         String userId = null;
         String userSecret = null;
+        String symbol = null;
         Double price = null;
         Double stop = null;
         Double units = null;
-        AccountOrderRecord response = api.placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+        AccountOrderRecord response = api.placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
+                .symbol(symbol)
                 .price(price)
                 .stop(stop)
                 .units(units)
@@ -199,6 +203,33 @@ public class TradingApiTest {
         Boolean waitToConfirm = null;
         AccountOrderRecord response = api.placeOrder(tradeId, userId, userSecret)
                 .waitToConfirm(waitToConfirm)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Replaces an order with a new one
+     *
+     * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void replaceOrderTest() throws ApiException {
+        ActionStrict action = null;
+        OrderTypeStrict orderType = null;
+        TimeInForceStrict timeInForce = null;
+        UUID accountId = null;
+        String brokerageOrderId = null;
+        String userId = null;
+        String userSecret = null;
+        Double price = null;
+        Double stop = null;
+        Double units = null;
+        AccountOrderRecord response = api.replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+                .price(price)
+                .stop(stop)
+                .units(units)
                 .execute();
         // TODO: test validations
     }

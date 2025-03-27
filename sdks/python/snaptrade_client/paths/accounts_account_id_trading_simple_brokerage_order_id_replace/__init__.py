@@ -1,7 +1,7 @@
 # do not import all endpoints into this module because that uses a lot of memory and stack frames
 # if you need the ability to import all endpoints from this module, import them with
-# from snaptrade_client.paths.trade_place_bracket_order import Api
+# from snaptrade_client.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import Api
 
 from snaptrade_client.paths import PathValues
 
-path = PathValues.TRADE_PLACE_BRACKET_ORDER
+path = PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE

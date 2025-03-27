@@ -58,9 +58,9 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeFormBracket" /> class.
         /// </summary>
-        /// <param name="accountId">Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. (required).</param>
         /// <param name="action">action (required).</param>
-        /// <param name="symbol">The security&#39;s trading ticker symbol. (required).</param>
+        /// <param name="symbol">The security&#39;s trading ticker symbol..</param>
+        /// <param name="instrument">instrument (required).</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
@@ -68,21 +68,15 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
         /// <param name="stopLoss">stopLoss (required).</param>
         /// <param name="takeProfit">takeProfit (required).</param>
-        public ManualTradeFormBracket(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit))
+        public ManualTradeFormBracket(ActionStrictWithOptions action = default(ActionStrictWithOptions), string symbol = default(string), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit))
         {
-            // to ensure "accountId" is required (not null)
-            if (accountId == null)
-            {
-                throw new ArgumentNullException("accountId is a required property for ManualTradeFormBracket and cannot be null");
-            }
-            this.AccountId = accountId;
             this._Action = action;
-            // to ensure "symbol" is required (not null)
-            if (symbol == null)
+            // to ensure "instrument" is required (not null)
+            if (instrument == null)
             {
-                throw new ArgumentNullException("symbol is a required property for ManualTradeFormBracket and cannot be null");
+                throw new ArgumentNullException("instrument is a required property for ManualTradeFormBracket and cannot be null");
             }
-            this.Symbol = symbol;
+            this.Instrument = instrument;
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
             // to ensure "stopLoss" is required (not null)
@@ -97,24 +91,24 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("takeProfit is a required property for ManualTradeFormBracket and cannot be null");
             }
             this.TakeProfit = takeProfit;
+            this.Symbol = symbol;
             this.Price = price;
             this.Stop = stop;
             this.Units = units;
         }
 
         /// <summary>
-        /// Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-        /// </summary>
-        /// <value>Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.</value>
-        [DataMember(Name = "account_id", IsRequired = true, EmitDefaultValue = true)]
-        public string AccountId { get; set; }
-
-        /// <summary>
         /// The security&#39;s trading ticker symbol.
         /// </summary>
         /// <value>The security&#39;s trading ticker symbol.</value>
-        [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
         public string Symbol { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Instrument
+        /// </summary>
+        [DataMember(Name = "instrument", IsRequired = true, EmitDefaultValue = true)]
+        public TradingInstrument Instrument { get; set; }
 
         /// <summary>
         /// The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
@@ -157,9 +151,9 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeFormBracket {\n");
-            sb.Append("  AccountId: ").Append(AccountId).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
@@ -203,11 +197,6 @@ namespace SnapTrade.Net.Model
             }
             return 
                 (
-                    this.AccountId == input.AccountId ||
-                    (this.AccountId != null &&
-                    this.AccountId.Equals(input.AccountId))
-                ) && 
-                (
                     this._Action == input._Action ||
                     this._Action.Equals(input._Action)
                 ) && 
@@ -215,6 +204,11 @@ namespace SnapTrade.Net.Model
                     this.Symbol == input.Symbol ||
                     (this.Symbol != null &&
                     this.Symbol.Equals(input.Symbol))
+                ) && 
+                (
+                    this.Instrument == input.Instrument ||
+                    (this.Instrument != null &&
+                    this.Instrument.Equals(input.Instrument))
                 ) && 
                 (
                     this.OrderType == input.OrderType ||
@@ -259,14 +253,14 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.AccountId != null)
-                {
-                    hashCode = (hashCode * 59) + this.AccountId.GetHashCode();
-                }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 if (this.Symbol != null)
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
+                if (this.Instrument != null)
+                {
+                    hashCode = (hashCode * 59) + this.Instrument.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();

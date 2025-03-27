@@ -20,12 +20,6 @@ describe SnapTrade::ManualTradeFormBracket do
       expect(instance).to be_instance_of(SnapTrade::ManualTradeFormBracket)
     end
   end
-  describe 'test attribute "account_id"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "action"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -33,6 +27,12 @@ describe SnapTrade::ManualTradeFormBracket do
   end
 
   describe 'test attribute "symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "instrument"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

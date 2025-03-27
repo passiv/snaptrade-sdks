@@ -74,6 +74,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -2127,7 +2128,8 @@ use. Only supported on certain brokerages
 ```java
 AccountOrderRecord result = client
         .trading
-        .placeBracketOrder(accountId, action, symbol, orderType, timeInForce, stopLoss, takeProfit, userId, userSecret)
+        .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
+        .symbol(symbol)
         .price(price)
         .stop(stop)
         .units(units)
@@ -2136,15 +2138,9 @@ AccountOrderRecord result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### account_id: `UUID`<a id="account_id-uuid"></a>
-
-Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
-
 ##### action:<a id="action"></a>
 
-##### symbol: `String`<a id="symbol-string"></a>
-
-The security's trading ticker symbol.
+##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
 
 ##### order_type:<a id="order_type"></a>
 
@@ -2154,9 +2150,17 @@ The security's trading ticker symbol.
 
 ##### take_profit: [`TakeProfit`](./src/main/java/com/konfigthis/client/model/TakeProfit.java)<a id="take_profit-takeprofitsrcmainjavacomkonfigthisclientmodeltakeprofitjava"></a>
 
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+The ID of the account to execute the trade on.
+
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### symbol: `String`<a id="symbol-string"></a>
+
+The security's trading ticker symbol.
 
 ##### price: `Double`<a id="price-double"></a>
 
@@ -2176,7 +2180,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/trade/placeBracketOrder` `POST`
+`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2296,6 +2300,70 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/{tradeId}` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.replaceOrder`<a id="snaptradetradingreplaceorder"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountOrderRecord result = client
+        .trading
+        .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+        .price(price)
+        .stop(stop)
+        .units(units)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action:<a id="action"></a>
+
+##### order_type:<a id="order_type"></a>
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### price: `Double`<a id="price-double"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Double`<a id="stop-double"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `Double`<a id="units-double"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

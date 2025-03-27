@@ -36,22 +36,23 @@ class ManualTradeFormBracket(
 
     class MetaOapg:
         required = {
-            "symbol",
             "time_in_force",
-            "account_id",
             "take_profit",
             "stop_loss",
             "action",
+            "instrument",
             "order_type",
         }
         
         class properties:
-            account_id = schemas.UUIDSchema
         
             @staticmethod
             def action() -> typing.Type['ActionStrictWithOptions']:
                 return ActionStrictWithOptions
-            symbol = schemas.StrSchema
+        
+            @staticmethod
+            def instrument() -> typing.Type['TradingInstrument']:
+                return TradingInstrument
         
             @staticmethod
             def order_type() -> typing.Type['OrderTypeStrict']:
@@ -68,6 +69,7 @@ class ManualTradeFormBracket(
             @staticmethod
             def take_profit() -> typing.Type['TakeProfit']:
                 return TakeProfit
+            symbol = schemas.StrSchema
             
             
             class price(
@@ -110,34 +112,30 @@ class ManualTradeFormBracket(
                     )
             units = schemas.NumberSchema
             __annotations__ = {
-                "account_id": account_id,
                 "action": action,
-                "symbol": symbol,
+                "instrument": instrument,
                 "order_type": order_type,
                 "time_in_force": time_in_force,
                 "stop_loss": stop_loss,
                 "take_profit": take_profit,
+                "symbol": symbol,
                 "price": price,
                 "stop": stop,
                 "units": units,
             }
     
-    symbol: MetaOapg.properties.symbol
     time_in_force: 'TimeInForceStrict'
-    account_id: MetaOapg.properties.account_id
     take_profit: 'TakeProfit'
     stop_loss: 'StopLoss'
     action: 'ActionStrictWithOptions'
+    instrument: 'TradingInstrument'
     order_type: 'OrderTypeStrict'
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["account_id"]) -> MetaOapg.properties.account_id: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["action"]) -> 'ActionStrictWithOptions': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
+    def __getitem__(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
@@ -152,6 +150,9 @@ class ManualTradeFormBracket(
     def __getitem__(self, name: typing_extensions.Literal["take_profit"]) -> 'TakeProfit': ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
     
     @typing.overload
@@ -163,19 +164,16 @@ class ManualTradeFormBracket(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "symbol", "order_type", "time_in_force", "stop_loss", "take_profit", "price", "stop", "units", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["action", "instrument", "order_type", "time_in_force", "stop_loss", "take_profit", "symbol", "price", "stop", "units", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["account_id"]) -> MetaOapg.properties.account_id: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["action"]) -> 'ActionStrictWithOptions': ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'OrderTypeStrict': ...
@@ -190,6 +188,9 @@ class ManualTradeFormBracket(
     def get_item_oapg(self, name: typing_extensions.Literal["take_profit"]) -> 'TakeProfit': ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
     
     @typing.overload
@@ -201,20 +202,20 @@ class ManualTradeFormBracket(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["account_id", "action", "symbol", "order_type", "time_in_force", "stop_loss", "take_profit", "price", "stop", "units", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["action", "instrument", "order_type", "time_in_force", "stop_loss", "take_profit", "symbol", "price", "stop", "units", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        symbol: typing.Union[MetaOapg.properties.symbol, str, ],
         time_in_force: 'TimeInForceStrict',
-        account_id: typing.Union[MetaOapg.properties.account_id, str, uuid.UUID, ],
         take_profit: 'TakeProfit',
         stop_loss: 'StopLoss',
         action: 'ActionStrictWithOptions',
+        instrument: 'TradingInstrument',
         order_type: 'OrderTypeStrict',
+        symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         stop: typing.Union[MetaOapg.properties.stop, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union[MetaOapg.properties.units, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
@@ -224,13 +225,13 @@ class ManualTradeFormBracket(
         return super().__new__(
             cls,
             *args,
-            symbol=symbol,
             time_in_force=time_in_force,
-            account_id=account_id,
             take_profit=take_profit,
             stop_loss=stop_loss,
             action=action,
+            instrument=instrument,
             order_type=order_type,
+            symbol=symbol,
             price=price,
             stop=stop,
             units=units,
@@ -243,3 +244,4 @@ from snaptrade_client.model.order_type_strict import OrderTypeStrict
 from snaptrade_client.model.stop_loss import StopLoss
 from snaptrade_client.model.take_profit import TakeProfit
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.model.trading_instrument import TradingInstrument

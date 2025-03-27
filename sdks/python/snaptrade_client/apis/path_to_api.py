@@ -35,7 +35,8 @@ from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
-from snaptrade_client.apis.paths.trade_place_bracket_order import TradePlaceBracketOrder
+from snaptrade_client.apis.paths.accounts_account_id_trading_bracket import AccountsAccountIdTradingBracket
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import AccountsAccountIdTradingSimpleBrokerageOrderIdReplace
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -90,7 +91,8 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
-        PathValues.TRADE_PLACE_BRACKET_ORDER: TradePlaceBracketOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -146,7 +148,8 @@ path_to_api = PathToApi(
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
-        PathValues.TRADE_PLACE_BRACKET_ORDER: TradePlaceBracketOrder,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
