@@ -91,6 +91,24 @@ It is not consistent at the same time every day, but guarunteed once per day.
 
 The connection is probably disabled, this happens when the access token is no longer valid. Please check using the :api[Connections_detailBrokerageAuthorization] and follow [this guide](https://docs.snaptrade.com/docs/fix-broken-connections) to repair the connection.
 
+### How can I tell the difference between asset classes?
+
+Each symbol will have a `type` property. This will contain a short code representing the security type. For example, "cs" for Common Stock. Here are some common values:
+
+`ad` - ADR
+`bnd` - Bond
+`cs` - Common Stock
+`cef` - Closed End Fund
+`crypto` - Cryptocurrency
+`et` - ETF
+`oef` - Open Ended Fund
+`ps` - Preferred Stock
+`rt` - Right
+`struct` - Structured Product
+`ut` - Unit
+`wi` - When Issued
+`wt` - Warrant
+
 ---
 
 ## Trading
