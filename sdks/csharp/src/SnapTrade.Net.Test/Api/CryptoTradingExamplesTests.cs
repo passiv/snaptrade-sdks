@@ -8,9 +8,9 @@ using Xunit;
 namespace SnapTrade.Net.Test.Api
 {
 
-    public class CryptoSpotTradingApiTests
+    public class CryptoTradingExampleTests
     {
-        private CryptoSpotTradingApi cryptoSpotTradingApi;
+        private TradingApi tradingApi;
 
         private readonly string testUserId;
 
@@ -18,7 +18,7 @@ namespace SnapTrade.Net.Test.Api
 
         private readonly string accountId;
 
-        public CryptoSpotTradingApiTests()
+        public CryptoTradingExampleTests()
         {
             this.testUserId = Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_ID");
             this.testUserSecret = Environment.GetEnvironmentVariable("SNAPTRADE_TEST_USER_SECRET");
@@ -34,43 +34,41 @@ namespace SnapTrade.Net.Test.Api
                 ConsumerKey = Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY")
             };
 
-            cryptoSpotTradingApi = new CryptoSpotTradingApi(configuration);
+            tradingApi = new TradingApi(configuration);
         }
 
         [Fact(Skip = "requires placing an order")]
         public void OrderFlowExample() {
-
-            // Find the symbol
-            var symbolsResult = cryptoSpotTradingApi.CryptoSpotSymbols(
+            // Find the instrument
+            var searchResult = tradingApi.SearchCryptocurrencyPairInstruments(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
                 _base: "DOGE",
                 quote: "USD"
             );
-            var symbol = symbolsResult.Items.First();
+            var instrument = searchResult.Items.First();
 
             // Get a quote
-            var quote = cryptoSpotTradingApi.CryptoSpotQuote(
+            var quote = tradingApi.GetCryptocurrencyPairQuote(
                 testUserId,
                 testUserSecret,
                 accountId:accountId,
-                _base: symbol.Base,
-                quote: symbol.Quote
+                instrumentSymbol: instrument.Symbol
             );
             Console.WriteLine("quote: {0}", quote);
 
             // Place a limit order
-            var placeOrderResult = cryptoSpotTradingApi.CryptoSpotPlaceOrder(
+            var placeOrderResult = tradingApi.PlaceSimpleOrder(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new TradingCryptoSpotPlaceOrderRequest(
-                    symbol: symbol,
+                new TradingPlaceSimpleOrderRequest(
+                    instrument: new TradingInstrument(instrument.Symbol, TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.SELL,
-                    type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.LIMIT,
-                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.GTD,
-                    expirationDate: DateTime.UtcNow.AddMinutes(5),
+                    type: TradingPlaceSimpleOrderRequest.TypeEnum.LIMIT,
+                    timeInForce: TradingPlaceSimpleOrderRequest.TimeInForceEnum.GTD,
+                    expirationDate: DateTime.UtcNow.AddMinutes(1),
                     amount:42.2m,
                     limitPrice: quote.Ask * 2m,
                     postOnly: true
@@ -79,58 +77,31 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine("placeOrderResult: {0}", placeOrderResult);
 
             // Cancel the order
-            var cancelOrderResult = cryptoSpotTradingApi.CryptoSpotCancelOrder(
+            var cancelOrderResult = tradingApi.CancelOrder(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new TradingCryptoSpotCancelOrderRequest(placeOrderResult.BrokerageOrderId)
+                brokerageOrderId: placeOrderResult.BrokerageOrderId
             );
             Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);
         }
 
         [Fact(Skip = "WIP")]
         public void PreviewOrderExample() {
-            var response = cryptoSpotTradingApi.CryptoSpotPreviewOrder(
+            var response = tradingApi.PreviewSimpleOrder(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new TradingCryptoSpotPlaceOrderRequest(
-                    symbol: new CryptocurrencyPair("DOGE", "USDC"),
+                new TradingPlaceSimpleOrderRequest(
+                    instrument: new TradingInstrument("DOGE-USDC", TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.BUY,
-                    type: TradingCryptoSpotPlaceOrderRequest.TypeEnum.MARKET,
-                    timeInForce: TradingCryptoSpotPlaceOrderRequest.TimeInForceEnum.IOC,
+                    type: TradingPlaceSimpleOrderRequest.TypeEnum.MARKET,
+                    timeInForce: TradingPlaceSimpleOrderRequest.TimeInForceEnum.IOC,
                     amount:1.42m
                 )
             );
 
             Console.WriteLine(response);
-        }
-
-        [Fact(Skip = "WIP")]
-        public void GetQuoteExample() {
-            var response = cryptoSpotTradingApi.CryptoSpotQuote(
-                testUserId,
-                testUserSecret,
-                accountId: accountId,
-                _base: "BTC",
-                quote: "USDT"
-            );
-
-            Console.WriteLine(response);
-        }
-
-        [Fact(Skip = "WIP")]
-        public void SearchSymbolsExample() {
-            var response = cryptoSpotTradingApi.CryptoSpotSymbols(
-                testUserId,
-                testUserSecret,
-                accountId: accountId,
-                _base: "BTC"
-            );
-
-            foreach (var symbol in response.Items) {
-                Console.WriteLine(symbol);
-            }
         }
     }
 }
