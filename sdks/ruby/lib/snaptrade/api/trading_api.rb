@@ -17,6 +17,117 @@ module SnapTrade
       @api_client = api_client
     end
 
+    # Cancel an order.
+    #
+    # Cancels an order in the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def cancel_order(user_id:, user_secret:, account_id:, brokerage_order_id:, extra: {})
+      data, _status_code, _headers = cancel_order_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, extra)
+      data
+    end
+
+    # Cancel an order.
+    #
+    # Cancels an order in the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def cancel_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id:, extra: {})
+      cancel_order_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, extra)
+    end
+
+    # Cancel an order.
+    # Cancels an order in the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [OrderUpdatedResponse]
+    private def cancel_order_impl(user_id, user_secret, account_id, brokerage_order_id, opts = {})
+      data, _status_code, _headers = cancel_order_with_http_info(user_id, user_secret, account_id, brokerage_order_id, opts)
+      data
+    end
+
+    # Cancel an order.
+    # Cancels an order in the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
+    private def cancel_order_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.cancel_order ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.cancel_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.cancel_order"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.cancel_order"
+      end
+      # verify the required parameter 'brokerage_order_id' is set
+      if @api_client.config.client_side_validation && brokerage_order_id.nil?
+        fail ArgumentError, "Missing the required parameter 'brokerage_order_id' when calling TradingApi.cancel_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'brokerageOrderId' + '}', CGI.escape(brokerage_order_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.cancel_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#cancel_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Cancel order
     #
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
@@ -136,6 +247,117 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#cancel_user_account_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Get cryptocurrency pair quote
+    #
+    # Gets a quote for the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param instrument_symbol [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_cryptocurrency_pair_quote(user_id:, user_secret:, account_id:, instrument_symbol:, extra: {})
+      data, _status_code, _headers = get_cryptocurrency_pair_quote_with_http_info_impl(user_id, user_secret, account_id, instrument_symbol, extra)
+      data
+    end
+
+    # Get cryptocurrency pair quote
+    #
+    # Gets a quote for the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param instrument_symbol [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_cryptocurrency_pair_quote_with_http_info(user_id:, user_secret:, account_id:, instrument_symbol:, extra: {})
+      get_cryptocurrency_pair_quote_with_http_info_impl(user_id, user_secret, account_id, instrument_symbol, extra)
+    end
+
+    # Get cryptocurrency pair quote
+    # Gets a quote for the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param instrument_symbol [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [CryptocurrencyPairQuote]
+    private def get_cryptocurrency_pair_quote_impl(user_id, user_secret, account_id, instrument_symbol, opts = {})
+      data, _status_code, _headers = get_cryptocurrency_pair_quote_with_http_info(user_id, user_secret, account_id, instrument_symbol, opts)
+      data
+    end
+
+    # Get cryptocurrency pair quote
+    # Gets a quote for the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param instrument_symbol [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(CryptocurrencyPairQuote, Integer, Hash)>] CryptocurrencyPairQuote data, response status code and response headers
+    private def get_cryptocurrency_pair_quote_with_http_info_impl(user_id, user_secret, account_id, instrument_symbol, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.get_cryptocurrency_pair_quote ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.get_cryptocurrency_pair_quote"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.get_cryptocurrency_pair_quote"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.get_cryptocurrency_pair_quote"
+      end
+      # verify the required parameter 'instrument_symbol' is set
+      if @api_client.config.client_side_validation && instrument_symbol.nil?
+        fail ArgumentError, "Missing the required parameter 'instrument_symbol' when calling TradingApi.get_cryptocurrency_pair_quote"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'instrumentSymbol' + '}', CGI.escape(instrument_symbol.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'CryptocurrencyPairQuote'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.get_cryptocurrency_pair_quote",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#get_cryptocurrency_pair_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end
@@ -854,6 +1076,320 @@ module SnapTrade
     end
 
 
+    # Place order
+    #
+    # Places an order in the specified account.
+    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    #
+    # @param instrument [TradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [Type] The type of order to place.
+    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      trading_place_simple_order_request = _body
+      data, _status_code, _headers = place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      data
+    end
+
+    # Place order
+    #
+    # Places an order in the specified account.
+    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    #
+    # @param instrument [TradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [Type] The type of order to place.
+    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      trading_place_simple_order_request = _body
+      place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+    end
+
+    # Place order
+    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [OrderUpdatedResponse]
+    private def place_simple_order_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+      data, _status_code, _headers = place_simple_order_with_http_info(user_id, user_secret, account_id, trading_place_simple_order_request, opts)
+      data
+    end
+
+    # Place order
+    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
+    private def place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.place_simple_order ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_simple_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_simple_order"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_simple_order"
+      end
+      # verify the required parameter 'trading_place_simple_order_request' is set
+      if @api_client.config.client_side_validation && trading_place_simple_order_request.nil?
+        fail ArgumentError, "Missing the required parameter 'trading_place_simple_order_request' when calling TradingApi.place_simple_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/simple'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_simple_order_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.place_simple_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#place_simple_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Preview order
+    #
+    # Previews an order using the specified account.
+    #
+    # @param instrument [TradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [Type] The type of order to place.
+    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def preview_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      trading_place_simple_order_request = _body
+      data, _status_code, _headers = preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      data
+    end
+
+    # Preview order
+    #
+    # Previews an order using the specified account.
+    #
+    # @param instrument [TradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [Type] The type of order to place.
+    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def preview_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      trading_place_simple_order_request = _body
+      preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+    end
+
+    # Preview order
+    # Previews an order using the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [SimpleOrderPreview]
+    private def preview_simple_order_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+      data, _status_code, _headers = preview_simple_order_with_http_info(user_id, user_secret, account_id, trading_place_simple_order_request, opts)
+      data
+    end
+
+    # Preview order
+    # Previews an order using the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(SimpleOrderPreview, Integer, Hash)>] SimpleOrderPreview data, response status code and response headers
+    private def preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.preview_simple_order ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.preview_simple_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.preview_simple_order"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.preview_simple_order"
+      end
+      # verify the required parameter 'trading_place_simple_order_request' is set
+      if @api_client.config.client_side_validation && trading_place_simple_order_request.nil?
+        fail ArgumentError, "Missing the required parameter 'trading_place_simple_order_request' when calling TradingApi.preview_simple_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/simple/preview'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_simple_order_request)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'SimpleOrderPreview'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.preview_simple_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#preview_simple_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Replaces an order with a new one
     #
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
@@ -1005,6 +1541,123 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#replace_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
+    # Search cryptocurrency pairs instruments
+    #
+    # Searches cryptocurrency pairs instruments accessible to the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param base [String] 
+    # @param quote [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def search_cryptocurrency_pair_instruments(user_id:, user_secret:, account_id:, base: SENTINEL, quote: SENTINEL, extra: {})
+      extra[:base] = base if base != SENTINEL
+      extra[:quote] = quote if quote != SENTINEL
+      data, _status_code, _headers = search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # Search cryptocurrency pairs instruments
+    #
+    # Searches cryptocurrency pairs instruments accessible to the specified account.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param base [String] 
+    # @param quote [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def search_cryptocurrency_pair_instruments_with_http_info(user_id:, user_secret:, account_id:, base: SENTINEL, quote: SENTINEL, extra: {})
+      extra[:base] = base if base != SENTINEL
+      extra[:quote] = quote if quote != SENTINEL
+      search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
+    # Search cryptocurrency pairs instruments
+    # Searches cryptocurrency pairs instruments accessible to the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :base 
+    # @option opts [String] :quote 
+    # @return [TradingSearchCryptocurrencyPairInstruments200Response]
+    private def search_cryptocurrency_pair_instruments_impl(user_id, user_secret, account_id, opts = {})
+      data, _status_code, _headers = search_cryptocurrency_pair_instruments_with_http_info(user_id, user_secret, account_id, opts)
+      data
+    end
+
+    # Search cryptocurrency pairs instruments
+    # Searches cryptocurrency pairs instruments accessible to the specified account. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @option opts [String] :base 
+    # @option opts [String] :quote 
+    # @return [Array<(TradingSearchCryptocurrencyPairInstruments200Response, Integer, Hash)>] TradingSearchCryptocurrencyPairInstruments200Response data, response status code and response headers
+    private def search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.search_cryptocurrency_pair_instruments ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.search_cryptocurrency_pair_instruments"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.search_cryptocurrency_pair_instruments"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.search_cryptocurrency_pair_instruments"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+      query_params[:'base'] = opts[:'base'] if !opts[:'base'].nil?
+      query_params[:'quote'] = opts[:'quote'] if !opts[:'quote'].nil?
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'TradingSearchCryptocurrencyPairInstruments200Response'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.search_cryptocurrency_pair_instruments",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#search_cryptocurrency_pair_instruments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

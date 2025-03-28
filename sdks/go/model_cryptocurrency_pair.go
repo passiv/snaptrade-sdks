@@ -15,8 +15,10 @@ import (
 	"encoding/json"
 )
 
-// CryptocurrencyPair A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+// CryptocurrencyPair A cryptocurrency pair instrument.
 type CryptocurrencyPair struct {
+	// Cryptocurrency pair instrument instrument symbol
+	Symbol *string `json:"symbol,omitempty"`
 	// The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
 	Base string `json:"base"`
 	// The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
@@ -43,6 +45,38 @@ func NewCryptocurrencyPair(base string, quote string) *CryptocurrencyPair {
 func NewCryptocurrencyPairWithDefaults() *CryptocurrencyPair {
 	this := CryptocurrencyPair{}
 	return &this
+}
+
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
+func (o *CryptocurrencyPair) GetSymbol() string {
+	if o == nil || isNil(o.Symbol) {
+		var ret string
+		return ret
+	}
+	return *o.Symbol
+}
+
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CryptocurrencyPair) GetSymbolOk() (*string, bool) {
+	if o == nil || isNil(o.Symbol) {
+    return nil, false
+	}
+	return o.Symbol, true
+}
+
+// HasSymbol returns a boolean if a field has been set.
+func (o *CryptocurrencyPair) HasSymbol() bool {
+	if o != nil && !isNil(o.Symbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+func (o *CryptocurrencyPair) SetSymbol(v string) {
+	o.Symbol = &v
 }
 
 // GetBase returns the Base field value
@@ -95,6 +129,9 @@ func (o *CryptocurrencyPair) SetQuote(v string) {
 
 func (o CryptocurrencyPair) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if !isNil(o.Symbol) {
+		toSerialize["symbol"] = o.Symbol
+	}
 	if true {
 		toSerialize["base"] = o.Base
 	}
@@ -119,6 +156,7 @@ func (o *CryptocurrencyPair) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "base")
 		delete(additionalProperties, "quote")
 		o.AdditionalProperties = additionalProperties

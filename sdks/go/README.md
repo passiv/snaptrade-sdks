@@ -91,11 +91,6 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
-*CryptoSpotTradingApi* | [**CryptoSpotCancelOrder**](docs/CryptoSpotTradingApi.md#cryptospotcancelorder) | **Post** /accounts/{accountId}/trading/crypto/spot/cancelOrder | Cancel a crypto spot order.
-*CryptoSpotTradingApi* | [**CryptoSpotPlaceOrder**](docs/CryptoSpotTradingApi.md#cryptospotplaceorder) | **Post** /accounts/{accountId}/trading/crypto/spot/placeOrder | Place a spot order on a crypto exchange
-*CryptoSpotTradingApi* | [**CryptoSpotPreviewOrder**](docs/CryptoSpotTradingApi.md#cryptospotprevieworder) | **Post** /accounts/{accountId}/trading/crypto/spot/previewOrder | Preview a crypto spot order
-*CryptoSpotTradingApi* | [**CryptoSpotQuote**](docs/CryptoSpotTradingApi.md#cryptospotquote) | **Get** /accounts/{accountId}/trading/crypto/spot/quote | Get a cryptocurrency spot market quote
-*CryptoSpotTradingApi* | [**CryptoSpotSymbols**](docs/CryptoSpotTradingApi.md#cryptospotsymbols) | **Get** /accounts/{accountId}/trading/crypto/spot/symbols | Search crypto spot symbols
 *OptionsApi* | [**GetOptionStrategy**](docs/OptionsApi.md#getoptionstrategy) | **Post** /accounts/{accountId}/optionStrategy | Create options strategy
 *OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 *OptionsApi* | [**GetOptionsStrategyQuote**](docs/OptionsApi.md#getoptionsstrategyquote) | **Get** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
@@ -112,13 +107,18 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **Get** /currencies | Get currencies
 *ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **Get** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **Post** /accounts/{accountId}/symbols | Search account symbols
+*TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **Post** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel an order.
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
+*TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place a Bracket Order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked order
+*TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place order
+*TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one
+*TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe
 
@@ -156,10 +156,8 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
  - [BrokerageType](docs/BrokerageType.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
- - [CryptoSpotOrderPreview](docs/CryptoSpotOrderPreview.md)
- - [CryptoSpotOrderPreviewEstimatedFee](docs/CryptoSpotOrderPreviewEstimatedFee.md)
- - [CryptoSpotQuote](docs/CryptoSpotQuote.md)
  - [CryptocurrencyPair](docs/CryptocurrencyPair.md)
+ - [CryptocurrencyPairQuote](docs/CryptocurrencyPairQuote.md)
  - [Currency](docs/Currency.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)
@@ -219,6 +217,8 @@ Class | Method | HTTP request | Description
  - [RecentOrdersResponse](docs/RecentOrdersResponse.md)
  - [SecurityType](docs/SecurityType.md)
  - [SessionEvent](docs/SessionEvent.md)
+ - [SimpleOrderPreview](docs/SimpleOrderPreview.md)
+ - [SimpleOrderPreviewEstimatedFee](docs/SimpleOrderPreviewEstimatedFee.md)
  - [SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
  - [SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
  - [SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)
@@ -238,10 +238,9 @@ Class | Method | HTTP request | Description
  - [TakeProfit](docs/TakeProfit.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
  - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
- - [TradingCryptoSpotCancelOrderRequest](docs/TradingCryptoSpotCancelOrderRequest.md)
- - [TradingCryptoSpotPlaceOrderRequest](docs/TradingCryptoSpotPlaceOrderRequest.md)
- - [TradingCryptoSpotSymbols200Response](docs/TradingCryptoSpotSymbols200Response.md)
  - [TradingInstrument](docs/TradingInstrument.md)
+ - [TradingPlaceSimpleOrderRequest](docs/TradingPlaceSimpleOrderRequest.md)
+ - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)

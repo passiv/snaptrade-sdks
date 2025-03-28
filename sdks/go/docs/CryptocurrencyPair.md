@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Symbol** | Pointer to **string** | Cryptocurrency pair instrument instrument symbol | [optional] 
 **Base** | **string** | The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 **Quote** | **string** | The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewCryptocurrencyPairWithDefaults instantiates a new CryptocurrencyPair object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetSymbol
+
+`func (o *CryptocurrencyPair) GetSymbol() string`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *CryptocurrencyPair) GetSymbolOk() (*string, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *CryptocurrencyPair) SetSymbol(v string)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *CryptocurrencyPair) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
 
 ### GetBase
 

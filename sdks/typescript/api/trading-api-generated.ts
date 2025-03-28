@@ -25,6 +25,8 @@ import { ActionStrict } from '../models';
 // @ts-ignore
 import { ActionStrictWithOptions } from '../models';
 // @ts-ignore
+import { CryptocurrencyPairQuote } from '../models';
+// @ts-ignore
 import { ManualTradeAndImpact } from '../models';
 // @ts-ignore
 import { ManualTradeForm } from '../models';
@@ -45,6 +47,10 @@ import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { OrderTypeStrict } from '../models';
 // @ts-ignore
+import { OrderUpdatedResponse } from '../models';
+// @ts-ignore
+import { SimpleOrderPreview } from '../models';
+// @ts-ignore
 import { StopLoss } from '../models';
 // @ts-ignore
 import { SymbolsQuotesInner } from '../models';
@@ -57,6 +63,10 @@ import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingInstrument } from '../models';
 // @ts-ignore
+import { TradingPlaceSimpleOrderRequest } from '../models';
+// @ts-ignore
+import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
+// @ts-ignore
 import { ValidatedTradeBody } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
@@ -67,6 +77,72 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const TradingApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Cancels an order in the specified account. 
+         * @summary Cancel an order.
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {string} brokerageOrderId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelOrder: async (userId: string, userSecret: string, accountId: string, brokerageOrderId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('cancelOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('cancelOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('cancelOrder', 'accountId', accountId)
+            // verify required parameter 'brokerageOrderId' is not null or undefined
+            assertParamExists('cancelOrder', 'brokerageOrderId', brokerageOrderId)
+            const localVarPath = `/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel',
+                httpMethod: 'POST'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel order
@@ -130,6 +206,72 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 httpMethod: 'POST'
             });
             localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Gets a quote for the specified account. 
+         * @summary Get cryptocurrency pair quote
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {string} instrumentSymbol 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCryptocurrencyPairQuote: async (userId: string, userSecret: string, accountId: string, instrumentSymbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getCryptocurrencyPairQuote', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getCryptocurrencyPairQuote', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getCryptocurrencyPairQuote', 'accountId', accountId)
+            // verify required parameter 'instrumentSymbol' is not null or undefined
+            assertParamExists('getCryptocurrencyPairQuote', 'instrumentSymbol', instrumentSymbol)
+            const localVarPath = `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"instrumentSymbol"}}`, encodeURIComponent(String(instrumentSymbol !== undefined ? instrumentSymbol : `-instrumentSymbol-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote',
+                httpMethod: 'GET'
+            });
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -482,6 +624,146 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+         * @summary Place order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {TradingPlaceSimpleOrderRequest} tradingPlaceSimpleOrderRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeSimpleOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'accountId', accountId)
+            // verify required parameter 'tradingPlaceSimpleOrderRequest' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'tradingPlaceSimpleOrderRequest', tradingPlaceSimpleOrderRequest)
+            const localVarPath = `/accounts/{accountId}/trading/simple`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: tradingPlaceSimpleOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/simple',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceSimpleOrderRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Previews an order using the specified account. 
+         * @summary Preview order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {TradingPlaceSimpleOrderRequest} tradingPlaceSimpleOrderRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewSimpleOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('previewSimpleOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('previewSimpleOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('previewSimpleOrder', 'accountId', accountId)
+            // verify required parameter 'tradingPlaceSimpleOrderRequest' is not null or undefined
+            assertParamExists('previewSimpleOrder', 'tradingPlaceSimpleOrderRequest', tradingPlaceSimpleOrderRequest)
+            const localVarPath = `/accounts/{accountId}/trading/simple/preview`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: tradingPlaceSimpleOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/simple/preview',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceSimpleOrderRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
          * @summary Replaces an order with a new one
          * @param {string} accountId The ID of the account to execute the trade on.
@@ -555,6 +837,78 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * @summary Search cryptocurrency pairs instruments
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {string} [base] 
+         * @param {string} [quote] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCryptocurrencyPairInstruments: async (userId: string, userSecret: string, accountId: string, base?: string, quote?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('searchCryptocurrencyPairInstruments', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('searchCryptocurrencyPairInstruments', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('searchCryptocurrencyPairInstruments', 'accountId', accountId)
+            const localVarPath = `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (base !== undefined) {
+                localVarQueryParameter['base'] = base;
+            }
+
+            if (quote !== undefined) {
+                localVarQueryParameter['quote'] = quote;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -565,6 +919,17 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 export const TradingApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = TradingApiAxiosParamCreator(configuration)
     return {
+        /**
+         * Cancels an order in the specified account. 
+         * @summary Cancel an order.
+         * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.brokerageOrderId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
         /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel order
@@ -577,6 +942,17 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 brokerage_order_id: requestParameters.brokerage_order_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.cancelUserAccountOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingCancelUserAccountOrderRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Gets a quote for the specified account. 
+         * @summary Get cryptocurrency pair quote
+         * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CryptocurrencyPairQuote>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getCryptocurrencyPairQuote(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.instrumentSymbol, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -673,6 +1049,50 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+         * @summary Place order
+         * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeSimpleOrder(requestParameters: TradingApiPlaceSimpleOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
+            const tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest = {
+                instrument: requestParameters.instrument,
+                side: requestParameters.side,
+                type: requestParameters.type,
+                time_in_force: requestParameters.time_in_force,
+                amount: requestParameters.amount,
+                limit_price: requestParameters.limit_price,
+                stop_price: requestParameters.stop_price,
+                post_only: requestParameters.post_only,
+                expiration_date: requestParameters.expiration_date
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceSimpleOrderRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Previews an order using the specified account. 
+         * @summary Preview order
+         * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async previewSimpleOrder(requestParameters: TradingApiPreviewSimpleOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimpleOrderPreview>> {
+            const tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest = {
+                instrument: requestParameters.instrument,
+                side: requestParameters.side,
+                type: requestParameters.type,
+                time_in_force: requestParameters.time_in_force,
+                amount: requestParameters.amount,
+                limit_price: requestParameters.limit_price,
+                stop_price: requestParameters.stop_price,
+                post_only: requestParameters.post_only,
+                expiration_date: requestParameters.expiration_date
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceSimpleOrderRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
          * @summary Replaces an order with a new one
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
@@ -691,6 +1111,17 @@ export const TradingApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.replaceOrder(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, manualTradeReplaceForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * @summary Search cryptocurrency pairs instruments
+         * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.searchCryptocurrencyPairInstruments(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.base, requestParameters.quote, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -702,6 +1133,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = TradingApiFp(configuration)
     return {
         /**
+         * Cancels an order in the specified account. 
+         * @summary Cancel an order.
+         * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
+            return localVarFp.cancelOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
          * @summary Cancel order
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
@@ -710,6 +1151,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.cancelUserAccountOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Gets a quote for the specified account. 
+         * @summary Get cryptocurrency pair quote
+         * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest, options?: AxiosRequestConfig): AxiosPromise<CryptocurrencyPairQuote> {
+            return localVarFp.getCryptocurrencyPairQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -762,6 +1213,26 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.placeOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
+         * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+         * @summary Place order
+         * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeSimpleOrder(requestParameters: TradingApiPlaceSimpleOrderRequest, options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
+            return localVarFp.placeSimpleOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Previews an order using the specified account. 
+         * @summary Preview order
+         * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        previewSimpleOrder(requestParameters: TradingApiPreviewSimpleOrderRequest, options?: AxiosRequestConfig): AxiosPromise<SimpleOrderPreview> {
+            return localVarFp.previewSimpleOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
          * @summary Replaces an order with a new one
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
@@ -771,8 +1242,55 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         replaceOrder(requestParameters: TradingApiReplaceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.replaceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
+        /**
+         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * @summary Search cryptocurrency pairs instruments
+         * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest, options?: AxiosRequestConfig): AxiosPromise<TradingSearchCryptocurrencyPairInstruments200Response> {
+            return localVarFp.searchCryptocurrencyPairInstruments(requestParameters, options).then((request) => request(axios, basePath));
+        },
     };
 };
+
+/**
+ * Request parameters for cancelOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiCancelOrderRequest
+ */
+export type TradingApiCancelOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelOrder
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelOrder
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiCancelOrder
+    */
+    readonly brokerageOrderId: string
+    
+}
 
 /**
  * Request parameters for cancelUserAccountOrder operation in TradingApi.
@@ -803,6 +1321,43 @@ export type TradingApiCancelUserAccountOrderRequest = {
     readonly accountId: string
     
 } & TradingCancelUserAccountOrderRequest
+
+/**
+ * Request parameters for getCryptocurrencyPairQuote operation in TradingApi.
+ * @export
+ * @interface TradingApiGetCryptocurrencyPairQuoteRequest
+ */
+export type TradingApiGetCryptocurrencyPairQuoteRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetCryptocurrencyPairQuote
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetCryptocurrencyPairQuote
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetCryptocurrencyPairQuote
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetCryptocurrencyPairQuote
+    */
+    readonly instrumentSymbol: string
+    
+}
 
 /**
  * Request parameters for getOrderImpact operation in TradingApi.
@@ -955,6 +1510,66 @@ export type TradingApiPlaceOrderRequest = {
 } & ValidatedTradeBody
 
 /**
+ * Request parameters for placeSimpleOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPlaceSimpleOrderRequest
+ */
+export type TradingApiPlaceSimpleOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceSimpleOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceSimpleOrder
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceSimpleOrder
+    */
+    readonly accountId: string
+    
+} & TradingPlaceSimpleOrderRequest
+
+/**
+ * Request parameters for previewSimpleOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPreviewSimpleOrderRequest
+ */
+export type TradingApiPreviewSimpleOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPreviewSimpleOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPreviewSimpleOrder
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPreviewSimpleOrder
+    */
+    readonly accountId: string
+    
+} & TradingPlaceSimpleOrderRequest
+
+/**
  * Request parameters for replaceOrder operation in TradingApi.
  * @export
  * @interface TradingApiReplaceOrderRequest
@@ -992,12 +1607,68 @@ export type TradingApiReplaceOrderRequest = {
 } & ManualTradeReplaceForm
 
 /**
+ * Request parameters for searchCryptocurrencyPairInstruments operation in TradingApi.
+ * @export
+ * @interface TradingApiSearchCryptocurrencyPairInstrumentsRequest
+ */
+export type TradingApiSearchCryptocurrencyPairInstrumentsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiSearchCryptocurrencyPairInstruments
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiSearchCryptocurrencyPairInstruments
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiSearchCryptocurrencyPairInstruments
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiSearchCryptocurrencyPairInstruments
+    */
+    readonly base?: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiSearchCryptocurrencyPairInstruments
+    */
+    readonly quote?: string
+    
+}
+
+/**
  * TradingApiGenerated - object-oriented interface
  * @export
  * @class TradingApiGenerated
  * @extends {BaseAPI}
  */
 export class TradingApiGenerated extends BaseAPI {
+    /**
+     * Cancels an order in the specified account. 
+     * @summary Cancel an order.
+     * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).cancelOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
      * @summary Cancel order
@@ -1008,6 +1679,18 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public cancelUserAccountOrder(requestParameters: TradingApiCancelUserAccountOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).cancelUserAccountOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Gets a quote for the specified account. 
+     * @summary Get cryptocurrency pair quote
+     * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getCryptocurrencyPairQuote(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1071,6 +1754,30 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+     * @summary Place order
+     * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeSimpleOrder(requestParameters: TradingApiPlaceSimpleOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeSimpleOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Previews an order using the specified account. 
+     * @summary Preview order
+     * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public previewSimpleOrder(requestParameters: TradingApiPreviewSimpleOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).previewSimpleOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
      * @summary Replaces an order with a new one
      * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
@@ -1080,5 +1787,17 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public replaceOrder(requestParameters: TradingApiReplaceOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).replaceOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     * @summary Search cryptocurrency pairs instruments
+     * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public searchCryptocurrencyPairInstruments(requestParameters: TradingApiSearchCryptocurrencyPairInstrumentsRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).searchCryptocurrencyPairInstruments(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 }

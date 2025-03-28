@@ -37,6 +37,11 @@ from snaptrade_client.apis.paths.trade_place import TradePlace
 from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_bracket import AccountsAccountIdTradingBracket
 from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import AccountsAccountIdTradingSimpleBrokerageOrderIdReplace
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel import AccountsAccountIdTradingSimpleBrokerageOrderIdCancel
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_preview import AccountsAccountIdTradingSimplePreview
+from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
+from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -48,11 +53,6 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_place_order import AccountsAccountIdTradingCryptoSpotPlaceOrder
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_cancel_order import AccountsAccountIdTradingCryptoSpotCancelOrder
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_preview_order import AccountsAccountIdTradingCryptoSpotPreviewOrder
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_symbols import AccountsAccountIdTradingCryptoSpotSymbols
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_spot_quote import AccountsAccountIdTradingCryptoSpotQuote
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -93,6 +93,11 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -104,11 +109,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )
 
@@ -150,6 +150,11 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -161,10 +166,5 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PLACE_ORDER: AccountsAccountIdTradingCryptoSpotPlaceOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_CANCEL_ORDER: AccountsAccountIdTradingCryptoSpotCancelOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_PREVIEW_ORDER: AccountsAccountIdTradingCryptoSpotPreviewOrder,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_SYMBOLS: AccountsAccountIdTradingCryptoSpotSymbols,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_SPOT_QUOTE: AccountsAccountIdTradingCryptoSpotQuote,
     }
 )

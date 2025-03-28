@@ -12,13 +12,19 @@ import type * as buffer from "buffer"
 
 
 /**
- * A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+ * A cryptocurrency pair instrument.
  * @export
  * @interface CryptocurrencyPair
  */
 export interface CryptocurrencyPair {
     [key: string]: any;
 
+    /**
+     * Cryptocurrency pair instrument instrument symbol
+     * @type {string}
+     * @memberof CryptocurrencyPair
+     */
+    'symbol'?: string;
     /**
      * The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
      * @type {string}

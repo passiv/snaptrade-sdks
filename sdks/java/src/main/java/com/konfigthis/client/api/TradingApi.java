@@ -4,18 +4,25 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
+import java.math.BigDecimal;
+import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.OrderUpdatedResponse;
+import com.konfigthis.client.model.SimpleOrderPreview;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
+import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import java.util.ArrayList;
@@ -28,9 +35,19 @@ public class TradingApi extends TradingApiGenerated {
     public TradingApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
     }
+    public class CancelOrderRequestBuilder extends CancelOrderRequestBuilderGenerated {
+        public CancelOrderRequestBuilder(String userId, String userSecret, UUID accountId, String brokerageOrderId) {
+            super(userId, userSecret, accountId, brokerageOrderId);
+        }
+    }
     public class CancelUserAccountOrderRequestBuilder extends CancelUserAccountOrderRequestBuilderGenerated {
         public CancelUserAccountOrderRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
+        }
+    }
+    public class GetCryptocurrencyPairQuoteRequestBuilder extends GetCryptocurrencyPairQuoteRequestBuilderGenerated {
+        public GetCryptocurrencyPairQuoteRequestBuilder(String userId, String userSecret, UUID accountId, String instrumentSymbol) {
+            super(userId, userSecret, accountId, instrumentSymbol);
         }
     }
     public class GetOrderImpactRequestBuilder extends GetOrderImpactRequestBuilderGenerated {
@@ -58,9 +75,24 @@ public class TradingApi extends TradingApiGenerated {
             super(tradeId, userId, userSecret);
         }
     }
+    public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
+        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+            super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
+        }
+    }
+    public class PreviewSimpleOrderRequestBuilder extends PreviewSimpleOrderRequestBuilderGenerated {
+        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+            super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
+        }
+    }
     public class ReplaceOrderRequestBuilder extends ReplaceOrderRequestBuilderGenerated {
         public ReplaceOrderRequestBuilder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
             super(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
+        }
+    }
+    public class SearchCryptocurrencyPairInstrumentsRequestBuilder extends SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated {
+        public SearchCryptocurrencyPairInstrumentsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
         }
     }
 }

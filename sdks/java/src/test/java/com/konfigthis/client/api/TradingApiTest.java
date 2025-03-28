@@ -19,18 +19,25 @@ import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
+import java.math.BigDecimal;
+import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.OrderUpdatedResponse;
+import com.konfigthis.client.model.SimpleOrderPreview;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
+import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
@@ -58,6 +65,24 @@ public class TradingApiTest {
     }
 
     /**
+     * Cancel an order.
+     *
+     * Cancels an order in the specified account. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void cancelOrderTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        String brokerageOrderId = null;
+        OrderUpdatedResponse response = api.cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Cancel order
      *
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
@@ -72,6 +97,24 @@ public class TradingApiTest {
         String brokerageOrderId = null;
         AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId)
                 .brokerageOrderId(brokerageOrderId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get cryptocurrency pair quote
+     *
+     * Gets a quote for the specified account. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getCryptocurrencyPairQuoteTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        String instrumentSymbol = null;
+        CryptocurrencyPairQuote response = api.getCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol)
                 .execute();
         // TODO: test validations
     }
@@ -208,6 +251,66 @@ public class TradingApiTest {
     }
 
     /**
+     * Place order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeSimpleOrderTest() throws ApiException {
+        TradingInstrument instrument = null;
+        ActionStrict side = null;
+        String type = null;
+        String timeInForce = null;
+        BigDecimal amount = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        Boolean postOnly = null;
+        OffsetDateTime expirationDate = null;
+        OrderUpdatedResponse response = api.placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .postOnly(postOnly)
+                .expirationDate(expirationDate)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Preview order
+     *
+     * Previews an order using the specified account. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void previewSimpleOrderTest() throws ApiException {
+        TradingInstrument instrument = null;
+        ActionStrict side = null;
+        String type = null;
+        String timeInForce = null;
+        BigDecimal amount = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        Boolean postOnly = null;
+        OffsetDateTime expirationDate = null;
+        SimpleOrderPreview response = api.previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .postOnly(postOnly)
+                .expirationDate(expirationDate)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Replaces an order with a new one
      *
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -230,6 +333,27 @@ public class TradingApiTest {
                 .price(price)
                 .stop(stop)
                 .units(units)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Search cryptocurrency pairs instruments
+     *
+     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void searchCryptocurrencyPairInstrumentsTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        String base = null;
+        String quote = null;
+        TradingSearchCryptocurrencyPairInstruments200Response response = api.searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
+                .base(base)
+                .quote(quote)
                 .execute();
         // TODO: test validations
     }

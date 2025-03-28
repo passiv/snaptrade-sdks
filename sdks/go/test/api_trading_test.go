@@ -26,6 +26,23 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
+    t.Run("Test TradingApiService CancelOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.TradingApi.CancelOrder(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "brokerageOrderId_example",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService CancelUserAccountOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
@@ -37,6 +54,23 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             "userSecret_example",
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
             tradingCancelUserAccountOrderRequest,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test TradingApiService GetCryptocurrencyPairQuote", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.TradingApi.GetCryptocurrencyPairQuote(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "instrumentSymbol_example",
         )
         
         resp, httpRes, err := request.Execute()
@@ -184,6 +218,68 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test TradingApiService PlaceSimpleOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        instrument := *snaptrade.NewTradingInstrument()
+        
+        tradingPlaceSimpleOrderRequest := *snaptrade.NewTradingPlaceSimpleOrderRequest(
+            instrument,
+            null,
+            "null",
+            "null",
+            "123.45",
+        )
+        tradingPlaceSimpleOrderRequest.SetLimitPrice("123.45")
+        tradingPlaceSimpleOrderRequest.SetStopPrice("123.45")
+        tradingPlaceSimpleOrderRequest.SetPostOnly(false)
+        tradingPlaceSimpleOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
+        
+        request := client.TradingApi.PlaceSimpleOrder(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            tradingPlaceSimpleOrderRequest,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test TradingApiService PreviewSimpleOrder", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        instrument := *snaptrade.NewTradingInstrument()
+        
+        tradingPlaceSimpleOrderRequest := *snaptrade.NewTradingPlaceSimpleOrderRequest(
+            instrument,
+            null,
+            "null",
+            "null",
+            "123.45",
+        )
+        tradingPlaceSimpleOrderRequest.SetLimitPrice("123.45")
+        tradingPlaceSimpleOrderRequest.SetStopPrice("123.45")
+        tradingPlaceSimpleOrderRequest.SetPostOnly(false)
+        tradingPlaceSimpleOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
+        
+        request := client.TradingApi.PreviewSimpleOrder(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            tradingPlaceSimpleOrderRequest,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService ReplaceOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         units := *snaptrade.Newfloat32()
@@ -204,6 +300,24 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             "userSecret_example",
             manualTradeReplaceForm,
         )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
+    t.Run("Test TradingApiService SearchCryptocurrencyPairInstruments", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.TradingApi.SearchCryptocurrencyPairInstruments(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        )
+        request.Base("base_example")
+        request.Quote("quote_example")
         
         resp, httpRes, err := request.Execute()
 
