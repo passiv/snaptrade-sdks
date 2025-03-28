@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+    /// A cryptocurrency pair instrument.
     /// </summary>
     [DataContract(Name = "CryptocurrencyPair")]
     public partial class CryptocurrencyPair : IEquatable<CryptocurrencyPair>, IValidatableObject
@@ -43,9 +43,10 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CryptocurrencyPair" /> class.
         /// </summary>
+        /// <param name="symbol">Cryptocurrency pair instrument instrument symbol.</param>
         /// <param name="_base">The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
         /// <param name="quote">The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
-        public CryptocurrencyPair(string _base = default(string), string quote = default(string)) : base()
+        public CryptocurrencyPair(string symbol = default(string), string _base = default(string), string quote = default(string)) : base()
         {
             // to ensure "_base" is required (not null)
             if (_base == null)
@@ -59,8 +60,16 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("quote is a required property for CryptocurrencyPair and cannot be null");
             }
             this.Quote = quote;
+            this.Symbol = symbol;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
+
+        /// <summary>
+        /// Cryptocurrency pair instrument instrument symbol
+        /// </summary>
+        /// <value>Cryptocurrency pair instrument instrument symbol</value>
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        public string Symbol { get; set; }
 
         /// <summary>
         /// The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
@@ -91,6 +100,7 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CryptocurrencyPair {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
+            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Base: ").Append(Base).Append("\n");
             sb.Append("  Quote: ").Append(Quote).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
@@ -130,6 +140,11 @@ namespace SnapTrade.Net.Model
             }
             return base.Equals(input) && 
                 (
+                    this.Symbol == input.Symbol ||
+                    (this.Symbol != null &&
+                    this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
                     this.Base == input.Base ||
                     (this.Base != null &&
                     this.Base.Equals(input.Base))
@@ -151,6 +166,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = base.GetHashCode();
+                if (this.Symbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
                 if (this.Base != null)
                 {
                     hashCode = (hashCode * 59) + this.Base.GetHashCode();

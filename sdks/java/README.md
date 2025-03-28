@@ -47,11 +47,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.cryptoSpotTrading.cryptoSpotCancelOrder`](#snaptradecryptospottradingcryptospotcancelorder)
-  * [`snaptrade.cryptoSpotTrading.cryptoSpotPlaceOrder`](#snaptradecryptospottradingcryptospotplaceorder)
-  * [`snaptrade.cryptoSpotTrading.cryptoSpotPreviewOrder`](#snaptradecryptospottradingcryptospotprevieworder)
-  * [`snaptrade.cryptoSpotTrading.cryptoSpotQuote`](#snaptradecryptospottradingcryptospotquote)
-  * [`snaptrade.cryptoSpotTrading.cryptoSpotSymbols`](#snaptradecryptospottradingcryptospotsymbols)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -68,13 +63,18 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
   * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
+  * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
+  * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
+  * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
+  * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -1168,268 +1168,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.cryptoSpotTrading.cryptoSpotCancelOrder`<a id="snaptradecryptospottradingcryptospotcancelorder"></a>
-
-Cancels a cryptocurrency spot order in the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-OrderUpdatedResponse result = client
-        .cryptoSpotTrading
-        .cryptoSpotCancelOrder(brokerageOrderId, userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/crypto/spot/cancelOrder` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.cryptoSpotTrading.cryptoSpotPlaceOrder`<a id="snaptradecryptospottradingcryptospotplaceorder"></a>
-
-Places a spot cryptocurrency order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-OrderUpdatedResponse result = client
-        .cryptoSpotTrading
-        .cryptoSpotPlaceOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
-        .limitPrice(limitPrice)
-        .stopPrice(stopPrice)
-        .postOnly(postOnly)
-        .expirationDate(expirationDate)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### symbol: [`CryptocurrencyPair`](./src/main/java/com/konfigthis/client/model/CryptocurrencyPair.java)<a id="symbol-cryptocurrencypairsrcmainjavacomkonfigthisclientmodelcryptocurrencypairjava"></a>
-
-##### side:<a id="side"></a>
-
-##### type: `String`<a id="type-string"></a>
-
-The type of order to place.
-
-##### time_in_force: `String`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-
-##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
-
-The amount of the base currency to buy or sell.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
-
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-
-##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
-
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `Boolean`<a id="post_only-boolean"></a>
-
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-
-##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
-
-The expiration date of the order. Required if the time_in_force is GTD.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/crypto/spot/placeOrder` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.cryptoSpotTrading.cryptoSpotPreviewOrder`<a id="snaptradecryptospottradingcryptospotprevieworder"></a>
-
-Previews a cryptocurrency spot order using the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-CryptoSpotOrderPreview result = client
-        .cryptoSpotTrading
-        .cryptoSpotPreviewOrder(symbol, side, type, timeInForce, amount, userId, userSecret, accountId)
-        .limitPrice(limitPrice)
-        .stopPrice(stopPrice)
-        .postOnly(postOnly)
-        .expirationDate(expirationDate)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### symbol: [`CryptocurrencyPair`](./src/main/java/com/konfigthis/client/model/CryptocurrencyPair.java)<a id="symbol-cryptocurrencypairsrcmainjavacomkonfigthisclientmodelcryptocurrencypairjava"></a>
-
-##### side:<a id="side"></a>
-
-##### type: `String`<a id="type-string"></a>
-
-The type of order to place.
-
-##### time_in_force: `String`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-
-##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
-
-The amount of the base currency to buy or sell.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
-
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-
-##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
-
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `Boolean`<a id="post_only-boolean"></a>
-
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-
-##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
-
-The expiration date of the order. Required if the time_in_force is GTD.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[CryptoSpotOrderPreview](./src/main/java/com/konfigthis/client/model/CryptoSpotOrderPreview.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/crypto/spot/previewOrder` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.cryptoSpotTrading.cryptoSpotQuote`<a id="snaptradecryptospottradingcryptospotquote"></a>
-
-Gets a quote for the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-CryptoSpotQuote result = client
-        .cryptoSpotTrading
-        .cryptoSpotQuote(userId, userSecret, accountId, base, quote)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### base: `String`<a id="base-string"></a>
-
-##### quote: `String`<a id="quote-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[CryptoSpotQuote](./src/main/java/com/konfigthis/client/model/CryptoSpotQuote.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/crypto/spot/quote` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.cryptoSpotTrading.cryptoSpotSymbols`<a id="snaptradecryptospottradingcryptospotsymbols"></a>
-
-Searches cryptocurrency spot symbols accessible to the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-TradingCryptoSpotSymbols200Response result = client
-        .cryptoSpotTrading
-        .cryptoSpotSymbols(userId, userSecret, accountId)
-        .base(base)
-        .quote(quote)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### base: `String`<a id="base-string"></a>
-
-##### quote: `String`<a id="quote-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[TradingCryptoSpotSymbols200Response](./src/main/java/com/konfigthis/client/model/TradingCryptoSpotSymbols200Response.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/crypto/spot/symbols` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -1970,6 +1708,43 @@ The search query for symbols.
 ---
 
 
+### `snaptrade.trading.cancelOrder`<a id="snaptradetradingcancelorder"></a>
+
+Cancels an order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+OrderUpdatedResponse result = client
+        .trading
+        .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
@@ -2004,6 +1779,43 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/orders/cancel` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.getCryptocurrencyPairQuote`<a id="snaptradetradinggetcryptocurrencypairquote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+CryptocurrencyPairQuote result = client
+        .trading
+        .getCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### instrumentSymbol: `String`<a id="instrumentsymbol-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptocurrencyPairQuote](./src/main/java/com/konfigthis/client/model/CryptocurrencyPairQuote.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2306,6 +2118,149 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 ---
 
 
+### `snaptrade.trading.placeSimpleOrder`<a id="snaptradetradingplacesimpleorder"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+OrderUpdatedResponse result = client
+        .trading
+        .placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .postOnly(postOnly)
+        .expirationDate(expirationDate)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
+
+##### side:<a id="side"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `String`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.previewSimpleOrder`<a id="snaptradetradingpreviewsimpleorder"></a>
+
+Previews an order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+SimpleOrderPreview result = client
+        .trading
+        .previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .postOnly(postOnly)
+        .expirationDate(expirationDate)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
+
+##### side:<a id="side"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `String`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[SimpleOrderPreview](./src/main/java/com/konfigthis/client/model/SimpleOrderPreview.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/preview` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.replaceOrder`<a id="snaptradetradingreplaceorder"></a>
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
@@ -2364,6 +2319,47 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+TradingSearchCryptocurrencyPairInstruments200Response result = client
+        .trading
+        .searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
+        .base(base)
+        .quote(quote)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### base: `String`<a id="base-string"></a>
+
+##### quote: `String`<a id="quote-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingSearchCryptocurrencyPairInstruments200Response](./src/main/java/com/konfigthis/client/model/TradingSearchCryptocurrencyPairInstruments200Response.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

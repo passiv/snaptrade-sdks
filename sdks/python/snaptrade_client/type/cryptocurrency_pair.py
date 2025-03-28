@@ -23,8 +23,10 @@ class RequiredCryptocurrencyPair(TypedDict):
     # The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     quote: str
 
+
 class OptionalCryptocurrencyPair(TypedDict, total=False):
-    pass
+    # Cryptocurrency pair instrument instrument symbol
+    symbol: str
 
 class CryptocurrencyPair(RequiredCryptocurrencyPair, OptionalCryptocurrencyPair):
     pass

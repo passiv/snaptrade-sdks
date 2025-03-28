@@ -39,6 +39,14 @@ public class CryptocurrencyPairTest {
     }
 
     /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
+    }
+
+    /**
      * Test the property 'base'
      */
     @Test

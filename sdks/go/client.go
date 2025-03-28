@@ -58,8 +58,6 @@ type APIClient struct {
 
 	ConnectionsApi *ConnectionsApiService
 
-	CryptoSpotTradingApi *CryptoSpotTradingApiService
-
 	OptionsApi *OptionsApiService
 
 	ReferenceDataApi *ReferenceDataApiService
@@ -89,7 +87,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.APIStatusApi = (*APIStatusApiService)(&c.common)
 	c.AuthenticationApi = (*AuthenticationApiService)(&c.common)
 	c.ConnectionsApi = (*ConnectionsApiService)(&c.common)
-	c.CryptoSpotTradingApi = (*CryptoSpotTradingApiService)(&c.common)
 	c.OptionsApi = (*OptionsApiService)(&c.common)
 	c.ReferenceDataApi = (*ReferenceDataApiService)(&c.common)
 	c.TradingApi = (*TradingApiService)(&c.common)

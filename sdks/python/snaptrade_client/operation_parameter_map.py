@@ -311,140 +311,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/crypto/spot/cancelOrder-POST': {
-        'parameters': [
-            {
-                'name': 'brokerage_order_id'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/crypto/spot/placeOrder-POST': {
-        'parameters': [
-            {
-                'name': 'symbol'
-            },
-            {
-                'name': 'side'
-            },
-            {
-                'name': 'type'
-            },
-            {
-                'name': 'time_in_force'
-            },
-            {
-                'name': 'amount'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'limit_price'
-            },
-            {
-                'name': 'stop_price'
-            },
-            {
-                'name': 'post_only'
-            },
-            {
-                'name': 'expiration_date'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/crypto/spot/previewOrder-POST': {
-        'parameters': [
-            {
-                'name': 'symbol'
-            },
-            {
-                'name': 'side'
-            },
-            {
-                'name': 'type'
-            },
-            {
-                'name': 'time_in_force'
-            },
-            {
-                'name': 'amount'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'limit_price'
-            },
-            {
-                'name': 'stop_price'
-            },
-            {
-                'name': 'post_only'
-            },
-            {
-                'name': 'expiration_date'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/crypto/spot/quote-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'base'
-            },
-            {
-                'name': 'quote'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/crypto/spot/symbols-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'base'
-            },
-            {
-                'name': 'quote'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionStrategy-POST': {
         'parameters': [
             {
@@ -605,6 +471,22 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel-POST': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/cancel-POST': {
         'parameters': [
             {
@@ -618,6 +500,22 @@ operation_parameter_map = {
             },
             {
                 'name': 'brokerage_order_id'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'instrumentSymbol'
             },
         ]
     },
@@ -776,6 +674,86 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/simple-POST': {
+        'parameters': [
+            {
+                'name': 'instrument'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple/preview-POST': {
+        'parameters': [
+            {
+                'name': 'instrument'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
     '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace-PATCH': {
         'parameters': [
             {
@@ -807,6 +785,25 @@ operation_parameter_map = {
             },
             {
                 'name': 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'base'
+            },
+            {
+                'name': 'quote'
             },
         ]
     },
