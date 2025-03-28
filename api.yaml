@@ -30,8 +30,6 @@ tags:
     description: Retrieve information on account transactions, performance, dividends, contributions, etc.
   - name: Trading
     description: Manage orders on user accounts.
-  - name: Crypto Spot Trading
-    description: Advanced cryptocurrencies spot trading API.
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported brokerages, exchanges, currencies, etc.
   - name: Webhooks
@@ -1911,15 +1909,15 @@ paths:
         "500":
           description: Unexpected Error
 
-  /accounts/{accountId}/trading/crypto/spot/placeOrder:
+  /accounts/{accountId}/trading/simple:
     post:
       tags:
-        - Crypto Spot Trading
-      summary: Place a spot order on a crypto exchange
+        - Trading
+      summary: Place order
       description: |
-        Places a spot cryptocurrency order in the specified account.
-        This endpoint does not compute the impact to the account balance from the order before submitting the order to the exchange.
-      operationId: Trading_cryptoSpotPlaceOrder
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeSimpleOrder
       parameters:
         - in: query
           required: true
@@ -1937,7 +1935,7 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountID"
       requestBody:
-        $ref: "#/components/requestBodies/CryptoSpotOrderRequestBody"
+        $ref: "#/components/requestBodies/SimpleOrderRequestBody"
       responses:
         "200":
           description: OK
@@ -1953,14 +1951,14 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/crypto/spot/cancelOrder:
+  /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
     post:
       tags:
-        - Crypto Spot Trading
-      summary: Cancel a crypto spot order.
+        - Trading
+      summary: Cancel an order.
       description: |
-        Cancels a cryptocurrency spot order in the specified account.
-      operationId: Trading_cryptoSpotCancelOrder
+        Cancels an order in the specified account.
+      operationId: Trading_cancelOrder
       parameters:
         - in: query
           required: true
@@ -1977,8 +1975,11 @@ paths:
           name: accountId
           schema:
             $ref: "#/components/schemas/AccountID"
-      requestBody:
-        $ref: "#/components/requestBodies/CryptoSpotCancelOrder"
+        - in: path
+          required: true
+          name: brokerageOrderId
+          schema:
+            $ref: "#/components/schemas/BrokerageOrderID"
       responses:
         "200":
           description: OK
@@ -1994,14 +1995,14 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/crypto/spot/previewOrder:
+  /accounts/{accountId}/trading/simple/preview:
     post:
       tags:
-        - Crypto Spot Trading
-      summary: Preview a crypto spot order
+        - Trading
+      summary: Preview order
       description: |
-        Previews a cryptocurrency spot order using the specified account.
-      operationId: Trading_cryptoSpotPreviewOrder
+        Previews an order using the specified account.
+      operationId: Trading_previewSimpleOrder
       parameters:
         - in: query
           required: true
@@ -2019,14 +2020,14 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountID"
       requestBody:
-        $ref: "#/components/requestBodies/CryptoSpotOrderRequestBody"
+        $ref: "#/components/requestBodies/SimpleOrderRequestBody"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CryptoSpotOrderPreview"
+                $ref: "#/components/schemas/SimpleOrderPreview"
         "400":
           description: Invalid request
           content:
@@ -2035,14 +2036,14 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/crypto/spot/symbols:
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
     get:
       tags:
-        - Crypto Spot Trading
-      summary: Search crypto spot symbols
+        - Trading
+      summary: Search cryptocurrency pairs instruments
       description: |
-        Searches cryptocurrency spot symbols accessible to the specified account.
-      operationId: Trading_cryptoSpotSymbols
+        Searches cryptocurrency pairs instruments accessible to the specified account.
+      operationId: Trading_searchCryptocurrencyPairInstruments
       parameters:
         - in: query
           required: true
@@ -2091,14 +2092,14 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/crypto/spot/quote:
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
     get:
       tags:
-        - Crypto Spot Trading
-      summary: Get a cryptocurrency spot market quote
+        - Trading
+      summary: Get cryptocurrency pair quote
       description: |
         Gets a quote for the specified account.
-      operationId: Trading_cryptoSpotQuote
+      operationId: Trading_getCryptocurrencyPairQuote
       parameters:
         - in: query
           required: true
@@ -2115,23 +2116,18 @@ paths:
           name: accountId
           schema:
             $ref: "#/components/schemas/AccountID"
-        - in: query
+        - in: path
           required: true
-          name: base
+          name: instrumentSymbol
           schema:
-            $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
-        - in: query
-          required: true
-          name: quote
-          schema:
-            $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
+            $ref: "#/components/schemas/CryptocurrencyPairSymbol"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/CryptoSpotQuote"
+                $ref: "#/components/schemas/CryptocurrencyPairQuote"
 
         "400":
           description: Invalid request
@@ -2527,21 +2523,21 @@ components:
               price:
                 $ref: "#/components/schemas/Price"
 
-    CryptoSpotOrderRequestBody:
+    SimpleOrderRequestBody:
       required: true
       content:
         application/json:
           schema:
             type: object
             required:
-              - "symbol"
+              - "instrument"
               - "side"
               - "type"
               - "time_in_force"
               - "amount"
             properties:
-              symbol:
-                $ref: "#/components/schemas/CryptocurrencyPair"
+              instrument:
+                $ref: "#/components/schemas/TradingInstrument"
               side:
                 $ref: "#/components/schemas/ActionStrict"
               type:
@@ -2593,16 +2589,6 @@ components:
                 format: date-time
                 example: "2024-01-01T00:00:00Z"
                 description: The expiration date of the order. Required if the time_in_force is GTD.
-    CryptoSpotCancelOrder:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            required: ["brokerage_order_id"]
-            properties:
-              brokerage_order_id:
-                $ref: "#/components/schemas/BrokerageOrderID"
 
   schemas:
     400FailedRequestResponse:
@@ -4577,16 +4563,22 @@ components:
         Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
       type: string
       example: USD
+    CryptocurrencyPairSymbol:
+      description: Cryptocurrency pair instrument instrument symbol
+      type: string
+      example: BTC-USD
     CryptocurrencyPair:
-      description: A cryptocurrency symbol. This is a unique identifier for a cryptocurrency.
+      description: A cryptocurrency pair instrument.
       type: object
       required: ["base", "quote"]
       properties:
+        symbol:
+          $ref: "#/components/schemas/CryptocurrencyPairSymbol"
         base:
           $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
         quote:
           $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
-    CryptoSpotQuote:
+    CryptocurrencyPairQuote:
       type: object
       required: ["bid", "ask"]
       properties:
@@ -4610,8 +4602,8 @@ components:
           type: string
           format: date-time
           example: 2024-01-24T15:00:00Z
-    CryptoSpotOrderPreview:
-      description: Preview of a cryptocurrency spot order.
+    SimpleOrderPreview:
+      description: Preview of an order.
       type: object
       properties:
         estimated_fee:
