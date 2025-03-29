@@ -33,6 +33,10 @@ class TradingInstrument(
 
 
     class MetaOapg:
+        required = {
+            "symbol",
+            "type",
+        }
         
         class properties:
             symbol = schemas.StrSchema
@@ -40,10 +44,7 @@ class TradingInstrument(
             
             class type(
                 schemas.EnumBase,
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
+                schemas.StrSchema
             ):
             
             
@@ -65,23 +66,14 @@ class TradingInstrument(
                 @schemas.classproperty
                 def CRYPTOCURRENCY_PAIR(cls):
                     return cls("CRYPTOCURRENCY_PAIR")
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'type':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
             __annotations__ = {
                 "symbol": symbol,
                 "type": type,
             }
         additional_properties = schemas.AnyTypeSchema
+    
+    symbol: MetaOapg.properties.symbol
+    type: MetaOapg.properties.type
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
@@ -97,10 +89,10 @@ class TradingInstrument(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> typing.Union[MetaOapg.properties.type, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
@@ -111,8 +103,8 @@ class TradingInstrument(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
-        type: typing.Union[MetaOapg.properties.type, None, str, schemas.Unset] = schemas.unset,
+        symbol: typing.Union[MetaOapg.properties.symbol, str, ],
+        type: typing.Union[MetaOapg.properties.type, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'TradingInstrument':

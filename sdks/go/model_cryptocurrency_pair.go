@@ -17,7 +17,7 @@ import (
 
 // CryptocurrencyPair A cryptocurrency pair instrument.
 type CryptocurrencyPair struct {
-	// Cryptocurrency pair instrument instrument symbol
+	// Cryptocurrency pair instrument symbol
 	Symbol *string `json:"symbol,omitempty"`
 	// The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
 	Base string `json:"base"`

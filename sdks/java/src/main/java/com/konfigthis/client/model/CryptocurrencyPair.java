@@ -75,11 +75,11 @@ public class CryptocurrencyPair {
   }
 
    /**
-   * Cryptocurrency pair instrument instrument symbol
+   * Cryptocurrency pair instrument symbol
    * @return symbol
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "BTC-USD", value = "Cryptocurrency pair instrument instrument symbol")
+  @ApiModelProperty(example = "BTC-USD", value = "Cryptocurrency pair instrument symbol")
 
   public String getSymbol() {
     return symbol;

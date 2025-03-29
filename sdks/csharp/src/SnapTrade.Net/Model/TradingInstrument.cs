@@ -33,8 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class TradingInstrument : IEquatable<TradingInstrument>, IValidatableObject
     {
         /// <summary>
-        /// Defines Type
+        /// The type of the instrument
         /// </summary>
+        /// <value>The type of the instrument</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -60,27 +61,41 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Gets or Sets Type
+        /// The type of the instrument
         /// </summary>
-        [DataMember(Name = "type", EmitDefaultValue = true)]
-        public TypeEnum? Type { get; set; }
+        /// <value>The type of the instrument</value>
+        [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
+        public TypeEnum Type { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingInstrument" /> class.
         /// </summary>
-        /// <param name="symbol">The security&#39;s trading ticker symbol.</param>
-        /// <param name="type">type.</param>
-        public TradingInstrument(string symbol = default(string), TypeEnum? type = default(TypeEnum?)) : base()
+        [JsonConstructorAttribute]
+        protected TradingInstrument()
         {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TradingInstrument" /> class.
+        /// </summary>
+        /// <param name="symbol">The instrument&#39;s trading ticker symbol (required).</param>
+        /// <param name="type">The type of the instrument (required).</param>
+        public TradingInstrument(string symbol = default(string), TypeEnum type = default(TypeEnum)) : base()
+        {
+            // to ensure "symbol" is required (not null)
+            if (symbol == null)
+            {
+                throw new ArgumentNullException("symbol is a required property for TradingInstrument and cannot be null");
+            }
             this.Symbol = symbol;
             this.Type = type;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// The security&#39;s trading ticker symbol
+        /// The instrument&#39;s trading ticker symbol
         /// </summary>
-        /// <value>The security&#39;s trading ticker symbol</value>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        /// <value>The instrument&#39;s trading ticker symbol</value>
+        [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
         public string Symbol { get; set; }
 
         /// <summary>

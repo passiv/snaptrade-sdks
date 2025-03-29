@@ -2,7 +2,7 @@
 
 # TradingSearchCryptocurrencyPairInstruments200Response
 
-The symbols
+The instruments
 
 ## Properties
 

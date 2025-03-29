@@ -20,17 +20,17 @@ export interface TradingInstrument {
     [key: string]: any;
 
     /**
-     * The security\'s trading ticker symbol
+     * The instrument\'s trading ticker symbol
      * @type {string}
      * @memberof TradingInstrument
      */
-    'symbol'?: string;
+    'symbol': string;
     /**
-     * 
+     * The type of the instrument
      * @type {string}
      * @memberof TradingInstrument
      */
-    'type'?: TradingInstrumentTypeEnum;
+    'type': TradingInstrumentTypeEnum;
 }
 
 type TradingInstrumentTypeEnum = 'EQUITY' | 'CRYPTOCURRENCY' | 'CRYPTOCURRENCY_PAIR'

@@ -13,7 +13,7 @@ import type * as buffer from "buffer"
 import { CryptocurrencyPair } from './cryptocurrency-pair';
 
 /**
- * The symbols
+ * The instruments
  * @export
  * @interface TradingSearchCryptocurrencyPairInstruments200Response
  */

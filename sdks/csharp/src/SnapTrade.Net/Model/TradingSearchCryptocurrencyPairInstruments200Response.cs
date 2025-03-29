@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The symbols
+    /// The instruments
     /// </summary>
     [DataContract(Name = "Trading_searchCryptocurrencyPairInstruments_200_response")]
     public partial class TradingSearchCryptocurrencyPairInstruments200Response : IEquatable<TradingSearchCryptocurrencyPairInstruments200Response>, IValidatableObject

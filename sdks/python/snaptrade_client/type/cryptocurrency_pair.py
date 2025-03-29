@@ -25,7 +25,7 @@ class RequiredCryptocurrencyPair(TypedDict):
 
 
 class OptionalCryptocurrencyPair(TypedDict, total=False):
-    # Cryptocurrency pair instrument instrument symbol
+    # Cryptocurrency pair instrument symbol
     symbol: str
 
 class CryptocurrencyPair(RequiredCryptocurrencyPair, OptionalCryptocurrencyPair):

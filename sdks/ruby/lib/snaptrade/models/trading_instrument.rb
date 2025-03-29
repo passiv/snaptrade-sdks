@@ -12,9 +12,10 @@ require 'time'
 
 module SnapTrade
   class TradingInstrument
-    # The security's trading ticker symbol
+    # The instrument's trading ticker symbol
     attr_accessor :symbol
 
+    # The type of the instrument
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -41,7 +42,6 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'type'
       ])
     end
 
@@ -73,12 +73,22 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @symbol.nil?
+        invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
+      end
+
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @symbol.nil?
+      return false if @type.nil?
       true
     end
 

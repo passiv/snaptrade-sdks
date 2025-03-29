@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol | [optional] 
-**Type** | Pointer to **NullableString** |  | [optional] 
+**Symbol** | **string** | The instrument&#39;s trading ticker symbol | 
+**Type** | **string** | The type of the instrument | 
 
 ## Methods
 
 ### NewTradingInstrument
 
-`func NewTradingInstrument() *TradingInstrument`
+`func NewTradingInstrument(symbol string, type_ string, ) *TradingInstrument`
 
 NewTradingInstrument instantiates a new TradingInstrument object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetSymbol sets Symbol field to given value.
 
-### HasSymbol
-
-`func (o *TradingInstrument) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetType
 
@@ -70,22 +65,7 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
-### HasType
 
-`func (o *TradingInstrument) HasType() bool`
-
-HasType returns a boolean if a field has been set.
-
-### SetTypeNil
-
-`func (o *TradingInstrument) SetTypeNil(b bool)`
-
- SetTypeNil sets the value for Type to be an explicit nil
-
-### UnsetType
-`func (o *TradingInstrument) UnsetType()`
-
-UnsetType ensures that no value is present for Type, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

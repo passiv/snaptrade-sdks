@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="CryptocurrencyPair" /> class.
         /// </summary>
-        /// <param name="symbol">Cryptocurrency pair instrument instrument symbol.</param>
+        /// <param name="symbol">Cryptocurrency pair instrument symbol.</param>
         /// <param name="_base">The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
         /// <param name="quote">The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  (required).</param>
         public CryptocurrencyPair(string symbol = default(string), string _base = default(string), string quote = default(string)) : base()
@@ -65,9 +65,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// Cryptocurrency pair instrument instrument symbol
+        /// Cryptocurrency pair instrument symbol
         /// </summary>
-        /// <value>Cryptocurrency pair instrument instrument symbol</value>
+        /// <value>Cryptocurrency pair instrument symbol</value>
         [DataMember(Name = "symbol", EmitDefaultValue = false)]
         public string Symbol { get; set; }
 
