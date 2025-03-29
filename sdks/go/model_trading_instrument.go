@@ -17,9 +17,10 @@ import (
 
 // TradingInstrument struct for TradingInstrument
 type TradingInstrument struct {
-	// The security's trading ticker symbol
-	Symbol *string `json:"symbol,omitempty"`
-	Type NullableString `json:"type,omitempty"`
+	// The instrument's trading ticker symbol
+	Symbol string `json:"symbol"`
+	// The type of the instrument
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -29,8 +30,10 @@ type _TradingInstrument TradingInstrument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingInstrument() *TradingInstrument {
+func NewTradingInstrument(symbol string, type_ string) *TradingInstrument {
 	this := TradingInstrument{}
+	this.Symbol = symbol
+	this.Type = type_
 	return &this
 }
 
@@ -42,87 +45,61 @@ func NewTradingInstrumentWithDefaults() *TradingInstrument {
 	return &this
 }
 
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
+// GetSymbol returns the Symbol field value
 func (o *TradingInstrument) GetSymbol() string {
-	if o == nil || isNil(o.Symbol) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Symbol
+
+	return o.Symbol
 }
 
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// GetSymbolOk returns a tuple with the Symbol field value
 // and a boolean to check if the value has been set.
 func (o *TradingInstrument) GetSymbolOk() (*string, bool) {
-	if o == nil || isNil(o.Symbol) {
+	if o == nil {
     return nil, false
 	}
-	return o.Symbol, true
+	return &o.Symbol, true
 }
 
-// HasSymbol returns a boolean if a field has been set.
-func (o *TradingInstrument) HasSymbol() bool {
-	if o != nil && !isNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// SetSymbol sets field value
 func (o *TradingInstrument) SetSymbol(v string) {
-	o.Symbol = &v
+	o.Symbol = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetType returns the Type field value
 func (o *TradingInstrument) GetType() string {
-	if o == nil || isNil(o.Type.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type.Get()
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TradingInstrument) GetTypeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
-	return o.Type.Get(), o.Type.IsSet()
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *TradingInstrument) HasType() bool {
-	if o != nil && o.Type.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given NullableString and assigns it to the Type field.
+// SetType sets field value
 func (o *TradingInstrument) SetType(v string) {
-	o.Type.Set(&v)
-}
-// SetTypeNil sets the value for Type to be an explicit nil
-func (o *TradingInstrument) SetTypeNil() {
-	o.Type.Set(nil)
-}
-
-// UnsetType ensures that no value is present for Type, not even an explicit nil
-func (o *TradingInstrument) UnsetType() {
-	o.Type.Unset()
+	o.Type = v
 }
 
 func (o TradingInstrument) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Symbol) {
+	if true {
 		toSerialize["symbol"] = o.Symbol
 	}
-	if o.Type.IsSet() {
-		toSerialize["type"] = o.Type.Get()
+	if true {
+		toSerialize["type"] = o.Type
 	}
 
 	for key, value := range o.AdditionalProperties {

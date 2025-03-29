@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | Pointer to **string** | Cryptocurrency pair instrument instrument symbol | [optional] 
+**Symbol** | Pointer to **string** | Cryptocurrency pair instrument symbol | [optional] 
 **Base** | **string** | The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 **Quote** | **string** | The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 

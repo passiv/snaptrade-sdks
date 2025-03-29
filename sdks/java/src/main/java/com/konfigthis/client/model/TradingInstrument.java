@@ -22,7 +22,6 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -55,7 +54,7 @@ public class TradingInstrument {
   private String symbol;
 
   /**
-   * Gets or Sets type
+   * The type of the instrument
    */
   @JsonAdapter(TypeEnum.Adapter.class)
  public enum TypeEnum {
@@ -86,7 +85,7 @@ public class TradingInstrument {
           return b;
         }
       }
-      return null;
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
 
     public static class Adapter extends TypeAdapter<TypeEnum> {
@@ -120,11 +119,11 @@ public class TradingInstrument {
   }
 
    /**
-   * The security&#39;s trading ticker symbol
+   * The instrument&#39;s trading ticker symbol
    * @return symbol
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "AAPL", value = "The security's trading ticker symbol")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "AAPL", required = true, value = "The instrument's trading ticker symbol")
 
   public String getSymbol() {
     return symbol;
@@ -149,11 +148,11 @@ public class TradingInstrument {
   }
 
    /**
-   * Get type
+   * The type of the instrument
    * @return type
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "The type of the instrument")
 
   public TypeEnum getType() {
     return type;
@@ -227,20 +226,9 @@ public class TradingInstrument {
         Objects.equals(this.additionalProperties, tradingInstrument.additionalProperties);
   }
 
-  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
-    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(symbol, type, additionalProperties);
-  }
-
-  private static <T> int hashCodeNullable(JsonNullable<T> a) {
-    if (a == null) {
-      return 1;
-    }
-    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -277,6 +265,8 @@ public class TradingInstrument {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("symbol");
+    openapiRequiredFields.add("type");
   }
 
  /**
@@ -291,10 +281,17 @@ public class TradingInstrument {
           throw new IllegalArgumentException(String.format("The required field(s) %s in TradingInstrument is not found in the empty JSON string", TradingInstrument.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : TradingInstrument.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
-      if (!jsonObj.get("type").isJsonNull() && (jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
+      if (!jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
   }

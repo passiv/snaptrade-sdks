@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// TradingSearchCryptocurrencyPairInstruments200Response The symbols
+// TradingSearchCryptocurrencyPairInstruments200Response The instruments
 type TradingSearchCryptocurrencyPairInstruments200Response struct {
 	Items []CryptocurrencyPair `json:"items"`
 	AdditionalProperties map[string]interface{}

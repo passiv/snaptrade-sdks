@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # The symbols
+  # The instruments
   class TradingSearchCryptocurrencyPairInstruments200Response
     attr_accessor :items
 

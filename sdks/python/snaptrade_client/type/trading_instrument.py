@@ -17,13 +17,14 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredTradingInstrument(TypedDict):
-    pass
-
-class OptionalTradingInstrument(TypedDict, total=False):
-    # The security's trading ticker symbol
+    # The instrument's trading ticker symbol
     symbol: str
 
-    type: typing.Optional[str]
+    # The type of the instrument
+    type: str
+
+class OptionalTradingInstrument(TypedDict, total=False):
+    pass
 
 class TradingInstrument(RequiredTradingInstrument, OptionalTradingInstrument):
     pass

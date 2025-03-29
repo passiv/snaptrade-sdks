@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   # A cryptocurrency pair instrument.
   class CryptocurrencyPair
-    # Cryptocurrency pair instrument instrument symbol
+    # Cryptocurrency pair instrument symbol
     attr_accessor :symbol
 
     # The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 

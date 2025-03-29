@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.TradingSearchCryptocurrencyPairInstruments200Response
-The symbols
+The instruments
 
 ## Properties
 

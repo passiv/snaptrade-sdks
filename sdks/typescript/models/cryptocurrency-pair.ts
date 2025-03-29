@@ -20,7 +20,7 @@ export interface CryptocurrencyPair {
     [key: string]: any;
 
     /**
-     * Cryptocurrency pair instrument instrument symbol
+     * Cryptocurrency pair instrument symbol
      * @type {string}
      * @memberof CryptocurrencyPair
      */
