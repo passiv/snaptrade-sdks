@@ -2078,7 +2078,7 @@ paths:
               schema:
                 type: object
                 required: ["items"]
-                description: The symbols
+                description: The instruments
                 properties:
                   items:
                     type: array
@@ -4433,13 +4433,16 @@ components:
           description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
     TradingInstrument:
       type: object
+      required:
+        - symbol
+        - type
       properties:
         symbol:
-          description: The security's trading ticker symbol
+          description: The instrument's trading ticker symbol
           type: string
           example: AAPL
         type:
-          nullable: true
+          description: The type of the instrument
           type: string
           enum:
             - EQUITY
@@ -4564,7 +4567,7 @@ components:
       type: string
       example: USD
     CryptocurrencyPairSymbol:
-      description: Cryptocurrency pair instrument instrument symbol
+      description: Cryptocurrency pair instrument symbol
       type: string
       example: BTC-USD
     CryptocurrencyPair:
