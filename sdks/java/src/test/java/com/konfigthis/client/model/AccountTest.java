@@ -112,6 +112,14 @@ public class AccountTest {
     }
 
     /**
+     * Test the property 'rawType'
+     */
+    @Test
+    public void rawTypeTest() {
+        // TODO: test rawType
+    }
+
+    /**
      * Test the property 'meta'
      */
     @Test
@@ -133,14 +141,6 @@ public class AccountTest {
     @Test
     public void cashRestrictionsTest() {
         // TODO: test cashRestrictions
-    }
-
-    /**
-     * Test the property 'rawType'
-     */
-    @Test
-    public void rawTypeTest() {
-        // TODO: test rawType
     }
 
 }

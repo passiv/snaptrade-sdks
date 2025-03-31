@@ -3227,6 +3227,13 @@ components:
           $ref: '#/components/schemas/AccountSyncStatus'
         balance:
           $ref: '#/components/schemas/AccountBalance'
+        raw_type:
+          description: The account type as provided by the brokerage
+          example: Margin
+          nullable: true
+          type: string
+          x-konfig-original-example: Margin
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-raw_type
         meta:
           additionalProperties: true
           deprecated: true
@@ -3262,13 +3269,6 @@ components:
           type: array
           x-konfig-original-example: []
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-cash_restrictions
-        raw_type:
-          description: The account type as provided by the brokerage
-          example: Margin
-          nullable: true
-          type: string
-          x-konfig-original-example: Margin
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-raw_type
       required:
       - balance
       - brokerage_authorization
@@ -8357,6 +8357,10 @@ components:
       example: 2024-07-23T22:50:22.761Z
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-raw_type:
+      example: Margin
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-meta:
       additionalProperties: true
       example:
@@ -8379,10 +8383,6 @@ components:
       items:
         type: string
       type: array
-      x-do-not-generate: true
-    konfig-generated-schema-components-schemas-Account-properties-raw_type:
-      example: Margin
-      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-name:
       example: Robinhood Individual

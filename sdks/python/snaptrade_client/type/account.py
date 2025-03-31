@@ -45,6 +45,9 @@ class RequiredAccount(TypedDict):
 
 
 class OptionalAccount(TypedDict, total=False):
+    # The account type as provided by the brokerage
+    raw_type: typing.Optional[str]
+
     # WARNING: This property is deprecated
     meta: AccountMeta
 
@@ -54,9 +57,6 @@ class OptionalAccount(TypedDict, total=False):
 
     # WARNING: This property is deprecated
     cash_restrictions: AccountCashRestrictions
-
-    # The account type as provided by the brokerage
-    raw_type: typing.Optional[str]
 
 class Account(RequiredAccount, OptionalAccount):
     pass

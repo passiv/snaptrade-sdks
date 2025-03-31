@@ -35,6 +35,9 @@ module SnapTrade
 
     attr_accessor :balance
 
+    # The account type as provided by the brokerage
+    attr_accessor :raw_type
+
     # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
@@ -43,9 +46,6 @@ module SnapTrade
 
     # This field is deprecated.
     attr_accessor :cash_restrictions
-
-    # The account type as provided by the brokerage
-    attr_accessor :raw_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -58,10 +58,10 @@ module SnapTrade
         :'created_date' => :'created_date',
         :'sync_status' => :'sync_status',
         :'balance' => :'balance',
+        :'raw_type' => :'raw_type',
         :'meta' => :'meta',
         :'portfolio_group' => :'portfolio_group',
-        :'cash_restrictions' => :'cash_restrictions',
-        :'raw_type' => :'raw_type'
+        :'cash_restrictions' => :'cash_restrictions'
       }
     end
 
@@ -81,10 +81,10 @@ module SnapTrade
         :'created_date' => :'Time',
         :'sync_status' => :'AccountSyncStatus',
         :'balance' => :'AccountBalance',
+        :'raw_type' => :'String',
         :'meta' => :'Hash<String, Object>',
         :'portfolio_group' => :'String',
-        :'cash_restrictions' => :'Array<String>',
-        :'raw_type' => :'String'
+        :'cash_restrictions' => :'Array<String>'
       }
     end
 
@@ -92,7 +92,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'name',
-        :'raw_type'
+        :'raw_type',
       ])
     end
 
@@ -143,6 +143,10 @@ module SnapTrade
         self.balance = attributes[:'balance']
       end
 
+      if attributes.key?(:'raw_type')
+        self.raw_type = attributes[:'raw_type']
+      end
+
       if attributes.key?(:'meta')
         if (value = attributes[:'meta']).is_a?(Hash)
           self.meta = value
@@ -157,10 +161,6 @@ module SnapTrade
         if (value = attributes[:'cash_restrictions']).is_a?(Array)
           self.cash_restrictions = value
         end
-      end
-
-      if attributes.key?(:'raw_type')
-        self.raw_type = attributes[:'raw_type']
       end
     end
 
@@ -225,10 +225,10 @@ module SnapTrade
           created_date == o.created_date &&
           sync_status == o.sync_status &&
           balance == o.balance &&
+          raw_type == o.raw_type &&
           meta == o.meta &&
           portfolio_group == o.portfolio_group &&
-          cash_restrictions == o.cash_restrictions &&
-          raw_type == o.raw_type
+          cash_restrictions == o.cash_restrictions
     end
 
     # @see the `==` method
@@ -240,7 +240,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, meta, portfolio_group, cash_restrictions, raw_type].hash
+      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, raw_type, meta, portfolio_group, cash_restrictions].hash
     end
 
     # Builds the object from hash

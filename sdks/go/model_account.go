@@ -32,6 +32,8 @@ type Account struct {
 	CreatedDate time.Time `json:"created_date"`
 	SyncStatus AccountSyncStatus `json:"sync_status"`
 	Balance AccountBalance `json:"balance"`
+	// The account type as provided by the brokerage
+	RawType NullableString `json:"raw_type,omitempty"`
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
@@ -41,8 +43,6 @@ type Account struct {
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
-	// The account type as provided by the brokerage
-	RawType NullableString `json:"raw_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -267,6 +267,48 @@ func (o *Account) SetBalance(v AccountBalance) {
 	o.Balance = v
 }
 
+// GetRawType returns the RawType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetRawType() string {
+	if o == nil || isNil(o.RawType.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.RawType.Get()
+}
+
+// GetRawTypeOk returns a tuple with the RawType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetRawTypeOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.RawType.Get(), o.RawType.IsSet()
+}
+
+// HasRawType returns a boolean if a field has been set.
+func (o *Account) HasRawType() bool {
+	if o != nil && o.RawType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawType gets a reference to the given NullableString and assigns it to the RawType field.
+func (o *Account) SetRawType(v string) {
+	o.RawType.Set(&v)
+}
+// SetRawTypeNil sets the value for RawType to be an explicit nil
+func (o *Account) SetRawTypeNil() {
+	o.RawType.Set(nil)
+}
+
+// UnsetRawType ensures that no value is present for RawType, not even an explicit nil
+func (o *Account) UnsetRawType() {
+	o.RawType.Unset()
+}
+
 // GetMeta returns the Meta field value if set, zero value otherwise.
 // Deprecated
 func (o *Account) GetMeta() map[string]interface{} {
@@ -372,48 +414,6 @@ func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 
-// GetRawType returns the RawType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Account) GetRawType() string {
-	if o == nil || isNil(o.RawType.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.RawType.Get()
-}
-
-// GetRawTypeOk returns a tuple with the RawType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Account) GetRawTypeOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.RawType.Get(), o.RawType.IsSet()
-}
-
-// HasRawType returns a boolean if a field has been set.
-func (o *Account) HasRawType() bool {
-	if o != nil && o.RawType.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRawType gets a reference to the given NullableString and assigns it to the RawType field.
-func (o *Account) SetRawType(v string) {
-	o.RawType.Set(&v)
-}
-// SetRawTypeNil sets the value for RawType to be an explicit nil
-func (o *Account) SetRawTypeNil() {
-	o.RawType.Set(nil)
-}
-
-// UnsetRawType ensures that no value is present for RawType, not even an explicit nil
-func (o *Account) UnsetRawType() {
-	o.RawType.Unset()
-}
-
 func (o Account) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -440,6 +440,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["balance"] = o.Balance
 	}
+	if o.RawType.IsSet() {
+		toSerialize["raw_type"] = o.RawType.Get()
+	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
 	}
@@ -448,9 +451,6 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
-	}
-	if o.RawType.IsSet() {
-		toSerialize["raw_type"] = o.RawType.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -478,10 +478,10 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "created_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "balance")
+		delete(additionalProperties, "raw_type")
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")
-		delete(additionalProperties, "raw_type")
 		o.AdditionalProperties = additionalProperties
 	}
 
