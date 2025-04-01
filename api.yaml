@@ -4442,7 +4442,7 @@ components:
           type: string
           example: AAPL
         type:
-          description: The type of the instrument
+          description: The instrument's type
           type: string
           enum:
             - EQUITY

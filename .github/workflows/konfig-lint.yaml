@@ -13,8 +13,5 @@ jobs:
       - name: Install Konfig CLI
         uses: passiv/konfig-workflows/.github/actions/install-cli@main
 
-      - name: Initialize Linting Rules
-        run: konfig init -s
-
       - name: Lint OpenAPI Spec
         run: konfig lint api.yaml
