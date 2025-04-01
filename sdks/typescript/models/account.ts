@@ -70,6 +70,12 @@ export interface Account {
      */
     'balance': AccountBalance;
     /**
+     * The account type as provided by the brokerage
+     * @type {string}
+     * @memberof Account
+     */
+    'raw_type'?: string | null;
+    /**
      * Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there\'s no standard format for this data. This field is deprecated and subject to removal in a future version.
      * @type {{ [key: string]: any; }}
      * @memberof Account
@@ -90,11 +96,5 @@ export interface Account {
      * @deprecated
      */
     'cash_restrictions'?: Array<string>;
-    /**
-     * The account type as provided by the brokerage
-     * @type {string}
-     * @memberof Account
-     */
-    'raw_type'?: string | null;
 }
 

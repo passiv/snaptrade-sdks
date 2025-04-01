@@ -91,6 +91,10 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_BALANCE)
   private AccountBalance balance;
 
+  public static final String SERIALIZED_NAME_RAW_TYPE = "raw_type";
+  @SerializedName(SERIALIZED_NAME_RAW_TYPE)
+  private String rawType;
+
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
   private Map<String, Object> meta = null;
@@ -102,10 +106,6 @@ public class Account {
   public static final String SERIALIZED_NAME_CASH_RESTRICTIONS = "cash_restrictions";
   @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
   private List<String> cashRestrictions = null;
-
-  public static final String SERIALIZED_NAME_RAW_TYPE = "raw_type";
-  @SerializedName(SERIALIZED_NAME_RAW_TYPE)
-  private String rawType;
 
   public Account() {
   }
@@ -342,6 +342,35 @@ public class Account {
   }
 
 
+  public Account rawType(String rawType) {
+    
+    
+    
+    
+    this.rawType = rawType;
+    return this;
+  }
+
+   /**
+   * The account type as provided by the brokerage
+   * @return rawType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "Margin", value = "The account type as provided by the brokerage")
+
+  public String getRawType() {
+    return rawType;
+  }
+
+
+  public void setRawType(String rawType) {
+    
+    
+    
+    this.rawType = rawType;
+  }
+
+
   public Account meta(Map<String, Object> meta) {
     
     
@@ -450,35 +479,6 @@ public class Account {
     this.cashRestrictions = cashRestrictions;
   }
 
-
-  public Account rawType(String rawType) {
-    
-    
-    
-    
-    this.rawType = rawType;
-    return this;
-  }
-
-   /**
-   * The account type as provided by the brokerage
-   * @return rawType
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "Margin", value = "The account type as provided by the brokerage")
-
-  public String getRawType() {
-    return rawType;
-  }
-
-
-  public void setRawType(String rawType) {
-    
-    
-    
-    this.rawType = rawType;
-  }
-
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -542,10 +542,10 @@ public class Account {
         Objects.equals(this.createdDate, account.createdDate) &&
         Objects.equals(this.syncStatus, account.syncStatus) &&
         Objects.equals(this.balance, account.balance) &&
+        Objects.equals(this.rawType, account.rawType) &&
         Objects.equals(this.meta, account.meta) &&
         Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
-        Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
-        Objects.equals(this.rawType, account.rawType)&&
+        Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
   }
 
@@ -555,7 +555,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, meta, portfolioGroup, cashRestrictions, rawType, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, rawType, meta, portfolioGroup, cashRestrictions, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -577,10 +577,10 @@ public class Account {
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
+    sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
-    sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -612,10 +612,10 @@ public class Account {
     openapiFields.add("created_date");
     openapiFields.add("sync_status");
     openapiFields.add("balance");
+    openapiFields.add("raw_type");
     openapiFields.add("meta");
     openapiFields.add("portfolio_group");
     openapiFields.add("cash_restrictions");
-    openapiFields.add("raw_type");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -664,15 +664,15 @@ public class Account {
       AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       // validate the required field `balance`
       AccountBalance.validateJsonObject(jsonObj.getAsJsonObject("balance"));
+      if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
+      }
       if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
       }
       // ensure the optional json data is an array if present
       if (jsonObj.get("cash_restrictions") != null && !jsonObj.get("cash_restrictions").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `cash_restrictions` to be an array in the JSON string but got `%s`", jsonObj.get("cash_restrictions").toString()));
-      }
-      if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
       }
   }
 
