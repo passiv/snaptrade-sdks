@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | **string** | The instrument&#39;s trading ticker symbol | 
-**Type** | **string** | The type of the instrument | 
+**Type** | **string** | The instrument&#39;s type | 
 
 ## Methods
 

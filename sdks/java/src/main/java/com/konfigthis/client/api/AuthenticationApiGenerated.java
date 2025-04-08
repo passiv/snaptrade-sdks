@@ -717,21 +717,12 @@ public class AuthenticationApiGenerated {
     }
 
     public abstract class RegisterSnapTradeUserRequestBuilderGenerated {
-        String userId;
+        final String userId;
 
-        public RegisterSnapTradeUserRequestBuilderGenerated() {
-        }
-
-        /**
-         * Set userId
-         * @param userId SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable. (optional)
-         * @return AuthenticationApi.RegisterSnapTradeUserRequestBuilder
-         */
-        public AuthenticationApi.RegisterSnapTradeUserRequestBuilder userId(String userId) {
+        public RegisterSnapTradeUserRequestBuilderGenerated(String userId) {
             this.userId = userId;
-            return (AuthenticationApi.RegisterSnapTradeUserRequestBuilder) this;
         }
-        
+
         /**
          * Build call for registerSnapTradeUser
          * @param _callback ApiCallback API callback
@@ -813,8 +804,11 @@ public class AuthenticationApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public AuthenticationApi.RegisterSnapTradeUserRequestBuilder registerSnapTradeUser() throws IllegalArgumentException {
-        return ((AuthenticationApi) this).new RegisterSnapTradeUserRequestBuilder();
+    public AuthenticationApi.RegisterSnapTradeUserRequestBuilder registerSnapTradeUser(String userId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        return ((AuthenticationApi) this).new RegisterSnapTradeUserRequestBuilder(userId);
     }
     private okhttp3.Call resetSnapTradeUserSecretCall(UserIDandSecret userIDandSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;

@@ -26,7 +26,7 @@ export interface TradingInstrument {
      */
     'symbol': string;
     /**
-     * The type of the instrument
+     * The instrument\'s type
      * @type {string}
      * @memberof TradingInstrument
      */

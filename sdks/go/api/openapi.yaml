@@ -452,9 +452,9 @@ paths:
     post:
       description: |
         Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
-        This endpoint will also trigger a transaction sync for the past day if one has not yet occured.
+        This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-        *Please contact support for access as this endpoint is not enabled by default.*
+        **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
       - explode: false
@@ -521,7 +521,7 @@ paths:
         Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
         Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
 
-        *Please contact us in order to use this endpoint as it is disabled by default.*
+        This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default.
       operationId: Connections_disableBrokerageAuthorization
       parameters:
       - explode: false
@@ -1046,7 +1046,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
-      summary: List account recent orders
+      summary: List account orders
       tags:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
@@ -5114,6 +5114,8 @@ components:
           type: string
           x-konfig-original-example: snaptrade-user-123
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-UserID
+      required:
+      - userId
       type: object
     SnapTradeLoginUserRequestBody:
       description: Data to login a user via SnapTrade Partner
@@ -6694,7 +6696,7 @@ components:
           x-konfig-original-example: AAPL
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradingInstrument-properties-symbol
         type:
-          description: The type of the instrument
+          description: The instrument's type
           enum:
           - EQUITY
           - CRYPTOCURRENCY
@@ -9073,6 +9075,8 @@ components:
       properties:
         userId:
           $ref: '#/components/schemas/UserID'
+      required:
+      - userId
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []

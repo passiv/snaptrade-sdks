@@ -20,7 +20,7 @@ class RequiredTradingInstrument(TypedDict):
     # The instrument's trading ticker symbol
     symbol: str
 
-    # The type of the instrument
+    # The instrument's type
     type: str
 
 class OptionalTradingInstrument(TypedDict, total=False):

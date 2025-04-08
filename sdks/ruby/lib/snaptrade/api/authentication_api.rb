@@ -324,7 +324,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user(user_id: SENTINEL, extra: {})
+    def register_snap_trade_user(user_id:, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       snap_trade_register_user_request_body = _body
@@ -340,7 +340,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user_with_http_info(user_id: SENTINEL, extra: {})
+    def register_snap_trade_user_with_http_info(user_id:, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       snap_trade_register_user_request_body = _body

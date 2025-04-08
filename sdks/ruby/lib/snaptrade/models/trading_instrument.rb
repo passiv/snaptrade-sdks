@@ -15,7 +15,7 @@ module SnapTrade
     # The instrument's trading ticker symbol
     attr_accessor :symbol
 
-    # The type of the instrument
+    # The instrument's type
     attr_accessor :type
 
     # Attribute mapping from ruby-style variable name to JSON key.

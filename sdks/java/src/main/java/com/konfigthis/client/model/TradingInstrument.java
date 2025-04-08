@@ -54,7 +54,7 @@ public class TradingInstrument {
   private String symbol;
 
   /**
-   * The type of the instrument
+   * The instrument&#39;s type
    */
   @JsonAdapter(TypeEnum.Adapter.class)
  public enum TypeEnum {
@@ -148,11 +148,11 @@ public class TradingInstrument {
   }
 
    /**
-   * The type of the instrument
+   * The instrument&#39;s type
    * @return type
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The type of the instrument")
+  @ApiModelProperty(required = true, value = "The instrument's type")
 
   public TypeEnum getType() {
     return type;

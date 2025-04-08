@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class TradingInstrument : IEquatable<TradingInstrument>, IValidatableObject
     {
         /// <summary>
-        /// The type of the instrument
+        /// The instrument&#39;s type
         /// </summary>
-        /// <value>The type of the instrument</value>
+        /// <value>The instrument&#39;s type</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum TypeEnum
         {
@@ -61,9 +61,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// The type of the instrument
+        /// The instrument&#39;s type
         /// </summary>
-        /// <value>The type of the instrument</value>
+        /// <value>The instrument&#39;s type</value>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
         public TypeEnum Type { get; set; }
         /// <summary>
@@ -78,7 +78,7 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="TradingInstrument" /> class.
         /// </summary>
         /// <param name="symbol">The instrument&#39;s trading ticker symbol (required).</param>
-        /// <param name="type">The type of the instrument (required).</param>
+        /// <param name="type">The instrument&#39;s type (required).</param>
         public TradingInstrument(string symbol = default(string), TypeEnum type = default(TypeEnum)) : base()
         {
             // to ensure "symbol" is required (not null)
