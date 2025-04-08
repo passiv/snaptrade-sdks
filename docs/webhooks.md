@@ -17,7 +17,7 @@ Aside from webhook secrets:
 
 # Handling Undeliverable Webhooks
 
-When your webhook handler responds to our requests with a status code that is not 200 or 201, we mark that webhook as undelivered in our system.
+When your webhook handler responds to our requests with a status code that is not 200, 201, 202, or 204, we mark that webhook as undelivered in our system.
 
 We will attempt to resend an undeliverable webhook notification with an exponential backoff (starting at 30 minutes) until it is either delivered successfully, or 3 retry attempts have been made.
 
