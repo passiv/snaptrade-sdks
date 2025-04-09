@@ -28,8 +28,7 @@ public class GettingStartedTest {
                 configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
                 Snaptrade snaptrade = new Snaptrade(configuration);
                 UUID userId = UUID.randomUUID();
-                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
-                        .userId(userId.toString()).execute();
+                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser(userId.toString()).execute();
                 snaptrade.authentication.deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
         }
 
