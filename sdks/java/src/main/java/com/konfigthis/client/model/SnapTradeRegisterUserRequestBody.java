@@ -70,8 +70,8 @@ public class SnapTradeRegisterUserRequestBody {
    * SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
    * @return userId
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "snaptrade-user-123", value = "SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "snaptrade-user-123", required = true, value = "SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.")
 
   public String getUserId() {
     return userId;
@@ -181,6 +181,7 @@ public class SnapTradeRegisterUserRequestBody {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("userId");
   }
 
  /**
@@ -195,7 +196,14 @@ public class SnapTradeRegisterUserRequestBody {
           throw new IllegalArgumentException(String.format("The required field(s) %s in SnapTradeRegisterUserRequestBody is not found in the empty JSON string", SnapTradeRegisterUserRequestBody.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("userId") != null && !jsonObj.get("userId").isJsonNull()) && !jsonObj.get("userId").isJsonPrimitive()) {
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : SnapTradeRegisterUserRequestBody.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("userId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `userId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("userId").toString()));
       }
   }

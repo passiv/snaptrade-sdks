@@ -185,7 +185,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // List account recent orders
+                // List account orders
                 List<AccountOrderRecord> result = client.AccountInformation.GetUserAccountOrders(userId, userSecret, accountId, state, days);
                 Console.WriteLine(result);
             }

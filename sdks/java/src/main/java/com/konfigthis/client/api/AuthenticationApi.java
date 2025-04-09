@@ -31,8 +31,8 @@ public class AuthenticationApi extends AuthenticationApiGenerated {
         }
     }
     public class RegisterSnapTradeUserRequestBuilder extends RegisterSnapTradeUserRequestBuilderGenerated {
-        public RegisterSnapTradeUserRequestBuilder() {
-            super();
+        public RegisterSnapTradeUserRequestBuilder(String userId) {
+            super(userId);
         }
     }
     public class ResetSnapTradeUserSecretRequestBuilder extends ResetSnapTradeUserSecretRequestBuilderGenerated {

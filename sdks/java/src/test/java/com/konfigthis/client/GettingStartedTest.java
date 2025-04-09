@@ -20,19 +20,6 @@ import static org.junit.Assert.assertNotNull;
 
 public class GettingStartedTest {
 
-        @Disabled
-        @Test
-        public void setPortfolioTargets() throws ApiException {
-                Configuration configuration = new Configuration();
-                configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
-                configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
-                Snaptrade snaptrade = new Snaptrade(configuration);
-                UUID userId = UUID.randomUUID();
-                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
-                        .userId(userId.toString()).execute();
-                snaptrade.authentication.deleteSnapTradeUser(userIDandSecret.getUserId()).execute();
-        }
-
         @Test
         public void gettingStartedTest() throws ApiException {
                 // 1) Initialize default client with clientID and consumerKey
@@ -49,8 +36,7 @@ public class GettingStartedTest {
                 // The userId should be provided by you and refer to permanent value such as a
                 // database row ID
                 UUID userId = UUID.randomUUID();
-                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser()
-                                .userId(userId.toString()).execute();
+                UserIDandSecret userIDandSecret = snaptrade.authentication.registerSnapTradeUser(userId.toString()).execute();
 
                 new SnapTradeRegisterUserRequestBody().userId(userId.toString());
                 // Note: A user secret is only generated once. It's required to access resources

@@ -111,8 +111,7 @@ public class AuthenticationApiTest {
     @Test
     public void registerSnapTradeUserTest() throws ApiException {
         String userId = null;
-        UserIDandSecret response = api.registerSnapTradeUser()
-                .userId(userId)
+        UserIDandSecret response = api.registerSnapTradeUser(userId)
                 .execute();
         // TODO: test validations
     }

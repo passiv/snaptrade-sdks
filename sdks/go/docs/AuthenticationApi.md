@@ -182,8 +182,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody()
-    snapTradeRegisterUserRequestBody.SetUserId("snaptrade-user-123")
+    snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody(
+        "snaptrade-user-123",
+    )
     
     request := client.AuthenticationApi.RegisterSnapTradeUser(
         snapTradeRegisterUserRequestBody,

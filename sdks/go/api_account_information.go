@@ -802,7 +802,7 @@ func (r AccountInformationApiGetUserAccountOrdersRequest) Execute() ([]AccountOr
 }
 
 /*
-GetUserAccountOrders List account recent orders
+GetUserAccountOrders List account orders
 
 Returns a list of recent orders in the specified account.
 

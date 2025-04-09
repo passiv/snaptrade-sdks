@@ -19,7 +19,7 @@ import (
 type TradingInstrument struct {
 	// The instrument's trading ticker symbol
 	Symbol string `json:"symbol"`
-	// The type of the instrument
+	// The instrument's type
 	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }

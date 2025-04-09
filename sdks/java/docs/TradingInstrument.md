@@ -8,7 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**symbol** | **String** | The instrument&#39;s trading ticker symbol |  |
-|**type** | [**TypeEnum**](#TypeEnum) | The type of the instrument |  |
+|**type** | [**TypeEnum**](#TypeEnum) | The instrument&#39;s type |  |
 
 
 

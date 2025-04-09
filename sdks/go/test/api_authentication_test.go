@@ -81,8 +81,9 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
     t.Run("Test AuthenticationApiService RegisterSnapTradeUser", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
-        snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody()
-        snapTradeRegisterUserRequestBody.SetUserId("snaptrade-user-123")
+        snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody(
+            "snaptrade-user-123",
+        )
         
         request := client.AuthenticationApi.RegisterSnapTradeUser(
             snapTradeRegisterUserRequestBody,

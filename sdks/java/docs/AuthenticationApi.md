@@ -341,8 +341,7 @@ public class Example {
     try {
       UserIDandSecret result = client
               .authentication
-              .registerSnapTradeUser()
-              .userId(userId)
+              .registerSnapTradeUser(userId)
               .execute();
       System.out.println(result);
       System.out.println(result.getUserId());
@@ -359,8 +358,7 @@ public class Example {
     try {
       ApiResponse<UserIDandSecret> response = client
               .authentication
-              .registerSnapTradeUser()
-              .userId(userId)
+              .registerSnapTradeUser(userId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
