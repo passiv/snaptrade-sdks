@@ -1,20 +1,8 @@
-## Requests
+# Sending Requests
 
-We strongly recommend using an SDK for interfacing with the SnapTrade APIs
+When sending requests to SnapTrade, we strongly recommend using an SDK. You can also send requests directly through the API reference on this site, this is especially useful for managing users and connections during development.
 
-### Request Headers
-
-**x-request-id** - Each SnapTrade API request has an associated request identifier. If you need to contact us about a specific request, providing the request identifier is helpful to the fastest possible resolution.
-
-**x-ratelimit-limit** - 
-
-**x-ratelimit-remaining** -
-
-### Ratelimiting
-
-See https://docs.snaptrade.com/docs/ratelimiting.
-
-### SDKs
+## SDKs
 
 | **Language** | **SDK Link** |
 | --- | --- |
@@ -26,6 +14,28 @@ See https://docs.snaptrade.com/docs/ratelimiting.
 | PHP | [**https://packagist.org/packages/konfig/snaptrade-php-sdk**](https://packagist.org/packages/konfig/snaptrade-php-sdk) |
 | Go | [**https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go**](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go) |
 
+## Ratelimiting
+
+The SnapTrade API uses a number of safety mechanisms to protect against bursts of incoming traffic and help maximize its stability.
+
+Sending many requests in quick succession might trigger error responses that show up as HTTP status code 429.
+
+## Request Headers
+
+### x-request-id
+
+Each SnapTrade API request has an associated request identifier. If you need to contact us about a specific request, providing the request identifier is helpful to the fastest possible resolution.
+
+### x-ratelimit-limit
+
+With each request, you will receive your ratelimit as a header. This denotes how many requests you can make in one minute before being throttled.
+
+### x-ratelimit-remaining
+
+Within each request, you will receive how many requests are remaining until SnapTrade begins throttling your requests. 
+
+
 ---
 
 See also:
+- [https://docs.snaptrade.com/docs/ratelimiting](Ratelimiting)
