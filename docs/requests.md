@@ -4,7 +4,7 @@ When sending requests to SnapTrade, we recommend using an SDK. You can also send
 
 ## SDKs
 
-It is possible to integrate without an SDK, but will require you to lift the signing code from one of our SDKs for making requests. SnapTrade provides the following SDKs 
+It is possible to integrate without an SDK, but will require you to lift the signing code from one of our SDKs for making requests. SnapTrade provides the following SDKs for you to use.
 
 | **Language** | **SDK Link** |
 | --- | --- |
