@@ -52,6 +52,10 @@ portal:
               path: docs/ratelimiting.md
             - id: launch-guide
               path: docs/launching-your-application.md
+        - label: Core Concepts
+          links:
+            - id: requests
+              path: docs/requests.md
         - label: Troubleshooting
           links:
             - id: request-ids
