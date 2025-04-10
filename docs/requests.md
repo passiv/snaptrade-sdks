@@ -39,4 +39,4 @@ Within each request, you will receive how many requests are remaining until Snap
 ---
 
 See also:
-- [https://docs.snaptrade.com/docs/ratelimiting](Ratelimiting)
+- [Ratelimiting](https://docs.snaptrade.com/docs/ratelimiting)
