@@ -26,7 +26,7 @@ Sending many requests in quick succession might trigger error responses that sho
 
 ### x-request-id
 
-Each SnapTrade API request has an associated request identifier. If you need to contact us about a specific request, providing the request identifier is helpful to the fastest possible resolution.
+Each SnapTrade API request has an associated request identifier. If you need to contact us about a specific request, providing the request identifier is helpful to ensure the fastest possible resolution.
 
 ### x-ratelimit-limit
 
