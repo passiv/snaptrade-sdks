@@ -1,8 +1,10 @@
 # Sending Requests
 
-When sending requests to SnapTrade, we strongly recommend using an SDK. You can also send requests directly through the API reference on this site, this is especially useful for managing users and connections during development.
+When sending requests to SnapTrade, we recommend using an SDK. You can also send requests directly through the API reference on this site, this is especially useful for managing users and connections during development.
 
 ## SDKs
+
+It is possible to integrate without an SDK, but will require you to lift the signing code from one of our SDKs for making requests. SnapTrade provides the following SDKs 
 
 | **Language** | **SDK Link** |
 | --- | --- |
@@ -33,7 +35,6 @@ With each request, you will receive your ratelimit as a header. This denotes how
 ### x-ratelimit-remaining
 
 Within each request, you will receive how many requests are remaining until SnapTrade begins throttling your requests. 
-
 
 ---
 
