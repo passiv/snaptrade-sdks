@@ -22,7 +22,7 @@ The SnapTrade API uses a number of safety mechanisms to protect against bursts o
 
 Sending many requests in quick succession might trigger error responses that show up as HTTP status code 429.
 
-## Request Headers
+## Response Headers
 
 ### x-request-id
 
