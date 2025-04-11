@@ -40,3 +40,4 @@ Within each request, you will receive how many requests are remaining until Snap
 
 See also:
 - [Ratelimiting](https://docs.snaptrade.com/docs/ratelimiting)
+- [Request IDs](https://docs.snaptrade.com/docs/request-ids)
