@@ -290,6 +290,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             null,
         )
         manualTradeReplaceForm.SetPrice(31.33)
+        manualTradeReplaceForm.SetSymbol("AAPL")
         manualTradeReplaceForm.SetStop(31.33)
         manualTradeReplaceForm.SetUnits(units)
         

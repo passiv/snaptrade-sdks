@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
+**Symbol** | Pointer to **string** | The security&#39;s trading ticker symbol | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** |  | [optional] 
 
@@ -125,6 +126,31 @@ HasPrice returns a boolean if a field has been set.
 `func (o *ManualTradeReplaceForm) UnsetPrice()`
 
 UnsetPrice ensures that no value is present for Price, not even an explicit nil
+### GetSymbol
+
+`func (o *ManualTradeReplaceForm) GetSymbol() string`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *ManualTradeReplaceForm) GetSymbolOk() (*string, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *ManualTradeReplaceForm) SetSymbol(v string)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *ManualTradeReplaceForm) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
+
 ### GetStop
 
 `func (o *ManualTradeReplaceForm) GetStop() float32`

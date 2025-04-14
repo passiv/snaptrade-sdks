@@ -1404,16 +1404,18 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param symbol [String] The security's trading ticker symbol
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def replace_order(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def replace_order(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
       _body[:action] = action if action != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       manual_trade_replace_form = _body
@@ -1435,16 +1437,18 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
+    # @param symbol [String] The security's trading ticker symbol
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def replace_order_with_http_info(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def replace_order_with_http_info(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
       _body[:action] = action if action != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:price] = price if price != SENTINEL
+      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       manual_trade_replace_form = _body

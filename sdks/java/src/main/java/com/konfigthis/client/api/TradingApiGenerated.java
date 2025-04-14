@@ -2721,6 +2721,7 @@ public class TradingApiGenerated {
         final String userId;
         final String userSecret;
         Double price;
+        String symbol;
         Double stop;
         Double units;
 
@@ -2752,6 +2753,16 @@ public class TradingApiGenerated {
          */
         public TradingApi.ReplaceOrderRequestBuilder price(Integer price) {
             this.price = price.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
             return (TradingApi.ReplaceOrderRequestBuilder) this;
         }
         
@@ -2820,6 +2831,7 @@ public class TradingApiGenerated {
             manualTradeReplaceForm.orderType(this.orderType);
             manualTradeReplaceForm.timeInForce(this.timeInForce);
             manualTradeReplaceForm.price(this.price);
+            manualTradeReplaceForm.symbol(this.symbol);
             manualTradeReplaceForm.stop(this.stop);
             manualTradeReplaceForm.units(this.units);
             return manualTradeReplaceForm;

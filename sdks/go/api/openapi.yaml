@@ -6486,6 +6486,7 @@ components:
     ManualTradeReplaceForm:
       description: Inputs for placing an order with the brokerage.
       example:
+        symbol: AAPL
         time_in_force: null
         stop: 31.33
         price: 31.33
@@ -6506,6 +6507,12 @@ components:
           type: number
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        symbol:
+          description: The security's trading ticker symbol
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
         stop:
           description: The price at which a stop order is triggered for `Stop` and
             `StopLimit` orders.
@@ -8736,6 +8743,10 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop:
       example: 31.33
       type: number
@@ -10044,6 +10055,12 @@ components:
           type: number
           x-konfig-original-example: 31.33
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        symbol:
+          description: The security's trading ticker symbol
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
         stop:
           description: The price at which a stop order is triggered for `Stop` and
             `StopLimit` orders.

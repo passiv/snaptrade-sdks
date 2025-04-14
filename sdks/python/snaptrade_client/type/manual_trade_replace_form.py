@@ -32,6 +32,9 @@ class OptionalManualTradeReplaceForm(TypedDict, total=False):
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]
 
+    # The security's trading ticker symbol
+    symbol: str
+
     # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     stop: typing.Optional[typing.Union[int, float]]
 

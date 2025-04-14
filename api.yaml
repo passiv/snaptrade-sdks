@@ -4331,6 +4331,10 @@ components:
           type: number
           example: 31.33
           nullable: true
+        symbol:
+          description: The security's trading ticker symbol
+          type: string
+          example: AAPL
         stop:
           description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
           type: number

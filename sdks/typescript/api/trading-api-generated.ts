@@ -1105,6 +1105,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 price: requestParameters.price,
+                symbol: requestParameters.symbol,
                 stop: requestParameters.stop,
                 units: requestParameters.units
             };

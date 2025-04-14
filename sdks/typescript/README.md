@@ -2326,6 +2326,7 @@ const replaceOrderResponse = await snaptrade.trading.replaceOrder({
   order_type: "Market",
   time_in_force: "FOK",
   price: 31.33,
+  symbol: "AAPL",
   stop: 31.33,
   units: 10.5,
 });
@@ -2360,6 +2361,10 @@ The Brokerage Order ID of the order to replace.
 ##### price: `number`<a id="price-number"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol
 
 ##### stop: `number`<a id="stop-number"></a>
 

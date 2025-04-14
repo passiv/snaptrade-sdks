@@ -25,6 +25,9 @@ module SnapTrade
     # The limit price for `Limit` and `StopLimit` orders.
     attr_accessor :price
 
+    # The security's trading ticker symbol
+    attr_accessor :symbol
+
     # The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     attr_accessor :stop
 
@@ -37,6 +40,7 @@ module SnapTrade
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'price' => :'price',
+        :'symbol' => :'symbol',
         :'stop' => :'stop',
         :'units' => :'units'
       }
@@ -54,6 +58,7 @@ module SnapTrade
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
         :'price' => :'Float',
+        :'symbol' => :'String',
         :'stop' => :'Float',
         :'units' => :'Float'
       }
@@ -97,6 +102,10 @@ module SnapTrade
 
       if attributes.key?(:'price')
         self.price = attributes[:'price']
+      end
+
+      if attributes.key?(:'symbol')
+        self.symbol = attributes[:'symbol']
       end
 
       if attributes.key?(:'stop')
@@ -145,6 +154,7 @@ module SnapTrade
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           price == o.price &&
+          symbol == o.symbol &&
           stop == o.stop &&
           units == o.units
     end
@@ -158,7 +168,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action, order_type, time_in_force, price, stop, units].hash
+      [action, order_type, time_in_force, price, symbol, stop, units].hash
     end
 
     # Builds the object from hash

@@ -787,6 +787,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'price'
             },
             {
+                name: 'symbol'
+            },
+            {
                 name: 'stop'
             },
             {

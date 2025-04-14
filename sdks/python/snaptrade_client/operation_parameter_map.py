@@ -781,6 +781,9 @@ operation_parameter_map = {
                 'name': 'price'
             },
             {
+                'name': 'symbol'
+            },
+            {
                 'name': 'stop'
             },
             {

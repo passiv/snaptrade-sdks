@@ -1234,6 +1234,7 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
+    String symbol = "symbol_example"; // The security's trading ticker symbol
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     try {
@@ -1241,6 +1242,7 @@ public class Example {
               .trading
               .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
               .price(price)
+              .symbol(symbol)
               .stop(stop)
               .units(units)
               .execute();
@@ -1281,6 +1283,7 @@ public class Example {
               .trading
               .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
               .price(price)
+              .symbol(symbol)
               .stop(stop)
               .units(units)
               .executeWithHttpInfo();

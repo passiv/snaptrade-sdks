@@ -45,6 +45,12 @@ export interface ManualTradeReplaceForm {
      */
     'price'?: number | null;
     /**
+     * The security\'s trading ticker symbol
+     * @type {string}
+     * @memberof ManualTradeReplaceForm
+     */
+    'symbol'?: string;
+    /**
      * The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
      * @type {number}
      * @memberof ManualTradeReplaceForm
