@@ -75,6 +75,14 @@ public class ManualTradeReplaceFormTest {
     }
 
     /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
+    }
+
+    /**
      * Test the property 'stop'
      */
     @Test

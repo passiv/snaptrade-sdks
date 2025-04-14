@@ -22,6 +22,8 @@ type ManualTradeReplaceForm struct {
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price for `Limit` and `StopLimit` orders.
 	Price NullableFloat32 `json:"price,omitempty"`
+	// The security's trading ticker symbol
+	Symbol *string `json:"symbol,omitempty"`
 	// The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 	Stop NullableFloat32 `json:"stop,omitempty"`
 	Units NullableFloat32 `json:"units,omitempty"`
@@ -161,6 +163,38 @@ func (o *ManualTradeReplaceForm) UnsetPrice() {
 	o.Price.Unset()
 }
 
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
+func (o *ManualTradeReplaceForm) GetSymbol() string {
+	if o == nil || isNil(o.Symbol) {
+		var ret string
+		return ret
+	}
+	return *o.Symbol
+}
+
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ManualTradeReplaceForm) GetSymbolOk() (*string, bool) {
+	if o == nil || isNil(o.Symbol) {
+    return nil, false
+	}
+	return o.Symbol, true
+}
+
+// HasSymbol returns a boolean if a field has been set.
+func (o *ManualTradeReplaceForm) HasSymbol() bool {
+	if o != nil && !isNil(o.Symbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+func (o *ManualTradeReplaceForm) SetSymbol(v string) {
+	o.Symbol = &v
+}
+
 // GetStop returns the Stop field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ManualTradeReplaceForm) GetStop() float32 {
 	if o == nil || isNil(o.Stop.Get()) {
@@ -258,6 +292,9 @@ func (o ManualTradeReplaceForm) MarshalJSON() ([]byte, error) {
 	}
 	if o.Price.IsSet() {
 		toSerialize["price"] = o.Price.Get()
+	}
+	if !isNil(o.Symbol) {
+		toSerialize["symbol"] = o.Symbol
 	}
 	if o.Stop.IsSet() {
 		toSerialize["stop"] = o.Stop.Get()

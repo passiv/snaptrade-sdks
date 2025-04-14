@@ -70,6 +70,10 @@ public class ManualTradeReplaceForm {
   @SerializedName(SERIALIZED_NAME_PRICE)
   private Double price;
 
+  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
+  @SerializedName(SERIALIZED_NAME_SYMBOL)
+  private String symbol;
+
   public static final String SERIALIZED_NAME_STOP = "stop";
   @SerializedName(SERIALIZED_NAME_STOP)
   private Double stop;
@@ -203,6 +207,35 @@ public class ManualTradeReplaceForm {
     
     
     this.price = price;
+  }
+
+
+  public ManualTradeReplaceForm symbol(String symbol) {
+    
+    
+    
+    
+    this.symbol = symbol;
+    return this;
+  }
+
+   /**
+   * The security&#39;s trading ticker symbol
+   * @return symbol
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "AAPL", value = "The security's trading ticker symbol")
+
+  public String getSymbol() {
+    return symbol;
+  }
+
+
+  public void setSymbol(String symbol) {
+    
+    
+    
+    this.symbol = symbol;
   }
 
 
@@ -340,6 +373,7 @@ public class ManualTradeReplaceForm {
         Objects.equals(this.orderType, manualTradeReplaceForm.orderType) &&
         Objects.equals(this.timeInForce, manualTradeReplaceForm.timeInForce) &&
         Objects.equals(this.price, manualTradeReplaceForm.price) &&
+        Objects.equals(this.symbol, manualTradeReplaceForm.symbol) &&
         Objects.equals(this.stop, manualTradeReplaceForm.stop) &&
         Objects.equals(this.units, manualTradeReplaceForm.units)&&
         Objects.equals(this.additionalProperties, manualTradeReplaceForm.additionalProperties);
@@ -351,7 +385,7 @@ public class ManualTradeReplaceForm {
 
   @Override
   public int hashCode() {
-    return Objects.hash(action, orderType, timeInForce, price, stop, units, additionalProperties);
+    return Objects.hash(action, orderType, timeInForce, price, symbol, stop, units, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -369,6 +403,7 @@ public class ManualTradeReplaceForm {
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
+    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    stop: ").append(toIndentedString(stop)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
@@ -398,6 +433,7 @@ public class ManualTradeReplaceForm {
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
     openapiFields.add("price");
+    openapiFields.add("symbol");
     openapiFields.add("stop");
     openapiFields.add("units");
 
@@ -426,6 +462,9 @@ public class ManualTradeReplaceForm {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
+      }
+      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
   }
 

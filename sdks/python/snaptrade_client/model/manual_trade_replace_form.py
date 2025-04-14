@@ -74,6 +74,7 @@ class ManualTradeReplaceForm(
                         *args,
                         _configuration=_configuration,
                     )
+            symbol = schemas.StrSchema
             
             
             class stop(
@@ -103,6 +104,7 @@ class ManualTradeReplaceForm(
                 "order_type": order_type,
                 "time_in_force": time_in_force,
                 "price": price,
+                "symbol": symbol,
                 "stop": stop,
                 "units": units,
             }
@@ -124,6 +126,9 @@ class ManualTradeReplaceForm(
     def __getitem__(self, name: typing_extensions.Literal["price"]) -> MetaOapg.properties.price: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["stop"]) -> MetaOapg.properties.stop: ...
     
     @typing.overload
@@ -132,7 +137,7 @@ class ManualTradeReplaceForm(
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["action", "order_type", "time_in_force", "price", "stop", "units", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["action", "order_type", "time_in_force", "price", "symbol", "stop", "units", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -150,6 +155,9 @@ class ManualTradeReplaceForm(
     def get_item_oapg(self, name: typing_extensions.Literal["price"]) -> typing.Union[MetaOapg.properties.price, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["stop"]) -> typing.Union[MetaOapg.properties.stop, schemas.Unset]: ...
     
     @typing.overload
@@ -158,7 +166,7 @@ class ManualTradeReplaceForm(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["action", "order_type", "time_in_force", "price", "stop", "units", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["action", "order_type", "time_in_force", "price", "symbol", "stop", "units", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -169,6 +177,7 @@ class ManualTradeReplaceForm(
         action: 'ActionStrict',
         order_type: 'OrderTypeStrict',
         price: typing.Union[MetaOapg.properties.price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
         stop: typing.Union[MetaOapg.properties.stop, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         units: typing.Union['UnitsNullable', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
@@ -181,6 +190,7 @@ class ManualTradeReplaceForm(
             action=action,
             order_type=order_type,
             price=price,
+            symbol=symbol,
             stop=stop,
             units=units,
             _configuration=_configuration,

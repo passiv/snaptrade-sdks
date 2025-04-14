@@ -2214,6 +2214,7 @@ result = snaptrade.trading.replace_order(
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   price: 31.33,
+  symbol: "AAPL",
   stop: 31.33,
   units: 10.5,
 )
@@ -2249,6 +2250,9 @@ The Brokerage Order ID of the order to replace.
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.
+
+##### symbol: `String`<a id="symbol-string"></a>
+The security's trading ticker symbol
 
 ##### stop: `Float`<a id="stop-float"></a>
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.

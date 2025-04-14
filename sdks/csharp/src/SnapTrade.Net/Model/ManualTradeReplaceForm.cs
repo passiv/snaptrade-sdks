@@ -62,14 +62,16 @@ namespace SnapTrade.Net.Model
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
+        /// <param name="symbol">The security&#39;s trading ticker symbol.</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
-        public ManualTradeReplaceForm(ActionStrict action = default(ActionStrict), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?))
+        public ManualTradeReplaceForm(ActionStrict action = default(ActionStrict), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), string symbol = default(string), double? stop = default(double?), double? units = default(double?))
         {
             this._Action = action;
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
             this.Price = price;
+            this.Symbol = symbol;
             this.Stop = stop;
             this.Units = units;
         }
@@ -80,6 +82,13 @@ namespace SnapTrade.Net.Model
         /// <value>The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.</value>
         [DataMember(Name = "price", EmitDefaultValue = true)]
         public double? Price { get; set; }
+
+        /// <summary>
+        /// The security&#39;s trading ticker symbol
+        /// </summary>
+        /// <value>The security&#39;s trading ticker symbol</value>
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        public string Symbol { get; set; }
 
         /// <summary>
         /// The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders.
@@ -107,6 +116,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Stop: ").Append(Stop).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
             sb.Append("}\n");
@@ -162,6 +172,11 @@ namespace SnapTrade.Net.Model
                     this.Price.Equals(input.Price))
                 ) && 
                 (
+                    this.Symbol == input.Symbol ||
+                    (this.Symbol != null &&
+                    this.Symbol.Equals(input.Symbol))
+                ) && 
+                (
                     this.Stop == input.Stop ||
                     (this.Stop != null &&
                     this.Stop.Equals(input.Stop))
@@ -188,6 +203,10 @@ namespace SnapTrade.Net.Model
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();
+                }
+                if (this.Symbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
                 if (this.Stop != null)
                 {

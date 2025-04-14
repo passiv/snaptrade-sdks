@@ -2274,6 +2274,7 @@ AccountOrderRecord result = client
         .trading
         .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
         .price(price)
+        .symbol(symbol)
         .stop(stop)
         .units(units)
         .execute();
@@ -2302,6 +2303,10 @@ The Brokerage Order ID of the order to replace.
 ##### price: `Double`<a id="price-double"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
+
+##### symbol: `String`<a id="symbol-string"></a>
+
+The security's trading ticker symbol
 
 ##### stop: `Double`<a id="stop-double"></a>
 

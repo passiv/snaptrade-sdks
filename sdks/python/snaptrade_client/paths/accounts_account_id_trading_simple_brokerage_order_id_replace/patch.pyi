@@ -228,6 +228,7 @@ class BaseApi(api_client.Api):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        symbol: typing.Optional[str] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
@@ -245,6 +246,8 @@ class BaseApi(api_client.Api):
             _body["time_in_force"] = time_in_force
         if price is not None:
             _body["price"] = price
+        if symbol is not None:
+            _body["symbol"] = symbol
         if stop is not None:
             _body["stop"] = stop
         if units is not None:
@@ -541,6 +544,7 @@ class ReplaceOrder(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        symbol: typing.Optional[str] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
@@ -563,6 +567,7 @@ class ReplaceOrder(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             price=price,
+            symbol=symbol,
             stop=stop,
             units=units,
         )
@@ -584,6 +589,7 @@ class ReplaceOrder(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        symbol: typing.Optional[str] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
@@ -605,6 +611,7 @@ class ReplaceOrder(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             price=price,
+            symbol=symbol,
             stop=stop,
             units=units,
         )
@@ -628,6 +635,7 @@ class ApiForpatch(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        symbol: typing.Optional[str] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
@@ -650,6 +658,7 @@ class ApiForpatch(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             price=price,
+            symbol=symbol,
             stop=stop,
             units=units,
         )
@@ -671,6 +680,7 @@ class ApiForpatch(BaseApi):
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
+        symbol: typing.Optional[str] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[UnitsNullable] = None,
         query_params: typing.Optional[dict] = {},
@@ -692,6 +702,7 @@ class ApiForpatch(BaseApi):
             user_id=user_id,
             user_secret=user_secret,
             price=price,
+            symbol=symbol,
             stop=stop,
             units=units,
         )

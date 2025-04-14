@@ -327,10 +327,12 @@ public class TradingApiTest {
         String userId = null;
         String userSecret = null;
         Double price = null;
+        String symbol = null;
         Double stop = null;
         Double units = null;
         AccountOrderRecord response = api.replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
                 .price(price)
+                .symbol(symbol)
                 .stop(stop)
                 .units(units)
                 .execute();

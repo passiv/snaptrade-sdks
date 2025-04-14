@@ -1144,6 +1144,7 @@ namespace Example
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
+            var symbol = "AAPL"; // The security's trading ticker symbol
             var stop = 31.33; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
             var units = 10.5; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
             
@@ -1152,6 +1153,7 @@ namespace Example
                 orderType,
                 timeInForce,
                 price,
+                symbol,
                 stop,
                 units
             );
