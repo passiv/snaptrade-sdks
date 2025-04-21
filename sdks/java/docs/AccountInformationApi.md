@@ -23,7 +23,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 List account activities
 
-Returns all historical transactions for the specified account.  This endpoint is paginated with a default (and maximum) page size of 1000. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
+Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
 
 ### Example
 ```java
