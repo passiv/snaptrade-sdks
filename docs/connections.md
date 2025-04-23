@@ -4,10 +4,6 @@ A connection is an open channel for you to access the account data of your end-u
 
 ## Connection Portal
 
-![image.png](./assets/250423_wealthlyrobinhood.png)
-
-![image.png](./assets/250423_robinhoodcomplete.png)
-
 The Connection Portal is a UI widget designed to allow end users to securely connect their brokerage accounts to your app. It handles brokerage selection, OAuth redirects, username/password authentication, and multi-factor auth verification in one flow.
 
 ## Brokerage Integrations
