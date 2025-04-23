@@ -26,5 +26,8 @@ class OptionalPaginationDetails(TypedDict, total=False):
     # The maximum number of items to return in the response.
     limit: int
 
+    # The total number of items available to be returned over the API.
+    total: int
+
 class PaginationDetails(RequiredPaginationDetails, OptionalPaginationDetails):
     pass

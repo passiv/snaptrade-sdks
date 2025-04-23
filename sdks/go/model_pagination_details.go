@@ -21,6 +21,8 @@ type PaginationDetails struct {
 	Offset *int32 `json:"offset,omitempty"`
 	// The maximum number of items to return in the response.
 	Limit *int32 `json:"limit,omitempty"`
+	// The total number of items available to be returned over the API.
+	Total *int32 `json:"total,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -107,6 +109,38 @@ func (o *PaginationDetails) SetLimit(v int32) {
 	o.Limit = &v
 }
 
+// GetTotal returns the Total field value if set, zero value otherwise.
+func (o *PaginationDetails) GetTotal() int32 {
+	if o == nil || isNil(o.Total) {
+		var ret int32
+		return ret
+	}
+	return *o.Total
+}
+
+// GetTotalOk returns a tuple with the Total field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaginationDetails) GetTotalOk() (*int32, bool) {
+	if o == nil || isNil(o.Total) {
+    return nil, false
+	}
+	return o.Total, true
+}
+
+// HasTotal returns a boolean if a field has been set.
+func (o *PaginationDetails) HasTotal() bool {
+	if o != nil && !isNil(o.Total) {
+		return true
+	}
+
+	return false
+}
+
+// SetTotal gets a reference to the given int32 and assigns it to the Total field.
+func (o *PaginationDetails) SetTotal(v int32) {
+	o.Total = &v
+}
+
 func (o PaginationDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Offset) {
@@ -114,6 +148,9 @@ func (o PaginationDetails) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
+	}
+	if !isNil(o.Total) {
+		toSerialize["total"] = o.Total
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -135,6 +172,7 @@ func (o *PaginationDetails) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "offset")
 		delete(additionalProperties, "limit")
+		delete(additionalProperties, "total")
 		o.AdditionalProperties = additionalProperties
 	}
 

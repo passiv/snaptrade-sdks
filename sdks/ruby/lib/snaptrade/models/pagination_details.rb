@@ -19,11 +19,15 @@ module SnapTrade
     # The maximum number of items to return in the response.
     attr_accessor :limit
 
+    # The total number of items available to be returned over the API.
+    attr_accessor :total
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'offset' => :'offset',
-        :'limit' => :'limit'
+        :'limit' => :'limit',
+        :'total' => :'total'
       }
     end
 
@@ -36,7 +40,8 @@ module SnapTrade
     def self.openapi_types
       {
         :'offset' => :'Integer',
-        :'limit' => :'Integer'
+        :'limit' => :'Integer',
+        :'total' => :'Integer'
       }
     end
 
@@ -68,6 +73,10 @@ module SnapTrade
       if attributes.key?(:'limit')
         self.limit = attributes[:'limit']
       end
+
+      if attributes.key?(:'total')
+        self.total = attributes[:'total']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -89,7 +98,8 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           offset == o.offset &&
-          limit == o.limit
+          limit == o.limit &&
+          total == o.total
     end
 
     # @see the `==` method
@@ -101,7 +111,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [offset, limit].hash
+      [offset, limit, total].hash
     end
 
     # Builds the object from hash

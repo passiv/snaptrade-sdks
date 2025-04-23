@@ -54,4 +54,12 @@ public class PaginationDetailsTest {
         // TODO: test limit
     }
 
+    /**
+     * Test the property 'total'
+     */
+    @Test
+    public void totalTest() {
+        // TODO: test total
+    }
+
 }

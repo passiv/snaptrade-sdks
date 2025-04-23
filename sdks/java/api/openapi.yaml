@@ -7274,6 +7274,7 @@ components:
       additionalProperties: true
       description: Details about the pagination of the results.
       example:
+        total: 1000
         offset: 0
         limit: 100
       properties:
@@ -7289,12 +7290,20 @@ components:
           type: integer
           x-konfig-original-example: 100
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-PaginationDetails-properties-limit
+        total:
+          description: The total number of items available to be returned over the
+            API.
+          example: 1000
+          type: integer
+          x-konfig-original-example: 1000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-PaginationDetails-properties-total
       type: object
     PaginatedUniversalActivity:
       additionalProperties: true
       description: A paginated list of UniversalActivity objects.
       example:
         pagination:
+          total: 1000
           offset: 0
           limit: 100
         data:
@@ -9311,6 +9320,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-PaginationDetails-properties-limit:
       example: 100
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-PaginationDetails-properties-total:
+      example: 1000
       type: number
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountUniversalActivity-properties-id:
