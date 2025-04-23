@@ -73,6 +73,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'Limit'
         }
+        /// <summary>
+        /// Test the property 'Total'
+        /// </summary>
+        [Fact]
+        public void TotalTest()
+        {
+            // TODO unit test for the property 'Total'
+        }
 
     }
 

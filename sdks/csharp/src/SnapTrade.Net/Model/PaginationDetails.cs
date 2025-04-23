@@ -37,10 +37,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="offset">The starting point of the paginated results..</param>
         /// <param name="limit">The maximum number of items to return in the response..</param>
-        public PaginationDetails(int offset = default(int), int limit = default(int)) : base()
+        /// <param name="total">The total number of items available to be returned over the API..</param>
+        public PaginationDetails(int offset = default(int), int limit = default(int), int total = default(int)) : base()
         {
             this.Offset = offset;
             this.Limit = limit;
+            this.Total = total;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -59,6 +61,13 @@ namespace SnapTrade.Net.Model
         public int Limit { get; set; }
 
         /// <summary>
+        /// The total number of items available to be returned over the API.
+        /// </summary>
+        /// <value>The total number of items available to be returned over the API.</value>
+        [DataMember(Name = "total", EmitDefaultValue = false)]
+        public int Total { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -75,6 +84,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
+            sb.Append("  Total: ").Append(Total).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -118,6 +128,10 @@ namespace SnapTrade.Net.Model
                 (
                     this.Limit == input.Limit ||
                     this.Limit.Equals(input.Limit)
+                ) && base.Equals(input) && 
+                (
+                    this.Total == input.Total ||
+                    this.Total.Equals(input.Total)
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -133,6 +147,7 @@ namespace SnapTrade.Net.Model
                 int hashCode = base.GetHashCode();
                 hashCode = (hashCode * 59) + this.Offset.GetHashCode();
                 hashCode = (hashCode * 59) + this.Limit.GetHashCode();
+                hashCode = (hashCode * 59) + this.Total.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

@@ -31,5 +31,11 @@ export interface PaginationDetails {
      * @memberof PaginationDetails
      */
     'limit'?: number;
+    /**
+     * The total number of items available to be returned over the API.
+     * @type {number}
+     * @memberof PaginationDetails
+     */
+    'total'?: number;
 }
 

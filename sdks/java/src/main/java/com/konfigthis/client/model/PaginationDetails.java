@@ -58,6 +58,10 @@ public class PaginationDetails {
   @SerializedName(SERIALIZED_NAME_LIMIT)
   private Integer limit;
 
+  public static final String SERIALIZED_NAME_TOTAL = "total";
+  @SerializedName(SERIALIZED_NAME_TOTAL)
+  private Integer total;
+
   public PaginationDetails() {
   }
 
@@ -118,6 +122,35 @@ public class PaginationDetails {
     this.limit = limit;
   }
 
+
+  public PaginationDetails total(Integer total) {
+    
+    
+    
+    
+    this.total = total;
+    return this;
+  }
+
+   /**
+   * The total number of items available to be returned over the API.
+   * @return total
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "1000", value = "The total number of items available to be returned over the API.")
+
+  public Integer getTotal() {
+    return total;
+  }
+
+
+  public void setTotal(Integer total) {
+    
+    
+    
+    this.total = total;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -174,13 +207,14 @@ public class PaginationDetails {
     }
     PaginationDetails paginationDetails = (PaginationDetails) o;
     return Objects.equals(this.offset, paginationDetails.offset) &&
-        Objects.equals(this.limit, paginationDetails.limit)&&
+        Objects.equals(this.limit, paginationDetails.limit) &&
+        Objects.equals(this.total, paginationDetails.total)&&
         Objects.equals(this.additionalProperties, paginationDetails.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(offset, limit, additionalProperties);
+    return Objects.hash(offset, limit, total, additionalProperties);
   }
 
   @Override
@@ -189,6 +223,7 @@ public class PaginationDetails {
     sb.append("class PaginationDetails {\n");
     sb.append("    offset: ").append(toIndentedString(offset)).append("\n");
     sb.append("    limit: ").append(toIndentedString(limit)).append("\n");
+    sb.append("    total: ").append(toIndentedString(total)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -214,6 +249,7 @@ public class PaginationDetails {
     openapiFields = new HashSet<String>();
     openapiFields.add("offset");
     openapiFields.add("limit");
+    openapiFields.add("total");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

@@ -10,6 +10,7 @@ Details about the pagination of the results.
 |------------ | ------------- | ------------- | -------------|
 |**offset** | **Integer** | The starting point of the paginated results. |  [optional] |
 |**limit** | **Integer** | The maximum number of items to return in the response. |  [optional] |
+|**total** | **Integer** | The total number of items available to be returned over the API. |  [optional] |
 
 
 

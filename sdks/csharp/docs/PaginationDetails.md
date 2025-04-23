@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Offset** | **int** | The starting point of the paginated results. | [optional] 
 **Limit** | **int** | The maximum number of items to return in the response. | [optional] 
+**Total** | **int** | The total number of items available to be returned over the API. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
