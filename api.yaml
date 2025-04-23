@@ -4648,6 +4648,10 @@ components:
           type: integer
           example: 100
           description: The maximum number of items to return in the response.
+        total:
+          type: integer
+          example: 1000
+          description: The total number of items available to be returned over the API.
     PaginatedUniversalActivity:
       description: A paginated list of UniversalActivity objects.
       type: object
