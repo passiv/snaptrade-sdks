@@ -46,3 +46,9 @@ Activities record the transaction history for the account. Each activity documen
 ## Caching
 
 Responses to the Account Data APIs are always cached. We have a daily sync process that refreshes all account data for all connections at least once every 24 hours. You can listen to the [`ACCOUNT_HOLDING_UPDATED`](https://www.notion.so/Webhooks-298cb05cc76943ccbb94d21cfb8137b1?pvs=21) webhook if you want to react to SnapTrade having new account data. If you want to refresh accounts on demand, you can call the `manual refresh` endpoint: :api[Connections_refreshBrokerageAuthorization]. Note that this endpoint may incur a cost.
+
+---
+
+See also:
+- [Webhooks](https://docs.snaptrade.com/docs/webhooks)
+- [Getting Started with SnapTrade](https://docs.snaptrade.com/docs/getting-started)
