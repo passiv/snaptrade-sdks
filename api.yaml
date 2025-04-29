@@ -2138,6 +2138,48 @@ paths:
         "500":
           description: Unexpected Error
 
+  /accounts/{accountId}/trading/options:
+    post:
+      tags:
+        - Trading
+      summary: Place multi-leg option order
+      description: |
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+      operationId: Trading_placeMlegOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/MlegOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MlegOrderResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+
   /activities:
     get:
       deprecated: true
@@ -2551,18 +2593,7 @@ components:
                   - TAKE_PROFIT_LIMIT
                 description: The type of order to place.
               time_in_force:
-                description: >
-                  The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-                    - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-                    - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-                    - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-                    - `GTD` - Good Til Date. The order is valid until the specified date.
-                type: string
-                enum:
-                  - GTC
-                  - FOK
-                  - IOC
-                  - GTD
+                $ref: "#/components/schemas/TimeInForceStrict"
               amount:
                 description: The amount of the base currency to buy or sell.
                 type: string
@@ -2589,6 +2620,44 @@ components:
                 format: date-time
                 example: "2024-01-01T00:00:00Z"
                 description: The expiration date of the order. Required if the time_in_force is GTD.
+
+    MlegOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - "type"
+              - "time_in_force"
+              - "legs"
+            properties:
+              type:
+                type: string
+                enum:
+                  - MARKET
+                  - LIMIT
+                  - STOP_LOSS_MARKET
+                  - STOP_LOSS_LIMIT
+                description: The type of order to place.
+              time_in_force:
+                $ref: "#/components/schemas/TimeInForceStrict"
+              limit_price:
+                description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+                type: string
+                format: decimal
+                example: ""
+                nullable: true
+              stop_price:
+                description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+                type: string
+                format: decimal
+                example: ""
+                nullable: true
+              legs:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MlegLeg"
 
   schemas:
     400FailedRequestResponse:
@@ -4454,6 +4523,22 @@ components:
             - EQUITY
             - CRYPTOCURRENCY
             - CRYPTOCURRENCY_PAIR
+    MlegTradingInstrument:
+      type: object
+      required:
+        - symbol
+        - type
+      properties:
+        symbol:
+          description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example "AAPL  131124C00240000" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+          type: string
+          example: PBI   250718C00006000
+        type:
+          description: The instrument's type
+          type: string
+          enum:
+            - OPTION
+            - EQUITY
     OrderTypeStrict:
       description: |
         The type of order to place.
@@ -4481,11 +4566,14 @@ components:
           - `Day` - Day. The order is valid only for the trading day on which it is placed.
           - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
           - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
       type: string
       enum:
         - FOK
         - Day
         - GTC
+        - IOC
+      example: Day
     TimeInForce:
       description: |
         Trade time in force examples:
@@ -4500,6 +4588,17 @@ components:
       enum:
         - BUY
         - SELL
+    MlegActionStrict:
+      description: The action describes the intent and side of a trade. For equities, this is either `BUY` or `SELL`. For options, this is one of `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN`, `SELL_TO_CLOSE`.
+      type: string
+      enum:
+        - BUY
+        - SELL
+        - BUY_TO_OPEN
+        - BUY_TO_CLOSE
+        - SELL_TO_OPEN
+        - SELL_TO_CLOSE
+      example: BUY_TO_OPEN
     ActionStrictWithOptions:
       description: The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
       type: string
@@ -4635,6 +4734,19 @@ components:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
           $ref: "#/components/schemas/AccountOrderRecord"
+
+    MlegOrderResponse:
+      type: object
+      required:
+        - brokerage_order_id
+        - orders
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        orders:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountOrderRecord"
 
     PaginationDetails:
       description: Details about the pagination of the results.
@@ -5154,3 +5266,19 @@ components:
             nonce:
               type: string
               example: None
+
+    MlegLeg:
+      type: object
+      required:
+        - "instrument"
+        - "action"
+        - "units"
+      properties:
+        instrument:
+          $ref: "#/components/schemas/MlegTradingInstrument"
+        action:
+          $ref: "#/components/schemas/MlegActionStrict"
+        units:
+          description: The quantity to trade. For options this represents the number of contracts. For equity this represents the number of shares.
+          type: integer
+          example: 1
