@@ -70,6 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
+  * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
   * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
@@ -2073,6 +2074,59 @@ For Equity orders, this represents the number of shares for the order. This can 
 ---
 
 
+### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+MlegOrderResponse result = client
+        .trading
+        .placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### legs: List<[`MlegLeg`](./src/main/java/com/konfigthis/client/model/MlegLeg.java)><a id="legs-list"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MlegOrderResponse](./src/main/java/com/konfigthis/client/model/MlegOrderResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.placeOrder`<a id="snaptradetradingplaceorder"></a>
 
 Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
@@ -2146,9 +2200,7 @@ OrderUpdatedResponse result = client
 
 The type of order to place.
 
-##### time_in_force: `String`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+##### time_in_force:<a id="time_in_force"></a>
 
 ##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
 
@@ -2217,9 +2269,7 @@ SimpleOrderPreview result = client
 
 The type of order to place.
 
-##### time_in_force: `String`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+##### time_in_force:<a id="time_in_force"></a>
 
 ##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
 

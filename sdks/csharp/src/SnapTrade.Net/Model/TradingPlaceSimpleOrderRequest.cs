@@ -90,46 +90,12 @@ namespace SnapTrade.Net.Model
         /// <value>The type of order to place.</value>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
         public TypeEnum Type { get; set; }
-        /// <summary>
-        /// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. 
-        /// </summary>
-        /// <value>The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. </value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TimeInForceEnum
-        {
-            /// <summary>
-            /// Enum GTC for value: GTC
-            /// </summary>
-            [EnumMember(Value = "GTC")]
-            GTC = 1,
-
-            /// <summary>
-            /// Enum FOK for value: FOK
-            /// </summary>
-            [EnumMember(Value = "FOK")]
-            FOK = 2,
-
-            /// <summary>
-            /// Enum IOC for value: IOC
-            /// </summary>
-            [EnumMember(Value = "IOC")]
-            IOC = 3,
-
-            /// <summary>
-            /// Enum GTD for value: GTD
-            /// </summary>
-            [EnumMember(Value = "GTD")]
-            GTD = 4
-
-        }
-
 
         /// <summary>
-        /// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. 
+        /// Gets or Sets TimeInForce
         /// </summary>
-        /// <value>The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. </value>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
-        public TimeInForceEnum TimeInForce { get; set; }
+        public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingPlaceSimpleOrderRequest" /> class.
         /// </summary>
@@ -141,13 +107,13 @@ namespace SnapTrade.Net.Model
         /// <param name="instrument">instrument (required).</param>
         /// <param name="side">side (required).</param>
         /// <param name="type">The type of order to place. (required).</param>
-        /// <param name="timeInForce">The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  (required).</param>
+        /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="amount">The amount of the base currency to buy or sell. (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
         /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
-        public TradingPlaceSimpleOrderRequest(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
+        public TradingPlaceSimpleOrderRequest(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
         {
             // to ensure "instrument" is required (not null)
             if (instrument == null)

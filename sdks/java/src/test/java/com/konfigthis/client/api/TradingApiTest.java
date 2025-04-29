@@ -26,6 +26,8 @@ import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import com.konfigthis.client.model.MlegLeg;
+import com.konfigthis.client.model.MlegOrderResponse;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -36,6 +38,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceMlegOrderRequest;
 import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -232,6 +235,30 @@ public class TradingApiTest {
     }
 
     /**
+     * Place multi-leg option order
+     *
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeMlegOrderTest() throws ApiException {
+        String type = null;
+        TimeInForceStrict timeInForce = null;
+        List<MlegLeg> legs = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        MlegOrderResponse response = api.placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Place checked order
      *
      * Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -262,7 +289,7 @@ public class TradingApiTest {
         TradingInstrument instrument = null;
         ActionStrict side = null;
         String type = null;
-        String timeInForce = null;
+        TimeInForceStrict timeInForce = null;
         BigDecimal amount = null;
         String userId = null;
         String userSecret = null;
@@ -292,7 +319,7 @@ public class TradingApiTest {
         TradingInstrument instrument = null;
         ActionStrict side = null;
         String type = null;
-        String timeInForce = null;
+        TimeInForceStrict timeInForce = null;
         BigDecimal amount = null;
         String userId = null;
         String userSecret = null;

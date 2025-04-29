@@ -66,6 +66,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
+  * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
   * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
   * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
@@ -1218,7 +1219,7 @@ Places the option strategy order and returns the order record received from the 
 ```ruby
 result = snaptrade.options.place_option_strategy(
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1241,7 +1242,9 @@ will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
 is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely.
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
@@ -1700,7 +1703,7 @@ result = snaptrade.trading.get_order_impact(
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   price: 31.33,
@@ -1736,7 +1739,9 @@ will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
 is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely.
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
@@ -1820,7 +1825,7 @@ result = snaptrade.trading.place_bracket_order(
         "type" => "EQUITY",
     },
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   stop_loss: {
         "stop_price" => "48.55",
         "limit_price" => "48.50",
@@ -1858,7 +1863,9 @@ will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
 is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely.
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### stop_loss: [`StopLoss`](./lib/snaptrade/models/stop_loss.rb)<a id="stop_loss-stoplosslibsnaptrademodelsstop_lossrb"></a>
 ##### take_profit: [`TakeProfit`](./lib/snaptrade/models/take_profit.rb)<a id="take_profit-takeprofitlibsnaptrademodelstake_profitrb"></a>
@@ -1909,7 +1916,7 @@ result = snaptrade.trading.place_force_order(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1944,7 +1951,9 @@ will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
 is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely.
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
@@ -1980,6 +1989,74 @@ contracts to buy or sell. (e.g., 1 contract = 100 shares).
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.place_mleg_order`<a id="snaptradetradingplace_mleg_order"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.place_mleg_order(
+  type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+        {
+            "instrument" => {
+                "symbol" => "PBI   250718C00006000",
+                "type" => "OPTION",
+            },
+            "action" => "BUY_TO_OPEN",
+            "units" => 1,
+        }
+    ],
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "",
+  stop_price: "",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: [`MlegOrderRequestBodyType`](./lib/snaptrade/models/mleg_order_request_body_type.rb)<a id="type-mlegorderrequestbodytypelibsnaptrademodelsmleg_order_request_body_typerb"></a>
+The type of order to place.
+
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
+
+##### legs: Array<[`MlegLeg`](./lib/snaptrade/models/mleg_leg.rb)><a id="legs-array"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `Float`<a id="stop_price-float"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MlegOrderResponse](./lib/snaptrade/models/mleg_order_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2048,7 +2125,7 @@ result = snaptrade.trading.place_simple_order(
     },
   side: "BUY",
   type: "MARKET",
-  time_in_force: "GTC",
+  time_in_force: "Day",
   amount: "123.45",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -2071,14 +2148,15 @@ The action describes the intent or side of a trade. This is either `BUY` or
 ##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
 The Time in Force type for the order. This field indicates how long the order
-will remain active before it is executed or expires. - `GTC` - Good Til
-Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
-Kill. The order must be executed in its entirety immediately or be canceled
-completely. - `IOC` - Immediate Or Cancel. The order must be executed
-immediately. Any portion of the order that cannot be filled immediately will be
-canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### amount: `Float`<a id="amount-float"></a>
 The amount of the base currency to buy or sell.
@@ -2129,7 +2207,7 @@ result = snaptrade.trading.preview_simple_order(
     },
   side: "BUY",
   type: "MARKET",
-  time_in_force: "GTC",
+  time_in_force: "Day",
   amount: "123.45",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -2152,14 +2230,15 @@ The action describes the intent or side of a trade. This is either `BUY` or
 ##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
 The Time in Force type for the order. This field indicates how long the order
-will remain active before it is executed or expires. - `GTC` - Good Til
-Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
-Kill. The order must be executed in its entirety immediately or be canceled
-completely. - `IOC` - Immediate Or Cancel. The order must be executed
-immediately. Any portion of the order that cannot be filled immediately will be
-canceled. - `GTD` - Good Til Date. The order is valid until the specified date.
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### amount: `Float`<a id="amount-float"></a>
 The amount of the base currency to buy or sell.
@@ -2208,7 +2287,7 @@ returned in the response going forward. Only supported on some brokerages
 result = snaptrade.trading.replace_order(
   action: "BUY",
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
@@ -2238,7 +2317,9 @@ will remain active before it is executed or expires. Here are the supported
 values: - `Day` - Day. The order is valid only for the trading day on which it
 is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
 or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely.
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
 
 ##### account_id: `String`<a id="account_id-string"></a>
 The ID of the account to execute the trade on.

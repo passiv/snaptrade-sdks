@@ -20,6 +20,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrict;
+import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingInstrument;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -120,60 +121,9 @@ public class TradingPlaceSimpleOrderRequest {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private TypeEnum type;
 
-  /**
-   * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. 
-   */
-  @JsonAdapter(TimeInForceEnum.Adapter.class)
- public enum TimeInForceEnum {
-    GTC("GTC"),
-    
-    FOK("FOK"),
-    
-    IOC("IOC"),
-    
-    GTD("GTD");
-
-    private String value;
-
-    TimeInForceEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TimeInForceEnum fromValue(String value) {
-      for (TimeInForceEnum b : TimeInForceEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TimeInForceEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TimeInForceEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TimeInForceEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TimeInForceEnum.fromValue(value);
-      }
-    }
-  }
-
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
-  private TimeInForceEnum timeInForce;
+  private TimeInForceStrict timeInForce;
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
@@ -285,7 +235,7 @@ public class TradingPlaceSimpleOrderRequest {
   }
 
 
-  public TradingPlaceSimpleOrderRequest timeInForce(TimeInForceEnum timeInForce) {
+  public TradingPlaceSimpleOrderRequest timeInForce(TimeInForceStrict timeInForce) {
     
     
     
@@ -295,18 +245,18 @@ public class TradingPlaceSimpleOrderRequest {
   }
 
    /**
-   * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date. 
+   * Get timeInForce
    * @return timeInForce
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. ")
+  @ApiModelProperty(required = true, value = "")
 
-  public TimeInForceEnum getTimeInForce() {
+  public TimeInForceStrict getTimeInForce() {
     return timeInForce;
   }
 
 
-  public void setTimeInForce(TimeInForceEnum timeInForce) {
+  public void setTimeInForce(TimeInForceStrict timeInForce) {
     
     
     
@@ -608,9 +558,6 @@ public class TradingPlaceSimpleOrderRequest {
       TradingInstrument.validateJsonObject(jsonObj.getAsJsonObject("instrument"));
       if (!jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
-      }
-      if (!jsonObj.get("time_in_force").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `time_in_force` to be a primitive type in the JSON string but got `%s`", jsonObj.get("time_in_force").toString()));
       }
       if (!jsonObj.get("amount").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `amount` to be a primitive type in the JSON string but got `%s`", jsonObj.get("amount").toString()));

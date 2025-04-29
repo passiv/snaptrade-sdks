@@ -22,8 +22,7 @@ type TradingPlaceSimpleOrderRequest struct {
 	Side ActionStrict `json:"side"`
 	// The type of order to place.
 	Type string `json:"type"`
-	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-	TimeInForce string `json:"time_in_force"`
+	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The amount of the base currency to buy or sell.
 	Amount float64 `json:"amount"`
 	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
@@ -40,7 +39,7 @@ type TradingPlaceSimpleOrderRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64) *TradingPlaceSimpleOrderRequest {
+func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce TimeInForceStrict, amount float64) *TradingPlaceSimpleOrderRequest {
 	this := TradingPlaceSimpleOrderRequest{}
 	this.Instrument = instrument
 	this.Side = side
@@ -131,9 +130,9 @@ func (o *TradingPlaceSimpleOrderRequest) SetType(v string) {
 }
 
 // GetTimeInForce returns the TimeInForce field value
-func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string {
+func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() TimeInForceStrict {
 	if o == nil {
-		var ret string
+		var ret TimeInForceStrict
 		return ret
 	}
 
@@ -142,7 +141,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool) {
+func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*TimeInForceStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -150,7 +149,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool) {
 }
 
 // SetTimeInForce sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v string) {
+func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v TimeInForceStrict) {
 	o.TimeInForce = v
 }
 

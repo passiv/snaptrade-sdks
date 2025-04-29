@@ -2527,6 +2527,58 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
       x-accepts: application/json
+  /accounts/{accountId}/trading/options:
+    post:
+      description: |
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+      operationId: Trading_placeMlegOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/MlegOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlegOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place multi-leg option order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
+      x-content-type: application/json
+      x-accepts: application/json
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -2936,6 +2988,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Trading_placeSimpleOrder_request'
+      required: true
+    MlegOrderRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Trading_placeMlegOrder_request'
       required: true
   schemas:
     "400FailedRequestResponse":
@@ -6420,7 +6478,7 @@ components:
             code: USD
             name: US Dollar
             id: 87b24961-b51e-4db8-9226-f198f6518a89
-        time_in_force: null
+        time_in_force: Day
         price: 31.33
         action: null
         id: 139e307a-82f7-4402-b39e-4da7baa87758
@@ -6625,7 +6683,7 @@ components:
               code: USD
               name: US Dollar
               id: 87b24961-b51e-4db8-9226-f198f6518a89
-          time_in_force: null
+          time_in_force: Day
           price: 31.33
           action: null
           id: 139e307a-82f7-4402-b39e-4da7baa87758
@@ -6684,7 +6742,7 @@ components:
       description: Inputs for placing an order with the brokerage.
       example:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        time_in_force: null
+        time_in_force: Day
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
         price: 31.33
@@ -6753,7 +6811,7 @@ components:
       description: Inputs for placing an order with the brokerage.
       example:
         symbol: AAPL
-        time_in_force: null
+        time_in_force: Day
         stop: 31.33
         price: 31.33
         action: null
@@ -6805,7 +6863,7 @@ components:
       example:
         universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
         symbol: AAPL  131124C00240000
-        time_in_force: null
+        time_in_force: Day
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
         price: 31.33
@@ -6896,7 +6954,7 @@ components:
       description: Inputs for placing an order with the brokerage.
       example:
         symbol: AAPL
-        time_in_force: null
+        time_in_force: Day
         take_profit:
           limit_price: "49.95"
         stop: 31.33
@@ -6997,6 +7055,29 @@ components:
       - symbol
       - type
       type: object
+    MlegTradingInstrument:
+      additionalProperties: true
+      properties:
+        symbol:
+          description: "The security's trading ticker symbol. This currently supports\
+            \ stock symbols and Options symbols in the 21 character OCC format. For\
+            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ on 2024-11-13 with a strike price of $240. For more information on the\
+            \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)"
+          example: PBI   250718C00006000
+          type: string
+          x-konfig-original-example: PBI   250718C00006000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradingInstrument-properties-symbol
+        type:
+          description: The instrument's type
+          enum:
+          - OPTION
+          - EQUITY
+          type: string
+      required:
+      - symbol
+      - type
+      type: object
     OrderTypeStrict:
       description: |
         The type of order to place.
@@ -7023,11 +7104,16 @@ components:
           - `Day` - Day. The order is valid only for the trading day on which it is placed.
           - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
           - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
       enum:
       - FOK
       - Day
       - GTC
+      - IOC
+      example: Day
       type: string
+      x-konfig-original-example: Day
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
     TimeInForce:
       description: |
         Trade time in force examples:
@@ -7043,6 +7129,21 @@ components:
       - BUY
       - SELL
       type: string
+    MlegActionStrict:
+      description: "The action describes the intent and side of a trade. For equities,\
+        \ this is either `BUY` or `SELL`. For options, this is one of `BUY_TO_OPEN`,\
+        \ `BUY_TO_CLOSE`, `SELL_TO_OPEN`, `SELL_TO_CLOSE`."
+      enum:
+      - BUY
+      - SELL
+      - BUY_TO_OPEN
+      - BUY_TO_CLOSE
+      - SELL_TO_OPEN
+      - SELL_TO_CLOSE
+      example: BUY_TO_OPEN
+      type: string
+      x-konfig-original-example: BUY_TO_OPEN
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegActionStrict
     ActionStrictWithOptions:
       description: "The action describes the intent or side of a trade. This is either\
         \ `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN`\
@@ -7268,6 +7369,76 @@ components:
           $ref: '#/components/schemas/AccountOrderRecord'
       required:
       - brokerage_order_id
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    MlegOrderResponse:
+      additionalProperties: true
+      example:
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        orders:
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: null
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
+          time_in_force: time_in_force
+          execution_price: 12.34
+          stop_price: 12.5
+          quote_universal_symbol: null
+          action: action
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
+          status: null
+        - time_executed: 2024-08-05T00:05:57.409Z
+          symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          child_brokerage_order_ids:
+            stop_loss_order_id: "12345678"
+            take_profit_order_id: "12345678"
+          time_placed: 2024-07-30T22:51:49.746Z
+          expiry_date: 2024-08-05T00:05:57.409Z
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          limit_price: 12.34
+          quote_currency: null
+          time_updated: 2024-08-05T00:05:57.409Z
+          canceled_quantity: 10
+          time_in_force: time_in_force
+          execution_price: 12.34
+          stop_price: 12.5
+          quote_universal_symbol: null
+          action: action
+          total_quantity: 100
+          universal_symbol: null
+          filled_quantity: 80
+          option_symbol: null
+          order_type: Market
+          open_quantity: 10
+          status: null
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        orders:
+          items:
+            $ref: '#/components/schemas/AccountOrderRecord'
+          type: array
+      required:
+      - brokerage_order_id
+      - orders
       type: object
       x-konfig-is-used-in-successful-response: true
     PaginationDetails:
@@ -8299,6 +8470,25 @@ components:
         encryptedMessageData:
           $ref: '#/components/schemas/encryptedResponse_encryptedMessageData'
       type: object
+    MlegLeg:
+      additionalProperties: true
+      properties:
+        instrument:
+          $ref: '#/components/schemas/MlegTradingInstrument'
+        action:
+          $ref: '#/components/schemas/MlegActionStrict'
+        units:
+          description: The quantity to trade. For options this represents the number
+            of contracts. For equity this represents the number of shares.
+          example: 1
+          type: integer
+          x-konfig-original-example: 1
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegLeg-properties-units
+      required:
+      - action
+      - instrument
+      - units
+      type: object
     konfig-generated-schema-paths--holdings-get-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -8341,6 +8531,14 @@ components:
       x-do-not-generate: true
     ? konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
     : example: 2024-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price:
+      example: ""
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price:
+      example: ""
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
@@ -9254,8 +9452,20 @@ components:
       example: AAPL
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegTradingInstrument-properties-symbol:
+      example: PBI   250718C00006000
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-OrderTypeStrict:
       example: Market
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TimeInForceStrict:
+      example: Day
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegActionStrict:
+      example: BUY_TO_OPEN
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Units:
@@ -9549,6 +9759,10 @@ components:
     konfig-generated-schema-components-schemas-encryptedResponse-properties-encryptedMessageData-properties-nonce:
       example: None
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegLeg-properties-units:
+      example: 1
+      type: number
       x-do-not-generate: true
     konfig-generated-schema-single-parameter-schema-get--:
       additionalProperties: true
@@ -10583,18 +10797,7 @@ components:
           - TAKE_PROFIT_LIMIT
           type: string
         time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
+          $ref: '#/components/schemas/TimeInForceStrict'
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
@@ -10695,18 +10898,7 @@ components:
           - TAKE_PROFIT_LIMIT
           type: string
         time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
+          $ref: '#/components/schemas/TimeInForceStrict'
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
@@ -10808,6 +11000,59 @@ components:
       - userSecret
       - accountId
       - instrumentSymbol
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          type: string
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - accountId
+      - legs
+      - time_in_force
+      - type
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}
@@ -11443,18 +11688,7 @@ components:
           - TAKE_PROFIT_LIMIT
           type: string
         time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
+          $ref: '#/components/schemas/TimeInForceStrict'
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
@@ -11520,6 +11754,44 @@ components:
       - items
       type: object
       x-konfig-is-used-in-successful-response: true
+    Trading_placeMlegOrder_request:
+      properties:
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          type: string
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - legs
+      - time_in_force
+      - type
+      type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\
         \ income, etc). This value is directly obtained from the brokerage and should\

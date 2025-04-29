@@ -36,10 +36,12 @@ from snaptrade_client.model.trading_instrument import TradingInstrument as Tradi
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
 from snaptrade_client.model.order_updated_response import OrderUpdatedResponse as OrderUpdatedResponseSchema
+from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
 
 from snaptrade_client.type.trading_instrument import TradingInstrument
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.action_strict import ActionStrict
+from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.order_updated_response import OrderUpdatedResponse
 
 from . import path
@@ -173,37 +175,10 @@ class SchemaForRequestBodyApplicationJson(
                 @schemas.classproperty
                 def TAKE_PROFIT_LIMIT(cls):
                     return cls("TAKE_PROFIT_LIMIT")
-            
-            
-            class time_in_force(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-            
-            
-                class MetaOapg:
-                    enum_value_to_name = {
-                        "GTC": "GTC",
-                        "FOK": "FOK",
-                        "IOC": "IOC",
-                        "GTD": "GTD",
-                    }
-                
-                @schemas.classproperty
-                def GTC(cls):
-                    return cls("GTC")
-                
-                @schemas.classproperty
-                def FOK(cls):
-                    return cls("FOK")
-                
-                @schemas.classproperty
-                def IOC(cls):
-                    return cls("IOC")
-                
-                @schemas.classproperty
-                def GTD(cls):
-                    return cls("GTD")
+        
+            @staticmethod
+            def time_in_force() -> typing.Type['TimeInForceStrict']:
+                return TimeInForceStrict
             amount = schemas.StrSchema
             limit_price = schemas.StrSchema
             stop_price = schemas.StrSchema
@@ -223,7 +198,7 @@ class SchemaForRequestBodyApplicationJson(
     
     amount: MetaOapg.properties.amount
     side: 'ActionStrict'
-    time_in_force: MetaOapg.properties.time_in_force
+    time_in_force: 'TimeInForceStrict'
     instrument: 'TradingInstrument'
     type: MetaOapg.properties.type
     
@@ -237,7 +212,7 @@ class SchemaForRequestBodyApplicationJson(
     def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
+    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
@@ -272,7 +247,7 @@ class SchemaForRequestBodyApplicationJson(
     def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
@@ -301,7 +276,7 @@ class SchemaForRequestBodyApplicationJson(
         *args: typing.Union[dict, frozendict.frozendict, ],
         amount: typing.Union[MetaOapg.properties.amount, str, ],
         side: 'ActionStrict',
-        time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
+        time_in_force: 'TimeInForceStrict',
         instrument: 'TradingInstrument',
         type: typing.Union[MetaOapg.properties.type, str, ],
         limit_price: typing.Union[MetaOapg.properties.limit_price, str, schemas.Unset] = schemas.unset,
@@ -416,7 +391,7 @@ class BaseApi(api_client.Api):
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
         amount: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -733,7 +708,7 @@ class PlaceSimpleOrder(BaseApi):
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
         amount: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -780,7 +755,7 @@ class PlaceSimpleOrder(BaseApi):
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
         amount: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -828,7 +803,7 @@ class ApiForpost(BaseApi):
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
         amount: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -875,7 +850,7 @@ class ApiForpost(BaseApi):
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
-        time_in_force: typing.Optional[str] = None,
+        time_in_force: typing.Optional[TimeInForceStrict] = None,
         amount: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,

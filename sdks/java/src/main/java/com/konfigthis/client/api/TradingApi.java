@@ -11,6 +11,8 @@ import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import com.konfigthis.client.model.MlegLeg;
+import com.konfigthis.client.model.MlegOrderResponse;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -21,6 +23,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceMlegOrderRequest;
 import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -70,18 +73,23 @@ public class TradingApi extends TradingApiGenerated {
             super(accountId, action, orderType, timeInForce, userId, userSecret);
         }
     }
+    public class PlaceMlegOrderRequestBuilder extends PlaceMlegOrderRequestBuilderGenerated {
+        public PlaceMlegOrderRequestBuilder(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            super(type, timeInForce, legs, userId, userSecret, accountId);
+        }
+    }
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {
         public PlaceOrderRequestBuilder(UUID tradeId, String userId, String userSecret) {
             super(tradeId, userId, userSecret);
         }
     }
     public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
-        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
         }
     }
     public class PreviewSimpleOrderRequestBuilder extends PreviewSimpleOrderRequestBuilderGenerated {
-        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
         }
     }

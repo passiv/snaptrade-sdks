@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Instrument** | [**TradingInstrument**](TradingInstrument.md) |  | 
 **Side** | [**ActionStrict**](ActionStrict.md) |  | 
 **Type** | **string** | The type of order to place. | 
-**TimeInForce** | **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  | 
+**TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Amount** | **float64** | The amount of the base currency to buy or sell. | 
 **LimitPrice** | Pointer to **float64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. | [optional] 
 **StopPrice** | Pointer to **float64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. | [optional] 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewTradingPlaceSimpleOrderRequest
 
-`func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64, ) *TradingPlaceSimpleOrderRequest`
+`func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce TimeInForceStrict, amount float64, ) *TradingPlaceSimpleOrderRequest`
 
 NewTradingPlaceSimpleOrderRequest instantiates a new TradingPlaceSimpleOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -95,20 +95,20 @@ SetType sets Type field to given value.
 
 ### GetTimeInForce
 
-`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string`
+`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() TimeInForceStrict`
 
 GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
 
 ### GetTimeInForceOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool)`
+`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*TimeInForceStrict, bool)`
 
 GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeInForce
 
-`func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v string)`
+`func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v TimeInForceStrict)`
 
 SetTimeInForce sets TimeInForce field to given value.
 

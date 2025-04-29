@@ -36,6 +36,8 @@ import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import com.konfigthis.client.model.MlegLeg;
+import com.konfigthis.client.model.MlegOrderResponse;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -46,6 +48,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceMlegOrderRequest;
 import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -1835,6 +1838,251 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, orderType, timeInForce, userId, userSecret);
     }
+    private okhttp3.Call placeMlegOrderCall(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = tradingPlaceMlegOrderRequest;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/options"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeMlegOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'tradingPlaceMlegOrderRequest' is set
+        if (tradingPlaceMlegOrderRequest == null) {
+            throw new ApiException("Missing the required parameter 'tradingPlaceMlegOrderRequest' when calling placeMlegOrder(Async)");
+        }
+
+        return placeMlegOrderCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+
+    }
+
+
+    private ApiResponse<MlegOrderResponse> placeMlegOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, null);
+        Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeMlegOrderAsync(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+        Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceMlegOrderRequestBuilderGenerated {
+        final String type;
+        final TimeInForceStrict timeInForce;
+        final List<MlegLeg> legs;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+
+        public PlaceMlegOrderRequestBuilderGenerated(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            this.type = type;
+            this.timeInForce = timeInForce;
+            this.legs = legs;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeMlegOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
+            return placeMlegOrderCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+        }
+
+        private TradingPlaceMlegOrderRequest buildBodyParams() {
+            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest();
+            if (this.type != null)
+            tradingPlaceMlegOrderRequest.type(TradingPlaceMlegOrderRequest.TypeEnum.fromValue(this.type));
+            tradingPlaceMlegOrderRequest.timeInForce(this.timeInForce);
+            tradingPlaceMlegOrderRequest.limitPrice(this.limitPrice);
+            tradingPlaceMlegOrderRequest.stopPrice(this.stopPrice);
+            tradingPlaceMlegOrderRequest.legs(this.legs);
+            return tradingPlaceMlegOrderRequest;
+        }
+
+        /**
+         * Execute placeMlegOrder request
+         * @return MlegOrderResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public MlegOrderResponse execute() throws ApiException {
+            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
+            ApiResponse<MlegOrderResponse> localVarResp = placeMlegOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeMlegOrder request with HTTP info returned
+         * @return ApiResponse&lt;MlegOrderResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MlegOrderResponse> executeWithHttpInfo() throws ApiException {
+            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
+            return placeMlegOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+        }
+
+        /**
+         * Execute placeMlegOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
+            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
+            return placeMlegOrderAsync(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+        }
+    }
+
+    /**
+     * Place multi-leg option order
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param tradingPlaceMlegOrderRequest  (required)
+     * @return PlaceMlegOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
+            
+
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new PlaceMlegOrderRequestBuilder(type, timeInForce, legs, userId, userSecret, accountId);
+    }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -2146,7 +2394,7 @@ public class TradingApiGenerated {
         final TradingInstrument instrument;
         final ActionStrict side;
         final String type;
-        final String timeInForce;
+        final TimeInForceStrict timeInForce;
         final BigDecimal amount;
         final String userId;
         final String userSecret;
@@ -2156,7 +2404,7 @@ public class TradingApiGenerated {
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public PlaceSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PlaceSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             this.instrument = instrument;
             this.side = side;
             this.type = type;
@@ -2230,8 +2478,7 @@ public class TradingApiGenerated {
             tradingPlaceSimpleOrderRequest.side(this.side);
             if (this.type != null)
             tradingPlaceSimpleOrderRequest.type(TradingPlaceSimpleOrderRequest.TypeEnum.fromValue(this.type));
-            if (this.timeInForce != null)
-            tradingPlaceSimpleOrderRequest.timeInForce(TradingPlaceSimpleOrderRequest.TimeInForceEnum.fromValue(this.timeInForce));
+            tradingPlaceSimpleOrderRequest.timeInForce(this.timeInForce);
             tradingPlaceSimpleOrderRequest.amount(this.amount);
             tradingPlaceSimpleOrderRequest.limitPrice(this.limitPrice);
             tradingPlaceSimpleOrderRequest.stopPrice(this.stopPrice);
@@ -2306,15 +2553,13 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+    public TradingApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
             
 
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
-            
-
         if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
             
 
@@ -2428,7 +2673,7 @@ public class TradingApiGenerated {
         final TradingInstrument instrument;
         final ActionStrict side;
         final String type;
-        final String timeInForce;
+        final TimeInForceStrict timeInForce;
         final BigDecimal amount;
         final String userId;
         final String userSecret;
@@ -2438,7 +2683,7 @@ public class TradingApiGenerated {
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public PreviewSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PreviewSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             this.instrument = instrument;
             this.side = side;
             this.type = type;
@@ -2512,8 +2757,7 @@ public class TradingApiGenerated {
             tradingPlaceSimpleOrderRequest.side(this.side);
             if (this.type != null)
             tradingPlaceSimpleOrderRequest.type(TradingPlaceSimpleOrderRequest.TypeEnum.fromValue(this.type));
-            if (this.timeInForce != null)
-            tradingPlaceSimpleOrderRequest.timeInForce(TradingPlaceSimpleOrderRequest.TimeInForceEnum.fromValue(this.timeInForce));
+            tradingPlaceSimpleOrderRequest.timeInForce(this.timeInForce);
             tradingPlaceSimpleOrderRequest.amount(this.amount);
             tradingPlaceSimpleOrderRequest.limitPrice(this.limitPrice);
             tradingPlaceSimpleOrderRequest.stopPrice(this.stopPrice);
@@ -2588,15 +2832,13 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PreviewSimpleOrderRequestBuilder previewSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+    public TradingApi.PreviewSimpleOrderRequestBuilder previewSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, TimeInForceStrict timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
             
 
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
-            
-
         if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
             
 
