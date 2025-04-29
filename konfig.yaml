@@ -98,6 +98,8 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
+    /accounts/{accountId}/trading/options:
+      post: true
     /brokerageAuthorizationTypes:
       get: true
     /currencies:
