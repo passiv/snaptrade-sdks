@@ -70,6 +70,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
+  * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
   * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
@@ -2067,6 +2068,59 @@ For Equity orders, this represents the number of shares for the order. This can 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+MlegOrderResponse result = client
+        .trading
+        .placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### legs: List<[`MlegLeg`](./src/main/java/com/konfigthis/client/model/MlegLeg.java)><a id="legs-list"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MlegOrderResponse](./src/main/java/com/konfigthis/client/model/MlegOrderResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

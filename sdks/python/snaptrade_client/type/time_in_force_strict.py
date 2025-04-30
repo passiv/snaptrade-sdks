@@ -16,4 +16,4 @@ from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
-TimeInForceStrict = Literal["FOK", "Day", "GTC"]
+TimeInForceStrict = Literal["FOK", "Day", "GTC", "IOC"]
