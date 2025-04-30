@@ -26,6 +26,8 @@ import com.konfigthis.client.model.ManualTradeForm;
 import com.konfigthis.client.model.ManualTradeFormBracket;
 import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
+import com.konfigthis.client.model.MlegLeg;
+import com.konfigthis.client.model.MlegOrderResponse;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -36,6 +38,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingPlaceMlegOrderRequest;
 import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -227,6 +230,30 @@ public class TradingApiTest {
                 .stop(stop)
                 .units(units)
                 .notionalValue(notionalValue)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Place multi-leg option order
+     *
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeMlegOrderTest() throws ApiException {
+        String type = null;
+        TimeInForceStrict timeInForce = null;
+        List<MlegLeg> legs = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        MlegOrderResponse response = api.placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
                 .execute();
         // TODO: test validations
     }

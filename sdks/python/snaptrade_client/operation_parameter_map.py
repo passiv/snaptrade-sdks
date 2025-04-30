@@ -658,6 +658,34 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/options-POST': {
+        'parameters': [
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'legs'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+        ]
+    },
     '/trade/{tradeId}-POST': {
         'parameters': [
             {

@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place order
+*TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order
 *TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place order
 *TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview order
@@ -209,6 +210,10 @@ Class | Method | HTTP request | Description
  - [ManualTradeImpact](docs/ManualTradeImpact.md)
  - [ManualTradeReplaceForm](docs/ManualTradeReplaceForm.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
+ - [MlegActionStrict](docs/MlegActionStrict.md)
+ - [MlegLeg](docs/MlegLeg.md)
+ - [MlegOrderResponse](docs/MlegOrderResponse.md)
+ - [MlegTradingInstrument](docs/MlegTradingInstrument.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
  - [Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)
  - [Model402BrokerageAuthAlreadyDisabledException](docs/Model402BrokerageAuthAlreadyDisabledException.md)
@@ -271,6 +276,7 @@ Class | Method | HTTP request | Description
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
  - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
  - [TradingInstrument](docs/TradingInstrument.md)
+ - [TradingPlaceMlegOrderRequest](docs/TradingPlaceMlegOrderRequest.md)
  - [TradingPlaceSimpleOrderRequest](docs/TradingPlaceSimpleOrderRequest.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)

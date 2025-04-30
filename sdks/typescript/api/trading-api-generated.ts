@@ -39,6 +39,10 @@ import { ManualTradeFormWithOptions } from '../models';
 // @ts-ignore
 import { ManualTradeReplaceForm } from '../models';
 // @ts-ignore
+import { MlegLeg } from '../models';
+// @ts-ignore
+import { MlegOrderResponse } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
@@ -62,6 +66,8 @@ import { TimeInForceStrict } from '../models';
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingInstrument } from '../models';
+// @ts-ignore
+import { TradingPlaceMlegOrderRequest } from '../models';
 // @ts-ignore
 import { TradingPlaceSimpleOrderRequest } from '../models';
 // @ts-ignore
@@ -556,6 +562,76 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * @summary Place multi-leg option order
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {TradingPlaceMlegOrderRequest} tradingPlaceMlegOrderRequest 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeMlegOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceMlegOrderRequest: TradingPlaceMlegOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('placeMlegOrder', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('placeMlegOrder', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('placeMlegOrder', 'accountId', accountId)
+            // verify required parameter 'tradingPlaceMlegOrderRequest' is not null or undefined
+            assertParamExists('placeMlegOrder', 'tradingPlaceMlegOrderRequest', tradingPlaceMlegOrderRequest)
+            const localVarPath = `/accounts/{accountId}/trading/options`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: tradingPlaceMlegOrderRequest,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/options',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceMlegOrderRequest, localVarRequestOptions, configuration)
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
          * @summary Place checked order
          * @param {string} tradeId Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
@@ -1035,6 +1111,24 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * @summary Place multi-leg option order
+         * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MlegOrderResponse>> {
+            const tradingPlaceMlegOrderRequest: TradingPlaceMlegOrderRequest = {
+                type: requestParameters.type,
+                time_in_force: requestParameters.time_in_force,
+                limit_price: requestParameters.limit_price,
+                stop_price: requestParameters.stop_price,
+                legs: requestParameters.legs
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeMlegOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceMlegOrderRequest, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
          * @summary Place checked order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
@@ -1202,6 +1296,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
          */
         placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
             return localVarFp.placeForceOrder(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * @summary Place multi-leg option order
+         * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest, options?: AxiosRequestConfig): AxiosPromise<MlegOrderResponse> {
+            return localVarFp.placeMlegOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -1481,6 +1585,36 @@ export type TradingApiPlaceForceOrderRequest = {
 } & ManualTradeFormWithOptions
 
 /**
+ * Request parameters for placeMlegOrder operation in TradingApi.
+ * @export
+ * @interface TradingApiPlaceMlegOrderRequest
+ */
+export type TradingApiPlaceMlegOrderRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceMlegOrder
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceMlegOrder
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiPlaceMlegOrder
+    */
+    readonly accountId: string
+    
+} & TradingPlaceMlegOrderRequest
+
+/**
  * Request parameters for placeOrder operation in TradingApi.
  * @export
  * @interface TradingApiPlaceOrderRequest
@@ -1740,6 +1874,18 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public placeForceOrder(requestParameters: TradingApiPlaceForceOrderRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).placeForceOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     * @summary Place multi-leg option order
+     * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).placeMlegOrder(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

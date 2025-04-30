@@ -16,6 +16,7 @@ from snaptrade_client.paths.trade_impact.post import GetOrderImpact
 from snaptrade_client.paths.accounts_account_id_quotes.get import GetUserAccountQuotes
 from snaptrade_client.paths.accounts_account_id_trading_bracket.post import PlaceBracketOrder
 from snaptrade_client.paths.trade_place.post import PlaceForceOrder
+from snaptrade_client.paths.accounts_account_id_trading_options.post import PlaceMlegOrder
 from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
 from snaptrade_client.paths.accounts_account_id_trading_simple.post import PlaceSimpleOrder
 from snaptrade_client.paths.accounts_account_id_trading_simple_preview.post import PreviewSimpleOrder
@@ -31,6 +32,7 @@ class TradingApiGenerated(
     GetUserAccountQuotes,
     PlaceBracketOrder,
     PlaceForceOrder,
+    PlaceMlegOrder,
     PlaceOrder,
     PlaceSimpleOrder,
     PreviewSimpleOrder,
