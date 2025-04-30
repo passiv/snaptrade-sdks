@@ -5,7 +5,6 @@ on:
     types:
       - opened
       - synchronize
-      - ready_for_review
     branches:
       - master
     paths:
@@ -14,7 +13,6 @@ on:
 jobs:
   regenerate-sdks-on-oas-change:
     uses: passiv/konfig-workflows/.github/workflows/regenerate-sdks.yaml@main
-    if: github.event.pull_request.draft == false
     with:
       konfig_yaml_dir: ./
     secrets:
