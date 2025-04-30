@@ -78,6 +78,8 @@ portal:
     - id: placing-trades
       path: demos/placing-trades.md
   hideOperations:
+    /activities:
+      get: true
     /holdings:
       get: true
     /accounts/{accountId}:
