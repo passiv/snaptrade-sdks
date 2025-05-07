@@ -200,19 +200,19 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
     t.Run("Test TradingApiService PlaceMlegOrder", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
-        tradingPlaceMlegOrderRequest := *snaptrade.NewTradingPlaceMlegOrderRequest(
+        mlegTradeForm := *snaptrade.NewMlegTradeForm(
             null,
             null,
             null,
         )
-        tradingPlaceMlegOrderRequest.SetLimitPrice("")
-        tradingPlaceMlegOrderRequest.SetStopPrice("")
+        mlegTradeForm.SetLimitPrice("")
+        mlegTradeForm.SetStopPrice("")
         
         request := client.TradingApi.PlaceMlegOrder(
             "userId_example",
             "userSecret_example",
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            tradingPlaceMlegOrderRequest,
+            mlegTradeForm,
         )
         
         resp, httpRes, err := request.Execute()

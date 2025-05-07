@@ -1,4 +1,5 @@
-# SnapTrade.Net.Model.TradingPlaceMlegOrderRequest
+# SnapTrade.Net.Model.MlegTradeForm
+Inputs for placing a multi-leg order with the brokerage.
 
 ## Properties
 

@@ -137,7 +137,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param trading_place_mleg_order_request 
+  # @param mleg_trade_form 
   # @param [Hash] opts the optional parameters
   # @return [MlegOrderResponse]
   describe 'place_mleg_order test' do

@@ -45,6 +45,8 @@ import { MlegOrderResponse } from '../models';
 // @ts-ignore
 import { MlegOrderTypeStrict } from '../models';
 // @ts-ignore
+import { MlegTradeForm } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';
@@ -68,8 +70,6 @@ import { TimeInForceStrict } from '../models';
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingInstrument } from '../models';
-// @ts-ignore
-import { TradingPlaceMlegOrderRequest } from '../models';
 // @ts-ignore
 import { TradingPlaceSimpleOrderRequest } from '../models';
 // @ts-ignore
@@ -569,19 +569,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {TradingPlaceMlegOrderRequest} tradingPlaceMlegOrderRequest 
+         * @param {MlegTradeForm} mlegTradeForm 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeMlegOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceMlegOrderRequest: TradingPlaceMlegOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeMlegOrder: async (userId: string, userSecret: string, accountId: string, mlegTradeForm: MlegTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('placeMlegOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('placeMlegOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('placeMlegOrder', 'accountId', accountId)
-            // verify required parameter 'tradingPlaceMlegOrderRequest' is not null or undefined
-            assertParamExists('placeMlegOrder', 'tradingPlaceMlegOrderRequest', tradingPlaceMlegOrderRequest)
+            // verify required parameter 'mlegTradeForm' is not null or undefined
+            assertParamExists('placeMlegOrder', 'mlegTradeForm', mlegTradeForm)
             const localVarPath = `/accounts/{accountId}/trading/options`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -617,7 +617,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradingPlaceMlegOrderRequest,
+                requestBody: mlegTradeForm,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -625,7 +625,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 pathTemplate: '/accounts/{accountId}/trading/options',
                 httpMethod: 'POST'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceMlegOrderRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(mlegTradeForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1120,14 +1120,14 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MlegOrderResponse>> {
-            const tradingPlaceMlegOrderRequest: TradingPlaceMlegOrderRequest = {
+            const mlegTradeForm: MlegTradeForm = {
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 limit_price: requestParameters.limit_price,
                 stop_price: requestParameters.stop_price,
                 legs: requestParameters.legs
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeMlegOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceMlegOrderRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeMlegOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, mlegTradeForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1614,7 +1614,7 @@ export type TradingApiPlaceMlegOrderRequest = {
     */
     readonly accountId: string
     
-} & TradingPlaceMlegOrderRequest
+} & MlegTradeForm
 
 /**
  * Request parameters for placeOrder operation in TradingApi.

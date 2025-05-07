@@ -1,4 +1,4 @@
-# TradingPlaceMlegOrderRequest
+# MlegTradeForm
 
 ## Properties
 
@@ -12,149 +12,149 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewTradingPlaceMlegOrderRequest
+### NewMlegTradeForm
 
-`func NewTradingPlaceMlegOrderRequest(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg, ) *TradingPlaceMlegOrderRequest`
+`func NewMlegTradeForm(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg, ) *MlegTradeForm`
 
-NewTradingPlaceMlegOrderRequest instantiates a new TradingPlaceMlegOrderRequest object
+NewMlegTradeForm instantiates a new MlegTradeForm object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTradingPlaceMlegOrderRequestWithDefaults
+### NewMlegTradeFormWithDefaults
 
-`func NewTradingPlaceMlegOrderRequestWithDefaults() *TradingPlaceMlegOrderRequest`
+`func NewMlegTradeFormWithDefaults() *MlegTradeForm`
 
-NewTradingPlaceMlegOrderRequestWithDefaults instantiates a new TradingPlaceMlegOrderRequest object
+NewMlegTradeFormWithDefaults instantiates a new MlegTradeForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetOrderType
 
-`func (o *TradingPlaceMlegOrderRequest) GetOrderType() MlegOrderTypeStrict`
+`func (o *MlegTradeForm) GetOrderType() MlegOrderTypeStrict`
 
 GetOrderType returns the OrderType field if non-nil, zero value otherwise.
 
 ### GetOrderTypeOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetOrderTypeOk() (*MlegOrderTypeStrict, bool)`
+`func (o *MlegTradeForm) GetOrderTypeOk() (*MlegOrderTypeStrict, bool)`
 
 GetOrderTypeOk returns a tuple with the OrderType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrderType
 
-`func (o *TradingPlaceMlegOrderRequest) SetOrderType(v MlegOrderTypeStrict)`
+`func (o *MlegTradeForm) SetOrderType(v MlegOrderTypeStrict)`
 
 SetOrderType sets OrderType field to given value.
 
 
 ### GetTimeInForce
 
-`func (o *TradingPlaceMlegOrderRequest) GetTimeInForce() TimeInForceStrict`
+`func (o *MlegTradeForm) GetTimeInForce() TimeInForceStrict`
 
 GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
 
 ### GetTimeInForceOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetTimeInForceOk() (*TimeInForceStrict, bool)`
+`func (o *MlegTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool)`
 
 GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeInForce
 
-`func (o *TradingPlaceMlegOrderRequest) SetTimeInForce(v TimeInForceStrict)`
+`func (o *MlegTradeForm) SetTimeInForce(v TimeInForceStrict)`
 
 SetTimeInForce sets TimeInForce field to given value.
 
 
 ### GetLimitPrice
 
-`func (o *TradingPlaceMlegOrderRequest) GetLimitPrice() float64`
+`func (o *MlegTradeForm) GetLimitPrice() float64`
 
 GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
 
 ### GetLimitPriceOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetLimitPriceOk() (*float64, bool)`
+`func (o *MlegTradeForm) GetLimitPriceOk() (*float64, bool)`
 
 GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitPrice
 
-`func (o *TradingPlaceMlegOrderRequest) SetLimitPrice(v float64)`
+`func (o *MlegTradeForm) SetLimitPrice(v float64)`
 
 SetLimitPrice sets LimitPrice field to given value.
 
 ### HasLimitPrice
 
-`func (o *TradingPlaceMlegOrderRequest) HasLimitPrice() bool`
+`func (o *MlegTradeForm) HasLimitPrice() bool`
 
 HasLimitPrice returns a boolean if a field has been set.
 
 ### SetLimitPriceNil
 
-`func (o *TradingPlaceMlegOrderRequest) SetLimitPriceNil(b bool)`
+`func (o *MlegTradeForm) SetLimitPriceNil(b bool)`
 
  SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
 
 ### UnsetLimitPrice
-`func (o *TradingPlaceMlegOrderRequest) UnsetLimitPrice()`
+`func (o *MlegTradeForm) UnsetLimitPrice()`
 
 UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
 ### GetStopPrice
 
-`func (o *TradingPlaceMlegOrderRequest) GetStopPrice() float64`
+`func (o *MlegTradeForm) GetStopPrice() float64`
 
 GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
 
 ### GetStopPriceOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetStopPriceOk() (*float64, bool)`
+`func (o *MlegTradeForm) GetStopPriceOk() (*float64, bool)`
 
 GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopPrice
 
-`func (o *TradingPlaceMlegOrderRequest) SetStopPrice(v float64)`
+`func (o *MlegTradeForm) SetStopPrice(v float64)`
 
 SetStopPrice sets StopPrice field to given value.
 
 ### HasStopPrice
 
-`func (o *TradingPlaceMlegOrderRequest) HasStopPrice() bool`
+`func (o *MlegTradeForm) HasStopPrice() bool`
 
 HasStopPrice returns a boolean if a field has been set.
 
 ### SetStopPriceNil
 
-`func (o *TradingPlaceMlegOrderRequest) SetStopPriceNil(b bool)`
+`func (o *MlegTradeForm) SetStopPriceNil(b bool)`
 
  SetStopPriceNil sets the value for StopPrice to be an explicit nil
 
 ### UnsetStopPrice
-`func (o *TradingPlaceMlegOrderRequest) UnsetStopPrice()`
+`func (o *MlegTradeForm) UnsetStopPrice()`
 
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
 ### GetLegs
 
-`func (o *TradingPlaceMlegOrderRequest) GetLegs() []MlegLeg`
+`func (o *MlegTradeForm) GetLegs() []MlegLeg`
 
 GetLegs returns the Legs field if non-nil, zero value otherwise.
 
 ### GetLegsOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetLegsOk() (*[]MlegLeg, bool)`
+`func (o *MlegTradeForm) GetLegsOk() (*[]MlegLeg, bool)`
 
 GetLegsOk returns a tuple with the Legs field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLegs
 
-`func (o *TradingPlaceMlegOrderRequest) SetLegs(v []MlegLeg)`
+`func (o *MlegTradeForm) SetLegs(v []MlegLeg)`
 
 SetLegs sets Legs field to given value.
 

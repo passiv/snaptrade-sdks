@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// TradingPlaceMlegOrderRequest struct for TradingPlaceMlegOrderRequest
-type TradingPlaceMlegOrderRequest struct {
+// MlegTradeForm Inputs for placing a multi-leg order with the brokerage.
+type MlegTradeForm struct {
 	OrderType MlegOrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
@@ -26,28 +26,28 @@ type TradingPlaceMlegOrderRequest struct {
 	Legs []MlegLeg `json:"legs"`
 }
 
-// NewTradingPlaceMlegOrderRequest instantiates a new TradingPlaceMlegOrderRequest object
+// NewMlegTradeForm instantiates a new MlegTradeForm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingPlaceMlegOrderRequest(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg) *TradingPlaceMlegOrderRequest {
-	this := TradingPlaceMlegOrderRequest{}
+func NewMlegTradeForm(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg) *MlegTradeForm {
+	this := MlegTradeForm{}
 	this.OrderType = orderType
 	this.TimeInForce = timeInForce
 	this.Legs = legs
 	return &this
 }
 
-// NewTradingPlaceMlegOrderRequestWithDefaults instantiates a new TradingPlaceMlegOrderRequest object
+// NewMlegTradeFormWithDefaults instantiates a new MlegTradeForm object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTradingPlaceMlegOrderRequestWithDefaults() *TradingPlaceMlegOrderRequest {
-	this := TradingPlaceMlegOrderRequest{}
+func NewMlegTradeFormWithDefaults() *MlegTradeForm {
+	this := MlegTradeForm{}
 	return &this
 }
 
 // GetOrderType returns the OrderType field value
-func (o *TradingPlaceMlegOrderRequest) GetOrderType() MlegOrderTypeStrict {
+func (o *MlegTradeForm) GetOrderType() MlegOrderTypeStrict {
 	if o == nil {
 		var ret MlegOrderTypeStrict
 		return ret
@@ -58,7 +58,7 @@ func (o *TradingPlaceMlegOrderRequest) GetOrderType() MlegOrderTypeStrict {
 
 // GetOrderTypeOk returns a tuple with the OrderType field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceMlegOrderRequest) GetOrderTypeOk() (*MlegOrderTypeStrict, bool) {
+func (o *MlegTradeForm) GetOrderTypeOk() (*MlegOrderTypeStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -66,12 +66,12 @@ func (o *TradingPlaceMlegOrderRequest) GetOrderTypeOk() (*MlegOrderTypeStrict, b
 }
 
 // SetOrderType sets field value
-func (o *TradingPlaceMlegOrderRequest) SetOrderType(v MlegOrderTypeStrict) {
+func (o *MlegTradeForm) SetOrderType(v MlegOrderTypeStrict) {
 	o.OrderType = v
 }
 
 // GetTimeInForce returns the TimeInForce field value
-func (o *TradingPlaceMlegOrderRequest) GetTimeInForce() TimeInForceStrict {
+func (o *MlegTradeForm) GetTimeInForce() TimeInForceStrict {
 	if o == nil {
 		var ret TimeInForceStrict
 		return ret
@@ -82,7 +82,7 @@ func (o *TradingPlaceMlegOrderRequest) GetTimeInForce() TimeInForceStrict {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceMlegOrderRequest) GetTimeInForceOk() (*TimeInForceStrict, bool) {
+func (o *MlegTradeForm) GetTimeInForceOk() (*TimeInForceStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -90,12 +90,12 @@ func (o *TradingPlaceMlegOrderRequest) GetTimeInForceOk() (*TimeInForceStrict, b
 }
 
 // SetTimeInForce sets field value
-func (o *TradingPlaceMlegOrderRequest) SetTimeInForce(v TimeInForceStrict) {
+func (o *MlegTradeForm) SetTimeInForce(v TimeInForceStrict) {
 	o.TimeInForce = v
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TradingPlaceMlegOrderRequest) GetLimitPrice() float64 {
+func (o *MlegTradeForm) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice.Get()) {
 		var ret float64
 		return ret
@@ -106,7 +106,7 @@ func (o *TradingPlaceMlegOrderRequest) GetLimitPrice() float64 {
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TradingPlaceMlegOrderRequest) GetLimitPriceOk() (*float64, bool) {
+func (o *MlegTradeForm) GetLimitPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -114,7 +114,7 @@ func (o *TradingPlaceMlegOrderRequest) GetLimitPriceOk() (*float64, bool) {
 }
 
 // HasLimitPrice returns a boolean if a field has been set.
-func (o *TradingPlaceMlegOrderRequest) HasLimitPrice() bool {
+func (o *MlegTradeForm) HasLimitPrice() bool {
 	if o != nil && o.LimitPrice.IsSet() {
 		return true
 	}
@@ -123,21 +123,21 @@ func (o *TradingPlaceMlegOrderRequest) HasLimitPrice() bool {
 }
 
 // SetLimitPrice gets a reference to the given NullableFloat64 and assigns it to the LimitPrice field.
-func (o *TradingPlaceMlegOrderRequest) SetLimitPrice(v float64) {
+func (o *MlegTradeForm) SetLimitPrice(v float64) {
 	o.LimitPrice.Set(&v)
 }
 // SetLimitPriceNil sets the value for LimitPrice to be an explicit nil
-func (o *TradingPlaceMlegOrderRequest) SetLimitPriceNil() {
+func (o *MlegTradeForm) SetLimitPriceNil() {
 	o.LimitPrice.Set(nil)
 }
 
 // UnsetLimitPrice ensures that no value is present for LimitPrice, not even an explicit nil
-func (o *TradingPlaceMlegOrderRequest) UnsetLimitPrice() {
+func (o *MlegTradeForm) UnsetLimitPrice() {
 	o.LimitPrice.Unset()
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TradingPlaceMlegOrderRequest) GetStopPrice() float64 {
+func (o *MlegTradeForm) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice.Get()) {
 		var ret float64
 		return ret
@@ -148,7 +148,7 @@ func (o *TradingPlaceMlegOrderRequest) GetStopPrice() float64 {
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TradingPlaceMlegOrderRequest) GetStopPriceOk() (*float64, bool) {
+func (o *MlegTradeForm) GetStopPriceOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -156,7 +156,7 @@ func (o *TradingPlaceMlegOrderRequest) GetStopPriceOk() (*float64, bool) {
 }
 
 // HasStopPrice returns a boolean if a field has been set.
-func (o *TradingPlaceMlegOrderRequest) HasStopPrice() bool {
+func (o *MlegTradeForm) HasStopPrice() bool {
 	if o != nil && o.StopPrice.IsSet() {
 		return true
 	}
@@ -165,21 +165,21 @@ func (o *TradingPlaceMlegOrderRequest) HasStopPrice() bool {
 }
 
 // SetStopPrice gets a reference to the given NullableFloat64 and assigns it to the StopPrice field.
-func (o *TradingPlaceMlegOrderRequest) SetStopPrice(v float64) {
+func (o *MlegTradeForm) SetStopPrice(v float64) {
 	o.StopPrice.Set(&v)
 }
 // SetStopPriceNil sets the value for StopPrice to be an explicit nil
-func (o *TradingPlaceMlegOrderRequest) SetStopPriceNil() {
+func (o *MlegTradeForm) SetStopPriceNil() {
 	o.StopPrice.Set(nil)
 }
 
 // UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
-func (o *TradingPlaceMlegOrderRequest) UnsetStopPrice() {
+func (o *MlegTradeForm) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
 // GetLegs returns the Legs field value
-func (o *TradingPlaceMlegOrderRequest) GetLegs() []MlegLeg {
+func (o *MlegTradeForm) GetLegs() []MlegLeg {
 	if o == nil {
 		var ret []MlegLeg
 		return ret
@@ -190,7 +190,7 @@ func (o *TradingPlaceMlegOrderRequest) GetLegs() []MlegLeg {
 
 // GetLegsOk returns a tuple with the Legs field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceMlegOrderRequest) GetLegsOk() ([]MlegLeg, bool) {
+func (o *MlegTradeForm) GetLegsOk() ([]MlegLeg, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -198,11 +198,11 @@ func (o *TradingPlaceMlegOrderRequest) GetLegsOk() ([]MlegLeg, bool) {
 }
 
 // SetLegs sets field value
-func (o *TradingPlaceMlegOrderRequest) SetLegs(v []MlegLeg) {
+func (o *MlegTradeForm) SetLegs(v []MlegLeg) {
 	o.Legs = v
 }
 
-func (o TradingPlaceMlegOrderRequest) MarshalJSON() ([]byte, error) {
+func (o MlegTradeForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["order_type"] = o.OrderType
@@ -222,38 +222,38 @@ func (o TradingPlaceMlegOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableTradingPlaceMlegOrderRequest struct {
-	value *TradingPlaceMlegOrderRequest
+type NullableMlegTradeForm struct {
+	value *MlegTradeForm
 	isSet bool
 }
 
-func (v NullableTradingPlaceMlegOrderRequest) Get() *TradingPlaceMlegOrderRequest {
+func (v NullableMlegTradeForm) Get() *MlegTradeForm {
 	return v.value
 }
 
-func (v *NullableTradingPlaceMlegOrderRequest) Set(val *TradingPlaceMlegOrderRequest) {
+func (v *NullableMlegTradeForm) Set(val *MlegTradeForm) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTradingPlaceMlegOrderRequest) IsSet() bool {
+func (v NullableMlegTradeForm) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTradingPlaceMlegOrderRequest) Unset() {
+func (v *NullableMlegTradeForm) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTradingPlaceMlegOrderRequest(val *TradingPlaceMlegOrderRequest) *NullableTradingPlaceMlegOrderRequest {
-	return &NullableTradingPlaceMlegOrderRequest{value: val, isSet: true}
+func NewNullableMlegTradeForm(val *MlegTradeForm) *NullableMlegTradeForm {
+	return &NullableMlegTradeForm{value: val, isSet: true}
 }
 
-func (v NullableTradingPlaceMlegOrderRequest) MarshalJSON() ([]byte, error) {
+func (v NullableMlegTradeForm) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTradingPlaceMlegOrderRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableMlegTradeForm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

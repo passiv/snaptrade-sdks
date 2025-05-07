@@ -1,7 +1,8 @@
 
 
-# TradingPlaceMlegOrderRequest
+# MlegTradeForm
 
+Inputs for placing a multi-leg order with the brokerage.
 
 ## Properties
 

@@ -499,19 +499,19 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    tradingPlaceMlegOrderRequest := *snaptrade.NewTradingPlaceMlegOrderRequest(
+    mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,
         null,
         null,
     )
-    tradingPlaceMlegOrderRequest.SetLimitPrice("")
-    tradingPlaceMlegOrderRequest.SetStopPrice("")
+    mlegTradeForm.SetLimitPrice("")
+    mlegTradeForm.SetStopPrice("")
     
     request := client.TradingApi.PlaceMlegOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        tradingPlaceMlegOrderRequest,
+        mlegTradeForm,
     )
     
     resp, httpRes, err := request.Execute()

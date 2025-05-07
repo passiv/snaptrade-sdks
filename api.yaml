@@ -2637,32 +2637,7 @@ components:
       content:
         application/json:
           schema:
-            type: object
-            required:
-              - "order_type"
-              - "time_in_force"
-              - "legs"
-            properties:
-              order_type:
-                $ref: "#/components/schemas/MlegOrderTypeStrict"
-              time_in_force:
-                $ref: "#/components/schemas/TimeInForceStrict"
-              limit_price:
-                description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
-                type: string
-                format: decimal
-                example: ""
-                nullable: true
-              stop_price:
-                description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-                type: string
-                format: decimal
-                example: ""
-                nullable: true
-              legs:
-                type: array
-                items:
-                  $ref: "#/components/schemas/MlegLeg"
+            $ref: "#/components/schemas/MlegTradeForm"
 
   schemas:
     400FailedRequestResponse:
@@ -4386,6 +4361,34 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    MlegTradeForm:
+      description: Inputs for placing a multi-leg order with the brokerage.
+      type: object
+      required:
+        - "order_type"
+        - "time_in_force"
+        - "legs"
+      properties:
+        order_type:
+          $ref: "#/components/schemas/MlegOrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        limit_price:
+          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+          type: string
+          format: decimal
+          example: ""
+          nullable: true
+        stop_price:
+          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+          type: string
+          format: decimal
+          example: ""
+          nullable: true
+        legs:
+          type: array
+          items:
+            $ref: "#/components/schemas/MlegLeg"
     ManualTradeReplaceForm:
       description: Inputs for placing an order with the brokerage.
       type: object
@@ -4576,6 +4579,7 @@ components:
         - IOC
       example: Day
     MlegOrderTypeStrict:
+      example: MARKET
       type: string
       enum:
         - MARKET
