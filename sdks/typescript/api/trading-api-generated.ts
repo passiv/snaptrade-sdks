@@ -1121,7 +1121,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          */
         async placeMlegOrder(requestParameters: TradingApiPlaceMlegOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<MlegOrderResponse>> {
             const tradingPlaceMlegOrderRequest: TradingPlaceMlegOrderRequest = {
-                type: requestParameters.type,
+                order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
                 limit_price: requestParameters.limit_price,
                 stop_price: requestParameters.stop_price,

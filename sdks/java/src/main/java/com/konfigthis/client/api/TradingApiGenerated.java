@@ -1935,7 +1935,7 @@ public class TradingApiGenerated {
     }
 
     public abstract class PlaceMlegOrderRequestBuilderGenerated {
-        final MlegOrderTypeStrict type;
+        final MlegOrderTypeStrict orderType;
         final TimeInForceStrict timeInForce;
         final List<MlegLeg> legs;
         final String userId;
@@ -1944,8 +1944,8 @@ public class TradingApiGenerated {
         BigDecimal limitPrice;
         BigDecimal stopPrice;
 
-        public PlaceMlegOrderRequestBuilderGenerated(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
-            this.type = type;
+        public PlaceMlegOrderRequestBuilderGenerated(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            this.orderType = orderType;
             this.timeInForce = timeInForce;
             this.legs = legs;
             this.userId = userId;
@@ -1992,7 +1992,7 @@ public class TradingApiGenerated {
 
         private TradingPlaceMlegOrderRequest buildBodyParams() {
             TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest();
-            tradingPlaceMlegOrderRequest.type(this.type);
+            tradingPlaceMlegOrderRequest.orderType(this.orderType);
             tradingPlaceMlegOrderRequest.timeInForce(this.timeInForce);
             tradingPlaceMlegOrderRequest.limitPrice(this.limitPrice);
             tradingPlaceMlegOrderRequest.stopPrice(this.stopPrice);
@@ -2066,8 +2066,8 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
-        if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
+    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
@@ -2079,7 +2079,7 @@ public class TradingApiGenerated {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
-        return ((TradingApi) this).new PlaceMlegOrderRequestBuilder(type, timeInForce, legs, userId, userSecret, accountId);
+        return ((TradingApi) this).new PlaceMlegOrderRequestBuilder(orderType, timeInForce, legs, userId, userSecret, accountId);
     }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;

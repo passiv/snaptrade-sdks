@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.MlegInstrumentType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -53,56 +54,9 @@ public class MlegTradingInstrument {
   @SerializedName(SERIALIZED_NAME_SYMBOL)
   private String symbol;
 
-  /**
-   * The instrument&#39;s type
-   */
-  @JsonAdapter(TypeEnum.Adapter.class)
- public enum TypeEnum {
-    OPTION("OPTION"),
-    
-    EQUITY("EQUITY");
-
-    private String value;
-
-    TypeEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static TypeEnum fromValue(String value) {
-      for (TypeEnum b : TypeEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<TypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final TypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public TypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return TypeEnum.fromValue(value);
-      }
-    }
-  }
-
-  public static final String SERIALIZED_NAME_TYPE = "type";
-  @SerializedName(SERIALIZED_NAME_TYPE)
-  private TypeEnum type;
+  public static final String SERIALIZED_NAME_INSTRUMENT_TYPE = "instrument_type";
+  @SerializedName(SERIALIZED_NAME_INSTRUMENT_TYPE)
+  private MlegInstrumentType instrumentType;
 
   public MlegTradingInstrument() {
   }
@@ -136,32 +90,32 @@ public class MlegTradingInstrument {
   }
 
 
-  public MlegTradingInstrument type(TypeEnum type) {
+  public MlegTradingInstrument instrumentType(MlegInstrumentType instrumentType) {
     
     
     
     
-    this.type = type;
+    this.instrumentType = instrumentType;
     return this;
   }
 
    /**
-   * The instrument&#39;s type
-   * @return type
+   * Get instrumentType
+   * @return instrumentType
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "The instrument's type")
+  @ApiModelProperty(required = true, value = "")
 
-  public TypeEnum getType() {
-    return type;
+  public MlegInstrumentType getInstrumentType() {
+    return instrumentType;
   }
 
 
-  public void setType(TypeEnum type) {
+  public void setInstrumentType(MlegInstrumentType instrumentType) {
     
     
     
-    this.type = type;
+    this.instrumentType = instrumentType;
   }
 
   /**
@@ -220,13 +174,13 @@ public class MlegTradingInstrument {
     }
     MlegTradingInstrument mlegTradingInstrument = (MlegTradingInstrument) o;
     return Objects.equals(this.symbol, mlegTradingInstrument.symbol) &&
-        Objects.equals(this.type, mlegTradingInstrument.type)&&
+        Objects.equals(this.instrumentType, mlegTradingInstrument.instrumentType)&&
         Objects.equals(this.additionalProperties, mlegTradingInstrument.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, type, additionalProperties);
+    return Objects.hash(symbol, instrumentType, additionalProperties);
   }
 
   @Override
@@ -234,7 +188,7 @@ public class MlegTradingInstrument {
     StringBuilder sb = new StringBuilder();
     sb.append("class MlegTradingInstrument {\n");
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
-    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    instrumentType: ").append(toIndentedString(instrumentType)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -259,12 +213,12 @@ public class MlegTradingInstrument {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("symbol");
-    openapiFields.add("type");
+    openapiFields.add("instrument_type");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("symbol");
-    openapiRequiredFields.add("type");
+    openapiRequiredFields.add("instrument_type");
   }
 
  /**
@@ -288,9 +242,6 @@ public class MlegTradingInstrument {
       }
       if (!jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
-      }
-      if (!jsonObj.get("type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));
       }
   }
 

@@ -956,7 +956,7 @@ module SnapTrade
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
-    # @param type [MlegOrderTypeStrict] The type of order to place.
+    # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param legs [Array<MlegLeg>] 
     # @param user_id [String] 
@@ -966,9 +966,9 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
     # @param body [TradingPlaceMlegOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order(type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
+    def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
       _body = {}
-      _body[:type] = type if type != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL
@@ -982,7 +982,7 @@ module SnapTrade
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
-    # @param type [MlegOrderTypeStrict] The type of order to place.
+    # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param legs [Array<MlegLeg>] 
     # @param user_id [String] 
@@ -992,9 +992,9 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
     # @param body [TradingPlaceMlegOrderRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order_with_http_info(type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
+    def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
       _body = {}
-      _body[:type] = type if type != SENTINEL
+      _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL

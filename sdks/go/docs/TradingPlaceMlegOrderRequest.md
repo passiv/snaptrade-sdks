@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | [**MlegOrderTypeStrict**](MlegOrderTypeStrict.md) |  | 
+**OrderType** | [**MlegOrderTypeStrict**](MlegOrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewTradingPlaceMlegOrderRequest
 
-`func NewTradingPlaceMlegOrderRequest(type_ MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg, ) *TradingPlaceMlegOrderRequest`
+`func NewTradingPlaceMlegOrderRequest(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg, ) *TradingPlaceMlegOrderRequest`
 
 NewTradingPlaceMlegOrderRequest instantiates a new TradingPlaceMlegOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -29,24 +29,24 @@ NewTradingPlaceMlegOrderRequestWithDefaults instantiates a new TradingPlaceMlegO
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetType
+### GetOrderType
 
-`func (o *TradingPlaceMlegOrderRequest) GetType() MlegOrderTypeStrict`
+`func (o *TradingPlaceMlegOrderRequest) GetOrderType() MlegOrderTypeStrict`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetOrderType returns the OrderType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetOrderTypeOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*MlegOrderTypeStrict, bool)`
+`func (o *TradingPlaceMlegOrderRequest) GetOrderTypeOk() (*MlegOrderTypeStrict, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetOrderTypeOk returns a tuple with the OrderType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetOrderType
 
-`func (o *TradingPlaceMlegOrderRequest) SetType(v MlegOrderTypeStrict)`
+`func (o *TradingPlaceMlegOrderRequest) SetOrderType(v MlegOrderTypeStrict)`
 
-SetType sets Type field to given value.
+SetOrderType sets OrderType field to given value.
 
 
 ### GetTimeInForce

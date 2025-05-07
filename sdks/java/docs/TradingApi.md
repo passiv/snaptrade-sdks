@@ -871,7 +871,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    MlegOrderTypeStrict type = MlegOrderTypeStrict.fromValue("MARKET");
+    MlegOrderTypeStrict orderType = MlegOrderTypeStrict.fromValue("MARKET");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     List<MlegLeg> legs = Arrays.asList();
     String userId = "userId_example";
@@ -882,7 +882,7 @@ public class Example {
     try {
       MlegOrderResponse result = client
               .trading
-              .placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+              .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .execute();
@@ -901,7 +901,7 @@ public class Example {
     try {
       ApiResponse<MlegOrderResponse> response = client
               .trading
-              .placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+              .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
               .executeWithHttpInfo();

@@ -802,14 +802,14 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var type = MlegOrderTypeStrict.MARKET;
+            var orderType = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = ""; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
             var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
             var legs = new List<MlegLeg>();
             
             var tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest(
-                type,
+                orderType,
                 timeInForce,
                 limitPrice,
                 stopPrice,

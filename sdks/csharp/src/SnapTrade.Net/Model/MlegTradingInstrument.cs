@@ -32,34 +32,12 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "MlegTradingInstrument")]
     public partial class MlegTradingInstrument : IEquatable<MlegTradingInstrument>, IValidatableObject
     {
-        /// <summary>
-        /// The instrument&#39;s type
-        /// </summary>
-        /// <value>The instrument&#39;s type</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum OPTION for value: OPTION
-            /// </summary>
-            [EnumMember(Value = "OPTION")]
-            OPTION = 1,
-
-            /// <summary>
-            /// Enum EQUITY for value: EQUITY
-            /// </summary>
-            [EnumMember(Value = "EQUITY")]
-            EQUITY = 2
-
-        }
-
 
         /// <summary>
-        /// The instrument&#39;s type
+        /// Gets or Sets InstrumentType
         /// </summary>
-        /// <value>The instrument&#39;s type</value>
-        [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public TypeEnum Type { get; set; }
+        [DataMember(Name = "instrument_type", IsRequired = true, EmitDefaultValue = true)]
+        public MlegInstrumentType InstrumentType { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="MlegTradingInstrument" /> class.
         /// </summary>
@@ -72,8 +50,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="MlegTradingInstrument" /> class.
         /// </summary>
         /// <param name="symbol">The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) (required).</param>
-        /// <param name="type">The instrument&#39;s type (required).</param>
-        public MlegTradingInstrument(string symbol = default(string), TypeEnum type = default(TypeEnum)) : base()
+        /// <param name="instrumentType">instrumentType (required).</param>
+        public MlegTradingInstrument(string symbol = default(string), MlegInstrumentType instrumentType = default(MlegInstrumentType)) : base()
         {
             // to ensure "symbol" is required (not null)
             if (symbol == null)
@@ -81,7 +59,7 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("symbol is a required property for MlegTradingInstrument and cannot be null");
             }
             this.Symbol = symbol;
-            this.Type = type;
+            this.InstrumentType = instrumentType;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -108,7 +86,7 @@ namespace SnapTrade.Net.Model
             sb.Append("class MlegTradingInstrument {\n");
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  InstrumentType: ").Append(InstrumentType).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -151,8 +129,8 @@ namespace SnapTrade.Net.Model
                     this.Symbol.Equals(input.Symbol))
                 ) && base.Equals(input) && 
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
+                    this.InstrumentType == input.InstrumentType ||
+                    this.InstrumentType.Equals(input.InstrumentType)
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -170,7 +148,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
                 }
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                hashCode = (hashCode * 59) + this.InstrumentType.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

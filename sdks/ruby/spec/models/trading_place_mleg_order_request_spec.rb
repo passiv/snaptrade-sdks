@@ -20,7 +20,7 @@ describe SnapTrade::TradingPlaceMlegOrderRequest do
       expect(instance).to be_instance_of(SnapTrade::TradingPlaceMlegOrderRequest)
     end
   end
-  describe 'test attribute "type"' do
+  describe 'test attribute "order_type"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

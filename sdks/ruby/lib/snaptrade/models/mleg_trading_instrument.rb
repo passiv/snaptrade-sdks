@@ -16,13 +16,13 @@ module SnapTrade
     attr_accessor :symbol
 
     # The instrument's type
-    attr_accessor :type
+    attr_accessor :instrument_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'symbol' => :'symbol',
-        :'type' => :'type'
+        :'instrument_type' => :'instrument_type'
       }
     end
 
@@ -35,7 +35,7 @@ module SnapTrade
     def self.openapi_types
       {
         :'symbol' => :'String',
-        :'type' => :'MlegTradingInstrumentType'
+        :'instrument_type' => :'MlegInstrumentType'
       }
     end
 
@@ -64,8 +64,8 @@ module SnapTrade
         self.symbol = attributes[:'symbol']
       end
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'instrument_type')
+        self.instrument_type = attributes[:'instrument_type']
       end
     end
 
@@ -77,8 +77,8 @@ module SnapTrade
         invalid_properties.push('invalid value for "symbol", symbol cannot be nil.')
       end
 
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      if @instrument_type.nil?
+        invalid_properties.push('invalid value for "instrument_type", instrument_type cannot be nil.')
       end
 
       invalid_properties
@@ -88,7 +88,7 @@ module SnapTrade
     # @return true if the model is valid
     def valid?
       return false if @symbol.nil?
-      return false if @type.nil?
+      return false if @instrument_type.nil?
       true
     end
 
@@ -98,7 +98,7 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           symbol == o.symbol &&
-          type == o.type
+          instrument_type == o.instrument_type
     end
 
     # @see the `==` method
@@ -110,7 +110,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, type].hash
+      [symbol, instrument_type].hash
     end
 
     # Builds the object from hash

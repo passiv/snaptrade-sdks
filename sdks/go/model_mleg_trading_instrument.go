@@ -19,8 +19,7 @@ import (
 type MlegTradingInstrument struct {
 	// The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
 	Symbol string `json:"symbol"`
-	// The instrument's type
-	Type string `json:"type"`
+	InstrumentType MlegInstrumentType `json:"instrument_type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -30,10 +29,10 @@ type _MlegTradingInstrument MlegTradingInstrument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMlegTradingInstrument(symbol string, type_ string) *MlegTradingInstrument {
+func NewMlegTradingInstrument(symbol string, instrumentType MlegInstrumentType) *MlegTradingInstrument {
 	this := MlegTradingInstrument{}
 	this.Symbol = symbol
-	this.Type = type_
+	this.InstrumentType = instrumentType
 	return &this
 }
 
@@ -69,28 +68,28 @@ func (o *MlegTradingInstrument) SetSymbol(v string) {
 	o.Symbol = v
 }
 
-// GetType returns the Type field value
-func (o *MlegTradingInstrument) GetType() string {
+// GetInstrumentType returns the InstrumentType field value
+func (o *MlegTradingInstrument) GetInstrumentType() MlegInstrumentType {
 	if o == nil {
-		var ret string
+		var ret MlegInstrumentType
 		return ret
 	}
 
-	return o.Type
+	return o.InstrumentType
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetInstrumentTypeOk returns a tuple with the InstrumentType field value
 // and a boolean to check if the value has been set.
-func (o *MlegTradingInstrument) GetTypeOk() (*string, bool) {
+func (o *MlegTradingInstrument) GetInstrumentTypeOk() (*MlegInstrumentType, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.Type, true
+	return &o.InstrumentType, true
 }
 
-// SetType sets field value
-func (o *MlegTradingInstrument) SetType(v string) {
-	o.Type = v
+// SetInstrumentType sets field value
+func (o *MlegTradingInstrument) SetInstrumentType(v MlegInstrumentType) {
+	o.InstrumentType = v
 }
 
 func (o MlegTradingInstrument) MarshalJSON() ([]byte, error) {
@@ -99,7 +98,7 @@ func (o MlegTradingInstrument) MarshalJSON() ([]byte, error) {
 		toSerialize["symbol"] = o.Symbol
 	}
 	if true {
-		toSerialize["type"] = o.Type
+		toSerialize["instrument_type"] = o.InstrumentType
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -120,7 +119,7 @@ func (o *MlegTradingInstrument) UnmarshalJSON(bytes []byte) (err error) {
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "symbol")
-		delete(additionalProperties, "type")
+		delete(additionalProperties, "instrument_type")
 		o.AdditionalProperties = additionalProperties
 	}
 

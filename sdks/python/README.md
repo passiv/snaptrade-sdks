@@ -2071,13 +2071,13 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 ```python
 place_mleg_order_response = snaptrade.trading.place_mleg_order(
-    type="MARKET",
+    order_type="MARKET",
     time_in_force="Day",
     legs=[
         {
             "instrument": {
                 "symbol": "PBI   250718C00006000",
-                "type": "OPTION",
+                "instrument_type": "OPTION",
             },
             "action": "BUY_TO_OPEN",
             "units": 1,
@@ -2093,7 +2093,7 @@ place_mleg_order_response = snaptrade.trading.place_mleg_order(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: [`MlegOrderTypeStrict`](./snaptrade_client/type/mleg_order_type_strict.py)<a id="type-mlegordertypestrictsnaptrade_clienttypemleg_order_type_strictpy"></a>
+##### order_type: [`MlegOrderTypeStrict`](./snaptrade_client/type/mleg_order_type_strict.py)<a id="order_type-mlegordertypestrictsnaptrade_clienttypemleg_order_type_strictpy"></a>
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
