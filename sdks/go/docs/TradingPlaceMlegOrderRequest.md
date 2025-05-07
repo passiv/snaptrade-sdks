@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | The type of order to place. | 
+**Type** | [**MlegOrderTypeStrict**](MlegOrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewTradingPlaceMlegOrderRequest
 
-`func NewTradingPlaceMlegOrderRequest(type_ string, timeInForce TimeInForceStrict, legs []MlegLeg, ) *TradingPlaceMlegOrderRequest`
+`func NewTradingPlaceMlegOrderRequest(type_ MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg, ) *TradingPlaceMlegOrderRequest`
 
 NewTradingPlaceMlegOrderRequest instantiates a new TradingPlaceMlegOrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *TradingPlaceMlegOrderRequest) GetType() string`
+`func (o *TradingPlaceMlegOrderRequest) GetType() MlegOrderTypeStrict`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*string, bool)`
+`func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*MlegOrderTypeStrict, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *TradingPlaceMlegOrderRequest) SetType(v string)`
+`func (o *TradingPlaceMlegOrderRequest) SetType(v MlegOrderTypeStrict)`
 
 SetType sets Type field to given value.
 

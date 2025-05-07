@@ -32,46 +32,12 @@ namespace SnapTrade.Net.Model
     [DataContract(Name = "Trading_placeMlegOrder_request")]
     public partial class TradingPlaceMlegOrderRequest : IEquatable<TradingPlaceMlegOrderRequest>, IValidatableObject
     {
-        /// <summary>
-        /// The type of order to place.
-        /// </summary>
-        /// <value>The type of order to place.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum TypeEnum
-        {
-            /// <summary>
-            /// Enum MARKET for value: MARKET
-            /// </summary>
-            [EnumMember(Value = "MARKET")]
-            MARKET = 1,
-
-            /// <summary>
-            /// Enum LIMIT for value: LIMIT
-            /// </summary>
-            [EnumMember(Value = "LIMIT")]
-            LIMIT = 2,
-
-            /// <summary>
-            /// Enum STOPLOSSMARKET for value: STOP_LOSS_MARKET
-            /// </summary>
-            [EnumMember(Value = "STOP_LOSS_MARKET")]
-            STOPLOSSMARKET = 3,
-
-            /// <summary>
-            /// Enum STOPLOSSLIMIT for value: STOP_LOSS_LIMIT
-            /// </summary>
-            [EnumMember(Value = "STOP_LOSS_LIMIT")]
-            STOPLOSSLIMIT = 4
-
-        }
-
 
         /// <summary>
-        /// The type of order to place.
+        /// Gets or Sets Type
         /// </summary>
-        /// <value>The type of order to place.</value>
         [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public TypeEnum Type { get; set; }
+        public MlegOrderTypeStrict Type { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
@@ -86,12 +52,12 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingPlaceMlegOrderRequest" /> class.
         /// </summary>
-        /// <param name="type">The type of order to place. (required).</param>
+        /// <param name="type">type (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT..</param>
         /// <param name="legs">legs (required).</param>
-        public TradingPlaceMlegOrderRequest(TypeEnum type = default(TypeEnum), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
+        public TradingPlaceMlegOrderRequest(MlegOrderTypeStrict type = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
         {
             this.Type = type;
             this.TimeInForce = timeInForce;

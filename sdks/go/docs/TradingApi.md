@@ -500,7 +500,7 @@ func main() {
 
     
     tradingPlaceMlegOrderRequest := *snaptrade.NewTradingPlaceMlegOrderRequest(
-        "null",
+        null,
         null,
         null,
     )

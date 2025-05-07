@@ -2129,7 +2129,7 @@ const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: `string`<a id="type-string"></a>
+##### type: [`MlegOrderTypeStrict`](./models/mleg-order-type-strict.ts)<a id="type-mlegordertypestrictmodelsmleg-order-type-strictts"></a>
 
 The type of order to place.
 

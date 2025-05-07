@@ -7114,6 +7114,14 @@ components:
       type: string
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
+    MlegOrderTypeStrict:
+      description: The type of order to place.
+      enum:
+      - MARKET
+      - LIMIT
+      - STOP_LOSS_MARKET
+      - STOP_LOSS_LIMIT
+      type: string
     TimeInForce:
       description: |
         Trade time in force examples:
@@ -11032,13 +11040,7 @@ components:
         accountId:
           $ref: '#/components/schemas/AccountID'
         type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          type: string
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         limit_price:
@@ -11790,13 +11792,7 @@ components:
     Trading_placeMlegOrder_request:
       properties:
         type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          type: string
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
         limit_price:

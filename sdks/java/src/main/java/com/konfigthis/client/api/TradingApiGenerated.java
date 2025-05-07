@@ -38,6 +38,7 @@ import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
+import com.konfigthis.client.model.MlegOrderTypeStrict;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -1934,7 +1935,7 @@ public class TradingApiGenerated {
     }
 
     public abstract class PlaceMlegOrderRequestBuilderGenerated {
-        final String type;
+        final MlegOrderTypeStrict type;
         final TimeInForceStrict timeInForce;
         final List<MlegLeg> legs;
         final String userId;
@@ -1943,7 +1944,7 @@ public class TradingApiGenerated {
         BigDecimal limitPrice;
         BigDecimal stopPrice;
 
-        public PlaceMlegOrderRequestBuilderGenerated(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+        public PlaceMlegOrderRequestBuilderGenerated(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
             this.type = type;
             this.timeInForce = timeInForce;
             this.legs = legs;
@@ -1991,8 +1992,7 @@ public class TradingApiGenerated {
 
         private TradingPlaceMlegOrderRequest buildBodyParams() {
             TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest();
-            if (this.type != null)
-            tradingPlaceMlegOrderRequest.type(TradingPlaceMlegOrderRequest.TypeEnum.fromValue(this.type));
+            tradingPlaceMlegOrderRequest.type(this.type);
             tradingPlaceMlegOrderRequest.timeInForce(this.timeInForce);
             tradingPlaceMlegOrderRequest.limitPrice(this.limitPrice);
             tradingPlaceMlegOrderRequest.stopPrice(this.stopPrice);
@@ -2066,10 +2066,8 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
-            
-
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");

@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class MlegOrderRequestBodyType
+  class MlegOrderTypeStrict
     MARKET = "MARKET".freeze
     LIMIT = "LIMIT".freeze
     STOP_LOSS_MARKET = "STOP_LOSS_MARKET".freeze
@@ -32,8 +32,8 @@ module SnapTrade
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      return value if MlegOrderRequestBodyType.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #MlegOrderRequestBodyType"
+      return value if MlegOrderTypeStrict.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #MlegOrderTypeStrict"
     end
   end
 end

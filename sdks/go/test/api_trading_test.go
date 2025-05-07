@@ -201,7 +201,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
         tradingPlaceMlegOrderRequest := *snaptrade.NewTradingPlaceMlegOrderRequest(
-            "null",
+            null,
             null,
             null,
         )

@@ -13,6 +13,7 @@ import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
+import com.konfigthis.client.model.MlegOrderTypeStrict;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -74,7 +75,7 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceMlegOrderRequestBuilder extends PlaceMlegOrderRequestBuilderGenerated {
-        public PlaceMlegOrderRequestBuilder(String type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+        public PlaceMlegOrderRequestBuilder(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
             super(type, timeInForce, legs, userId, userSecret, accountId);
         }
     }

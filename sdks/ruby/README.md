@@ -2027,7 +2027,7 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: [`MlegOrderRequestBodyType`](./lib/snaptrade/models/mleg_order_request_body_type.rb)<a id="type-mlegorderrequestbodytypelibsnaptrademodelsmleg_order_request_body_typerb"></a>
+##### type: [`MlegOrderTypeStrict`](./lib/snaptrade/models/mleg_order_type_strict.rb)<a id="type-mlegordertypestrictlibsnaptrademodelsmleg_order_type_strictrb"></a>
 The type of order to place.
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>

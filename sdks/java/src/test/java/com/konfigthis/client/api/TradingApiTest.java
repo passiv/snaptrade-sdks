@@ -28,6 +28,7 @@ import com.konfigthis.client.model.ManualTradeFormWithOptions;
 import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
+import com.konfigthis.client.model.MlegOrderTypeStrict;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -243,7 +244,7 @@ public class TradingApiTest {
      */
     @Test
     public void placeMlegOrderTest() throws ApiException {
-        String type = null;
+        MlegOrderTypeStrict type = null;
         TimeInForceStrict timeInForce = null;
         List<MlegLeg> legs = null;
         String userId = null;

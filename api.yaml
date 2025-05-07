@@ -2644,13 +2644,7 @@ components:
               - "legs"
             properties:
               type:
-                type: string
-                enum:
-                  - MARKET
-                  - LIMIT
-                  - STOP_LOSS_MARKET
-                  - STOP_LOSS_LIMIT
-                description: The type of order to place.
+                $ref: "#/components/schemas/MlegOrderTypeStrict"
               time_in_force:
                 $ref: "#/components/schemas/TimeInForceStrict"
               limit_price:
@@ -4585,6 +4579,14 @@ components:
         - GTC
         - IOC
       example: Day
+    MlegOrderTypeStrict:
+      type: string
+      enum:
+        - MARKET
+        - LIMIT
+        - STOP_LOSS_MARKET
+        - STOP_LOSS_LIMIT
+      description: The type of order to place.
     TimeInForce:
       description: |
         Trade time in force examples:
