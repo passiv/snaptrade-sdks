@@ -2084,7 +2084,7 @@ Places a multi-leg option order. Only supported on certain option trading broker
 ```java
 MlegOrderResponse result = client
         .trading
-        .placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+        .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
         .limitPrice(limitPrice)
         .stopPrice(stopPrice)
         .execute();
@@ -2092,7 +2092,7 @@ MlegOrderResponse result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type:<a id="type"></a>
+##### order_type:<a id="order_type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
 

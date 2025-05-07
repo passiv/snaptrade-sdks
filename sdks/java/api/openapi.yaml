@@ -7068,15 +7068,11 @@ components:
           type: string
           x-konfig-original-example: PBI   250718C00006000
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradingInstrument-properties-symbol
-        type:
-          description: The instrument's type
-          enum:
-          - OPTION
-          - EQUITY
-          type: string
+        instrument_type:
+          $ref: '#/components/schemas/MlegInstrumentType'
       required:
+      - instrument_type
       - symbol
-      - type
       type: object
     OrderTypeStrict:
       description: |
@@ -7121,6 +7117,12 @@ components:
       - LIMIT
       - STOP_LOSS_MARKET
       - STOP_LOSS_LIMIT
+      type: string
+    MlegInstrumentType:
+      description: The instrument's type
+      enum:
+      - OPTION
+      - EQUITY
       type: string
     TimeInForce:
       description: |
@@ -11039,7 +11041,7 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        type:
+        order_type:
           $ref: '#/components/schemas/MlegOrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
@@ -11067,8 +11069,8 @@ components:
       required:
       - accountId
       - legs
+      - order_type
       - time_in_force
-      - type
       - userId
       - userSecret
       type: object
@@ -11791,7 +11793,7 @@ components:
       x-konfig-is-used-in-successful-response: true
     Trading_placeMlegOrder_request:
       properties:
-        type:
+        order_type:
           $ref: '#/components/schemas/MlegOrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
@@ -11818,8 +11820,8 @@ components:
           type: array
       required:
       - legs
+      - order_type
       - time_in_force
-      - type
       type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\

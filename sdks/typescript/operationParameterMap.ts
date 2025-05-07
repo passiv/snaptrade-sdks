@@ -667,7 +667,7 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/trading/options-POST': {
         parameters: [
             {
-                name: 'type'
+                name: 'order_type'
             },
             {
                 name: 'time_in_force'

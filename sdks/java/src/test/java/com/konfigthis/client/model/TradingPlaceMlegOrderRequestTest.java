@@ -46,11 +46,11 @@ public class TradingPlaceMlegOrderRequestTest {
     }
 
     /**
-     * Test the property 'type'
+     * Test the property 'orderType'
      */
     @Test
-    public void typeTest() {
-        // TODO: test type
+    public void orderTypeTest() {
+        // TODO: test orderType
     }
 
     /**

@@ -53,6 +53,7 @@ export * from './manual-trade-impact';
 export * from './manual-trade-replace-form';
 export * from './manual-trade-symbol';
 export * from './mleg-action-strict';
+export * from './mleg-instrument-type';
 export * from './mleg-leg';
 export * from './mleg-order-response';
 export * from './mleg-order-type-strict';

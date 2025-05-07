@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Symbol** | **string** | The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \&quot;AAPL  131124C00240000\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) | 
-**Type** | **string** | The instrument&#39;s type | 
+**InstrumentType** | [**MlegInstrumentType**](MlegInstrumentType.md) |  | 
 
 ## Methods
 
 ### NewMlegTradingInstrument
 
-`func NewMlegTradingInstrument(symbol string, type_ string, ) *MlegTradingInstrument`
+`func NewMlegTradingInstrument(symbol string, instrumentType MlegInstrumentType, ) *MlegTradingInstrument`
 
 NewMlegTradingInstrument instantiates a new MlegTradingInstrument object
 This constructor will assign default values to properties that have it defined,
@@ -46,24 +46,24 @@ and a boolean to check if the value has been set.
 SetSymbol sets Symbol field to given value.
 
 
-### GetType
+### GetInstrumentType
 
-`func (o *MlegTradingInstrument) GetType() string`
+`func (o *MlegTradingInstrument) GetInstrumentType() MlegInstrumentType`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetInstrumentType returns the InstrumentType field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetInstrumentTypeOk
 
-`func (o *MlegTradingInstrument) GetTypeOk() (*string, bool)`
+`func (o *MlegTradingInstrument) GetInstrumentTypeOk() (*MlegInstrumentType, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetInstrumentTypeOk returns a tuple with the InstrumentType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetInstrumentType
 
-`func (o *MlegTradingInstrument) SetType(v string)`
+`func (o *MlegTradingInstrument) SetInstrumentType(v MlegInstrumentType)`
 
-SetType sets Type field to given value.
+SetInstrumentType sets InstrumentType field to given value.
 
 
 

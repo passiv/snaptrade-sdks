@@ -244,7 +244,7 @@ public class TradingApiTest {
      */
     @Test
     public void placeMlegOrderTest() throws ApiException {
-        MlegOrderTypeStrict type = null;
+        MlegOrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         List<MlegLeg> legs = null;
         String userId = null;
@@ -252,7 +252,7 @@ public class TradingApiTest {
         UUID accountId = null;
         BigDecimal limitPrice = null;
         BigDecimal stopPrice = null;
-        MlegOrderResponse response = api.placeMlegOrder(type, timeInForce, legs, userId, userSecret, accountId)
+        MlegOrderResponse response = api.placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
                 .execute();

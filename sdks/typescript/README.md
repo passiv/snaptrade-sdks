@@ -2110,7 +2110,7 @@ const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  type: "MARKET",
+  order_type: "MARKET",
   time_in_force: "Day",
   limit_price: "",
   stop_price: "",
@@ -2118,7 +2118,7 @@ const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
     {
       instrument: {
         symbol: "PBI   250718C00006000",
-        type: "OPTION",
+        instrument_type: "OPTION",
       },
       action: "BUY_TO_OPEN",
       units: 1,
@@ -2129,7 +2129,7 @@ const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: [`MlegOrderTypeStrict`](./models/mleg-order-type-strict.ts)<a id="type-mlegordertypestrictmodelsmleg-order-type-strictts"></a>
+##### order_type: [`MlegOrderTypeStrict`](./models/mleg-order-type-strict.ts)<a id="order_type-mlegordertypestrictmodelsmleg-order-type-strictts"></a>
 
 The type of order to place.
 

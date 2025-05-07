@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **MlegOrderTypeStrict** |  | 
+**OrderType** | **MlegOrderTypeStrict** |  | 
 **TimeInForce** | **TimeInForceStrict** |  | 
 **LimitPrice** | **decimal?** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. | [optional] 
 **StopPrice** | **decimal?** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. | [optional] 

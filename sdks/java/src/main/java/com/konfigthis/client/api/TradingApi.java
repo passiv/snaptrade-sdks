@@ -75,8 +75,8 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PlaceMlegOrderRequestBuilder extends PlaceMlegOrderRequestBuilderGenerated {
-        public PlaceMlegOrderRequestBuilder(MlegOrderTypeStrict type, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
-            super(type, timeInForce, legs, userId, userSecret, accountId);
+        public PlaceMlegOrderRequestBuilder(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            super(orderType, timeInForce, legs, userId, userSecret, accountId);
         }
     }
     public class PlaceOrderRequestBuilder extends PlaceOrderRequestBuilderGenerated {

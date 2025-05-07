@@ -77,6 +77,7 @@ from snaptrade_client.model.manual_trade_impact import ManualTradeImpact
 from snaptrade_client.model.manual_trade_replace_form import ManualTradeReplaceForm
 from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.mleg_action_strict import MlegActionStrict
+from snaptrade_client.model.mleg_instrument_type import MlegInstrumentType
 from snaptrade_client.model.mleg_leg import MlegLeg
 from snaptrade_client.model.mleg_order_response import MlegOrderResponse
 from snaptrade_client.model.mleg_order_type_strict import MlegOrderTypeStrict

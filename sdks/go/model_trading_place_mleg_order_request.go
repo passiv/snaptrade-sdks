@@ -17,7 +17,7 @@ import (
 
 // TradingPlaceMlegOrderRequest struct for TradingPlaceMlegOrderRequest
 type TradingPlaceMlegOrderRequest struct {
-	Type MlegOrderTypeStrict `json:"type"`
+	OrderType MlegOrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
@@ -30,9 +30,9 @@ type TradingPlaceMlegOrderRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingPlaceMlegOrderRequest(type_ MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg) *TradingPlaceMlegOrderRequest {
+func NewTradingPlaceMlegOrderRequest(orderType MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg) *TradingPlaceMlegOrderRequest {
 	this := TradingPlaceMlegOrderRequest{}
-	this.Type = type_
+	this.OrderType = orderType
 	this.TimeInForce = timeInForce
 	this.Legs = legs
 	return &this
@@ -46,28 +46,28 @@ func NewTradingPlaceMlegOrderRequestWithDefaults() *TradingPlaceMlegOrderRequest
 	return &this
 }
 
-// GetType returns the Type field value
-func (o *TradingPlaceMlegOrderRequest) GetType() MlegOrderTypeStrict {
+// GetOrderType returns the OrderType field value
+func (o *TradingPlaceMlegOrderRequest) GetOrderType() MlegOrderTypeStrict {
 	if o == nil {
 		var ret MlegOrderTypeStrict
 		return ret
 	}
 
-	return o.Type
+	return o.OrderType
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetOrderTypeOk returns a tuple with the OrderType field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*MlegOrderTypeStrict, bool) {
+func (o *TradingPlaceMlegOrderRequest) GetOrderTypeOk() (*MlegOrderTypeStrict, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.Type, true
+	return &o.OrderType, true
 }
 
-// SetType sets field value
-func (o *TradingPlaceMlegOrderRequest) SetType(v MlegOrderTypeStrict) {
-	o.Type = v
+// SetOrderType sets field value
+func (o *TradingPlaceMlegOrderRequest) SetOrderType(v MlegOrderTypeStrict) {
+	o.OrderType = v
 }
 
 // GetTimeInForce returns the TimeInForce field value
@@ -205,7 +205,7 @@ func (o *TradingPlaceMlegOrderRequest) SetLegs(v []MlegLeg) {
 func (o TradingPlaceMlegOrderRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["type"] = o.Type
+		toSerialize["order_type"] = o.OrderType
 	}
 	if true {
 		toSerialize["time_in_force"] = o.TimeInForce

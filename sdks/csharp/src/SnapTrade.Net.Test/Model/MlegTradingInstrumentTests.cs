@@ -66,12 +66,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'Symbol'
         }
         /// <summary>
-        /// Test the property 'Type'
+        /// Test the property 'InstrumentType'
         /// </summary>
         [Fact]
-        public void TypeTest()
+        public void InstrumentTypeTest()
         {
-            // TODO unit test for the property 'Type'
+            // TODO unit test for the property 'InstrumentType'
         }
 
     }

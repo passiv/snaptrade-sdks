@@ -2004,13 +2004,13 @@ Places a multi-leg option order. Only supported on certain option trading broker
 
 ```ruby
 result = snaptrade.trading.place_mleg_order(
-  type: "MARKET",
+  order_type: "MARKET",
   time_in_force: "Day",
   legs: [
         {
             "instrument" => {
                 "symbol" => "PBI   250718C00006000",
-                "type" => "OPTION",
+                "instrument_type" => "OPTION",
             },
             "action" => "BUY_TO_OPEN",
             "units" => 1,
@@ -2027,7 +2027,7 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: [`MlegOrderTypeStrict`](./lib/snaptrade/models/mleg_order_type_strict.rb)<a id="type-mlegordertypestrictlibsnaptrademodelsmleg_order_type_strictrb"></a>
+##### order_type: [`MlegOrderTypeStrict`](./lib/snaptrade/models/mleg_order_type_strict.rb)<a id="order_type-mlegordertypestrictlibsnaptrademodelsmleg_order_type_strictrb"></a>
 The type of order to place.
 
 ##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>

@@ -34,10 +34,10 @@ namespace SnapTrade.Net.Model
     {
 
         /// <summary>
-        /// Gets or Sets Type
+        /// Gets or Sets OrderType
         /// </summary>
-        [DataMember(Name = "type", IsRequired = true, EmitDefaultValue = true)]
-        public MlegOrderTypeStrict Type { get; set; }
+        [DataMember(Name = "order_type", IsRequired = true, EmitDefaultValue = true)]
+        public MlegOrderTypeStrict OrderType { get; set; }
 
         /// <summary>
         /// Gets or Sets TimeInForce
@@ -52,14 +52,14 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingPlaceMlegOrderRequest" /> class.
         /// </summary>
-        /// <param name="type">type (required).</param>
+        /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT..</param>
         /// <param name="legs">legs (required).</param>
-        public TradingPlaceMlegOrderRequest(MlegOrderTypeStrict type = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
+        public TradingPlaceMlegOrderRequest(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
         {
-            this.Type = type;
+            this.OrderType = orderType;
             this.TimeInForce = timeInForce;
             // to ensure "legs" is required (not null)
             if (legs == null)
@@ -99,7 +99,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class TradingPlaceMlegOrderRequest {\n");
-            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
@@ -140,8 +140,8 @@ namespace SnapTrade.Net.Model
             }
             return 
                 (
-                    this.Type == input.Type ||
-                    this.Type.Equals(input.Type)
+                    this.OrderType == input.OrderType ||
+                    this.OrderType.Equals(input.OrderType)
                 ) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
@@ -174,7 +174,7 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                hashCode = (hashCode * 59) + this.Type.GetHashCode();
+                hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
                 if (this.LimitPrice != null)
                 {

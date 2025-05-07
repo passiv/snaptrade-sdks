@@ -13,7 +13,7 @@ require 'time'
 module SnapTrade
   class TradingPlaceMlegOrderRequest
     # The type of order to place.
-    attr_accessor :type
+    attr_accessor :order_type
 
     # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     attr_accessor :time_in_force
@@ -29,7 +29,7 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
+        :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
@@ -45,7 +45,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'MlegOrderTypeStrict',
+        :'order_type' => :'MlegOrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
@@ -76,8 +76,8 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'order_type')
+        self.order_type = attributes[:'order_type']
       end
 
       if attributes.key?(:'time_in_force')
@@ -103,8 +103,8 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @type.nil?
-        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      if @order_type.nil?
+        invalid_properties.push('invalid value for "order_type", order_type cannot be nil.')
       end
 
       if @time_in_force.nil?
@@ -121,7 +121,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @type.nil?
+      return false if @order_type.nil?
       return false if @time_in_force.nil?
       return false if @legs.nil?
       true
@@ -132,7 +132,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
+          order_type == o.order_type &&
           time_in_force == o.time_in_force &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
@@ -148,7 +148,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, time_in_force, limit_price, stop_price, legs].hash
+      [order_type, time_in_force, limit_price, stop_price, legs].hash
     end
 
     # Builds the object from hash

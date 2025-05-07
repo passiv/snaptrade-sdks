@@ -2639,11 +2639,11 @@ components:
           schema:
             type: object
             required:
-              - "type"
+              - "order_type"
               - "time_in_force"
               - "legs"
             properties:
-              type:
+              order_type:
                 $ref: "#/components/schemas/MlegOrderTypeStrict"
               time_in_force:
                 $ref: "#/components/schemas/TimeInForceStrict"
@@ -4532,18 +4532,14 @@ components:
       type: object
       required:
         - symbol
-        - type
+        - instrument_type
       properties:
         symbol:
           description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example "AAPL  131124C00240000" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
           type: string
           example: PBI   250718C00006000
-        type:
-          description: The instrument's type
-          type: string
-          enum:
-            - OPTION
-            - EQUITY
+        instrument_type:
+          $ref: "#/components/schemas/MlegInstrumentType"
     OrderTypeStrict:
       description: |
         The type of order to place.
@@ -4587,6 +4583,12 @@ components:
         - STOP_LOSS_MARKET
         - STOP_LOSS_LIMIT
       description: The type of order to place.
+    MlegInstrumentType:
+      description: The instrument's type
+      type: string
+      enum:
+        - OPTION
+        - EQUITY
     TimeInForce:
       description: |
         Trade time in force examples:

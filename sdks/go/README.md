@@ -180,6 +180,7 @@ Class | Method | HTTP request | Description
  - [ManualTradeReplaceForm](docs/ManualTradeReplaceForm.md)
  - [ManualTradeSymbol](docs/ManualTradeSymbol.md)
  - [MlegActionStrict](docs/MlegActionStrict.md)
+ - [MlegInstrumentType](docs/MlegInstrumentType.md)
  - [MlegLeg](docs/MlegLeg.md)
  - [MlegOrderResponse](docs/MlegOrderResponse.md)
  - [MlegOrderTypeStrict](docs/MlegOrderTypeStrict.md)
