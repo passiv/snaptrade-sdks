@@ -36,9 +36,11 @@ from snaptrade_client.model.model400_failed_request_response import Model400Fail
 from snaptrade_client.model.mleg_leg import MlegLeg as MlegLegSchema
 from snaptrade_client.model.mleg_order_type_strict import MlegOrderTypeStrict as MlegOrderTypeStrictSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
+from snaptrade_client.model.mleg_trade_form import MlegTradeForm as MlegTradeFormSchema
 from snaptrade_client.model.mleg_order_response import MlegOrderResponse as MlegOrderResponseSchema
 
 from snaptrade_client.type.mleg_leg import MlegLeg
+from snaptrade_client.type.mleg_trade_form import MlegTradeForm
 from snaptrade_client.type.mleg_order_type_strict import MlegOrderTypeStrict
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
@@ -107,185 +109,10 @@ request_path_account_id = api_client.PathParameter(
     required=True,
 )
 # body param
+SchemaForRequestBodyApplicationJson = MlegTradeFormSchema
 
 
-class SchemaForRequestBodyApplicationJson(
-    schemas.DictSchema
-):
-
-
-    class MetaOapg:
-        required = {
-            "time_in_force",
-            "legs",
-            "order_type",
-        }
-        
-        class properties:
-        
-            @staticmethod
-            def order_type() -> typing.Type['MlegOrderTypeStrict']:
-                return MlegOrderTypeStrict
-        
-            @staticmethod
-            def time_in_force() -> typing.Type['TimeInForceStrict']:
-                return TimeInForceStrict
-            
-            
-            class limit_price(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                class MetaOapg:
-                    format = 'decimal'
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'limit_price':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
-            
-            
-            class stop_price(
-                schemas.StrBase,
-                schemas.NoneBase,
-                schemas.Schema,
-                schemas.NoneStrMixin
-            ):
-            
-            
-                class MetaOapg:
-                    format = 'decimal'
-            
-            
-                def __new__(
-                    cls,
-                    *args: typing.Union[None, str, ],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'stop_price':
-                    return super().__new__(
-                        cls,
-                        *args,
-                        _configuration=_configuration,
-                    )
-            
-            
-            class legs(
-                schemas.ListSchema
-            ):
-            
-            
-                class MetaOapg:
-                    
-                    @staticmethod
-                    def items() -> typing.Type['MlegLegSchema']:
-                        return MlegLegSchema
-            
-                def __new__(
-                    cls,
-                    arg: typing.Union[typing.Tuple['MlegLeg'], typing.List['MlegLeg']],
-                    _configuration: typing.Optional[schemas.Configuration] = None,
-                ) -> 'legs':
-                    return super().__new__(
-                        cls,
-                        arg,
-                        _configuration=_configuration,
-                    )
-            
-                def __getitem__(self, i: int) -> 'MlegLeg':
-                    return super().__getitem__(i)
-            __annotations__ = {
-                "order_type": order_type,
-                "time_in_force": time_in_force,
-                "limit_price": limit_price,
-                "stop_price": stop_price,
-                "legs": legs,
-            }
-    
-    time_in_force: 'TimeInForceStrict'
-    legs: MetaOapg.properties.legs
-    order_type: 'MlegOrderTypeStrict'
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["order_type"]) -> 'MlegOrderTypeStrict': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["limit_price"]) -> MetaOapg.properties.limit_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> MetaOapg.properties.stop_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
-    
-    @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-    
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "limit_price", "stop_price", "legs", ], str]):
-        # dict_instance[name] accessor
-        return super().__getitem__(name)
-    
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["order_type"]) -> 'MlegOrderTypeStrict': ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> 'TimeInForceStrict': ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["limit_price"]) -> typing.Union[MetaOapg.properties.limit_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union[MetaOapg.properties.stop_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["legs"]) -> MetaOapg.properties.legs: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-    
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["order_type", "time_in_force", "limit_price", "stop_price", "legs", ], str]):
-        return super().get_item_oapg(name)
-    
-
-    def __new__(
-        cls,
-        *args: typing.Union[dict, frozendict.frozendict, ],
-        time_in_force: 'TimeInForceStrict',
-        legs: typing.Union[MetaOapg.properties.legs, list, tuple, ],
-        order_type: 'MlegOrderTypeStrict',
-        limit_price: typing.Union[MetaOapg.properties.limit_price, None, str, schemas.Unset] = schemas.unset,
-        stop_price: typing.Union[MetaOapg.properties.stop_price, None, str, schemas.Unset] = schemas.unset,
-        _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'SchemaForRequestBodyApplicationJson':
-        return super().__new__(
-            cls,
-            *args,
-            time_in_force=time_in_force,
-            legs=legs,
-            order_type=order_type,
-            limit_price=limit_price,
-            stop_price=stop_price,
-            _configuration=_configuration,
-            **kwargs,
-        )
-
-
-request_body_typing_any = api_client.RequestBody(
+request_body_mleg_trade_form = api_client.RequestBody(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaForRequestBodyApplicationJson),
@@ -359,7 +186,7 @@ class BaseApi(api_client.Api):
 
     def _place_mleg_order_mapped_args(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[MlegTradeForm] = None,
         order_type: typing.Optional[MlegOrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
@@ -471,7 +298,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
+        serialized_data = request_body_mleg_trade_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -617,7 +444,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
+        serialized_data = request_body_mleg_trade_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -664,7 +491,7 @@ class PlaceMlegOrder(BaseApi):
 
     async def aplace_mleg_order(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[MlegTradeForm] = None,
         order_type: typing.Optional[MlegOrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
@@ -703,7 +530,7 @@ class PlaceMlegOrder(BaseApi):
     
     def place_mleg_order(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[MlegTradeForm] = None,
         order_type: typing.Optional[MlegOrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
@@ -743,7 +570,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[MlegTradeForm] = None,
         order_type: typing.Optional[MlegOrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,
@@ -782,7 +609,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[MlegTradeForm] = None,
         order_type: typing.Optional[MlegOrderTypeStrict] = None,
         time_in_force: typing.Optional[TimeInForceStrict] = None,
         legs: typing.Optional[typing.List[MlegLeg]] = None,

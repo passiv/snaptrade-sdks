@@ -39,6 +39,7 @@ import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
 import com.konfigthis.client.model.MlegOrderTypeStrict;
+import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -49,7 +50,6 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
-import com.konfigthis.client.model.TradingPlaceMlegOrderRequest;
 import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -1839,7 +1839,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, orderType, timeInForce, userId, userSecret);
     }
-    private okhttp3.Call placeMlegOrderCall(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeMlegOrderCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1853,7 +1853,7 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingPlaceMlegOrderRequest;
+        Object localVarPostBody = mlegTradeForm;
 
         // create path and map variables
         String localVarPath = "/accounts/{accountId}/trading/options"
@@ -1894,7 +1894,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeMlegOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeMlegOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling placeMlegOrder(Async)");
@@ -1910,25 +1910,25 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling placeMlegOrder(Async)");
         }
 
-        // verify the required parameter 'tradingPlaceMlegOrderRequest' is set
-        if (tradingPlaceMlegOrderRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingPlaceMlegOrderRequest' when calling placeMlegOrder(Async)");
+        // verify the required parameter 'mlegTradeForm' is set
+        if (mlegTradeForm == null) {
+            throw new ApiException("Missing the required parameter 'mlegTradeForm' when calling placeMlegOrder(Async)");
         }
 
-        return placeMlegOrderCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+        return placeMlegOrderCall(userId, userSecret, accountId, mlegTradeForm, _callback);
 
     }
 
 
-    private ApiResponse<MlegOrderResponse> placeMlegOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, null);
+    private ApiResponse<MlegOrderResponse> placeMlegOrderWithHttpInfo(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, null);
         Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeMlegOrderAsync(String userId, String userSecret, UUID accountId, TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest, final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
+    private okhttp3.Call placeMlegOrderAsync(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, _callback);
         Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1986,18 +1986,18 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
-            return placeMlegOrderCall(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderCall(userId, userSecret, accountId, mlegTradeForm, _callback);
         }
 
-        private TradingPlaceMlegOrderRequest buildBodyParams() {
-            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest();
-            tradingPlaceMlegOrderRequest.orderType(this.orderType);
-            tradingPlaceMlegOrderRequest.timeInForce(this.timeInForce);
-            tradingPlaceMlegOrderRequest.limitPrice(this.limitPrice);
-            tradingPlaceMlegOrderRequest.stopPrice(this.stopPrice);
-            tradingPlaceMlegOrderRequest.legs(this.legs);
-            return tradingPlaceMlegOrderRequest;
+        private MlegTradeForm buildBodyParams() {
+            MlegTradeForm mlegTradeForm = new MlegTradeForm();
+            mlegTradeForm.orderType(this.orderType);
+            mlegTradeForm.timeInForce(this.timeInForce);
+            mlegTradeForm.limitPrice(this.limitPrice);
+            mlegTradeForm.stopPrice(this.stopPrice);
+            mlegTradeForm.legs(this.legs);
+            return mlegTradeForm;
         }
 
         /**
@@ -2012,8 +2012,8 @@ public class TradingApiGenerated {
          </table>
          */
         public MlegOrderResponse execute() throws ApiException {
-            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
-            ApiResponse<MlegOrderResponse> localVarResp = placeMlegOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            ApiResponse<MlegOrderResponse> localVarResp = placeMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
             return localVarResp.getResponseBody();
         }
 
@@ -2029,8 +2029,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<MlegOrderResponse> executeWithHttpInfo() throws ApiException {
-            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
-            return placeMlegOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
         }
 
         /**
@@ -2046,8 +2046,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
-            TradingPlaceMlegOrderRequest tradingPlaceMlegOrderRequest = buildBodyParams();
-            return placeMlegOrderAsync(userId, userSecret, accountId, tradingPlaceMlegOrderRequest, _callback);
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderAsync(userId, userSecret, accountId, mlegTradeForm, _callback);
         }
     }
 
@@ -2057,7 +2057,7 @@ public class TradingApiGenerated {
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
-     * @param tradingPlaceMlegOrderRequest  (required)
+     * @param mlegTradeForm  (required)
      * @return PlaceMlegOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

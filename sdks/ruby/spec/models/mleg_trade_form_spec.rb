@@ -11,13 +11,13 @@ require 'spec_helper'
 require 'json'
 require 'date'
 
-# Unit tests for SnapTrade::TradingPlaceMlegOrderRequest
-describe SnapTrade::TradingPlaceMlegOrderRequest do
-  let(:instance) { SnapTrade::TradingPlaceMlegOrderRequest.new }
+# Unit tests for SnapTrade::MlegTradeForm
+describe SnapTrade::MlegTradeForm do
+  let(:instance) { SnapTrade::MlegTradeForm.new }
 
-  describe 'test an instance of TradingPlaceMlegOrderRequest' do
-    it 'should create an instance of TradingPlaceMlegOrderRequest' do
-      expect(instance).to be_instance_of(SnapTrade::TradingPlaceMlegOrderRequest)
+  describe 'test an instance of MlegTradeForm' do
+    it 'should create an instance of MlegTradeForm' do
+      expect(instance).to be_instance_of(SnapTrade::MlegTradeForm)
     end
   end
   describe 'test attribute "order_type"' do

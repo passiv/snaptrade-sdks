@@ -27,10 +27,10 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// TradingPlaceMlegOrderRequest
+    /// Inputs for placing a multi-leg order with the brokerage.
     /// </summary>
-    [DataContract(Name = "Trading_placeMlegOrder_request")]
-    public partial class TradingPlaceMlegOrderRequest : IEquatable<TradingPlaceMlegOrderRequest>, IValidatableObject
+    [DataContract(Name = "MlegTradeForm")]
+    public partial class MlegTradeForm : IEquatable<MlegTradeForm>, IValidatableObject
     {
 
         /// <summary>
@@ -45,26 +45,26 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceStrict TimeInForce { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingPlaceMlegOrderRequest" /> class.
+        /// Initializes a new instance of the <see cref="MlegTradeForm" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TradingPlaceMlegOrderRequest() { }
+        protected MlegTradeForm() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingPlaceMlegOrderRequest" /> class.
+        /// Initializes a new instance of the <see cref="MlegTradeForm" /> class.
         /// </summary>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT..</param>
         /// <param name="legs">legs (required).</param>
-        public TradingPlaceMlegOrderRequest(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
+        public MlegTradeForm(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
             // to ensure "legs" is required (not null)
             if (legs == null)
             {
-                throw new ArgumentNullException("legs is a required property for TradingPlaceMlegOrderRequest and cannot be null");
+                throw new ArgumentNullException("legs is a required property for MlegTradeForm and cannot be null");
             }
             this.Legs = legs;
             this.LimitPrice = limitPrice;
@@ -98,7 +98,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class TradingPlaceMlegOrderRequest {\n");
+            sb.Append("class MlegTradeForm {\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
@@ -124,15 +124,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TradingPlaceMlegOrderRequest);
+            return this.Equals(input as MlegTradeForm);
         }
 
         /// <summary>
-        /// Returns true if TradingPlaceMlegOrderRequest instances are equal
+        /// Returns true if MlegTradeForm instances are equal
         /// </summary>
-        /// <param name="input">Instance of TradingPlaceMlegOrderRequest to be compared</param>
+        /// <param name="input">Instance of MlegTradeForm to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TradingPlaceMlegOrderRequest input)
+        public bool Equals(MlegTradeForm input)
         {
             if (input == null)
             {

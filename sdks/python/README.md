@@ -2115,7 +2115,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`Any`](./snaptrade_client/type/typing_any.py)
+[`MlegTradeForm`](./snaptrade_client/type/mleg_trade_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`MlegOrderResponse`](./snaptrade_client/type/mleg_order_response.py)

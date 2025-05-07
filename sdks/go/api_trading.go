@@ -1314,7 +1314,7 @@ type TradingApiPlaceMlegOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingPlaceMlegOrderRequest TradingPlaceMlegOrderRequest
+	mlegTradeForm MlegTradeForm
 }
 
 func (r TradingApiPlaceMlegOrderRequest) Execute() (*MlegOrderResponse, *http.Response, error) {
@@ -1331,17 +1331,17 @@ Places a multi-leg option order. Only supported on certain option trading broker
  @param userId
  @param userSecret
  @param accountId
- @param tradingPlaceMlegOrderRequest
+ @param mlegTradeForm
  @return TradingApiPlaceMlegOrderRequest
 */
-func (a *TradingApiService) PlaceMlegOrder(userId string, userSecret string, accountId string, tradingPlaceMlegOrderRequest TradingPlaceMlegOrderRequest) TradingApiPlaceMlegOrderRequest {
+func (a *TradingApiService) PlaceMlegOrder(userId string, userSecret string, accountId string, mlegTradeForm MlegTradeForm) TradingApiPlaceMlegOrderRequest {
 	return TradingApiPlaceMlegOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingPlaceMlegOrderRequest: tradingPlaceMlegOrderRequest,
+		mlegTradeForm: mlegTradeForm,
 	}
 }
 
@@ -1391,8 +1391,8 @@ func (a *TradingApiService) PlaceMlegOrderExecute(r TradingApiPlaceMlegOrderRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingPlaceMlegOrderRequest) {
-        localVarPostBody = r.tradingPlaceMlegOrderRequest
+    if !checkNilInterface(r.mlegTradeForm) {
+        localVarPostBody = r.mlegTradeForm
     }
 	if r.ctx != nil {
 		// API Key Authentication

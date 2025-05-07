@@ -32,17 +32,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for TradingPlaceMlegOrderRequest
+ * Model tests for MlegTradeForm
  */
-public class TradingPlaceMlegOrderRequestTest {
-    private final TradingPlaceMlegOrderRequest model = new TradingPlaceMlegOrderRequest();
+public class MlegTradeFormTest {
+    private final MlegTradeForm model = new MlegTradeForm();
 
     /**
-     * Model tests for TradingPlaceMlegOrderRequest
+     * Model tests for MlegTradeForm
      */
     @Test
-    public void testTradingPlaceMlegOrderRequest() {
-        // TODO: test TradingPlaceMlegOrderRequest
+    public void testMlegTradeForm() {
+        // TODO: test MlegTradeForm
     }
 
     /**

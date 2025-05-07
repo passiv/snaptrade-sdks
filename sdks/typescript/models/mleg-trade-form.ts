@@ -15,39 +15,39 @@ import { MlegOrderTypeStrict } from './mleg-order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
 
 /**
- * 
+ * Inputs for placing a multi-leg order with the brokerage.
  * @export
- * @interface TradingPlaceMlegOrderRequest
+ * @interface MlegTradeForm
  */
-export interface TradingPlaceMlegOrderRequest {
+export interface MlegTradeForm {
     /**
      * The type of order to place.
      * @type {MlegOrderTypeStrict}
-     * @memberof TradingPlaceMlegOrderRequest
+     * @memberof MlegTradeForm
      */
     'order_type': MlegOrderTypeStrict;
     /**
      * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
      * @type {TimeInForceStrict}
-     * @memberof TradingPlaceMlegOrderRequest
+     * @memberof MlegTradeForm
      */
     'time_in_force': TimeInForceStrict;
     /**
      * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
      * @type {string}
-     * @memberof TradingPlaceMlegOrderRequest
+     * @memberof MlegTradeForm
      */
     'limit_price'?: string | null;
     /**
      * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
      * @type {string}
-     * @memberof TradingPlaceMlegOrderRequest
+     * @memberof MlegTradeForm
      */
     'stop_price'?: string | null;
     /**
      * 
      * @type {Array<MlegLeg>}
-     * @memberof TradingPlaceMlegOrderRequest
+     * @memberof MlegTradeForm
      */
     'legs': Array<MlegLeg>;
 }

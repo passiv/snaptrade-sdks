@@ -808,7 +808,7 @@ namespace Example
             var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
             var legs = new List<MlegLeg>();
             
-            var tradingPlaceMlegOrderRequest = new TradingPlaceMlegOrderRequest(
+            var mlegTradeForm = new MlegTradeForm(
                 orderType,
                 timeInForce,
                 limitPrice,
@@ -819,7 +819,7 @@ namespace Example
             try
             {
                 // Place multi-leg option order
-                MlegOrderResponse result = client.Trading.PlaceMlegOrder(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+                MlegOrderResponse result = client.Trading.PlaceMlegOrder(userId, userSecret, accountId, mlegTradeForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -846,7 +846,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place multi-leg option order
-    ApiResponse<MlegOrderResponse> response = apiInstance.PlaceMlegOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceMlegOrderRequest);
+    ApiResponse<MlegOrderResponse> response = apiInstance.PlaceMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -866,7 +866,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingPlaceMlegOrderRequest** | [**TradingPlaceMlegOrderRequest**](TradingPlaceMlegOrderRequest.md) |  |  |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md) |  |  |
 
 ### Return type
 

@@ -964,7 +964,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-    # @param body [TradingPlaceMlegOrderRequest] 
+    # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
       _body = {}
@@ -973,8 +973,8 @@ module SnapTrade
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
-      trading_place_mleg_order_request = _body
-      data, _status_code, _headers = place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_mleg_order_request, extra)
+      mleg_trade_form = _body
+      data, _status_code, _headers = place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
       data
     end
 
@@ -990,7 +990,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-    # @param body [TradingPlaceMlegOrderRequest] 
+    # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
       _body = {}
@@ -999,8 +999,8 @@ module SnapTrade
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
-      trading_place_mleg_order_request = _body
-      place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_mleg_order_request, extra)
+      mleg_trade_form = _body
+      place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
     end
 
     # Place multi-leg option order
@@ -1008,11 +1008,11 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_mleg_order_request [TradingPlaceMlegOrderRequest] 
+    # @param mleg_trade_form [MlegTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [MlegOrderResponse]
-    private def place_mleg_order_impl(user_id, user_secret, account_id, trading_place_mleg_order_request, opts = {})
-      data, _status_code, _headers = place_mleg_order_with_http_info(user_id, user_secret, account_id, trading_place_mleg_order_request, opts)
+    private def place_mleg_order_impl(user_id, user_secret, account_id, mleg_trade_form, opts = {})
+      data, _status_code, _headers = place_mleg_order_with_http_info(user_id, user_secret, account_id, mleg_trade_form, opts)
       data
     end
 
@@ -1021,10 +1021,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_mleg_order_request [TradingPlaceMlegOrderRequest] 
+    # @param mleg_trade_form [MlegTradeForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(MlegOrderResponse, Integer, Hash)>] MlegOrderResponse data, response status code and response headers
-    private def place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_mleg_order_request, opts = {})
+    private def place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_mleg_order ...'
       end
@@ -1040,9 +1040,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_mleg_order"
       end
-      # verify the required parameter 'trading_place_mleg_order_request' is set
-      if @api_client.config.client_side_validation && trading_place_mleg_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_place_mleg_order_request' when calling TradingApi.place_mleg_order"
+      # verify the required parameter 'mleg_trade_form' is set
+      if @api_client.config.client_side_validation && mleg_trade_form.nil?
+        fail ArgumentError, "Missing the required parameter 'mleg_trade_form' when calling TradingApi.place_mleg_order"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/trading/options'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -1066,7 +1066,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_mleg_order_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(mleg_trade_form)
 
       # return_type
       return_type = opts[:debug_return_type] || 'MlegOrderResponse'

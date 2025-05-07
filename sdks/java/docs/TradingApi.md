@@ -843,7 +843,7 @@ public class Example {
 
 <a name="placeMlegOrder"></a>
 # **placeMlegOrder**
-> MlegOrderResponse placeMlegOrder(userId, userSecret, accountId, tradingPlaceMlegOrderRequest).execute();
+> MlegOrderResponse placeMlegOrder(userId, userSecret, accountId, mlegTradeForm).execute();
 
 Place multi-leg option order
 
@@ -929,7 +929,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingPlaceMlegOrderRequest** | [**TradingPlaceMlegOrderRequest**](TradingPlaceMlegOrderRequest.md)|  | |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md)|  | |
 
 ### Return type
 

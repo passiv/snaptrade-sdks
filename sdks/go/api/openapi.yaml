@@ -2842,7 +2842,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Trading_placeMlegOrder_request'
+            $ref: '#/components/schemas/MlegTradeForm'
       required: true
   schemas:
     "400FailedRequestResponse":
@@ -6538,6 +6538,55 @@ components:
       - time_in_force
       - universal_symbol_id
       type: object
+    MlegTradeForm:
+      description: Inputs for placing a multi-leg order with the brokerage.
+      example:
+        time_in_force: Day
+        stop_price: ""
+        legs:
+        - action: BUY_TO_OPEN
+          instrument:
+            symbol: PBI   250718C00006000
+            instrument_type: null
+          units: 1
+        - action: BUY_TO_OPEN
+          instrument:
+            symbol: PBI   250718C00006000
+            instrument_type: null
+          units: 1
+        order_type: MARKET
+        limit_price: ""
+      properties:
+        order_type:
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - legs
+      - order_type
+      - time_in_force
+      type: object
     ManualTradeReplaceForm:
       description: Inputs for placing an order with the brokerage.
       example:
@@ -6770,6 +6819,9 @@ components:
       type: object
     MlegTradingInstrument:
       additionalProperties: true
+      example:
+        symbol: PBI   250718C00006000
+        instrument_type: null
       properties:
         symbol:
           description: "The security's trading ticker symbol. This currently supports\
@@ -6830,7 +6882,10 @@ components:
       - LIMIT
       - STOP_LOSS_MARKET
       - STOP_LOSS_LIMIT
+      example: MARKET
       type: string
+      x-konfig-original-example: MARKET
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegOrderTypeStrict
     MlegInstrumentType:
       description: The instrument's type
       enum:
@@ -8012,6 +8067,12 @@ components:
       type: object
     MlegLeg:
       additionalProperties: true
+      example:
+        action: BUY_TO_OPEN
+        instrument:
+          symbol: PBI   250718C00006000
+          instrument_type: null
+        units: 1
       properties:
         instrument:
           $ref: '#/components/schemas/MlegTradingInstrument'
@@ -8071,14 +8132,6 @@ components:
       x-do-not-generate: true
     ? konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
     : example: 2024-01-01T00:00:00Z
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price:
-      example: ""
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price:
-      example: ""
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
@@ -8948,6 +9001,14 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price:
+      example: ""
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price:
+      example: ""
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price:
       example: 31.33
       type: number
@@ -9002,6 +9063,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TimeInForceStrict:
       example: Day
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegOrderTypeStrict:
+      example: MARKET
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegActionStrict:
@@ -10586,7 +10651,7 @@ components:
           nullable: true
           type: string
           x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
         stop_price:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT."
@@ -10595,7 +10660,7 @@ components:
           nullable: true
           type: string
           x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'
@@ -11046,38 +11111,6 @@ components:
           type: array
       required:
       - items
-      type: object
-    Trading_placeMlegOrder_request:
-      properties:
-        order_type:
-          $ref: '#/components/schemas/MlegOrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-MlegOrderRequestBody-content-application-json-schema-properties-stop_price
-        legs:
-          items:
-            $ref: '#/components/schemas/MlegLeg'
-          type: array
-      required:
-      - legs
-      - order_type
-      - time_in_force
       type: object
     AccountBalance_total:
       description: "Total market value of this account (includes cash, equity, fixed\
