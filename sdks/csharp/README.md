@@ -213,6 +213,7 @@ Class | Method | HTTP request | Description
  - [MlegActionStrict](docs/MlegActionStrict.md)
  - [MlegLeg](docs/MlegLeg.md)
  - [MlegOrderResponse](docs/MlegOrderResponse.md)
+ - [MlegOrderTypeStrict](docs/MlegOrderTypeStrict.md)
  - [MlegTradingInstrument](docs/MlegTradingInstrument.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)
  - [Model401FailedRequestResponse](docs/Model401FailedRequestResponse.md)

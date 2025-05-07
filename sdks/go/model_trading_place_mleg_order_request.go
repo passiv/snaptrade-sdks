@@ -17,8 +17,7 @@ import (
 
 // TradingPlaceMlegOrderRequest struct for TradingPlaceMlegOrderRequest
 type TradingPlaceMlegOrderRequest struct {
-	// The type of order to place.
-	Type string `json:"type"`
+	Type MlegOrderTypeStrict `json:"type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
 	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
@@ -31,7 +30,7 @@ type TradingPlaceMlegOrderRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingPlaceMlegOrderRequest(type_ string, timeInForce TimeInForceStrict, legs []MlegLeg) *TradingPlaceMlegOrderRequest {
+func NewTradingPlaceMlegOrderRequest(type_ MlegOrderTypeStrict, timeInForce TimeInForceStrict, legs []MlegLeg) *TradingPlaceMlegOrderRequest {
 	this := TradingPlaceMlegOrderRequest{}
 	this.Type = type_
 	this.TimeInForce = timeInForce
@@ -48,9 +47,9 @@ func NewTradingPlaceMlegOrderRequestWithDefaults() *TradingPlaceMlegOrderRequest
 }
 
 // GetType returns the Type field value
-func (o *TradingPlaceMlegOrderRequest) GetType() string {
+func (o *TradingPlaceMlegOrderRequest) GetType() MlegOrderTypeStrict {
 	if o == nil {
-		var ret string
+		var ret MlegOrderTypeStrict
 		return ret
 	}
 
@@ -59,7 +58,7 @@ func (o *TradingPlaceMlegOrderRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*string, bool) {
+func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*MlegOrderTypeStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -67,7 +66,7 @@ func (o *TradingPlaceMlegOrderRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *TradingPlaceMlegOrderRequest) SetType(v string) {
+func (o *TradingPlaceMlegOrderRequest) SetType(v MlegOrderTypeStrict) {
 	o.Type = v
 }
 

@@ -43,6 +43,8 @@ import { MlegLeg } from '../models';
 // @ts-ignore
 import { MlegOrderResponse } from '../models';
 // @ts-ignore
+import { MlegOrderTypeStrict } from '../models';
+// @ts-ignore
 import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FailedRequestResponse } from '../models';

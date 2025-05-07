@@ -2092,9 +2092,7 @@ MlegOrderResponse result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: `String`<a id="type-string"></a>
-
-The type of order to place.
+##### type:<a id="type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
 

@@ -871,7 +871,7 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String type = "MARKET"; // The type of order to place.
+    MlegOrderTypeStrict type = MlegOrderTypeStrict.fromValue("MARKET");
     TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
     List<MlegLeg> legs = Arrays.asList();
     String userId = "userId_example";

@@ -79,6 +79,7 @@ from snaptrade_client.model.manual_trade_symbol import ManualTradeSymbol
 from snaptrade_client.model.mleg_action_strict import MlegActionStrict
 from snaptrade_client.model.mleg_leg import MlegLeg
 from snaptrade_client.model.mleg_order_response import MlegOrderResponse
+from snaptrade_client.model.mleg_order_type_strict import MlegOrderTypeStrict
 from snaptrade_client.model.mleg_trading_instrument import MlegTradingInstrument
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.model.model401_failed_request_response import Model401FailedRequestResponse

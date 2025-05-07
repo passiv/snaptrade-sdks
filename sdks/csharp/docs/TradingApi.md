@@ -802,7 +802,7 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var type = TradingPlaceMlegOrderRequest.TypeEnum.MARKET; // The type of order to place.
+            var type = MlegOrderTypeStrict.MARKET;
             var timeInForce = TimeInForceStrict.FOK;
             var limitPrice = ""; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
             var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.

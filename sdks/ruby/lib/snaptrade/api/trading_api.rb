@@ -956,7 +956,7 @@ module SnapTrade
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
-    # @param type [MlegOrderRequestBodyType] The type of order to place.
+    # @param type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param legs [Array<MlegLeg>] 
     # @param user_id [String] 
@@ -982,7 +982,7 @@ module SnapTrade
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
-    # @param type [MlegOrderRequestBodyType] The type of order to place.
+    # @param type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param legs [Array<MlegLeg>] 
     # @param user_id [String] 

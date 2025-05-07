@@ -55,6 +55,7 @@ export * from './manual-trade-symbol';
 export * from './mleg-action-strict';
 export * from './mleg-leg';
 export * from './mleg-order-response';
+export * from './mleg-order-type-strict';
 export * from './mleg-trading-instrument';
 export * from './model400-failed-request-response';
 export * from './model401-failed-request-response';

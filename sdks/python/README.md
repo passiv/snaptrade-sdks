@@ -2093,9 +2093,7 @@ place_mleg_order_response = snaptrade.trading.place_mleg_order(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### type: `str`<a id="type-str"></a>
-
-The type of order to place.
+##### type: [`MlegOrderTypeStrict`](./snaptrade_client/type/mleg_order_type_strict.py)<a id="type-mlegordertypestrictsnaptrade_clienttypemleg_order_type_strictpy"></a>
 
 ##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
 
