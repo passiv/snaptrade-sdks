@@ -1675,7 +1675,7 @@ type TradingApiPlaceSimpleOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingPlaceSimpleOrderRequest TradingPlaceSimpleOrderRequest
+	simpleOrderForm SimpleOrderForm
 }
 
 func (r TradingApiPlaceSimpleOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
@@ -1693,17 +1693,17 @@ This endpoint does not compute the impact to the account balance from the order 
  @param userId
  @param userSecret
  @param accountId
- @param tradingPlaceSimpleOrderRequest
+ @param simpleOrderForm
  @return TradingApiPlaceSimpleOrderRequest
 */
-func (a *TradingApiService) PlaceSimpleOrder(userId string, userSecret string, accountId string, tradingPlaceSimpleOrderRequest TradingPlaceSimpleOrderRequest) TradingApiPlaceSimpleOrderRequest {
+func (a *TradingApiService) PlaceSimpleOrder(userId string, userSecret string, accountId string, simpleOrderForm SimpleOrderForm) TradingApiPlaceSimpleOrderRequest {
 	return TradingApiPlaceSimpleOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingPlaceSimpleOrderRequest: tradingPlaceSimpleOrderRequest,
+		simpleOrderForm: simpleOrderForm,
 	}
 }
 
@@ -1753,8 +1753,8 @@ func (a *TradingApiService) PlaceSimpleOrderExecute(r TradingApiPlaceSimpleOrder
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingPlaceSimpleOrderRequest) {
-        localVarPostBody = r.tradingPlaceSimpleOrderRequest
+    if !checkNilInterface(r.simpleOrderForm) {
+        localVarPostBody = r.simpleOrderForm
     }
 	if r.ctx != nil {
 		// API Key Authentication
@@ -1854,7 +1854,7 @@ type TradingApiPreviewSimpleOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingPlaceSimpleOrderRequest TradingPlaceSimpleOrderRequest
+	simpleOrderForm SimpleOrderForm
 }
 
 func (r TradingApiPreviewSimpleOrderRequest) Execute() (*SimpleOrderPreview, *http.Response, error) {
@@ -1871,17 +1871,17 @@ Previews an order using the specified account.
  @param userId
  @param userSecret
  @param accountId
- @param tradingPlaceSimpleOrderRequest
+ @param simpleOrderForm
  @return TradingApiPreviewSimpleOrderRequest
 */
-func (a *TradingApiService) PreviewSimpleOrder(userId string, userSecret string, accountId string, tradingPlaceSimpleOrderRequest TradingPlaceSimpleOrderRequest) TradingApiPreviewSimpleOrderRequest {
+func (a *TradingApiService) PreviewSimpleOrder(userId string, userSecret string, accountId string, simpleOrderForm SimpleOrderForm) TradingApiPreviewSimpleOrderRequest {
 	return TradingApiPreviewSimpleOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingPlaceSimpleOrderRequest: tradingPlaceSimpleOrderRequest,
+		simpleOrderForm: simpleOrderForm,
 	}
 }
 
@@ -1931,8 +1931,8 @@ func (a *TradingApiService) PreviewSimpleOrderExecute(r TradingApiPreviewSimpleO
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingPlaceSimpleOrderRequest) {
-        localVarPostBody = r.tradingPlaceSimpleOrderRequest
+    if !checkNilInterface(r.simpleOrderForm) {
+        localVarPostBody = r.simpleOrderForm
     }
 	if r.ctx != nil {
 		// API Key Authentication

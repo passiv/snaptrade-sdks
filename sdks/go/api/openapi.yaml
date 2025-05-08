@@ -2836,7 +2836,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Trading_placeSimpleOrder_request'
+            $ref: '#/components/schemas/SimpleOrderForm'
       required: true
     MlegOrderRequestBody:
       content:
@@ -6667,7 +6667,7 @@ components:
         symbol:
           description: "The security's trading ticker symbol. This currently supports\
             \ stock symbols and Options symbols in the 21 character OCC format. For\
-            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ example `AAPL  131124C00240000` represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -6826,7 +6826,7 @@ components:
         symbol:
           description: "The security's trading ticker symbol. This currently supports\
             \ stock symbols and Options symbols in the 21 character OCC format. For\
-            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ example `AAPL  131124C00240000` represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)"
           example: PBI   250718C00006000
@@ -8090,6 +8090,92 @@ components:
       - instrument
       - units
       type: object
+    SimpleOrderForm:
+      example:
+        side: null
+        time_in_force: GTC
+        amount: "123.45"
+        stop_price: "123.45"
+        instrument:
+          symbol: AAPL
+          type: EQUITY
+        post_only: false
+        type: MARKET
+        expiration_date: 2024-01-01T00:00:00Z
+        limit_price: "123.45"
+      properties:
+        instrument:
+          $ref: '#/components/schemas/TradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
+      required:
+      - amount
+      - instrument
+      - side
+      - time_in_force
+      - type
+      type: object
     konfig-generated-schema-paths--holdings-get-parameters-2-schema:
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631
       type: string
@@ -8112,26 +8198,6 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-amount:
-      example: "123.45"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-limit_price:
-      example: "123.45"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-stop_price:
-      example: "123.45"
-      type: string
-      x-do-not-generate: true
-    konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-post_only:
-      example: false
-      type: boolean
-      x-do-not-generate: true
-    ? konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
-    : example: 2024-01-01T00:00:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TransactionsStatus-properties-initial_sync_completed:
@@ -9369,6 +9435,26 @@ components:
       example: 1
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only:
+      example: false
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date:
+      example: 2024-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-single-parameter-schema-get--:
       additionalProperties: true
       properties: {}
@@ -10191,7 +10277,7 @@ components:
         symbol:
           description: "The security's trading ticker symbol. This currently supports\
             \ stock symbols and Options symbols in the 21 character OCC format. For\
-            \ example \"AAPL  131124C00240000\" represents a call option on AAPL expiring\
+            \ example `AAPL  131124C00240000` represents a call option on AAPL expiring\
             \ on 2024-11-13 with a strike price of $240. For more information on the\
             \ OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format).\
             \ If 'symbol' is provided, then 'universal_symbol_id' must be 'null'."
@@ -10424,7 +10510,7 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
         limit_price:
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
@@ -10432,7 +10518,7 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-limit_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
         stop_price:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
@@ -10440,14 +10526,14 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-stop_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
         post_only:
           description: |
             Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-post_only
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
             is GTD.
@@ -10455,7 +10541,7 @@ components:
           format: date-time
           type: string
           x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
       required:
       - accountId
       - amount
@@ -10536,7 +10622,7 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
         limit_price:
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
@@ -10544,7 +10630,7 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-limit_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
         stop_price:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
@@ -10552,14 +10638,14 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-stop_price
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
         post_only:
           description: |
             Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
           example: false
           type: boolean
           x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-post_only
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
         expiration_date:
           description: The expiration date of the order. Required if the time_in_force
             is GTD.
@@ -10567,7 +10653,7 @@ components:
           format: date-time
           type: string
           x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
       required:
       - accountId
       - amount
@@ -11018,80 +11104,6 @@ components:
           type: string
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
-      type: object
-    Trading_placeSimpleOrder_request:
-      properties:
-        instrument:
-          $ref: '#/components/schemas/TradingInstrument'
-        side:
-          $ref: '#/components/schemas/ActionStrict'
-        type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          - TAKE_PROFIT_MARKET
-          - TAKE_PROFIT_LIMIT
-          type: string
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
-        amount:
-          description: The amount of the base currency to buy or sell.
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-amount
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-stop_price
-        post_only:
-          description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-post_only
-        expiration_date:
-          description: The expiration date of the order. Required if the time_in_force
-            is GTD.
-          example: 2024-01-01T00:00:00Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-requestBodies-SimpleOrderRequestBody-content-application-json-schema-properties-expiration_date
-      required:
-      - amount
-      - instrument
-      - side
-      - time_in_force
-      - type
       type: object
     Trading_searchCryptocurrencyPairInstruments_200_response:
       additionalProperties: true

@@ -248,23 +248,23 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         instrument := *snaptrade.NewTradingInstrument()
         
-        tradingPlaceSimpleOrderRequest := *snaptrade.NewTradingPlaceSimpleOrderRequest(
+        simpleOrderForm := *snaptrade.NewSimpleOrderForm(
             instrument,
             null,
             "null",
             "null",
             "123.45",
         )
-        tradingPlaceSimpleOrderRequest.SetLimitPrice("123.45")
-        tradingPlaceSimpleOrderRequest.SetStopPrice("123.45")
-        tradingPlaceSimpleOrderRequest.SetPostOnly(false)
-        tradingPlaceSimpleOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
+        simpleOrderForm.SetLimitPrice("123.45")
+        simpleOrderForm.SetStopPrice("123.45")
+        simpleOrderForm.SetPostOnly(false)
+        simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
         
         request := client.TradingApi.PlaceSimpleOrder(
             "userId_example",
             "userSecret_example",
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            tradingPlaceSimpleOrderRequest,
+            simpleOrderForm,
         )
         
         resp, httpRes, err := request.Execute()
@@ -279,23 +279,23 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         instrument := *snaptrade.NewTradingInstrument()
         
-        tradingPlaceSimpleOrderRequest := *snaptrade.NewTradingPlaceSimpleOrderRequest(
+        simpleOrderForm := *snaptrade.NewSimpleOrderForm(
             instrument,
             null,
             "null",
             "null",
             "123.45",
         )
-        tradingPlaceSimpleOrderRequest.SetLimitPrice("123.45")
-        tradingPlaceSimpleOrderRequest.SetStopPrice("123.45")
-        tradingPlaceSimpleOrderRequest.SetPostOnly(false)
-        tradingPlaceSimpleOrderRequest.SetExpirationDate(2024-01-01T00:00Z)
+        simpleOrderForm.SetLimitPrice("123.45")
+        simpleOrderForm.SetStopPrice("123.45")
+        simpleOrderForm.SetPostOnly(false)
+        simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
         
         request := client.TradingApi.PreviewSimpleOrder(
             "userId_example",
             "userSecret_example",
             ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            tradingPlaceSimpleOrderRequest,
+            simpleOrderForm,
         )
         
         resp, httpRes, err := request.Execute()

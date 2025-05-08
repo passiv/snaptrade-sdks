@@ -132,6 +132,7 @@ from snaptrade_client.model.reporting_frequency import ReportingFrequency
 from snaptrade_client.model.security_type import SecurityType
 from snaptrade_client.model.security_type_id import SecurityTypeID
 from snaptrade_client.model.session_event import SessionEvent
+from snaptrade_client.model.simple_order_form import SimpleOrderForm
 from snaptrade_client.model.simple_order_preview import SimpleOrderPreview
 from snaptrade_client.model.simple_order_preview_estimated_fee import SimpleOrderPreviewEstimatedFee
 from snaptrade_client.model.snap_trade_holdings_account import SnapTradeHoldingsAccount

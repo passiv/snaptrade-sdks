@@ -16,66 +16,66 @@ import { TradingInstrument } from './trading-instrument';
 /**
  * 
  * @export
- * @interface TradingPlaceSimpleOrderRequest
+ * @interface SimpleOrderForm
  */
-export interface TradingPlaceSimpleOrderRequest {
+export interface SimpleOrderForm {
     /**
      * 
      * @type {TradingInstrument}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'instrument': TradingInstrument;
     /**
      * The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
      * @type {ActionStrict}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'side': ActionStrict;
     /**
      * The type of order to place.
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
-    'type': TradingPlaceSimpleOrderRequestTypeEnum;
+    'type': SimpleOrderFormTypeEnum;
     /**
      * The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
-    'time_in_force': TradingPlaceSimpleOrderRequestTimeInForceEnum;
+    'time_in_force': SimpleOrderFormTimeInForceEnum;
     /**
      * The amount of the base currency to buy or sell.
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'amount': string;
     /**
      * The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'limit_price'?: string;
     /**
      * The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'stop_price'?: string;
     /**
      * Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
      * @type {boolean}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'post_only'?: boolean;
     /**
      * The expiration date of the order. Required if the time_in_force is GTD.
      * @type {string}
-     * @memberof TradingPlaceSimpleOrderRequest
+     * @memberof SimpleOrderForm
      */
     'expiration_date'?: string;
 }
 
-type TradingPlaceSimpleOrderRequestTypeEnum = 'MARKET' | 'LIMIT' | 'STOP_LOSS_MARKET' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT_MARKET' | 'TAKE_PROFIT_LIMIT'
-type TradingPlaceSimpleOrderRequestTimeInForceEnum = 'GTC' | 'FOK' | 'IOC' | 'GTD'
+type SimpleOrderFormTypeEnum = 'MARKET' | 'LIMIT' | 'STOP_LOSS_MARKET' | 'STOP_LOSS_LIMIT' | 'TAKE_PROFIT_MARKET' | 'TAKE_PROFIT_LIMIT'
+type SimpleOrderFormTimeInForceEnum = 'GTC' | 'FOK' | 'IOC' | 'GTD'
 
 

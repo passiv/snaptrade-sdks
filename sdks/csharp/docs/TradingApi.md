@@ -685,7 +685,7 @@ namespace Example
             var accountId = "917c8734-8470-4a3e-a18f-57c3f2ee6631"; // Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
             var action = ActionStrictWithOptions.BUY;
             var universalSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3"; // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
-            var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \"AAPL  131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+            var symbol = "AAPL  131124C00240000"; // The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
             var price = 31.33; // The limit price for `Limit` and `StopLimit` orders.
@@ -1016,15 +1016,15 @@ namespace Example
             var accountId = "accountId_example";
             var instrument = new TradingInstrument();
             var side = ActionStrict.BUY;
-            var type = TradingPlaceSimpleOrderRequest.TypeEnum.MARKET; // The type of order to place.
-            var timeInForce = TradingPlaceSimpleOrderRequest.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var type = SimpleOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = SimpleOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
             var amount = "123.45"; // The amount of the base currency to buy or sell.
             var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
             var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
             var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
-            var tradingPlaceSimpleOrderRequest = new TradingPlaceSimpleOrderRequest(
+            var simpleOrderForm = new SimpleOrderForm(
                 instrument,
                 side,
                 type,
@@ -1039,7 +1039,7 @@ namespace Example
             try
             {
                 // Place order
-                OrderUpdatedResponse result = client.Trading.PlaceSimpleOrder(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+                OrderUpdatedResponse result = client.Trading.PlaceSimpleOrder(userId, userSecret, accountId, simpleOrderForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -1066,7 +1066,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Place order
-    ApiResponse<OrderUpdatedResponse> response = apiInstance.PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+    ApiResponse<OrderUpdatedResponse> response = apiInstance.PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1086,7 +1086,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingPlaceSimpleOrderRequest** | [**TradingPlaceSimpleOrderRequest**](TradingPlaceSimpleOrderRequest.md) |  |  |
+| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md) |  |  |
 
 ### Return type
 
@@ -1134,15 +1134,15 @@ namespace Example
             var accountId = "accountId_example";
             var instrument = new TradingInstrument();
             var side = ActionStrict.BUY;
-            var type = TradingPlaceSimpleOrderRequest.TypeEnum.MARKET; // The type of order to place.
-            var timeInForce = TradingPlaceSimpleOrderRequest.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+            var type = SimpleOrderForm.TypeEnum.MARKET; // The type of order to place.
+            var timeInForce = SimpleOrderForm.TimeInForceEnum.GTC; // The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
             var amount = "123.45"; // The amount of the base currency to buy or sell.
             var limitPrice = "123.45"; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
             var stopPrice = "123.45"; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
             var postOnly = false; // Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
             var expirationDate = DateTime.Now; // The expiration date of the order. Required if the time_in_force is GTD.
             
-            var tradingPlaceSimpleOrderRequest = new TradingPlaceSimpleOrderRequest(
+            var simpleOrderForm = new SimpleOrderForm(
                 instrument,
                 side,
                 type,
@@ -1157,7 +1157,7 @@ namespace Example
             try
             {
                 // Preview order
-                SimpleOrderPreview result = client.Trading.PreviewSimpleOrder(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+                SimpleOrderPreview result = client.Trading.PreviewSimpleOrder(userId, userSecret, accountId, simpleOrderForm);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -1184,7 +1184,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Preview order
-    ApiResponse<SimpleOrderPreview> response = apiInstance.PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+    ApiResponse<SimpleOrderPreview> response = apiInstance.PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -1204,7 +1204,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingPlaceSimpleOrderRequest** | [**TradingPlaceSimpleOrderRequest**](TradingPlaceSimpleOrderRequest.md) |  |  |
+| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md) |  |  |
 
 ### Return type
 
