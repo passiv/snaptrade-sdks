@@ -16,8 +16,8 @@ import (
 	"time"
 )
 
-// TradingPlaceSimpleOrderRequest struct for TradingPlaceSimpleOrderRequest
-type TradingPlaceSimpleOrderRequest struct {
+// SimpleOrderForm struct for SimpleOrderForm
+type SimpleOrderForm struct {
 	Instrument TradingInstrument `json:"instrument"`
 	Side ActionStrict `json:"side"`
 	// The type of order to place.
@@ -36,12 +36,12 @@ type TradingPlaceSimpleOrderRequest struct {
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
 }
 
-// NewTradingPlaceSimpleOrderRequest instantiates a new TradingPlaceSimpleOrderRequest object
+// NewSimpleOrderForm instantiates a new SimpleOrderForm object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64) *TradingPlaceSimpleOrderRequest {
-	this := TradingPlaceSimpleOrderRequest{}
+func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64) *SimpleOrderForm {
+	this := SimpleOrderForm{}
 	this.Instrument = instrument
 	this.Side = side
 	this.Type = type_
@@ -50,16 +50,16 @@ func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side Action
 	return &this
 }
 
-// NewTradingPlaceSimpleOrderRequestWithDefaults instantiates a new TradingPlaceSimpleOrderRequest object
+// NewSimpleOrderFormWithDefaults instantiates a new SimpleOrderForm object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTradingPlaceSimpleOrderRequestWithDefaults() *TradingPlaceSimpleOrderRequest {
-	this := TradingPlaceSimpleOrderRequest{}
+func NewSimpleOrderFormWithDefaults() *SimpleOrderForm {
+	this := SimpleOrderForm{}
 	return &this
 }
 
 // GetInstrument returns the Instrument field value
-func (o *TradingPlaceSimpleOrderRequest) GetInstrument() TradingInstrument {
+func (o *SimpleOrderForm) GetInstrument() TradingInstrument {
 	if o == nil {
 		var ret TradingInstrument
 		return ret
@@ -70,7 +70,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetInstrument() TradingInstrument {
 
 // GetInstrumentOk returns a tuple with the Instrument field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetInstrumentOk() (*TradingInstrument, bool) {
+func (o *SimpleOrderForm) GetInstrumentOk() (*TradingInstrument, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -78,12 +78,12 @@ func (o *TradingPlaceSimpleOrderRequest) GetInstrumentOk() (*TradingInstrument, 
 }
 
 // SetInstrument sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetInstrument(v TradingInstrument) {
+func (o *SimpleOrderForm) SetInstrument(v TradingInstrument) {
 	o.Instrument = v
 }
 
 // GetSide returns the Side field value
-func (o *TradingPlaceSimpleOrderRequest) GetSide() ActionStrict {
+func (o *SimpleOrderForm) GetSide() ActionStrict {
 	if o == nil {
 		var ret ActionStrict
 		return ret
@@ -94,7 +94,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetSide() ActionStrict {
 
 // GetSideOk returns a tuple with the Side field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetSideOk() (*ActionStrict, bool) {
+func (o *SimpleOrderForm) GetSideOk() (*ActionStrict, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -102,12 +102,12 @@ func (o *TradingPlaceSimpleOrderRequest) GetSideOk() (*ActionStrict, bool) {
 }
 
 // SetSide sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetSide(v ActionStrict) {
+func (o *SimpleOrderForm) SetSide(v ActionStrict) {
 	o.Side = v
 }
 
 // GetType returns the Type field value
-func (o *TradingPlaceSimpleOrderRequest) GetType() string {
+func (o *SimpleOrderForm) GetType() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -118,7 +118,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetTypeOk() (*string, bool) {
+func (o *SimpleOrderForm) GetTypeOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -126,12 +126,12 @@ func (o *TradingPlaceSimpleOrderRequest) GetTypeOk() (*string, bool) {
 }
 
 // SetType sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetType(v string) {
+func (o *SimpleOrderForm) SetType(v string) {
 	o.Type = v
 }
 
 // GetTimeInForce returns the TimeInForce field value
-func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string {
+func (o *SimpleOrderForm) GetTimeInForce() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -142,7 +142,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string {
 
 // GetTimeInForceOk returns a tuple with the TimeInForce field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool) {
+func (o *SimpleOrderForm) GetTimeInForceOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -150,12 +150,12 @@ func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool) {
 }
 
 // SetTimeInForce sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v string) {
+func (o *SimpleOrderForm) SetTimeInForce(v string) {
 	o.TimeInForce = v
 }
 
 // GetAmount returns the Amount field value
-func (o *TradingPlaceSimpleOrderRequest) GetAmount() float64 {
+func (o *SimpleOrderForm) GetAmount() float64 {
 	if o == nil {
 		var ret float64
 		return ret
@@ -166,7 +166,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetAmount() float64 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetAmountOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetAmountOk() (*float64, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -174,12 +174,12 @@ func (o *TradingPlaceSimpleOrderRequest) GetAmountOk() (*float64, bool) {
 }
 
 // SetAmount sets field value
-func (o *TradingPlaceSimpleOrderRequest) SetAmount(v float64) {
+func (o *SimpleOrderForm) SetAmount(v float64) {
 	o.Amount = v
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise.
-func (o *TradingPlaceSimpleOrderRequest) GetLimitPrice() float64 {
+func (o *SimpleOrderForm) GetLimitPrice() float64 {
 	if o == nil || isNil(o.LimitPrice) {
 		var ret float64
 		return ret
@@ -189,7 +189,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetLimitPrice() float64 {
 
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetLimitPriceOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetLimitPriceOk() (*float64, bool) {
 	if o == nil || isNil(o.LimitPrice) {
     return nil, false
 	}
@@ -197,7 +197,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetLimitPriceOk() (*float64, bool) {
 }
 
 // HasLimitPrice returns a boolean if a field has been set.
-func (o *TradingPlaceSimpleOrderRequest) HasLimitPrice() bool {
+func (o *SimpleOrderForm) HasLimitPrice() bool {
 	if o != nil && !isNil(o.LimitPrice) {
 		return true
 	}
@@ -206,12 +206,12 @@ func (o *TradingPlaceSimpleOrderRequest) HasLimitPrice() bool {
 }
 
 // SetLimitPrice gets a reference to the given float64 and assigns it to the LimitPrice field.
-func (o *TradingPlaceSimpleOrderRequest) SetLimitPrice(v float64) {
+func (o *SimpleOrderForm) SetLimitPrice(v float64) {
 	o.LimitPrice = &v
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise.
-func (o *TradingPlaceSimpleOrderRequest) GetStopPrice() float64 {
+func (o *SimpleOrderForm) GetStopPrice() float64 {
 	if o == nil || isNil(o.StopPrice) {
 		var ret float64
 		return ret
@@ -221,7 +221,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetStopPrice() float64 {
 
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetStopPriceOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetStopPriceOk() (*float64, bool) {
 	if o == nil || isNil(o.StopPrice) {
     return nil, false
 	}
@@ -229,7 +229,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetStopPriceOk() (*float64, bool) {
 }
 
 // HasStopPrice returns a boolean if a field has been set.
-func (o *TradingPlaceSimpleOrderRequest) HasStopPrice() bool {
+func (o *SimpleOrderForm) HasStopPrice() bool {
 	if o != nil && !isNil(o.StopPrice) {
 		return true
 	}
@@ -238,12 +238,12 @@ func (o *TradingPlaceSimpleOrderRequest) HasStopPrice() bool {
 }
 
 // SetStopPrice gets a reference to the given float64 and assigns it to the StopPrice field.
-func (o *TradingPlaceSimpleOrderRequest) SetStopPrice(v float64) {
+func (o *SimpleOrderForm) SetStopPrice(v float64) {
 	o.StopPrice = &v
 }
 
 // GetPostOnly returns the PostOnly field value if set, zero value otherwise.
-func (o *TradingPlaceSimpleOrderRequest) GetPostOnly() bool {
+func (o *SimpleOrderForm) GetPostOnly() bool {
 	if o == nil || isNil(o.PostOnly) {
 		var ret bool
 		return ret
@@ -253,7 +253,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetPostOnly() bool {
 
 // GetPostOnlyOk returns a tuple with the PostOnly field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetPostOnlyOk() (*bool, bool) {
+func (o *SimpleOrderForm) GetPostOnlyOk() (*bool, bool) {
 	if o == nil || isNil(o.PostOnly) {
     return nil, false
 	}
@@ -261,7 +261,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetPostOnlyOk() (*bool, bool) {
 }
 
 // HasPostOnly returns a boolean if a field has been set.
-func (o *TradingPlaceSimpleOrderRequest) HasPostOnly() bool {
+func (o *SimpleOrderForm) HasPostOnly() bool {
 	if o != nil && !isNil(o.PostOnly) {
 		return true
 	}
@@ -270,12 +270,12 @@ func (o *TradingPlaceSimpleOrderRequest) HasPostOnly() bool {
 }
 
 // SetPostOnly gets a reference to the given bool and assigns it to the PostOnly field.
-func (o *TradingPlaceSimpleOrderRequest) SetPostOnly(v bool) {
+func (o *SimpleOrderForm) SetPostOnly(v bool) {
 	o.PostOnly = &v
 }
 
 // GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
-func (o *TradingPlaceSimpleOrderRequest) GetExpirationDate() time.Time {
+func (o *SimpleOrderForm) GetExpirationDate() time.Time {
 	if o == nil || isNil(o.ExpirationDate) {
 		var ret time.Time
 		return ret
@@ -285,7 +285,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetExpirationDate() time.Time {
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TradingPlaceSimpleOrderRequest) GetExpirationDateOk() (*time.Time, bool) {
+func (o *SimpleOrderForm) GetExpirationDateOk() (*time.Time, bool) {
 	if o == nil || isNil(o.ExpirationDate) {
     return nil, false
 	}
@@ -293,7 +293,7 @@ func (o *TradingPlaceSimpleOrderRequest) GetExpirationDateOk() (*time.Time, bool
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
-func (o *TradingPlaceSimpleOrderRequest) HasExpirationDate() bool {
+func (o *SimpleOrderForm) HasExpirationDate() bool {
 	if o != nil && !isNil(o.ExpirationDate) {
 		return true
 	}
@@ -302,11 +302,11 @@ func (o *TradingPlaceSimpleOrderRequest) HasExpirationDate() bool {
 }
 
 // SetExpirationDate gets a reference to the given time.Time and assigns it to the ExpirationDate field.
-func (o *TradingPlaceSimpleOrderRequest) SetExpirationDate(v time.Time) {
+func (o *SimpleOrderForm) SetExpirationDate(v time.Time) {
 	o.ExpirationDate = &v
 }
 
-func (o TradingPlaceSimpleOrderRequest) MarshalJSON() ([]byte, error) {
+func (o SimpleOrderForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["instrument"] = o.Instrument
@@ -338,38 +338,38 @@ func (o TradingPlaceSimpleOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableTradingPlaceSimpleOrderRequest struct {
-	value *TradingPlaceSimpleOrderRequest
+type NullableSimpleOrderForm struct {
+	value *SimpleOrderForm
 	isSet bool
 }
 
-func (v NullableTradingPlaceSimpleOrderRequest) Get() *TradingPlaceSimpleOrderRequest {
+func (v NullableSimpleOrderForm) Get() *SimpleOrderForm {
 	return v.value
 }
 
-func (v *NullableTradingPlaceSimpleOrderRequest) Set(val *TradingPlaceSimpleOrderRequest) {
+func (v *NullableSimpleOrderForm) Set(val *SimpleOrderForm) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTradingPlaceSimpleOrderRequest) IsSet() bool {
+func (v NullableSimpleOrderForm) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTradingPlaceSimpleOrderRequest) Unset() {
+func (v *NullableSimpleOrderForm) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTradingPlaceSimpleOrderRequest(val *TradingPlaceSimpleOrderRequest) *NullableTradingPlaceSimpleOrderRequest {
-	return &NullableTradingPlaceSimpleOrderRequest{value: val, isSet: true}
+func NewNullableSimpleOrderForm(val *SimpleOrderForm) *NullableSimpleOrderForm {
+	return &NullableSimpleOrderForm{value: val, isSet: true}
 }
 
-func (v NullableTradingPlaceSimpleOrderRequest) MarshalJSON() ([]byte, error) {
+func (v NullableSimpleOrderForm) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTradingPlaceSimpleOrderRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableSimpleOrderForm) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

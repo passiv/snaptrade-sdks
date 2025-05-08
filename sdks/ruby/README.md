@@ -2145,10 +2145,10 @@ p result
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL`.
 
-##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. - `GTC` - Good Til
 Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
@@ -2226,10 +2226,10 @@ p result
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL`.
 
-##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. - `GTC` - Good Til
 Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or

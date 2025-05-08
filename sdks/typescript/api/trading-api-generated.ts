@@ -57,6 +57,8 @@ import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { OrderUpdatedResponse } from '../models';
 // @ts-ignore
+import { SimpleOrderForm } from '../models';
+// @ts-ignore
 import { SimpleOrderPreview } from '../models';
 // @ts-ignore
 import { StopLoss } from '../models';
@@ -70,8 +72,6 @@ import { TimeInForceStrict } from '../models';
 import { TradingCancelUserAccountOrderRequest } from '../models';
 // @ts-ignore
 import { TradingInstrument } from '../models';
-// @ts-ignore
-import { TradingPlaceSimpleOrderRequest } from '../models';
 // @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
@@ -707,19 +707,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {TradingPlaceSimpleOrderRequest} tradingPlaceSimpleOrderRequest 
+         * @param {SimpleOrderForm} simpleOrderForm 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        placeSimpleOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        placeSimpleOrder: async (userId: string, userSecret: string, accountId: string, simpleOrderForm: SimpleOrderForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('placeSimpleOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('placeSimpleOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('placeSimpleOrder', 'accountId', accountId)
-            // verify required parameter 'tradingPlaceSimpleOrderRequest' is not null or undefined
-            assertParamExists('placeSimpleOrder', 'tradingPlaceSimpleOrderRequest', tradingPlaceSimpleOrderRequest)
+            // verify required parameter 'simpleOrderForm' is not null or undefined
+            assertParamExists('placeSimpleOrder', 'simpleOrderForm', simpleOrderForm)
             const localVarPath = `/accounts/{accountId}/trading/simple`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -755,7 +755,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradingPlaceSimpleOrderRequest,
+                requestBody: simpleOrderForm,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -763,7 +763,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 pathTemplate: '/accounts/{accountId}/trading/simple',
                 httpMethod: 'POST'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceSimpleOrderRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(simpleOrderForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -777,19 +777,19 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {TradingPlaceSimpleOrderRequest} tradingPlaceSimpleOrderRequest 
+         * @param {SimpleOrderForm} simpleOrderForm 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        previewSimpleOrder: async (userId: string, userSecret: string, accountId: string, tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        previewSimpleOrder: async (userId: string, userSecret: string, accountId: string, simpleOrderForm: SimpleOrderForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('previewSimpleOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('previewSimpleOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('previewSimpleOrder', 'accountId', accountId)
-            // verify required parameter 'tradingPlaceSimpleOrderRequest' is not null or undefined
-            assertParamExists('previewSimpleOrder', 'tradingPlaceSimpleOrderRequest', tradingPlaceSimpleOrderRequest)
+            // verify required parameter 'simpleOrderForm' is not null or undefined
+            assertParamExists('previewSimpleOrder', 'simpleOrderForm', simpleOrderForm)
             const localVarPath = `/accounts/{accountId}/trading/simple/preview`
                 .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -825,7 +825,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: tradingPlaceSimpleOrderRequest,
+                requestBody: simpleOrderForm,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
@@ -833,7 +833,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 pathTemplate: '/accounts/{accountId}/trading/simple/preview',
                 httpMethod: 'POST'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(tradingPlaceSimpleOrderRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(simpleOrderForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1152,7 +1152,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async placeSimpleOrder(requestParameters: TradingApiPlaceSimpleOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
-            const tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest = {
+            const simpleOrderForm: SimpleOrderForm = {
                 instrument: requestParameters.instrument,
                 side: requestParameters.side,
                 type: requestParameters.type,
@@ -1163,7 +1163,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 post_only: requestParameters.post_only,
                 expiration_date: requestParameters.expiration_date
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.placeSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceSimpleOrderRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.placeSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, simpleOrderForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1174,7 +1174,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async previewSimpleOrder(requestParameters: TradingApiPreviewSimpleOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimpleOrderPreview>> {
-            const tradingPlaceSimpleOrderRequest: TradingPlaceSimpleOrderRequest = {
+            const simpleOrderForm: SimpleOrderForm = {
                 instrument: requestParameters.instrument,
                 side: requestParameters.side,
                 type: requestParameters.type,
@@ -1185,7 +1185,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 post_only: requestParameters.post_only,
                 expiration_date: requestParameters.expiration_date
             };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.previewSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingPlaceSimpleOrderRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.previewSimpleOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, simpleOrderForm, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1674,7 +1674,7 @@ export type TradingApiPlaceSimpleOrderRequest = {
     */
     readonly accountId: string
     
-} & TradingPlaceSimpleOrderRequest
+} & SimpleOrderForm
 
 /**
  * Request parameters for previewSimpleOrder operation in TradingApi.
@@ -1704,7 +1704,7 @@ export type TradingApiPreviewSimpleOrderRequest = {
     */
     readonly accountId: string
     
-} & TradingPlaceSimpleOrderRequest
+} & SimpleOrderForm
 
 /**
  * Request parameters for replaceOrder operation in TradingApi.

@@ -2246,7 +2246,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`Any`](./snaptrade_client/type/typing_any.py)
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
@@ -2329,7 +2329,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`Any`](./snaptrade_client/type/typing_any.py)
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`SimpleOrderPreview`](./snaptrade_client/type/simple_order_preview.py)

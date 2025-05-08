@@ -1075,7 +1075,7 @@ public class Example {
 
 <a name="placeSimpleOrder"></a>
 # **placeSimpleOrder**
-> OrderUpdatedResponse placeSimpleOrder(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest).execute();
+> OrderUpdatedResponse placeSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
 
 Place order
 
@@ -1169,7 +1169,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingPlaceSimpleOrderRequest** | [**TradingPlaceSimpleOrderRequest**](TradingPlaceSimpleOrderRequest.md)|  | |
+| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md)|  | |
 
 ### Return type
 
@@ -1192,7 +1192,7 @@ public class Example {
 
 <a name="previewSimpleOrder"></a>
 # **previewSimpleOrder**
-> SimpleOrderPreview previewSimpleOrder(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest).execute();
+> SimpleOrderPreview previewSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
 
 Preview order
 
@@ -1285,7 +1285,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingPlaceSimpleOrderRequest** | [**TradingPlaceSimpleOrderRequest**](TradingPlaceSimpleOrderRequest.md)|  | |
+| **simpleOrderForm** | [**SimpleOrderForm**](SimpleOrderForm.md)|  | |
 
 ### Return type
 

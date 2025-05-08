@@ -1223,8 +1223,8 @@ module SnapTrade
     #
     # @param instrument [TradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [Type] The type of order to place.
-    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [SimpleOrderFormType] The type of order to place.
+    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1233,7 +1233,7 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param body [SimpleOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
@@ -1246,8 +1246,8 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      trading_place_simple_order_request = _body
-      data, _status_code, _headers = place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      simple_order_form = _body
+      data, _status_code, _headers = place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
       data
     end
 
@@ -1258,8 +1258,8 @@ module SnapTrade
     #
     # @param instrument [TradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [Type] The type of order to place.
-    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [SimpleOrderFormType] The type of order to place.
+    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1268,7 +1268,7 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param body [SimpleOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
@@ -1281,8 +1281,8 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      trading_place_simple_order_request = _body
-      place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      simple_order_form = _body
+      place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
     end
 
     # Place order
@@ -1290,11 +1290,11 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param simple_order_form [SimpleOrderForm] 
     # @param [Hash] opts the optional parameters
     # @return [OrderUpdatedResponse]
-    private def place_simple_order_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
-      data, _status_code, _headers = place_simple_order_with_http_info(user_id, user_secret, account_id, trading_place_simple_order_request, opts)
+    private def place_simple_order_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
+      data, _status_code, _headers = place_simple_order_with_http_info(user_id, user_secret, account_id, simple_order_form, opts)
       data
     end
 
@@ -1303,10 +1303,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param simple_order_form [SimpleOrderForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
-    private def place_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+    private def place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.place_simple_order ...'
       end
@@ -1322,9 +1322,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_simple_order"
       end
-      # verify the required parameter 'trading_place_simple_order_request' is set
-      if @api_client.config.client_side_validation && trading_place_simple_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_place_simple_order_request' when calling TradingApi.place_simple_order"
+      # verify the required parameter 'simple_order_form' is set
+      if @api_client.config.client_side_validation && simple_order_form.nil?
+        fail ArgumentError, "Missing the required parameter 'simple_order_form' when calling TradingApi.place_simple_order"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/trading/simple'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -1348,7 +1348,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_simple_order_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_order_form)
 
       # return_type
       return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
@@ -1380,8 +1380,8 @@ module SnapTrade
     #
     # @param instrument [TradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [Type] The type of order to place.
-    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [SimpleOrderFormType] The type of order to place.
+    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1390,7 +1390,7 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param body [SimpleOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def preview_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
@@ -1403,8 +1403,8 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      trading_place_simple_order_request = _body
-      data, _status_code, _headers = preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      simple_order_form = _body
+      data, _status_code, _headers = preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
       data
     end
 
@@ -1414,8 +1414,8 @@ module SnapTrade
     #
     # @param instrument [TradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [Type] The type of order to place.
-    # @param time_in_force [SimpleOrderRequestBodyTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [SimpleOrderFormType] The type of order to place.
+    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1424,7 +1424,7 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [TradingPlaceSimpleOrderRequest] 
+    # @param body [SimpleOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def preview_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
@@ -1437,8 +1437,8 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      trading_place_simple_order_request = _body
-      preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, extra)
+      simple_order_form = _body
+      preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
     end
 
     # Preview order
@@ -1446,11 +1446,11 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param simple_order_form [SimpleOrderForm] 
     # @param [Hash] opts the optional parameters
     # @return [SimpleOrderPreview]
-    private def preview_simple_order_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
-      data, _status_code, _headers = preview_simple_order_with_http_info(user_id, user_secret, account_id, trading_place_simple_order_request, opts)
+    private def preview_simple_order_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
+      data, _status_code, _headers = preview_simple_order_with_http_info(user_id, user_secret, account_id, simple_order_form, opts)
       data
     end
 
@@ -1459,10 +1459,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_place_simple_order_request [TradingPlaceSimpleOrderRequest] 
+    # @param simple_order_form [SimpleOrderForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(SimpleOrderPreview, Integer, Hash)>] SimpleOrderPreview data, response status code and response headers
-    private def preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, trading_place_simple_order_request, opts = {})
+    private def preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.preview_simple_order ...'
       end
@@ -1478,9 +1478,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.preview_simple_order"
       end
-      # verify the required parameter 'trading_place_simple_order_request' is set
-      if @api_client.config.client_side_validation && trading_place_simple_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_place_simple_order_request' when calling TradingApi.preview_simple_order"
+      # verify the required parameter 'simple_order_form' is set
+      if @api_client.config.client_side_validation && simple_order_form.nil?
+        fail ArgumentError, "Missing the required parameter 'simple_order_form' when calling TradingApi.preview_simple_order"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/trading/simple/preview'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -1504,7 +1504,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_place_simple_order_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_order_form)
 
       # return_type
       return_type = opts[:debug_return_type] || 'SimpleOrderPreview'

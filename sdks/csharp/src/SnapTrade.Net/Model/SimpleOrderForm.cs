@@ -27,10 +27,10 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// TradingPlaceSimpleOrderRequest
+    /// SimpleOrderForm
     /// </summary>
-    [DataContract(Name = "Trading_placeSimpleOrder_request")]
-    public partial class TradingPlaceSimpleOrderRequest : IEquatable<TradingPlaceSimpleOrderRequest>, IValidatableObject
+    [DataContract(Name = "SimpleOrderForm")]
+    public partial class SimpleOrderForm : IEquatable<SimpleOrderForm>, IValidatableObject
     {
 
         /// <summary>
@@ -131,12 +131,12 @@ namespace SnapTrade.Net.Model
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceEnum TimeInForce { get; set; }
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingPlaceSimpleOrderRequest" /> class.
+        /// Initializes a new instance of the <see cref="SimpleOrderForm" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected TradingPlaceSimpleOrderRequest() { }
+        protected SimpleOrderForm() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="TradingPlaceSimpleOrderRequest" /> class.
+        /// Initializes a new instance of the <see cref="SimpleOrderForm" /> class.
         /// </summary>
         /// <param name="instrument">instrument (required).</param>
         /// <param name="side">side (required).</param>
@@ -147,12 +147,12 @@ namespace SnapTrade.Net.Model
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
         /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
-        public TradingPlaceSimpleOrderRequest(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
+        public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
         {
             // to ensure "instrument" is required (not null)
             if (instrument == null)
             {
-                throw new ArgumentNullException("instrument is a required property for TradingPlaceSimpleOrderRequest and cannot be null");
+                throw new ArgumentNullException("instrument is a required property for SimpleOrderForm and cannot be null");
             }
             this.Instrument = instrument;
             this.Side = side;
@@ -213,7 +213,7 @@ namespace SnapTrade.Net.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class TradingPlaceSimpleOrderRequest {\n");
+            sb.Append("class SimpleOrderForm {\n");
             sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  Side: ").Append(Side).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -243,15 +243,15 @@ namespace SnapTrade.Net.Model
         /// <returns>Boolean</returns>
         public override bool Equals(object input)
         {
-            return this.Equals(input as TradingPlaceSimpleOrderRequest);
+            return this.Equals(input as SimpleOrderForm);
         }
 
         /// <summary>
-        /// Returns true if TradingPlaceSimpleOrderRequest instances are equal
+        /// Returns true if SimpleOrderForm instances are equal
         /// </summary>
-        /// <param name="input">Instance of TradingPlaceSimpleOrderRequest to be compared</param>
+        /// <param name="input">Instance of SimpleOrderForm to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TradingPlaceSimpleOrderRequest input)
+        public bool Equals(SimpleOrderForm input)
         {
             if (input == null)
             {
