@@ -63,11 +63,11 @@ namespace SnapTrade.Net.Test.Api
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new TradingPlaceSimpleOrderRequest(
+                new SimpleOrderForm(
                     instrument: new TradingInstrument(instrument.Symbol, TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.SELL,
-                    type: TradingPlaceSimpleOrderRequest.TypeEnum.LIMIT,
-                    timeInForce: TradingPlaceSimpleOrderRequest.TimeInForceEnum.GTD,
+                    type: SimpleOrderForm.TypeEnum.LIMIT,
+                    timeInForce: SimpleOrderForm.TimeInForceEnum.GTD,
                     expirationDate: DateTime.UtcNow.AddMinutes(1),
                     amount:42.2m,
                     limitPrice: quote.Ask * 2m,
@@ -92,11 +92,11 @@ namespace SnapTrade.Net.Test.Api
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new TradingPlaceSimpleOrderRequest(
+                new SimpleOrderForm(
                     instrument: new TradingInstrument("DOGE-USDC", TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.BUY,
-                    type: TradingPlaceSimpleOrderRequest.TypeEnum.MARKET,
-                    timeInForce: TradingPlaceSimpleOrderRequest.TimeInForceEnum.IOC,
+                    type: SimpleOrderForm.TypeEnum.MARKET,
+                    timeInForce: SimpleOrderForm.TimeInForceEnum.IOC,
                     amount:1.42m
                 )
             );
