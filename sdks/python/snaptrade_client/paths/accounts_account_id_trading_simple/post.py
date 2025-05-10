@@ -35,11 +35,13 @@ from snaptrade_client import schemas  # noqa: F401
 from snaptrade_client.model.trading_instrument import TradingInstrument as TradingInstrumentSchema
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.action_strict import ActionStrict as ActionStrictSchema
+from snaptrade_client.model.simple_order_form import SimpleOrderForm as SimpleOrderFormSchema
 from snaptrade_client.model.order_updated_response import OrderUpdatedResponse as OrderUpdatedResponseSchema
 
 from snaptrade_client.type.trading_instrument import TradingInstrument
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.action_strict import ActionStrict
+from snaptrade_client.type.simple_order_form import SimpleOrderForm
 from snaptrade_client.type.order_updated_response import OrderUpdatedResponse
 
 from . import path
@@ -107,228 +109,10 @@ request_path_account_id = api_client.PathParameter(
     required=True,
 )
 # body param
+SchemaForRequestBodyApplicationJson = SimpleOrderFormSchema
 
 
-class SchemaForRequestBodyApplicationJson(
-    schemas.DictSchema
-):
-
-
-    class MetaOapg:
-        required = {
-            "amount",
-            "side",
-            "time_in_force",
-            "instrument",
-            "type",
-        }
-        
-        class properties:
-        
-            @staticmethod
-            def instrument() -> typing.Type['TradingInstrument']:
-                return TradingInstrument
-        
-            @staticmethod
-            def side() -> typing.Type['ActionStrict']:
-                return ActionStrict
-            
-            
-            class type(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-            
-            
-                class MetaOapg:
-                    enum_value_to_name = {
-                        "MARKET": "MARKET",
-                        "LIMIT": "LIMIT",
-                        "STOP_LOSS_MARKET": "STOP_LOSS_MARKET",
-                        "STOP_LOSS_LIMIT": "STOP_LOSS_LIMIT",
-                        "TAKE_PROFIT_MARKET": "TAKE_PROFIT_MARKET",
-                        "TAKE_PROFIT_LIMIT": "TAKE_PROFIT_LIMIT",
-                    }
-                
-                @schemas.classproperty
-                def MARKET(cls):
-                    return cls("MARKET")
-                
-                @schemas.classproperty
-                def LIMIT(cls):
-                    return cls("LIMIT")
-                
-                @schemas.classproperty
-                def STOP_LOSS_MARKET(cls):
-                    return cls("STOP_LOSS_MARKET")
-                
-                @schemas.classproperty
-                def STOP_LOSS_LIMIT(cls):
-                    return cls("STOP_LOSS_LIMIT")
-                
-                @schemas.classproperty
-                def TAKE_PROFIT_MARKET(cls):
-                    return cls("TAKE_PROFIT_MARKET")
-                
-                @schemas.classproperty
-                def TAKE_PROFIT_LIMIT(cls):
-                    return cls("TAKE_PROFIT_LIMIT")
-            
-            
-            class time_in_force(
-                schemas.EnumBase,
-                schemas.StrSchema
-            ):
-            
-            
-                class MetaOapg:
-                    enum_value_to_name = {
-                        "GTC": "GTC",
-                        "FOK": "FOK",
-                        "IOC": "IOC",
-                        "GTD": "GTD",
-                    }
-                
-                @schemas.classproperty
-                def GTC(cls):
-                    return cls("GTC")
-                
-                @schemas.classproperty
-                def FOK(cls):
-                    return cls("FOK")
-                
-                @schemas.classproperty
-                def IOC(cls):
-                    return cls("IOC")
-                
-                @schemas.classproperty
-                def GTD(cls):
-                    return cls("GTD")
-            amount = schemas.StrSchema
-            limit_price = schemas.StrSchema
-            stop_price = schemas.StrSchema
-            post_only = schemas.BoolSchema
-            expiration_date = schemas.DateTimeSchema
-            __annotations__ = {
-                "instrument": instrument,
-                "side": side,
-                "type": type,
-                "time_in_force": time_in_force,
-                "amount": amount,
-                "limit_price": limit_price,
-                "stop_price": stop_price,
-                "post_only": post_only,
-                "expiration_date": expiration_date,
-            }
-    
-    amount: MetaOapg.properties.amount
-    side: 'ActionStrict'
-    time_in_force: MetaOapg.properties.time_in_force
-    instrument: 'TradingInstrument'
-    type: MetaOapg.properties.type
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["side"]) -> 'ActionStrict': ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["limit_price"]) -> MetaOapg.properties.limit_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["stop_price"]) -> MetaOapg.properties.stop_price: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["post_only"]) -> MetaOapg.properties.post_only: ...
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["expiration_date"]) -> MetaOapg.properties.expiration_date: ...
-    
-    @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-    
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["instrument", "side", "type", "time_in_force", "amount", "limit_price", "stop_price", "post_only", "expiration_date", ], str]):
-        # dict_instance[name] accessor
-        return super().__getitem__(name)
-    
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["side"]) -> 'ActionStrict': ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["limit_price"]) -> typing.Union[MetaOapg.properties.limit_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["stop_price"]) -> typing.Union[MetaOapg.properties.stop_price, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["post_only"]) -> typing.Union[MetaOapg.properties.post_only, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["expiration_date"]) -> typing.Union[MetaOapg.properties.expiration_date, schemas.Unset]: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-    
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["instrument", "side", "type", "time_in_force", "amount", "limit_price", "stop_price", "post_only", "expiration_date", ], str]):
-        return super().get_item_oapg(name)
-    
-
-    def __new__(
-        cls,
-        *args: typing.Union[dict, frozendict.frozendict, ],
-        amount: typing.Union[MetaOapg.properties.amount, str, ],
-        side: 'ActionStrict',
-        time_in_force: typing.Union[MetaOapg.properties.time_in_force, str, ],
-        instrument: 'TradingInstrument',
-        type: typing.Union[MetaOapg.properties.type, str, ],
-        limit_price: typing.Union[MetaOapg.properties.limit_price, str, schemas.Unset] = schemas.unset,
-        stop_price: typing.Union[MetaOapg.properties.stop_price, str, schemas.Unset] = schemas.unset,
-        post_only: typing.Union[MetaOapg.properties.post_only, bool, schemas.Unset] = schemas.unset,
-        expiration_date: typing.Union[MetaOapg.properties.expiration_date, str, datetime, schemas.Unset] = schemas.unset,
-        _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'SchemaForRequestBodyApplicationJson':
-        return super().__new__(
-            cls,
-            *args,
-            amount=amount,
-            side=side,
-            time_in_force=time_in_force,
-            instrument=instrument,
-            type=type,
-            limit_price=limit_price,
-            stop_price=stop_price,
-            post_only=post_only,
-            expiration_date=expiration_date,
-            _configuration=_configuration,
-            **kwargs,
-        )
-
-
-request_body_typing_any = api_client.RequestBody(
+request_body_simple_order_form = api_client.RequestBody(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaForRequestBodyApplicationJson),
@@ -412,7 +196,7 @@ class BaseApi(api_client.Api):
 
     def _place_simple_order_mapped_args(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[SimpleOrderForm] = None,
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
@@ -536,7 +320,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
+        serialized_data = request_body_simple_order_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -682,7 +466,7 @@ class BaseApi(api_client.Api):
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
+        serialized_data = request_body_simple_order_form.serialize(body, content_type)
         if 'fields' in serialized_data:
             _fields = serialized_data['fields']
         elif 'body' in serialized_data:
@@ -729,7 +513,7 @@ class PlaceSimpleOrder(BaseApi):
 
     async def aplace_simple_order(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[SimpleOrderForm] = None,
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
@@ -776,7 +560,7 @@ class PlaceSimpleOrder(BaseApi):
     
     def place_simple_order(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[SimpleOrderForm] = None,
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
@@ -824,7 +608,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[SimpleOrderForm] = None,
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,
@@ -871,7 +655,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
-        body: typing.Optional[typing.Any] = None,
+        body: typing.Optional[SimpleOrderForm] = None,
         instrument: typing.Optional[TradingInstrument] = None,
         side: typing.Optional[ActionStrict] = None,
         type: typing.Optional[str] = None,

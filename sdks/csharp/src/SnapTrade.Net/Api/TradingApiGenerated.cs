@@ -296,10 +296,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>OrderUpdatedResponse</returns>
-        OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0);
+        OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
 
         /// <summary>
         /// Place order
@@ -311,10 +311,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0);
+        ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
         /// <summary>
         /// Preview order
         /// </summary>
@@ -325,10 +325,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SimpleOrderPreview</returns>
-        SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0);
+        SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
 
         /// <summary>
         /// Preview order
@@ -340,10 +340,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SimpleOrderPreview</returns>
-        ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0);
+        ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
         /// <summary>
         /// Replaces an order with a new one
         /// </summary>
@@ -702,11 +702,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OrderUpdatedResponse</returns>
-        System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Place order
@@ -718,11 +718,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Preview order
         /// </summary>
@@ -733,11 +733,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SimpleOrderPreview</returns>
-        System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Preview order
@@ -749,11 +749,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
-        System.Threading.Tasks.Task<ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Replaces an order with a new one
         /// </summary>
@@ -2975,12 +2975,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>OrderUpdatedResponse</returns>
-        public OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0)
+        public OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = PlaceSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
             return localVarResponse.Data;
         }
 
@@ -2991,10 +2991,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of OrderUpdatedResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3014,10 +3014,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceSimpleOrder");
             }
 
-            // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-            if (tradingPlaceSimpleOrderRequest == null)
+            // verify the required parameter 'simpleOrderForm' is set
+            if (simpleOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceSimpleOrderRequest' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PlaceSimpleOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -3046,7 +3046,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceSimpleOrderRequest;
+            localVarRequestOptions.Data = simpleOrderForm;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceSimpleOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -3088,13 +3088,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of OrderUpdatedResponse</returns>
-        public async System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await PlaceSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse> localVarResponse = await PlaceSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, simpleOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -3105,11 +3105,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3129,10 +3129,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PlaceSimpleOrder");
             }
 
-            // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-            if (tradingPlaceSimpleOrderRequest == null)
+            // verify the required parameter 'simpleOrderForm' is set
+            if (simpleOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceSimpleOrderRequest' when calling TradingApi->PlaceSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PlaceSimpleOrder");
             }
 
 
@@ -3162,7 +3162,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceSimpleOrderRequest;
+            localVarRequestOptions.Data = simpleOrderForm;
 
             localVarRequestOptions.Operation = "TradingApi.PlaceSimpleOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -3205,12 +3205,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>SimpleOrderPreview</returns>
-        public SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0)
+        public SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = PreviewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
             return localVarResponse.Data;
         }
 
@@ -3221,10 +3221,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of SimpleOrderPreview</returns>
-        public SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3244,10 +3244,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewSimpleOrder");
             }
 
-            // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-            if (tradingPlaceSimpleOrderRequest == null)
+            // verify the required parameter 'simpleOrderForm' is set
+            if (simpleOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceSimpleOrderRequest' when calling TradingApi->PreviewSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PreviewSimpleOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -3276,7 +3276,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceSimpleOrderRequest;
+            localVarRequestOptions.Data = simpleOrderForm;
 
             localVarRequestOptions.Operation = "TradingApi.PreviewSimpleOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -3318,13 +3318,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of SimpleOrderPreview</returns>
-        public async System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = await PreviewSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview> localVarResponse = await PreviewSimpleOrderWithHttpInfoAsync(userId, userSecret, accountId, simpleOrderForm, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -3335,11 +3335,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingPlaceSimpleOrderRequest"></param>
+        /// <param name="simpleOrderForm"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3359,10 +3359,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->PreviewSimpleOrder");
             }
 
-            // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-            if (tradingPlaceSimpleOrderRequest == null)
+            // verify the required parameter 'simpleOrderForm' is set
+            if (simpleOrderForm == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingPlaceSimpleOrderRequest' when calling TradingApi->PreviewSimpleOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'simpleOrderForm' when calling TradingApi->PreviewSimpleOrder");
             }
 
 
@@ -3392,7 +3392,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingPlaceSimpleOrderRequest;
+            localVarRequestOptions.Data = simpleOrderForm;
 
             localVarRequestOptions.Operation = "TradingApi.PreviewSimpleOrder";
             localVarRequestOptions.OperationIndex = operationIndex;

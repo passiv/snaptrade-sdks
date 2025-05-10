@@ -1963,8 +1963,8 @@ provided, otherwise must be provided.
 
 ##### symbol: `String`<a id="symbol-string"></a>
 The security's trading ticker symbol. This currently supports stock symbols and
-Options symbols in the 21 character OCC format. For example \"AAPL
-131124C00240000\" represents a call option on AAPL expiring on 2024-11-13 with a
+Options symbols in the 21 character OCC format. For example `AAPL
+131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a
 strike price of $240. For more information on the OCC format, see
 [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is
 provided, then 'universal_symbol_id' must be 'null'.
@@ -2145,10 +2145,10 @@ p result
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL`.
 
-##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. - `GTC` - Good Til
 Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
@@ -2226,10 +2226,10 @@ p result
 The action describes the intent or side of a trade. This is either `BUY` or
 `SELL`.
 
-##### type: [`Type`](./lib/snaptrade/models/type.rb)<a id="type-typelibsnaptrademodelstyperb"></a>
+##### type: [`SimpleOrderFormType`](./lib/snaptrade/models/simple_order_form_type.rb)<a id="type-simpleorderformtypelibsnaptrademodelssimple_order_form_typerb"></a>
 The type of order to place.
 
-##### time_in_force: [`SimpleOrderRequestBodyTimeInForce`](./lib/snaptrade/models/simple_order_request_body_time_in_force.rb)<a id="time_in_force-simpleorderrequestbodytimeinforcelibsnaptrademodelssimple_order_request_body_time_in_forcerb"></a>
+##### time_in_force: [`SimpleOrderFormTimeInForce`](./lib/snaptrade/models/simple_order_form_time_in_force.rb)<a id="time_in_force-simpleorderformtimeinforcelibsnaptrademodelssimple_order_form_time_in_forcerb"></a>
 The Time in Force type for the order. This field indicates how long the order
 will remain active before it is executed or expires. - `GTC` - Good Til
 Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or
