@@ -167,7 +167,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param trading_place_simple_order_request 
+  # @param simple_order_form 
   # @param [Hash] opts the optional parameters
   # @return [OrderUpdatedResponse]
   describe 'place_simple_order test' do
@@ -182,7 +182,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param trading_place_simple_order_request 
+  # @param simple_order_form 
   # @param [Hash] opts the optional parameters
   # @return [SimpleOrderPreview]
   describe 'preview_simple_order test' do

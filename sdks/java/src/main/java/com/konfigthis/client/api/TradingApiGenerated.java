@@ -43,6 +43,7 @@ import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
+import com.konfigthis.client.model.SimpleOrderForm;
 import com.konfigthis.client.model.SimpleOrderPreview;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
@@ -50,7 +51,6 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
-import com.konfigthis.client.model.TradingPlaceSimpleOrderRequest;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
@@ -1657,7 +1657,7 @@ public class TradingApiGenerated {
         
         /**
          * Set symbol
-         * @param symbol The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\&quot;AAPL  131124C00240000\\\&quot; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. (optional)
+         * @param symbol The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder symbol(String symbol) {
@@ -2293,7 +2293,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new PlaceOrderRequestBuilder(tradeId, userId, userSecret);
     }
-    private okhttp3.Call placeSimpleOrderCall(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeSimpleOrderCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2307,7 +2307,7 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingPlaceSimpleOrderRequest;
+        Object localVarPostBody = simpleOrderForm;
 
         // create path and map variables
         String localVarPath = "/accounts/{accountId}/trading/simple"
@@ -2348,7 +2348,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling placeSimpleOrder(Async)");
@@ -2364,25 +2364,25 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling placeSimpleOrder(Async)");
         }
 
-        // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-        if (tradingPlaceSimpleOrderRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingPlaceSimpleOrderRequest' when calling placeSimpleOrder(Async)");
+        // verify the required parameter 'simpleOrderForm' is set
+        if (simpleOrderForm == null) {
+            throw new ApiException("Missing the required parameter 'simpleOrderForm' when calling placeSimpleOrder(Async)");
         }
 
-        return placeSimpleOrderCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+        return placeSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
 
     }
 
 
-    private ApiResponse<OrderUpdatedResponse> placeSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, null);
+    private ApiResponse<OrderUpdatedResponse> placeSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm) throws ApiException {
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, null);
         Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeSimpleOrderAsync(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+    private okhttp3.Call placeSimpleOrderAsync(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, _callback);
         Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2466,24 +2466,24 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return placeSimpleOrderCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
         }
 
-        private TradingPlaceSimpleOrderRequest buildBodyParams() {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = new TradingPlaceSimpleOrderRequest();
-            tradingPlaceSimpleOrderRequest.instrument(this.instrument);
-            tradingPlaceSimpleOrderRequest.side(this.side);
+        private SimpleOrderForm buildBodyParams() {
+            SimpleOrderForm simpleOrderForm = new SimpleOrderForm();
+            simpleOrderForm.instrument(this.instrument);
+            simpleOrderForm.side(this.side);
             if (this.type != null)
-            tradingPlaceSimpleOrderRequest.type(TradingPlaceSimpleOrderRequest.TypeEnum.fromValue(this.type));
+            simpleOrderForm.type(SimpleOrderForm.TypeEnum.fromValue(this.type));
             if (this.timeInForce != null)
-            tradingPlaceSimpleOrderRequest.timeInForce(TradingPlaceSimpleOrderRequest.TimeInForceEnum.fromValue(this.timeInForce));
-            tradingPlaceSimpleOrderRequest.amount(this.amount);
-            tradingPlaceSimpleOrderRequest.limitPrice(this.limitPrice);
-            tradingPlaceSimpleOrderRequest.stopPrice(this.stopPrice);
-            tradingPlaceSimpleOrderRequest.postOnly(this.postOnly);
-            tradingPlaceSimpleOrderRequest.expirationDate(this.expirationDate);
-            return tradingPlaceSimpleOrderRequest;
+            simpleOrderForm.timeInForce(SimpleOrderForm.TimeInForceEnum.fromValue(this.timeInForce));
+            simpleOrderForm.amount(this.amount);
+            simpleOrderForm.limitPrice(this.limitPrice);
+            simpleOrderForm.stopPrice(this.stopPrice);
+            simpleOrderForm.postOnly(this.postOnly);
+            simpleOrderForm.expirationDate(this.expirationDate);
+            return simpleOrderForm;
         }
 
         /**
@@ -2498,8 +2498,8 @@ public class TradingApiGenerated {
          </table>
          */
         public OrderUpdatedResponse execute() throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            ApiResponse<OrderUpdatedResponse> localVarResp = placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            ApiResponse<OrderUpdatedResponse> localVarResp = placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
             return localVarResp.getResponseBody();
         }
 
@@ -2515,8 +2515,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
         }
 
         /**
@@ -2532,8 +2532,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return placeSimpleOrderAsync(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderAsync(userId, userSecret, accountId, simpleOrderForm, _callback);
         }
     }
 
@@ -2543,7 +2543,7 @@ public class TradingApiGenerated {
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
-     * @param tradingPlaceSimpleOrderRequest  (required)
+     * @param simpleOrderForm  (required)
      * @return PlaceSimpleOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -2575,7 +2575,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new PlaceSimpleOrderRequestBuilder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
     }
-    private okhttp3.Call previewSimpleOrderCall(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call previewSimpleOrderCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2589,7 +2589,7 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = tradingPlaceSimpleOrderRequest;
+        Object localVarPostBody = simpleOrderForm;
 
         // create path and map variables
         String localVarPath = "/accounts/{accountId}/trading/simple/preview"
@@ -2630,7 +2630,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call previewSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call previewSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling previewSimpleOrder(Async)");
@@ -2646,25 +2646,25 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling previewSimpleOrder(Async)");
         }
 
-        // verify the required parameter 'tradingPlaceSimpleOrderRequest' is set
-        if (tradingPlaceSimpleOrderRequest == null) {
-            throw new ApiException("Missing the required parameter 'tradingPlaceSimpleOrderRequest' when calling previewSimpleOrder(Async)");
+        // verify the required parameter 'simpleOrderForm' is set
+        if (simpleOrderForm == null) {
+            throw new ApiException("Missing the required parameter 'simpleOrderForm' when calling previewSimpleOrder(Async)");
         }
 
-        return previewSimpleOrderCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+        return previewSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
 
     }
 
 
-    private ApiResponse<SimpleOrderPreview> previewSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest) throws ApiException {
-        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, null);
+    private ApiResponse<SimpleOrderPreview> previewSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm) throws ApiException {
+        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, null);
         Type localVarReturnType = new TypeToken<SimpleOrderPreview>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call previewSimpleOrderAsync(String userId, String userSecret, UUID accountId, TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest, final ApiCallback<SimpleOrderPreview> _callback) throws ApiException {
+    private okhttp3.Call previewSimpleOrderAsync(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback<SimpleOrderPreview> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, _callback);
         Type localVarReturnType = new TypeToken<SimpleOrderPreview>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2748,24 +2748,24 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return previewSimpleOrderCall(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
         }
 
-        private TradingPlaceSimpleOrderRequest buildBodyParams() {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = new TradingPlaceSimpleOrderRequest();
-            tradingPlaceSimpleOrderRequest.instrument(this.instrument);
-            tradingPlaceSimpleOrderRequest.side(this.side);
+        private SimpleOrderForm buildBodyParams() {
+            SimpleOrderForm simpleOrderForm = new SimpleOrderForm();
+            simpleOrderForm.instrument(this.instrument);
+            simpleOrderForm.side(this.side);
             if (this.type != null)
-            tradingPlaceSimpleOrderRequest.type(TradingPlaceSimpleOrderRequest.TypeEnum.fromValue(this.type));
+            simpleOrderForm.type(SimpleOrderForm.TypeEnum.fromValue(this.type));
             if (this.timeInForce != null)
-            tradingPlaceSimpleOrderRequest.timeInForce(TradingPlaceSimpleOrderRequest.TimeInForceEnum.fromValue(this.timeInForce));
-            tradingPlaceSimpleOrderRequest.amount(this.amount);
-            tradingPlaceSimpleOrderRequest.limitPrice(this.limitPrice);
-            tradingPlaceSimpleOrderRequest.stopPrice(this.stopPrice);
-            tradingPlaceSimpleOrderRequest.postOnly(this.postOnly);
-            tradingPlaceSimpleOrderRequest.expirationDate(this.expirationDate);
-            return tradingPlaceSimpleOrderRequest;
+            simpleOrderForm.timeInForce(SimpleOrderForm.TimeInForceEnum.fromValue(this.timeInForce));
+            simpleOrderForm.amount(this.amount);
+            simpleOrderForm.limitPrice(this.limitPrice);
+            simpleOrderForm.stopPrice(this.stopPrice);
+            simpleOrderForm.postOnly(this.postOnly);
+            simpleOrderForm.expirationDate(this.expirationDate);
+            return simpleOrderForm;
         }
 
         /**
@@ -2780,8 +2780,8 @@ public class TradingApiGenerated {
          </table>
          */
         public SimpleOrderPreview execute() throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            ApiResponse<SimpleOrderPreview> localVarResp = previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            ApiResponse<SimpleOrderPreview> localVarResp = previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
             return localVarResp.getResponseBody();
         }
 
@@ -2797,8 +2797,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<SimpleOrderPreview> executeWithHttpInfo() throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
         }
 
         /**
@@ -2814,8 +2814,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<SimpleOrderPreview> _callback) throws ApiException {
-            TradingPlaceSimpleOrderRequest tradingPlaceSimpleOrderRequest = buildBodyParams();
-            return previewSimpleOrderAsync(userId, userSecret, accountId, tradingPlaceSimpleOrderRequest, _callback);
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderAsync(userId, userSecret, accountId, simpleOrderForm, _callback);
         }
     }
 
@@ -2825,7 +2825,7 @@ public class TradingApiGenerated {
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
-     * @param tradingPlaceSimpleOrderRequest  (required)
+     * @param simpleOrderForm  (required)
      * @return PreviewSimpleOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">

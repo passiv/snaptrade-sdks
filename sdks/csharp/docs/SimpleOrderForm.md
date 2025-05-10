@@ -1,4 +1,4 @@
-# SnapTrade.Net.Model.TradingPlaceSimpleOrderRequest
+# SnapTrade.Net.Model.SimpleOrderForm
 
 ## Properties
 

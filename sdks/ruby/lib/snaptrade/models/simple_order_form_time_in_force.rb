@@ -11,12 +11,14 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  class BrokerageAuthorizationTypeReadOnlyType
-    READ = "read".freeze
-    TRADE = "trade".freeze
+  class SimpleOrderFormTimeInForce
+    GTC = "GTC".freeze
+    FOK = "FOK".freeze
+    IOC = "IOC".freeze
+    GTD = "GTD".freeze
 
     def self.all_vars
-      @all_vars ||= [READ, TRADE].freeze
+      @all_vars ||= [GTC, FOK, IOC, GTD].freeze
     end
 
     # Builds the enum from string
@@ -30,8 +32,8 @@ module SnapTrade
     # @param [String] The enum value in the form of the string
     # @return [String] The enum value
     def build_from_hash(value)
-      return value if BrokerageAuthorizationTypeReadOnlyType.all_vars.include?(value)
-      raise "Invalid ENUM value #{value} for class #BrokerageAuthorizationTypeReadOnlyType"
+      return value if SimpleOrderFormTimeInForce.all_vars.include?(value)
+      raise "Invalid ENUM value #{value} for class #SimpleOrderFormTimeInForce"
     end
   end
 end

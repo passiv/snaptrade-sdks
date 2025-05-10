@@ -2031,7 +2031,7 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 
 ##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
 
-The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example \\\"AAPL  131124C00240000\\\" represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
@@ -2246,7 +2246,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`Any`](./snaptrade_client/type/typing_any.py)
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
@@ -2329,7 +2329,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`Any`](./snaptrade_client/type/typing_any.py)
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`SimpleOrderPreview`](./snaptrade_client/type/simple_order_preview.py)

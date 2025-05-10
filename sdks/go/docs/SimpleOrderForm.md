@@ -1,4 +1,4 @@
-# TradingPlaceSimpleOrderRequest
+# SimpleOrderForm
 
 ## Properties
 
@@ -16,220 +16,220 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewTradingPlaceSimpleOrderRequest
+### NewSimpleOrderForm
 
-`func NewTradingPlaceSimpleOrderRequest(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64, ) *TradingPlaceSimpleOrderRequest`
+`func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64, ) *SimpleOrderForm`
 
-NewTradingPlaceSimpleOrderRequest instantiates a new TradingPlaceSimpleOrderRequest object
+NewSimpleOrderForm instantiates a new SimpleOrderForm object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewTradingPlaceSimpleOrderRequestWithDefaults
+### NewSimpleOrderFormWithDefaults
 
-`func NewTradingPlaceSimpleOrderRequestWithDefaults() *TradingPlaceSimpleOrderRequest`
+`func NewSimpleOrderFormWithDefaults() *SimpleOrderForm`
 
-NewTradingPlaceSimpleOrderRequestWithDefaults instantiates a new TradingPlaceSimpleOrderRequest object
+NewSimpleOrderFormWithDefaults instantiates a new SimpleOrderForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetInstrument
 
-`func (o *TradingPlaceSimpleOrderRequest) GetInstrument() TradingInstrument`
+`func (o *SimpleOrderForm) GetInstrument() TradingInstrument`
 
 GetInstrument returns the Instrument field if non-nil, zero value otherwise.
 
 ### GetInstrumentOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetInstrumentOk() (*TradingInstrument, bool)`
+`func (o *SimpleOrderForm) GetInstrumentOk() (*TradingInstrument, bool)`
 
 GetInstrumentOk returns a tuple with the Instrument field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstrument
 
-`func (o *TradingPlaceSimpleOrderRequest) SetInstrument(v TradingInstrument)`
+`func (o *SimpleOrderForm) SetInstrument(v TradingInstrument)`
 
 SetInstrument sets Instrument field to given value.
 
 
 ### GetSide
 
-`func (o *TradingPlaceSimpleOrderRequest) GetSide() ActionStrict`
+`func (o *SimpleOrderForm) GetSide() ActionStrict`
 
 GetSide returns the Side field if non-nil, zero value otherwise.
 
 ### GetSideOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetSideOk() (*ActionStrict, bool)`
+`func (o *SimpleOrderForm) GetSideOk() (*ActionStrict, bool)`
 
 GetSideOk returns a tuple with the Side field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSide
 
-`func (o *TradingPlaceSimpleOrderRequest) SetSide(v ActionStrict)`
+`func (o *SimpleOrderForm) SetSide(v ActionStrict)`
 
 SetSide sets Side field to given value.
 
 
 ### GetType
 
-`func (o *TradingPlaceSimpleOrderRequest) GetType() string`
+`func (o *SimpleOrderForm) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetTypeOk() (*string, bool)`
+`func (o *SimpleOrderForm) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *TradingPlaceSimpleOrderRequest) SetType(v string)`
+`func (o *SimpleOrderForm) SetType(v string)`
 
 SetType sets Type field to given value.
 
 
 ### GetTimeInForce
 
-`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForce() string`
+`func (o *SimpleOrderForm) GetTimeInForce() string`
 
 GetTimeInForce returns the TimeInForce field if non-nil, zero value otherwise.
 
 ### GetTimeInForceOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetTimeInForceOk() (*string, bool)`
+`func (o *SimpleOrderForm) GetTimeInForceOk() (*string, bool)`
 
 GetTimeInForceOk returns a tuple with the TimeInForce field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimeInForce
 
-`func (o *TradingPlaceSimpleOrderRequest) SetTimeInForce(v string)`
+`func (o *SimpleOrderForm) SetTimeInForce(v string)`
 
 SetTimeInForce sets TimeInForce field to given value.
 
 
 ### GetAmount
 
-`func (o *TradingPlaceSimpleOrderRequest) GetAmount() float64`
+`func (o *SimpleOrderForm) GetAmount() float64`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetAmountOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetAmountOk() (*float64, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *TradingPlaceSimpleOrderRequest) SetAmount(v float64)`
+`func (o *SimpleOrderForm) SetAmount(v float64)`
 
 SetAmount sets Amount field to given value.
 
 
 ### GetLimitPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) GetLimitPrice() float64`
+`func (o *SimpleOrderForm) GetLimitPrice() float64`
 
 GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
 
 ### GetLimitPriceOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetLimitPriceOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetLimitPriceOk() (*float64, bool)`
 
 GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) SetLimitPrice(v float64)`
+`func (o *SimpleOrderForm) SetLimitPrice(v float64)`
 
 SetLimitPrice sets LimitPrice field to given value.
 
 ### HasLimitPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) HasLimitPrice() bool`
+`func (o *SimpleOrderForm) HasLimitPrice() bool`
 
 HasLimitPrice returns a boolean if a field has been set.
 
 ### GetStopPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) GetStopPrice() float64`
+`func (o *SimpleOrderForm) GetStopPrice() float64`
 
 GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
 
 ### GetStopPriceOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetStopPriceOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetStopPriceOk() (*float64, bool)`
 
 GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) SetStopPrice(v float64)`
+`func (o *SimpleOrderForm) SetStopPrice(v float64)`
 
 SetStopPrice sets StopPrice field to given value.
 
 ### HasStopPrice
 
-`func (o *TradingPlaceSimpleOrderRequest) HasStopPrice() bool`
+`func (o *SimpleOrderForm) HasStopPrice() bool`
 
 HasStopPrice returns a boolean if a field has been set.
 
 ### GetPostOnly
 
-`func (o *TradingPlaceSimpleOrderRequest) GetPostOnly() bool`
+`func (o *SimpleOrderForm) GetPostOnly() bool`
 
 GetPostOnly returns the PostOnly field if non-nil, zero value otherwise.
 
 ### GetPostOnlyOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetPostOnlyOk() (*bool, bool)`
+`func (o *SimpleOrderForm) GetPostOnlyOk() (*bool, bool)`
 
 GetPostOnlyOk returns a tuple with the PostOnly field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostOnly
 
-`func (o *TradingPlaceSimpleOrderRequest) SetPostOnly(v bool)`
+`func (o *SimpleOrderForm) SetPostOnly(v bool)`
 
 SetPostOnly sets PostOnly field to given value.
 
 ### HasPostOnly
 
-`func (o *TradingPlaceSimpleOrderRequest) HasPostOnly() bool`
+`func (o *SimpleOrderForm) HasPostOnly() bool`
 
 HasPostOnly returns a boolean if a field has been set.
 
 ### GetExpirationDate
 
-`func (o *TradingPlaceSimpleOrderRequest) GetExpirationDate() time.Time`
+`func (o *SimpleOrderForm) GetExpirationDate() time.Time`
 
 GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
 
 ### GetExpirationDateOk
 
-`func (o *TradingPlaceSimpleOrderRequest) GetExpirationDateOk() (*time.Time, bool)`
+`func (o *SimpleOrderForm) GetExpirationDateOk() (*time.Time, bool)`
 
 GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationDate
 
-`func (o *TradingPlaceSimpleOrderRequest) SetExpirationDate(v time.Time)`
+`func (o *SimpleOrderForm) SetExpirationDate(v time.Time)`
 
 SetExpirationDate sets ExpirationDate field to given value.
 
 ### HasExpirationDate
 
-`func (o *TradingPlaceSimpleOrderRequest) HasExpirationDate() bool`
+`func (o *SimpleOrderForm) HasExpirationDate() bool`
 
 HasExpirationDate returns a boolean if a field has been set.
 
