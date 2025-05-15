@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **DisabledDate** | Pointer to **NullableTime** | Timestamp of when the connection was disabled in SnapTrade. | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **UpdatedDate** | Pointer to **time.Time** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. | [optional] 
+**IsEligibleForPayout** | Pointer to **bool** | Whether the connection is eligible for a payout. | [optional] 
 
 ## Methods
 
@@ -267,6 +268,31 @@ SetUpdatedDate sets UpdatedDate field to given value.
 `func (o *BrokerageAuthorization) HasUpdatedDate() bool`
 
 HasUpdatedDate returns a boolean if a field has been set.
+
+### GetIsEligibleForPayout
+
+`func (o *BrokerageAuthorization) GetIsEligibleForPayout() bool`
+
+GetIsEligibleForPayout returns the IsEligibleForPayout field if non-nil, zero value otherwise.
+
+### GetIsEligibleForPayoutOk
+
+`func (o *BrokerageAuthorization) GetIsEligibleForPayoutOk() (*bool, bool)`
+
+GetIsEligibleForPayoutOk returns a tuple with the IsEligibleForPayout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsEligibleForPayout
+
+`func (o *BrokerageAuthorization) SetIsEligibleForPayout(v bool)`
+
+SetIsEligibleForPayout sets IsEligibleForPayout field to given value.
+
+### HasIsEligibleForPayout
+
+`func (o *BrokerageAuthorization) HasIsEligibleForPayout() bool`
+
+HasIsEligibleForPayout returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

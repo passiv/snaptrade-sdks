@@ -37,6 +37,8 @@ type BrokerageAuthorization struct {
 	// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
 	// Deprecated
 	UpdatedDate *time.Time `json:"updated_date,omitempty"`
+	// Whether the connection is eligible for a payout.
+	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -363,6 +365,38 @@ func (o *BrokerageAuthorization) SetUpdatedDate(v time.Time) {
 	o.UpdatedDate = &v
 }
 
+// GetIsEligibleForPayout returns the IsEligibleForPayout field value if set, zero value otherwise.
+func (o *BrokerageAuthorization) GetIsEligibleForPayout() bool {
+	if o == nil || isNil(o.IsEligibleForPayout) {
+		var ret bool
+		return ret
+	}
+	return *o.IsEligibleForPayout
+}
+
+// GetIsEligibleForPayoutOk returns a tuple with the IsEligibleForPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BrokerageAuthorization) GetIsEligibleForPayoutOk() (*bool, bool) {
+	if o == nil || isNil(o.IsEligibleForPayout) {
+    return nil, false
+	}
+	return o.IsEligibleForPayout, true
+}
+
+// HasIsEligibleForPayout returns a boolean if a field has been set.
+func (o *BrokerageAuthorization) HasIsEligibleForPayout() bool {
+	if o != nil && !isNil(o.IsEligibleForPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsEligibleForPayout gets a reference to the given bool and assigns it to the IsEligibleForPayout field.
+func (o *BrokerageAuthorization) SetIsEligibleForPayout(v bool) {
+	o.IsEligibleForPayout = &v
+}
+
 func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
@@ -392,6 +426,9 @@ func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	if !isNil(o.UpdatedDate) {
 		toSerialize["updated_date"] = o.UpdatedDate
 	}
+	if !isNil(o.IsEligibleForPayout) {
+		toSerialize["is_eligible_for_payout"] = o.IsEligibleForPayout
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -419,6 +456,7 @@ func (o *BrokerageAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "disabled_date")
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "updated_date")
+		delete(additionalProperties, "is_eligible_for_payout")
 		o.AdditionalProperties = additionalProperties
 	}
 

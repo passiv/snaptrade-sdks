@@ -76,5 +76,11 @@ export interface BrokerageAuthorization {
      * @deprecated
      */
     'updated_date'?: string;
+    /**
+     * Whether the connection is eligible for a payout.
+     * @type {boolean}
+     * @memberof BrokerageAuthorization
+     */
+    'is_eligible_for_payout'?: boolean;
 }
 

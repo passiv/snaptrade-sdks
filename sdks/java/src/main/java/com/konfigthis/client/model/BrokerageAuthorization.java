@@ -92,6 +92,10 @@ public class BrokerageAuthorization {
   @SerializedName(SERIALIZED_NAME_UPDATED_DATE)
   private OffsetDateTime updatedDate;
 
+  public static final String SERIALIZED_NAME_IS_ELIGIBLE_FOR_PAYOUT = "is_eligible_for_payout";
+  @SerializedName(SERIALIZED_NAME_IS_ELIGIBLE_FOR_PAYOUT)
+  private Boolean isEligibleForPayout;
+
   public BrokerageAuthorization() {
   }
 
@@ -367,6 +371,35 @@ public class BrokerageAuthorization {
     this.updatedDate = updatedDate;
   }
 
+
+  public BrokerageAuthorization isEligibleForPayout(Boolean isEligibleForPayout) {
+    
+    
+    
+    
+    this.isEligibleForPayout = isEligibleForPayout;
+    return this;
+  }
+
+   /**
+   * Whether the connection is eligible for a payout.
+   * @return isEligibleForPayout
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Whether the connection is eligible for a payout.")
+
+  public Boolean getIsEligibleForPayout() {
+    return isEligibleForPayout;
+  }
+
+
+  public void setIsEligibleForPayout(Boolean isEligibleForPayout) {
+    
+    
+    
+    this.isEligibleForPayout = isEligibleForPayout;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -430,7 +463,8 @@ public class BrokerageAuthorization {
         Objects.equals(this.disabled, brokerageAuthorization.disabled) &&
         Objects.equals(this.disabledDate, brokerageAuthorization.disabledDate) &&
         Objects.equals(this.meta, brokerageAuthorization.meta) &&
-        Objects.equals(this.updatedDate, brokerageAuthorization.updatedDate)&&
+        Objects.equals(this.updatedDate, brokerageAuthorization.updatedDate) &&
+        Objects.equals(this.isEligibleForPayout, brokerageAuthorization.isEligibleForPayout)&&
         Objects.equals(this.additionalProperties, brokerageAuthorization.additionalProperties);
   }
 
@@ -440,7 +474,7 @@ public class BrokerageAuthorization {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, createdDate, brokerage, name, type, disabled, disabledDate, meta, updatedDate, additionalProperties);
+    return Objects.hash(id, createdDate, brokerage, name, type, disabled, disabledDate, meta, updatedDate, isEligibleForPayout, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -463,6 +497,7 @@ public class BrokerageAuthorization {
     sb.append("    disabledDate: ").append(toIndentedString(disabledDate)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    updatedDate: ").append(toIndentedString(updatedDate)).append("\n");
+    sb.append("    isEligibleForPayout: ").append(toIndentedString(isEligibleForPayout)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -495,6 +530,7 @@ public class BrokerageAuthorization {
     openapiFields.add("disabled_date");
     openapiFields.add("meta");
     openapiFields.add("updated_date");
+    openapiFields.add("is_eligible_for_payout");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

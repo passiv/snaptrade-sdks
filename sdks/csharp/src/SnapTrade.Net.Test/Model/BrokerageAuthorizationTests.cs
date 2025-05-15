@@ -129,6 +129,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'UpdatedDate'
         }
+        /// <summary>
+        /// Test the property 'IsEligibleForPayout'
+        /// </summary>
+        [Fact]
+        public void IsEligibleForPayoutTest()
+        {
+            // TODO unit test for the property 'IsEligibleForPayout'
+        }
 
     }
 

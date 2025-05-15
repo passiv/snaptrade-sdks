@@ -49,5 +49,8 @@ class OptionalBrokerageAuthorization(TypedDict, total=False):
     # Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
     updated_date: datetime
 
+    # Whether the connection is eligible for a payout.
+    is_eligible_for_payout: bool
+
 class BrokerageAuthorization(RequiredBrokerageAuthorization, OptionalBrokerageAuthorization):
     pass
