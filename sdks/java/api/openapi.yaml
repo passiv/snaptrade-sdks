@@ -3526,6 +3526,7 @@ components:
             created_date: 2024-08-20T21:56:19.123Z
             updated_date: 2024-08-20T21:56:20.057Z
             type: trade
+            is_eligible_for_payout: true
           meta:
             type: Margin
             status: ACTIVE
@@ -4550,6 +4551,7 @@ components:
           created_date: 2024-08-20T21:56:19.123Z
           updated_date: 2024-08-20T21:56:20.057Z
           type: trade
+          is_eligible_for_payout: true
         meta:
           type: Margin
           status: ACTIVE
@@ -5837,6 +5839,7 @@ components:
         created_date: 2024-08-20T21:56:19.123Z
         updated_date: 2024-08-20T21:56:20.057Z
         type: trade
+        is_eligible_for_payout: true
       properties:
         id:
           description: Unique identifier for the connection. This is the UUID used
@@ -5912,6 +5915,12 @@ components:
           type: string
           x-konfig-original-example: 2024-08-20T21:56:20.057Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date
+        is_eligible_for_payout:
+          description: Whether the connection is eligible for a payout.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-is_eligible_for_payout
       type: object
       x-konfig-is-used-in-successful-response: true
     BrokerageAuthorizationRefreshConfirmation:
@@ -9308,6 +9317,10 @@ components:
     konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-updated_date:
       example: 2024-08-20T21:56:20.057Z
       type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageAuthorization-properties-is_eligible_for_payout:
+      example: true
+      type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh

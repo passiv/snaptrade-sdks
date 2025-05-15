@@ -116,4 +116,12 @@ public class BrokerageAuthorizationTest {
         // TODO: test updatedDate
     }
 
+    /**
+     * Test the property 'isEligibleForPayout'
+     */
+    @Test
+    public void isEligibleForPayoutTest() {
+        // TODO: test isEligibleForPayout
+    }
+
 }

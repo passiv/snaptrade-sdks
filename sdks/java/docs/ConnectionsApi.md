@@ -61,6 +61,7 @@ public class Example {
       System.out.println(result.getDisabledDate());
       System.out.println(result.getMeta());
       System.out.println(result.getUpdatedDate());
+      System.out.println(result.getIsEligibleForPayout());
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#detailBrokerageAuthorization");
       System.err.println("Status code: " + e.getStatusCode());

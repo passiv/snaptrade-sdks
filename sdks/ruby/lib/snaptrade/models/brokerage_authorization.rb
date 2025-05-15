@@ -39,6 +39,9 @@ module SnapTrade
     # Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
     attr_accessor :updated_date
 
+    # Whether the connection is eligible for a payout.
+    attr_accessor :is_eligible_for_payout
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -50,7 +53,8 @@ module SnapTrade
         :'disabled' => :'disabled',
         :'disabled_date' => :'disabled_date',
         :'meta' => :'meta',
-        :'updated_date' => :'updated_date'
+        :'updated_date' => :'updated_date',
+        :'is_eligible_for_payout' => :'is_eligible_for_payout'
       }
     end
 
@@ -70,7 +74,8 @@ module SnapTrade
         :'disabled' => :'Boolean',
         :'disabled_date' => :'Time',
         :'meta' => :'Hash<String, Object>',
-        :'updated_date' => :'Time'
+        :'updated_date' => :'Time',
+        :'is_eligible_for_payout' => :'Boolean'
       }
     end
 
@@ -133,6 +138,10 @@ module SnapTrade
       if attributes.key?(:'updated_date')
         self.updated_date = attributes[:'updated_date']
       end
+
+      if attributes.key?(:'is_eligible_for_payout')
+        self.is_eligible_for_payout = attributes[:'is_eligible_for_payout']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -161,7 +170,8 @@ module SnapTrade
           disabled == o.disabled &&
           disabled_date == o.disabled_date &&
           meta == o.meta &&
-          updated_date == o.updated_date
+          updated_date == o.updated_date &&
+          is_eligible_for_payout == o.is_eligible_for_payout
     end
 
     # @see the `==` method
@@ -173,7 +183,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_date, brokerage, name, type, disabled, disabled_date, meta, updated_date].hash
+      [id, created_date, brokerage, name, type, disabled, disabled_date, meta, updated_date, is_eligible_for_payout].hash
     end
 
     # Builds the object from hash

@@ -60,6 +60,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.UpdatedDate`: %v\n", *resp.UpdatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.IsEligibleForPayout`: %v\n", *resp.IsEligibleForPayout)
 }
 ```
 
@@ -159,6 +160,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.IsEligibleForPayout`: %v\n", *resp.IsEligibleForPayout)
 }
 ```
 
