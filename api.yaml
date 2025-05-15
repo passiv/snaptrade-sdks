@@ -3842,6 +3842,10 @@ components:
           type: string
           format: date-time
           example: 2024-08-20T21:56:20.057224Z
+        is_eligible_for_payout:
+          description: Whether the connection is eligible for a payout.
+          type: boolean
+          example: true
     BrokerageAuthorizationRefreshConfirmation:
       description: Confirmation that the syncs have been scheduled.
       type: object
