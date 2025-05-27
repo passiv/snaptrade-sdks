@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
+# yaml-language-server: $schema=./konfig-yaml.schema.json
 
 order:
   - tag: API Status
@@ -77,6 +77,9 @@ portal:
       path: demos/get-transactions.md
     - id: placing-trades
       path: demos/placing-trades.md
+  betaOperations:
+    /accounts/{accountId}/trading/bracket:
+      post: true
   hideOperations:
     /activities:
       get: true
@@ -116,8 +119,7 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
-    /accounts/{accountId}/trading/bracket:
-      post: true
+
     /accounts/{accountId}/trading/simple:
       post: true
     /accounts/{accountId}/trading/simple/preview:

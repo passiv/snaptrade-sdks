@@ -1,0 +1,3101 @@
+{
+  "$ref": "#/definitions/konfigYaml",
+  "definitions": {
+    "konfigYaml": {
+      "type": "object",
+      "properties": {
+        "primaryColor": {
+          "type": "string",
+          "description": "Primary color to be used in Konfig's API Portal"
+        },
+        "portal": {
+          "type": "object",
+          "properties": {
+            "primaryColor": {
+              "$ref": "#/definitions/konfigYaml/properties/primaryColor"
+            },
+            "customSnippet": {
+              "type": "string",
+              "description": "Path to file containing HTML to be added in the <head> of the docs. This is useful if you want to include a custom snippets in the docs."
+            },
+            "googleAnalyticsId": {
+              "type": "string",
+              "description": "Google Analytics ID. If provided, Konfig's API Portal will include Google Analytics tracking."
+            },
+            "favicon": {
+              "type": "string",
+              "description": "Relative path to favicon image used for Konfig's API Portal"
+            },
+            "logo": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "light": {
+                      "type": "string"
+                    },
+                    "dark": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "light",
+                    "dark"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Light and dark logos for Konfig's API Portal"
+                }
+              ],
+              "description": "Relative path to logo image used for Konfig's API Portal. If an object is provided, the light logo will be used for light mode and the dark logo will be used for dark mode."
+            },
+            "socials": {
+              "type": "object",
+              "properties": {
+                "website": {
+                  "type": "string"
+                },
+                "documentation": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "hideNonSdkSnippets": {
+              "type": "boolean",
+              "description": "Do not show non-SDK snippets in the API Reference page of the API Portal. This is useful if your API is not easily usable without an SDK or if you do not want developers to use your API without an SDK."
+            },
+            "title": {
+              "type": "string",
+              "description": "Title to be used in Konfig's API Portal"
+            },
+            "documentation": {
+              "type": "object",
+              "properties": {
+                "sidebar": {
+                  "type": "object",
+                  "properties": {
+                    "sections": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "label": {
+                            "type": "string"
+                          },
+                          "links": {
+                            "type": "array",
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "const": "link",
+                                      "default": "link"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "path": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "path"
+                                  ],
+                                  "additionalProperties": false
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "type": {
+                                      "type": "string",
+                                      "const": "group",
+                                      "default": "group"
+                                    },
+                                    "label": {
+                                      "type": "string"
+                                    },
+                                    "links": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "#/definitions/konfigYaml/properties/portal/properties/documentation/properties/sidebar/properties/sections/items/properties/links/items/anyOf/0"
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "label",
+                                    "links"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "required": [
+                          "label",
+                          "links"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  },
+                  "required": [
+                    "sections"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Configuration of sidebar to navigate the documentation. Supports sections, links, and grouped links."
+                }
+              },
+              "required": [
+                "sidebar"
+              ],
+              "additionalProperties": false,
+              "description": "Markdown-based Documentation to be uploaded to Konfig's API Portal"
+            },
+            "demos": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "path": {
+                    "type": "string"
+                  },
+                  "showCode": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "id",
+                  "path"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "hideOperations": {
+              "type": "object",
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "boolean"
+                    }
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              }
+            },
+            "betaOperations": {
+              "type": "object",
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "boolean"
+                    }
+                  },
+                  {
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "description": "Mark operations as beta in the API documentation and SDKs"
+            },
+            "cta": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "url",
+                "label"
+              ],
+              "additionalProperties": false,
+              "description": "Adds a call-to-action button at the top-right of the docs."
+            },
+            "hideSecurity": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              },
+              "description": "List of security names to hide in Konfig's API Portal"
+            }
+          },
+          "required": [
+            "title"
+          ],
+          "additionalProperties": false,
+          "description": "Configuration for API portal generated by Konfig"
+        },
+        "order": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tag": {
+                "type": "string",
+                "description": "This represents the tag name from the OpenAPI specification."
+              },
+              "operations": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "description": "This represents the operationId from the OpenAPI specification."
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "path": {
+                          "type": "string",
+                          "description": "This represents the operation's subpath."
+                        },
+                        "method": {
+                          "type": "string",
+                          "description": "This represents the operation's HTTP method."
+                        }
+                      },
+                      "required": [
+                        "path",
+                        "method"
+                      ],
+                      "additionalProperties": false,
+                      "description": "This represents the operation's subpath and HTTP method."
+                    }
+                  ]
+                },
+                "description": "An ordered list of operations associated with the tag. Each operation can be an operationId or a combination of subpath and HTTP method."
+              }
+            },
+            "required": [
+              "tag"
+            ],
+            "additionalProperties": false,
+            "description": "A schema that represents a tag and its associated operations in a user-defined order."
+          },
+          "description": "An ordered list of tags, where each tag has its associated operations. This represents the user-defined order for displaying tags and operations in the API documentation."
+        },
+        "readmeHeader": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "string",
+              "description": "Relative path from konfig.yaml to image"
+            },
+            "title": {
+              "type": "string",
+              "description": "Title to be displayed in SDKs README.md"
+            },
+            "url": {
+              "type": "string",
+              "description": "URL to redirect to when clicking on the image"
+            }
+          },
+          "required": [
+            "image",
+            "title",
+            "url"
+          ],
+          "additionalProperties": false,
+          "description": "Call to action to be displayed in SDKs README.md"
+        },
+        "securitySchemeOverride": {
+          "type": "object",
+          "properties": {
+            "security": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "securitySchemes": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "const": "apiKey"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "in": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "type",
+                  "name",
+                  "in"
+                ],
+                "additionalProperties": true
+              }
+            }
+          },
+          "required": [
+            "security",
+            "securitySchemes"
+          ],
+          "additionalProperties": false
+        },
+        "useSecurityKeyName": {
+          "type": "boolean",
+          "description": "Instead of using the security scheme's key, use the security scheme's name in the OpenAPI specification.\n\nFor example take the following OAS security scheme:\n\ncomponents:\n  securitySchemes:\n    apiKey: # <- security name\n      type: apiKey\n      in: header\n      name: X-API-Key # <- security key\n\nIf this field is true then \"X-API-Key\" will be used instead of \"apiKey\" in the generated SDKs.\n"
+        },
+        "omitSecurityRequirementsFromTopLevelClient": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readmeOperation": {
+          "type": "object",
+          "properties": {
+            "operationId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "operationId"
+          ],
+          "additionalProperties": false,
+          "description": "Operation to be displayed in \"Getting Started\" section of SDKs README.md"
+        },
+        "portalTitle": {
+          "type": "string",
+          "description": "Title to be used in Konfig's API Portal"
+        },
+        "defaultChangesetBumpType": {
+          "type": "string",
+          "enum": [
+            "major",
+            "minor",
+            "patch",
+            "prerelease"
+          ],
+          "description": "Default changeset bump type for 'konfig changeset' command",
+          "default": "patch"
+        },
+        "overrideTopLevelReadme": {
+          "type": "string"
+        },
+        "fixConfig": {
+          "type": "object",
+          "properties": {
+            "inheritMetadataSpecPath": {
+              "type": "string",
+              "description": "Path to OAS to inherit metadata such as examples, descriptions, summaries, and tags. This is useful if you have multiple OpenAPI Specifications. One that includes extra metadata (usually hand-written) and one that is used to generate SDKs (usually generated from code)."
+            },
+            "updateProperty": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "anyOf": [
+                      {
+                        "type": [
+                          "string",
+                          "number",
+                          "boolean",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/konfigYaml/properties/fixConfig/properties/updateProperty/additionalProperties/additionalProperties/additionalProperties"
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "additionalProperties": {
+                          "$ref": "#/definitions/konfigYaml/properties/fixConfig/properties/updateProperty/additionalProperties/additionalProperties/additionalProperties"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "propertyNames": {
+                  "minLength": 1
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              }
+            },
+            "modify": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/konfigYaml/properties/fixConfig/properties/updateProperty/additionalProperties/additionalProperties/additionalProperties"
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "description": "A JSON where the key is a JSON Path pointing to a location in the OAS and the value is the JSON value to be placed at the location."
+            },
+            "update": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/definitions/konfigYaml/properties/fixConfig/properties/updateProperty/additionalProperties/additionalProperties/additionalProperties"
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "description": "A JSON where the key is a JSON Path pointing to a location in the OAS and the value is a JSON Object that is merged with the existing JSON Object at that location."
+            }
+          },
+          "additionalProperties": false
+        },
+        "filterQueryParams": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filterModels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of model names to filter out. This is useful if you don't want to generate a model for a specific schema."
+        },
+        "filterRequestBodies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "attachNullabletoAllResponseSchemas": {
+          "type": "boolean"
+        },
+        "validateRequiredPropertiesAndParametersAreNonEmpty": {
+          "type": "boolean"
+        },
+        "stripRequiredStringProperties": {
+          "type": "boolean"
+        },
+        "optionalParameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "\"name\" field of parameter"
+              },
+              "in": {
+                "type": "string",
+                "description": "\"in\" field of parameter"
+              }
+            },
+            "required": [
+              "name",
+              "in"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Can be configured to make specified parameters optional in the\n  SDKs. This can be useful if you have a set of parameters you would rather\n  instantiate on the top-level client to avoid redundant passing of this\n  parameter. For example if you have a \"version\" parameter that you repeatedly\n  pass throughout the operations, you can instead make it optional, add it as a\n  client state, and implement a request hook to attach the \"version\" client\n  state to the operation."
+        },
+        "doNotValidateGloballyRequiredSecurity": {
+          "type": "boolean"
+        },
+        "infoContactEmail": {
+          "type": "string"
+        },
+        "infoContactName": {
+          "type": "string"
+        },
+        "omitInfoDescription": {
+          "type": "boolean"
+        },
+        "validateSpec": {
+          "type": "boolean"
+        },
+        "infoContactUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "progressYamlPath": {
+          "type": "string",
+          "description": "Overrides the path of progress.yaml which is used in the \"konfig fix\" CLI command. This is helpful if you have a staging and production OpenAPI Specification and you want to host two different SDK repos for staging and production releases but want to share the same progress for \"konfig fix\"."
+        },
+        "filterPaths": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "method": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "additionalProperties": false
+          },
+          "description": "Filter operations from OpenAPI spec by path and method. Filtered operations won't be generated in SDKs. Omitting method will filter all methods for the path."
+        },
+        "doNotAutoMergeBumpPr": {
+          "type": "boolean"
+        },
+        "disableAutomationLinter": {
+          "type": "boolean"
+        },
+        "tagPriority": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Name of tag"
+          },
+          "description": "Order of tags to be processed by Konfig. This can be used to configure which operation is used when generated the getting started documentation in the generated README for an SDK."
+        },
+        "takeFirstTag": {
+          "type": "boolean",
+          "default": true,
+          "description": "Multiple tags can cause conflicts for TypeScript SDK"
+        },
+        "removeDefaultArrayValues": {
+          "type": "boolean",
+          "default": true,
+          "description": "Default array value is not supported in Java SDK"
+        },
+        "convertArrayDataTypesToAny": {
+          "type": "boolean",
+          "default": false,
+          "description": "Array data type is not supported in TypeScript SDK for OAS 3.1"
+        },
+        "allObjectsHaveAdditionalProperties": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "requestBody": {
+                  "type": "boolean"
+                },
+                "exclude": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "include": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "excludeGenerators": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        },
+        "requiredEnvironmentVariables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputDirectory": {
+          "type": "string"
+        },
+        "generators": {
+          "type": "object",
+          "properties": {
+            "java": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object",
+                    "properties": {
+                      "destinationFilename": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "destinationFilename"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "version": {
+                  "type": "string"
+                },
+                "outputDirectory": {
+                  "type": "string"
+                },
+                "mapTags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "A JSON where the key is a tag name and the value is the new tag name. Allows you to modify tags by name."
+                },
+                "mockServerPort": {
+                  "type": "number",
+                  "description": "To configure the port of the mock server for generated tests. This will ensure that the SDK client is configured to point to the correct port on the local machine (e.g. http://127.0.0.1:{mockServerPort})."
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "type": "string"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "type": "string"
+                },
+                "readmeDescriptionSnippet": {
+                  "type": "string"
+                },
+                "copyFiles": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "from": {
+                            "type": "string",
+                            "description": "Relative path from directory that contains konfig.yaml to file that you want to copy"
+                          },
+                          "to": {
+                            "type": "string",
+                            "description": "Relative path from directory that contains konfig.yaml to destination you want to copy to"
+                          }
+                        },
+                        "required": [
+                          "from",
+                          "to"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "konfigIgnore": {
+                            "type": "string",
+                            "description": "Relative path to a .konfigignore file. If specified, we parse the .konfigignore file and copy all files that it matches to the current directory."
+                          }
+                        },
+                        "required": [
+                          "konfigIgnore"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "description": "Configure copying a set of files from a source to a destination. This is useful if you have custom implementations that you would like duplicated across multiple SDK repos."
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "type": "string",
+                  "description": "Filepath to file containing override for the section in generated documentation for setting up authentication in the SDK."
+                },
+                "disabled": {
+                  "type": "boolean"
+                },
+                "defaultTimeout": {
+                  "type": "number",
+                  "default": 0
+                },
+                "userAgent": {
+                  "type": "string",
+                  "default": "Konfig"
+                },
+                "test": {
+                  "type": "object",
+                  "properties": {
+                    "script": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Series of commands that are sequentially executed to test the SDK"
+                    },
+                    "requiredEnvironmentVariables": {
+                      "$ref": "#/definitions/konfigYaml/properties/requiredEnvironmentVariables"
+                    }
+                  },
+                  "required": [
+                    "script"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Configuration of \"konfig test\""
+                },
+                "git": {
+                  "type": "object",
+                  "properties": {
+                    "host": {
+                      "type": "string",
+                      "default": "github.com"
+                    },
+                    "userId": {
+                      "type": "string"
+                    },
+                    "repoId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "userId",
+                    "repoId"
+                  ],
+                  "additionalProperties": true
+                },
+                "language": {
+                  "type": "string",
+                  "const": "java",
+                  "default": "java"
+                },
+                "groupId": {
+                  "type": "string",
+                  "description": "Uniquely identifies your JVM-based project (ex. \"com.acme\"). By default we publish packages under Konfig's group id of \"com.konfigthis\". If you would like to publish to your own group ID then create a Sonatype account (https://central.sonatype.org/publish/publish-guide/#initial-setup) and claim your group ID and add \"dphuang2\" to the list of users that can publish to your group ID."
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "acme"
+                },
+                "artifactId": {
+                  "type": "string",
+                  "description": "Example: \"acme-java-sdk\" (see https://maven.apache.org/guides/mini/guide-naming-conventions.html)"
+                },
+                "removeKonfigBranding": {
+                  "type": "boolean",
+                  "description": "Don't add Konfig branding to generated SDK"
+                },
+                "gitlab": {
+                  "type": "object",
+                  "properties": {
+                    "domain": {
+                      "type": "string",
+                      "default": "gitlab.com",
+                      "description": "gitlab.com"
+                    },
+                    "projectId": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "projectId"
+                  ],
+                  "additionalProperties": false
+                },
+                "clientName": {
+                  "type": "string"
+                },
+                "clientState": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "A list of stateful properties generated into the SDK that can be used in custom implementation hooks. This is useful when you need state in the SDK that is not described in the OpenAPI Specification such as a key used for request signing."
+                },
+                "clientStateWithExamples": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "example": {
+                        "type": "string"
+                      },
+                      "required": {
+                        "type": "boolean",
+                        "description": "Configures SDKs to validate that this client state is non-empty. (e.g. not empty string '' or null)"
+                      }
+                    },
+                    "required": [
+                      "name"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "description": "A list of stateful properties generated into the SDK that can be used in custom implementation hooks. This is useful when you need state in the SDK that is not described in the OpenAPI Specification such as a key used for request signing. This is different from the \"clientState\" field in that it also includes examples for the generated documentation"
+                },
+                "toStringReturnsJson": {
+                  "type": "boolean",
+                  "description": "Modify the behavior of toString() for generated schema classes to return a parsable JSON string as opposed to a string representation of the object's properties. This could be useful when you want to log the contents of a schema class without having to manually serialize it to JSON."
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "groupId",
+                "artifactId",
+                "clientName"
+              ],
+              "additionalProperties": false
+            },
+            "android": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "android",
+                  "default": "android"
+                },
+                "groupId": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/groupId"
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "acme"
+                },
+                "artifactId": {
+                  "type": "string",
+                  "description": "ascme-java-sdk"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "groupId",
+                "artifactId"
+              ],
+              "additionalProperties": false
+            },
+            "ruby": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "ruby",
+                  "default": "ruby"
+                },
+                "moduleName": {
+                  "type": "string"
+                },
+                "gemName": {
+                  "type": "string",
+                  "description": "The name of the gem on rubygems.org (e.g. https://rubygems.org/gems/GEM_NAME)"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "moduleName",
+                "gemName"
+              ],
+              "additionalProperties": false
+            },
+            "python": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "useDescriptionInOperationTableDocumentation": {
+                  "type": "boolean",
+                  "description": "Whether or not to use the operation's description in the operation table documentation. By default the summary is used."
+                },
+                "readmeHeaderSnippet": {
+                  "type": "string",
+                  "description": "A snippet of markdown that will be inserted at the top of the README.md file. This is useful for adding a custom header to the README.md file that is not generated by Konfig."
+                },
+                "language": {
+                  "type": "string",
+                  "const": "python",
+                  "default": "python"
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "acme_client"
+                },
+                "projectName": {
+                  "type": "string",
+                  "description": "acme-python-sdk"
+                },
+                "responseTypeVersion": {
+                  "type": "string",
+                  "enum": [
+                    "1",
+                    "2"
+                  ],
+                  "default": "2",
+                  "description": "Choose which version of Konfig's implementation of responses for the Python SDK to use."
+                },
+                "removeKonfigBranding": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                },
+                "pypiApiTokenEnvironmentVariable": {
+                  "type": "string"
+                },
+                "gitlabRepositoryId": {
+                  "type": "string"
+                },
+                "useAiohttp3_8": {
+                  "type": "boolean",
+                  "description": "Use aiohttp 3.8.4 instead of the latest version. This is useful if you want to continue publishing your Python SDK with Python 3.7 compatability since the next version of aiohttp requires Python 3.8."
+                },
+                "asyncReadmeSnippet": {
+                  "type": "string"
+                },
+                "objectPropertyNamingConvention": {
+                  "type": "string",
+                  "enum": [
+                    "camelCase",
+                    "snake_case"
+                  ],
+                  "default": "snake_case"
+                },
+                "clientName": {
+                  "type": "string"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                },
+                "clientStateIsOptional": {
+                  "type": "boolean",
+                  "description": "Whether or not to raise an error if client state is provided"
+                },
+                "setSkipSerializationToTrueByDefault": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "apiKeyAlias": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "validateRequiredStringsAreNonEmpty": {
+                  "type": "boolean"
+                },
+                "omitApiDocumentation": {
+                  "type": "boolean"
+                },
+                "omitModelDocumentation": {
+                  "type": "boolean"
+                },
+                "packageUrl": {
+                  "type": "string"
+                },
+                "topLevelOperations": {
+                  "anyOf": [
+                    {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "operationId": {
+                            "type": "string"
+                          },
+                          "methodName": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "operationId",
+                          "methodName"
+                        ],
+                        "additionalProperties": false
+                      }
+                    }
+                  ]
+                },
+                "defaultAsyncTimeout": {
+                  "type": "number",
+                  "description": "Configure a default timeout for async operations. By default the timeout will be the default inherited from aiohttp which is 300 seconds (5 minutes)."
+                },
+                "testPyPI": {
+                  "type": "boolean"
+                },
+                "keepAllParametersOptional": {
+                  "type": "boolean",
+                  "description": "This is a feature flag for ensuring that all parameters stay optional in the case of Python SDKs that have been published and distributed to developers already and want to preserve backwards compatability. Particularly we want to handle flattened kwargs and \"query_params\" / \"header_params\" form arguments."
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "packageName",
+                "projectName",
+                "clientName"
+              ],
+              "additionalProperties": false
+            },
+            "typescript": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "useDescriptionInOperationTableDocumentation": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/useDescriptionInOperationTableDocumentation"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "typescript",
+                  "default": "typescript"
+                },
+                "useAxios0_27_2": {
+                  "type": "boolean",
+                  "description": "Use axios 0.27.2 instead of the latest version. This is useful if you want to continue publishing your TypeScript SDK without making breaking changes since the next version of axios has some interface differences as described here: https://github.com/bmuenzenmeyer/axios-1.0.0-migration-guide."
+                },
+                "dependencies": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "A map of dependencies to add to the generated package.json. This is useful for adding dependencies that are required for the SDK to work."
+                },
+                "packageJsonScripts": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "A map of scripts to add to the generated package.json. This is useful for adding custom scripts that run tests or build the SDK."
+                },
+                "clientName": {
+                  "type": "string",
+                  "description": "The top-level client's name. (e.g. 'Acme' in \"import { Acme } from 'acme-typescript-sdk'\")"
+                },
+                "npmName": {
+                  "type": "string",
+                  "description": "The name of the npm package (e.g. \"acme-typescript-sdk\" in \"import { Acme } from 'acme-typescript-sdk'\")"
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "parameters": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "response": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "parameters",
+                    "response"
+                  ],
+                  "additionalProperties": false,
+                  "description": "Enable pagination for operations in which the parameters are a superset of the 'parameters' array and     the response fields are a superset of the 'response' array."
+                },
+                "rateLimitRetry": {
+                  "type": "object",
+                  "properties": {
+                    "initialDelay": {
+                      "type": "number",
+                      "default": 5000
+                    },
+                    "maxAttempts": {
+                      "type": "number",
+                      "default": 3
+                    }
+                  },
+                  "additionalProperties": false,
+                  "description": "Configure retry options for rate limit errors (Error code 429).     Initial delay is measured in ms and is doubled every subsequent attempt where the response is a 429 error."
+                },
+                "removeKonfigBranding": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                },
+                "useSecurityKeyNameAsPropertyName": {
+                  "type": "boolean",
+                  "description": "Consider the following security scheme: { accessToken: { type: apiKey, name: authorization, in: header }}.\nThe default behavior is to use the (camelCased) header name as the Configuration property name (e.g. \"authorization\").\nIf this flag is set to true, then the key name will be used instead (e.g. \"accessToken\")."
+                },
+                "objectPropertyNamingConvention": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/objectPropertyNamingConvention",
+                  "default": "camelCase"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                },
+                "removeRequiredProperties": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "topLevelOperations": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/topLevelOperations"
+                },
+                "gitlab": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/gitlab"
+                },
+                "omitApiDocumentation": {
+                  "type": "boolean"
+                },
+                "includeFetchAdapter": {
+                  "type": "boolean"
+                },
+                "includeEventSourceParser": {
+                  "type": "boolean"
+                },
+                "removeDefaultConfigurationParameters": {
+                  "type": "boolean",
+                  "description": "Removes default fields (username, password, apiKey, and accessToken) from ConfigurationParameters class"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "clientName",
+                "npmName"
+              ],
+              "additionalProperties": false
+            },
+            "csharp": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "csharp",
+                  "default": "csharp"
+                },
+                "clientName": {
+                  "type": "string"
+                },
+                "logoPath": {
+                  "type": "string",
+                  "description": "The path to a logo image that is copied to the generated C# SDK to be used as an image on https://nuget.org. This is required and important for branding your SDK."
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "The name of this package that shows up on https://nuget.org (e.g. \"Acme.Net\")"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "clientName",
+                "logoPath",
+                "packageName"
+              ],
+              "additionalProperties": false
+            },
+            "php": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "php",
+                  "default": "php"
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "acme-php"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                },
+                "supportPhp7": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "guzzle6": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "packagistUsername": {
+                  "type": "string",
+                  "default": "konfig",
+                  "description": "The username used to publish to packagist.org"
+                },
+                "invokerPackage": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "packageName",
+                "invokerPackage"
+              ],
+              "additionalProperties": false
+            },
+            "kotlin": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "kotlin",
+                  "default": "kotlin"
+                },
+                "groupId": {
+                  "type": "string",
+                  "description": "com.acme"
+                },
+                "artifactId": {
+                  "type": "string",
+                  "description": "acme-kotlin-sdk"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "groupId",
+                "artifactId"
+              ],
+              "additionalProperties": false
+            },
+            "objc": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "objc",
+                  "default": "objc"
+                },
+                "podName": {
+                  "type": "string",
+                  "description": "AcmeClient"
+                },
+                "classPrefix": {
+                  "type": "string",
+                  "description": "A"
+                },
+                "authorName": {
+                  "type": "string",
+                  "description": "acme.com"
+                },
+                "authorEmail": {
+                  "type": "string",
+                  "description": "engineering@acme.com"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "podName",
+                "classPrefix",
+                "authorName",
+                "authorEmail"
+              ],
+              "additionalProperties": false
+            },
+            "go": {
+              "type": "object",
+              "properties": {
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "go",
+                  "default": "go"
+                },
+                "packageName": {
+                  "type": "string",
+                  "description": "acme"
+                },
+                "clientState": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                },
+                "clientStateWithExamples": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                }
+              },
+              "required": [
+                "outputDirectory",
+                "version",
+                "git",
+                "packageName"
+              ],
+              "additionalProperties": false
+            },
+            "swift": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "swift",
+                  "default": "swift"
+                },
+                "projectName": {
+                  "type": "string",
+                  "description": "Acme"
+                },
+                "podAuthors": {
+                  "type": "string",
+                  "description": "acme.com"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "projectName",
+                "podAuthors"
+              ],
+              "additionalProperties": false
+            },
+            "dart": {
+              "type": "object",
+              "properties": {
+                "files": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                },
+                "version": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                },
+                "outputDirectory": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                },
+                "mapTags": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                },
+                "mockServerPort": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                },
+                "defaultChangesetBumpType": {
+                  "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                },
+                "readmeSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                },
+                "readmeSupportingDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                },
+                "readmeDescriptionSnippet": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                },
+                "copyFiles": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                },
+                "apiDocumentationAuthenticationPartial": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                },
+                "disabled": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                },
+                "defaultTimeout": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                },
+                "userAgent": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                },
+                "test": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                },
+                "git": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                },
+                "language": {
+                  "type": "string",
+                  "const": "dart",
+                  "default": "dart"
+                },
+                "removeKonfigBranding": {
+                  "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                },
+                "clientName": {
+                  "type": "string",
+                  "description": "The top-level client's name. (e.g. 'Acme' in \"final acme = Acme();\")"
+                },
+                "pubName": {
+                  "type": "string",
+                  "pattern": "^[a-z][a-z\\_]*$",
+                  "description": "\"a\" in import 'package:a/b.dart';"
+                }
+              },
+              "required": [
+                "version",
+                "outputDirectory",
+                "git",
+                "clientName",
+                "pubName"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "specPath": {
+          "type": "string"
+        },
+        "specInputPath": {
+          "type": "string",
+          "description": "Configure an \"input\" path for your OpenAPI Specification. This is useful when you want to persist two different versions of your OpenAPI Specification. One that is an exact copy from another location that is either polled from an endpoint or pushed from another Git repository. Another that is modified to be used for code generation. Konfig will detect that this field is set and write or read from it in place of \"specPath\" for operations like \"konfig fix\", \"konfig pull\", and \"konfig push\"."
+        },
+        "specRemotePath": {
+          "type": "string",
+          "format": "uri"
+        },
+        "additionalGenerators": {
+          "type": "object",
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "java"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/language"
+                  },
+                  "groupId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/groupId"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/packageName"
+                  },
+                  "artifactId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/artifactId"
+                  },
+                  "removeKonfigBranding": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                  },
+                  "gitlab": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/gitlab"
+                  },
+                  "clientName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  },
+                  "toStringReturnsJson": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/toStringReturnsJson"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "groupId",
+                  "artifactId",
+                  "clientName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "ruby"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/ruby/properties/language"
+                  },
+                  "moduleName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/ruby/properties/moduleName"
+                  },
+                  "gemName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/ruby/properties/gemName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "moduleName",
+                  "gemName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "android"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/android/properties/language"
+                  },
+                  "groupId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/groupId"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/android/properties/packageName"
+                  },
+                  "artifactId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/android/properties/artifactId"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "groupId",
+                  "artifactId"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "python"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "useDescriptionInOperationTableDocumentation": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/useDescriptionInOperationTableDocumentation"
+                  },
+                  "readmeHeaderSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/readmeHeaderSnippet"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/language"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/packageName"
+                  },
+                  "projectName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/projectName"
+                  },
+                  "responseTypeVersion": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/responseTypeVersion"
+                  },
+                  "removeKonfigBranding": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                  },
+                  "pypiApiTokenEnvironmentVariable": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/pypiApiTokenEnvironmentVariable"
+                  },
+                  "gitlabRepositoryId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/gitlabRepositoryId"
+                  },
+                  "useAiohttp3_8": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/useAiohttp3_8"
+                  },
+                  "asyncReadmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/asyncReadmeSnippet"
+                  },
+                  "objectPropertyNamingConvention": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/objectPropertyNamingConvention"
+                  },
+                  "clientName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/clientName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  },
+                  "clientStateIsOptional": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/clientStateIsOptional"
+                  },
+                  "setSkipSerializationToTrueByDefault": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/setSkipSerializationToTrueByDefault"
+                  },
+                  "apiKeyAlias": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/apiKeyAlias"
+                  },
+                  "validateRequiredStringsAreNonEmpty": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/validateRequiredStringsAreNonEmpty"
+                  },
+                  "omitApiDocumentation": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/omitApiDocumentation"
+                  },
+                  "omitModelDocumentation": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/omitModelDocumentation"
+                  },
+                  "packageUrl": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/packageUrl"
+                  },
+                  "topLevelOperations": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/topLevelOperations"
+                  },
+                  "defaultAsyncTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/defaultAsyncTimeout"
+                  },
+                  "testPyPI": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/testPyPI"
+                  },
+                  "keepAllParametersOptional": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/keepAllParametersOptional"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "packageName",
+                  "projectName",
+                  "clientName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "typescript"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "useDescriptionInOperationTableDocumentation": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/useDescriptionInOperationTableDocumentation"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/language"
+                  },
+                  "useAxios0_27_2": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/useAxios0_27_2"
+                  },
+                  "dependencies": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/dependencies"
+                  },
+                  "packageJsonScripts": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/packageJsonScripts"
+                  },
+                  "clientName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/clientName"
+                  },
+                  "npmName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/npmName"
+                  },
+                  "pagination": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/pagination"
+                  },
+                  "rateLimitRetry": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/rateLimitRetry"
+                  },
+                  "removeKonfigBranding": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                  },
+                  "useSecurityKeyNameAsPropertyName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/useSecurityKeyNameAsPropertyName"
+                  },
+                  "objectPropertyNamingConvention": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/objectPropertyNamingConvention"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  },
+                  "removeRequiredProperties": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/removeRequiredProperties"
+                  },
+                  "topLevelOperations": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/python/properties/topLevelOperations"
+                  },
+                  "gitlab": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/gitlab"
+                  },
+                  "omitApiDocumentation": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/omitApiDocumentation"
+                  },
+                  "includeFetchAdapter": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/includeFetchAdapter"
+                  },
+                  "includeEventSourceParser": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/includeEventSourceParser"
+                  },
+                  "removeDefaultConfigurationParameters": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/typescript/properties/removeDefaultConfigurationParameters"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "clientName",
+                  "npmName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "csharp"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/csharp/properties/language"
+                  },
+                  "clientName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/csharp/properties/clientName"
+                  },
+                  "logoPath": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/csharp/properties/logoPath"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/csharp/properties/packageName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "clientName",
+                  "logoPath",
+                  "packageName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "php"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/language"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/packageName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  },
+                  "supportPhp7": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/supportPhp7"
+                  },
+                  "guzzle6": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/guzzle6"
+                  },
+                  "packagistUsername": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/packagistUsername"
+                  },
+                  "invokerPackage": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/php/properties/invokerPackage"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "packageName",
+                  "invokerPackage"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "dart"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/dart/properties/language"
+                  },
+                  "removeKonfigBranding": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/removeKonfigBranding"
+                  },
+                  "clientName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/dart/properties/clientName"
+                  },
+                  "pubName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/dart/properties/pubName"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "clientName",
+                  "pubName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "kotlin"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/kotlin/properties/language"
+                  },
+                  "groupId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/kotlin/properties/groupId"
+                  },
+                  "artifactId": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/kotlin/properties/artifactId"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "groupId",
+                  "artifactId"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "objc"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/objc/properties/language"
+                  },
+                  "podName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/objc/properties/podName"
+                  },
+                  "classPrefix": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/objc/properties/classPrefix"
+                  },
+                  "authorName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/objc/properties/authorName"
+                  },
+                  "authorEmail": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/objc/properties/authorEmail"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "podName",
+                  "classPrefix",
+                  "authorName",
+                  "authorEmail"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "go"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/go/properties/language"
+                  },
+                  "packageName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/go/properties/packageName"
+                  },
+                  "clientState": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientState"
+                  },
+                  "clientStateWithExamples": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/clientStateWithExamples"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "outputDirectory",
+                  "version",
+                  "git",
+                  "packageName"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "generator": {
+                    "type": "string",
+                    "const": "swift"
+                  },
+                  "files": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/files"
+                  },
+                  "version": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/version"
+                  },
+                  "outputDirectory": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/outputDirectory"
+                  },
+                  "mapTags": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mapTags"
+                  },
+                  "mockServerPort": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/mockServerPort"
+                  },
+                  "defaultChangesetBumpType": {
+                    "$ref": "#/definitions/konfigYaml/properties/defaultChangesetBumpType"
+                  },
+                  "readmeSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSnippet"
+                  },
+                  "readmeSupportingDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeSupportingDescriptionSnippet"
+                  },
+                  "readmeDescriptionSnippet": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/readmeDescriptionSnippet"
+                  },
+                  "copyFiles": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/copyFiles"
+                  },
+                  "apiDocumentationAuthenticationPartial": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/apiDocumentationAuthenticationPartial"
+                  },
+                  "disabled": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/disabled"
+                  },
+                  "defaultTimeout": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/defaultTimeout"
+                  },
+                  "userAgent": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/userAgent"
+                  },
+                  "test": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/test"
+                  },
+                  "git": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/java/properties/git"
+                  },
+                  "language": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/swift/properties/language"
+                  },
+                  "projectName": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/swift/properties/projectName"
+                  },
+                  "podAuthors": {
+                    "$ref": "#/definitions/konfigYaml/properties/generators/properties/swift/properties/podAuthors"
+                  }
+                },
+                "required": [
+                  "generator",
+                  "version",
+                  "outputDirectory",
+                  "git",
+                  "projectName",
+                  "podAuthors"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "generators",
+        "specPath"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
