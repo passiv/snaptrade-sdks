@@ -46,6 +46,8 @@ portal:
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: crypto-trading
+              path: docs/crypto-trading.md
             - id: webhooks
               path: docs/webhooks.md
             - id: ratelimiting
