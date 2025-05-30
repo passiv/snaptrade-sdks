@@ -4,6 +4,23 @@ SnapTrade supports specialized crypto-specific trading endpoints for some broker
 
 Trading crypto works with tradable asset pairs. That means you trade a `base` asset (such as crypto or fiat currency) for a `quote` asset (which can also be a crypto or fiat currency), with the direction being determined by the action (eg: BUY or SELL).
 
+Here is an example payload that would execute a trade buying ETH with EUR. Don't worry if it's a bit hard to understand at first, the rest of the doc should provide you with the right context.
+
+```json
+{
+    "account_id": "{{accountId}}",
+    "instrument": {
+      "symbol": "ETH-EUR",
+      "type": "CRYPTOCURRENCY_PAIR"
+    },
+    "side": "SELL",
+    "type": "MARKET",
+    "amount": "0.01",
+    "time_in_force": "GTC",
+    "post_only": false
+}
+```
+
 ## Create a trading connection
 
 By default connections are created with read-only permissions. To create a trading-enabled connection set the `connectionType` body parameter to `trade` when calling the :api[Authentication_loginSnapTradeUser] endpoint.
