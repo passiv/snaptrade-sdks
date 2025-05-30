@@ -13,7 +13,7 @@ Here is an example payload that would execute a trade buying ETH with EUR. Don't
       "symbol": "ETH-EUR",
       "type": "CRYPTOCURRENCY_PAIR"
     },
-    "side": "SELL",
+    "side": "BUY",
     "type": "MARKET",
     "amount": "0.01",
     "time_in_force": "GTC",
