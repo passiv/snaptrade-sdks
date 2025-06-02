@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://unpkg.com/konfig-lib@latest/konfig-yaml.schema.json
+# yaml-language-server: $schema=./konfig-yaml.schema.json
 
 order:
   - tag: API Status
