@@ -112,6 +112,14 @@ public class AccountTest {
     }
 
     /**
+     * Test the property 'status'
+     */
+    @Test
+    public void statusTest() {
+        // TODO: test status
+    }
+
+    /**
      * Test the property 'rawType'
      */
     @Test

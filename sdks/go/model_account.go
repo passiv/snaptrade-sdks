@@ -32,6 +32,8 @@ type Account struct {
 	CreatedDate time.Time `json:"created_date"`
 	SyncStatus AccountSyncStatus `json:"sync_status"`
 	Balance AccountBalance `json:"balance"`
+	// The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+	Status NullableString `json:"status,omitempty"`
 	// The account type as provided by the brokerage
 	RawType NullableString `json:"raw_type,omitempty"`
 	// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
@@ -267,6 +269,48 @@ func (o *Account) SetBalance(v AccountBalance) {
 	o.Balance = v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetStatus() string {
+	if o == nil || isNil(o.Status.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Status.Get()
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetStatusOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.Status.Get(), o.Status.IsSet()
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *Account) HasStatus() bool {
+	if o != nil && o.Status.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given NullableString and assigns it to the Status field.
+func (o *Account) SetStatus(v string) {
+	o.Status.Set(&v)
+}
+// SetStatusNil sets the value for Status to be an explicit nil
+func (o *Account) SetStatusNil() {
+	o.Status.Set(nil)
+}
+
+// UnsetStatus ensures that no value is present for Status, not even an explicit nil
+func (o *Account) UnsetStatus() {
+	o.Status.Unset()
+}
+
 // GetRawType returns the RawType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Account) GetRawType() string {
 	if o == nil || isNil(o.RawType.Get()) {
@@ -440,6 +484,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["balance"] = o.Balance
 	}
+	if o.Status.IsSet() {
+		toSerialize["status"] = o.Status.Get()
+	}
 	if o.RawType.IsSet() {
 		toSerialize["raw_type"] = o.RawType.Get()
 	}
@@ -478,6 +525,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "created_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "balance")
+		delete(additionalProperties, "status")
 		delete(additionalProperties, "raw_type")
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
