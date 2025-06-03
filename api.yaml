@@ -2754,6 +2754,12 @@ components:
           $ref: "#/components/schemas/AccountSyncStatus"
         balance:
           $ref: "#/components/schemas/AccountBalance"
+        status:
+          type: string
+          description: The current status of the account. Can be either "open", "closed", or null if the status is unknown or not provided by the brokerage.
+          enum: [open, closed]
+          nullable: true
+          example: 'open'
         raw_type:
           type: string
           description: The account type as provided by the brokerage
