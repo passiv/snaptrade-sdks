@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **CreatedDate** | **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. | 
 **SyncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | 
 **Balance** | [**AccountBalance**](AccountBalance.md) |  | 
+**Status** | Pointer to **NullableString** | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage. | [optional] 
 **RawType** | Pointer to **NullableString** | The account type as provided by the brokerage | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
@@ -206,6 +207,41 @@ and a boolean to check if the value has been set.
 SetBalance sets Balance field to given value.
 
 
+### GetStatus
+
+`func (o *Account) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *Account) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *Account) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *Account) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### SetStatusNil
+
+`func (o *Account) SetStatusNil(b bool)`
+
+ SetStatusNil sets the value for Status to be an explicit nil
+
+### UnsetStatus
+`func (o *Account) UnsetStatus()`
+
+UnsetStatus ensures that no value is present for Status, not even an explicit nil
 ### GetRawType
 
 `func (o *Account) GetRawType() string`

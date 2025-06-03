@@ -35,6 +35,9 @@ module SnapTrade
 
     attr_accessor :balance
 
+    # The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+    attr_accessor :status
+
     # The account type as provided by the brokerage
     attr_accessor :raw_type
 
@@ -58,6 +61,7 @@ module SnapTrade
         :'created_date' => :'created_date',
         :'sync_status' => :'sync_status',
         :'balance' => :'balance',
+        :'status' => :'status',
         :'raw_type' => :'raw_type',
         :'meta' => :'meta',
         :'portfolio_group' => :'portfolio_group',
@@ -81,6 +85,7 @@ module SnapTrade
         :'created_date' => :'Time',
         :'sync_status' => :'AccountSyncStatus',
         :'balance' => :'AccountBalance',
+        :'status' => :'AccountStatus',
         :'raw_type' => :'String',
         :'meta' => :'Hash<String, Object>',
         :'portfolio_group' => :'String',
@@ -92,6 +97,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'status',
         :'raw_type',
       ])
     end
@@ -141,6 +147,10 @@ module SnapTrade
 
       if attributes.key?(:'balance')
         self.balance = attributes[:'balance']
+      end
+
+      if attributes.key?(:'status')
+        self.status = attributes[:'status']
       end
 
       if attributes.key?(:'raw_type')
@@ -225,6 +235,7 @@ module SnapTrade
           created_date == o.created_date &&
           sync_status == o.sync_status &&
           balance == o.balance &&
+          status == o.status &&
           raw_type == o.raw_type &&
           meta == o.meta &&
           portfolio_group == o.portfolio_group &&
@@ -240,7 +251,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, raw_type, meta, portfolio_group, cash_restrictions].hash
+      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions].hash
     end
 
     # Builds the object from hash

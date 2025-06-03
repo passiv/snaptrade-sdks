@@ -3037,13 +3037,15 @@ components:
       additionalProperties: true
       description: A single account at a brokerage.
       example:
+        brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
+        portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        institution_name: Robinhood
         number: Q6542138443
         balance:
           total:
             amount: 15363.23
             currency: USD
         raw_type: Margin
-        brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
         meta:
           type: Margin
           status: ACTIVE
@@ -3059,9 +3061,8 @@ components:
             first_transaction_date: ""
         id: ""
         created_date: 2024-07-23T22:50:22.761Z
-        portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-        institution_name: Robinhood
         cash_restrictions: []
+        status: open
       properties:
         id:
           allOf:
@@ -3113,6 +3114,18 @@ components:
           $ref: '#/components/schemas/AccountSyncStatus'
         balance:
           $ref: '#/components/schemas/AccountBalance'
+        status:
+          description: "The current status of the account. Can be either \"open\"\
+            , \"closed\", or null if the status is unknown or not provided by the\
+            \ brokerage."
+          enum:
+          - open
+          - closed
+          example: open
+          nullable: true
+          type: string
+          x-konfig-original-example: open
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-status
         raw_type:
           description: The account type as provided by the brokerage
           example: Margin
@@ -3570,13 +3583,15 @@ components:
           open_quantity: 10
           status: null
         account:
+          brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
+          portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          institution_name: Robinhood
           number: Q6542138443
           balance:
             total:
               amount: 15363.23
               currency: USD
           raw_type: Margin
-          brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
           meta:
             type: Margin
             status: ACTIVE
@@ -3592,9 +3607,8 @@ components:
               first_transaction_date: ""
           id: ""
           created_date: 2024-07-23T22:50:22.761Z
-          portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
-          institution_name: Robinhood
           cash_restrictions: []
+          status: open
       properties:
         account:
           $ref: '#/components/schemas/Account'
@@ -8239,6 +8253,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-created_date:
       example: 2024-07-23T22:50:22.761Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-status:
+      example: open
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-raw_type:

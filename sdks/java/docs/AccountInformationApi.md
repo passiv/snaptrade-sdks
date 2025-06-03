@@ -379,6 +379,7 @@ public class Example {
       System.out.println(result.getCreatedDate());
       System.out.println(result.getSyncStatus());
       System.out.println(result.getBalance());
+      System.out.println(result.getStatus());
       System.out.println(result.getRawType());
       System.out.println(result.getMeta());
       System.out.println(result.getPortfolioGroup());
