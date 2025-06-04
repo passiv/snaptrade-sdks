@@ -1,3 +1,4 @@
 test/test_getting_started.py
 snaptrade_client/request_after_hook.py
 snaptrade_client/request_before_hook.py
+mise.toml

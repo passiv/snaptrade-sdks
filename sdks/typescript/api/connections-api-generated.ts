@@ -36,6 +36,10 @@ import { Model402BrokerageAuthDisabledResponse } from '../models';
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
 import { Model404FailedRequestResponse } from '../models';
+// @ts-ignore
+import { Model500UnexpectedExceptionResponse } from '../models';
+// @ts-ignore
+import { RateOfReturnResponse } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
 import { requestBeforeHook } from '../requestBeforeHook';
@@ -108,7 +112,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
          * @summary Force disable connection
          * @param {string} authorizationId 
          * @param {string} userId 
@@ -228,7 +232,7 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
          * @summary Refresh holdings for a connection
          * @param {string} authorizationId 
          * @param {string} userId 
@@ -352,6 +356,68 @@ export const ConnectionsApiAxiosParamCreator = function (configuration?: Configu
             };
         },
         /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} authorizationId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        returnRates: async (userId: string, userSecret: string, authorizationId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('returnRates', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('returnRates', 'userSecret', userSecret)
+            // verify required parameter 'authorizationId' is not null or undefined
+            assertParamExists('returnRates', 'authorizationId', authorizationId)
+            const localVarPath = `/authorizations/{authorizationId}/returnRates`
+                .replace(`{${"authorizationId"}}`, encodeURIComponent(String(authorizationId !== undefined ? authorizationId : `-authorizationId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/authorizations/{authorizationId}/returnRates',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of session events associated with a user.
          * @summary Get all session events for a user
          * @param {string} partnerClientId 
@@ -434,7 +500,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
          * @summary Force disable connection
          * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -456,7 +522,7 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -475,6 +541,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
          */
         async removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.removeBrokerageAuthorization(requestParameters.authorizationId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RateOfReturnResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.returnRates(requestParameters.userId, requestParameters.userSecret, requestParameters.authorizationId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -509,7 +586,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.detailBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+         * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
          * @summary Force disable connection
          * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -529,7 +606,7 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
             return localVarFp.listBrokerageAuthorizations(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+         * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
          * @summary Refresh holdings for a connection
          * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -547,6 +624,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
          */
         removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.removeBrokerageAuthorization(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+         * @summary List connection rate of returns
+         * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig): AxiosPromise<RateOfReturnResponse> {
+            return localVarFp.returnRates(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of session events associated with a user.
@@ -705,6 +792,36 @@ export type ConnectionsApiRemoveBrokerageAuthorizationRequest = {
 }
 
 /**
+ * Request parameters for returnRates operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiReturnRatesRequest
+ */
+export type ConnectionsApiReturnRatesRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiReturnRates
+    */
+    readonly authorizationId: string
+    
+}
+
+/**
  * Request parameters for sessionEvents operation in ConnectionsApi.
  * @export
  * @interface ConnectionsApiSessionEventsRequest
@@ -754,7 +871,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
      * @summary Force disable connection
      * @param {ConnectionsApiDisableBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -778,7 +895,7 @@ export class ConnectionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
      * @summary Refresh holdings for a connection
      * @param {ConnectionsApiRefreshBrokerageAuthorizationRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
@@ -799,6 +916,18 @@ export class ConnectionsApiGenerated extends BaseAPI {
      */
     public removeBrokerageAuthorization(requestParameters: ConnectionsApiRemoveBrokerageAuthorizationRequest, options?: AxiosRequestConfig) {
         return ConnectionsApiFp(this.configuration).removeBrokerageAuthorization(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+     * @summary List connection rate of returns
+     * @param {ConnectionsApiReturnRatesRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public returnRates(requestParameters: ConnectionsApiReturnRatesRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).returnRates(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

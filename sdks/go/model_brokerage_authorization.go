@@ -22,9 +22,6 @@ type BrokerageAuthorization struct {
 	Id *string `json:"id,omitempty"`
 	// Timestamp of when the connection was established in SnapTrade.
 	CreatedDate *time.Time `json:"created_date,omitempty"`
-	// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-	// Deprecated
-	UpdatedDate *time.Time `json:"updated_date,omitempty"`
 	Brokerage *Brokerage `json:"brokerage,omitempty"`
 	// A short, human-readable name for the connection.
 	Name *string `json:"name,omitempty"`
@@ -37,6 +34,11 @@ type BrokerageAuthorization struct {
 	// Additional data about the connection. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
 	// Deprecated
 	Meta map[string]interface{} `json:"meta,omitempty"`
+	// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+	// Deprecated
+	UpdatedDate *time.Time `json:"updated_date,omitempty"`
+	// Whether the connection is eligible for a payout.
+	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -121,41 +123,6 @@ func (o *BrokerageAuthorization) HasCreatedDate() bool {
 // SetCreatedDate gets a reference to the given time.Time and assigns it to the CreatedDate field.
 func (o *BrokerageAuthorization) SetCreatedDate(v time.Time) {
 	o.CreatedDate = &v
-}
-
-// GetUpdatedDate returns the UpdatedDate field value if set, zero value otherwise.
-// Deprecated
-func (o *BrokerageAuthorization) GetUpdatedDate() time.Time {
-	if o == nil || isNil(o.UpdatedDate) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedDate
-}
-
-// GetUpdatedDateOk returns a tuple with the UpdatedDate field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *BrokerageAuthorization) GetUpdatedDateOk() (*time.Time, bool) {
-	if o == nil || isNil(o.UpdatedDate) {
-    return nil, false
-	}
-	return o.UpdatedDate, true
-}
-
-// HasUpdatedDate returns a boolean if a field has been set.
-func (o *BrokerageAuthorization) HasUpdatedDate() bool {
-	if o != nil && !isNil(o.UpdatedDate) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedDate gets a reference to the given time.Time and assigns it to the UpdatedDate field.
-// Deprecated
-func (o *BrokerageAuthorization) SetUpdatedDate(v time.Time) {
-	o.UpdatedDate = &v
 }
 
 // GetBrokerage returns the Brokerage field value if set, zero value otherwise.
@@ -363,6 +330,73 @@ func (o *BrokerageAuthorization) SetMeta(v map[string]interface{}) {
 	o.Meta = v
 }
 
+// GetUpdatedDate returns the UpdatedDate field value if set, zero value otherwise.
+// Deprecated
+func (o *BrokerageAuthorization) GetUpdatedDate() time.Time {
+	if o == nil || isNil(o.UpdatedDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedDate
+}
+
+// GetUpdatedDateOk returns a tuple with the UpdatedDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *BrokerageAuthorization) GetUpdatedDateOk() (*time.Time, bool) {
+	if o == nil || isNil(o.UpdatedDate) {
+    return nil, false
+	}
+	return o.UpdatedDate, true
+}
+
+// HasUpdatedDate returns a boolean if a field has been set.
+func (o *BrokerageAuthorization) HasUpdatedDate() bool {
+	if o != nil && !isNil(o.UpdatedDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedDate gets a reference to the given time.Time and assigns it to the UpdatedDate field.
+// Deprecated
+func (o *BrokerageAuthorization) SetUpdatedDate(v time.Time) {
+	o.UpdatedDate = &v
+}
+
+// GetIsEligibleForPayout returns the IsEligibleForPayout field value if set, zero value otherwise.
+func (o *BrokerageAuthorization) GetIsEligibleForPayout() bool {
+	if o == nil || isNil(o.IsEligibleForPayout) {
+		var ret bool
+		return ret
+	}
+	return *o.IsEligibleForPayout
+}
+
+// GetIsEligibleForPayoutOk returns a tuple with the IsEligibleForPayout field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BrokerageAuthorization) GetIsEligibleForPayoutOk() (*bool, bool) {
+	if o == nil || isNil(o.IsEligibleForPayout) {
+    return nil, false
+	}
+	return o.IsEligibleForPayout, true
+}
+
+// HasIsEligibleForPayout returns a boolean if a field has been set.
+func (o *BrokerageAuthorization) HasIsEligibleForPayout() bool {
+	if o != nil && !isNil(o.IsEligibleForPayout) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsEligibleForPayout gets a reference to the given bool and assigns it to the IsEligibleForPayout field.
+func (o *BrokerageAuthorization) SetIsEligibleForPayout(v bool) {
+	o.IsEligibleForPayout = &v
+}
+
 func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
@@ -370,9 +404,6 @@ func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.CreatedDate) {
 		toSerialize["created_date"] = o.CreatedDate
-	}
-	if !isNil(o.UpdatedDate) {
-		toSerialize["updated_date"] = o.UpdatedDate
 	}
 	if !isNil(o.Brokerage) {
 		toSerialize["brokerage"] = o.Brokerage
@@ -391,6 +422,12 @@ func (o BrokerageAuthorization) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Meta) {
 		toSerialize["meta"] = o.Meta
+	}
+	if !isNil(o.UpdatedDate) {
+		toSerialize["updated_date"] = o.UpdatedDate
+	}
+	if !isNil(o.IsEligibleForPayout) {
+		toSerialize["is_eligible_for_payout"] = o.IsEligibleForPayout
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -412,13 +449,14 @@ func (o *BrokerageAuthorization) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "created_date")
-		delete(additionalProperties, "updated_date")
 		delete(additionalProperties, "brokerage")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "disabled")
 		delete(additionalProperties, "disabled_date")
 		delete(additionalProperties, "meta")
+		delete(additionalProperties, "updated_date")
+		delete(additionalProperties, "is_eligible_for_payout")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -37,7 +37,6 @@ class ManualTradeSymbol(
     class MetaOapg:
         
         class properties:
-            brokerage_symbol_id = schemas.UUIDSchema
             universal_symbol_id = schemas.UUIDSchema
         
             @staticmethod
@@ -65,18 +64,16 @@ class ManualTradeSymbol(
                         _configuration=_configuration,
                     )
             symbol = schemas.StrSchema
+            brokerage_symbol_id = schemas.UUIDSchema
             __annotations__ = {
-                "brokerage_symbol_id": brokerage_symbol_id,
                 "universal_symbol_id": universal_symbol_id,
                 "currency": currency,
                 "local_id": local_id,
                 "description": description,
                 "symbol": symbol,
+                "brokerage_symbol_id": brokerage_symbol_id,
             }
         additional_properties = schemas.AnyTypeSchema
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["brokerage_symbol_id"]) -> MetaOapg.properties.brokerage_symbol_id: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["universal_symbol_id"]) -> MetaOapg.properties.universal_symbol_id: ...
@@ -94,14 +91,14 @@ class ManualTradeSymbol(
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
-    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
-    
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
-        # dict_instance[name] accessor
-        return super().__getitem__(name)
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_symbol_id"]) -> MetaOapg.properties.brokerage_symbol_id: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_symbol_id"]) -> typing.Union[MetaOapg.properties.brokerage_symbol_id, schemas.Unset]: ...
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["brokerage_symbol_id"], str, ]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["universal_symbol_id"]) -> typing.Union[MetaOapg.properties.universal_symbol_id, schemas.Unset]: ...
@@ -119,32 +116,35 @@ class ManualTradeSymbol(
     def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_symbol_id"]) -> typing.Union[MetaOapg.properties.brokerage_symbol_id, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_symbol_id"], typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["universal_symbol_id"], typing_extensions.Literal["currency"], typing_extensions.Literal["local_id"], typing_extensions.Literal["description"], typing_extensions.Literal["symbol"], typing_extensions.Literal["brokerage_symbol_id"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        brokerage_symbol_id: typing.Union[MetaOapg.properties.brokerage_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         universal_symbol_id: typing.Union[MetaOapg.properties.universal_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         currency: typing.Union['Currency', schemas.Unset] = schemas.unset,
         local_id: typing.Union[MetaOapg.properties.local_id, str, schemas.Unset] = schemas.unset,
         description: typing.Union[MetaOapg.properties.description, None, str, schemas.Unset] = schemas.unset,
         symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
+        brokerage_symbol_id: typing.Union[MetaOapg.properties.brokerage_symbol_id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'ManualTradeSymbol':
         return super().__new__(
             cls,
             *args,
-            brokerage_symbol_id=brokerage_symbol_id,
             universal_symbol_id=universal_symbol_id,
             currency=currency,
             local_id=local_id,
             description=description,
             symbol=symbol,
+            brokerage_symbol_id=brokerage_symbol_id,
             _configuration=_configuration,
             **kwargs,
         )

@@ -46,9 +46,8 @@ func Test_snaptrade_GettingStarted(t *testing.T) {
 		client := snaptrade.NewAPIClient(configuration)
 
 		// 1) Create a new user
-		requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody()
 		userId := generateUUID()
-		requestBody.SetUserId(userId)
+		requestBody := snaptrade.NewSnapTradeRegisterUserRequestBody(userId)
 		request := client.AuthenticationApi.RegisterSnapTradeUser(*requestBody)
 
 		resp, httpRes, err := request.Execute()

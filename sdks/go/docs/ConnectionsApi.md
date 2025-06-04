@@ -9,6 +9,7 @@ Method | Path | Description
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
 [**RefreshBrokerageAuthorization**](ConnectionsApi.md#RefreshBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection
 [**RemoveBrokerageAuthorization**](ConnectionsApi.md#RemoveBrokerageAuthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
+[**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
 
 
@@ -52,13 +53,14 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.DetailBrokerageAuthorization`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.CreatedDate`: %v\n", *resp.CreatedDate)
-    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.UpdatedDate`: %v\n", *resp.UpdatedDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Brokerage`: %v\n", *resp.Brokerage)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Type`: %v\n", *resp.Type)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Disabled`: %v\n", *resp.Disabled)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.UpdatedDate`: %v\n", *resp.UpdatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.DetailBrokerageAuthorization.IsEligibleForPayout`: %v\n", *resp.IsEligibleForPayout)
 }
 ```
 
@@ -151,13 +153,14 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ListBrokerageAuthorizations`: %v\n", resp)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Id`: %v\n", *resp.Id)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.CreatedDate`: %v\n", *resp.CreatedDate)
-    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Brokerage`: %v\n", *resp.Brokerage)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Name`: %v\n", *resp.Name)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Type`: %v\n", *resp.Type)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Disabled`: %v\n", *resp.Disabled)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.DisabledDate`: %v\n", *resp.DisabledDate)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.Meta`: %v\n", *resp.Meta)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.UpdatedDate`: %v\n", *resp.UpdatedDate)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorization.ListBrokerageAuthorizations.IsEligibleForPayout`: %v\n", *resp.IsEligibleForPayout)
 }
 ```
 
@@ -247,6 +250,52 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.RemoveBrokerageAuthorization``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReturnRates
+
+List connection rate of returns
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.ReturnRates(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.ReturnRates``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ReturnRates`: RateOfReturnResponse
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.ReturnRates`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `RateOfReturnResponse.ReturnRates.Data`: %v\n", *resp.Data)
 }
 ```
 

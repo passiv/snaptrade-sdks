@@ -28,12 +28,30 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
+import com.konfigthis.client.model.ActionStrictWithOptions;
+import java.math.BigDecimal;
+import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
+import com.konfigthis.client.model.ManualTradeFormBracket;
+import com.konfigthis.client.model.ManualTradeFormWithOptions;
+import com.konfigthis.client.model.ManualTradeReplaceForm;
+import com.konfigthis.client.model.MlegLeg;
+import com.konfigthis.client.model.MlegOrderResponse;
+import com.konfigthis.client.model.MlegOrderTypeStrict;
+import com.konfigthis.client.model.MlegTradeForm;
+import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
+import com.konfigthis.client.model.OrderUpdatedResponse;
+import com.konfigthis.client.model.SimpleOrderForm;
+import com.konfigthis.client.model.SimpleOrderPreview;
+import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
+import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
+import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 
@@ -81,6 +99,209 @@ public class TradingApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    private okhttp3.Call cancelOrderCall(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
+            .replace("{" + "brokerageOrderId" + "}", localVarApiClient.escapeString(brokerageOrderId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call cancelOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling cancelOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling cancelOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling cancelOrder(Async)");
+        }
+
+        // verify the required parameter 'brokerageOrderId' is set
+        if (brokerageOrderId == null) {
+            throw new ApiException("Missing the required parameter 'brokerageOrderId' when calling cancelOrder(Async)");
+        }
+
+        return cancelOrderCall(userId, userSecret, accountId, brokerageOrderId, _callback);
+
+    }
+
+
+    private ApiResponse<OrderUpdatedResponse> cancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, String brokerageOrderId) throws ApiException {
+        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, brokerageOrderId, null);
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call cancelOrderAsync(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, brokerageOrderId, _callback);
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class CancelOrderRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        final String brokerageOrderId;
+
+        public CancelOrderRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String brokerageOrderId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.brokerageOrderId = brokerageOrderId;
+        }
+
+        /**
+         * Build call for cancelOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return cancelOrderCall(userId, userSecret, accountId, brokerageOrderId, _callback);
+        }
+
+
+        /**
+         * Execute cancelOrder request
+         * @return OrderUpdatedResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public OrderUpdatedResponse execute() throws ApiException {
+            ApiResponse<OrderUpdatedResponse> localVarResp = cancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute cancelOrder request with HTTP info returned
+         * @return ApiResponse&lt;OrderUpdatedResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
+            return cancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+        }
+
+        /**
+         * Execute cancelOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+            return cancelOrderAsync(userId, userSecret, accountId, brokerageOrderId, _callback);
+        }
+    }
+
+    /**
+     * Cancel an order.
+     * Cancels an order in the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param brokerageOrderId  (required)
+     * @return CancelOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.CancelOrderRequestBuilder cancelOrder(String userId, String userSecret, UUID accountId, String brokerageOrderId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+            
+
+        return ((TradingApi) this).new CancelOrderRequestBuilder(userId, userSecret, accountId, brokerageOrderId);
+    }
     private okhttp3.Call cancelUserAccountOrderCall(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
@@ -293,6 +514,209 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new CancelUserAccountOrderRequestBuilder(userId, userSecret, accountId);
+    }
+    private okhttp3.Call getCryptocurrencyPairQuoteCall(String userId, String userSecret, UUID accountId, String instrumentSymbol, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
+            .replace("{" + "instrumentSymbol" + "}", localVarApiClient.escapeString(instrumentSymbol.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getCryptocurrencyPairQuoteValidateBeforeCall(String userId, String userSecret, UUID accountId, String instrumentSymbol, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getCryptocurrencyPairQuote(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getCryptocurrencyPairQuote(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getCryptocurrencyPairQuote(Async)");
+        }
+
+        // verify the required parameter 'instrumentSymbol' is set
+        if (instrumentSymbol == null) {
+            throw new ApiException("Missing the required parameter 'instrumentSymbol' when calling getCryptocurrencyPairQuote(Async)");
+        }
+
+        return getCryptocurrencyPairQuoteCall(userId, userSecret, accountId, instrumentSymbol, _callback);
+
+    }
+
+
+    private ApiResponse<CryptocurrencyPairQuote> getCryptocurrencyPairQuoteWithHttpInfo(String userId, String userSecret, UUID accountId, String instrumentSymbol) throws ApiException {
+        okhttp3.Call localVarCall = getCryptocurrencyPairQuoteValidateBeforeCall(userId, userSecret, accountId, instrumentSymbol, null);
+        Type localVarReturnType = new TypeToken<CryptocurrencyPairQuote>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getCryptocurrencyPairQuoteAsync(String userId, String userSecret, UUID accountId, String instrumentSymbol, final ApiCallback<CryptocurrencyPairQuote> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getCryptocurrencyPairQuoteValidateBeforeCall(userId, userSecret, accountId, instrumentSymbol, _callback);
+        Type localVarReturnType = new TypeToken<CryptocurrencyPairQuote>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetCryptocurrencyPairQuoteRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        final String instrumentSymbol;
+
+        public GetCryptocurrencyPairQuoteRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String instrumentSymbol) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+            this.instrumentSymbol = instrumentSymbol;
+        }
+
+        /**
+         * Build call for getCryptocurrencyPairQuote
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getCryptocurrencyPairQuoteCall(userId, userSecret, accountId, instrumentSymbol, _callback);
+        }
+
+
+        /**
+         * Execute getCryptocurrencyPairQuote request
+         * @return CryptocurrencyPairQuote
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public CryptocurrencyPairQuote execute() throws ApiException {
+            ApiResponse<CryptocurrencyPairQuote> localVarResp = getCryptocurrencyPairQuoteWithHttpInfo(userId, userSecret, accountId, instrumentSymbol);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getCryptocurrencyPairQuote request with HTTP info returned
+         * @return ApiResponse&lt;CryptocurrencyPairQuote&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CryptocurrencyPairQuote> executeWithHttpInfo() throws ApiException {
+            return getCryptocurrencyPairQuoteWithHttpInfo(userId, userSecret, accountId, instrumentSymbol);
+        }
+
+        /**
+         * Execute getCryptocurrencyPairQuote request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CryptocurrencyPairQuote> _callback) throws ApiException {
+            return getCryptocurrencyPairQuoteAsync(userId, userSecret, accountId, instrumentSymbol, _callback);
+        }
+    }
+
+    /**
+     * Get cryptocurrency pair quote
+     * Gets a quote for the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param instrumentSymbol  (required)
+     * @return GetCryptocurrencyPairQuoteRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.GetCryptocurrencyPairQuoteRequestBuilder getCryptocurrencyPairQuote(String userId, String userSecret, UUID accountId, String instrumentSymbol) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (instrumentSymbol == null) throw new IllegalArgumentException("\"instrumentSymbol\" is required but got null");
+            
+
+        return ((TradingApi) this).new GetCryptocurrencyPairQuoteRequestBuilder(userId, userSecret, accountId, instrumentSymbol);
     }
     private okhttp3.Call getOrderImpactCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -785,7 +1209,7 @@ public class TradingApiGenerated {
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. (required)
+     * @param symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator (required)
      * @param accountId  (required)
      * @return GetUserAccountQuotesRequestBuilder
      * @http.response.details
@@ -809,7 +1233,7 @@ public class TradingApiGenerated {
 
         return ((TradingApi) this).new GetUserAccountQuotesRequestBuilder(userId, userSecret, symbols, accountId);
     }
-    private okhttp3.Call placeForceOrderCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeBracketOrderCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -823,7 +1247,307 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = manualTradeForm;
+        Object localVarPostBody = manualTradeFormBracket;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/bracket"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeBracketOrderValidateBeforeCall(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeBracketOrder(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeBracketOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeBracketOrder(Async)");
+        }
+
+        // verify the required parameter 'manualTradeFormBracket' is set
+        if (manualTradeFormBracket == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeFormBracket' when calling placeBracketOrder(Async)");
+        }
+
+        return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
+
+    }
+
+
+    private ApiResponse<AccountOrderRecord> placeBracketOrderWithHttpInfo(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket) throws ApiException {
+        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormBracket, null);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeBracketOrderAsync(UUID accountId, String userId, String userSecret, ManualTradeFormBracket manualTradeFormBracket, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeBracketOrderValidateBeforeCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceBracketOrderRequestBuilderGenerated {
+        final ActionStrictWithOptions action;
+        final TradingInstrument instrument;
+        final OrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
+        final StopLoss stopLoss;
+        final TakeProfit takeProfit;
+        final UUID accountId;
+        final String userId;
+        final String userSecret;
+        String symbol;
+        Double price;
+        Double stop;
+        Double units;
+
+        public PlaceBracketOrderRequestBuilderGenerated(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) {
+            this.action = action;
+            this.instrument = instrument;
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.stopLoss = stopLoss;
+            this.takeProfit = takeProfit;
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder price(Double price) {
+            this.price = price;
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder price(Integer price) {
+            this.price = price.doubleValue();
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder stop(Double stop) {
+            this.stop = stop;
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder stop(Integer stop) {
+            this.stop = stop.doubleValue();
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.PlaceBracketOrderRequestBuilder
+         */
+        public TradingApi.PlaceBracketOrderRequestBuilder units(Double units) {
+            this.units = units;
+            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeBracketOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
+            return placeBracketOrderCall(accountId, userId, userSecret, manualTradeFormBracket, _callback);
+        }
+
+        private ManualTradeFormBracket buildBodyParams() {
+            ManualTradeFormBracket manualTradeFormBracket = new ManualTradeFormBracket();
+            manualTradeFormBracket.action(this.action);
+            manualTradeFormBracket.symbol(this.symbol);
+            manualTradeFormBracket.instrument(this.instrument);
+            manualTradeFormBracket.orderType(this.orderType);
+            manualTradeFormBracket.timeInForce(this.timeInForce);
+            manualTradeFormBracket.price(this.price);
+            manualTradeFormBracket.stop(this.stop);
+            manualTradeFormBracket.units(this.units);
+            manualTradeFormBracket.stopLoss(this.stopLoss);
+            manualTradeFormBracket.takeProfit(this.takeProfit);
+            return manualTradeFormBracket;
+        }
+
+        /**
+         * Execute placeBracketOrder request
+         * @return AccountOrderRecord
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountOrderRecord execute() throws ApiException {
+            ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeBracketOrder request with HTTP info returned
+         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+            ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
+            return placeBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
+        }
+
+        /**
+         * Execute placeBracketOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+            ManualTradeFormBracket manualTradeFormBracket = buildBodyParams();
+            return placeBracketOrderAsync(accountId, userId, userSecret, manualTradeFormBracket, _callback);
+        }
+    }
+
+    /**
+     * Place a Bracket Order
+     * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+     * @param accountId The ID of the account to execute the trade on. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeFormBracket  (required)
+     * @return PlaceBracketOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PlaceBracketOrderRequestBuilder placeBracketOrder(ActionStrictWithOptions action, TradingInstrument instrument, OrderTypeStrict orderType, TimeInForceStrict timeInForce, StopLoss stopLoss, TakeProfit takeProfit, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
+        if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (stopLoss == null) throw new IllegalArgumentException("\"stopLoss\" is required but got null");
+        if (takeProfit == null) throw new IllegalArgumentException("\"takeProfit\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((TradingApi) this).new PlaceBracketOrderRequestBuilder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
+    }
+    private okhttp3.Call placeForceOrderCall(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manualTradeFormWithOptions;
 
         // create path and map variables
         String localVarPath = "/trade/place";
@@ -863,7 +1587,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call placeForceOrderValidateBeforeCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call placeForceOrderValidateBeforeCall(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling placeForceOrder(Async)");
@@ -874,25 +1598,25 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling placeForceOrder(Async)");
         }
 
-        // verify the required parameter 'manualTradeForm' is set
-        if (manualTradeForm == null) {
-            throw new ApiException("Missing the required parameter 'manualTradeForm' when calling placeForceOrder(Async)");
+        // verify the required parameter 'manualTradeFormWithOptions' is set
+        if (manualTradeFormWithOptions == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeFormWithOptions' when calling placeForceOrder(Async)");
         }
 
-        return placeForceOrderCall(userId, userSecret, manualTradeForm, _callback);
+        return placeForceOrderCall(userId, userSecret, manualTradeFormWithOptions, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecord> placeForceOrderWithHttpInfo(String userId, String userSecret, ManualTradeForm manualTradeForm) throws ApiException {
-        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeForm, null);
+    private ApiResponse<AccountOrderRecord> placeForceOrderWithHttpInfo(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions) throws ApiException {
+        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeFormWithOptions, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call placeForceOrderAsync(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+    private okhttp3.Call placeForceOrderAsync(String userId, String userSecret, ManualTradeFormWithOptions manualTradeFormWithOptions, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeForm, _callback);
+        okhttp3.Call localVarCall = placeForceOrderValidateBeforeCall(userId, userSecret, manualTradeFormWithOptions, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -900,27 +1624,47 @@ public class TradingApiGenerated {
 
     public abstract class PlaceForceOrderRequestBuilderGenerated {
         final UUID accountId;
-        final ActionStrict action;
-        final UUID universalSymbolId;
+        final ActionStrictWithOptions action;
         final OrderTypeStrict orderType;
         final TimeInForceStrict timeInForce;
         final String userId;
         final String userSecret;
+        UUID universalSymbolId;
+        String symbol;
         Double price;
         Double stop;
         Double units;
         Object notionalValue;
 
-        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
+        public PlaceForceOrderRequestBuilderGenerated(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
             this.accountId = accountId;
             this.action = action;
-            this.universalSymbolId = universalSymbolId;
             this.orderType = orderType;
             this.timeInForce = timeInForce;
             this.userId = userId;
             this.userSecret = userSecret;
         }
 
+        /**
+         * Set universalSymbolId
+         * @param universalSymbolId Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder universalSymbolId(UUID universalSymbolId) {
+            this.universalSymbolId = universalSymbolId;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. (optional)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
         /**
          * Set price
          * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
@@ -965,22 +1709,11 @@ public class TradingApiGenerated {
         
         /**
          * Set units
-         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @param units For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). (optional)
          * @return TradingApi.PlaceForceOrderRequestBuilder
          */
         public TradingApi.PlaceForceOrderRequestBuilder units(Double units) {
             this.units = units;
-            return (TradingApi.PlaceForceOrderRequestBuilder) this;
-        }
-        
-
-        /**
-         * Set units
-         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
-         * @return TradingApi.PlaceForceOrderRequestBuilder
-         */
-        public TradingApi.PlaceForceOrderRequestBuilder units(Integer units) {
-            this.units = units.doubleValue();
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         
@@ -1007,22 +1740,23 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderCall(userId, userSecret, manualTradeForm, _callback);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderCall(userId, userSecret, manualTradeFormWithOptions, _callback);
         }
 
-        private ManualTradeForm buildBodyParams() {
-            ManualTradeForm manualTradeForm = new ManualTradeForm();
-            manualTradeForm.accountId(this.accountId);
-            manualTradeForm.action(this.action);
-            manualTradeForm.universalSymbolId(this.universalSymbolId);
-            manualTradeForm.orderType(this.orderType);
-            manualTradeForm.timeInForce(this.timeInForce);
-            manualTradeForm.price(this.price);
-            manualTradeForm.stop(this.stop);
-            manualTradeForm.units(this.units);
-            manualTradeForm.notionalValue(this.notionalValue);
-            return manualTradeForm;
+        private ManualTradeFormWithOptions buildBodyParams() {
+            ManualTradeFormWithOptions manualTradeFormWithOptions = new ManualTradeFormWithOptions();
+            manualTradeFormWithOptions.accountId(this.accountId);
+            manualTradeFormWithOptions.action(this.action);
+            manualTradeFormWithOptions.universalSymbolId(this.universalSymbolId);
+            manualTradeFormWithOptions.symbol(this.symbol);
+            manualTradeFormWithOptions.orderType(this.orderType);
+            manualTradeFormWithOptions.timeInForce(this.timeInForce);
+            manualTradeFormWithOptions.price(this.price);
+            manualTradeFormWithOptions.stop(this.stop);
+            manualTradeFormWithOptions.units(this.units);
+            manualTradeFormWithOptions.notionalValue(this.notionalValue);
+            return manualTradeFormWithOptions;
         }
 
         /**
@@ -1037,8 +1771,8 @@ public class TradingApiGenerated {
          </table>
          */
         public AccountOrderRecord execute() throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            ApiResponse<AccountOrderRecord> localVarResp = placeForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = placeForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
             return localVarResp.getResponseBody();
         }
 
@@ -1054,8 +1788,8 @@ public class TradingApiGenerated {
          </table>
          */
         public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderWithHttpInfo(userId, userSecret, manualTradeForm);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
         }
 
         /**
@@ -1071,8 +1805,8 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
-            ManualTradeForm manualTradeForm = buildBodyParams();
-            return placeForceOrderAsync(userId, userSecret, manualTradeForm, _callback);
+            ManualTradeFormWithOptions manualTradeFormWithOptions = buildBodyParams();
+            return placeForceOrderAsync(userId, userSecret, manualTradeFormWithOptions, _callback);
         }
     }
 
@@ -1081,7 +1815,7 @@ public class TradingApiGenerated {
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param manualTradeForm  (required)
+     * @param manualTradeFormWithOptions  (required)
      * @return PlaceForceOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1090,14 +1824,11 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrict action, UUID universalSymbolId, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
+    public TradingApi.PlaceForceOrderRequestBuilder placeForceOrder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) throws IllegalArgumentException {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
         if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
-        if (universalSymbolId == null) throw new IllegalArgumentException("\"universalSymbolId\" is required but got null");
-            
-
         if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
         if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
@@ -1106,7 +1837,249 @@ public class TradingApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, universalSymbolId, orderType, timeInForce, userId, userSecret);
+        return ((TradingApi) this).new PlaceForceOrderRequestBuilder(accountId, action, orderType, timeInForce, userId, userSecret);
+    }
+    private okhttp3.Call placeMlegOrderCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = mlegTradeForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/options"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeMlegOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeMlegOrder(Async)");
+        }
+
+        // verify the required parameter 'mlegTradeForm' is set
+        if (mlegTradeForm == null) {
+            throw new ApiException("Missing the required parameter 'mlegTradeForm' when calling placeMlegOrder(Async)");
+        }
+
+        return placeMlegOrderCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+
+    }
+
+
+    private ApiResponse<MlegOrderResponse> placeMlegOrderWithHttpInfo(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, null);
+        Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeMlegOrderAsync(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeMlegOrderValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+        Type localVarReturnType = new TypeToken<MlegOrderResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceMlegOrderRequestBuilderGenerated {
+        final MlegOrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
+        final List<MlegLeg> legs;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+
+        public PlaceMlegOrderRequestBuilderGenerated(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.legs = legs;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeMlegOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+        }
+
+        private MlegTradeForm buildBodyParams() {
+            MlegTradeForm mlegTradeForm = new MlegTradeForm();
+            mlegTradeForm.orderType(this.orderType);
+            mlegTradeForm.timeInForce(this.timeInForce);
+            mlegTradeForm.limitPrice(this.limitPrice);
+            mlegTradeForm.stopPrice(this.stopPrice);
+            mlegTradeForm.legs(this.legs);
+            return mlegTradeForm;
+        }
+
+        /**
+         * Execute placeMlegOrder request
+         * @return MlegOrderResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public MlegOrderResponse execute() throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            ApiResponse<MlegOrderResponse> localVarResp = placeMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeMlegOrder request with HTTP info returned
+         * @return ApiResponse&lt;MlegOrderResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<MlegOrderResponse> executeWithHttpInfo() throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+        }
+
+        /**
+         * Execute placeMlegOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<MlegOrderResponse> _callback) throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return placeMlegOrderAsync(userId, userSecret, accountId, mlegTradeForm, _callback);
+        }
+    }
+
+    /**
+     * Place multi-leg option order
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param mlegTradeForm  (required)
+     * @return PlaceMlegOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PlaceMlegOrderRequestBuilder placeMlegOrder(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new PlaceMlegOrderRequestBuilder(orderType, timeInForce, legs, userId, userSecret, accountId);
     }
     private okhttp3.Call placeOrderCall(UUID tradeId, String userId, String userSecret, ValidatedTradeBody validatedTradeBody, final ApiCallback _callback) throws ApiException {
         String basePath = null;
@@ -1319,5 +2292,1101 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new PlaceOrderRequestBuilder(tradeId, userId, userSecret);
+    }
+    private okhttp3.Call placeSimpleOrderCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = simpleOrderForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call placeSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling placeSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'simpleOrderForm' is set
+        if (simpleOrderForm == null) {
+            throw new ApiException("Missing the required parameter 'simpleOrderForm' when calling placeSimpleOrder(Async)");
+        }
+
+        return placeSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+
+    }
+
+
+    private ApiResponse<OrderUpdatedResponse> placeSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm) throws ApiException {
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, null);
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call placeSimpleOrderAsync(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = placeSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PlaceSimpleOrderRequestBuilderGenerated {
+        final TradingInstrument instrument;
+        final ActionStrict side;
+        final String type;
+        final String timeInForce;
+        final BigDecimal amount;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+        Boolean postOnly;
+        OffsetDateTime expirationDate;
+
+        public PlaceSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+            this.instrument = instrument;
+            this.side = side;
+            this.type = type;
+            this.timeInForce = timeInForce;
+            this.amount = amount;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
+         * @return TradingApi.PlaceSimpleOrderRequestBuilder
+         */
+        public TradingApi.PlaceSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (TradingApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
+         * @return TradingApi.PlaceSimpleOrderRequestBuilder
+         */
+        public TradingApi.PlaceSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (TradingApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set postOnly
+         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
+         * @return TradingApi.PlaceSimpleOrderRequestBuilder
+         */
+        public TradingApi.PlaceSimpleOrderRequestBuilder postOnly(Boolean postOnly) {
+            this.postOnly = postOnly;
+            return (TradingApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set expirationDate
+         * @param expirationDate The expiration date of the order. Required if the time_in_force is GTD. (optional)
+         * @return TradingApi.PlaceSimpleOrderRequestBuilder
+         */
+        public TradingApi.PlaceSimpleOrderRequestBuilder expirationDate(OffsetDateTime expirationDate) {
+            this.expirationDate = expirationDate;
+            return (TradingApi.PlaceSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for placeSimpleOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+        }
+
+        private SimpleOrderForm buildBodyParams() {
+            SimpleOrderForm simpleOrderForm = new SimpleOrderForm();
+            simpleOrderForm.instrument(this.instrument);
+            simpleOrderForm.side(this.side);
+            if (this.type != null)
+            simpleOrderForm.type(SimpleOrderForm.TypeEnum.fromValue(this.type));
+            if (this.timeInForce != null)
+            simpleOrderForm.timeInForce(SimpleOrderForm.TimeInForceEnum.fromValue(this.timeInForce));
+            simpleOrderForm.amount(this.amount);
+            simpleOrderForm.limitPrice(this.limitPrice);
+            simpleOrderForm.stopPrice(this.stopPrice);
+            simpleOrderForm.postOnly(this.postOnly);
+            simpleOrderForm.expirationDate(this.expirationDate);
+            return simpleOrderForm;
+        }
+
+        /**
+         * Execute placeSimpleOrder request
+         * @return OrderUpdatedResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public OrderUpdatedResponse execute() throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            ApiResponse<OrderUpdatedResponse> localVarResp = placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute placeSimpleOrder request with HTTP info returned
+         * @return ApiResponse&lt;OrderUpdatedResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+        }
+
+        /**
+         * Execute placeSimpleOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return placeSimpleOrderAsync(userId, userSecret, accountId, simpleOrderForm, _callback);
+        }
+    }
+
+    /**
+     * Place order
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param simpleOrderForm  (required)
+     * @return PlaceSimpleOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
+        if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
+        if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
+            
+
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+            
+
+        if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new PlaceSimpleOrderRequestBuilder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
+    }
+    private okhttp3.Call previewSimpleOrderCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = simpleOrderForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple/preview"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call previewSimpleOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling previewSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling previewSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling previewSimpleOrder(Async)");
+        }
+
+        // verify the required parameter 'simpleOrderForm' is set
+        if (simpleOrderForm == null) {
+            throw new ApiException("Missing the required parameter 'simpleOrderForm' when calling previewSimpleOrder(Async)");
+        }
+
+        return previewSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+
+    }
+
+
+    private ApiResponse<SimpleOrderPreview> previewSimpleOrderWithHttpInfo(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm) throws ApiException {
+        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, null);
+        Type localVarReturnType = new TypeToken<SimpleOrderPreview>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call previewSimpleOrderAsync(String userId, String userSecret, UUID accountId, SimpleOrderForm simpleOrderForm, final ApiCallback<SimpleOrderPreview> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = previewSimpleOrderValidateBeforeCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+        Type localVarReturnType = new TypeToken<SimpleOrderPreview>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class PreviewSimpleOrderRequestBuilderGenerated {
+        final TradingInstrument instrument;
+        final ActionStrict side;
+        final String type;
+        final String timeInForce;
+        final BigDecimal amount;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+        Boolean postOnly;
+        OffsetDateTime expirationDate;
+
+        public PreviewSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+            this.instrument = instrument;
+            this.side = side;
+            this.type = type;
+            this.timeInForce = timeInForce;
+            this.amount = amount;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
+         * @return TradingApi.PreviewSimpleOrderRequestBuilder
+         */
+        public TradingApi.PreviewSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
+         * @return TradingApi.PreviewSimpleOrderRequestBuilder
+         */
+        public TradingApi.PreviewSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set postOnly
+         * @param postOnly Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  (optional)
+         * @return TradingApi.PreviewSimpleOrderRequestBuilder
+         */
+        public TradingApi.PreviewSimpleOrderRequestBuilder postOnly(Boolean postOnly) {
+            this.postOnly = postOnly;
+            return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set expirationDate
+         * @param expirationDate The expiration date of the order. Required if the time_in_force is GTD. (optional)
+         * @return TradingApi.PreviewSimpleOrderRequestBuilder
+         */
+        public TradingApi.PreviewSimpleOrderRequestBuilder expirationDate(OffsetDateTime expirationDate) {
+            this.expirationDate = expirationDate;
+            return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for previewSimpleOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderCall(userId, userSecret, accountId, simpleOrderForm, _callback);
+        }
+
+        private SimpleOrderForm buildBodyParams() {
+            SimpleOrderForm simpleOrderForm = new SimpleOrderForm();
+            simpleOrderForm.instrument(this.instrument);
+            simpleOrderForm.side(this.side);
+            if (this.type != null)
+            simpleOrderForm.type(SimpleOrderForm.TypeEnum.fromValue(this.type));
+            if (this.timeInForce != null)
+            simpleOrderForm.timeInForce(SimpleOrderForm.TimeInForceEnum.fromValue(this.timeInForce));
+            simpleOrderForm.amount(this.amount);
+            simpleOrderForm.limitPrice(this.limitPrice);
+            simpleOrderForm.stopPrice(this.stopPrice);
+            simpleOrderForm.postOnly(this.postOnly);
+            simpleOrderForm.expirationDate(this.expirationDate);
+            return simpleOrderForm;
+        }
+
+        /**
+         * Execute previewSimpleOrder request
+         * @return SimpleOrderPreview
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public SimpleOrderPreview execute() throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            ApiResponse<SimpleOrderPreview> localVarResp = previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute previewSimpleOrder request with HTTP info returned
+         * @return ApiResponse&lt;SimpleOrderPreview&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SimpleOrderPreview> executeWithHttpInfo() throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderWithHttpInfo(userId, userSecret, accountId, simpleOrderForm);
+        }
+
+        /**
+         * Execute previewSimpleOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SimpleOrderPreview> _callback) throws ApiException {
+            SimpleOrderForm simpleOrderForm = buildBodyParams();
+            return previewSimpleOrderAsync(userId, userSecret, accountId, simpleOrderForm, _callback);
+        }
+    }
+
+    /**
+     * Preview order
+     * Previews an order using the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param simpleOrderForm  (required)
+     * @return PreviewSimpleOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.PreviewSimpleOrderRequestBuilder previewSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
+        if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
+        if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
+            
+
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+            
+
+        if (amount == null) throw new IllegalArgumentException("\"amount\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new PreviewSimpleOrderRequestBuilder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
+    }
+    private okhttp3.Call replaceOrderCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = manualTradeReplaceForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
+            .replace("{" + "brokerageOrderId" + "}", localVarApiClient.escapeString(brokerageOrderId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PATCH", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call replaceOrderValidateBeforeCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'brokerageOrderId' is set
+        if (brokerageOrderId == null) {
+            throw new ApiException("Missing the required parameter 'brokerageOrderId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling replaceOrder(Async)");
+        }
+
+        // verify the required parameter 'manualTradeReplaceForm' is set
+        if (manualTradeReplaceForm == null) {
+            throw new ApiException("Missing the required parameter 'manualTradeReplaceForm' when calling replaceOrder(Async)");
+        }
+
+        return replaceOrderCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+
+    }
+
+
+    private ApiResponse<AccountOrderRecord> replaceOrderWithHttpInfo(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm) throws ApiException {
+        okhttp3.Call localVarCall = replaceOrderValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, null);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call replaceOrderAsync(UUID accountId, String brokerageOrderId, String userId, String userSecret, ManualTradeReplaceForm manualTradeReplaceForm, final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = replaceOrderValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        Type localVarReturnType = new TypeToken<AccountOrderRecord>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ReplaceOrderRequestBuilderGenerated {
+        final ActionStrict action;
+        final OrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
+        final UUID accountId;
+        final String brokerageOrderId;
+        final String userId;
+        final String userSecret;
+        Double price;
+        String symbol;
+        Double stop;
+        Double units;
+
+        public ReplaceOrderRequestBuilderGenerated(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
+            this.action = action;
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.accountId = accountId;
+            this.brokerageOrderId = brokerageOrderId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder price(Double price) {
+            this.price = price;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set price
+         * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder price(Integer price) {
+            this.price = price.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set symbol
+         * @param symbol The security&#39;s trading ticker symbol (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder symbol(String symbol) {
+            this.symbol = symbol;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder stop(Double stop) {
+            this.stop = stop;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set stop
+         * @param stop The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder stop(Integer stop) {
+            this.stop = stop.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder units(Double units) {
+            this.units = units;
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+
+        /**
+         * Set units
+         * @param units Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. (optional)
+         * @return TradingApi.ReplaceOrderRequestBuilder
+         */
+        public TradingApi.ReplaceOrderRequestBuilder units(Integer units) {
+            this.units = units.doubleValue();
+            return (TradingApi.ReplaceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for replaceOrder
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderCall(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        }
+
+        private ManualTradeReplaceForm buildBodyParams() {
+            ManualTradeReplaceForm manualTradeReplaceForm = new ManualTradeReplaceForm();
+            manualTradeReplaceForm.action(this.action);
+            manualTradeReplaceForm.orderType(this.orderType);
+            manualTradeReplaceForm.timeInForce(this.timeInForce);
+            manualTradeReplaceForm.price(this.price);
+            manualTradeReplaceForm.symbol(this.symbol);
+            manualTradeReplaceForm.stop(this.stop);
+            manualTradeReplaceForm.units(this.units);
+            return manualTradeReplaceForm;
+        }
+
+        /**
+         * Execute replaceOrder request
+         * @return AccountOrderRecord
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountOrderRecord execute() throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            ApiResponse<AccountOrderRecord> localVarResp = replaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute replaceOrder request with HTTP info returned
+         * @return ApiResponse&lt;AccountOrderRecord&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountOrderRecord> executeWithHttpInfo() throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderWithHttpInfo(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm);
+        }
+
+        /**
+         * Execute replaceOrder request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecord> _callback) throws ApiException {
+            ManualTradeReplaceForm manualTradeReplaceForm = buildBodyParams();
+            return replaceOrderAsync(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm, _callback);
+        }
+    }
+
+    /**
+     * Replaces an order with a new one
+     * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+     * @param accountId The ID of the account to execute the trade on. (required)
+     * @param brokerageOrderId The Brokerage Order ID of the order to replace. (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param manualTradeReplaceForm  (required)
+     * @return ReplaceOrderRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.ReplaceOrderRequestBuilder replaceOrder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) throws IllegalArgumentException {
+        if (action == null) throw new IllegalArgumentException("\"action\" is required but got null");
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((TradingApi) this).new ReplaceOrderRequestBuilder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
+    }
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        if (base != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("base", base));
+        }
+
+        if (quote != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quote", quote));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsValidateBeforeCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        return searchCryptocurrencyPairInstrumentsCall(userId, userSecret, accountId, base, quote, _callback);
+
+    }
+
+
+    private ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> searchCryptocurrencyPairInstrumentsWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
+        okhttp3.Call localVarCall = searchCryptocurrencyPairInstrumentsValidateBeforeCall(userId, userSecret, accountId, base, quote, null);
+        Type localVarReturnType = new TypeToken<TradingSearchCryptocurrencyPairInstruments200Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<TradingSearchCryptocurrencyPairInstruments200Response> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchCryptocurrencyPairInstrumentsValidateBeforeCall(userId, userSecret, accountId, base, quote, _callback);
+        Type localVarReturnType = new TypeToken<TradingSearchCryptocurrencyPairInstruments200Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        String base;
+        String quote;
+
+        public SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set base
+         * @param base  (optional)
+         * @return TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder
+         */
+        public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder base(String base) {
+            this.base = base;
+            return (TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder) this;
+        }
+        
+        /**
+         * Set quote
+         * @param quote  (optional)
+         * @return TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder
+         */
+        public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder quote(String quote) {
+            this.quote = quote;
+            return (TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for searchCryptocurrencyPairInstruments
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return searchCryptocurrencyPairInstrumentsCall(userId, userSecret, accountId, base, quote, _callback);
+        }
+
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request
+         * @return TradingSearchCryptocurrencyPairInstruments200Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public TradingSearchCryptocurrencyPairInstruments200Response execute() throws ApiException {
+            ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> localVarResp = searchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, base, quote);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request with HTTP info returned
+         * @return ApiResponse&lt;TradingSearchCryptocurrencyPairInstruments200Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> executeWithHttpInfo() throws ApiException {
+            return searchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, base, quote);
+        }
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TradingSearchCryptocurrencyPairInstruments200Response> _callback) throws ApiException {
+            return searchCryptocurrencyPairInstrumentsAsync(userId, userSecret, accountId, base, quote, _callback);
+        }
+    }
+
+    /**
+     * Search cryptocurrency pairs instruments
+     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @return SearchCryptocurrencyPairInstrumentsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder searchCryptocurrencyPairInstruments(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new SearchCryptocurrencyPairInstrumentsRequestBuilder(userId, userSecret, accountId);
     }
 }

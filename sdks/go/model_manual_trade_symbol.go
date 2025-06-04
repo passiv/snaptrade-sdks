@@ -17,9 +17,6 @@ import (
 
 // ManualTradeSymbol Information about the security for the order.
 type ManualTradeSymbol struct {
-	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-	// Deprecated
-	BrokerageSymbolId *string `json:"brokerage_symbol_id,omitempty"`
 	// Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
 	UniversalSymbolId *string `json:"universal_symbol_id,omitempty"`
 	Currency *Currency `json:"currency,omitempty"`
@@ -32,6 +29,9 @@ type ManualTradeSymbol struct {
 	// This field is deprecated and should not be used.
 	// Deprecated
 	Symbol *string `json:"symbol,omitempty"`
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
+	BrokerageSymbolId *string `json:"brokerage_symbol_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -52,41 +52,6 @@ func NewManualTradeSymbol() *ManualTradeSymbol {
 func NewManualTradeSymbolWithDefaults() *ManualTradeSymbol {
 	this := ManualTradeSymbol{}
 	return &this
-}
-
-// GetBrokerageSymbolId returns the BrokerageSymbolId field value if set, zero value otherwise.
-// Deprecated
-func (o *ManualTradeSymbol) GetBrokerageSymbolId() string {
-	if o == nil || isNil(o.BrokerageSymbolId) {
-		var ret string
-		return ret
-	}
-	return *o.BrokerageSymbolId
-}
-
-// GetBrokerageSymbolIdOk returns a tuple with the BrokerageSymbolId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *ManualTradeSymbol) GetBrokerageSymbolIdOk() (*string, bool) {
-	if o == nil || isNil(o.BrokerageSymbolId) {
-    return nil, false
-	}
-	return o.BrokerageSymbolId, true
-}
-
-// HasBrokerageSymbolId returns a boolean if a field has been set.
-func (o *ManualTradeSymbol) HasBrokerageSymbolId() bool {
-	if o != nil && !isNil(o.BrokerageSymbolId) {
-		return true
-	}
-
-	return false
-}
-
-// SetBrokerageSymbolId gets a reference to the given string and assigns it to the BrokerageSymbolId field.
-// Deprecated
-func (o *ManualTradeSymbol) SetBrokerageSymbolId(v string) {
-	o.BrokerageSymbolId = &v
 }
 
 // GetUniversalSymbolId returns the UniversalSymbolId field value if set, zero value otherwise.
@@ -268,11 +233,43 @@ func (o *ManualTradeSymbol) SetSymbol(v string) {
 	o.Symbol = &v
 }
 
+// GetBrokerageSymbolId returns the BrokerageSymbolId field value if set, zero value otherwise.
+// Deprecated
+func (o *ManualTradeSymbol) GetBrokerageSymbolId() string {
+	if o == nil || isNil(o.BrokerageSymbolId) {
+		var ret string
+		return ret
+	}
+	return *o.BrokerageSymbolId
+}
+
+// GetBrokerageSymbolIdOk returns a tuple with the BrokerageSymbolId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *ManualTradeSymbol) GetBrokerageSymbolIdOk() (*string, bool) {
+	if o == nil || isNil(o.BrokerageSymbolId) {
+    return nil, false
+	}
+	return o.BrokerageSymbolId, true
+}
+
+// HasBrokerageSymbolId returns a boolean if a field has been set.
+func (o *ManualTradeSymbol) HasBrokerageSymbolId() bool {
+	if o != nil && !isNil(o.BrokerageSymbolId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBrokerageSymbolId gets a reference to the given string and assigns it to the BrokerageSymbolId field.
+// Deprecated
+func (o *ManualTradeSymbol) SetBrokerageSymbolId(v string) {
+	o.BrokerageSymbolId = &v
+}
+
 func (o ManualTradeSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.BrokerageSymbolId) {
-		toSerialize["brokerage_symbol_id"] = o.BrokerageSymbolId
-	}
 	if !isNil(o.UniversalSymbolId) {
 		toSerialize["universal_symbol_id"] = o.UniversalSymbolId
 	}
@@ -287,6 +284,9 @@ func (o ManualTradeSymbol) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Symbol) {
 		toSerialize["symbol"] = o.Symbol
+	}
+	if !isNil(o.BrokerageSymbolId) {
+		toSerialize["brokerage_symbol_id"] = o.BrokerageSymbolId
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -306,12 +306,12 @@ func (o *ManualTradeSymbol) UnmarshalJSON(bytes []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
-		delete(additionalProperties, "brokerage_symbol_id")
 		delete(additionalProperties, "universal_symbol_id")
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "local_id")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "brokerage_symbol_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

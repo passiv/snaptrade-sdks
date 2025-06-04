@@ -31,20 +31,17 @@ type Brokerage struct {
 	AwsS3LogoUrl *string `json:"aws_s3_logo_url,omitempty"`
 	// URL to the brokerage's logo in square format.
 	AwsS3SquareLogoUrl NullableString `json:"aws_s3_square_logo_url,omitempty"`
-	// This field is deprecated.
-	// Deprecated
-	OpenUrl NullableString `json:"open_url,omitempty"`
 	// URL to the brokerage's website.
 	Url *string `json:"url,omitempty"`
 	// Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections.
 	Enabled *bool `json:"enabled,omitempty"`
 	// Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
 	MaintenanceMode *bool `json:"maintenance_mode,omitempty"`
+	// Whether the brokerage allows trading through SnapTrade.
+	AllowsTrading NullableBool `json:"allows_trading,omitempty"`
 	// This field is deprecated. Please contact us if you have a valid use case for it.
 	// Deprecated
 	AllowsFractionalUnits NullableBool `json:"allows_fractional_units,omitempty"`
-	// Whether the brokerage allows trading through SnapTrade.
-	AllowsTrading NullableBool `json:"allows_trading,omitempty"`
 	// This field is deprecated. Please contact us if you have a valid use case for it.
 	// Deprecated
 	HasReporting NullableBool `json:"has_reporting,omitempty"`
@@ -55,6 +52,9 @@ type Brokerage struct {
 	// This field is deprecated. Please contact us if you have a valid use case for it.
 	// Deprecated
 	Exchanges []interface{} `json:"exchanges,omitempty"`
+	// This field is deprecated.
+	// Deprecated
+	OpenUrl NullableString `json:"open_url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -311,51 +311,6 @@ func (o *Brokerage) UnsetAwsS3SquareLogoUrl() {
 	o.AwsS3SquareLogoUrl.Unset()
 }
 
-// GetOpenUrl returns the OpenUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *Brokerage) GetOpenUrl() string {
-	if o == nil || isNil(o.OpenUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.OpenUrl.Get()
-}
-
-// GetOpenUrlOk returns a tuple with the OpenUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *Brokerage) GetOpenUrlOk() (*string, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.OpenUrl.Get(), o.OpenUrl.IsSet()
-}
-
-// HasOpenUrl returns a boolean if a field has been set.
-func (o *Brokerage) HasOpenUrl() bool {
-	if o != nil && o.OpenUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOpenUrl gets a reference to the given NullableString and assigns it to the OpenUrl field.
-// Deprecated
-func (o *Brokerage) SetOpenUrl(v string) {
-	o.OpenUrl.Set(&v)
-}
-// SetOpenUrlNil sets the value for OpenUrl to be an explicit nil
-func (o *Brokerage) SetOpenUrlNil() {
-	o.OpenUrl.Set(nil)
-}
-
-// UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
-func (o *Brokerage) UnsetOpenUrl() {
-	o.OpenUrl.Unset()
-}
-
 // GetUrl returns the Url field value if set, zero value otherwise.
 func (o *Brokerage) GetUrl() string {
 	if o == nil || isNil(o.Url) {
@@ -452,6 +407,48 @@ func (o *Brokerage) SetMaintenanceMode(v bool) {
 	o.MaintenanceMode = &v
 }
 
+// GetAllowsTrading returns the AllowsTrading field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Brokerage) GetAllowsTrading() bool {
+	if o == nil || isNil(o.AllowsTrading.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.AllowsTrading.Get()
+}
+
+// GetAllowsTradingOk returns a tuple with the AllowsTrading field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Brokerage) GetAllowsTradingOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AllowsTrading.Get(), o.AllowsTrading.IsSet()
+}
+
+// HasAllowsTrading returns a boolean if a field has been set.
+func (o *Brokerage) HasAllowsTrading() bool {
+	if o != nil && o.AllowsTrading.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAllowsTrading gets a reference to the given NullableBool and assigns it to the AllowsTrading field.
+func (o *Brokerage) SetAllowsTrading(v bool) {
+	o.AllowsTrading.Set(&v)
+}
+// SetAllowsTradingNil sets the value for AllowsTrading to be an explicit nil
+func (o *Brokerage) SetAllowsTradingNil() {
+	o.AllowsTrading.Set(nil)
+}
+
+// UnsetAllowsTrading ensures that no value is present for AllowsTrading, not even an explicit nil
+func (o *Brokerage) UnsetAllowsTrading() {
+	o.AllowsTrading.Unset()
+}
+
 // GetAllowsFractionalUnits returns the AllowsFractionalUnits field value if set, zero value otherwise (both if not set or set to explicit null).
 // Deprecated
 func (o *Brokerage) GetAllowsFractionalUnits() bool {
@@ -495,48 +492,6 @@ func (o *Brokerage) SetAllowsFractionalUnitsNil() {
 // UnsetAllowsFractionalUnits ensures that no value is present for AllowsFractionalUnits, not even an explicit nil
 func (o *Brokerage) UnsetAllowsFractionalUnits() {
 	o.AllowsFractionalUnits.Unset()
-}
-
-// GetAllowsTrading returns the AllowsTrading field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Brokerage) GetAllowsTrading() bool {
-	if o == nil || isNil(o.AllowsTrading.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.AllowsTrading.Get()
-}
-
-// GetAllowsTradingOk returns a tuple with the AllowsTrading field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Brokerage) GetAllowsTradingOk() (*bool, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.AllowsTrading.Get(), o.AllowsTrading.IsSet()
-}
-
-// HasAllowsTrading returns a boolean if a field has been set.
-func (o *Brokerage) HasAllowsTrading() bool {
-	if o != nil && o.AllowsTrading.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAllowsTrading gets a reference to the given NullableBool and assigns it to the AllowsTrading field.
-func (o *Brokerage) SetAllowsTrading(v bool) {
-	o.AllowsTrading.Set(&v)
-}
-// SetAllowsTradingNil sets the value for AllowsTrading to be an explicit nil
-func (o *Brokerage) SetAllowsTradingNil() {
-	o.AllowsTrading.Set(nil)
-}
-
-// UnsetAllowsTrading ensures that no value is present for AllowsTrading, not even an explicit nil
-func (o *Brokerage) UnsetAllowsTrading() {
-	o.AllowsTrading.Unset()
 }
 
 // GetHasReporting returns the HasReporting field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -686,6 +641,51 @@ func (o *Brokerage) SetExchanges(v []interface{}) {
 	o.Exchanges = v
 }
 
+// GetOpenUrl returns the OpenUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
+func (o *Brokerage) GetOpenUrl() string {
+	if o == nil || isNil(o.OpenUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.OpenUrl.Get()
+}
+
+// GetOpenUrlOk returns a tuple with the OpenUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
+func (o *Brokerage) GetOpenUrlOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.OpenUrl.Get(), o.OpenUrl.IsSet()
+}
+
+// HasOpenUrl returns a boolean if a field has been set.
+func (o *Brokerage) HasOpenUrl() bool {
+	if o != nil && o.OpenUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenUrl gets a reference to the given NullableString and assigns it to the OpenUrl field.
+// Deprecated
+func (o *Brokerage) SetOpenUrl(v string) {
+	o.OpenUrl.Set(&v)
+}
+// SetOpenUrlNil sets the value for OpenUrl to be an explicit nil
+func (o *Brokerage) SetOpenUrlNil() {
+	o.OpenUrl.Set(nil)
+}
+
+// UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
+func (o *Brokerage) UnsetOpenUrl() {
+	o.OpenUrl.Unset()
+}
+
 func (o Brokerage) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
@@ -709,9 +709,6 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	if o.AwsS3SquareLogoUrl.IsSet() {
 		toSerialize["aws_s3_square_logo_url"] = o.AwsS3SquareLogoUrl.Get()
 	}
-	if o.OpenUrl.IsSet() {
-		toSerialize["open_url"] = o.OpenUrl.Get()
-	}
 	if !isNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}
@@ -721,11 +718,11 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	if !isNil(o.MaintenanceMode) {
 		toSerialize["maintenance_mode"] = o.MaintenanceMode
 	}
-	if o.AllowsFractionalUnits.IsSet() {
-		toSerialize["allows_fractional_units"] = o.AllowsFractionalUnits.Get()
-	}
 	if o.AllowsTrading.IsSet() {
 		toSerialize["allows_trading"] = o.AllowsTrading.Get()
+	}
+	if o.AllowsFractionalUnits.IsSet() {
+		toSerialize["allows_fractional_units"] = o.AllowsFractionalUnits.Get()
 	}
 	if o.HasReporting.IsSet() {
 		toSerialize["has_reporting"] = o.HasReporting.Get()
@@ -738,6 +735,9 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Exchanges) {
 		toSerialize["exchanges"] = o.Exchanges
+	}
+	if o.OpenUrl.IsSet() {
+		toSerialize["open_url"] = o.OpenUrl.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -764,16 +764,16 @@ func (o *Brokerage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "aws_s3_logo_url")
 		delete(additionalProperties, "aws_s3_square_logo_url")
-		delete(additionalProperties, "open_url")
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "maintenance_mode")
-		delete(additionalProperties, "allows_fractional_units")
 		delete(additionalProperties, "allows_trading")
+		delete(additionalProperties, "allows_fractional_units")
 		delete(additionalProperties, "has_reporting")
 		delete(additionalProperties, "is_real_time_connection")
 		delete(additionalProperties, "brokerage_type")
 		delete(additionalProperties, "exchanges")
+		delete(additionalProperties, "open_url")
 		o.AdditionalProperties = additionalProperties
 	}
 

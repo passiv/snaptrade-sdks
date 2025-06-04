@@ -230,8 +230,8 @@ public class Example {
     Boolean immediateRedirect = true; // When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String customRedirect = "customRedirect_example"; // URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled.
-    String connectionPortalVersion = "v4"; // Sets the version of the connection portal to render.
+    String connectionType = "read"; // Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+    String connectionPortalVersion = "v4"; // Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     try {
       Object result = client
               .authentication
@@ -341,8 +341,7 @@ public class Example {
     try {
       UserIDandSecret result = client
               .authentication
-              .registerSnapTradeUser()
-              .userId(userId)
+              .registerSnapTradeUser(userId)
               .execute();
       System.out.println(result);
       System.out.println(result.getUserId());
@@ -359,8 +358,7 @@ public class Example {
     try {
       ApiResponse<UserIDandSecret> response = client
               .authentication
-              .registerSnapTradeUser()
-              .userId(userId)
+              .registerSnapTradeUser(userId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

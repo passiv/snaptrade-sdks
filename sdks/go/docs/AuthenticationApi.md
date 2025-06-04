@@ -130,7 +130,7 @@ func main() {
     snapTradeLoginUserRequestBody.SetCustomRedirect("https://snaptrade.com")
     snapTradeLoginUserRequestBody.SetReconnect("8b5f262d-4bb9-365d-888a-202bd3b15fa1")
     snapTradeLoginUserRequestBody.SetConnectionType("READ")
-    snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V3")
+    snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
     
     request := client.AuthenticationApi.LoginSnapTradeUser(
         "userId_example",
@@ -182,8 +182,9 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody()
-    snapTradeRegisterUserRequestBody.SetUserId("snaptrade-user-123")
+    snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody(
+        "snaptrade-user-123",
+    )
     
     request := client.AuthenticationApi.RegisterSnapTradeUser(
         snapTradeRegisterUserRequestBody,

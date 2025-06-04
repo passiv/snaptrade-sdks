@@ -33,6 +33,34 @@ namespace SnapTrade.Net.Model
     public partial class Account : IEquatable<Account>, IValidatableObject
     {
         /// <summary>
+        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+        /// </summary>
+        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.</value>
+        [JsonConverter(typeof(StringEnumConverter))]
+        public enum StatusEnum
+        {
+            /// <summary>
+            /// Enum Open for value: open
+            /// </summary>
+            [EnumMember(Value = "open")]
+            Open = 1,
+
+            /// <summary>
+            /// Enum Closed for value: closed
+            /// </summary>
+            [EnumMember(Value = "closed")]
+            Closed = 2
+
+        }
+
+
+        /// <summary>
+        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+        /// </summary>
+        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.</value>
+        [DataMember(Name = "status", EmitDefaultValue = true)]
+        public StatusEnum? Status { get; set; }
+        /// <summary>
         /// Initializes a new instance of the <see cref="Account" /> class.
         /// </summary>
         [JsonConstructorAttribute]
@@ -51,10 +79,12 @@ namespace SnapTrade.Net.Model
         /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. (required).</param>
         /// <param name="syncStatus">syncStatus (required).</param>
         /// <param name="balance">balance (required).</param>
+        /// <param name="status">The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage..</param>
+        /// <param name="rawType">The account type as provided by the brokerage.</param>
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>)) : base()
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -99,6 +129,8 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("balance is a required property for Account and cannot be null");
             }
             this.Balance = balance;
+            this.Status = status;
+            this.RawType = rawType;
             this.Meta = meta;
             this.PortfolioGroup = portfolioGroup;
             this.CashRestrictions = cashRestrictions;
@@ -160,6 +192,13 @@ namespace SnapTrade.Net.Model
         public AccountBalance Balance { get; set; }
 
         /// <summary>
+        /// The account type as provided by the brokerage
+        /// </summary>
+        /// <value>The account type as provided by the brokerage</value>
+        [DataMember(Name = "raw_type", EmitDefaultValue = true)]
+        public string RawType { get; set; }
+
+        /// <summary>
         /// Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.
         /// </summary>
         /// <value>Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version.</value>
@@ -206,6 +245,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  Balance: ").Append(Balance).Append("\n");
+            sb.Append("  Status: ").Append(Status).Append("\n");
+            sb.Append("  RawType: ").Append(RawType).Append("\n");
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  PortfolioGroup: ").Append(PortfolioGroup).Append("\n");
             sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
@@ -286,6 +327,15 @@ namespace SnapTrade.Net.Model
                     this.Balance.Equals(input.Balance))
                 ) && base.Equals(input) && 
                 (
+                    this.Status == input.Status ||
+                    this.Status.Equals(input.Status)
+                ) && base.Equals(input) && 
+                (
+                    this.RawType == input.RawType ||
+                    (this.RawType != null &&
+                    this.RawType.Equals(input.RawType))
+                ) && base.Equals(input) && 
+                (
                     this.Meta == input.Meta ||
                     this.Meta != null &&
                     input.Meta != null &&
@@ -345,6 +395,11 @@ namespace SnapTrade.Net.Model
                 if (this.Balance != null)
                 {
                     hashCode = (hashCode * 59) + this.Balance.GetHashCode();
+                }
+                hashCode = (hashCode * 59) + this.Status.GetHashCode();
+                if (this.RawType != null)
+                {
+                    hashCode = (hashCode * 59) + this.RawType.GetHashCode();
                 }
                 if (this.Meta != null)
                 {

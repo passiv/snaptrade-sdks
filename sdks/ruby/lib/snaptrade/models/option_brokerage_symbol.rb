@@ -13,20 +13,20 @@ require 'time'
 module SnapTrade
   # Uniquely describes a security for the option position within an account. The distinction between this and the `option_symbol` child property is that this object is specific to a position within an account, while the `option_symbol` child property is universal across all brokerage accounts. The caller should rely on the `option_symbol` child property for most use cases.
   class OptionBrokerageSymbol
+    attr_accessor :option_symbol
+
     # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
     attr_accessor :id
 
     # This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
     attr_accessor :description
 
-    attr_accessor :option_symbol
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'option_symbol' => :'option_symbol',
         :'id' => :'id',
-        :'description' => :'description',
-        :'option_symbol' => :'option_symbol'
+        :'description' => :'description'
       }
     end
 
@@ -38,9 +38,9 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'option_symbol' => :'OptionsSymbol',
         :'id' => :'String',
-        :'description' => :'String',
-        :'option_symbol' => :'OptionsSymbol'
+        :'description' => :'String'
       }
     end
 
@@ -65,16 +65,16 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'option_symbol')
+        self.option_symbol = attributes[:'option_symbol']
+      end
+
       if attributes.key?(:'id')
         self.id = attributes[:'id']
       end
 
       if attributes.key?(:'description')
         self.description = attributes[:'description']
-      end
-
-      if attributes.key?(:'option_symbol')
-        self.option_symbol = attributes[:'option_symbol']
       end
     end
 
@@ -96,9 +96,9 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          option_symbol == o.option_symbol &&
           id == o.id &&
-          description == o.description &&
-          option_symbol == o.option_symbol
+          description == o.description
     end
 
     # @see the `==` method
@@ -110,7 +110,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, description, option_symbol].hash
+      [option_symbol, id, description].hash
     end
 
     # Builds the object from hash

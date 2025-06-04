@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages  # noqa: H301
 
 NAME = "snaptrade-python-sdk"
-VERSION = "11.0.45"
+VERSION = "11.0.103"
 # To install the library, run the following
 #
 # python setup.py install
@@ -31,9 +31,9 @@ REQUIRES = [
     "python-dateutil ~= 2.8.2",
     "typing_extensions ~= 4.3.0",
     "urllib3 ~= 1.26.18, ~= 2.0.0",
-    "cryptography ~= 42.0.5",
+    "cryptography ~= 43.0.3",
     "frozendict ~= 2.3.4",
-    "aiohttp ~= 3.8.4"
+    "aiohttp ~= 3.10.11"
 ]
 
 setup(
@@ -44,7 +44,7 @@ setup(
     author_email="api@snaptrade.com",
     url="https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python",
     keywords=["Konfig", "SnapTrade"],
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,

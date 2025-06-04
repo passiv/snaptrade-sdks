@@ -21,7 +21,7 @@ type HoldingsStatus struct {
 	// Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete.
 	InitialSyncCompleted *bool `json:"initial_sync_completed,omitempty"`
 	// The last time holdings were successfully synced by SnapTrade.
-	LastSuccessfulSync *time.Time `json:"last_successful_sync,omitempty"`
+	LastSuccessfulSync NullableTime `json:"last_successful_sync,omitempty"`
 }
 
 // NewHoldingsStatus instantiates a new HoldingsStatus object
@@ -73,36 +73,46 @@ func (o *HoldingsStatus) SetInitialSyncCompleted(v bool) {
 	o.InitialSyncCompleted = &v
 }
 
-// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise.
+// GetLastSuccessfulSync returns the LastSuccessfulSync field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HoldingsStatus) GetLastSuccessfulSync() time.Time {
-	if o == nil || isNil(o.LastSuccessfulSync) {
+	if o == nil || isNil(o.LastSuccessfulSync.Get()) {
 		var ret time.Time
 		return ret
 	}
-	return *o.LastSuccessfulSync
+	return *o.LastSuccessfulSync.Get()
 }
 
 // GetLastSuccessfulSyncOk returns a tuple with the LastSuccessfulSync field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *HoldingsStatus) GetLastSuccessfulSyncOk() (*time.Time, bool) {
-	if o == nil || isNil(o.LastSuccessfulSync) {
+	if o == nil {
     return nil, false
 	}
-	return o.LastSuccessfulSync, true
+	return o.LastSuccessfulSync.Get(), o.LastSuccessfulSync.IsSet()
 }
 
 // HasLastSuccessfulSync returns a boolean if a field has been set.
 func (o *HoldingsStatus) HasLastSuccessfulSync() bool {
-	if o != nil && !isNil(o.LastSuccessfulSync) {
+	if o != nil && o.LastSuccessfulSync.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLastSuccessfulSync gets a reference to the given time.Time and assigns it to the LastSuccessfulSync field.
+// SetLastSuccessfulSync gets a reference to the given NullableTime.Time and assigns it to the LastSuccessfulSync field.
 func (o *HoldingsStatus) SetLastSuccessfulSync(v time.Time) {
-	o.LastSuccessfulSync = &v
+	o.LastSuccessfulSync.Set(&v)
+}
+// SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
+func (o *HoldingsStatus) SetLastSuccessfulSyncNil() {
+	o.LastSuccessfulSync.Set(nil)
+}
+
+// UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
+func (o *HoldingsStatus) UnsetLastSuccessfulSync() {
+	o.LastSuccessfulSync.Unset()
 }
 
 func (o HoldingsStatus) MarshalJSON() ([]byte, error) {
@@ -110,8 +120,8 @@ func (o HoldingsStatus) MarshalJSON() ([]byte, error) {
 	if !isNil(o.InitialSyncCompleted) {
 		toSerialize["initial_sync_completed"] = o.InitialSyncCompleted
 	}
-	if !isNil(o.LastSuccessfulSync) {
-		toSerialize["last_successful_sync"] = o.LastSuccessfulSync
+	if o.LastSuccessfulSync.IsSet() {
+		toSerialize["last_successful_sync"] = o.LastSuccessfulSync.Get()
 	}
 	return json.Marshal(toSerialize)
 }

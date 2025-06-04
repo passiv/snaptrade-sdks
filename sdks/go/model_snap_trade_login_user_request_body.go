@@ -25,9 +25,9 @@ type SnapTradeLoginUserRequestBody struct {
 	CustomRedirect *string `json:"customRedirect,omitempty"`
 	// The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
 	Reconnect *string `json:"reconnect,omitempty"`
-	// Sets whether the connection should be read-only or trade-enabled.
+	// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
 	ConnectionType *string `json:"connectionType,omitempty"`
-	// Sets the version of the connection portal to render.
+	// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 	ConnectionPortalVersion *string `json:"connectionPortalVersion,omitempty"`
 }
 
@@ -39,7 +39,7 @@ func NewSnapTradeLoginUserRequestBody() *SnapTradeLoginUserRequestBody {
 	this := SnapTradeLoginUserRequestBody{}
 	var connectionType string = "read"
 	this.ConnectionType = &connectionType
-	var connectionPortalVersion string = "v3"
+	var connectionPortalVersion string = "v4"
 	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
 }
@@ -51,7 +51,7 @@ func NewSnapTradeLoginUserRequestBodyWithDefaults() *SnapTradeLoginUserRequestBo
 	this := SnapTradeLoginUserRequestBody{}
 	var connectionType string = "read"
 	this.ConnectionType = &connectionType
-	var connectionPortalVersion string = "v3"
+	var connectionPortalVersion string = "v4"
 	this.ConnectionPortalVersion = &connectionPortalVersion
 	return &this
 }

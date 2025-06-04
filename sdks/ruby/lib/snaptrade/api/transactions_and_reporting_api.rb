@@ -19,11 +19,13 @@ module SnapTrade
 
     # Get transaction history for a user
     #
+    # This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
+    # 
     # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
     # 
     # There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
     # 
-    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+    # The data returned here is always cached and refreshed once a day.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -31,7 +33,7 @@ module SnapTrade
     # @param end_date [Date] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     # @param accounts [String] Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
     # @param brokerage_authorizations [String] Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. 
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. - `OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` - Transfer of assets from one account to another 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -45,11 +47,13 @@ module SnapTrade
 
     # Get transaction history for a user
     #
+    # This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
+    # 
     # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
     # 
     # There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
     # 
-    # The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+    # The data returned here is always cached and refreshed once a day.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -57,7 +61,7 @@ module SnapTrade
     # @param end_date [Date] The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     # @param accounts [String] Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
     # @param brokerage_authorizations [String] Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. 
+    # @param type [String] Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values: - `BUY` - Asset bought. - `SELL` - Asset sold. - `DIVIDEND` - Dividend payout. - `CONTRIBUTION` - Cash contribution. - `WITHDRAWAL` - Cash withdrawal. - `REI` - Dividend reinvestment. - `INTEREST` - Interest deposited into the account. - `FEE` - Fee withdrawn from the account. - `OPTIONEXPIRATION` - Option expiration event. - `OPTIONASSIGNMENT` - Option assignment event. - `OPTIONEXERCISE` - Option exercise event. - `TRANSFER` - Transfer of assets from one account to another 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def get_activities_with_http_info(user_id:, user_secret:, start_date: SENTINEL, end_date: SENTINEL, accounts: SENTINEL, brokerage_authorizations: SENTINEL, type: SENTINEL, extra: {})
       extra[:start_date] = start_date if start_date != SENTINEL
@@ -69,7 +73,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -77,7 +81,7 @@ module SnapTrade
     # @option opts [Date] :end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     # @option opts [String] :accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
     # @option opts [String] :brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
     # @return [Array<UniversalActivity>]
     private def get_activities_impl(user_id, user_secret, opts = {})
       data, _status_code, _headers = get_activities_with_http_info(user_id, user_secret, opts)
@@ -85,7 +89,7 @@ module SnapTrade
     end
 
     # Get transaction history for a user
-    # Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+    # This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param [Hash] opts the optional parameters
@@ -93,7 +97,7 @@ module SnapTrade
     # @option opts [Date] :end_date The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
     # @option opts [String] :accounts Optional comma separated list of SnapTrade Account IDs used to filter the request to specific accounts. If not provided, the default is all known brokerage accounts for the user. The `brokerageAuthorizations` parameter takes precedence over this parameter.
     # @option opts [String] :brokerage_authorizations Optional comma separated list of SnapTrade Connection (Brokerage Authorization) IDs used to filter the request to only accounts that belong to those connections. If not provided, the default is all connections for the user. This parameter takes precedence over the `accounts` parameter.
-    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+    # @option opts [String] :type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
     # @return [Array<(Array<UniversalActivity>, Integer, Hash)>] Array<UniversalActivity> data, response status code and response headers
     private def get_activities_with_http_info_impl(user_id, user_secret, opts = {})
       if @api_client.config.debugging

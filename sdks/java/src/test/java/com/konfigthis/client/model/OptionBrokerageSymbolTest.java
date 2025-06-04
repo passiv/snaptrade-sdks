@@ -41,6 +41,14 @@ public class OptionBrokerageSymbolTest {
     }
 
     /**
+     * Test the property 'optionSymbol'
+     */
+    @Test
+    public void optionSymbolTest() {
+        // TODO: test optionSymbol
+    }
+
+    /**
      * Test the property 'id'
      */
     @Test
@@ -54,14 +62,6 @@ public class OptionBrokerageSymbolTest {
     @Test
     public void descriptionTest() {
         // TODO: test description
-    }
-
-    /**
-     * Test the property 'optionSymbol'
-     */
-    @Test
-    public void optionSymbolTest() {
-        // TODO: test optionSymbol
     }
 
 }

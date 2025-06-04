@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.45-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.45)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.103-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.103)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -22,11 +22,14 @@ Connect brokerage accounts to your app for live positions and trading
 - [Getting Started](#getting-started)
 - [Async](#async)
 - [Reference](#reference)
+  * [`snaptrade.account_information.get_account_activities`](#snaptradeaccount_informationget_account_activities)
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_positions`](#snaptradeaccount_informationget_user_account_positions)
+  * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
+  * [`snaptrade.account_information.get_user_account_return_rates`](#snaptradeaccount_informationget_user_account_return_rates)
   * [`snaptrade.account_information.get_user_holdings`](#snaptradeaccount_informationget_user_holdings)
   * [`snaptrade.account_information.list_user_accounts`](#snaptradeaccount_informationlist_user_accounts)
   * [`snaptrade.account_information.update_user_account`](#snaptradeaccount_informationupdate_user_account)
@@ -41,6 +44,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.list_brokerage_authorizations`](#snaptradeconnectionslist_brokerage_authorizations)
   * [`snaptrade.connections.refresh_brokerage_authorization`](#snaptradeconnectionsrefresh_brokerage_authorization)
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
+  * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
@@ -58,11 +62,19 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.reference_data.list_all_currencies`](#snaptradereference_datalist_all_currencies)
   * [`snaptrade.reference_data.list_all_currencies_rates`](#snaptradereference_datalist_all_currencies_rates)
   * [`snaptrade.reference_data.symbol_search_user_account`](#snaptradereference_datasymbol_search_user_account)
+  * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
+  * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
+  * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
+  * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
+  * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
+  * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
+  * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
+  * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -70,12 +82,12 @@ Connect brokerage accounts to your app for live positions and trading
 
 ## Requirements<a id="requirements"></a>
 
-Python >=3.7
+Python >=3.8
 
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.45
+pip install snaptrade-python-sdk==11.0.103
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -144,25 +156,28 @@ snaptrade = SnapTrade(
 
 async def main():
     try:
-        # List all accounts for the user, plus balances, positions, and orders for each account.
-        get_all_user_holdings_response = (
-            await snaptrade.account_information.aget_all_user_holdings(
+        # List account activities
+        get_account_activities_response = (
+            await snaptrade.account_information.aget_account_activities(
+                account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
                 user_id="snaptrade-user-123",
                 user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-                brokerage_authorizations="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+                start_date="2022-01-24",
+                end_date="2022-01-24",
+                offset=0,
+                limit=1,
+                type="BUY,SELL,DIVIDEND",
             )
         )
-        pprint(get_all_user_holdings_response.body)
-        pprint(get_all_user_holdings_response.body["account"])
-        pprint(get_all_user_holdings_response.body["balances"])
-        pprint(get_all_user_holdings_response.body["positions"])
-        pprint(get_all_user_holdings_response.body["total_value"])
-        pprint(get_all_user_holdings_response.headers)
-        pprint(get_all_user_holdings_response.status)
-        pprint(get_all_user_holdings_response.round_trip_time)
+        pprint(get_account_activities_response.body)
+        pprint(get_account_activities_response.body["data"])
+        pprint(get_account_activities_response.body["pagination"])
+        pprint(get_account_activities_response.headers)
+        pprint(get_account_activities_response.status)
+        pprint(get_account_activities_response.round_trip_time)
     except ApiException as e:
         print(
-            "Exception when calling AccountInformationApi.get_all_user_holdings: %s\n"
+            "Exception when calling AccountInformationApi.get_account_activities: %s\n"
             % e
         )
         pprint(e.body)
@@ -177,6 +192,72 @@ asyncio.run(main())
 
 
 ## Reference<a id="reference"></a>
+### `snaptrade.account_information.get_account_activities`<a id="snaptradeaccount_informationget_account_activities"></a>
+
+Returns all historical transactions for the specified account.
+
+This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+Transaction are returned in reverse chronological order, using the `trade_date` field.
+
+The data returned here is always cached and refreshed once a day.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_account_activities_response = snaptrade.account_information.get_account_activities(
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    start_date="2022-01-24",
+    end_date="2022-01-24",
+    offset=0,
+    limit=1,
+    type="BUY,SELL,DIVIDEND",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### start_date: `date`<a id="start_date-date"></a>
+
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
+##### end_date: `date`<a id="end_date-date"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+
+##### offset: `int`<a id="offset-int"></a>
+
+An integer that specifies the starting point of the paginated results. Default is 0.
+
+##### limit: `int`<a id="limit-int"></a>
+
+An integer that specifies the maximum number of transactions to return. Default of 1000.
+
+##### type: `str`<a id="type-str"></a>
+
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`PaginatedUniversalActivity`](./snaptrade_client/type/paginated_universal_activity.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/activities` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.account_information.get_all_user_holdings`<a id="snaptradeaccount_informationget_all_user_holdings"></a>
 ![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
@@ -384,6 +465,89 @@ get_user_account_positions_response = (
 
 ---
 
+### `snaptrade.account_information.get_user_account_recent_orders`<a id="snaptradeaccount_informationget_user_account_recent_orders"></a>
+
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
+Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+By default only returns executed orders, but that can be changed by setting *only_executed* to false
+**Please contact support for access as this endpoint is not enabled by default.**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_recent_orders_response = (
+    snaptrade.account_information.get_user_account_recent_orders(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### only_executed: `bool`<a id="only_executed-bool"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`RecentOrdersResponse`](./snaptrade_client/type/recent_orders_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.account_information.get_user_account_return_rates`<a id="snaptradeaccount_informationget_user_account_return_rates"></a>
+
+Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_return_rates_response = (
+    snaptrade.account_information.get_user_account_return_rates(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`RateOfReturnResponse`](./snaptrade_client/type/rate_of_return_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/returnRates` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.account_information.get_user_holdings`<a id="snaptradeaccount_informationget_user_holdings"></a>
 
 Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
@@ -581,7 +745,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     custom_redirect="https://snaptrade.com",
     reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connection_type="read",
-    connection_portal_version="v3",
+    connection_portal_version="v4",
 )
 ```
 
@@ -609,11 +773,11 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 
 ##### connection_type: `str`<a id="connection_type-str"></a>
 
-Sets whether the connection should be read-only or trade-enabled.
+Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 
-Sets the version of the connection portal to render.
+Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
@@ -743,7 +907,7 @@ detail_brokerage_authorization_response = (
 Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
 Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
 
-*Please contact us in order to use this endpoint as it is disabled by default.*
+This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -819,8 +983,9 @@ list_brokerage_authorizations_response = (
 ### `snaptrade.connections.refresh_brokerage_authorization`<a id="snaptradeconnectionsrefresh_brokerage_authorization"></a>
 
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-*Please contact support for access as this endpoint is not enabled by default.*
+**Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -880,6 +1045,41 @@ snaptrade.connections.remove_brokerage_authorization(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `delete`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.connections.return_rates`<a id="snaptradeconnectionsreturn_rates"></a>
+
+Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+return_rates_response = snaptrade.connections.return_rates(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### authorization_id: `str`<a id="authorization_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`RateOfReturnResponse`](./snaptrade_client/type/rate_of_return_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/returnRates` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1103,7 +1303,7 @@ Places the option strategy order and returns the order record received from the 
 ```python
 place_option_strategy_response = snaptrade.options.place_option_strategy(
     order_type="Market",
-    time_in_force="FOK",
+    time_in_force="Day",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
@@ -1457,6 +1657,44 @@ The search query for symbols.
 
 ---
 
+### `snaptrade.trading.cancel_order`<a id="snaptradetradingcancel_order"></a>
+
+Cancels an order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+cancel_order_response = snaptrade.trading.cancel_order(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
@@ -1500,6 +1738,46 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 ---
 
+### `snaptrade.trading.get_cryptocurrency_pair_quote`<a id="snaptradetradingget_cryptocurrency_pair_quote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_cryptocurrency_pair_quote_response = (
+    snaptrade.trading.get_cryptocurrency_pair_quote(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        instrument_symbol="BTC-USD",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### instrument_symbol: `str`<a id="instrument_symbol-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`CryptocurrencyPairQuote`](./snaptrade_client/type/cryptocurrency_pair_quote.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.trading.get_order_impact`<a id="snaptradetradingget_order_impact"></a>
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -1512,7 +1790,7 @@ get_order_impact_response = snaptrade.trading.get_order_impact(
     action="BUY",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type="Market",
-    time_in_force="FOK",
+    time_in_force="Day",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     price=31.33,
@@ -1593,7 +1871,7 @@ get_user_account_quotes_response = snaptrade.trading.get_user_account_quotes(
 
 ##### symbols: `str`<a id="symbols-str"></a>
 
-List of Universal Symbol IDs or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
 
 ##### account_id: `str`<a id="account_id-str"></a>
 
@@ -1608,6 +1886,96 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.place_bracket_order`<a id="snaptradetradingplace_bracket_order"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_bracket_order_response = snaptrade.trading.place_bracket_order(
+    action="BUY",
+    instrument={
+        "symbol": "AAPL",
+        "type": "EQUITY",
+    },
+    order_type="Market",
+    time_in_force="Day",
+    stop_loss={
+        "stop_price": "48.55",
+        "limit_price": "48.50",
+    },
+    take_profit={
+        "limit_price": "49.95",
+    },
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    symbol="AAPL",
+    price=31.33,
+    stop=31.33,
+    units=10.5,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
+
+##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
+
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### stop_loss: [`StopLoss`](./snaptrade_client/type/stop_loss.py)<a id="stop_loss-stoplosssnaptrade_clienttypestop_losspy"></a>
+
+
+##### take_profit: [`TakeProfit`](./snaptrade_client/type/take_profit.py)<a id="take_profit-takeprofitsnaptrade_clienttypetake_profitpy"></a>
+
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+The ID of the account to execute the trade on.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The security's trading ticker symbol.
+
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ManualTradeFormBracket`](./snaptrade_client/type/manual_trade_form_bracket.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/bracket` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1628,11 +1996,12 @@ It's recommended to trigger a manual refresh of the account after placing an ord
 place_force_order_response = snaptrade.trading.place_force_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     action="BUY",
-    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type="Market",
-    time_in_force="FOK",
+    time_in_force="Day",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    symbol="AAPL  131124C00240000",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -1646,11 +2015,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
-
-##### universal_symbol_id: `str`<a id="universal_symbol_id-str"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+##### action: [`ActionStrictWithOptions`](./snaptrade_client/type/action_strict_with_options.py)<a id="action-actionstrictwithoptionssnaptrade_clienttypeaction_strict_with_optionspy"></a>
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
 
@@ -1660,6 +2025,14 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
+##### universal_symbol_id: [`UniversalSymbolIDNullable`](./snaptrade_client/type/universal_symbol_id_nullable.py)<a id="universal_symbol_id-universalsymbolidnullablesnaptrade_clienttypeuniversal_symbol_id_nullablepy"></a>
+
+The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
+
+The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 
 The limit price for `Limit` and `StopLimit` orders.
@@ -1668,13 +2041,15 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
+##### units: `Union[int, float]`<a id="units-unionint-float"></a>
+
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ##### notional_value: `NotionalValueNullable`<a id="notional_value-notionalvaluenullable"></a>
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`ManualTradeForm`](./snaptrade_client/type/manual_trade_form.py)
+[`ManualTradeFormWithOptions`](./snaptrade_client/type/manual_trade_form_with_options.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
@@ -1682,6 +2057,72 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.place_mleg_order`<a id="snaptradetradingplace_mleg_order"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_mleg_order_response = snaptrade.trading.place_mleg_order(
+    order_type="MARKET",
+    time_in_force="Day",
+    legs=[
+        {
+            "instrument": {
+                "symbol": "PBI   250718C00006000",
+                "instrument_type": "OPTION",
+            },
+            "action": "BUY_TO_OPEN",
+            "units": 1,
+        }
+    ],
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="",
+    stop_price="",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./snaptrade_client/type/mleg_order_type_strict.py)<a id="order_type-mlegordertypestrictsnaptrade_clienttypemleg_order_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### legs: List[`MlegLeg`]<a id="legs-listmlegleg"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`MlegTradeForm`](./snaptrade_client/type/mleg_trade_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`MlegOrderResponse`](./snaptrade_client/type/mleg_order_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1734,13 +2175,296 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 ---
 
+### `snaptrade.trading.place_simple_order`<a id="snaptradetradingplace_simple_order"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_simple_order_response = snaptrade.trading.place_simple_order(
+    instrument={
+        "symbol": "AAPL",
+        "type": "EQUITY",
+    },
+    side="BUY",
+    type="MARKET",
+    time_in_force="GTC",
+    amount="123.45",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="123.45",
+    stop_price="123.45",
+    post_only=False,
+    expiration_date="2024-01-01T00:00:00Z",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
+
+
+##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### type: `str`<a id="type-str"></a>
+
+The type of order to place.
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `str`<a id="amount-str"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `str`<a id="limit_price-str"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `str`<a id="stop_price-str"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.preview_simple_order`<a id="snaptradetradingpreview_simple_order"></a>
+
+Previews an order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+preview_simple_order_response = snaptrade.trading.preview_simple_order(
+    instrument={
+        "symbol": "AAPL",
+        "type": "EQUITY",
+    },
+    side="BUY",
+    type="MARKET",
+    time_in_force="GTC",
+    amount="123.45",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="123.45",
+    stop_price="123.45",
+    post_only=False,
+    expiration_date="2024-01-01T00:00:00Z",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
+
+
+##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### type: `str`<a id="type-str"></a>
+
+The type of order to place.
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `str`<a id="amount-str"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `str`<a id="limit_price-str"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `str`<a id="stop_price-str"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`SimpleOrderPreview`](./snaptrade_client/type/simple_order_preview.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/preview` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.replace_order`<a id="snaptradetradingreplace_order"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+replace_order_response = snaptrade.trading.replace_order(
+    action="BUY",
+    order_type="Market",
+    time_in_force="Day",
+    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    price=31.33,
+    symbol="AAPL",
+    stop=31.33,
+    units=10.5,
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The security's trading ticker symbol
+
+##### stop: `Optional[Union[int, float]]`<a id="stop-optionalunionint-float"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`UnitsNullable`](./snaptrade_client/type/units_nullable.py)<a id="units-unitsnullablesnaptrade_clienttypeunits_nullablepy"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`ManualTradeReplaceForm`](./snaptrade_client/type/manual_trade_replace_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `patch`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.search_cryptocurrency_pair_instruments`<a id="snaptradetradingsearch_cryptocurrency_pair_instruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+search_cryptocurrency_pair_instruments_response = (
+    snaptrade.trading.search_cryptocurrency_pair_instruments(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        base="BTC",
+        quote="USD",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### base: `str`<a id="base-str"></a>
+
+##### quote: `str`<a id="quote-str"></a>
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.transactions_and_reporting.get_activities`<a id="snaptradetransactions_and_reportingget_activities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1781,7 +2505,7 @@ Optional comma separated list of SnapTrade Connection (Brokerage Authorization) 
 
 ##### type: `str`<a id="type-str"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

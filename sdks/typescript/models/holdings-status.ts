@@ -28,6 +28,6 @@ export interface HoldingsStatus {
      * @type {string}
      * @memberof HoldingsStatus
      */
-    'last_successful_sync'?: string;
+    'last_successful_sync'?: string | null;
 }
 

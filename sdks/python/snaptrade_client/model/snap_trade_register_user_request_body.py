@@ -35,12 +35,17 @@ class SnapTradeRegisterUserRequestBody(
 
 
     class MetaOapg:
+        required = {
+            "userId",
+        }
         
         class properties:
             userId = schemas.StrSchema
             __annotations__ = {
                 "userId": userId,
             }
+    
+    userId: MetaOapg.properties.userId
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["userId"]) -> MetaOapg.properties.userId: ...
@@ -54,7 +59,7 @@ class SnapTradeRegisterUserRequestBody(
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["userId"]) -> typing.Union[MetaOapg.properties.userId, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["userId"]) -> MetaOapg.properties.userId: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
@@ -66,7 +71,7 @@ class SnapTradeRegisterUserRequestBody(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        userId: typing.Union[MetaOapg.properties.userId, str, schemas.Unset] = schemas.unset,
+        userId: typing.Union[MetaOapg.properties.userId, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SnapTradeRegisterUserRequestBody':

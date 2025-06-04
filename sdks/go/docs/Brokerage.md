@@ -11,16 +11,16 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A brief description of the brokerage. | [optional] 
 **AwsS3LogoUrl** | Pointer to **string** | URL to the brokerage&#39;s logo. | [optional] 
 **AwsS3SquareLogoUrl** | Pointer to **NullableString** | URL to the brokerage&#39;s logo in square format. | [optional] 
-**OpenUrl** | Pointer to **NullableString** | This field is deprecated. | [optional] 
 **Url** | Pointer to **string** | URL to the brokerage&#39;s website. | [optional] 
 **Enabled** | Pointer to **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
 **MaintenanceMode** | Pointer to **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
-**AllowsFractionalUnits** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **AllowsTrading** | Pointer to **NullableBool** | Whether the brokerage allows trading through SnapTrade. | [optional] 
+**AllowsFractionalUnits** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **HasReporting** | Pointer to **NullableBool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **IsRealTimeConnection** | Pointer to **bool** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **BrokerageType** | Pointer to [**BrokerageType**](BrokerageType.md) |  | [optional] 
 **Exchanges** | Pointer to **[]interface{}** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
+**OpenUrl** | Pointer to **NullableString** | This field is deprecated. | [optional] 
 
 ## Methods
 
@@ -226,41 +226,6 @@ HasAwsS3SquareLogoUrl returns a boolean if a field has been set.
 `func (o *Brokerage) UnsetAwsS3SquareLogoUrl()`
 
 UnsetAwsS3SquareLogoUrl ensures that no value is present for AwsS3SquareLogoUrl, not even an explicit nil
-### GetOpenUrl
-
-`func (o *Brokerage) GetOpenUrl() string`
-
-GetOpenUrl returns the OpenUrl field if non-nil, zero value otherwise.
-
-### GetOpenUrlOk
-
-`func (o *Brokerage) GetOpenUrlOk() (*string, bool)`
-
-GetOpenUrlOk returns a tuple with the OpenUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOpenUrl
-
-`func (o *Brokerage) SetOpenUrl(v string)`
-
-SetOpenUrl sets OpenUrl field to given value.
-
-### HasOpenUrl
-
-`func (o *Brokerage) HasOpenUrl() bool`
-
-HasOpenUrl returns a boolean if a field has been set.
-
-### SetOpenUrlNil
-
-`func (o *Brokerage) SetOpenUrlNil(b bool)`
-
- SetOpenUrlNil sets the value for OpenUrl to be an explicit nil
-
-### UnsetOpenUrl
-`func (o *Brokerage) UnsetOpenUrl()`
-
-UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
 ### GetUrl
 
 `func (o *Brokerage) GetUrl() string`
@@ -336,41 +301,6 @@ SetMaintenanceMode sets MaintenanceMode field to given value.
 
 HasMaintenanceMode returns a boolean if a field has been set.
 
-### GetAllowsFractionalUnits
-
-`func (o *Brokerage) GetAllowsFractionalUnits() bool`
-
-GetAllowsFractionalUnits returns the AllowsFractionalUnits field if non-nil, zero value otherwise.
-
-### GetAllowsFractionalUnitsOk
-
-`func (o *Brokerage) GetAllowsFractionalUnitsOk() (*bool, bool)`
-
-GetAllowsFractionalUnitsOk returns a tuple with the AllowsFractionalUnits field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowsFractionalUnits
-
-`func (o *Brokerage) SetAllowsFractionalUnits(v bool)`
-
-SetAllowsFractionalUnits sets AllowsFractionalUnits field to given value.
-
-### HasAllowsFractionalUnits
-
-`func (o *Brokerage) HasAllowsFractionalUnits() bool`
-
-HasAllowsFractionalUnits returns a boolean if a field has been set.
-
-### SetAllowsFractionalUnitsNil
-
-`func (o *Brokerage) SetAllowsFractionalUnitsNil(b bool)`
-
- SetAllowsFractionalUnitsNil sets the value for AllowsFractionalUnits to be an explicit nil
-
-### UnsetAllowsFractionalUnits
-`func (o *Brokerage) UnsetAllowsFractionalUnits()`
-
-UnsetAllowsFractionalUnits ensures that no value is present for AllowsFractionalUnits, not even an explicit nil
 ### GetAllowsTrading
 
 `func (o *Brokerage) GetAllowsTrading() bool`
@@ -406,6 +336,41 @@ HasAllowsTrading returns a boolean if a field has been set.
 `func (o *Brokerage) UnsetAllowsTrading()`
 
 UnsetAllowsTrading ensures that no value is present for AllowsTrading, not even an explicit nil
+### GetAllowsFractionalUnits
+
+`func (o *Brokerage) GetAllowsFractionalUnits() bool`
+
+GetAllowsFractionalUnits returns the AllowsFractionalUnits field if non-nil, zero value otherwise.
+
+### GetAllowsFractionalUnitsOk
+
+`func (o *Brokerage) GetAllowsFractionalUnitsOk() (*bool, bool)`
+
+GetAllowsFractionalUnitsOk returns a tuple with the AllowsFractionalUnits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAllowsFractionalUnits
+
+`func (o *Brokerage) SetAllowsFractionalUnits(v bool)`
+
+SetAllowsFractionalUnits sets AllowsFractionalUnits field to given value.
+
+### HasAllowsFractionalUnits
+
+`func (o *Brokerage) HasAllowsFractionalUnits() bool`
+
+HasAllowsFractionalUnits returns a boolean if a field has been set.
+
+### SetAllowsFractionalUnitsNil
+
+`func (o *Brokerage) SetAllowsFractionalUnitsNil(b bool)`
+
+ SetAllowsFractionalUnitsNil sets the value for AllowsFractionalUnits to be an explicit nil
+
+### UnsetAllowsFractionalUnits
+`func (o *Brokerage) UnsetAllowsFractionalUnits()`
+
+UnsetAllowsFractionalUnits ensures that no value is present for AllowsFractionalUnits, not even an explicit nil
 ### GetHasReporting
 
 `func (o *Brokerage) GetHasReporting() bool`
@@ -516,6 +481,41 @@ SetExchanges sets Exchanges field to given value.
 
 HasExchanges returns a boolean if a field has been set.
 
+### GetOpenUrl
+
+`func (o *Brokerage) GetOpenUrl() string`
+
+GetOpenUrl returns the OpenUrl field if non-nil, zero value otherwise.
+
+### GetOpenUrlOk
+
+`func (o *Brokerage) GetOpenUrlOk() (*string, bool)`
+
+GetOpenUrlOk returns a tuple with the OpenUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenUrl
+
+`func (o *Brokerage) SetOpenUrl(v string)`
+
+SetOpenUrl sets OpenUrl field to given value.
+
+### HasOpenUrl
+
+`func (o *Brokerage) HasOpenUrl() bool`
+
+HasOpenUrl returns a boolean if a field has been set.
+
+### SetOpenUrlNil
+
+`func (o *Brokerage) SetOpenUrlNil(b bool)`
+
+ SetOpenUrlNil sets the value for OpenUrl to be an explicit nil
+
+### UnsetOpenUrl
+`func (o *Brokerage) UnsetOpenUrl()`
+
+UnsetOpenUrl ensures that no value is present for OpenUrl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

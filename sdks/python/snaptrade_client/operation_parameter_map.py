@@ -1,4 +1,32 @@
 operation_parameter_map = {
+    '/accounts/{accountId}/activities-GET': {
+        'parameters': [
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'startDate'
+            },
+            {
+                'name': 'endDate'
+            },
+            {
+                'name': 'offset'
+            },
+            {
+                'name': 'limit'
+            },
+            {
+                'name': 'type'
+            },
+        ]
+    },
     '/holdings-GET': {
         'parameters': [
             {
@@ -58,6 +86,35 @@ operation_parameter_map = {
         ]
     },
     '/accounts/{accountId}/positions-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
+    '/accounts/{accountId}/recentOrders-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'only_executed'
+            },
+        ]
+    },
+    '/accounts/{accountId}/returnRates-GET': {
         'parameters': [
             {
                 'name': 'userId'
@@ -225,6 +282,19 @@ operation_parameter_map = {
             },
             {
                 'name': 'userSecret'
+            },
+        ]
+    },
+    '/authorizations/{authorizationId}/returnRates-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'authorizationId'
             },
         ]
     },
@@ -401,6 +471,22 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel-POST': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/cancel-POST': {
         'parameters': [
             {
@@ -414,6 +500,22 @@ operation_parameter_map = {
             },
             {
                 'name': 'brokerage_order_id'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'instrumentSymbol'
             },
         ]
     },
@@ -473,6 +575,49 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/bracket-POST': {
+        'parameters': [
+            {
+                'name': 'action'
+            },
+            {
+                'name': 'instrument'
+            },
+            {
+                'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'stop_loss'
+            },
+            {
+                'name': 'take_profit'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'price'
+            },
+            {
+                'name': 'stop'
+            },
+            {
+                'name': 'units'
+            },
+        ]
+    },
     '/trade/place-POST': {
         'parameters': [
             {
@@ -480,9 +625,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'action'
-            },
-            {
-                'name': 'universal_symbol_id'
             },
             {
                 'name': 'order_type'
@@ -497,6 +639,12 @@ operation_parameter_map = {
                 'name': 'userSecret'
             },
             {
+                'name': 'universal_symbol_id'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
                 'name': 'price'
             },
             {
@@ -507,6 +655,34 @@ operation_parameter_map = {
             },
             {
                 'name': 'notional_value'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/options-POST': {
+        'parameters': [
+            {
+                'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'legs'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
             },
         ]
     },
@@ -523,6 +699,142 @@ operation_parameter_map = {
             },
             {
                 'name': 'wait_to_confirm'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple-POST': {
+        'parameters': [
+            {
+                'name': 'instrument'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple/preview-POST': {
+        'parameters': [
+            {
+                'name': 'instrument'
+            },
+            {
+                'name': 'side'
+            },
+            {
+                'name': 'type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'amount'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'limit_price'
+            },
+            {
+                'name': 'stop_price'
+            },
+            {
+                'name': 'post_only'
+            },
+            {
+                'name': 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace-PATCH': {
+        'parameters': [
+            {
+                'name': 'action'
+            },
+            {
+                'name': 'order_type'
+            },
+            {
+                'name': 'time_in_force'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'brokerageOrderId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'price'
+            },
+            {
+                'name': 'symbol'
+            },
+            {
+                'name': 'stop'
+            },
+            {
+                'name': 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'base'
+            },
+            {
+                'name': 'quote'
             },
         ]
     },

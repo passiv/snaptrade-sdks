@@ -6,7 +6,7 @@ Status of account holdings sync. SnapTrade syncs holdings from the brokerage und
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSyncCompleted** | **bool** | Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete. | [optional] 
-**LastSuccessfulSync** | **DateTime** | The last time holdings were successfully synced by SnapTrade. | [optional] 
+**LastSuccessfulSync** | **DateTime?** | Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

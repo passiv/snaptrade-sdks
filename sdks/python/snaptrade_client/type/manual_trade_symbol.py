@@ -21,10 +21,6 @@ class RequiredManualTradeSymbol(TypedDict):
     pass
 
 class OptionalManualTradeSymbol(TypedDict, total=False):
-    # WARNING: This property is deprecated
-    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-    brokerage_symbol_id: str
-
     # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     universal_symbol_id: str
 
@@ -41,6 +37,10 @@ class OptionalManualTradeSymbol(TypedDict, total=False):
     # WARNING: This property is deprecated
     # This field is deprecated and should not be used.
     symbol: str
+
+    # WARNING: This property is deprecated
+    # A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+    brokerage_symbol_id: str
 
 class ManualTradeSymbol(RequiredManualTradeSymbol, OptionalManualTradeSymbol):
     pass

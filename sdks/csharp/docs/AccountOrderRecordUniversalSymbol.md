@@ -12,9 +12,9 @@ Name | Type | Description | Notes
 **Currency** | [**SymbolCurrency**](SymbolCurrency.md) |  | 
 **Exchange** | [**SymbolExchange**](SymbolExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | 
-**Currencies** | [**List&lt;Currency&gt;**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
 **FigiCode** | **string** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | [**FigiInstrumentNullable**](FigiInstrumentNullable.md) |  | [optional] 
+**Currencies** | [**List&lt;Currency&gt;**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections |
 | [**RefreshBrokerageAuthorization**](ConnectionsApi.md#refreshbrokerageauthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
+| [**ReturnRates**](ConnectionsApi.md#returnrates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user |
 
 
@@ -111,7 +112,7 @@ catch (ApiException e)
 
 
 
-Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
 
 ### Example
 ```csharp
@@ -302,7 +303,7 @@ catch (ApiException e)
 
 
 
-Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
 
 ### Example
 ```csharp
@@ -485,6 +486,102 @@ void (empty response body)
 | **400** | Bad Request |  -  |
 | **404** | Not Found |  -  |
 | **0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **ReturnRates**
+
+
+
+Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \"ALL\", \"1Y\", \"6M\", \"3M\", \"1M\" 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class ReturnRatesExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var authorizationId = "authorizationId_example";
+            
+            try
+            {
+                // List connection rate of returns
+                RateOfReturnResponse result = client.Connections.ReturnRates(userId, userSecret, authorizationId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.ReturnRates: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the ReturnRatesWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List connection rate of returns
+    ApiResponse<RateOfReturnResponse> response = apiInstance.ReturnRatesWithHttpInfo(userId, userSecret, authorizationId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ConnectionsApi.ReturnRatesWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **authorizationId** | **string** |  |  |
+
+### Return type
+
+[**RateOfReturnResponse**](RateOfReturnResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **403** | Forbidden |  -  |
+| **500** | Unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

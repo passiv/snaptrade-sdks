@@ -32,10 +32,10 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     reconnect: str
 
-    # Sets whether the connection should be read-only or trade-enabled.
+    # Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
     connectionType: str
 
-    # Sets the version of the connection portal to render.
+    # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     connectionPortalVersion: str
 
 class SnapTradeLoginUserRequestBody(RequiredSnapTradeLoginUserRequestBody, OptionalSnapTradeLoginUserRequestBody):

@@ -33,13 +33,6 @@ export interface BrokerageAuthorization {
      */
     'created_date'?: string;
     /**
-     * Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-     * @type {string}
-     * @memberof BrokerageAuthorization
-     * @deprecated
-     */
-    'updated_date'?: string;
-    /**
      * 
      * @type {Brokerage}
      * @memberof BrokerageAuthorization
@@ -76,5 +69,18 @@ export interface BrokerageAuthorization {
      * @deprecated
      */
     'meta'?: { [key: string]: any; };
+    /**
+     * Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+     * @type {string}
+     * @memberof BrokerageAuthorization
+     * @deprecated
+     */
+    'updated_date'?: string;
+    /**
+     * Whether the connection is eligible for a payout.
+     * @type {boolean}
+     * @memberof BrokerageAuthorization
+     */
+    'is_eligible_for_payout'?: boolean;
 }
 

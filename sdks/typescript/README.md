@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.47-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.47)
+[![npm](https://img.shields.io/badge/npm-v9.0.107-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.107)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -18,11 +18,14 @@ Connect brokerage accounts to your app for live positions and trading
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Reference](#reference)
+  * [`snaptrade.accountInformation.getAccountActivities`](#snaptradeaccountinformationgetaccountactivities)
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
+  * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
+  * [`snaptrade.accountInformation.getUserAccountReturnRates`](#snaptradeaccountinformationgetuseraccountreturnrates)
   * [`snaptrade.accountInformation.getUserHoldings`](#snaptradeaccountinformationgetuserholdings)
   * [`snaptrade.accountInformation.listUserAccounts`](#snaptradeaccountinformationlistuseraccounts)
   * [`snaptrade.accountInformation.updateUserAccount`](#snaptradeaccountinformationupdateuseraccount)
@@ -37,6 +40,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
   * [`snaptrade.connections.refreshBrokerageAuthorization`](#snaptradeconnectionsrefreshbrokerageauthorization)
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
+  * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
@@ -54,11 +58,19 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
   * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
   * [`snaptrade.referenceData.symbolSearchUserAccount`](#snaptradereferencedatasymbolsearchuseraccount)
+  * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
+  * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
+  * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
+  * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
+  * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
+  * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
+  * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
+  * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -175,6 +187,72 @@ main();
 ```
 
 ## Reference<a id="reference"></a>
+
+
+### `snaptrade.accountInformation.getAccountActivities`<a id="snaptradeaccountinformationgetaccountactivities"></a>
+
+Returns all historical transactions for the specified account.
+
+This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+Transaction are returned in reverse chronological order, using the `trade_date` field.
+
+The data returned here is always cached and refreshed once a day.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getAccountActivitiesResponse =
+  await snaptrade.accountInformation.getAccountActivities({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    startDate: "2022-01-24",
+    endDate: "2022-01-24",
+    type: "BUY,SELL,DIVIDEND",
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### startDate: `string | Date`<a id="startdate-string--date"></a>
+
+The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+
+##### endDate: `string | Date`<a id="enddate-string--date"></a>
+
+The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+
+##### offset: `number`<a id="offset-number"></a>
+
+An integer that specifies the starting point of the paginated results. Default is 0.
+
+##### limit: `number`<a id="limit-number"></a>
+
+An integer that specifies the maximum number of transactions to return. Default of 1000.
+
+##### type: `string`<a id="type-string"></a>
+
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[PaginatedUniversalActivity](./models/paginated-universal-activity.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/activities` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
 
 
 ### `snaptrade.accountInformation.getAllUserHoldings`<a id="snaptradeaccountinformationgetalluserholdings"></a>
@@ -386,6 +464,88 @@ const getUserAccountPositionsResponse =
 ---
 
 
+### `snaptrade.accountInformation.getUserAccountRecentOrders`<a id="snaptradeaccountinformationgetuseraccountrecentorders"></a>
+
+A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
+Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+By default only returns executed orders, but that can be changed by setting *only_executed* to false
+**Please contact support for access as this endpoint is not enabled by default.**
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getUserAccountRecentOrdersResponse =
+  await snaptrade.accountInformation.getUserAccountRecentOrders({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### onlyExecuted: `boolean`<a id="onlyexecuted-boolean"></a>
+
+Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[RecentOrdersResponse](./models/recent-orders-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/recentOrders` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getUserAccountReturnRates`<a id="snaptradeaccountinformationgetuseraccountreturnrates"></a>
+
+Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getUserAccountReturnRatesResponse =
+  await snaptrade.accountInformation.getUserAccountReturnRates({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[RateOfReturnResponse](./models/rate-of-return-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/returnRates` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.accountInformation.getUserHoldings`<a id="snaptradeaccountinformationgetuserholdings"></a>
 
 Returns a list of balances, positions, and recent orders for the specified account. The data returned is similar to the data returned over the more fine-grained [balances](/reference/Account%20Information/AccountInformation_getUserAccountBalance), [positions](/reference/Account%20Information/AccountInformation_getUserAccountPositions) and [orders](/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoints. __The finer-grained APIs are preferred. They are easier to work with, faster, and have better error handling than this coarse-grained API.__
@@ -591,7 +751,7 @@ const loginSnapTradeUserResponse =
     customRedirect: "https://snaptrade.com",
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connectionType: "read",
-    connectionPortalVersion: "v3",
+    connectionPortalVersion: "v4",
   });
 ```
 
@@ -619,11 +779,11 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
-Sets whether the connection should be read-only or trade-enabled.
+Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 
-Sets the version of the connection portal to render.
+Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -751,7 +911,7 @@ const detailBrokerageAuthorizationResponse =
 Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
 Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
 
-*Please contact us in order to use this endpoint as it is disabled by default.*
+This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -827,8 +987,9 @@ const listBrokerageAuthorizationsResponse =
 ### `snaptrade.connections.refreshBrokerageAuthorization`<a id="snaptradeconnectionsrefreshbrokerageauthorization"></a>
 
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-*Please contact support for access as this endpoint is not enabled by default.*
+**Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -889,6 +1050,42 @@ const removeBrokerageAuthorizationResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/authorizations/{authorizationId}` `DELETE`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.returnRates`<a id="snaptradeconnectionsreturnrates"></a>
+
+Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const returnRatesResponse = await snaptrade.connections.returnRates({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  authorizationId: "87b24961-b51e-4db8-9226-f198f6518a89",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### authorizationId: `string`<a id="authorizationid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[RateOfReturnResponse](./models/rate-of-return-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/authorizations/{authorizationId}/returnRates` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1127,7 +1324,7 @@ const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
     accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
     order_type: "Market",
-    time_in_force: "FOK",
+    time_in_force: "Day",
     price: 31.33,
   }
 );
@@ -1141,7 +1338,7 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 
 ##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1488,6 +1685,45 @@ The search query for symbols.
 ---
 
 
+### `snaptrade.trading.cancelOrder`<a id="snaptradetradingcancelorder"></a>
+
+Cancels an order in the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const cancelOrderResponse = await snaptrade.trading.cancelOrder({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./models/order-updated-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
@@ -1530,6 +1766,46 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 
+### `snaptrade.trading.getCryptocurrencyPairQuote`<a id="snaptradetradinggetcryptocurrencypairquote"></a>
+
+Gets a quote for the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getCryptocurrencyPairQuoteResponse =
+  await snaptrade.trading.getCryptocurrencyPairQuote({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    instrumentSymbol: "BTC-USD",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### instrumentSymbol: `string`<a id="instrumentsymbol-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[CryptocurrencyPairQuote](./models/cryptocurrency-pair-quote.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.getOrderImpact`<a id="snaptradetradinggetorderimpact"></a>
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
@@ -1544,7 +1820,7 @@ const getOrderImpactResponse = await snaptrade.trading.getOrderImpact({
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -1559,7 +1835,7 @@ Unique identifier for the connected brokerage account. This is the UUID used to 
 
 ##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
 
-The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
 
 ##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
 
@@ -1571,7 +1847,7 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 
 ##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
 
 ##### userId: `string`<a id="userid-string"></a>
 
@@ -1626,7 +1902,7 @@ const getUserAccountQuotesResponse =
 
 ##### symbols: `string`<a id="symbols-string"></a>
 
-List of Universal Symbol IDs or tickers to get quotes for.
+List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
@@ -1641,6 +1917,97 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/quotes` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.placeBracketOrder`<a id="snaptradetradingplacebracketorder"></a>
+
+Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+use. Only supported on certain brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  action: "BUY",
+  symbol: "AAPL",
+  instrument: {
+    symbol: "AAPL",
+    type: "EQUITY",
+  },
+  order_type: "Market",
+  time_in_force: "Day",
+  price: 31.33,
+  stop: 31.33,
+  units: 10.5,
+  stop_loss: {
+    stop_price: "48.55",
+    limit_price: "48.50",
+  },
+  take_profit: {
+    limit_price: "49.95",
+  },
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+
+##### instrument: [`TradingInstrument`](./models/trading-instrument.ts)<a id="instrument-tradinginstrumentmodelstrading-instrumentts"></a>
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+
+##### stop_loss: [`StopLoss`](./models/stop-loss.ts)<a id="stop_loss-stoplossmodelsstop-lossts"></a>
+
+##### take_profit: [`TakeProfit`](./models/take-profit.ts)<a id="take_profit-takeprofitmodelstake-profitts"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+The ID of the account to execute the trade on.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol.
+
+##### price: `number`<a id="price-number"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### stop: `number`<a id="stop-number"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: `number`<a id="units-number"></a>
+
+Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/bracket` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1665,8 +2032,9 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   action: "BUY",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  symbol: "AAPL  131124C00240000",
   order_type: "Market",
-  time_in_force: "FOK",
+  time_in_force: "Day",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -1679,13 +2047,9 @@ const placeForceOrderResponse = await snaptrade.trading.placeForceOrder({
 
 Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
 
-##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+##### action: [`ActionStrictWithOptions`](./models/action-strict-with-options.ts)<a id="action-actionstrictwithoptionsmodelsaction-strict-with-optionsts"></a>
 
-The action describes the intent or side of a trade. This is either `BUY` or `SELL`
-
-##### universal_symbol_id: `string`<a id="universal_symbol_id-string"></a>
-
-Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
+The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
 
 ##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
 
@@ -1693,11 +2057,19 @@ The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` f
 
 ##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
 
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
 
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### universal_symbol_id: [`string`](./models/model-string.ts)<a id="universal_symbol_id-stringmodelsmodel-stringts"></a>
+
+The universal symbol ID of the security to trade. Must be \\\'null\\\' if `symbol` is provided, otherwise must be provided.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If \\\'symbol\\\' is provided, then \\\'universal_symbol_id\\\' must be \\\'null\\\'.
 
 ##### price: `number`<a id="price-number"></a>
 
@@ -1709,6 +2081,8 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
 
+For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+
 ##### notional_value: [`ManualTradeFormNotionalValue`](./models/manual-trade-form-notional-value.ts)<a id="notional_value-manualtradeformnotionalvaluemodelsmanual-trade-form-notional-valuets"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1718,6 +2092,74 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/trade/place` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
+
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  order_type: "MARKET",
+  time_in_force: "Day",
+  limit_price: "",
+  stop_price: "",
+  legs: [
+    {
+      instrument: {
+        symbol: "PBI   250718C00006000",
+        instrument_type: "OPTION",
+      },
+      action: "BUY_TO_OPEN",
+      units: 1,
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./models/mleg-order-type-strict.ts)<a id="order_type-mlegordertypestrictmodelsmleg-order-type-strictts"></a>
+
+The type of order to place.
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+
+##### legs: [`MlegLeg`](./models/mleg-leg.ts)[]<a id="legs-mleglegmodelsmleg-legts"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: `string`<a id="limit_price-string"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `string`<a id="stop_price-string"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[MlegOrderResponse](./models/mleg-order-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -1769,13 +2211,302 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 ---
 
 
+### `snaptrade.trading.placeSimpleOrder`<a id="snaptradetradingplacesimpleorder"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const placeSimpleOrderResponse = await snaptrade.trading.placeSimpleOrder({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  instrument: {
+    symbol: "AAPL",
+    type: "EQUITY",
+  },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00Z",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./models/trading-instrument.ts)<a id="instrument-tradinginstrumentmodelstrading-instrumentts"></a>
+
+##### side: [`ActionStrict`](./models/action-strict.ts)<a id="side-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `string`<a id="amount-string"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: `string`<a id="limit_price-string"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `string`<a id="stop_price-string"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `boolean`<a id="post_only-boolean"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `string`<a id="expiration_date-string"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./models/order-updated-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.previewSimpleOrder`<a id="snaptradetradingpreviewsimpleorder"></a>
+
+Previews an order using the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const previewSimpleOrderResponse = await snaptrade.trading.previewSimpleOrder({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  instrument: {
+    symbol: "AAPL",
+    type: "EQUITY",
+  },
+  side: "BUY",
+  type: "MARKET",
+  time_in_force: "GTC",
+  amount: "123.45",
+  limit_price: "123.45",
+  stop_price: "123.45",
+  post_only: false,
+  expiration_date: "2024-01-01T00:00:00Z",
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`TradingInstrument`](./models/trading-instrument.ts)<a id="instrument-tradinginstrumentmodelstrading-instrumentts"></a>
+
+##### side: [`ActionStrict`](./models/action-strict.ts)<a id="side-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### type: `string`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `string`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `string`<a id="amount-string"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: `string`<a id="limit_price-string"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `string`<a id="stop_price-string"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `boolean`<a id="post_only-boolean"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `string`<a id="expiration_date-string"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[SimpleOrderPreview](./models/simple-order-preview.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/preview` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.replaceOrder`<a id="snaptradetradingreplaceorder"></a>
+
+Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+returned in the response going forward. Only supported on some brokerages
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const replaceOrderResponse = await snaptrade.trading.replaceOrder({
+  accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
+  brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  action: "BUY",
+  order_type: "Market",
+  time_in_force: "Day",
+  price: 31.33,
+  symbol: "AAPL",
+  stop: 31.33,
+  units: 10.5,
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### action: [`ActionStrict`](./models/action-strict.ts)<a id="action-actionstrictmodelsaction-strictts"></a>
+
+The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+
+##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
+
+The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+The ID of the account to execute the trade on.
+
+##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+
+The Brokerage Order ID of the order to replace.
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### price: `number`<a id="price-number"></a>
+
+The limit price for `Limit` and `StopLimit` orders.
+
+##### symbol: `string`<a id="symbol-string"></a>
+
+The security\\\'s trading ticker symbol
+
+##### stop: `number`<a id="stop-number"></a>
+
+The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+
+##### units: [`number`](./models/number.ts)<a id="units-numbermodelsnumberts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const searchCryptocurrencyPairInstrumentsResponse =
+  await snaptrade.trading.searchCryptocurrencyPairInstruments({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    base: "BTC",
+    quote: "USD",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### base: `string`<a id="base-string"></a>
+
+##### quote: `string`<a id="quote-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingSearchCryptocurrencyPairInstruments200Response](./models/trading-search-cryptocurrency-pair-instruments200-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.transactionsAndReporting.getActivities`<a id="snaptradetransactionsandreportinggetactivities"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
+
+This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
 
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1819,7 +2550,7 @@ Optional comma separated list of SnapTrade Connection (Brokerage Authorization) 
 
 ##### type: `string`<a id="type-string"></a>
 
-Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  
+Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event.   - `OPTIONASSIGNMENT` - Option assignment event.   - `OPTIONEXERCISE` - Option exercise event.   - `TRANSFER` - Transfer of assets from one account to another 
 
 #### 🔄 Return<a id="🔄-return"></a>
 

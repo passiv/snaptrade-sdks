@@ -18,15 +18,16 @@ import (
 // SnapTradeRegisterUserRequestBody Data required to register a user via SnapTrade Partner
 type SnapTradeRegisterUserRequestBody struct {
 	// SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
-	UserId *string `json:"userId,omitempty"`
+	UserId string `json:"userId"`
 }
 
 // NewSnapTradeRegisterUserRequestBody instantiates a new SnapTradeRegisterUserRequestBody object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSnapTradeRegisterUserRequestBody() *SnapTradeRegisterUserRequestBody {
+func NewSnapTradeRegisterUserRequestBody(userId string) *SnapTradeRegisterUserRequestBody {
 	this := SnapTradeRegisterUserRequestBody{}
+	this.UserId = userId
 	return &this
 }
 
@@ -38,41 +39,33 @@ func NewSnapTradeRegisterUserRequestBodyWithDefaults() *SnapTradeRegisterUserReq
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise.
+// GetUserId returns the UserId field value
 func (o *SnapTradeRegisterUserRequestBody) GetUserId() string {
-	if o == nil || isNil(o.UserId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 func (o *SnapTradeRegisterUserRequestBody) GetUserIdOk() (*string, bool) {
-	if o == nil || isNil(o.UserId) {
+	if o == nil {
     return nil, false
 	}
-	return o.UserId, true
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *SnapTradeRegisterUserRequestBody) HasUserId() bool {
-	if o != nil && !isNil(o.UserId) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given string and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *SnapTradeRegisterUserRequestBody) SetUserId(v string) {
-	o.UserId = &v
+	o.UserId = v
 }
 
 func (o SnapTradeRegisterUserRequestBody) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.UserId) {
+	if true {
 		toSerialize["userId"] = o.UserId
 	}
 	return json.Marshal(toSerialize)

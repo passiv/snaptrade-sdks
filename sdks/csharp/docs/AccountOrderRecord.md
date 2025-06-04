@@ -7,9 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
 **Status** | **AccountOrderRecordStatus** |  | [optional] 
-**Symbol** | **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
 **UniversalSymbol** | [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
+**QuoteUniversalSymbol** | [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
+**QuoteCurrency** | [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
 **_Action** | **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
 **TotalQuantity** | **double?** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
 **OpenQuantity** | **double?** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
@@ -24,6 +25,8 @@ Name | Type | Description | Notes
 **TimeUpdated** | **DateTime?** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **TimeExecuted** | **DateTime?** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **ExpiryDate** | **DateTime?** | The time the order expires. This value is not always available from the brokerage. | [optional] 
+**Symbol** | **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**ChildBrokerageOrderIds** | [**ChildBrokerageOrderIDsNullable**](ChildBrokerageOrderIDsNullable.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

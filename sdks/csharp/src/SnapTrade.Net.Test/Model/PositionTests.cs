@@ -90,20 +90,20 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'OpenPnl'
         }
         /// <summary>
-        /// Test the property 'FractionalUnits'
-        /// </summary>
-        [Fact]
-        public void FractionalUnitsTest()
-        {
-            // TODO unit test for the property 'FractionalUnits'
-        }
-        /// <summary>
         /// Test the property 'AveragePurchasePrice'
         /// </summary>
         [Fact]
         public void AveragePurchasePriceTest()
         {
             // TODO unit test for the property 'AveragePurchasePrice'
+        }
+        /// <summary>
+        /// Test the property 'FractionalUnits'
+        /// </summary>
+        [Fact]
+        public void FractionalUnitsTest()
+        {
+            // TODO unit test for the property 'FractionalUnits'
         }
 
     }

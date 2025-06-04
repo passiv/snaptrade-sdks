@@ -62,12 +62,6 @@ describe SnapTrade::Brokerage do
     end
   end
 
-  describe 'test attribute "open_url"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "url"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -86,13 +80,13 @@ describe SnapTrade::Brokerage do
     end
   end
 
-  describe 'test attribute "allows_fractional_units"' do
+  describe 'test attribute "allows_trading"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
   end
 
-  describe 'test attribute "allows_trading"' do
+  describe 'test attribute "allows_fractional_units"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -117,6 +111,12 @@ describe SnapTrade::Brokerage do
   end
 
   describe 'test attribute "exchanges"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "open_url"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

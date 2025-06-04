@@ -36,8 +36,8 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="HoldingsStatus" /> class.
         /// </summary>
         /// <param name="initialSyncCompleted">Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete..</param>
-        /// <param name="lastSuccessfulSync">The last time holdings were successfully synced by SnapTrade..</param>
-        public HoldingsStatus(bool initialSyncCompleted = default(bool), DateTime lastSuccessfulSync = default(DateTime))
+        /// <param name="lastSuccessfulSync">Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ).</param>
+        public HoldingsStatus(bool initialSyncCompleted = default(bool), DateTime? lastSuccessfulSync = default(DateTime?))
         {
             this.InitialSyncCompleted = initialSyncCompleted;
             this.LastSuccessfulSync = lastSuccessfulSync;
@@ -51,11 +51,11 @@ namespace SnapTrade.Net.Model
         public bool InitialSyncCompleted { get; set; }
 
         /// <summary>
-        /// The last time holdings were successfully synced by SnapTrade.
+        /// Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)
         /// </summary>
-        /// <value>The last time holdings were successfully synced by SnapTrade.</value>
-        [DataMember(Name = "last_successful_sync", EmitDefaultValue = false)]
-        public DateTime LastSuccessfulSync { get; set; }
+        /// <value>Date in ISO 8601 format or null (YYYY-MM-DD HH:MM:SS.mmmmmmTZ)</value>
+        [DataMember(Name = "last_successful_sync", EmitDefaultValue = true)]
+        public DateTime? LastSuccessfulSync { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

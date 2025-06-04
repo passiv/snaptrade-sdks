@@ -66,13 +66,6 @@ export interface AccountOrderRecordUniversalSymbol {
      */
     'type': SecurityType;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-     * @type {Array<Currency>}
-     * @memberof AccountOrderRecordUniversalSymbol
-     * @deprecated
-     */
-    'currencies': Array<Currency>;
-    /**
      * This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
      * @type {string}
      * @memberof AccountOrderRecordUniversalSymbol
@@ -84,5 +77,12 @@ export interface AccountOrderRecordUniversalSymbol {
      * @memberof AccountOrderRecordUniversalSymbol
      */
     'figi_instrument'?: SymbolFigiInstrument | null;
+    /**
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * @type {Array<Currency>}
+     * @memberof AccountOrderRecordUniversalSymbol
+     * @deprecated
+     */
+    'currencies': Array<Currency>;
 }
 

@@ -30,6 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -89,6 +90,61 @@ public class Account {
   public static final String SERIALIZED_NAME_BALANCE = "balance";
   @SerializedName(SERIALIZED_NAME_BALANCE)
   private AccountBalance balance;
+
+  /**
+   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+   */
+  @JsonAdapter(StatusEnum.Adapter.class)
+ public enum StatusEnum {
+    OPEN("open"),
+    
+    CLOSED("closed");
+
+    private String value;
+
+    StatusEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static StatusEnum fromValue(String value) {
+      for (StatusEnum b : StatusEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      return null;
+    }
+
+    public static class Adapter extends TypeAdapter<StatusEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final StatusEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public StatusEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return StatusEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private StatusEnum status;
+
+  public static final String SERIALIZED_NAME_RAW_TYPE = "raw_type";
+  @SerializedName(SERIALIZED_NAME_RAW_TYPE)
+  private String rawType;
 
   public static final String SERIALIZED_NAME_META = "meta";
   @SerializedName(SERIALIZED_NAME_META)
@@ -337,6 +393,64 @@ public class Account {
   }
 
 
+  public Account status(StatusEnum status) {
+    
+    
+    
+    
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+   * @return status
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "OPEN", value = "The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.")
+
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(StatusEnum status) {
+    
+    
+    
+    this.status = status;
+  }
+
+
+  public Account rawType(String rawType) {
+    
+    
+    
+    
+    this.rawType = rawType;
+    return this;
+  }
+
+   /**
+   * The account type as provided by the brokerage
+   * @return rawType
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "Margin", value = "The account type as provided by the brokerage")
+
+  public String getRawType() {
+    return rawType;
+  }
+
+
+  public void setRawType(String rawType) {
+    
+    
+    
+    this.rawType = rawType;
+  }
+
+
   public Account meta(Map<String, Object> meta) {
     
     
@@ -508,15 +622,28 @@ public class Account {
         Objects.equals(this.createdDate, account.createdDate) &&
         Objects.equals(this.syncStatus, account.syncStatus) &&
         Objects.equals(this.balance, account.balance) &&
+        Objects.equals(this.status, account.status) &&
+        Objects.equals(this.rawType, account.rawType) &&
         Objects.equals(this.meta, account.meta) &&
         Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
         Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, meta, portfolioGroup, cashRestrictions, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -531,6 +658,8 @@ public class Account {
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    rawType: ").append(toIndentedString(rawType)).append("\n");
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
@@ -565,6 +694,8 @@ public class Account {
     openapiFields.add("created_date");
     openapiFields.add("sync_status");
     openapiFields.add("balance");
+    openapiFields.add("status");
+    openapiFields.add("raw_type");
     openapiFields.add("meta");
     openapiFields.add("portfolio_group");
     openapiFields.add("cash_restrictions");
@@ -616,6 +747,12 @@ public class Account {
       AccountSyncStatus.validateJsonObject(jsonObj.getAsJsonObject("sync_status"));
       // validate the required field `balance`
       AccountBalance.validateJsonObject(jsonObj.getAsJsonObject("balance"));
+      if (!jsonObj.get("status").isJsonNull() && (jsonObj.get("status") != null && !jsonObj.get("status").isJsonNull()) && !jsonObj.get("status").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `status` to be a primitive type in the JSON string but got `%s`", jsonObj.get("status").toString()));
+      }
+      if (!jsonObj.get("raw_type").isJsonNull() && (jsonObj.get("raw_type") != null && !jsonObj.get("raw_type").isJsonNull()) && !jsonObj.get("raw_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `raw_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("raw_type").toString()));
+      }
       if ((jsonObj.get("portfolio_group") != null && !jsonObj.get("portfolio_group").isJsonNull()) && !jsonObj.get("portfolio_group").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `portfolio_group` to be a primitive type in the JSON string but got `%s`", jsonObj.get("portfolio_group").toString()));
       }

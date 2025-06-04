@@ -21,13 +21,6 @@ export interface ManualTradeSymbol {
     [key: string]: any;
 
     /**
-     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-     * @type {string}
-     * @memberof ManualTradeSymbol
-     * @deprecated
-     */
-    'brokerage_symbol_id'?: string;
-    /**
      * Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
      * @type {string}
      * @memberof ManualTradeSymbol
@@ -60,5 +53,12 @@ export interface ManualTradeSymbol {
      * @deprecated
      */
     'symbol'?: string;
+    /**
+     * A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+     * @type {string}
+     * @memberof ManualTradeSymbol
+     * @deprecated
+     */
+    'brokerage_symbol_id'?: string;
 }
 

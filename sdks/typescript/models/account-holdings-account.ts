@@ -59,6 +59,7 @@ export interface AccountHoldingsAccount {
      * 
      * @type {SnapTradeHoldingsTotalValue}
      * @memberof AccountHoldingsAccount
+     * @deprecated
      */
     'total_value'?: SnapTradeHoldingsTotalValue;
 }

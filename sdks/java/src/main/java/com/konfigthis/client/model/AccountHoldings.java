@@ -191,7 +191,9 @@ public class AccountHoldings {
    /**
    * Get totalValue
    * @return totalValue
+   * @deprecated
   **/
+  @Deprecated
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 

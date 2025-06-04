@@ -9,6 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**listBrokerageAuthorizations**](ConnectionsApi.md#listBrokerageAuthorizations) | **GET** /authorizations | List all connections |
 | [**refreshBrokerageAuthorization**](ConnectionsApi.md#refreshBrokerageAuthorization) | **POST** /authorizations/{authorizationId}/refresh | Refresh holdings for a connection |
 | [**removeBrokerageAuthorization**](ConnectionsApi.md#removeBrokerageAuthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
+| [**returnRates**](ConnectionsApi.md#returnRates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**sessionEvents**](ConnectionsApi.md#sessionEvents) | **GET** /sessionEvents | Get all session events for a user |
 
 
@@ -53,13 +54,14 @@ public class Example {
       System.out.println(result);
       System.out.println(result.getId());
       System.out.println(result.getCreatedDate());
-      System.out.println(result.getUpdatedDate());
       System.out.println(result.getBrokerage());
       System.out.println(result.getName());
       System.out.println(result.getType());
       System.out.println(result.getDisabled());
       System.out.println(result.getDisabledDate());
       System.out.println(result.getMeta());
+      System.out.println(result.getUpdatedDate());
+      System.out.println(result.getIsEligibleForPayout());
     } catch (ApiException e) {
       System.err.println("Exception when calling ConnectionsApi#detailBrokerageAuthorization");
       System.err.println("Status code: " + e.getStatusCode());
@@ -124,7 +126,7 @@ public class Example {
 
 Force disable connection
 
-Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
 
 ### Example
 ```java
@@ -316,7 +318,7 @@ public class Example {
 
 Refresh holdings for a connection
 
-Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge of $0.05** 
 
 ### Example
 ```java
@@ -499,6 +501,103 @@ null (empty response body)
 | **400** | Bad Request |  -  |
 | **404** | Not Found |  -  |
 | **0** | Unexpected error |  -  |
+
+<a name="returnRates"></a>
+# **returnRates**
+> RateOfReturnResponse returnRates(userId, userSecret, authorizationId).execute();
+
+List connection rate of returns
+
+Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+
+### Example
+```java
+import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.ApiResponse;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.auth.*;
+import com.konfigthis.client.model.*;
+import com.konfigthis.client.api.ConnectionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID authorizationId = UUID.randomUUID();
+    try {
+      RateOfReturnResponse result = client
+              .connections
+              .returnRates(userId, userSecret, authorizationId)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getData());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#returnRates");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<RateOfReturnResponse> response = client
+              .connections
+              .returnRates(userId, userSecret, authorizationId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ConnectionsApi#returnRates");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **authorizationId** | **UUID**|  | |
+
+### Return type
+
+[**RateOfReturnResponse**](RateOfReturnResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="sessionEvents"></a>
 # **sessionEvents**

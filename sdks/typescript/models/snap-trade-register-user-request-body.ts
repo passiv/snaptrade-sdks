@@ -22,6 +22,6 @@ export interface SnapTradeRegisterUserRequestBody {
      * @type {string}
      * @memberof SnapTradeRegisterUserRequestBody
      */
-    'userId'?: string;
+    'userId': string;
 }
 

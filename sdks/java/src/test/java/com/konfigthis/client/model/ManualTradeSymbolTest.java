@@ -42,14 +42,6 @@ public class ManualTradeSymbolTest {
     }
 
     /**
-     * Test the property 'brokerageSymbolId'
-     */
-    @Test
-    public void brokerageSymbolIdTest() {
-        // TODO: test brokerageSymbolId
-    }
-
-    /**
      * Test the property 'universalSymbolId'
      */
     @Test
@@ -87,6 +79,14 @@ public class ManualTradeSymbolTest {
     @Test
     public void symbolTest() {
         // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'brokerageSymbolId'
+     */
+    @Test
+    public void brokerageSymbolIdTest() {
+        // TODO: test brokerageSymbolId
     }
 
 }

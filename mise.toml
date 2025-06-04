@@ -1,0 +1,5 @@
+[env]
+mise.file = ".env"
+
+[tools]
+dotnet = "7"

@@ -21,7 +21,11 @@ import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import java.time.LocalDate;
+import com.konfigthis.client.model.PaginatedUniversalActivity;
 import com.konfigthis.client.model.Position;
+import com.konfigthis.client.model.RateOfReturnResponse;
+import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -45,6 +49,33 @@ public class AccountInformationApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new AccountInformationApi(apiClient);
+    }
+
+    /**
+     * List account activities
+     *
+     * Returns all historical transactions for the specified account.  This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.  Transaction are returned in reverse chronological order, using the &#x60;trade_date&#x60; field.  The data returned here is always cached and refreshed once a day. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountActivitiesTest() throws ApiException {
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        Integer offset = null;
+        Integer limit = null;
+        String type = null;
+        PaginatedUniversalActivity response = api.getAccountActivities(accountId, userId, userSecret)
+                .startDate(startDate)
+                .endDate(endDate)
+                .offset(offset)
+                .limit(limit)
+                .type(type)
+                .execute();
+        // TODO: test validations
     }
 
     /**
@@ -100,7 +131,7 @@ public class AccountInformationApiTest {
     }
 
     /**
-     * List account recent orders
+     * List account orders
      *
      * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
      *
@@ -133,6 +164,42 @@ public class AccountInformationApiTest {
         String userSecret = null;
         UUID accountId = null;
         List<Position> response = api.getUserAccountPositions(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List account recent orders (last 24 hours only)
+     *
+     * A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false **Please contact support for access as this endpoint is not enabled by default.** 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountRecentOrdersTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        Boolean onlyExecuted = null;
+        RecentOrdersResponse response = api.getUserAccountRecentOrders(userId, userSecret, accountId)
+                .onlyExecuted(onlyExecuted)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List account rate of returns
+     *
+     * Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountReturnRatesTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        RateOfReturnResponse response = api.getUserAccountReturnRates(userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

@@ -146,6 +146,7 @@ public class TransactionsAndReportingApiGenerated {
         return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
+    @Deprecated
     @SuppressWarnings("rawtypes")
     private okhttp3.Call getActivitiesValidateBeforeCall(String userId, String userSecret, LocalDate startDate, LocalDate endDate, String accounts, String brokerageAuthorizations, String type, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
@@ -233,7 +234,7 @@ public class TransactionsAndReportingApiGenerated {
         
         /**
          * Set type
-         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   (optional)
+         * @param type Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another  (optional)
          * @return TransactionsAndReportingApi.GetActivitiesRequestBuilder
          */
         public TransactionsAndReportingApi.GetActivitiesRequestBuilder type(String type) {
@@ -252,7 +253,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
             return getActivitiesCall(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
         }
@@ -268,7 +271,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public List<UniversalActivity> execute() throws ApiException {
             ApiResponse<List<UniversalActivity>> localVarResp = getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
             return localVarResp.getResponseBody();
@@ -284,7 +289,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public ApiResponse<List<UniversalActivity>> executeWithHttpInfo() throws ApiException {
             return getActivitiesWithHttpInfo(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type);
         }
@@ -300,7 +307,9 @@ public class TransactionsAndReportingApiGenerated {
             <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
          </table>
+         * @deprecated
          */
+        @Deprecated
         public okhttp3.Call executeAsync(final ApiCallback<List<UniversalActivity>> _callback) throws ApiException {
             return getActivitiesAsync(userId, userSecret, startDate, endDate, accounts, brokerageAuthorizations, type, _callback);
         }
@@ -308,7 +317,7 @@ public class TransactionsAndReportingApiGenerated {
 
     /**
      * Get transaction history for a user
-     * Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
+     * This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It&#39;s recommended to use &#x60;startDate&#x60; and &#x60;endDate&#x60; to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There&#39;s a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the &#x60;trade_date&#x60; field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @return GetActivitiesRequestBuilder
@@ -318,7 +327,9 @@ public class TransactionsAndReportingApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
      </table>
+     * @deprecated
      */
+    @Deprecated
     public TransactionsAndReportingApi.GetActivitiesRequestBuilder getActivities(String userId, String userSecret) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             

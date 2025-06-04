@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeLoginUserRequestBody : IEquatable<SnapTradeLoginUserRequestBody>, IValidatableObject
     {
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled.
+        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled.</value>
+        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionTypeEnum
         {
@@ -55,15 +55,15 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled.
+        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled.</value>
+        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
-        /// Sets the version of the connection portal to render.
+        /// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
         /// </summary>
-        /// <value>Sets the version of the connection portal to render.</value>
+        /// <value>Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionPortalVersionEnum
         {
@@ -89,9 +89,9 @@ namespace SnapTrade.Net.Model
 
 
         /// <summary>
-        /// Sets the version of the connection portal to render.
+        /// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
         /// </summary>
-        /// <value>Sets the version of the connection portal to render.</value>
+        /// <value>Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.</value>
         [DataMember(Name = "connectionPortalVersion", EmitDefaultValue = false)]
         public ConnectionPortalVersionEnum? ConnectionPortalVersion { get; set; }
         /// <summary>
@@ -101,9 +101,9 @@ namespace SnapTrade.Net.Model
         /// <param name="immediateRedirect">When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information..</param>
-        /// <param name="connectionType">Sets whether the connection should be read-only or trade-enabled. (default to ConnectionTypeEnum.Read).</param>
-        /// <param name="connectionPortalVersion">Sets the version of the connection portal to render. (default to ConnectionPortalVersionEnum.V3).</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V3)
+        /// <param name="connectionType">Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified. (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
