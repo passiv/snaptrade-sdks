@@ -46,6 +46,12 @@ export interface MlegTradeForm {
     'stop_price'?: string | null;
     /**
      * 
+     * @type {string}
+     * @memberof MlegTradeForm
+     */
+    'price_effect'?: string | null;
+    /**
+     * 
      * @type {Array<MlegLeg>}
      * @memberof MlegTradeForm
      */

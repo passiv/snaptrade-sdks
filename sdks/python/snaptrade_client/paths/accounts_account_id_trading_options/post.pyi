@@ -33,6 +33,7 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
+from snaptrade_client.model.mleg_price_effect_strict_nullable import MlegPriceEffectStrictNullable as MlegPriceEffectStrictNullableSchema
 from snaptrade_client.model.mleg_leg import MlegLeg as MlegLegSchema
 from snaptrade_client.model.mleg_order_type_strict import MlegOrderTypeStrict as MlegOrderTypeStrictSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
@@ -45,6 +46,7 @@ from snaptrade_client.type.mleg_order_type_strict import MlegOrderTypeStrict
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.mleg_order_response import MlegOrderResponse
+from snaptrade_client.type.mleg_price_effect_strict_nullable import MlegPriceEffectStrictNullable
 
 # Query params
 UserIdSchema = schemas.StrSchema
@@ -195,6 +197,7 @@ class BaseApi(api_client.Api):
         account_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -210,6 +213,8 @@ class BaseApi(api_client.Api):
             _body["limit_price"] = limit_price
         if stop_price is not None:
             _body["stop_price"] = stop_price
+        if price_effect is not None:
+            _body["price_effect"] = price_effect
         if legs is not None:
             _body["legs"] = legs
         args.body = body if body is not None else _body
@@ -500,6 +505,7 @@ class PlaceMlegOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -520,6 +526,7 @@ class PlaceMlegOrder(BaseApi):
             account_id=account_id,
             limit_price=limit_price,
             stop_price=stop_price,
+            price_effect=price_effect,
         )
         return await self._aplace_mleg_order_oapg(
             body=args.body,
@@ -539,6 +546,7 @@ class PlaceMlegOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -558,6 +566,7 @@ class PlaceMlegOrder(BaseApi):
             account_id=account_id,
             limit_price=limit_price,
             stop_price=stop_price,
+            price_effect=price_effect,
         )
         return self._place_mleg_order_oapg(
             body=args.body,
@@ -579,6 +588,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         **kwargs,
@@ -599,6 +609,7 @@ class ApiForpost(BaseApi):
             account_id=account_id,
             limit_price=limit_price,
             stop_price=stop_price,
+            price_effect=price_effect,
         )
         return await self._aplace_mleg_order_oapg(
             body=args.body,
@@ -618,6 +629,7 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         limit_price: typing.Optional[typing.Optional[str]] = None,
         stop_price: typing.Optional[typing.Optional[str]] = None,
+        price_effect: typing.Optional[MlegPriceEffectStrictNullable] = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -637,6 +649,7 @@ class ApiForpost(BaseApi):
             account_id=account_id,
             limit_price=limit_price,
             stop_price=stop_price,
+            price_effect=price_effect,
         )
         return self._place_mleg_order_oapg(
             body=args.body,

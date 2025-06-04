@@ -56,8 +56,9 @@ namespace SnapTrade.Net.Model
         /// <param name="timeInForce">timeInForce (required).</param>
         /// <param name="limitPrice">The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT..</param>
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT..</param>
+        /// <param name="priceEffect">The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT.</param>
         /// <param name="legs">legs (required).</param>
-        public MlegTradeForm(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), List<MlegLeg> legs = default(List<MlegLeg>))
+        public MlegTradeForm(MlegOrderTypeStrict orderType = default(MlegOrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), decimal? limitPrice = default(decimal?), decimal? stopPrice = default(decimal?), string priceEffect = default(string), List<MlegLeg> legs = default(List<MlegLeg>))
         {
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
@@ -69,6 +70,7 @@ namespace SnapTrade.Net.Model
             this.Legs = legs;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
+            this.PriceEffect = priceEffect;
         }
 
         /// <summary>
@@ -84,6 +86,13 @@ namespace SnapTrade.Net.Model
         /// <value>The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = true)]
         public decimal? StopPrice { get; set; }
+
+        /// <summary>
+        /// The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+        /// </summary>
+        /// <value>The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT</value>
+        [DataMember(Name = "price_effect", EmitDefaultValue = true)]
+        public string PriceEffect { get; set; }
 
         /// <summary>
         /// Gets or Sets Legs
@@ -103,6 +112,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
             sb.Append("  LimitPrice: ").Append(LimitPrice).Append("\n");
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
+            sb.Append("  PriceEffect: ").Append(PriceEffect).Append("\n");
             sb.Append("  Legs: ").Append(Legs).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -158,6 +168,11 @@ namespace SnapTrade.Net.Model
                     this.StopPrice.Equals(input.StopPrice))
                 ) && 
                 (
+                    this.PriceEffect == input.PriceEffect ||
+                    (this.PriceEffect != null &&
+                    this.PriceEffect.Equals(input.PriceEffect))
+                ) && 
+                (
                     this.Legs == input.Legs ||
                     this.Legs != null &&
                     input.Legs != null &&
@@ -183,6 +198,10 @@ namespace SnapTrade.Net.Model
                 if (this.StopPrice != null)
                 {
                     hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                }
+                if (this.PriceEffect != null)
+                {
+                    hashCode = (hashCode * 59) + this.PriceEffect.GetHashCode();
                 }
                 if (this.Legs != null)
                 {

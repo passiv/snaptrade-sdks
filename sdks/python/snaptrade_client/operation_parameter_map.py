@@ -684,6 +684,9 @@ operation_parameter_map = {
             {
                 'name': 'stop_price'
             },
+            {
+                'name': 'price_effect'
+            },
         ]
     },
     '/trade/{tradeId}-POST': {

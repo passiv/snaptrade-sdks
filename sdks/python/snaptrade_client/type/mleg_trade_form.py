@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.mleg_leg import MlegLeg
 from snaptrade_client.type.mleg_order_type_strict import MlegOrderTypeStrict
+from snaptrade_client.type.mleg_price_effect_strict_nullable import MlegPriceEffectStrictNullable
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 
 class RequiredMlegTradeForm(TypedDict):
@@ -33,6 +34,8 @@ class OptionalMlegTradeForm(TypedDict, total=False):
 
     # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
     stop_price: typing.Optional[str]
+
+    price_effect: MlegPriceEffectStrictNullable
 
 class MlegTradeForm(RequiredMlegTradeForm, OptionalMlegTradeForm):
     pass

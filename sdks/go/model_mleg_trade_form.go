@@ -23,6 +23,7 @@ type MlegTradeForm struct {
 	LimitPrice NullableFloat64 `json:"limit_price,omitempty"`
 	// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 	StopPrice NullableFloat64 `json:"stop_price,omitempty"`
+	PriceEffect NullableString `json:"price_effect,omitempty"`
 	Legs []MlegLeg `json:"legs"`
 }
 
@@ -178,6 +179,48 @@ func (o *MlegTradeForm) UnsetStopPrice() {
 	o.StopPrice.Unset()
 }
 
+// GetPriceEffect returns the PriceEffect field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MlegTradeForm) GetPriceEffect() string {
+	if o == nil || isNil(o.PriceEffect.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PriceEffect.Get()
+}
+
+// GetPriceEffectOk returns a tuple with the PriceEffect field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MlegTradeForm) GetPriceEffectOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.PriceEffect.Get(), o.PriceEffect.IsSet()
+}
+
+// HasPriceEffect returns a boolean if a field has been set.
+func (o *MlegTradeForm) HasPriceEffect() bool {
+	if o != nil && o.PriceEffect.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPriceEffect gets a reference to the given NullableString and assigns it to the PriceEffect field.
+func (o *MlegTradeForm) SetPriceEffect(v string) {
+	o.PriceEffect.Set(&v)
+}
+// SetPriceEffectNil sets the value for PriceEffect to be an explicit nil
+func (o *MlegTradeForm) SetPriceEffectNil() {
+	o.PriceEffect.Set(nil)
+}
+
+// UnsetPriceEffect ensures that no value is present for PriceEffect, not even an explicit nil
+func (o *MlegTradeForm) UnsetPriceEffect() {
+	o.PriceEffect.Unset()
+}
+
 // GetLegs returns the Legs field value
 func (o *MlegTradeForm) GetLegs() []MlegLeg {
 	if o == nil {
@@ -215,6 +258,9 @@ func (o MlegTradeForm) MarshalJSON() ([]byte, error) {
 	}
 	if o.StopPrice.IsSet() {
 		toSerialize["stop_price"] = o.StopPrice.Get()
+	}
+	if o.PriceEffect.IsSet() {
+		toSerialize["price_effect"] = o.PriceEffect.Get()
 	}
 	if true {
 		toSerialize["legs"] = o.Legs

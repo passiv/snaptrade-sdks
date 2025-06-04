@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **LimitPrice** | Pointer to **NullableFloat64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. | [optional] 
 **StopPrice** | Pointer to **NullableFloat64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. | [optional] 
+**PriceEffect** | Pointer to **NullableString** |  | [optional] 
 **Legs** | [**[]MlegLeg**](MlegLeg.md) |  | 
 
 ## Methods
@@ -139,6 +140,41 @@ HasStopPrice returns a boolean if a field has been set.
 `func (o *MlegTradeForm) UnsetStopPrice()`
 
 UnsetStopPrice ensures that no value is present for StopPrice, not even an explicit nil
+### GetPriceEffect
+
+`func (o *MlegTradeForm) GetPriceEffect() string`
+
+GetPriceEffect returns the PriceEffect field if non-nil, zero value otherwise.
+
+### GetPriceEffectOk
+
+`func (o *MlegTradeForm) GetPriceEffectOk() (*string, bool)`
+
+GetPriceEffectOk returns a tuple with the PriceEffect field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPriceEffect
+
+`func (o *MlegTradeForm) SetPriceEffect(v string)`
+
+SetPriceEffect sets PriceEffect field to given value.
+
+### HasPriceEffect
+
+`func (o *MlegTradeForm) HasPriceEffect() bool`
+
+HasPriceEffect returns a boolean if a field has been set.
+
+### SetPriceEffectNil
+
+`func (o *MlegTradeForm) SetPriceEffectNil(b bool)`
+
+ SetPriceEffectNil sets the value for PriceEffect to be an explicit nil
+
+### UnsetPriceEffect
+`func (o *MlegTradeForm) UnsetPriceEffect()`
+
+UnsetPriceEffect ensures that no value is present for PriceEffect, not even an explicit nil
 ### GetLegs
 
 `func (o *MlegTradeForm) GetLegs() []MlegLeg`

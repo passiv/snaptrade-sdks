@@ -1943,6 +1943,7 @@ public class TradingApiGenerated {
         final UUID accountId;
         BigDecimal limitPrice;
         BigDecimal stopPrice;
+        String priceEffect;
 
         public PlaceMlegOrderRequestBuilderGenerated(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
             this.orderType = orderType;
@@ -1974,6 +1975,16 @@ public class TradingApiGenerated {
         }
         
         /**
+         * Set priceEffect
+         * @param priceEffect The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT (optional)
+         * @return TradingApi.PlaceMlegOrderRequestBuilder
+         */
+        public TradingApi.PlaceMlegOrderRequestBuilder priceEffect(String priceEffect) {
+            this.priceEffect = priceEffect;
+            return (TradingApi.PlaceMlegOrderRequestBuilder) this;
+        }
+        
+        /**
          * Build call for placeMlegOrder
          * @param _callback ApiCallback API callback
          * @return Call to execute
@@ -1996,6 +2007,7 @@ public class TradingApiGenerated {
             mlegTradeForm.timeInForce(this.timeInForce);
             mlegTradeForm.limitPrice(this.limitPrice);
             mlegTradeForm.stopPrice(this.stopPrice);
+            mlegTradeForm.priceEffect(this.priceEffect);
             mlegTradeForm.legs(this.legs);
             return mlegTradeForm;
         }

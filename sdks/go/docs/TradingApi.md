@@ -498,6 +498,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
+    priceEffect := *snaptrade.Newstring()
     
     mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,
@@ -506,6 +507,7 @@ func main() {
     )
     mlegTradeForm.SetLimitPrice("")
     mlegTradeForm.SetStopPrice("")
+    mlegTradeForm.SetPriceEffect(priceEffect)
     
     request := client.TradingApi.PlaceMlegOrder(
         "userId_example",

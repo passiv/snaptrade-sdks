@@ -73,6 +73,10 @@ public class MlegTradeForm {
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
   private BigDecimal stopPrice;
 
+  public static final String SERIALIZED_NAME_PRICE_EFFECT = "price_effect";
+  @SerializedName(SERIALIZED_NAME_PRICE_EFFECT)
+  private String priceEffect;
+
   public static final String SERIALIZED_NAME_LEGS = "legs";
   @SerializedName(SERIALIZED_NAME_LEGS)
   private List<MlegLeg> legs = new ArrayList<>();
@@ -196,6 +200,35 @@ public class MlegTradeForm {
   }
 
 
+  public MlegTradeForm priceEffect(String priceEffect) {
+    
+    
+    
+    
+    this.priceEffect = priceEffect;
+    return this;
+  }
+
+   /**
+   * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+   * @return priceEffect
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "DEBIT", value = "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT")
+
+  public String getPriceEffect() {
+    return priceEffect;
+  }
+
+
+  public void setPriceEffect(String priceEffect) {
+    
+    
+    
+    this.priceEffect = priceEffect;
+  }
+
+
   public MlegTradeForm legs(List<MlegLeg> legs) {
     
     
@@ -288,6 +321,7 @@ public class MlegTradeForm {
         Objects.equals(this.timeInForce, mlegTradeForm.timeInForce) &&
         Objects.equals(this.limitPrice, mlegTradeForm.limitPrice) &&
         Objects.equals(this.stopPrice, mlegTradeForm.stopPrice) &&
+        Objects.equals(this.priceEffect, mlegTradeForm.priceEffect) &&
         Objects.equals(this.legs, mlegTradeForm.legs)&&
         Objects.equals(this.additionalProperties, mlegTradeForm.additionalProperties);
   }
@@ -298,7 +332,7 @@ public class MlegTradeForm {
 
   @Override
   public int hashCode() {
-    return Objects.hash(orderType, timeInForce, limitPrice, stopPrice, legs, additionalProperties);
+    return Objects.hash(orderType, timeInForce, limitPrice, stopPrice, priceEffect, legs, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -316,6 +350,7 @@ public class MlegTradeForm {
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
     sb.append("    limitPrice: ").append(toIndentedString(limitPrice)).append("\n");
     sb.append("    stopPrice: ").append(toIndentedString(stopPrice)).append("\n");
+    sb.append("    priceEffect: ").append(toIndentedString(priceEffect)).append("\n");
     sb.append("    legs: ").append(toIndentedString(legs)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -344,6 +379,7 @@ public class MlegTradeForm {
     openapiFields.add("time_in_force");
     openapiFields.add("limit_price");
     openapiFields.add("stop_price");
+    openapiFields.add("price_effect");
     openapiFields.add("legs");
 
     // a set of required properties/fields (JSON key names)
@@ -377,6 +413,9 @@ public class MlegTradeForm {
       }
       if (!jsonObj.get("stop_price").isJsonNull() && (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) && !jsonObj.get("stop_price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `stop_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_price").toString()));
+      }
+      if (!jsonObj.get("price_effect").isJsonNull() && (jsonObj.get("price_effect") != null && !jsonObj.get("price_effect").isJsonNull()) && !jsonObj.get("price_effect").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
       }
       // ensure the json data is an array
       if (!jsonObj.get("legs").isJsonArray()) {

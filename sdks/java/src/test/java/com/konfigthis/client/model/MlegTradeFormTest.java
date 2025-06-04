@@ -78,6 +78,14 @@ public class MlegTradeFormTest {
     }
 
     /**
+     * Test the property 'priceEffect'
+     */
+    @Test
+    public void priceEffectTest() {
+        // TODO: test priceEffect
+    }
+
+    /**
      * Test the property 'legs'
      */
     @Test

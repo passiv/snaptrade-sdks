@@ -4335,6 +4335,10 @@ components:
           format: decimal
           example: ""
           nullable: true
+        price_effect:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/MlegPriceEffectStrict"
         legs:
           type: array
           items:
@@ -4528,6 +4532,13 @@ components:
         - GTC
         - IOC
       example: Day
+    MlegPriceEffectStrict:
+      type: string
+      nullable: true
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+        - CREDIT
+        - DEBIT
+      example: DEBIT
     MlegOrderTypeStrict:
       example: MARKET
       type: string

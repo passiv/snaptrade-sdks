@@ -2021,6 +2021,7 @@ result = snaptrade.trading.place_mleg_order(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   limit_price: "",
   stop_price: "",
+  price_effect: "DEBIT",
 )
 p result
 ```
@@ -2050,6 +2051,7 @@ The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 ##### stop_price: `Float`<a id="stop_price-float"></a>
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
+##### price_effect: [`String`](./lib/snaptrade/models/string.rb)<a id="price_effect-stringlibsnaptrademodelsstringrb"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [MlegOrderResponse](./lib/snaptrade/models/mleg_order_response.rb)

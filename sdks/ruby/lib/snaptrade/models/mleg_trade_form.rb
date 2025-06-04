@@ -25,6 +25,8 @@ module SnapTrade
     # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
     attr_accessor :stop_price
 
+    attr_accessor :price_effect
+
     attr_accessor :legs
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -34,6 +36,7 @@ module SnapTrade
         :'time_in_force' => :'time_in_force',
         :'limit_price' => :'limit_price',
         :'stop_price' => :'stop_price',
+        :'price_effect' => :'price_effect',
         :'legs' => :'legs'
       }
     end
@@ -50,6 +53,7 @@ module SnapTrade
         :'time_in_force' => :'TimeInForceStrict',
         :'limit_price' => :'Float',
         :'stop_price' => :'Float',
+        :'price_effect' => :'String',
         :'legs' => :'Array<MlegLeg>'
       }
     end
@@ -59,6 +63,7 @@ module SnapTrade
       Set.new([
         :'limit_price',
         :'stop_price',
+        :'price_effect',
       ])
     end
 
@@ -91,6 +96,10 @@ module SnapTrade
 
       if attributes.key?(:'stop_price')
         self.stop_price = attributes[:'stop_price']
+      end
+
+      if attributes.key?(:'price_effect')
+        self.price_effect = attributes[:'price_effect']
       end
 
       if attributes.key?(:'legs')
@@ -137,6 +146,7 @@ module SnapTrade
           time_in_force == o.time_in_force &&
           limit_price == o.limit_price &&
           stop_price == o.stop_price &&
+          price_effect == o.price_effect &&
           legs == o.legs
     end
 
@@ -149,7 +159,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [order_type, time_in_force, limit_price, stop_price, legs].hash
+      [order_type, time_in_force, limit_price, stop_price, price_effect, legs].hash
     end
 
     # Builds the object from hash
