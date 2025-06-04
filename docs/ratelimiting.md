@@ -14,6 +14,8 @@ The SnapTrade API returns several helpful response headers that you can use to k
 - `X-RateLimit-Remaining`: the number of requests remaining in the current minute
 - `X-RateLimit-Reset`: the number of seconds until the next minutely ratelimit resets
 
+These are rolling limits that look at the trailing 60 seconds.
+
 ## Common Causes and Mitigations
 
 There are a number of situations that may cause your ratelimiting to kick in. Here are a few scenarios and suggested mitigations:
