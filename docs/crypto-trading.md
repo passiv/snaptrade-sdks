@@ -1,6 +1,6 @@
 # Crypto trading
 
-SnapTrade supports specialized crypto-specific trading endpoints for some brokerages such as Kraken, Binance and Coinbase. We recommend that you limit trade requests to 1 trade per second per account to maximize the chances that they are all executed without error.
+SnapTrade supports specialized crypto-specific trading endpoints for some exchanges such as Kraken, Binance and Coinbase. We recommend that you limit trade requests to 1 trade per second per account to maximize the chances that they are all executed without error.
 
 Trading crypto works with tradable asset pairs. That means you trade a `base` asset (such as crypto or fiat currency) for a `quote` asset (which can also be a crypto or fiat currency), with the direction being determined by the action (eg: BUY or SELL).
 
@@ -31,7 +31,7 @@ To enable trading for an existing connection you will have to ask the user to re
 
 ## Getting a list of tradable asset pairs
 
-Before you execute a trade, we recommend calling the :api[Trading_searchCryptocurrencyPairInstruments] endpoint to fetch a list of tradable pairs. You can filter by the base or quote if you know their ticker. Different brokerages will have different tradable asset pairs and sometimes also different tickers for the same cryptocurrency (eg: `BTC` vs `XXBT`).
+Before you execute a trade, we recommend calling the :api[Trading_searchCryptocurrencyPairInstruments] endpoint to fetch a list of tradable pairs. You can filter by the base or quote if you know their ticker. Different exchanges will have different tradable asset pairs and sometimes also different tickers for the same cryptocurrency (eg: `BTC` vs `XXBT`).
 
 This search will return a list of objects for each tradable pair, and each object will also contain a `symbol` property. This value can then be used to get a quote or place a trade.
 
