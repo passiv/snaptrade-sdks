@@ -81,6 +81,8 @@ from snaptrade_client.model.mleg_instrument_type import MlegInstrumentType
 from snaptrade_client.model.mleg_leg import MlegLeg
 from snaptrade_client.model.mleg_order_response import MlegOrderResponse
 from snaptrade_client.model.mleg_order_type_strict import MlegOrderTypeStrict
+from snaptrade_client.model.mleg_price_effect_strict import MlegPriceEffectStrict
+from snaptrade_client.model.mleg_price_effect_strict_nullable import MlegPriceEffectStrictNullable
 from snaptrade_client.model.mleg_trade_form import MlegTradeForm
 from snaptrade_client.model.mleg_trading_instrument import MlegTradingInstrument
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse

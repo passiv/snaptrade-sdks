@@ -690,6 +690,9 @@ export const operationParameterMap: Record<string, Entry> = {
             {
                 name: 'stop_price'
             },
+            {
+                name: 'price_effect'
+            },
         ]
     },
     '/trade/{tradeId}-POST': {

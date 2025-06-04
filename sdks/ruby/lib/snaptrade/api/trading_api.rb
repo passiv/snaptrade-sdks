@@ -964,14 +964,16 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # @param price_effect [String] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
+    def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
       mleg_trade_form = _body
       data, _status_code, _headers = place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
@@ -990,14 +992,16 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # @param price_effect [String] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, extra: {})
+    def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
       _body = {}
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
       _body[:limit_price] = limit_price if limit_price != SENTINEL
       _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
       _body[:legs] = legs if legs != SENTINEL
       mleg_trade_form = _body
       place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)

@@ -2114,6 +2114,7 @@ const placeMlegOrderResponse = await snaptrade.trading.placeMlegOrder({
   time_in_force: "Day",
   limit_price: "",
   stop_price: "",
+  price_effect: "DEBIT",
   legs: [
     {
       instrument: {
@@ -2152,6 +2153,8 @@ The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 ##### stop_price: `string`<a id="stop_price-string"></a>
 
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`string`](./models/model-string.ts)<a id="price_effect-stringmodelsmodel-stringts"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 

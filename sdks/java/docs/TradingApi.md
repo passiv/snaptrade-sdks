@@ -879,12 +879,14 @@ public class Example {
     UUID accountId = UUID.randomUUID();
     BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    String priceEffect = "priceEffect_example"; // The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
     try {
       MlegOrderResponse result = client
               .trading
               .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -904,6 +906,7 @@ public class Example {
               .placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
               .limitPrice(limitPrice)
               .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

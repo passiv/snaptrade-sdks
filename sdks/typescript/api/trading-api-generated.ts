@@ -1125,6 +1125,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 time_in_force: requestParameters.time_in_force,
                 limit_price: requestParameters.limit_price,
                 stop_price: requestParameters.stop_price,
+                price_effect: requestParameters.price_effect,
                 legs: requestParameters.legs
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.placeMlegOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, mlegTradeForm, options);

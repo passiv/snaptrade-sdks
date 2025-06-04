@@ -252,9 +252,11 @@ public class TradingApiTest {
         UUID accountId = null;
         BigDecimal limitPrice = null;
         BigDecimal stopPrice = null;
+        String priceEffect = null;
         MlegOrderResponse response = api.placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
+                .priceEffect(priceEffect)
                 .execute();
         // TODO: test validations
     }

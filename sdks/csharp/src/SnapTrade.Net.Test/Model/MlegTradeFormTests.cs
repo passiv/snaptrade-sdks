@@ -90,6 +90,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'StopPrice'
         }
         /// <summary>
+        /// Test the property 'PriceEffect'
+        /// </summary>
+        [Fact]
+        public void PriceEffectTest()
+        {
+            // TODO unit test for the property 'PriceEffect'
+        }
+        /// <summary>
         /// Test the property 'Legs'
         /// </summary>
         [Fact]

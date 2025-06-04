@@ -6835,6 +6835,7 @@ components:
       example:
         time_in_force: Day
         stop_price: ""
+        price_effect: DEBIT
         legs:
         - action: BUY_TO_OPEN
           instrument:
@@ -6870,6 +6871,14 @@ components:
           type: string
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
+            Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+          example: DEBIT
+          nullable: true
+          type: string
+          x-konfig-original-example: DEBIT
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'
@@ -6879,6 +6888,9 @@ components:
       - order_type
       - time_in_force
       type: object
+      x-konfig-properties:
+        price_effect:
+          nullable: true
     ManualTradeReplaceForm:
       description: Inputs for placing an order with the brokerage.
       example:
@@ -7185,6 +7197,14 @@ components:
       type: string
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
+    MlegPriceEffectStrict:
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
+        Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+      example: DEBIT
+      nullable: true
+      type: string
+      x-konfig-original-example: DEBIT
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
     MlegOrderTypeStrict:
       description: The type of order to place.
       enum:
@@ -9632,6 +9652,10 @@ components:
       example: Day
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-MlegPriceEffectStrict:
+      example: DEBIT
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegOrderTypeStrict:
       example: MARKET
       type: string
@@ -11244,6 +11268,8 @@ components:
           type: string
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'
@@ -11657,6 +11683,14 @@ components:
       x-konfig-original-example: 10.5
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
     NotionalValueNullable: {}
+    MlegPriceEffectStrictNullable:
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
+        Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+      example: DEBIT
+      nullable: true
+      type: string
+      x-konfig-original-example: DEBIT
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
     UniversalSymbolIDNullable:
       description: Unique identifier for the symbol within SnapTrade. This is the
         ID used to reference the symbol in SnapTrade API calls.
