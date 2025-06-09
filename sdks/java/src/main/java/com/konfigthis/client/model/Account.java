@@ -92,13 +92,15 @@ public class Account {
   private AccountBalance balance;
 
   /**
-   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.
    */
   @JsonAdapter(StatusEnum.Adapter.class)
  public enum StatusEnum {
     OPEN("open"),
     
-    CLOSED("closed");
+    CLOSED("closed"),
+    
+    ARCHIVED("archived");
 
     private String value;
 
@@ -403,11 +405,11 @@ public class Account {
   }
 
    /**
-   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+   * The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.
    * @return status
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "OPEN", value = "The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.")
+  @ApiModelProperty(example = "OPEN", value = "The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.")
 
   public StatusEnum getStatus() {
     return status;

@@ -14,9 +14,10 @@ module SnapTrade
   class AccountStatus
     OPEN = "open".freeze
     CLOSED = "closed".freeze
+    ARCHIVED = "archived".freeze
 
     def self.all_vars
-      @all_vars ||= [OPEN, CLOSED].freeze
+      @all_vars ||= [OPEN, CLOSED, ARCHIVED].freeze
     end
 
     # Builds the enum from string

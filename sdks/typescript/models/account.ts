@@ -70,7 +70,7 @@ export interface Account {
      */
     'balance': AccountBalance;
     /**
-     * The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+     * The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
      * @type {string}
      * @memberof Account
      */
@@ -104,6 +104,6 @@ export interface Account {
     'cash_restrictions'?: Array<string>;
 }
 
-type AccountStatusEnum = 'open' | 'closed'
+type AccountStatusEnum = 'open' | 'closed' | 'archived'
 
 
