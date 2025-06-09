@@ -45,7 +45,7 @@ class RequiredAccount(TypedDict):
 
 
 class OptionalAccount(TypedDict, total=False):
-    # The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+    # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
     status: typing.Optional[str]
 
     # The account type as provided by the brokerage

@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class Account : IEquatable<Account>, IValidatableObject
     {
         /// <summary>
-        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.
         /// </summary>
-        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.</value>
+        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.</value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum StatusEnum
         {
@@ -49,15 +49,21 @@ namespace SnapTrade.Net.Model
             /// Enum Closed for value: closed
             /// </summary>
             [EnumMember(Value = "closed")]
-            Closed = 2
+            Closed = 2,
+
+            /// <summary>
+            /// Enum Archived for value: archived
+            /// </summary>
+            [EnumMember(Value = "archived")]
+            Archived = 3
 
         }
 
 
         /// <summary>
-        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.
+        /// The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.
         /// </summary>
-        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage.</value>
+        /// <value>The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage.</value>
         [DataMember(Name = "status", EmitDefaultValue = true)]
         public StatusEnum? Status { get; set; }
         /// <summary>
@@ -79,7 +85,7 @@ namespace SnapTrade.Net.Model
         /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. (required).</param>
         /// <param name="syncStatus">syncStatus (required).</param>
         /// <param name="balance">balance (required).</param>
-        /// <param name="status">The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage..</param>
+        /// <param name="status">The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage..</param>
         /// <param name="rawType">The account type as provided by the brokerage.</param>
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>

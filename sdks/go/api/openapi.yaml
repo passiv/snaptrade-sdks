@@ -3116,11 +3116,12 @@ components:
           $ref: '#/components/schemas/AccountBalance'
         status:
           description: "The current status of the account. Can be either \"open\"\
-            , \"closed\", or null if the status is unknown or not provided by the\
-            \ brokerage."
+            , \"closed\", \"archived\" or null if the status is unknown or not provided\
+            \ by the brokerage."
           enum:
           - open
           - closed
+          - archived
           example: open
           nullable: true
           type: string

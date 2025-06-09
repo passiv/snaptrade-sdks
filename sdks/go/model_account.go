@@ -32,7 +32,7 @@ type Account struct {
 	CreatedDate time.Time `json:"created_date"`
 	SyncStatus AccountSyncStatus `json:"sync_status"`
 	Balance AccountBalance `json:"balance"`
-	// The current status of the account. Can be either \"open\", \"closed\", or null if the status is unknown or not provided by the brokerage.
+	// The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
 	Status NullableString `json:"status,omitempty"`
 	// The account type as provided by the brokerage
 	RawType NullableString `json:"raw_type,omitempty"`

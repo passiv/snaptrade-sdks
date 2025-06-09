@@ -16,7 +16,7 @@ A single account at a brokerage.
 |**createdDate** | **OffsetDateTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. |  |
 |**syncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  |  |
 |**balance** | [**AccountBalance**](AccountBalance.md) |  |  |
-|**status** | [**StatusEnum**](#StatusEnum) | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, or null if the status is unknown or not provided by the brokerage. |  [optional] |
+|**status** | [**StatusEnum**](#StatusEnum) | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage. |  [optional] |
 |**rawType** | **String** | The account type as provided by the brokerage |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. |  [optional] |
 |**portfolioGroup** | **UUID** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. |  [optional] |
@@ -30,6 +30,7 @@ A single account at a brokerage.
 |---- | -----|
 | OPEN | &quot;open&quot; |
 | CLOSED | &quot;closed&quot; |
+| ARCHIVED | &quot;archived&quot; |
 
 
 

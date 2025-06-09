@@ -131,6 +131,7 @@ class Account(
                     enum_value_to_name = {
                         "open": "OPEN",
                         "closed": "CLOSED",
+                        "archived": "ARCHIVED",
                     }
                 
                 @schemas.classproperty
@@ -140,6 +141,10 @@ class Account(
                 @schemas.classproperty
                 def CLOSED(cls):
                     return cls("closed")
+                
+                @schemas.classproperty
+                def ARCHIVED(cls):
+                    return cls("archived")
             
             
                 def __new__(
