@@ -6,7 +6,7 @@
 You need an existing SnapTrade user with a connected brokerage account for this demo. Please finish the [Getting Started](https://docs.snaptrade.com/demo/getting-started) demo first.
 :::
 
-Use this interactive demo to retrieve historical transactions from a specific connected account for a SnapTrade user.
+Use this interactive demo to retrieve historical transactions from the connected accounts for a SnapTrade user.
 
 ---
 
@@ -47,50 +47,26 @@ print("Successfully initiated client")
 
 ---
 
-## 2. Get user's accounts
+## 2. Retrieve historical transactions
 
-First, let's get a list of the user's connected accounts to select one for fetching transactions.
-
-```python
-accounts = snaptrade.account_information.get_user_accounts(
-  user_id=user_id,
-  user_secret=user_secret
-)
-print(json.dumps(accounts.body, indent=2))
-```
-
-::button[Get Accounts]
-
-:::
-
----
-
-## 3. Retrieve historical transactions
-
-Once you have the account ID from the previous step, you can retrieve historical transactions using the [Account Activities](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities) endpoint. This endpoint is paginated with a default page size of 1000 transactions and returns them in reverse chronological order.
+Once a user connects a brokerage account, you can retrieve historical transactions using the <a href="https://docs.snaptrade.com/reference/Transactions%20And%20Reporting/TransactionsAndReporting_getActivities" target="_blank">Transaction History</a> endpoint. This demo retrieves transactions across all connected accounts for the user. To perform additional filtering, please check the API reference.
 
 Please note for accounts with a large number of transactions, it could take a significant amount of time for SnapTrade to initially retrieve and index the data. If you don't see any transactions now, please try again later.
 
-:::form{skippable}
 
-::input{name=ACCOUNT_ID label="Account ID" placeholder="YOUR_ACCOUNT_ID" description="The ID of the account to fetch transactions for"}
+:::form{skippable}
 
 ::date{name=START_DATE label="Start Date" placeholder="START_DATE" description="The start date (inclusive) of the transaction history to retrieve" valueFormat="YYYY-MM-DD" optional}
 ::date{name=END_DATE label="End Date" placeholder="END_DATE" description="The end date (inclusive) of the transaction history to retrieve" valueFormat="YYYY-MM-DD" optional}
 ::enum{name=TYPE label="Type" searchable nothingFound="No type" placeholder="TYPE" data="BUY,SELL,DIVIDEND,CONTRIBUTION,WITHDRAWAL,REI,INTEREST,FEE,OPTIONEXPIRATION,OPTIONASSIGNMENT,OPTIONEXERCISE" description="Optional comma seperated list of types to filter transactions by" optional}
-::input{name=OFFSET label="Offset" placeholder="0" description="Starting point for pagination (default: 0)" optional}
-::input{name=LIMIT label="Limit" placeholder="1000" description="Maximum number of transactions to return (default: 1000)" optional}
 
 ```python
-activities = snaptrade.account_information.get_account_activities(
-  account_id=ACCOUNT_ID,
+activities = snaptrade.transactions_and_reporting.get_activities(
   user_id=user_id,
   user_secret=user_secret,
   start_date=START_DATE if "START_DATE" in globals() else None,
   end_date=END_DATE if "END_DATE" in globals() else None,
-  type=TYPE if "TYPE" in globals() else None,
-  offset=OFFSET if "OFFSET" in globals() else None,
-  limit=LIMIT if "LIMIT" in globals() else None
+  type=TYPE if "TYPE" in globals() else None
 )
 print(json.dumps(activities.body, indent=2))
 ```
