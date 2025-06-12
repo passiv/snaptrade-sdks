@@ -61,8 +61,6 @@ print(json.dumps(accounts.body, indent=2))
 
 ::button[Get Accounts]
 
-:::
-
 ---
 
 ## 3. Retrieve historical transactions
