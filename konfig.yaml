@@ -82,6 +82,16 @@ portal:
   betaOperations:
     /accounts/{accountId}/trading/bracket:
       post: true
+    /accounts/{accountId}/optionsChain:
+      get: true
+    /accounts/{accountId}/optionStrategy:
+      post: true
+    /accounts/{accountId}/optionStrategy/{optionStrategyId}:
+      get: true
+    /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
+      post: true
+    /accounts/{accountId}/trading/options:
+      post: true
   hideOperations:
     /activities:
       get: true
@@ -97,16 +107,6 @@ portal:
       get: true
     /performance/custom:
       get: true
-    /accounts/{accountId}/optionsChain:
-      get: true
-    /accounts/{accountId}/optionStrategy:
-      post: true
-    /accounts/{accountId}/optionStrategy/{optionStrategyId}:
-      get: true
-    /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
-      post: true
-    /accounts/{accountId}/trading/options:
-      post: true
     /brokerageAuthorizationTypes:
       get: true
     /currencies:
