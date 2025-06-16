@@ -82,6 +82,14 @@ portal:
   betaOperations:
     /accounts/{accountId}/trading/bracket:
       post: true
+      /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+      get: true
+    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
+      get: true
+    /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
+      patch: true
+    /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
+      post: true
   hideOperations:
     /activities:
       get: true
@@ -125,14 +133,6 @@ portal:
       post: true
     /accounts/{accountId}/trading/simple/preview:
       post: true
-    /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
-      patch: true
-    /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
-      post: true
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
-      get: true
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
-      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
