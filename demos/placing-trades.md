@@ -117,7 +117,7 @@ universal_symbol_id = quotes.body[0]['symbol']['id']
 :::
 
 
-## 4. Submit an equity order
+## 5. Submit an equity order
 
 You can use the <a href="https://docs.snaptrade.com/reference/Trading/Trading_placeForceOrder" target="_blank">Place Order</a> endpoint to submit an equity order under the connected brokerage account.
 
