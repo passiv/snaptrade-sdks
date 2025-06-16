@@ -90,6 +90,10 @@ portal:
       patch: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
       post: true
+    /accounts/{accountId}/trading/simple:
+      post: true
+    /accounts/{accountId}/trading/simple/preview:
+      post: true
   hideOperations:
     /activities:
       get: true
@@ -129,10 +133,6 @@ portal:
       get: true
     /authorizations/{authorizationId}/returnRates:
       get: true
-    /accounts/{accountId}/trading/simple:
-      post: true
-    /accounts/{accountId}/trading/simple/preview:
-      post: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
