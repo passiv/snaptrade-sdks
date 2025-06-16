@@ -43,7 +43,6 @@ print("Successfully initiated client")
 
 ::button[Initialize SDK Client]
 
-:::
 
 ---
 
