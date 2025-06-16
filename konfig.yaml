@@ -82,7 +82,7 @@ portal:
   betaOperations:
     /accounts/{accountId}/trading/bracket:
       post: true
-      /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
       get: true
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
       get: true
