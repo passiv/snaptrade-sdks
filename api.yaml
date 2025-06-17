@@ -30,6 +30,8 @@ tags:
     description: Retrieve information on account transactions, performance, dividends, contributions, etc.
   - name: Trading
     description: Manage orders on user accounts.
+  - name: Crypto Trading
+    description: Manage Crypto Orders on user accounts.
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported brokerages, exchanges, currencies, etc.
   - name: Webhooks
