@@ -51,6 +51,8 @@ print("Successfully initiated client")
 
 First, let's get a list of the user's connected accounts to select one for fetching transactions.
 
+:::form
+
 ```python
 accounts = snaptrade.account_information.get_user_accounts(
   user_id=user_id,
@@ -60,6 +62,8 @@ print(json.dumps(accounts.body, indent=2))
 ```
 
 ::button[Get Accounts]
+
+:::
 
 ---
 
