@@ -46,7 +46,7 @@ When you have an `API Key` and want to start using the SnapTrade API, you will n
 
 In the box below the ‘request’ you should receive a response from the SnapTrade API. The :api[ApiStatus_check] endpoint is the most basic request you can make to the SnapTrade API.
 
-You can also make this request with any of the SnapTrade SDKs. We don't support not using an SDK, but if you would like to do so you can lift the signature generation from any of our SDKs.
+You can also make this request with any of the SnapTrade SDKs. While we don’t officially support custom setups without an SDK, you can copy the signature generation logic from any of our SDKs if you want to go that route.
 
 ### SnapTrade SDKs
 
