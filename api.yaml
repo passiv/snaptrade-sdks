@@ -2039,7 +2039,7 @@ paths:
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
     get:
       tags:
-        - Trading
+        - Crypto Trading
       summary: Search cryptocurrency pairs instruments
       description: |
         Searches cryptocurrency pairs instruments accessible to the specified account.
@@ -2095,7 +2095,7 @@ paths:
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
     get:
       tags:
-        - Trading
+        - Crypto Trading
       summary: Get cryptocurrency pair quote
       description: |
         Gets a quote for the specified account.
