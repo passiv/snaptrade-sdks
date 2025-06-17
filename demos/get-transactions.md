@@ -54,7 +54,7 @@ First, let's get a list of the user's connected accounts to select one for fetch
 :::form
 
 ```python
-accounts = snaptrade.account_information.get_user_accounts(
+accounts = snaptrade.account_information.list_user_accounts(
   user_id=user_id,
   user_secret=user_secret
 )
