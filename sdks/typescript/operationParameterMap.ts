@@ -317,6 +317,81 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'instrumentSymbol'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/simple-POST': {
+        parameters: [
+            {
+                name: 'instrument'
+            },
+            {
+                name: 'side'
+            },
+            {
+                name: 'type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'amount'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'post_only'
+            },
+            {
+                name: 'expiration_date'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'base'
+            },
+            {
+                name: 'quote'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionStrategy-POST': {
         parameters: [
             {
@@ -509,22 +584,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'instrumentSymbol'
-            },
-        ]
-    },
     '/trade/impact-POST': {
         parameters: [
             {
@@ -711,46 +770,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/simple-POST': {
-        parameters: [
-            {
-                name: 'instrument'
-            },
-            {
-                name: 'side'
-            },
-            {
-                name: 'type'
-            },
-            {
-                name: 'time_in_force'
-            },
-            {
-                name: 'amount'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'limit_price'
-            },
-            {
-                name: 'stop_price'
-            },
-            {
-                name: 'post_only'
-            },
-            {
-                name: 'expiration_date'
-            },
-        ]
-    },
     '/accounts/{accountId}/trading/simple/preview-POST': {
         parameters: [
             {
@@ -825,25 +844,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'units'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'base'
-            },
-            {
-                name: 'quote'
             },
         ]
     },
