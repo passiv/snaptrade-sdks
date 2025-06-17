@@ -1912,7 +1912,7 @@ paths:
   /accounts/{accountId}/trading/simple:
     post:
       tags:
-        - Trading
+        - Crypto Trading
       summary: Place order
       description: |
         Places an order in the specified account.
