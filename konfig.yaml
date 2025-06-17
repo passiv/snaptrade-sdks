@@ -80,21 +80,21 @@ portal:
     - id: placing-trades
       path: demos/placing-trades.md
   betaOperations:
-    /accounts/{accountId}/trading/bracket:
-      post: true
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
       get: true
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
       get: true
+    /accounts/{accountId}/trading/simple:
+      post: true
+  hideOperations:
+    /accounts/{accountId}/trading/bracket:
+      post: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
       patch: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
       post: true
-    /accounts/{accountId}/trading/simple:
-      post: true
     /accounts/{accountId}/trading/simple/preview:
       post: true
-  hideOperations:
     /activities:
       get: true
     /holdings:
