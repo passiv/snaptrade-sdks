@@ -36,6 +36,8 @@ tags:
   name: Transactions And Reporting
 - description: Manage orders on user accounts.
   name: Trading
+- description: Manage Crypto Orders on user accounts.
+  name: Crypto Trading
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
@@ -2247,59 +2249,6 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace
       x-content-type: application/json
       x-accepts: application/json
-  /accounts/{accountId}/trading/simple:
-    post:
-      description: |
-        Places an order in the specified account.
-        This endpoint does not compute the impact to the account balance from the order before submitting the order.
-      operationId: Trading_placeSimpleOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderUpdatedResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
-      x-content-type: application/json
-      x-accepts: application/json
   /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
     post:
       description: |
@@ -2408,6 +2357,111 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview
       x-content-type: application/json
       x-accepts: application/json
+  /accounts/{accountId}/trading/options:
+    post:
+      description: |
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+      operationId: Trading_placeMlegOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/MlegOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlegOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place multi-leg option order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/simple:
+    post:
+      description: |
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderUpdatedResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place order
+      tags:
+      - Crypto Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
+      x-content-type: application/json
+      x-accepts: application/json
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
     get:
       description: |
@@ -2467,7 +2521,7 @@ paths:
           description: Unexpected Error
       summary: Search cryptocurrency pairs instruments
       tags:
-      - Trading
+      - Crypto Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
       x-accepts: application/json
@@ -2523,61 +2577,9 @@ paths:
           description: Unexpected Error
       summary: Get cryptocurrency pair quote
       tags:
-      - Trading
+      - Crypto Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
-      x-accepts: application/json
-  /accounts/{accountId}/trading/options:
-    post:
-      description: |
-        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
-      operationId: Trading_placeMlegOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/MlegOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MlegOrderResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place multi-leg option order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
-      x-content-type: application/json
       x-accepts: application/json
   /snapTrade/partners:
     get:
@@ -10990,7 +10992,30 @@ components:
       - brokerageOrderId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - brokerageOrderId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - brokerageOrderId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview:
       additionalProperties: true
       properties:
         userId:
@@ -11079,7 +11104,7 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
       additionalProperties: true
       properties:
         userId:
@@ -11088,11 +11113,38 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
+        order_type:
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
       required:
       - accountId
-      - brokerageOrderId
+      - legs
+      - order_type
+      - time_in_force
       - userId
       - userSecret
       type: object
@@ -11101,8 +11153,7 @@ components:
       - userId
       - userSecret
       - accountId
-      - brokerageOrderId
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
       additionalProperties: true
       properties:
         userId:
@@ -11239,55 +11290,6 @@ components:
       - userSecret
       - accountId
       - instrumentSymbol
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        order_type:
-          $ref: '#/components/schemas/MlegOrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
-          example: ""
-          format: decimal
-          nullable: true
-          type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
-        price_effect:
-          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
-        legs:
-          items:
-            $ref: '#/components/schemas/MlegLeg'
-          type: array
-      required:
-      - accountId
-      - legs
-      - order_type
-      - time_in_force
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}
