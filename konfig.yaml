@@ -20,7 +20,7 @@ order:
       - Trading_placeOrder
       - Trading_placeForceOrder
       - Trading_cancelUserAccountOrder
-    - tag: Crypto Trading
+  - tag: Crypto Trading
 overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
