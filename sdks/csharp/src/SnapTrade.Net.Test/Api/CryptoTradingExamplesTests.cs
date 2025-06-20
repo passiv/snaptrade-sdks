@@ -70,7 +70,8 @@ namespace SnapTrade.Net.Test.Api
                     timeInForce: SimpleOrderForm.TimeInForceEnum.GTD,
                     expirationDate: DateTime.UtcNow.AddMinutes(1),
                     amount:42.2m,
-                    limitPrice: quote.Ask * 2m,
+                    // Bid and Ask are strings, so we need to parse them before doing any calculation
+                    limitPrice: decimal.Parse(quote.Ask) * 2m,
                     postOnly: true
                 )
             );
