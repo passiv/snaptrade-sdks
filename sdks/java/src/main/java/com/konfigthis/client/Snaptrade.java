@@ -4,6 +4,7 @@ import com.konfigthis.client.api.AccountInformationApi;
 import com.konfigthis.client.api.ApiStatusApi;
 import com.konfigthis.client.api.AuthenticationApi;
 import com.konfigthis.client.api.ConnectionsApi;
+import com.konfigthis.client.api.CryptoTradingApi;
 import com.konfigthis.client.api.OptionsApi;
 import com.konfigthis.client.api.ReferenceDataApi;
 import com.konfigthis.client.api.TradingApi;
@@ -15,6 +16,7 @@ public class Snaptrade {
     public final ApiStatusApi apiStatus;
     public final AuthenticationApi authentication;
     public final ConnectionsApi connections;
+    public final CryptoTradingApi cryptoTrading;
     public final OptionsApi options;
     public final ReferenceDataApi referenceData;
     public final TradingApi trading;
@@ -30,6 +32,7 @@ public class Snaptrade {
         this.apiStatus = new ApiStatusApi(this.apiClient);
         this.authentication = new AuthenticationApi(this.apiClient);
         this.connections = new ConnectionsApi(this.apiClient);
+        this.cryptoTrading = new CryptoTradingApi(this.apiClient);
         this.options = new OptionsApi(this.apiClient);
         this.referenceData = new ReferenceDataApi(this.apiClient);
         this.trading = new TradingApi(this.apiClient);

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingSimple(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingSimple unit test stubs
-        Place order
+        Place order v2
     """
 
     def setUp(self):
