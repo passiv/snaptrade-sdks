@@ -10,7 +10,7 @@ namespace SnapTrade.Net.Test.Api
 
     public class CryptoTradingExampleTests
     {
-        private TradingApi tradingApi;
+        private CryptoTradingApi tradingApi;
 
         private readonly string testUserId;
 
@@ -34,7 +34,7 @@ namespace SnapTrade.Net.Test.Api
                 ConsumerKey = Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY")
             };
 
-            tradingApi = new TradingApi(configuration);
+            tradingApi = new CryptoTradingApi(configuration);
         }
 
         [Fact(Skip = "requires placing an order")]
