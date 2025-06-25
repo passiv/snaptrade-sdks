@@ -10,7 +10,6 @@ on:
       - master
     paths:
       - api.yaml
-      - sdks/typescript/package.json
 
 jobs:
   regenerate-sdks-on-oas-change:
