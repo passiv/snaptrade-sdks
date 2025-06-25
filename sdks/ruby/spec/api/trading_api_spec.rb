@@ -133,7 +133,7 @@ describe 'TradingApi' do
 
   # unit tests for place_mleg_order
   # Place multi-leg option order
-  # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+  # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
