@@ -65,9 +65,9 @@ module SnapTrade
         :'side' => :'ActionStrict',
         :'type' => :'SimpleOrderFormType',
         :'time_in_force' => :'SimpleOrderFormTimeInForce',
-        :'amount' => :'Float',
-        :'limit_price' => :'Float',
-        :'stop_price' => :'Float',
+        :'amount' => :'String',
+        :'limit_price' => :'String',
+        :'stop_price' => :'String',
         :'post_only' => :'Boolean',
         :'expiration_date' => :'Time'
       }

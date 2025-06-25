@@ -147,7 +147,7 @@ namespace SnapTrade.Net.Model
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
         /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
-        public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
+        public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), string amount = default(string), string limitPrice = default(string), string stopPrice = default(string), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
         {
             // to ensure "instrument" is required (not null)
             if (instrument == null)
@@ -158,6 +158,11 @@ namespace SnapTrade.Net.Model
             this.Side = side;
             this.Type = type;
             this.TimeInForce = timeInForce;
+            // to ensure "amount" is required (not null)
+            if (amount == null)
+            {
+                throw new ArgumentNullException("amount is a required property for SimpleOrderForm and cannot be null");
+            }
             this.Amount = amount;
             this.LimitPrice = limitPrice;
             this.StopPrice = stopPrice;
@@ -176,21 +181,21 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <value>The amount of the base currency to buy or sell.</value>
         [DataMember(Name = "amount", IsRequired = true, EmitDefaultValue = true)]
-        public decimal Amount { get; set; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
         /// </summary>
         /// <value>The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.</value>
         [DataMember(Name = "limit_price", EmitDefaultValue = false)]
-        public decimal LimitPrice { get; set; }
+        public string LimitPrice { get; set; }
 
         /// <summary>
         /// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
         /// </summary>
         /// <value>The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.</value>
         [DataMember(Name = "stop_price", EmitDefaultValue = false)]
-        public decimal StopPrice { get; set; }
+        public string StopPrice { get; set; }
 
         /// <summary>
         /// Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
@@ -277,15 +282,18 @@ namespace SnapTrade.Net.Model
                 ) && 
                 (
                     this.Amount == input.Amount ||
-                    this.Amount.Equals(input.Amount)
+                    (this.Amount != null &&
+                    this.Amount.Equals(input.Amount))
                 ) && 
                 (
                     this.LimitPrice == input.LimitPrice ||
-                    this.LimitPrice.Equals(input.LimitPrice)
+                    (this.LimitPrice != null &&
+                    this.LimitPrice.Equals(input.LimitPrice))
                 ) && 
                 (
                     this.StopPrice == input.StopPrice ||
-                    this.StopPrice.Equals(input.StopPrice)
+                    (this.StopPrice != null &&
+                    this.StopPrice.Equals(input.StopPrice))
                 ) && 
                 (
                     this.PostOnly == input.PostOnly ||
@@ -314,9 +322,18 @@ namespace SnapTrade.Net.Model
                 hashCode = (hashCode * 59) + this.Side.GetHashCode();
                 hashCode = (hashCode * 59) + this.Type.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
-                hashCode = (hashCode * 59) + this.Amount.GetHashCode();
-                hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
-                hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                if (this.Amount != null)
+                {
+                    hashCode = (hashCode * 59) + this.Amount.GetHashCode();
+                }
+                if (this.LimitPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.LimitPrice.GetHashCode();
+                }
+                if (this.StopPrice != null)
+                {
+                    hashCode = (hashCode * 59) + this.StopPrice.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this.PostOnly.GetHashCode();
                 if (this.ExpirationDate != null)
                 {

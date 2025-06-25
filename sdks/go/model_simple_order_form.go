@@ -25,11 +25,11 @@ type SimpleOrderForm struct {
 	// The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
 	TimeInForce string `json:"time_in_force"`
 	// The amount of the base currency to buy or sell.
-	Amount float64 `json:"amount"`
+	Amount string `json:"amount"`
 	// The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-	LimitPrice *float64 `json:"limit_price,omitempty"`
+	LimitPrice *string `json:"limit_price,omitempty"`
 	// The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-	StopPrice *float64 `json:"stop_price,omitempty"`
+	StopPrice *string `json:"stop_price,omitempty"`
 	// Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
 	PostOnly *bool `json:"post_only,omitempty"`
 	// The expiration date of the order. Required if the time_in_force is GTD.
@@ -40,7 +40,7 @@ type SimpleOrderForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64) *SimpleOrderForm {
+func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount string) *SimpleOrderForm {
 	this := SimpleOrderForm{}
 	this.Instrument = instrument
 	this.Side = side
@@ -155,9 +155,9 @@ func (o *SimpleOrderForm) SetTimeInForce(v string) {
 }
 
 // GetAmount returns the Amount field value
-func (o *SimpleOrderForm) GetAmount() float64 {
+func (o *SimpleOrderForm) GetAmount() string {
 	if o == nil {
-		var ret float64
+		var ret string
 		return ret
 	}
 
@@ -166,7 +166,7 @@ func (o *SimpleOrderForm) GetAmount() float64 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *SimpleOrderForm) GetAmountOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetAmountOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
@@ -174,14 +174,14 @@ func (o *SimpleOrderForm) GetAmountOk() (*float64, bool) {
 }
 
 // SetAmount sets field value
-func (o *SimpleOrderForm) SetAmount(v float64) {
+func (o *SimpleOrderForm) SetAmount(v string) {
 	o.Amount = v
 }
 
 // GetLimitPrice returns the LimitPrice field value if set, zero value otherwise.
-func (o *SimpleOrderForm) GetLimitPrice() float64 {
+func (o *SimpleOrderForm) GetLimitPrice() string {
 	if o == nil || isNil(o.LimitPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.LimitPrice
@@ -189,7 +189,7 @@ func (o *SimpleOrderForm) GetLimitPrice() float64 {
 
 // GetLimitPriceOk returns a tuple with the LimitPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleOrderForm) GetLimitPriceOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetLimitPriceOk() (*string, bool) {
 	if o == nil || isNil(o.LimitPrice) {
     return nil, false
 	}
@@ -205,15 +205,15 @@ func (o *SimpleOrderForm) HasLimitPrice() bool {
 	return false
 }
 
-// SetLimitPrice gets a reference to the given float64 and assigns it to the LimitPrice field.
-func (o *SimpleOrderForm) SetLimitPrice(v float64) {
+// SetLimitPrice gets a reference to the given string and assigns it to the LimitPrice field.
+func (o *SimpleOrderForm) SetLimitPrice(v string) {
 	o.LimitPrice = &v
 }
 
 // GetStopPrice returns the StopPrice field value if set, zero value otherwise.
-func (o *SimpleOrderForm) GetStopPrice() float64 {
+func (o *SimpleOrderForm) GetStopPrice() string {
 	if o == nil || isNil(o.StopPrice) {
-		var ret float64
+		var ret string
 		return ret
 	}
 	return *o.StopPrice
@@ -221,7 +221,7 @@ func (o *SimpleOrderForm) GetStopPrice() float64 {
 
 // GetStopPriceOk returns a tuple with the StopPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SimpleOrderForm) GetStopPriceOk() (*float64, bool) {
+func (o *SimpleOrderForm) GetStopPriceOk() (*string, bool) {
 	if o == nil || isNil(o.StopPrice) {
     return nil, false
 	}
@@ -237,8 +237,8 @@ func (o *SimpleOrderForm) HasStopPrice() bool {
 	return false
 }
 
-// SetStopPrice gets a reference to the given float64 and assigns it to the StopPrice field.
-func (o *SimpleOrderForm) SetStopPrice(v float64) {
+// SetStopPrice gets a reference to the given string and assigns it to the StopPrice field.
+func (o *SimpleOrderForm) SetStopPrice(v string) {
 	o.StopPrice = &v
 }
 

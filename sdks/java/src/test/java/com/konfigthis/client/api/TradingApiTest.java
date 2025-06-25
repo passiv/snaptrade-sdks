@@ -273,12 +273,12 @@ public class TradingApiTest {
         ActionStrict side = null;
         String type = null;
         String timeInForce = null;
-        BigDecimal amount = null;
+        String amount = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        BigDecimal limitPrice = null;
-        BigDecimal stopPrice = null;
+        String limitPrice = null;
+        String stopPrice = null;
         Boolean postOnly = null;
         OffsetDateTime expirationDate = null;
         SimpleOrderPreview response = api.previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)

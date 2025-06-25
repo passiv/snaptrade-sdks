@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **Side** | [**ActionStrict**](ActionStrict.md) |  | 
 **Type** | **string** | The type of order to place. | 
 **TimeInForce** | **string** | The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - &#x60;GTC&#x60; - Good Til Canceled. The order is valid until it is executed or canceled.   - &#x60;FOK&#x60; - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - &#x60;IOC&#x60; - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - &#x60;GTD&#x60; - Good Til Date. The order is valid until the specified date.  | 
-**Amount** | **float64** | The amount of the base currency to buy or sell. | 
-**LimitPrice** | Pointer to **float64** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. | [optional] 
-**StopPrice** | Pointer to **float64** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. | [optional] 
+**Amount** | **string** | The amount of the base currency to buy or sell. | 
+**LimitPrice** | Pointer to **string** | The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. | [optional] 
+**StopPrice** | Pointer to **string** | The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. | [optional] 
 **PostOnly** | Pointer to **bool** | Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.  | [optional] 
 **ExpirationDate** | Pointer to **time.Time** | The expiration date of the order. Required if the time_in_force is GTD. | [optional] 
 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewSimpleOrderForm
 
-`func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount float64, ) *SimpleOrderForm`
+`func NewSimpleOrderForm(instrument TradingInstrument, side ActionStrict, type_ string, timeInForce string, amount string, ) *SimpleOrderForm`
 
 NewSimpleOrderForm instantiates a new SimpleOrderForm object
 This constructor will assign default values to properties that have it defined,
@@ -115,40 +115,40 @@ SetTimeInForce sets TimeInForce field to given value.
 
 ### GetAmount
 
-`func (o *SimpleOrderForm) GetAmount() float64`
+`func (o *SimpleOrderForm) GetAmount() string`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *SimpleOrderForm) GetAmountOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetAmountOk() (*string, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *SimpleOrderForm) SetAmount(v float64)`
+`func (o *SimpleOrderForm) SetAmount(v string)`
 
 SetAmount sets Amount field to given value.
 
 
 ### GetLimitPrice
 
-`func (o *SimpleOrderForm) GetLimitPrice() float64`
+`func (o *SimpleOrderForm) GetLimitPrice() string`
 
 GetLimitPrice returns the LimitPrice field if non-nil, zero value otherwise.
 
 ### GetLimitPriceOk
 
-`func (o *SimpleOrderForm) GetLimitPriceOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetLimitPriceOk() (*string, bool)`
 
 GetLimitPriceOk returns a tuple with the LimitPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLimitPrice
 
-`func (o *SimpleOrderForm) SetLimitPrice(v float64)`
+`func (o *SimpleOrderForm) SetLimitPrice(v string)`
 
 SetLimitPrice sets LimitPrice field to given value.
 
@@ -160,20 +160,20 @@ HasLimitPrice returns a boolean if a field has been set.
 
 ### GetStopPrice
 
-`func (o *SimpleOrderForm) GetStopPrice() float64`
+`func (o *SimpleOrderForm) GetStopPrice() string`
 
 GetStopPrice returns the StopPrice field if non-nil, zero value otherwise.
 
 ### GetStopPriceOk
 
-`func (o *SimpleOrderForm) GetStopPriceOk() (*float64, bool)`
+`func (o *SimpleOrderForm) GetStopPriceOk() (*string, bool)`
 
 GetStopPriceOk returns a tuple with the StopPrice field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStopPrice
 
-`func (o *SimpleOrderForm) SetStopPrice(v float64)`
+`func (o *SimpleOrderForm) SetStopPrice(v string)`
 
 SetStopPrice sets StopPrice field to given value.
 

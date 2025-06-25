@@ -2200,16 +2200,16 @@ public class TradingApiGenerated {
         final ActionStrict side;
         final String type;
         final String timeInForce;
-        final BigDecimal amount;
+        final String amount;
         final String userId;
         final String userSecret;
         final UUID accountId;
-        BigDecimal limitPrice;
-        BigDecimal stopPrice;
+        String limitPrice;
+        String stopPrice;
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public PreviewSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PreviewSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) {
             this.instrument = instrument;
             this.side = side;
             this.type = type;
@@ -2225,7 +2225,7 @@ public class TradingApiGenerated {
          * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
          * @return TradingApi.PreviewSimpleOrderRequestBuilder
          */
-        public TradingApi.PreviewSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+        public TradingApi.PreviewSimpleOrderRequestBuilder limitPrice(String limitPrice) {
             this.limitPrice = limitPrice;
             return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
         }
@@ -2235,7 +2235,7 @@ public class TradingApiGenerated {
          * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
          * @return TradingApi.PreviewSimpleOrderRequestBuilder
          */
-        public TradingApi.PreviewSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+        public TradingApi.PreviewSimpleOrderRequestBuilder stopPrice(String stopPrice) {
             this.stopPrice = stopPrice;
             return (TradingApi.PreviewSimpleOrderRequestBuilder) this;
         }
@@ -2359,7 +2359,7 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.PreviewSimpleOrderRequestBuilder previewSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+    public TradingApi.PreviewSimpleOrderRequestBuilder previewSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");

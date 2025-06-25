@@ -24,7 +24,6 @@ import com.konfigthis.client.model.TradingInstrument;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import com.google.gson.Gson;
@@ -177,15 +176,15 @@ public class SimpleOrderForm {
 
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
-  private BigDecimal amount;
+  private String amount;
 
   public static final String SERIALIZED_NAME_LIMIT_PRICE = "limit_price";
   @SerializedName(SERIALIZED_NAME_LIMIT_PRICE)
-  private BigDecimal limitPrice;
+  private String limitPrice;
 
   public static final String SERIALIZED_NAME_STOP_PRICE = "stop_price";
   @SerializedName(SERIALIZED_NAME_STOP_PRICE)
-  private BigDecimal stopPrice;
+  private String stopPrice;
 
   public static final String SERIALIZED_NAME_POST_ONLY = "post_only";
   @SerializedName(SERIALIZED_NAME_POST_ONLY)
@@ -314,7 +313,7 @@ public class SimpleOrderForm {
   }
 
 
-  public SimpleOrderForm amount(BigDecimal amount) {
+  public SimpleOrderForm amount(String amount) {
     
     
     
@@ -330,12 +329,12 @@ public class SimpleOrderForm {
   @javax.annotation.Nonnull
   @ApiModelProperty(example = "123.45", required = true, value = "The amount of the base currency to buy or sell.")
 
-  public BigDecimal getAmount() {
+  public String getAmount() {
     return amount;
   }
 
 
-  public void setAmount(BigDecimal amount) {
+  public void setAmount(String amount) {
     
     
     
@@ -343,7 +342,7 @@ public class SimpleOrderForm {
   }
 
 
-  public SimpleOrderForm limitPrice(BigDecimal limitPrice) {
+  public SimpleOrderForm limitPrice(String limitPrice) {
     
     
     
@@ -359,12 +358,12 @@ public class SimpleOrderForm {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "123.45", value = "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.")
 
-  public BigDecimal getLimitPrice() {
+  public String getLimitPrice() {
     return limitPrice;
   }
 
 
-  public void setLimitPrice(BigDecimal limitPrice) {
+  public void setLimitPrice(String limitPrice) {
     
     
     
@@ -372,7 +371,7 @@ public class SimpleOrderForm {
   }
 
 
-  public SimpleOrderForm stopPrice(BigDecimal stopPrice) {
+  public SimpleOrderForm stopPrice(String stopPrice) {
     
     
     
@@ -388,12 +387,12 @@ public class SimpleOrderForm {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "123.45", value = "The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.")
 
-  public BigDecimal getStopPrice() {
+  public String getStopPrice() {
     return stopPrice;
   }
 
 
-  public void setStopPrice(BigDecimal stopPrice) {
+  public void setStopPrice(String stopPrice) {
     
     
     

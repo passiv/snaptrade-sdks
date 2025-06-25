@@ -78,7 +78,7 @@ public class TradingApi extends TradingApiGenerated {
         }
     }
     public class PreviewSimpleOrderRequestBuilder extends PreviewSimpleOrderRequestBuilderGenerated {
-        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) {
             super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
         }
     }

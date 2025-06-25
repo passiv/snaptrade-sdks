@@ -17,7 +17,6 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.ActionStrict;
-import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -80,12 +79,12 @@ public class CryptoTradingApiTest {
         ActionStrict side = null;
         String type = null;
         String timeInForce = null;
-        BigDecimal amount = null;
+        String amount = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        BigDecimal limitPrice = null;
-        BigDecimal stopPrice = null;
+        String limitPrice = null;
+        String stopPrice = null;
         Boolean postOnly = null;
         OffsetDateTime expirationDate = null;
         OrderUpdatedResponse response = api.placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)

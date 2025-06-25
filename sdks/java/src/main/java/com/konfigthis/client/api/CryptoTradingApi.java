@@ -2,7 +2,6 @@ package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.ActionStrict;
-import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -26,7 +25,7 @@ public class CryptoTradingApi extends CryptoTradingApiGenerated {
         }
     }
     public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
-        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) {
             super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
         }
     }

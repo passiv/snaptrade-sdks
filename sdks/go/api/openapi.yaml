@@ -8173,7 +8173,6 @@ components:
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
@@ -8181,7 +8180,6 @@ components:
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
@@ -8189,7 +8187,6 @@ components:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
@@ -10581,7 +10578,6 @@ components:
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
@@ -10589,7 +10585,6 @@ components:
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
@@ -10597,7 +10592,6 @@ components:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
@@ -10828,7 +10822,6 @@ components:
         amount:
           description: The amount of the base currency to buy or sell.
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
@@ -10836,7 +10829,6 @@ components:
           description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
             \ or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
@@ -10844,7 +10836,6 @@ components:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
             \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
           example: "123.45"
-          format: decimal
           type: string
           x-konfig-original-example: "123.45"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price

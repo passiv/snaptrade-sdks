@@ -27,7 +27,6 @@ import java.io.IOException;
 
 
 import com.konfigthis.client.model.ActionStrict;
-import java.math.BigDecimal;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderUpdatedResponse;
@@ -383,16 +382,16 @@ public class CryptoTradingApiGenerated {
         final ActionStrict side;
         final String type;
         final String timeInForce;
-        final BigDecimal amount;
+        final String amount;
         final String userId;
         final String userSecret;
         final UUID accountId;
-        BigDecimal limitPrice;
-        BigDecimal stopPrice;
+        String limitPrice;
+        String stopPrice;
         Boolean postOnly;
         OffsetDateTime expirationDate;
 
-        public PlaceSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+        public PlaceSimpleOrderRequestBuilderGenerated(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) {
             this.instrument = instrument;
             this.side = side;
             this.type = type;
@@ -408,7 +407,7 @@ public class CryptoTradingApiGenerated {
          * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT. (optional)
          * @return CryptoTradingApi.PlaceSimpleOrderRequestBuilder
          */
-        public CryptoTradingApi.PlaceSimpleOrderRequestBuilder limitPrice(BigDecimal limitPrice) {
+        public CryptoTradingApi.PlaceSimpleOrderRequestBuilder limitPrice(String limitPrice) {
             this.limitPrice = limitPrice;
             return (CryptoTradingApi.PlaceSimpleOrderRequestBuilder) this;
         }
@@ -418,7 +417,7 @@ public class CryptoTradingApiGenerated {
          * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT. (optional)
          * @return CryptoTradingApi.PlaceSimpleOrderRequestBuilder
          */
-        public CryptoTradingApi.PlaceSimpleOrderRequestBuilder stopPrice(BigDecimal stopPrice) {
+        public CryptoTradingApi.PlaceSimpleOrderRequestBuilder stopPrice(String stopPrice) {
             this.stopPrice = stopPrice;
             return (CryptoTradingApi.PlaceSimpleOrderRequestBuilder) this;
         }
@@ -542,7 +541,7 @@ public class CryptoTradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public CryptoTradingApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+    public CryptoTradingApi.PlaceSimpleOrderRequestBuilder placeSimpleOrder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, String amount, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (instrument == null) throw new IllegalArgumentException("\"instrument\" is required but got null");
         if (side == null) throw new IllegalArgumentException("\"side\" is required but got null");
         if (type == null) throw new IllegalArgumentException("\"type\" is required but got null");
