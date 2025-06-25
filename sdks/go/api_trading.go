@@ -1324,7 +1324,7 @@ func (r TradingApiPlaceMlegOrderRequest) Execute() (*MlegOrderResponse, *http.Re
 /*
 PlaceMlegOrder Place multi-leg option order
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

@@ -564,7 +564,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
          * @summary Place multi-leg option order
          * @param {string} userId 
          * @param {string} userSecret 
@@ -1113,7 +1113,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
          * @summary Place multi-leg option order
          * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1301,7 +1301,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.placeForceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+         * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
          * @summary Place multi-leg option order
          * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1880,7 +1880,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+     * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
      * @summary Place multi-leg option order
      * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

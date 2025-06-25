@@ -2076,7 +2076,7 @@ For Equity orders, this represents the number of shares for the order. This can 
 
 ### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

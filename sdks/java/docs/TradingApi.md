@@ -847,7 +847,7 @@ public class Example {
 
 Place multi-leg option order
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
 
 ### Example
 ```java

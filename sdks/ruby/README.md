@@ -1997,7 +1997,7 @@ contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ### `snaptrade.trading.place_mleg_order`<a id="snaptradetradingplace_mleg_order"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
