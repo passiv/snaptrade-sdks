@@ -26,7 +26,6 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
-import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import java.util.ArrayList;
@@ -97,11 +96,6 @@ public class TradingApi extends TradingApiGenerated {
     public class ReplaceOrderRequestBuilder extends ReplaceOrderRequestBuilderGenerated {
         public ReplaceOrderRequestBuilder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
             super(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
-        }
-    }
-    public class SearchCryptocurrencyPairInstrumentsRequestBuilder extends SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated {
-        public SearchCryptocurrencyPairInstrumentsRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
         }
     }
 }
