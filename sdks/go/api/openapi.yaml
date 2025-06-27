@@ -36,6 +36,8 @@ tags:
   name: Transactions And Reporting
 - description: Manage orders on user accounts.
   name: Trading
+- description: Manage crypto orders on user accounts.
+  name: Crypto Trading
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
@@ -2289,67 +2291,6 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview
-  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
-    get:
-      description: |
-        Searches cryptocurrency pairs instruments accessible to the specified account.
-      operationId: Trading_searchCryptocurrencyPairInstruments
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: true
-        in: query
-        name: base
-        required: false
-        schema:
-          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
-        style: form
-      - explode: true
-        in: query
-        name: quote
-        required: false
-        schema:
-          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trading_searchCryptocurrencyPairInstruments_200_response'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-        "500":
-          description: Unexpected Error
-      summary: Search cryptocurrency pairs instruments
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
     get:
       description: |
@@ -2765,6 +2706,67 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+    get:
+      description: |
+        Searches cryptocurrency pairs instruments accessible to the specified account.
+      operationId: Trading_searchCryptocurrencyPairInstruments
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: base
+        required: false
+        schema:
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
+        style: form
+      - explode: true
+        in: query
+        name: quote
+        required: false
+        schema:
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trading_searchCryptocurrencyPairInstruments_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+        "500":
+          description: Unexpected Error
+      summary: Search cryptocurrency pairs instruments
+      tags:
+      - Crypto Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
 components:
   requestBodies:
     RegisterUserRequestBody:
@@ -10718,31 +10720,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        base:
-          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
-        quote:
-          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - base
-      - quote
     ? konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
     : additionalProperties: true
       properties:
@@ -10924,6 +10901,31 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        base:
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
+        quote:
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - base
+      - quote
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:
       additionalProperties: true
       properties:

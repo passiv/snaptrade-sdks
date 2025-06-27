@@ -40,7 +40,6 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_or
 from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
 from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel import AccountsAccountIdTradingSimpleBrokerageOrderIdCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_simple_preview import AccountsAccountIdTradingSimplePreview
-from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
 from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
 from snaptrade_client.apis.paths.accounts_account_id_trading_options import AccountsAccountIdTradingOptions
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
@@ -54,6 +53,7 @@ from snaptrade_client.apis.paths.exchanges import Exchanges
 from snaptrade_client.apis.paths.security_types import SecurityTypes
 from snaptrade_client.apis.paths.symbols import Symbols
 from snaptrade_client.apis.paths.symbols_query import SymbolsQuery
+from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
 
 PathToApi = typing_extensions.TypedDict(
     'PathToApi',
@@ -97,7 +97,6 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
@@ -111,6 +110,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
     }
 )
 
@@ -155,7 +155,6 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
@@ -169,5 +168,6 @@ path_to_api = PathToApi(
         PathValues.SECURITY_TYPES: SecurityTypes,
         PathValues.SYMBOLS: Symbols,
         PathValues.SYMBOLS_QUERY: SymbolsQuery,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
     }
 )
