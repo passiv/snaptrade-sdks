@@ -954,7 +954,7 @@ module SnapTrade
 
     # Place multi-leg option order
     #
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -982,7 +982,7 @@ module SnapTrade
 
     # Place multi-leg option order
     #
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -1008,7 +1008,7 @@ module SnapTrade
     end
 
     # Place multi-leg option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1021,7 +1021,7 @@ module SnapTrade
     end
 
     # Place multi-leg option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support. 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1689,123 +1689,6 @@ module SnapTrade
       data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#replace_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Search cryptocurrency pairs instruments
-    #
-    # Searches cryptocurrency pairs instruments accessible to the specified account.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param base [String] 
-    # @param quote [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def search_cryptocurrency_pair_instruments(user_id:, user_secret:, account_id:, base: SENTINEL, quote: SENTINEL, extra: {})
-      extra[:base] = base if base != SENTINEL
-      extra[:quote] = quote if quote != SENTINEL
-      data, _status_code, _headers = search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, extra)
-      data
-    end
-
-    # Search cryptocurrency pairs instruments
-    #
-    # Searches cryptocurrency pairs instruments accessible to the specified account.
-    #
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param base [String] 
-    # @param quote [String] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def search_cryptocurrency_pair_instruments_with_http_info(user_id:, user_secret:, account_id:, base: SENTINEL, quote: SENTINEL, extra: {})
-      extra[:base] = base if base != SENTINEL
-      extra[:quote] = quote if quote != SENTINEL
-      search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, extra)
-    end
-
-    # Search cryptocurrency pairs instruments
-    # Searches cryptocurrency pairs instruments accessible to the specified account. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [String] :base 
-    # @option opts [String] :quote 
-    # @return [TradingSearchCryptocurrencyPairInstruments200Response]
-    private def search_cryptocurrency_pair_instruments_impl(user_id, user_secret, account_id, opts = {})
-      data, _status_code, _headers = search_cryptocurrency_pair_instruments_with_http_info(user_id, user_secret, account_id, opts)
-      data
-    end
-
-    # Search cryptocurrency pairs instruments
-    # Searches cryptocurrency pairs instruments accessible to the specified account. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param [Hash] opts the optional parameters
-    # @option opts [String] :base 
-    # @option opts [String] :quote 
-    # @return [Array<(TradingSearchCryptocurrencyPairInstruments200Response, Integer, Hash)>] TradingSearchCryptocurrencyPairInstruments200Response data, response status code and response headers
-    private def search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.search_cryptocurrency_pair_instruments ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.search_cryptocurrency_pair_instruments"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.search_cryptocurrency_pair_instruments"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.search_cryptocurrency_pair_instruments"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-      query_params[:'base'] = opts[:'base'] if !opts[:'base'].nil?
-      query_params[:'quote'] = opts[:'quote'] if !opts[:'quote'].nil?
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body]
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'TradingSearchCryptocurrencyPairInstruments200Response'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"TradingApi.search_cryptocurrency_pair_instruments",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#search_cryptocurrency_pair_instruments\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end

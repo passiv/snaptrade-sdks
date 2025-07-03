@@ -43,6 +43,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
+  * [`snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`](#snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -71,7 +72,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
   * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
   * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
-  * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -1047,6 +1047,44 @@ specific users
 ---
 
 
+### `snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`<a id="snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.crypto_trading.search_cryptocurrency_pair_instruments(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  base: "BTC",
+  quote: "USD",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### base: `String`<a id="base-string"></a>
+##### quote: `String`<a id="quote-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingSearchCryptocurrencyPairInstruments200Response](./lib/snaptrade/models/trading_search_cryptocurrency_pair_instruments200_response.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -1997,7 +2035,7 @@ contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
 ### `snaptrade.trading.place_mleg_order`<a id="snaptradetradingplace_mleg_order"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2346,44 +2384,6 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.search_cryptocurrency_pair_instruments`<a id="snaptradetradingsearch_cryptocurrency_pair_instruments"></a>
-
-Searches cryptocurrency pairs instruments accessible to the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.trading.search_cryptocurrency_pair_instruments(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  base: "BTC",
-  quote: "USD",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-##### base: `String`<a id="base-string"></a>
-##### quote: `String`<a id="quote-string"></a>
-#### 🔄 Return<a id="🔄-return"></a>
-
-[TradingSearchCryptocurrencyPairInstruments200Response](./lib/snaptrade/models/trading_search_cryptocurrency_pair_instruments200_response.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

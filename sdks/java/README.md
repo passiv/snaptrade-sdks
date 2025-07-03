@@ -47,6 +47,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
+  * [`snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`](#snaptradecryptotradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
@@ -75,7 +76,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
   * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
-  * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
   * [`snaptrade.transactionsAndReporting.getReportingCustomRange`](#snaptradetransactionsandreportinggetreportingcustomrange)
 
@@ -1168,6 +1168,47 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
+### `snaptrade.cryptoTrading.searchCryptocurrencyPairInstruments`<a id="snaptradecryptotradingsearchcryptocurrencypairinstruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+TradingSearchCryptocurrencyPairInstruments200Response result = client
+        .cryptoTrading
+        .searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
+        .base(base)
+        .quote(quote)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### base: `String`<a id="base-string"></a>
+
+##### quote: `String`<a id="quote-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[TradingSearchCryptocurrencyPairInstruments200Response](./src/main/java/com/konfigthis/client/model/TradingSearchCryptocurrencyPairInstruments200Response.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
 
 Creates an option strategy object that will be used to place an option strategy order.
@@ -2076,7 +2117,7 @@ For Equity orders, this represents the number of shares for the order. This can 
 
 ### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support.
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2380,47 +2421,6 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
-
-Searches cryptocurrency pairs instruments accessible to the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-TradingSearchCryptocurrencyPairInstruments200Response result = client
-        .trading
-        .searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
-        .base(base)
-        .quote(quote)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### base: `String`<a id="base-string"></a>
-
-##### quote: `String`<a id="quote-string"></a>
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[TradingSearchCryptocurrencyPairInstruments200Response](./src/main/java/com/konfigthis/client/model/TradingSearchCryptocurrencyPairInstruments200Response.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
