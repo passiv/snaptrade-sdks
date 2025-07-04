@@ -169,7 +169,6 @@ require 'snaptrade/api/account_information_api'
 require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
-require 'snaptrade/api/crypto_trading_api'
 require 'snaptrade/api/options_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
@@ -243,7 +242,6 @@ module SnapTrade
     attr_reader :api_status
     attr_reader :authentication
     attr_reader :connections
-    attr_reader :crypto_trading
     attr_reader :options
     attr_reader :reference_data
     attr_reader :trading
@@ -255,7 +253,6 @@ module SnapTrade
       @api_status = SnapTrade::APIStatusApi.new(@api_client)
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
-      @crypto_trading = SnapTrade::CryptoTradingApi.new(@api_client)
       @options = SnapTrade::OptionsApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)

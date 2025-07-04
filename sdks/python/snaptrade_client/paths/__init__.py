@@ -45,6 +45,7 @@ class PathValues(str, enum.Enum):
     ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE = "/accounts/{accountId}/trading/simple"
     ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL = "/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel"
     ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW = "/accounts/{accountId}/trading/simple/preview"
+    ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs"
     ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote"
     ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS = "/accounts/{accountId}/trading/options"
     SNAP_TRADE_PARTNERS = "/snapTrade/partners"
@@ -58,4 +59,3 @@ class PathValues(str, enum.Enum):
     SECURITY_TYPES = "/securityTypes"
     SYMBOLS = "/symbols"
     SYMBOLS_QUERY = "/symbols/{query}"
-    ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs"

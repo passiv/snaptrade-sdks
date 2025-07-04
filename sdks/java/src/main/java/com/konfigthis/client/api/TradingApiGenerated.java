@@ -51,6 +51,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
+import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 
@@ -3178,5 +3179,226 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new ReplaceOrderRequestBuilder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
+    }
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/instruments/cryptocurrencyPairs"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        if (base != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("base", base));
+        }
+
+        if (quote != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("quote", quote));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsValidateBeforeCall(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling searchCryptocurrencyPairInstruments(Async)");
+        }
+
+        return searchCryptocurrencyPairInstrumentsCall(userId, userSecret, accountId, base, quote, _callback);
+
+    }
+
+
+    private ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> searchCryptocurrencyPairInstrumentsWithHttpInfo(String userId, String userSecret, UUID accountId, String base, String quote) throws ApiException {
+        okhttp3.Call localVarCall = searchCryptocurrencyPairInstrumentsValidateBeforeCall(userId, userSecret, accountId, base, quote, null);
+        Type localVarReturnType = new TypeToken<TradingSearchCryptocurrencyPairInstruments200Response>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call searchCryptocurrencyPairInstrumentsAsync(String userId, String userSecret, UUID accountId, String base, String quote, final ApiCallback<TradingSearchCryptocurrencyPairInstruments200Response> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = searchCryptocurrencyPairInstrumentsValidateBeforeCall(userId, userSecret, accountId, base, quote, _callback);
+        Type localVarReturnType = new TypeToken<TradingSearchCryptocurrencyPairInstruments200Response>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        String base;
+        String quote;
+
+        public SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set base
+         * @param base  (optional)
+         * @return TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder
+         */
+        public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder base(String base) {
+            this.base = base;
+            return (TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder) this;
+        }
+        
+        /**
+         * Set quote
+         * @param quote  (optional)
+         * @return TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder
+         */
+        public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder quote(String quote) {
+            this.quote = quote;
+            return (TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for searchCryptocurrencyPairInstruments
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return searchCryptocurrencyPairInstrumentsCall(userId, userSecret, accountId, base, quote, _callback);
+        }
+
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request
+         * @return TradingSearchCryptocurrencyPairInstruments200Response
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public TradingSearchCryptocurrencyPairInstruments200Response execute() throws ApiException {
+            ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> localVarResp = searchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, base, quote);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request with HTTP info returned
+         * @return ApiResponse&lt;TradingSearchCryptocurrencyPairInstruments200Response&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> executeWithHttpInfo() throws ApiException {
+            return searchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, base, quote);
+        }
+
+        /**
+         * Execute searchCryptocurrencyPairInstruments request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TradingSearchCryptocurrencyPairInstruments200Response> _callback) throws ApiException {
+            return searchCryptocurrencyPairInstrumentsAsync(userId, userSecret, accountId, base, quote, _callback);
+        }
+    }
+
+    /**
+     * Search cryptocurrency pairs instruments
+     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @return SearchCryptocurrencyPairInstrumentsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.SearchCryptocurrencyPairInstrumentsRequestBuilder searchCryptocurrencyPairInstruments(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new SearchCryptocurrencyPairInstrumentsRequestBuilder(userId, userSecret, accountId);
     }
 }

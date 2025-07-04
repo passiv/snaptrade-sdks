@@ -91,7 +91,6 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
-*CryptoTradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/CryptoTradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments
 *OptionsApi* | [**GetOptionStrategy**](docs/OptionsApi.md#getoptionstrategy) | **Post** /accounts/{accountId}/optionStrategy | Create options strategy
 *OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 *OptionsApi* | [**GetOptionsStrategyQuote**](docs/OptionsApi.md#getoptionsstrategyquote) | **Get** /accounts/{accountId}/optionStrategy/{optionStrategyId} | Get options strategy quotes
@@ -120,6 +119,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place order
 *TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one
+*TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe
 

@@ -311,25 +311,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'base'
-            },
-            {
-                'name': 'quote'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionStrategy-POST': {
         'parameters': [
             {
@@ -838,6 +819,25 @@ operation_parameter_map = {
             },
             {
                 'name': 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'base'
+            },
+            {
+                'name': 'quote'
             },
         ]
     },
