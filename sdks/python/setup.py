@@ -29,7 +29,7 @@ long_description = (this_directory / "README.md").read_text()
 REQUIRES = [
     "certifi >= 2023.7.22",
     "python-dateutil ~= 2.8.2",
-    "typing_extensions ~= 4.3.0",
+    "typing_extensions == 4.13.2",
     "urllib3 ~= 1.26.18, ~= 2.0.0",
     "cryptography ~= 43.0.3",
     "frozendict ~= 2.3.4",
