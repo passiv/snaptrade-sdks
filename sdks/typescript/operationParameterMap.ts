@@ -317,25 +317,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
-        parameters: [
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'base'
-            },
-            {
-                name: 'quote'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionStrategy-POST': {
         parameters: [
             {
@@ -844,6 +825,25 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'units'
+            },
+        ]
+    },
+    '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'base'
+            },
+            {
+                name: 'quote'
             },
         ]
     },
