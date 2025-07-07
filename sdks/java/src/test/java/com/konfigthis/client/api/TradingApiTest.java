@@ -41,7 +41,6 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
-import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
@@ -365,27 +364,6 @@ public class TradingApiTest {
                 .symbol(symbol)
                 .stop(stop)
                 .units(units)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Search cryptocurrency pairs instruments
-     *
-     * Searches cryptocurrency pairs instruments accessible to the specified account. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void searchCryptocurrencyPairInstrumentsTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        String base = null;
-        String quote = null;
-        TradingSearchCryptocurrencyPairInstruments200Response response = api.searchCryptocurrencyPairInstruments(userId, userSecret, accountId)
-                .base(base)
-                .quote(quote)
                 .execute();
         // TODO: test validations
     }

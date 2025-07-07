@@ -13,4 +13,5 @@ class TagValues(str, enum.Enum):
     OPTIONS = "Options"
     TRANSACTIONS_AND_REPORTING = "Transactions And Reporting"
     TRADING = "Trading"
+    CRYPTO_TRADING = "Crypto Trading"
     REFERENCE_DATA = "Reference Data"
