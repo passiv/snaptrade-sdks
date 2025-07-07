@@ -30,8 +30,6 @@ tags:
     description: Retrieve information on account transactions, performance, dividends, contributions, etc.
   - name: Trading
     description: Manage orders on user accounts.
-  - name: Crypto Trading
-    description: Manage crypto orders on user accounts.
   - name: Reference Data
     description: Retrieve basic information for API use, such as supported brokerages, exchanges, currencies, etc.
   - name: Webhooks
@@ -2041,7 +2039,7 @@ paths:
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
     get:
       tags:
-        - Crypto Trading
+        - Trading
       summary: Search cryptocurrency pairs instruments
       description: |
         Searches cryptocurrency pairs instruments accessible to the specified account.
