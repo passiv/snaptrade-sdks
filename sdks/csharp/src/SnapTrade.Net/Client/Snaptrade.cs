@@ -41,11 +41,6 @@ namespace SnapTrade.Net.Client
         /// <summary>
         /// API instance
         /// </summary>
-        public virtual CryptoTradingApi CryptoTrading { get; set; }
-
-        /// <summary>
-        /// API instance
-        /// </summary>
         public virtual OptionsApi Options { get; set; }
 
         /// <summary>
@@ -83,7 +78,6 @@ namespace SnapTrade.Net.Client
             APIStatus = new APIStatusApi(Configuration);
             Authentication = new AuthenticationApi(Configuration);
             Connections = new ConnectionsApi(Configuration);
-            CryptoTrading = new CryptoTradingApi(Configuration);
             Options = new OptionsApi(Configuration);
             ReferenceData = new ReferenceDataApi(Configuration);
             Trading = new TradingApi(Configuration);

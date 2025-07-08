@@ -207,4 +207,20 @@ describe 'TradingApi' do
     end
   end
 
+  # unit tests for search_cryptocurrency_pair_instruments
+  # Search cryptocurrency pairs instruments
+  # Searches cryptocurrency pairs instruments accessible to the specified account. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param [Hash] opts the optional parameters
+  # @option opts [String] :base 
+  # @option opts [String] :quote 
+  # @return [TradingSearchCryptocurrencyPairInstruments200Response]
+  describe 'search_cryptocurrency_pair_instruments test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
 end

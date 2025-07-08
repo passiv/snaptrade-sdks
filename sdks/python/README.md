@@ -46,7 +46,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`](#snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
@@ -75,6 +74,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
   * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
   * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
+  * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
   * [`snaptrade.transactions_and_reporting.get_reporting_custom_range`](#snaptradetransactions_and_reportingget_reporting_custom_range)
 
@@ -1114,45 +1114,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.crypto_trading.search_cryptocurrency_pair_instruments`<a id="snaptradecrypto_tradingsearch_cryptocurrency_pair_instruments"></a>
-
-Searches cryptocurrency pairs instruments accessible to the specified account.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-search_cryptocurrency_pair_instruments_response = (
-    snaptrade.crypto_trading.search_cryptocurrency_pair_instruments(
-        user_id="snaptrade-user-123",
-        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        base="BTC",
-        quote="USD",
-    )
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### base: `str`<a id="base-str"></a>
-
-##### quote: `str`<a id="quote-str"></a>
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2453,6 +2414,45 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `patch`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.search_cryptocurrency_pair_instruments`<a id="snaptradetradingsearch_cryptocurrency_pair_instruments"></a>
+
+Searches cryptocurrency pairs instruments accessible to the specified account.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+search_cryptocurrency_pair_instruments_response = (
+    snaptrade.trading.search_cryptocurrency_pair_instruments(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        base="BTC",
+        quote="USD",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### base: `str`<a id="base-str"></a>
+
+##### quote: `str`<a id="quote-str"></a>
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/instruments/cryptocurrencyPairs` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
