@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingSimpleBrokerageOrderIdCancel(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingSimpleBrokerageOrderIdCancel unit test stubs
-        Cancel an order.
+        Cancel crypto order
     """
 
     def setUp(self):

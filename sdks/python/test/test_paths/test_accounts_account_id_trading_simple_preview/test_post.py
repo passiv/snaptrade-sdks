@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingSimplePreview(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingSimplePreview unit test stubs
-        Preview order
+        Preview crypto order
     """
 
     def setUp(self):

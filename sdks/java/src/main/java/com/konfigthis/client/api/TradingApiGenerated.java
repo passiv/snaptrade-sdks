@@ -273,7 +273,7 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Cancel an order.
+     * Cancel crypto order
      * Cancels an order in the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -2550,7 +2550,7 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Place order
+     * Place crypto order
      * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -2832,7 +2832,7 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Preview order
+     * Preview crypto order
      * Previews an order using the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
@@ -3147,7 +3147,7 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Replaces an order with a new one
+     * Replace crypto order
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
      * @param accountId The ID of the account to execute the trade on. (required)
      * @param brokerageOrderId The Brokerage Order ID of the order to replace. (required)
