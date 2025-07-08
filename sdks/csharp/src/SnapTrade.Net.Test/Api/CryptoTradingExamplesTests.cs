@@ -11,7 +11,6 @@ namespace SnapTrade.Net.Test.Api
     public class CryptoTradingExampleTests
     {
         private TradingApi tradingApi;
-        private CryptoTradingApi cryptoTradingApi;
 
         private readonly string testUserId;
 
@@ -36,13 +35,12 @@ namespace SnapTrade.Net.Test.Api
             };
 
             tradingApi = new TradingApi(configuration);
-            cryptoTradingApi = new CryptoTradingApi(configuration);
         }
 
         [Fact(Skip = "requires placing an order")]
         public void OrderFlowExample() {
             // Find the instrument
-            var searchResult = cryptoTradingApi.SearchCryptocurrencyPairInstruments(
+            var searchResult = tradingApi.SearchCryptocurrencyPairInstruments(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
