@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel an order. |
+| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order |
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
 | [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
@@ -13,9 +13,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
 | [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
-| [**placeSimpleOrder**](TradingApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place order |
-| [**previewSimpleOrder**](TradingApi.md#previewSimpleOrder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview order |
-| [**replaceOrder**](TradingApi.md#replaceOrder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replaces an order with a new one |
+| [**placeSimpleOrder**](TradingApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place crypto order |
+| [**previewSimpleOrder**](TradingApi.md#previewSimpleOrder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview crypto order |
+| [**replaceOrder**](TradingApi.md#replaceOrder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order |
 | [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments |
 
 
@@ -23,7 +23,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 # **cancelOrder**
 > OrderUpdatedResponse cancelOrder(userId, userSecret, accountId, brokerageOrderId).execute();
 
-Cancel an order.
+Cancel crypto order
 
 Cancels an order in the specified account. 
 
@@ -1080,7 +1080,7 @@ public class Example {
 # **placeSimpleOrder**
 > OrderUpdatedResponse placeSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
 
-Place order
+Place crypto order
 
 Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
 
@@ -1197,7 +1197,7 @@ public class Example {
 # **previewSimpleOrder**
 > SimpleOrderPreview previewSimpleOrder(userId, userSecret, accountId, simpleOrderForm).execute();
 
-Preview order
+Preview crypto order
 
 Previews an order using the specified account. 
 
@@ -1313,7 +1313,7 @@ public class Example {
 # **replaceOrder**
 > AccountOrderRecord replaceOrder(accountId, brokerageOrderId, userId, userSecret, manualTradeReplaceForm).execute();
 
-Replaces an order with a new one
+Replace crypto order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
 

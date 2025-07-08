@@ -87,7 +87,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel an order.
+         * @summary Cancel crypto order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -703,7 +703,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-         * @summary Place order
+         * @summary Place crypto order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -773,7 +773,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Previews an order using the specified account. 
-         * @summary Preview order
+         * @summary Preview crypto order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -843,7 +843,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replaces an order with a new one
+         * @summary Replace crypto order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} brokerageOrderId The Brokerage Order ID of the order to replace.
          * @param {string} userId 
@@ -999,7 +999,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel an order.
+         * @summary Cancel crypto order
          * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1147,7 +1147,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-         * @summary Place order
+         * @summary Place crypto order
          * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1169,7 +1169,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Previews an order using the specified account. 
-         * @summary Preview order
+         * @summary Preview crypto order
          * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1191,7 +1191,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replaces an order with a new one
+         * @summary Replace crypto order
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1232,7 +1232,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel an order.
+         * @summary Cancel crypto order
          * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1322,7 +1322,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-         * @summary Place order
+         * @summary Place crypto order
          * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1332,7 +1332,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Previews an order using the specified account. 
-         * @summary Preview order
+         * @summary Preview crypto order
          * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1342,7 +1342,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replaces an order with a new one
+         * @summary Replace crypto order
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1797,7 +1797,7 @@ export type TradingApiSearchCryptocurrencyPairInstrumentsRequest = {
 export class TradingApiGenerated extends BaseAPI {
     /**
      * Cancels an order in the specified account. 
-     * @summary Cancel an order.
+     * @summary Cancel crypto order
      * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1905,7 +1905,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-     * @summary Place order
+     * @summary Place crypto order
      * @param {TradingApiPlaceSimpleOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1917,7 +1917,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Previews an order using the specified account. 
-     * @summary Preview order
+     * @summary Preview crypto order
      * @param {TradingApiPreviewSimpleOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1929,7 +1929,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-     * @summary Replaces an order with a new one
+     * @summary Replace crypto order
      * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

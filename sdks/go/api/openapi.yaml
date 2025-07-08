@@ -2131,7 +2131,7 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Replaces an order with a new one
+      summary: Replace crypto order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2181,7 +2181,7 @@ paths:
           description: Invalid request
         "500":
           description: Unexpected Error
-      summary: Place order
+      summary: Place crypto order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2235,7 +2235,7 @@ paths:
           description: Invalid request
         "500":
           description: Unexpected Error
-      summary: Cancel an order.
+      summary: Cancel crypto order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2284,7 +2284,7 @@ paths:
           description: Invalid request
         "500":
           description: Unexpected Error
-      summary: Preview order
+      summary: Preview crypto order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true

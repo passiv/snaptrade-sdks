@@ -28,7 +28,7 @@ namespace SnapTrade.Net.Api
     {
         #region Synchronous Operations
         /// <summary>
-        /// Cancel an order.
+        /// Cancel crypto order
         /// </summary>
         /// <remarks>
         /// Cancels an order in the specified account. 
@@ -43,7 +43,7 @@ namespace SnapTrade.Net.Api
         OrderUpdatedResponse CancelOrder(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0);
 
         /// <summary>
-        /// Cancel an order.
+        /// Cancel crypto order
         /// </summary>
         /// <remarks>
         /// Cancels an order in the specified account. 
@@ -287,7 +287,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         ApiResponse<AccountOrderRecord> PlaceOrderWithHttpInfo(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0);
         /// <summary>
-        /// Place order
+        /// Place crypto order
         /// </summary>
         /// <remarks>
         /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -302,7 +302,7 @@ namespace SnapTrade.Net.Api
         OrderUpdatedResponse PlaceSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
 
         /// <summary>
-        /// Place order
+        /// Place crypto order
         /// </summary>
         /// <remarks>
         /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -316,7 +316,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of OrderUpdatedResponse</returns>
         ApiResponse<OrderUpdatedResponse> PlaceSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -331,7 +331,7 @@ namespace SnapTrade.Net.Api
         SimpleOrderPreview PreviewSimpleOrder(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
 
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -345,7 +345,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of SimpleOrderPreview</returns>
         ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace crypto order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -361,7 +361,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
 
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace crypto order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -416,7 +416,7 @@ namespace SnapTrade.Net.Api
     {
         #region Asynchronous Operations
         /// <summary>
-        /// Cancel an order.
+        /// Cancel crypto order
         /// </summary>
         /// <remarks>
         /// Cancels an order in the specified account. 
@@ -432,7 +432,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<OrderUpdatedResponse> CancelOrderAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Cancel an order.
+        /// Cancel crypto order
         /// </summary>
         /// <remarks>
         /// Cancels an order in the specified account. 
@@ -693,7 +693,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> PlaceOrderWithHttpInfoAsync(string tradeId, string userId, string userSecret, ValidatedTradeBody validatedTradeBody = default(ValidatedTradeBody), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place order
+        /// Place crypto order
         /// </summary>
         /// <remarks>
         /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -709,7 +709,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<OrderUpdatedResponse> PlaceSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place order
+        /// Place crypto order
         /// </summary>
         /// <remarks>
         /// Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
@@ -724,7 +724,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (OrderUpdatedResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<OrderUpdatedResponse>> PlaceSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -740,7 +740,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<SimpleOrderPreview> PreviewSimpleOrderAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Preview order
+        /// Preview crypto order
         /// </summary>
         /// <remarks>
         /// Previews an order using the specified account. 
@@ -755,7 +755,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
         System.Threading.Tasks.Task<ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace crypto order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -772,7 +772,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Replaces an order with a new one
+        /// Replace crypto order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -941,7 +941,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel crypto order Cancels an order in the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -957,7 +957,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel crypto order Cancels an order in the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1053,7 +1053,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel crypto order Cancels an order in the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1070,7 +1070,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Cancel an order. Cancels an order in the specified account. 
+        /// Cancel crypto order Cancels an order in the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2969,7 +2969,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -2985,7 +2985,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3082,7 +3082,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3099,7 +3099,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+        /// Place crypto order Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3199,7 +3199,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Preview order Previews an order using the specified account. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3215,7 +3215,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Preview order Previews an order using the specified account. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3312,7 +3312,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Preview order Previews an order using the specified account. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3329,7 +3329,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Preview order Previews an order using the specified account. 
+        /// Preview crypto order Previews an order using the specified account. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3429,7 +3429,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3446,7 +3446,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3551,7 +3551,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3569,7 +3569,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replaces an order with a new one Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>

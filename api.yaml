@@ -1771,7 +1771,7 @@ paths:
     patch:
       tags:
         - Trading
-      summary: Replaces an order with a new one
+      summary: Replace crypto order
       description: |
         Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
         the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
@@ -1913,7 +1913,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place order
+      summary: Place crypto order
       description: |
         Places an order in the specified account.
         This endpoint does not compute the impact to the account balance from the order before submitting the order.
@@ -1955,7 +1955,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Cancel an order.
+      summary: Cancel crypto order
       description: |
         Cancels an order in the specified account.
       operationId: Trading_cancelOrder
@@ -1999,7 +1999,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Preview order
+      summary: Preview crypto order
       description: |
         Previews an order using the specified account.
       operationId: Trading_previewSimpleOrder

@@ -38,7 +38,7 @@ func (r TradingApiCancelOrderRequest) Execute() (*OrderUpdatedResponse, *http.Re
 }
 
 /*
-CancelOrder Cancel an order.
+CancelOrder Cancel crypto order
 
 Cancels an order in the specified account.
 
@@ -1683,7 +1683,7 @@ func (r TradingApiPlaceSimpleOrderRequest) Execute() (*OrderUpdatedResponse, *ht
 }
 
 /*
-PlaceSimpleOrder Place order
+PlaceSimpleOrder Place crypto order
 
 Places an order in the specified account.
 This endpoint does not compute the impact to the account balance from the order before submitting the order.
@@ -1862,7 +1862,7 @@ func (r TradingApiPreviewSimpleOrderRequest) Execute() (*SimpleOrderPreview, *ht
 }
 
 /*
-PreviewSimpleOrder Preview order
+PreviewSimpleOrder Preview crypto order
 
 Previews an order using the specified account.
 
@@ -2041,7 +2041,7 @@ func (r TradingApiReplaceOrderRequest) Execute() (*AccountOrderRecord, *http.Res
 }
 
 /*
-ReplaceOrder Replaces an order with a new one
+ReplaceOrder Replace crypto order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
 the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one

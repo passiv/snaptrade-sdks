@@ -28,7 +28,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for cancel_order
-  # Cancel an order.
+  # Cancel crypto order
   # Cancels an order in the specified account. 
   # @param user_id 
   # @param user_secret 
@@ -162,7 +162,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_simple_order
-  # Place order
+  # Place crypto order
   # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
   # @param user_id 
   # @param user_secret 
@@ -177,7 +177,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for preview_simple_order
-  # Preview order
+  # Preview crypto order
   # Previews an order using the specified account. 
   # @param user_id 
   # @param user_secret 
@@ -192,7 +192,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for replace_order
-  # Replaces an order with a new one
+  # Replace crypto order
   # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
   # @param account_id The ID of the account to execute the trade on.
   # @param brokerage_order_id The Brokerage Order ID of the order to replace.
