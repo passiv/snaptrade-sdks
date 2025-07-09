@@ -34,15 +34,15 @@ from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccou
 from snaptrade_client.apis.paths.trade_impact import TradeImpact
 from snaptrade_client.apis.paths.trade_trade_id import TradeTradeId
 from snaptrade_client.apis.paths.trade_place import TradePlace
-from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_bracket import AccountsAccountIdTradingBracket
-from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import AccountsAccountIdTradingSimpleBrokerageOrderIdReplace
-from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
-from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel import AccountsAccountIdTradingSimpleBrokerageOrderIdCancel
-from snaptrade_client.apis.paths.accounts_account_id_trading_simple_preview import AccountsAccountIdTradingSimplePreview
-from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
-from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
+from snaptrade_client.apis.paths.accounts_account_id_orders_cancel import AccountsAccountIdOrdersCancel
 from snaptrade_client.apis.paths.accounts_account_id_trading_options import AccountsAccountIdTradingOptions
+from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_preview import AccountsAccountIdTradingSimplePreview
+from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple import AccountsAccountIdTradingSimple
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_replace import AccountsAccountIdTradingSimpleBrokerageOrderIdReplace
+from snaptrade_client.apis.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel import AccountsAccountIdTradingSimpleBrokerageOrderIdCancel
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -91,15 +91,15 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -149,15 +149,15 @@ path_to_api = PathToApi(
         PathValues.TRADE_IMPACT: TradeImpact,
         PathValues.TRADE_TRADE_ID: TradeTradeId,
         PathValues.TRADE_PLACE: TradePlace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_BRACKET: AccountsAccountIdTradingBracket,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_CANCEL: AccountsAccountIdOrdersCancel,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_PREVIEW: AccountsAccountIdTradingSimplePreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE: AccountsAccountIdTradingSimple,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_REPLACE: AccountsAccountIdTradingSimpleBrokerageOrderIdReplace,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_SIMPLE_BROKERAGE_ORDER_ID_CANCEL: AccountsAccountIdTradingSimpleBrokerageOrderIdCancel,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,

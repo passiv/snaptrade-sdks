@@ -868,7 +868,7 @@ paths:
     get:
       tags:
         - Trading
-      summary: Get symbol quotes
+      summary: Get equity symbol quotes
       description: Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
       operationId: Trading_getUserAccountQuotes
       parameters:
@@ -915,7 +915,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Cancel order
+      summary: Cancel equity order
       description: |
         Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
@@ -1676,7 +1676,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place order
+      summary: Place equity order
       description: |
         Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 
@@ -1722,7 +1722,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place a Bracket Order
+      summary: Place bracket equity order
       description: |
         Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
         use. Only supported on certain brokerages
@@ -1827,7 +1827,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Check order impact
+      summary: Check equity order impact
       description: Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
       operationId: Trading_getOrderImpact
       parameters:
@@ -1868,7 +1868,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place checked order
+      summary: Place checked equity order
       description: |
         Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
@@ -2040,7 +2040,7 @@ paths:
     get:
       tags:
         - Trading
-      summary: Search cryptocurrency pairs instruments
+      summary: Get crypto pairs
       description: |
         Searches cryptocurrency pairs instruments accessible to the specified account.
       operationId: Trading_searchCryptocurrencyPairInstruments
@@ -2096,7 +2096,7 @@ paths:
     get:
       tags:
         - Trading
-      summary: Get cryptocurrency pair quote
+      summary: Get crypto pair quote
       description: |
         Gets a quote for the specified account.
       operationId: Trading_getCryptocurrencyPairQuote
@@ -2142,7 +2142,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place multi-leg option order
+      summary: Place option order
       description: |
         Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
       operationId: Trading_placeMlegOrder

@@ -153,7 +153,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel order
+         * @summary Cancel equity order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -223,7 +223,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get cryptocurrency pair quote
+         * @summary Get crypto pair quote
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -289,7 +289,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
-         * @summary Check order impact
+         * @summary Check equity order impact
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeForm} manualTradeForm 
@@ -355,7 +355,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
-         * @summary Get symbol quotes
+         * @summary Get equity symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} symbols List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
@@ -429,7 +429,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place a Bracket Order
+         * @summary Place bracket equity order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -499,7 +499,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place order
+         * @summary Place equity order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {ManualTradeFormWithOptions} manualTradeFormWithOptions 
@@ -565,7 +565,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
-         * @summary Place multi-leg option order
+         * @summary Place option order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -635,7 +635,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place checked order
+         * @summary Place checked equity order
          * @param {string} tradeId Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
          * @param {string} userId 
          * @param {string} userSecret 
@@ -917,7 +917,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Searches cryptocurrency pairs instruments accessible to the specified account. 
-         * @summary Search cryptocurrency pairs instruments
+         * @summary Get crypto pairs
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
@@ -1010,7 +1010,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel order
+         * @summary Cancel equity order
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1024,7 +1024,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get cryptocurrency pair quote
+         * @summary Get crypto pair quote
          * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1035,7 +1035,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
-         * @summary Check order impact
+         * @summary Check equity order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1057,7 +1057,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
-         * @summary Get symbol quotes
+         * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1068,7 +1068,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place a Bracket Order
+         * @summary Place bracket equity order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1091,7 +1091,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place order
+         * @summary Place equity order
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1114,7 +1114,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
-         * @summary Place multi-leg option order
+         * @summary Place option order
          * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1133,7 +1133,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place checked order
+         * @summary Place checked equity order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1211,7 +1211,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Searches cryptocurrency pairs instruments accessible to the specified account. 
-         * @summary Search cryptocurrency pairs instruments
+         * @summary Get crypto pairs
          * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1242,7 +1242,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-         * @summary Cancel order
+         * @summary Cancel equity order
          * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1252,7 +1252,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Gets a quote for the specified account. 
-         * @summary Get cryptocurrency pair quote
+         * @summary Get crypto pair quote
          * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1262,7 +1262,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
-         * @summary Check order impact
+         * @summary Check equity order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1272,7 +1272,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
-         * @summary Get symbol quotes
+         * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1282,7 +1282,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place a Bracket Order
+         * @summary Place bracket equity order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1292,7 +1292,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place order
+         * @summary Place equity order
          * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1302,7 +1302,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
-         * @summary Place multi-leg option order
+         * @summary Place option order
          * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1312,7 +1312,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-         * @summary Place checked order
+         * @summary Place checked equity order
          * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1352,7 +1352,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Searches cryptocurrency pairs instruments accessible to the specified account. 
-         * @summary Search cryptocurrency pairs instruments
+         * @summary Get crypto pairs
          * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1809,7 +1809,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
-     * @summary Cancel order
+     * @summary Cancel equity order
      * @param {TradingApiCancelUserAccountOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1821,7 +1821,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Gets a quote for the specified account. 
-     * @summary Get cryptocurrency pair quote
+     * @summary Get crypto pair quote
      * @param {TradingApiGetCryptocurrencyPairQuoteRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1833,7 +1833,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
-     * @summary Check order impact
+     * @summary Check equity order impact
      * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1845,7 +1845,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
-     * @summary Get symbol quotes
+     * @summary Get equity symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1857,7 +1857,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-     * @summary Place a Bracket Order
+     * @summary Place bracket equity order
      * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1869,7 +1869,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-     * @summary Place order
+     * @summary Place equity order
      * @param {TradingApiPlaceForceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1881,7 +1881,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
-     * @summary Place multi-leg option order
+     * @summary Place option order
      * @param {TradingApiPlaceMlegOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1893,7 +1893,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It\'s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
-     * @summary Place checked order
+     * @summary Place checked equity order
      * @param {TradingApiPlaceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1941,7 +1941,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Searches cryptocurrency pairs instruments accessible to the specified account. 
-     * @summary Search cryptocurrency pairs instruments
+     * @summary Get crypto pairs
      * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

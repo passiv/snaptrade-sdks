@@ -43,7 +43,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for cancel_user_account_order
-  # Cancel order
+  # Cancel equity order
   # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
   # @param user_id 
   # @param user_secret 
@@ -58,7 +58,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for get_cryptocurrency_pair_quote
-  # Get cryptocurrency pair quote
+  # Get crypto pair quote
   # Gets a quote for the specified account. 
   # @param user_id 
   # @param user_secret 
@@ -73,7 +73,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for get_order_impact
-  # Check order impact
+  # Check equity order impact
   # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
   # @param user_id 
   # @param user_secret 
@@ -87,7 +87,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for get_user_account_quotes
-  # Get symbol quotes
+  # Get equity symbol quotes
   # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
   # @param user_id 
   # @param user_secret 
@@ -103,7 +103,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_bracket_order
-  # Place a Bracket Order
+  # Place bracket equity order
   # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
   # @param account_id The ID of the account to execute the trade on.
   # @param user_id 
@@ -118,7 +118,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_force_order
-  # Place order
+  # Place equity order
   # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
   # @param user_id 
   # @param user_secret 
@@ -132,7 +132,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_mleg_order
-  # Place multi-leg option order
+  # Place option order
   # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
   # @param user_id 
   # @param user_secret 
@@ -147,7 +147,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for place_order
-  # Place checked order
+  # Place checked equity order
   # Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
   # @param trade_id Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
   # @param user_id 
@@ -208,7 +208,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for search_cryptocurrency_pair_instruments
-  # Search cryptocurrency pairs instruments
+  # Get crypto pairs
   # Searches cryptocurrency pairs instruments accessible to the specified account. 
   # @param user_id 
   # @param user_secret 

@@ -128,7 +128,7 @@ module SnapTrade
     end
 
 
-    # Cancel order
+    # Cancel equity order
     #
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
@@ -146,7 +146,7 @@ module SnapTrade
       data
     end
 
-    # Cancel order
+    # Cancel equity order
     #
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
@@ -163,7 +163,7 @@ module SnapTrade
       cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
     end
 
-    # Cancel order
+    # Cancel equity order
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -176,7 +176,7 @@ module SnapTrade
       data
     end
 
-    # Cancel order
+    # Cancel equity order
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -252,7 +252,7 @@ module SnapTrade
     end
 
 
-    # Get cryptocurrency pair quote
+    # Get crypto pair quote
     #
     # Gets a quote for the specified account.
     #
@@ -266,7 +266,7 @@ module SnapTrade
       data
     end
 
-    # Get cryptocurrency pair quote
+    # Get crypto pair quote
     #
     # Gets a quote for the specified account.
     #
@@ -279,7 +279,7 @@ module SnapTrade
       get_cryptocurrency_pair_quote_with_http_info_impl(user_id, user_secret, account_id, instrument_symbol, extra)
     end
 
-    # Get cryptocurrency pair quote
+    # Get crypto pair quote
     # Gets a quote for the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -292,7 +292,7 @@ module SnapTrade
       data
     end
 
-    # Get cryptocurrency pair quote
+    # Get crypto pair quote
     # Gets a quote for the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -363,7 +363,7 @@ module SnapTrade
     end
 
 
-    # Check order impact
+    # Check equity order impact
     #
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
@@ -396,7 +396,7 @@ module SnapTrade
       data
     end
 
-    # Check order impact
+    # Check equity order impact
     #
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     #
@@ -428,7 +428,7 @@ module SnapTrade
       get_order_impact_with_http_info_impl(user_id, user_secret, manual_trade_form, extra)
     end
 
-    # Check order impact
+    # Check equity order impact
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -440,7 +440,7 @@ module SnapTrade
       data
     end
 
-    # Check order impact
+    # Check equity order impact
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -511,7 +511,7 @@ module SnapTrade
     end
 
 
-    # Get symbol quotes
+    # Get equity symbol quotes
     #
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     #
@@ -527,7 +527,7 @@ module SnapTrade
       data
     end
 
-    # Get symbol quotes
+    # Get equity symbol quotes
     #
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     #
@@ -542,7 +542,7 @@ module SnapTrade
       get_user_account_quotes_with_http_info_impl(user_id, user_secret, symbols, account_id, extra)
     end
 
-    # Get symbol quotes
+    # Get equity symbol quotes
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -556,7 +556,7 @@ module SnapTrade
       data
     end
 
-    # Get symbol quotes
+    # Get equity symbol quotes
     # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -630,7 +630,7 @@ module SnapTrade
     end
 
 
-    # Place a Bracket Order
+    # Place bracket equity order
     #
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
@@ -667,7 +667,7 @@ module SnapTrade
       data
     end
 
-    # Place a Bracket Order
+    # Place bracket equity order
     #
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
@@ -703,7 +703,7 @@ module SnapTrade
       place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
     end
 
-    # Place a Bracket Order
+    # Place bracket equity order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
@@ -716,7 +716,7 @@ module SnapTrade
       data
     end
 
-    # Place a Bracket Order
+    # Place bracket equity order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
@@ -792,7 +792,7 @@ module SnapTrade
     end
 
 
-    # Place order
+    # Place equity order
     #
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
     # 
@@ -831,7 +831,7 @@ module SnapTrade
       data
     end
 
-    # Place order
+    # Place equity order
     #
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
     # 
@@ -869,7 +869,7 @@ module SnapTrade
       place_force_order_with_http_info_impl(user_id, user_secret, manual_trade_form_with_options, extra)
     end
 
-    # Place order
+    # Place equity order
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -881,7 +881,7 @@ module SnapTrade
       data
     end
 
-    # Place order
+    # Place equity order
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -952,7 +952,7 @@ module SnapTrade
     end
 
 
-    # Place multi-leg option order
+    # Place option order
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
@@ -980,7 +980,7 @@ module SnapTrade
       data
     end
 
-    # Place multi-leg option order
+    # Place option order
     #
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
     #
@@ -1007,7 +1007,7 @@ module SnapTrade
       place_mleg_order_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
     end
 
-    # Place multi-leg option order
+    # Place option order
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1020,7 +1020,7 @@ module SnapTrade
       data
     end
 
-    # Place multi-leg option order
+    # Place option order
     # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1096,7 +1096,7 @@ module SnapTrade
     end
 
 
-    # Place checked order
+    # Place checked equity order
     #
     # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
     # 
@@ -1116,7 +1116,7 @@ module SnapTrade
       data
     end
 
-    # Place checked order
+    # Place checked equity order
     #
     # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
     # 
@@ -1135,7 +1135,7 @@ module SnapTrade
       place_order_with_http_info_impl(trade_id, user_id, user_secret, extra)
     end
 
-    # Place checked order
+    # Place checked equity order
     # Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It's recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
@@ -1148,7 +1148,7 @@ module SnapTrade
       data
     end
 
-    # Place checked order
+    # Place checked equity order
     # Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
     # @param trade_id [String] Obtained from calling the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact)
     # @param user_id [String] 
@@ -1694,7 +1694,7 @@ module SnapTrade
     end
 
 
-    # Search cryptocurrency pairs instruments
+    # Get crypto pairs
     #
     # Searches cryptocurrency pairs instruments accessible to the specified account.
     #
@@ -1711,7 +1711,7 @@ module SnapTrade
       data
     end
 
-    # Search cryptocurrency pairs instruments
+    # Get crypto pairs
     #
     # Searches cryptocurrency pairs instruments accessible to the specified account.
     #
@@ -1727,7 +1727,7 @@ module SnapTrade
       search_cryptocurrency_pair_instruments_with_http_info_impl(user_id, user_secret, account_id, extra)
     end
 
-    # Search cryptocurrency pairs instruments
+    # Get crypto pairs
     # Searches cryptocurrency pairs instruments accessible to the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1741,7 +1741,7 @@ module SnapTrade
       data
     end
 
-    # Search cryptocurrency pairs instruments
+    # Get crypto pairs
     # Searches cryptocurrency pairs instruments accessible to the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 

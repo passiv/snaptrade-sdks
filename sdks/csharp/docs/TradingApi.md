@@ -5,18 +5,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order |
-| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
-| [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote |
-| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact |
-| [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
-| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place order |
-| [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order |
-| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order |
+| [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
+| [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact |
+| [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
+| [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order |
+| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order |
+| [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order |
+| [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order |
 | [**PlaceSimpleOrder**](TradingApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place crypto order |
 | [**PreviewSimpleOrder**](TradingApi.md#previewsimpleorder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview crypto order |
 | [**ReplaceOrder**](TradingApi.md#replaceorder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order |
-| [**SearchCryptocurrencyPairInstruments**](TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments |
+| [**SearchCryptocurrencyPairInstruments**](TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
 # **CancelOrder**
@@ -154,7 +154,7 @@ namespace Example
             
             try
             {
-                // Cancel order
+                // Cancel equity order
                 AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
                 Console.WriteLine(result);
             }
@@ -181,7 +181,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Cancel order
+    // Cancel equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -252,7 +252,7 @@ namespace Example
             
             try
             {
-                // Get cryptocurrency pair quote
+                // Get crypto pair quote
                 CryptocurrencyPairQuote result = client.Trading.GetCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol);
                 Console.WriteLine(result);
             }
@@ -279,7 +279,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get cryptocurrency pair quote
+    // Get crypto pair quote
     ApiResponse<CryptocurrencyPairQuote> response = apiInstance.GetCryptocurrencyPairQuoteWithHttpInfo(userId, userSecret, accountId, instrumentSymbol);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -369,7 +369,7 @@ namespace Example
             
             try
             {
-                // Check order impact
+                // Check equity order impact
                 ManualTradeAndImpact result = client.Trading.GetOrderImpact(userId, userSecret, manualTradeForm);
                 Console.WriteLine(result);
             }
@@ -396,7 +396,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Check order impact
+    // Check equity order impact
     ApiResponse<ManualTradeAndImpact> response = apiInstance.GetOrderImpactWithHttpInfo(userId, userSecret, manualTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -468,7 +468,7 @@ namespace Example
             
             try
             {
-                // Get symbol quotes
+                // Get equity symbol quotes
                 List<SymbolsQuotesInner> result = client.Trading.GetUserAccountQuotes(userId, userSecret, symbols, accountId, useTicker);
                 Console.WriteLine(result);
             }
@@ -495,7 +495,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get symbol quotes
+    // Get equity symbol quotes
     ApiResponse<List<SymbolsQuotesInner>> response = apiInstance.GetUserAccountQuotesWithHttpInfo(userId, userSecret, symbols, accountId, useTicker);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -588,7 +588,7 @@ namespace Example
             
             try
             {
-                // Place a Bracket Order
+                // Place bracket equity order
                 AccountOrderRecord result = client.Trading.PlaceBracketOrder(accountId, userId, userSecret, manualTradeFormBracket);
                 Console.WriteLine(result);
             }
@@ -615,7 +615,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place a Bracket Order
+    // Place bracket equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceBracketOrderWithHttpInfo(accountId, userId, userSecret, manualTradeFormBracket);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -708,7 +708,7 @@ namespace Example
             
             try
             {
-                // Place order
+                // Place equity order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeFormWithOptions);
                 Console.WriteLine(result);
             }
@@ -735,7 +735,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place order
+    // Place equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -820,7 +820,7 @@ namespace Example
             
             try
             {
-                // Place multi-leg option order
+                // Place option order
                 MlegOrderResponse result = client.Trading.PlaceMlegOrder(userId, userSecret, accountId, mlegTradeForm);
                 Console.WriteLine(result);
             }
@@ -847,7 +847,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place multi-leg option order
+    // Place option order
     ApiResponse<MlegOrderResponse> response = apiInstance.PlaceMlegOrderWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -922,7 +922,7 @@ namespace Example
             
             try
             {
-                // Place checked order
+                // Place checked equity order
                 AccountOrderRecord result = client.Trading.PlaceOrder(tradeId, userId, userSecret, validatedTradeBody);
                 Console.WriteLine(result);
             }
@@ -949,7 +949,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place checked order
+    // Place checked equity order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceOrderWithHttpInfo(tradeId, userId, userSecret, validatedTradeBody);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
@@ -1374,7 +1374,7 @@ namespace Example
             
             try
             {
-                // Search cryptocurrency pairs instruments
+                // Get crypto pairs
                 TradingSearchCryptocurrencyPairInstruments200Response result = client.Trading.SearchCryptocurrencyPairInstruments(userId, userSecret, accountId, _base, quote);
                 Console.WriteLine(result);
             }
@@ -1401,7 +1401,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Search cryptocurrency pairs instruments
+    // Get crypto pairs
     ApiResponse<TradingSearchCryptocurrencyPairInstruments200Response> response = apiInstance.SearchCryptocurrencyPairInstrumentsWithHttpInfo(userId, userSecret, accountId, _base, quote);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

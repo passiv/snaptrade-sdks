@@ -5,18 +5,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order |
-| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order |
-| [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote |
-| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check order impact |
-| [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes |
-| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order |
-| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
-| [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order |
-| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked order |
+| [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
+| [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
+| [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
+| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order |
+| [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place equity order |
+| [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
+| [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked equity order |
 | [**placeSimpleOrder**](TradingApi.md#placeSimpleOrder) | **POST** /accounts/{accountId}/trading/simple | Place crypto order |
 | [**previewSimpleOrder**](TradingApi.md#previewSimpleOrder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview crypto order |
 | [**replaceOrder**](TradingApi.md#replaceOrder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order |
-| [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments |
+| [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
 <a name="cancelOrder"></a>
@@ -124,7 +124,7 @@ public class Example {
 # **cancelUserAccountOrder**
 > AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
 
-Cancel order
+Cancel equity order
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
 
@@ -246,7 +246,7 @@ public class Example {
 # **getCryptocurrencyPairQuote**
 > CryptocurrencyPairQuote getCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol).execute();
 
-Get cryptocurrency pair quote
+Get crypto pair quote
 
 Gets a quote for the specified account. 
 
@@ -349,7 +349,7 @@ public class Example {
 # **getOrderImpact**
 > ManualTradeAndImpact getOrderImpact(userId, userSecret, manualTradeForm).execute();
 
-Check order impact
+Check equity order impact
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.
 
@@ -465,7 +465,7 @@ public class Example {
 # **getUserAccountQuotes**
 > List&lt;SymbolsQuotesInner&gt; getUserAccountQuotes(userId, userSecret, symbols, accountId).useTicker(useTicker).execute();
 
-Get symbol quotes
+Get equity symbol quotes
 
 Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
@@ -567,7 +567,7 @@ public class Example {
 # **placeBracketOrder**
 > AccountOrderRecord placeBracketOrder(accountId, userId, userSecret, manualTradeFormBracket).execute();
 
-Place a Bracket Order
+Place bracket equity order
 
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
 
@@ -705,7 +705,7 @@ public class Example {
 # **placeForceOrder**
 > AccountOrderRecord placeForceOrder(userId, userSecret, manualTradeFormWithOptions).execute();
 
-Place order
+Place equity order
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
 
@@ -845,7 +845,7 @@ public class Example {
 # **placeMlegOrder**
 > MlegOrderResponse placeMlegOrder(userId, userSecret, accountId, mlegTradeForm).execute();
 
-Place multi-leg option order
+Place option order
 
 Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
 
@@ -957,7 +957,7 @@ public class Example {
 # **placeOrder**
 > AccountOrderRecord placeOrder(tradeId, userId, userSecret).validatedTradeBody(validatedTradeBody).execute();
 
-Place checked order
+Place checked equity order
 
 Places the previously checked order with the brokerage. The &#x60;tradeId&#x60; is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
 
@@ -1450,7 +1450,7 @@ public class Example {
 # **searchCryptocurrencyPairInstruments**
 > TradingSearchCryptocurrencyPairInstruments200Response searchCryptocurrencyPairInstruments(userId, userSecret, accountId).base(base).quote(quote).execute();
 
-Search cryptocurrency pairs instruments
+Get crypto pairs
 
 Searches cryptocurrency pairs instruments accessible to the specified account. 
 

@@ -5,18 +5,18 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 Method | Path | Description
 ------------- | ------------- | -------------
 [**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order
-[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel order
-[**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote
-[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check order impact
-[**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get symbol quotes
-[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place a Bracket Order
-[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
-[**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place multi-leg option order
-[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked order
+[**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
+[**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
+[**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
+[**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
+[**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket equity order
+[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
+[**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
+[**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
 [**PlaceSimpleOrder**](TradingApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place crypto order
 [**PreviewSimpleOrder**](TradingApi.md#PreviewSimpleOrder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview crypto order
 [**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order
-[**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments
+[**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 
 
 
@@ -70,7 +70,7 @@ func main() {
 
 ## CancelUserAccountOrder
 
-Cancel order
+Cancel equity order
 
 
 
@@ -142,7 +142,7 @@ func main() {
 
 ## GetCryptocurrencyPairQuote
 
-Get cryptocurrency pair quote
+Get crypto pair quote
 
 
 
@@ -192,7 +192,7 @@ func main() {
 
 ## GetOrderImpact
 
-Check order impact
+Check equity order impact
 
 
 
@@ -255,7 +255,7 @@ func main() {
 
 ## GetUserAccountQuotes
 
-Get symbol quotes
+Get equity symbol quotes
 
 
 
@@ -308,7 +308,7 @@ func main() {
 
 ## PlaceBracketOrder
 
-Place a Bracket Order
+Place bracket equity order
 
 
 
@@ -393,7 +393,7 @@ func main() {
 
 ## PlaceForceOrder
 
-Place order
+Place equity order
 
 
 
@@ -477,7 +477,7 @@ func main() {
 
 ## PlaceMlegOrder
 
-Place multi-leg option order
+Place option order
 
 
 
@@ -536,7 +536,7 @@ func main() {
 
 ## PlaceOrder
 
-Place checked order
+Place checked equity order
 
 
 
@@ -812,7 +812,7 @@ func main() {
 
 ## SearchCryptocurrencyPairInstruments
 
-Search cryptocurrency pairs instruments
+Get crypto pairs
 
 
 
