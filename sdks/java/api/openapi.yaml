@@ -1885,7 +1885,7 @@ paths:
                 $ref: '#/components/schemas/500UnexpectedExceptionResponse'
           description: Unexpected error
           x-do-not-generate: true
-      summary: Get symbol quotes
+      summary: Get equity symbol quotes
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -1940,7 +1940,7 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Check order impact
+      summary: Check equity order impact
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -1995,7 +1995,7 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Place checked order
+      summary: Place checked equity order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -2051,69 +2051,11 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Place order
+      summary: Place equity order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/orders/cancel:
-    post:
-      description: |
-        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-      operationId: Trading_cancelUserAccountOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Order Record of canceled order
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Unable to cancel open order. Please verify status in brokerage
-            account
-          x-do-not-generate: true
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Cancel order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
       x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/trading/bracket:
@@ -2170,11 +2112,345 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Place a Bracket Order
+      summary: Place bracket equity order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/orders/cancel:
+    post:
+      description: |
+        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+      operationId: Trading_cancelUserAccountOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Order Record of canceled order
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Unable to cancel open order. Please verify status in brokerage
+            account
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Cancel equity order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/options:
+    post:
+      description: |
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+      operationId: Trading_placeMlegOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/MlegOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MlegOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place option order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+    get:
+      description: |
+        Searches cryptocurrency pairs instruments accessible to the specified account.
+      operationId: Trading_searchCryptocurrencyPairInstruments
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: base
+        required: false
+        schema:
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
+        style: form
+      - explode: true
+        in: query
+        name: quote
+        required: false
+        schema:
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trading_searchCryptocurrencyPairInstruments_200_response'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Get crypto pairs
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
+      x-accepts: application/json
+  /accounts/{accountId}/trading/simple/preview:
+    post:
+      description: |
+        Previews an order using the specified account.
+      operationId: Trading_previewSimpleOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimpleOrderPreview'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Preview crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
+    get:
+      description: |
+        Gets a quote for the specified account.
+      operationId: Trading_getCryptocurrencyPairQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: false
+        in: path
+        name: instrumentSymbol
+        required: true
+        schema:
+          $ref: '#/components/schemas/CryptocurrencyPairSymbol'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptocurrencyPairQuote'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Get crypto pair quote
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
+      x-accepts: application/json
+  /accounts/{accountId}/trading/simple:
+    post:
+      description: |
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeSimpleOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderUpdatedResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
       x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
@@ -2247,59 +2523,6 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace
       x-content-type: application/json
       x-accepts: application/json
-  /accounts/{accountId}/trading/simple:
-    post:
-      description: |
-        Places an order in the specified account.
-        This endpoint does not compute the impact to the account balance from the order before submitting the order.
-      operationId: Trading_placeSimpleOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderUpdatedResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
-      x-content-type: application/json
-      x-accepts: application/json
   /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
     post:
       description: |
@@ -2355,229 +2578,6 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel
-      x-accepts: application/json
-  /accounts/{accountId}/trading/simple/preview:
-    post:
-      description: |
-        Previews an order using the specified account.
-      operationId: Trading_previewSimpleOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimpleOrderPreview'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Preview crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
-    get:
-      description: |
-        Searches cryptocurrency pairs instruments accessible to the specified account.
-      operationId: Trading_searchCryptocurrencyPairInstruments
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: true
-        in: query
-        name: base
-        required: false
-        schema:
-          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
-        style: form
-      - explode: true
-        in: query
-        name: quote
-        required: false
-        schema:
-          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Trading_searchCryptocurrencyPairInstruments_200_response'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Search cryptocurrency pairs instruments
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
-      x-accepts: application/json
-  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
-    get:
-      description: |
-        Gets a quote for the specified account.
-      operationId: Trading_getCryptocurrencyPairQuote
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: false
-        in: path
-        name: instrumentSymbol
-        required: true
-        schema:
-          $ref: '#/components/schemas/CryptocurrencyPairSymbol'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CryptocurrencyPairQuote'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Get cryptocurrency pair quote
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
-      x-accepts: application/json
-  /accounts/{accountId}/trading/options:
-    post:
-      description: |
-        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
-      operationId: Trading_placeMlegOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/MlegOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MlegOrderResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place multi-leg option order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options
-      x-content-type: application/json
       x-accepts: application/json
   /snapTrade/partners:
     get:
@@ -10854,27 +10854,6 @@ components:
             \ represents the number of contracts to buy or sell. (e.g., 1 contract\
             \ = 100 shares)."
           nullable: true
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        brokerage_order_id:
-          $ref: '#/components/schemas/BrokerageOrderID'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket:
       additionalProperties: true
       properties:
@@ -10935,50 +10914,66 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
       additionalProperties: true
       properties:
-        accountId:
-          $ref: '#/components/schemas/Id'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
-        action:
-          $ref: '#/components/schemas/ActionStrict'
-        order_type:
-          $ref: '#/components/schemas/OrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        price:
-          description: The limit price for `Limit` and `StopLimit` orders.
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
-        symbol:
-          description: The security's trading ticker symbol
-          example: AAPL
-          type: string
-          x-konfig-original-example: AAPL
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
-        stop:
-          description: The price at which a stop order is triggered for `Stop` and
-            `StopLimit` orders.
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
-        units:
-          $ref: '#/components/schemas/UnitsNullable'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
-      - action
-      - brokerageOrderId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        order_type:
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - accountId
+      - legs
       - order_type
       - time_in_force
       - userId
@@ -10986,11 +10981,10 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
-      - accountId
-      - brokerageOrderId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs:
       additionalProperties: true
       properties:
         userId:
@@ -10999,78 +10993,12 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        instrument:
-          $ref: '#/components/schemas/TradingInstrument'
-        side:
-          $ref: '#/components/schemas/ActionStrict'
-        type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          - TAKE_PROFIT_MARKET
-          - TAKE_PROFIT_LIMIT
-          type: string
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
-        amount:
-          description: The amount of the base currency to buy or sell.
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
-        post_only:
-          description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
-        expiration_date:
-          description: The expiration date of the order. Required if the time_in_force
-            is GTD.
-          example: 2024-01-01T00:00:00Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
+        base:
+          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
+        quote:
+          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
       required:
       - accountId
-      - amount
-      - instrument
-      - side
-      - time_in_force
-      - type
       - userId
       - userSecret
       type: object
@@ -11079,29 +11007,8 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
-      required:
-      - accountId
-      - brokerageOrderId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - brokerageOrderId
+      - base
+      - quote
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview:
       additionalProperties: true
       properties:
@@ -11191,31 +11098,6 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        base:
-          $ref: '#/components/schemas/CryptocurrencyBaseSymbol'
-        quote:
-          $ref: '#/components/schemas/CryptocurrencyQuoteSymbol'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - base
-      - quote
     ? konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
     : additionalProperties: true
       properties:
@@ -11239,7 +11121,7 @@ components:
       - userSecret
       - accountId
       - instrumentSymbol
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
       additionalProperties: true
       properties:
         userId:
@@ -11248,38 +11130,78 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        order_type:
-          $ref: '#/components/schemas/MlegOrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
-          example: ""
-          format: decimal
-          nullable: true
+        instrument:
+          $ref: '#/components/schemas/TradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
           type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
         stop_price:
           description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT."
-          example: ""
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
           format: decimal
-          nullable: true
           type: string
-          x-konfig-original-example: ""
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
-        price_effect:
-          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
-        legs:
-          items:
-            $ref: '#/components/schemas/MlegLeg'
-          type: array
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
       required:
       - accountId
-      - legs
-      - order_type
+      - amount
+      - instrument
+      - side
       - time_in_force
+      - type
       - userId
       - userSecret
       type: object
@@ -11288,6 +11210,84 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/Id'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        symbol:
+          description: The security's trading ticker symbol
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
+        units:
+          $ref: '#/components/schemas/UnitsNullable'
+      required:
+      - accountId
+      - action
+      - brokerageOrderId
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - brokerageOrderId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - brokerageOrderId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - brokerageOrderId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}

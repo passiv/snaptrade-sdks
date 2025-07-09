@@ -213,7 +213,7 @@ func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord,
 }
 
 /*
-CancelUserAccountOrder Cancel order
+CancelUserAccountOrder Cancel equity order
 
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
@@ -401,7 +401,7 @@ func (r TradingApiGetCryptocurrencyPairQuoteRequest) Execute() (*CryptocurrencyP
 }
 
 /*
-GetCryptocurrencyPairQuote Get cryptocurrency pair quote
+GetCryptocurrencyPairQuote Get crypto pair quote
 
 Gets a quote for the specified account.
 
@@ -575,7 +575,7 @@ func (r TradingApiGetOrderImpactRequest) Execute() (*ManualTradeAndImpact, *http
 }
 
 /*
-GetOrderImpact Check order impact
+GetOrderImpact Check equity order impact
 
 Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
 
@@ -767,7 +767,7 @@ func (r TradingApiGetUserAccountQuotesRequest) Execute() ([]SymbolsQuotesInner, 
 }
 
 /*
-GetUserAccountQuotes Get symbol quotes
+GetUserAccountQuotes Get equity symbol quotes
 
 Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
 
@@ -943,7 +943,7 @@ func (r TradingApiPlaceBracketOrderRequest) Execute() (*AccountOrderRecord, *htt
 }
 
 /*
-PlaceBracketOrder Place a Bracket Order
+PlaceBracketOrder Place bracket equity order
 
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
 use. Only supported on certain brokerages
@@ -1132,7 +1132,7 @@ func (r TradingApiPlaceForceOrderRequest) Execute() (*AccountOrderRecord, *http.
 }
 
 /*
-PlaceForceOrder Place order
+PlaceForceOrder Place equity order
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 
@@ -1322,7 +1322,7 @@ func (r TradingApiPlaceMlegOrderRequest) Execute() (*MlegOrderResponse, *http.Re
 }
 
 /*
-PlaceMlegOrder Place multi-leg option order
+PlaceMlegOrder Place option order
 
 Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
 
@@ -1505,7 +1505,7 @@ func (r TradingApiPlaceOrderRequest) Execute() (*AccountOrderRecord, *http.Respo
 }
 
 /*
-PlaceOrder Place checked order
+PlaceOrder Place checked equity order
 
 Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
@@ -2246,7 +2246,7 @@ func (r TradingApiSearchCryptocurrencyPairInstrumentsRequest) Execute() (*Tradin
 }
 
 /*
-SearchCryptocurrencyPairInstruments Search cryptocurrency pairs instruments
+SearchCryptocurrencyPairInstruments Get crypto pairs
 
 Searches cryptocurrency pairs instruments accessible to the specified account.
 

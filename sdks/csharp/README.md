@@ -139,18 +139,18 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search account symbols
 *TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order
-*TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel order
-*TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get cryptocurrency pair quote
-*TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check order impact
-*TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get symbol quotes
-*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place a Bracket Order
-*TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place order
-*TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place multi-leg option order
-*TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked order
+*TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order
+*TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
+*TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact
+*TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes
+*TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order
+*TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order
+*TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order
+*TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order
 *TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **POST** /accounts/{accountId}/trading/simple | Place crypto order
 *TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **POST** /accounts/{accountId}/trading/simple/preview | Preview crypto order
 *TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **PATCH** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order
-*TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Search cryptocurrency pairs instruments
+*TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
 

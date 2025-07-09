@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingInstrumentsCryptocurrencyPairs(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingInstrumentsCryptocurrencyPairs unit test stubs
-        Search cryptocurrency pairs instruments
+        Get crypto pairs
     """
 
     def setUp(self):

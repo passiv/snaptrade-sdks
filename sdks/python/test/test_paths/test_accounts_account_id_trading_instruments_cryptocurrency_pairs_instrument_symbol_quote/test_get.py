@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote unit test stubs
-        Get cryptocurrency pair quote
+        Get crypto pair quote
     """
 
     def setUp(self):

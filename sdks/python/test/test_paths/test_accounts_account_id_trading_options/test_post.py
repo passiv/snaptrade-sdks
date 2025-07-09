@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingOptions(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingOptions unit test stubs
-        Place multi-leg option order
+        Place option order
     """
 
     def setUp(self):

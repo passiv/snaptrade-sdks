@@ -219,7 +219,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Get symbol quotes
+        Get equity symbol quotes
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -349,7 +349,7 @@ class BaseApi(api_client.Api):
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Get symbol quotes
+        Get equity symbol quotes
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
