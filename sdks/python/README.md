@@ -137,7 +137,6 @@ deleted_response = snaptrade.authentication.delete_snap_trade_user(
     query_params={"userId": user_id}
 )
 pprint(deleted_response.body)
-
 ```
 
 ## Async<a id="async"></a>
@@ -145,7 +144,6 @@ pprint(deleted_response.body)
 `async` support is available by prepending `a` to any method.
 
 ```python
-
 import asyncio
 from pprint import pprint
 from snaptrade_client import SnapTrade, ApiException
@@ -155,18 +153,21 @@ snaptrade = SnapTrade(
     client_id="YOUR_CLIENT_ID",
 )
 
+
 async def main():
     try:
         # List account activities
-        get_account_activities_response = await snaptrade.account_information.aget_account_activities(
-            account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-            user_id="snaptrade-user-123",
-            user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-            start_date="2022-01-24",
-            end_date="2022-01-24",
-            offset=0,
-            limit=1,
-            type="BUY,SELL,DIVIDEND",
+        get_account_activities_response = (
+            await snaptrade.account_information.aget_account_activities(
+                account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+                user_id="snaptrade-user-123",
+                user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+                start_date="2022-01-24",
+                end_date="2022-01-24",
+                offset=0,
+                limit=1,
+                type="BUY,SELL,DIVIDEND",
+            )
         )
         pprint(get_account_activities_response.body)
         pprint(get_account_activities_response.body["data"])
@@ -175,12 +176,16 @@ async def main():
         pprint(get_account_activities_response.status)
         pprint(get_account_activities_response.round_trip_time)
     except ApiException as e:
-        print("Exception when calling AccountInformationApi.get_account_activities: %s\n" % e)
+        print(
+            "Exception when calling AccountInformationApi.get_account_activities: %s\n"
+            % e
+        )
         pprint(e.body)
         pprint(e.headers)
         pprint(e.status)
         pprint(e.reason)
         pprint(e.round_trip_time)
+
 
 asyncio.run(main())
 ```
@@ -304,10 +309,12 @@ The data returned here is cached. How long the data is cached for varies by brok
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_balance_response = snaptrade.account_information.get_user_account_balance(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+get_user_account_balance_response = (
+    snaptrade.account_information.get_user_account_balance(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
 )
 ```
 
@@ -341,10 +348,12 @@ The data returned here is always cached and refreshed once a day. **If you need 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_details_response = snaptrade.account_information.get_user_account_details(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+get_user_account_details_response = (
+    snaptrade.account_information.get_user_account_details(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
 )
 ```
 
@@ -378,12 +387,14 @@ The data returned here is cached. How long the data is cached for varies by brok
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_orders_response = snaptrade.account_information.get_user_account_orders(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    state="all",
-    days=30,
+get_user_account_orders_response = (
+    snaptrade.account_information.get_user_account_orders(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        state="all",
+        days=30,
+    )
 )
 ```
 
@@ -425,10 +436,12 @@ The data returned here is cached. How long the data is cached for varies by brok
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_positions_response = snaptrade.account_information.get_user_account_positions(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+get_user_account_positions_response = (
+    snaptrade.account_information.get_user_account_positions(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
 )
 ```
 
@@ -464,11 +477,13 @@ By default only returns executed orders, but that can be changed by setting *onl
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_recent_orders_response = snaptrade.account_information.get_user_account_recent_orders(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    only_executed=True,
+get_user_account_recent_orders_response = (
+    snaptrade.account_information.get_user_account_recent_orders(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        only_executed=True,
+    )
 )
 ```
 
@@ -504,10 +519,12 @@ Returns a list of rate of return percents for a given account. Will include time
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_user_account_return_rates_response = snaptrade.account_information.get_user_account_return_rates(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+get_user_account_return_rates_response = (
+    snaptrade.account_information.get_user_account_return_rates(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    )
 )
 ```
 
@@ -816,9 +833,11 @@ Rotates the secret for a SnapTrade user. You might use this if `userSecret` is c
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-reset_snap_trade_user_secret_response = snaptrade.authentication.reset_snap_trade_user_secret(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+reset_snap_trade_user_secret_response = (
+    snaptrade.authentication.reset_snap_trade_user_secret(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
 )
 ```
 
@@ -854,10 +873,12 @@ Returns a single connection for the specified ID.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-detail_brokerage_authorization_response = snaptrade.connections.detail_brokerage_authorization(
-    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+detail_brokerage_authorization_response = (
+    snaptrade.connections.detail_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
 )
 ```
 
@@ -892,10 +913,12 @@ This endpoint is available on test keys. If you would like it enabled on product
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-disable_brokerage_authorization_response = snaptrade.connections.disable_brokerage_authorization(
-    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+disable_brokerage_authorization_response = (
+    snaptrade.connections.disable_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
 )
 ```
 
@@ -931,9 +954,11 @@ SnapTrade performs de-duping on connections for a given user. If the user has an
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_brokerage_authorizations_response = snaptrade.connections.list_brokerage_authorizations(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+list_brokerage_authorizations_response = (
+    snaptrade.connections.list_brokerage_authorizations(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
 )
 ```
 
@@ -966,10 +991,12 @@ This endpoint will also trigger a transaction sync for the past day if one has n
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-refresh_brokerage_authorization_response = snaptrade.connections.refresh_brokerage_authorization(
-    authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+refresh_brokerage_authorization_response = (
+    snaptrade.connections.refresh_brokerage_authorization(
+        authorization_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
 )
 ```
 
@@ -1327,8 +1354,10 @@ Returns an Exchange Rate Pair object for the specified Currency Pair.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_currency_exchange_rate_pair_response = snaptrade.reference_data.get_currency_exchange_rate_pair(
-    currency_pair="currencyPair_example",
+get_currency_exchange_rate_pair_response = (
+    snaptrade.reference_data.get_currency_exchange_rate_pair(
+        currency_pair="currencyPair_example",
+    )
 )
 ```
 
@@ -1488,8 +1517,10 @@ Returns a list of all defined Brokerage authorization Type objects.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_all_brokerage_authorization_type_response = snaptrade.reference_data.list_all_brokerage_authorization_type(
-    brokerage="QUESTRADE,ALPACA",
+list_all_brokerage_authorization_type_response = (
+    snaptrade.reference_data.list_all_brokerage_authorization_type(
+        brokerage="QUESTRADE,ALPACA",
+    )
 )
 ```
 
@@ -1562,7 +1593,9 @@ Returns a list of all Exchange Rate Pairs for all supported Currencies.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-list_all_currencies_rates_response = snaptrade.reference_data.list_all_currencies_rates()
+list_all_currencies_rates_response = (
+    snaptrade.reference_data.list_all_currencies_rates()
+)
 ```
 
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1587,11 +1620,13 @@ The search results are further limited to the symbols supported by the brokerage
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-symbol_search_user_account_response = snaptrade.reference_data.symbol_search_user_account(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    substring="AAPL",
+symbol_search_user_account_response = (
+    snaptrade.reference_data.symbol_search_user_account(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        substring="AAPL",
+    )
 )
 ```
 
@@ -1711,11 +1746,13 @@ Gets a quote for the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-get_cryptocurrency_pair_quote_response = snaptrade.trading.get_cryptocurrency_pair_quote(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    instrument_symbol="BTC-USD",
+get_cryptocurrency_pair_quote_response = (
+    snaptrade.trading.get_cryptocurrency_pair_quote(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        instrument_symbol="BTC-USD",
+    )
 )
 ```
 
@@ -2390,12 +2427,14 @@ Searches cryptocurrency pairs instruments accessible to the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-search_cryptocurrency_pair_instruments_response = snaptrade.trading.search_cryptocurrency_pair_instruments(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    base="BTC",
-    quote="USD",
+search_cryptocurrency_pair_instruments_response = (
+    snaptrade.trading.search_cryptocurrency_pair_instruments(
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        base="BTC",
+        quote="USD",
+    )
 )
 ```
 

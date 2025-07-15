@@ -118,7 +118,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked equity order
 *TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place crypto order
 *TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview crypto order
-*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order
+*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace equity order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe

@@ -15,7 +15,7 @@ Method | Path | Description
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
 [**PlaceSimpleOrder**](TradingApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place crypto order
 [**PreviewSimpleOrder**](TradingApi.md#PreviewSimpleOrder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview crypto order
-[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace crypto order
+[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace equity order
 [**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 
 
@@ -731,7 +731,7 @@ func main() {
 
 ## ReplaceOrder
 
-Replace crypto order
+Replace equity order
 
 
 

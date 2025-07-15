@@ -345,7 +345,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of SimpleOrderPreview</returns>
         ApiResponse<SimpleOrderPreview> PreviewSimpleOrderWithHttpInfo(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0);
         /// <summary>
-        /// Replace crypto order
+        /// Replace equity order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -361,7 +361,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord ReplaceOrder(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0);
 
         /// <summary>
-        /// Replace crypto order
+        /// Replace equity order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -755,7 +755,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (SimpleOrderPreview)</returns>
         System.Threading.Tasks.Task<ApiResponse<SimpleOrderPreview>> PreviewSimpleOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, SimpleOrderForm simpleOrderForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Replace crypto order
+        /// Replace equity order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -772,7 +772,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> ReplaceOrderAsync(string accountId, string brokerageOrderId, string userId, string userSecret, ManualTradeReplaceForm manualTradeReplaceForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Replace crypto order
+        /// Replace equity order
         /// </summary>
         /// <remarks>
         /// Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
@@ -3429,7 +3429,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace equity order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3446,7 +3446,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace equity order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3551,7 +3551,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace equity order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -3569,7 +3569,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Replace crypto order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
+        /// Replace equity order Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>

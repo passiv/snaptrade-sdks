@@ -1771,7 +1771,7 @@ paths:
     patch:
       tags:
         - Trading
-      summary: Replace crypto order
+      summary: Replace equity order
       description: |
         Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
         the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
