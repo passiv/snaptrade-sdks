@@ -843,7 +843,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replace crypto order
+         * @summary Replace equity order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} brokerageOrderId The Brokerage Order ID of the order to replace.
          * @param {string} userId 
@@ -1191,7 +1191,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replace crypto order
+         * @summary Replace equity order
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1342,7 +1342,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-         * @summary Replace crypto order
+         * @summary Replace equity order
          * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1929,7 +1929,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order\'s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
-     * @summary Replace crypto order
+     * @summary Replace equity order
      * @param {TradingApiReplaceOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

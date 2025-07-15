@@ -2041,7 +2041,7 @@ func (r TradingApiReplaceOrderRequest) Execute() (*AccountOrderRecord, *http.Res
 }
 
 /*
-ReplaceOrder Replace crypto order
+ReplaceOrder Replace equity order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
 the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one

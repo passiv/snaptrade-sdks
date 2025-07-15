@@ -1534,7 +1534,7 @@ module SnapTrade
     end
 
 
-    # Replace crypto order
+    # Replace equity order
     #
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
     # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
@@ -1567,7 +1567,7 @@ module SnapTrade
       data
     end
 
-    # Replace crypto order
+    # Replace equity order
     #
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
     # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
@@ -1599,7 +1599,7 @@ module SnapTrade
       replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, extra)
     end
 
-    # Replace crypto order
+    # Replace equity order
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
@@ -1613,7 +1613,7 @@ module SnapTrade
       data
     end
 
-    # Replace crypto order
+    # Replace equity order
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.

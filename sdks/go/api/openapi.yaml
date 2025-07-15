@@ -1959,6 +1959,60 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--trade-place
+  /accounts/{accountId}/orders/cancel:
+    post:
+      description: |
+        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
+      operationId: Trading_cancelUserAccountOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: Order Record of canceled order
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Unable to cancel open order. Please verify status in brokerage
+            account
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: Cancel equity order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
   /accounts/{accountId}/trading/bracket:
     post:
       description: |
@@ -2016,60 +2070,6 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket
-  /accounts/{accountId}/orders/cancel:
-    post:
-      description: |
-        Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
-      operationId: Trading_cancelUserAccountOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: Order Record of canceled order
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Unable to cancel open order. Please verify status in brokerage
-            account
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-      summary: Cancel equity order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel
   /accounts/{accountId}/trading/options:
     post:
       description: |
@@ -2394,7 +2394,7 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Replace crypto order
+      summary: Replace equity order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -10379,6 +10379,27 @@ components:
       x-konfig-is-parameter:
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-bracket:
       additionalProperties: true
       properties:
@@ -10439,27 +10460,6 @@ components:
       - accountId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-cancel:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        brokerage_order_id:
-          $ref: '#/components/schemas/BrokerageOrderID'
-      required:
-      - accountId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options:
       additionalProperties: true
       properties:
