@@ -14,6 +14,7 @@ import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
 import com.konfigthis.client.model.MlegOrderTypeStrict;
+import com.konfigthis.client.model.MlegPriceEffectStrictNullable;
 import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;

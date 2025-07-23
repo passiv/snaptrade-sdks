@@ -35,7 +35,7 @@ class OptionalMlegTradeForm(TypedDict, total=False):
     # The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
     stop_price: typing.Optional[str]
 
-    price_effect: MlegPriceEffectStrictNullable
+    price_effect: typing.Optional[MlegPriceEffectStrictNullable]
 
 class MlegTradeForm(RequiredMlegTradeForm, OptionalMlegTradeForm):
     pass

@@ -29,6 +29,7 @@ import com.konfigthis.client.model.ManualTradeReplaceForm;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderResponse;
 import com.konfigthis.client.model.MlegOrderTypeStrict;
+import com.konfigthis.client.model.MlegPriceEffectStrictNullable;
 import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
@@ -252,7 +253,7 @@ public class TradingApiTest {
         UUID accountId = null;
         BigDecimal limitPrice = null;
         BigDecimal stopPrice = null;
-        String priceEffect = null;
+        MlegPriceEffectStrictNullable priceEffect = null;
         MlegOrderResponse response = api.placeMlegOrder(orderType, timeInForce, legs, userId, userSecret, accountId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)

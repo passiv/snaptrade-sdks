@@ -57,6 +57,7 @@ export * from './mleg-instrument-type';
 export * from './mleg-leg';
 export * from './mleg-order-response';
 export * from './mleg-order-type-strict';
+export * from './mleg-price-effect-strict';
 export * from './mleg-trade-form';
 export * from './mleg-trading-instrument';
 export * from './model400-failed-request-response';

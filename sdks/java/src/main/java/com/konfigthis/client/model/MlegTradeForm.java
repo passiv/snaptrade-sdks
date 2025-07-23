@@ -21,6 +21,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.MlegLeg;
 import com.konfigthis.client.model.MlegOrderTypeStrict;
+import com.konfigthis.client.model.MlegPriceEffectStrictNullable;
 import com.konfigthis.client.model.TimeInForceStrict;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -75,7 +76,7 @@ public class MlegTradeForm {
 
   public static final String SERIALIZED_NAME_PRICE_EFFECT = "price_effect";
   @SerializedName(SERIALIZED_NAME_PRICE_EFFECT)
-  private String priceEffect;
+  private MlegPriceEffectStrictNullable priceEffect;
 
   public static final String SERIALIZED_NAME_LEGS = "legs";
   @SerializedName(SERIALIZED_NAME_LEGS)
@@ -200,7 +201,7 @@ public class MlegTradeForm {
   }
 
 
-  public MlegTradeForm priceEffect(String priceEffect) {
+  public MlegTradeForm priceEffect(MlegPriceEffectStrictNullable priceEffect) {
     
     
     
@@ -210,18 +211,18 @@ public class MlegTradeForm {
   }
 
    /**
-   * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+   * Get priceEffect
    * @return priceEffect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "DEBIT", value = "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT")
+  @ApiModelProperty(value = "")
 
-  public String getPriceEffect() {
+  public MlegPriceEffectStrictNullable getPriceEffect() {
     return priceEffect;
   }
 
 
-  public void setPriceEffect(String priceEffect) {
+  public void setPriceEffect(MlegPriceEffectStrictNullable priceEffect) {
     
     
     
@@ -413,9 +414,6 @@ public class MlegTradeForm {
       }
       if (!jsonObj.get("stop_price").isJsonNull() && (jsonObj.get("stop_price") != null && !jsonObj.get("stop_price").isJsonNull()) && !jsonObj.get("stop_price").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `stop_price` to be a primitive type in the JSON string but got `%s`", jsonObj.get("stop_price").toString()));
-      }
-      if (!jsonObj.get("price_effect").isJsonNull() && (jsonObj.get("price_effect") != null && !jsonObj.get("price_effect").isJsonNull()) && !jsonObj.get("price_effect").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `price_effect` to be a primitive type in the JSON string but got `%s`", jsonObj.get("price_effect").toString()));
       }
       // ensure the json data is an array
       if (!jsonObj.get("legs").isJsonArray()) {
