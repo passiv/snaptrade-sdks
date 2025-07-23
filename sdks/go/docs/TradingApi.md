@@ -498,7 +498,7 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    priceEffect := *snaptrade.Newstring()
+    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
     
     mlegTradeForm := *snaptrade.NewMlegTradeForm(
         null,

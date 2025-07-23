@@ -6906,7 +6906,11 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
     MlegPriceEffectStrict:
       description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
-        Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+        Only required for certain brokerages like ETrade.
+      enum:
+      - CREDIT
+      - DEBIT
+      - EVEN
       example: DEBIT
       nullable: true
       type: string

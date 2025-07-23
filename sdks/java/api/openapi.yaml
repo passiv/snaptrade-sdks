@@ -6873,13 +6873,7 @@ components:
           x-konfig-original-example: ""
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
         price_effect:
-          description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
-            Only required for certain brokerages like ETrade. - CREDIT - DEBIT
-          example: DEBIT
-          nullable: true
-          type: string
-          x-konfig-original-example: DEBIT
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
+          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'
@@ -7200,7 +7194,11 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
     MlegPriceEffectStrict:
       description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
-        Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+        Only required for certain brokerages like ETrade.
+      enum:
+      - CREDIT
+      - DEBIT
+      - EVEN
       example: DEBIT
       nullable: true
       type: string
@@ -11686,7 +11684,11 @@ components:
     NotionalValueNullable: {}
     MlegPriceEffectStrictNullable:
       description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
-        Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+        Only required for certain brokerages like ETrade.
+      enum:
+      - CREDIT
+      - DEBIT
+      - EVEN
       example: DEBIT
       nullable: true
       type: string

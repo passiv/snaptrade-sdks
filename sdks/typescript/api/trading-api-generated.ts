@@ -45,6 +45,8 @@ import { MlegOrderResponse } from '../models';
 // @ts-ignore
 import { MlegOrderTypeStrict } from '../models';
 // @ts-ignore
+import { MlegPriceEffectStrict } from '../models';
+// @ts-ignore
 import { MlegTradeForm } from '../models';
 // @ts-ignore
 import { Model400FailedRequestResponse } from '../models';

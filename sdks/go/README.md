@@ -184,6 +184,7 @@ Class | Method | HTTP request | Description
  - [MlegLeg](docs/MlegLeg.md)
  - [MlegOrderResponse](docs/MlegOrderResponse.md)
  - [MlegOrderTypeStrict](docs/MlegOrderTypeStrict.md)
+ - [MlegPriceEffectStrict](docs/MlegPriceEffectStrict.md)
  - [MlegTradeForm](docs/MlegTradeForm.md)
  - [MlegTradingInstrument](docs/MlegTradingInstrument.md)
  - [Model400FailedRequestResponse](docs/Model400FailedRequestResponse.md)

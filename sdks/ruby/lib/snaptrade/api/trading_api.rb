@@ -964,7 +964,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-    # @param price_effect [String] 
+    # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_mleg_order(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
@@ -992,7 +992,7 @@ module SnapTrade
     # @param account_id [String] 
     # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
-    # @param price_effect [String] 
+    # @param price_effect [MlegPriceEffectStrict] 
     # @param body [MlegTradeForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
     def place_mleg_order_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})

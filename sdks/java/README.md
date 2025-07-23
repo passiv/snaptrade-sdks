@@ -2113,9 +2113,7 @@ The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
 
 The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
-##### price_effect: `String`<a id="price_effect-string"></a>
-
-The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade. - CREDIT - DEBIT
+##### price_effect:<a id="price_effect"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
