@@ -50,7 +50,7 @@ Example payload is below:
 
 ```json
 {
-   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9_deleted",
+   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9",
    "clientId":"phjBdpKfpN",
    "eventType":"USER_DELETED",
    "webhookId":"dbaee13a-1184-4677-9741-b6845e60ee3a",
