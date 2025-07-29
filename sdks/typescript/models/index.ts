@@ -28,6 +28,7 @@ export * from './brokerage-authorization-refresh-confirmation';
 export * from './brokerage-authorization-type-read-only';
 export * from './brokerage-authorization-type-read-only-brokerage';
 export * from './brokerage-type';
+export * from './cancel-order-response';
 export * from './child-brokerage-order-ids';
 export * from './connections-session-events200-response-inner';
 export * from './cryptocurrency-pair';

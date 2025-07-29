@@ -1716,9 +1716,10 @@ Cancels an order in the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
-OrderUpdatedResponse result = client
+CancelOrderResponse result = client
         .trading
-        .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+        .cancelOrder(userId, userSecret, accountId)
+        .brokerageOrderId(brokerageOrderId)
         .execute();
 ```
 
@@ -1730,15 +1731,17 @@ OrderUpdatedResponse result = client
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
+[CancelOrderResponse](./src/main/java/com/konfigthis/client/model/CancelOrderResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+`/accounts/{accountId}/trading/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

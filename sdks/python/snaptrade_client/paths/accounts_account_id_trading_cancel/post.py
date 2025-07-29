@@ -33,10 +33,10 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
-from snaptrade_client.model.order_updated_response import OrderUpdatedResponse as OrderUpdatedResponseSchema
+from snaptrade_client.model.cancel_order_response import CancelOrderResponse as CancelOrderResponseSchema
 
+from snaptrade_client.type.cancel_order_response import CancelOrderResponse
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
-from snaptrade_client.type.order_updated_response import OrderUpdatedResponse
 
 from . import path
 
@@ -78,12 +78,10 @@ request_query_user_secret = api_client.QueryParameter(
 )
 # Path params
 AccountIdSchema = schemas.UUIDSchema
-BrokerageOrderIdSchema = schemas.StrSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
         'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
-        'brokerageOrderId': typing.Union[BrokerageOrderIdSchema, str, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -104,10 +102,64 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-request_path_brokerage_order_id = api_client.PathParameter(
-    name="brokerageOrderId",
-    style=api_client.ParameterStyle.SIMPLE,
-    schema=BrokerageOrderIdSchema,
+# body param
+
+
+class SchemaForRequestBodyApplicationJson(
+    schemas.DictSchema
+):
+
+
+    class MetaOapg:
+        
+        class properties:
+            brokerage_order_id = schemas.StrSchema
+            __annotations__ = {
+                "brokerage_order_id": brokerage_order_id,
+            }
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
+    
+    @typing.overload
+    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+    
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
+        # dict_instance[name] accessor
+        return super().__getitem__(name)
+    
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> typing.Union[MetaOapg.properties.brokerage_order_id, schemas.Unset]: ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+    
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
+        return super().get_item_oapg(name)
+    
+
+    def __new__(
+        cls,
+        *args: typing.Union[dict, frozendict.frozendict, ],
+        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, schemas.Unset] = schemas.unset,
+        _configuration: typing.Optional[schemas.Configuration] = None,
+        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+    ) -> 'SchemaForRequestBodyApplicationJson':
+        return super().__new__(
+            cls,
+            *args,
+            brokerage_order_id=brokerage_order_id,
+            _configuration=_configuration,
+            **kwargs,
+        )
+
+
+request_body_typing_any = api_client.RequestBody(
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaForRequestBodyApplicationJson),
+    },
     required=True,
 )
 _auth = [
@@ -115,17 +167,17 @@ _auth = [
     'PartnerSignature',
     'PartnerTimestamp',
 ]
-SchemaFor200ResponseBodyApplicationJson = OrderUpdatedResponseSchema
+SchemaFor200ResponseBodyApplicationJson = CancelOrderResponseSchema
 
 
 @dataclass
 class ApiResponseFor200(api_client.ApiResponse):
-    body: OrderUpdatedResponse
+    body: CancelOrderResponse
 
 
 @dataclass
 class ApiResponseFor200Async(api_client.AsyncApiResponse):
-    body: OrderUpdatedResponse
+    body: CancelOrderResponse
 
 
 _response_for_200 = api_client.OpenApiResponse(
@@ -187,6 +239,7 @@ class BaseApi(api_client.Api):
 
     def _cancel_order_mapped_args(
         self,
+        body: typing.Optional[typing.Any] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
@@ -197,25 +250,29 @@ class BaseApi(api_client.Api):
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         _path_params = {}
+        _body = {}
+        if brokerage_order_id is not None:
+            _body["brokerage_order_id"] = brokerage_order_id
+        args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
         if account_id is not None:
             _path_params["accountId"] = account_id
-        if brokerage_order_id is not None:
-            _path_params["brokerageOrderId"] = brokerage_order_id
         args.query = query_params if query_params else _query_params
         args.path = path_params if path_params else _path_params
         return args
 
     async def _acancel_order_oapg(
         self,
+        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
         **kwargs,
     ) -> typing.Union[
@@ -224,7 +281,7 @@ class BaseApi(api_client.Api):
         AsyncGeneratorResponse,
     ]:
         """
-        Cancel crypto order
+        Cancel order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -236,7 +293,6 @@ class BaseApi(api_client.Api):
         _path_params = {}
         for parameter in (
             request_path_account_id,
-            request_path_brokerage_order_id,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -267,19 +323,35 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        if body is schemas.unset:
+            raise exceptions.ApiValueError(
+                'The required body parameter has an invalid value of: unset. Set a valid value instead')
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel',
+            path_template='/accounts/{accountId}/trading/cancel',
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        serialized_data = request_body_typing_any.serialize(body, content_type)
+        if 'fields' in serialized_data:
+            _fields = serialized_data['fields']
+        elif 'body' in serialized_data:
+            _body = serialized_data['body']
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -342,18 +414,20 @@ class BaseApi(api_client.Api):
 
     def _cancel_order_oapg(
         self,
+        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
+        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
         """
-        Cancel crypto order
+        Cancel order
         :param skip_deserialization: If true then api_response.response will be set but
             api_response.body and api_response.headers will not be deserialized into schema
             class instances
@@ -365,7 +439,6 @@ class BaseApi(api_client.Api):
         _path_params = {}
         for parameter in (
             request_path_account_id,
-            request_path_brokerage_order_id,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -396,19 +469,35 @@ class BaseApi(api_client.Api):
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
         method = 'post'.upper()
+        _headers.add('Content-Type', content_type)
+    
+        if body is schemas.unset:
+            raise exceptions.ApiValueError(
+                'The required body parameter has an invalid value of: unset. Set a valid value instead')
+        _fields = None
+        _body = None
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel',
+            path_template='/accounts/{accountId}/trading/cancel',
+            body=body,
             auth_settings=_auth,
             headers=_headers,
         )
+        serialized_data = request_body_typing_any.serialize(body, content_type)
+        if 'fields' in serialized_data:
+            _fields = serialized_data['fields']
+        elif 'body' in serialized_data:
+            _body = serialized_data['body']
     
         response = self.api_client.call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
+            fields=_fields,
+            serialized_body=_body,
+            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -443,6 +532,7 @@ class CancelOrder(BaseApi):
 
     async def acancel_order(
         self,
+        body: typing.Optional[typing.Any] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
@@ -456,6 +546,7 @@ class CancelOrder(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._cancel_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -464,6 +555,7 @@ class CancelOrder(BaseApi):
             brokerage_order_id=brokerage_order_id,
         )
         return await self._acancel_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -471,6 +563,7 @@ class CancelOrder(BaseApi):
     
     def cancel_order(
         self,
+        body: typing.Optional[typing.Any] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
@@ -483,6 +576,7 @@ class CancelOrder(BaseApi):
     ]:
         """ Cancels an order in the specified account.  """
         args = self._cancel_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -491,6 +585,7 @@ class CancelOrder(BaseApi):
             brokerage_order_id=brokerage_order_id,
         )
         return self._cancel_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )
@@ -500,6 +595,7 @@ class ApiForpost(BaseApi):
 
     async def apost(
         self,
+        body: typing.Optional[typing.Any] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
@@ -513,6 +609,7 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._cancel_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -521,6 +618,7 @@ class ApiForpost(BaseApi):
             brokerage_order_id=brokerage_order_id,
         )
         return await self._acancel_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -528,6 +626,7 @@ class ApiForpost(BaseApi):
     
     def post(
         self,
+        body: typing.Optional[typing.Any] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
@@ -540,6 +639,7 @@ class ApiForpost(BaseApi):
     ]:
         """ Cancels an order in the specified account.  """
         args = self._cancel_order_mapped_args(
+            body=body,
             query_params=query_params,
             path_params=path_params,
             user_id=user_id,
@@ -548,6 +648,7 @@ class ApiForpost(BaseApi):
             brokerage_order_id=brokerage_order_id,
         )
         return self._cancel_order_oapg(
+            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )

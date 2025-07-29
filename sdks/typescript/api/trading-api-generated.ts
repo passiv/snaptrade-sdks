@@ -25,6 +25,8 @@ import { ActionStrict } from '../models';
 // @ts-ignore
 import { ActionStrictWithOptions } from '../models';
 // @ts-ignore
+import { CancelOrderResponse } from '../models';
+// @ts-ignore
 import { CryptocurrencyPairQuote } from '../models';
 // @ts-ignore
 import { ManualTradeAndImpact } from '../models';
@@ -89,26 +91,25 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel crypto order
+         * @summary Cancel order
          * @param {string} userId 
          * @param {string} userSecret 
          * @param {string} accountId 
-         * @param {string} brokerageOrderId 
+         * @param {TradingCancelUserAccountOrderRequest} tradingCancelUserAccountOrderRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelOrder: async (userId: string, userSecret: string, accountId: string, brokerageOrderId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        cancelOrder: async (userId: string, userSecret: string, accountId: string, tradingCancelUserAccountOrderRequest: TradingCancelUserAccountOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('cancelOrder', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('cancelOrder', 'userSecret', userSecret)
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('cancelOrder', 'accountId', accountId)
-            // verify required parameter 'brokerageOrderId' is not null or undefined
-            assertParamExists('cancelOrder', 'brokerageOrderId', brokerageOrderId)
-            const localVarPath = `/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
-                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // verify required parameter 'tradingCancelUserAccountOrderRequest' is not null or undefined
+            assertParamExists('cancelOrder', 'tradingCancelUserAccountOrderRequest', tradingCancelUserAccountOrderRequest)
+            const localVarPath = `/accounts/{accountId}/trading/cancel`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -136,16 +137,21 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
+                requestBody: tradingCancelUserAccountOrderRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel',
+                pathTemplate: '/accounts/{accountId}/trading/cancel',
                 httpMethod: 'POST'
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(tradingCancelUserAccountOrderRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1001,13 +1007,16 @@ export const TradingApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel crypto order
+         * @summary Cancel order
          * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderUpdatedResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.brokerageOrderId, options);
+        async cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CancelOrderResponse>> {
+            const tradingCancelUserAccountOrderRequest: TradingCancelUserAccountOrderRequest = {
+                brokerage_order_id: requestParameters.brokerage_order_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cancelOrder(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, tradingCancelUserAccountOrderRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1234,12 +1243,12 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * Cancels an order in the specified account. 
-         * @summary Cancel crypto order
+         * @summary Cancel order
          * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<OrderUpdatedResponse> {
+        cancelOrder(requestParameters: TradingApiCancelOrderRequest, options?: AxiosRequestConfig): AxiosPromise<CancelOrderResponse> {
             return localVarFp.cancelOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1393,14 +1402,7 @@ export type TradingApiCancelOrderRequest = {
     */
     readonly accountId: string
     
-    /**
-    * 
-    * @type {string}
-    * @memberof TradingApiCancelOrder
-    */
-    readonly brokerageOrderId: string
-    
-}
+} & TradingCancelUserAccountOrderRequest
 
 /**
  * Request parameters for cancelUserAccountOrder operation in TradingApi.
@@ -1799,7 +1801,7 @@ export type TradingApiSearchCryptocurrencyPairInstrumentsRequest = {
 export class TradingApiGenerated extends BaseAPI {
     /**
      * Cancels an order in the specified account. 
-     * @summary Cancel crypto order
+     * @summary Cancel order
      * @param {TradingApiCancelOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

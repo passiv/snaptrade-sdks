@@ -471,7 +471,7 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel-POST': {
+    '/accounts/{accountId}/trading/cancel-POST': {
         'parameters': [
             {
                 'name': 'userId'
@@ -483,7 +483,7 @@ operation_parameter_map = {
                 'name': 'accountId'
             },
             {
-                'name': 'brokerageOrderId'
+                'name': 'brokerage_order_id'
             },
         ]
     },

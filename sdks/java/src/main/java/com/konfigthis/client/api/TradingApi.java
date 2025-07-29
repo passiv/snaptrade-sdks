@@ -5,6 +5,7 @@ import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
+import com.konfigthis.client.model.CancelOrderResponse;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
@@ -41,8 +42,8 @@ public class TradingApi extends TradingApiGenerated {
         super(apiClient);
     }
     public class CancelOrderRequestBuilder extends CancelOrderRequestBuilderGenerated {
-        public CancelOrderRequestBuilder(String userId, String userSecret, UUID accountId, String brokerageOrderId) {
-            super(userId, userSecret, accountId, brokerageOrderId);
+        public CancelOrderRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
         }
     }
     public class CancelUserAccountOrderRequestBuilder extends CancelUserAccountOrderRequestBuilderGenerated {

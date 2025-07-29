@@ -30,6 +30,7 @@ import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
+import com.konfigthis.client.model.CancelOrderResponse;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
@@ -100,7 +101,7 @@ public class TradingApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call cancelOrderCall(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cancelOrderCall(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -114,12 +115,11 @@ public class TradingApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = null;
+        Object localVarPostBody = tradingCancelUserAccountOrderRequest;
 
         // create path and map variables
-        String localVarPath = "/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
-            .replace("{" + "brokerageOrderId" + "}", localVarApiClient.escapeString(brokerageOrderId.toString()));
+        String localVarPath = "/accounts/{accountId}/trading/cancel"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -144,6 +144,7 @@ public class TradingApiGenerated {
         }
 
         final String[] localVarContentTypes = {
+            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -155,7 +156,7 @@ public class TradingApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call cancelOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call cancelOrderValidateBeforeCall(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userId' is set
         if (userId == null) {
             throw new ApiException("Missing the required parameter 'userId' when calling cancelOrder(Async)");
@@ -171,26 +172,26 @@ public class TradingApiGenerated {
             throw new ApiException("Missing the required parameter 'accountId' when calling cancelOrder(Async)");
         }
 
-        // verify the required parameter 'brokerageOrderId' is set
-        if (brokerageOrderId == null) {
-            throw new ApiException("Missing the required parameter 'brokerageOrderId' when calling cancelOrder(Async)");
+        // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
+        if (tradingCancelUserAccountOrderRequest == null) {
+            throw new ApiException("Missing the required parameter 'tradingCancelUserAccountOrderRequest' when calling cancelOrder(Async)");
         }
 
-        return cancelOrderCall(userId, userSecret, accountId, brokerageOrderId, _callback);
+        return cancelOrderCall(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, _callback);
 
     }
 
 
-    private ApiResponse<OrderUpdatedResponse> cancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, String brokerageOrderId) throws ApiException {
-        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, brokerageOrderId, null);
-        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+    private ApiResponse<CancelOrderResponse> cancelOrderWithHttpInfo(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest) throws ApiException {
+        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, null);
+        Type localVarReturnType = new TypeToken<CancelOrderResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call cancelOrderAsync(String userId, String userSecret, UUID accountId, String brokerageOrderId, final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
+    private okhttp3.Call cancelOrderAsync(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, final ApiCallback<CancelOrderResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, brokerageOrderId, _callback);
-        Type localVarReturnType = new TypeToken<OrderUpdatedResponse>(){}.getType();
+        okhttp3.Call localVarCall = cancelOrderValidateBeforeCall(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, _callback);
+        Type localVarReturnType = new TypeToken<CancelOrderResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -199,15 +200,24 @@ public class TradingApiGenerated {
         final String userId;
         final String userSecret;
         final UUID accountId;
-        final String brokerageOrderId;
+        String brokerageOrderId;
 
-        public CancelOrderRequestBuilderGenerated(String userId, String userSecret, UUID accountId, String brokerageOrderId) {
+        public CancelOrderRequestBuilderGenerated(String userId, String userSecret, UUID accountId) {
             this.userId = userId;
             this.userSecret = userSecret;
             this.accountId = accountId;
-            this.brokerageOrderId = brokerageOrderId;
         }
 
+        /**
+         * Set brokerageOrderId
+         * @param brokerageOrderId Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (optional)
+         * @return TradingApi.CancelOrderRequestBuilder
+         */
+        public TradingApi.CancelOrderRequestBuilder brokerageOrderId(String brokerageOrderId) {
+            this.brokerageOrderId = brokerageOrderId;
+            return (TradingApi.CancelOrderRequestBuilder) this;
+        }
+        
         /**
          * Build call for cancelOrder
          * @param _callback ApiCallback API callback
@@ -221,13 +231,19 @@ public class TradingApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return cancelOrderCall(userId, userSecret, accountId, brokerageOrderId, _callback);
+            TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest = buildBodyParams();
+            return cancelOrderCall(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, _callback);
         }
 
+        private TradingCancelUserAccountOrderRequest buildBodyParams() {
+            TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest();
+            tradingCancelUserAccountOrderRequest.brokerageOrderId(this.brokerageOrderId);
+            return tradingCancelUserAccountOrderRequest;
+        }
 
         /**
          * Execute cancelOrder request
-         * @return OrderUpdatedResponse
+         * @return CancelOrderResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -236,14 +252,15 @@ public class TradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public OrderUpdatedResponse execute() throws ApiException {
-            ApiResponse<OrderUpdatedResponse> localVarResp = cancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+        public CancelOrderResponse execute() throws ApiException {
+            TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest = buildBodyParams();
+            ApiResponse<CancelOrderResponse> localVarResp = cancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
             return localVarResp.getResponseBody();
         }
 
         /**
          * Execute cancelOrder request with HTTP info returned
-         * @return ApiResponse&lt;OrderUpdatedResponse&gt;
+         * @return ApiResponse&lt;CancelOrderResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -252,8 +269,9 @@ public class TradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<OrderUpdatedResponse> executeWithHttpInfo() throws ApiException {
-            return cancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+        public ApiResponse<CancelOrderResponse> executeWithHttpInfo() throws ApiException {
+            TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest = buildBodyParams();
+            return cancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
         }
 
         /**
@@ -268,18 +286,19 @@ public class TradingApiGenerated {
             <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<OrderUpdatedResponse> _callback) throws ApiException {
-            return cancelOrderAsync(userId, userSecret, accountId, brokerageOrderId, _callback);
+        public okhttp3.Call executeAsync(final ApiCallback<CancelOrderResponse> _callback) throws ApiException {
+            TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest = buildBodyParams();
+            return cancelOrderAsync(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, _callback);
         }
     }
 
     /**
-     * Cancel crypto order
+     * Cancel order
      * Cancels an order in the specified account. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)
-     * @param brokerageOrderId  (required)
+     * @param tradingCancelUserAccountOrderRequest  (required)
      * @return CancelOrderRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -288,7 +307,7 @@ public class TradingApiGenerated {
         <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
      </table>
      */
-    public TradingApi.CancelOrderRequestBuilder cancelOrder(String userId, String userSecret, UUID accountId, String brokerageOrderId) throws IllegalArgumentException {
+    public TradingApi.CancelOrderRequestBuilder cancelOrder(String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
             
 
@@ -298,10 +317,7 @@ public class TradingApiGenerated {
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
-        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
-            
-
-        return ((TradingApi) this).new CancelOrderRequestBuilder(userId, userSecret, accountId, brokerageOrderId);
+        return ((TradingApi) this).new CancelOrderRequestBuilder(userId, userSecret, accountId);
     }
     private okhttp3.Call cancelUserAccountOrderCall(String userId, String userSecret, UUID accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;

@@ -20,6 +20,7 @@ import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
+import com.konfigthis.client.model.CancelOrderResponse;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
@@ -70,7 +71,7 @@ public class TradingApiTest {
     }
 
     /**
-     * Cancel crypto order
+     * Cancel order
      *
      * Cancels an order in the specified account. 
      *
@@ -82,7 +83,8 @@ public class TradingApiTest {
         String userSecret = null;
         UUID accountId = null;
         String brokerageOrderId = null;
-        OrderUpdatedResponse response = api.cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+        CancelOrderResponse response = api.cancelOrder(userId, userSecret, accountId)
+                .brokerageOrderId(brokerageOrderId)
                 .execute();
         // TODO: test validations
     }

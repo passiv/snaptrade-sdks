@@ -138,7 +138,7 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies
 *ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates
 *ReferenceDataApi* | [**SymbolSearchUserAccount**](docs/ReferenceDataApi.md#symbolsearchuseraccount) | **POST** /accounts/{accountId}/symbols | Search account symbols
-*TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order
+*TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order
 *TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact
@@ -184,6 +184,7 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
  - [BrokerageType](docs/BrokerageType.md)
+ - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
  - [ChildBrokerageOrderIDsNullable](docs/ChildBrokerageOrderIDsNullable.md)
  - [ConnectionsSessionEvents200ResponseInner](docs/ConnectionsSessionEvents200ResponseInner.md)
