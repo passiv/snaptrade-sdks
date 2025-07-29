@@ -98,7 +98,7 @@ portal:
       post: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
       patch: true
-    /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
+    /accounts/{accountId}/trading/cancel:
       post: true
     /accounts/{accountId}/trading/simple/preview:
       post: true
