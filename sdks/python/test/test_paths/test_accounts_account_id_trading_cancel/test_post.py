@@ -16,16 +16,16 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel import post
+from snaptrade_client.paths.accounts_account_id_trading_cancel import post
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestAccountsAccountIdTradingSimpleBrokerageOrderIdCancel(ApiTestMixin, unittest.TestCase):
+class TestAccountsAccountIdTradingCancel(ApiTestMixin, unittest.TestCase):
     """
-    AccountsAccountIdTradingSimpleBrokerageOrderIdCancel unit test stubs
-        Cancel crypto order
+    AccountsAccountIdTradingCancel unit test stubs
+        Cancel order
     """
 
     def setUp(self):
@@ -35,6 +35,8 @@ class TestAccountsAccountIdTradingSimpleBrokerageOrderIdCancel(ApiTestMixin, uni
         pass
 
     response_status = 200
+
+
 
 
 

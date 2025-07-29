@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order
+[**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
 [**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
 [**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
@@ -22,7 +22,7 @@ Method | Path | Description
 
 ## CancelOrder
 
-Cancel crypto order
+Cancel order
 
 
 
@@ -43,11 +43,15 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
+    
+    tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
+    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
+    
     request := client.TradingApi.CancelOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "brokerageOrderId_example",
+        tradingCancelUserAccountOrderRequest,
     )
     
     resp, httpRes, err := request.Execute()
@@ -56,10 +60,10 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.CancelOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `CancelOrder`: OrderUpdatedResponse
+    // response from `CancelOrder`: CancelOrderResponse
     fmt.Fprintf(os.Stdout, "Response from `TradingApi.CancelOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.CancelOrder.Order`: %v\n", *resp.Order)
+    fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `CancelOrderResponse.CancelOrder.RawResponse`: %v\n", *resp.RawResponse)
 }
 ```
 

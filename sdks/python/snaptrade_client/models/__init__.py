@@ -41,6 +41,8 @@ from snaptrade_client.model.brokerage_exchanges import BrokerageExchanges
 from snaptrade_client.model.brokerage_order_id import BrokerageOrderID
 from snaptrade_client.model.brokerage_symbol_id import BrokerageSymbolID
 from snaptrade_client.model.brokerage_type import BrokerageType
+from snaptrade_client.model.cancel_order_response import CancelOrderResponse
+from snaptrade_client.model.cancel_order_response_raw_response import CancelOrderResponseRawResponse
 from snaptrade_client.model.child_brokerage_order_ids import ChildBrokerageOrderIDs
 from snaptrade_client.model.child_brokerage_order_ids_nullable import ChildBrokerageOrderIDsNullable
 from snaptrade_client.model.client_id import ClientID

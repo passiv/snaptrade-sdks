@@ -30,15 +30,15 @@ type TradingApiCancelOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	brokerageOrderId string
+	tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest
 }
 
-func (r TradingApiCancelOrderRequest) Execute() (*OrderUpdatedResponse, *http.Response, error) {
+func (r TradingApiCancelOrderRequest) Execute() (*CancelOrderResponse, *http.Response, error) {
 	return r.ApiService.CancelOrderExecute(r)
 }
 
 /*
-CancelOrder Cancel crypto order
+CancelOrder Cancel order
 
 Cancels an order in the specified account.
 
@@ -47,28 +47,28 @@ Cancels an order in the specified account.
  @param userId
  @param userSecret
  @param accountId
- @param brokerageOrderId
+ @param tradingCancelUserAccountOrderRequest
  @return TradingApiCancelOrderRequest
 */
-func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, brokerageOrderId string) TradingApiCancelOrderRequest {
+func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest) TradingApiCancelOrderRequest {
 	return TradingApiCancelOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		brokerageOrderId: brokerageOrderId,
+		tradingCancelUserAccountOrderRequest: tradingCancelUserAccountOrderRequest,
 	}
 }
 
 // Execute executes the request
-//  @return OrderUpdatedResponse
-func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (*OrderUpdatedResponse, *http.Response, error) {
+//  @return CancelOrderResponse
+func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (*CancelOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *OrderUpdatedResponse
+		localVarReturnValue  *CancelOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TradingApiService.CancelOrder")
@@ -76,13 +76,12 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel"
+    subpath := "/accounts/{accountId}/trading/cancel"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"brokerageOrderId"+"}", url.PathEscape(parameterToString(r.brokerageOrderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -91,7 +90,7 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -107,6 +106,10 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+    if !checkNilInterface(r.tradingCancelUserAccountOrderRequest) {
+        localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

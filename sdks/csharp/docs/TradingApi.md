@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order |
+| [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
 | [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
 | [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
 | [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact |
@@ -48,12 +48,16 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var accountId = "accountId_example";
-            var brokerageOrderId = "brokerageOrderId_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            
+            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+                brokerageOrderId
+            );
             
             try
             {
-                // Cancel crypto order
-                OrderUpdatedResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, brokerageOrderId);
+                // Cancel order
+                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -79,8 +83,8 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Cancel crypto order
-    ApiResponse<OrderUpdatedResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+    // Cancel order
+    ApiResponse<CancelOrderResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -100,11 +104,11 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **brokerageOrderId** | **string** |  |  |
+| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) |  |  |
 
 ### Return type
 
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 
 ### HTTP response details

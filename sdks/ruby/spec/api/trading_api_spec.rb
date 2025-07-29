@@ -28,14 +28,14 @@ describe 'TradingApi' do
   end
 
   # unit tests for cancel_order
-  # Cancel crypto order
+  # Cancel order
   # Cancels an order in the specified account. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param brokerage_order_id 
+  # @param trading_cancel_user_account_order_request 
   # @param [Hash] opts the optional parameters
-  # @return [OrderUpdatedResponse]
+  # @return [CancelOrderResponse]
   describe 'cancel_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

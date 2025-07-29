@@ -9,7 +9,7 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.accounts_account_id_trading_simple_brokerage_order_id_cancel.post import CancelOrder
+from snaptrade_client.paths.accounts_account_id_trading_cancel.post import CancelOrder
 from snaptrade_client.paths.accounts_account_id_orders_cancel.post import CancelUserAccountOrder
 from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote.get import GetCryptocurrencyPairQuote
 from snaptrade_client.paths.trade_impact.post import GetOrderImpact

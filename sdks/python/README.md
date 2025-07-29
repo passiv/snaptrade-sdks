@@ -1683,13 +1683,18 @@ cancel_order_response = snaptrade.trading.cancel_order(
 
 ##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
 
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
+[`CancelOrderResponse`](./snaptrade_client/type/cancel_order_response.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `post`
+`/accounts/{accountId}/trading/cancel` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

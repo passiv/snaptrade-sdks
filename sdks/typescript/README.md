@@ -1697,7 +1697,7 @@ const cancelOrderResponse = await snaptrade.trading.cancelOrder({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 });
 ```
 
@@ -1709,15 +1709,17 @@ const cancelOrderResponse = await snaptrade.trading.cancelOrder({
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OrderUpdatedResponse](./models/order-updated-response.ts)
+[CancelOrderResponse](./models/cancel-order-response.ts)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+`/accounts/{accountId}/trading/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

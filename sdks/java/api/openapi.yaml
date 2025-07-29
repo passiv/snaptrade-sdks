@@ -2523,7 +2523,7 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace
       x-content-type: application/json
       x-accepts: application/json
-  /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
+  /accounts/{accountId}/trading/cancel:
     post:
       description: |
         Cancels an order in the specified account.
@@ -2550,19 +2550,14 @@ paths:
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
-      - explode: false
-        in: path
-        name: brokerageOrderId
-        required: true
-        schema:
-          $ref: '#/components/schemas/BrokerageOrderID'
-        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderUpdatedResponse'
+                $ref: '#/components/schemas/CancelOrderResponse'
           description: OK
         "400":
           content:
@@ -2573,11 +2568,12 @@ paths:
           x-do-not-generate: true
         "500":
           description: Unexpected Error
-      summary: Cancel crypto order
+      summary: Cancel order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel
+      x-content-type: application/json
       x-accepts: application/json
   /snapTrade/partners:
     get:
@@ -7478,6 +7474,37 @@ components:
       - brokerage_order_id
       type: object
       x-konfig-is-used-in-successful-response: true
+    CancelOrderResponse:
+      additionalProperties: true
+      example:
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        raw_response:
+          order_id: "1234567890"
+          status: CANCELLED
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        raw_response:
+          additionalProperties: true
+          description: The raw response from the brokerage.
+          example:
+            order_id: "1234567890"
+            status: CANCELLED
+          nullable: true
+          type: object
+          x-konfig-original-example:
+            order_id: "1234567890"
+            status: CANCELLED
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CancelOrderResponse-properties-raw_response
+      required:
+      - brokerage_order_id
+      type: object
+      x-konfig-is-used-in-successful-response: true
     MlegOrderResponse:
       additionalProperties: true
       example:
@@ -9719,6 +9746,20 @@ components:
       example: "123.45"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CancelOrderResponse-properties-raw_response:
+      additionalProperties: true
+      example:
+        order_id: "1234567890"
+        status: CANCELLED
+      properties:
+        order_id:
+          example: "1234567890"
+          type: string
+        status:
+          example: CANCELLED
+          type: string
+      type: object
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-PaginationDetails-properties-offset:
       example: 0
       type: number
@@ -11263,7 +11304,7 @@ components:
       - brokerageOrderId
       - userId
       - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-brokerageOrderId-cancel:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel:
       additionalProperties: true
       properties:
         userId:
@@ -11272,11 +11313,10 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        brokerageOrderId:
+        brokerage_order_id:
           $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
-      - brokerageOrderId
       - userId
       - userSecret
       type: object
@@ -11285,7 +11325,6 @@ components:
       - userId
       - userSecret
       - accountId
-      - brokerageOrderId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}

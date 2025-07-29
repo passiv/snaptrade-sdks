@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel | Cancel crypto order |
+| [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
 | [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
@@ -21,9 +21,9 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="cancelOrder"></a>
 # **cancelOrder**
-> OrderUpdatedResponse cancelOrder(userId, userSecret, accountId, brokerageOrderId).execute();
+> CancelOrderResponse cancelOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
 
-Cancel crypto order
+Cancel order
 
 Cancels an order in the specified account. 
 
@@ -52,15 +52,16 @@ public class Example {
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example";
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     try {
-      OrderUpdatedResponse result = client
+      CancelOrderResponse result = client
               .trading
-              .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+              .cancelOrder(userId, userSecret, accountId)
+              .brokerageOrderId(brokerageOrderId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
-      System.out.println(result.getOrder());
+      System.out.println(result.getRawResponse());
     } catch (ApiException e) {
       System.err.println("Exception when calling TradingApi#cancelOrder");
       System.err.println("Status code: " + e.getStatusCode());
@@ -71,9 +72,10 @@ public class Example {
 
     // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
     try {
-      ApiResponse<OrderUpdatedResponse> response = client
+      ApiResponse<CancelOrderResponse> response = client
               .trading
-              .cancelOrder(userId, userSecret, accountId, brokerageOrderId)
+              .cancelOrder(userId, userSecret, accountId)
+              .brokerageOrderId(brokerageOrderId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -99,11 +101,11 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **brokerageOrderId** | **String**|  | |
+| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)|  | |
 
 ### Return type
 
-[**OrderUpdatedResponse**](OrderUpdatedResponse.md)
+[**CancelOrderResponse**](CancelOrderResponse.md)
 
 ### Authorization
 
@@ -111,7 +113,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

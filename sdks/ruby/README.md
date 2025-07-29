@@ -1603,13 +1603,16 @@ p result
 ##### user_secret: `String`<a id="user_secret-string"></a>
 ##### account_id: `String`<a id="account_id-string"></a>
 ##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OrderUpdatedResponse](./lib/snaptrade/models/order_updated_response.rb)
+[CancelOrderResponse](./lib/snaptrade/models/cancel_order_response.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel` `POST`
+`/accounts/{accountId}/trading/cancel` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
