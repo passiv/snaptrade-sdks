@@ -1951,11 +1951,11 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/simple/{brokerageOrderId}/cancel:
+  /accounts/{accountId}/trading/cancel:
     post:
       tags:
         - Trading
-      summary: Cancel crypto order
+      summary: Cancel order
       description: |
         Cancels an order in the specified account.
       operationId: Trading_cancelOrder
@@ -1975,18 +1975,15 @@ paths:
           name: accountId
           schema:
             $ref: "#/components/schemas/AccountID"
-        - in: path
-          required: true
-          name: brokerageOrderId
-          schema:
-            $ref: "#/components/schemas/BrokerageOrderID"
+      requestBody:
+        $ref: "#/components/requestBodies/CancelOrderRequestBody"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/OrderUpdatedResponse"
+                $ref: "#/components/schemas/CancelOrderResponse"
         "400":
           description: Invalid request
           content:
@@ -4716,7 +4713,21 @@ components:
           $ref: "#/components/schemas/BrokerageOrderID"
         order:
           $ref: "#/components/schemas/AccountOrderRecord"
-
+    CancelOrderResponse:
+      type: object
+      required:
+        - brokerage_order_id
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        raw_response:
+          type: object
+          nullable: true
+          description: The raw response from the brokerage.
+          example: {
+            "order_id": "1234567890",
+            "status": "CANCELLED"
+          }
     MlegOrderResponse:
       type: object
       required:
