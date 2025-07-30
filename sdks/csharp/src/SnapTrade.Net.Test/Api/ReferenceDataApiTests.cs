@@ -253,7 +253,7 @@ namespace SnapTrade.Net.Test.Api
             
             try
             {
-                // Get a list of instruments available on the brokerage.
+                // Get brokerage instruments
                 BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(brokerageId);
                 Console.WriteLine(result);
             }

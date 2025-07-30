@@ -183,10 +183,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;BrokerageAuthorizationTypeReadOnly&gt;</returns>
         ApiResponse<List<BrokerageAuthorizationTypeReadOnly>> ListAllBrokerageAuthorizationTypeWithHttpInfo(string brokerage = default(string), int operationIndex = 0);
         /// <summary>
-        /// Get a list of instruments available on the brokerage.
+        /// Get brokerage instruments
         /// </summary>
         /// <remarks>
-        /// Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -195,10 +195,10 @@ namespace SnapTrade.Net.Api
         BrokerageInstrumentsResponse ListAllBrokerageInstruments(string brokerageId, int operationIndex = 0);
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage.
+        /// Get brokerage instruments
         /// </summary>
         /// <remarks>
-        /// Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -476,10 +476,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;BrokerageAuthorizationTypeReadOnly&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<BrokerageAuthorizationTypeReadOnly>>> ListAllBrokerageAuthorizationTypeWithHttpInfoAsync(string brokerage = default(string), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get a list of instruments available on the brokerage.
+        /// Get brokerage instruments
         /// </summary>
         /// <remarks>
-        /// Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -489,10 +489,10 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsAsync(string brokerageId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage.
+        /// Get brokerage instruments
         /// </summary>
         /// <remarks>
-        /// Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -1869,7 +1869,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage. Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -1882,7 +1882,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage. Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -1954,7 +1954,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage. Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>
@@ -1968,7 +1968,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get a list of instruments available on the brokerage. Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+        /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="brokerageId"></param>

@@ -11,7 +11,7 @@ Method | Path | Description
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
-[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{brokerageId}/instruments | Get a list of instruments available on the brokerage.
+[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{brokerageId}/instruments | Get brokerage instruments
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
 [**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
 [**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
@@ -374,7 +374,7 @@ func main() {
 
 ## ListAllBrokerageInstruments
 
-Get a list of instruments available on the brokerage.
+Get brokerage instruments
 
 
 

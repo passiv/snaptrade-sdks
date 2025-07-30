@@ -1501,8 +1501,8 @@ paths:
     get:
       tags:
         - Reference Data
-      summary: Get a list of instruments available on the brokerage.
-      description: Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+      summary: Get brokerage instruments
+      description: Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
       operationId: ReferenceData_listAllBrokerageInstruments
       parameters:
         - in: path

@@ -381,8 +381,8 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
-         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
-         * @summary Get a list of instruments available on the brokerage.
+         * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get brokerage instruments
          * @param {string} brokerageId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -716,8 +716,8 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
-         * @summary Get a list of instruments available on the brokerage.
+         * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get brokerage instruments
          * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -848,8 +848,8 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllBrokerageAuthorizationType(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
-         * @summary Get a list of instruments available on the brokerage.
+         * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get brokerage instruments
          * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1089,8 +1089,8 @@ export class ReferenceDataApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
-     * @summary Get a list of instruments available on the brokerage.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
+     * @summary Get brokerage instruments
      * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

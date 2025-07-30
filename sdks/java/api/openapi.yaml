@@ -2697,9 +2697,9 @@ paths:
       x-accepts: application/json
   /brokerages/{brokerageId}/instruments:
     get:
-      description: "Returns a list of all brokerage instruments available for a given\
-        \ brokerage, optionally filtered by a search. Not all brokerages support this.\
-        \ The ones that don't will return an empty list."
+      description: Returns a list of all brokerage instruments available for a given
+        brokerage. Not all brokerages support this. The ones that don't will return
+        an empty list.
       operationId: ReferenceData_listAllBrokerageInstruments
       parameters:
       - explode: false
@@ -2718,7 +2718,7 @@ paths:
           description: A list of brokerage instruments.
         default:
           description: Unexpected error.
-      summary: Get a list of instruments available on the brokerage.
+      summary: Get brokerage instruments
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
