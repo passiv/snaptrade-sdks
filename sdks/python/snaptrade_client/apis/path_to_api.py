@@ -46,6 +46,7 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import Accou
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
+from snaptrade_client.apis.paths.brokerages_brokerage_id_instruments import BrokeragesBrokerageIdInstruments
 from snaptrade_client.apis.paths.brokerage_authorization_types import BrokerageAuthorizationTypes
 from snaptrade_client.apis.paths.currencies import Currencies
 from snaptrade_client.apis.paths.currencies_rates import CurrenciesRates
@@ -103,6 +104,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
+        PathValues.BROKERAGES_BROKERAGE_ID_INSTRUMENTS: BrokeragesBrokerageIdInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
         PathValues.CURRENCIES_RATES: CurrenciesRates,
@@ -161,6 +163,7 @@ path_to_api = PathToApi(
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
+        PathValues.BROKERAGES_BROKERAGE_ID_INSTRUMENTS: BrokeragesBrokerageIdInstruments,
         PathValues.BROKERAGE_AUTHORIZATION_TYPES: BrokerageAuthorizationTypes,
         PathValues.CURRENCIES: Currencies,
         PathValues.CURRENCIES_RATES: CurrenciesRates,

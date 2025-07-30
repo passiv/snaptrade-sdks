@@ -134,6 +134,7 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols
 *ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail
 *ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types
+*ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{brokerageId}/instruments | Get a list of instruments available on the brokerage.
 *ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages
 *ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies
 *ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates
@@ -183,6 +184,8 @@ Class | Method | HTTP request | Description
  - [BrokerageAuthorizationRefreshConfirmation](docs/BrokerageAuthorizationRefreshConfirmation.md)
  - [BrokerageAuthorizationTypeReadOnly](docs/BrokerageAuthorizationTypeReadOnly.md)
  - [BrokerageAuthorizationTypeReadOnlyBrokerage](docs/BrokerageAuthorizationTypeReadOnlyBrokerage.md)
+ - [BrokerageInstrument](docs/BrokerageInstrument.md)
+ - [BrokerageInstrumentsResponse](docs/BrokerageInstrumentsResponse.md)
  - [BrokerageType](docs/BrokerageType.md)
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)

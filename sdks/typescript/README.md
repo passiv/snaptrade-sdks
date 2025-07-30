@@ -54,6 +54,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
   * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
+  * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
   * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
   * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
@@ -1563,6 +1564,36 @@ Comma separated value of brokerage slugs
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.referenceData.listAllBrokerageInstruments`<a id="snaptradereferencedatalistallbrokerageinstruments"></a>
+
+Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const listAllBrokerageInstrumentsResponse =
+  await snaptrade.referenceData.listAllBrokerageInstruments({
+    brokerageId: "87b24961-b51e-4db8-9226-f198f6518a89",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerageId: `string`<a id="brokerageid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageInstrumentsResponse](./models/brokerage-instruments-response.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/brokerages/{brokerageId}/instruments` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

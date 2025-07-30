@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
+import com.konfigthis.client.model.BrokerageInstrumentsResponse;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;
@@ -1173,6 +1174,167 @@ public class ReferenceDataApiGenerated {
      */
     public ReferenceDataApi.ListAllBrokerageAuthorizationTypeRequestBuilder listAllBrokerageAuthorizationType() throws IllegalArgumentException {
         return ((ReferenceDataApi) this).new ListAllBrokerageAuthorizationTypeRequestBuilder();
+    }
+    private okhttp3.Call listAllBrokerageInstrumentsCall(UUID brokerageId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/brokerages/{brokerageId}/instruments"
+            .replace("{" + "brokerageId" + "}", localVarApiClient.escapeString(brokerageId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listAllBrokerageInstrumentsValidateBeforeCall(UUID brokerageId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'brokerageId' is set
+        if (brokerageId == null) {
+            throw new ApiException("Missing the required parameter 'brokerageId' when calling listAllBrokerageInstruments(Async)");
+        }
+
+        return listAllBrokerageInstrumentsCall(brokerageId, _callback);
+
+    }
+
+
+    private ApiResponse<BrokerageInstrumentsResponse> listAllBrokerageInstrumentsWithHttpInfo(UUID brokerageId) throws ApiException {
+        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(brokerageId, null);
+        Type localVarReturnType = new TypeToken<BrokerageInstrumentsResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listAllBrokerageInstrumentsAsync(UUID brokerageId, final ApiCallback<BrokerageInstrumentsResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(brokerageId, _callback);
+        Type localVarReturnType = new TypeToken<BrokerageInstrumentsResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ListAllBrokerageInstrumentsRequestBuilderGenerated {
+        final UUID brokerageId;
+
+        public ListAllBrokerageInstrumentsRequestBuilderGenerated(UUID brokerageId) {
+            this.brokerageId = brokerageId;
+        }
+
+        /**
+         * Build call for listAllBrokerageInstruments
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of brokerage instruments. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listAllBrokerageInstrumentsCall(brokerageId, _callback);
+        }
+
+
+        /**
+         * Execute listAllBrokerageInstruments request
+         * @return BrokerageInstrumentsResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of brokerage instruments. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public BrokerageInstrumentsResponse execute() throws ApiException {
+            ApiResponse<BrokerageInstrumentsResponse> localVarResp = listAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute listAllBrokerageInstruments request with HTTP info returned
+         * @return ApiResponse&lt;BrokerageInstrumentsResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of brokerage instruments. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<BrokerageInstrumentsResponse> executeWithHttpInfo() throws ApiException {
+            return listAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+        }
+
+        /**
+         * Execute listAllBrokerageInstruments request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> A list of brokerage instruments. </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<BrokerageInstrumentsResponse> _callback) throws ApiException {
+            return listAllBrokerageInstrumentsAsync(brokerageId, _callback);
+        }
+    }
+
+    /**
+     * Get a list of instruments available on the brokerage.
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * @param brokerageId  (required)
+     * @return ListAllBrokerageInstrumentsRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> A list of brokerage instruments. </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
+     </table>
+     */
+    public ReferenceDataApi.ListAllBrokerageInstrumentsRequestBuilder listAllBrokerageInstruments(UUID brokerageId) throws IllegalArgumentException {
+        if (brokerageId == null) throw new IllegalArgumentException("\"brokerageId\" is required but got null");
+            
+
+        return ((ReferenceDataApi) this).new ListAllBrokerageInstrumentsRequestBuilder(brokerageId);
     }
     private okhttp3.Call listAllBrokeragesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
