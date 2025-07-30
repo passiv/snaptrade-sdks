@@ -596,9 +596,9 @@ module SnapTrade
     end
 
 
-    # Get a list of instruments available on the brokerage.
+    # Get brokerage instruments
     #
-    # Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
     #
     # @param brokerage_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -607,9 +607,9 @@ module SnapTrade
       data
     end
 
-    # Get a list of instruments available on the brokerage.
+    # Get brokerage instruments
     #
-    # Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
     #
     # @param brokerage_id [String] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
@@ -617,8 +617,8 @@ module SnapTrade
       list_all_brokerage_instruments_with_http_info_impl(brokerage_id, extra)
     end
 
-    # Get a list of instruments available on the brokerage.
-    # Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+    # Get brokerage instruments
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
     # @param brokerage_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [BrokerageInstrumentsResponse]
@@ -627,8 +627,8 @@ module SnapTrade
       data
     end
 
-    # Get a list of instruments available on the brokerage.
-    # Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+    # Get brokerage instruments
+    # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
     # @param brokerage_id [String] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(BrokerageInstrumentsResponse, Integer, Hash)>] BrokerageInstrumentsResponse data, response status code and response headers

@@ -1319,8 +1319,8 @@ public class ReferenceDataApiGenerated {
     }
 
     /**
-     * Get a list of instruments available on the brokerage.
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Get brokerage instruments
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      * @param brokerageId  (required)
      * @return ListAllBrokerageInstrumentsRequestBuilder
      * @http.response.details

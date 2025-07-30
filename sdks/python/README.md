@@ -1545,7 +1545,7 @@ Comma separated value of brokerage slugs
 
 ### `snaptrade.reference_data.list_all_brokerage_instruments`<a id="snaptradereference_datalist_all_brokerage_instruments"></a>
 
-Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 

@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestBrokeragesBrokerageIdInstruments(ApiTestMixin, unittest.TestCase):
     """
     BrokeragesBrokerageIdInstruments unit test stubs
-        Get a list of instruments available on the brokerage.
+        Get brokerage instruments
     """
 
     def setUp(self):

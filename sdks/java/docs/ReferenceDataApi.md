@@ -11,7 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
 | [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
-| [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{brokerageId}/instruments | Get a list of instruments available on the brokerage. |
+| [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{brokerageId}/instruments | Get brokerage instruments |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
 | [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
 | [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -688,9 +688,9 @@ public class Example {
 # **listAllBrokerageInstruments**
 > BrokerageInstrumentsResponse listAllBrokerageInstruments(brokerageId).execute();
 
-Get a list of instruments available on the brokerage.
+Get brokerage instruments
 
-Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
 
 ### Example
 ```java

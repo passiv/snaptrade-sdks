@@ -1138,9 +1138,9 @@ func (r ReferenceDataApiListAllBrokerageInstrumentsRequest) Execute() (*Brokerag
 }
 
 /*
-ListAllBrokerageInstruments Get a list of instruments available on the brokerage.
+ListAllBrokerageInstruments Get brokerage instruments
 
-Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param brokerageId

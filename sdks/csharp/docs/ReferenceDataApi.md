@@ -11,7 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
-| [**ListAllBrokerageInstruments**](ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{brokerageId}/instruments | Get a list of instruments available on the brokerage. |
+| [**ListAllBrokerageInstruments**](ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{brokerageId}/instruments | Get brokerage instruments |
 | [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages |
 | [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies |
 | [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -650,7 +650,7 @@ catch (ApiException e)
 
 
 
-Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
 
 ### Example
 ```csharp
@@ -676,7 +676,7 @@ namespace Example
             
             try
             {
-                // Get a list of instruments available on the brokerage.
+                // Get brokerage instruments
                 BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(brokerageId);
                 Console.WriteLine(result);
             }
@@ -703,7 +703,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Get a list of instruments available on the brokerage.
+    // Get brokerage instruments
     ApiResponse<BrokerageInstrumentsResponse> response = apiInstance.ListAllBrokerageInstrumentsWithHttpInfo(brokerageId);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

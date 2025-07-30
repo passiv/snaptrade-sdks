@@ -156,9 +156,9 @@ public class ReferenceDataApiTest {
     }
 
     /**
-     * Get a list of instruments available on the brokerage.
+     * Get brokerage instruments
      *
-     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
      *
      * @throws ApiException if the Api call fails
      */
