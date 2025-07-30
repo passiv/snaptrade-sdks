@@ -58,6 +58,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.reference_data.get_symbols`](#snaptradereference_dataget_symbols)
   * [`snaptrade.reference_data.get_symbols_by_ticker`](#snaptradereference_dataget_symbols_by_ticker)
   * [`snaptrade.reference_data.list_all_brokerage_authorization_type`](#snaptradereference_datalist_all_brokerage_authorization_type)
+  * [`snaptrade.reference_data.list_all_brokerage_instruments`](#snaptradereference_datalist_all_brokerage_instruments)
   * [`snaptrade.reference_data.list_all_brokerages`](#snaptradereference_datalist_all_brokerages)
   * [`snaptrade.reference_data.list_all_currencies`](#snaptradereference_datalist_all_currencies)
   * [`snaptrade.reference_data.list_all_currencies_rates`](#snaptradereference_datalist_all_currencies_rates)
@@ -1537,6 +1538,36 @@ Comma separated value of brokerage slugs
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.reference_data.list_all_brokerage_instruments`<a id="snaptradereference_datalist_all_brokerage_instruments"></a>
+
+Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+list_all_brokerage_instruments_response = (
+    snaptrade.reference_data.list_all_brokerage_instruments(
+        brokerage_id="87b24961-b51e-4db8-9226-f198f6518a89",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_id: `str`<a id="brokerage_id-str"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`BrokerageInstrumentsResponse`](./snaptrade_client/type/brokerage_instruments_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/brokerages/{brokerageId}/instruments` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

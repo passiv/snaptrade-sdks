@@ -1497,6 +1497,28 @@ paths:
                   $ref: "#/components/schemas/Brokerage"
         default:
           description: Unexpected error.
+  "/brokerages/{brokerageId}/instruments":
+    get:
+      tags:
+        - Reference Data
+      summary: Get a list of instruments available on the brokerage.
+      description: Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+      operationId: ReferenceData_listAllBrokerageInstruments
+      parameters:
+        - in: path
+          required: true
+          name: brokerageId
+          schema:
+            $ref: "#/components/schemas/BrokerageID"
+      responses:
+        "200":
+          description: A list of brokerage instruments.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrokerageInstrumentsResponse"
+        default:
+          description: Unexpected error.
   "/brokerageAuthorizationTypes":
     get:
       tags:
@@ -2804,6 +2826,11 @@ components:
       description: Comma separated list of account IDs
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+    BrokerageID:
+      description: Unique identifier for the brokerage.
+      type: string
+      format: uuid
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
     BrokerageAuthID:
       description: Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
       type: string
@@ -4482,6 +4509,41 @@ components:
             - EQUITY
             - CRYPTOCURRENCY
             - CRYPTOCURRENCY_PAIR
+    BrokerageInstrumentsResponse:
+      type: object
+      properties:
+        instruments:
+          type: array
+          items:
+            $ref: "#/components/schemas/BrokerageInstrument"
+    BrokerageInstrument:
+      type: object
+      properties:
+        symbol:
+          description: The instrument's trading symbol / ticker.
+          type: string
+          example: AAPL
+        exchange_mic:
+          description: The MIC code of the exchange where the instrument is traded.
+          type: string
+          example: XNAS
+          nullable: true
+        tradeable:
+          description: Whether the instrument is tradeable through the brokerage. `null` if the tradeability is unknown.
+          type: boolean
+          example: true
+          nullable: true
+        fractionable:
+          description: Whether the instrument allows fractional units. `null` if the fractionability is unknown.
+          type: boolean
+          example: true
+          nullable: true
+        universal_symbol_id:
+          description: The universal symbol ID of the instrument. This is the ID used to reference the instrument in SnapTrade API calls.
+          type: string
+          format: uuid
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          nullable: true
     MlegTradingInstrument:
       type: object
       required:

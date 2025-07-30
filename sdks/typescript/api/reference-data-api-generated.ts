@@ -23,6 +23,8 @@ import { Brokerage } from '../models';
 // @ts-ignore
 import { BrokerageAuthorizationTypeReadOnly } from '../models';
 // @ts-ignore
+import { BrokerageInstrumentsResponse } from '../models';
+// @ts-ignore
 import { Currency } from '../models';
 // @ts-ignore
 import { Exchange } from '../models';
@@ -379,6 +381,54 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
             };
         },
         /**
+         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get a list of instruments available on the brokerage.
+         * @param {string} brokerageId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerageInstruments: async (brokerageId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'brokerageId' is not null or undefined
+            assertParamExists('listAllBrokerageInstruments', 'brokerageId', brokerageId)
+            const localVarPath = `/brokerages/{brokerageId}/instruments`
+                .replace(`{${"brokerageId"}}`, encodeURIComponent(String(brokerageId !== undefined ? brokerageId : `-brokerageId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/brokerages/{brokerageId}/instruments',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a list of all defined Brokerage objects.
          * @summary Get brokerages
          * @param {*} [options] Override http request option.
@@ -666,6 +716,17 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get a list of instruments available on the brokerage.
+         * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageInstrumentsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageInstruments(requestParameters.brokerageId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of all defined Brokerage objects.
          * @summary Get brokerages
          * @param {*} [options] Override http request option.
@@ -787,6 +848,16 @@ export const ReferenceDataApiFactory = function (configuration?: Configuration, 
             return localVarFp.listAllBrokerageAuthorizationType(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
+         * @summary Get a list of instruments available on the brokerage.
+         * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest, options?: AxiosRequestConfig): AxiosPromise<BrokerageInstrumentsResponse> {
+            return localVarFp.listAllBrokerageInstruments(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a list of all defined Brokerage objects.
          * @summary Get brokerages
          * @param {*} [options] Override http request option.
@@ -880,6 +951,22 @@ export type ReferenceDataApiListAllBrokerageAuthorizationTypeRequest = {
     * @memberof ReferenceDataApiListAllBrokerageAuthorizationType
     */
     readonly brokerage?: string
+    
+}
+
+/**
+ * Request parameters for listAllBrokerageInstruments operation in ReferenceDataApi.
+ * @export
+ * @interface ReferenceDataApiListAllBrokerageInstrumentsRequest
+ */
+export type ReferenceDataApiListAllBrokerageInstrumentsRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ReferenceDataApiListAllBrokerageInstruments
+    */
+    readonly brokerageId: string
     
 }
 
@@ -999,6 +1086,18 @@ export class ReferenceDataApiGenerated extends BaseAPI {
      */
     public listAllBrokerageAuthorizationType(requestParameters: ReferenceDataApiListAllBrokerageAuthorizationTypeRequest = {}, options?: AxiosRequestConfig) {
         return ReferenceDataApiFp(this.configuration).listAllBrokerageAuthorizationType(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don\'t will return an empty list.
+     * @summary Get a list of instruments available on the brokerage.
+     * @param {ReferenceDataApiListAllBrokerageInstrumentsRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReferenceDataApiGenerated
+     */
+    public listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest, options?: AxiosRequestConfig) {
+        return ReferenceDataApiFp(this.configuration).listAllBrokerageInstruments(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

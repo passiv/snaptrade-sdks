@@ -449,6 +449,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/brokerages/{brokerageId}/instruments-GET': {
+        parameters: [
+            {
+                name: 'brokerageId'
+            },
+        ]
+    },
     '/brokerages-GET': {
         parameters: [
         ]

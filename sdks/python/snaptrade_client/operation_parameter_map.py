@@ -443,6 +443,13 @@ operation_parameter_map = {
             },
         ]
     },
+    '/brokerages/{brokerageId}/instruments-GET': {
+        'parameters': [
+            {
+                'name': 'brokerageId'
+            },
+        ]
+    },
     '/brokerages-GET': {
         'parameters': [
         ]

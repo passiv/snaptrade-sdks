@@ -2695,6 +2695,35 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages
       x-accepts: application/json
+  /brokerages/{brokerageId}/instruments:
+    get:
+      description: "Returns a list of all brokerage instruments available for a given\
+        \ brokerage, optionally filtered by a search. Not all brokerages support this.\
+        \ The ones that don't will return an empty list."
+      operationId: ReferenceData_listAllBrokerageInstruments
+      parameters:
+      - explode: false
+        in: path
+        name: brokerageId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrokerageInstrumentsResponse'
+          description: A list of brokerage instruments.
+        default:
+          description: Unexpected error.
+      summary: Get a list of instruments available on the brokerage.
+      tags:
+      - Reference Data
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages-brokerageId-instruments
+      x-accepts: application/json
   /brokerageAuthorizationTypes:
     get:
       description: Returns a list of all defined Brokerage authorization Type objects.
@@ -3404,6 +3433,13 @@ components:
       type: string
       x-konfig-original-example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountIDs
+    BrokerageID:
+      description: Unique identifier for the brokerage.
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
+      format: uuid
+      type: string
+      x-konfig-original-example: 87b24961-b51e-4db8-9226-f198f6518a89
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageID
     BrokerageAuthID:
       description: Unique identifier for the connection. This is the UUID used to
         reference the connection in SnapTrade.
@@ -7130,6 +7166,75 @@ components:
       - symbol
       - type
       type: object
+    BrokerageInstrumentsResponse:
+      additionalProperties: true
+      example:
+        instruments:
+        - symbol: AAPL
+          universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          exchange_mic: XNAS
+          tradeable: true
+          fractionable: true
+        - symbol: AAPL
+          universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          exchange_mic: XNAS
+          tradeable: true
+          fractionable: true
+      properties:
+        instruments:
+          items:
+            $ref: '#/components/schemas/BrokerageInstrument'
+          type: array
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    BrokerageInstrument:
+      additionalProperties: true
+      example:
+        symbol: AAPL
+        universal_symbol_id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        exchange_mic: XNAS
+        tradeable: true
+        fractionable: true
+      properties:
+        symbol:
+          description: The instrument's trading symbol / ticker.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-symbol
+        exchange_mic:
+          description: The MIC code of the exchange where the instrument is traded.
+          example: XNAS
+          nullable: true
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-exchange_mic
+        tradeable:
+          description: Whether the instrument is tradeable through the brokerage.
+            `null` if the tradeability is unknown.
+          example: true
+          nullable: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-tradeable
+        fractionable:
+          description: Whether the instrument allows fractional units. `null` if the
+            fractionability is unknown.
+          example: true
+          nullable: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-fractionable
+        universal_symbol_id:
+          description: The universal symbol ID of the instrument. This is the ID used
+            to reference the instrument in SnapTrade API calls.
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          format: uuid
+          nullable: true
+          type: string
+          x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-universal_symbol_id
+      type: object
     MlegTradingInstrument:
       additionalProperties: true
       example:
@@ -8818,6 +8923,10 @@ components:
       example: "917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageID:
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthID:
       example: 87b24961-b51e-4db8-9226-f198f6518a89
       type: string
@@ -9664,6 +9773,26 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TradingInstrument-properties-symbol:
       example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageInstrument-properties-exchange_mic:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageInstrument-properties-tradeable:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageInstrument-properties-fractionable:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-BrokerageInstrument-properties-universal_symbol_id:
+      example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegTradingInstrument-properties-symbol:
@@ -11362,6 +11491,17 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--brokerages-brokerageId-instruments:
+      additionalProperties: true
+      properties:
+        brokerageId:
+          $ref: '#/components/schemas/BrokerageID'
+      required:
+      - brokerageId
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - brokerageId
     konfig-generated-schema-single-parameter-schema-get--brokerageAuthorizationTypes:
       additionalProperties: true
       properties:

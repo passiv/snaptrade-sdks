@@ -27,6 +27,8 @@ export * from './brokerage-authorization-disabled-confirmation';
 export * from './brokerage-authorization-refresh-confirmation';
 export * from './brokerage-authorization-type-read-only';
 export * from './brokerage-authorization-type-read-only-brokerage';
+export * from './brokerage-instrument';
+export * from './brokerage-instruments-response';
 export * from './brokerage-type';
 export * from './cancel-order-response';
 export * from './child-brokerage-order-ids';

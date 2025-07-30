@@ -11,6 +11,7 @@ Method | Path | Description
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
+[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{brokerageId}/instruments | Get a list of instruments available on the brokerage.
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
 [**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
 [**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
@@ -363,6 +364,50 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTypeReadOnly.ListAllBrokerageAuthorizationType.Type`: %v\n", *resp.Type)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTypeReadOnly.ListAllBrokerageAuthorizationType.AuthType`: %v\n", *resp.AuthType)
     fmt.Fprintf(os.Stdout, "Response from `BrokerageAuthorizationTypeReadOnly.ListAllBrokerageAuthorizationType.Brokerage`: %v\n", *resp.Brokerage)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListAllBrokerageInstruments
+
+Get a list of instruments available on the brokerage.
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ReferenceDataApi.ListAllBrokerageInstruments(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.ListAllBrokerageInstruments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListAllBrokerageInstruments`: BrokerageInstrumentsResponse
+    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.ListAllBrokerageInstruments`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageInstrumentsResponse.ListAllBrokerageInstruments.Instruments`: %v\n", *resp.Instruments)
 }
 ```
 

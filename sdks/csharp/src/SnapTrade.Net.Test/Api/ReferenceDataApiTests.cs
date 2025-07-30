@@ -244,6 +244,34 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test ListAllBrokerageInstruments
+        /// </summary>
+        [Fact]
+        public void ListAllBrokerageInstrumentsTest()
+        {
+            var brokerageId = "brokerageId_example";
+            
+            try
+            {
+                // Get a list of instruments available on the brokerage.
+                BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(brokerageId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ReferenceDataApi.ListAllBrokerageInstruments: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test ListAllBrokerages
         /// </summary>
         [Fact]

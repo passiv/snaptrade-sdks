@@ -59,6 +59,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.referenceData.getSymbols`](#snaptradereferencedatagetsymbols)
   * [`snaptrade.referenceData.getSymbolsByTicker`](#snaptradereferencedatagetsymbolsbyticker)
   * [`snaptrade.referenceData.listAllBrokerageAuthorizationType`](#snaptradereferencedatalistallbrokerageauthorizationtype)
+  * [`snaptrade.referenceData.listAllBrokerageInstruments`](#snaptradereferencedatalistallbrokerageinstruments)
   * [`snaptrade.referenceData.listAllBrokerages`](#snaptradereferencedatalistallbrokerages)
   * [`snaptrade.referenceData.listAllCurrencies`](#snaptradereferencedatalistallcurrencies)
   * [`snaptrade.referenceData.listAllCurrenciesRates`](#snaptradereferencedatalistallcurrenciesrates)
@@ -1582,6 +1583,36 @@ Comma separated value of brokerage slugs
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/brokerageAuthorizationTypes` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.referenceData.listAllBrokerageInstruments`<a id="snaptradereferencedatalistallbrokerageinstruments"></a>
+
+Returns a list of all brokerage instruments available for a given brokerage, optionally filtered by a search. Not all brokerages support this. The ones that don't will return an empty list.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+BrokerageInstrumentsResponse result = client
+        .referenceData
+        .listAllBrokerageInstruments(brokerageId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerageId: `UUID`<a id="brokerageid-uuid"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[BrokerageInstrumentsResponse](./src/main/java/com/konfigthis/client/model/BrokerageInstrumentsResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/brokerages/{brokerageId}/instruments` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

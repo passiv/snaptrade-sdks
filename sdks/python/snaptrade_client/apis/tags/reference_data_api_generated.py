@@ -16,6 +16,7 @@ from snaptrade_client.paths.exchanges.get import GetStockExchanges
 from snaptrade_client.paths.symbols.post import GetSymbols
 from snaptrade_client.paths.symbols_query.get import GetSymbolsByTicker
 from snaptrade_client.paths.brokerage_authorization_types.get import ListAllBrokerageAuthorizationType
+from snaptrade_client.paths.brokerages_brokerage_id_instruments.get import ListAllBrokerageInstruments
 from snaptrade_client.paths.brokerages.get import ListAllBrokerages
 from snaptrade_client.paths.currencies.get import ListAllCurrencies
 from snaptrade_client.paths.currencies_rates.get import ListAllCurrenciesRates
@@ -30,6 +31,7 @@ class ReferenceDataApiGenerated(
     GetSymbols,
     GetSymbolsByTicker,
     ListAllBrokerageAuthorizationType,
+    ListAllBrokerageInstruments,
     ListAllBrokerages,
     ListAllCurrencies,
     ListAllCurrenciesRates,
