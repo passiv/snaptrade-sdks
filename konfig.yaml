@@ -102,6 +102,8 @@ portal:
       post: true
     /accounts/{accountId}/trading/options:
       post: true
+    /brokerages/{brokerageId}/instruments:
+      get: true
   hideOperations:
     /activities:
       get: true
