@@ -20,6 +20,12 @@ describe SnapTrade::ManualTradeReplaceForm do
       expect(instance).to be_instance_of(SnapTrade::ManualTradeReplaceForm)
     end
   end
+  describe 'test attribute "brokerage_order_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "action"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

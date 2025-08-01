@@ -138,6 +138,7 @@ class SimpleOrderForm(
                 "post_only": post_only,
                 "expiration_date": expiration_date,
             }
+        additional_properties = schemas.AnyTypeSchema
     
     amount: MetaOapg.properties.amount
     side: 'ActionStrict'
@@ -146,19 +147,19 @@ class SimpleOrderForm(
     type: MetaOapg.properties.type
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
+    def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["side"]) -> 'ActionStrict': ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
-    
-    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
+    def __getitem__(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
+    
+    @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
     
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["limit_price"]) -> MetaOapg.properties.limit_price: ...
@@ -173,27 +174,26 @@ class SimpleOrderForm(
     def __getitem__(self, name: typing_extensions.Literal["expiration_date"]) -> MetaOapg.properties.expiration_date: ...
     
     @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
+    def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["instrument", "side", "type", "time_in_force", "amount", "limit_price", "stop_price", "post_only", "expiration_date", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["amount"], typing_extensions.Literal["side"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["instrument"], typing_extensions.Literal["type"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["post_only"], typing_extensions.Literal["expiration_date"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
-    
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
+    def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["side"]) -> 'ActionStrict': ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
-    
-    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["time_in_force"]) -> MetaOapg.properties.time_in_force: ...
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["amount"]) -> MetaOapg.properties.amount: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["instrument"]) -> 'TradingInstrument': ...
+    
+    @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["type"]) -> MetaOapg.properties.type: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["limit_price"]) -> typing.Union[MetaOapg.properties.limit_price, schemas.Unset]: ...
@@ -208,11 +208,10 @@ class SimpleOrderForm(
     def get_item_oapg(self, name: typing_extensions.Literal["expiration_date"]) -> typing.Union[MetaOapg.properties.expiration_date, schemas.Unset]: ...
     
     @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
+    def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["instrument", "side", "type", "time_in_force", "amount", "limit_price", "stop_price", "post_only", "expiration_date", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["amount"], typing_extensions.Literal["side"], typing_extensions.Literal["time_in_force"], typing_extensions.Literal["instrument"], typing_extensions.Literal["type"], typing_extensions.Literal["limit_price"], typing_extensions.Literal["stop_price"], typing_extensions.Literal["post_only"], typing_extensions.Literal["expiration_date"], str, ]):
         return super().get_item_oapg(name)
-    
 
     def __new__(
         cls,
@@ -227,7 +226,7 @@ class SimpleOrderForm(
         post_only: typing.Union[MetaOapg.properties.post_only, bool, schemas.Unset] = schemas.unset,
         expiration_date: typing.Union[MetaOapg.properties.expiration_date, str, datetime, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+        **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'SimpleOrderForm':
         return super().__new__(
             cls,

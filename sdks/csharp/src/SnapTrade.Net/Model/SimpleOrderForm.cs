@@ -134,7 +134,10 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="SimpleOrderForm" /> class.
         /// </summary>
         [JsonConstructorAttribute]
-        protected SimpleOrderForm() { }
+        protected SimpleOrderForm()
+        {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleOrderForm" /> class.
         /// </summary>
@@ -147,7 +150,7 @@ namespace SnapTrade.Net.Model
         /// <param name="stopPrice">The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT..</param>
         /// <param name="postOnly">Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. .</param>
         /// <param name="expirationDate">The expiration date of the order. Required if the time_in_force is GTD..</param>
-        public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime))
+        public SimpleOrderForm(TradingInstrument instrument = default(TradingInstrument), ActionStrict side = default(ActionStrict), TypeEnum type = default(TypeEnum), TimeInForceEnum timeInForce = default(TimeInForceEnum), decimal amount = default(decimal), decimal limitPrice = default(decimal), decimal stopPrice = default(decimal), bool postOnly = default(bool), DateTime expirationDate = default(DateTime)) : base()
         {
             // to ensure "instrument" is required (not null)
             if (instrument == null)
@@ -163,6 +166,7 @@ namespace SnapTrade.Net.Model
             this.StopPrice = stopPrice;
             this.PostOnly = postOnly;
             this.ExpirationDate = expirationDate;
+            this.AdditionalProperties = new Dictionary<string, object>();
         }
 
         /// <summary>
@@ -207,6 +211,12 @@ namespace SnapTrade.Net.Model
         public DateTime ExpirationDate { get; set; }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public IDictionary<string, object> AdditionalProperties { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -214,6 +224,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class SimpleOrderForm {\n");
+            sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  Side: ").Append(Side).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -223,6 +234,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  StopPrice: ").Append(StopPrice).Append("\n");
             sb.Append("  PostOnly: ").Append(PostOnly).Append("\n");
             sb.Append("  ExpirationDate: ").Append(ExpirationDate).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -231,7 +243,7 @@ namespace SnapTrade.Net.Model
         /// Returns the JSON string presentation of the object
         /// </summary>
         /// <returns>JSON string presentation of the object</returns>
-        public virtual string ToJson()
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
         }
@@ -257,45 +269,46 @@ namespace SnapTrade.Net.Model
             {
                 return false;
             }
-            return 
+            return base.Equals(input) && 
                 (
                     this.Instrument == input.Instrument ||
                     (this.Instrument != null &&
                     this.Instrument.Equals(input.Instrument))
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Side == input.Side ||
                     this.Side.Equals(input.Side)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Type == input.Type ||
                     this.Type.Equals(input.Type)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.TimeInForce == input.TimeInForce ||
                     this.TimeInForce.Equals(input.TimeInForce)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.Amount == input.Amount ||
                     this.Amount.Equals(input.Amount)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.LimitPrice == input.LimitPrice ||
                     this.LimitPrice.Equals(input.LimitPrice)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.StopPrice == input.StopPrice ||
                     this.StopPrice.Equals(input.StopPrice)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.PostOnly == input.PostOnly ||
                     this.PostOnly.Equals(input.PostOnly)
-                ) && 
+                ) && base.Equals(input) && 
                 (
                     this.ExpirationDate == input.ExpirationDate ||
                     (this.ExpirationDate != null &&
                     this.ExpirationDate.Equals(input.ExpirationDate))
-                );
+                )
+                && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
 
         /// <summary>
@@ -306,7 +319,7 @@ namespace SnapTrade.Net.Model
         {
             unchecked // Overflow is fine, just wrap
             {
-                int hashCode = 41;
+                int hashCode = base.GetHashCode();
                 if (this.Instrument != null)
                 {
                     hashCode = (hashCode * 59) + this.Instrument.GetHashCode();
@@ -321,6 +334,10 @@ namespace SnapTrade.Net.Model
                 if (this.ExpirationDate != null)
                 {
                     hashCode = (hashCode * 59) + this.ExpirationDate.GetHashCode();
+                }
+                if (this.AdditionalProperties != null)
+                {
+                    hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();
                 }
                 return hashCode;
             }

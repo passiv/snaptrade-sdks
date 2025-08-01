@@ -70,11 +70,11 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
+  * [`snaptrade.trading.placeCryptoOrder`](#snaptradetradingplacecryptoorder)
   * [`snaptrade.trading.placeForceOrder`](#snaptradetradingplaceforceorder)
   * [`snaptrade.trading.placeMlegOrder`](#snaptradetradingplacemlegorder)
   * [`snaptrade.trading.placeOrder`](#snaptradetradingplaceorder)
-  * [`snaptrade.trading.placeSimpleOrder`](#snaptradetradingplacesimpleorder)
-  * [`snaptrade.trading.previewSimpleOrder`](#snaptradetradingpreviewsimpleorder)
+  * [`snaptrade.trading.previewCryptoOrder`](#snaptradetradingpreviewcryptoorder)
   * [`snaptrade.trading.replaceOrder`](#snaptradetradingreplaceorder)
   * [`snaptrade.trading.searchCryptocurrencyPairInstruments`](#snaptradetradingsearchcryptocurrencypairinstruments)
   * [`snaptrade.transactionsAndReporting.getActivities`](#snaptradetransactionsandreportinggetactivities)
@@ -1741,7 +1741,7 @@ The search query for symbols.
 
 ### `snaptrade.trading.cancelOrder`<a id="snaptradetradingcancelorder"></a>
 
-Cancels an order in the specified account.
+Cancels an order in the specified account. Accepts order IDs for all asset types.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1780,7 +1780,9 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 
 ### `snaptrade.trading.cancelUserAccountOrder`<a id="snaptradetradingcanceluseraccountorder"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -2033,6 +2035,78 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 ---
 
 
+### `snaptrade.trading.placeCryptoOrder`<a id="snaptradetradingplacecryptoorder"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+OrderUpdatedResponse result = client
+        .trading
+        .placeCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .postOnly(postOnly)
+        .expirationDate(expirationDate)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/konfigthis/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomkonfigthisclientmodelcryptotradinginstrumentjava"></a>
+
+##### side:<a id="side"></a>
+
+##### type: `String`<a id="type-string"></a>
+
+The type of order to place.
+
+##### time_in_force: `String`<a id="time_in_force-string"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
+
+The amount of the base currency to buy or sell.
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `Boolean`<a id="post_only-boolean"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
 ### `snaptrade.trading.placeForceOrder`<a id="snaptradetradingplaceforceorder"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -2206,79 +2280,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 ---
 
 
-### `snaptrade.trading.placeSimpleOrder`<a id="snaptradetradingplacesimpleorder"></a>
-
-Places an order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-OrderUpdatedResponse result = client
-        .trading
-        .placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
-        .limitPrice(limitPrice)
-        .stopPrice(stopPrice)
-        .postOnly(postOnly)
-        .expirationDate(expirationDate)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
-
-##### side:<a id="side"></a>
-
-##### type: `String`<a id="type-string"></a>
-
-The type of order to place.
-
-##### time_in_force: `String`<a id="time_in_force-string"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-
-##### amount: `BigDecimal`<a id="amount-bigdecimal"></a>
-
-The amount of the base currency to buy or sell.
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
-
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-
-##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
-
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `Boolean`<a id="post_only-boolean"></a>
-
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-
-##### expiration_date: `OffsetDateTime`<a id="expiration_date-offsetdatetime"></a>
-
-The expiration date of the order. Required if the time_in_force is GTD.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/simple` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.trading.previewSimpleOrder`<a id="snaptradetradingpreviewsimpleorder"></a>
+### `snaptrade.trading.previewCryptoOrder`<a id="snaptradetradingpreviewcryptoorder"></a>
 
 Previews an order using the specified account.
 
@@ -2286,9 +2288,9 @@ Previews an order using the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```java
-SimpleOrderPreview result = client
+CryptoOrderPreview result = client
         .trading
-        .previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+        .previewCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
         .limitPrice(limitPrice)
         .stopPrice(stopPrice)
         .postOnly(postOnly)
@@ -2298,7 +2300,7 @@ SimpleOrderPreview result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
+##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/konfigthis/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomkonfigthisclientmodelcryptotradinginstrumentjava"></a>
 
 ##### side:<a id="side"></a>
 
@@ -2338,11 +2340,11 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[SimpleOrderPreview](./src/main/java/com/konfigthis/client/model/SimpleOrderPreview.java)
+[CryptoOrderPreview](./src/main/java/com/konfigthis/client/model/CryptoOrderPreview.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/preview` `POST`
+`/accounts/{accountId}/trading/crypto/preview` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2361,7 +2363,7 @@ returned in the response going forward. Only supported on some brokerages
 ```java
 AccountOrderRecord result = client
         .trading
-        .replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+        .replaceOrder(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret)
         .price(price)
         .symbol(symbol)
         .stop(stop)
@@ -2370,6 +2372,10 @@ AccountOrderRecord result = client
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### action:<a id="action"></a>
 
@@ -2380,10 +2386,6 @@ AccountOrderRecord result = client
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
 
 The ID of the account to execute the trade on.
-
-##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
-
-The Brokerage Order ID of the order to replace.
 
 ##### userId: `String`<a id="userid-string"></a>
 
@@ -2411,7 +2413,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `PATCH`
+`/accounts/{accountId}/trading/replace` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

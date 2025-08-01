@@ -15,11 +15,17 @@ import { OrderTypeStrict } from './order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
 
 /**
- * Inputs for placing an order with the brokerage.
+ * Inputs for replacing an order with the brokerage.
  * @export
  * @interface ManualTradeReplaceForm
  */
 export interface ManualTradeReplaceForm {
+    /**
+     * Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+     * @type {string}
+     * @memberof ManualTradeReplaceForm
+     */
+    'brokerage_order_id': string;
     /**
      * The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
      * @type {ActionStrict}

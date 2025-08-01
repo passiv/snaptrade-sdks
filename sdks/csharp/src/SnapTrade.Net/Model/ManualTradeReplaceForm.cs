@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Inputs for placing an order with the brokerage.
+    /// Inputs for replacing an order with the brokerage.
     /// </summary>
     [DataContract(Name = "ManualTradeReplaceForm")]
     public partial class ManualTradeReplaceForm : IEquatable<ManualTradeReplaceForm>, IValidatableObject
@@ -58,6 +58,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeReplaceForm" /> class.
         /// </summary>
+        /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (required).</param>
         /// <param name="action">action (required).</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
@@ -65,8 +66,14 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">The security&#39;s trading ticker symbol.</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
-        public ManualTradeReplaceForm(ActionStrict action = default(ActionStrict), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), string symbol = default(string), double? stop = default(double?), double? units = default(double?))
+        public ManualTradeReplaceForm(string brokerageOrderId = default(string), ActionStrict action = default(ActionStrict), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), string symbol = default(string), double? stop = default(double?), double? units = default(double?))
         {
+            // to ensure "brokerageOrderId" is required (not null)
+            if (brokerageOrderId == null)
+            {
+                throw new ArgumentNullException("brokerageOrderId is a required property for ManualTradeReplaceForm and cannot be null");
+            }
+            this.BrokerageOrderId = brokerageOrderId;
             this._Action = action;
             this.OrderType = orderType;
             this.TimeInForce = timeInForce;
@@ -75,6 +82,13 @@ namespace SnapTrade.Net.Model
             this.Stop = stop;
             this.Units = units;
         }
+
+        /// <summary>
+        /// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+        /// </summary>
+        /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
+        [DataMember(Name = "brokerage_order_id", IsRequired = true, EmitDefaultValue = true)]
+        public string BrokerageOrderId { get; set; }
 
         /// <summary>
         /// The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders.
@@ -112,6 +126,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeReplaceForm {\n");
+            sb.Append("  BrokerageOrderId: ").Append(BrokerageOrderId).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
@@ -155,6 +170,11 @@ namespace SnapTrade.Net.Model
             }
             return 
                 (
+                    this.BrokerageOrderId == input.BrokerageOrderId ||
+                    (this.BrokerageOrderId != null &&
+                    this.BrokerageOrderId.Equals(input.BrokerageOrderId))
+                ) && 
+                (
                     this._Action == input._Action ||
                     this._Action.Equals(input._Action)
                 ) && 
@@ -197,6 +217,10 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
+                if (this.BrokerageOrderId != null)
+                {
+                    hashCode = (hashCode * 59) + this.BrokerageOrderId.GetHashCode();
+                }
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();

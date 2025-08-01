@@ -631,6 +631,46 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/crypto-POST': {
+        parameters: [
+            {
+                name: 'instrument'
+            },
+            {
+                name: 'side'
+            },
+            {
+                name: 'type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'amount'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'post_only'
+            },
+            {
+                name: 'expiration_date'
+            },
+        ]
+    },
     '/trade/place-POST': {
         parameters: [
             {
@@ -718,7 +758,7 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/simple-POST': {
+    '/accounts/{accountId}/trading/crypto/preview-POST': {
         parameters: [
             {
                 name: 'instrument'
@@ -758,48 +798,11 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/trading/simple/preview-POST': {
+    '/accounts/{accountId}/trading/replace-POST': {
         parameters: [
             {
-                name: 'instrument'
+                name: 'brokerage_order_id'
             },
-            {
-                name: 'side'
-            },
-            {
-                name: 'type'
-            },
-            {
-                name: 'time_in_force'
-            },
-            {
-                name: 'amount'
-            },
-            {
-                name: 'userId'
-            },
-            {
-                name: 'userSecret'
-            },
-            {
-                name: 'accountId'
-            },
-            {
-                name: 'limit_price'
-            },
-            {
-                name: 'stop_price'
-            },
-            {
-                name: 'post_only'
-            },
-            {
-                name: 'expiration_date'
-            },
-        ]
-    },
-    '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace-PATCH': {
-        parameters: [
             {
                 name: 'action'
             },
@@ -811,9 +814,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
-            },
-            {
-                name: 'brokerageOrderId'
             },
             {
                 name: 'userId'
