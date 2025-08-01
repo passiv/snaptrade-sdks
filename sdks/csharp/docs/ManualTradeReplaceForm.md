@@ -1,10 +1,11 @@
 # SnapTrade.Net.Model.ManualTradeReplaceForm
-Inputs for placing an order with the brokerage.
+Inputs for replacing an order with the brokerage.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
 **_Action** | **ActionStrict** |  | 
 **OrderType** | **OrderTypeStrict** |  | 
 **TimeInForce** | **TimeInForceStrict** |  | 

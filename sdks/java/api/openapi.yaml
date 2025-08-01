@@ -2060,7 +2060,9 @@ paths:
       x-accepts: application/json
   /accounts/{accountId}/orders/cancel:
     post:
+      deprecated: true
       description: |
+        **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
         Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
       parameters:
@@ -2292,58 +2294,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs
       x-accepts: application/json
-  /accounts/{accountId}/trading/simple/preview:
-    post:
-      description: |
-        Previews an order using the specified account.
-      operationId: Trading_previewSimpleOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SimpleOrderPreview'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Preview crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview
-      x-content-type: application/json
-      x-accepts: application/json
   /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
     get:
       description: |
@@ -2400,61 +2350,8 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
       x-accepts: application/json
-  /accounts/{accountId}/trading/simple:
+  /accounts/{accountId}/trading/replace:
     post:
-      description: |
-        Places an order in the specified account.
-        This endpoint does not compute the impact to the account balance from the order before submitting the order.
-      operationId: Trading_placeSimpleOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/SimpleOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderUpdatedResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-          x-do-not-generate: true
-        "500":
-          description: Unexpected Error
-      summary: Place crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple
-      x-content-type: application/json
-      x-accepts: application/json
-  /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
-    patch:
       description: |
         Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
         the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
@@ -2468,14 +2365,6 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/Id'
-        style: simple
-      - description: The Brokerage Order ID of the order to replace.
-        explode: false
-        in: path
-        name: brokerageOrderId
-        required: true
-        schema:
-          $ref: '#/components/schemas/BrokerageOrderID'
         style: simple
       - explode: true
         in: query
@@ -2520,13 +2409,13 @@ paths:
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
       x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/trading/cancel:
     post:
       description: |
-        Cancels an order in the specified account.
+        Cancels an order in the specified account. Accepts order IDs for all asset types.
       operationId: Trading_cancelOrder
       parameters:
       - explode: true
@@ -2573,6 +2462,111 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto:
+    post:
+      description: |
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeCryptoOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderUpdatedResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Place crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto
+      x-content-type: application/json
+      x-accepts: application/json
+  /accounts/{accountId}/trading/crypto/preview:
+    post:
+      description: |
+        Previews an order using the specified account.
+      operationId: Trading_previewCryptoOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoOrderPreview'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+      summary: Preview crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview
       x-content-type: application/json
       x-accepts: application/json
   /snapTrade/partners:
@@ -3013,6 +3007,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/SimpleOrderForm'
+      required: true
+    CryptoOrderRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CryptoOrderForm'
       required: true
     MlegOrderRequestBody:
       content:
@@ -6919,16 +6919,24 @@ components:
         price_effect:
           nullable: true
     ManualTradeReplaceForm:
-      description: Inputs for placing an order with the brokerage.
+      description: Inputs for replacing an order with the brokerage.
       example:
         symbol: AAPL
         time_in_force: Day
         stop: 31.33
         price: 31.33
         action: null
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
         units: 10.5
         order_type: Market
       properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
         action:
           $ref: '#/components/schemas/ActionStrict'
         order_type:
@@ -6966,6 +6974,7 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
       required:
       - action
+      - brokerage_order_id
       - order_type
       - time_in_force
       type: object
@@ -7142,6 +7151,28 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ValidatedTradeBody-properties-wait_to_confirm
+      type: object
+    CryptoTradingInstrument:
+      additionalProperties: true
+      example:
+        symbol: BTC
+        type: CRYPTOCURRENCY
+      properties:
+        symbol:
+          description: The instrument's trading ticker symbol
+          example: BTC
+          type: string
+          x-konfig-original-example: BTC
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoTradingInstrument-properties-symbol
+        type:
+          description: The instrument's type
+          enum:
+          - CRYPTOCURRENCY
+          - CRYPTOCURRENCY_PAIR
+          type: string
+      required:
+      - symbol
+      - type
       type: object
     TradingInstrument:
       additionalProperties: true
@@ -7524,7 +7555,7 @@ components:
       - bid
       type: object
       x-konfig-is-used-in-successful-response: true
-    SimpleOrderPreview:
+    CryptoOrderPreview:
       additionalProperties: true
       description: Preview of an order.
       example:
@@ -7533,7 +7564,7 @@ components:
           currency: BTC
       properties:
         estimated_fee:
-          $ref: '#/components/schemas/SimpleOrderPreview_estimated_fee'
+          $ref: '#/components/schemas/CryptoOrderPreview_estimated_fee'
       type: object
       x-konfig-is-used-in-successful-response: true
     OrderUpdatedResponse:
@@ -8735,18 +8766,7 @@ components:
       - units
       type: object
     SimpleOrderForm:
-      example:
-        side: null
-        time_in_force: GTC
-        amount: "123.45"
-        stop_price: "123.45"
-        instrument:
-          symbol: AAPL
-          type: EQUITY
-        post_only: false
-        type: MARKET
-        expiration_date: 2024-01-01T00:00:00Z
-        limit_price: "123.45"
+      additionalProperties: true
       properties:
         instrument:
           $ref: '#/components/schemas/TradingInstrument'
@@ -8813,6 +8833,92 @@ components:
           type: string
           x-konfig-original-example: 2024-01-01T00:00:00Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
+      required:
+      - amount
+      - instrument
+      - side
+      - time_in_force
+      - type
+      type: object
+    CryptoOrderForm:
+      example:
+        side: null
+        time_in_force: GTC
+        amount: "123.45"
+        stop_price: "123.45"
+        instrument:
+          symbol: BTC
+          type: CRYPTOCURRENCY
+        post_only: false
+        type: MARKET
+        expiration_date: 2024-01-01T00:00:00Z
+        limit_price: "123.45"
+      properties:
+        instrument:
+          $ref: '#/components/schemas/CryptoTradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date
       required:
       - amount
       - instrument
@@ -9771,6 +9877,10 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoTradingInstrument-properties-symbol:
+      example: BTC
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-TradingInstrument-properties-symbol:
       example: AAPL
       type: string
@@ -9871,7 +9981,7 @@ components:
       example: 2024-01-24T15:00:00.000Z
       type: string
       x-do-not-generate: true
-    konfig-generated-schema-components-schemas-SimpleOrderPreview-properties-estimated_fee-properties-amount:
+    konfig-generated-schema-components-schemas-CryptoOrderPreview-properties-estimated_fee-properties-amount:
       example: "123.45"
       type: string
       x-do-not-generate: true
@@ -10146,6 +10256,26 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date:
+      example: 2024-01-01T00:00:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price:
+      example: "123.45"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only:
+      example: false
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date:
       example: 2024-01-01T00:00:00Z
       type: string
       x-do-not-generate: true
@@ -11177,95 +11307,6 @@ components:
       - accountId
       - base
       - quote
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple-preview:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        instrument:
-          $ref: '#/components/schemas/TradingInstrument'
-        side:
-          $ref: '#/components/schemas/ActionStrict'
-        type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          - TAKE_PROFIT_MARKET
-          - TAKE_PROFIT_LIMIT
-          type: string
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
-        amount:
-          description: The amount of the base currency to buy or sell.
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
-        post_only:
-          description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
-        expiration_date:
-          description: The expiration date of the order. Required if the time_in_force
-            is GTD.
-          example: 2024-01-01T00:00:00Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
-      required:
-      - accountId
-      - amount
-      - instrument
-      - side
-      - time_in_force
-      - type
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
     ? konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
     : additionalProperties: true
       properties:
@@ -11289,106 +11330,17 @@ components:
       - userSecret
       - accountId
       - instrumentSymbol
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-simple:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        instrument:
-          $ref: '#/components/schemas/TradingInstrument'
-        side:
-          $ref: '#/components/schemas/ActionStrict'
-        type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          - TAKE_PROFIT_MARKET
-          - TAKE_PROFIT_LIMIT
-          type: string
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
-        amount:
-          description: The amount of the base currency to buy or sell.
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-amount
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-stop_price
-        post_only:
-          description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-post_only
-        expiration_date:
-          description: The expiration date of the order. Required if the time_in_force
-            is GTD.
-          example: 2024-01-01T00:00:00Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderForm-properties-expiration_date
-      required:
-      - accountId
-      - amount
-      - instrument
-      - side
-      - time_in_force
-      - type
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-    konfig-generated-schema-single-parameter-schema-patch--accounts-accountId-trading-simple-brokerageOrderId-replace:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace:
       additionalProperties: true
       properties:
         accountId:
           $ref: '#/components/schemas/Id'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
         action:
           $ref: '#/components/schemas/ActionStrict'
         order_type:
@@ -11421,7 +11373,7 @@ components:
       required:
       - accountId
       - action
-      - brokerageOrderId
+      - brokerage_order_id
       - order_type
       - time_in_force
       - userId
@@ -11430,7 +11382,6 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - accountId
-      - brokerageOrderId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel:
@@ -11446,6 +11397,184 @@ components:
           $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        instrument:
+          $ref: '#/components/schemas/CryptoTradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date
+      required:
+      - accountId
+      - amount
+      - instrument
+      - side
+      - time_in_force
+      - type
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        instrument:
+          $ref: '#/components/schemas/CryptoTradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date
+      required:
+      - accountId
+      - amount
+      - instrument
+      - side
+      - time_in_force
+      - type
       - userId
       - userSecret
       type: object
@@ -12434,7 +12563,7 @@ components:
           type: number
           x-konfig-original-example: 344
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SymbolsQuotes-items-properties-ask_size
-    SimpleOrderPreview_estimated_fee:
+    CryptoOrderPreview_estimated_fee:
       additionalProperties: true
       description: The estimated order fee.
       example:
@@ -12453,7 +12582,7 @@ components:
           format: decimal
           type: string
           x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SimpleOrderPreview-properties-estimated_fee-properties-amount
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderPreview-properties-estimated_fee-properties-amount
       required:
       - amount
       - currency

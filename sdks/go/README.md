@@ -114,12 +114,12 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check equity order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket equity order
+*TradingApi* | [**PlaceCryptoOrder**](docs/TradingApi.md#placecryptoorder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 *TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **Post** /trade/place | Place equity order
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **Post** /accounts/{accountId}/trading/options | Place option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked equity order
-*TradingApi* | [**PlaceSimpleOrder**](docs/TradingApi.md#placesimpleorder) | **Post** /accounts/{accountId}/trading/simple | Place crypto order
-*TradingApi* | [**PreviewSimpleOrder**](docs/TradingApi.md#previewsimpleorder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview crypto order
-*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace equity order
+*TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
+*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Post** /accounts/{accountId}/trading/replace | Replace equity order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe
@@ -161,6 +161,10 @@ Class | Method | HTTP request | Description
  - [BrokerageType](docs/BrokerageType.md)
  - [CancelOrderResponse](docs/CancelOrderResponse.md)
  - [ChildBrokerageOrderIDs](docs/ChildBrokerageOrderIDs.md)
+ - [CryptoOrderForm](docs/CryptoOrderForm.md)
+ - [CryptoOrderPreview](docs/CryptoOrderPreview.md)
+ - [CryptoOrderPreviewEstimatedFee](docs/CryptoOrderPreviewEstimatedFee.md)
+ - [CryptoTradingInstrument](docs/CryptoTradingInstrument.md)
  - [CryptocurrencyPair](docs/CryptocurrencyPair.md)
  - [CryptocurrencyPairQuote](docs/CryptocurrencyPairQuote.md)
  - [Currency](docs/Currency.md)
@@ -231,8 +235,6 @@ Class | Method | HTTP request | Description
  - [SecurityType](docs/SecurityType.md)
  - [SessionEvent](docs/SessionEvent.md)
  - [SimpleOrderForm](docs/SimpleOrderForm.md)
- - [SimpleOrderPreview](docs/SimpleOrderPreview.md)
- - [SimpleOrderPreviewEstimatedFee](docs/SimpleOrderPreviewEstimatedFee.md)
  - [SnapTradeHoldingsAccount](docs/SnapTradeHoldingsAccount.md)
  - [SnapTradeHoldingsTotalValue](docs/SnapTradeHoldingsTotalValue.md)
  - [SnapTradeLoginUserRequestBody](docs/SnapTradeLoginUserRequestBody.md)

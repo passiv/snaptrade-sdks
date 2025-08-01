@@ -43,6 +43,14 @@ public class ManualTradeReplaceFormTest {
     }
 
     /**
+     * Test the property 'brokerageOrderId'
+     */
+    @Test
+    public void brokerageOrderIdTest() {
+        // TODO: test brokerageOrderId
+    }
+
+    /**
      * Test the property 'action'
      */
     @Test

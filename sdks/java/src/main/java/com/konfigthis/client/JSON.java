@@ -138,6 +138,10 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CancelOrderResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.ChildBrokerageOrderIDs.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.ChildBrokerageOrderIDsNullable.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptoOrderForm.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptoOrderPreview.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptoOrderPreviewEstimatedFee.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptoTradingInstrument.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptocurrencyPair.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.CryptocurrencyPairQuote.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.Currency.CustomTypeAdapterFactory());
@@ -194,8 +198,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SecurityType.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SessionEvent.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SimpleOrderForm.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SimpleOrderPreview.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SimpleOrderPreviewEstimatedFee.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SnapTradeHoldingsAccount.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SnapTradeHoldingsTotalValue.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.konfigthis.client.model.SnapTradeLoginUserRequestBody.CustomTypeAdapterFactory());

@@ -19,7 +19,7 @@ module SnapTrade
 
     # Cancel order
     #
-    # Cancels an order in the specified account.
+    # Cancels an order in the specified account. Accepts order IDs for all asset types.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -37,7 +37,7 @@ module SnapTrade
 
     # Cancel order
     #
-    # Cancels an order in the specified account.
+    # Cancels an order in the specified account. Accepts order IDs for all asset types.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -53,7 +53,7 @@ module SnapTrade
     end
 
     # Cancel order
-    # Cancels an order in the specified account. 
+    # Cancels an order in the specified account. Accepts order IDs for all asset types. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -66,7 +66,7 @@ module SnapTrade
     end
 
     # Cancel order
-    # Cancels an order in the specified account. 
+    # Cancels an order in the specified account. Accepts order IDs for all asset types. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -143,6 +143,7 @@ module SnapTrade
 
     # Cancel equity order
     #
+    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
     # @param user_id [String] 
@@ -161,6 +162,7 @@ module SnapTrade
 
     # Cancel equity order
     #
+    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
     # @param user_id [String] 
@@ -177,7 +179,7 @@ module SnapTrade
     end
 
     # Cancel equity order
-    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -190,7 +192,7 @@ module SnapTrade
     end
 
     # Cancel equity order
-    # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+    # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -805,6 +807,164 @@ module SnapTrade
     end
 
 
+    # Place crypto order
+    #
+    # Places an order in the specified account.
+    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    #
+    # @param instrument [CryptoTradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [CryptoOrderFormType] The type of order to place.
+    # @param time_in_force [CryptoOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [CryptoOrderForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_crypto_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      crypto_order_form = _body
+      data, _status_code, _headers = place_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, extra)
+      data
+    end
+
+    # Place crypto order
+    #
+    # Places an order in the specified account.
+    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    #
+    # @param instrument [CryptoTradingInstrument] 
+    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
+    # @param type [CryptoOrderFormType] The type of order to place.
+    # @param time_in_force [CryptoOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param amount [Float] The amount of the base currency to buy or sell.
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
+    # @param body [CryptoOrderForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def place_crypto_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+      _body = {}
+      _body[:instrument] = instrument if instrument != SENTINEL
+      _body[:side] = side if side != SENTINEL
+      _body[:type] = type if type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:amount] = amount if amount != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:post_only] = post_only if post_only != SENTINEL
+      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
+      crypto_order_form = _body
+      place_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, extra)
+    end
+
+    # Place crypto order
+    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param crypto_order_form [CryptoOrderForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [OrderUpdatedResponse]
+    private def place_crypto_order_impl(user_id, user_secret, account_id, crypto_order_form, opts = {})
+      data, _status_code, _headers = place_crypto_order_with_http_info(user_id, user_secret, account_id, crypto_order_form, opts)
+      data
+    end
+
+    # Place crypto order
+    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param crypto_order_form [CryptoOrderForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
+    private def place_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.place_crypto_order ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_crypto_order"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_crypto_order"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_crypto_order"
+      end
+      # verify the required parameter 'crypto_order_form' is set
+      if @api_client.config.client_side_validation && crypto_order_form.nil?
+        fail ArgumentError, "Missing the required parameter 'crypto_order_form' when calling TradingApi.place_crypto_order"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/crypto'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(crypto_order_form)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.place_crypto_order",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#place_crypto_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Place equity order
     #
     # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -1233,15 +1393,14 @@ module SnapTrade
     end
 
 
-    # Place crypto order
+    # Preview crypto order
     #
-    # Places an order in the specified account.
-    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    # Previews an order using the specified account.
     #
-    # @param instrument [TradingInstrument] 
+    # @param instrument [CryptoTradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [SimpleOrderFormType] The type of order to place.
-    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [CryptoOrderFormType] The type of order to place.
+    # @param time_in_force [CryptoOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1250,9 +1409,9 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [SimpleOrderForm] 
+    # @param body [CryptoOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+    def preview_crypto_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
       _body[:instrument] = instrument if instrument != SENTINEL
       _body[:side] = side if side != SENTINEL
@@ -1263,20 +1422,19 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      simple_order_form = _body
-      data, _status_code, _headers = place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
+      crypto_order_form = _body
+      data, _status_code, _headers = preview_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, extra)
       data
     end
 
-    # Place crypto order
+    # Preview crypto order
     #
-    # Places an order in the specified account.
-    # This endpoint does not compute the impact to the account balance from the order before submitting the order.
+    # Previews an order using the specified account.
     #
-    # @param instrument [TradingInstrument] 
+    # @param instrument [CryptoTradingInstrument] 
     # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [SimpleOrderFormType] The type of order to place.
-    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
+    # @param type [CryptoOrderFormType] The type of order to place.
+    # @param time_in_force [CryptoOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
     # @param amount [Float] The amount of the base currency to buy or sell.
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1285,9 +1443,9 @@ module SnapTrade
     # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
     # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
     # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [SimpleOrderForm] 
+    # @param body [CryptoOrderForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
+    def preview_crypto_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
       _body = {}
       _body[:instrument] = instrument if instrument != SENTINEL
       _body[:side] = side if side != SENTINEL
@@ -1298,53 +1456,53 @@ module SnapTrade
       _body[:stop_price] = stop_price if stop_price != SENTINEL
       _body[:post_only] = post_only if post_only != SENTINEL
       _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      simple_order_form = _body
-      place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
+      crypto_order_form = _body
+      preview_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, extra)
     end
 
-    # Place crypto order
-    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # Preview crypto order
+    # Previews an order using the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param simple_order_form [SimpleOrderForm] 
+    # @param crypto_order_form [CryptoOrderForm] 
     # @param [Hash] opts the optional parameters
-    # @return [OrderUpdatedResponse]
-    private def place_simple_order_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
-      data, _status_code, _headers = place_simple_order_with_http_info(user_id, user_secret, account_id, simple_order_form, opts)
+    # @return [CryptoOrderPreview]
+    private def preview_crypto_order_impl(user_id, user_secret, account_id, crypto_order_form, opts = {})
+      data, _status_code, _headers = preview_crypto_order_with_http_info(user_id, user_secret, account_id, crypto_order_form, opts)
       data
     end
 
-    # Place crypto order
-    # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+    # Preview crypto order
+    # Previews an order using the specified account. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param simple_order_form [SimpleOrderForm] 
+    # @param crypto_order_form [CryptoOrderForm] 
     # @param [Hash] opts the optional parameters
-    # @return [Array<(OrderUpdatedResponse, Integer, Hash)>] OrderUpdatedResponse data, response status code and response headers
-    private def place_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
+    # @return [Array<(CryptoOrderPreview, Integer, Hash)>] CryptoOrderPreview data, response status code and response headers
+    private def preview_crypto_order_with_http_info_impl(user_id, user_secret, account_id, crypto_order_form, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.place_simple_order ...'
+        @api_client.config.logger.debug 'Calling API: TradingApi.preview_crypto_order ...'
       end
       # verify the required parameter 'user_id' is set
       if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.place_simple_order"
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.preview_crypto_order"
       end
       # verify the required parameter 'user_secret' is set
       if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.place_simple_order"
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.preview_crypto_order"
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.place_simple_order"
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.preview_crypto_order"
       end
-      # verify the required parameter 'simple_order_form' is set
-      if @api_client.config.client_side_validation && simple_order_form.nil?
-        fail ArgumentError, "Missing the required parameter 'simple_order_form' when calling TradingApi.place_simple_order"
+      # verify the required parameter 'crypto_order_form' is set
+      if @api_client.config.client_side_validation && crypto_order_form.nil?
+        fail ArgumentError, "Missing the required parameter 'crypto_order_form' when calling TradingApi.preview_crypto_order"
       end
       # resource path
-      local_var_path = '/accounts/{accountId}/trading/simple'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+      local_var_path = '/accounts/{accountId}/trading/crypto/preview'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1365,16 +1523,16 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_order_form)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(crypto_order_form)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'OrderUpdatedResponse'
+      return_type = opts[:debug_return_type] || 'CryptoOrderPreview'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
 
       new_options = opts.merge(
-        :operation => :"TradingApi.place_simple_order",
+        :operation => :"TradingApi.preview_crypto_order",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -1385,163 +1543,7 @@ module SnapTrade
 
       data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#place_simple_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      return data, status_code, headers, response
-    end
-
-
-    # Preview crypto order
-    #
-    # Previews an order using the specified account.
-    #
-    # @param instrument [TradingInstrument] 
-    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [SimpleOrderFormType] The type of order to place.
-    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
-    # @param amount [Float] The amount of the base currency to buy or sell.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [SimpleOrderForm] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def preview_simple_order(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
-      _body = {}
-      _body[:instrument] = instrument if instrument != SENTINEL
-      _body[:side] = side if side != SENTINEL
-      _body[:type] = type if type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:amount] = amount if amount != SENTINEL
-      _body[:limit_price] = limit_price if limit_price != SENTINEL
-      _body[:stop_price] = stop_price if stop_price != SENTINEL
-      _body[:post_only] = post_only if post_only != SENTINEL
-      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      simple_order_form = _body
-      data, _status_code, _headers = preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
-      data
-    end
-
-    # Preview crypto order
-    #
-    # Previews an order using the specified account.
-    #
-    # @param instrument [TradingInstrument] 
-    # @param side [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
-    # @param type [SimpleOrderFormType] The type of order to place.
-    # @param time_in_force [SimpleOrderFormTimeInForce] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. - `GTD` - Good Til Date. The order is valid until the specified date. 
-    # @param amount [Float] The amount of the base currency to buy or sell.
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-    # @param post_only [Boolean] Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-    # @param expiration_date [Time] The expiration date of the order. Required if the time_in_force is GTD.
-    # @param body [SimpleOrderForm] 
-    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def preview_simple_order_with_http_info(instrument:, side:, type:, time_in_force:, amount:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, post_only: SENTINEL, expiration_date: SENTINEL, extra: {})
-      _body = {}
-      _body[:instrument] = instrument if instrument != SENTINEL
-      _body[:side] = side if side != SENTINEL
-      _body[:type] = type if type != SENTINEL
-      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
-      _body[:amount] = amount if amount != SENTINEL
-      _body[:limit_price] = limit_price if limit_price != SENTINEL
-      _body[:stop_price] = stop_price if stop_price != SENTINEL
-      _body[:post_only] = post_only if post_only != SENTINEL
-      _body[:expiration_date] = expiration_date if expiration_date != SENTINEL
-      simple_order_form = _body
-      preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, extra)
-    end
-
-    # Preview crypto order
-    # Previews an order using the specified account. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param simple_order_form [SimpleOrderForm] 
-    # @param [Hash] opts the optional parameters
-    # @return [SimpleOrderPreview]
-    private def preview_simple_order_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
-      data, _status_code, _headers = preview_simple_order_with_http_info(user_id, user_secret, account_id, simple_order_form, opts)
-      data
-    end
-
-    # Preview crypto order
-    # Previews an order using the specified account. 
-    # @param user_id [String] 
-    # @param user_secret [String] 
-    # @param account_id [String] 
-    # @param simple_order_form [SimpleOrderForm] 
-    # @param [Hash] opts the optional parameters
-    # @return [Array<(SimpleOrderPreview, Integer, Hash)>] SimpleOrderPreview data, response status code and response headers
-    private def preview_simple_order_with_http_info_impl(user_id, user_secret, account_id, simple_order_form, opts = {})
-      if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: TradingApi.preview_simple_order ...'
-      end
-      # verify the required parameter 'user_id' is set
-      if @api_client.config.client_side_validation && user_id.nil?
-        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.preview_simple_order"
-      end
-      # verify the required parameter 'user_secret' is set
-      if @api_client.config.client_side_validation && user_secret.nil?
-        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.preview_simple_order"
-      end
-      # verify the required parameter 'account_id' is set
-      if @api_client.config.client_side_validation && account_id.nil?
-        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.preview_simple_order"
-      end
-      # verify the required parameter 'simple_order_form' is set
-      if @api_client.config.client_side_validation && simple_order_form.nil?
-        fail ArgumentError, "Missing the required parameter 'simple_order_form' when calling TradingApi.preview_simple_order"
-      end
-      # resource path
-      local_var_path = '/accounts/{accountId}/trading/simple/preview'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
-
-      # query parameters
-      query_params = opts[:query_params] || {}
-      query_params[:'userId'] = user_id
-      query_params[:'userSecret'] = user_secret
-
-      # header parameters
-      header_params = opts[:header_params] || {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      content_type = @api_client.select_header_content_type(['application/json'])
-      if !content_type.nil?
-        header_params['Content-Type'] = content_type
-      end
-
-      # form parameters
-      form_params = opts[:form_params] || {}
-
-      # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(simple_order_form)
-
-      # return_type
-      return_type = opts[:debug_return_type] || 'SimpleOrderPreview'
-
-      # auth_names
-      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
-
-      new_options = opts.merge(
-        :operation => :"TradingApi.preview_simple_order",
-        :header_params => header_params,
-        :query_params => query_params,
-        :form_params => form_params,
-        :body => post_body,
-        :auth_names => auth_names,
-        :return_type => return_type
-      )
-
-      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: TradingApi#preview_simple_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: TradingApi#preview_crypto_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers, response
     end
@@ -1553,11 +1555,11 @@ module SnapTrade
     # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
     # returned in the response going forward. Only supported on some brokerages
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param account_id [String] The ID of the account to execute the trade on.
-    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
@@ -1566,8 +1568,9 @@ module SnapTrade
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def replace_order(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def replace_order(brokerage_order_id:, action:, order_type:, time_in_force:, account_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
@@ -1576,7 +1579,7 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       manual_trade_replace_form = _body
-      data, _status_code, _headers = replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, extra)
+      data, _status_code, _headers = replace_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_replace_form, extra)
       data
     end
 
@@ -1586,11 +1589,11 @@ module SnapTrade
     # the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
     # returned in the response going forward. Only supported on some brokerages
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param action [ActionStrict] The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     # @param order_type [OrderTypeStrict] The type of order to place. - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     # @param account_id [String] The ID of the account to execute the trade on.
-    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
@@ -1599,8 +1602,9 @@ module SnapTrade
     # @param units [Float] 
     # @param body [ManualTradeReplaceForm] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def replace_order_with_http_info(action:, order_type:, time_in_force:, account_id:, brokerage_order_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def replace_order_with_http_info(brokerage_order_id:, action:, order_type:, time_in_force:, account_id:, user_id:, user_secret:, price: SENTINEL, symbol: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       _body[:action] = action if action != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
@@ -1609,43 +1613,37 @@ module SnapTrade
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
       manual_trade_replace_form = _body
-      replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, extra)
+      replace_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_replace_form, extra)
     end
 
     # Replace equity order
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
-    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_replace_form [ManualTradeReplaceForm] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    private def replace_order_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts = {})
-      data, _status_code, _headers = replace_order_with_http_info(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts)
+    private def replace_order_impl(account_id, user_id, user_secret, manual_trade_replace_form, opts = {})
+      data, _status_code, _headers = replace_order_with_http_info(account_id, user_id, user_secret, manual_trade_replace_form, opts)
       data
     end
 
     # Replace equity order
     # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
-    # @param brokerage_order_id [String] The Brokerage Order ID of the order to replace.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param manual_trade_replace_form [ManualTradeReplaceForm] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def replace_order_with_http_info_impl(account_id, brokerage_order_id, user_id, user_secret, manual_trade_replace_form, opts = {})
+    private def replace_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_replace_form, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.replace_order ...'
       end
       # verify the required parameter 'account_id' is set
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.replace_order"
-      end
-      # verify the required parameter 'brokerage_order_id' is set
-      if @api_client.config.client_side_validation && brokerage_order_id.nil?
-        fail ArgumentError, "Missing the required parameter 'brokerage_order_id' when calling TradingApi.replace_order"
       end
       # verify the required parameter 'user_id' is set
       if @api_client.config.client_side_validation && user_id.nil?
@@ -1660,7 +1658,7 @@ module SnapTrade
         fail ArgumentError, "Missing the required parameter 'manual_trade_replace_form' when calling TradingApi.replace_order"
       end
       # resource path
-      local_var_path = '/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'brokerageOrderId' + '}', CGI.escape(brokerage_order_id.to_s))
+      local_var_path = '/accounts/{accountId}/trading/replace'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}
@@ -1699,7 +1697,7 @@ module SnapTrade
         :return_type => return_type
       )
 
-      data, status_code, headers, response = @api_client.call_api(:PATCH, local_var_path, new_options)
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: TradingApi#replace_order\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end

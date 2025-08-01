@@ -2,12 +2,13 @@
 
 # ManualTradeReplaceForm
 
-Inputs for placing an order with the brokerage.
+Inputs for replacing an order with the brokerage.
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**brokerageOrderId** | **String** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. |  |
 |**action** | **ActionStrict** |  |  |
 |**orderType** | **OrderTypeStrict** |  |  |
 |**timeInForce** | **TimeInForceStrict** |  |  |

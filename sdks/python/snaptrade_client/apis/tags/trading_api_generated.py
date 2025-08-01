@@ -15,12 +15,12 @@ from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurren
 from snaptrade_client.paths.trade_impact.post import GetOrderImpact
 from snaptrade_client.paths.accounts_account_id_quotes.get import GetUserAccountQuotes
 from snaptrade_client.paths.accounts_account_id_trading_bracket.post import PlaceBracketOrder
+from snaptrade_client.paths.accounts_account_id_trading_crypto.post import PlaceCryptoOrder
 from snaptrade_client.paths.trade_place.post import PlaceForceOrder
 from snaptrade_client.paths.accounts_account_id_trading_options.post import PlaceMlegOrder
 from snaptrade_client.paths.trade_trade_id.post import PlaceOrder
-from snaptrade_client.paths.accounts_account_id_trading_simple.post import PlaceSimpleOrder
-from snaptrade_client.paths.accounts_account_id_trading_simple_preview.post import PreviewSimpleOrder
-from snaptrade_client.paths.accounts_account_id_trading_simple_brokerage_order_id_replace.patch import ReplaceOrder
+from snaptrade_client.paths.accounts_account_id_trading_crypto_preview.post import PreviewCryptoOrder
+from snaptrade_client.paths.accounts_account_id_trading_replace.post import ReplaceOrder
 from snaptrade_client.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs.get import SearchCryptocurrencyPairInstruments
 
 
@@ -31,11 +31,11 @@ class TradingApiGenerated(
     GetOrderImpact,
     GetUserAccountQuotes,
     PlaceBracketOrder,
+    PlaceCryptoOrder,
     PlaceForceOrder,
     PlaceMlegOrder,
     PlaceOrder,
-    PlaceSimpleOrder,
-    PreviewSimpleOrder,
+    PreviewCryptoOrder,
     ReplaceOrder,
     SearchCryptocurrencyPairInstruments,
 ):

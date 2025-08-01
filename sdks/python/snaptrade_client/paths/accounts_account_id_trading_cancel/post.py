@@ -574,7 +574,7 @@ class CancelOrder(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Cancels an order in the specified account.  """
+        """ Cancels an order in the specified account. Accepts order IDs for all asset types.  """
         args = self._cancel_order_mapped_args(
             body=body,
             query_params=query_params,
@@ -637,7 +637,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Cancels an order in the specified account.  """
+        """ Cancels an order in the specified account. Accepts order IDs for all asset types.  """
         args = self._cancel_order_mapped_args(
             body=body,
             query_params=query_params,

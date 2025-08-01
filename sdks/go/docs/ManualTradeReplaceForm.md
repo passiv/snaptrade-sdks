@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
 **Action** | [**ActionStrict**](ActionStrict.md) |  | 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
@@ -16,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewManualTradeReplaceForm
 
-`func NewManualTradeReplaceForm(action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeReplaceForm`
+`func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict, ) *ManualTradeReplaceForm`
 
 NewManualTradeReplaceForm instantiates a new ManualTradeReplaceForm object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +31,26 @@ will change when the set of required properties is changed
 NewManualTradeReplaceFormWithDefaults instantiates a new ManualTradeReplaceForm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBrokerageOrderId
+
+`func (o *ManualTradeReplaceForm) GetBrokerageOrderId() string`
+
+GetBrokerageOrderId returns the BrokerageOrderId field if non-nil, zero value otherwise.
+
+### GetBrokerageOrderIdOk
+
+`func (o *ManualTradeReplaceForm) GetBrokerageOrderIdOk() (*string, bool)`
+
+GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBrokerageOrderId
+
+`func (o *ManualTradeReplaceForm) SetBrokerageOrderId(v string)`
+
+SetBrokerageOrderId sets BrokerageOrderId field to given value.
+
 
 ### GetAction
 
