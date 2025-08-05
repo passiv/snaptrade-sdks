@@ -21,6 +21,9 @@ import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CancelOrderResponse;
+import com.konfigthis.client.model.CryptoOrderForm;
+import com.konfigthis.client.model.CryptoOrderPreview;
+import com.konfigthis.client.model.CryptoTradingInstrument;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
@@ -35,8 +38,6 @@ import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
-import com.konfigthis.client.model.SimpleOrderForm;
-import com.konfigthis.client.model.SimpleOrderPreview;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
@@ -73,7 +74,7 @@ public class TradingApiTest {
     /**
      * Cancel order
      *
-     * Cancels an order in the specified account. 
+     * Cancels an order in the specified account. Accepts order IDs for all asset types. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -92,7 +93,7 @@ public class TradingApiTest {
     /**
      * Cancel equity order
      *
-     * Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+     * **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -207,6 +208,36 @@ public class TradingApiTest {
     }
 
     /**
+     * Place crypto order
+     *
+     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void placeCryptoOrderTest() throws ApiException {
+        CryptoTradingInstrument instrument = null;
+        ActionStrict side = null;
+        String type = null;
+        String timeInForce = null;
+        BigDecimal amount = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        Boolean postOnly = null;
+        OffsetDateTime expirationDate = null;
+        OrderUpdatedResponse response = api.placeCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .postOnly(postOnly)
+                .expirationDate(expirationDate)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
      * Place equity order
      *
      * Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -284,36 +315,6 @@ public class TradingApiTest {
     }
 
     /**
-     * Place crypto order
-     *
-     * Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void placeSimpleOrderTest() throws ApiException {
-        TradingInstrument instrument = null;
-        ActionStrict side = null;
-        String type = null;
-        String timeInForce = null;
-        BigDecimal amount = null;
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        BigDecimal limitPrice = null;
-        BigDecimal stopPrice = null;
-        Boolean postOnly = null;
-        OffsetDateTime expirationDate = null;
-        OrderUpdatedResponse response = api.placeSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
-                .limitPrice(limitPrice)
-                .stopPrice(stopPrice)
-                .postOnly(postOnly)
-                .expirationDate(expirationDate)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * Preview crypto order
      *
      * Previews an order using the specified account. 
@@ -321,8 +322,8 @@ public class TradingApiTest {
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void previewSimpleOrderTest() throws ApiException {
-        TradingInstrument instrument = null;
+    public void previewCryptoOrderTest() throws ApiException {
+        CryptoTradingInstrument instrument = null;
         ActionStrict side = null;
         String type = null;
         String timeInForce = null;
@@ -334,7 +335,7 @@ public class TradingApiTest {
         BigDecimal stopPrice = null;
         Boolean postOnly = null;
         OffsetDateTime expirationDate = null;
-        SimpleOrderPreview response = api.previewSimpleOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
+        CryptoOrderPreview response = api.previewCryptoOrder(instrument, side, type, timeInForce, amount, userId, userSecret, accountId)
                 .limitPrice(limitPrice)
                 .stopPrice(stopPrice)
                 .postOnly(postOnly)
@@ -352,18 +353,18 @@ public class TradingApiTest {
      */
     @Test
     public void replaceOrderTest() throws ApiException {
+        String brokerageOrderId = null;
         ActionStrict action = null;
         OrderTypeStrict orderType = null;
         TimeInForceStrict timeInForce = null;
         UUID accountId = null;
-        String brokerageOrderId = null;
         String userId = null;
         String userSecret = null;
         Double price = null;
         String symbol = null;
         Double stop = null;
         Double units = null;
-        AccountOrderRecord response = api.replaceOrder(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret)
+        AccountOrderRecord response = api.replaceOrder(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret)
                 .price(price)
                 .symbol(symbol)
                 .stop(stop)

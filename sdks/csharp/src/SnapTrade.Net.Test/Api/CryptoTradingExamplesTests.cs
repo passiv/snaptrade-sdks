@@ -59,15 +59,15 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine("quote: {0}", quote);
 
             // Place a limit order
-            var placeOrderResult = tradingApi.PlaceSimpleOrder(
+            var placeOrderResult = tradingApi.PlaceCryptoOrder(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new SimpleOrderForm(
-                    instrument: new TradingInstrument(instrument.Symbol, TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
+                new CryptoOrderForm(
+                    instrument: new CryptoTradingInstrument(instrument.Symbol, CryptoTradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.SELL,
-                    type: SimpleOrderForm.TypeEnum.LIMIT,
-                    timeInForce: SimpleOrderForm.TimeInForceEnum.GTD,
+                    type: CryptoOrderForm.TypeEnum.LIMIT,
+                    timeInForce: CryptoOrderForm.TimeInForceEnum.GTD,
                     expirationDate: DateTime.UtcNow.AddMinutes(1),
                     amount:42.2m,
                     limitPrice: quote.Ask * 2m,
@@ -93,15 +93,15 @@ namespace SnapTrade.Net.Test.Api
 
         [Fact(Skip = "WIP")]
         public void PreviewOrderExample() {
-            var response = tradingApi.PreviewSimpleOrder(
+            var response = tradingApi.PreviewCryptoOrder(
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                new SimpleOrderForm(
-                    instrument: new TradingInstrument("DOGE-USDC", TradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
+                new CryptoOrderForm(
+                    instrument: new CryptoTradingInstrument("DOGE-USDC", CryptoTradingInstrument.TypeEnum.CRYPTOCURRENCYPAIR),
                     side: ActionStrict.BUY,
-                    type: SimpleOrderForm.TypeEnum.MARKET,
-                    timeInForce: SimpleOrderForm.TimeInForceEnum.IOC,
+                    type: CryptoOrderForm.TypeEnum.MARKET,
+                    timeInForce: CryptoOrderForm.TimeInForceEnum.IOC,
                     amount:1.42m
                 )
             );

@@ -15,8 +15,10 @@ import (
 	"encoding/json"
 )
 
-// ManualTradeReplaceForm Inputs for placing an order with the brokerage.
+// ManualTradeReplaceForm Inputs for replacing an order with the brokerage.
 type ManualTradeReplaceForm struct {
+	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+	BrokerageOrderId string `json:"brokerage_order_id"`
 	Action ActionStrict `json:"action"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
@@ -33,8 +35,9 @@ type ManualTradeReplaceForm struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewManualTradeReplaceForm(action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeReplaceForm {
+func NewManualTradeReplaceForm(brokerageOrderId string, action ActionStrict, orderType OrderTypeStrict, timeInForce TimeInForceStrict) *ManualTradeReplaceForm {
 	this := ManualTradeReplaceForm{}
+	this.BrokerageOrderId = brokerageOrderId
 	this.Action = action
 	this.OrderType = orderType
 	this.TimeInForce = timeInForce
@@ -47,6 +50,30 @@ func NewManualTradeReplaceForm(action ActionStrict, orderType OrderTypeStrict, t
 func NewManualTradeReplaceFormWithDefaults() *ManualTradeReplaceForm {
 	this := ManualTradeReplaceForm{}
 	return &this
+}
+
+// GetBrokerageOrderId returns the BrokerageOrderId field value
+func (o *ManualTradeReplaceForm) GetBrokerageOrderId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.BrokerageOrderId
+}
+
+// GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field value
+// and a boolean to check if the value has been set.
+func (o *ManualTradeReplaceForm) GetBrokerageOrderIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.BrokerageOrderId, true
+}
+
+// SetBrokerageOrderId sets field value
+func (o *ManualTradeReplaceForm) SetBrokerageOrderId(v string) {
+	o.BrokerageOrderId = v
 }
 
 // GetAction returns the Action field value
@@ -281,6 +308,9 @@ func (o *ManualTradeReplaceForm) UnsetUnits() {
 
 func (o ManualTradeReplaceForm) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if true {
+		toSerialize["brokerage_order_id"] = o.BrokerageOrderId
+	}
 	if true {
 		toSerialize["action"] = o.Action
 	}

@@ -29,7 +29,7 @@ describe 'TradingApi' do
 
   # unit tests for cancel_order
   # Cancel order
-  # Cancels an order in the specified account. 
+  # Cancels an order in the specified account. Accepts order IDs for all asset types. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
@@ -44,7 +44,7 @@ describe 'TradingApi' do
 
   # unit tests for cancel_user_account_order
   # Cancel equity order
-  # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
+  # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) ** Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
@@ -117,6 +117,21 @@ describe 'TradingApi' do
     end
   end
 
+  # unit tests for place_crypto_order
+  # Place crypto order
+  # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param crypto_order_form 
+  # @param [Hash] opts the optional parameters
+  # @return [OrderUpdatedResponse]
+  describe 'place_crypto_order test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for place_force_order
   # Place equity order
   # Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.  This endpoint does not compute the impact to the account balance from the order and any potential commissions before submitting the order to the brokerage. If that is desired, you can use the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact).  It&#39;s recommended to trigger a manual refresh of the account after placing an order to ensure the account is up to date. You can use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint for this. 
@@ -161,31 +176,16 @@ describe 'TradingApi' do
     end
   end
 
-  # unit tests for place_simple_order
-  # Place crypto order
-  # Places an order in the specified account. This endpoint does not compute the impact to the account balance from the order before submitting the order. 
-  # @param user_id 
-  # @param user_secret 
-  # @param account_id 
-  # @param simple_order_form 
-  # @param [Hash] opts the optional parameters
-  # @return [OrderUpdatedResponse]
-  describe 'place_simple_order test' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
-  # unit tests for preview_simple_order
+  # unit tests for preview_crypto_order
   # Preview crypto order
   # Previews an order using the specified account. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param simple_order_form 
+  # @param crypto_order_form 
   # @param [Hash] opts the optional parameters
-  # @return [SimpleOrderPreview]
-  describe 'preview_simple_order test' do
+  # @return [CryptoOrderPreview]
+  describe 'preview_crypto_order test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
@@ -195,7 +195,6 @@ describe 'TradingApi' do
   # Replace equity order
   # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
   # @param account_id The ID of the account to execute the trade on.
-  # @param brokerage_order_id The Brokerage Order ID of the order to replace.
   # @param user_id 
   # @param user_secret 
   # @param manual_trade_replace_form 

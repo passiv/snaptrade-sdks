@@ -11,8 +11,11 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Inputs for placing an order with the brokerage.
+  # Inputs for replacing an order with the brokerage.
   class ManualTradeReplaceForm
+    # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    attr_accessor :brokerage_order_id
+
     # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     attr_accessor :action
 
@@ -36,6 +39,7 @@ module SnapTrade
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'brokerage_order_id' => :'brokerage_order_id',
         :'action' => :'action',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
@@ -54,6 +58,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'brokerage_order_id' => :'String',
         :'action' => :'ActionStrict',
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
@@ -88,6 +93,10 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'brokerage_order_id')
+        self.brokerage_order_id = attributes[:'brokerage_order_id']
+      end
+
       if attributes.key?(:'action')
         self.action = attributes[:'action']
       end
@@ -121,6 +130,10 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @brokerage_order_id.nil?
+        invalid_properties.push('invalid value for "brokerage_order_id", brokerage_order_id cannot be nil.')
+      end
+
       if @action.nil?
         invalid_properties.push('invalid value for "action", action cannot be nil.')
       end
@@ -139,6 +152,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @brokerage_order_id.nil?
       return false if @action.nil?
       return false if @order_type.nil?
       return false if @time_in_force.nil?
@@ -150,6 +164,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          brokerage_order_id == o.brokerage_order_id &&
           action == o.action &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
@@ -168,7 +183,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action, order_type, time_in_force, price, symbol, stop, units].hash
+      [brokerage_order_id, action, order_type, time_in_force, price, symbol, stop, units].hash
     end
 
     # Builds the object from hash

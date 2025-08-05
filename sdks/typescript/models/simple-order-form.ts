@@ -19,6 +19,8 @@ import { TradingInstrument } from './trading-instrument';
  * @interface SimpleOrderForm
  */
 export interface SimpleOrderForm {
+    [key: string]: any;
+
     /**
      * 
      * @type {TradingInstrument}

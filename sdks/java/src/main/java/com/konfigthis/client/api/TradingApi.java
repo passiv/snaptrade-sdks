@@ -6,6 +6,9 @@ import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import java.math.BigDecimal;
 import com.konfigthis.client.model.CancelOrderResponse;
+import com.konfigthis.client.model.CryptoOrderForm;
+import com.konfigthis.client.model.CryptoOrderPreview;
+import com.konfigthis.client.model.CryptoTradingInstrument;
 import com.konfigthis.client.model.CryptocurrencyPairQuote;
 import com.konfigthis.client.model.ManualTradeAndImpact;
 import com.konfigthis.client.model.ManualTradeForm;
@@ -20,8 +23,6 @@ import com.konfigthis.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.OrderUpdatedResponse;
-import com.konfigthis.client.model.SimpleOrderForm;
-import com.konfigthis.client.model.SimpleOrderPreview;
 import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
@@ -71,6 +72,11 @@ public class TradingApi extends TradingApiGenerated {
             super(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret);
         }
     }
+    public class PlaceCryptoOrderRequestBuilder extends PlaceCryptoOrderRequestBuilderGenerated {
+        public PlaceCryptoOrderRequestBuilder(CryptoTradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+            super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
+        }
+    }
     public class PlaceForceOrderRequestBuilder extends PlaceForceOrderRequestBuilderGenerated {
         public PlaceForceOrderRequestBuilder(UUID accountId, ActionStrictWithOptions action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, String userId, String userSecret) {
             super(accountId, action, orderType, timeInForce, userId, userSecret);
@@ -86,19 +92,14 @@ public class TradingApi extends TradingApiGenerated {
             super(tradeId, userId, userSecret);
         }
     }
-    public class PlaceSimpleOrderRequestBuilder extends PlaceSimpleOrderRequestBuilderGenerated {
-        public PlaceSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
-            super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
-        }
-    }
-    public class PreviewSimpleOrderRequestBuilder extends PreviewSimpleOrderRequestBuilderGenerated {
-        public PreviewSimpleOrderRequestBuilder(TradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
+    public class PreviewCryptoOrderRequestBuilder extends PreviewCryptoOrderRequestBuilderGenerated {
+        public PreviewCryptoOrderRequestBuilder(CryptoTradingInstrument instrument, ActionStrict side, String type, String timeInForce, BigDecimal amount, String userId, String userSecret, UUID accountId) {
             super(instrument, side, type, timeInForce, amount, userId, userSecret, accountId);
         }
     }
     public class ReplaceOrderRequestBuilder extends ReplaceOrderRequestBuilderGenerated {
-        public ReplaceOrderRequestBuilder(ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String brokerageOrderId, String userId, String userSecret) {
-            super(action, orderType, timeInForce, accountId, brokerageOrderId, userId, userSecret);
+        public ReplaceOrderRequestBuilder(String brokerageOrderId, ActionStrict action, OrderTypeStrict orderType, TimeInForceStrict timeInForce, UUID accountId, String userId, String userSecret) {
+            super(brokerageOrderId, action, orderType, timeInForce, accountId, userId, userSecret);
         }
     }
     public class SearchCryptocurrencyPairInstrumentsRequestBuilder extends SearchCryptocurrencyPairInstrumentsRequestBuilderGenerated {

@@ -34,7 +34,10 @@ type SimpleOrderForm struct {
 	PostOnly *bool `json:"post_only,omitempty"`
 	// The expiration date of the order. Required if the time_in_force is GTD.
 	ExpirationDate *time.Time `json:"expiration_date,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _SimpleOrderForm SimpleOrderForm
 
 // NewSimpleOrderForm instantiates a new SimpleOrderForm object
 // This constructor will assign default values to properties that have it defined,
@@ -335,7 +338,37 @@ func (o SimpleOrderForm) MarshalJSON() ([]byte, error) {
 	if !isNil(o.ExpirationDate) {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return json.Marshal(toSerialize)
+}
+
+func (o *SimpleOrderForm) UnmarshalJSON(bytes []byte) (err error) {
+	varSimpleOrderForm := _SimpleOrderForm{}
+
+	if err = json.Unmarshal(bytes, &varSimpleOrderForm); err == nil {
+		*o = SimpleOrderForm(varSimpleOrderForm)
+	}
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
+		delete(additionalProperties, "instrument")
+		delete(additionalProperties, "side")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "time_in_force")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "limit_price")
+		delete(additionalProperties, "stop_price")
+		delete(additionalProperties, "post_only")
+		delete(additionalProperties, "expiration_date")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableSimpleOrderForm struct {

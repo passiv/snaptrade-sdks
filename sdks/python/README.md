@@ -69,11 +69,11 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
+  * [`snaptrade.trading.place_crypto_order`](#snaptradetradingplace_crypto_order)
   * [`snaptrade.trading.place_force_order`](#snaptradetradingplace_force_order)
   * [`snaptrade.trading.place_mleg_order`](#snaptradetradingplace_mleg_order)
   * [`snaptrade.trading.place_order`](#snaptradetradingplace_order)
-  * [`snaptrade.trading.place_simple_order`](#snaptradetradingplace_simple_order)
-  * [`snaptrade.trading.preview_simple_order`](#snaptradetradingpreview_simple_order)
+  * [`snaptrade.trading.preview_crypto_order`](#snaptradetradingpreview_crypto_order)
   * [`snaptrade.trading.replace_order`](#snaptradetradingreplace_order)
   * [`snaptrade.trading.search_cryptocurrency_pair_instruments`](#snaptradetradingsearch_cryptocurrency_pair_instruments)
   * [`snaptrade.transactions_and_reporting.get_activities`](#snaptradetransactions_and_reportingget_activities)
@@ -1690,7 +1690,7 @@ The search query for symbols.
 
 ### `snaptrade.trading.cancel_order`<a id="snaptradetradingcancel_order"></a>
 
-Cancels an order in the specified account.
+Cancels an order in the specified account. Accepts order IDs for all asset types.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1732,7 +1732,9 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 ---
 
 ### `snaptrade.trading.cancel_user_account_order`<a id="snaptradetradingcancel_user_account_order"></a>
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
+**This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
 Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
 
 
@@ -2017,6 +2019,90 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 ---
 
+### `snaptrade.trading.place_crypto_order`<a id="snaptradetradingplace_crypto_order"></a>
+
+Places an order in the specified account.
+This endpoint does not compute the impact to the account balance from the order before submitting the order.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+place_crypto_order_response = snaptrade.trading.place_crypto_order(
+    instrument={
+        "symbol": "BTC",
+        "type": "CRYPTOCURRENCY",
+    },
+    side="BUY",
+    type="MARKET",
+    time_in_force="GTC",
+    amount="123.45",
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="123.45",
+    stop_price="123.45",
+    post_only=False,
+    expiration_date="2024-01-01T00:00:00Z",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### instrument: [`CryptoTradingInstrument`](./snaptrade_client/type/crypto_trading_instrument.py)<a id="instrument-cryptotradinginstrumentsnaptrade_clienttypecrypto_trading_instrumentpy"></a>
+
+
+##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
+
+##### type: `str`<a id="type-str"></a>
+
+The type of order to place.
+
+##### time_in_force: `str`<a id="time_in_force-str"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
+
+##### amount: `str`<a id="amount-str"></a>
+
+The amount of the base currency to buy or sell.
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `str`<a id="limit_price-str"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+
+##### stop_price: `str`<a id="stop_price-str"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+
+##### post_only: `bool`<a id="post_only-bool"></a>
+
+Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
+
+##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
+
+The expiration date of the order. Required if the time_in_force is GTD.
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`CryptoOrderForm`](./snaptrade_client/type/crypto_order_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/crypto` `post`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
 ### `snaptrade.trading.place_force_order`<a id="snaptradetradingplace_force_order"></a>
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
@@ -2214,91 +2300,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 ---
 
-### `snaptrade.trading.place_simple_order`<a id="snaptradetradingplace_simple_order"></a>
-
-Places an order in the specified account.
-This endpoint does not compute the impact to the account balance from the order before submitting the order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-place_simple_order_response = snaptrade.trading.place_simple_order(
-    instrument={
-        "symbol": "AAPL",
-        "type": "EQUITY",
-    },
-    side="BUY",
-    type="MARKET",
-    time_in_force="GTC",
-    amount="123.45",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    limit_price="123.45",
-    stop_price="123.45",
-    post_only=False,
-    expiration_date="2024-01-01T00:00:00Z",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
-
-
-##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
-
-##### type: `str`<a id="type-str"></a>
-
-The type of order to place.
-
-##### time_in_force: `str`<a id="time_in_force-str"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.   - `GTD` - Good Til Date. The order is valid until the specified date. 
-
-##### amount: `str`<a id="amount-str"></a>
-
-The amount of the base currency to buy or sell.
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-##### limit_price: `str`<a id="limit_price-str"></a>
-
-The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
-
-##### stop_price: `str`<a id="stop_price-str"></a>
-
-The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
-
-##### post_only: `bool`<a id="post_only-bool"></a>
-
-Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees. 
-
-##### expiration_date: `datetime`<a id="expiration_date-datetime"></a>
-
-The expiration date of the order. Required if the time_in_force is GTD.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`OrderUpdatedResponse`](./snaptrade_client/type/order_updated_response.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/trading/simple` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.trading.preview_simple_order`<a id="snaptradetradingpreview_simple_order"></a>
+### `snaptrade.trading.preview_crypto_order`<a id="snaptradetradingpreview_crypto_order"></a>
 
 Previews an order using the specified account.
 
@@ -2306,10 +2308,10 @@ Previews an order using the specified account.
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
 ```python
-preview_simple_order_response = snaptrade.trading.preview_simple_order(
+preview_crypto_order_response = snaptrade.trading.preview_crypto_order(
     instrument={
-        "symbol": "AAPL",
-        "type": "EQUITY",
+        "symbol": "BTC",
+        "type": "CRYPTOCURRENCY",
     },
     side="BUY",
     type="MARKET",
@@ -2327,7 +2329,7 @@ preview_simple_order_response = snaptrade.trading.preview_simple_order(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### instrument: [`TradingInstrument`](./snaptrade_client/type/trading_instrument.py)<a id="instrument-tradinginstrumentsnaptrade_clienttypetrading_instrumentpy"></a>
+##### instrument: [`CryptoTradingInstrument`](./snaptrade_client/type/crypto_trading_instrument.py)<a id="instrument-cryptotradinginstrumentsnaptrade_clienttypecrypto_trading_instrumentpy"></a>
 
 
 ##### side: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="side-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
@@ -2368,14 +2370,14 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-[`SimpleOrderForm`](./snaptrade_client/type/simple_order_form.py)
+[`CryptoOrderForm`](./snaptrade_client/type/crypto_order_form.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
-[`SimpleOrderPreview`](./snaptrade_client/type/simple_order_preview.py)
+[`CryptoOrderPreview`](./snaptrade_client/type/crypto_order_preview.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/preview` `post`
+`/accounts/{accountId}/trading/crypto/preview` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
@@ -2392,11 +2394,11 @@ returned in the response going forward. Only supported on some brokerages
 
 ```python
 replace_order_response = snaptrade.trading.replace_order(
+    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     action="BUY",
     order_type="Market",
     time_in_force="Day",
     account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     price=31.33,
@@ -2408,6 +2410,10 @@ replace_order_response = snaptrade.trading.replace_order(
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
 ##### action: [`ActionStrict`](./snaptrade_client/type/action_strict.py)<a id="action-actionstrictsnaptrade_clienttypeaction_strictpy"></a>
 
 ##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
@@ -2417,10 +2423,6 @@ replace_order_response = snaptrade.trading.replace_order(
 ##### account_id: `str`<a id="account_id-str"></a>
 
 The ID of the account to execute the trade on.
-
-##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
-
-The Brokerage Order ID of the order to replace.
 
 ##### user_id: `str`<a id="user_id-str"></a>
 
@@ -2449,7 +2451,7 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/trading/simple/{brokerageOrderId}/replace` `patch`
+`/accounts/{accountId}/trading/replace` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

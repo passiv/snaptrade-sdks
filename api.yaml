@@ -913,10 +913,12 @@ paths:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/orders/cancel":
     post:
+      deprecated: true
       tags:
         - Trading
       summary: Cancel equity order
       description: |
+        **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
         Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
       parameters:
@@ -1789,8 +1791,8 @@ paths:
                 $ref: "#/components/schemas/403FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
-    patch:
+  /accounts/{accountId}/trading/replace:
+    post:
       tags:
         - Trading
       summary: Replace equity order
@@ -1806,12 +1808,6 @@ paths:
           description: The ID of the account to execute the trade on.
           schema:
             $ref: "#/components/schemas/Id"
-        - in: path
-          name: brokerageOrderId
-          required: true
-          description: The Brokerage Order ID of the order to replace.
-          schema:
-            $ref: "#/components/schemas/BrokerageOrderID"
         - in: query
           required: true
           name: userId
@@ -1931,7 +1927,7 @@ paths:
         "500":
           description: Unexpected Error
 
-  /accounts/{accountId}/trading/simple:
+  /accounts/{accountId}/trading/crypto:
     post:
       tags:
         - Trading
@@ -1939,7 +1935,7 @@ paths:
       description: |
         Places an order in the specified account.
         This endpoint does not compute the impact to the account balance from the order before submitting the order.
-      operationId: Trading_placeSimpleOrder
+      operationId: Trading_placeCryptoOrder
       parameters:
         - in: query
           required: true
@@ -1957,7 +1953,7 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountID"
       requestBody:
-        $ref: "#/components/requestBodies/SimpleOrderRequestBody"
+        $ref: "#/components/requestBodies/CryptoOrderRequestBody"
       responses:
         "200":
           description: OK
@@ -1979,7 +1975,7 @@ paths:
         - Trading
       summary: Cancel order
       description: |
-        Cancels an order in the specified account.
+        Cancels an order in the specified account. Accepts order IDs for all asset types.
       operationId: Trading_cancelOrder
       parameters:
         - in: query
@@ -2014,14 +2010,14 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
-  /accounts/{accountId}/trading/simple/preview:
+  /accounts/{accountId}/trading/crypto/preview:
     post:
       tags:
         - Trading
       summary: Preview crypto order
       description: |
         Previews an order using the specified account.
-      operationId: Trading_previewSimpleOrder
+      operationId: Trading_previewCryptoOrder
       parameters:
         - in: query
           required: true
@@ -2039,14 +2035,14 @@ paths:
           schema:
             $ref: "#/components/schemas/AccountID"
       requestBody:
-        $ref: "#/components/requestBodies/SimpleOrderRequestBody"
+        $ref: "#/components/requestBodies/CryptoOrderRequestBody"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SimpleOrderPreview"
+                $ref: "#/components/schemas/CryptoOrderPreview"
         "400":
           description: Invalid request
           content:
@@ -2590,7 +2586,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/SimpleOrderForm"
-
+    CryptoOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CryptoOrderForm"
     MlegOrderRequestBody:
       required: true
       content:
@@ -4368,13 +4369,16 @@ components:
           items:
             $ref: "#/components/schemas/MlegLeg"
     ManualTradeReplaceForm:
-      description: Inputs for placing an order with the brokerage.
+      description: Inputs for replacing an order with the brokerage.
       type: object
       required:
+        - brokerage_order_id
         - action
         - order_type
         - time_in_force
       properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
         action:
           $ref: "#/components/schemas/ActionStrict"
         order_type:
@@ -4492,6 +4496,22 @@ components:
           example: true
           type: boolean
           description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
+    CryptoTradingInstrument:
+      type: object
+      required:
+        - symbol
+        - type
+      properties:
+        symbol:
+          description: The instrument's trading ticker symbol
+          type: string
+          example: BTC
+        type:
+          description: The instrument's type
+          type: string
+          enum:
+            - CRYPTOCURRENCY
+            - CRYPTOCURRENCY_PAIR
     TradingInstrument:
       type: object
       required:
@@ -4751,7 +4771,7 @@ components:
           type: string
           format: date-time
           example: 2024-01-24T15:00:00Z
-    SimpleOrderPreview:
+    CryptoOrderPreview:
       description: Preview of an order.
       type: object
       properties:
@@ -5349,6 +5369,68 @@ components:
       properties:
         instrument:
           $ref: "#/components/schemas/TradingInstrument"
+        side:
+          $ref: "#/components/schemas/ActionStrict"
+        type:
+          type: string
+          enum:
+            - MARKET
+            - LIMIT
+            - STOP_LOSS_MARKET
+            - STOP_LOSS_LIMIT
+            - TAKE_PROFIT_MARKET
+            - TAKE_PROFIT_LIMIT
+          description: The type of order to place.
+        time_in_force:
+          description: >
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          type: string
+          enum:
+            - GTC
+            - FOK
+            - IOC
+            - GTD
+        amount:
+          description: The amount of the base currency to buy or sell.
+          type: string
+          format: decimal
+          example: "123.45"
+        limit_price:
+          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        stop_price:
+          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        post_only:
+          type: boolean
+          example: false
+          description: >
+            Valid and required only for order type LIMIT.
+            If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+        expiration_date:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+          description: The expiration date of the order. Required if the time_in_force is GTD.
+    CryptoOrderForm:
+      type: object
+      required:
+        - "instrument"
+        - "side"
+        - "type"
+        - "time_in_force"
+        - "amount"
+      properties:
+        instrument:
+          $ref: "#/components/schemas/CryptoTradingInstrument"
         side:
           $ref: "#/components/schemas/ActionStrict"
         type:

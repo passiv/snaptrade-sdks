@@ -10,12 +10,12 @@ Method | Path | Description
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket equity order
+[**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
 [**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
 [**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
-[**PlaceSimpleOrder**](TradingApi.md#PlaceSimpleOrder) | **Post** /accounts/{accountId}/trading/simple | Place crypto order
-[**PreviewSimpleOrder**](TradingApi.md#PreviewSimpleOrder) | **Post** /accounts/{accountId}/trading/simple/preview | Preview crypto order
-[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Patch** /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace | Replace equity order
+[**PreviewCryptoOrder**](TradingApi.md#PreviewCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
+[**ReplaceOrder**](TradingApi.md#ReplaceOrder) | **Post** /accounts/{accountId}/trading/replace | Replace equity order
 [**SearchCryptocurrencyPairInstruments**](TradingApi.md#SearchCryptocurrencyPairInstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 
 
@@ -73,6 +73,7 @@ func main() {
 
 
 ## CancelUserAccountOrder
+![Deprecated](https://img.shields.io/badge/deprecated-yellow)
 
 Cancel equity order
 
@@ -395,6 +396,68 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## PlaceCryptoOrder
+
+Place crypto order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    instrument := *snaptrade.NewCryptoTradingInstrument()
+    
+    cryptoOrderForm := *snaptrade.NewCryptoOrderForm(
+        instrument,
+        null,
+        "null",
+        "null",
+        "123.45",
+    )
+    cryptoOrderForm.SetLimitPrice("123.45")
+    cryptoOrderForm.SetStopPrice("123.45")
+    cryptoOrderForm.SetPostOnly(false)
+    cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
+    
+    request := client.TradingApi.PlaceCryptoOrder(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        cryptoOrderForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceCryptoOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `PlaceCryptoOrder`: OrderUpdatedResponse
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceCryptoOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceCryptoOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceCryptoOrder.Order`: %v\n", *resp.Order)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PlaceForceOrder
 
 Place equity order
@@ -610,69 +673,7 @@ func main() {
 [[Back to README]](../README.md)
 
 
-## PlaceSimpleOrder
-
-Place crypto order
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "fmt"
-    "os"
-    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
-)
-
-func main() {
-    configuration := snaptrade.NewConfiguration()
-    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
-    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
-    client := snaptrade.NewAPIClient(configuration)
-
-    instrument := *snaptrade.NewTradingInstrument()
-    
-    simpleOrderForm := *snaptrade.NewSimpleOrderForm(
-        instrument,
-        null,
-        "null",
-        "null",
-        "123.45",
-    )
-    simpleOrderForm.SetLimitPrice("123.45")
-    simpleOrderForm.SetStopPrice("123.45")
-    simpleOrderForm.SetPostOnly(false)
-    simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
-    
-    request := client.TradingApi.PlaceSimpleOrder(
-        "userId_example",
-        "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        simpleOrderForm,
-    )
-    
-    resp, httpRes, err := request.Execute()
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PlaceSimpleOrder``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
-    }
-    // response from `PlaceSimpleOrder`: OrderUpdatedResponse
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PlaceSimpleOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceSimpleOrder.BrokerageOrderId`: %v\n", resp.BrokerageOrderId)
-    fmt.Fprintf(os.Stdout, "Response from `OrderUpdatedResponse.PlaceSimpleOrder.Order`: %v\n", *resp.Order)
-}
-```
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PreviewSimpleOrder
+## PreviewCryptoOrder
 
 Preview crypto order
 
@@ -695,36 +696,36 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    instrument := *snaptrade.NewTradingInstrument()
+    instrument := *snaptrade.NewCryptoTradingInstrument()
     
-    simpleOrderForm := *snaptrade.NewSimpleOrderForm(
+    cryptoOrderForm := *snaptrade.NewCryptoOrderForm(
         instrument,
         null,
         "null",
         "null",
         "123.45",
     )
-    simpleOrderForm.SetLimitPrice("123.45")
-    simpleOrderForm.SetStopPrice("123.45")
-    simpleOrderForm.SetPostOnly(false)
-    simpleOrderForm.SetExpirationDate(2024-01-01T00:00Z)
+    cryptoOrderForm.SetLimitPrice("123.45")
+    cryptoOrderForm.SetStopPrice("123.45")
+    cryptoOrderForm.SetPostOnly(false)
+    cryptoOrderForm.SetExpirationDate(2024-01-01T00:00Z)
     
-    request := client.TradingApi.PreviewSimpleOrder(
+    request := client.TradingApi.PreviewCryptoOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        simpleOrderForm,
+        cryptoOrderForm,
     )
     
     resp, httpRes, err := request.Execute()
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PreviewSimpleOrder``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.PreviewCryptoOrder``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
     }
-    // response from `PreviewSimpleOrder`: SimpleOrderPreview
-    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PreviewSimpleOrder`: %v\n", resp)
-    fmt.Fprintf(os.Stdout, "Response from `SimpleOrderPreview.PreviewSimpleOrder.EstimatedFee`: %v\n", *resp.EstimatedFee)
+    // response from `PreviewCryptoOrder`: CryptoOrderPreview
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.PreviewCryptoOrder`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `CryptoOrderPreview.PreviewCryptoOrder.EstimatedFee`: %v\n", *resp.EstimatedFee)
 }
 ```
 
@@ -759,6 +760,7 @@ func main() {
     units := *snaptrade.Newfloat32()
     
     manualTradeReplaceForm := *snaptrade.NewManualTradeReplaceForm(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
         null,
         null,
         null,
@@ -770,7 +772,6 @@ func main() {
     
     request := client.TradingApi.ReplaceOrder(
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "brokerageOrderId_example",
         "userId_example",
         "userSecret_example",
         manualTradeReplaceForm,
