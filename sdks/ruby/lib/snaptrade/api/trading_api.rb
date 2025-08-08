@@ -980,7 +980,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
-    # @param symbol [String] The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL 131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param symbol [String] The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
@@ -1019,7 +1019,7 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
-    # @param symbol [String] The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL 131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param symbol [String] The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).

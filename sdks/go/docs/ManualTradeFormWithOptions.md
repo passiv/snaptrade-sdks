@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **AccountId** | **string** | Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. | 
 **Action** | [**ActionStrictWithOptions**](ActionStrictWithOptions.md) |  | 
 **UniversalSymbolId** | Pointer to **NullableString** | The universal symbol ID of the security to trade. Must be &#39;null&#39; if &#x60;symbol&#x60; is provided, otherwise must be provided. | [optional] 
-**Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
+**Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
