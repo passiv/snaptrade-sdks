@@ -2123,7 +2123,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    symbol="AAPL  131124C00240000",
+    symbol="AAPL",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -2153,7 +2153,7 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 
 ##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
 
-The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 

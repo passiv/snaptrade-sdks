@@ -22,7 +22,7 @@ module SnapTrade
     # The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
     attr_accessor :universal_symbol_id
 
-    # The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format). If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     attr_accessor :symbol
 
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 

@@ -212,7 +212,7 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
             null,
         )
         manualTradeFormWithOptions.SetUniversalSymbolId(universalSymbolId)
-        manualTradeFormWithOptions.SetSymbol("AAPL  131124C00240000")
+        manualTradeFormWithOptions.SetSymbol("AAPL")
         manualTradeFormWithOptions.SetPrice(31.33)
         manualTradeFormWithOptions.SetStop(31.33)
         manualTradeFormWithOptions.SetUnits(units)
