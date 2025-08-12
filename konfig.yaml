@@ -127,6 +127,8 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
+    /accounts/{accountId}/orders/cancel:
+      post: true
     /brokerageAuthorizationTypes:
       get: true
     /currencies:
