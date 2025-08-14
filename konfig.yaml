@@ -24,8 +24,8 @@ order:
       - Trading_placeMlegOrder
       - Trading_searchCryptocurrencyPairInstruments
       - Trading_getCryptocurrencyPairQuote
-      - Trading_previewSimpleOrder
-      - Trading_placeSimpleOrder
+      - Trading_previewCryptoOrder
+      - Trading_placeCryptoOrder
       - Trading_cancelOrder
       - Trading_replaceOrder
 overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
