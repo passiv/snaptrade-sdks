@@ -23,11 +23,11 @@ order:
       - Trading_placeBracketOrder
       - Trading_placeMlegOrder
       - Trading_searchCryptocurrencyPairInstruments
-      - Trading_previewSimpleOrder
       - Trading_getCryptocurrencyPairQuote
+      - Trading_previewSimpleOrder
       - Trading_placeSimpleOrder
-      - Trading_replaceOrder
       - Trading_cancelOrder
+      - Trading_replaceOrder
 overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
