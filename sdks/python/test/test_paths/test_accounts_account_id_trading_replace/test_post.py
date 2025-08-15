@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingReplace(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingReplace unit test stubs
-        Replace equity order
+        Replace order
     """
 
     def setUp(self):

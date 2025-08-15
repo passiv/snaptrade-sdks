@@ -15,7 +15,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
 | [**placeOrder**](TradingApi.md#placeOrder) | **POST** /trade/{tradeId} | Place checked equity order |
 | [**previewCryptoOrder**](TradingApi.md#previewCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
-| [**replaceOrder**](TradingApi.md#replaceOrder) | **POST** /accounts/{accountId}/trading/replace | Replace equity order |
+| [**replaceOrder**](TradingApi.md#replaceOrder) | **POST** /accounts/{accountId}/trading/replace | Replace order |
 | [**searchCryptocurrencyPairInstruments**](TradingApi.md#searchCryptocurrencyPairInstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
@@ -1315,7 +1315,7 @@ public class Example {
 # **replaceOrder**
 > AccountOrderRecord replaceOrder(accountId, userId, userSecret, manualTradeReplaceForm).execute();
 
-Replace equity order
+Replace order
 
 Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
 

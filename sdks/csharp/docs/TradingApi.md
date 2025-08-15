@@ -15,7 +15,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order |
 | [**PreviewCryptoOrder**](TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
-| [**ReplaceOrder**](TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace equity order |
+| [**ReplaceOrder**](TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace order |
 | [**SearchCryptocurrencyPairInstruments**](TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs |
 
 
@@ -1278,7 +1278,7 @@ namespace Example
             
             try
             {
-                // Replace equity order
+                // Replace order
                 AccountOrderRecord result = client.Trading.ReplaceOrder(accountId, userId, userSecret, manualTradeReplaceForm);
                 Console.WriteLine(result);
             }
@@ -1305,7 +1305,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Replace equity order
+    // Replace order
     ApiResponse<AccountOrderRecord> response = apiInstance.ReplaceOrderWithHttpInfo(accountId, userId, userSecret, manualTradeReplaceForm);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

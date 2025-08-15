@@ -119,7 +119,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **Post** /accounts/{accountId}/trading/options | Place option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **Post** /trade/{tradeId} | Place checked equity order
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
-*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Post** /accounts/{accountId}/trading/replace | Replace equity order
+*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **Post** /accounts/{accountId}/trading/replace | Replace order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **Get** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **Get** /performance/custom | Get performance information for a specific timeframe

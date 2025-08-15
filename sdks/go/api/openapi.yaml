@@ -2236,6 +2236,154 @@ paths:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-trading-instruments-cryptocurrencyPairs-instrumentSymbol-quote
+  /accounts/{accountId}/trading/crypto/preview:
+    post:
+      description: |
+        Previews an order using the specified account.
+      operationId: Trading_previewCryptoOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CryptoOrderPreview'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+        "500":
+          description: Unexpected Error
+      summary: Preview crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview
+  /accounts/{accountId}/trading/crypto:
+    post:
+      description: |
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeCryptoOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderUpdatedResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+        "500":
+          description: Unexpected Error
+      summary: Place crypto order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto
+  /accounts/{accountId}/trading/cancel:
+    post:
+      description: |
+        Cancels an order in the specified account. Accepts order IDs for all asset types.
+      operationId: Trading_cancelOrder
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CancelOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelOrderResponse'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+        "500":
+          description: Unexpected Error
+      summary: Cancel order
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel
   /accounts/{accountId}/trading/replace:
     post:
       description: |
@@ -2289,159 +2437,11 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Replace equity order
+      summary: Replace order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
-  /accounts/{accountId}/trading/cancel:
-    post:
-      description: |
-        Cancels an order in the specified account. Accepts order IDs for all asset types.
-      operationId: Trading_cancelOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CancelOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CancelOrderResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-        "500":
-          description: Unexpected Error
-      summary: Cancel order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel
-  /accounts/{accountId}/trading/crypto:
-    post:
-      description: |
-        Places an order in the specified account.
-        This endpoint does not compute the impact to the account balance from the order before submitting the order.
-      operationId: Trading_placeCryptoOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OrderUpdatedResponse'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-        "500":
-          description: Unexpected Error
-      summary: Place crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto
-  /accounts/{accountId}/trading/crypto/preview:
-    post:
-      description: |
-        Previews an order using the specified account.
-      operationId: Trading_previewCryptoOrder
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CryptoOrderRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CryptoOrderPreview'
-          description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Invalid request
-        "500":
-          description: Unexpected Error
-      summary: Preview crypto order
-      tags:
-      - Trading
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -10851,63 +10851,7 @@ components:
       - userSecret
       - accountId
       - instrumentSymbol
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace:
-      additionalProperties: true
-      properties:
-        accountId:
-          $ref: '#/components/schemas/Id'
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        brokerage_order_id:
-          $ref: '#/components/schemas/BrokerageOrderID'
-        action:
-          $ref: '#/components/schemas/ActionStrict'
-        order_type:
-          $ref: '#/components/schemas/OrderTypeStrict'
-        time_in_force:
-          $ref: '#/components/schemas/TimeInForceStrict'
-        price:
-          description: The limit price for `Limit` and `StopLimit` orders.
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
-        symbol:
-          description: The security's trading ticker symbol
-          example: AAPL
-          type: string
-          x-konfig-original-example: AAPL
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
-        stop:
-          description: The price at which a stop order is triggered for `Stop` and
-            `StopLimit` orders.
-          example: 31.33
-          nullable: true
-          type: number
-          x-konfig-original-example: 31.33
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
-        units:
-          allOf:
-          - $ref: '#/components/schemas/Units'
-          nullable: true
-      required:
-      - accountId
-      - action
-      - brokerage_order_id
-      - order_type
-      - time_in_force
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - accountId
-      - userId
-      - userSecret
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview:
       additionalProperties: true
       properties:
         userId:
@@ -10916,10 +10860,78 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        brokerage_order_id:
-          $ref: '#/components/schemas/BrokerageOrderID'
+        instrument:
+          $ref: '#/components/schemas/CryptoTradingInstrument'
+        side:
+          $ref: '#/components/schemas/ActionStrict'
+        type:
+          description: The type of order to place.
+          enum:
+          - MARKET
+          - LIMIT
+          - STOP_LOSS_MARKET
+          - STOP_LOSS_LIMIT
+          - TAKE_PROFIT_MARKET
+          - TAKE_PROFIT_LIMIT
+          type: string
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          enum:
+          - GTC
+          - FOK
+          - IOC
+          - GTD
+          type: string
+        amount:
+          description: The amount of the base currency to buy or sell.
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
+            \ or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
+          example: "123.45"
+          format: decimal
+          type: string
+          x-konfig-original-example: "123.45"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
+        post_only:
+          description: |
+            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+          example: false
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
+        expiration_date:
+          description: The expiration date of the order. Required if the time_in_force
+            is GTD.
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-01-01T00:00:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date
       required:
       - accountId
+      - amount
+      - instrument
+      - side
+      - time_in_force
+      - type
       - userId
       - userSecret
       type: object
@@ -11017,7 +11029,7 @@ components:
       - userId
       - userSecret
       - accountId
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-crypto-preview:
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-cancel:
       additionalProperties: true
       properties:
         userId:
@@ -11026,78 +11038,10 @@ components:
           $ref: '#/components/schemas/UserSecret'
         accountId:
           $ref: '#/components/schemas/AccountID'
-        instrument:
-          $ref: '#/components/schemas/CryptoTradingInstrument'
-        side:
-          $ref: '#/components/schemas/ActionStrict'
-        type:
-          description: The type of order to place.
-          enum:
-          - MARKET
-          - LIMIT
-          - STOP_LOSS_MARKET
-          - STOP_LOSS_LIMIT
-          - TAKE_PROFIT_MARKET
-          - TAKE_PROFIT_LIMIT
-          type: string
-        time_in_force:
-          description: |
-            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
-              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
-              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
-              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
-              - `GTD` - Good Til Date. The order is valid until the specified date.
-          enum:
-          - GTC
-          - FOK
-          - IOC
-          - GTD
-          type: string
-        amount:
-          description: The amount of the base currency to buy or sell.
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-amount
-        limit_price:
-          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT\
-            \ or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-limit_price
-        stop_price:
-          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
-            \ STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT."
-          example: "123.45"
-          format: decimal
-          type: string
-          x-konfig-original-example: "123.45"
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-stop_price
-        post_only:
-          description: |
-            Valid and required only for order type LIMIT. If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
-          example: false
-          type: boolean
-          x-konfig-original-example: false
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-post_only
-        expiration_date:
-          description: The expiration date of the order. Required if the time_in_force
-            is GTD.
-          example: 2024-01-01T00:00:00Z
-          format: date-time
-          type: string
-          x-konfig-original-example: 2024-01-01T00:00:00Z
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptoOrderForm-properties-expiration_date
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
-      - amount
-      - instrument
-      - side
-      - time_in_force
-      - type
       - userId
       - userSecret
       type: object
@@ -11106,6 +11050,62 @@ components:
       - userId
       - userSecret
       - accountId
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/Id'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        action:
+          $ref: '#/components/schemas/ActionStrict'
+        order_type:
+          $ref: '#/components/schemas/OrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-price
+        symbol:
+          description: The security's trading ticker symbol
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-symbol
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and
+            `StopLimit` orders.
+          example: 31.33
+          nullable: true
+          type: number
+          x-konfig-original-example: 31.33
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-ManualTradeReplaceForm-properties-stop
+        units:
+          allOf:
+          - $ref: '#/components/schemas/Units'
+          nullable: true
+      required:
+      - accountId
+      - action
+      - brokerage_order_id
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}

@@ -150,7 +150,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
-*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace equity order
+*TradingApi* | [**ReplaceOrder**](docs/TradingApi.md#replaceorder) | **POST** /accounts/{accountId}/trading/replace | Replace order
 *TradingApi* | [**SearchCryptocurrencyPairInstruments**](docs/TradingApi.md#searchcryptocurrencypairinstruments) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs | Get crypto pairs
 *TransactionsAndReportingApi* | [**GetActivities**](docs/TransactionsAndReportingApi.md#getactivities) | **GET** /activities | Get transaction history for a user
 *TransactionsAndReportingApi* | [**GetReportingCustomRange**](docs/TransactionsAndReportingApi.md#getreportingcustomrange) | **GET** /performance/custom | Get performance information for a specific timeframe
