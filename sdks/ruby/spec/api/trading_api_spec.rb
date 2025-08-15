@@ -192,7 +192,7 @@ describe 'TradingApi' do
   end
 
   # unit tests for replace_order
-  # Replace equity order
+  # Replace order
   # Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling the existing order and placing a new one. The order&#39;s brokerage_order_id may or may not change, be sure to use the one returned in the response going forward. Only supported on some brokerages 
   # @param account_id The ID of the account to execute the trade on.
   # @param user_id 

@@ -39,10 +39,10 @@ from snaptrade_client.apis.paths.accounts_account_id_trading_bracket import Acco
 from snaptrade_client.apis.paths.accounts_account_id_trading_options import AccountsAccountIdTradingOptions
 from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs import AccountsAccountIdTradingInstrumentsCryptocurrencyPairs
 from snaptrade_client.apis.paths.accounts_account_id_trading_instruments_cryptocurrency_pairs_instrument_symbol_quote import AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote
-from snaptrade_client.apis.paths.accounts_account_id_trading_replace import AccountsAccountIdTradingReplace
-from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import AccountsAccountIdTradingCancel
-from snaptrade_client.apis.paths.accounts_account_id_trading_crypto import AccountsAccountIdTradingCrypto
 from snaptrade_client.apis.paths.accounts_account_id_trading_crypto_preview import AccountsAccountIdTradingCryptoPreview
+from snaptrade_client.apis.paths.accounts_account_id_trading_crypto import AccountsAccountIdTradingCrypto
+from snaptrade_client.apis.paths.accounts_account_id_trading_cancel import AccountsAccountIdTradingCancel
+from snaptrade_client.apis.paths.accounts_account_id_trading_replace import AccountsAccountIdTradingReplace
 from snaptrade_client.apis.paths.snap_trade_partners import SnapTradePartners
 from snaptrade_client.apis.paths.accounts_account_id_symbols import AccountsAccountIdSymbols
 from snaptrade_client.apis.paths.brokerages import Brokerages
@@ -97,10 +97,10 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_PREVIEW: AccountsAccountIdTradingCryptoPreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
@@ -156,10 +156,10 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_OPTIONS: AccountsAccountIdTradingOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS: AccountsAccountIdTradingInstrumentsCryptocurrencyPairs,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_INSTRUMENTS_CRYPTOCURRENCY_PAIRS_INSTRUMENT_SYMBOL_QUOTE: AccountsAccountIdTradingInstrumentsCryptocurrencyPairsInstrumentSymbolQuote,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
-        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
         PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO_PREVIEW: AccountsAccountIdTradingCryptoPreview,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CRYPTO: AccountsAccountIdTradingCrypto,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL: AccountsAccountIdTradingCancel,
+        PathValues.ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE: AccountsAccountIdTradingReplace,
         PathValues.SNAP_TRADE_PARTNERS: SnapTradePartners,
         PathValues.ACCOUNTS_ACCOUNT_ID_SYMBOLS: AccountsAccountIdSymbols,
         PathValues.BROKERAGES: Brokerages,
