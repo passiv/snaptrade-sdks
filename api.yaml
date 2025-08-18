@@ -1700,7 +1700,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place equity order
+      summary: Place order
       description: |
         Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 
@@ -3587,6 +3587,11 @@ components:
           type: number
           nullable: true
           example: 1.44
+        currency:
+          description: | 
+            The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object

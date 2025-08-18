@@ -11,7 +11,7 @@ Method | Path | Description
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket equity order
 [**PlaceCryptoOrder**](TradingApi.md#PlaceCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto | Place crypto order
-[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place equity order
+[**PlaceForceOrder**](TradingApi.md#PlaceForceOrder) | **Post** /trade/place | Place order
 [**PlaceMlegOrder**](TradingApi.md#PlaceMlegOrder) | **Post** /accounts/{accountId}/trading/options | Place option order
 [**PlaceOrder**](TradingApi.md#PlaceOrder) | **Post** /trade/{tradeId} | Place checked equity order
 [**PreviewCryptoOrder**](TradingApi.md#PreviewCryptoOrder) | **Post** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
@@ -460,7 +460,7 @@ func main() {
 
 ## PlaceForceOrder
 
-Place equity order
+Place order
 
 
 

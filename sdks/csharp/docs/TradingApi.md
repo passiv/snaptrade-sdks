@@ -11,7 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order |
 | [**PlaceCryptoOrder**](TradingApi.md#placecryptoorder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
-| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order |
+| [**PlaceForceOrder**](TradingApi.md#placeforceorder) | **POST** /trade/place | Place order |
 | [**PlaceMlegOrder**](TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order |
 | [**PlaceOrder**](TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order |
 | [**PreviewCryptoOrder**](TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order |
@@ -830,7 +830,7 @@ namespace Example
             
             try
             {
-                // Place equity order
+                // Place order
                 AccountOrderRecord result = client.Trading.PlaceForceOrder(userId, userSecret, manualTradeFormWithOptions);
                 Console.WriteLine(result);
             }
@@ -857,7 +857,7 @@ This returns an ApiResponse object which contains the response data, status code
 ```csharp
 try
 {
-    // Place equity order
+    // Place order
     ApiResponse<AccountOrderRecord> response = apiInstance.PlaceForceOrderWithHttpInfo(userId, userSecret, manualTradeFormWithOptions);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);

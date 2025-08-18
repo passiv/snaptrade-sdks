@@ -1954,7 +1954,7 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Place equity order
+      summary: Place order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
@@ -3324,6 +3324,7 @@ components:
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
+          currency: null
           units: 40
           average_purchase_price: 108.3353
         - symbol:
@@ -3356,6 +3357,7 @@ components:
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
+          currency: null
           units: 40
           average_purchase_price: 108.3353
         account:
@@ -3534,6 +3536,7 @@ components:
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
+          currency: null
           units: 40
           average_purchase_price: 108.3353
         - symbol:
@@ -3566,6 +3569,7 @@ components:
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
+          currency: null
           units: 40
           average_purchase_price: 108.3353
         orders:
@@ -5151,6 +5155,7 @@ components:
         fractional_units: 1.44
         price: 113.15
         open_pnl: 0.44
+        currency: null
         units: 40
         average_purchase_price: 108.3353
       properties:
@@ -5201,6 +5206,8 @@ components:
           type: number
           x-konfig-original-example: 1.44
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-fractional_units
+        currency:
+          $ref: '#/components/schemas/Position_currency'
       type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
@@ -11600,6 +11607,11 @@ components:
       allOf:
       - $ref: '#/components/schemas/Currency'
       description: The currency of the balance. This applies to both `cash` and `buying_power`.
+    Position_currency:
+      allOf:
+      - $ref: '#/components/schemas/Currency'
+      description: |
+        The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
     Symbol_currency:
       allOf:
       - $ref: '#/components/schemas/Currency'

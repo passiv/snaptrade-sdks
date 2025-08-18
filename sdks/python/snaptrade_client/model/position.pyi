@@ -141,6 +141,42 @@ class Position(
                         *args,
                         _configuration=_configuration,
                     )
+            
+            
+            class currency(
+                schemas.ComposedSchema,
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @classmethod
+                    @functools.lru_cache()
+                    def all_of(cls):
+                        # we need this here to make our import statements work
+                        # we must store _composed_schemas in here so the code is only run
+                        # when we invoke this method. If we kept this at the class
+                        # level we would get an error because the class level
+                        # code would be run when this module is imported, and these composed
+                        # classes don't exist yet because their module has not finished
+                        # loading
+                        return [
+                            Currency,
+                        ]
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                    **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
+                ) -> 'currency':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                        **kwargs,
+                    )
             __annotations__ = {
                 "symbol": symbol,
                 "units": units,
@@ -148,6 +184,7 @@ class Position(
                 "open_pnl": open_pnl,
                 "average_purchase_price": average_purchase_price,
                 "fractional_units": fractional_units,
+                "currency": currency,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -170,9 +207,12 @@ class Position(
     def __getitem__(self, name: typing_extensions.Literal["fractional_units"]) -> MetaOapg.properties.fractional_units: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["currency"]) -> MetaOapg.properties.currency: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -195,9 +235,12 @@ class Position(
     def get_item_oapg(self, name: typing_extensions.Literal["fractional_units"]) -> typing.Union[MetaOapg.properties.fractional_units, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["currency"]) -> typing.Union[MetaOapg.properties.currency, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -209,6 +252,7 @@ class Position(
         open_pnl: typing.Union[MetaOapg.properties.open_pnl, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         average_purchase_price: typing.Union[MetaOapg.properties.average_purchase_price, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         fractional_units: typing.Union[MetaOapg.properties.fractional_units, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
+        currency: typing.Union[MetaOapg.properties.currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Position':
@@ -221,8 +265,10 @@ class Position(
             open_pnl=open_pnl,
             average_purchase_price=average_purchase_price,
             fractional_units=fractional_units,
+            currency=currency,
             _configuration=_configuration,
             **kwargs,
         )
 
+from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.position_symbol import PositionSymbol

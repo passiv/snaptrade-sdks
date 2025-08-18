@@ -146,7 +146,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order
 *TradingApi* | [**PlaceCryptoOrder**](docs/TradingApi.md#placecryptoorder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order
-*TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place equity order
+*TradingApi* | [**PlaceForceOrder**](docs/TradingApi.md#placeforceorder) | **POST** /trade/place | Place order
 *TradingApi* | [**PlaceMlegOrder**](docs/TradingApi.md#placemlegorder) | **POST** /accounts/{accountId}/trading/options | Place option order
 *TradingApi* | [**PlaceOrder**](docs/TradingApi.md#placeorder) | **POST** /trade/{tradeId} | Place checked equity order
 *TradingApi* | [**PreviewCryptoOrder**](docs/TradingApi.md#previewcryptoorder) | **POST** /accounts/{accountId}/trading/crypto/preview | Preview crypto order
@@ -261,6 +261,7 @@ Class | Method | HTTP request | Description
  - [PastValue](docs/PastValue.md)
  - [PerformanceCustom](docs/PerformanceCustom.md)
  - [Position](docs/Position.md)
+ - [PositionCurrency](docs/PositionCurrency.md)
  - [PositionSymbol](docs/PositionSymbol.md)
  - [RateOfReturnObject](docs/RateOfReturnObject.md)
  - [RateOfReturnResponse](docs/RateOfReturnResponse.md)

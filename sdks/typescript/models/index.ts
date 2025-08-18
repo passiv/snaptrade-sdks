@@ -100,6 +100,7 @@ export * from './partner-data';
 export * from './past-value';
 export * from './performance-custom';
 export * from './position';
+export * from './position-currency';
 export * from './position-symbol';
 export * from './rate-of-return-object';
 export * from './rate-of-return-response';

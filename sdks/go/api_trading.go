@@ -1318,7 +1318,7 @@ func (r TradingApiPlaceForceOrderRequest) Execute() (*AccountOrderRecord, *http.
 }
 
 /*
-PlaceForceOrder Place equity order
+PlaceForceOrder Place order
 
 Places a brokerage order in the specified account. The order could be rejected by the brokerage if it is invalid or if the account does not have sufficient funds.
 

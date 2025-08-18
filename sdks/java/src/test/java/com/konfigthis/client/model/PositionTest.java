@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.PositionCurrency;
 import com.konfigthis.client.model.PositionSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -86,6 +87,14 @@ public class PositionTest {
     @Test
     public void fractionalUnitsTest() {
         // TODO: test fractionalUnits
+    }
+
+    /**
+     * Test the property 'currency'
+     */
+    @Test
+    public void currencyTest() {
+        // TODO: test currency
     }
 
 }

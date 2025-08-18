@@ -29,6 +29,7 @@ type Position struct {
 	// Deprecated, use the `units` field for both fractional and integer units going forward
 	// Deprecated
 	FractionalUnits NullableFloat32 `json:"fractional_units,omitempty"`
+	Currency *PositionCurrency `json:"currency,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -296,6 +297,38 @@ func (o *Position) UnsetFractionalUnits() {
 	o.FractionalUnits.Unset()
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *Position) GetCurrency() PositionCurrency {
+	if o == nil || isNil(o.Currency) {
+		var ret PositionCurrency
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Position) GetCurrencyOk() (*PositionCurrency, bool) {
+	if o == nil || isNil(o.Currency) {
+    return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *Position) HasCurrency() bool {
+	if o != nil && !isNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given PositionCurrency and assigns it to the Currency field.
+func (o *Position) SetCurrency(v PositionCurrency) {
+	o.Currency = &v
+}
+
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -315,6 +348,9 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	}
 	if o.FractionalUnits.IsSet() {
 		toSerialize["fractional_units"] = o.FractionalUnits.Get()
+	}
+	if !isNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -340,6 +376,7 @@ func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "open_pnl")
 		delete(additionalProperties, "average_purchase_price")
 		delete(additionalProperties, "fractional_units")
+		delete(additionalProperties, "currency")
 		o.AdditionalProperties = additionalProperties
 	}
 

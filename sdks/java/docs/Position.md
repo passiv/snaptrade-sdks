@@ -14,6 +14,7 @@ Describes a single stock/ETF/crypto/mutual fund position in an account.
 |**openPnl** | **Double** | The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field. |  [optional] |
 |**averagePurchasePrice** | **Double** | Cost basis _per share_ of this position. |  [optional] |
 |**fractionalUnits** | **Double** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward |  [optional] |
+|**currency** | [**PositionCurrency**](PositionCurrency.md) |  |  [optional] |
 
 
 
