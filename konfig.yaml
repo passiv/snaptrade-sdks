@@ -32,7 +32,7 @@ overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
   hideNonSdkSnippets: true
-  primaryColor: '#ebb964'
+  primaryColor: "#ebb964"
   favicon: favicon.png
   cta:
     url: https://snaptrade.com/contact-sales
@@ -104,7 +104,11 @@ portal:
       post: true
     /brokerages/{brokerageId}/instruments:
       get: true
+    /accounts/{accountId}/orders/{brokerageOrderId}:
+      get: true
   hideOperations:
+    /accounts/{accountId}/orders/{brokerageOrderId}:
+      get: true
     /activities:
       get: true
     /holdings:
@@ -257,8 +261,13 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
+<<<<<<< Updated upstream
     version: 11.0.122
     responseTypeVersion: '1'
+=======
+    version: 11.0.105
+    responseTypeVersion: "1"
+>>>>>>> Stashed changes
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
