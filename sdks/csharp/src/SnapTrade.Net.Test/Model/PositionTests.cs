@@ -105,6 +105,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'FractionalUnits'
         }
+        /// <summary>
+        /// Test the property 'Currency'
+        /// </summary>
+        [Fact]
+        public void CurrencyTest()
+        {
+            // TODO unit test for the property 'Currency'
+        }
 
     }
 

@@ -41,7 +41,8 @@ namespace SnapTrade.Net.Model
         /// <param name="openPnl">The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field..</param>
         /// <param name="averagePurchasePrice">Cost basis _per share_ of this position..</param>
         /// <param name="fractionalUnits">Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward.</param>
-        public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? averagePurchasePrice = default(double?), double? fractionalUnits = default(double?)) : base()
+        /// <param name="currency">currency.</param>
+        public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? averagePurchasePrice = default(double?), double? fractionalUnits = default(double?), PositionCurrency currency = default(PositionCurrency)) : base()
         {
             this.Symbol = symbol;
             this.Units = units;
@@ -49,6 +50,7 @@ namespace SnapTrade.Net.Model
             this.OpenPnl = openPnl;
             this.AveragePurchasePrice = averagePurchasePrice;
             this.FractionalUnits = fractionalUnits;
+            this.Currency = currency;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -95,6 +97,12 @@ namespace SnapTrade.Net.Model
         public double? FractionalUnits { get; set; }
 
         /// <summary>
+        /// Gets or Sets Currency
+        /// </summary>
+        [DataMember(Name = "currency", EmitDefaultValue = false)]
+        public PositionCurrency Currency { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -115,6 +123,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  OpenPnl: ").Append(OpenPnl).Append("\n");
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
             sb.Append("  FractionalUnits: ").Append(FractionalUnits).Append("\n");
+            sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -180,6 +189,11 @@ namespace SnapTrade.Net.Model
                     this.FractionalUnits == input.FractionalUnits ||
                     (this.FractionalUnits != null &&
                     this.FractionalUnits.Equals(input.FractionalUnits))
+                ) && base.Equals(input) && 
+                (
+                    this.Currency == input.Currency ||
+                    (this.Currency != null &&
+                    this.Currency.Equals(input.Currency))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -216,6 +230,10 @@ namespace SnapTrade.Net.Model
                 if (this.FractionalUnits != null)
                 {
                     hashCode = (hashCode * 59) + this.FractionalUnits.GetHashCode();
+                }
+                if (this.Currency != null)
+                {
+                    hashCode = (hashCode * 59) + this.Currency.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **OpenPnl** | Pointer to **NullableFloat32** | The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field. | [optional] 
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per share_ of this position. | [optional] 
 **FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
+**Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
 
 ## Methods
 
@@ -230,6 +231,31 @@ HasFractionalUnits returns a boolean if a field has been set.
 `func (o *Position) UnsetFractionalUnits()`
 
 UnsetFractionalUnits ensures that no value is present for FractionalUnits, not even an explicit nil
+### GetCurrency
+
+`func (o *Position) GetCurrency() PositionCurrency`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *Position) GetCurrencyOk() (*PositionCurrency, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *Position) SetCurrency(v PositionCurrency)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *Position) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.PositionCurrency;
 import com.konfigthis.client.model.PositionSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -75,6 +76,10 @@ public class Position {
   public static final String SERIALIZED_NAME_FRACTIONAL_UNITS = "fractional_units";
   @SerializedName(SERIALIZED_NAME_FRACTIONAL_UNITS)
   private Double fractionalUnits;
+
+  public static final String SERIALIZED_NAME_CURRENCY = "currency";
+  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  private PositionCurrency currency;
 
   public Position() {
   }
@@ -299,6 +304,35 @@ public class Position {
     this.fractionalUnits = fractionalUnits;
   }
 
+
+  public Position currency(PositionCurrency currency) {
+    
+    
+    
+    
+    this.currency = currency;
+    return this;
+  }
+
+   /**
+   * Get currency
+   * @return currency
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public PositionCurrency getCurrency() {
+    return currency;
+  }
+
+
+  public void setCurrency(PositionCurrency currency) {
+    
+    
+    
+    this.currency = currency;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -359,7 +393,8 @@ public class Position {
         Objects.equals(this.price, position.price) &&
         Objects.equals(this.openPnl, position.openPnl) &&
         Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice) &&
-        Objects.equals(this.fractionalUnits, position.fractionalUnits)&&
+        Objects.equals(this.fractionalUnits, position.fractionalUnits) &&
+        Objects.equals(this.currency, position.currency)&&
         Objects.equals(this.additionalProperties, position.additionalProperties);
   }
 
@@ -369,7 +404,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, additionalProperties);
+    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -389,6 +424,7 @@ public class Position {
     sb.append("    openPnl: ").append(toIndentedString(openPnl)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
     sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -418,6 +454,7 @@ public class Position {
     openapiFields.add("open_pnl");
     openapiFields.add("average_purchase_price");
     openapiFields.add("fractional_units");
+    openapiFields.add("currency");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -438,6 +475,10 @@ public class Position {
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         PositionSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        PositionCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
   }
 

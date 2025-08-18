@@ -11,37 +11,23 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Describes a single stock/ETF/crypto/mutual fund position in an account.
-  class Position
-    attr_accessor :symbol
+  # The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position. 
+  class PositionCurrency
+    # Unique identifier for the currency. This is the UUID used to reference the currency in SnapTrade.
+    attr_accessor :id
 
-    # The number of shares of the position. This can be fractional or integer units.
-    attr_accessor :units
+    # The ISO-4217 currency code for the currency.
+    attr_accessor :code
 
-    # Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
-    attr_accessor :price
-
-    # The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
-    attr_accessor :open_pnl
-
-    # Cost basis _per share_ of this position.
-    attr_accessor :average_purchase_price
-
-    # Deprecated, use the `units` field for both fractional and integer units going forward
-    attr_accessor :fractional_units
-
-    attr_accessor :currency
+    # A human-friendly name of the currency.
+    attr_accessor :name
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'symbol' => :'symbol',
-        :'units' => :'units',
-        :'price' => :'price',
-        :'open_pnl' => :'open_pnl',
-        :'average_purchase_price' => :'average_purchase_price',
-        :'fractional_units' => :'fractional_units',
-        :'currency' => :'currency'
+        :'id' => :'id',
+        :'code' => :'code',
+        :'name' => :'name'
       }
     end
 
@@ -53,68 +39,50 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'symbol' => :'PositionSymbol',
-        :'units' => :'Float',
-        :'price' => :'Float',
-        :'open_pnl' => :'Float',
-        :'average_purchase_price' => :'Float',
-        :'fractional_units' => :'Float',
-        :'currency' => :'PositionCurrency'
+        :'id' => :'String',
+        :'code' => :'String',
+        :'name' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'units',
-        :'price',
-        :'open_pnl',
-        :'average_purchase_price',
-        :'fractional_units',
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'Currency'
+      ]
     end
 
     # Initializes the object
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::Position` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::PositionCurrency` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::Position`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::PositionCurrency`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
-      end
-
-      if attributes.key?(:'open_pnl')
-        self.open_pnl = attributes[:'open_pnl']
-      end
-
-      if attributes.key?(:'average_purchase_price')
-        self.average_purchase_price = attributes[:'average_purchase_price']
-      end
-
-      if attributes.key?(:'fractional_units')
-        self.fractional_units = attributes[:'fractional_units']
-      end
-
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
       end
     end
 
@@ -136,13 +104,9 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          symbol == o.symbol &&
-          units == o.units &&
-          price == o.price &&
-          open_pnl == o.open_pnl &&
-          average_purchase_price == o.average_purchase_price &&
-          fractional_units == o.fractional_units &&
-          currency == o.currency
+          id == o.id &&
+          code == o.code &&
+          name == o.name
     end
 
     # @see the `==` method
@@ -154,7 +118,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, units, price, open_pnl, average_purchase_price, fractional_units, currency].hash
+      [id, code, name].hash
     end
 
     # Builds the object from hash
