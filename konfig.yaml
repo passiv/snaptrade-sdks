@@ -261,13 +261,8 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-<<<<<<< Updated upstream
     version: 11.0.122
-    responseTypeVersion: '1'
-=======
-    version: 11.0.105
     responseTypeVersion: "1"
->>>>>>> Stashed changes
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
