@@ -100,7 +100,9 @@ public class Account {
     
     CLOSED("closed"),
     
-    ARCHIVED("archived");
+    ARCHIVED("archived"),
+    
+    UNAVAILABLE("unavailable");
 
     private String value;
 

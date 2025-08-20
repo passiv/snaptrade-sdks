@@ -72,6 +72,22 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/{brokerageOrderId}-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'brokerageOrderId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders-GET': {
         parameters: [
             {

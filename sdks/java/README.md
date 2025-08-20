@@ -27,6 +27,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
+  * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
@@ -428,6 +429,43 @@ Account result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
+
+Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+AccountOrderRecord result = client
+        .accountInformation
+        .getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

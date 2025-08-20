@@ -132,6 +132,7 @@ class Account(
                         "open": "OPEN",
                         "closed": "CLOSED",
                         "archived": "ARCHIVED",
+                        "unavailable": "UNAVAILABLE",
                     }
                 
                 @schemas.classproperty
@@ -145,6 +146,10 @@ class Account(
                 @schemas.classproperty
                 def ARCHIVED(cls):
                     return cls("archived")
+                
+                @schemas.classproperty
+                def UNAVAILABLE(cls):
+                    return cls("unavailable")
             
             
                 def __new__(

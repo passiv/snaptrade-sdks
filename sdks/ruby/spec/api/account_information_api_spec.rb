@@ -88,6 +88,21 @@ describe 'AccountInformationApi' do
     end
   end
 
+  # unit tests for get_user_account_order_detail
+  # Get account order detail
+  # Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param brokerage_order_id 
+  # @param [Hash] opts the optional parameters
+  # @return [AccountOrderRecord]
+  describe 'get_user_account_order_detail test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_user_account_orders
   # List account orders
   # Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 

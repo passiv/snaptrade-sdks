@@ -95,6 +95,23 @@ func Test_snaptrade_AccountInformationApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test AccountInformationApiService GetUserAccountOrderDetail", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.AccountInformationApi.GetUserAccountOrderDetail(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "brokerageOrderId_example",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test AccountInformationApiService GetUserAccountOrders", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.AccountInformationApi.GetUserAccountOrders(

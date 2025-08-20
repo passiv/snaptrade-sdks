@@ -8,6 +8,7 @@ Method | Path | Description
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
+[**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Get** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
@@ -219,6 +220,74 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.Meta`: %v\n", *resp.Meta)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.PortfolioGroup`: %v\n", *resp.PortfolioGroup)
     fmt.Fprintf(os.Stdout, "Response from `Account.GetUserAccountDetails.CashRestrictions`: %v\n", *resp.CashRestrictions)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetUserAccountOrderDetail
+
+Get account order detail
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.AccountInformationApi.GetUserAccountOrderDetail(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "brokerageOrderId_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountInformationApi.GetUserAccountOrderDetail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetUserAccountOrderDetail`: AccountOrderRecord
+    fmt.Fprintf(os.Stdout, "Response from `AccountInformationApi.GetUserAccountOrderDetail`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.BrokerageOrderId`: %v\n", *resp.BrokerageOrderId)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Status`: %v\n", *resp.Status)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.UniversalSymbol`: %v\n", *resp.UniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OptionSymbol`: %v\n", *resp.OptionSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.QuoteUniversalSymbol`: %v\n", *resp.QuoteUniversalSymbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.QuoteCurrency`: %v\n", *resp.QuoteCurrency)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Action`: %v\n", *resp.Action)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TotalQuantity`: %v\n", *resp.TotalQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OpenQuantity`: %v\n", *resp.OpenQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.CanceledQuantity`: %v\n", *resp.CanceledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.FilledQuantity`: %v\n", *resp.FilledQuantity)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ExecutionPrice`: %v\n", *resp.ExecutionPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.LimitPrice`: %v\n", *resp.LimitPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.StopPrice`: %v\n", *resp.StopPrice)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.OrderType`: %v\n", *resp.OrderType)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeInForce`: %v\n", *resp.TimeInForce)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimePlaced`: %v\n", *resp.TimePlaced)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeUpdated`: %v\n", *resp.TimeUpdated)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.TimeExecuted`: %v\n", *resp.TimeExecuted)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ExpiryDate`: %v\n", *resp.ExpiryDate)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.Symbol`: %v\n", *resp.Symbol)
+    fmt.Fprintf(os.Stdout, "Response from `AccountOrderRecord.GetUserAccountOrderDetail.ChildBrokerageOrderIds`: %v\n", *resp.ChildBrokerageOrderIds)
 }
 ```
 

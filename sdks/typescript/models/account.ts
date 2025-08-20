@@ -104,6 +104,6 @@ export interface Account {
     'cash_restrictions'?: Array<string>;
 }
 
-type AccountStatusEnum = 'open' | 'closed' | 'archived'
+type AccountStatusEnum = 'open' | 'closed' | 'archived' | 'unavailable'
 
 

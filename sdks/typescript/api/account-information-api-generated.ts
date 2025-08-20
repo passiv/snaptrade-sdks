@@ -35,6 +35,8 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
+import { Model404FailedRequestResponse } from '../models';
+// @ts-ignore
 import { Model425FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
@@ -325,6 +327,72 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 path: localVarPath,
                 configuration,
                 pathTemplate: '/accounts/{accountId}',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * @summary Get account order detail
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {string} brokerageOrderId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountOrderDetail: async (userId: string, userSecret: string, accountId: string, brokerageOrderId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'accountId', accountId)
+            // verify required parameter 'brokerageOrderId' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'brokerageOrderId', brokerageOrderId)
+            const localVarPath = `/accounts/{accountId}/orders/{brokerageOrderId}`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/orders/{brokerageOrderId}',
                 httpMethod: 'GET'
             });
 
@@ -835,6 +903,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * @summary Get account order detail
+         * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetail(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.brokerageOrderId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
          * @summary List account orders
          * @param {AccountInformationApiGetUserAccountOrdersRequest} requestParameters Request parameters.
@@ -961,6 +1040,16 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
          */
         getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig): AxiosPromise<Account> {
             return localVarFp.getUserAccountDetails(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * @summary Get account order detail
+         * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest, options?: AxiosRequestConfig): AxiosPromise<AccountOrderRecord> {
+            return localVarFp.getUserAccountOrderDetail(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns a list of recent orders in the specified account.  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
@@ -1187,6 +1276,43 @@ export type AccountInformationApiGetUserAccountDetailsRequest = {
     * @memberof AccountInformationApiGetUserAccountDetails
     */
     readonly accountId: string
+    
+}
+
+/**
+ * Request parameters for getUserAccountOrderDetail operation in AccountInformationApi.
+ * @export
+ * @interface AccountInformationApiGetUserAccountOrderDetailRequest
+ */
+export type AccountInformationApiGetUserAccountOrderDetailRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrderDetail
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrderDetail
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrderDetail
+    */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrderDetail
+    */
+    readonly brokerageOrderId: string
     
 }
 
@@ -1468,6 +1594,18 @@ export class AccountInformationApiGenerated extends BaseAPI {
      */
     public getUserAccountDetails(requestParameters: AccountInformationApiGetUserAccountDetailsRequest, options?: AxiosRequestConfig) {
         return AccountInformationApiFp(this.configuration).getUserAccountDetails(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+     * @summary Get account order detail
+     * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AccountInformationApiGenerated
+     */
+    public getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest, options?: AxiosRequestConfig) {
+        return AccountInformationApiFp(this.configuration).getUserAccountOrderDetail(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -31,6 +31,7 @@ A single account at a brokerage.
 | OPEN | &quot;open&quot; |
 | CLOSED | &quot;closed&quot; |
 | ARCHIVED | &quot;archived&quot; |
+| UNAVAILABLE | &quot;unavailable&quot; |
 
 
 
