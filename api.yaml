@@ -638,6 +638,54 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/orders/{brokerageOrderId}:
+    get:
+      tags:
+        - Account Information
+      summary: Get account order detail
+      operationId: AccountInformation_getUserAccountOrderDetail
+      description: |
+        Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: path
+          name: brokerageOrderId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageOrderID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /accounts/{accountId}/recentOrders:
     get:
       tags:
@@ -2777,7 +2825,7 @@ components:
         status:
           type: string
           description: The current status of the account. Can be either "open", "closed", "archived" or null if the status is unknown or not provided by the brokerage.
-          enum: [open, closed, archived]
+          enum: [open, closed, archived, unavailable]
           nullable: true
           example: 'open'
         raw_type:
@@ -3588,7 +3636,7 @@ components:
           nullable: true
           example: 1.44
         currency:
-          description: | 
+          description: |
             The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
           allOf:
             - $ref: "#/components/schemas/Currency"
