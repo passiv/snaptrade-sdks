@@ -22,6 +22,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.accountInformation.getAllUserHoldings`](#snaptradeaccountinformationgetalluserholdings)
   * [`snaptrade.accountInformation.getUserAccountBalance`](#snaptradeaccountinformationgetuseraccountbalance)
   * [`snaptrade.accountInformation.getUserAccountDetails`](#snaptradeaccountinformationgetuseraccountdetails)
+  * [`snaptrade.accountInformation.getUserAccountOrderDetail`](#snaptradeaccountinformationgetuseraccountorderdetail)
   * [`snaptrade.accountInformation.getUserAccountOrders`](#snaptradeaccountinformationgetuseraccountorders)
   * [`snaptrade.accountInformation.getUserAccountPositions`](#snaptradeaccountinformationgetuseraccountpositions)
   * [`snaptrade.accountInformation.getUserAccountRecentOrders`](#snaptradeaccountinformationgetuseraccountrecentorders)
@@ -371,6 +372,46 @@ const getUserAccountDetailsResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
+
+Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getUserAccountOrderDetailResponse =
+  await snaptrade.accountInformation.getUserAccountOrderDetail({
+    userId: "snaptrade-user-123",
+    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  });
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./models/account-order-record.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

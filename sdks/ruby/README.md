@@ -23,6 +23,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.account_information.get_all_user_holdings`](#snaptradeaccount_informationget_all_user_holdings)
   * [`snaptrade.account_information.get_user_account_balance`](#snaptradeaccount_informationget_user_account_balance)
   * [`snaptrade.account_information.get_user_account_details`](#snaptradeaccount_informationget_user_account_details)
+  * [`snaptrade.account_information.get_user_account_order_detail`](#snaptradeaccount_informationget_user_account_order_detail)
   * [`snaptrade.account_information.get_user_account_orders`](#snaptradeaccount_informationget_user_account_orders)
   * [`snaptrade.account_information.get_user_account_positions`](#snaptradeaccount_informationget_user_account_positions)
   * [`snaptrade.account_information.get_user_account_recent_orders`](#snaptradeaccount_informationget_user_account_recent_orders)
@@ -314,6 +315,42 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
+
+Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.account_information.get_user_account_order_detail(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -1051,6 +1051,64 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
+  /accounts/{accountId}/orders/{brokerageOrderId}:
+    get:
+      description: |
+        Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+      operationId: AccountInformation_getUserAccountOrderDetail
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: false
+        in: path
+        name: brokerageOrderId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: Get account order detail
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId
   /accounts/{accountId}/recentOrders:
     get:
       description: |
@@ -3145,6 +3203,7 @@ components:
           - open
           - closed
           - archived
+          - unavailable
           example: open
           nullable: true
           type: string
@@ -10219,6 +10278,29 @@ components:
       - state
       - days
       - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - brokerageOrderId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
+      - brokerageOrderId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders:
       additionalProperties: true
       properties:

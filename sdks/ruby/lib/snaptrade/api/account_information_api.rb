@@ -497,6 +497,117 @@ module SnapTrade
     end
 
 
+    # Get account order detail
+    #
+    # Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_user_account_order_detail(user_id:, user_secret:, account_id:, brokerage_order_id:, extra: {})
+      data, _status_code, _headers = get_user_account_order_detail_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, extra)
+      data
+    end
+
+    # Get account order detail
+    #
+    # Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_user_account_order_detail_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id:, extra: {})
+      get_user_account_order_detail_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, extra)
+    end
+
+    # Get account order detail
+    # Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountOrderRecord]
+    private def get_user_account_order_detail_impl(user_id, user_secret, account_id, brokerage_order_id, opts = {})
+      data, _status_code, _headers = get_user_account_order_detail_with_http_info(user_id, user_secret, account_id, brokerage_order_id, opts)
+      data
+    end
+
+    # Get account order detail
+    # Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param brokerage_order_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
+    private def get_user_account_order_detail_with_http_info_impl(user_id, user_secret, account_id, brokerage_order_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: AccountInformationApi.get_user_account_order_detail ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling AccountInformationApi.get_user_account_order_detail"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling AccountInformationApi.get_user_account_order_detail"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling AccountInformationApi.get_user_account_order_detail"
+      end
+      # verify the required parameter 'brokerage_order_id' is set
+      if @api_client.config.client_side_validation && brokerage_order_id.nil?
+        fail ArgumentError, "Missing the required parameter 'brokerage_order_id' when calling AccountInformationApi.get_user_account_order_detail"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/orders/{brokerageOrderId}'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s)).sub('{' + 'brokerageOrderId' + '}', CGI.escape(brokerage_order_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountOrderRecord'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"AccountInformationApi.get_user_account_order_detail",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: AccountInformationApi#get_user_account_order_detail\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # List account orders
     #
     # Returns a list of recent orders in the specified account.

@@ -55,7 +55,13 @@ namespace SnapTrade.Net.Model
             /// Enum Archived for value: archived
             /// </summary>
             [EnumMember(Value = "archived")]
-            Archived = 3
+            Archived = 3,
+
+            /// <summary>
+            /// Enum Unavailable for value: unavailable
+            /// </summary>
+            [EnumMember(Value = "unavailable")]
+            Unavailable = 4
 
         }
 
