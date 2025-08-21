@@ -48,11 +48,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
-  * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.options.placeOptionStrategy`](#snaptradeoptionsplaceoptionstrategy)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
@@ -1207,49 +1204,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
-
-Creates an option strategy object that will be used to place an option strategy order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-StrategyQuotes result = client
-        .options
-        .getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### underlying_symbol_id: `UUID`<a id="underlying_symbol_id-uuid"></a>
-
-##### legs: List<[`OptionLeg`](./src/main/java/com/konfigthis/client/model/OptionLeg.java)><a id="legs-list"></a>
-
-##### strategy_type: `String`<a id="strategy_type-string"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-The ID of the account to create the option strategy object in.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./src/main/java/com/konfigthis/client/model/StrategyQuotes.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
@@ -1290,47 +1244,6 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.getOptionsStrategyQuote`<a id="snaptradeoptionsgetoptionsstrategyquote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-StrategyQuotes result = client
-        .options
-        .getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-The ID of the account the strategy will be placed in.
-
-##### optionStrategyId: `UUID`<a id="optionstrategyid-uuid"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./src/main/java/com/konfigthis/client/model/StrategyQuotes.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
@@ -1362,55 +1275,6 @@ List<OptionsPosition> result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.placeOptionStrategy`<a id="snaptradeoptionsplaceoptionstrategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```java
-StrategyOrderRecord result = client
-        .options
-        .placeOptionStrategy(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId)
-        .price(price)
-        .execute();
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type:<a id="order_type"></a>
-
-##### time_in_force:<a id="time_in_force"></a>
-
-##### userId: `String`<a id="userid-string"></a>
-
-##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-The ID of the account to execute the strategy in.
-
-##### optionStrategyId: `UUID`<a id="optionstrategyid-uuid"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-##### price: `Double`<a id="price-double"></a>
-
-Trade Price if limit or stop limit order
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyOrderRecord](./src/main/java/com/konfigthis/client/model/StrategyOrderRecord.java)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

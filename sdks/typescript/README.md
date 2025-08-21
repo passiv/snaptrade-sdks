@@ -43,11 +43,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.removeBrokerageAuthorization`](#snaptradeconnectionsremovebrokerageauthorization)
   * [`snaptrade.connections.returnRates`](#snaptradeconnectionsreturnrates)
   * [`snaptrade.connections.sessionEvents`](#snaptradeconnectionssessionevents)
-  * [`snaptrade.options.getOptionStrategy`](#snaptradeoptionsgetoptionstrategy)
   * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
-  * [`snaptrade.options.getOptionsStrategyQuote`](#snaptradeoptionsgetoptionsstrategyquote)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
-  * [`snaptrade.options.placeOptionStrategy`](#snaptradeoptionsplaceoptionstrategy)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
   * [`snaptrade.referenceData.getSecurityTypes`](#snaptradereferencedatagetsecuritytypes)
@@ -1175,59 +1172,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 ---
 
 
-### `snaptrade.options.getOptionStrategy`<a id="snaptradeoptionsgetoptionstrategy"></a>
-
-Creates an option strategy object that will be used to place an option strategy order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getOptionStrategyResponse = await snaptrade.options.getOptionStrategy({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  accountId: "accountId_example",
-  underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  legs: [
-    {
-      action: "BUY_TO_OPEN",
-      option_symbol_id: "SPY220819P00200000",
-      quantity: 1,
-    },
-  ],
-  strategy_type: "CUSTOM",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### underlying_symbol_id: `string`<a id="underlying_symbol_id-string"></a>
-
-##### legs: [`OptionLeg`](./models/option-leg.ts)[]<a id="legs-optionlegmodelsoption-legts"></a>
-
-##### strategy_type: `string`<a id="strategy_type-string"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to create the option strategy object in.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./models/strategy-quotes.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
@@ -1270,50 +1214,6 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.getOptionsStrategyQuote`<a id="snaptradeoptionsgetoptionsstrategyquote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getOptionsStrategyQuoteResponse =
-  await snaptrade.options.getOptionsStrategyQuote({
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "accountId_example",
-    optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  });
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account the strategy will be placed in.
-
-##### optionStrategyId: `string`<a id="optionstrategyid-string"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./models/strategy-quotes.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
@@ -1346,65 +1246,6 @@ const listOptionHoldingsResponse = await snaptrade.options.listOptionHoldings({
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.placeOptionStrategy`<a id="snaptradeoptionsplaceoptionstrategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const placeOptionStrategyResponse = await snaptrade.options.placeOptionStrategy(
-  {
-    userId: "snaptrade-user-123",
-    userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    optionStrategyId: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-    order_type: "Market",
-    time_in_force: "Day",
-    price: 31.33,
-  }
-);
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type: [`OrderTypeStrict`](./models/order-type-strict.ts)<a id="order_type-ordertypestrictmodelsorder-type-strictts"></a>
-
-The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
-
-##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
-
-The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to execute the strategy in.
-
-##### optionStrategyId: `string`<a id="optionstrategyid-string"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-##### price: `number`<a id="price-number"></a>
-
-Trade Price if limit or stop limit order
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyOrderRecord](./models/strategy-order-record.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

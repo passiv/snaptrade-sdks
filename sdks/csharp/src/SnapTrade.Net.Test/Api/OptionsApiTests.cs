@@ -47,45 +47,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetOptionStrategy
-        /// </summary>
-        [Fact]
-        public void GetOptionStrategyTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to create the option strategy object in.
-            var underlyingSymbolId = "2bcd7cc3-e922-4976-bce1-9858296801c3";
-            var legs = new List<OptionLeg>();
-            var strategyType = OptionsGetOptionStrategyRequest.StrategyTypeEnum.CUSTOM;
-            
-            var optionsGetOptionStrategyRequest = new OptionsGetOptionStrategyRequest(
-                underlyingSymbolId,
-                legs,
-                strategyType
-            );
-            
-            try
-            {
-                // Create options strategy
-                StrategyQuotes result = client.Options.GetOptionStrategy(userId, userSecret, accountId, optionsGetOptionStrategyRequest);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionStrategy: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test GetOptionsChain
         /// </summary>
         [Fact]
@@ -117,37 +78,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetOptionsStrategyQuote
-        /// </summary>
-        [Fact]
-        public void GetOptionsStrategyQuoteTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account the strategy will be placed in.
-            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
-            
-            try
-            {
-                // Get options strategy quotes
-                StrategyQuotes result = client.Options.GetOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionsStrategyQuote: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test ListOptionHoldings
         /// </summary>
         [Fact]
@@ -166,46 +96,6 @@ namespace SnapTrade.Net.Test.Api
             catch (ApiException e)
             {
                 Console.WriteLine("Exception when calling OptionsApi.ListOptionHoldings: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
-        /// Test PlaceOptionStrategy
-        /// </summary>
-        [Fact]
-        public void PlaceOptionStrategyTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to execute the strategy in.
-            var optionStrategyId = "optionStrategyId_example"; // Option strategy id obtained from response when creating option strategy object
-            var orderType = OrderTypeStrict.Limit;
-            var timeInForce = TimeInForceStrict.FOK;
-            var price = 31.33; // Trade Price if limit or stop limit order
-            
-            var optionsPlaceOptionStrategyRequest = new OptionsPlaceOptionStrategyRequest(
-                orderType,
-                timeInForce,
-                price
-            );
-            
-            try
-            {
-                // Place an option strategy order
-                StrategyOrderRecord result = client.Options.PlaceOptionStrategy(userId, userSecret, accountId, optionStrategyId, optionsPlaceOptionStrategyRequest);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.PlaceOptionStrategy: " + e.Message);
                 Console.WriteLine("Status Code: "+ e.ErrorCode);
                 Console.WriteLine(e.StackTrace);
             }

@@ -17,14 +17,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.OptionChainInner;
-import com.konfigthis.client.model.OptionLeg;
-import com.konfigthis.client.model.OptionsGetOptionStrategyRequest;
-import com.konfigthis.client.model.OptionsPlaceOptionStrategyRequest;
 import com.konfigthis.client.model.OptionsPosition;
-import com.konfigthis.client.model.OrderTypeStrict;
-import com.konfigthis.client.model.StrategyOrderRecord;
-import com.konfigthis.client.model.StrategyQuotes;
-import com.konfigthis.client.model.TimeInForceStrict;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -51,26 +44,6 @@ public class OptionsApiTest {
     }
 
     /**
-     * Create options strategy
-     *
-     * Creates an option strategy object that will be used to place an option strategy order. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getOptionStrategyTest() throws ApiException {
-        UUID underlyingSymbolId = null;
-        List<OptionLeg> legs = null;
-        String strategyType = null;
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        StrategyQuotes response = api.getOptionStrategy(underlyingSymbolId, legs, strategyType, userId, userSecret, accountId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * Get the options chain for a symbol
      *
      * Returns the option chain for the specified symbol in the specified account.
@@ -89,24 +62,6 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get options strategy quotes
-     *
-     * Returns a Strategy Quotes object which has latest market data of the specified option strategy. 
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getOptionsStrategyQuoteTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        UUID optionStrategyId = null;
-        StrategyQuotes response = api.getOptionsStrategyQuote(userId, userSecret, accountId, optionStrategyId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * List account option positions
      *
      * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  The data returned here is cached. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**. 
@@ -119,28 +74,6 @@ public class OptionsApiTest {
         String userSecret = null;
         UUID accountId = null;
         List<OptionsPosition> response = api.listOptionHoldings(userId, userSecret, accountId)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
-     * Place an option strategy order
-     *
-     * Places the option strategy order and returns the order record received from the brokerage.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void placeOptionStrategyTest() throws ApiException {
-        OrderTypeStrict orderType = null;
-        TimeInForceStrict timeInForce = null;
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        UUID optionStrategyId = null;
-        Double price = null;
-        StrategyOrderRecord response = api.placeOptionStrategy(orderType, timeInForce, userId, userSecret, accountId, optionStrategyId)
-                .price(price)
                 .execute();
         // TODO: test validations
     }
