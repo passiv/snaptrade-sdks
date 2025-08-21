@@ -2,9 +2,9 @@
 
 ---
 
-::::info
+:::::info
 Trading is only available to certain brokerages and requires a trade-enabled connection. See the supported brokerages list (Capabilities) in the docs. To enable trading, generate a Connection Portal URL with `connection_type` set to `trade`.
-::::
+:::::
 
 This demo places a single-leg options order using an OCC-formatted option symbol.
 
@@ -12,15 +12,15 @@ This demo places a single-leg options order using an OCC-formatted option symbol
 
 ## 1. Initialize SnapTrade client and user
 
-::::form
+:::::form
 
-:::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID"}
+::::input{name=SNAPTRADE_CLIENT_ID label="Client ID" placeholder="YOUR_CLIENT_ID"}
 
-:::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
+::::input{name=SNAPTRADE_CONSUMER_KEY label="Consumer Key" placeholder="YOUR_CONSUMER_KEY" type="password"}
 
-:::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID"}
+::::input{name=USER_ID label="User ID" placeholder="YOUR_USER_ID"}
 
-:::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
+::::input{name=USER_SECRET label="User Secret" placeholder="YOUR_USER_SECRET" type="password"}
 
 ```python
 from snaptrade_client import SnapTrade
@@ -37,15 +37,15 @@ user_secret = USER_SECRET
 print("Successfully initiated client")
 ```
 
-:::button[Initialize SDK Client]
+::::button[Initialize SDK Client]
 
-::::
+:::::
 
 ---
 
 ## 2. Select an account
 
-::::form
+:::::form
 
 ```python
 accounts = snaptrade.account_information.list_user_accounts(
@@ -58,9 +58,9 @@ for account in accounts.body:
     print("::SAVE[ACCOUNTS]/{}".format(account["id"]))
 ```
 
-:::button[Get Accounts]
+::::button[Get Accounts]
 
-::::
+:::::
 
 ---
 
@@ -70,21 +70,21 @@ Uses the [Place Options Order](https://docs.snaptrade.com/reference/Trading/Trad
 
 - Provide an OCC option symbol, e.g., `AAPL  251219C00240000` (two spaces between underlying and date).
 
-::::warn
+:::::warn
 If you connected a live brokerage account, be cautious when submitting orders. SnapTrade is not responsible for any financial losses incurred from using the API.
-::::
+:::::
 
-::::form
+:::::form
 
-:::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
-:::input{name=OPTION_SYMBOL label="OCC Option Symbol" placeholder="AAPL  251219C00240000"}
-:::enum{name=ACTION label="Action" data="BUY_TO_OPEN,BUY_TO_CLOSE,SELL_TO_OPEN,SELL_TO_CLOSE" defaultValue=BUY_TO_OPEN}
-:::enum{name=ORDER_TYPE label="Order Type" data="MARKET,LIMIT,STOP_LOSS_MARKET,STOP_LOSS_LIMIT" defaultValue=MARKET}
-:::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,GTC,FOK,IOC" defaultValue=Day}
-:::enum{name=PRICE_EFFECT label="Price Effect" data="CREDIT,DEBIT,EVEN" optional}
-:::number{name=LIMIT_PRICE label="Limit Price" step=0.01 precision=2 optional description="Required for LIMIT and STOP_LOSS_LIMIT"}
-:::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="Required for STOP_LOSS_MARKET and STOP_LOSS_LIMIT"}
-:::number{name=UNITS label="Contracts" defaultValue=1 step=1 precision=0 description="Number of contracts"}
+::::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
+::::input{name=OPTION_SYMBOL label="OCC Option Symbol" placeholder="AAPL  251219C00240000"}
+::::enum{name=ACTION label="Action" data="BUY_TO_OPEN,BUY_TO_CLOSE,SELL_TO_OPEN,SELL_TO_CLOSE" defaultValue=BUY_TO_OPEN}
+::::enum{name=ORDER_TYPE label="Order Type" data="MARKET,LIMIT,STOP_LOSS_MARKET,STOP_LOSS_LIMIT" defaultValue=MARKET}
+::::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,GTC,FOK,IOC" defaultValue=Day}
+::::enum{name=PRICE_EFFECT label="Price Effect" data="CREDIT,DEBIT,EVEN" optional}
+::::number{name=LIMIT_PRICE label="Limit Price" step=0.01 precision=2 optional description="Required for LIMIT and STOP_LOSS_LIMIT"}
+::::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="Required for STOP_LOSS_MARKET and STOP_LOSS_LIMIT"}
+::::number{name=UNITS label="Contracts" defaultValue=1 step=1 precision=0 description="Number of contracts"}
 
 ```python
 mleg_trade_form = {
@@ -126,9 +126,9 @@ result = snaptrade.trading.place_mleg_order(
 print(json.dumps(result.body, indent=2))
 ```
 
-:::button[Place Options Order]
+::::button[Place Options Order]
 
-::::
+:::::
 
 ```typescript
 import { Snaptrade } from "snaptrade-typescript-sdk";
@@ -161,11 +161,11 @@ console.log(res.data);
 
 Use the [List Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoint to fetch recent orders.
 
-::::form{skippable}
+:::::form{skippable}
 
-:::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
-:::enum{name=STATE label="State" data="all,open,executed" defaultValue=open optional}
-:::number{name=DAYS label="Days" placeholder=7 description="Number of days to look back (default: 30)" optional}
+::::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
+::::enum{name=STATE label="State" data="all,open,executed" defaultValue=open optional}
+::::number{name=DAYS label="Days" placeholder=7 description="Number of days to look back (default: 30)" optional}
 
 ```python
 orders = snaptrade.account_information.get_user_account_orders(
@@ -178,6 +178,6 @@ orders = snaptrade.account_information.get_user_account_orders(
 print(json.dumps(orders.body, indent=2))
 ```
 
-:::button[Get Recent Orders]
+::::button[Get Recent Orders]
 
-::::
+:::::
