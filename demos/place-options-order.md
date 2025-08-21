@@ -80,7 +80,7 @@ If you connected a live brokerage account, be cautious when submitting orders. S
 :::input{name=OPTION_SYMBOL label="OCC Option Symbol" placeholder="AAPL  251219C00240000"}
 :::enum{name=ACTION label="Action" data="BUY_TO_OPEN,BUY_TO_CLOSE,SELL_TO_OPEN,SELL_TO_CLOSE" defaultValue=BUY_TO_OPEN}
 :::enum{name=ORDER_TYPE label="Order Type" data="MARKET,LIMIT,STOP_LOSS_MARKET,STOP_LOSS_LIMIT" defaultValue=MARKET}
-:::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue=Day}
+:::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,GTC,FOK,IOC" defaultValue=Day}
 :::enum{name=PRICE_EFFECT label="Price Effect" data="CREDIT,DEBIT,EVEN" optional}
 :::number{name=LIMIT_PRICE label="Limit Price" step=0.01 precision=2 optional description="Required for LIMIT and STOP_LOSS_LIMIT"}
 :::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="Required for STOP_LOSS_MARKET and STOP_LOSS_LIMIT"}
@@ -127,5 +127,57 @@ print(json.dumps(result.body, indent=2))
 ```
 
 :::button[Place Options Order]
+
+::::
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+
+const snaptrade = new Snaptrade({
+  consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
+  clientId: process.env.SNAPTRADE_CLIENT_ID!,
+});
+
+const res = await snaptrade.trading.placeMlegOrder({
+  userId: process.env.SNAPTRADE_TEST_USER_ID!,
+  userSecret: process.env.SNAPTRADE_TEST_USER_SECRET!,
+  accountId: "<ACCOUNT_ID>",
+  order_type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+    {
+      instrument: { symbol: "AAPL  251219C00240000", instrument_type: "OPTION" },
+      action: "BUY_TO_OPEN",
+      units: 1,
+    },
+  ],
+});
+console.log(res.data);
+```
+
+---
+
+## 4. Verify order status
+
+Use the [List Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoint to fetch recent orders.
+
+::::form{skippable}
+
+:::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
+:::enum{name=STATE label="State" data="all,open,executed" defaultValue=open optional}
+:::number{name=DAYS label="Days" placeholder=7 description="Number of days to look back (default: 30)" optional}
+
+```python
+orders = snaptrade.account_information.get_user_account_orders(
+  account_id=ACCOUNT_ID,
+  user_id=user_id,
+  user_secret=user_secret,
+  state=STATE if "STATE" in globals() else None,
+  days=DAYS if "DAYS" in globals() else None,
+)
+print(json.dumps(orders.body, indent=2))
+```
+
+:::button[Get Recent Orders]
 
 ::::

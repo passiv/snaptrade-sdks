@@ -83,12 +83,37 @@ quotes = snaptrade.trading.get_user_account_quotes(
 )
 print(json.dumps(quotes.body, indent=2))
 
-universal_symbol_id = quotes.body[0]['symbol']['id']
+if not quotes.body or len(quotes.body) == 0:
+    raise ValueError(f"No quotes returned for ticker '{TICKER}'. Check the symbol and try again.")
+
+universal_symbol_id = quotes.body[0]["symbol"]["id"]
+print(f"Using Universal Symbol ID: {universal_symbol_id}")
+print(f"::SAVE[UNIVERSAL_SYMBOL_ID]/{universal_symbol_id}")
 ```
 
 :::button[Get Quote]
 
 ::::
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+
+const snaptrade = new Snaptrade({
+  consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
+  clientId: process.env.SNAPTRADE_CLIENT_ID!,
+});
+
+const quotes = await snaptrade.trading.getUserAccountQuotes({
+  userId: process.env.SNAPTRADE_TEST_USER_ID!,
+  userSecret: process.env.SNAPTRADE_TEST_USER_SECRET!,
+  symbols: "AAPL",
+  accountId: "<ACCOUNT_ID>",
+  use_ticker: true,
+});
+if (!quotes.data.length) throw new Error("No quotes returned");
+const universalSymbolId = quotes.data[0].symbol!.id!;
+console.log({ universalSymbolId });
+```
 
 ---
 
@@ -104,10 +129,10 @@ If you connected a live brokerage account, be cautious when submitting orders. S
 
 :::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
 :::enum{name=ACTION label="Action" data="BUY,SELL" defaultValue=BUY}
-:::enum{name=ORDER_TYPE label="Order Type" data="Market,Limit,StopLimit,StopLoss" defaultValue="Market"}
-:::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,FOK,GTC" defaultValue="Day"}
+:::enum{name=ORDER_TYPE label="Order Type" data="Market,Limit,StopLimit,Stop" defaultValue="Market"}
+:::enum{name=TIME_IN_FORCE label="Time in Force" data="Day,GTC,FOK,IOC" defaultValue="Day"}
 :::number{name=LIMIT_PRICE label="Limit Price" step=0.01 precision=2 optional description="Required for Limit and StopLimit"}
-:::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="Required for StopLoss and StopLimit"}
+:::number{name=STOP_PRICE label="Stop Price" step=0.01 precision=2 optional description="Required for Stop and StopLimit"}
 :::number{name=UNITS label="Units" defaultValue=1 step=0.05 precision=2 description="Number of shares (fractional allowed)"}
 
 ```python
@@ -137,5 +162,53 @@ print(json.dumps(result.body, indent=2))
 ```
 
 :::button[Place Order]
+
+::::
+
+```typescript
+import { Snaptrade } from "snaptrade-typescript-sdk";
+
+const snaptrade = new Snaptrade({
+  consumerKey: process.env.SNAPTRADE_CONSUMER_KEY!,
+  clientId: process.env.SNAPTRADE_CLIENT_ID!,
+});
+
+const order = await snaptrade.trading.placeForceOrder({
+  userId: process.env.SNAPTRADE_TEST_USER_ID!,
+  userSecret: process.env.SNAPTRADE_TEST_USER_SECRET!,
+  account_id: "<ACCOUNT_ID>",
+  action: "BUY",
+  universal_symbol_id: "<UNIVERSAL_SYMBOL_ID>",
+  order_type: "Market",
+  time_in_force: "Day",
+  units: 1.0,
+});
+console.log(order.data);
+```
+
+---
+
+## 5. Verify order status
+
+Use the [List Orders](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountOrders) endpoint to fetch recent orders. Note that this endpoint is cached per brokerage; allow some time after placing an order.
+
+::::form{skippable}
+
+:::enum{name=ACCOUNT_ID label="Account ID" placeholder="ACCOUNT_ID" savedData=ACCOUNTS}
+:::enum{name=STATE label="State" data="all,open,executed" defaultValue=open optional}
+:::number{name=DAYS label="Days" placeholder=7 description="Number of days to look back (default: 30)" optional}
+
+```python
+orders = snaptrade.account_information.get_user_account_orders(
+  account_id=ACCOUNT_ID,
+  user_id=user_id,
+  user_secret=user_secret,
+  state=STATE if "STATE" in globals() else None,
+  days=DAYS if "DAYS" in globals() else None,
+)
+print(json.dumps(orders.body, indent=2))
+```
+
+:::button[Get Recent Orders]
 
 ::::
