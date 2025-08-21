@@ -41,4 +41,4 @@ Using the symbol information from the previous call, call the :api[Trading_getCr
 
 ## Placing a trade
 
-To place a trade, use the :api[Trading_placeSimpleOrder] endpoint, provide the `symbol` to the `instrument` object, and set the `type` to `"CRYPTOCURRENCY_PAIR"`.
+To place a trade, use the :api[Trading_placeCryptoOrder] endpoint, provide the `symbol` to the `instrument` object, and set the `type` to `"CRYPTOCURRENCY_PAIR"`.
