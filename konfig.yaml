@@ -87,18 +87,6 @@ portal:
       path: demos/get-transactions.md
     - id: placing-trades
       path: demos/placing-trades.md
-    - id: make-connection
-      path: demos/make-connection.md
-    - id: pull-positions
-      path: demos/pull-positions.md
-    - id: pull-orders
-      path: demos/pull-orders.md
-    - id: pull-transactions
-      path: demos/pull-transactions.md
-    - id: place-equity-order
-      path: demos/place-equity-order.md
-    - id: place-options-order
-      path: demos/place-options-order.md
   betaOperations:
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
       get: true
