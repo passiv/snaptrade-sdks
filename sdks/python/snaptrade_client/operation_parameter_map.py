@@ -327,28 +327,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/optionStrategy-POST': {
-        'parameters': [
-            {
-                'name': 'underlying_symbol_id'
-            },
-            {
-                'name': 'legs'
-            },
-            {
-                'name': 'strategy_type'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-        ]
-    },
     '/accounts/{accountId}/optionsChain-GET': {
         'parameters': [
             {
@@ -365,22 +343,6 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/optionStrategy/{optionStrategyId}-GET': {
-        'parameters': [
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'optionStrategyId'
-            },
-        ]
-    },
     '/accounts/{accountId}/options-GET': {
         'parameters': [
             {
@@ -391,31 +353,6 @@ operation_parameter_map = {
             },
             {
                 'name': 'accountId'
-            },
-        ]
-    },
-    '/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute-POST': {
-        'parameters': [
-            {
-                'name': 'order_type'
-            },
-            {
-                'name': 'time_in_force'
-            },
-            {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
-            },
-            {
-                'name': 'accountId'
-            },
-            {
-                'name': 'optionStrategyId'
-            },
-            {
-                'name': 'price'
             },
         ]
     },

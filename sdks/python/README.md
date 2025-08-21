@@ -47,11 +47,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
-  * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
-  * [`snaptrade.options.place_option_strategy`](#snaptradeoptionsplace_option_strategy)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
   * [`snaptrade.reference_data.get_security_types`](#snaptradereference_dataget_security_types)
@@ -1161,61 +1158,6 @@ Optional comma separated list of session IDs used to filter the request on speci
 
 ---
 
-### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
-
-Creates an option strategy object that will be used to place an option strategy order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_option_strategy_response = snaptrade.options.get_option_strategy(
-    underlying_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    legs=[
-        {
-            "action": "BUY_TO_OPEN",
-            "option_symbol_id": "SPY220819P00200000",
-            "quantity": 1,
-        }
-    ],
-    strategy_type="CUSTOM",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="accountId_example",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### underlying_symbol_id: `str`<a id="underlying_symbol_id-str"></a>
-
-##### legs: List[`OptionLeg`]<a id="legs-listoptionleg"></a>
-
-##### strategy_type: `str`<a id="strategy_type-str"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-The ID of the account to create the option strategy object in.
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`Any`](./snaptrade_client/type/typing_any.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`StrategyQuotes`](./snaptrade_client/type/strategy_quotes.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy` `post`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
 ### `snaptrade.options.get_options_chain`<a id="snaptradeoptionsget_options_chain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
@@ -1257,48 +1199,6 @@ Universal symbol ID if symbol
 
 ---
 
-### `snaptrade.options.get_options_strategy_quote`<a id="snaptradeoptionsget_options_strategy_quote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-get_options_strategy_quote_response = snaptrade.options.get_options_strategy_quote(
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="accountId_example",
-    option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-The ID of the account the strategy will be placed in.
-
-##### option_strategy_id: `str`<a id="option_strategy_id-str"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`StrategyQuotes`](./snaptrade_client/type/strategy_quotes.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
@@ -1331,59 +1231,6 @@ list_option_holdings_response = snaptrade.options.list_option_holdings(
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `get`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-### `snaptrade.options.place_option_strategy`<a id="snaptradeoptionsplace_option_strategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```python
-place_option_strategy_response = snaptrade.options.place_option_strategy(
-    order_type="Market",
-    time_in_force="Day",
-    user_id="snaptrade-user-123",
-    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    account_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    option_strategy_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
-    price=31.33,
-)
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type: [`OrderTypeStrict`](./snaptrade_client/type/order_type_strict.py)<a id="order_type-ordertypestrictsnaptrade_clienttypeorder_type_strictpy"></a>
-
-##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
-
-##### user_id: `str`<a id="user_id-str"></a>
-
-##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### account_id: `str`<a id="account_id-str"></a>
-
-The ID of the account to execute the strategy in.
-
-##### option_strategy_id: `str`<a id="option_strategy_id-str"></a>
-
-Option strategy id obtained from response when creating option strategy object
-
-##### price: [`Price`](./snaptrade_client/type/price.py)<a id="price-pricesnaptrade_clienttypepricepy"></a>
-
-#### ⚙️ Request Body<a id="⚙️-request-body"></a>
-
-[`Any`](./snaptrade_client/type/typing_any.py)
-#### 🔄 Return<a id="🔄-return"></a>
-
-[`StrategyOrderRecord`](./snaptrade_client/type/strategy_order_record.py)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

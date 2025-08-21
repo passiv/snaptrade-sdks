@@ -44,11 +44,8 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
-  * [`snaptrade.options.get_option_strategy`](#snaptradeoptionsget_option_strategy)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
-  * [`snaptrade.options.get_options_strategy_quote`](#snaptradeoptionsget_options_strategy_quote)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
-  * [`snaptrade.options.place_option_strategy`](#snaptradeoptionsplace_option_strategy)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
   * [`snaptrade.reference_data.get_partner_info`](#snaptradereference_dataget_partner_info)
   * [`snaptrade.reference_data.get_security_types`](#snaptradereference_dataget_security_types)
@@ -1085,54 +1082,6 @@ specific users
 ---
 
 
-### `snaptrade.options.get_option_strategy`<a id="snaptradeoptionsget_option_strategy"></a>
-
-Creates an option strategy object that will be used to place an option strategy order.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.options.get_option_strategy(
-  underlying_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  legs: [
-        {
-            "action" => "BUY_TO_OPEN",
-            "option_symbol_id" => "SPY220819P00200000",
-            "quantity" => 1,
-        }
-    ],
-  strategy_type: "CUSTOM",
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "accountId_example",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### underlying_symbol_id: `String`<a id="underlying_symbol_id-string"></a>
-##### legs: Array<[`OptionLeg`](./lib/snaptrade/models/option_leg.rb)><a id="legs-array"></a>
-##### strategy_type: [`StrategyType`](./lib/snaptrade/models/strategy_type.rb)<a id="strategy_type-strategytypelibsnaptrademodelsstrategy_typerb"></a>
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to create the option strategy object in.
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./lib/snaptrade/models/strategy_quotes.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy` `POST`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.get_options_chain`<a id="snaptradeoptionsget_options_chain"></a>
 
 Returns the option chain for the specified symbol in the specified account.
@@ -1172,46 +1121,6 @@ Universal symbol ID if symbol
 ---
 
 
-### `snaptrade.options.get_options_strategy_quote`<a id="snaptradeoptionsget_options_strategy_quote"></a>
-
-Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.options.get_options_strategy_quote(
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "accountId_example",
-  option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account the strategy will be placed in.
-
-##### option_strategy_id: `String`<a id="option_strategy_id-string"></a>
-Option strategy id obtained from response when creating option strategy object
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyQuotes](./lib/snaptrade/models/strategy_quotes.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.list_option_holdings`<a id="snaptradeoptionslist_option_holdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
@@ -1242,66 +1151,6 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/options` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
-### `snaptrade.options.place_option_strategy`<a id="snaptradeoptionsplace_option_strategy"></a>
-
-Places the option strategy order and returns the order record received from the brokerage.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```ruby
-result = snaptrade.options.place_option_strategy(
-  order_type: "Market",
-  time_in_force: "Day",
-  user_id: "snaptrade-user-123",
-  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  option_strategy_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
-  price: 31.33,
-)
-p result
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### order_type: [`OrderTypeStrict`](./lib/snaptrade/models/order_type_strict.rb)<a id="order_type-ordertypestrictlibsnaptrademodelsorder_type_strictrb"></a>
-The type of order to place. - For `Limit` and `StopLimit` orders, the `price`
-field is required. - For `Stop` and `StopLimit` orders, the `stop` field is
-required.
-
-##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
-The Time in Force type for the order. This field indicates how long the order
-will remain active before it is executed or expires. Here are the supported
-values: - `Day` - Day. The order is valid only for the trading day on which it
-is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
-or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
-immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
-must be executed immediately. Any portion of the order that cannot be filled
-immediately will be canceled.
-
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-The ID of the account to execute the strategy in.
-
-##### option_strategy_id: `String`<a id="option_strategy_id-string"></a>
-Option strategy id obtained from response when creating option strategy object
-
-##### price: `Float`<a id="price-float"></a>
-Trade Price if limit or stop limit order
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[StrategyOrderRecord](./lib/snaptrade/models/strategy_order_record.rb)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
