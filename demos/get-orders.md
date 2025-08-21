@@ -1,4 +1,4 @@
-# Pull Orders
+# Get Orders
 
 ---
 

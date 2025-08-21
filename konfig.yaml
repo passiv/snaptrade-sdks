@@ -83,8 +83,7 @@ portal:
   demos:
     - id: getting-started
       path: demos/getting-started.md
-    - id: get-transactions
-      path: demos/get-transactions.md
+    
     - id: placing-trades
       path: demos/placing-trades.md
     - id: make-connection

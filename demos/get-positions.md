@@ -1,4 +1,4 @@
-# Pull Positions
+# Get Positions
 
 ---
 
