@@ -89,12 +89,10 @@ portal:
       path: demos/placing-trades.md
     - id: make-connection
       path: demos/make-connection.md
-    - id: pull-positions
-      path: demos/pull-positions.md
-    - id: pull-orders
-      path: demos/pull-orders.md
-    - id: pull-transactions
-      path: demos/pull-transactions.md
+    - id: get-positions
+      path: demos/get-positions.md
+    - id: get-orders
+      path: demos/get-orders.md
     - id: place-equity-order
       path: demos/place-equity-order.md
     - id: place-options-order
