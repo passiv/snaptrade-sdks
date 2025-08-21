@@ -2,7 +2,7 @@
 
 An account represents a unique account at a brokerage, like an individual account, or a 401k retirement account. A connection can have multiple accounts. The same brokerage account can also belong to multiple connections. For example a joint account between two individual account holders are visible under each account holder’s connection. With a connected account, you can call any SnapTrade account data API to get information about the account, its holdings, and its history.
 
-## Account Metadata
+## Account Details
 
 :api[AccountInformation_getUserAccountDetails]
 
@@ -24,6 +24,7 @@ Balances are the current cash holdings and buying power of the account. In some 
 ## Orders
 
 :api[AccountInformation_getUserAccountOrders]
+:api[AccountInformation_getUserAccountRecentOrders]
 
 Orders are how a broker keeps track of trading activity in an account. This differs from account activities in the following ways:
 
@@ -34,7 +35,7 @@ Orders are how a broker keeps track of trading activity in an account. This diff
 
 ## Activities
 
-:api[TransactionsAndReporting_getActivities]
+:api[AccountInformation_getAccountActivities]
 
 Activities record the transaction history for the account. Each activity documents a change in position for the account, including deposits, withdrawals, fees, dividends, buys and sells. This differs from Orders in the following ways:
 
