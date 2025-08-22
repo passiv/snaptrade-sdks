@@ -528,7 +528,13 @@ module SnapTrade
 
     # Get equity symbol quotes
     #
-    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+    # Returns quotes from the brokerage for the specified symbols and account.
+    # 
+    # The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+    # 
+    # This endpoint does not work for options quotes.
+    # 
+    # This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -544,7 +550,13 @@ module SnapTrade
 
     # Get equity symbol quotes
     #
-    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+    # Returns quotes from the brokerage for the specified symbols and account.
+    # 
+    # The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+    # 
+    # This endpoint does not work for options quotes.
+    # 
+    # This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -558,7 +570,7 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+    # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
@@ -572,7 +584,7 @@ module SnapTrade
     end
 
     # Get equity symbol quotes
-    # Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+    # Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param symbols [String] List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator

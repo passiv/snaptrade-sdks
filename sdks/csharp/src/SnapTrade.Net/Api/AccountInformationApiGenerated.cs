@@ -151,7 +151,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -166,7 +166,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -510,7 +510,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -526,7 +526,7 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1763,7 +1763,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1779,7 +1779,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1875,7 +1875,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -1892,7 +1892,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

@@ -378,7 +378,11 @@ get_user_account_details_response = (
 
 ### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
 
-Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+Returns the detail of a single order in the specified account.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1775,7 +1779,14 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ### `snaptrade.trading.get_user_account_quotes`<a id="snaptradetradingget_user_account_quotes"></a>
 
-Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+Returns quotes from the brokerage for the specified symbols and account.
+
+The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+
+This endpoint does not work for options quotes.
+
+This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
+
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
 
