@@ -97,8 +97,6 @@ portal:
       path: demos/pull-transactions.md
     - id: place-equity-order
       path: demos/place-equity-order.md
-    - id: place-options-order
-      path: demos/place-options-order.md
   betaOperations:
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
       get: true
