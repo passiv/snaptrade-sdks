@@ -791,7 +791,11 @@ func (r AccountInformationApiGetUserAccountOrderDetailRequest) Execute() (*Accou
 /*
 GetUserAccountOrderDetail Get account order detail
 
-Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data.
+Returns the detail of a single order in the specified account.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

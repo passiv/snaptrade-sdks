@@ -337,7 +337,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
          * @param {string} userId 
          * @param {string} userSecret 
@@ -903,7 +903,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
          * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1042,7 +1042,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountDetails(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
          * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1597,7 +1597,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns the detail of a single order in the specified account. This endpoint is always realtime and does not rely on cached data. 
+     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @summary Get account order detail
      * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
