@@ -378,7 +378,7 @@ get_user_account_details_response = (
 
 ### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -390,31 +390,36 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```python
 get_user_account_order_detail_response = (
     snaptrade.account_information.get_user_account_order_detail(
+        external_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
-        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
     )
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### external_order_id: `str`<a id="external_order_id-str"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### account_id: `str`<a id="account_id-str"></a>
+
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
 
-##### account_id: `str`<a id="account_id-str"></a>
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
 
-##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
-
+[`Any`](./snaptrade_client/type/typing_any.py)
 #### 🔄 Return<a id="🔄-return"></a>
 
 [`AccountOrderRecord`](./snaptrade_client/type/account_order_record.py)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/{brokerageOrderId}` `get`
+`/accounts/{accountId}/orders/details` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

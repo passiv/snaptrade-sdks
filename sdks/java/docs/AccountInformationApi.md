@@ -8,7 +8,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getAllUserHoldings**](AccountInformationApi.md#getAllUserHoldings) | **GET** /holdings | List all accounts for the user, plus balances, positions, and orders for each account. |
 | [**getUserAccountBalance**](AccountInformationApi.md#getUserAccountBalance) | **GET** /accounts/{accountId}/balances | List account balances |
 | [**getUserAccountDetails**](AccountInformationApi.md#getUserAccountDetails) | **GET** /accounts/{accountId} | Get account detail |
-| [**getUserAccountOrderDetail**](AccountInformationApi.md#getUserAccountOrderDetail) | **GET** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail |
+| [**getUserAccountOrderDetail**](AccountInformationApi.md#getUserAccountOrderDetail) | **POST** /accounts/{accountId}/orders/details | Get account order detail |
 | [**getUserAccountOrders**](AccountInformationApi.md#getUserAccountOrders) | **GET** /accounts/{accountId}/orders | List account orders |
 | [**getUserAccountPositions**](AccountInformationApi.md#getUserAccountPositions) | **GET** /accounts/{accountId}/positions | List account positions |
 | [**getUserAccountRecentOrders**](AccountInformationApi.md#getUserAccountRecentOrders) | **GET** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only) |
@@ -445,11 +445,11 @@ public class Example {
 
 <a name="getUserAccountOrderDetail"></a>
 # **getUserAccountOrderDetail**
-> AccountOrderRecord getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId).execute();
+> AccountOrderRecord getUserAccountOrderDetail(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest).execute();
 
 Get account order detail
 
-Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
 
 ### Example
 ```java
@@ -473,14 +473,14 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String externalOrderId = "externalOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    UUID accountId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example";
     try {
       AccountOrderRecord result = client
               .accountInformation
-              .getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId)
+              .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -517,7 +517,7 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .accountInformation
-              .getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId)
+              .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -540,10 +540,10 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **accountId** | **UUID**|  | |
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
-| **accountId** | **UUID**|  | |
-| **brokerageOrderId** | **String**|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
 
 ### Return type
 
@@ -555,7 +555,7 @@ public class Example {
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

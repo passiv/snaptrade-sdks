@@ -3,6 +3,7 @@ export * from './account-balance';
 export * from './account-balance-total';
 export * from './account-holdings';
 export * from './account-holdings-account';
+export * from './account-information-get-user-account-order-detail-request';
 export * from './account-order-record';
 export * from './account-order-record-child-brokerage-order-ids';
 export * from './account-order-record-option-symbol';
