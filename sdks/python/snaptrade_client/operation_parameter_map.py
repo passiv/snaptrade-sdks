@@ -66,19 +66,19 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/orders/{brokerageOrderId}-GET': {
+    '/accounts/{accountId}/orders/details-POST': {
         'parameters': [
             {
-                'name': 'userId'
-            },
-            {
-                'name': 'userSecret'
+                'name': 'external_order_id'
             },
             {
                 'name': 'accountId'
             },
             {
-                'name': 'brokerageOrderId'
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
             },
         ]
     },

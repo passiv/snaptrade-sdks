@@ -434,7 +434,7 @@ Account result = client
 
 ### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -446,19 +446,21 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```java
 AccountOrderRecord result = client
         .accountInformation
-        .getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId)
+        .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `String`<a id="userid-string"></a>
+##### external_order_id: `String`<a id="external_order_id-string"></a>
 
-##### userSecret: `String`<a id="usersecret-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
 
-##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -466,7 +468,7 @@ AccountOrderRecord result = client
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+`/accounts/{accountId}/orders/details` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -177,15 +177,19 @@ namespace SnapTrade.Net.Test.Api
         [Fact]
         public void GetUserAccountOrderDetailTest()
         {
+            var accountId = "accountId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var accountId = "accountId_example";
-            var brokerageOrderId = "brokerageOrderId_example";
+            var externalOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+                externalOrderId
+            );
             
             try
             {
                 // Get account order detail
-                AccountOrderRecord result = client.AccountInformation.GetUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId);
+                AccountOrderRecord result = client.AccountInformation.GetUserAccountOrderDetail(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
