@@ -1449,14 +1449,16 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 ```python
 list_all_brokerage_instruments_response = (
     snaptrade.reference_data.list_all_brokerage_instruments(
-        brokerage_id="87b24961-b51e-4db8-9226-f198f6518a89",
+        slug="QUESTRADE",
     )
 )
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage_id: `str`<a id="brokerage_id-str"></a>
+##### slug: `str`<a id="slug-str"></a>
+
+A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1464,7 +1466,7 @@ list_all_brokerage_instruments_response = (
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/brokerages/{brokerageId}/instruments` `get`
+`/brokerages/{slug}/instruments` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

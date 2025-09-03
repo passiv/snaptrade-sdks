@@ -1506,13 +1506,15 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 ```java
 BrokerageInstrumentsResponse result = client
         .referenceData
-        .listAllBrokerageInstruments(brokerageId)
+        .listAllBrokerageInstruments(slug)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerageId: `UUID`<a id="brokerageid-uuid"></a>
+##### slug: `String`<a id="slug-string"></a>
+
+A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1520,7 +1522,7 @@ BrokerageInstrumentsResponse result = client
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/brokerages/{brokerageId}/instruments` `GET`
+`/brokerages/{slug}/instruments` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -16,15 +16,15 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.brokerages_brokerage_id_instruments import get
+from snaptrade_client.paths.brokerages_slug_instruments import get
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestBrokeragesBrokerageIdInstruments(ApiTestMixin, unittest.TestCase):
+class TestBrokeragesSlugInstruments(ApiTestMixin, unittest.TestCase):
     """
-    BrokeragesBrokerageIdInstruments unit test stubs
+    BrokeragesSlugInstruments unit test stubs
         Get brokerage instruments
     """
 

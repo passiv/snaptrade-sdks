@@ -35,13 +35,26 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="BrokerageInstrument" /> class.
         /// </summary>
-        /// <param name="symbol">The instrument&#39;s trading symbol / ticker..</param>
+        [JsonConstructorAttribute]
+        protected BrokerageInstrument()
+        {
+            this.AdditionalProperties = new Dictionary<string, object>();
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BrokerageInstrument" /> class.
+        /// </summary>
+        /// <param name="symbol">The instrument&#39;s trading symbol / ticker. (required).</param>
         /// <param name="exchangeMic">The MIC code of the exchange where the instrument is traded..</param>
         /// <param name="tradeable">Whether the instrument is tradeable through the brokerage. &#x60;null&#x60; if the tradeability is unknown..</param>
         /// <param name="fractionable">Whether the instrument allows fractional units. &#x60;null&#x60; if the fractionability is unknown..</param>
         /// <param name="universalSymbolId">The universal symbol ID of the instrument. This is the ID used to reference the instrument in SnapTrade API calls..</param>
         public BrokerageInstrument(string symbol = default(string), string exchangeMic = default(string), bool? tradeable = default(bool?), bool? fractionable = default(bool?), string universalSymbolId = default(string)) : base()
         {
+            // to ensure "symbol" is required (not null)
+            if (symbol == null)
+            {
+                throw new ArgumentNullException("symbol is a required property for BrokerageInstrument and cannot be null");
+            }
             this.Symbol = symbol;
             this.ExchangeMic = exchangeMic;
             this.Tradeable = tradeable;
@@ -54,7 +67,7 @@ namespace SnapTrade.Net.Model
         /// The instrument&#39;s trading symbol / ticker.
         /// </summary>
         /// <value>The instrument&#39;s trading symbol / ticker.</value>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
         public string Symbol { get; set; }
 
         /// <summary>

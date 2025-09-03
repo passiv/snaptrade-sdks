@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | Pointer to **string** | The instrument&#39;s trading symbol / ticker. | [optional] 
+**Symbol** | **string** | The instrument&#39;s trading symbol / ticker. | 
 **ExchangeMic** | Pointer to **NullableString** | The MIC code of the exchange where the instrument is traded. | [optional] 
 **Tradeable** | Pointer to **NullableBool** | Whether the instrument is tradeable through the brokerage. &#x60;null&#x60; if the tradeability is unknown. | [optional] 
 **Fractionable** | Pointer to **NullableBool** | Whether the instrument allows fractional units. &#x60;null&#x60; if the fractionability is unknown. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewBrokerageInstrument
 
-`func NewBrokerageInstrument() *BrokerageInstrument`
+`func NewBrokerageInstrument(symbol string, ) *BrokerageInstrument`
 
 NewBrokerageInstrument instantiates a new BrokerageInstrument object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetSymbol sets Symbol field to given value.
 
-### HasSymbol
-
-`func (o *BrokerageInstrument) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
 
 ### GetExchangeMic
 

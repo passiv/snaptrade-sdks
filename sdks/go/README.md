@@ -101,7 +101,7 @@ Class | Method | HTTP request | Description
 *ReferenceDataApi* | [**GetSymbols**](docs/ReferenceDataApi.md#getsymbols) | **Post** /symbols | Search symbols
 *ReferenceDataApi* | [**GetSymbolsByTicker**](docs/ReferenceDataApi.md#getsymbolsbyticker) | **Get** /symbols/{query} | Get symbol detail
 *ReferenceDataApi* | [**ListAllBrokerageAuthorizationType**](docs/ReferenceDataApi.md#listallbrokerageauthorizationtype) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
-*ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **Get** /brokerages/{brokerageId}/instruments | Get brokerage instruments
+*ReferenceDataApi* | [**ListAllBrokerageInstruments**](docs/ReferenceDataApi.md#listallbrokerageinstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 *ReferenceDataApi* | [**ListAllBrokerages**](docs/ReferenceDataApi.md#listallbrokerages) | **Get** /brokerages | Get brokerages
 *ReferenceDataApi* | [**ListAllCurrencies**](docs/ReferenceDataApi.md#listallcurrencies) | **Get** /currencies | Get currencies
 *ReferenceDataApi* | [**ListAllCurrenciesRates**](docs/ReferenceDataApi.md#listallcurrenciesrates) | **Get** /currencies/rates | Get currency exchange rates

@@ -164,8 +164,8 @@ public class ReferenceDataApiTest {
      */
     @Test
     public void listAllBrokerageInstrumentsTest() throws ApiException {
-        UUID brokerageId = null;
-        BrokerageInstrumentsResponse response = api.listAllBrokerageInstruments(brokerageId)
+        String slug = null;
+        BrokerageInstrumentsResponse response = api.listAllBrokerageInstruments(slug)
                 .execute();
         // TODO: test validations
     }

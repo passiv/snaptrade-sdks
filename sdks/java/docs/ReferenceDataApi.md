@@ -11,7 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getSymbols**](ReferenceDataApi.md#getSymbols) | **POST** /symbols | Search symbols |
 | [**getSymbolsByTicker**](ReferenceDataApi.md#getSymbolsByTicker) | **GET** /symbols/{query} | Get symbol detail |
 | [**listAllBrokerageAuthorizationType**](ReferenceDataApi.md#listAllBrokerageAuthorizationType) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
-| [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{brokerageId}/instruments | Get brokerage instruments |
+| [**listAllBrokerageInstruments**](ReferenceDataApi.md#listAllBrokerageInstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**listAllBrokerages**](ReferenceDataApi.md#listAllBrokerages) | **GET** /brokerages | Get brokerages |
 | [**listAllCurrencies**](ReferenceDataApi.md#listAllCurrencies) | **GET** /currencies | Get currencies |
 | [**listAllCurrenciesRates**](ReferenceDataApi.md#listAllCurrenciesRates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -686,7 +686,7 @@ public class Example {
 
 <a name="listAllBrokerageInstruments"></a>
 # **listAllBrokerageInstruments**
-> BrokerageInstrumentsResponse listAllBrokerageInstruments(brokerageId).execute();
+> BrokerageInstrumentsResponse listAllBrokerageInstruments(slug).execute();
 
 Get brokerage instruments
 
@@ -714,11 +714,11 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    UUID brokerageId = UUID.randomUUID();
+    String slug = "QUESTRADE"; // A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     try {
       BrokerageInstrumentsResponse result = client
               .referenceData
-              .listAllBrokerageInstruments(brokerageId)
+              .listAllBrokerageInstruments(slug)
               .execute();
       System.out.println(result);
       System.out.println(result.getInstruments());
@@ -734,7 +734,7 @@ public class Example {
     try {
       ApiResponse<BrokerageInstrumentsResponse> response = client
               .referenceData
-              .listAllBrokerageInstruments(brokerageId)
+              .listAllBrokerageInstruments(slug)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -757,7 +757,7 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **brokerageId** | **UUID**|  | |
+| **slug** | **String**| A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. | |
 
 ### Return type
 

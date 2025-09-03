@@ -600,10 +600,10 @@ module SnapTrade
     #
     # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
     #
-    # @param brokerage_id [String] 
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerage_instruments(brokerage_id:, extra: {})
-      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info_impl(brokerage_id, extra)
+    def list_all_brokerage_instruments(slug:, extra: {})
+      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info_impl(slug, extra)
       data
     end
 
@@ -611,37 +611,37 @@ module SnapTrade
     #
     # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
     #
-    # @param brokerage_id [String] 
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def list_all_brokerage_instruments_with_http_info(brokerage_id:, extra: {})
-      list_all_brokerage_instruments_with_http_info_impl(brokerage_id, extra)
+    def list_all_brokerage_instruments_with_http_info(slug:, extra: {})
+      list_all_brokerage_instruments_with_http_info_impl(slug, extra)
     end
 
     # Get brokerage instruments
     # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
-    # @param brokerage_id [String] 
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     # @param [Hash] opts the optional parameters
     # @return [BrokerageInstrumentsResponse]
-    private def list_all_brokerage_instruments_impl(brokerage_id, opts = {})
-      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info(brokerage_id, opts)
+    private def list_all_brokerage_instruments_impl(slug, opts = {})
+      data, _status_code, _headers = list_all_brokerage_instruments_with_http_info(slug, opts)
       data
     end
 
     # Get brokerage instruments
     # Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
-    # @param brokerage_id [String] 
+    # @param slug [String] A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     # @param [Hash] opts the optional parameters
     # @return [Array<(BrokerageInstrumentsResponse, Integer, Hash)>] BrokerageInstrumentsResponse data, response status code and response headers
-    private def list_all_brokerage_instruments_with_http_info_impl(brokerage_id, opts = {})
+    private def list_all_brokerage_instruments_with_http_info_impl(slug, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: ReferenceDataApi.list_all_brokerage_instruments ...'
       end
-      # verify the required parameter 'brokerage_id' is set
-      if @api_client.config.client_side_validation && brokerage_id.nil?
-        fail ArgumentError, "Missing the required parameter 'brokerage_id' when calling ReferenceDataApi.list_all_brokerage_instruments"
+      # verify the required parameter 'slug' is set
+      if @api_client.config.client_side_validation && slug.nil?
+        fail ArgumentError, "Missing the required parameter 'slug' when calling ReferenceDataApi.list_all_brokerage_instruments"
       end
       # resource path
-      local_var_path = '/brokerages/{brokerageId}/instruments'.sub('{' + 'brokerageId' + '}', CGI.escape(brokerage_id.to_s))
+      local_var_path = '/brokerages/{slug}/instruments'.sub('{' + 'slug' + '}', CGI.escape(slug.to_s))
 
       # query parameters
       query_params = opts[:query_params] || {}

@@ -58,8 +58,8 @@ public class ReferenceDataApi extends ReferenceDataApiGenerated {
         }
     }
     public class ListAllBrokerageInstrumentsRequestBuilder extends ListAllBrokerageInstrumentsRequestBuilderGenerated {
-        public ListAllBrokerageInstrumentsRequestBuilder(UUID brokerageId) {
-            super(brokerageId);
+        public ListAllBrokerageInstrumentsRequestBuilder(String slug) {
+            super(slug);
         }
     }
     public class ListAllBrokeragesRequestBuilder extends ListAllBrokeragesRequestBuilderGenerated {

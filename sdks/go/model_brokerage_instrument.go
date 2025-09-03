@@ -18,7 +18,7 @@ import (
 // BrokerageInstrument struct for BrokerageInstrument
 type BrokerageInstrument struct {
 	// The instrument's trading symbol / ticker.
-	Symbol *string `json:"symbol,omitempty"`
+	Symbol string `json:"symbol"`
 	// The MIC code of the exchange where the instrument is traded.
 	ExchangeMic NullableString `json:"exchange_mic,omitempty"`
 	// Whether the instrument is tradeable through the brokerage. `null` if the tradeability is unknown.
@@ -36,8 +36,9 @@ type _BrokerageInstrument BrokerageInstrument
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBrokerageInstrument() *BrokerageInstrument {
+func NewBrokerageInstrument(symbol string) *BrokerageInstrument {
 	this := BrokerageInstrument{}
+	this.Symbol = symbol
 	return &this
 }
 
@@ -49,36 +50,28 @@ func NewBrokerageInstrumentWithDefaults() *BrokerageInstrument {
 	return &this
 }
 
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
+// GetSymbol returns the Symbol field value
 func (o *BrokerageInstrument) GetSymbol() string {
-	if o == nil || isNil(o.Symbol) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Symbol
+
+	return o.Symbol
 }
 
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// GetSymbolOk returns a tuple with the Symbol field value
 // and a boolean to check if the value has been set.
 func (o *BrokerageInstrument) GetSymbolOk() (*string, bool) {
-	if o == nil || isNil(o.Symbol) {
+	if o == nil {
     return nil, false
 	}
-	return o.Symbol, true
+	return &o.Symbol, true
 }
 
-// HasSymbol returns a boolean if a field has been set.
-func (o *BrokerageInstrument) HasSymbol() bool {
-	if o != nil && !isNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// SetSymbol sets field value
 func (o *BrokerageInstrument) SetSymbol(v string) {
-	o.Symbol = &v
+	o.Symbol = v
 }
 
 // GetExchangeMic returns the ExchangeMic field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -251,7 +244,7 @@ func (o *BrokerageInstrument) UnsetUniversalSymbolId() {
 
 func (o BrokerageInstrument) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if !isNil(o.Symbol) {
+	if true {
 		toSerialize["symbol"] = o.Symbol
 	}
 	if o.ExchangeMic.IsSet() {

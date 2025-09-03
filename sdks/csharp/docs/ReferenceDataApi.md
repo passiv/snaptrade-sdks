@@ -11,7 +11,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**GetSymbols**](ReferenceDataApi.md#getsymbols) | **POST** /symbols | Search symbols |
 | [**GetSymbolsByTicker**](ReferenceDataApi.md#getsymbolsbyticker) | **GET** /symbols/{query} | Get symbol detail |
 | [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#listallbrokerageauthorizationtype) | **GET** /brokerageAuthorizationTypes | Get all brokerage authorization types |
-| [**ListAllBrokerageInstruments**](ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{brokerageId}/instruments | Get brokerage instruments |
+| [**ListAllBrokerageInstruments**](ReferenceDataApi.md#listallbrokerageinstruments) | **GET** /brokerages/{slug}/instruments | Get brokerage instruments |
 | [**ListAllBrokerages**](ReferenceDataApi.md#listallbrokerages) | **GET** /brokerages | Get brokerages |
 | [**ListAllCurrencies**](ReferenceDataApi.md#listallcurrencies) | **GET** /currencies | Get currencies |
 | [**ListAllCurrenciesRates**](ReferenceDataApi.md#listallcurrenciesrates) | **GET** /currencies/rates | Get currency exchange rates |
@@ -672,12 +672,12 @@ namespace Example
             client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
-            var brokerageId = "brokerageId_example";
+            var slug = "QUESTRADE"; // A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
             
             try
             {
                 // Get brokerage instruments
-                BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(brokerageId);
+                BrokerageInstrumentsResponse result = client.ReferenceData.ListAllBrokerageInstruments(slug);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -704,7 +704,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get brokerage instruments
-    ApiResponse<BrokerageInstrumentsResponse> response = apiInstance.ListAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+    ApiResponse<BrokerageInstrumentsResponse> response = apiInstance.ListAllBrokerageInstrumentsWithHttpInfo(slug);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -721,7 +721,7 @@ catch (ApiException e)
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **brokerageId** | **string** |  |  |
+| **slug** | **string** | A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. |  |
 
 ### Return type
 

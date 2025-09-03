@@ -11,7 +11,7 @@ Method | Path | Description
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
-[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{brokerageId}/instruments | Get brokerage instruments
+[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
 [**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
 [**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
@@ -396,7 +396,7 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     request := client.ReferenceDataApi.ListAllBrokerageInstruments(
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        ""QUESTRADE"",
     )
     
     resp, httpRes, err := request.Execute()
