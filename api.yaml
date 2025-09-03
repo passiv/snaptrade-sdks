@@ -1372,7 +1372,7 @@ paths:
                   $ref: "#/components/schemas/Brokerage"
         default:
           description: Unexpected error.
-  "/brokerages/{brokerageId}/instruments":
+  "/brokerages/{slug}/instruments":
     get:
       tags:
         - Reference Data
@@ -1381,10 +1381,12 @@ paths:
       operationId: ReferenceData_listAllBrokerageInstruments
       parameters:
         - in: path
+          name: slug
           required: true
-          name: brokerageId
+          description: A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
           schema:
-            $ref: "#/components/schemas/BrokerageID"
+            type: string
+            example: QUESTRADE
       responses:
         "200":
           description: A list of brokerage instruments.
@@ -4481,6 +4483,8 @@ components:
             $ref: "#/components/schemas/BrokerageInstrument"
     BrokerageInstrument:
       type: object
+      required:
+        - symbol
       properties:
         symbol:
           description: The instrument's trading symbol / ticker.
