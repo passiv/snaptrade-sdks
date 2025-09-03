@@ -402,10 +402,10 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/brokerages/{brokerageId}/instruments-GET': {
+    '/brokerages/{slug}/instruments-GET': {
         parameters: [
             {
-                name: 'brokerageId'
+                name: 'slug'
             },
         ]
     },

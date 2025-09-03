@@ -383,15 +383,15 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
         /**
          * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don\'t will return an empty list.
          * @summary Get brokerage instruments
-         * @param {string} brokerageId 
+         * @param {string} slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listAllBrokerageInstruments: async (brokerageId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'brokerageId' is not null or undefined
-            assertParamExists('listAllBrokerageInstruments', 'brokerageId', brokerageId)
-            const localVarPath = `/brokerages/{brokerageId}/instruments`
-                .replace(`{${"brokerageId"}}`, encodeURIComponent(String(brokerageId !== undefined ? brokerageId : `-brokerageId-`)));
+        listAllBrokerageInstruments: async (slug: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'slug' is not null or undefined
+            assertParamExists('listAllBrokerageInstruments', 'slug', slug)
+            const localVarPath = `/brokerages/{slug}/instruments`
+                .replace(`{${"slug"}}`, encodeURIComponent(String(slug !== undefined ? slug : `-slug-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -418,7 +418,7 @@ export const ReferenceDataApiAxiosParamCreator = function (configuration?: Confi
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/brokerages/{brokerageId}/instruments',
+                pathTemplate: '/brokerages/{slug}/instruments',
                 httpMethod: 'GET'
             });
 
@@ -723,7 +723,7 @@ export const ReferenceDataApiFp = function(configuration?: Configuration) {
          * @throws {RequiredError}
          */
         async listAllBrokerageInstruments(requestParameters: ReferenceDataApiListAllBrokerageInstrumentsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<BrokerageInstrumentsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageInstruments(requestParameters.brokerageId, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listAllBrokerageInstruments(requestParameters.slug, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -962,11 +962,11 @@ export type ReferenceDataApiListAllBrokerageAuthorizationTypeRequest = {
 export type ReferenceDataApiListAllBrokerageInstrumentsRequest = {
     
     /**
-    * 
+    * A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
     * @type {string}
     * @memberof ReferenceDataApiListAllBrokerageInstruments
     */
-    readonly brokerageId: string
+    readonly slug: string
     
 }
 

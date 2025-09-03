@@ -39,11 +39,11 @@ from snaptrade_client.type.brokerage_instruments_response import BrokerageInstru
 from . import path
 
 # Path params
-BrokerageIdSchema = schemas.UUIDSchema
+SlugSchema = schemas.StrSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
-        'brokerageId': typing.Union[BrokerageIdSchema, str, uuid.UUID, ],
+        'slug': typing.Union[SlugSchema, str, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -58,10 +58,10 @@ class RequestPathParams(RequestRequiredPathParams, RequestOptionalPathParams):
     pass
 
 
-request_path_brokerage_id = api_client.PathParameter(
-    name="brokerageId",
+request_path_slug = api_client.PathParameter(
+    name="slug",
     style=api_client.ParameterStyle.SIMPLE,
-    schema=BrokerageIdSchema,
+    schema=SlugSchema,
     required=True,
 )
 _auth = [
@@ -118,13 +118,13 @@ class BaseApi(api_client.Api):
 
     def _list_all_brokerage_instruments_mapped_args(
         self,
-        brokerage_id: typing.Optional[str] = None,
+        slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
         args: api_client.MappedArgs = api_client.MappedArgs()
         _path_params = {}
-        if brokerage_id is not None:
-            _path_params["brokerageId"] = brokerage_id
+        if slug is not None:
+            _path_params["slug"] = slug
         args.path = path_params if path_params else _path_params
         return args
 
@@ -153,7 +153,7 @@ class BaseApi(api_client.Api):
     
         _path_params = {}
         for parameter in (
-            request_path_brokerage_id,
+            request_path_slug,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -174,7 +174,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/brokerages/{brokerageId}/instruments',
+            path_template='/brokerages/{slug}/instruments',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -270,7 +270,7 @@ class BaseApi(api_client.Api):
     
         _path_params = {}
         for parameter in (
-            request_path_brokerage_id,
+            request_path_slug,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -291,7 +291,7 @@ class BaseApi(api_client.Api):
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/brokerages/{brokerageId}/instruments',
+            path_template='/brokerages/{slug}/instruments',
             auth_settings=_auth,
             headers=_headers,
         )
@@ -338,7 +338,7 @@ class ListAllBrokerageInstruments(BaseApi):
 
     async def alist_all_brokerage_instruments(
         self,
-        brokerage_id: typing.Optional[str] = None,
+        slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -349,7 +349,7 @@ class ListAllBrokerageInstruments(BaseApi):
     ]:
         args = self._list_all_brokerage_instruments_mapped_args(
             path_params=path_params,
-            brokerage_id=brokerage_id,
+            slug=slug,
         )
         return await self._alist_all_brokerage_instruments_oapg(
             path_params=args.path,
@@ -358,7 +358,7 @@ class ListAllBrokerageInstruments(BaseApi):
     
     def list_all_brokerage_instruments(
         self,
-        brokerage_id: typing.Optional[str] = None,
+        slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -368,7 +368,7 @@ class ListAllBrokerageInstruments(BaseApi):
         """ Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list. """
         args = self._list_all_brokerage_instruments_mapped_args(
             path_params=path_params,
-            brokerage_id=brokerage_id,
+            slug=slug,
         )
         return self._list_all_brokerage_instruments_oapg(
             path_params=args.path,
@@ -379,7 +379,7 @@ class ApiForget(BaseApi):
 
     async def aget(
         self,
-        brokerage_id: typing.Optional[str] = None,
+        slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
         **kwargs,
     ) -> typing.Union[
@@ -390,7 +390,7 @@ class ApiForget(BaseApi):
     ]:
         args = self._list_all_brokerage_instruments_mapped_args(
             path_params=path_params,
-            brokerage_id=brokerage_id,
+            slug=slug,
         )
         return await self._alist_all_brokerage_instruments_oapg(
             path_params=args.path,
@@ -399,7 +399,7 @@ class ApiForget(BaseApi):
     
     def get(
         self,
-        brokerage_id: typing.Optional[str] = None,
+        slug: typing.Optional[str] = None,
         path_params: typing.Optional[dict] = {},
     ) -> typing.Union[
         ApiResponseFor200,
@@ -409,7 +409,7 @@ class ApiForget(BaseApi):
         """ Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list. """
         args = self._list_all_brokerage_instruments_mapped_args(
             path_params=path_params,
-            brokerage_id=brokerage_id,
+            slug=slug,
         )
         return self._list_all_brokerage_instruments_oapg(
             path_params=args.path,

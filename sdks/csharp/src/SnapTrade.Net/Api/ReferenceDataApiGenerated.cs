@@ -189,10 +189,10 @@ namespace SnapTrade.Net.Api
         /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BrokerageInstrumentsResponse</returns>
-        BrokerageInstrumentsResponse ListAllBrokerageInstruments(string brokerageId, int operationIndex = 0);
+        BrokerageInstrumentsResponse ListAllBrokerageInstruments(string slug, int operationIndex = 0);
 
         /// <summary>
         /// Get brokerage instruments
@@ -201,10 +201,10 @@ namespace SnapTrade.Net.Api
         /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageInstrumentsResponse</returns>
-        ApiResponse<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsWithHttpInfo(string brokerageId, int operationIndex = 0);
+        ApiResponse<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsWithHttpInfo(string slug, int operationIndex = 0);
         /// <summary>
         /// Get brokerages
         /// </summary>
@@ -482,11 +482,11 @@ namespace SnapTrade.Net.Api
         /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BrokerageInstrumentsResponse</returns>
-        System.Threading.Tasks.Task<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsAsync(string brokerageId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsAsync(string slug, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get brokerage instruments
@@ -495,11 +495,11 @@ namespace SnapTrade.Net.Api
         /// Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BrokerageInstrumentsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<BrokerageInstrumentsResponse>> ListAllBrokerageInstrumentsWithHttpInfoAsync(string brokerageId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<BrokerageInstrumentsResponse>> ListAllBrokerageInstrumentsWithHttpInfoAsync(string slug, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get brokerages
         /// </summary>
@@ -1872,12 +1872,12 @@ namespace SnapTrade.Net.Api
         /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>BrokerageInstrumentsResponse</returns>
-        public BrokerageInstrumentsResponse ListAllBrokerageInstruments(string brokerageId, int operationIndex = 0)
+        public BrokerageInstrumentsResponse ListAllBrokerageInstruments(string slug, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> localVarResponse = ListAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+            SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> localVarResponse = ListAllBrokerageInstrumentsWithHttpInfo(slug);
             return localVarResponse.Data;
         }
 
@@ -1885,15 +1885,15 @@ namespace SnapTrade.Net.Api
         /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of BrokerageInstrumentsResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsWithHttpInfo(string brokerageId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsWithHttpInfo(string slug, int operationIndex = 0)
         {
-            // verify the required parameter 'brokerageId' is set
-            if (brokerageId == null)
+            // verify the required parameter 'slug' is set
+            if (slug == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageId' when calling ReferenceDataApi->ListAllBrokerageInstruments");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'slug' when calling ReferenceDataApi->ListAllBrokerageInstruments");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1918,7 +1918,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("brokerageId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("slug", SnapTrade.Net.Client.ClientUtils.ParameterToString(slug)); // path parameter
 
             localVarRequestOptions.Operation = "ReferenceDataApi.ListAllBrokerageInstruments";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1940,7 +1940,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<BrokerageInstrumentsResponse>("/brokerages/{brokerageId}/instruments", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<BrokerageInstrumentsResponse>("/brokerages/{slug}/instruments", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("ListAllBrokerageInstruments", localVarResponse);
@@ -1957,13 +1957,13 @@ namespace SnapTrade.Net.Api
         /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of BrokerageInstrumentsResponse</returns>
-        public async System.Threading.Tasks.Task<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsAsync(string brokerageId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<BrokerageInstrumentsResponse> ListAllBrokerageInstrumentsAsync(string slug, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> localVarResponse = await ListAllBrokerageInstrumentsWithHttpInfoAsync(brokerageId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse> localVarResponse = await ListAllBrokerageInstrumentsWithHttpInfoAsync(slug, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1971,16 +1971,16 @@ namespace SnapTrade.Net.Api
         /// Get brokerage instruments Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="brokerageId"></param>
+        /// <param name="slug">A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.</param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (BrokerageInstrumentsResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse>> ListAllBrokerageInstrumentsWithHttpInfoAsync(string brokerageId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<BrokerageInstrumentsResponse>> ListAllBrokerageInstrumentsWithHttpInfoAsync(string slug, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            // verify the required parameter 'brokerageId' is set
-            if (brokerageId == null)
+            // verify the required parameter 'slug' is set
+            if (slug == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageId' when calling ReferenceDataApi->ListAllBrokerageInstruments");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'slug' when calling ReferenceDataApi->ListAllBrokerageInstruments");
             }
 
 
@@ -2006,7 +2006,7 @@ namespace SnapTrade.Net.Api
                 localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
             }
 
-            localVarRequestOptions.PathParameters.Add("brokerageId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("slug", SnapTrade.Net.Client.ClientUtils.ParameterToString(slug)); // path parameter
 
             localVarRequestOptions.Operation = "ReferenceDataApi.ListAllBrokerageInstruments";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -2028,7 +2028,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<BrokerageInstrumentsResponse>("/brokerages/{brokerageId}/instruments", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<BrokerageInstrumentsResponse>("/brokerages/{slug}/instruments", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

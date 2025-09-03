@@ -24,7 +24,7 @@ export interface BrokerageInstrument {
      * @type {string}
      * @memberof BrokerageInstrument
      */
-    'symbol'?: string;
+    'symbol': string;
     /**
      * The MIC code of the exchange where the instrument is traded.
      * @type {string}

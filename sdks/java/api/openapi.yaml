@@ -2590,19 +2590,24 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages
       x-accepts: application/json
-  /brokerages/{brokerageId}/instruments:
+  /brokerages/{slug}/instruments:
     get:
       description: Returns a list of all brokerage instruments available for a given
         brokerage. Not all brokerages support this. The ones that don't will return
         an empty list.
       operationId: ReferenceData_listAllBrokerageInstruments
       parameters:
-      - explode: false
+      - description: "A short, unique identifier for the brokerage. It is usually\
+          \ the name of the brokerage in capital letters and will never change."
+        explode: false
         in: path
-        name: brokerageId
+        name: slug
         required: true
         schema:
-          $ref: '#/components/schemas/BrokerageID'
+          example: QUESTRADE
+          type: string
+          x-konfig-original-example: QUESTRADE
+          x-konfig-generated-schema: konfig-generated-schema-paths--brokerages-slug-instruments-get-parameters-0-schema
         style: simple
       responses:
         "200":
@@ -2617,7 +2622,7 @@ paths:
       tags:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages-brokerageId-instruments
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--brokerages-slug-instruments
       x-accepts: application/json
   /brokerageAuthorizationTypes:
     get:
@@ -7071,6 +7076,8 @@ components:
           type: string
           x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageInstrument-properties-universal_symbol_id
+      required:
+      - symbol
       type: object
     MlegTradingInstrument:
       additionalProperties: true
@@ -8751,6 +8758,10 @@ components:
     konfig-generated-schema-paths--performance-custom-get-parameters-3-schema:
       example: true
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-paths--brokerages-slug-instruments-get-parameters-0-schema:
+      example: QUESTRADE
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-paths--brokerageAuthorizationTypes-get-parameters-0-schema:
       example: "QUESTRADE,ALPACA"
@@ -11356,17 +11367,20 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
-    konfig-generated-schema-single-parameter-schema-get--brokerages-brokerageId-instruments:
+    konfig-generated-schema-single-parameter-schema-get--brokerages-slug-instruments:
       additionalProperties: true
       properties:
-        brokerageId:
-          $ref: '#/components/schemas/BrokerageID'
+        slug:
+          example: QUESTRADE
+          type: string
+          x-konfig-original-example: QUESTRADE
+          x-konfig-generated-schema: konfig-generated-schema-paths--brokerages-slug-instruments-get-parameters-0-schema
       required:
-      - brokerageId
+      - slug
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
-      - brokerageId
+      - slug
     konfig-generated-schema-single-parameter-schema-get--brokerageAuthorizationTypes:
       additionalProperties: true
       properties:

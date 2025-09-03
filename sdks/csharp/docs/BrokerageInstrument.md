@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Symbol** | **string** | The instrument&#39;s trading symbol / ticker. | [optional] 
+**Symbol** | **string** | The instrument&#39;s trading symbol / ticker. | 
 **ExchangeMic** | **string** | The MIC code of the exchange where the instrument is traded. | [optional] 
 **Tradeable** | **bool?** | Whether the instrument is tradeable through the brokerage. &#x60;null&#x60; if the tradeability is unknown. | [optional] 
 **Fractionable** | **bool?** | Whether the instrument allows fractional units. &#x60;null&#x60; if the fractionability is unknown. | [optional] 

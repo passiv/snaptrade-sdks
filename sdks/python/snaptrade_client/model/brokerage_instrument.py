@@ -33,6 +33,9 @@ class BrokerageInstrument(
 
 
     class MetaOapg:
+        required = {
+            "symbol",
+        }
         
         class properties:
             symbol = schemas.StrSchema
@@ -130,6 +133,8 @@ class BrokerageInstrument(
             }
         additional_properties = schemas.AnyTypeSchema
     
+    symbol: MetaOapg.properties.symbol
+    
     @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
@@ -153,7 +158,7 @@ class BrokerageInstrument(
         return super().__getitem__(name)
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> typing.Union[MetaOapg.properties.symbol, schemas.Unset]: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["symbol"]) -> MetaOapg.properties.symbol: ...
     
     @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["exchange_mic"]) -> typing.Union[MetaOapg.properties.exchange_mic, schemas.Unset]: ...
@@ -176,7 +181,7 @@ class BrokerageInstrument(
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        symbol: typing.Union[MetaOapg.properties.symbol, str, schemas.Unset] = schemas.unset,
+        symbol: typing.Union[MetaOapg.properties.symbol, str, ],
         exchange_mic: typing.Union[MetaOapg.properties.exchange_mic, None, str, schemas.Unset] = schemas.unset,
         tradeable: typing.Union[MetaOapg.properties.tradeable, None, bool, schemas.Unset] = schemas.unset,
         fractionable: typing.Union[MetaOapg.properties.fractionable, None, bool, schemas.Unset] = schemas.unset,

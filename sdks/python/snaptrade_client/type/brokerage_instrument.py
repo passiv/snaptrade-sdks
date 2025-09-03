@@ -17,12 +17,11 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 
 class RequiredBrokerageInstrument(TypedDict):
-    pass
-
-class OptionalBrokerageInstrument(TypedDict, total=False):
     # The instrument's trading symbol / ticker.
     symbol: str
 
+
+class OptionalBrokerageInstrument(TypedDict, total=False):
     # The MIC code of the exchange where the instrument is traded.
     exchange_mic: typing.Optional[str]
 

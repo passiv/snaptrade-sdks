@@ -1175,7 +1175,7 @@ public class ReferenceDataApiGenerated {
     public ReferenceDataApi.ListAllBrokerageAuthorizationTypeRequestBuilder listAllBrokerageAuthorizationType() throws IllegalArgumentException {
         return ((ReferenceDataApi) this).new ListAllBrokerageAuthorizationTypeRequestBuilder();
     }
-    private okhttp3.Call listAllBrokerageInstrumentsCall(UUID brokerageId, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call listAllBrokerageInstrumentsCall(String slug, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1192,8 +1192,8 @@ public class ReferenceDataApiGenerated {
         Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/brokerages/{brokerageId}/instruments"
-            .replace("{" + "brokerageId" + "}", localVarApiClient.escapeString(brokerageId.toString()));
+        String localVarPath = "/brokerages/{slug}/instruments"
+            .replace("{" + "slug" + "}", localVarApiClient.escapeString(slug.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -1221,36 +1221,36 @@ public class ReferenceDataApiGenerated {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listAllBrokerageInstrumentsValidateBeforeCall(UUID brokerageId, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'brokerageId' is set
-        if (brokerageId == null) {
-            throw new ApiException("Missing the required parameter 'brokerageId' when calling listAllBrokerageInstruments(Async)");
+    private okhttp3.Call listAllBrokerageInstrumentsValidateBeforeCall(String slug, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'slug' is set
+        if (slug == null) {
+            throw new ApiException("Missing the required parameter 'slug' when calling listAllBrokerageInstruments(Async)");
         }
 
-        return listAllBrokerageInstrumentsCall(brokerageId, _callback);
+        return listAllBrokerageInstrumentsCall(slug, _callback);
 
     }
 
 
-    private ApiResponse<BrokerageInstrumentsResponse> listAllBrokerageInstrumentsWithHttpInfo(UUID brokerageId) throws ApiException {
-        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(brokerageId, null);
+    private ApiResponse<BrokerageInstrumentsResponse> listAllBrokerageInstrumentsWithHttpInfo(String slug) throws ApiException {
+        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(slug, null);
         Type localVarReturnType = new TypeToken<BrokerageInstrumentsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listAllBrokerageInstrumentsAsync(UUID brokerageId, final ApiCallback<BrokerageInstrumentsResponse> _callback) throws ApiException {
+    private okhttp3.Call listAllBrokerageInstrumentsAsync(String slug, final ApiCallback<BrokerageInstrumentsResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(brokerageId, _callback);
+        okhttp3.Call localVarCall = listAllBrokerageInstrumentsValidateBeforeCall(slug, _callback);
         Type localVarReturnType = new TypeToken<BrokerageInstrumentsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class ListAllBrokerageInstrumentsRequestBuilderGenerated {
-        final UUID brokerageId;
+        final String slug;
 
-        public ListAllBrokerageInstrumentsRequestBuilderGenerated(UUID brokerageId) {
-            this.brokerageId = brokerageId;
+        public ListAllBrokerageInstrumentsRequestBuilderGenerated(String slug) {
+            this.slug = slug;
         }
 
         /**
@@ -1266,7 +1266,7 @@ public class ReferenceDataApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return listAllBrokerageInstrumentsCall(brokerageId, _callback);
+            return listAllBrokerageInstrumentsCall(slug, _callback);
         }
 
 
@@ -1282,7 +1282,7 @@ public class ReferenceDataApiGenerated {
          </table>
          */
         public BrokerageInstrumentsResponse execute() throws ApiException {
-            ApiResponse<BrokerageInstrumentsResponse> localVarResp = listAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+            ApiResponse<BrokerageInstrumentsResponse> localVarResp = listAllBrokerageInstrumentsWithHttpInfo(slug);
             return localVarResp.getResponseBody();
         }
 
@@ -1298,7 +1298,7 @@ public class ReferenceDataApiGenerated {
          </table>
          */
         public ApiResponse<BrokerageInstrumentsResponse> executeWithHttpInfo() throws ApiException {
-            return listAllBrokerageInstrumentsWithHttpInfo(brokerageId);
+            return listAllBrokerageInstrumentsWithHttpInfo(slug);
         }
 
         /**
@@ -1314,14 +1314,14 @@ public class ReferenceDataApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<BrokerageInstrumentsResponse> _callback) throws ApiException {
-            return listAllBrokerageInstrumentsAsync(brokerageId, _callback);
+            return listAllBrokerageInstrumentsAsync(slug, _callback);
         }
     }
 
     /**
      * Get brokerage instruments
      * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
-     * @param brokerageId  (required)
+     * @param slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change. (required)
      * @return ListAllBrokerageInstrumentsRequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1330,11 +1330,11 @@ public class ReferenceDataApiGenerated {
         <tr><td> 0 </td><td> Unexpected error. </td><td>  -  </td></tr>
      </table>
      */
-    public ReferenceDataApi.ListAllBrokerageInstrumentsRequestBuilder listAllBrokerageInstruments(UUID brokerageId) throws IllegalArgumentException {
-        if (brokerageId == null) throw new IllegalArgumentException("\"brokerageId\" is required but got null");
+    public ReferenceDataApi.ListAllBrokerageInstrumentsRequestBuilder listAllBrokerageInstruments(String slug) throws IllegalArgumentException {
+        if (slug == null) throw new IllegalArgumentException("\"slug\" is required but got null");
             
 
-        return ((ReferenceDataApi) this).new ListAllBrokerageInstrumentsRequestBuilder(brokerageId);
+        return ((ReferenceDataApi) this).new ListAllBrokerageInstrumentsRequestBuilder(slug);
     }
     private okhttp3.Call listAllBrokeragesCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;

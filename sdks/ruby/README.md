@@ -1370,21 +1370,24 @@ Returns a list of all brokerage instruments available for a given brokerage. Not
 
 ```ruby
 result = snaptrade.reference_data.list_all_brokerage_instruments(
-  brokerage_id: "87b24961-b51e-4db8-9226-f198f6518a89",
+  slug: "QUESTRADE",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage_id: `String`<a id="brokerage_id-string"></a>
+##### slug: `String`<a id="slug-string"></a>
+A short, unique identifier for the brokerage. It is usually the name of the
+brokerage in capital letters and will never change.
+
 #### 🔄 Return<a id="🔄-return"></a>
 
 [BrokerageInstrumentsResponse](./lib/snaptrade/models/brokerage_instruments_response.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/brokerages/{brokerageId}/instruments` `GET`
+`/brokerages/{slug}/instruments` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

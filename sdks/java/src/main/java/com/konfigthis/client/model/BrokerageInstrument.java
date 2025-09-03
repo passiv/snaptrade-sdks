@@ -87,8 +87,8 @@ public class BrokerageInstrument {
    * The instrument&#39;s trading symbol / ticker.
    * @return symbol
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "AAPL", value = "The instrument's trading symbol / ticker.")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "AAPL", required = true, value = "The instrument's trading symbol / ticker.")
 
   public String getSymbol() {
     return symbol;
@@ -337,6 +337,7 @@ public class BrokerageInstrument {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("symbol");
   }
 
  /**
@@ -351,7 +352,14 @@ public class BrokerageInstrument {
           throw new IllegalArgumentException(String.format("The required field(s) %s in BrokerageInstrument is not found in the empty JSON string", BrokerageInstrument.openapiRequiredFields.toString()));
         }
       }
-      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : BrokerageInstrument.openapiRequiredFields) {
+        if (jsonObj.get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
+        }
+      }
+      if (!jsonObj.get("symbol").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
       if (!jsonObj.get("exchange_mic").isJsonNull() && (jsonObj.get("exchange_mic") != null && !jsonObj.get("exchange_mic").isJsonNull()) && !jsonObj.get("exchange_mic").isJsonPrimitive()) {

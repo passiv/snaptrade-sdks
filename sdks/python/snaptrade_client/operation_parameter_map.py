@@ -396,10 +396,10 @@ operation_parameter_map = {
             },
         ]
     },
-    '/brokerages/{brokerageId}/instruments-GET': {
+    '/brokerages/{slug}/instruments-GET': {
         'parameters': [
             {
-                'name': 'brokerageId'
+                'name': 'slug'
             },
         ]
     },

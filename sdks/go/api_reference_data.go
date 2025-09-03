@@ -1130,7 +1130,7 @@ func (a *ReferenceDataApiService) ListAllBrokerageAuthorizationTypeExecute(r Ref
 type ReferenceDataApiListAllBrokerageInstrumentsRequest struct {
 	ctx context.Context
 	ApiService *ReferenceDataApiService
-	brokerageId string
+	slug string
 }
 
 func (r ReferenceDataApiListAllBrokerageInstrumentsRequest) Execute() (*BrokerageInstrumentsResponse, *http.Response, error) {
@@ -1143,14 +1143,14 @@ ListAllBrokerageInstruments Get brokerage instruments
 Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param brokerageId
+ @param slug A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
  @return ReferenceDataApiListAllBrokerageInstrumentsRequest
 */
-func (a *ReferenceDataApiService) ListAllBrokerageInstruments(brokerageId string) ReferenceDataApiListAllBrokerageInstrumentsRequest {
+func (a *ReferenceDataApiService) ListAllBrokerageInstruments(slug string) ReferenceDataApiListAllBrokerageInstrumentsRequest {
 	return ReferenceDataApiListAllBrokerageInstrumentsRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
-		brokerageId: brokerageId,
+		slug: slug,
 	}
 }
 
@@ -1169,12 +1169,12 @@ func (a *ReferenceDataApiService) ListAllBrokerageInstrumentsExecute(r Reference
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/brokerages/{brokerageId}/instruments"
+    subpath := "/brokerages/{slug}/instruments"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
-	localVarPath = strings.Replace(localVarPath, "{"+"brokerageId"+"}", url.PathEscape(parameterToString(r.brokerageId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"slug"+"}", url.PathEscape(parameterToString(r.slug, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
