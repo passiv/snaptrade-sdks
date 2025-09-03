@@ -4,6 +4,7 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
+import com.konfigthis.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import java.time.LocalDate;
@@ -43,8 +44,8 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
         }
     }
     public class GetUserAccountOrderDetailRequestBuilder extends GetUserAccountOrderDetailRequestBuilderGenerated {
-        public GetUserAccountOrderDetailRequestBuilder(String userId, String userSecret, UUID accountId, String brokerageOrderId) {
-            super(userId, userSecret, accountId, brokerageOrderId);
+        public GetUserAccountOrderDetailRequestBuilder(String externalOrderId, UUID accountId, String userId, String userSecret) {
+            super(externalOrderId, accountId, userId, userSecret);
         }
     }
     public class GetUserAccountOrdersRequestBuilder extends GetUserAccountOrdersRequestBuilderGenerated {

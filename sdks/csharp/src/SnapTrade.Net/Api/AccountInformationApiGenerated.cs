@@ -151,31 +151,31 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        AccountOrderRecord GetUserAccountOrderDetail(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0);
+        AccountOrderRecord GetUserAccountOrderDetail(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
 
         /// <summary>
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        ApiResponse<AccountOrderRecord> GetUserAccountOrderDetailWithHttpInfo(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> GetUserAccountOrderDetailWithHttpInfo(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
         /// <summary>
         /// List account orders
         /// </summary>
@@ -510,33 +510,33 @@ namespace SnapTrade.Net.Api
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        System.Threading.Tasks.Task<AccountOrderRecord> GetUserAccountOrderDetailAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> GetUserAccountOrderDetailAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get account order detail
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> GetUserAccountOrderDetailWithHttpInfoAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> GetUserAccountOrderDetailWithHttpInfoAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account orders
         /// </summary>
@@ -1763,33 +1763,39 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
-        public AccountOrderRecord GetUserAccountOrderDetail(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0)
+        public AccountOrderRecord GetUserAccountOrderDetail(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = GetUserAccountOrderDetailWithHttpInfo(userId, userSecret, accountId, brokerageOrderId);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = GetUserAccountOrderDetailWithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> GetUserAccountOrderDetailWithHttpInfo(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> GetUserAccountOrderDetailWithHttpInfo(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountOrderDetail");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -1802,21 +1808,16 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetUserAccountOrderDetail");
             }
 
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountOrderDetail");
-            }
-
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling AccountInformationApi->GetUserAccountOrderDetail");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling AccountInformationApi->GetUserAccountOrderDetail");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1837,9 +1838,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountOrderDetail";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1861,7 +1862,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<AccountOrderRecord>("/accounts/{accountId}/orders/{brokerageOrderId}", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<AccountOrderRecord>("/accounts/{accountId}/orders/details", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountOrderDetail", localVarResponse);
@@ -1875,35 +1876,41 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecord> GetUserAccountOrderDetailAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> GetUserAccountOrderDetailAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await GetUserAccountOrderDetailWithHttpInfoAsync(userId, userSecret, accountId, brokerageOrderId, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await GetUserAccountOrderDetailWithHttpInfoAsync(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get account order detail Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="accountId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountId"></param>
-        /// <param name="brokerageOrderId"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> GetUserAccountOrderDetailWithHttpInfoAsync(string userId, string userSecret, string accountId, string brokerageOrderId, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> GetUserAccountOrderDetailWithHttpInfoAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountOrderDetail");
+            }
+
             // verify the required parameter 'userId' is set
             if (userId == null)
             {
@@ -1916,22 +1923,17 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling AccountInformationApi->GetUserAccountOrderDetail");
             }
 
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling AccountInformationApi->GetUserAccountOrderDetail");
-            }
-
-            // verify the required parameter 'brokerageOrderId' is set
-            if (brokerageOrderId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling AccountInformationApi->GetUserAccountOrderDetail");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling AccountInformationApi->GetUserAccountOrderDetail");
             }
 
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
+                "application/json"
             };
 
             // to determine the Accept header
@@ -1952,9 +1954,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "AccountInformationApi.GetUserAccountOrderDetail";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1976,7 +1978,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountOrderRecord>("/accounts/{accountId}/orders/{brokerageOrderId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecord>("/accounts/{accountId}/orders/details", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

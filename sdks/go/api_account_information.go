@@ -778,10 +778,10 @@ func (a *AccountInformationApiService) GetUserAccountDetailsExecute(r AccountInf
 type AccountInformationApiGetUserAccountOrderDetailRequest struct {
 	ctx context.Context
 	ApiService *AccountInformationApiService
+	accountId string
 	userId string
 	userSecret string
-	accountId string
-	brokerageOrderId string
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
 func (r AccountInformationApiGetUserAccountOrderDetailRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
@@ -791,7 +791,7 @@ func (r AccountInformationApiGetUserAccountOrderDetailRequest) Execute() (*Accou
 /*
 GetUserAccountOrderDetail Get account order detail
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -799,20 +799,20 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId
  @param userId
  @param userSecret
- @param accountId
- @param brokerageOrderId
+ @param accountInformationGetUserAccountOrderDetailRequest
  @return AccountInformationApiGetUserAccountOrderDetailRequest
 */
-func (a *AccountInformationApiService) GetUserAccountOrderDetail(userId string, userSecret string, accountId string, brokerageOrderId string) AccountInformationApiGetUserAccountOrderDetailRequest {
+func (a *AccountInformationApiService) GetUserAccountOrderDetail(accountId string, userId string, userSecret string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) AccountInformationApiGetUserAccountOrderDetailRequest {
 	return AccountInformationApiGetUserAccountOrderDetailRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
+		accountId: accountId,
 		userId: userId,
 		userSecret: userSecret,
-		accountId: accountId,
-		brokerageOrderId: brokerageOrderId,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
@@ -820,7 +820,7 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetail(userId string, 
 //  @return AccountOrderRecord
 func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r AccountInformationApiGetUserAccountOrderDetailRequest) (*AccountOrderRecord, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
+		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *AccountOrderRecord
@@ -831,13 +831,12 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r Accoun
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/orders/{brokerageOrderId}"
+    subpath := "/accounts/{accountId}/orders/details"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"brokerageOrderId"+"}", url.PathEscape(parameterToString(r.brokerageOrderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -846,7 +845,7 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r Accoun
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -862,6 +861,10 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r Accoun
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
+    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -927,6 +930,17 @@ func (a *AccountInformationApiService) GetUserAccountOrderDetailExecute(r Accoun
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Model404FailedRequestResponse

@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/gem-v2.0.127-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.127)
+[![npm](https://img.shields.io/badge/gem-v2.0.128-blue)](https://rubygems.org/gems/snaptrade/versions/2.0.128)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -81,7 +81,7 @@ Connect brokerage accounts to your app for live positions and trading
 Add to Gemfile:
 
 ```ruby
-gem 'snaptrade', '~> 2.0.127'
+gem 'snaptrade', '~> 2.0.128'
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -320,7 +320,7 @@ p result
 
 ### `snaptrade.account_information.get_user_account_order_detail`<a id="snaptradeaccount_informationget_user_account_order_detail"></a>
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -331,27 +331,30 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 ```ruby
 result = snaptrade.account_information.get_user_account_order_detail(
+  external_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### external_order_id: `String`<a id="external_order_id-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in
+the brokerage system.
+
+##### account_id: `String`<a id="account_id-string"></a>
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+`/accounts/{accountId}/orders/details` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

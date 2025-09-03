@@ -16,15 +16,15 @@ from unittest.mock import patch
 import urllib3
 
 import snaptrade_client
-from snaptrade_client.paths.accounts_account_id_orders_brokerage_order_id import get
+from snaptrade_client.paths.accounts_account_id_orders_details import post
 from snaptrade_client import configuration, schemas, api_client
 
 from .. import ApiTestMixin
 
 
-class TestAccountsAccountIdOrdersBrokerageOrderId(ApiTestMixin, unittest.TestCase):
+class TestAccountsAccountIdOrdersDetails(ApiTestMixin, unittest.TestCase):
     """
-    AccountsAccountIdOrdersBrokerageOrderId unit test stubs
+    AccountsAccountIdOrdersDetails unit test stubs
         Get account order detail
     """
 
@@ -35,6 +35,8 @@ class TestAccountsAccountIdOrdersBrokerageOrderId(ApiTestMixin, unittest.TestCas
         pass
 
     response_status = 200
+
+
 
 
 

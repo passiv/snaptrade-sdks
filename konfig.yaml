@@ -87,18 +87,6 @@ portal:
       path: demos/get-transactions.md
     - id: placing-trades
       path: demos/placing-trades.md
-    - id: make-connection
-      path: demos/make-connection.md
-    - id: pull-positions
-      path: demos/pull-positions.md
-    - id: pull-orders
-      path: demos/pull-orders.md
-    - id: pull-transactions
-      path: demos/pull-transactions.md
-    - id: place-equity-order
-      path: demos/place-equity-order.md
-    - id: place-options-order
-      path: demos/place-options-order.md
   betaOperations:
     /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
       get: true
@@ -199,7 +187,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 2.0.127
+    version: 2.0.128
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -213,7 +201,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 1.0.99
+    version: 1.0.100
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -225,7 +213,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 2.0.127
+    version: 2.0.128
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -236,7 +224,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 2.0.126
+    version: 2.0.127
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -248,7 +236,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.129
+    version: 5.0.130
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -259,7 +247,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 5.0.126
+    version: 5.0.127
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -273,8 +261,8 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.126
-    responseTypeVersion: "1"
+    version: 11.0.127
+    responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
     setSkipSerializationToTrueByDefault: true
@@ -291,7 +279,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 9.0.130
+    version: 9.0.131
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

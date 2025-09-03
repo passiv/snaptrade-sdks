@@ -8,7 +8,7 @@ Method | Path | Description
 [**GetAllUserHoldings**](AccountInformationApi.md#GetAllUserHoldings) | **Get** /holdings | List all accounts for the user, plus balances, positions, and orders for each account.
 [**GetUserAccountBalance**](AccountInformationApi.md#GetUserAccountBalance) | **Get** /accounts/{accountId}/balances | List account balances
 [**GetUserAccountDetails**](AccountInformationApi.md#GetUserAccountDetails) | **Get** /accounts/{accountId} | Get account detail
-[**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Get** /accounts/{accountId}/orders/{brokerageOrderId} | Get account order detail
+[**GetUserAccountOrderDetail**](AccountInformationApi.md#GetUserAccountOrderDetail) | **Post** /accounts/{accountId}/orders/details | Get account order detail
 [**GetUserAccountOrders**](AccountInformationApi.md#GetUserAccountOrders) | **Get** /accounts/{accountId}/orders | List account orders
 [**GetUserAccountPositions**](AccountInformationApi.md#GetUserAccountPositions) | **Get** /accounts/{accountId}/positions | List account positions
 [**GetUserAccountRecentOrders**](AccountInformationApi.md#GetUserAccountRecentOrders) | **Get** /accounts/{accountId}/recentOrders | List account recent orders (last 24 hours only)
@@ -251,11 +251,16 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
+    
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
+    
     request := client.AccountInformationApi.GetUserAccountOrderDetail(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
         "userId_example",
         "userSecret_example",
-        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        "brokerageOrderId_example",
+        accountInformationGetUserAccountOrderDetailRequest,
     )
     
     resp, httpRes, err := request.Execute()

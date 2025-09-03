@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.130-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.130)
+[![npm](https://img.shields.io/badge/npm-v9.0.131-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.131)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -377,7 +377,7 @@ const getUserAccountDetailsResponse =
 
 ### `snaptrade.accountInformation.getUserAccountOrderDetail`<a id="snaptradeaccountinformationgetuseraccountorderdetail"></a>
 
-Returns the detail of a single order in the specified account.
+Returns the detail of a single order using the external order ID provided in the request body.
 
 This endpoint is always realtime and does not rely on cached data.
 
@@ -389,22 +389,24 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```typescript
 const getUserAccountOrderDetailResponse =
   await snaptrade.accountInformation.getUserAccountOrderDetail({
+    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
     userId: "snaptrade-user-123",
     userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-    accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-    brokerageOrderId: "66a033fa-da74-4fcf-b527-feefdec9257e",
+    external_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   });
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### userId: `string`<a id="userid-string"></a>
+##### external_order_id: `string`<a id="external_order_id-string"></a>
 
-##### userSecret: `string`<a id="usersecret-string"></a>
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### accountId: `string`<a id="accountid-string"></a>
 
-##### brokerageOrderId: `string`<a id="brokerageorderid-string"></a>
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -412,7 +414,7 @@ const getUserAccountOrderDetailResponse =
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/{brokerageOrderId}` `GET`
+`/accounts/{accountId}/orders/details` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

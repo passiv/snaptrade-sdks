@@ -19,6 +19,7 @@ import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
+import com.konfigthis.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
 import java.time.LocalDate;
@@ -133,17 +134,17 @@ public class AccountInformationApiTest {
     /**
      * Get account order detail
      *
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void getUserAccountOrderDetailTest() throws ApiException {
+        String externalOrderId = null;
+        UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        UUID accountId = null;
-        String brokerageOrderId = null;
-        AccountOrderRecord response = api.getUserAccountOrderDetail(userId, userSecret, accountId, brokerageOrderId)
+        AccountOrderRecord response = api.getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

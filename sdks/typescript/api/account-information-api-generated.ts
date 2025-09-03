@@ -25,6 +25,8 @@ import { AccountHoldings } from '../models';
 // @ts-ignore
 import { AccountHoldingsAccount } from '../models';
 // @ts-ignore
+import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
+// @ts-ignore
 import { AccountOrderRecord } from '../models';
 // @ts-ignore
 import { Balance } from '../models';
@@ -337,27 +339,26 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
             };
         },
         /**
-         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
+         * @param {string} accountId 
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {string} accountId 
-         * @param {string} brokerageOrderId 
+         * @param {AccountInformationGetUserAccountOrderDetailRequest} accountInformationGetUserAccountOrderDetailRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrderDetail: async (userId: string, userSecret: string, accountId: string, brokerageOrderId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountOrderDetail: async (accountId: string, userId: string, userSecret: string, accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'accountId', accountId)
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getUserAccountOrderDetail', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('getUserAccountOrderDetail', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getUserAccountOrderDetail', 'accountId', accountId)
-            // verify required parameter 'brokerageOrderId' is not null or undefined
-            assertParamExists('getUserAccountOrderDetail', 'brokerageOrderId', brokerageOrderId)
-            const localVarPath = `/accounts/{accountId}/orders/{brokerageOrderId}`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
-                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
+            // verify required parameter 'accountInformationGetUserAccountOrderDetailRequest' is not null or undefined
+            assertParamExists('getUserAccountOrderDetail', 'accountInformationGetUserAccountOrderDetailRequest', accountInformationGetUserAccountOrderDetailRequest)
+            const localVarPath = `/accounts/{accountId}/orders/details`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -365,7 +366,7 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -385,16 +386,21 @@ export const AccountInformationApiAxiosParamCreator = function (configuration?: 
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
+                requestBody: accountInformationGetUserAccountOrderDetailRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/accounts/{accountId}/orders/{brokerageOrderId}',
-                httpMethod: 'GET'
+                pathTemplate: '/accounts/{accountId}/orders/details',
+                httpMethod: 'POST'
             });
+            localVarRequestOptions.data = serializeDataIfNeeded(accountInformationGetUserAccountOrderDetailRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -903,14 +909,17 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
          * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetail(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.brokerageOrderId, options);
+            const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
+                external_order_id: requestParameters.external_order_id
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetail(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, accountInformationGetUserAccountOrderDetailRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -1042,7 +1051,7 @@ export const AccountInformationApiFactory = function (configuration?: Configurat
             return localVarFp.getUserAccountDetails(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail
          * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1291,6 +1300,13 @@ export type AccountInformationApiGetUserAccountOrderDetailRequest = {
     * @type {string}
     * @memberof AccountInformationApiGetUserAccountOrderDetail
     */
+    readonly accountId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof AccountInformationApiGetUserAccountOrderDetail
+    */
     readonly userId: string
     
     /**
@@ -1300,21 +1316,7 @@ export type AccountInformationApiGetUserAccountOrderDetailRequest = {
     */
     readonly userSecret: string
     
-    /**
-    * 
-    * @type {string}
-    * @memberof AccountInformationApiGetUserAccountOrderDetail
-    */
-    readonly accountId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof AccountInformationApiGetUserAccountOrderDetail
-    */
-    readonly brokerageOrderId: string
-    
-}
+} & AccountInformationGetUserAccountOrderDetailRequest
 
 /**
  * Request parameters for getUserAccountOrders operation in AccountInformationApi.
@@ -1597,7 +1599,7 @@ export class AccountInformationApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns the detail of a single order in the specified account.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @summary Get account order detail
      * @param {AccountInformationApiGetUserAccountOrderDetailRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

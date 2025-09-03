@@ -1114,71 +1114,6 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders
       x-accepts: application/json
-  /accounts/{accountId}/orders/{brokerageOrderId}:
-    get:
-      description: |
-        Returns the detail of a single order in the specified account.
-
-        This endpoint is always realtime and does not rely on cached data.
-
-        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
-      operationId: AccountInformation_getUserAccountOrderDetail
-      parameters:
-      - explode: true
-        in: query
-        name: userId
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserID'
-        style: form
-      - explode: true
-        in: query
-        name: userSecret
-        required: true
-        schema:
-          $ref: '#/components/schemas/UserSecret'
-        style: form
-      - explode: false
-        in: path
-        name: accountId
-        required: true
-        schema:
-          $ref: '#/components/schemas/AccountID'
-        style: simple
-      - explode: false
-        in: path
-        name: brokerageOrderId
-        required: true
-        schema:
-          $ref: '#/components/schemas/BrokerageOrderID'
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountOrderRecord'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/404FailedRequestResponse'
-          description: Not Found
-          x-do-not-generate: true
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
-          description: Unexpected error
-          x-do-not-generate: true
-      summary: Get account order detail
-      tags:
-      - Account Information
-      x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId
-      x-accepts: application/json
   /accounts/{accountId}/recentOrders:
     get:
       description: |
@@ -1414,6 +1349,74 @@ paths:
       - Account Information
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-activities
+      x-accepts: application/json
+  /accounts/{accountId}/orders/details:
+    post:
+      description: |
+        Returns the detail of a single order using the external order ID provided in the request body.
+
+        This endpoint is always realtime and does not rely on cached data.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+      operationId: AccountInformation_getUserAccountOrderDetail
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/OrderDetailRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecord'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+          x-do-not-generate: true
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Get account order detail
+      tags:
+      - Account Information
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details
+      x-content-type: application/json
       x-accepts: application/json
   /accounts/{accountId}/options:
     get:
@@ -2887,6 +2890,12 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Trading_cancelUserAccountOrder_request'
+      required: true
+    OrderDetailRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AccountInformation_getUserAccountOrderDetail_request'
       required: true
     OptionStrategyRequestBody:
       content:
@@ -10488,29 +10497,6 @@ components:
       - state
       - days
       - accountId
-    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-brokerageOrderId:
-      additionalProperties: true
-      properties:
-        userId:
-          $ref: '#/components/schemas/UserID'
-        userSecret:
-          $ref: '#/components/schemas/UserSecret'
-        accountId:
-          $ref: '#/components/schemas/AccountID'
-        brokerageOrderId:
-          $ref: '#/components/schemas/BrokerageOrderID'
-      required:
-      - accountId
-      - brokerageOrderId
-      - userId
-      - userSecret
-      type: object
-      x-do-not-generate: true
-      x-konfig-is-parameter:
-      - userId
-      - userSecret
-      - accountId
-      - brokerageOrderId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders:
       additionalProperties: true
       properties:
@@ -10591,6 +10577,28 @@ components:
       - offset
       - limit
       - type
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        external_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - external_order_id
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-options:
@@ -11903,6 +11911,18 @@ components:
       - strike_price
       - ticker
       - underlying_symbol
+      type: object
+    AccountInformation_getUserAccountOrderDetail_request:
+      properties:
+        external_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+      required:
+      - external_order_id
       type: object
     Trading_cancelUserAccountOrder_request:
       properties:
