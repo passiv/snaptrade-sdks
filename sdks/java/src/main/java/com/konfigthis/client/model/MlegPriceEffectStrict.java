@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+ * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
  */
 @JsonAdapter(MlegPriceEffectStrict.Adapter.class)public enum MlegPriceEffectStrict {
   
@@ -55,7 +55,7 @@ import com.google.gson.stream.JsonWriter;
         return b;
       }
     }
-    return null;
+    throw new IllegalArgumentException("Unexpected value '" + value + "'");
   }
 
   public static class Adapter extends TypeAdapter<MlegPriceEffectStrict> {

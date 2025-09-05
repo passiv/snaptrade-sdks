@@ -33,9 +33,9 @@ namespace SnapTrade.Net.Model
     public partial class SnapTradeLoginUserRequestBody : IEquatable<SnapTradeLoginUserRequestBody>, IValidatableObject
     {
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+        /// Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
+        /// <value>Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. </value>
         [JsonConverter(typeof(StringEnumConverter))]
         public enum ConnectionTypeEnum
         {
@@ -49,15 +49,21 @@ namespace SnapTrade.Net.Model
             /// Enum Trade for value: trade
             /// </summary>
             [EnumMember(Value = "trade")]
-            Trade = 2
+            Trade = 2,
+
+            /// <summary>
+            /// Enum TradeIfAvailable for value: trade-if-available
+            /// </summary>
+            [EnumMember(Value = "trade-if-available")]
+            TradeIfAvailable = 3
 
         }
 
 
         /// <summary>
-        /// Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+        /// Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
         /// </summary>
-        /// <value>Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.</value>
+        /// <value>Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. </value>
         [DataMember(Name = "connectionType", EmitDefaultValue = false)]
         public ConnectionTypeEnum? ConnectionType { get; set; }
         /// <summary>
@@ -101,7 +107,7 @@ namespace SnapTrade.Net.Model
         /// <param name="immediateRedirect">When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information..</param>
-        /// <param name="connectionType">Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified. (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="connectionType">Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (default to ConnectionTypeEnum.Read).</param>
         /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
         public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {

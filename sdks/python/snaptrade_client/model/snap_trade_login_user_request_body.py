@@ -53,6 +53,7 @@ class SnapTradeLoginUserRequestBody(
                     enum_value_to_name = {
                         "read": "READ",
                         "trade": "TRADE",
+                        "trade-if-available": "TRADEIFAVAILABLE",
                     }
                 
                 @schemas.classproperty
@@ -62,6 +63,10 @@ class SnapTradeLoginUserRequestBody(
                 @schemas.classproperty
                 def TRADE(cls):
                     return cls("trade")
+                
+                @schemas.classproperty
+                def TRADEIFAVAILABLE(cls):
+                    return cls("trade-if-available")
             
             
             class connectionPortalVersion(

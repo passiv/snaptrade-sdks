@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.MlegPriceEffectStrict
-The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
 
 ## Properties
 

@@ -870,7 +870,7 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 
 ##### connectionType: `String`<a id="connectiontype-string"></a>
 
-Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
 
 ##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 

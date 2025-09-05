@@ -25,7 +25,7 @@ module SnapTrade
     # The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     attr_accessor :reconnect
 
-    # Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+    # Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     attr_accessor :connection_type
 
     # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.

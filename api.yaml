@@ -3561,11 +3561,16 @@ components:
           type: string
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         connectionType:
-          description: Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+          description: >
+            Determines connection permissions (default: read)
+            - `read`: Data access only.
+            - `trade`: Data and trading access.
+            - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
           type: string
           enum:
             - read
             - trade
+            - trade-if-available
           default: read
         connectionPortalVersion:
           description: Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
@@ -4307,6 +4312,7 @@ components:
           nullable: true
         price_effect:
           nullable: true
+          example: DEBIT
           allOf:
             - $ref: "#/components/schemas/MlegPriceEffectStrict"
         legs:
@@ -4560,8 +4566,7 @@ components:
       example: Day
     MlegPriceEffectStrict:
       type: string
-      nullable: true
-      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
       enum:
         - CREDIT
         - DEBIT
