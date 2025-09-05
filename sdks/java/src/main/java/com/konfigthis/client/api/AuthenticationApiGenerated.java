@@ -524,7 +524,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionType
-         * @param connectionType Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified. (optional, default to read)
+         * @param connectionType Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (optional, default to read)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {

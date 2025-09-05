@@ -215,7 +215,7 @@ public class MlegTradeForm {
    * @return priceEffect
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(example = "DEBIT", value = "")
 
   public MlegPriceEffectStrictNullable getPriceEffect() {
     return priceEffect;

@@ -55,6 +55,10 @@ class SnapTradeLoginUserRequestBody(
                 @schemas.classproperty
                 def TRADE(cls):
                     return cls("trade")
+                
+                @schemas.classproperty
+                def TRADEIFAVAILABLE(cls):
+                    return cls("trade-if-available")
             
             
             class connectionPortalVersion(

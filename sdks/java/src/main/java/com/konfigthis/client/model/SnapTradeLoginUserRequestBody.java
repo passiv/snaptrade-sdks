@@ -67,13 +67,15 @@ public class SnapTradeLoginUserRequestBody {
   private String reconnect;
 
   /**
-   * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+   * Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
    */
   @JsonAdapter(ConnectionTypeEnum.Adapter.class)
  public enum ConnectionTypeEnum {
     READ("read"),
     
-    TRADE("trade");
+    TRADE("trade"),
+    
+    TRADE_IF_AVAILABLE("trade-if-available");
 
     private String value;
 
@@ -299,11 +301,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.
+   * Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
    * @return connectionType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "READ", value = "Sets whether the connection should be read-only or trade-enabled. Defaults to read-only if not specified.")
+  @ApiModelProperty(example = "READ", value = "Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. ")
 
   public ConnectionTypeEnum getConnectionType() {
     return connectionType;

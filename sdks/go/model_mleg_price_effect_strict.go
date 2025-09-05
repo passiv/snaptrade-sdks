@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// MlegPriceEffectStrict The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+// MlegPriceEffectStrict The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
 type MlegPriceEffectStrict string
 
 // List of MlegPriceEffectStrict

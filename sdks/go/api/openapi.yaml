@@ -5093,11 +5093,12 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-reconnect
         connectionType:
           default: read
-          description: Sets whether the connection should be read-only or trade-enabled.
-            Defaults to read-only if not specified.
+          description: |
+            Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
           enum:
           - read
           - trade
+          - trade-if-available
           example: read
           type: string
           x-konfig-original-example: read
@@ -6423,7 +6424,7 @@ components:
       example:
         time_in_force: Day
         stop_price: ""
-        price_effect: ""
+        price_effect: DEBIT
         legs:
         - action: BUY_TO_OPEN
           instrument:
@@ -6462,7 +6463,9 @@ components:
         price_effect:
           allOf:
           - $ref: '#/components/schemas/MlegPriceEffectStrict'
+          example: DEBIT
           nullable: true
+          x-konfig-original-example: DEBIT
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'
@@ -6858,14 +6861,12 @@ components:
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
     MlegPriceEffectStrict:
-      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.
-        Only required for certain brokerages like ETrade.
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
       enum:
       - CREDIT
       - DEBIT
       - EVEN
       example: DEBIT
-      nullable: true
       type: string
       x-konfig-original-example: DEBIT
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegPriceEffectStrict
@@ -9693,11 +9694,12 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-reconnect
         connectionType:
           default: read
-          description: Sets whether the connection should be read-only or trade-enabled.
-            Defaults to read-only if not specified.
+          description: |
+            Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
           enum:
           - read
           - trade
+          - trade-if-available
           example: read
           type: string
           x-konfig-original-example: read
@@ -10551,7 +10553,9 @@ components:
         price_effect:
           allOf:
           - $ref: '#/components/schemas/MlegPriceEffectStrict'
+          example: DEBIT
           nullable: true
+          x-konfig-original-example: DEBIT
         legs:
           items:
             $ref: '#/components/schemas/MlegLeg'

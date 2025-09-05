@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+ * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
  * @export
  * @enum {string}
  */

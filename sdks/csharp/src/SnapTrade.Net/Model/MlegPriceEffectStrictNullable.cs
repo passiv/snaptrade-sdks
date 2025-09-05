@@ -27,9 +27,9 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.
+    /// The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
     /// </summary>
-    /// <value>The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Only required for certain brokerages like ETrade.</value>
+    /// <value>The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders</value>
     [JsonConverter(typeof(StringEnumConverter))]
     public enum MlegPriceEffectStrictNullable
     {
