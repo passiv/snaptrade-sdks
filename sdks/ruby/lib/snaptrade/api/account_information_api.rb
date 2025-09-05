@@ -505,15 +505,15 @@ module SnapTrade
     # 
     # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
     #
-    # @param external_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_order_detail(external_order_id:, account_id:, user_id:, user_secret:, extra: {})
+    def get_user_account_order_detail(brokerage_order_id:, account_id:, user_id:, user_secret:, extra: {})
       _body = {}
-      _body[:external_order_id] = external_order_id if external_order_id != SENTINEL
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       account_information_get_user_account_order_detail_request = _body
       data, _status_code, _headers = get_user_account_order_detail_with_http_info_impl(account_id, user_id, user_secret, account_information_get_user_account_order_detail_request, extra)
       data
@@ -527,15 +527,15 @@ module SnapTrade
     # 
     # This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
     #
-    # @param external_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param account_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def get_user_account_order_detail_with_http_info(external_order_id:, account_id:, user_id:, user_secret:, extra: {})
+    def get_user_account_order_detail_with_http_info(brokerage_order_id:, account_id:, user_id:, user_secret:, extra: {})
       _body = {}
-      _body[:external_order_id] = external_order_id if external_order_id != SENTINEL
+      _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
       account_information_get_user_account_order_detail_request = _body
       get_user_account_order_detail_with_http_info_impl(account_id, user_id, user_secret, account_information_get_user_account_order_detail_request, extra)
     end

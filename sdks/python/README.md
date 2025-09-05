@@ -390,7 +390,7 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```python
 get_user_account_order_detail_response = (
     snaptrade.account_information.get_user_account_order_detail(
-        external_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
         account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
         user_id="snaptrade-user-123",
         user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
@@ -400,7 +400,7 @@ get_user_account_order_detail_response = (
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### external_order_id: `str`<a id="external_order_id-str"></a>
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 

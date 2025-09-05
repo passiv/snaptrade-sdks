@@ -116,49 +116,49 @@ class SchemaForRequestBodyApplicationJson(
 
     class MetaOapg:
         required = {
-            "external_order_id",
+            "brokerage_order_id",
         }
         
         class properties:
-            external_order_id = schemas.StrSchema
+            brokerage_order_id = schemas.StrSchema
             __annotations__ = {
-                "external_order_id": external_order_id,
+                "brokerage_order_id": brokerage_order_id,
             }
     
-    external_order_id: MetaOapg.properties.external_order_id
+    brokerage_order_id: MetaOapg.properties.brokerage_order_id
     
     @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["external_order_id"]) -> MetaOapg.properties.external_order_id: ...
+    def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["external_order_id", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
     
     @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["external_order_id"]) -> MetaOapg.properties.external_order_id: ...
+    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["external_order_id", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
         return super().get_item_oapg(name)
     
 
     def __new__(
         cls,
         *args: typing.Union[dict, frozendict.frozendict, ],
-        external_order_id: typing.Union[MetaOapg.properties.external_order_id, str, ],
+        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
     ) -> 'SchemaForRequestBodyApplicationJson':
         return super().__new__(
             cls,
             *args,
-            external_order_id=external_order_id,
+            brokerage_order_id=brokerage_order_id,
             _configuration=_configuration,
             **kwargs,
         )
@@ -276,7 +276,7 @@ class BaseApi(api_client.Api):
     def _get_user_account_order_detail_mapped_args(
         self,
         body: typing.Optional[typing.Any] = None,
-        external_order_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -287,8 +287,8 @@ class BaseApi(api_client.Api):
         _query_params = {}
         _path_params = {}
         _body = {}
-        if external_order_id is not None:
-            _body["external_order_id"] = external_order_id
+        if brokerage_order_id is not None:
+            _body["brokerage_order_id"] = brokerage_order_id
         args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
@@ -569,7 +569,7 @@ class GetUserAccountOrderDetail(BaseApi):
     async def aget_user_account_order_detail(
         self,
         body: typing.Optional[typing.Any] = None,
-        external_order_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -585,7 +585,7 @@ class GetUserAccountOrderDetail(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
-            external_order_id=external_order_id,
+            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
@@ -600,7 +600,7 @@ class GetUserAccountOrderDetail(BaseApi):
     def get_user_account_order_detail(
         self,
         body: typing.Optional[typing.Any] = None,
-        external_order_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -615,7 +615,7 @@ class GetUserAccountOrderDetail(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
-            external_order_id=external_order_id,
+            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
@@ -632,7 +632,7 @@ class ApiForpost(BaseApi):
     async def apost(
         self,
         body: typing.Optional[typing.Any] = None,
-        external_order_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -648,7 +648,7 @@ class ApiForpost(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
-            external_order_id=external_order_id,
+            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
@@ -663,7 +663,7 @@ class ApiForpost(BaseApi):
     def post(
         self,
         body: typing.Optional[typing.Any] = None,
-        external_order_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
@@ -678,7 +678,7 @@ class ApiForpost(BaseApi):
             body=body,
             query_params=query_params,
             path_params=path_params,
-            external_order_id=external_order_id,
+            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,

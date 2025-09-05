@@ -473,14 +473,14 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
-    String externalOrderId = "externalOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     UUID accountId = UUID.randomUUID();
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     try {
       AccountOrderRecord result = client
               .accountInformation
-              .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
+              .getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -517,7 +517,7 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .accountInformation
-              .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
+              .getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());

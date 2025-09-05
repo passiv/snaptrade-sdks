@@ -10599,11 +10599,11 @@ components:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
-        external_order_id:
+        brokerage_order_id:
           $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
-      - external_order_id
+      - brokerage_order_id
       - userId
       - userSecret
       type: object
@@ -11928,7 +11928,7 @@ components:
       type: object
     AccountInformation_getUserAccountOrderDetail_request:
       properties:
-        external_order_id:
+        brokerage_order_id:
           description: Order ID returned by brokerage. This is the unique identifier
             for the order in the brokerage system.
           example: 66a033fa-da74-4fcf-b527-feefdec9257e
@@ -11936,7 +11936,7 @@ components:
           x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
       required:
-      - external_order_id
+      - brokerage_order_id
       type: object
     Trading_cancelUserAccountOrder_request:
       properties:

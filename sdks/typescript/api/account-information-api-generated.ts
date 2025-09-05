@@ -917,7 +917,7 @@ export const AccountInformationApiFp = function(configuration?: Configuration) {
          */
         async getUserAccountOrderDetail(requestParameters: AccountInformationApiGetUserAccountOrderDetailRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
             const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
-                external_order_id: requestParameters.external_order_id
+                brokerage_order_id: requestParameters.brokerage_order_id
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetail(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, accountInformationGetUserAccountOrderDetailRequest, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);

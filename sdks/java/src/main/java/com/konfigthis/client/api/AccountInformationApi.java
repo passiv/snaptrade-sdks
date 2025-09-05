@@ -44,8 +44,8 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
         }
     }
     public class GetUserAccountOrderDetailRequestBuilder extends GetUserAccountOrderDetailRequestBuilderGenerated {
-        public GetUserAccountOrderDetailRequestBuilder(String externalOrderId, UUID accountId, String userId, String userSecret) {
-            super(externalOrderId, accountId, userId, userSecret);
+        public GetUserAccountOrderDetailRequestBuilder(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
+            super(brokerageOrderId, accountId, userId, userSecret);
         }
     }
     public class GetUserAccountOrdersRequestBuilder extends GetUserAccountOrdersRequestBuilderGenerated {

@@ -40,23 +40,23 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AccountInformationGetUserAccountOrderDetailRequest" /> class.
         /// </summary>
-        /// <param name="externalOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (required).</param>
-        public AccountInformationGetUserAccountOrderDetailRequest(string externalOrderId = default(string))
+        /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. (required).</param>
+        public AccountInformationGetUserAccountOrderDetailRequest(string brokerageOrderId = default(string))
         {
-            // to ensure "externalOrderId" is required (not null)
-            if (externalOrderId == null)
+            // to ensure "brokerageOrderId" is required (not null)
+            if (brokerageOrderId == null)
             {
-                throw new ArgumentNullException("externalOrderId is a required property for AccountInformationGetUserAccountOrderDetailRequest and cannot be null");
+                throw new ArgumentNullException("brokerageOrderId is a required property for AccountInformationGetUserAccountOrderDetailRequest and cannot be null");
             }
-            this.ExternalOrderId = externalOrderId;
+            this.BrokerageOrderId = brokerageOrderId;
         }
 
         /// <summary>
         /// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
         /// </summary>
         /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
-        [DataMember(Name = "external_order_id", IsRequired = true, EmitDefaultValue = true)]
-        public string ExternalOrderId { get; set; }
+        [DataMember(Name = "brokerage_order_id", IsRequired = true, EmitDefaultValue = true)]
+        public string BrokerageOrderId { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,7 +66,7 @@ namespace SnapTrade.Net.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AccountInformationGetUserAccountOrderDetailRequest {\n");
-            sb.Append("  ExternalOrderId: ").Append(ExternalOrderId).Append("\n");
+            sb.Append("  BrokerageOrderId: ").Append(BrokerageOrderId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -103,9 +103,9 @@ namespace SnapTrade.Net.Model
             }
             return 
                 (
-                    this.ExternalOrderId == input.ExternalOrderId ||
-                    (this.ExternalOrderId != null &&
-                    this.ExternalOrderId.Equals(input.ExternalOrderId))
+                    this.BrokerageOrderId == input.BrokerageOrderId ||
+                    (this.BrokerageOrderId != null &&
+                    this.BrokerageOrderId.Equals(input.BrokerageOrderId))
                 );
         }
 
@@ -118,9 +118,9 @@ namespace SnapTrade.Net.Model
             unchecked // Overflow is fine, just wrap
             {
                 int hashCode = 41;
-                if (this.ExternalOrderId != null)
+                if (this.BrokerageOrderId != null)
                 {
-                    hashCode = (hashCode * 59) + this.ExternalOrderId.GetHashCode();
+                    hashCode = (hashCode * 59) + this.BrokerageOrderId.GetHashCode();
                 }
                 return hashCode;
             }

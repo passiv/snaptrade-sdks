@@ -69,7 +69,7 @@ operation_parameter_map = {
     '/accounts/{accountId}/orders/details-POST': {
         'parameters': [
             {
-                'name': 'external_order_id'
+                'name': 'brokerage_order_id'
             },
             {
                 'name': 'accountId'

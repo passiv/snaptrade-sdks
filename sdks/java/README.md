@@ -446,13 +446,13 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```java
 AccountOrderRecord result = client
         .accountInformation
-        .getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
+        .getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### external_order_id: `String`<a id="external_order_id-string"></a>
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 
 Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
