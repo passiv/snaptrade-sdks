@@ -440,10 +440,10 @@ namespace Example
             var accountId = "accountId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var externalOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
             var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
-                externalOrderId
+                brokerageOrderId
             );
             
             try

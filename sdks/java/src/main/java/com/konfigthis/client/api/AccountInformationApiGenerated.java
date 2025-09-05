@@ -1032,13 +1032,13 @@ public class AccountInformationApiGenerated {
     }
 
     public abstract class GetUserAccountOrderDetailRequestBuilderGenerated {
-        final String externalOrderId;
+        final String brokerageOrderId;
         final UUID accountId;
         final String userId;
         final String userSecret;
 
-        public GetUserAccountOrderDetailRequestBuilderGenerated(String externalOrderId, UUID accountId, String userId, String userSecret) {
-            this.externalOrderId = externalOrderId;
+        public GetUserAccountOrderDetailRequestBuilderGenerated(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
+            this.brokerageOrderId = brokerageOrderId;
             this.accountId = accountId;
             this.userId = userId;
             this.userSecret = userSecret;
@@ -1062,7 +1062,7 @@ public class AccountInformationApiGenerated {
 
         private AccountInformationGetUserAccountOrderDetailRequest buildBodyParams() {
             AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest();
-            accountInformationGetUserAccountOrderDetailRequest.externalOrderId(this.externalOrderId);
+            accountInformationGetUserAccountOrderDetailRequest.brokerageOrderId(this.brokerageOrderId);
             return accountInformationGetUserAccountOrderDetailRequest;
         }
 
@@ -1128,8 +1128,8 @@ public class AccountInformationApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public AccountInformationApi.GetUserAccountOrderDetailRequestBuilder getUserAccountOrderDetail(String externalOrderId, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
-        if (externalOrderId == null) throw new IllegalArgumentException("\"externalOrderId\" is required but got null");
+    public AccountInformationApi.GetUserAccountOrderDetailRequestBuilder getUserAccountOrderDetail(String brokerageOrderId, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
             
 
         if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
@@ -1141,7 +1141,7 @@ public class AccountInformationApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((AccountInformationApi) this).new GetUserAccountOrderDetailRequestBuilder(externalOrderId, accountId, userId, userSecret);
+        return ((AccountInformationApi) this).new GetUserAccountOrderDetailRequestBuilder(brokerageOrderId, accountId, userId, userSecret);
     }
     private okhttp3.Call getUserAccountOrdersCall(String userId, String userSecret, UUID accountId, String state, Integer days, final ApiCallback _callback) throws ApiException {
         String basePath = null;

@@ -39,11 +39,11 @@ public class AccountInformationGetUserAccountOrderDetailRequestTest {
     }
 
     /**
-     * Test the property 'externalOrderId'
+     * Test the property 'brokerageOrderId'
      */
     @Test
-    public void externalOrderIdTest() {
-        // TODO: test externalOrderId
+    public void brokerageOrderIdTest() {
+        // TODO: test brokerageOrderId
     }
 
 }

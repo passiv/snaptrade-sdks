@@ -18,16 +18,16 @@ import (
 // AccountInformationGetUserAccountOrderDetailRequest struct for AccountInformationGetUserAccountOrderDetailRequest
 type AccountInformationGetUserAccountOrderDetailRequest struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-	ExternalOrderId string `json:"external_order_id"`
+	BrokerageOrderId string `json:"brokerage_order_id"`
 }
 
 // NewAccountInformationGetUserAccountOrderDetailRequest instantiates a new AccountInformationGetUserAccountOrderDetailRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountInformationGetUserAccountOrderDetailRequest(externalOrderId string) *AccountInformationGetUserAccountOrderDetailRequest {
+func NewAccountInformationGetUserAccountOrderDetailRequest(brokerageOrderId string) *AccountInformationGetUserAccountOrderDetailRequest {
 	this := AccountInformationGetUserAccountOrderDetailRequest{}
-	this.ExternalOrderId = externalOrderId
+	this.BrokerageOrderId = brokerageOrderId
 	return &this
 }
 
@@ -39,34 +39,34 @@ func NewAccountInformationGetUserAccountOrderDetailRequestWithDefaults() *Accoun
 	return &this
 }
 
-// GetExternalOrderId returns the ExternalOrderId field value
-func (o *AccountInformationGetUserAccountOrderDetailRequest) GetExternalOrderId() string {
+// GetBrokerageOrderId returns the BrokerageOrderId field value
+func (o *AccountInformationGetUserAccountOrderDetailRequest) GetBrokerageOrderId() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.ExternalOrderId
+	return o.BrokerageOrderId
 }
 
-// GetExternalOrderIdOk returns a tuple with the ExternalOrderId field value
+// GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field value
 // and a boolean to check if the value has been set.
-func (o *AccountInformationGetUserAccountOrderDetailRequest) GetExternalOrderIdOk() (*string, bool) {
+func (o *AccountInformationGetUserAccountOrderDetailRequest) GetBrokerageOrderIdOk() (*string, bool) {
 	if o == nil {
     return nil, false
 	}
-	return &o.ExternalOrderId, true
+	return &o.BrokerageOrderId, true
 }
 
-// SetExternalOrderId sets field value
-func (o *AccountInformationGetUserAccountOrderDetailRequest) SetExternalOrderId(v string) {
-	o.ExternalOrderId = v
+// SetBrokerageOrderId sets field value
+func (o *AccountInformationGetUserAccountOrderDetailRequest) SetBrokerageOrderId(v string) {
+	o.BrokerageOrderId = v
 }
 
 func (o AccountInformationGetUserAccountOrderDetailRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
-		toSerialize["external_order_id"] = o.ExternalOrderId
+		toSerialize["brokerage_order_id"] = o.BrokerageOrderId
 	}
 	return json.Marshal(toSerialize)
 }

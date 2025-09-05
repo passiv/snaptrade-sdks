@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
+**BrokerageOrderId** | **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | 
 
 ## Methods
 
 ### NewAccountInformationGetUserAccountOrderDetailRequest
 
-`func NewAccountInformationGetUserAccountOrderDetailRequest(externalOrderId string, ) *AccountInformationGetUserAccountOrderDetailRequest`
+`func NewAccountInformationGetUserAccountOrderDetailRequest(brokerageOrderId string, ) *AccountInformationGetUserAccountOrderDetailRequest`
 
 NewAccountInformationGetUserAccountOrderDetailRequest instantiates a new AccountInformationGetUserAccountOrderDetailRequest object
 This constructor will assign default values to properties that have it defined,
@@ -25,24 +25,24 @@ NewAccountInformationGetUserAccountOrderDetailRequestWithDefaults instantiates a
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetExternalOrderId
+### GetBrokerageOrderId
 
-`func (o *AccountInformationGetUserAccountOrderDetailRequest) GetExternalOrderId() string`
+`func (o *AccountInformationGetUserAccountOrderDetailRequest) GetBrokerageOrderId() string`
 
-GetExternalOrderId returns the ExternalOrderId field if non-nil, zero value otherwise.
+GetBrokerageOrderId returns the BrokerageOrderId field if non-nil, zero value otherwise.
 
-### GetExternalOrderIdOk
+### GetBrokerageOrderIdOk
 
-`func (o *AccountInformationGetUserAccountOrderDetailRequest) GetExternalOrderIdOk() (*string, bool)`
+`func (o *AccountInformationGetUserAccountOrderDetailRequest) GetBrokerageOrderIdOk() (*string, bool)`
 
-GetExternalOrderIdOk returns a tuple with the ExternalOrderId field if it's non-nil, zero value otherwise
+GetBrokerageOrderIdOk returns a tuple with the BrokerageOrderId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExternalOrderId
+### SetBrokerageOrderId
 
-`func (o *AccountInformationGetUserAccountOrderDetailRequest) SetExternalOrderId(v string)`
+`func (o *AccountInformationGetUserAccountOrderDetailRequest) SetBrokerageOrderId(v string)`
 
-SetExternalOrderId sets ExternalOrderId field to given value.
+SetBrokerageOrderId sets BrokerageOrderId field to given value.
 
 
 

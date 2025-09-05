@@ -58,12 +58,12 @@ namespace SnapTrade.Net.Test.Model
 
 
         /// <summary>
-        /// Test the property 'ExternalOrderId'
+        /// Test the property 'BrokerageOrderId'
         /// </summary>
         [Fact]
-        public void ExternalOrderIdTest()
+        public void BrokerageOrderIdTest()
         {
-            // TODO unit test for the property 'ExternalOrderId'
+            // TODO unit test for the property 'BrokerageOrderId'
         }
 
     }

@@ -2482,9 +2482,9 @@ components:
         application/json:
           schema:
             type: object
-            required: ["external_order_id"]
+            required: ["brokerage_order_id"]
             properties:
-              external_order_id:
+              brokerage_order_id:
                 $ref: "#/components/schemas/BrokerageOrderID"
     OptionStrategyRequestBody:
       required: true

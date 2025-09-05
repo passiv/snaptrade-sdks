@@ -22,6 +22,6 @@ export interface AccountInformationGetUserAccountOrderDetailRequest {
      * @type {string}
      * @memberof AccountInformationGetUserAccountOrderDetailRequest
      */
-    'external_order_id': string;
+    'brokerage_order_id': string;
 }
 

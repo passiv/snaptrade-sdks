@@ -140,11 +140,11 @@ public class AccountInformationApiTest {
      */
     @Test
     public void getUserAccountOrderDetailTest() throws ApiException {
-        String externalOrderId = null;
+        String brokerageOrderId = null;
         UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        AccountOrderRecord response = api.getUserAccountOrderDetail(externalOrderId, accountId, userId, userSecret)
+        AccountOrderRecord response = api.getUserAccountOrderDetail(brokerageOrderId, accountId, userId, userSecret)
                 .execute();
         // TODO: test validations
     }

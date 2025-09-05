@@ -13,12 +13,12 @@ require 'time'
 module SnapTrade
   class AccountInformationGetUserAccountOrderDetailRequest
     # Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    attr_accessor :external_order_id
+    attr_accessor :brokerage_order_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'external_order_id' => :'external_order_id'
+        :'brokerage_order_id' => :'brokerage_order_id'
       }
     end
 
@@ -30,7 +30,7 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'external_order_id' => :'String'
+        :'brokerage_order_id' => :'String'
       }
     end
 
@@ -55,8 +55,8 @@ module SnapTrade
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'external_order_id')
-        self.external_order_id = attributes[:'external_order_id']
+      if attributes.key?(:'brokerage_order_id')
+        self.brokerage_order_id = attributes[:'brokerage_order_id']
       end
     end
 
@@ -64,8 +64,8 @@ module SnapTrade
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @external_order_id.nil?
-        invalid_properties.push('invalid value for "external_order_id", external_order_id cannot be nil.')
+      if @brokerage_order_id.nil?
+        invalid_properties.push('invalid value for "brokerage_order_id", brokerage_order_id cannot be nil.')
       end
 
       invalid_properties
@@ -74,7 +74,7 @@ module SnapTrade
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @external_order_id.nil?
+      return false if @brokerage_order_id.nil?
       true
     end
 
@@ -83,7 +83,7 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          external_order_id == o.external_order_id
+          brokerage_order_id == o.brokerage_order_id
     end
 
     # @see the `==` method
@@ -95,7 +95,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [external_order_id].hash
+      [brokerage_order_id].hash
     end
 
     # Builds the object from hash
