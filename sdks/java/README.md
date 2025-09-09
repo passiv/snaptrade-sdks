@@ -1659,22 +1659,21 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 ```java
 CancelOrderResponse result = client
         .trading
-        .cancelOrder(userId, userSecret, accountId)
-        .brokerageOrderId(brokerageOrderId)
+        .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1701,22 +1700,21 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
 ```java
 AccountOrderRecord result = client
         .trading
-        .cancelUserAccountOrder(userId, userSecret, accountId)
-        .brokerageOrderId(brokerageOrderId)
+        .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

@@ -30,7 +30,7 @@ type TradingApiCancelOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
 func (r TradingApiCancelOrderRequest) Execute() (*CancelOrderResponse, *http.Response, error) {
@@ -47,17 +47,17 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
  @param userId
  @param userSecret
  @param accountId
- @param tradingCancelUserAccountOrderRequest
+ @param accountInformationGetUserAccountOrderDetailRequest
  @return TradingApiCancelOrderRequest
 */
-func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest) TradingApiCancelOrderRequest {
+func (a *TradingApiService) CancelOrder(userId string, userSecret string, accountId string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) TradingApiCancelOrderRequest {
 	return TradingApiCancelOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingCancelUserAccountOrderRequest: tradingCancelUserAccountOrderRequest,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
@@ -107,8 +107,8 @@ func (a *TradingApiService) CancelOrderExecute(r TradingApiCancelOrderRequest) (
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingCancelUserAccountOrderRequest) {
-        localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
     }
 	if r.ctx != nil {
 		// API Key Authentication
@@ -208,7 +208,7 @@ type TradingApiCancelUserAccountOrderRequest struct {
 	userId string
 	userSecret string
 	accountId string
-	tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
 func (r TradingApiCancelUserAccountOrderRequest) Execute() (*AccountOrderRecord, *http.Response, error) {
@@ -226,19 +226,19 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
  @param userId
  @param userSecret
  @param accountId
- @param tradingCancelUserAccountOrderRequest
+ @param accountInformationGetUserAccountOrderDetailRequest
  @return TradingApiCancelUserAccountOrderRequest
 
 Deprecated
 */
-func (a *TradingApiService) CancelUserAccountOrder(userId string, userSecret string, accountId string, tradingCancelUserAccountOrderRequest TradingCancelUserAccountOrderRequest) TradingApiCancelUserAccountOrderRequest {
+func (a *TradingApiService) CancelUserAccountOrder(userId string, userSecret string, accountId string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) TradingApiCancelUserAccountOrderRequest {
 	return TradingApiCancelUserAccountOrderRequest{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		userId: userId,
 		userSecret: userSecret,
 		accountId: accountId,
-		tradingCancelUserAccountOrderRequest: tradingCancelUserAccountOrderRequest,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
@@ -289,8 +289,8 @@ func (a *TradingApiService) CancelUserAccountOrderExecute(r TradingApiCancelUser
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-    if !checkNilInterface(r.tradingCancelUserAccountOrderRequest) {
-        localVarPostBody = r.tradingCancelUserAccountOrderRequest
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
     }
 	if r.ctx != nil {
 		// API Key Authentication

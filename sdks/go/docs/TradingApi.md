@@ -44,14 +44,15 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
-    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
     
     request := client.TradingApi.CancelOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        tradingCancelUserAccountOrderRequest,
+        accountInformationGetUserAccountOrderDetailRequest,
     )
     
     resp, httpRes, err := request.Execute()
@@ -97,14 +98,15 @@ func main() {
     client := snaptrade.NewAPIClient(configuration)
 
     
-    tradingCancelUserAccountOrderRequest := *snaptrade.NewTradingCancelUserAccountOrderRequest()
-    tradingCancelUserAccountOrderRequest.SetBrokerageOrderId("66a033fa-da74-4fcf-b527-feefdec9257e")
+    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+        "66a033fa-da74-4fcf-b527-feefdec9257e",
+    )
     
     request := client.TradingApi.CancelUserAccountOrder(
         "userId_example",
         "userSecret_example",
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        tradingCancelUserAccountOrderRequest,
+        accountInformationGetUserAccountOrderDetailRequest,
     )
     
     resp, httpRes, err := request.Execute()

@@ -251,7 +251,6 @@ Class | Method | HTTP request | Description
  - [SymbolsQuotesInner](docs/SymbolsQuotesInner.md)
  - [TakeProfit](docs/TakeProfit.md)
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
- - [TradingCancelUserAccountOrderRequest](docs/TradingCancelUserAccountOrderRequest.md)
  - [TradingInstrument](docs/TradingInstrument.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)

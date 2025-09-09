@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// Details of the stop loss order. Only to be used when order_class &#x3D; BRACKET. stop_price is required, limit_price is optional
+    /// Takes in string value for stop_price and limit_price. stop_price is required, limit_price is optional
     /// </summary>
     [DataContract(Name = "StopLoss")]
     public partial class StopLoss : IEquatable<StopLoss>, IValidatableObject

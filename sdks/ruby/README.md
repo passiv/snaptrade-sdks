@@ -1517,23 +1517,23 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 
 ```ruby
 result = snaptrade.trading.cancel_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
 ##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 Order ID returned by brokerage. This is the unique identifier for the order in
 the brokerage system.
 
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [CancelOrderResponse](./lib/snaptrade/models/cancel_order_response.rb)
@@ -1558,23 +1558,23 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
 
 ```ruby
 result = snaptrade.trading.cancel_user_account_order(
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
 )
 p result
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### user_id: `String`<a id="user_id-string"></a>
-##### user_secret: `String`<a id="user_secret-string"></a>
-##### account_id: `String`<a id="account_id-string"></a>
 ##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 Order ID returned by brokerage. This is the unique identifier for the order in
 the brokerage system.
 
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
 
 [AccountOrderRecord](./lib/snaptrade/models/account_order_record.rb)

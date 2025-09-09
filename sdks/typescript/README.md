@@ -1624,15 +1624,15 @@ const cancelOrderResponse = await snaptrade.trading.cancelOrder({
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1668,15 +1668,15 @@ const cancelUserAccountOrderResponse =
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
+##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
 
 ##### accountId: `string`<a id="accountid-string"></a>
-
-##### brokerage_order_id: `string`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

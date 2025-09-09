@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// TakeProfit Details of the take profit order. Only to be used when order_class = BRACKET.
+// TakeProfit Takes in a string value for limit_price
 type TakeProfit struct {
 	LimitPrice *string `json:"limit_price,omitempty"`
 	AdditionalProperties map[string]interface{}
