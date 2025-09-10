@@ -2473,6 +2473,7 @@ components:
         application/json:
           schema:
             type: object
+            required: ["brokerage_order_id"]
             properties:
               brokerage_order_id:
                 $ref: "#/components/schemas/BrokerageOrderID"
@@ -4650,7 +4651,7 @@ components:
         - type: number
       example: 100.00
     StopLoss:
-      description: Details of the stop loss order. Only to be used when order_class = BRACKET. stop_price is required, limit_price is optional
+      description: Takes in string value for stop_price and limit_price. stop_price is required, limit_price is optional
       type: object
       properties:
         stop_price:
@@ -4661,7 +4662,7 @@ components:
           nullable: true
           example: "48.50"
     TakeProfit:
-      description: Details of the take profit order. Only to be used when order_class = BRACKET.
+      description: Takes in a string value for limit_price
       type: object
       properties:
         limit_price:
