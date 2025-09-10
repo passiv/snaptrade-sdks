@@ -125,7 +125,6 @@ export * from './symbol-query';
 export * from './symbols-quotes-inner';
 export * from './take-profit';
 export * from './time-in-force-strict';
-export * from './trading-cancel-user-account-order-request';
 export * from './trading-instrument';
 export * from './trading-search-cryptocurrency-pair-instruments200-response';
 export * from './transactions-status';

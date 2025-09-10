@@ -484,7 +484,7 @@ paths:
         Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
         This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-        **Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)**
+        **Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
       - explode: false
@@ -1121,7 +1121,7 @@ paths:
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
         Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
         By default only returns executed orders, but that can be changed by setting *only_executed* to false
-        **Please contact support for access as this endpoint is not enabled by default.**
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
       operationId: AccountInformation_getUserAccountRecentOrders
       parameters:
       - explode: true
@@ -2894,7 +2894,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Trading_cancelUserAccountOrder_request'
+            $ref: '#/components/schemas/AccountInformation_getUserAccountOrderDetail_request'
       required: true
     OrderDetailRequestBody:
       content:
@@ -7238,8 +7238,8 @@ components:
     NotionalValue: {}
     StopLoss:
       additionalProperties: true
-      description: "Details of the stop loss order. Only to be used when order_class\
-        \ = BRACKET. stop_price is required, limit_price is optional"
+      description: "Takes in string value for stop_price and limit_price. stop_price\
+        \ is required, limit_price is optional"
       example:
         stop_price: "48.55"
         limit_price: "48.50"
@@ -7258,8 +7258,7 @@ components:
       type: object
     TakeProfit:
       additionalProperties: true
-      description: Details of the take profit order. Only to be used when order_class
-        = BRACKET.
+      description: Takes in a string value for limit_price
       example:
         limit_price: "49.95"
       properties:
@@ -10914,6 +10913,7 @@ components:
           $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
+      - brokerage_order_id
       - userId
       - userSecret
       type: object
@@ -11270,6 +11270,7 @@ components:
           $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
+      - brokerage_order_id
       - userId
       - userSecret
       type: object
@@ -11938,16 +11939,6 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
       required:
       - brokerage_order_id
-      type: object
-    Trading_cancelUserAccountOrder_request:
-      properties:
-        brokerage_order_id:
-          description: Order ID returned by brokerage. This is the unique identifier
-            for the order in the brokerage system.
-          example: 66a033fa-da74-4fcf-b527-feefdec9257e
-          type: string
-          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
-          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
       type: object
     Trading_searchCryptocurrencyPairInstruments_200_response:
       additionalProperties: true

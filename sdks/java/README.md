@@ -565,7 +565,7 @@ A lightweight endpoint that returns a list of orders executed in the last 24 hou
 This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
 Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
 By default only returns executed orders, but that can be changed by setting *only_executed* to false
-**Please contact support for access as this endpoint is not enabled by default.**
+**Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1072,7 +1072,7 @@ List<BrokerageAuthorization> result = client
 Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
 This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-**Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)**
+**Please contact support before use. Because of the cost of refreshing a connection, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -1659,22 +1659,21 @@ Cancels an order in the specified account. Accepts order IDs for all asset types
 ```java
 CancelOrderResponse result = client
         .trading
-        .cancelOrder(userId, userSecret, accountId)
-        .brokerageOrderId(brokerageOrderId)
+        .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
@@ -1701,22 +1700,21 @@ Attempts to cancel an open order with the brokerage. If the order is no longer c
 ```java
 AccountOrderRecord result = client
         .trading
-        .cancelUserAccountOrder(userId, userSecret, accountId)
-        .brokerageOrderId(brokerageOrderId)
+        .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
-
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 
 #### 🔄 Return<a id="🔄-return"></a>
 

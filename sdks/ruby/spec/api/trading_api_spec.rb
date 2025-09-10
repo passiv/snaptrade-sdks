@@ -33,7 +33,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param trading_cancel_user_account_order_request 
+  # @param account_information_get_user_account_order_detail_request 
   # @param [Hash] opts the optional parameters
   # @return [CancelOrderResponse]
   describe 'cancel_order test' do
@@ -48,7 +48,7 @@ describe 'TradingApi' do
   # @param user_id 
   # @param user_secret 
   # @param account_id 
-  # @param trading_cancel_user_account_order_request 
+  # @param account_information_get_user_account_order_detail_request 
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecord]
   describe 'cancel_user_account_order test' do

@@ -16,6 +16,7 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
+import com.konfigthis.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
@@ -42,7 +43,6 @@ import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
-import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -80,12 +80,11 @@ public class TradingApiTest {
      */
     @Test
     public void cancelOrderTest() throws ApiException {
+        String brokerageOrderId = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        String brokerageOrderId = null;
-        CancelOrderResponse response = api.cancelOrder(userId, userSecret, accountId)
-                .brokerageOrderId(brokerageOrderId)
+        CancelOrderResponse response = api.cancelOrder(brokerageOrderId, userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }
@@ -99,12 +98,11 @@ public class TradingApiTest {
      */
     @Test
     public void cancelUserAccountOrderTest() throws ApiException {
+        String brokerageOrderId = null;
         String userId = null;
         String userSecret = null;
         UUID accountId = null;
-        String brokerageOrderId = null;
-        AccountOrderRecord response = api.cancelUserAccountOrder(userId, userSecret, accountId)
-                .brokerageOrderId(brokerageOrderId)
+        AccountOrderRecord response = api.cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
                 .execute();
         // TODO: test validations
     }

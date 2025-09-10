@@ -50,14 +50,14 @@ namespace Example
             var accountId = "accountId_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             
             try
             {
                 // Cancel order
-                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+                CancelOrderResponse result = client.Trading.CancelOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -84,7 +84,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Cancel order
-    ApiResponse<CancelOrderResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+    ApiResponse<CancelOrderResponse> response = apiInstance.CancelOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -104,7 +104,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) |  |  |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md) |  |  |
 
 ### Return type
 
@@ -152,14 +152,14 @@ namespace Example
             var accountId = "accountId_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             
             try
             {
                 // Cancel equity order
-                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+                AccountOrderRecord result = client.Trading.CancelUserAccountOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -186,7 +186,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Cancel equity order
-    ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+    ApiResponse<AccountOrderRecord> response = apiInstance.CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -206,7 +206,7 @@ catch (ApiException e)
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
 | **accountId** | **string** |  |  |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md) |  |  |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md) |  |  |
 
 ### Return type
 
