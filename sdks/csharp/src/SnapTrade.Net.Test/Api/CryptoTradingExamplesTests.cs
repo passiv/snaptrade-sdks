@@ -77,7 +77,7 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine("placeOrderResult: {0}", placeOrderResult);
 
             // Cancel the order
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+            var tradingCancelUserAccountOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 placeOrderResult.BrokerageOrderId
             );
         
@@ -85,7 +85,7 @@ namespace SnapTrade.Net.Test.Api
                 testUserId,
                 testUserSecret,
                 accountId: accountId,
-                tradingCancelUserAccountOrderRequest: tradingCancelUserAccountOrderRequest
+                accountInformationGetUserAccountOrderDetailRequest: tradingCancelUserAccountOrderRequest
             );
           
             Console.WriteLine("cancelOrderResult: {0}", cancelOrderResult);

@@ -21,7 +21,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 <a name="cancelOrder"></a>
 # **cancelOrder**
-> CancelOrderResponse cancelOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
+> CancelOrderResponse cancelOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest).execute();
 
 Cancel order
 
@@ -49,15 +49,14 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     try {
       CancelOrderResponse result = client
               .trading
-              .cancelOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -74,8 +73,7 @@ public class Example {
     try {
       ApiResponse<CancelOrderResponse> response = client
               .trading
-              .cancelOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelOrder(brokerageOrderId, userId, userSecret, accountId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -101,7 +99,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
 
 ### Return type
 
@@ -124,7 +122,7 @@ public class Example {
 
 <a name="cancelUserAccountOrder"></a>
 # **cancelUserAccountOrder**
-> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest).execute();
+> AccountOrderRecord cancelUserAccountOrder(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest).execute();
 
 Cancel equity order
 
@@ -152,15 +150,14 @@ public class Example {
     configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
     
     Snaptrade client = new Snaptrade(configuration);
+    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
     UUID accountId = UUID.randomUUID();
-    String brokerageOrderId = "brokerageOrderId_example"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     try {
       AccountOrderRecord result = client
               .trading
-              .cancelUserAccountOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
               .execute();
       System.out.println(result);
       System.out.println(result.getBrokerageOrderId());
@@ -197,8 +194,7 @@ public class Example {
     try {
       ApiResponse<AccountOrderRecord> response = client
               .trading
-              .cancelUserAccountOrder(userId, userSecret, accountId)
-              .brokerageOrderId(brokerageOrderId)
+              .cancelUserAccountOrder(brokerageOrderId, userId, userSecret, accountId)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());
       System.out.println(response.getResponseHeaders());
@@ -224,7 +220,7 @@ public class Example {
 | **userId** | **String**|  | |
 | **userSecret** | **String**|  | |
 | **accountId** | **UUID**|  | |
-| **tradingCancelUserAccountOrderRequest** | [**TradingCancelUserAccountOrderRequest**](TradingCancelUserAccountOrderRequest.md)|  | |
+| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md)|  | |
 
 ### Return type
 

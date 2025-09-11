@@ -1,6 +1,7 @@
 package com.konfigthis.client.api;
 
 import com.konfigthis.client.ApiClient;
+import com.konfigthis.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.ActionStrict;
 import com.konfigthis.client.model.ActionStrictWithOptions;
@@ -27,7 +28,6 @@ import com.konfigthis.client.model.StopLoss;
 import com.konfigthis.client.model.SymbolsQuotesInner;
 import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
-import com.konfigthis.client.model.TradingCancelUserAccountOrderRequest;
 import com.konfigthis.client.model.TradingInstrument;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
 import java.util.UUID;
@@ -43,13 +43,13 @@ public class TradingApi extends TradingApiGenerated {
         super(apiClient);
     }
     public class CancelOrderRequestBuilder extends CancelOrderRequestBuilderGenerated {
-        public CancelOrderRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
+        public CancelOrderRequestBuilder(String brokerageOrderId, String userId, String userSecret, UUID accountId) {
+            super(brokerageOrderId, userId, userSecret, accountId);
         }
     }
     public class CancelUserAccountOrderRequestBuilder extends CancelUserAccountOrderRequestBuilderGenerated {
-        public CancelUserAccountOrderRequestBuilder(String userId, String userSecret, UUID accountId) {
-            super(userId, userSecret, accountId);
+        public CancelUserAccountOrderRequestBuilder(String brokerageOrderId, String userId, String userSecret, UUID accountId) {
+            super(brokerageOrderId, userId, userSecret, accountId);
         }
     }
     public class GetCryptocurrencyPairQuoteRequestBuilder extends GetCryptocurrencyPairQuoteRequestBuilderGenerated {

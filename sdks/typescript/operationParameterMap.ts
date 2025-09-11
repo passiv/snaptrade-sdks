@@ -440,6 +440,9 @@ export const operationParameterMap: Record<string, Entry> = {
     '/accounts/{accountId}/trading/cancel-POST': {
         parameters: [
             {
+                name: 'brokerage_order_id'
+            },
+            {
                 name: 'userId'
             },
             {
@@ -447,15 +450,15 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
-            },
-            {
-                name: 'brokerage_order_id'
             },
         ]
     },
     '/accounts/{accountId}/orders/cancel-POST': {
         parameters: [
             {
+                name: 'brokerage_order_id'
+            },
+            {
                 name: 'userId'
             },
             {
@@ -463,9 +466,6 @@ export const operationParameterMap: Record<string, Entry> = {
             },
             {
                 name: 'accountId'
-            },
-            {
-                name: 'brokerage_order_id'
             },
         ]
     },

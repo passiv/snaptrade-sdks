@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.TakeProfit
-Details of the take profit order. Only to be used when order_class = BRACKET.
+Takes in a string value for limit_price
 
 ## Properties
 

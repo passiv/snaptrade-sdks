@@ -21,17 +21,17 @@ module SnapTrade
     #
     # Cancels an order in the specified account. Accepts order IDs for all asset types.
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param body [TradingCancelUserAccountOrderRequest] 
+    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
+    def cancel_order(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      trading_cancel_user_account_order_request = _body
-      data, _status_code, _headers = cancel_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+      account_information_get_user_account_order_detail_request = _body
+      data, _status_code, _headers = cancel_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
       data
     end
 
@@ -39,17 +39,17 @@ module SnapTrade
     #
     # Cancels an order in the specified account. Accepts order IDs for all asset types.
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param body [TradingCancelUserAccountOrderRequest] 
+    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
+    def cancel_order_with_http_info(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      trading_cancel_user_account_order_request = _body
-      cancel_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+      account_information_get_user_account_order_detail_request = _body
+      cancel_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
     end
 
     # Cancel order
@@ -57,11 +57,11 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
+    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] opts the optional parameters
     # @return [CancelOrderResponse]
-    private def cancel_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
-      data, _status_code, _headers = cancel_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts)
+    private def cancel_order_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
+      data, _status_code, _headers = cancel_order_with_http_info(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts)
       data
     end
 
@@ -70,10 +70,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
+    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(CancelOrderResponse, Integer, Hash)>] CancelOrderResponse data, response status code and response headers
-    private def cancel_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    private def cancel_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.cancel_order ...'
       end
@@ -89,9 +89,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.cancel_order"
       end
-      # verify the required parameter 'trading_cancel_user_account_order_request' is set
-      if @api_client.config.client_side_validation && trading_cancel_user_account_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_cancel_user_account_order_request' when calling TradingApi.cancel_order"
+      # verify the required parameter 'account_information_get_user_account_order_detail_request' is set
+      if @api_client.config.client_side_validation && account_information_get_user_account_order_detail_request.nil?
+        fail ArgumentError, "Missing the required parameter 'account_information_get_user_account_order_detail_request' when calling TradingApi.cancel_order"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/trading/cancel'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -115,7 +115,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_cancel_user_account_order_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(account_information_get_user_account_order_detail_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'CancelOrderResponse'
@@ -146,17 +146,17 @@ module SnapTrade
     # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param body [TradingCancelUserAccountOrderRequest] 
+    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
+    def cancel_user_account_order(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      trading_cancel_user_account_order_request = _body
-      data, _status_code, _headers = cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+      account_information_get_user_account_order_detail_request = _body
+      data, _status_code, _headers = cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
       data
     end
 
@@ -165,17 +165,17 @@ module SnapTrade
     # **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
     # Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
     #
+    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param brokerage_order_id [String] Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-    # @param body [TradingCancelUserAccountOrderRequest] 
+    # @param body [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def cancel_user_account_order_with_http_info(user_id:, user_secret:, account_id:, brokerage_order_id: SENTINEL, extra: {})
+    def cancel_user_account_order_with_http_info(brokerage_order_id:, user_id:, user_secret:, account_id:, extra: {})
       _body = {}
       _body[:brokerage_order_id] = brokerage_order_id if brokerage_order_id != SENTINEL
-      trading_cancel_user_account_order_request = _body
-      cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, extra)
+      account_information_get_user_account_order_detail_request = _body
+      cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, extra)
     end
 
     # Cancel equity order
@@ -183,11 +183,11 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
+    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] opts the optional parameters
     # @return [AccountOrderRecord]
-    private def cancel_user_account_order_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
-      data, _status_code, _headers = cancel_user_account_order_with_http_info(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts)
+    private def cancel_user_account_order_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
+      data, _status_code, _headers = cancel_user_account_order_with_http_info(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts)
       data
     end
 
@@ -196,10 +196,10 @@ module SnapTrade
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
-    # @param trading_cancel_user_account_order_request [TradingCancelUserAccountOrderRequest] 
+    # @param account_information_get_user_account_order_detail_request [AccountInformationGetUserAccountOrderDetailRequest] 
     # @param [Hash] opts the optional parameters
     # @return [Array<(AccountOrderRecord, Integer, Hash)>] AccountOrderRecord data, response status code and response headers
-    private def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, trading_cancel_user_account_order_request, opts = {})
+    private def cancel_user_account_order_with_http_info_impl(user_id, user_secret, account_id, account_information_get_user_account_order_detail_request, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: TradingApi.cancel_user_account_order ...'
       end
@@ -215,9 +215,9 @@ module SnapTrade
       if @api_client.config.client_side_validation && account_id.nil?
         fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.cancel_user_account_order"
       end
-      # verify the required parameter 'trading_cancel_user_account_order_request' is set
-      if @api_client.config.client_side_validation && trading_cancel_user_account_order_request.nil?
-        fail ArgumentError, "Missing the required parameter 'trading_cancel_user_account_order_request' when calling TradingApi.cancel_user_account_order"
+      # verify the required parameter 'account_information_get_user_account_order_detail_request' is set
+      if @api_client.config.client_side_validation && account_information_get_user_account_order_detail_request.nil?
+        fail ArgumentError, "Missing the required parameter 'account_information_get_user_account_order_detail_request' when calling TradingApi.cancel_user_account_order"
       end
       # resource path
       local_var_path = '/accounts/{accountId}/orders/cancel'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
@@ -241,7 +241,7 @@ module SnapTrade
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(trading_cancel_user_account_order_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(account_information_get_user_account_order_detail_request)
 
       # return_type
       return_type = opts[:debug_return_type] || 'AccountOrderRecord'

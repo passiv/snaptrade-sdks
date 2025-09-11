@@ -37,10 +37,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CancelOrderResponse</returns>
-        CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
 
         /// <summary>
         /// Cancel order
@@ -52,10 +52,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CancelOrderResponse</returns>
-        ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
         /// <summary>
         /// Cancel equity order
         /// </summary>
@@ -66,11 +66,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
         [Obsolete]
-        AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
 
         /// <summary>
         /// Cancel equity order
@@ -82,11 +82,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         [Obsolete]
-        ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0);
+        ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
         /// <summary>
         /// Get crypto pair quote
         /// </summary>
@@ -425,11 +425,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CancelOrderResponse</returns>
-        System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel order
@@ -441,11 +441,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CancelOrderResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Cancel equity order
         /// </summary>
@@ -456,12 +456,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
         [Obsolete]
-        System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Cancel equity order
@@ -473,12 +473,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         [Obsolete]
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Get crypto pair quote
         /// </summary>
@@ -947,12 +947,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>CancelOrderResponse</returns>
-        public CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        public CancelOrderResponse CancelOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = CancelOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = CancelOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
             return localVarResponse.Data;
         }
 
@@ -963,10 +963,10 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of CancelOrderResponse</returns>
-        public SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> CancelOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -986,10 +986,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1018,7 +1018,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1060,13 +1060,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of CancelOrderResponse</returns>
-        public async System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<CancelOrderResponse> CancelOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = await CancelOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<CancelOrderResponse> localVarResponse = await CancelOrderWithHttpInfoAsync(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1077,11 +1077,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CancelOrderResponse)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<CancelOrderResponse>> CancelOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1101,10 +1101,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelOrder");
             }
 
 
@@ -1134,7 +1134,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1177,13 +1177,13 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecord</returns>
         [Obsolete]
-        public AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        public AccountOrderRecord CancelUserAccountOrder(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = CancelUserAccountOrderWithHttpInfo(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest);
             return localVarResponse.Data;
         }
 
@@ -1194,11 +1194,11 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecord</returns>
         [Obsolete]
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> CancelUserAccountOrderWithHttpInfo(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1218,10 +1218,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelUserAccountOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelUserAccountOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelUserAccountOrder");
             }
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
@@ -1250,7 +1250,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelUserAccountOrder";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -1292,14 +1292,14 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecord</returns>
         [Obsolete]
-        public async System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecord> CancelUserAccountOrderAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CancelUserAccountOrderWithHttpInfoAsync(userId, userSecret, accountId, tradingCancelUserAccountOrderRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecord> localVarResponse = await CancelUserAccountOrderWithHttpInfoAsync(userId, userSecret, accountId, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
@@ -1310,12 +1310,12 @@ namespace SnapTrade.Net.Api
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
         /// <param name="accountId"></param>
-        /// <param name="tradingCancelUserAccountOrderRequest"></param>
+        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecord)</returns>
         [Obsolete]
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, TradingCancelUserAccountOrderRequest tradingCancelUserAccountOrderRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecord>> CancelUserAccountOrderWithHttpInfoAsync(string userId, string userSecret, string accountId, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -1335,10 +1335,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->CancelUserAccountOrder");
             }
 
-            // verify the required parameter 'tradingCancelUserAccountOrderRequest' is set
-            if (tradingCancelUserAccountOrderRequest == null)
+            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+            if (accountInformationGetUserAccountOrderDetailRequest == null)
             {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'tradingCancelUserAccountOrderRequest' when calling TradingApi->CancelUserAccountOrder");
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling TradingApi->CancelUserAccountOrder");
             }
 
 
@@ -1368,7 +1368,7 @@ namespace SnapTrade.Net.Api
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = tradingCancelUserAccountOrderRequest;
+            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "TradingApi.CancelUserAccountOrder";
             localVarRequestOptions.OperationIndex = operationIndex;

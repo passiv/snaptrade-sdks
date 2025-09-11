@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// StopLoss Details of the stop loss order. Only to be used when order_class = BRACKET. stop_price is required, limit_price is optional
+// StopLoss Takes in string value for stop_price and limit_price. stop_price is required, limit_price is optional
 type StopLoss struct {
 	StopPrice *string `json:"stop_price,omitempty"`
 	LimitPrice NullableString `json:"limit_price,omitempty"`

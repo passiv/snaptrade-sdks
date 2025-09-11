@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Details of the take profit order. Only to be used when order_class = BRACKET.
+  # Takes in a string value for limit_price
   class TakeProfit
     attr_accessor :limit_price
 

@@ -57,7 +57,7 @@ namespace SnapTrade.Net.Test.Api
             var accountId = "accountId_example";
             var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
             
-            var tradingCancelUserAccountOrderRequest = new TradingCancelUserAccountOrderRequest(
+            var tradingCancelUserAccountOrderRequest = new AccountInformationGetUserAccountOrderDetailRequest(
                 brokerageOrderId
             );
             

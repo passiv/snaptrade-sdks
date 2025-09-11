@@ -11,7 +11,7 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Details of the stop loss order. Only to be used when order_class = BRACKET. stop_price is required, limit_price is optional
+  # Takes in string value for stop_price and limit_price. stop_price is required, limit_price is optional
   class StopLoss
     attr_accessor :stop_price
 
