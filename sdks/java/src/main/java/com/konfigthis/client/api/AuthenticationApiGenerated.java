@@ -524,7 +524,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionType
-         * @param connectionType Sets whether the connection should be read-only or trade-enabled. (optional, default to read)
+         * @param connectionType Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (optional, default to read)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionType(String connectionType) {
@@ -534,7 +534,7 @@ public class AuthenticationApiGenerated {
         
         /**
          * Set connectionPortalVersion
-         * @param connectionPortalVersion Sets the version of the connection portal to render. (optional, default to v3)
+         * @param connectionPortalVersion Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (optional, default to v4)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder connectionPortalVersion(String connectionPortalVersion) {
@@ -717,21 +717,12 @@ public class AuthenticationApiGenerated {
     }
 
     public abstract class RegisterSnapTradeUserRequestBuilderGenerated {
-        String userId;
+        final String userId;
 
-        public RegisterSnapTradeUserRequestBuilderGenerated() {
-        }
-
-        /**
-         * Set userId
-         * @param userId SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable. (optional)
-         * @return AuthenticationApi.RegisterSnapTradeUserRequestBuilder
-         */
-        public AuthenticationApi.RegisterSnapTradeUserRequestBuilder userId(String userId) {
+        public RegisterSnapTradeUserRequestBuilderGenerated(String userId) {
             this.userId = userId;
-            return (AuthenticationApi.RegisterSnapTradeUserRequestBuilder) this;
         }
-        
+
         /**
          * Build call for registerSnapTradeUser
          * @param _callback ApiCallback API callback
@@ -813,8 +804,11 @@ public class AuthenticationApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public AuthenticationApi.RegisterSnapTradeUserRequestBuilder registerSnapTradeUser() throws IllegalArgumentException {
-        return ((AuthenticationApi) this).new RegisterSnapTradeUserRequestBuilder();
+    public AuthenticationApi.RegisterSnapTradeUserRequestBuilder registerSnapTradeUser(String userId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        return ((AuthenticationApi) this).new RegisterSnapTradeUserRequestBuilder(userId);
     }
     private okhttp3.Call resetSnapTradeUserSecretCall(UserIDandSecret userIDandSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;

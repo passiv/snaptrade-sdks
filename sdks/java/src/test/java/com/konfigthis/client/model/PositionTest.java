@@ -17,6 +17,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.PositionCurrency;
 import com.konfigthis.client.model.PositionSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -73,6 +74,14 @@ public class PositionTest {
     }
 
     /**
+     * Test the property 'averagePurchasePrice'
+     */
+    @Test
+    public void averagePurchasePriceTest() {
+        // TODO: test averagePurchasePrice
+    }
+
+    /**
      * Test the property 'fractionalUnits'
      */
     @Test
@@ -81,11 +90,11 @@ public class PositionTest {
     }
 
     /**
-     * Test the property 'averagePurchasePrice'
+     * Test the property 'currency'
      */
     @Test
-    public void averagePurchasePriceTest() {
-        // TODO: test averagePurchasePrice
+    public void currencyTest() {
+        // TODO: test currency
     }
 
 }

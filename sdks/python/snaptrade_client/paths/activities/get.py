@@ -443,6 +443,7 @@ class BaseApi(api_client.Api):
 class GetActivities(BaseApi):
     # this class is used by api classes that refer to endpoints with operationId fn names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget_activities(
         self,
         user_id: typing.Optional[str] = None,
@@ -475,6 +476,7 @@ class GetActivities(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get_activities(
         self,
         user_id: typing.Optional[str] = None,
@@ -490,7 +492,7 @@ class GetActivities(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.  """
+        """ This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
         args = self._get_activities_mapped_args(
             query_params=query_params,
             user_id=user_id,
@@ -508,6 +510,7 @@ class GetActivities(BaseApi):
 class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     async def aget(
         self,
         user_id: typing.Optional[str] = None,
@@ -540,6 +543,7 @@ class ApiForget(BaseApi):
             **kwargs,
         )
     
+    @api_client.DeprecationWarningOnce(prefix="transactions_and_reporting")
     def get(
         self,
         user_id: typing.Optional[str] = None,
@@ -555,7 +559,7 @@ class ApiForget(BaseApi):
         ApiResponseForDefault,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.  """
+        """ This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible  Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.  There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.  The data returned here is always cached and refreshed once a day.  """
         args = self._get_activities_mapped_args(
             query_params=query_params,
             user_id=user_id,

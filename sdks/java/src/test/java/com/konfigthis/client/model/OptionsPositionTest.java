@@ -66,19 +66,19 @@ public class OptionsPositionTest {
     }
 
     /**
-     * Test the property 'currency'
-     */
-    @Test
-    public void currencyTest() {
-        // TODO: test currency
-    }
-
-    /**
      * Test the property 'averagePurchasePrice'
      */
     @Test
     public void averagePurchasePriceTest() {
         // TODO: test averagePurchasePrice
+    }
+
+    /**
+     * Test the property 'currency'
+     */
+    @Test
+    public void currencyTest() {
+        // TODO: test currency
     }
 
 }

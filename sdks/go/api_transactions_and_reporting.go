@@ -59,7 +59,7 @@ func (r *TransactionsAndReportingApiGetActivitiesRequest) BrokerageAuthorization
 	return r
 }
 
-// Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.  
+// Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event.   - &#x60;TRANSFER&#x60; - Transfer of assets from one account to another 
 func (r *TransactionsAndReportingApiGetActivitiesRequest) Type_(type_ string) *TransactionsAndReportingApiGetActivitiesRequest {
 	r.type_ = &type_
 	return r
@@ -72,17 +72,21 @@ func (r TransactionsAndReportingApiGetActivitiesRequest) Execute() ([]UniversalA
 /*
 GetActivities Get transaction history for a user
 
+This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
+
 Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
 There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+The data returned here is always cached and refreshed once a day.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param userId
  @param userSecret
  @return TransactionsAndReportingApiGetActivitiesRequest
+
+Deprecated
 */
 func (a *TransactionsAndReportingApiService) GetActivities(userId string, userSecret string) TransactionsAndReportingApiGetActivitiesRequest {
 	return TransactionsAndReportingApiGetActivitiesRequest{
@@ -95,6 +99,7 @@ func (a *TransactionsAndReportingApiService) GetActivities(userId string, userSe
 
 // Execute executes the request
 //  @return []UniversalActivity
+// Deprecated
 func (a *TransactionsAndReportingApiService) GetActivitiesExecute(r TransactionsAndReportingApiGetActivitiesRequest) ([]UniversalActivity, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet

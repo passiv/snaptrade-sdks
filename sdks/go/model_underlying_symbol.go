@@ -28,12 +28,12 @@ type UnderlyingSymbol struct {
 	Currency *SymbolCurrency `json:"currency,omitempty"`
 	Exchange *UnderlyingSymbolExchange `json:"exchange,omitempty"`
 	Type *UnderlyingSymbolType `json:"type,omitempty"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-	// Deprecated
-	Currencies []Currency `json:"currencies,omitempty"`
 	// This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
 	FigiCode NullableString `json:"figi_code,omitempty"`
 	FigiInstrument NullableSymbolFigiInstrument `json:"figi_instrument,omitempty"`
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// Deprecated
+	Currencies []Currency `json:"currencies,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -290,41 +290,6 @@ func (o *UnderlyingSymbol) SetType(v UnderlyingSymbolType) {
 	o.Type = &v
 }
 
-// GetCurrencies returns the Currencies field value if set, zero value otherwise.
-// Deprecated
-func (o *UnderlyingSymbol) GetCurrencies() []Currency {
-	if o == nil || isNil(o.Currencies) {
-		var ret []Currency
-		return ret
-	}
-	return o.Currencies
-}
-
-// GetCurrenciesOk returns a tuple with the Currencies field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *UnderlyingSymbol) GetCurrenciesOk() ([]Currency, bool) {
-	if o == nil || isNil(o.Currencies) {
-    return nil, false
-	}
-	return o.Currencies, true
-}
-
-// HasCurrencies returns a boolean if a field has been set.
-func (o *UnderlyingSymbol) HasCurrencies() bool {
-	if o != nil && !isNil(o.Currencies) {
-		return true
-	}
-
-	return false
-}
-
-// SetCurrencies gets a reference to the given []Currency and assigns it to the Currencies field.
-// Deprecated
-func (o *UnderlyingSymbol) SetCurrencies(v []Currency) {
-	o.Currencies = v
-}
-
 // GetFigiCode returns the FigiCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UnderlyingSymbol) GetFigiCode() string {
 	if o == nil || isNil(o.FigiCode.Get()) {
@@ -409,6 +374,41 @@ func (o *UnderlyingSymbol) UnsetFigiInstrument() {
 	o.FigiInstrument.Unset()
 }
 
+// GetCurrencies returns the Currencies field value if set, zero value otherwise.
+// Deprecated
+func (o *UnderlyingSymbol) GetCurrencies() []Currency {
+	if o == nil || isNil(o.Currencies) {
+		var ret []Currency
+		return ret
+	}
+	return o.Currencies
+}
+
+// GetCurrenciesOk returns a tuple with the Currencies field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *UnderlyingSymbol) GetCurrenciesOk() ([]Currency, bool) {
+	if o == nil || isNil(o.Currencies) {
+    return nil, false
+	}
+	return o.Currencies, true
+}
+
+// HasCurrencies returns a boolean if a field has been set.
+func (o *UnderlyingSymbol) HasCurrencies() bool {
+	if o != nil && !isNil(o.Currencies) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrencies gets a reference to the given []Currency and assigns it to the Currencies field.
+// Deprecated
+func (o *UnderlyingSymbol) SetCurrencies(v []Currency) {
+	o.Currencies = v
+}
+
 func (o UnderlyingSymbol) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Id) {
@@ -432,14 +432,14 @@ func (o UnderlyingSymbol) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
-	if !isNil(o.Currencies) {
-		toSerialize["currencies"] = o.Currencies
-	}
 	if o.FigiCode.IsSet() {
 		toSerialize["figi_code"] = o.FigiCode.Get()
 	}
 	if o.FigiInstrument.IsSet() {
 		toSerialize["figi_instrument"] = o.FigiInstrument.Get()
+	}
+	if !isNil(o.Currencies) {
+		toSerialize["currencies"] = o.Currencies
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -466,9 +466,9 @@ func (o *UnderlyingSymbol) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "exchange")
 		delete(additionalProperties, "type")
-		delete(additionalProperties, "currencies")
 		delete(additionalProperties, "figi_code")
 		delete(additionalProperties, "figi_instrument")
+		delete(additionalProperties, "currencies")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -22,10 +22,10 @@ type OptionsPosition struct {
 	Price NullableFloat32 `json:"price,omitempty"`
 	// The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
 	Units *float32 `json:"units,omitempty"`
-	// Deprecated
-	Currency NullableOptionsPositionCurrency `json:"currency,omitempty"`
 	// Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
 	AveragePurchasePrice NullableFloat32 `json:"average_purchase_price,omitempty"`
+	// Deprecated
+	Currency NullableOptionsPositionCurrency `json:"currency,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -154,6 +154,48 @@ func (o *OptionsPosition) SetUnits(v float32) {
 	o.Units = &v
 }
 
+// GetAveragePurchasePrice returns the AveragePurchasePrice field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OptionsPosition) GetAveragePurchasePrice() float32 {
+	if o == nil || isNil(o.AveragePurchasePrice.Get()) {
+		var ret float32
+		return ret
+	}
+	return *o.AveragePurchasePrice.Get()
+}
+
+// GetAveragePurchasePriceOk returns a tuple with the AveragePurchasePrice field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OptionsPosition) GetAveragePurchasePriceOk() (*float32, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.AveragePurchasePrice.Get(), o.AveragePurchasePrice.IsSet()
+}
+
+// HasAveragePurchasePrice returns a boolean if a field has been set.
+func (o *OptionsPosition) HasAveragePurchasePrice() bool {
+	if o != nil && o.AveragePurchasePrice.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAveragePurchasePrice gets a reference to the given NullableFloat32 and assigns it to the AveragePurchasePrice field.
+func (o *OptionsPosition) SetAveragePurchasePrice(v float32) {
+	o.AveragePurchasePrice.Set(&v)
+}
+// SetAveragePurchasePriceNil sets the value for AveragePurchasePrice to be an explicit nil
+func (o *OptionsPosition) SetAveragePurchasePriceNil() {
+	o.AveragePurchasePrice.Set(nil)
+}
+
+// UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
+func (o *OptionsPosition) UnsetAveragePurchasePrice() {
+	o.AveragePurchasePrice.Unset()
+}
+
 // GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
 // Deprecated
 func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency {
@@ -199,48 +241,6 @@ func (o *OptionsPosition) UnsetCurrency() {
 	o.Currency.Unset()
 }
 
-// GetAveragePurchasePrice returns the AveragePurchasePrice field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *OptionsPosition) GetAveragePurchasePrice() float32 {
-	if o == nil || isNil(o.AveragePurchasePrice.Get()) {
-		var ret float32
-		return ret
-	}
-	return *o.AveragePurchasePrice.Get()
-}
-
-// GetAveragePurchasePriceOk returns a tuple with the AveragePurchasePrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *OptionsPosition) GetAveragePurchasePriceOk() (*float32, bool) {
-	if o == nil {
-    return nil, false
-	}
-	return o.AveragePurchasePrice.Get(), o.AveragePurchasePrice.IsSet()
-}
-
-// HasAveragePurchasePrice returns a boolean if a field has been set.
-func (o *OptionsPosition) HasAveragePurchasePrice() bool {
-	if o != nil && o.AveragePurchasePrice.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAveragePurchasePrice gets a reference to the given NullableFloat32 and assigns it to the AveragePurchasePrice field.
-func (o *OptionsPosition) SetAveragePurchasePrice(v float32) {
-	o.AveragePurchasePrice.Set(&v)
-}
-// SetAveragePurchasePriceNil sets the value for AveragePurchasePrice to be an explicit nil
-func (o *OptionsPosition) SetAveragePurchasePriceNil() {
-	o.AveragePurchasePrice.Set(nil)
-}
-
-// UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
-func (o *OptionsPosition) UnsetAveragePurchasePrice() {
-	o.AveragePurchasePrice.Unset()
-}
-
 func (o OptionsPosition) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -252,11 +252,11 @@ func (o OptionsPosition) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Units) {
 		toSerialize["units"] = o.Units
 	}
-	if o.Currency.IsSet() {
-		toSerialize["currency"] = o.Currency.Get()
-	}
 	if o.AveragePurchasePrice.IsSet() {
 		toSerialize["average_purchase_price"] = o.AveragePurchasePrice.Get()
+	}
+	if o.Currency.IsSet() {
+		toSerialize["currency"] = o.Currency.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -279,8 +279,8 @@ func (o *OptionsPosition) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "price")
 		delete(additionalProperties, "units")
-		delete(additionalProperties, "currency")
 		delete(additionalProperties, "average_purchase_price")
+		delete(additionalProperties, "currency")
 		o.AdditionalProperties = additionalProperties
 	}
 

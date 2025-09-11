@@ -19,6 +19,7 @@ import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import com.konfigthis.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -65,7 +66,7 @@ public class ConnectionsApiTest {
     /**
      * Force disable connection
      *
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
      *
      * @throws ApiException if the Api call fails
      */
@@ -98,7 +99,7 @@ public class ConnectionsApiTest {
     /**
      * Refresh holdings for a connection
      *
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)** 
      *
      * @throws ApiException if the Api call fails
      */
@@ -125,6 +126,23 @@ public class ConnectionsApiTest {
         String userId = null;
         String userSecret = null;
         api.removeBrokerageAuthorization(authorizationId, userId, userSecret)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * List connection rate of returns
+     *
+     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void returnRatesTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID authorizationId = null;
+        RateOfReturnResponse response = api.returnRates(userId, userSecret, authorizationId)
                 .execute();
         // TODO: test validations
     }

@@ -90,6 +90,7 @@ namespace SnapTrade.Net.Model
         /// Gets or Sets TotalValue
         /// </summary>
         [DataMember(Name = "total_value", EmitDefaultValue = false)]
+        [Obsolete]
         public SnapTradeHoldingsTotalValue TotalValue { get; set; }
 
         /// <summary>

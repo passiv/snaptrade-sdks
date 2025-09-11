@@ -2,13 +2,13 @@
 
 The SnapTrade API can be configured to send you webhook notifications when certain events happen.
 
-To get started with webhooks, contact your Customer Success Manager. They will need the URL of your webhook handler for webhook notifications to begin to be sent.
+To get started with webhooks, visit the webhook tab of the SnapTrade Dashboard to configure a webhook listener.
 
 # Verifying Webhook Authenticity
 
 You can verify the authenticity of any SnapTrade webhook by verifying the `webhookSecret` field contained in the body of any webhook.
 
-Contact your customer success manager to get the correct value of this secret.
+The correct value of this secret can be found when you configure a webhook listener in the SnapTrade Dashboard.
 
 Aside from webhook secrets:
 
@@ -17,9 +17,9 @@ Aside from webhook secrets:
 
 # Handling Undeliverable Webhooks
 
-When your webhook handler responds to our requests with a status code that is not 200 or 201, we mark that webhook as undelivered in our system.
+When your webhook handler responds to our requests with a status code that is not 200, 201, 202, or 204, we mark that webhook as undelivered in our system.
 
-We will attempt to resend an undeliverable webhook notification with an exponential backoff (starting at 30 minutes) until it is either delivered successfully, or 10 retry attempts have been made.
+We will attempt to resend an undeliverable webhook notification with an exponential backoff (starting at 30 minutes) until it is either delivered successfully, or 3 retry attempts have been made.
 
 # Webhook Types
 
@@ -39,6 +39,23 @@ Example payload is below:
   "userId": "qQYISR9xcmR8ZtVHNgg1lbYgSQcxafPqPW0ZbE0yaA6ham6n54",
   "eventType": "USER_REGISTERED",
   "webhookSecret": "lgCQWztweEFcHvjdLhHc"
+}
+```
+
+## USER_DELETED
+
+Sent when a user is successfully deleted through the `/deleteUser/` endpoint.
+
+Example payload is below:
+
+```json
+{
+   "userId":"TOD1ACWHxnO9cnpq9XgNmFaRwXRMRu2taaFPpvYi6ng3uD2UN9",
+   "clientId":"phjBdpKfpN",
+   "eventType":"USER_DELETED",
+   "webhookId":"dbaee13a-1184-4677-9741-b6845e60ee3a",
+   "webhookSecret":"lgCQWztweEFcHvjdLhHc",
+   "eventTimestamp":"2025-01-08T14:32:59.979214+00:00"
 }
 ```
 

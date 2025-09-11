@@ -4,9 +4,14 @@ import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.Account;
 import com.konfigthis.client.model.AccountHoldings;
 import com.konfigthis.client.model.AccountHoldingsAccount;
+import com.konfigthis.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.konfigthis.client.model.AccountOrderRecord;
 import com.konfigthis.client.model.Balance;
+import java.time.LocalDate;
+import com.konfigthis.client.model.PaginatedUniversalActivity;
 import com.konfigthis.client.model.Position;
+import com.konfigthis.client.model.RateOfReturnResponse;
+import com.konfigthis.client.model.RecentOrdersResponse;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +22,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
 
     public AccountInformationApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
+    }
+    public class GetAccountActivitiesRequestBuilder extends GetAccountActivitiesRequestBuilderGenerated {
+        public GetAccountActivitiesRequestBuilder(UUID accountId, String userId, String userSecret) {
+            super(accountId, userId, userSecret);
+        }
     }
     public class GetAllUserHoldingsRequestBuilder extends GetAllUserHoldingsRequestBuilderGenerated {
         public GetAllUserHoldingsRequestBuilder(String userId, String userSecret) {
@@ -33,6 +43,11 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
             super(userId, userSecret, accountId);
         }
     }
+    public class GetUserAccountOrderDetailRequestBuilder extends GetUserAccountOrderDetailRequestBuilderGenerated {
+        public GetUserAccountOrderDetailRequestBuilder(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
+            super(brokerageOrderId, accountId, userId, userSecret);
+        }
+    }
     public class GetUserAccountOrdersRequestBuilder extends GetUserAccountOrdersRequestBuilderGenerated {
         public GetUserAccountOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
@@ -40,6 +55,16 @@ public class AccountInformationApi extends AccountInformationApiGenerated {
     }
     public class GetUserAccountPositionsRequestBuilder extends GetUserAccountPositionsRequestBuilderGenerated {
         public GetUserAccountPositionsRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetUserAccountRecentOrdersRequestBuilder extends GetUserAccountRecentOrdersRequestBuilderGenerated {
+        public GetUserAccountRecentOrdersRequestBuilder(String userId, String userSecret, UUID accountId) {
+            super(userId, userSecret, accountId);
+        }
+    }
+    public class GetUserAccountReturnRatesRequestBuilder extends GetUserAccountReturnRatesRequestBuilderGenerated {
+        public GetUserAccountReturnRatesRequestBuilder(String userId, String userSecret, UUID accountId) {
             super(userId, userSecret, accountId);
         }
     }

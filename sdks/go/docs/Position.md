@@ -8,8 +8,9 @@ Name | Type | Description | Notes
 **Units** | Pointer to **NullableFloat32** | The number of shares of the position. This can be fractional or integer units. | [optional] 
 **Price** | Pointer to **NullableFloat32** | Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
 **OpenPnl** | Pointer to **NullableFloat32** | The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field. | [optional] 
-**FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per share_ of this position. | [optional] 
+**FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
+**Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
 
 ## Methods
 
@@ -160,41 +161,6 @@ HasOpenPnl returns a boolean if a field has been set.
 `func (o *Position) UnsetOpenPnl()`
 
 UnsetOpenPnl ensures that no value is present for OpenPnl, not even an explicit nil
-### GetFractionalUnits
-
-`func (o *Position) GetFractionalUnits() float32`
-
-GetFractionalUnits returns the FractionalUnits field if non-nil, zero value otherwise.
-
-### GetFractionalUnitsOk
-
-`func (o *Position) GetFractionalUnitsOk() (*float32, bool)`
-
-GetFractionalUnitsOk returns a tuple with the FractionalUnits field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFractionalUnits
-
-`func (o *Position) SetFractionalUnits(v float32)`
-
-SetFractionalUnits sets FractionalUnits field to given value.
-
-### HasFractionalUnits
-
-`func (o *Position) HasFractionalUnits() bool`
-
-HasFractionalUnits returns a boolean if a field has been set.
-
-### SetFractionalUnitsNil
-
-`func (o *Position) SetFractionalUnitsNil(b bool)`
-
- SetFractionalUnitsNil sets the value for FractionalUnits to be an explicit nil
-
-### UnsetFractionalUnits
-`func (o *Position) UnsetFractionalUnits()`
-
-UnsetFractionalUnits ensures that no value is present for FractionalUnits, not even an explicit nil
 ### GetAveragePurchasePrice
 
 `func (o *Position) GetAveragePurchasePrice() float32`
@@ -230,6 +196,66 @@ HasAveragePurchasePrice returns a boolean if a field has been set.
 `func (o *Position) UnsetAveragePurchasePrice()`
 
 UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
+### GetFractionalUnits
+
+`func (o *Position) GetFractionalUnits() float32`
+
+GetFractionalUnits returns the FractionalUnits field if non-nil, zero value otherwise.
+
+### GetFractionalUnitsOk
+
+`func (o *Position) GetFractionalUnitsOk() (*float32, bool)`
+
+GetFractionalUnitsOk returns a tuple with the FractionalUnits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFractionalUnits
+
+`func (o *Position) SetFractionalUnits(v float32)`
+
+SetFractionalUnits sets FractionalUnits field to given value.
+
+### HasFractionalUnits
+
+`func (o *Position) HasFractionalUnits() bool`
+
+HasFractionalUnits returns a boolean if a field has been set.
+
+### SetFractionalUnitsNil
+
+`func (o *Position) SetFractionalUnitsNil(b bool)`
+
+ SetFractionalUnitsNil sets the value for FractionalUnits to be an explicit nil
+
+### UnsetFractionalUnits
+`func (o *Position) UnsetFractionalUnits()`
+
+UnsetFractionalUnits ensures that no value is present for FractionalUnits, not even an explicit nil
+### GetCurrency
+
+`func (o *Position) GetCurrency() PositionCurrency`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *Position) GetCurrencyOk() (*PositionCurrency, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *Position) SetCurrency(v PositionCurrency)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *Position) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

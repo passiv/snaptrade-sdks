@@ -342,6 +342,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
+        "425":
+          description: Too Early
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/425FailedRequestResponse"
         "500":
           description: Unexpected Error
   /accounts/{accountId}/holdings:
@@ -389,6 +395,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/403FailedRequestResponse"
+        "425":
+          description: Too Early
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/425FailedRequestResponse"
         "500":
           description: Unexpected Error
   /accounts:
@@ -572,7 +584,7 @@ paths:
     get:
       tags:
         - Account Information
-      summary: List account recent orders
+      summary: List account orders
       operationId: AccountInformation_getUserAccountOrders
       description: |
         Returns a list of recent orders in the specified account.
@@ -626,12 +638,246 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/recentOrders:
+    get:
+      tags:
+        - Account Information
+      summary: List account recent orders (last 24 hours only)
+      operationId: AccountInformation_getUserAccountRecentOrders
+      description: |
+        A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
+        Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false
+        **Please contact support for access as this endpoint is not enabled by default.**
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: only_executed
+          description: Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+          schema:
+            type: boolean
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecentOrdersResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/returnRates:
+    get:
+      tags:
+        - Account Information
+      summary: List account rate of returns
+      operationId: AccountInformation_getUserAccountReturnRates
+      description: |
+        Returns a list of rate of return percents for a given account. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateOfReturnResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/activities:
+    get:
+      tags:
+        - Account Information
+      summary: List account activities
+      operationId: AccountInformation_getAccountActivities
+      description: |
+        Returns all historical transactions for the specified account.
+
+        This endpoint is paginated with a default page size of 1000. The endpoint will return a maximum of 1000 transactions per request. See the query parameters for pagination options.
+
+        Transaction are returned in reverse chronological order, using the `trade_date` field.
+
+        The data returned here is always cached and refreshed once a day.
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: false
+          name: startDate
+          description: The start date (inclusive) of the transaction history to retrieve. If not provided, the default is the first transaction known to SnapTrade based on `trade_date`.
+          schema:
+            $ref: "#/components/schemas/ReportingDate"
+        - in: query
+          required: false
+          name: endDate
+          description: The end date (inclusive) of the transaction history to retrieve. If not provided, the default is the last transaction known to SnapTrade based on `trade_date`.
+          schema:
+            $ref: "#/components/schemas/ReportingDate"
+        - in: query
+          required: false
+          name: offset
+          description: An integer that specifies the starting point of the paginated results. Default is 0.
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+        - in: query
+          required: false
+          name: limit
+          description: An integer that specifies the maximum number of transactions to return. Default of 1000.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+        - in: query
+          required: false
+          name: type
+          description: |
+            Optional comma separated list of transaction types to filter by. SnapTrade does a best effort to categorize brokerage transaction types into a common set of values. Here are some of the most popular values:
+              - `BUY` - Asset bought.
+              - `SELL` - Asset sold.
+              - `DIVIDEND` - Dividend payout.
+              - `CONTRIBUTION` - Cash contribution.
+              - `WITHDRAWAL` - Cash withdrawal.
+              - `REI` - Dividend reinvestment.
+              - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
+              - `INTEREST` - Interest deposited into the account.
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event.
+              - `OPTIONASSIGNMENT` - Option assignment event.
+              - `OPTIONEXERCISE` - Option exercise event.
+              - `TRANSFER` - Transfer of assets from one account to another
+          schema:
+            type: string
+            example: BUY,SELL,DIVIDEND
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedUniversalActivity"
+        default:
+          description: Unexpected error
+  /authorizations/{authorizationId}/returnRates:
+    get:
+      tags:
+        - Connections
+      summary: List connection rate of returns
+      operationId: Connections_returnRates
+      description: |
+        Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example "ALL", "1Y", "6M", "3M", "1M"
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: authorizationId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageAuthID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateOfReturnResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/quotes":
     get:
       tags:
         - Trading
-      summary: Get symbol quotes
-      description: Returns quotes from the brokerage for the specified symbols and account. The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint. This endpoint does not work for options quotes.
+      summary: Get equity symbol quotes
+      description: |
+        Returns quotes from the brokerage for the specified symbols and account.
+
+        The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
+
+        This endpoint does not work for options quotes.
+
+        This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
+
       operationId: Trading_getUserAccountQuotes
       parameters:
         - in: query
@@ -647,7 +893,7 @@ paths:
         - in: query
           name: symbols
           required: true
-          description: List of Universal Symbol IDs or tickers to get quotes for.
+          description: List of Universal Symbol IDs or tickers to get quotes for. When providing multiple values, use a comma as separator
           schema:
             type: string
         - in: query
@@ -675,10 +921,12 @@ paths:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/accounts/{accountId}/orders/cancel":
     post:
+      deprecated: true
       tags:
         - Trading
-      summary: Cancel order
+      summary: Cancel equity order
       description: |
+        **This endpoint is deprecated. Please switch to [the new cancel order endpoint](/reference/Trading/Trading_cancelOrder) **
         Attempts to cancel an open order with the brokerage. If the order is no longer cancellable, the request will be rejected.
       operationId: Trading_cancelUserAccountOrder
       parameters:
@@ -849,141 +1097,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-  "/accounts/{accountId}/optionStrategy":
-    post:
-      tags:
-        - Options
-      summary: Create options strategy
-      description: |
-        Creates an option strategy object that will be used to place an option strategy order.
-      operationId: Options_getOptionStrategy
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account to create the option strategy object in.
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        $ref: "#/components/requestBodies/OptionStrategyRequestBody"
-
-      responses:
-        "200":
-          description: Order Quotes
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StrategyQuotes"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-
-  /accounts/{accountId}/optionStrategy/{optionStrategyId}:
-    get:
-      tags:
-        - Options
-      summary: Get options strategy quotes
-      description: |
-        Returns a Strategy Quotes object which has latest market data of the specified option strategy.
-      operationId: Options_getOptionsStrategyQuote
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account the strategy will be placed in.
-          schema:
-            type: string
-            format: uuid
-        - in: path
-          required: true
-          name: optionStrategyId
-          description: Option strategy id obtained from response when creating option strategy object
-          schema:
-            $ref: "#/components/schemas/Id"
-      responses:
-        "200":
-          description: Order Quotes
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StrategyQuotes"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-
-  "/accounts/{accountId}/optionStrategy/{optionStrategyId}/execute":
-    post:
-      tags:
-        - Options
-      summary: Place an option strategy order
-      description: Places the option strategy order and returns the order record received from the brokerage.
-      operationId: Options_placeOptionStrategy
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account to execute the strategy in.
-          schema:
-            $ref: "#/components/schemas/Id"
-        - in: path
-          name: optionStrategyId
-          required: true
-          description: Option strategy id obtained from response when creating option strategy object
-          schema:
-            $ref: "#/components/schemas/Id"
-      requestBody:
-        $ref: "#/components/requestBodies/OrderStrategyExecuteBody"
-
-      responses:
-        "200":
-          description: Status of strategy order placed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/StrategyOrderRecord"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/authorizations":
     get:
       tags:
@@ -1089,8 +1202,9 @@ paths:
       summary: Refresh holdings for a connection
       description: |
         Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [`ACCOUNT_HOLDINGS_UPDATED` webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.
+        This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.
 
-        *Please contact support for access as this endpoint is not enabled by default.*
+        **Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)**
       operationId: Connections_refreshBrokerageAuthorization
       parameters:
         - in: path
@@ -1148,7 +1262,7 @@ paths:
         Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections.
         Will trigger a disconnect as if it happened naturally, and send a [`CONNECTION_BROKEN` webhook](/docs/webhooks#webhooks-connection_broken) for the connection.
 
-        *Please contact us in order to use this endpoint as it is disabled by default.*
+        This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default.
       operationId: Connections_disableBrokerageAuthorization
       parameters:
         - in: path
@@ -1256,6 +1370,30 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Brokerage"
+        default:
+          description: Unexpected error.
+  "/brokerages/{slug}/instruments":
+    get:
+      tags:
+        - Reference Data
+      summary: Get brokerage instruments
+      description: Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don't will return an empty list.
+      operationId: ReferenceData_listAllBrokerageInstruments
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          description: A short, unique identifier for the brokerage. It is usually the name of the brokerage in capital letters and will never change.
+          schema:
+            type: string
+            example: QUESTRADE
+      responses:
+        "200":
+          description: A list of brokerage instruments.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BrokerageInstrumentsResponse"
         default:
           description: Unexpected error.
   "/brokerageAuthorizationTypes":
@@ -1457,7 +1595,106 @@ paths:
           schema:
             $ref: "#/components/schemas/UserSecret"
       requestBody:
-        $ref: "#/components/requestBodies/ManualTradeFormRequestBody"
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBodyWithOptions"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/bracket:
+    post:
+      tags:
+        - Trading
+      summary: Place bracket equity order
+      description: |
+        Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
+        use. Only supported on certain brokerages
+      operationId: Trading_placeBracketOrder
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeFormRequestBodyBracket"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Trade could not be placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: User does not have permissions to place trades
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/replace:
+    post:
+      tags:
+        - Trading
+      summary: Replace order
+      description: |
+        Replaces an existing pending order with a new one. The way this works is brokerage dependent, but usually involves cancelling
+        the existing order and placing a new one. The order's brokerage_order_id may or may not change, be sure to use the one
+        returned in the response going forward. Only supported on some brokerages
+      operationId: Trading_replaceOrder
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          description: The ID of the account to execute the trade on.
+          schema:
+            $ref: "#/components/schemas/Id"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/ManualTradeReplaceFormRequestBody"
       responses:
         "200":
           description: OK
@@ -1483,7 +1720,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Check order impact
+      summary: Check equity order impact
       description: Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
       operationId: Trading_getOrderImpact
       parameters:
@@ -1524,7 +1761,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place checked order
+      summary: Place checked equity order
       description: |
         Places the previously checked order with the brokerage. The `tradeId` is obtained from the [check order impact endpoint](/reference/Trading/Trading_getOrderImpact). If you prefer to place the order without checking for impact first, you can use the [place order endpoint](/reference/Trading/Trading_placeForceOrder).
 
@@ -1564,18 +1801,345 @@ paths:
                 $ref: "#/components/schemas/400FailedRequestResponse"
         "500":
           description: Unexpected Error
+  /accounts/{accountId}/orders/details:
+    post:
+      tags:
+        - Account Information
+      summary: Get account order detail
+      operationId: AccountInformation_getUserAccountOrderDetail
+      description: |
+        Returns the detail of a single order using the external order ID provided in the request body.
+
+        This endpoint is always realtime and does not rely on cached data.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      requestBody:
+        $ref: "#/components/requestBodies/OrderDetailRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrderRecord"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+
+  /accounts/{accountId}/trading/crypto:
+    post:
+      tags:
+        - Trading
+      summary: Place crypto order
+      description: |
+        Places an order in the specified account.
+        This endpoint does not compute the impact to the account balance from the order before submitting the order.
+      operationId: Trading_placeCryptoOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CryptoOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderUpdatedResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/cancel:
+    post:
+      tags:
+        - Trading
+      summary: Cancel order
+      description: |
+        Cancels an order in the specified account. Accepts order IDs for all asset types.
+      operationId: Trading_cancelOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CancelOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelOrderResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/crypto/preview:
+    post:
+      tags:
+        - Trading
+      summary: Preview crypto order
+      description: |
+        Previews an order using the specified account.
+      operationId: Trading_previewCryptoOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/CryptoOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CryptoOrderPreview"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+    get:
+      tags:
+        - Trading
+      summary: Get crypto pairs
+      description: |
+        Searches cryptocurrency pairs instruments accessible to the specified account.
+      operationId: Trading_searchCryptocurrencyPairInstruments
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: query
+          required: false
+          name: base
+          schema:
+            $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
+        - in: query
+          required: false
+          name: quote
+          schema:
+            $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["items"]
+                description: The instruments
+                properties:
+                  items:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/CryptocurrencyPair"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+  /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
+    get:
+      tags:
+        - Trading
+      summary: Get crypto pair quote
+      description: |
+        Gets a quote for the specified account.
+      operationId: Trading_getCryptocurrencyPairQuote
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+        - in: path
+          required: true
+          name: instrumentSymbol
+          schema:
+            $ref: "#/components/schemas/CryptocurrencyPairSymbol"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CryptocurrencyPairQuote"
+
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+
+  /accounts/{accountId}/trading/options:
+    post:
+      tags:
+        - Trading
+      summary: Place option order
+      description: |
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+      operationId: Trading_placeMlegOrder
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/MlegOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MlegOrderResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "500":
+          description: Unexpected Error
+
   /activities:
     get:
+      deprecated: true
       tags:
         - Transactions And Reporting
       summary: Get transaction history for a user
       operationId: TransactionsAndReporting_getActivities
       description: |
+        This endpoint is being deprecated but will continue to be available for use via SDKs, please use [the account level endpoint](/reference/Account%20Information/AccountInformation_getAccountActivities) if possible
+
         Returns all historical transactions for the specified user and filtering criteria. It's recommended to use `startDate` and `endDate` to paginate through the data, as the response may be very large for accounts with a long history and/or a lot of activity. There's a max number of 10000 transactions returned per request.
 
         There is no guarantee to the ordering of the transactions returned. Please sort the transactions based on the `trade_date` field if you need them in a specific order.
 
-        The data returned here is always cached and refreshed once a day. **If you need real-time data, please use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint**.
+        The data returned here is always cached and refreshed once a day.
       parameters:
         - in: query
           required: false
@@ -1613,7 +2177,11 @@ paths:
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
-              - `FEE` - Fee withdrawn from the account. 
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event.
+              - `OPTIONASSIGNMENT` - Option assignment event.
+              - `OPTIONEXERCISE` - Option exercise event.
+              - `TRANSFER` - Transfer of assets from one account to another
           schema:
             type: string
             example: BUY,SELL,DIVIDEND
@@ -1875,6 +2443,24 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/ManualTradeForm"
+    ManualTradeFormRequestBodyWithOptions:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeFormWithOptions"
+    ManualTradeFormRequestBodyBracket:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeFormBracket"
+    ManualTradeReplaceFormRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ManualTradeReplaceForm"
     ValidatedTradeRequestBody:
       required: false
       content:
@@ -1887,6 +2473,16 @@ components:
         application/json:
           schema:
             type: object
+            properties:
+              brokerage_order_id:
+                $ref: "#/components/schemas/BrokerageOrderID"
+    OrderDetailRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required: ["brokerage_order_id"]
             properties:
               brokerage_order_id:
                 $ref: "#/components/schemas/BrokerageOrderID"
@@ -1923,6 +2519,25 @@ components:
                 $ref: "#/components/schemas/TimeInForceStrict"
               price:
                 $ref: "#/components/schemas/Price"
+
+    SimpleOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/SimpleOrderForm"
+    CryptoOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CryptoOrderForm"
+    MlegOrderRequestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/MlegTradeForm"
 
   schemas:
     400FailedRequestResponse:
@@ -1981,6 +2596,14 @@ components:
           example: The requested resource does not exist.
         default_code:
           example: 1011
+    425FailedRequestResponse:
+      description: Example for failed request response
+      type: object
+      properties:
+        detail:
+          example: The resource is currently being populated. Please try again later.
+        code:
+          example: 3012
     500UnexpectedExceptionResponse:
       description: Example for a response that failed for unexpected reasons
       type: object
@@ -2011,10 +2634,12 @@ components:
           example: true
         last_successful_sync:
           description: All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/SyncStatusDate"
         first_transaction_date:
           description: The date of the first transaction in the account known to SnapTrade. It's possible that the account has transactions before this date, but they are not known to SnapTrade.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/SyncStatusDate"
     HoldingsStatus:
@@ -2030,6 +2655,7 @@ components:
           example: true
         last_successful_sync:
           description: The last time holdings were successfully synced by SnapTrade.
+          nullable: true
           allOf:
             - $ref: "#/components/schemas/HoldingsSyncStatusDate"
     AccountBalance:
@@ -2088,6 +2714,17 @@ components:
           $ref: "#/components/schemas/AccountSyncStatus"
         balance:
           $ref: "#/components/schemas/AccountBalance"
+        status:
+          type: string
+          description: The current status of the account. Can be either "open", "closed", "archived" or null if the status is unknown or not provided by the brokerage.
+          enum: [open, closed, archived, unavailable]
+          nullable: true
+          example: 'open'
+        raw_type:
+          type: string
+          description: The account type as provided by the brokerage
+          example: Margin
+          nullable: true
         meta:
           type: object
           deprecated: true
@@ -2130,6 +2767,11 @@ components:
       description: Comma separated list of account IDs
       type: string
       example: 917c8734-8470-4a3e-a18f-57c3f2ee6631,65e839a3-9103-4cfb-9b72-2071ef80c5f2
+    BrokerageID:
+      description: Unique identifier for the brokerage.
+      type: string
+      format: uuid
+      example: 87b24961-b51e-4db8-9226-f198f6518a89
     BrokerageAuthID:
       description: Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade.
       type: string
@@ -2189,6 +2831,47 @@ components:
             $ref: "#/components/schemas/AccountOrderRecord"
         total_value:
           $ref: "#/components/schemas/SnapTradeHoldingsTotalValue"
+    RecentOrdersResponse:
+      description: List of orders executed within the last 24 hours
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders executed in the last 24 hours
+          items:
+            $ref: "#/components/schemas/AccountOrderRecord"
+    RateOfReturnResponse:
+      description: List of return rates with their timeframe
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of return percentages
+          items:
+            $ref: "#/components/schemas/RateOfReturnObject"
+    RateOfReturnObject:
+      description: Individual rate of return object with return percent and timeframe
+      type: object
+      properties:
+        timeframe:
+          type: string
+          enum:
+            - ALL
+            - 1Y
+            - 6M
+            - 3M
+            - 1M
+          description: The timeframe this return percent is reflecting
+          example: ALL
+        return_percent:
+          type: number
+          description: The percent return of the portfolio, directly from the brokerage. 5.97 indicates a 5.97% return over the timeframe
+          example: 5.97
+        created_date:
+          type: string
+          description: The date this was fetched
+          format: date-time
+          example: 2024-07-30T22:51:49.746270Z
     AccountOrderRecord:
       description: Describes a single recent order in an account. Each record here represents a single order leg. For multi-leg orders, there will be multiple records.
       type: object
@@ -2197,8 +2880,6 @@ components:
           $ref: "#/components/schemas/BrokerageOrderID"
         status:
           $ref: "#/components/schemas/AccountOrderRecordStatus"
-        symbol:
-          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol:
           description: Contains information about the security that the order is for. This field is only present for stock/ETF/crypto/mutual fund orders. For option orders, this field will be null and the `option_symbol` field will be populated.
           allOf:
@@ -2207,6 +2888,14 @@ components:
           description: Contains information about the option contract that the order is for. This field is only present for option orders. For stock/ETF/crypto/mutual fund orders, this field will be null and the `universal_symbol` field will be populated.
           allOf:
             - $ref: "#/components/schemas/OptionsSymbol"
+        quote_universal_symbol:
+          description: Quote cryptocurrency. This field is only present for cryptocurrency pair orders with a cryptocurrency as quote.
+          allOf:
+            - $ref: "#/components/schemas/UniversalSymbol"
+        quote_currency:
+          description: Quote currency. This field is only present for cryptocurrency pair orders with a fiat currency as quote.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
         action:
           $ref: "#/components/schemas/Action"
         total_quantity:
@@ -2283,6 +2972,12 @@ components:
           type: string
           format: date-time
           example: 2024-08-05T00:05:57.409000Z
+        symbol:
+          $ref: "#/components/schemas/BrokerageSymbolID"
+        child_brokerage_order_ids:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/ChildBrokerageOrderIDs"
     AccountOrderRecordStatus:
       description: Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
       type: string
@@ -2323,17 +3018,17 @@ components:
           type: number
           description: The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position.
           example: -50
+        average_purchase_price:
+          type: number
+          nullable: true
+          example: 4126
+          description: Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
         currency:
           deprecated: true
           description: The currency of the price. This field is deprecated and will be removed in a future version. The currency of the price is determined by the currency of the underlying security.
           nullable: true
           allOf:
             - $ref: "#/components/schemas/Currency"
-        average_purchase_price:
-          type: number
-          nullable: true
-          example: 4126
-          description: Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100).
     OptionStrategy:
       type: object
       properties:
@@ -2475,7 +3170,11 @@ components:
             institution_name: Alpaca
 
     SnapTradeHoldingsTotalValue:
-      description: The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to `account.balance.total`.
+      deprecated: true
+      description: |
+        This field is deprecated. To get the brokerage reported total market value of the account, please refer to `account.balance.total`.
+
+        The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. In certain cases, this value may also be double-counting cash-equivalent assets if those assets are represented as both cash and positions in the account.
       type: object
       properties:
         value:
@@ -2599,7 +3298,7 @@ components:
         redirectURI:
           description: Connection Portal link to redirect user to connect a brokerage account.
           type: string
-          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
+          example: https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d
         sessionId:
           description: ID to identify the connection portal session.
           type: string
@@ -2815,6 +3514,11 @@ components:
           description: The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
           example: 0.44
           nullable: true
+        average_purchase_price:
+          type: number
+          nullable: true
+          example: 108.3353
+          description: Cost basis _per share_ of this position.
         fractional_units:
           deprecated: true
           description:
@@ -2823,14 +3527,16 @@ components:
           type: number
           nullable: true
           example: 1.44
-        average_purchase_price:
-          type: number
-          nullable: true
-          example: 108.3353
-          description: Cost basis _per share_ of this position.
+        currency:
+          description: |
+            The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
+      required:
+        - userId
       properties:
         userId:
           $ref: "#/components/schemas/UserID"
@@ -2855,21 +3561,26 @@ components:
           type: string
           example: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         connectionType:
-          description: Sets whether the connection should be read-only or trade-enabled.
+          description: >
+            Determines connection permissions (default: read)
+            - `read`: Data access only.
+            - `trade`: Data and trading access.
+            - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.
           type: string
           enum:
             - read
             - trade
+            - trade-if-available
           default: read
         connectionPortalVersion:
-          description: Sets the version of the connection portal to render.
+          description: Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
           type: string
-          example: v3
+          example: v4
           enum:
             - v4
             - v3
             - v2
-          default: v3
+          default: v4
     Symbol:
       # FIXME Merge this with UniversalSymbol
       description: Uniquely describes a single security + exchange combination across all brokerages.
@@ -3006,12 +3717,6 @@ components:
           format: url
           example: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
           nullable: true
-        open_url:
-          deprecated: true
-          description: This field is deprecated.
-          type: string
-          format: url
-          nullable: true
         url:
           description: URL to the brokerage's website.
           type: string
@@ -3025,14 +3730,14 @@ components:
           description: Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
           type: boolean
           example: true
-        allows_fractional_units:
-          deprecated: true
-          description: This field is deprecated. Please contact us if you have a valid use case for it.
+        allows_trading:
+          description: Whether the brokerage allows trading through SnapTrade.
           type: boolean
           nullable: true
           example: true
-        allows_trading:
-          description: Whether the brokerage allows trading through SnapTrade.
+        allows_fractional_units:
+          deprecated: true
+          description: This field is deprecated. Please contact us if you have a valid use case for it.
           type: boolean
           nullable: true
           example: true
@@ -3057,6 +3762,12 @@ components:
           example:
             - 2bcd7cc3-e922-4976-bce1-9858296801c3
             - 4bcd8cc3-c122-4974-dc21-1858296801f4
+        open_url:
+          deprecated: true
+          description: This field is deprecated.
+          type: string
+          format: url
+          nullable: true
     BrokerageAuthorization:
       description: |
         A single connection with a brokerage. Note that `Connection` and `Brokerage Authorization` are interchangeable, but the term `Connection` is preferred and used in the doc for consistency.
@@ -3073,12 +3784,6 @@ components:
           type: string
           format: date-time
           example: 2024-08-20T21:56:19.123935Z
-        updated_date:
-          deprecated: true
-          description: Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
-          type: string
-          format: date-time
-          example: 2024-08-20T21:56:20.057224Z
         brokerage:
           $ref: "#/components/schemas/Brokerage"
         name:
@@ -3112,6 +3817,16 @@ components:
           type: object
           example:
             identifier: 123456
+        updated_date:
+          deprecated: true
+          description: Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
+          type: string
+          format: date-time
+          example: 2024-08-20T21:56:20.057224Z
+        is_eligible_for_payout:
+          description: Whether the connection is eligible for a payout.
+          type: boolean
+          example: true
     BrokerageAuthorizationRefreshConfirmation:
       description: Confirmation that the syncs have been scheduled.
       type: object
@@ -3167,6 +3882,8 @@ components:
       description: Uniquely describes a security for the option position within an account. The distinction between this and the `option_symbol` child property is that this object is specific to a position within an account, while the `option_symbol` child property is universal across all brokerage accounts. The caller should rely on the `option_symbol` child property for most use cases.
       type: object
       properties:
+        option_symbol:
+          $ref: "#/components/schemas/OptionsSymbol"
         id:
           $ref: "#/components/schemas/BrokerageSymbolID"
         description:
@@ -3174,12 +3891,12 @@ components:
           description: This field is deprecated and the caller should use the `option_symbol` child property's `description` instead.
           type: string
           example: SPY CALL 7/17 200
-        option_symbol:
-          $ref: "#/components/schemas/OptionsSymbol"
     PositionSymbol:
       description: Uniquely describes a security for the position within an account. The distinction between this and the `symbol` child property is that this object is specific to a position within an account, while the `symbol` child property is universal across all brokerage accounts. The caller should rely on the `symbol` child property for most use cases.
       type: object
       properties:
+        symbol:
+          $ref: "#/components/schemas/UniversalSymbol"
         id:
           $ref: "#/components/schemas/BrokerageSymbolID"
         description:
@@ -3187,8 +3904,6 @@ components:
           description: This field is deprecated and the caller should use the `symbol` child property's `description` instead.
           type: string
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
-        symbol:
-          $ref: "#/components/schemas/UniversalSymbol"
         local_id:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
@@ -3276,6 +3991,17 @@ components:
       type: string
       format: uuid
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+    ChildBrokerageOrderIDs:
+      type: object
+      properties:
+        take_profit_order_id:
+          type: string
+          description: The brokerage order ID for the take profit leg of the bracket order
+          example: "12345678"
+        stop_loss_order_id:
+          type: string
+          description: The brokerage order ID for the stop loss leg of the bracket order
+          example: "12345678"
     BrokerageOrderID:
       description: Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
       type: string
@@ -3374,7 +4100,7 @@ components:
       properties:
         version:
           type: integer
-          example: 151
+          example: 153
         timestamp:
           type: string
           example: 2022-11-04T01:47:00.377969Z
@@ -3448,8 +4174,6 @@ components:
       description: Information about the security for the order.
       type: object
       properties:
-        brokerage_symbol_id:
-          $ref: "#/components/schemas/BrokerageSymbolID"
         universal_symbol_id:
           $ref: "#/components/schemas/UniversalSymbolID"
         currency:
@@ -3470,6 +4194,8 @@ components:
           description: This field is deprecated and should not be used.
           type: string
           example: MVGP.U.TO
+        brokerage_symbol_id:
+          $ref: "#/components/schemas/BrokerageSymbolID"
     ManualTradeBalance:
       description: Estimated remaining balance of the account after the trade is executed.
       type: object
@@ -3560,6 +4286,159 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    MlegTradeForm:
+      description: Inputs for placing a multi-leg order with the brokerage.
+      type: object
+      required:
+        - "order_type"
+        - "time_in_force"
+        - "legs"
+      properties:
+        order_type:
+          $ref: "#/components/schemas/MlegOrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        limit_price:
+          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+          type: string
+          format: decimal
+          example: ""
+          nullable: true
+        stop_price:
+          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+          type: string
+          format: decimal
+          example: ""
+          nullable: true
+        price_effect:
+          nullable: true
+          example: DEBIT
+          allOf:
+            - $ref: "#/components/schemas/MlegPriceEffectStrict"
+        legs:
+          type: array
+          items:
+            $ref: "#/components/schemas/MlegLeg"
+    ManualTradeReplaceForm:
+      description: Inputs for replacing an order with the brokerage.
+      type: object
+      required:
+        - brokerage_order_id
+        - action
+        - order_type
+        - time_in_force
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        action:
+          $ref: "#/components/schemas/ActionStrict"
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        symbol:
+          description: The security's trading ticker symbol
+          type: string
+          example: AAPL
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Units"
+    ManualTradeFormWithOptions:
+      description: Inputs for placing an order with the brokerage.
+      type: object
+      required:
+        - account_id
+        - action
+        - order_type
+        - time_in_force
+      properties:
+        account_id:
+          $ref: "#/components/schemas/AccountID"
+        action:
+          $ref: "#/components/schemas/ActionStrictWithOptions"
+        universal_symbol_id:
+          description: The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/UniversalSymbolID"
+        symbol:
+          description: The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+          type: string
+          example: AAPL
+          nullable: true
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          description: For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Units"
+        notional_value:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/NotionalValue"
+    ManualTradeFormBracket:
+      description: Inputs for placing an order with the brokerage.
+      type: object
+      required:
+        - action
+        - order_type
+        - time_in_force
+        - stop_loss
+        - take_profit
+        - instrument
+      properties:
+        action:
+          $ref: "#/components/schemas/ActionStrictWithOptions"
+        symbol:
+          description: The security's trading ticker symbol.
+          type: string
+          example: AAPL
+        instrument:
+          $ref: "#/components/schemas/TradingInstrument"
+        order_type:
+          $ref: "#/components/schemas/OrderTypeStrict"
+        time_in_force:
+          $ref: "#/components/schemas/TimeInForceStrict"
+        price:
+          description: The limit price for `Limit` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        stop:
+          description: The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
+          type: number
+          example: 31.33
+          nullable: true
+        units:
+          $ref: "#/components/schemas/Units"
+        stop_loss:
+          $ref: "#/components/schemas/StopLoss"
+        take_profit:
+          $ref: "#/components/schemas/TakeProfit"
     ValidatedTradeBody:
       type: object
       properties:
@@ -3568,6 +4447,88 @@ components:
           example: true
           type: boolean
           description: Optional, defaults to true. Determines if a wait is performed to check on order status. If false, latency will be reduced but orders returned will be more likely to be of status `PENDING` as we will not wait to check on the status before responding to the request.
+    CryptoTradingInstrument:
+      type: object
+      required:
+        - symbol
+        - type
+      properties:
+        symbol:
+          description: The instrument's trading ticker symbol
+          type: string
+          example: BTC
+        type:
+          description: The instrument's type
+          type: string
+          enum:
+            - CRYPTOCURRENCY
+            - CRYPTOCURRENCY_PAIR
+    TradingInstrument:
+      type: object
+      required:
+        - symbol
+        - type
+      properties:
+        symbol:
+          description: The instrument's trading ticker symbol
+          type: string
+          example: AAPL
+        type:
+          description: The instrument's type
+          type: string
+          enum:
+            - EQUITY
+            - CRYPTOCURRENCY
+            - CRYPTOCURRENCY_PAIR
+    BrokerageInstrumentsResponse:
+      type: object
+      properties:
+        instruments:
+          type: array
+          items:
+            $ref: "#/components/schemas/BrokerageInstrument"
+    BrokerageInstrument:
+      type: object
+      required:
+        - symbol
+      properties:
+        symbol:
+          description: The instrument's trading symbol / ticker.
+          type: string
+          example: AAPL
+        exchange_mic:
+          description: The MIC code of the exchange where the instrument is traded.
+          type: string
+          example: XNAS
+          nullable: true
+        tradeable:
+          description: Whether the instrument is tradeable through the brokerage. `null` if the tradeability is unknown.
+          type: boolean
+          example: true
+          nullable: true
+        fractionable:
+          description: Whether the instrument allows fractional units. `null` if the fractionability is unknown.
+          type: boolean
+          example: true
+          nullable: true
+        universal_symbol_id:
+          description: The universal symbol ID of the instrument. This is the ID used to reference the instrument in SnapTrade API calls.
+          type: string
+          format: uuid
+          example: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          nullable: true
+    MlegTradingInstrument:
+      type: object
+      required:
+        - symbol
+        - instrument_type
+      properties:
+        symbol:
+          description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+          type: string
+          example: PBI   250718C00006000
+        instrument_type:
+          $ref: "#/components/schemas/MlegInstrumentType"
     OrderTypeStrict:
       description: |
         The type of order to place.
@@ -3595,11 +4556,37 @@ components:
           - `Day` - Day. The order is valid only for the trading day on which it is placed.
           - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
           - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+          - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
       type: string
       enum:
         - FOK
         - Day
         - GTC
+        - IOC
+      example: Day
+    MlegPriceEffectStrict:
+      type: string
+      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+      enum:
+        - CREDIT
+        - DEBIT
+        - EVEN
+      example: DEBIT
+    MlegOrderTypeStrict:
+      example: MARKET
+      type: string
+      enum:
+        - MARKET
+        - LIMIT
+        - STOP_LOSS_MARKET
+        - STOP_LOSS_LIMIT
+      description: The type of order to place.
+    MlegInstrumentType:
+      description: The instrument's type
+      type: string
+      enum:
+        - OPTION
+        - EQUITY
     TimeInForce:
       description: |
         Trade time in force examples:
@@ -3609,11 +4596,32 @@ components:
           * GTD - Good Til Date
       type: string
     ActionStrict:
-      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
       type: string
       enum:
         - BUY
         - SELL
+    MlegActionStrict:
+      description: The action describes the intent and side of a trade. For equities, this is either `BUY` or `SELL`. For options, this is one of `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN`, `SELL_TO_CLOSE`.
+      type: string
+      enum:
+        - BUY
+        - SELL
+        - BUY_TO_OPEN
+        - BUY_TO_CLOSE
+        - SELL_TO_OPEN
+        - SELL_TO_CLOSE
+      example: BUY_TO_OPEN
+    ActionStrictWithOptions:
+      description: The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
+      type: string
+      enum:
+        - BUY
+        - SELL
+        - BUY_TO_OPEN
+        - BUY_TO_CLOSE
+        - SELL_TO_OPEN
+        - SELL_TO_CLOSE
     Action:
       type: string
       description: >
@@ -3641,6 +4649,254 @@ components:
         - type: string
         - type: number
       example: 100.00
+    StopLoss:
+      description: Details of the stop loss order. Only to be used when order_class = BRACKET. stop_price is required, limit_price is optional
+      type: object
+      properties:
+        stop_price:
+          type: string
+          example: "48.55"
+        limit_price:
+          type: string
+          nullable: true
+          example: "48.50"
+    TakeProfit:
+      description: Details of the take profit order. Only to be used when order_class = BRACKET.
+      type: object
+      properties:
+        limit_price:
+          type: string
+          example: "49.95"
+
+    CryptocurrencySymbol:
+      description: Symbol to identify a cryptocurrency or fiat currency on a crypto exchange. Fiat currencies symbols are ISO-4217 codes.
+      type: string
+      example: BTC
+    CryptocurrencyBaseSymbol:
+      description: >
+        The base currency of a pair (e.g., "BTC" in BTC/USD).
+        Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      type: string
+      example: BTC
+    CryptocurrencyQuoteSymbol:
+      description: >
+        The quote currency of a pair (e.g., "USD" in BTC/USD).
+        Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
+      type: string
+      example: USD
+    CryptocurrencyPairSymbol:
+      description: Cryptocurrency pair instrument symbol
+      type: string
+      example: BTC-USD
+    CryptocurrencyPair:
+      description: A cryptocurrency pair instrument.
+      type: object
+      required: ["base", "quote"]
+      properties:
+        symbol:
+          $ref: "#/components/schemas/CryptocurrencyPairSymbol"
+        base:
+          $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
+        quote:
+          $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
+    CryptocurrencyPairQuote:
+      type: object
+      required: ["bid", "ask"]
+      properties:
+        bid:
+          description: The highest price a buyer is willing to pay.
+          type: string
+          format: decimal
+          example: "123.45"
+        ask:
+          description: The lowest price a seller is willing to accept.
+          type: string
+          format: decimal
+          example: "123.45"
+        mid:
+          description: The market mid price.
+          type: string
+          format: decimal
+          example: "123.45"
+        timestamp:
+          description: The timestamp of the quote.
+          type: string
+          format: date-time
+          example: 2024-01-24T15:00:00Z
+    CryptoOrderPreview:
+      description: Preview of an order.
+      type: object
+      properties:
+        estimated_fee:
+          type: object
+          required: ["currency", "amount"]
+          description: The estimated order fee.
+          properties:
+            currency:
+              $ref: "#/components/schemas/CryptocurrencySymbol"
+            amount:
+              type: string
+              format: decimal
+              example: "123.45"
+    OrderUpdatedResponse:
+      type: object
+      required:
+        - brokerage_order_id
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        order:
+          $ref: "#/components/schemas/AccountOrderRecord"
+    CancelOrderResponse:
+      type: object
+      required:
+        - brokerage_order_id
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        raw_response:
+          type: object
+          nullable: true
+          description: The raw response from the brokerage.
+          example: {
+            "order_id": "1234567890",
+            "status": "CANCELLED"
+          }
+    MlegOrderResponse:
+      type: object
+      required:
+        - brokerage_order_id
+        - orders
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        orders:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountOrderRecord"
+
+    PaginationDetails:
+      description: Details about the pagination of the results.
+      type: object
+      properties:
+        offset:
+          type: integer
+          example: 0
+          description: The starting point of the paginated results.
+        limit:
+          type: integer
+          example: 100
+          description: The maximum number of items to return in the response.
+        total:
+          type: integer
+          example: 1000
+          description: The total number of items available to be returned over the API.
+    PaginatedUniversalActivity:
+      description: A paginated list of UniversalActivity objects.
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountUniversalActivity"
+        pagination:
+          $ref: "#/components/schemas/PaginationDetails"
+    AccountUniversalActivity:
+      description: A transaction or activity from an institution
+      type: object
+      properties:
+        id:
+          description: |
+            Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.
+
+            Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.
+          type: string
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
+        symbol:
+          description: The security for the transaction. The field is `null` if the transaction is not related to a security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's symbol. In cases where the brokerage symbol is not recognized, the field will be set to `null`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/Symbol"
+        option_symbol:
+          description: The option security for the transaction. The field is `null` if the transaction is not related to an option security (like a deposit, withdrawal, fee, etc). SnapTrade does a best effort to map the brokerage's option symbol. In cases where the brokerage option symbol is not recognized, the field will be set to `null`.
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/OptionsSymbol"
+        price:
+          description: The price of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+          type: number
+          example: 0.4
+        units:
+          description: The number of units of the security for the transaction. This is mostly applicable to `BUY`, `SELL`, and `DIVIDEND` transactions.
+          type: number
+          example: 5.2
+        amount:
+          description: The amount of the transaction denominated in `currency`. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount.
+          type: number
+          example: 263.82
+          nullable: true
+        currency:
+          description: The currency in which the transaction `price` and `amount` is denominated.
+          allOf:
+            - $ref: "#/components/schemas/Currency"
+        type:
+          type: string
+          description: |
+            A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:
+              - `BUY` - Asset bought.
+              - `SELL` - Asset sold.
+              - `DIVIDEND` - Dividend payout.
+              - `CONTRIBUTION` - Cash contribution.
+              - `WITHDRAWAL` - Cash withdrawal.
+              - `REI` - Dividend reinvestment.
+              - `INTEREST` - Interest deposited into the account.
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
+        option_type:
+          type: string
+          example: BUY_TO_OPEN
+          description: |
+            If an option `BUY` or `SELL` transaction, this further specifies the type of action. The possible values are:
+            - BUY_TO_OPEN
+            - BUY_TO_CLOSE
+            - SELL_TO_OPEN
+            - SELL_TO_CLOSE
+        description:
+          description: A human-readable description of the transaction. This is usually the brokerage's description of the transaction.
+          type: string
+          example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
+        trade_date:
+          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+          type: string
+          format: date-time
+          example: 2024-03-22T16:27:55Z
+          nullable: true
+        settlement_date:
+          description: The date on which the transaction is settled.
+          type: string
+          format: date-time
+          example: 2024-03-26T00:00:00Z
+        fee:
+          description: Any fee associated with the transaction if provided by the brokerage.
+          type: number
+          example: 0
+        fx_rate:
+          type: number
+          example: 1.032
+          nullable: true
+          description: The forex conversion rate involved in the transaction if provided by the brokerage. Used in cases where securities of one currency are purchased in a different currency, and the forex conversion is automatic. In those cases, price, amount and fee will be in the top level currency (activity -> currency)
+        institution:
+          description: The institution that the transaction is associated with. This is usually the brokerage name.
+          type: string
+          example: Robinhood
+        external_reference_id:
+          type: string
+          nullable: true
+          description: Reference ID from brokerage used to identify related transactions. For example if an order comprises of several transactions (buy, fee, fx), they can be grouped if they share the same `external_reference_id`
+          example: 2f7dc9b3-5c33-4668-3440-2b31e056ebe6
     UniversalActivity:
       description: A transaction or activity from an institution
       type: object
@@ -3692,7 +4948,11 @@ components:
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
               - `INTEREST` - Interest deposited into the account.
-              - `FEE` - Fee withdrawn from the account. 
+              - `FEE` - Fee withdrawn from the account.
+              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
+              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
+              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+          example: BUY
         option_type:
           type: string
           example: BUY_TO_OPEN
@@ -3778,12 +5038,6 @@ components:
             - $ref: "#/components/schemas/Exchange"
         type:
           $ref: "#/components/schemas/SecurityType"
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-          type: array
-          items:
-            $ref: "#/components/schemas/Currency"
         figi_code:
           description: This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
           type: string
@@ -3793,6 +5047,12 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/FigiInstrument"
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          type: array
+          items:
+            $ref: "#/components/schemas/Currency"
       required:
         - id
         - symbol
@@ -3832,12 +5092,6 @@ components:
           description: The type of security. For example, "Common Stock" or "ETF".
           allOf:
             - $ref: "#/components/schemas/SecurityType"
-        currencies:
-          deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
-          type: array
-          items:
-            $ref: "#/components/schemas/Currency"
         figi_code:
           description: This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the `figi_code` in the `figi_instrument` child property.
           type: string
@@ -3847,6 +5101,12 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/FigiInstrument"
+        currencies:
+          deprecated: true
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          type: array
+          items:
+            $ref: "#/components/schemas/Currency"
     OptionsSymbol:
       description: Uniquely describes an option security + exchange combination across all brokerages.
       type: object
@@ -3912,20 +5172,21 @@ components:
         id:
           $ref: "#/components/schemas/SecurityTypeID"
         code:
-          description: >
+          description: |
             A short code representing the security type. For example, "cs" for Common Stock. Here are some common values:
-              ad - ADR
-              bnd - Bond
-              cs - Common Stock
-              cef - Closed End Fund
-              et - ETF
-              oef - Open Ended Fund
-              ps - Preferred Stock
-              rt - Right
-              struct - Structured Product
-              ut - Unit
-              wi - When Issued
-              wt - Warrant
+              - `ad` - ADR
+              - `bnd` - Bond
+              - `cs` - Common Stock
+              - `cef` - Closed End Fund
+              - `crypto` - Cryptocurrency
+              - `et` - ETF
+              - `oef` - Open Ended Fund
+              - `ps` - Preferred Stock
+              - `rt` - Right
+              - `struct` - Structured Product
+              - `ut` - Unit
+              - `wi` - When Issued
+              - `wt` - Warrant
           type: string
           example: cs
         description:
@@ -4032,3 +5293,144 @@ components:
             nonce:
               type: string
               example: None
+
+    MlegLeg:
+      type: object
+      required:
+        - "instrument"
+        - "action"
+        - "units"
+      properties:
+        instrument:
+          $ref: "#/components/schemas/MlegTradingInstrument"
+        action:
+          $ref: "#/components/schemas/MlegActionStrict"
+        units:
+          description: The quantity to trade. For options this represents the number of contracts. For equity this represents the number of shares.
+          type: integer
+          example: 1
+
+    SimpleOrderForm:
+      type: object
+      required:
+        - "instrument"
+        - "side"
+        - "type"
+        - "time_in_force"
+        - "amount"
+      properties:
+        instrument:
+          $ref: "#/components/schemas/TradingInstrument"
+        side:
+          $ref: "#/components/schemas/ActionStrict"
+        type:
+          type: string
+          enum:
+            - MARKET
+            - LIMIT
+            - STOP_LOSS_MARKET
+            - STOP_LOSS_LIMIT
+            - TAKE_PROFIT_MARKET
+            - TAKE_PROFIT_LIMIT
+          description: The type of order to place.
+        time_in_force:
+          description: >
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          type: string
+          enum:
+            - GTC
+            - FOK
+            - IOC
+            - GTD
+        amount:
+          description: The amount of the base currency to buy or sell.
+          type: string
+          format: decimal
+          example: "123.45"
+        limit_price:
+          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        stop_price:
+          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        post_only:
+          type: boolean
+          example: false
+          description: >
+            Valid and required only for order type LIMIT.
+            If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+        expiration_date:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+          description: The expiration date of the order. Required if the time_in_force is GTD.
+    CryptoOrderForm:
+      type: object
+      required:
+        - "instrument"
+        - "side"
+        - "type"
+        - "time_in_force"
+        - "amount"
+      properties:
+        instrument:
+          $ref: "#/components/schemas/CryptoTradingInstrument"
+        side:
+          $ref: "#/components/schemas/ActionStrict"
+        type:
+          type: string
+          enum:
+            - MARKET
+            - LIMIT
+            - STOP_LOSS_MARKET
+            - STOP_LOSS_LIMIT
+            - TAKE_PROFIT_MARKET
+            - TAKE_PROFIT_LIMIT
+          description: The type of order to place.
+        time_in_force:
+          description: >
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+          type: string
+          enum:
+            - GTC
+            - FOK
+            - IOC
+            - GTD
+        amount:
+          description: The amount of the base currency to buy or sell.
+          type: string
+          format: decimal
+          example: "123.45"
+        limit_price:
+          description: The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        stop_price:
+          description: The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT, TAKE_PROFIT_MARKET or TAKE_PROFIT_LIMIT.
+          type: string
+          format: decimal
+          example: "123.45"
+        post_only:
+          type: boolean
+          example: false
+          description: >
+            Valid and required only for order type LIMIT.
+            If true orders that would be filled immediately are rejected to avoid incurring TAKER fees.
+        expiration_date:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+          description: The expiration date of the order. Required if the time_in_force is GTD.

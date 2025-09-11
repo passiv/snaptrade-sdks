@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to [**OptionBrokerageSymbol**](OptionBrokerageSymbol.md) |  | [optional] 
 **Price** | Pointer to **NullableFloat32** | Last known market price _per share_ of the option contract. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices. | [optional] 
 **Units** | Pointer to **float32** | The number of contracts for this option position. A positive number indicates a long position, while a negative number indicates a short position. | [optional] 
-**Currency** | Pointer to [**NullableOptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional] 
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per contract_ of this option position. To get the cost basis _per share_, divide this value by the number of shares per contract (usually 100). | [optional] 
+**Currency** | Pointer to [**NullableOptionsPositionCurrency**](OptionsPositionCurrency.md) |  | [optional] 
 
 ## Methods
 
@@ -114,41 +114,6 @@ SetUnits sets Units field to given value.
 
 HasUnits returns a boolean if a field has been set.
 
-### GetCurrency
-
-`func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency`
-
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
-
-### GetCurrencyOk
-
-`func (o *OptionsPosition) GetCurrencyOk() (*OptionsPositionCurrency, bool)`
-
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrency
-
-`func (o *OptionsPosition) SetCurrency(v OptionsPositionCurrency)`
-
-SetCurrency sets Currency field to given value.
-
-### HasCurrency
-
-`func (o *OptionsPosition) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
-
-### SetCurrencyNil
-
-`func (o *OptionsPosition) SetCurrencyNil(b bool)`
-
- SetCurrencyNil sets the value for Currency to be an explicit nil
-
-### UnsetCurrency
-`func (o *OptionsPosition) UnsetCurrency()`
-
-UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
 ### GetAveragePurchasePrice
 
 `func (o *OptionsPosition) GetAveragePurchasePrice() float32`
@@ -184,6 +149,41 @@ HasAveragePurchasePrice returns a boolean if a field has been set.
 `func (o *OptionsPosition) UnsetAveragePurchasePrice()`
 
 UnsetAveragePurchasePrice ensures that no value is present for AveragePurchasePrice, not even an explicit nil
+### GetCurrency
+
+`func (o *OptionsPosition) GetCurrency() OptionsPositionCurrency`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *OptionsPosition) GetCurrencyOk() (*OptionsPositionCurrency, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *OptionsPosition) SetCurrency(v OptionsPositionCurrency)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *OptionsPosition) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### SetCurrencyNil
+
+`func (o *OptionsPosition) SetCurrencyNil(b bool)`
+
+ SetCurrencyNil sets the value for Currency to be an explicit nil
+
+### UnsetCurrency
+`func (o *OptionsPosition) UnsetCurrency()`
+
+UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

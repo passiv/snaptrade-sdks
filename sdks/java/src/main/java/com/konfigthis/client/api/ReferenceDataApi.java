@@ -3,6 +3,7 @@ package com.konfigthis.client.api;
 import com.konfigthis.client.ApiClient;
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
+import com.konfigthis.client.model.BrokerageInstrumentsResponse;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;
@@ -54,6 +55,11 @@ public class ReferenceDataApi extends ReferenceDataApiGenerated {
     public class ListAllBrokerageAuthorizationTypeRequestBuilder extends ListAllBrokerageAuthorizationTypeRequestBuilderGenerated {
         public ListAllBrokerageAuthorizationTypeRequestBuilder() {
             super();
+        }
+    }
+    public class ListAllBrokerageInstrumentsRequestBuilder extends ListAllBrokerageInstrumentsRequestBuilderGenerated {
+        public ListAllBrokerageInstrumentsRequestBuilder(String slug) {
+            super(slug);
         }
     }
     public class ListAllBrokeragesRequestBuilder extends ListAllBrokeragesRequestBuilderGenerated {

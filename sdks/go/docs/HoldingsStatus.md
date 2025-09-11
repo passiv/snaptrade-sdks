@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InitialSyncCompleted** | Pointer to **bool** | Indicates if the initial sync of holdings has been completed. For accounts with a large number of positions/orders/transactions, the initial sync may take a while to complete. | [optional] 
-**LastSuccessfulSync** | Pointer to [**time.Time**](time.Time.md) | The last time holdings were successfully synced by SnapTrade. | [optional] 
+**LastSuccessfulSync** | Pointer to [**NullableTime.Time**](time.Time.md) | The last time holdings were successfully synced by SnapTrade. | [optional] 
 
 ## Methods
 
@@ -76,6 +76,16 @@ SetLastSuccessfulSync sets LastSuccessfulSync field to given value.
 
 HasLastSuccessfulSync returns a boolean if a field has been set.
 
+### SetLastSuccessfulSyncNil
+
+`func (o *HoldingsStatus) SetLastSuccessfulSyncNil(b bool)`
+
+ SetLastSuccessfulSyncNil sets the value for LastSuccessfulSync to be an explicit nil
+
+### UnsetLastSuccessfulSync
+`func (o *HoldingsStatus) UnsetLastSuccessfulSync()`
+
+UnsetLastSuccessfulSync ensures that no value is present for LastSuccessfulSync, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

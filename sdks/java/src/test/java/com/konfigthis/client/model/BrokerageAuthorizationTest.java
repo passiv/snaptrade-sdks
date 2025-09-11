@@ -61,14 +61,6 @@ public class BrokerageAuthorizationTest {
     }
 
     /**
-     * Test the property 'updatedDate'
-     */
-    @Test
-    public void updatedDateTest() {
-        // TODO: test updatedDate
-    }
-
-    /**
      * Test the property 'brokerage'
      */
     @Test
@@ -114,6 +106,22 @@ public class BrokerageAuthorizationTest {
     @Test
     public void metaTest() {
         // TODO: test meta
+    }
+
+    /**
+     * Test the property 'updatedDate'
+     */
+    @Test
+    public void updatedDateTest() {
+        // TODO: test updatedDate
+    }
+
+    /**
+     * Test the property 'isEligibleForPayout'
+     */
+    @Test
+    public void isEligibleForPayoutTest() {
+        // TODO: test isEligibleForPayout
     }
 
 }

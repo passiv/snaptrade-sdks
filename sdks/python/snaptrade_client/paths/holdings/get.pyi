@@ -33,9 +33,11 @@ import frozendict  # noqa: F401
 from snaptrade_client import schemas  # noqa: F401
 
 from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
+from snaptrade_client.model.model425_failed_request_response import Model425FailedRequestResponse as Model425FailedRequestResponseSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.account_holdings import AccountHoldings as AccountHoldingsSchema
 
+from snaptrade_client.type.model425_failed_request_response import Model425FailedRequestResponse
 from snaptrade_client.type.account_holdings import AccountHoldings
 from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
@@ -170,6 +172,27 @@ _response_for_403 = api_client.OpenApiResponse(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaFor403ResponseBodyApplicationJson),
+    },
+)
+SchemaFor425ResponseBodyApplicationJson = Model425FailedRequestResponseSchema
+
+
+@dataclass
+class ApiResponseFor425(api_client.ApiResponse):
+    body: Model425FailedRequestResponse
+
+
+@dataclass
+class ApiResponseFor425Async(api_client.AsyncApiResponse):
+    body: Model425FailedRequestResponse
+
+
+_response_for_425 = api_client.OpenApiResponse(
+    response_cls=ApiResponseFor425,
+    response_cls_async=ApiResponseFor425Async,
+    content={
+        'application/json': api_client.MediaType(
+            schema=SchemaFor425ResponseBodyApplicationJson),
     },
 )
 

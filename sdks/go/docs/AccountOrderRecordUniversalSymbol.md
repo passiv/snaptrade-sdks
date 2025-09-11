@@ -11,9 +11,9 @@ Name | Type | Description | Notes
 **Currency** | [**SymbolCurrency**](SymbolCurrency.md) |  | 
 **Exchange** | Pointer to [**SymbolExchange**](SymbolExchange.md) |  | [optional] 
 **Type** | [**SecurityType**](SecurityType.md) |  | 
-**Currencies** | [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
 **FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
+**Currencies** | [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | 
 
 ## Methods
 
@@ -194,26 +194,6 @@ and a boolean to check if the value has been set.
 SetType sets Type field to given value.
 
 
-### GetCurrencies
-
-`func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency`
-
-GetCurrencies returns the Currencies field if non-nil, zero value otherwise.
-
-### GetCurrenciesOk
-
-`func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() (*[]Currency, bool)`
-
-GetCurrenciesOk returns a tuple with the Currencies field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrencies
-
-`func (o *AccountOrderRecordUniversalSymbol) SetCurrencies(v []Currency)`
-
-SetCurrencies sets Currencies field to given value.
-
-
 ### GetFigiCode
 
 `func (o *AccountOrderRecordUniversalSymbol) GetFigiCode() string`
@@ -284,6 +264,26 @@ HasFigiInstrument returns a boolean if a field has been set.
 `func (o *AccountOrderRecordUniversalSymbol) UnsetFigiInstrument()`
 
 UnsetFigiInstrument ensures that no value is present for FigiInstrument, not even an explicit nil
+### GetCurrencies
+
+`func (o *AccountOrderRecordUniversalSymbol) GetCurrencies() []Currency`
+
+GetCurrencies returns the Currencies field if non-nil, zero value otherwise.
+
+### GetCurrenciesOk
+
+`func (o *AccountOrderRecordUniversalSymbol) GetCurrenciesOk() (*[]Currency, bool)`
+
+GetCurrenciesOk returns a tuple with the Currencies field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrencies
+
+`func (o *AccountOrderRecordUniversalSymbol) SetCurrencies(v []Currency)`
+
+SetCurrencies sets Currencies field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

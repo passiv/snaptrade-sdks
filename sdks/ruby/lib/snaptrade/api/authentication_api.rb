@@ -192,11 +192,11 @@ module SnapTrade
     # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
+    # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v3', extra: {})
+    def login_snap_trade_user(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v4', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -221,11 +221,11 @@ module SnapTrade
     # @param immediate_redirect [Boolean] When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param custom_redirect [String] URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
     # @param reconnect [String] The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
-    # @param connection_type [ConnectionType] Sets whether the connection should be read-only or trade-enabled.
-    # @param connection_portal_version [ConnectionPortalVersion] Sets the version of the connection portal to render.
+    # @param connection_type [ConnectionType] Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+    # @param connection_portal_version [ConnectionPortalVersion] Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     # @param body [SnapTradeLoginUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v3', extra: {})
+    def login_snap_trade_user_with_http_info(user_id:, user_secret:, broker: SENTINEL, immediate_redirect: SENTINEL, custom_redirect: SENTINEL, reconnect: SENTINEL, connection_type: 'read', connection_portal_version: 'v4', extra: {})
       _body = {}
       _body[:broker] = broker if broker != SENTINEL
       _body[:immediateRedirect] = immediate_redirect if immediate_redirect != SENTINEL
@@ -324,7 +324,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user(user_id: SENTINEL, extra: {})
+    def register_snap_trade_user(user_id:, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       snap_trade_register_user_request_body = _body
@@ -340,7 +340,7 @@ module SnapTrade
     # @param user_id [String] SnapTrade User ID. This is chosen by the API partner and can be any string that is a) unique to the user, and b) immutable for the user. It is recommended to NOT use email addresses for this property because they are usually not immutable.
     # @param body [SnapTradeRegisterUserRequestBody] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def register_snap_trade_user_with_http_info(user_id: SENTINEL, extra: {})
+    def register_snap_trade_user_with_http_info(user_id:, extra: {})
       _body = {}
       _body[:userId] = user_id if user_id != SENTINEL
       snap_trade_register_user_request_body = _body

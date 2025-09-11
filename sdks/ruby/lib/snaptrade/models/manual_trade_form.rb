@@ -16,7 +16,7 @@ module SnapTrade
     # Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade.
     attr_accessor :account_id
 
-    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`
+    # The action describes the intent or side of a trade. This is either `BUY` or `SELL`.
     attr_accessor :action
 
     # Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
@@ -25,7 +25,7 @@ module SnapTrade
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
     attr_accessor :order_type
 
-    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. 
+    # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     attr_accessor :time_in_force
 
     # The limit price for `Limit` and `StopLimit` orders.

@@ -18,6 +18,7 @@ import com.konfigthis.client.ApiException;
 import com.konfigthis.client.Configuration;
 import com.konfigthis.client.model.Brokerage;
 import com.konfigthis.client.model.BrokerageAuthorizationTypeReadOnly;
+import com.konfigthis.client.model.BrokerageInstrumentsResponse;
 import com.konfigthis.client.model.Currency;
 import com.konfigthis.client.model.Exchange;
 import com.konfigthis.client.model.ExchangeRatePairs;
@@ -150,6 +151,21 @@ public class ReferenceDataApiTest {
         String brokerage = null;
         List<BrokerageAuthorizationTypeReadOnly> response = api.listAllBrokerageAuthorizationType()
                 .brokerage(brokerage)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get brokerage instruments
+     *
+     * Returns a list of all brokerage instruments available for a given brokerage. Not all brokerages support this. The ones that don&#39;t will return an empty list.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void listAllBrokerageInstrumentsTest() throws ApiException {
+        String slug = null;
+        BrokerageInstrumentsResponse response = api.listAllBrokerageInstruments(slug)
                 .execute();
         // TODO: test validations
     }

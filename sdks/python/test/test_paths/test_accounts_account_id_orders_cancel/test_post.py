@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdOrdersCancel(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdOrdersCancel unit test stubs
-        Cancel order
+        Cancel equity order
     """
 
     def setUp(self):

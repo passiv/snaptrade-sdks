@@ -75,7 +75,7 @@ public class LoginRedirectURI {
    * @return redirectURI
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v3&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d", value = "Connection Portal link to redirect user to connect a brokerage account.")
+  @ApiModelProperty(example = "https://app.snaptrade.com/snapTrade/redeemToken?token=npVKchZrL0MYIHTusGfADT74r4xXpHkmbxbQDmt0RINLXbQ5cWsvGkPSgMQRxz8/cnxjzL9T2NWLuHuDyidHiCNeXXTb/tVhzC2olSyfxWW6DRrkUppArGCdmkIHyBMzog6C55P8yoqzcGer5Hml0Q%3D%3D&clientId=WEALTHLY&broker=ROBINHOOD&connectionPortalVersion=v4&sessionId=cf371bb4-a475-4f17-ab94-d0fee699960d", value = "Connection Portal link to redirect user to connect a brokerage account.")
 
   public String getRedirectURI() {
     return redirectURI;

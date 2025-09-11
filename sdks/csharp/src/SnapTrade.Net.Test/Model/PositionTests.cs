@@ -90,6 +90,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'OpenPnl'
         }
         /// <summary>
+        /// Test the property 'AveragePurchasePrice'
+        /// </summary>
+        [Fact]
+        public void AveragePurchasePriceTest()
+        {
+            // TODO unit test for the property 'AveragePurchasePrice'
+        }
+        /// <summary>
         /// Test the property 'FractionalUnits'
         /// </summary>
         [Fact]
@@ -98,12 +106,12 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'FractionalUnits'
         }
         /// <summary>
-        /// Test the property 'AveragePurchasePrice'
+        /// Test the property 'Currency'
         /// </summary>
         [Fact]
-        public void AveragePurchasePriceTest()
+        public void CurrencyTest()
         {
-            // TODO unit test for the property 'AveragePurchasePrice'
+            // TODO unit test for the property 'Currency'
         }
 
     }

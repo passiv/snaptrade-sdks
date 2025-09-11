@@ -20,6 +20,14 @@ order:
       - Trading_placeOrder
       - Trading_placeForceOrder
       - Trading_cancelUserAccountOrder
+      - Trading_placeBracketOrder
+      - Trading_placeMlegOrder
+      - Trading_searchCryptocurrencyPairInstruments
+      - Trading_getCryptocurrencyPairQuote
+      - Trading_previewCryptoOrder
+      - Trading_placeCryptoOrder
+      - Trading_cancelOrder
+      - Trading_replaceOrder
 overrideTopLevelReadme: ./snippets/topLevelReadmeOverride.md
 portal:
   title: SnapTrade
@@ -42,34 +50,67 @@ portal:
           links:
             - id: getting-started
               path: docs/getting-started.md
-            - id: essential-functionalities
-              path: docs/essential-functionalities.md
-            - id: recommended-endpoints-to-get-started
-              path: docs/recommended-endpoints-to-get-started.md
-            - id: request-ids
-              path: docs/request-ids.md
-            - id: ratelimiting
-              path: docs/ratelimiting.md
-            - id: fix-broken-connections
-              path: docs/fix-broken-connections.md
             - id: implement-connection-portal
               path: docs/implement-connection-portal.md
             - id: trading-with-snaptrade
               path: docs/trading-with-snaptrade.md
+            - id: crypto-trading
+              path: docs/crypto-trading.md
             - id: webhooks
               path: docs/webhooks.md
+            - id: ratelimiting
+              path: docs/ratelimiting.md
+            - id: launch-guide
+              path: docs/launching-your-application.md
+        - label: Core Concepts
+          links:
+            - id: requests
+              path: docs/requests.md
+            - id: integrations
+              path: docs/integrations.md
+            - id: connections
+              path: docs/connections.md
+            - id: account-data
+              path: docs/account-data.md
+        - label: Troubleshooting
+          links:
+            - id: request-ids
+              path: docs/request-ids.md
+            - id: fix-broken-connections
+              path: docs/fix-broken-connections.md
+            - id: faq
+              path: docs/faq.md
   demos:
     - id: getting-started
       path: demos/getting-started.md
-    - id: registering-users
-      path: demos/registering-users.md
-    - id: list-accounts
-      path: demos/list-accounts.md
-    - id: handling-user-data
-      path: demos/handling-user-data.md
+    - id: get-transactions
+      path: demos/get-transactions.md
     - id: placing-trades
       path: demos/placing-trades.md
+  betaOperations:
+    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
+      get: true
+    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
+      get: true
+    /accounts/{accountId}/trading/simple:
+      post: true
+    /accounts/{accountId}/trading/bracket:
+      post: true
+    /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
+      patch: true
+    /accounts/{accountId}/trading/simple/preview:
+      post: true
+    /accounts/{accountId}/trading/options:
+      post: true
+    /brokerages/{brokerageId}/instruments:
+      get: true
   hideOperations:
+    /accounts/{accountId}/orders/{brokerageOrderId}:
+      get: true
+    /accounts/{accountId}/orders/details:
+      get: true
+    /activities:
+      get: true
     /holdings:
       get: true
     /accounts/{accountId}:
@@ -90,6 +131,8 @@ portal:
       get: true
     /accounts/{accountId}/optionStrategy/{optionStrategyId}/execute:
       post: true
+    /accounts/{accountId}/orders/cancel:
+      post: true
     /brokerageAuthorizationTypes:
       get: true
     /currencies:
@@ -99,6 +142,10 @@ portal:
     /currencies/rates/{currencyPair}:
       get: true
     /exchanges:
+      get: true
+    /accounts/{accountId}/returnRates:
+      get: true
+    /authorizations/{authorizationId}/returnRates:
       get: true
   hideSecurity:
     - name: PartnerSignature
@@ -140,7 +187,7 @@ readmeHeader:
 useSecurityKeyName: true
 additionalGenerators:
   php7:
-    version: 2.0.45
+    version: 2.0.131
     outputDirectory: sdks/php7
     packageName: snaptrade-php-7-sdk
     invokerPackage: SnapTrade
@@ -154,7 +201,7 @@ additionalGenerators:
       repoId: snaptrade-php-7-sdk
 generators:
   go:
-    version: 1.0.17
+    version: 1.0.103
     packageName: snaptrade
     outputDirectory: sdks/go
     readmeSnippet: snippets/go.go
@@ -166,7 +213,7 @@ generators:
       - ConsumerKey
   ruby:
     moduleName: SnapTrade
-    version: 2.0.46
+    version: 2.0.131
     outputDirectory: sdks/ruby
     apiDocumentationAuthenticationPartial: snippets/ruby_doc_auth_partial.rb
     gemName: snaptrade
@@ -177,7 +224,7 @@ generators:
       - name: consumer_key
         required: true
   php:
-    version: 2.0.45
+    version: 2.0.130
     outputDirectory: sdks/php
     packageName: snaptrade-php-sdk
     invokerPackage: SnapTrade
@@ -189,7 +236,7 @@ generators:
       repoId: snaptrade-php-sdk
   csharp:
     clientName: Snaptrade
-    version: 5.0.48
+    version: 5.0.133
     packageName: SnapTrade.Net
     logoPath: logo.png
     outputDirectory: sdks/csharp
@@ -200,7 +247,7 @@ generators:
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/csharp
   java:
-    version: 5.0.45
+    version: 5.0.130
     outputDirectory: sdks/java
     readmeSnippet: snippets/java.java
     clientName: Snaptrade
@@ -214,11 +261,10 @@ generators:
     groupId: com.konfigthis
     artifactId: snaptrade-java-sdk
   python:
-    version: 11.0.45
+    version: 11.0.130
     responseTypeVersion: '1'
     outputDirectory: sdks/python
     readmeSnippet: snippets/python.py
-    useAiohttp3_8: true
     setSkipSerializationToTrueByDefault: true
     pypiApiTokenEnvironmentVariable: PYPI_TOKEN_1
     apiDocumentationAuthenticationPartial: snippets/python_doc_auth_partial.py
@@ -233,7 +279,7 @@ generators:
     packageName: snaptrade_client
     projectName: snaptrade-python-sdk
   typescript:
-    version: 9.0.47
+    version: 9.0.134
     outputDirectory: sdks/typescript
     clientState:
       - consumerKey

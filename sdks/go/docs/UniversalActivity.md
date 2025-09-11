@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Unique identifier for the transaction. This is the ID used to reference the transaction in SnapTrade.  Please note that this ID _can_ change if the transaction is deleted and re-added. Under normal circumstances, SnapTrade does not delete transactions. The only time this would happen is if SnapTrade re-fetches and reprocesses the data from the brokerage, which is rare. If you require a stable ID, please let us know and we can work with you to provide one.  | [optional] 
 **Account** | Pointer to [**AccountSimple**](AccountSimple.md) |  | [optional] 
-**Symbol** | Pointer to [**NullableUniversalActivitySymbol**](UniversalActivitySymbol.md) |  | [optional] 
-**OptionSymbol** | Pointer to [**NullableUniversalActivityOptionSymbol**](UniversalActivityOptionSymbol.md) |  | [optional] 
+**Symbol** | Pointer to [**NullableAccountUniversalActivitySymbol**](AccountUniversalActivitySymbol.md) |  | [optional] 
+**OptionSymbol** | Pointer to [**NullableAccountUniversalActivityOptionSymbol**](AccountUniversalActivityOptionSymbol.md) |  | [optional] 
 **Price** | Pointer to **float32** | The price of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. | [optional] 
 **Units** | Pointer to **float32** | The number of units of the security for the transaction. This is mostly applicable to &#x60;BUY&#x60;, &#x60;SELL&#x60;, and &#x60;DIVIDEND&#x60; transactions. | [optional] 
 **Amount** | Pointer to **NullableFloat32** | The amount of the transaction denominated in &#x60;currency&#x60;. This can be positive or negative. In general, transactions that positively affect the account balance (like sell, deposits, dividends, etc) will have a positive amount, while transactions that negatively affect the account balance (like buy, withdrawals, fees, etc) will have a negative amount. | [optional] 
-**Currency** | Pointer to [**UniversalActivityCurrency**](UniversalActivityCurrency.md) |  | [optional] 
-**Type** | Pointer to **string** | A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   | [optional] 
+**Currency** | Pointer to [**AccountUniversalActivityCurrency**](AccountUniversalActivityCurrency.md) |  | [optional] 
+**Type** | Pointer to **string** | A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event. &#x60;option_symbol&#x60; contains the related option contract info.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event. &#x60;option_symbol&#x60; contains the related option contract info.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event. &#x60;option_symbol&#x60; contains the related option contract info.  | [optional] 
 **OptionType** | Pointer to **string** | If an option &#x60;BUY&#x60; or &#x60;SELL&#x60; transaction, this further specifies the type of action. The possible values are: - BUY_TO_OPEN - BUY_TO_CLOSE - SELL_TO_OPEN - SELL_TO_CLOSE  | [optional] 
 **Description** | Pointer to **string** | A human-readable description of the transaction. This is usually the brokerage&#39;s description of the transaction. | [optional] 
 **TradeDate** | Pointer to **NullableTime** | The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named &#x60;trade_date&#x60;, it can represent any type of transaction, not just trades. | [optional] 
@@ -93,20 +93,20 @@ HasAccount returns a boolean if a field has been set.
 
 ### GetSymbol
 
-`func (o *UniversalActivity) GetSymbol() UniversalActivitySymbol`
+`func (o *UniversalActivity) GetSymbol() AccountUniversalActivitySymbol`
 
 GetSymbol returns the Symbol field if non-nil, zero value otherwise.
 
 ### GetSymbolOk
 
-`func (o *UniversalActivity) GetSymbolOk() (*UniversalActivitySymbol, bool)`
+`func (o *UniversalActivity) GetSymbolOk() (*AccountUniversalActivitySymbol, bool)`
 
 GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSymbol
 
-`func (o *UniversalActivity) SetSymbol(v UniversalActivitySymbol)`
+`func (o *UniversalActivity) SetSymbol(v AccountUniversalActivitySymbol)`
 
 SetSymbol sets Symbol field to given value.
 
@@ -128,20 +128,20 @@ HasSymbol returns a boolean if a field has been set.
 UnsetSymbol ensures that no value is present for Symbol, not even an explicit nil
 ### GetOptionSymbol
 
-`func (o *UniversalActivity) GetOptionSymbol() UniversalActivityOptionSymbol`
+`func (o *UniversalActivity) GetOptionSymbol() AccountUniversalActivityOptionSymbol`
 
 GetOptionSymbol returns the OptionSymbol field if non-nil, zero value otherwise.
 
 ### GetOptionSymbolOk
 
-`func (o *UniversalActivity) GetOptionSymbolOk() (*UniversalActivityOptionSymbol, bool)`
+`func (o *UniversalActivity) GetOptionSymbolOk() (*AccountUniversalActivityOptionSymbol, bool)`
 
 GetOptionSymbolOk returns a tuple with the OptionSymbol field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOptionSymbol
 
-`func (o *UniversalActivity) SetOptionSymbol(v UniversalActivityOptionSymbol)`
+`func (o *UniversalActivity) SetOptionSymbol(v AccountUniversalActivityOptionSymbol)`
 
 SetOptionSymbol sets OptionSymbol field to given value.
 
@@ -248,20 +248,20 @@ HasAmount returns a boolean if a field has been set.
 UnsetAmount ensures that no value is present for Amount, not even an explicit nil
 ### GetCurrency
 
-`func (o *UniversalActivity) GetCurrency() UniversalActivityCurrency`
+`func (o *UniversalActivity) GetCurrency() AccountUniversalActivityCurrency`
 
 GetCurrency returns the Currency field if non-nil, zero value otherwise.
 
 ### GetCurrencyOk
 
-`func (o *UniversalActivity) GetCurrencyOk() (*UniversalActivityCurrency, bool)`
+`func (o *UniversalActivity) GetCurrencyOk() (*AccountUniversalActivityCurrency, bool)`
 
 GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCurrency
 
-`func (o *UniversalActivity) SetCurrency(v UniversalActivityCurrency)`
+`func (o *UniversalActivity) SetCurrency(v AccountUniversalActivityCurrency)`
 
 SetCurrency sets Currency field to given value.
 

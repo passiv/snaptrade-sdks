@@ -20,9 +20,9 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountSimple;
+import com.konfigthis.client.model.AccountUniversalActivityCurrency;
 import com.konfigthis.client.model.OptionsSymbolNullable;
 import com.konfigthis.client.model.SymbolNullable;
-import com.konfigthis.client.model.UniversalActivityCurrency;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -86,7 +86,7 @@ public class UniversalActivity {
 
   public static final String SERIALIZED_NAME_CURRENCY = "currency";
   @SerializedName(SERIALIZED_NAME_CURRENCY)
-  private UniversalActivityCurrency currency;
+  private AccountUniversalActivityCurrency currency;
 
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
@@ -357,7 +357,7 @@ public class UniversalActivity {
   }
 
 
-  public UniversalActivity currency(UniversalActivityCurrency currency) {
+  public UniversalActivity currency(AccountUniversalActivityCurrency currency) {
     
     
     
@@ -373,12 +373,12 @@ public class UniversalActivity {
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public UniversalActivityCurrency getCurrency() {
+  public AccountUniversalActivityCurrency getCurrency() {
     return currency;
   }
 
 
-  public void setCurrency(UniversalActivityCurrency currency) {
+  public void setCurrency(AccountUniversalActivityCurrency currency) {
     
     
     
@@ -396,11 +396,11 @@ public class UniversalActivity {
   }
 
    /**
-   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.  
+   * A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - &#x60;BUY&#x60; - Asset bought.   - &#x60;SELL&#x60; - Asset sold.   - &#x60;DIVIDEND&#x60; - Dividend payout.   - &#x60;CONTRIBUTION&#x60; - Cash contribution.   - &#x60;WITHDRAWAL&#x60; - Cash withdrawal.   - &#x60;REI&#x60; - Dividend reinvestment.   - &#x60;INTEREST&#x60; - Interest deposited into the account.   - &#x60;FEE&#x60; - Fee withdrawn from the account.   - &#x60;OPTIONEXPIRATION&#x60; - Option expiration event. &#x60;option_symbol&#x60; contains the related option contract info.   - &#x60;OPTIONASSIGNMENT&#x60; - Option assignment event. &#x60;option_symbol&#x60; contains the related option contract info.   - &#x60;OPTIONEXERCISE&#x60; - Option exercise event. &#x60;option_symbol&#x60; contains the related option contract info. 
    * @return type
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.  ")
+  @ApiModelProperty(example = "BUY", value = "A string representing the type of transaction. SnapTrade does a best effort to categorize the brokerage transaction types into a common set of values. Here are some of the most popular values:   - `BUY` - Asset bought.   - `SELL` - Asset sold.   - `DIVIDEND` - Dividend payout.   - `CONTRIBUTION` - Cash contribution.   - `WITHDRAWAL` - Cash withdrawal.   - `REI` - Dividend reinvestment.   - `INTEREST` - Interest deposited into the account.   - `FEE` - Fee withdrawn from the account.   - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.   - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.   - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info. ")
 
   public String getType() {
     return type;
@@ -850,7 +850,7 @@ public class UniversalActivity {
       }
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
-        UniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+        AccountUniversalActivityCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
       if ((jsonObj.get("type") != null && !jsonObj.get("type").isJsonNull()) && !jsonObj.get("type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("type").toString()));

@@ -21,11 +21,10 @@ type AccountOrderRecord struct {
 	// Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
 	BrokerageOrderId *string `json:"brokerage_order_id,omitempty"`
 	Status *AccountOrderRecordStatus `json:"status,omitempty"`
-	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-	// Deprecated
-	Symbol *string `json:"symbol,omitempty"`
 	UniversalSymbol *AccountOrderRecordUniversalSymbol `json:"universal_symbol,omitempty"`
 	OptionSymbol *AccountOrderRecordOptionSymbol `json:"option_symbol,omitempty"`
+	QuoteUniversalSymbol *AccountOrderRecordQuoteUniversalSymbol `json:"quote_universal_symbol,omitempty"`
+	QuoteCurrency *AccountOrderRecordQuoteCurrency `json:"quote_currency,omitempty"`
 	// The action describes the intent or side of a trade. This is usually `BUY` or `SELL` but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
 	Action *string `json:"action,omitempty"`
 	// The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
@@ -54,6 +53,10 @@ type AccountOrderRecord struct {
 	TimeExecuted NullableTime `json:"time_executed,omitempty"`
 	// The time the order expires. This value is not always available from the brokerage.
 	ExpiryDate NullableTime `json:"expiry_date,omitempty"`
+	// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+	// Deprecated
+	Symbol *string `json:"symbol,omitempty"`
+	ChildBrokerageOrderIds NullableAccountOrderRecordChildBrokerageOrderIds `json:"child_brokerage_order_ids,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -140,41 +143,6 @@ func (o *AccountOrderRecord) SetStatus(v AccountOrderRecordStatus) {
 	o.Status = &v
 }
 
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
-// Deprecated
-func (o *AccountOrderRecord) GetSymbol() string {
-	if o == nil || isNil(o.Symbol) {
-		var ret string
-		return ret
-	}
-	return *o.Symbol
-}
-
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *AccountOrderRecord) GetSymbolOk() (*string, bool) {
-	if o == nil || isNil(o.Symbol) {
-    return nil, false
-	}
-	return o.Symbol, true
-}
-
-// HasSymbol returns a boolean if a field has been set.
-func (o *AccountOrderRecord) HasSymbol() bool {
-	if o != nil && !isNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
-// Deprecated
-func (o *AccountOrderRecord) SetSymbol(v string) {
-	o.Symbol = &v
-}
-
 // GetUniversalSymbol returns the UniversalSymbol field value if set, zero value otherwise.
 func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol {
 	if o == nil || isNil(o.UniversalSymbol) {
@@ -237,6 +205,70 @@ func (o *AccountOrderRecord) HasOptionSymbol() bool {
 // SetOptionSymbol gets a reference to the given AccountOrderRecordOptionSymbol and assigns it to the OptionSymbol field.
 func (o *AccountOrderRecord) SetOptionSymbol(v AccountOrderRecordOptionSymbol) {
 	o.OptionSymbol = &v
+}
+
+// GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field value if set, zero value otherwise.
+func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol {
+	if o == nil || isNil(o.QuoteUniversalSymbol) {
+		var ret AccountOrderRecordQuoteUniversalSymbol
+		return ret
+	}
+	return *o.QuoteUniversalSymbol
+}
+
+// GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool) {
+	if o == nil || isNil(o.QuoteUniversalSymbol) {
+    return nil, false
+	}
+	return o.QuoteUniversalSymbol, true
+}
+
+// HasQuoteUniversalSymbol returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool {
+	if o != nil && !isNil(o.QuoteUniversalSymbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuoteUniversalSymbol gets a reference to the given AccountOrderRecordQuoteUniversalSymbol and assigns it to the QuoteUniversalSymbol field.
+func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol) {
+	o.QuoteUniversalSymbol = &v
+}
+
+// GetQuoteCurrency returns the QuoteCurrency field value if set, zero value otherwise.
+func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency {
+	if o == nil || isNil(o.QuoteCurrency) {
+		var ret AccountOrderRecordQuoteCurrency
+		return ret
+	}
+	return *o.QuoteCurrency
+}
+
+// GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool) {
+	if o == nil || isNil(o.QuoteCurrency) {
+    return nil, false
+	}
+	return o.QuoteCurrency, true
+}
+
+// HasQuoteCurrency returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasQuoteCurrency() bool {
+	if o != nil && !isNil(o.QuoteCurrency) {
+		return true
+	}
+
+	return false
+}
+
+// SetQuoteCurrency gets a reference to the given AccountOrderRecordQuoteCurrency and assigns it to the QuoteCurrency field.
+func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency) {
+	o.QuoteCurrency = &v
 }
 
 // GetAction returns the Action field value if set, zero value otherwise.
@@ -797,6 +829,83 @@ func (o *AccountOrderRecord) UnsetExpiryDate() {
 	o.ExpiryDate.Unset()
 }
 
+// GetSymbol returns the Symbol field value if set, zero value otherwise.
+// Deprecated
+func (o *AccountOrderRecord) GetSymbol() string {
+	if o == nil || isNil(o.Symbol) {
+		var ret string
+		return ret
+	}
+	return *o.Symbol
+}
+
+// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *AccountOrderRecord) GetSymbolOk() (*string, bool) {
+	if o == nil || isNil(o.Symbol) {
+    return nil, false
+	}
+	return o.Symbol, true
+}
+
+// HasSymbol returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasSymbol() bool {
+	if o != nil && !isNil(o.Symbol) {
+		return true
+	}
+
+	return false
+}
+
+// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
+// Deprecated
+func (o *AccountOrderRecord) SetSymbol(v string) {
+	o.Symbol = &v
+}
+
+// GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds {
+	if o == nil || isNil(o.ChildBrokerageOrderIds.Get()) {
+		var ret AccountOrderRecordChildBrokerageOrderIds
+		return ret
+	}
+	return *o.ChildBrokerageOrderIds.Get()
+}
+
+// GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.ChildBrokerageOrderIds.Get(), o.ChildBrokerageOrderIds.IsSet()
+}
+
+// HasChildBrokerageOrderIds returns a boolean if a field has been set.
+func (o *AccountOrderRecord) HasChildBrokerageOrderIds() bool {
+	if o != nil && o.ChildBrokerageOrderIds.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChildBrokerageOrderIds gets a reference to the given NullableAccountOrderRecordChildBrokerageOrderIds and assigns it to the ChildBrokerageOrderIds field.
+func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds) {
+	o.ChildBrokerageOrderIds.Set(&v)
+}
+// SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+func (o *AccountOrderRecord) SetChildBrokerageOrderIdsNil() {
+	o.ChildBrokerageOrderIds.Set(nil)
+}
+
+// UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
+func (o *AccountOrderRecord) UnsetChildBrokerageOrderIds() {
+	o.ChildBrokerageOrderIds.Unset()
+}
+
 func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.BrokerageOrderId) {
@@ -805,14 +914,17 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !isNil(o.Symbol) {
-		toSerialize["symbol"] = o.Symbol
-	}
 	if !isNil(o.UniversalSymbol) {
 		toSerialize["universal_symbol"] = o.UniversalSymbol
 	}
 	if !isNil(o.OptionSymbol) {
 		toSerialize["option_symbol"] = o.OptionSymbol
+	}
+	if !isNil(o.QuoteUniversalSymbol) {
+		toSerialize["quote_universal_symbol"] = o.QuoteUniversalSymbol
+	}
+	if !isNil(o.QuoteCurrency) {
+		toSerialize["quote_currency"] = o.QuoteCurrency
 	}
 	if !isNil(o.Action) {
 		toSerialize["action"] = o.Action
@@ -856,6 +968,12 @@ func (o AccountOrderRecord) MarshalJSON() ([]byte, error) {
 	if o.ExpiryDate.IsSet() {
 		toSerialize["expiry_date"] = o.ExpiryDate.Get()
 	}
+	if !isNil(o.Symbol) {
+		toSerialize["symbol"] = o.Symbol
+	}
+	if o.ChildBrokerageOrderIds.IsSet() {
+		toSerialize["child_brokerage_order_ids"] = o.ChildBrokerageOrderIds.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -876,9 +994,10 @@ func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "brokerage_order_id")
 		delete(additionalProperties, "status")
-		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "universal_symbol")
 		delete(additionalProperties, "option_symbol")
+		delete(additionalProperties, "quote_universal_symbol")
+		delete(additionalProperties, "quote_currency")
 		delete(additionalProperties, "action")
 		delete(additionalProperties, "total_quantity")
 		delete(additionalProperties, "open_quantity")
@@ -893,6 +1012,8 @@ func (o *AccountOrderRecord) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "time_updated")
 		delete(additionalProperties, "time_executed")
 		delete(additionalProperties, "expiry_date")
+		delete(additionalProperties, "symbol")
+		delete(additionalProperties, "child_brokerage_order_ids")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -62,7 +62,7 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         snapTradeLoginUserRequestBody.SetCustomRedirect("https://snaptrade.com")
         snapTradeLoginUserRequestBody.SetReconnect("8b5f262d-4bb9-365d-888a-202bd3b15fa1")
         snapTradeLoginUserRequestBody.SetConnectionType("READ")
-        snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V3")
+        snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
         
         request := client.AuthenticationApi.LoginSnapTradeUser(
             "userId_example",
@@ -81,8 +81,9 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
     t.Run("Test AuthenticationApiService RegisterSnapTradeUser", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         
-        snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody()
-        snapTradeRegisterUserRequestBody.SetUserId("snaptrade-user-123")
+        snapTradeRegisterUserRequestBody := *snaptrade.NewSnapTradeRegisterUserRequestBody(
+            "snaptrade-user-123",
+        )
         
         request := client.AuthenticationApi.RegisterSnapTradeUser(
             snapTradeRegisterUserRequestBody,

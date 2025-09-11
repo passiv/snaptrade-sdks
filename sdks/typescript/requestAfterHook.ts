@@ -25,14 +25,14 @@ async function computeHmacSha256(
     const encoder = new TextEncoder();
     const keyBuffer = encoder.encode(key);
     const msgBuffer = encoder.encode(message);
-    const cryptoKey = await window.crypto.subtle.importKey(
+    const cryptoKey = await globalThis.crypto.subtle.importKey(
       "raw",
       keyBuffer,
       { name: "HMAC", hash: "SHA-256" },
       false,
       ["sign"]
     );
-    const signature = await window.crypto.subtle.sign(
+    const signature = await globalThis.crypto.subtle.sign(
       "HMAC",
       cryptoKey,
       msgBuffer

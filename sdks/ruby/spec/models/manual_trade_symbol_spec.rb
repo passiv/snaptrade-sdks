@@ -20,12 +20,6 @@ describe SnapTrade::ManualTradeSymbol do
       expect(instance).to be_instance_of(SnapTrade::ManualTradeSymbol)
     end
   end
-  describe 'test attribute "brokerage_symbol_id"' do
-    it 'should work' do
-      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
-    end
-  end
-
   describe 'test attribute "universal_symbol_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
@@ -51,6 +45,12 @@ describe SnapTrade::ManualTradeSymbol do
   end
 
   describe 'test attribute "symbol"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  describe 'test attribute "brokerage_symbol_id"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

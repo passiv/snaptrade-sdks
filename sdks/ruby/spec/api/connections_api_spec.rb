@@ -43,7 +43,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for disable_brokerage_authorization
   # Force disable connection
-  # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+  # Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
   # @param authorization_id 
   # @param user_id 
   # @param user_secret 
@@ -70,7 +70,7 @@ describe 'ConnectionsApi' do
 
   # unit tests for refresh_brokerage_authorization
   # Refresh holdings for a connection
-  # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+  # Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)** 
   # @param authorization_id 
   # @param user_id 
   # @param user_secret 
@@ -91,6 +91,20 @@ describe 'ConnectionsApi' do
   # @param [Hash] opts the optional parameters
   # @return [nil]
   describe 'remove_brokerage_authorization test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for return_rates
+  # List connection rate of returns
+  # Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+  # @param user_id 
+  # @param user_secret 
+  # @param authorization_id 
+  # @param [Hash] opts the optional parameters
+  # @return [RateOfReturnResponse]
+  describe 'return_rates test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end

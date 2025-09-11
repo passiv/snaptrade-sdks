@@ -11,6 +11,7 @@ Method | Path | Description
 [**GetSymbols**](ReferenceDataApi.md#GetSymbols) | **Post** /symbols | Search symbols
 [**GetSymbolsByTicker**](ReferenceDataApi.md#GetSymbolsByTicker) | **Get** /symbols/{query} | Get symbol detail
 [**ListAllBrokerageAuthorizationType**](ReferenceDataApi.md#ListAllBrokerageAuthorizationType) | **Get** /brokerageAuthorizationTypes | Get all brokerage authorization types
+[**ListAllBrokerageInstruments**](ReferenceDataApi.md#ListAllBrokerageInstruments) | **Get** /brokerages/{slug}/instruments | Get brokerage instruments
 [**ListAllBrokerages**](ReferenceDataApi.md#ListAllBrokerages) | **Get** /brokerages | Get brokerages
 [**ListAllCurrencies**](ReferenceDataApi.md#ListAllCurrencies) | **Get** /currencies | Get currencies
 [**ListAllCurrenciesRates**](ReferenceDataApi.md#ListAllCurrenciesRates) | **Get** /currencies/rates | Get currency exchange rates
@@ -260,9 +261,9 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.Currency`: %v\n", resp.Currency)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.Exchange`: %v\n", *resp.Exchange)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.Type`: %v\n", resp.Type)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.Currencies`: %v\n", resp.Currencies)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.FigiCode`: %v\n", *resp.FigiCode)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.FigiInstrument`: %v\n", *resp.FigiInstrument)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbols.Currencies`: %v\n", resp.Currencies)
 }
 ```
 
@@ -313,9 +314,9 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.Currency`: %v\n", resp.Currency)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.Exchange`: %v\n", *resp.Exchange)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.Type`: %v\n", resp.Type)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.Currencies`: %v\n", resp.Currencies)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.FigiCode`: %v\n", *resp.FigiCode)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.FigiInstrument`: %v\n", *resp.FigiInstrument)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.GetSymbolsByTicker.Currencies`: %v\n", resp.Currencies)
 }
 ```
 
@@ -371,6 +372,50 @@ func main() {
 [[Back to README]](../README.md)
 
 
+## ListAllBrokerageInstruments
+
+Get brokerage instruments
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ReferenceDataApi.ListAllBrokerageInstruments(
+        ""QUESTRADE"",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReferenceDataApi.ListAllBrokerageInstruments``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `ListAllBrokerageInstruments`: BrokerageInstrumentsResponse
+    fmt.Fprintf(os.Stdout, "Response from `ReferenceDataApi.ListAllBrokerageInstruments`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `BrokerageInstrumentsResponse.ListAllBrokerageInstruments.Instruments`: %v\n", *resp.Instruments)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## ListAllBrokerages
 
 Get brokerages
@@ -412,16 +457,16 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Description`: %v\n", *resp.Description)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AwsS3LogoUrl`: %v\n", *resp.AwsS3LogoUrl)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AwsS3SquareLogoUrl`: %v\n", *resp.AwsS3SquareLogoUrl)
-    fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.OpenUrl`: %v\n", *resp.OpenUrl)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Url`: %v\n", *resp.Url)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Enabled`: %v\n", *resp.Enabled)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.MaintenanceMode`: %v\n", *resp.MaintenanceMode)
-    fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AllowsFractionalUnits`: %v\n", *resp.AllowsFractionalUnits)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AllowsTrading`: %v\n", *resp.AllowsTrading)
+    fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AllowsFractionalUnits`: %v\n", *resp.AllowsFractionalUnits)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.HasReporting`: %v\n", *resp.HasReporting)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.IsRealTimeConnection`: %v\n", *resp.IsRealTimeConnection)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.BrokerageType`: %v\n", *resp.BrokerageType)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Exchanges`: %v\n", *resp.Exchanges)
+    fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.OpenUrl`: %v\n", *resp.OpenUrl)
 }
 ```
 
@@ -569,9 +614,9 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.Currency`: %v\n", resp.Currency)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.Exchange`: %v\n", *resp.Exchange)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.Type`: %v\n", resp.Type)
-    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.Currencies`: %v\n", resp.Currencies)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.FigiCode`: %v\n", *resp.FigiCode)
     fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.FigiInstrument`: %v\n", *resp.FigiInstrument)
+    fmt.Fprintf(os.Stdout, "Response from `UniversalSymbol.SymbolSearchUserAccount.Currencies`: %v\n", resp.Currencies)
 }
 ```
 

@@ -16,6 +16,15 @@ The response body will have data on how long you should wait before making more 
 {"detail":"Request was throttled. Expected available in 7 seconds.","status_code":429,"code":"0000"}
 ```
 
+## Keeping Track of Your Ratelimit
+
+The SnapTrade API returns several helpful response headers that you can use to keep track of your ratelimit usage:
+
+- `X-RateLimit-Limit`: the maximum number of requests you can make in a given minute
+- `X-RateLimit-Remaining`: the number of requests remaining in the current minute
+- `X-RateLimit-Reset`: the number of seconds until the next minutely ratelimit resets
+
+These are rolling limits that look at the trailing 60 seconds.
 
 ## Common Causes and Mitigations
 

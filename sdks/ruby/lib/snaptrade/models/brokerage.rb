@@ -34,9 +34,6 @@ module SnapTrade
     # URL to the brokerage's logo in square format.
     attr_accessor :aws_s3_square_logo_url
 
-    # This field is deprecated.
-    attr_accessor :open_url
-
     # URL to the brokerage's website.
     attr_accessor :url
 
@@ -46,11 +43,11 @@ module SnapTrade
     # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     attr_accessor :maintenance_mode
 
-    # This field is deprecated. Please contact us if you have a valid use case for it.
-    attr_accessor :allows_fractional_units
-
     # Whether the brokerage allows trading through SnapTrade.
     attr_accessor :allows_trading
+
+    # This field is deprecated. Please contact us if you have a valid use case for it.
+    attr_accessor :allows_fractional_units
 
     # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :has_reporting
@@ -63,6 +60,9 @@ module SnapTrade
     # This field is deprecated. Please contact us if you have a valid use case for it.
     attr_accessor :exchanges
 
+    # This field is deprecated.
+    attr_accessor :open_url
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -73,16 +73,16 @@ module SnapTrade
         :'description' => :'description',
         :'aws_s3_logo_url' => :'aws_s3_logo_url',
         :'aws_s3_square_logo_url' => :'aws_s3_square_logo_url',
-        :'open_url' => :'open_url',
         :'url' => :'url',
         :'enabled' => :'enabled',
         :'maintenance_mode' => :'maintenance_mode',
-        :'allows_fractional_units' => :'allows_fractional_units',
         :'allows_trading' => :'allows_trading',
+        :'allows_fractional_units' => :'allows_fractional_units',
         :'has_reporting' => :'has_reporting',
         :'is_real_time_connection' => :'is_real_time_connection',
         :'brokerage_type' => :'brokerage_type',
-        :'exchanges' => :'exchanges'
+        :'exchanges' => :'exchanges',
+        :'open_url' => :'open_url'
       }
     end
 
@@ -101,16 +101,16 @@ module SnapTrade
         :'description' => :'String',
         :'aws_s3_logo_url' => :'String',
         :'aws_s3_square_logo_url' => :'String',
-        :'open_url' => :'String',
         :'url' => :'String',
         :'enabled' => :'Boolean',
         :'maintenance_mode' => :'Boolean',
-        :'allows_fractional_units' => :'Boolean',
         :'allows_trading' => :'Boolean',
+        :'allows_fractional_units' => :'Boolean',
         :'has_reporting' => :'Boolean',
         :'is_real_time_connection' => :'Boolean',
         :'brokerage_type' => :'BrokerageType',
-        :'exchanges' => :'Array<Object>'
+        :'exchanges' => :'Array<Object>',
+        :'open_url' => :'String'
       }
     end
 
@@ -118,10 +118,10 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'aws_s3_square_logo_url',
-        :'open_url',
-        :'allows_fractional_units',
         :'allows_trading',
+        :'allows_fractional_units',
         :'has_reporting',
+        :'open_url'
       ])
     end
 
@@ -168,10 +168,6 @@ module SnapTrade
         self.aws_s3_square_logo_url = attributes[:'aws_s3_square_logo_url']
       end
 
-      if attributes.key?(:'open_url')
-        self.open_url = attributes[:'open_url']
-      end
-
       if attributes.key?(:'url')
         self.url = attributes[:'url']
       end
@@ -184,12 +180,12 @@ module SnapTrade
         self.maintenance_mode = attributes[:'maintenance_mode']
       end
 
-      if attributes.key?(:'allows_fractional_units')
-        self.allows_fractional_units = attributes[:'allows_fractional_units']
-      end
-
       if attributes.key?(:'allows_trading')
         self.allows_trading = attributes[:'allows_trading']
+      end
+
+      if attributes.key?(:'allows_fractional_units')
+        self.allows_fractional_units = attributes[:'allows_fractional_units']
       end
 
       if attributes.key?(:'has_reporting')
@@ -208,6 +204,10 @@ module SnapTrade
         if (value = attributes[:'exchanges']).is_a?(Array)
           self.exchanges = value
         end
+      end
+
+      if attributes.key?(:'open_url')
+        self.open_url = attributes[:'open_url']
       end
     end
 
@@ -236,16 +236,16 @@ module SnapTrade
           description == o.description &&
           aws_s3_logo_url == o.aws_s3_logo_url &&
           aws_s3_square_logo_url == o.aws_s3_square_logo_url &&
-          open_url == o.open_url &&
           url == o.url &&
           enabled == o.enabled &&
           maintenance_mode == o.maintenance_mode &&
-          allows_fractional_units == o.allows_fractional_units &&
           allows_trading == o.allows_trading &&
+          allows_fractional_units == o.allows_fractional_units &&
           has_reporting == o.has_reporting &&
           is_real_time_connection == o.is_real_time_connection &&
           brokerage_type == o.brokerage_type &&
-          exchanges == o.exchanges
+          exchanges == o.exchanges &&
+          open_url == o.open_url
     end
 
     # @see the `==` method
@@ -257,7 +257,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, slug, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, open_url, url, enabled, maintenance_mode, allows_fractional_units, allows_trading, has_reporting, is_real_time_connection, brokerage_type, exchanges].hash
+      [id, slug, name, display_name, description, aws_s3_logo_url, aws_s3_square_logo_url, url, enabled, maintenance_mode, allows_trading, allows_fractional_units, has_reporting, is_real_time_connection, brokerage_type, exchanges, open_url].hash
     end
 
     # Builds the object from hash

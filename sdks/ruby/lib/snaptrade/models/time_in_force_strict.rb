@@ -15,9 +15,10 @@ module SnapTrade
     FOK = "FOK".freeze
     DAY = "Day".freeze
     GTC = "GTC".freeze
+    IOC = "IOC".freeze
 
     def self.all_vars
-      @all_vars ||= [FOK, DAY, GTC].freeze
+      @all_vars ||= [FOK, DAY, GTC, IOC].freeze
     end
 
     # Builds the enum from string

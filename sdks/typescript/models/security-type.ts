@@ -26,7 +26,7 @@ export interface SecurityType {
      */
     'id'?: string;
     /**
-     * A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   ad - ADR   bnd - Bond   cs - Common Stock   cef - Closed End Fund   et - ETF   oef - Open Ended Fund   ps - Preferred Stock   rt - Right   struct - Structured Product   ut - Unit   wi - When Issued   wt - Warrant 
+     * A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
      * @type {string}
      * @memberof SecurityType
      */

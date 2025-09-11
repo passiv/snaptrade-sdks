@@ -19,6 +19,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.konfigthis.client.model.PositionCurrency;
 import com.konfigthis.client.model.PositionSymbol;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -68,13 +69,17 @@ public class Position {
   @SerializedName(SERIALIZED_NAME_OPEN_PNL)
   private Double openPnl;
 
+  public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
+  @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
+  private Double averagePurchasePrice;
+
   public static final String SERIALIZED_NAME_FRACTIONAL_UNITS = "fractional_units";
   @SerializedName(SERIALIZED_NAME_FRACTIONAL_UNITS)
   private Double fractionalUnits;
 
-  public static final String SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE = "average_purchase_price";
-  @SerializedName(SERIALIZED_NAME_AVERAGE_PURCHASE_PRICE)
-  private Double averagePurchasePrice;
+  public static final String SERIALIZED_NAME_CURRENCY = "currency";
+  @SerializedName(SERIALIZED_NAME_CURRENCY)
+  private PositionCurrency currency;
 
   public Position() {
   }
@@ -222,6 +227,44 @@ public class Position {
   }
 
 
+  public Position averagePurchasePrice(Double averagePurchasePrice) {
+    
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice;
+    return this;
+  }
+
+  public Position averagePurchasePrice(Integer averagePurchasePrice) {
+    
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice.doubleValue();
+    return this;
+  }
+
+   /**
+   * Cost basis _per share_ of this position.
+   * @return averagePurchasePrice
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "108.3353", value = "Cost basis _per share_ of this position.")
+
+  public Double getAveragePurchasePrice() {
+    return averagePurchasePrice;
+  }
+
+
+  public void setAveragePurchasePrice(Double averagePurchasePrice) {
+    
+    
+    
+    this.averagePurchasePrice = averagePurchasePrice;
+  }
+
+
   public Position fractionalUnits(Double fractionalUnits) {
     
     
@@ -262,41 +305,32 @@ public class Position {
   }
 
 
-  public Position averagePurchasePrice(Double averagePurchasePrice) {
+  public Position currency(PositionCurrency currency) {
     
     
     
     
-    this.averagePurchasePrice = averagePurchasePrice;
-    return this;
-  }
-
-  public Position averagePurchasePrice(Integer averagePurchasePrice) {
-    
-    
-    
-    
-    this.averagePurchasePrice = averagePurchasePrice.doubleValue();
+    this.currency = currency;
     return this;
   }
 
    /**
-   * Cost basis _per share_ of this position.
-   * @return averagePurchasePrice
+   * Get currency
+   * @return currency
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "108.3353", value = "Cost basis _per share_ of this position.")
+  @ApiModelProperty(value = "")
 
-  public Double getAveragePurchasePrice() {
-    return averagePurchasePrice;
+  public PositionCurrency getCurrency() {
+    return currency;
   }
 
 
-  public void setAveragePurchasePrice(Double averagePurchasePrice) {
+  public void setCurrency(PositionCurrency currency) {
     
     
     
-    this.averagePurchasePrice = averagePurchasePrice;
+    this.currency = currency;
   }
 
   /**
@@ -358,8 +392,9 @@ public class Position {
         Objects.equals(this.units, position.units) &&
         Objects.equals(this.price, position.price) &&
         Objects.equals(this.openPnl, position.openPnl) &&
+        Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice) &&
         Objects.equals(this.fractionalUnits, position.fractionalUnits) &&
-        Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice)&&
+        Objects.equals(this.currency, position.currency)&&
         Objects.equals(this.additionalProperties, position.additionalProperties);
   }
 
@@ -369,7 +404,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, units, price, openPnl, fractionalUnits, averagePurchasePrice, additionalProperties);
+    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -387,8 +422,9 @@ public class Position {
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    openPnl: ").append(toIndentedString(openPnl)).append("\n");
-    sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
+    sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
+    sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -416,8 +452,9 @@ public class Position {
     openapiFields.add("units");
     openapiFields.add("price");
     openapiFields.add("open_pnl");
-    openapiFields.add("fractional_units");
     openapiFields.add("average_purchase_price");
+    openapiFields.add("fractional_units");
+    openapiFields.add("currency");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -438,6 +475,10 @@ public class Position {
       // validate the optional field `symbol`
       if (jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) {
         PositionSymbol.validateJsonObject(jsonObj.getAsJsonObject("symbol"));
+      }
+      // validate the optional field `currency`
+      if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
+        PositionCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
       }
   }
 

@@ -43,9 +43,10 @@ namespace SnapTrade.Net.Model
         /// </summary>
         /// <param name="brokerageOrderId">Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system..</param>
         /// <param name="status">status.</param>
-        /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
         /// <param name="universalSymbol">universalSymbol.</param>
         /// <param name="optionSymbol">optionSymbol.</param>
+        /// <param name="quoteUniversalSymbol">quoteUniversalSymbol.</param>
+        /// <param name="quoteCurrency">quoteCurrency.</param>
         /// <param name="action">The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE .</param>
         /// <param name="totalQuantity">The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares..</param>
         /// <param name="openQuantity">The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares..</param>
@@ -60,13 +61,16 @@ namespace SnapTrade.Net.Model
         /// <param name="timeUpdated">The time the order was last updated in the brokerage system. This value is not always available from the brokerage..</param>
         /// <param name="timeExecuted">The time the order was executed in the brokerage system. This value is not always available from the brokerage..</param>
         /// <param name="expiryDate">The time the order expires. This value is not always available from the brokerage..</param>
-        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), string symbol = default(string), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?)) : base()
+        /// <param name="symbol">A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change..</param>
+        /// <param name="childBrokerageOrderIds">childBrokerageOrderIds.</param>
+        public AccountOrderRecord(string brokerageOrderId = default(string), AccountOrderRecordStatus? status = default(AccountOrderRecordStatus?), AccountOrderRecordUniversalSymbol universalSymbol = default(AccountOrderRecordUniversalSymbol), AccountOrderRecordOptionSymbol optionSymbol = default(AccountOrderRecordOptionSymbol), AccountOrderRecordQuoteUniversalSymbol quoteUniversalSymbol = default(AccountOrderRecordQuoteUniversalSymbol), AccountOrderRecordQuoteCurrency quoteCurrency = default(AccountOrderRecordQuoteCurrency), string action = default(string), double? totalQuantity = default(double?), double? openQuantity = default(double?), double? canceledQuantity = default(double?), double? filledQuantity = default(double?), double? executionPrice = default(double?), double? limitPrice = default(double?), double? stopPrice = default(double?), string orderType = default(string), string timeInForce = default(string), DateTime timePlaced = default(DateTime), DateTime? timeUpdated = default(DateTime?), DateTime? timeExecuted = default(DateTime?), DateTime? expiryDate = default(DateTime?), string symbol = default(string), ChildBrokerageOrderIDsNullable childBrokerageOrderIds = default(ChildBrokerageOrderIDsNullable)) : base()
         {
             this.BrokerageOrderId = brokerageOrderId;
             this.Status = status;
-            this.Symbol = symbol;
             this.UniversalSymbol = universalSymbol;
             this.OptionSymbol = optionSymbol;
+            this.QuoteUniversalSymbol = quoteUniversalSymbol;
+            this.QuoteCurrency = quoteCurrency;
             this._Action = action;
             this.TotalQuantity = totalQuantity;
             this.OpenQuantity = openQuantity;
@@ -81,6 +85,8 @@ namespace SnapTrade.Net.Model
             this.TimeUpdated = timeUpdated;
             this.TimeExecuted = timeExecuted;
             this.ExpiryDate = expiryDate;
+            this.Symbol = symbol;
+            this.ChildBrokerageOrderIds = childBrokerageOrderIds;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -90,14 +96,6 @@ namespace SnapTrade.Net.Model
         /// <value>Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.</value>
         [DataMember(Name = "brokerage_order_id", EmitDefaultValue = false)]
         public string BrokerageOrderId { get; set; }
-
-        /// <summary>
-        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
-        /// </summary>
-        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        [Obsolete]
-        public string Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets UniversalSymbol
@@ -110,6 +108,18 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "option_symbol", EmitDefaultValue = false)]
         public AccountOrderRecordOptionSymbol OptionSymbol { get; set; }
+
+        /// <summary>
+        /// Gets or Sets QuoteUniversalSymbol
+        /// </summary>
+        [DataMember(Name = "quote_universal_symbol", EmitDefaultValue = false)]
+        public AccountOrderRecordQuoteUniversalSymbol QuoteUniversalSymbol { get; set; }
+
+        /// <summary>
+        /// Gets or Sets QuoteCurrency
+        /// </summary>
+        [DataMember(Name = "quote_currency", EmitDefaultValue = false)]
+        public AccountOrderRecordQuoteCurrency QuoteCurrency { get; set; }
 
         /// <summary>
         /// The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE 
@@ -210,6 +220,20 @@ namespace SnapTrade.Net.Model
         public DateTime? ExpiryDate { get; set; }
 
         /// <summary>
+        /// A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.
+        /// </summary>
+        /// <value>A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change.</value>
+        [DataMember(Name = "symbol", EmitDefaultValue = false)]
+        [Obsolete]
+        public string Symbol { get; set; }
+
+        /// <summary>
+        /// Gets or Sets ChildBrokerageOrderIds
+        /// </summary>
+        [DataMember(Name = "child_brokerage_order_ids", EmitDefaultValue = true)]
+        public ChildBrokerageOrderIDsNullable ChildBrokerageOrderIds { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -226,9 +250,10 @@ namespace SnapTrade.Net.Model
             sb.Append("  ").Append(base.ToString().Replace("\n", "\n  ")).Append("\n");
             sb.Append("  BrokerageOrderId: ").Append(BrokerageOrderId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
-            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  UniversalSymbol: ").Append(UniversalSymbol).Append("\n");
             sb.Append("  OptionSymbol: ").Append(OptionSymbol).Append("\n");
+            sb.Append("  QuoteUniversalSymbol: ").Append(QuoteUniversalSymbol).Append("\n");
+            sb.Append("  QuoteCurrency: ").Append(QuoteCurrency).Append("\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
             sb.Append("  TotalQuantity: ").Append(TotalQuantity).Append("\n");
             sb.Append("  OpenQuantity: ").Append(OpenQuantity).Append("\n");
@@ -243,6 +268,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  TimeUpdated: ").Append(TimeUpdated).Append("\n");
             sb.Append("  TimeExecuted: ").Append(TimeExecuted).Append("\n");
             sb.Append("  ExpiryDate: ").Append(ExpiryDate).Append("\n");
+            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
+            sb.Append("  ChildBrokerageOrderIds: ").Append(ChildBrokerageOrderIds).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -289,11 +316,6 @@ namespace SnapTrade.Net.Model
                     this.Status.Equals(input.Status)
                 ) && base.Equals(input) && 
                 (
-                    this.Symbol == input.Symbol ||
-                    (this.Symbol != null &&
-                    this.Symbol.Equals(input.Symbol))
-                ) && base.Equals(input) && 
-                (
                     this.UniversalSymbol == input.UniversalSymbol ||
                     (this.UniversalSymbol != null &&
                     this.UniversalSymbol.Equals(input.UniversalSymbol))
@@ -302,6 +324,16 @@ namespace SnapTrade.Net.Model
                     this.OptionSymbol == input.OptionSymbol ||
                     (this.OptionSymbol != null &&
                     this.OptionSymbol.Equals(input.OptionSymbol))
+                ) && base.Equals(input) && 
+                (
+                    this.QuoteUniversalSymbol == input.QuoteUniversalSymbol ||
+                    (this.QuoteUniversalSymbol != null &&
+                    this.QuoteUniversalSymbol.Equals(input.QuoteUniversalSymbol))
+                ) && base.Equals(input) && 
+                (
+                    this.QuoteCurrency == input.QuoteCurrency ||
+                    (this.QuoteCurrency != null &&
+                    this.QuoteCurrency.Equals(input.QuoteCurrency))
                 ) && base.Equals(input) && 
                 (
                     this._Action == input._Action ||
@@ -372,6 +404,16 @@ namespace SnapTrade.Net.Model
                     this.ExpiryDate == input.ExpiryDate ||
                     (this.ExpiryDate != null &&
                     this.ExpiryDate.Equals(input.ExpiryDate))
+                ) && base.Equals(input) && 
+                (
+                    this.Symbol == input.Symbol ||
+                    (this.Symbol != null &&
+                    this.Symbol.Equals(input.Symbol))
+                ) && base.Equals(input) && 
+                (
+                    this.ChildBrokerageOrderIds == input.ChildBrokerageOrderIds ||
+                    (this.ChildBrokerageOrderIds != null &&
+                    this.ChildBrokerageOrderIds.Equals(input.ChildBrokerageOrderIds))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -390,10 +432,6 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.BrokerageOrderId.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.Status.GetHashCode();
-                if (this.Symbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
-                }
                 if (this.UniversalSymbol != null)
                 {
                     hashCode = (hashCode * 59) + this.UniversalSymbol.GetHashCode();
@@ -401,6 +439,14 @@ namespace SnapTrade.Net.Model
                 if (this.OptionSymbol != null)
                 {
                     hashCode = (hashCode * 59) + this.OptionSymbol.GetHashCode();
+                }
+                if (this.QuoteUniversalSymbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.QuoteUniversalSymbol.GetHashCode();
+                }
+                if (this.QuoteCurrency != null)
+                {
+                    hashCode = (hashCode * 59) + this.QuoteCurrency.GetHashCode();
                 }
                 if (this._Action != null)
                 {
@@ -457,6 +503,14 @@ namespace SnapTrade.Net.Model
                 if (this.ExpiryDate != null)
                 {
                     hashCode = (hashCode * 59) + this.ExpiryDate.GetHashCode();
+                }
+                if (this.Symbol != null)
+                {
+                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
+                }
+                if (this.ChildBrokerageOrderIds != null)
+                {
+                    hashCode = (hashCode * 59) + this.ChildBrokerageOrderIds.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

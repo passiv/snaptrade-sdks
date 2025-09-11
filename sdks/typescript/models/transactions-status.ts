@@ -28,12 +28,12 @@ export interface TransactionsStatus {
      * @type {string}
      * @memberof TransactionsStatus
      */
-    'last_successful_sync'?: string;
+    'last_successful_sync'?: string | null;
     /**
      * The date of the first transaction in the account known to SnapTrade. It\'s possible that the account has transactions before this date, but they are not known to SnapTrade.
      * @type {string}
      * @memberof TransactionsStatus
      */
-    'first_transaction_date'?: string;
+    'first_transaction_date'?: string | null;
 }
 

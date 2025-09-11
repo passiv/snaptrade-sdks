@@ -12,8 +12,8 @@ Data to login a user via SnapTrade Partner
 |**immediateRedirect** | **Boolean** | When set to &#x60;true&#x60;, user will be redirected back to the partner&#39;s site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. |  [optional] |
 |**customRedirect** | **String** | URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information. |  [optional] |
 |**reconnect** | **String** | The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information. |  [optional] |
-|**connectionType** | [**ConnectionTypeEnum**](#ConnectionTypeEnum) | Sets whether the connection should be read-only or trade-enabled. |  [optional] |
-|**connectionPortalVersion** | [**ConnectionPortalVersionEnum**](#ConnectionPortalVersionEnum) | Sets the version of the connection portal to render. |  [optional] |
+|**connectionType** | [**ConnectionTypeEnum**](#ConnectionTypeEnum) | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  |  [optional] |
+|**connectionPortalVersion** | [**ConnectionPortalVersionEnum**](#ConnectionPortalVersionEnum) | Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. |  [optional] |
 
 
 
@@ -23,6 +23,7 @@ Data to login a user via SnapTrade Partner
 |---- | -----|
 | READ | &quot;read&quot; |
 | TRADE | &quot;trade&quot; |
+| TRADE_IF_AVAILABLE | &quot;trade-if-available&quot; |
 
 
 

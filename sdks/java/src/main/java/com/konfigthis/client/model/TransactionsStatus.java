@@ -23,6 +23,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.time.LocalDate;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -105,11 +106,11 @@ public class TransactionsStatus {
   }
 
    /**
-   * All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.
+   * Date in YYYY-MM-DD format or null
    * @return lastSuccessfulSync
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "All transactions up to this date have been successfully synced. Please note that this is not the date of the last transaction, nor the last time SnapTrade attempted to sync transactions.")
+  @ApiModelProperty(example = "Mon Jan 24 00:00:00 UTC 2022", value = "Date in YYYY-MM-DD format or null")
 
   public LocalDate getLastSuccessfulSync() {
     return lastSuccessfulSync;
@@ -213,9 +214,20 @@ public class TransactionsStatus {
         Objects.equals(this.additionalProperties, transactionsStatus.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
     return Objects.hash(initialSyncCompleted, lastSuccessfulSync, firstTransactionDate, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

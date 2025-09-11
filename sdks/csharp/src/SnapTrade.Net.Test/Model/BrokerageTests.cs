@@ -114,14 +114,6 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'AwsS3SquareLogoUrl'
         }
         /// <summary>
-        /// Test the property 'OpenUrl'
-        /// </summary>
-        [Fact]
-        public void OpenUrlTest()
-        {
-            // TODO unit test for the property 'OpenUrl'
-        }
-        /// <summary>
         /// Test the property 'Url'
         /// </summary>
         [Fact]
@@ -146,20 +138,20 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'MaintenanceMode'
         }
         /// <summary>
-        /// Test the property 'AllowsFractionalUnits'
-        /// </summary>
-        [Fact]
-        public void AllowsFractionalUnitsTest()
-        {
-            // TODO unit test for the property 'AllowsFractionalUnits'
-        }
-        /// <summary>
         /// Test the property 'AllowsTrading'
         /// </summary>
         [Fact]
         public void AllowsTradingTest()
         {
             // TODO unit test for the property 'AllowsTrading'
+        }
+        /// <summary>
+        /// Test the property 'AllowsFractionalUnits'
+        /// </summary>
+        [Fact]
+        public void AllowsFractionalUnitsTest()
+        {
+            // TODO unit test for the property 'AllowsFractionalUnits'
         }
         /// <summary>
         /// Test the property 'HasReporting'
@@ -192,6 +184,14 @@ namespace SnapTrade.Net.Test.Model
         public void ExchangesTest()
         {
             // TODO unit test for the property 'Exchanges'
+        }
+        /// <summary>
+        /// Test the property 'OpenUrl'
+        /// </summary>
+        [Fact]
+        public void OpenUrlTest()
+        {
+            // TODO unit test for the property 'OpenUrl'
         }
 
     }

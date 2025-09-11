@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **BrokerageOrderId** | Pointer to **string** | Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system. | [optional] 
 **Status** | Pointer to [**AccountOrderRecordStatus**](AccountOrderRecordStatus.md) |  | [optional] 
-**Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
 **UniversalSymbol** | Pointer to [**AccountOrderRecordUniversalSymbol**](AccountOrderRecordUniversalSymbol.md) |  | [optional] 
 **OptionSymbol** | Pointer to [**AccountOrderRecordOptionSymbol**](AccountOrderRecordOptionSymbol.md) |  | [optional] 
+**QuoteUniversalSymbol** | Pointer to [**AccountOrderRecordQuoteUniversalSymbol**](AccountOrderRecordQuoteUniversalSymbol.md) |  | [optional] 
+**QuoteCurrency** | Pointer to [**AccountOrderRecordQuoteCurrency**](AccountOrderRecordQuoteCurrency.md) |  | [optional] 
 **Action** | Pointer to **string** | The action describes the intent or side of a trade. This is usually &#x60;BUY&#x60; or &#x60;SELL&#x60; but can include other potential values like the following depending on the specific brokerage.   - BUY   - SELL   - BUY_COVER   - SELL_SHORT   - BUY_OPEN   - BUY_CLOSE   - SELL_OPEN   - SELL_CLOSE  | [optional] 
 **TotalQuantity** | Pointer to **NullableFloat32** | The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares. | [optional] 
 **OpenQuantity** | Pointer to **NullableFloat32** | The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares. | [optional] 
@@ -23,6 +24,8 @@ Name | Type | Description | Notes
 **TimeUpdated** | Pointer to **NullableTime** | The time the order was last updated in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **TimeExecuted** | Pointer to **NullableTime** | The time the order was executed in the brokerage system. This value is not always available from the brokerage. | [optional] 
 **ExpiryDate** | Pointer to **NullableTime** | The time the order expires. This value is not always available from the brokerage. | [optional] 
+**Symbol** | Pointer to **string** | A unique ID for the security within SnapTrade, scoped to the brokerage account that the security belongs to. This is a legacy field and should not be used. Do not rely on this being a stable ID as it can change. | [optional] 
+**ChildBrokerageOrderIds** | Pointer to [**NullableAccountOrderRecordChildBrokerageOrderIds**](AccountOrderRecordChildBrokerageOrderIds.md) |  | [optional] 
 
 ## Methods
 
@@ -93,31 +96,6 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
-### GetSymbol
-
-`func (o *AccountOrderRecord) GetSymbol() string`
-
-GetSymbol returns the Symbol field if non-nil, zero value otherwise.
-
-### GetSymbolOk
-
-`func (o *AccountOrderRecord) GetSymbolOk() (*string, bool)`
-
-GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSymbol
-
-`func (o *AccountOrderRecord) SetSymbol(v string)`
-
-SetSymbol sets Symbol field to given value.
-
-### HasSymbol
-
-`func (o *AccountOrderRecord) HasSymbol() bool`
-
-HasSymbol returns a boolean if a field has been set.
-
 ### GetUniversalSymbol
 
 `func (o *AccountOrderRecord) GetUniversalSymbol() AccountOrderRecordUniversalSymbol`
@@ -167,6 +145,56 @@ SetOptionSymbol sets OptionSymbol field to given value.
 `func (o *AccountOrderRecord) HasOptionSymbol() bool`
 
 HasOptionSymbol returns a boolean if a field has been set.
+
+### GetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbol() AccountOrderRecordQuoteUniversalSymbol`
+
+GetQuoteUniversalSymbol returns the QuoteUniversalSymbol field if non-nil, zero value otherwise.
+
+### GetQuoteUniversalSymbolOk
+
+`func (o *AccountOrderRecord) GetQuoteUniversalSymbolOk() (*AccountOrderRecordQuoteUniversalSymbol, bool)`
+
+GetQuoteUniversalSymbolOk returns a tuple with the QuoteUniversalSymbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) SetQuoteUniversalSymbol(v AccountOrderRecordQuoteUniversalSymbol)`
+
+SetQuoteUniversalSymbol sets QuoteUniversalSymbol field to given value.
+
+### HasQuoteUniversalSymbol
+
+`func (o *AccountOrderRecord) HasQuoteUniversalSymbol() bool`
+
+HasQuoteUniversalSymbol returns a boolean if a field has been set.
+
+### GetQuoteCurrency
+
+`func (o *AccountOrderRecord) GetQuoteCurrency() AccountOrderRecordQuoteCurrency`
+
+GetQuoteCurrency returns the QuoteCurrency field if non-nil, zero value otherwise.
+
+### GetQuoteCurrencyOk
+
+`func (o *AccountOrderRecord) GetQuoteCurrencyOk() (*AccountOrderRecordQuoteCurrency, bool)`
+
+GetQuoteCurrencyOk returns a tuple with the QuoteCurrency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuoteCurrency
+
+`func (o *AccountOrderRecord) SetQuoteCurrency(v AccountOrderRecordQuoteCurrency)`
+
+SetQuoteCurrency sets QuoteCurrency field to given value.
+
+### HasQuoteCurrency
+
+`func (o *AccountOrderRecord) HasQuoteCurrency() bool`
+
+HasQuoteCurrency returns a boolean if a field has been set.
 
 ### GetAction
 
@@ -628,6 +656,66 @@ HasExpiryDate returns a boolean if a field has been set.
 `func (o *AccountOrderRecord) UnsetExpiryDate()`
 
 UnsetExpiryDate ensures that no value is present for ExpiryDate, not even an explicit nil
+### GetSymbol
+
+`func (o *AccountOrderRecord) GetSymbol() string`
+
+GetSymbol returns the Symbol field if non-nil, zero value otherwise.
+
+### GetSymbolOk
+
+`func (o *AccountOrderRecord) GetSymbolOk() (*string, bool)`
+
+GetSymbolOk returns a tuple with the Symbol field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSymbol
+
+`func (o *AccountOrderRecord) SetSymbol(v string)`
+
+SetSymbol sets Symbol field to given value.
+
+### HasSymbol
+
+`func (o *AccountOrderRecord) HasSymbol() bool`
+
+HasSymbol returns a boolean if a field has been set.
+
+### GetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIds() AccountOrderRecordChildBrokerageOrderIds`
+
+GetChildBrokerageOrderIds returns the ChildBrokerageOrderIds field if non-nil, zero value otherwise.
+
+### GetChildBrokerageOrderIdsOk
+
+`func (o *AccountOrderRecord) GetChildBrokerageOrderIdsOk() (*AccountOrderRecordChildBrokerageOrderIds, bool)`
+
+GetChildBrokerageOrderIdsOk returns a tuple with the ChildBrokerageOrderIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) SetChildBrokerageOrderIds(v AccountOrderRecordChildBrokerageOrderIds)`
+
+SetChildBrokerageOrderIds sets ChildBrokerageOrderIds field to given value.
+
+### HasChildBrokerageOrderIds
+
+`func (o *AccountOrderRecord) HasChildBrokerageOrderIds() bool`
+
+HasChildBrokerageOrderIds returns a boolean if a field has been set.
+
+### SetChildBrokerageOrderIdsNil
+
+`func (o *AccountOrderRecord) SetChildBrokerageOrderIdsNil(b bool)`
+
+ SetChildBrokerageOrderIdsNil sets the value for ChildBrokerageOrderIds to be an explicit nil
+
+### UnsetChildBrokerageOrderIds
+`func (o *AccountOrderRecord) UnsetChildBrokerageOrderIds()`
+
+UnsetChildBrokerageOrderIds ensures that no value is present for ChildBrokerageOrderIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

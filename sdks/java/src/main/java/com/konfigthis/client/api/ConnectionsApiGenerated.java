@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.konfigthis.client.model.BrokerageAuthorization;
 import com.konfigthis.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.konfigthis.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.konfigthis.client.model.RateOfReturnResponse;
 import com.konfigthis.client.model.SessionEvent;
 import java.util.UUID;
 
@@ -430,7 +431,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Force disable connection
-     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  *Please contact us in order to use this endpoint as it is disabled by default.* 
+     * Manually force the specified connection to become disabled. This should only be used for testing a reconnect flow, and never used on production connections. Will trigger a disconnect as if it happened naturally, and send a [&#x60;CONNECTION_BROKEN&#x60; webhook](/docs/webhooks#webhooks-connection_broken) for the connection.  This endpoint is available on test keys. If you would like it enabled on production keys as well, please contact support as it is disabled by default. 
      * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -795,7 +796,7 @@ public class ConnectionsApiGenerated {
 
     /**
      * Refresh holdings for a connection
-     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection.  *Please contact support for access as this endpoint is not enabled by default.* 
+     * Trigger a holdings update for all accounts under this connection. Updates will be queued asynchronously. [&#x60;ACCOUNT_HOLDINGS_UPDATED&#x60; webhook](/docs/webhooks#webhooks-account_holdings_updated) will be sent once the sync completes for each account under the connection. This endpoint will also trigger a transaction sync for the past day if one has not yet occurred.  **Because of the cost of refreshing a connection, each call to this endpoint incurs a additional charge based on your [Pricing Plan](https://snaptrade.com/pricing)** 
      * @param authorizationId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
@@ -1013,6 +1014,192 @@ public class ConnectionsApiGenerated {
             
 
         return ((ConnectionsApi) this).new RemoveBrokerageAuthorizationRequestBuilder(authorizationId, userId, userSecret);
+    }
+    private okhttp3.Call returnRatesCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/authorizations/{authorizationId}/returnRates"
+            .replace("{" + "authorizationId" + "}", localVarApiClient.escapeString(authorizationId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call returnRatesValidateBeforeCall(String userId, String userSecret, UUID authorizationId, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling returnRates(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling returnRates(Async)");
+        }
+
+        // verify the required parameter 'authorizationId' is set
+        if (authorizationId == null) {
+            throw new ApiException("Missing the required parameter 'authorizationId' when calling returnRates(Async)");
+        }
+
+        return returnRatesCall(userId, userSecret, authorizationId, _callback);
+
+    }
+
+
+    private ApiResponse<RateOfReturnResponse> returnRatesWithHttpInfo(String userId, String userSecret, UUID authorizationId) throws ApiException {
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, null);
+        Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call returnRatesAsync(String userId, String userSecret, UUID authorizationId, final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = returnRatesValidateBeforeCall(userId, userSecret, authorizationId, _callback);
+        Type localVarReturnType = new TypeToken<RateOfReturnResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class ReturnRatesRequestBuilderGenerated {
+        final String userId;
+        final String userSecret;
+        final UUID authorizationId;
+
+        public ReturnRatesRequestBuilderGenerated(String userId, String userSecret, UUID authorizationId) {
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.authorizationId = authorizationId;
+        }
+
+        /**
+         * Build call for returnRates
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return returnRatesCall(userId, userSecret, authorizationId, _callback);
+        }
+
+
+        /**
+         * Execute returnRates request
+         * @return RateOfReturnResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public RateOfReturnResponse execute() throws ApiException {
+            ApiResponse<RateOfReturnResponse> localVarResp = returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute returnRates request with HTTP info returned
+         * @return ApiResponse&lt;RateOfReturnResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RateOfReturnResponse> executeWithHttpInfo() throws ApiException {
+            return returnRatesWithHttpInfo(userId, userSecret, authorizationId);
+        }
+
+        /**
+         * Execute returnRates request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<RateOfReturnResponse> _callback) throws ApiException {
+            return returnRatesAsync(userId, userSecret, authorizationId, _callback);
+        }
+    }
+
+    /**
+     * List connection rate of returns
+     * Returns a list of rate of return percents for a given connection. Will include timeframes available from the brokerage, for example \&quot;ALL\&quot;, \&quot;1Y\&quot;, \&quot;6M\&quot;, \&quot;3M\&quot;, \&quot;1M\&quot; 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param authorizationId  (required)
+     * @return ReturnRatesRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.ReturnRatesRequestBuilder returnRates(String userId, String userSecret, UUID authorizationId) throws IllegalArgumentException {
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (authorizationId == null) throw new IllegalArgumentException("\"authorizationId\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new ReturnRatesRequestBuilder(userId, userSecret, authorizationId);
     }
     private okhttp3.Call sessionEventsCall(String partnerClientId, String userId, String sessionId, final ApiCallback _callback) throws ApiException {
         String basePath = null;

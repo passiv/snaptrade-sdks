@@ -42,20 +42,20 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'reconnect'?: string;
     /**
-     * Sets whether the connection should be read-only or trade-enabled.
+     * Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
     'connectionType'?: SnapTradeLoginUserRequestBodyConnectionTypeEnum;
     /**
-     * Sets the version of the connection portal to render.
+     * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody
      */
     'connectionPortalVersion'?: SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum;
 }
 
-type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade'
+type SnapTradeLoginUserRequestBodyConnectionTypeEnum = 'read' | 'trade' | 'trade-if-available'
 type SnapTradeLoginUserRequestBodyConnectionPortalVersionEnum = 'v4' | 'v3' | 'v2'
 
 

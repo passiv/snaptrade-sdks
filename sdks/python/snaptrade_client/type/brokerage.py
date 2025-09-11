@@ -43,10 +43,6 @@ class OptionalBrokerage(TypedDict, total=False):
     # URL to the brokerage's logo in square format.
     aws_s3_square_logo_url: typing.Optional[str]
 
-    # WARNING: This property is deprecated
-    # This field is deprecated.
-    open_url: typing.Optional[str]
-
     # URL to the brokerage's website.
     url: str
 
@@ -56,12 +52,12 @@ class OptionalBrokerage(TypedDict, total=False):
     # Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
     maintenance_mode: bool
 
+    # Whether the brokerage allows trading through SnapTrade.
+    allows_trading: typing.Optional[bool]
+
     # WARNING: This property is deprecated
     # This field is deprecated. Please contact us if you have a valid use case for it.
     allows_fractional_units: typing.Optional[bool]
-
-    # Whether the brokerage allows trading through SnapTrade.
-    allows_trading: typing.Optional[bool]
 
     # WARNING: This property is deprecated
     # This field is deprecated. Please contact us if you have a valid use case for it.
@@ -75,6 +71,10 @@ class OptionalBrokerage(TypedDict, total=False):
 
     # WARNING: This property is deprecated
     exchanges: BrokerageExchanges
+
+    # WARNING: This property is deprecated
+    # This field is deprecated.
+    open_url: typing.Optional[str]
 
 class Brokerage(RequiredBrokerage, OptionalBrokerage):
     pass

@@ -26,6 +26,7 @@ type AccountHoldingsAccount struct {
 	OptionPositions []OptionsPosition `json:"option_positions,omitempty"`
 	// List of recent orders in the account, including both pending and executed orders. Note that option orders are included in this list. Option orders will have a null `universal_symbol` field and a non-null `option_symbol` field.
 	Orders []AccountOrderRecord `json:"orders,omitempty"`
+	// Deprecated
 	TotalValue *SnapTradeHoldingsTotalValue `json:"total_value,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -214,6 +215,7 @@ func (o *AccountHoldingsAccount) SetOrders(v []AccountOrderRecord) {
 }
 
 // GetTotalValue returns the TotalValue field value if set, zero value otherwise.
+// Deprecated
 func (o *AccountHoldingsAccount) GetTotalValue() SnapTradeHoldingsTotalValue {
 	if o == nil || isNil(o.TotalValue) {
 		var ret SnapTradeHoldingsTotalValue
@@ -224,6 +226,7 @@ func (o *AccountHoldingsAccount) GetTotalValue() SnapTradeHoldingsTotalValue {
 
 // GetTotalValueOk returns a tuple with the TotalValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *AccountHoldingsAccount) GetTotalValueOk() (*SnapTradeHoldingsTotalValue, bool) {
 	if o == nil || isNil(o.TotalValue) {
     return nil, false
@@ -241,6 +244,7 @@ func (o *AccountHoldingsAccount) HasTotalValue() bool {
 }
 
 // SetTotalValue gets a reference to the given SnapTradeHoldingsTotalValue and assigns it to the TotalValue field.
+// Deprecated
 func (o *AccountHoldingsAccount) SetTotalValue(v SnapTradeHoldingsTotalValue) {
 	o.TotalValue = &v
 }

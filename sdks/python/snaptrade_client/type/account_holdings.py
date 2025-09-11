@@ -30,6 +30,7 @@ class OptionalAccountHoldings(TypedDict, total=False):
 
     positions: typing.Optional[typing.List[Position]]
 
+    # WARNING: This property is deprecated
     total_value: SnapTradeHoldingsTotalValue
 
 class AccountHoldings(RequiredAccountHoldings, OptionalAccountHoldings):

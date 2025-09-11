@@ -27,7 +27,7 @@ using OpenAPIDateConverter = SnapTrade.Net.Client.OpenAPIDateConverter;
 namespace SnapTrade.Net.Model
 {
     /// <summary>
-    /// The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. To get the brokerage reported total market value of the account, refer to &#x60;account.balance.total&#x60;.
+    /// This field is deprecated. To get the brokerage reported total market value of the account, please refer to &#x60;account.balance.total&#x60;.  The total market value of the account. Note that this field is calculated based on the sum of the values of account positions and cash balances known to SnapTrade. It may not be accurate if the brokerage account has holdings that SnapTrade is not aware of. For example, if the brokerage account holds assets that SnapTrade does not support, the total value may be underreported. In certain cases, this value may also be double-counting cash-equivalent assets if those assets are represented as both cash and positions in the account. 
     /// </summary>
     [DataContract(Name = "SnapTradeHoldingsTotalValue")]
     public partial class SnapTradeHoldingsTotalValue : IEquatable<SnapTradeHoldingsTotalValue>, IValidatableObject

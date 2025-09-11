@@ -67,13 +67,15 @@ public class SnapTradeLoginUserRequestBody {
   private String reconnect;
 
   /**
-   * Sets whether the connection should be read-only or trade-enabled.
+   * Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
    */
   @JsonAdapter(ConnectionTypeEnum.Adapter.class)
  public enum ConnectionTypeEnum {
     READ("read"),
     
-    TRADE("trade");
+    TRADE("trade"),
+    
+    TRADE_IF_AVAILABLE("trade-if-available");
 
     private String value;
 
@@ -118,7 +120,7 @@ public class SnapTradeLoginUserRequestBody {
   private ConnectionTypeEnum connectionType = ConnectionTypeEnum.READ;
 
   /**
-   * Sets the version of the connection portal to render.
+   * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
    */
   @JsonAdapter(ConnectionPortalVersionEnum.Adapter.class)
  public enum ConnectionPortalVersionEnum {
@@ -168,7 +170,7 @@ public class SnapTradeLoginUserRequestBody {
 
   public static final String SERIALIZED_NAME_CONNECTION_PORTAL_VERSION = "connectionPortalVersion";
   @SerializedName(SERIALIZED_NAME_CONNECTION_PORTAL_VERSION)
-  private ConnectionPortalVersionEnum connectionPortalVersion = ConnectionPortalVersionEnum.V3;
+  private ConnectionPortalVersionEnum connectionPortalVersion = ConnectionPortalVersionEnum.V4;
 
   public SnapTradeLoginUserRequestBody() {
   }
@@ -299,11 +301,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets whether the connection should be read-only or trade-enabled.
+   * Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
    * @return connectionType
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "READ", value = "Sets whether the connection should be read-only or trade-enabled.")
+  @ApiModelProperty(example = "READ", value = "Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. ")
 
   public ConnectionTypeEnum getConnectionType() {
     return connectionType;
@@ -328,11 +330,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Sets the version of the connection portal to render.
+   * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
    * @return connectionPortalVersion
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "V3", value = "Sets the version of the connection portal to render.")
+  @ApiModelProperty(example = "V4", value = "Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.")
 
   public ConnectionPortalVersionEnum getConnectionPortalVersion() {
     return connectionPortalVersion;

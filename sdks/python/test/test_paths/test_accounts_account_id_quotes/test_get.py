@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdQuotes(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdQuotes unit test stubs
-        Get symbol quotes
+        Get equity symbol quotes
     """
 
     def setUp(self):

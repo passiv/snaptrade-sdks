@@ -18,8 +18,11 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.AccountOrderRecordOptionSymbol;
+import com.konfigthis.client.model.AccountOrderRecordQuoteCurrency;
+import com.konfigthis.client.model.AccountOrderRecordQuoteUniversalSymbol;
 import com.konfigthis.client.model.AccountOrderRecordStatus;
 import com.konfigthis.client.model.AccountOrderRecordUniversalSymbol;
+import com.konfigthis.client.model.ChildBrokerageOrderIDsNullable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -61,14 +64,6 @@ public class AccountOrderRecordTest {
     }
 
     /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
      * Test the property 'universalSymbol'
      */
     @Test
@@ -82,6 +77,22 @@ public class AccountOrderRecordTest {
     @Test
     public void optionSymbolTest() {
         // TODO: test optionSymbol
+    }
+
+    /**
+     * Test the property 'quoteUniversalSymbol'
+     */
+    @Test
+    public void quoteUniversalSymbolTest() {
+        // TODO: test quoteUniversalSymbol
+    }
+
+    /**
+     * Test the property 'quoteCurrency'
+     */
+    @Test
+    public void quoteCurrencyTest() {
+        // TODO: test quoteCurrency
     }
 
     /**
@@ -194,6 +205,22 @@ public class AccountOrderRecordTest {
     @Test
     public void expiryDateTest() {
         // TODO: test expiryDate
+    }
+
+    /**
+     * Test the property 'symbol'
+     */
+    @Test
+    public void symbolTest() {
+        // TODO: test symbol
+    }
+
+    /**
+     * Test the property 'childBrokerageOrderIds'
+     */
+    @Test
+    public void childBrokerageOrderIdsTest() {
+        // TODO: test childBrokerageOrderIds
     }
 
 }
