@@ -1116,7 +1116,7 @@ public class AccountInformationApiGenerated {
 
     /**
      * Get account order detail
-     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * Returns the detail of a single order using the external order ID provided in the request body.  This endpoint only works for single-leg orders at this time. Support for multi-leg orders will be added in the future.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @param accountId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
