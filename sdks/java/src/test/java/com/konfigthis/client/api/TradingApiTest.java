@@ -192,12 +192,10 @@ public class TradingApiTest {
         UUID accountId = null;
         String userId = null;
         String userSecret = null;
-        String symbol = null;
         Double price = null;
         Double stop = null;
         Double units = null;
         AccountOrderRecord response = api.placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-                .symbol(symbol)
                 .price(price)
                 .stop(stop)
                 .units(units)

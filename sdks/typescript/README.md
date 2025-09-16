@@ -1871,7 +1871,6 @@ const placeBracketOrderResponse = await snaptrade.trading.placeBracketOrder({
   userId: "snaptrade-user-123",
   userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   action: "BUY",
-  symbol: "AAPL",
   instrument: {
     symbol: "AAPL",
     type: "EQUITY",
@@ -1918,10 +1917,6 @@ The ID of the account to execute the trade on.
 ##### userId: `string`<a id="userid-string"></a>
 
 ##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### symbol: `string`<a id="symbol-string"></a>
-
-The security\\\'s trading ticker symbol.
 
 ##### price: `number`<a id="price-number"></a>
 

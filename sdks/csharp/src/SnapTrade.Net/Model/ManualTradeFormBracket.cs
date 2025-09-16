@@ -59,7 +59,6 @@ namespace SnapTrade.Net.Model
         /// Initializes a new instance of the <see cref="ManualTradeFormBracket" /> class.
         /// </summary>
         /// <param name="action">action (required).</param>
-        /// <param name="symbol">The security&#39;s trading ticker symbol..</param>
         /// <param name="instrument">instrument (required).</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
@@ -68,7 +67,7 @@ namespace SnapTrade.Net.Model
         /// <param name="units">Number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided..</param>
         /// <param name="stopLoss">stopLoss (required).</param>
         /// <param name="takeProfit">takeProfit (required).</param>
-        public ManualTradeFormBracket(ActionStrictWithOptions action = default(ActionStrictWithOptions), string symbol = default(string), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit))
+        public ManualTradeFormBracket(ActionStrictWithOptions action = default(ActionStrictWithOptions), TradingInstrument instrument = default(TradingInstrument), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double units = default(double), StopLoss stopLoss = default(StopLoss), TakeProfit takeProfit = default(TakeProfit))
         {
             this._Action = action;
             // to ensure "instrument" is required (not null)
@@ -91,18 +90,10 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("takeProfit is a required property for ManualTradeFormBracket and cannot be null");
             }
             this.TakeProfit = takeProfit;
-            this.Symbol = symbol;
             this.Price = price;
             this.Stop = stop;
             this.Units = units;
         }
-
-        /// <summary>
-        /// The security&#39;s trading ticker symbol.
-        /// </summary>
-        /// <value>The security&#39;s trading ticker symbol.</value>
-        [DataMember(Name = "symbol", EmitDefaultValue = false)]
-        public string Symbol { get; set; }
 
         /// <summary>
         /// Gets or Sets Instrument
@@ -152,7 +143,6 @@ namespace SnapTrade.Net.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ManualTradeFormBracket {\n");
             sb.Append("  _Action: ").Append(_Action).Append("\n");
-            sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  Instrument: ").Append(Instrument).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
@@ -199,11 +189,6 @@ namespace SnapTrade.Net.Model
                 (
                     this._Action == input._Action ||
                     this._Action.Equals(input._Action)
-                ) && 
-                (
-                    this.Symbol == input.Symbol ||
-                    (this.Symbol != null &&
-                    this.Symbol.Equals(input.Symbol))
                 ) && 
                 (
                     this.Instrument == input.Instrument ||
@@ -254,10 +239,6 @@ namespace SnapTrade.Net.Model
             {
                 int hashCode = 41;
                 hashCode = (hashCode * 59) + this._Action.GetHashCode();
-                if (this.Symbol != null)
-                {
-                    hashCode = (hashCode * 59) + this.Symbol.GetHashCode();
-                }
                 if (this.Instrument != null)
                 {
                     hashCode = (hashCode * 59) + this.Instrument.GetHashCode();

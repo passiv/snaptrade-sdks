@@ -225,7 +225,6 @@ class BaseApi(api_client.Api):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        symbol: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -238,8 +237,6 @@ class BaseApi(api_client.Api):
         _body = {}
         if action is not None:
             _body["action"] = action
-        if symbol is not None:
-            _body["symbol"] = symbol
         if instrument is not None:
             _body["instrument"] = instrument
         if order_type is not None:
@@ -545,7 +542,6 @@ class PlaceBracketOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        symbol: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -570,7 +566,6 @@ class PlaceBracketOrder(BaseApi):
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
-            symbol=symbol,
             price=price,
             stop=stop,
             units=units,
@@ -594,7 +589,6 @@ class PlaceBracketOrder(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        symbol: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -618,7 +612,6 @@ class PlaceBracketOrder(BaseApi):
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
-            symbol=symbol,
             price=price,
             stop=stop,
             units=units,
@@ -644,7 +637,6 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        symbol: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -669,7 +661,6 @@ class ApiForpost(BaseApi):
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
-            symbol=symbol,
             price=price,
             stop=stop,
             units=units,
@@ -693,7 +684,6 @@ class ApiForpost(BaseApi):
         account_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
-        symbol: typing.Optional[str] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[typing.Union[int, float]] = None,
@@ -717,7 +707,6 @@ class ApiForpost(BaseApi):
             account_id=account_id,
             user_id=user_id,
             user_secret=user_secret,
-            symbol=symbol,
             price=price,
             stop=stop,
             units=units,

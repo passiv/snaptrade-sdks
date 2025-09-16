@@ -571,9 +571,6 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'userSecret'
             },
             {
-                name: 'symbol'
-            },
-            {
                 name: 'price'
             },
             {

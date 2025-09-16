@@ -567,7 +567,6 @@ namespace Example
             var userId = "userId_example";
             var userSecret = "userSecret_example";
             var action = ActionStrictWithOptions.BUY;
-            var symbol = "AAPL"; // The security's trading ticker symbol.
             var instrument = new TradingInstrument();
             var orderType = OrderTypeStrict.Limit;
             var timeInForce = TimeInForceStrict.FOK;
@@ -579,7 +578,6 @@ namespace Example
             
             var manualTradeFormBracket = new ManualTradeFormBracket(
                 action,
-                symbol,
                 instrument,
                 orderType,
                 timeInForce,

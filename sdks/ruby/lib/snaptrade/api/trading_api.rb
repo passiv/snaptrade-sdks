@@ -671,16 +671,14 @@ module SnapTrade
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbol [String] The security's trading ticker symbol.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     # @param body [ManualTradeFormBracket] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def place_bracket_order(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
       _body[:action] = action if action != SENTINEL
-      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:instrument] = instrument if instrument != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
@@ -708,16 +706,14 @@ module SnapTrade
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
     # @param user_secret [String] 
-    # @param symbol [String] The security's trading ticker symbol.
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
     # @param body [ManualTradeFormBracket] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_bracket_order_with_http_info(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
+    def place_bracket_order_with_http_info(action:, instrument:, order_type:, time_in_force:, stop_loss:, take_profit:, account_id:, user_id:, user_secret:, price: SENTINEL, stop: SENTINEL, units: SENTINEL, extra: {})
       _body = {}
       _body[:action] = action if action != SENTINEL
-      _body[:symbol] = symbol if symbol != SENTINEL
       _body[:instrument] = instrument if instrument != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL

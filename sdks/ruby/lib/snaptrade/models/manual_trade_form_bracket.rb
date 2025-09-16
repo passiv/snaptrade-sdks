@@ -16,9 +16,6 @@ module SnapTrade
     # The action describes the intent or side of a trade. This is either `BUY` or `SELL` for Equity symbols or `BUY_TO_OPEN`, `BUY_TO_CLOSE`, `SELL_TO_OPEN` or `SELL_TO_CLOSE` for Options.
     attr_accessor :action
 
-    # The security's trading ticker symbol.
-    attr_accessor :symbol
-
     attr_accessor :instrument
 
     # The type of order to place.  - For `Limit` and `StopLimit` orders, the `price` field is required. - For `Stop` and `StopLimit` orders, the `stop` field is required. 
@@ -44,7 +41,6 @@ module SnapTrade
     def self.attribute_map
       {
         :'action' => :'action',
-        :'symbol' => :'symbol',
         :'instrument' => :'instrument',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
@@ -65,7 +61,6 @@ module SnapTrade
     def self.openapi_types
       {
         :'action' => :'ActionStrictWithOptions',
-        :'symbol' => :'String',
         :'instrument' => :'TradingInstrument',
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
@@ -102,10 +97,6 @@ module SnapTrade
 
       if attributes.key?(:'action')
         self.action = attributes[:'action']
-      end
-
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
       end
 
       if attributes.key?(:'instrument')
@@ -190,7 +181,6 @@ module SnapTrade
       return true if self.equal?(o)
       self.class == o.class &&
           action == o.action &&
-          symbol == o.symbol &&
           instrument == o.instrument &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
@@ -210,7 +200,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [action, symbol, instrument, order_type, time_in_force, price, stop, units, stop_loss, take_profit].hash
+      [action, instrument, order_type, time_in_force, price, stop, units, stop_loss, take_profit].hash
     end
 
     # Builds the object from hash

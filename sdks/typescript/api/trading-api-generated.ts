@@ -1087,7 +1087,6 @@ export const TradingApiFp = function(configuration?: Configuration) {
         async placeBracketOrder(requestParameters: TradingApiPlaceBracketOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecord>> {
             const manualTradeFormBracket: ManualTradeFormBracket = {
                 action: requestParameters.action,
-                symbol: requestParameters.symbol,
                 instrument: requestParameters.instrument,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
