@@ -348,7 +348,6 @@ func main() {
         stopLoss,
         takeProfit,
     )
-    manualTradeFormBracket.SetSymbol("AAPL")
     manualTradeFormBracket.SetPrice(31.33)
     manualTradeFormBracket.SetStop(31.33)
     manualTradeFormBracket.SetUnits(10.5)

@@ -600,7 +600,6 @@ public class Example {
     UUID accountId = UUID.randomUUID(); // The ID of the account to execute the trade on.
     String userId = "userId_example";
     String userSecret = "userSecret_example";
-    String symbol = "symbol_example"; // The security's trading ticker symbol.
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
@@ -608,7 +607,6 @@ public class Example {
       AccountOrderRecord result = client
               .trading
               .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)
@@ -649,7 +647,6 @@ public class Example {
       ApiResponse<AccountOrderRecord> response = client
               .trading
               .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-              .symbol(symbol)
               .price(price)
               .stop(stop)
               .units(units)

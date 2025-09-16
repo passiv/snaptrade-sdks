@@ -54,14 +54,6 @@ public class ManualTradeFormBracketTest {
     }
 
     /**
-     * Test the property 'symbol'
-     */
-    @Test
-    public void symbolTest() {
-        // TODO: test symbol
-    }
-
-    /**
      * Test the property 'instrument'
      */
     @Test

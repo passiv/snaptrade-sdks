@@ -1778,7 +1778,6 @@ result = snaptrade.trading.place_bracket_order(
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  symbol: "AAPL",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -1816,9 +1815,6 @@ The ID of the account to execute the trade on.
 
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
-##### symbol: `String`<a id="symbol-string"></a>
-The security's trading ticker symbol.
-
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.
 

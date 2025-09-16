@@ -1864,7 +1864,6 @@ place_bracket_order_response = snaptrade.trading.place_bracket_order(
     account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
     user_id="snaptrade-user-123",
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
-    symbol="AAPL",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -1895,10 +1894,6 @@ The ID of the account to execute the trade on.
 ##### user_id: `str`<a id="user_id-str"></a>
 
 ##### user_secret: `str`<a id="user_secret-str"></a>
-
-##### symbol: `str`<a id="symbol-str"></a>
-
-The security's trading ticker symbol.
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 

@@ -1355,7 +1355,6 @@ public class TradingApiGenerated {
         final UUID accountId;
         final String userId;
         final String userSecret;
-        String symbol;
         Double price;
         Double stop;
         Double units;
@@ -1372,16 +1371,6 @@ public class TradingApiGenerated {
             this.userSecret = userSecret;
         }
 
-        /**
-         * Set symbol
-         * @param symbol The security&#39;s trading ticker symbol. (optional)
-         * @return TradingApi.PlaceBracketOrderRequestBuilder
-         */
-        public TradingApi.PlaceBracketOrderRequestBuilder symbol(String symbol) {
-            this.symbol = symbol;
-            return (TradingApi.PlaceBracketOrderRequestBuilder) this;
-        }
-        
         /**
          * Set price
          * @param price The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. (optional)
@@ -1454,7 +1443,6 @@ public class TradingApiGenerated {
         private ManualTradeFormBracket buildBodyParams() {
             ManualTradeFormBracket manualTradeFormBracket = new ManualTradeFormBracket();
             manualTradeFormBracket.action(this.action);
-            manualTradeFormBracket.symbol(this.symbol);
             manualTradeFormBracket.instrument(this.instrument);
             manualTradeFormBracket.orderType(this.orderType);
             manualTradeFormBracket.timeInForce(this.timeInForce);

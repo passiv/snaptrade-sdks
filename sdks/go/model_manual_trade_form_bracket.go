@@ -18,8 +18,6 @@ import (
 // ManualTradeFormBracket Inputs for placing an order with the brokerage.
 type ManualTradeFormBracket struct {
 	Action ActionStrictWithOptions `json:"action"`
-	// The security's trading ticker symbol.
-	Symbol *string `json:"symbol,omitempty"`
 	Instrument TradingInstrument `json:"instrument"`
 	OrderType OrderTypeStrict `json:"order_type"`
 	TimeInForce TimeInForceStrict `json:"time_in_force"`
@@ -78,38 +76,6 @@ func (o *ManualTradeFormBracket) GetActionOk() (*ActionStrictWithOptions, bool) 
 // SetAction sets field value
 func (o *ManualTradeFormBracket) SetAction(v ActionStrictWithOptions) {
 	o.Action = v
-}
-
-// GetSymbol returns the Symbol field value if set, zero value otherwise.
-func (o *ManualTradeFormBracket) GetSymbol() string {
-	if o == nil || isNil(o.Symbol) {
-		var ret string
-		return ret
-	}
-	return *o.Symbol
-}
-
-// GetSymbolOk returns a tuple with the Symbol field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ManualTradeFormBracket) GetSymbolOk() (*string, bool) {
-	if o == nil || isNil(o.Symbol) {
-    return nil, false
-	}
-	return o.Symbol, true
-}
-
-// HasSymbol returns a boolean if a field has been set.
-func (o *ManualTradeFormBracket) HasSymbol() bool {
-	if o != nil && !isNil(o.Symbol) {
-		return true
-	}
-
-	return false
-}
-
-// SetSymbol gets a reference to the given string and assigns it to the Symbol field.
-func (o *ManualTradeFormBracket) SetSymbol(v string) {
-	o.Symbol = &v
 }
 
 // GetInstrument returns the Instrument field value
@@ -352,9 +318,6 @@ func (o ManualTradeFormBracket) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["action"] = o.Action
-	}
-	if !isNil(o.Symbol) {
-		toSerialize["symbol"] = o.Symbol
 	}
 	if true {
 		toSerialize["instrument"] = o.Instrument

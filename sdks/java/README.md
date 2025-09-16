@@ -1894,7 +1894,6 @@ use. Only supported on certain brokerages
 AccountOrderRecord result = client
         .trading
         .placeBracketOrder(action, instrument, orderType, timeInForce, stopLoss, takeProfit, accountId, userId, userSecret)
-        .symbol(symbol)
         .price(price)
         .stop(stop)
         .units(units)
@@ -1922,10 +1921,6 @@ The ID of the account to execute the trade on.
 ##### userId: `String`<a id="userid-string"></a>
 
 ##### userSecret: `String`<a id="usersecret-string"></a>
-
-##### symbol: `String`<a id="symbol-string"></a>
-
-The security's trading ticker symbol.
 
 ##### price: `Double`<a id="price-double"></a>
 

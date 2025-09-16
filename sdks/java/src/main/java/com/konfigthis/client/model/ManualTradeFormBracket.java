@@ -61,10 +61,6 @@ public class ManualTradeFormBracket {
   @SerializedName(SERIALIZED_NAME_ACTION)
   private ActionStrictWithOptions action;
 
-  public static final String SERIALIZED_NAME_SYMBOL = "symbol";
-  @SerializedName(SERIALIZED_NAME_SYMBOL)
-  private String symbol;
-
   public static final String SERIALIZED_NAME_INSTRUMENT = "instrument";
   @SerializedName(SERIALIZED_NAME_INSTRUMENT)
   private TradingInstrument instrument;
@@ -126,35 +122,6 @@ public class ManualTradeFormBracket {
     
     
     this.action = action;
-  }
-
-
-  public ManualTradeFormBracket symbol(String symbol) {
-    
-    
-    
-    
-    this.symbol = symbol;
-    return this;
-  }
-
-   /**
-   * The security&#39;s trading ticker symbol.
-   * @return symbol
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "AAPL", value = "The security's trading ticker symbol.")
-
-  public String getSymbol() {
-    return symbol;
-  }
-
-
-  public void setSymbol(String symbol) {
-    
-    
-    
-    this.symbol = symbol;
   }
 
 
@@ -472,7 +439,6 @@ public class ManualTradeFormBracket {
     }
     ManualTradeFormBracket manualTradeFormBracket = (ManualTradeFormBracket) o;
     return Objects.equals(this.action, manualTradeFormBracket.action) &&
-        Objects.equals(this.symbol, manualTradeFormBracket.symbol) &&
         Objects.equals(this.instrument, manualTradeFormBracket.instrument) &&
         Objects.equals(this.orderType, manualTradeFormBracket.orderType) &&
         Objects.equals(this.timeInForce, manualTradeFormBracket.timeInForce) &&
@@ -490,7 +456,7 @@ public class ManualTradeFormBracket {
 
   @Override
   public int hashCode() {
-    return Objects.hash(action, symbol, instrument, orderType, timeInForce, price, stop, units, stopLoss, takeProfit, additionalProperties);
+    return Objects.hash(action, instrument, orderType, timeInForce, price, stop, units, stopLoss, takeProfit, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -505,7 +471,6 @@ public class ManualTradeFormBracket {
     StringBuilder sb = new StringBuilder();
     sb.append("class ManualTradeFormBracket {\n");
     sb.append("    action: ").append(toIndentedString(action)).append("\n");
-    sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    instrument: ").append(toIndentedString(instrument)).append("\n");
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
@@ -538,7 +503,6 @@ public class ManualTradeFormBracket {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("action");
-    openapiFields.add("symbol");
     openapiFields.add("instrument");
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
@@ -576,9 +540,6 @@ public class ManualTradeFormBracket {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
-      }
-      if ((jsonObj.get("symbol") != null && !jsonObj.get("symbol").isJsonNull()) && !jsonObj.get("symbol").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `symbol` to be a primitive type in the JSON string but got `%s`", jsonObj.get("symbol").toString()));
       }
       // validate the required field `instrument`
       TradingInstrument.validateJsonObject(jsonObj.getAsJsonObject("instrument"));

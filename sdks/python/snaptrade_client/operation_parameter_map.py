@@ -565,9 +565,6 @@ operation_parameter_map = {
                 'name': 'userSecret'
             },
             {
-                'name': 'symbol'
-            },
-            {
                 'name': 'price'
             },
             {
