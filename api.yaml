@@ -4416,10 +4416,6 @@ components:
       properties:
         action:
           $ref: "#/components/schemas/ActionStrictWithOptions"
-        symbol:
-          description: The security's trading ticker symbol.
-          type: string
-          example: AAPL
         instrument:
           $ref: "#/components/schemas/TradingInstrument"
         order_type:
