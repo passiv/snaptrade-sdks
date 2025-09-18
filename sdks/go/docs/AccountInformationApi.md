@@ -414,6 +414,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.AveragePurchasePrice`: %v\n", *resp.AveragePurchasePrice)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.FractionalUnits`: %v\n", *resp.FractionalUnits)
     fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.Currency`: %v\n", *resp.Currency)
+    fmt.Fprintf(os.Stdout, "Response from `Position.GetUserAccountPositions.CashEquivalent`: %v\n", *resp.CashEquivalent)
 }
 ```
 

@@ -64,5 +64,11 @@ export interface Position {
      * @memberof Position
      */
     'currency'?: PositionCurrency;
+    /**
+     * If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+     * @type {boolean}
+     * @memberof Position
+     */
+    'cash_equivalent'?: boolean | null;
 }
 

@@ -42,7 +42,8 @@ namespace SnapTrade.Net.Model
         /// <param name="averagePurchasePrice">Cost basis _per share_ of this position..</param>
         /// <param name="fractionalUnits">Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward.</param>
         /// <param name="currency">currency.</param>
-        public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? averagePurchasePrice = default(double?), double? fractionalUnits = default(double?), PositionCurrency currency = default(PositionCurrency)) : base()
+        /// <param name="cashEquivalent">If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power.</param>
+        public Position(PositionSymbol symbol = default(PositionSymbol), double? units = default(double?), double? price = default(double?), double? openPnl = default(double?), double? averagePurchasePrice = default(double?), double? fractionalUnits = default(double?), PositionCurrency currency = default(PositionCurrency), bool? cashEquivalent = default(bool?)) : base()
         {
             this.Symbol = symbol;
             this.Units = units;
@@ -51,6 +52,7 @@ namespace SnapTrade.Net.Model
             this.AveragePurchasePrice = averagePurchasePrice;
             this.FractionalUnits = fractionalUnits;
             this.Currency = currency;
+            this.CashEquivalent = cashEquivalent;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -103,6 +105,13 @@ namespace SnapTrade.Net.Model
         public PositionCurrency Currency { get; set; }
 
         /// <summary>
+        /// If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+        /// </summary>
+        /// <value>If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power</value>
+        [DataMember(Name = "cash_equivalent", EmitDefaultValue = true)]
+        public bool? CashEquivalent { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -124,6 +133,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  AveragePurchasePrice: ").Append(AveragePurchasePrice).Append("\n");
             sb.Append("  FractionalUnits: ").Append(FractionalUnits).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
+            sb.Append("  CashEquivalent: ").Append(CashEquivalent).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -194,6 +204,11 @@ namespace SnapTrade.Net.Model
                     this.Currency == input.Currency ||
                     (this.Currency != null &&
                     this.Currency.Equals(input.Currency))
+                ) && base.Equals(input) && 
+                (
+                    this.CashEquivalent == input.CashEquivalent ||
+                    (this.CashEquivalent != null &&
+                    this.CashEquivalent.Equals(input.CashEquivalent))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -234,6 +249,10 @@ namespace SnapTrade.Net.Model
                 if (this.Currency != null)
                 {
                     hashCode = (hashCode * 59) + this.Currency.GetHashCode();
+                }
+                if (this.CashEquivalent != null)
+                {
+                    hashCode = (hashCode * 59) + this.CashEquivalent.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

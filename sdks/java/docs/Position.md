@@ -15,6 +15,7 @@ Describes a single stock/ETF/crypto/mutual fund position in an account.
 |**averagePurchasePrice** | **Double** | Cost basis _per share_ of this position. |  [optional] |
 |**fractionalUnits** | **Double** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward |  [optional] |
 |**currency** | [**PositionCurrency**](PositionCurrency.md) |  |  [optional] |
+|**cashEquivalent** | **Boolean** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power |  [optional] |
 
 
 

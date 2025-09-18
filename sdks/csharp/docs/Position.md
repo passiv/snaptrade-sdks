@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **AveragePurchasePrice** | **double?** | Cost basis _per share_ of this position. | [optional] 
 **FractionalUnits** | **double?** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **Currency** | [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
+**CashEquivalent** | **bool?** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
