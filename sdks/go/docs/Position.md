@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **AveragePurchasePrice** | Pointer to **NullableFloat32** | Cost basis _per share_ of this position. | [optional] 
 **FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
+**CashEquivalent** | Pointer to **NullableBool** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
 
 ## Methods
 
@@ -256,6 +257,41 @@ SetCurrency sets Currency field to given value.
 
 HasCurrency returns a boolean if a field has been set.
 
+### GetCashEquivalent
+
+`func (o *Position) GetCashEquivalent() bool`
+
+GetCashEquivalent returns the CashEquivalent field if non-nil, zero value otherwise.
+
+### GetCashEquivalentOk
+
+`func (o *Position) GetCashEquivalentOk() (*bool, bool)`
+
+GetCashEquivalentOk returns a tuple with the CashEquivalent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCashEquivalent
+
+`func (o *Position) SetCashEquivalent(v bool)`
+
+SetCashEquivalent sets CashEquivalent field to given value.
+
+### HasCashEquivalent
+
+`func (o *Position) HasCashEquivalent() bool`
+
+HasCashEquivalent returns a boolean if a field has been set.
+
+### SetCashEquivalentNil
+
+`func (o *Position) SetCashEquivalentNil(b bool)`
+
+ SetCashEquivalentNil sets the value for CashEquivalent to be an explicit nil
+
+### UnsetCashEquivalent
+`func (o *Position) UnsetCashEquivalent()`
+
+UnsetCashEquivalent ensures that no value is present for CashEquivalent, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

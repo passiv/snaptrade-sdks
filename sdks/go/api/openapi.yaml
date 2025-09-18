@@ -3266,6 +3266,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -3299,6 +3300,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -3478,6 +3480,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -3511,6 +3514,7 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
           open_pnl: 0.44
@@ -4973,6 +4977,7 @@ components:
           local_id: "3291231"
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        cash_equivalent: false
         fractional_units: 1.44
         price: 113.15
         open_pnl: 0.44
@@ -5029,6 +5034,14 @@ components:
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-fractional_units
         currency:
           $ref: '#/components/schemas/Position_currency'
+        cash_equivalent:
+          description: If the position is a cash equivalent (usually a money market
+            fund) that is also counted in account cash balance and buying power
+          example: false
+          nullable: true
+          type: boolean
+          x-konfig-original-example: false
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-cash_equivalent
       type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
@@ -8778,6 +8791,10 @@ components:
     konfig-generated-schema-components-schemas-Position-properties-fractional_units:
       example: 1.44
       type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Position-properties-cash_equivalent:
+      example: false
+      type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:
       example: ALPACA

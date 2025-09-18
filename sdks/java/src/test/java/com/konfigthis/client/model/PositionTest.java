@@ -97,4 +97,12 @@ public class PositionTest {
         // TODO: test currency
     }
 
+    /**
+     * Test the property 'cashEquivalent'
+     */
+    @Test
+    public void cashEquivalentTest() {
+        // TODO: test cashEquivalent
+    }
+
 }

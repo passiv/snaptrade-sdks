@@ -3535,6 +3535,11 @@ components:
             The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position.
           allOf:
             - $ref: "#/components/schemas/Currency"
+        cash_equivalent:
+          type: boolean
+          example: false
+          nullable: true
+          description: If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object

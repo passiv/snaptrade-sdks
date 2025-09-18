@@ -30,6 +30,8 @@ type Position struct {
 	// Deprecated
 	FractionalUnits NullableFloat32 `json:"fractional_units,omitempty"`
 	Currency *PositionCurrency `json:"currency,omitempty"`
+	// If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+	CashEquivalent NullableBool `json:"cash_equivalent,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -329,6 +331,48 @@ func (o *Position) SetCurrency(v PositionCurrency) {
 	o.Currency = &v
 }
 
+// GetCashEquivalent returns the CashEquivalent field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Position) GetCashEquivalent() bool {
+	if o == nil || isNil(o.CashEquivalent.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CashEquivalent.Get()
+}
+
+// GetCashEquivalentOk returns a tuple with the CashEquivalent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Position) GetCashEquivalentOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.CashEquivalent.Get(), o.CashEquivalent.IsSet()
+}
+
+// HasCashEquivalent returns a boolean if a field has been set.
+func (o *Position) HasCashEquivalent() bool {
+	if o != nil && o.CashEquivalent.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCashEquivalent gets a reference to the given NullableBool and assigns it to the CashEquivalent field.
+func (o *Position) SetCashEquivalent(v bool) {
+	o.CashEquivalent.Set(&v)
+}
+// SetCashEquivalentNil sets the value for CashEquivalent to be an explicit nil
+func (o *Position) SetCashEquivalentNil() {
+	o.CashEquivalent.Set(nil)
+}
+
+// UnsetCashEquivalent ensures that no value is present for CashEquivalent, not even an explicit nil
+func (o *Position) UnsetCashEquivalent() {
+	o.CashEquivalent.Unset()
+}
+
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -351,6 +395,9 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
+	}
+	if o.CashEquivalent.IsSet() {
+		toSerialize["cash_equivalent"] = o.CashEquivalent.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -377,6 +424,7 @@ func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "average_purchase_price")
 		delete(additionalProperties, "fractional_units")
 		delete(additionalProperties, "currency")
+		delete(additionalProperties, "cash_equivalent")
 		o.AdditionalProperties = additionalProperties
 	}
 

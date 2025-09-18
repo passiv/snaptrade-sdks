@@ -81,6 +81,10 @@ public class Position {
   @SerializedName(SERIALIZED_NAME_CURRENCY)
   private PositionCurrency currency;
 
+  public static final String SERIALIZED_NAME_CASH_EQUIVALENT = "cash_equivalent";
+  @SerializedName(SERIALIZED_NAME_CASH_EQUIVALENT)
+  private Boolean cashEquivalent;
+
   public Position() {
   }
 
@@ -333,6 +337,35 @@ public class Position {
     this.currency = currency;
   }
 
+
+  public Position cashEquivalent(Boolean cashEquivalent) {
+    
+    
+    
+    
+    this.cashEquivalent = cashEquivalent;
+    return this;
+  }
+
+   /**
+   * If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+   * @return cashEquivalent
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "false", value = "If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power")
+
+  public Boolean getCashEquivalent() {
+    return cashEquivalent;
+  }
+
+
+  public void setCashEquivalent(Boolean cashEquivalent) {
+    
+    
+    
+    this.cashEquivalent = cashEquivalent;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -394,7 +427,8 @@ public class Position {
         Objects.equals(this.openPnl, position.openPnl) &&
         Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice) &&
         Objects.equals(this.fractionalUnits, position.fractionalUnits) &&
-        Objects.equals(this.currency, position.currency)&&
+        Objects.equals(this.currency, position.currency) &&
+        Objects.equals(this.cashEquivalent, position.cashEquivalent)&&
         Objects.equals(this.additionalProperties, position.additionalProperties);
   }
 
@@ -404,7 +438,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, additionalProperties);
+    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, cashEquivalent, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -425,6 +459,7 @@ public class Position {
     sb.append("    averagePurchasePrice: ").append(toIndentedString(averagePurchasePrice)).append("\n");
     sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
+    sb.append("    cashEquivalent: ").append(toIndentedString(cashEquivalent)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -455,6 +490,7 @@ public class Position {
     openapiFields.add("average_purchase_price");
     openapiFields.add("fractional_units");
     openapiFields.add("currency");
+    openapiFields.add("cash_equivalent");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

@@ -43,5 +43,8 @@ class OptionalPosition(TypedDict, total=False):
     # The 'position currency' (`price` and `average_purchase_price`). This currency can potentially be different from the 'listing currency' of the security. The 'listing currency' is what's quoted on the listing exchange, while the 'position currency' is what the brokerage uses to hold and value your position. 
     currency: Currency
 
+    # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+    cash_equivalent: typing.Optional[bool]
+
 class Position(RequiredPosition, OptionalPosition):
     pass
