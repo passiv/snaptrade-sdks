@@ -923,7 +923,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
          * @summary Get crypto pairs
          * @param {string} userId 
          * @param {string} userSecret 
@@ -1221,7 +1221,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
          * @summary Get crypto pairs
          * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1363,7 +1363,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.replaceOrder(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Searches cryptocurrency pairs instruments accessible to the specified account. 
+         * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
          * @summary Get crypto pairs
          * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1939,7 +1939,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     * Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
      * @summary Get crypto pairs
      * @param {TradingApiSearchCryptocurrencyPairInstrumentsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

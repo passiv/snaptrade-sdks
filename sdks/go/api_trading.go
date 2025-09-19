@@ -2258,7 +2258,7 @@ func (r TradingApiSearchCryptocurrencyPairInstrumentsRequest) Execute() (*Tradin
 /*
 SearchCryptocurrencyPairInstruments Get crypto pairs
 
-Searches cryptocurrency pairs instruments accessible to the specified account.
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
