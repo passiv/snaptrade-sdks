@@ -2362,7 +2362,7 @@ The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
 ### `snaptrade.trading.search_cryptocurrency_pair_instruments`<a id="snaptradetradingsearch_cryptocurrency_pair_instruments"></a>
 
-Searches cryptocurrency pairs instruments accessible to the specified account.
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

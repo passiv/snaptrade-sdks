@@ -1715,7 +1715,7 @@ module SnapTrade
 
     # Get crypto pairs
     #
-    # Searches cryptocurrency pairs instruments accessible to the specified account.
+    # Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1732,7 +1732,7 @@ module SnapTrade
 
     # Get crypto pairs
     #
-    # Searches cryptocurrency pairs instruments accessible to the specified account.
+    # Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
     #
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -1747,7 +1747,7 @@ module SnapTrade
     end
 
     # Get crypto pairs
-    # Searches cryptocurrency pairs instruments accessible to the specified account. 
+    # Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1761,7 +1761,7 @@ module SnapTrade
     end
 
     # Get crypto pairs
-    # Searches cryptocurrency pairs instruments accessible to the specified account. 
+    # Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 

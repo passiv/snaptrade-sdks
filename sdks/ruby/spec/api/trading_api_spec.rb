@@ -208,7 +208,7 @@ describe 'TradingApi' do
 
   # unit tests for search_cryptocurrency_pair_instruments
   # Get crypto pairs
-  # Searches cryptocurrency pairs instruments accessible to the specified account. 
+  # Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
   # @param user_id 
   # @param user_secret 
   # @param account_id 

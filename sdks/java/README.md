@@ -2334,7 +2334,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 ### `snaptrade.trading.searchCryptocurrencyPairInstruments`<a id="snaptradetradingsearchcryptocurrencypairinstruments"></a>
 
-Searches cryptocurrency pairs instruments accessible to the specified account.
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

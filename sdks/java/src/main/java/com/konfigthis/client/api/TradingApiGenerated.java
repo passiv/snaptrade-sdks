@@ -3376,7 +3376,7 @@ public class TradingApiGenerated {
 
     /**
      * Get crypto pairs
-     * Searches cryptocurrency pairs instruments accessible to the specified account. 
+     * Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
      * @param userId  (required)
      * @param userSecret  (required)
      * @param accountId  (required)

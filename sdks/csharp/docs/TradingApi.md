@@ -1346,7 +1346,7 @@ catch (ApiException e)
 
 
 
-Searches cryptocurrency pairs instruments accessible to the specified account. 
+Searches cryptocurrency pairs instruments accessible to the specified account. Both `base` and `quote` are optional. Omit both for a full list of cryptocurrency pairs. 
 
 ### Example
 ```csharp

@@ -379,7 +379,7 @@ namespace SnapTrade.Net.Api
         /// Get crypto pairs
         /// </summary>
         /// <remarks>
-        /// Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -395,7 +395,7 @@ namespace SnapTrade.Net.Api
         /// Get crypto pairs
         /// </summary>
         /// <remarks>
-        /// Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -791,7 +791,7 @@ namespace SnapTrade.Net.Api
         /// Get crypto pairs
         /// </summary>
         /// <remarks>
-        /// Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -808,7 +808,7 @@ namespace SnapTrade.Net.Api
         /// Get crypto pairs
         /// </summary>
         /// <remarks>
-        /// Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3665,7 +3665,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3682,7 +3682,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3780,7 +3780,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -3798,7 +3798,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. 
+        /// Get crypto pairs Searches cryptocurrency pairs instruments accessible to the specified account. Both &#x60;base&#x60; and &#x60;quote&#x60; are optional. Omit both for a full list of cryptocurrency pairs. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
