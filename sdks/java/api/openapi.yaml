@@ -3723,18 +3723,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -3747,18 +3747,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
         account:
           brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
@@ -3839,18 +3839,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -3863,18 +3863,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
       properties:
         orders:
@@ -3955,18 +3955,18 @@ components:
         limit_price: 12.34
         quote_currency: null
         time_updated: 2024-08-05T00:05:57.409Z
-        canceled_quantity: 10
+        canceled_quantity: "10"
         time_in_force: time_in_force
         execution_price: 12.34
         stop_price: 12.5
         quote_universal_symbol: null
         action: action
-        total_quantity: 100
+        total_quantity: "100"
         universal_symbol: null
-        filled_quantity: 80
+        filled_quantity: "80"
         option_symbol: null
         order_type: Market
-        open_quantity: 10
+        open_quantity: "10"
         status: null
       properties:
         brokerage_order_id:
@@ -4002,34 +4002,34 @@ components:
           description: "The total number of shares or contracts of the order. This\
             \ should be the sum of the filled, canceled, and open quantities. Can\
             \ be a decimal number for fractional shares."
-          example: 100
+          example: "100"
           nullable: true
-          type: number
-          x-konfig-original-example: 100
+          type: string
+          x-konfig-original-example: "100"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity
         open_quantity:
           description: The number of shares or contracts that are still open (waiting
             for execution). Can be a decimal number for fractional shares.
-          example: 10
+          example: "10"
           nullable: true
-          type: number
-          x-konfig-original-example: 10
+          type: string
+          x-konfig-original-example: "10"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity
         canceled_quantity:
           description: The number of shares or contracts that have been canceled.
             Can be a decimal number for fractional shares.
-          example: 10
+          example: "10"
           nullable: true
-          type: number
-          x-konfig-original-example: 10
+          type: string
+          x-konfig-original-example: "10"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity
         filled_quantity:
           description: The number of shares or contracts that have been filled. Can
             be a decimal number for fractional shares.
-          example: 80
+          example: "80"
           nullable: true
-          type: number
-          x-konfig-original-example: 80
+          type: string
+          x-konfig-original-example: "80"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity
         execution_price:
           description: The price at which the order was executed.
@@ -7404,18 +7404,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
       properties:
         brokerage_order_id:
@@ -7478,18 +7478,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
         - time_executed: 2024-08-05T00:05:57.409Z
           symbol: 2bcd7cc3-e922-4976-bce1-9858296801c3
@@ -7502,18 +7502,18 @@ components:
           limit_price: 12.34
           quote_currency: null
           time_updated: 2024-08-05T00:05:57.409Z
-          canceled_quantity: 10
+          canceled_quantity: "10"
           time_in_force: time_in_force
           execution_price: 12.34
           stop_price: 12.5
           quote_universal_symbol: null
           action: action
-          total_quantity: 100
+          total_quantity: "100"
           universal_symbol: null
-          filled_quantity: 80
+          filled_quantity: "80"
           option_symbol: null
           order_type: Market
-          open_quantity: 10
+          open_quantity: "10"
           status: null
       properties:
         brokerage_order_id:
@@ -8879,20 +8879,20 @@ components:
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-total_quantity:
-      example: 100
-      type: number
+      example: "100"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-open_quantity:
-      example: 10
-      type: number
+      example: "10"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-canceled_quantity:
-      example: 10
-      type: number
+      example: "10"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-filled_quantity:
-      example: 80
-      type: number
+      example: "80"
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-execution_price:
       example: 12.34

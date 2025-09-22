@@ -69,28 +69,28 @@ export interface AccountOrderRecord {
     'action'?: string;
     /**
      * The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'total_quantity'?: number | null;
+    'total_quantity'?: string | null;
     /**
      * The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'open_quantity'?: number | null;
+    'open_quantity'?: string | null;
     /**
      * The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'canceled_quantity'?: number | null;
+    'canceled_quantity'?: string | null;
     /**
      * The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
-     * @type {number}
+     * @type {string}
      * @memberof AccountOrderRecord
      */
-    'filled_quantity'?: number | null;
+    'filled_quantity'?: string | null;
     /**
      * The price at which the order was executed.
      * @type {number}
