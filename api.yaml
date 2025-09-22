@@ -2904,23 +2904,23 @@ components:
         total_quantity:
           description: The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.
           nullable: true
-          type: number
-          example: 100
+          type: string
+          example: "100"
         open_quantity:
           description: The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.
           nullable: true
-          type: number
-          example: 10
+          type: string
+          example: "10"
         canceled_quantity:
           description: The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.
           nullable: true
-          type: number
-          example: 10
+          type: string
+          example: "10"
         filled_quantity:
           description: The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.
           nullable: true
-          type: number
-          example: 80
+          type: string
+          example: "80"
         execution_price:
           description: The price at which the order was executed.
           nullable: true

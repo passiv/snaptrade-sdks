@@ -89,19 +89,19 @@ public class AccountOrderRecord {
 
   public static final String SERIALIZED_NAME_TOTAL_QUANTITY = "total_quantity";
   @SerializedName(SERIALIZED_NAME_TOTAL_QUANTITY)
-  private Double totalQuantity;
+  private String totalQuantity;
 
   public static final String SERIALIZED_NAME_OPEN_QUANTITY = "open_quantity";
   @SerializedName(SERIALIZED_NAME_OPEN_QUANTITY)
-  private Double openQuantity;
+  private String openQuantity;
 
   public static final String SERIALIZED_NAME_CANCELED_QUANTITY = "canceled_quantity";
   @SerializedName(SERIALIZED_NAME_CANCELED_QUANTITY)
-  private Double canceledQuantity;
+  private String canceledQuantity;
 
   public static final String SERIALIZED_NAME_FILLED_QUANTITY = "filled_quantity";
   @SerializedName(SERIALIZED_NAME_FILLED_QUANTITY)
-  private Double filledQuantity;
+  private String filledQuantity;
 
   public static final String SERIALIZED_NAME_EXECUTION_PRICE = "execution_price";
   @SerializedName(SERIALIZED_NAME_EXECUTION_PRICE)
@@ -353,21 +353,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord totalQuantity(Double totalQuantity) {
+  public AccountOrderRecord totalQuantity(String totalQuantity) {
     
     
     
     
     this.totalQuantity = totalQuantity;
-    return this;
-  }
-
-  public AccountOrderRecord totalQuantity(Integer totalQuantity) {
-    
-    
-    
-    
-    this.totalQuantity = totalQuantity.doubleValue();
     return this;
   }
 
@@ -378,12 +369,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "100", value = "The total number of shares or contracts of the order. This should be the sum of the filled, canceled, and open quantities. Can be a decimal number for fractional shares.")
 
-  public Double getTotalQuantity() {
+  public String getTotalQuantity() {
     return totalQuantity;
   }
 
 
-  public void setTotalQuantity(Double totalQuantity) {
+  public void setTotalQuantity(String totalQuantity) {
     
     
     
@@ -391,21 +382,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord openQuantity(Double openQuantity) {
+  public AccountOrderRecord openQuantity(String openQuantity) {
     
     
     
     
     this.openQuantity = openQuantity;
-    return this;
-  }
-
-  public AccountOrderRecord openQuantity(Integer openQuantity) {
-    
-    
-    
-    
-    this.openQuantity = openQuantity.doubleValue();
     return this;
   }
 
@@ -416,12 +398,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "The number of shares or contracts that are still open (waiting for execution). Can be a decimal number for fractional shares.")
 
-  public Double getOpenQuantity() {
+  public String getOpenQuantity() {
     return openQuantity;
   }
 
 
-  public void setOpenQuantity(Double openQuantity) {
+  public void setOpenQuantity(String openQuantity) {
     
     
     
@@ -429,21 +411,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord canceledQuantity(Double canceledQuantity) {
+  public AccountOrderRecord canceledQuantity(String canceledQuantity) {
     
     
     
     
     this.canceledQuantity = canceledQuantity;
-    return this;
-  }
-
-  public AccountOrderRecord canceledQuantity(Integer canceledQuantity) {
-    
-    
-    
-    
-    this.canceledQuantity = canceledQuantity.doubleValue();
     return this;
   }
 
@@ -454,12 +427,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "10", value = "The number of shares or contracts that have been canceled. Can be a decimal number for fractional shares.")
 
-  public Double getCanceledQuantity() {
+  public String getCanceledQuantity() {
     return canceledQuantity;
   }
 
 
-  public void setCanceledQuantity(Double canceledQuantity) {
+  public void setCanceledQuantity(String canceledQuantity) {
     
     
     
@@ -467,21 +440,12 @@ public class AccountOrderRecord {
   }
 
 
-  public AccountOrderRecord filledQuantity(Double filledQuantity) {
+  public AccountOrderRecord filledQuantity(String filledQuantity) {
     
     
     
     
     this.filledQuantity = filledQuantity;
-    return this;
-  }
-
-  public AccountOrderRecord filledQuantity(Integer filledQuantity) {
-    
-    
-    
-    
-    this.filledQuantity = filledQuantity.doubleValue();
     return this;
   }
 
@@ -492,12 +456,12 @@ public class AccountOrderRecord {
   @javax.annotation.Nullable
   @ApiModelProperty(example = "80", value = "The number of shares or contracts that have been filled. Can be a decimal number for fractional shares.")
 
-  public Double getFilledQuantity() {
+  public String getFilledQuantity() {
     return filledQuantity;
   }
 
 
-  public void setFilledQuantity(Double filledQuantity) {
+  public void setFilledQuantity(String filledQuantity) {
     
     
     
@@ -1057,6 +1021,18 @@ public class AccountOrderRecord {
       }
       if ((jsonObj.get("action") != null && !jsonObj.get("action").isJsonNull()) && !jsonObj.get("action").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `action` to be a primitive type in the JSON string but got `%s`", jsonObj.get("action").toString()));
+      }
+      if (!jsonObj.get("total_quantity").isJsonNull() && (jsonObj.get("total_quantity") != null && !jsonObj.get("total_quantity").isJsonNull()) && !jsonObj.get("total_quantity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `total_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("total_quantity").toString()));
+      }
+      if (!jsonObj.get("open_quantity").isJsonNull() && (jsonObj.get("open_quantity") != null && !jsonObj.get("open_quantity").isJsonNull()) && !jsonObj.get("open_quantity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `open_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("open_quantity").toString()));
+      }
+      if (!jsonObj.get("canceled_quantity").isJsonNull() && (jsonObj.get("canceled_quantity") != null && !jsonObj.get("canceled_quantity").isJsonNull()) && !jsonObj.get("canceled_quantity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `canceled_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("canceled_quantity").toString()));
+      }
+      if (!jsonObj.get("filled_quantity").isJsonNull() && (jsonObj.get("filled_quantity") != null && !jsonObj.get("filled_quantity").isJsonNull()) && !jsonObj.get("filled_quantity").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `filled_quantity` to be a primitive type in the JSON string but got `%s`", jsonObj.get("filled_quantity").toString()));
       }
       if (!jsonObj.get("order_type").isJsonNull() && (jsonObj.get("order_type") != null && !jsonObj.get("order_type").isJsonNull()) && !jsonObj.get("order_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `order_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("order_type").toString()));
