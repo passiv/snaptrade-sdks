@@ -657,7 +657,7 @@ module SnapTrade
     end
 
 
-    # Place bracket equity order
+    # Place bracket order
     #
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
@@ -692,7 +692,7 @@ module SnapTrade
       data
     end
 
-    # Place bracket equity order
+    # Place bracket order
     #
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
     # use. Only supported on certain brokerages
@@ -726,7 +726,7 @@ module SnapTrade
       place_bracket_order_with_http_info_impl(account_id, user_id, user_secret, manual_trade_form_bracket, extra)
     end
 
-    # Place bracket equity order
+    # Place bracket order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 
@@ -739,7 +739,7 @@ module SnapTrade
       data
     end
 
-    # Place bracket equity order
+    # Place bracket order
     # Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
     # @param account_id [String] The ID of the account to execute the trade on.
     # @param user_id [String] 

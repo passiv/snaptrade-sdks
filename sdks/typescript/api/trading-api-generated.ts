@@ -440,7 +440,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket equity order
+         * @summary Place bracket order
          * @param {string} accountId The ID of the account to execute the trade on.
          * @param {string} userId 
          * @param {string} userSecret 
@@ -1079,7 +1079,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket equity order
+         * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1294,7 +1294,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-         * @summary Place bracket equity order
+         * @summary Place bracket order
          * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1856,7 +1856,7 @@ export class TradingApiGenerated extends BaseAPI {
 
     /**
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
-     * @summary Place bracket equity order
+     * @summary Place bracket order
      * @param {TradingApiPlaceBracketOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

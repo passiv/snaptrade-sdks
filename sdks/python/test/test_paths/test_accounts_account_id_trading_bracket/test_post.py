@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestAccountsAccountIdTradingBracket(ApiTestMixin, unittest.TestCase):
     """
     AccountsAccountIdTradingBracket unit test stubs
-        Place bracket equity order
+        Place bracket order
     """
 
     def setUp(self):

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
-| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket equity order |
+| [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
 | [**placeCryptoOrder**](TradingApi.md#placeCryptoOrder) | **POST** /accounts/{accountId}/trading/crypto | Place crypto order |
 | [**placeForceOrder**](TradingApi.md#placeForceOrder) | **POST** /trade/place | Place order |
 | [**placeMlegOrder**](TradingApi.md#placeMlegOrder) | **POST** /accounts/{accountId}/trading/options | Place option order |
@@ -565,7 +565,7 @@ public class Example {
 # **placeBracketOrder**
 > AccountOrderRecord placeBracketOrder(accountId, userId, userSecret, manualTradeFormBracket).execute();
 
-Place bracket equity order
+Place bracket order
 
 Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
 

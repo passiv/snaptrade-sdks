@@ -175,7 +175,7 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of List&lt;SymbolsQuotesInner&gt;</returns>
         ApiResponse<List<SymbolsQuotesInner>> GetUserAccountQuotesWithHttpInfo(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0);
         /// <summary>
-        /// Place bracket equity order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -190,7 +190,7 @@ namespace SnapTrade.Net.Api
         AccountOrderRecord PlaceBracketOrder(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0);
 
         /// <summary>
-        /// Place bracket equity order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -573,7 +573,7 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (List&lt;SymbolsQuotesInner&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<SymbolsQuotesInner>>> GetUserAccountQuotesWithHttpInfoAsync(string userId, string userSecret, string symbols, string accountId, bool? useTicker = default(bool?), int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Place bracket equity order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -589,7 +589,7 @@ namespace SnapTrade.Net.Api
         System.Threading.Tasks.Task<AccountOrderRecord> PlaceBracketOrderAsync(string accountId, string userId, string userSecret, ManualTradeFormBracket manualTradeFormBracket, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
-        /// Place bracket equity order
+        /// Place bracket order
         /// </summary>
         /// <remarks>
         /// Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
@@ -2085,7 +2085,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket equity order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2101,7 +2101,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket equity order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2198,7 +2198,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket equity order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
@@ -2215,7 +2215,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Place bracket equity order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
+        /// Place bracket order Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId">The ID of the account to execute the trade on.</param>
