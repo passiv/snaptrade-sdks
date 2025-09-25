@@ -52,6 +52,10 @@ class TradingInstrument(
                     return cls("EQUITY")
                 
                 @schemas.classproperty
+                def OPTION(cls):
+                    return cls("OPTION")
+                
+                @schemas.classproperty
                 def CRYPTOCURRENCY(cls):
                     return cls("CRYPTOCURRENCY")
                 

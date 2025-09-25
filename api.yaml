@@ -1621,7 +1621,7 @@ paths:
     post:
       tags:
         - Trading
-      summary: Place bracket equity order
+      summary: Place bracket order
       description: |
         Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for
         use. Only supported on certain brokerages
@@ -4474,7 +4474,7 @@ components:
         - type
       properties:
         symbol:
-          description: The instrument's trading ticker symbol
+          description: The instrument's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
           type: string
           example: AAPL
         type:
@@ -4482,6 +4482,7 @@ components:
           type: string
           enum:
             - EQUITY
+            - OPTION
             - CRYPTOCURRENCY
             - CRYPTOCURRENCY_PAIR
     BrokerageInstrumentsResponse:

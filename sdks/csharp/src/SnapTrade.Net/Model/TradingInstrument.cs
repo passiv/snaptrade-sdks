@@ -46,16 +46,22 @@ namespace SnapTrade.Net.Model
             EQUITY = 1,
 
             /// <summary>
+            /// Enum OPTION for value: OPTION
+            /// </summary>
+            [EnumMember(Value = "OPTION")]
+            OPTION = 2,
+
+            /// <summary>
             /// Enum CRYPTOCURRENCY for value: CRYPTOCURRENCY
             /// </summary>
             [EnumMember(Value = "CRYPTOCURRENCY")]
-            CRYPTOCURRENCY = 2,
+            CRYPTOCURRENCY = 3,
 
             /// <summary>
             /// Enum CRYPTOCURRENCYPAIR for value: CRYPTOCURRENCY_PAIR
             /// </summary>
             [EnumMember(Value = "CRYPTOCURRENCY_PAIR")]
-            CRYPTOCURRENCYPAIR = 3
+            CRYPTOCURRENCYPAIR = 4
 
         }
 
@@ -77,7 +83,7 @@ namespace SnapTrade.Net.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TradingInstrument" /> class.
         /// </summary>
-        /// <param name="symbol">The instrument&#39;s trading ticker symbol (required).</param>
+        /// <param name="symbol">The instrument&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format) (required).</param>
         /// <param name="type">The instrument&#39;s type (required).</param>
         public TradingInstrument(string symbol = default(string), TypeEnum type = default(TypeEnum)) : base()
         {
@@ -92,9 +98,9 @@ namespace SnapTrade.Net.Model
         }
 
         /// <summary>
-        /// The instrument&#39;s trading ticker symbol
+        /// The instrument&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
         /// </summary>
-        /// <value>The instrument&#39;s trading ticker symbol</value>
+        /// <value>The instrument&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)</value>
         [DataMember(Name = "symbol", IsRequired = true, EmitDefaultValue = true)]
         public string Symbol { get; set; }
 

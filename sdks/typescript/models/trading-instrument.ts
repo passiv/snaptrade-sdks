@@ -20,7 +20,7 @@ export interface TradingInstrument {
     [key: string]: any;
 
     /**
-     * The instrument\'s trading ticker symbol
+     * The instrument\'s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
      * @type {string}
      * @memberof TradingInstrument
      */
@@ -33,6 +33,6 @@ export interface TradingInstrument {
     'type': TradingInstrumentTypeEnum;
 }
 
-type TradingInstrumentTypeEnum = 'EQUITY' | 'CRYPTOCURRENCY' | 'CRYPTOCURRENCY_PAIR'
+type TradingInstrumentTypeEnum = 'EQUITY' | 'OPTION' | 'CRYPTOCURRENCY' | 'CRYPTOCURRENCY_PAIR'
 
 

@@ -60,6 +60,8 @@ public class TradingInstrument {
  public enum TypeEnum {
     EQUITY("EQUITY"),
     
+    OPTION("OPTION"),
+    
     CRYPTOCURRENCY("CRYPTOCURRENCY"),
     
     CRYPTOCURRENCY_PAIR("CRYPTOCURRENCY_PAIR");
@@ -119,11 +121,11 @@ public class TradingInstrument {
   }
 
    /**
-   * The instrument&#39;s trading ticker symbol
+   * The instrument&#39;s trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example &#x60;AAPL  131124C00240000&#x60; represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
    * @return symbol
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(example = "AAPL", required = true, value = "The instrument's trading ticker symbol")
+  @ApiModelProperty(example = "AAPL", required = true, value = "The instrument's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)")
 
   public String getSymbol() {
     return symbol;

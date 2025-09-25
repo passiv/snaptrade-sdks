@@ -1506,7 +1506,7 @@ public class TradingApiGenerated {
     }
 
     /**
-     * Place bracket equity order
+     * Place bracket order
      * Places a bracket order (entry order + OCO of stop loss and take profit). Disabled by default please contact support for use. Only supported on certain brokerages 
      * @param accountId The ID of the account to execute the trade on. (required)
      * @param userId  (required)
