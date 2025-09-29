@@ -25,7 +25,7 @@ from .. import ApiTestMixin
 class TestTradePlace(ApiTestMixin, unittest.TestCase):
     """
     TradePlace unit test stubs
-        Place order
+        Place equity order
     """
 
     def setUp(self):
