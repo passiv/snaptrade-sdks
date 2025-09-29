@@ -5293,6 +5293,7 @@ components:
         connectionPortalVersion: v4
         reconnect: 8b5f262d-4bb9-365d-888a-202bd3b15fa1
         immediateRedirect: true
+        showCloseButton: true
         customRedirect: https://snaptrade.com
         broker: ALPACA
         connectionType: read
@@ -5345,6 +5346,14 @@ components:
           type: string
           x-konfig-original-example: read
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionType
+        showCloseButton:
+          description: "Controls whether the close (X) button is displayed in the\
+            \ connection portal. When false, you control closing behavior from your\
+            \ app. Defaults to true."
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-showCloseButton
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
@@ -9285,6 +9294,10 @@ components:
       example: read
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-showCloseButton:
+      example: true
+      type: boolean
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion:
       example: v4
       type: string
@@ -10180,6 +10193,14 @@ components:
           type: string
           x-konfig-original-example: read
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionType
+        showCloseButton:
+          description: "Controls whether the close (X) button is displayed in the\
+            \ connection portal. When false, you control closing behavior from your\
+            \ app. Defaults to true."
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-showCloseButton
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only

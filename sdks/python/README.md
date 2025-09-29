@@ -795,6 +795,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     custom_redirect="https://snaptrade.com",
     reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connection_type="read",
+    show_close_button=True,
     connection_portal_version="v4",
 )
 ```
@@ -824,6 +825,10 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 ##### connection_type: `str`<a id="connection_type-str"></a>
 
 Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+
+##### show_close_button: `bool`<a id="show_close_button-bool"></a>
+
+Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 

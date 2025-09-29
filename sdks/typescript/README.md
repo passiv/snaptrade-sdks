@@ -798,6 +798,7 @@ const loginSnapTradeUserResponse =
     customRedirect: "https://snaptrade.com",
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connectionType: "read",
+    showCloseButton: true,
     connectionPortalVersion: "v4",
   });
 ```
@@ -827,6 +828,10 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 ##### connectionType: `string`<a id="connectiontype-string"></a>
 
 Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+
+##### showCloseButton: `boolean`<a id="showclosebutton-boolean"></a>
+
+Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 

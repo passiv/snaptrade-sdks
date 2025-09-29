@@ -27,6 +27,8 @@ type SnapTradeLoginUserRequestBody struct {
 	Reconnect *string `json:"reconnect,omitempty"`
 	// Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
 	ConnectionType *string `json:"connectionType,omitempty"`
+	// Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+	ShowCloseButton *bool `json:"showCloseButton,omitempty"`
 	// Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
 	ConnectionPortalVersion *string `json:"connectionPortalVersion,omitempty"`
 }
@@ -216,6 +218,38 @@ func (o *SnapTradeLoginUserRequestBody) SetConnectionType(v string) {
 	o.ConnectionType = &v
 }
 
+// GetShowCloseButton returns the ShowCloseButton field value if set, zero value otherwise.
+func (o *SnapTradeLoginUserRequestBody) GetShowCloseButton() bool {
+	if o == nil || isNil(o.ShowCloseButton) {
+		var ret bool
+		return ret
+	}
+	return *o.ShowCloseButton
+}
+
+// GetShowCloseButtonOk returns a tuple with the ShowCloseButton field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SnapTradeLoginUserRequestBody) GetShowCloseButtonOk() (*bool, bool) {
+	if o == nil || isNil(o.ShowCloseButton) {
+    return nil, false
+	}
+	return o.ShowCloseButton, true
+}
+
+// HasShowCloseButton returns a boolean if a field has been set.
+func (o *SnapTradeLoginUserRequestBody) HasShowCloseButton() bool {
+	if o != nil && !isNil(o.ShowCloseButton) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowCloseButton gets a reference to the given bool and assigns it to the ShowCloseButton field.
+func (o *SnapTradeLoginUserRequestBody) SetShowCloseButton(v bool) {
+	o.ShowCloseButton = &v
+}
+
 // GetConnectionPortalVersion returns the ConnectionPortalVersion field value if set, zero value otherwise.
 func (o *SnapTradeLoginUserRequestBody) GetConnectionPortalVersion() string {
 	if o == nil || isNil(o.ConnectionPortalVersion) {
@@ -264,6 +298,9 @@ func (o SnapTradeLoginUserRequestBody) MarshalJSON() ([]byte, error) {
 	}
 	if !isNil(o.ConnectionType) {
 		toSerialize["connectionType"] = o.ConnectionType
+	}
+	if !isNil(o.ShowCloseButton) {
+		toSerialize["showCloseButton"] = o.ShowCloseButton
 	}
 	if !isNil(o.ConnectionPortalVersion) {
 		toSerialize["connectionPortalVersion"] = o.ConnectionPortalVersion

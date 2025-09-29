@@ -89,6 +89,7 @@ public class AuthenticationApiTest {
         String customRedirect = null;
         String reconnect = null;
         String connectionType = null;
+        Boolean showCloseButton = null;
         String connectionPortalVersion = null;
         Object response = api.loginSnapTradeUser(userId, userSecret)
                 .broker(broker)
@@ -96,6 +97,7 @@ public class AuthenticationApiTest {
                 .customRedirect(customRedirect)
                 .reconnect(reconnect)
                 .connectionType(connectionType)
+                .showCloseButton(showCloseButton)
                 .connectionPortalVersion(connectionPortalVersion)
                 .execute();
         // TODO: test validations

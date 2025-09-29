@@ -79,6 +79,14 @@ public class SnapTradeLoginUserRequestBodyTest {
     }
 
     /**
+     * Test the property 'showCloseButton'
+     */
+    @Test
+    public void showCloseButtonTest() {
+        // TODO: test showCloseButton
+    }
+
+    /**
      * Test the property 'connectionPortalVersion'
      */
     @Test

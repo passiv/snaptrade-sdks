@@ -844,6 +844,7 @@ Object result = client
         .customRedirect(customRedirect)
         .reconnect(reconnect)
         .connectionType(connectionType)
+        .showCloseButton(showCloseButton)
         .connectionPortalVersion(connectionPortalVersion)
         .execute();
 ```
@@ -873,6 +874,10 @@ The UUID of the brokerage connection to be reconnected. This parameter should be
 ##### connectionType: `String`<a id="connectiontype-string"></a>
 
 Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
+
+##### showCloseButton: `Boolean`<a id="showclosebutton-boolean"></a>
+
+Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
 
 ##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 

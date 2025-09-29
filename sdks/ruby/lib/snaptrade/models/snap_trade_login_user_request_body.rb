@@ -28,6 +28,9 @@ module SnapTrade
     # Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     attr_accessor :connection_type
 
+    # Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+    attr_accessor :show_close_button
+
     # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
 
@@ -39,6 +42,7 @@ module SnapTrade
         :'custom_redirect' => :'customRedirect',
         :'reconnect' => :'reconnect',
         :'connection_type' => :'connectionType',
+        :'show_close_button' => :'showCloseButton',
         :'connection_portal_version' => :'connectionPortalVersion'
       }
     end
@@ -56,6 +60,7 @@ module SnapTrade
         :'custom_redirect' => :'String',
         :'reconnect' => :'String',
         :'connection_type' => :'ConnectionType',
+        :'show_close_button' => :'Boolean',
         :'connection_portal_version' => :'ConnectionPortalVersion'
       }
     end
@@ -103,6 +108,10 @@ module SnapTrade
         self.connection_type = 'read'
       end
 
+      if attributes.key?(:'show_close_button')
+        self.show_close_button = attributes[:'show_close_button']
+      end
+
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
       else
@@ -133,6 +142,7 @@ module SnapTrade
           custom_redirect == o.custom_redirect &&
           reconnect == o.reconnect &&
           connection_type == o.connection_type &&
+          show_close_button == o.show_close_button &&
           connection_portal_version == o.connection_portal_version
     end
 
@@ -145,7 +155,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, connection_portal_version].hash
+      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, connection_portal_version].hash
     end
 
     # Builds the object from hash

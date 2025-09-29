@@ -717,6 +717,7 @@ result = snaptrade.authentication.login_snap_trade_user(
   custom_redirect: "https://snaptrade.com",
   reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
   connection_type: "read",
+  show_close_button: true,
   connection_portal_version: "v4",
 )
 p result
@@ -753,6 +754,10 @@ Determines connection permissions (default: read) - `read`: Data access only. -
 `trade`: Data and trading access. - `trade-if-available`: Attempts to establish
 a trading connection if the brokerage supports it, otherwise falls back to
 read-only access automatically.
+
+##### showCloseButton: `Boolean`<a id="showclosebutton-boolean"></a>
+Controls whether the close (X) button is displayed in the connection portal.
+When false, you control closing behavior from your app. Defaults to true.
 
 ##### connectionPortalVersion: [`ConnectionPortalVersion`](./lib/snaptrade/models/connection_portal_version.rb)<a id="connectionportalversion-connectionportalversionlibsnaptrademodelsconnection_portal_versionrb"></a>
 Sets the connection portal version to render. Currently only v4 is supported and
