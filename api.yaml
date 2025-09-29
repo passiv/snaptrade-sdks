@@ -3580,6 +3580,10 @@ components:
             - trade
             - trade-if-available
           default: read
+        showCloseButton:
+            description: Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+            type: boolean
+            example: true
         connectionPortalVersion:
           description: Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
           type: string
