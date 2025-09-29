@@ -1860,7 +1860,7 @@ paths:
           description: User does not have permissions to place trades
         "500":
           description: Unexpected Error
-      summary: Place order
+      summary: Place equity order
       tags:
       - Trading
       x-konfig-operation-can-have-single-parameter: true
