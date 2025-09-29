@@ -119,6 +119,10 @@ public class SnapTradeLoginUserRequestBody {
   @SerializedName(SERIALIZED_NAME_CONNECTION_TYPE)
   private ConnectionTypeEnum connectionType = ConnectionTypeEnum.READ;
 
+  public static final String SERIALIZED_NAME_SHOW_CLOSE_BUTTON = "showCloseButton";
+  @SerializedName(SERIALIZED_NAME_SHOW_CLOSE_BUTTON)
+  private Boolean showCloseButton;
+
   /**
    * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
    */
@@ -320,6 +324,35 @@ public class SnapTradeLoginUserRequestBody {
   }
 
 
+  public SnapTradeLoginUserRequestBody showCloseButton(Boolean showCloseButton) {
+    
+    
+    
+    
+    this.showCloseButton = showCloseButton;
+    return this;
+  }
+
+   /**
+   * Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+   * @return showCloseButton
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.")
+
+  public Boolean getShowCloseButton() {
+    return showCloseButton;
+  }
+
+
+  public void setShowCloseButton(Boolean showCloseButton) {
+    
+    
+    
+    this.showCloseButton = showCloseButton;
+  }
+
+
   public SnapTradeLoginUserRequestBody connectionPortalVersion(ConnectionPortalVersionEnum connectionPortalVersion) {
     
     
@@ -408,13 +441,14 @@ public class SnapTradeLoginUserRequestBody {
         Objects.equals(this.customRedirect, snapTradeLoginUserRequestBody.customRedirect) &&
         Objects.equals(this.reconnect, snapTradeLoginUserRequestBody.reconnect) &&
         Objects.equals(this.connectionType, snapTradeLoginUserRequestBody.connectionType) &&
+        Objects.equals(this.showCloseButton, snapTradeLoginUserRequestBody.showCloseButton) &&
         Objects.equals(this.connectionPortalVersion, snapTradeLoginUserRequestBody.connectionPortalVersion)&&
         Objects.equals(this.additionalProperties, snapTradeLoginUserRequestBody.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, connectionPortalVersion, additionalProperties);
+    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, showCloseButton, connectionPortalVersion, additionalProperties);
   }
 
   @Override
@@ -426,6 +460,7 @@ public class SnapTradeLoginUserRequestBody {
     sb.append("    customRedirect: ").append(toIndentedString(customRedirect)).append("\n");
     sb.append("    reconnect: ").append(toIndentedString(reconnect)).append("\n");
     sb.append("    connectionType: ").append(toIndentedString(connectionType)).append("\n");
+    sb.append("    showCloseButton: ").append(toIndentedString(showCloseButton)).append("\n");
     sb.append("    connectionPortalVersion: ").append(toIndentedString(connectionPortalVersion)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -455,6 +490,7 @@ public class SnapTradeLoginUserRequestBody {
     openapiFields.add("customRedirect");
     openapiFields.add("reconnect");
     openapiFields.add("connectionType");
+    openapiFields.add("showCloseButton");
     openapiFields.add("connectionPortalVersion");
 
     // a set of required properties/fields (JSON key names)

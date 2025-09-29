@@ -108,14 +108,16 @@ namespace SnapTrade.Net.Model
         /// <param name="customRedirect">URL to redirect the user to after the user connects their brokerage account. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information..</param>
         /// <param name="reconnect">The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information..</param>
         /// <param name="connectionType">Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  (default to ConnectionTypeEnum.Read).</param>
+        /// <param name="showCloseButton">Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true..</param>
         /// <param name="connectionPortalVersion">Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (default to ConnectionPortalVersionEnum.V4).</param>
-        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
+        public SnapTradeLoginUserRequestBody(string broker = default(string), bool immediateRedirect = default(bool), string customRedirect = default(string), string reconnect = default(string), ConnectionTypeEnum? connectionType = ConnectionTypeEnum.Read, bool showCloseButton = default(bool), ConnectionPortalVersionEnum? connectionPortalVersion = ConnectionPortalVersionEnum.V4)
         {
             this.Broker = broker;
             this.ImmediateRedirect = immediateRedirect;
             this.CustomRedirect = customRedirect;
             this.Reconnect = reconnect;
             this.ConnectionType = connectionType;
+            this.ShowCloseButton = showCloseButton;
             this.ConnectionPortalVersion = connectionPortalVersion;
         }
 
@@ -148,6 +150,13 @@ namespace SnapTrade.Net.Model
         public string Reconnect { get; set; }
 
         /// <summary>
+        /// Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+        /// </summary>
+        /// <value>Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.</value>
+        [DataMember(Name = "showCloseButton", EmitDefaultValue = true)]
+        public bool ShowCloseButton { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -160,6 +169,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  CustomRedirect: ").Append(CustomRedirect).Append("\n");
             sb.Append("  Reconnect: ").Append(Reconnect).Append("\n");
             sb.Append("  ConnectionType: ").Append(ConnectionType).Append("\n");
+            sb.Append("  ShowCloseButton: ").Append(ShowCloseButton).Append("\n");
             sb.Append("  ConnectionPortalVersion: ").Append(ConnectionPortalVersion).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -220,6 +230,10 @@ namespace SnapTrade.Net.Model
                     this.ConnectionType.Equals(input.ConnectionType)
                 ) && 
                 (
+                    this.ShowCloseButton == input.ShowCloseButton ||
+                    this.ShowCloseButton.Equals(input.ShowCloseButton)
+                ) && 
+                (
                     this.ConnectionPortalVersion == input.ConnectionPortalVersion ||
                     this.ConnectionPortalVersion.Equals(input.ConnectionPortalVersion)
                 );
@@ -248,6 +262,7 @@ namespace SnapTrade.Net.Model
                     hashCode = (hashCode * 59) + this.Reconnect.GetHashCode();
                 }
                 hashCode = (hashCode * 59) + this.ConnectionType.GetHashCode();
+                hashCode = (hashCode * 59) + this.ShowCloseButton.GetHashCode();
                 hashCode = (hashCode * 59) + this.ConnectionPortalVersion.GetHashCode();
                 return hashCode;
             }

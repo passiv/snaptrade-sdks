@@ -98,6 +98,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ConnectionType'
         }
         /// <summary>
+        /// Test the property 'ShowCloseButton'
+        /// </summary>
+        [Fact]
+        public void ShowCloseButtonTest()
+        {
+            // TODO unit test for the property 'ShowCloseButton'
+        }
+        /// <summary>
         /// Test the property 'ConnectionPortalVersion'
         /// </summary>
         [Fact]

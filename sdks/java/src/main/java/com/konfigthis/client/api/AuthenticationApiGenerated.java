@@ -475,6 +475,7 @@ public class AuthenticationApiGenerated {
         String customRedirect;
         String reconnect;
         String connectionType;
+        Boolean showCloseButton;
         String connectionPortalVersion;
 
         public LoginSnapTradeUserRequestBuilderGenerated(String userId, String userSecret) {
@@ -533,6 +534,16 @@ public class AuthenticationApiGenerated {
         }
         
         /**
+         * Set showCloseButton
+         * @param showCloseButton Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. (optional)
+         * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
+         */
+        public AuthenticationApi.LoginSnapTradeUserRequestBuilder showCloseButton(Boolean showCloseButton) {
+            this.showCloseButton = showCloseButton;
+            return (AuthenticationApi.LoginSnapTradeUserRequestBuilder) this;
+        }
+        
+        /**
          * Set connectionPortalVersion
          * @param connectionPortalVersion Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (optional, default to v4)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
@@ -567,6 +578,7 @@ public class AuthenticationApiGenerated {
             snapTradeLoginUserRequestBody.reconnect(this.reconnect);
             if (this.connectionType != null)
             snapTradeLoginUserRequestBody.connectionType(SnapTradeLoginUserRequestBody.ConnectionTypeEnum.fromValue(this.connectionType));
+            snapTradeLoginUserRequestBody.showCloseButton(this.showCloseButton);
             if (this.connectionPortalVersion != null)
             snapTradeLoginUserRequestBody.connectionPortalVersion(SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.fromValue(this.connectionPortalVersion));
             return snapTradeLoginUserRequestBody;

@@ -59,6 +59,7 @@ class SnapTradeLoginUserRequestBody(
                 @schemas.classproperty
                 def TRADEIFAVAILABLE(cls):
                     return cls("trade-if-available")
+            showCloseButton = schemas.BoolSchema
             
             
             class connectionPortalVersion(
@@ -83,6 +84,7 @@ class SnapTradeLoginUserRequestBody(
                 "customRedirect": customRedirect,
                 "reconnect": reconnect,
                 "connectionType": connectionType,
+                "showCloseButton": showCloseButton,
                 "connectionPortalVersion": connectionPortalVersion,
             }
     
@@ -102,12 +104,15 @@ class SnapTradeLoginUserRequestBody(
     def __getitem__(self, name: typing_extensions.Literal["connectionType"]) -> MetaOapg.properties.connectionType: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["showCloseButton"]) -> MetaOapg.properties.showCloseButton: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> MetaOapg.properties.connectionPortalVersion: ...
     
     @typing.overload
     def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "connectionPortalVersion", ], str]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "connectionPortalVersion", ], str]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -128,12 +133,15 @@ class SnapTradeLoginUserRequestBody(
     def get_item_oapg(self, name: typing_extensions.Literal["connectionType"]) -> typing.Union[MetaOapg.properties.connectionType, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["showCloseButton"]) -> typing.Union[MetaOapg.properties.showCloseButton, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["connectionPortalVersion"]) -> typing.Union[MetaOapg.properties.connectionPortalVersion, schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "connectionPortalVersion", ], str]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["broker", "immediateRedirect", "customRedirect", "reconnect", "connectionType", "showCloseButton", "connectionPortalVersion", ], str]):
         return super().get_item_oapg(name)
     
 
@@ -145,6 +153,7 @@ class SnapTradeLoginUserRequestBody(
         customRedirect: typing.Union[MetaOapg.properties.customRedirect, str, schemas.Unset] = schemas.unset,
         reconnect: typing.Union[MetaOapg.properties.reconnect, str, schemas.Unset] = schemas.unset,
         connectionType: typing.Union[MetaOapg.properties.connectionType, str, schemas.Unset] = schemas.unset,
+        showCloseButton: typing.Union[MetaOapg.properties.showCloseButton, bool, schemas.Unset] = schemas.unset,
         connectionPortalVersion: typing.Union[MetaOapg.properties.connectionPortalVersion, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
@@ -157,6 +166,7 @@ class SnapTradeLoginUserRequestBody(
             customRedirect=customRedirect,
             reconnect=reconnect,
             connectionType=connectionType,
+            showCloseButton=showCloseButton,
             connectionPortalVersion=connectionPortalVersion,
             _configuration=_configuration,
             **kwargs,

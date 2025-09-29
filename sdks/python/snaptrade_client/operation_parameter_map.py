@@ -218,6 +218,9 @@ operation_parameter_map = {
                 'name': 'connectionType'
             },
             {
+                'name': 'showCloseButton'
+            },
+            {
                 'name': 'connectionPortalVersion'
             },
         ]
