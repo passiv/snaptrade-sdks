@@ -104,9 +104,9 @@ portal:
       post: true
     /brokerages/{brokerageId}/instruments:
       get: true
-  hideOperations:
     /accounts/{accountId}/orders/details:
       post: true
+  hideOperations:
     /activities:
       get: true
     /holdings:
