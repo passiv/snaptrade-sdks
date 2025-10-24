@@ -31,6 +31,9 @@ module SnapTrade
     # The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
     attr_accessor :time_in_force
 
+    # The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
+    attr_accessor :trading_session
+
     # The limit price for `Limit` and `StopLimit` orders.
     attr_accessor :price
 
@@ -51,6 +54,7 @@ module SnapTrade
         :'symbol' => :'symbol',
         :'order_type' => :'order_type',
         :'time_in_force' => :'time_in_force',
+        :'trading_session' => :'trading_session',
         :'price' => :'price',
         :'stop' => :'stop',
         :'units' => :'units',
@@ -72,6 +76,7 @@ module SnapTrade
         :'symbol' => :'String',
         :'order_type' => :'OrderTypeStrict',
         :'time_in_force' => :'TimeInForceStrict',
+        :'trading_session' => :'TradingSession',
         :'price' => :'Float',
         :'stop' => :'Float',
         :'units' => :'Float',
@@ -128,6 +133,12 @@ module SnapTrade
 
       if attributes.key?(:'time_in_force')
         self.time_in_force = attributes[:'time_in_force']
+      end
+
+      if attributes.key?(:'trading_session')
+        self.trading_session = attributes[:'trading_session']
+      else
+        self.trading_session = 'REGULAR'
       end
 
       if attributes.key?(:'price')
@@ -191,6 +202,7 @@ module SnapTrade
           symbol == o.symbol &&
           order_type == o.order_type &&
           time_in_force == o.time_in_force &&
+          trading_session == o.trading_session &&
           price == o.price &&
           stop == o.stop &&
           units == o.units &&
@@ -206,7 +218,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, price, stop, units, notional_value].hash
+      [account_id, action, universal_symbol_id, symbol, order_type, time_in_force, trading_session, price, stop, units, notional_value].hash
     end
 
     # Builds the object from hash

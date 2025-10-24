@@ -2053,6 +2053,7 @@ AccountOrderRecord result = client
         .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
         .universalSymbolId(universalSymbolId)
         .symbol(symbol)
+        .tradingSession(tradingSession)
         .price(price)
         .stop(stop)
         .units(units)
@@ -2083,6 +2084,8 @@ Unique identifier for the symbol within SnapTrade. This is the ID used to refere
 ##### symbol: `String`<a id="symbol-string"></a>
 
 The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+
+##### trading_session:<a id="trading_session"></a>
 
 ##### price: `Double`<a id="price-double"></a>
 

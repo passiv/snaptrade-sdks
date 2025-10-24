@@ -2044,6 +2044,7 @@ place_force_order_response = snaptrade.trading.place_force_order(
     user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
     universal_symbol_id="2bcd7cc3-e922-4976-bce1-9858296801c3",
     symbol="AAPL",
+    trading_session="REGULAR",
     price=31.33,
     stop=31.33,
     units=10.5,
@@ -2074,6 +2075,8 @@ The universal symbol ID of the security to trade. Must be 'null' if `symbol` is 
 ##### symbol: `Optional[str]`<a id="symbol-optionalstr"></a>
 
 The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+
+##### trading_session: [`TradingSession`](./snaptrade_client/type/trading_session.py)<a id="trading_session-tradingsessionsnaptrade_clienttypetrading_sessionpy"></a>
 
 ##### price: `Optional[Union[int, float]]`<a id="price-optionalunionint-float"></a>
 

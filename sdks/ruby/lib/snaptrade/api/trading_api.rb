@@ -989,13 +989,14 @@ module SnapTrade
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
     # @param symbol [String] The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param trading_session [TradingSession] The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values: - `REGULAR` - Regular trading hours. - `EXTENDED` - Extended trading hours. 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, trading_session: 'REGULAR', price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -1003,6 +1004,7 @@ module SnapTrade
       _body[:symbol] = symbol if symbol != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:trading_session] = trading_session if trading_session != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL
@@ -1028,13 +1030,14 @@ module SnapTrade
     # @param user_secret [String] 
     # @param universal_symbol_id [String] The universal symbol ID of the security to trade. Must be 'null' if `symbol` is provided, otherwise must be provided.
     # @param symbol [String] The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    # @param trading_session [TradingSession] The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values: - `REGULAR` - Regular trading hours. - `EXTENDED` - Extended trading hours. 
     # @param price [Float] The limit price for `Limit` and `StopLimit` orders.
     # @param stop [Float] The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     # @param units [Float] For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
     # @param notional_value [ManualTradeFormNotionalValue] 
     # @param body [ManualTradeFormWithOptions] 
     # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
-    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
+    def place_force_order_with_http_info(account_id:, action:, order_type:, time_in_force:, user_id:, user_secret:, universal_symbol_id: SENTINEL, symbol: SENTINEL, trading_session: 'REGULAR', price: SENTINEL, stop: SENTINEL, units: SENTINEL, notional_value: SENTINEL, extra: {})
       _body = {}
       _body[:account_id] = account_id if account_id != SENTINEL
       _body[:action] = action if action != SENTINEL
@@ -1042,6 +1045,7 @@ module SnapTrade
       _body[:symbol] = symbol if symbol != SENTINEL
       _body[:order_type] = order_type if order_type != SENTINEL
       _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:trading_session] = trading_session if trading_session != SENTINEL
       _body[:price] = price if price != SENTINEL
       _body[:stop] = stop if stop != SENTINEL
       _body[:units] = units if units != SENTINEL

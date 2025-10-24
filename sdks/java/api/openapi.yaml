@@ -6840,6 +6840,7 @@ components:
         time_in_force: Day
         account_id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
         stop: 31.33
+        trading_session: REGULAR
         price: 31.33
         notional_value: ""
         action: null
@@ -6877,6 +6878,8 @@ components:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
+        trading_session:
+          $ref: '#/components/schemas/TradingSession'
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33
@@ -7174,6 +7177,19 @@ components:
       type: string
       x-konfig-original-example: Day
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TimeInForceStrict
+    TradingSession:
+      default: REGULAR
+      description: |
+        The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:
+          - `REGULAR` - Regular trading hours.
+          - `EXTENDED` - Extended trading hours.
+      enum:
+      - REGULAR
+      - EXTENDED
+      example: REGULAR
+      type: string
+      x-konfig-original-example: REGULAR
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradingSession
     MlegPriceEffectStrict:
       description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
       enum:
@@ -9772,6 +9788,10 @@ components:
       example: Day
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TradingSession:
+      example: REGULAR
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegPriceEffectStrict:
       example: DEBIT
       type: string
@@ -10900,6 +10920,8 @@ components:
           $ref: '#/components/schemas/OrderTypeStrict'
         time_in_force:
           $ref: '#/components/schemas/TimeInForceStrict'
+        trading_session:
+          $ref: '#/components/schemas/TradingSession'
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           example: 31.33

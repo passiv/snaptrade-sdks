@@ -50,6 +50,12 @@ namespace SnapTrade.Net.Model
         /// </summary>
         [DataMember(Name = "time_in_force", IsRequired = true, EmitDefaultValue = true)]
         public TimeInForceStrict TimeInForce { get; set; }
+
+        /// <summary>
+        /// Gets or Sets TradingSession
+        /// </summary>
+        [DataMember(Name = "trading_session", EmitDefaultValue = false)]
+        public TradingSession? TradingSession { get; set; }
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualTradeFormWithOptions" /> class.
         /// </summary>
@@ -64,11 +70,12 @@ namespace SnapTrade.Net.Model
         /// <param name="symbol">The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;..</param>
         /// <param name="orderType">orderType (required).</param>
         /// <param name="timeInForce">timeInForce (required).</param>
+        /// <param name="tradingSession">tradingSession.</param>
         /// <param name="price">The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="stop">The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders..</param>
         /// <param name="units">For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares)..</param>
         /// <param name="notionalValue">notionalValue.</param>
-        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
+        public ManualTradeFormWithOptions(string accountId = default(string), ActionStrictWithOptions action = default(ActionStrictWithOptions), string universalSymbolId = default(string), string symbol = default(string), OrderTypeStrict orderType = default(OrderTypeStrict), TimeInForceStrict timeInForce = default(TimeInForceStrict), TradingSession? tradingSession = default(TradingSession?), double? price = default(double?), double? stop = default(double?), double? units = default(double?), NotionalValueNullable notionalValue = default(NotionalValueNullable))
         {
             // to ensure "accountId" is required (not null)
             if (accountId == null)
@@ -81,6 +88,7 @@ namespace SnapTrade.Net.Model
             this.TimeInForce = timeInForce;
             this.UniversalSymbolId = universalSymbolId;
             this.Symbol = symbol;
+            this.TradingSession = tradingSession;
             this.Price = price;
             this.Stop = stop;
             this.Units = units;
@@ -149,6 +157,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Symbol: ").Append(Symbol).Append("\n");
             sb.Append("  OrderType: ").Append(OrderType).Append("\n");
             sb.Append("  TimeInForce: ").Append(TimeInForce).Append("\n");
+            sb.Append("  TradingSession: ").Append(TradingSession).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  Stop: ").Append(Stop).Append("\n");
             sb.Append("  Units: ").Append(Units).Append("\n");
@@ -216,6 +225,10 @@ namespace SnapTrade.Net.Model
                     this.TimeInForce.Equals(input.TimeInForce)
                 ) && 
                 (
+                    this.TradingSession == input.TradingSession ||
+                    this.TradingSession.Equals(input.TradingSession)
+                ) && 
+                (
                     this.Price == input.Price ||
                     (this.Price != null &&
                     this.Price.Equals(input.Price))
@@ -261,6 +274,7 @@ namespace SnapTrade.Net.Model
                 }
                 hashCode = (hashCode * 59) + this.OrderType.GetHashCode();
                 hashCode = (hashCode * 59) + this.TimeInForce.GetHashCode();
+                hashCode = (hashCode * 59) + this.TradingSession.GetHashCode();
                 if (this.Price != null)
                 {
                     hashCode = (hashCode * 59) + this.Price.GetHashCode();

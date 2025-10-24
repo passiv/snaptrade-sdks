@@ -81,6 +81,8 @@ import { TradingInstrument } from '../models';
 // @ts-ignore
 import { TradingSearchCryptocurrencyPairInstruments200Response } from '../models';
 // @ts-ignore
+import { TradingSession } from '../models';
+// @ts-ignore
 import { ValidatedTradeBody } from '../models';
 import { paginate } from "../pagination/paginate";
 import type * as buffer from "buffer"
@@ -1136,6 +1138,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
                 symbol: requestParameters.symbol,
                 order_type: requestParameters.order_type,
                 time_in_force: requestParameters.time_in_force,
+                trading_session: requestParameters.trading_session,
                 price: requestParameters.price,
                 stop: requestParameters.stop,
                 units: requestParameters.units,

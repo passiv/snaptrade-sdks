@@ -14,6 +14,7 @@ import { ActionStrictWithOptions } from './action-strict-with-options';
 import { ManualTradeFormNotionalValue } from './manual-trade-form-notional-value';
 import { OrderTypeStrict } from './order-type-strict';
 import { TimeInForceStrict } from './time-in-force-strict';
+import { TradingSession } from './trading-session';
 
 /**
  * Inputs for placing an order with the brokerage.
@@ -57,6 +58,12 @@ export interface ManualTradeFormWithOptions {
      * @memberof ManualTradeFormWithOptions
      */
     'time_in_force': TimeInForceStrict;
+    /**
+     * The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:   - `REGULAR` - Regular trading hours.   - `EXTENDED` - Extended trading hours. 
+     * @type {TradingSession}
+     * @memberof ManualTradeFormWithOptions
+     */
+    'trading_session'?: TradingSession;
     /**
      * The limit price for `Limit` and `StopLimit` orders.
      * @type {number}

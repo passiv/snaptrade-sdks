@@ -651,6 +651,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'symbol'
             },
             {
+                name: 'trading_session'
+            },
+            {
                 name: 'price'
             },
             {

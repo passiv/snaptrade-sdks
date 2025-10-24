@@ -19,6 +19,7 @@ from snaptrade_client.type.action_strict_with_options import ActionStrictWithOpt
 from snaptrade_client.type.notional_value_nullable import NotionalValueNullable
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
+from snaptrade_client.type.trading_session import TradingSession
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 
 class RequiredManualTradeFormWithOptions(TypedDict):
@@ -38,6 +39,8 @@ class OptionalManualTradeFormWithOptions(TypedDict, total=False):
 
     # The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
     symbol: typing.Optional[str]
+
+    trading_session: TradingSession
 
     # The limit price for `Limit` and `StopLimit` orders.
     price: typing.Optional[typing.Union[int, float]]

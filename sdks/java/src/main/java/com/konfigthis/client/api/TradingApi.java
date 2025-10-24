@@ -30,6 +30,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingInstrument;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
+import com.konfigthis.client.model.TradingSession;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import java.util.ArrayList;

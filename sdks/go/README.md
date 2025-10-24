@@ -253,6 +253,7 @@ Class | Method | HTTP request | Description
  - [TimeInForceStrict](docs/TimeInForceStrict.md)
  - [TradingInstrument](docs/TradingInstrument.md)
  - [TradingSearchCryptocurrencyPairInstruments200Response](docs/TradingSearchCryptocurrencyPairInstruments200Response.md)
+ - [TradingSession](docs/TradingSession.md)
  - [TransactionsStatus](docs/TransactionsStatus.md)
  - [USExchange](docs/USExchange.md)
  - [UnderlyingSymbol](docs/UnderlyingSymbol.md)
