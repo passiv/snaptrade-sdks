@@ -36,6 +36,7 @@ from snaptrade_client.model.model400_failed_request_response import Model400Fail
 from snaptrade_client.model.notional_value_nullable import NotionalValueNullable as NotionalValueNullableSchema
 from snaptrade_client.model.universal_symbol_id_nullable import UniversalSymbolIDNullable as UniversalSymbolIDNullableSchema
 from snaptrade_client.model.account_order_record import AccountOrderRecord as AccountOrderRecordSchema
+from snaptrade_client.model.trading_session import TradingSession as TradingSessionSchema
 from snaptrade_client.model.model403_failed_request_response import Model403FailedRequestResponse as Model403FailedRequestResponseSchema
 from snaptrade_client.model.action_strict_with_options import ActionStrictWithOptions as ActionStrictWithOptionsSchema
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict as TimeInForceStrictSchema
@@ -49,6 +50,7 @@ from snaptrade_client.type.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.type.universal_symbol_id_nullable import UniversalSymbolIDNullable
 from snaptrade_client.type.action_strict_with_options import ActionStrictWithOptions
 from snaptrade_client.type.model403_failed_request_response import Model403FailedRequestResponse
+from snaptrade_client.type.trading_session import TradingSession
 from snaptrade_client.type.account_order_record import AccountOrderRecord
 from snaptrade_client.type.order_type_strict import OrderTypeStrict
 
@@ -196,6 +198,7 @@ class BaseApi(api_client.Api):
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
+        trading_session: typing.Optional[TradingSession] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -217,6 +220,8 @@ class BaseApi(api_client.Api):
             _body["order_type"] = order_type
         if time_in_force is not None:
             _body["time_in_force"] = time_in_force
+        if trading_session is not None:
+            _body["trading_session"] = trading_session
         if price is not None:
             _body["price"] = price
         if stop is not None:
@@ -480,6 +485,7 @@ class PlaceForceOrder(BaseApi):
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
+        trading_session: typing.Optional[TradingSession] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -502,6 +508,7 @@ class PlaceForceOrder(BaseApi):
             user_secret=user_secret,
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
+            trading_session=trading_session,
             price=price,
             stop=stop,
             units=units,
@@ -524,6 +531,7 @@ class PlaceForceOrder(BaseApi):
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
+        trading_session: typing.Optional[TradingSession] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -545,6 +553,7 @@ class PlaceForceOrder(BaseApi):
             user_secret=user_secret,
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
+            trading_session=trading_session,
             price=price,
             stop=stop,
             units=units,
@@ -569,6 +578,7 @@ class ApiForpost(BaseApi):
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
+        trading_session: typing.Optional[TradingSession] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -591,6 +601,7 @@ class ApiForpost(BaseApi):
             user_secret=user_secret,
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
+            trading_session=trading_session,
             price=price,
             stop=stop,
             units=units,
@@ -613,6 +624,7 @@ class ApiForpost(BaseApi):
         user_secret: typing.Optional[str] = None,
         universal_symbol_id: typing.Optional[UniversalSymbolIDNullable] = None,
         symbol: typing.Optional[typing.Optional[str]] = None,
+        trading_session: typing.Optional[TradingSession] = None,
         price: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         stop: typing.Optional[typing.Optional[typing.Union[int, float]]] = None,
         units: typing.Optional[float] = None,
@@ -634,6 +646,7 @@ class ApiForpost(BaseApi):
             user_secret=user_secret,
             universal_symbol_id=universal_symbol_id,
             symbol=symbol,
+            trading_session=trading_session,
             price=price,
             stop=stop,
             units=units,

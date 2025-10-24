@@ -1958,6 +1958,7 @@ result = snaptrade.trading.place_force_order(
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
   universal_symbol_id: "2bcd7cc3-e922-4976-bce1-9858296801c3",
   symbol: "AAPL",
+  trading_session: "REGULAR",
   price: 31.33,
   stop: 31.33,
   units: 10.5,
@@ -2001,6 +2002,12 @@ provided, otherwise must be provided.
 ##### symbol: `String`<a id="symbol-string"></a>
 The security's trading ticker symbol. If 'symbol' is provided, then
 'universal_symbol_id' must be 'null'.
+
+##### trading_session: [`TradingSession`](./lib/snaptrade/models/trading_session.rb)<a id="trading_session-tradingsessionlibsnaptrademodelstrading_sessionrb"></a>
+The trading session for the order. This field indicates which market session the
+order will be placed in. This is only available for certain brokerages. Defaults
+to REGULAR. Here are the supported values: - `REGULAR` - Regular trading hours.
+- `EXTENDED` - Extended trading hours.
 
 ##### price: `Float`<a id="price-float"></a>
 The limit price for `Limit` and `StopLimit` orders.

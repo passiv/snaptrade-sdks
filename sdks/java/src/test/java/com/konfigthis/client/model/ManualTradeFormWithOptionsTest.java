@@ -20,6 +20,7 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.TimeInForceStrict;
+import com.konfigthis.client.model.TradingSession;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -89,6 +90,14 @@ public class ManualTradeFormWithOptionsTest {
     @Test
     public void timeInForceTest() {
         // TODO: test timeInForce
+    }
+
+    /**
+     * Test the property 'tradingSession'
+     */
+    @Test
+    public void tradingSessionTest() {
+        // TODO: test tradingSession
     }
 
     /**

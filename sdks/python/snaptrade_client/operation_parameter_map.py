@@ -645,6 +645,9 @@ operation_parameter_map = {
                 'name': 'symbol'
             },
             {
+                'name': 'trading_session'
+            },
+            {
                 'name': 'price'
             },
             {

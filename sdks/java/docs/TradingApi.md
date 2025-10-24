@@ -851,6 +851,7 @@ public class Example {
     String userSecret = "userSecret_example";
     UUID universalSymbolId = UUID.randomUUID(); // Unique identifier for the symbol within SnapTrade. This is the ID used to reference the symbol in SnapTrade API calls.
     String symbol = "symbol_example"; // The security's trading ticker symbol. If 'symbol' is provided, then 'universal_symbol_id' must be 'null'.
+    TradingSession tradingSession = TradingSession.fromValue("REGULAR");
     Double price = 3.4D; // The limit price for `Limit` and `StopLimit` orders.
     Double stop = 3.4D; // The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
     Double units = 3.4D; // For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
@@ -861,6 +862,7 @@ public class Example {
               .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
+              .tradingSession(tradingSession)
               .price(price)
               .stop(stop)
               .units(units)
@@ -904,6 +906,7 @@ public class Example {
               .placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
               .universalSymbolId(universalSymbolId)
               .symbol(symbol)
+              .tradingSession(tradingSession)
               .price(price)
               .stop(stop)
               .units(units)

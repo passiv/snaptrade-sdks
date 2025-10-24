@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to **NullableString** | The security&#39;s trading ticker symbol. If &#39;symbol&#39; is provided, then &#39;universal_symbol_id&#39; must be &#39;null&#39;. | [optional] 
 **OrderType** | [**OrderTypeStrict**](OrderTypeStrict.md) |  | 
 **TimeInForce** | [**TimeInForceStrict**](TimeInForceStrict.md) |  | 
+**TradingSession** | Pointer to [**TradingSession**](TradingSession.md) |  | [optional] [default to TRADINGSESSION_REGULAR]
 **Price** | Pointer to **NullableFloat32** | The limit price for &#x60;Limit&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Stop** | Pointer to **NullableFloat32** | The price at which a stop order is triggered for &#x60;Stop&#x60; and &#x60;StopLimit&#x60; orders. | [optional] 
 **Units** | Pointer to **NullableFloat32** | For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be &#x60;null&#x60; if &#x60;notional_value&#x60; is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract &#x3D; 100 shares). | [optional] 
@@ -183,6 +184,31 @@ and a boolean to check if the value has been set.
 
 SetTimeInForce sets TimeInForce field to given value.
 
+
+### GetTradingSession
+
+`func (o *ManualTradeFormWithOptions) GetTradingSession() TradingSession`
+
+GetTradingSession returns the TradingSession field if non-nil, zero value otherwise.
+
+### GetTradingSessionOk
+
+`func (o *ManualTradeFormWithOptions) GetTradingSessionOk() (*TradingSession, bool)`
+
+GetTradingSessionOk returns a tuple with the TradingSession field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTradingSession
+
+`func (o *ManualTradeFormWithOptions) SetTradingSession(v TradingSession)`
+
+SetTradingSession sets TradingSession field to given value.
+
+### HasTradingSession
+
+`func (o *ManualTradeFormWithOptions) HasTradingSession() bool`
+
+HasTradingSession returns a boolean if a field has been set.
 
 ### GetPrice
 

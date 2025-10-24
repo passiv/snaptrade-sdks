@@ -55,6 +55,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingInstrument;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
+import com.konfigthis.client.model.TradingSession;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 
@@ -1918,6 +1919,7 @@ public class TradingApiGenerated {
         final String userSecret;
         UUID universalSymbolId;
         String symbol;
+        TradingSession tradingSession;
         Double price;
         Double stop;
         Double units;
@@ -1949,6 +1951,16 @@ public class TradingApiGenerated {
          */
         public TradingApi.PlaceForceOrderRequestBuilder symbol(String symbol) {
             this.symbol = symbol;
+            return (TradingApi.PlaceForceOrderRequestBuilder) this;
+        }
+        
+        /**
+         * Set tradingSession
+         * @param tradingSession  (optional, default to REGULAR)
+         * @return TradingApi.PlaceForceOrderRequestBuilder
+         */
+        public TradingApi.PlaceForceOrderRequestBuilder tradingSession(TradingSession tradingSession) {
+            this.tradingSession = tradingSession;
             return (TradingApi.PlaceForceOrderRequestBuilder) this;
         }
         
@@ -2039,6 +2051,7 @@ public class TradingApiGenerated {
             manualTradeFormWithOptions.symbol(this.symbol);
             manualTradeFormWithOptions.orderType(this.orderType);
             manualTradeFormWithOptions.timeInForce(this.timeInForce);
+            manualTradeFormWithOptions.tradingSession(this.tradingSession);
             manualTradeFormWithOptions.price(this.price);
             manualTradeFormWithOptions.stop(this.stop);
             manualTradeFormWithOptions.units(this.units);

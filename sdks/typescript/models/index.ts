@@ -127,6 +127,7 @@ export * from './take-profit';
 export * from './time-in-force-strict';
 export * from './trading-instrument';
 export * from './trading-search-cryptocurrency-pair-instruments200-response';
+export * from './trading-session';
 export * from './transactions-status';
 export * from './usexchange';
 export * from './underlying-symbol';

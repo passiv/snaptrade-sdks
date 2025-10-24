@@ -4408,6 +4408,8 @@ components:
           $ref: "#/components/schemas/OrderTypeStrict"
         time_in_force:
           $ref: "#/components/schemas/TimeInForceStrict"
+        trading_session:
+          $ref: "#/components/schemas/TradingSession"
         price:
           description: The limit price for `Limit` and `StopLimit` orders.
           type: number
@@ -4588,6 +4590,17 @@ components:
         - GTC
         - IOC
       example: Day
+    TradingSession:
+      description: >
+        The trading session for the order. This field indicates which market session the order will be placed in. This is only available for certain brokerages. Defaults to REGULAR. Here are the supported values:
+          - `REGULAR` - Regular trading hours.
+          - `EXTENDED` - Extended trading hours.
+      type: string
+      enum:
+        - REGULAR
+        - EXTENDED
+      example: REGULAR
+      default: REGULAR
     MlegPriceEffectStrict:
       type: string
       description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders

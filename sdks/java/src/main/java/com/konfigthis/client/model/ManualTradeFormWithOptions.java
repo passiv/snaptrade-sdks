@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import com.konfigthis.client.model.ActionStrictWithOptions;
 import com.konfigthis.client.model.OrderTypeStrict;
 import com.konfigthis.client.model.TimeInForceStrict;
+import com.konfigthis.client.model.TradingSession;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -78,6 +79,10 @@ public class ManualTradeFormWithOptions {
   public static final String SERIALIZED_NAME_TIME_IN_FORCE = "time_in_force";
   @SerializedName(SERIALIZED_NAME_TIME_IN_FORCE)
   private TimeInForceStrict timeInForce;
+
+  public static final String SERIALIZED_NAME_TRADING_SESSION = "trading_session";
+  @SerializedName(SERIALIZED_NAME_TRADING_SESSION)
+  private TradingSession tradingSession = TradingSession.REGULAR;
 
   public static final String SERIALIZED_NAME_PRICE = "price";
   @SerializedName(SERIALIZED_NAME_PRICE)
@@ -269,6 +274,35 @@ public class ManualTradeFormWithOptions {
     
     
     this.timeInForce = timeInForce;
+  }
+
+
+  public ManualTradeFormWithOptions tradingSession(TradingSession tradingSession) {
+    
+    
+    
+    
+    this.tradingSession = tradingSession;
+    return this;
+  }
+
+   /**
+   * Get tradingSession
+   * @return tradingSession
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public TradingSession getTradingSession() {
+    return tradingSession;
+  }
+
+
+  public void setTradingSession(TradingSession tradingSession) {
+    
+    
+    
+    this.tradingSession = tradingSession;
   }
 
 
@@ -466,6 +500,7 @@ public class ManualTradeFormWithOptions {
         Objects.equals(this.symbol, manualTradeFormWithOptions.symbol) &&
         Objects.equals(this.orderType, manualTradeFormWithOptions.orderType) &&
         Objects.equals(this.timeInForce, manualTradeFormWithOptions.timeInForce) &&
+        Objects.equals(this.tradingSession, manualTradeFormWithOptions.tradingSession) &&
         Objects.equals(this.price, manualTradeFormWithOptions.price) &&
         Objects.equals(this.stop, manualTradeFormWithOptions.stop) &&
         Objects.equals(this.units, manualTradeFormWithOptions.units) &&
@@ -479,7 +514,7 @@ public class ManualTradeFormWithOptions {
 
   @Override
   public int hashCode() {
-    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, price, stop, units, notionalValue, additionalProperties);
+    return Objects.hash(accountId, action, universalSymbolId, symbol, orderType, timeInForce, tradingSession, price, stop, units, notionalValue, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -499,6 +534,7 @@ public class ManualTradeFormWithOptions {
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    orderType: ").append(toIndentedString(orderType)).append("\n");
     sb.append("    timeInForce: ").append(toIndentedString(timeInForce)).append("\n");
+    sb.append("    tradingSession: ").append(toIndentedString(tradingSession)).append("\n");
     sb.append("    price: ").append(toIndentedString(price)).append("\n");
     sb.append("    stop: ").append(toIndentedString(stop)).append("\n");
     sb.append("    units: ").append(toIndentedString(units)).append("\n");
@@ -532,6 +568,7 @@ public class ManualTradeFormWithOptions {
     openapiFields.add("symbol");
     openapiFields.add("order_type");
     openapiFields.add("time_in_force");
+    openapiFields.add("trading_session");
     openapiFields.add("price");
     openapiFields.add("stop");
     openapiFields.add("units");

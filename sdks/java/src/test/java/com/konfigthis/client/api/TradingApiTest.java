@@ -45,6 +45,7 @@ import com.konfigthis.client.model.TakeProfit;
 import com.konfigthis.client.model.TimeInForceStrict;
 import com.konfigthis.client.model.TradingInstrument;
 import com.konfigthis.client.model.TradingSearchCryptocurrencyPairInstruments200Response;
+import com.konfigthis.client.model.TradingSession;
 import java.util.UUID;
 import com.konfigthis.client.model.ValidatedTradeBody;
 import org.junit.jupiter.api.Disabled;
@@ -250,6 +251,7 @@ public class TradingApiTest {
         String userSecret = null;
         UUID universalSymbolId = null;
         String symbol = null;
+        TradingSession tradingSession = null;
         Double price = null;
         Double stop = null;
         Double units = null;
@@ -257,6 +259,7 @@ public class TradingApiTest {
         AccountOrderRecord response = api.placeForceOrder(accountId, action, orderType, timeInForce, userId, userSecret)
                 .universalSymbolId(universalSymbolId)
                 .symbol(symbol)
+                .tradingSession(tradingSession)
                 .price(price)
                 .stop(stop)
                 .units(units)

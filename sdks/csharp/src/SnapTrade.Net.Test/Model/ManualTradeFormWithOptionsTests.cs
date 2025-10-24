@@ -106,6 +106,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'TimeInForce'
         }
         /// <summary>
+        /// Test the property 'TradingSession'
+        /// </summary>
+        [Fact]
+        public void TradingSessionTest()
+        {
+            // TODO unit test for the property 'TradingSession'
+        }
+        /// <summary>
         /// Test the property 'Price'
         /// </summary>
         [Fact]

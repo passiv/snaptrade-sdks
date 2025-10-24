@@ -167,6 +167,7 @@ from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict
 from snaptrade_client.model.trade_id import TradeID
 from snaptrade_client.model.trading_instrument import TradingInstrument
+from snaptrade_client.model.trading_session import TradingSession
 from snaptrade_client.model.transactions_status import TransactionsStatus
 from snaptrade_client.model.us_exchange import USExchange
 from snaptrade_client.model.underlying_symbol import UnderlyingSymbol
