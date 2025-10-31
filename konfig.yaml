@@ -106,6 +106,10 @@ portal:
       get: true
     /accounts/{accountId}/orders/details:
       post: true
+    /accounts/{accountId}/orders/v2:
+      get: true
+    /accounts/{accountId}/recentOrders/v2:
+      get: true
   hideOperations:
     /activities:
       get: true
@@ -144,6 +148,10 @@ portal:
     /accounts/{accountId}/returnRates:
       get: true
     /authorizations/{authorizationId}/returnRates:
+      get: true
+    /accounts/{accountId}/orders/v2:
+      get: true
+    /accounts/{accountId}/recentOrders/v2:
       get: true
   hideSecurity:
     - name: PartnerSignature
