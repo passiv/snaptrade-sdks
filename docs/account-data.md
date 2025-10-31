@@ -44,6 +44,29 @@ Activities record the transaction history for the account. Each activity documen
 - Activities only contain transactions that resulted in a change of position to the account, no pending or cancelled orders
 - Often has years of history for the account, sometimes the entire account history since inception
 
+SnapTrade classifies common transactions under the predefined types, with extra focus on what we consider the most important types (buys, sells, contributions, dividends, withdrawals, etc). When we encounter a transaction with a type that doesn't fit into one of our common types, we will return the type that the brokerage uses to identify it. 
+We usually recommend you try not to individually handle every type beyond the most common ones, and instead rely on the other fields: amount, units, price, symbol, option_symbol, etc.
+If amount is positive it represents gaining cash, if amount is negative it represents spending cash. Same with units, so a BUY for instance would have positive units and negative amount, a sell would be negative units positive amount.
+
+Here are some of the most popular types:
+
+BUY - Asset bought.
+SELL - Asset sold.
+DIVIDEND - Dividend payout.
+CONTRIBUTION - Cash contribution.
+WITHDRAWAL - Cash withdrawal.
+REI - Dividend reinvestment.
+STOCK_DIVIDEND - A type of dividend where a company distributes shares instead of cash
+INTEREST - Interest deposited into the account.
+FEE - Fee withdrawn from the account.
+TAX - A tax related fee.
+OPTIONEXPIRATION - Option expiration event.
+OPTIONASSIGNMENT - Option assignment event.
+OPTIONEXERCISE - Option exercise event.
+TRANSFER - Transfer of assets from one account to another.
+SPLIT - A stock share split.
+
+
 ## Caching
 
 Responses to the Account Data APIs are always cached. We have a daily sync process that refreshes all account data for all connections at least once every 24 hours. You can listen to the [`ACCOUNT_HOLDING_UPDATED`](https://www.notion.so/Webhooks-298cb05cc76943ccbb94d21cfb8137b1?pvs=21) webhook if you want to react to SnapTrade having new account data. If you want to refresh accounts on demand, you can call the `manual refresh` endpoint: :api[Connections_refreshBrokerageAuthorization]. Note that this endpoint may incur a cost.
