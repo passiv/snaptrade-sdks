@@ -1250,10 +1250,12 @@ paths:
             - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
             - `INTEREST` - Interest deposited into the account.
             - `FEE` - Fee withdrawn from the account.
+            - `TAX`` - A tax related fee.
             - `OPTIONEXPIRATION` - Option expiration event.
             - `OPTIONASSIGNMENT` - Option assignment event.
             - `OPTIONEXERCISE` - Option exercise event.
-            - `TRANSFER` - Transfer of assets from one account to another
+            - `TRANSFER` - Transfer of assets from one account to another.
+            - `SPLIT` - A stock share split.
         explode: true
         in: query
         name: type
@@ -3935,8 +3937,25 @@ components:
           $ref: '#/components/schemas/AccountOrderRecord_child_brokerage_order_ids'
       type: object
     AccountOrderRecordStatus:
-      description: Indicates the status of an order. SnapTrade does a best effort
-        to map brokerage statuses to statuses in this enum.
+      description: |
+        Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
+        Possible values include:
+          - NONE
+          - PENDING
+          - ACCEPTED
+          - FAILED
+          - REJECTED
+          - CANCELED
+          - PARTIAL_CANCELED
+          - CANCEL_PENDING
+          - EXECUTED
+          - PARTIAL
+          - REPLACE_PENDING
+          - REPLACED
+          - EXPIRED
+          - QUEUED
+          - TRIGGERED
+          - ACTIVATED
       enum:
       - NONE
       - PENDING
@@ -7441,11 +7460,15 @@ components:
               - `CONTRIBUTION` - Cash contribution.
               - `WITHDRAWAL` - Cash withdrawal.
               - `REI` - Dividend reinvestment.
+              - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
-              - `OPTIONEXPIRATION` - Option expiration event. `option_symbol` contains the related option contract info.
-              - `OPTIONASSIGNMENT` - Option assignment event. `option_symbol` contains the related option contract info.
-              - `OPTIONEXERCISE` - Option exercise event. `option_symbol` contains the related option contract info.
+              - `TAX`` - A tax related fee.
+              - `OPTIONEXPIRATION` - Option expiration event.
+              - `OPTIONASSIGNMENT` - Option assignment event.
+              - `OPTIONEXERCISE` - Option exercise event.
+              - `TRANSFER` - Transfer of assets from one account to another.
+              - `SPLIT` - A stock share split.
           example: BUY
           type: string
           x-konfig-original-example: BUY
