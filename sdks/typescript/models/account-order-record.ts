@@ -32,7 +32,7 @@ export interface AccountOrderRecord {
      */
     'brokerage_order_id'?: string;
     /**
-     * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
+     * Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum. Possible values include:   - NONE   - PENDING   - ACCEPTED   - FAILED   - REJECTED   - CANCELED   - PARTIAL_CANCELED   - CANCEL_PENDING   - EXECUTED   - PARTIAL   - REPLACE_PENDING   - REPLACED   - EXPIRED   - QUEUED   - TRIGGERED   - ACTIVATED 
      * @type {AccountOrderRecordStatus}
      * @memberof AccountOrderRecord
      */
