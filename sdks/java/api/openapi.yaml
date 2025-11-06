@@ -39,6 +39,9 @@ tags:
 - description: "Retrieve basic information for API use, such as supported brokerages,\
     \ exchanges, currencies, etc."
   name: Reference Data
+- description: Endpoints that are experimental and may have breaking changes in the
+    future. Use with caution.
+  name: Experimental endpoints
 paths:
   /:
     get:
@@ -2528,6 +2531,150 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--snapTrade-partners
       x-accepts: application/json
+  /accounts/{accountId}/orders/v2:
+    get:
+      description: |
+        Returns a list of recent orders in the specified account.
+
+        The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      operationId: AccountInformation_getUserAccountOrdersV2
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: defaults value is set to "all"
+        explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        style: form
+      - description: Number of days in the past to fetch the most recent orders. Defaults
+          to the last 30 days if no value is passed in.
+        explode: true
+        in: query
+        name: days
+        required: false
+        schema:
+          example: 30
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrdersV2Response'
+          description: OK
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: List account orders v2
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2
+      x-accepts: application/json
+  /accounts/{accountId}/recentOrders/v2:
+    get:
+      description: |
+        A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+        Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+      operationId: AccountInformation_getUserAccountRecentOrdersV2
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: Defaults to true. Indicates if request should fetch only executed
+          orders. Set to false to retrieve non executed orders as well
+        explode: true
+        in: query
+        name: only_executed
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrdersV2Response'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: "List account recent orders (V2, last 24 hours only)"
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2
+      x-accepts: application/json
   /accounts/{accountId}/symbols:
     post:
       description: |
@@ -4143,6 +4290,345 @@ components:
       x-konfig-properties:
         child_brokerage_order_ids:
           nullable: true
+    AccountOrdersV2Response:
+      additionalProperties: true
+      description: Contains a standardized list of account orders in the V2 format.
+      example:
+        orders:
+        - time_executed: 2024-08-05T00:05:57.409Z
+          time_in_force: DAY
+          execution_price: 12.34
+          stop_price: 12.5
+          time_placed: 2024-07-30T22:51:49.746Z
+          legs:
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: null
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: null
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_type: MARKET
+          limit_price: 12.34
+          quote_currency: USD
+          status: null
+        - time_executed: 2024-08-05T00:05:57.409Z
+          time_in_force: DAY
+          execution_price: 12.34
+          stop_price: 12.5
+          time_placed: 2024-07-30T22:51:49.746Z
+          legs:
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: null
+          - execution_price: 12.34
+            leg_id: leg_id
+            action: action
+            total_quantity: "10"
+            instrument:
+              figi_code: BBG000B9XRY4
+              symbol: AAPL
+              asset_type: EQUITY
+              description: Apple Inc.
+              exchange_mic_code: XNAS
+            filled_quantity: "9"
+            canceled_quantity: "1"
+            status: null
+          brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+          order_type: MARKET
+          limit_price: 12.34
+          quote_currency: USD
+          status: null
+      properties:
+        orders:
+          description: List of orders returned by the endpoint.
+          items:
+            $ref: '#/components/schemas/AccountOrderRecordV2'
+          type: array
+      required:
+      - orders
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    AccountOrderRecordV2:
+      additionalProperties: true
+      description: Describes a single order in the standardized V2 format.
+      example:
+        time_executed: 2024-08-05T00:05:57.409Z
+        time_in_force: DAY
+        execution_price: 12.34
+        stop_price: 12.5
+        time_placed: 2024-07-30T22:51:49.746Z
+        legs:
+        - execution_price: 12.34
+          leg_id: leg_id
+          action: action
+          total_quantity: "10"
+          instrument:
+            figi_code: BBG000B9XRY4
+            symbol: AAPL
+            asset_type: EQUITY
+            description: Apple Inc.
+            exchange_mic_code: XNAS
+          filled_quantity: "9"
+          canceled_quantity: "1"
+          status: null
+        - execution_price: 12.34
+          leg_id: leg_id
+          action: action
+          total_quantity: "10"
+          instrument:
+            figi_code: BBG000B9XRY4
+            symbol: AAPL
+            asset_type: EQUITY
+            description: Apple Inc.
+            exchange_mic_code: XNAS
+          filled_quantity: "9"
+          canceled_quantity: "1"
+          status: null
+        brokerage_order_id: 66a033fa-da74-4fcf-b527-feefdec9257e
+        order_type: MARKET
+        limit_price: 12.34
+        quote_currency: USD
+        status: null
+      properties:
+        brokerage_order_id:
+          description: Order ID returned by brokerage. This is the unique identifier
+            for the order in the brokerage system.
+          example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          type: string
+          x-konfig-original-example: 66a033fa-da74-4fcf-b527-feefdec9257e
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageOrderID
+        status:
+          $ref: '#/components/schemas/AccountOrderRecordStatus'
+        order_type:
+          description: |
+            The type of order placed.
+              - `MARKET`
+              - `LIMIT`
+              - `STOP`
+              - `STOP_LIMIT`
+          example: MARKET
+          nullable: true
+          type: string
+          x-konfig-original-example: MARKET
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_type
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
+              - `DAY` - Day. The order is valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+              - `MOO` - Market On Open. The order is to be executed at the day's opening price.
+              - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.
+          example: DAY
+          type: string
+          x-konfig-original-example: DAY
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_in_force
+        time_placed:
+          description: The time the order was placed. This is the time the order was
+            submitted to the brokerage.
+          example: 2024-07-30T22:51:49.746Z
+          format: date-time
+          type: string
+          x-konfig-original-example: 2024-07-30T22:51:49.746Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_placed
+        time_executed:
+          description: The time the order was executed in the brokerage system. This
+            value is not always available from the brokerage.
+          example: 2024-08-05T00:05:57.409Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-08-05T00:05:57.409Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_executed
+        quote_currency:
+          description: Quote currency code for the order.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency
+        execution_price:
+          description: The price at which the order was executed.
+          example: 12.34
+          nullable: true
+          type: number
+          x-konfig-original-example: 12.34
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price
+        limit_price:
+          description: The limit price is maximum price one is willing to pay for
+            a buy order or the minimum price one is willing to accept for a sell order.
+            Should only apply to `Limit` and `StopLimit` orders.
+          example: 12.34
+          nullable: true
+          type: number
+          x-konfig-original-example: 12.34
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price
+        stop_price:
+          description: The stop price is the price at which a stop order is triggered.
+            Should only apply to `Stop` and `StopLimit` orders.
+          example: 12.5
+          nullable: true
+          type: number
+          x-konfig-original-example: 12.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price
+        legs:
+          description: List of legs that make up the order.
+          items:
+            $ref: '#/components/schemas/AccountOrderRecordLeg'
+          type: array
+      type: object
+    AccountOrderRecordLeg:
+      additionalProperties: true
+      description: Describes an individual leg that makes up an order in the V2 format.
+      example:
+        execution_price: 12.34
+        leg_id: leg_id
+        action: action
+        total_quantity: "10"
+        instrument:
+          figi_code: BBG000B9XRY4
+          symbol: AAPL
+          asset_type: EQUITY
+          description: Apple Inc.
+          exchange_mic_code: XNAS
+        filled_quantity: "9"
+        canceled_quantity: "1"
+        status: null
+      properties:
+        leg_id:
+          description: "Brokerage order identifier for this leg, if available."
+          nullable: true
+          type: string
+        instrument:
+          $ref: '#/components/schemas/AccountOrderRecordLegInstrument'
+        action:
+          description: |
+            The action describes the intent or side of a trade.
+              - BUY
+              - SELL
+              - BUY_COVER
+              - SELL_SHORT
+              - BUY_TO_OPEN
+              - BUY_TO_CLOSE
+              - SELL_TO_OPEN
+              - SELL_TO_CLOSE
+          type: string
+        execution_price:
+          description: "Execution price for this leg, if available."
+          example: 12.34
+          nullable: true
+          type: number
+          x-konfig-original-example: 12.34
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price
+        total_quantity:
+          description: The total number of shares or contracts associated with this
+            leg. Can be a decimal number for fractional shares.
+          example: "10"
+          nullable: true
+          type: string
+          x-konfig-original-example: "10"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-total_quantity
+        canceled_quantity:
+          description: The number of shares or contracts that have been canceled for
+            this leg.
+          example: "1"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-canceled_quantity
+        filled_quantity:
+          description: The number of shares or contracts that have been filled for
+            this leg.
+          example: "9"
+          nullable: true
+          type: string
+          x-konfig-original-example: "9"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-filled_quantity
+        status:
+          $ref: '#/components/schemas/AccountOrderRecordStatusV2Nullable'
+      type: object
+      x-konfig-properties:
+        status:
+          nullable: true
+    AccountOrderRecordLegInstrument:
+      additionalProperties: true
+      description: Instrument metadata for an order leg.
+      example:
+        figi_code: BBG000B9XRY4
+        symbol: AAPL
+        asset_type: EQUITY
+        description: Apple Inc.
+        exchange_mic_code: XNAS
+      properties:
+        symbol:
+          description: The symbol or ticker for the security.
+          example: AAPL
+          type: string
+          x-konfig-original-example: AAPL
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-symbol
+        description:
+          description: Human-readable description of the security.
+          example: Apple Inc.
+          type: string
+          x-konfig-original-example: Apple Inc.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-description
+        asset_type:
+          description: |
+            Type of instrument for the leg.
+            - EQUITY
+            - OPTION
+            - CRYPTO
+          example: EQUITY
+          type: string
+          x-konfig-original-example: EQUITY
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-asset_type
+        exchange_mic_code:
+          description: Market Identifier Code (MIC) for the exchange on which the
+            instrument trades.
+          example: XNAS
+          type: string
+          x-konfig-original-example: XNAS
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-exchange_mic_code
+        figi_code:
+          description: Financial Instrument Global Identifier (FIGI) if available.
+          example: BBG000B9XRY4
+          nullable: true
+          type: string
+          x-konfig-original-example: BBG000B9XRY4
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-figi_code
+      type: object
     AccountOrderRecordStatus:
       description: |
         Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
@@ -4184,6 +4670,21 @@ components:
       - ACTIVATED
       - PENDING_RISK_REVIEW
       - CONTINGENT_ORDER
+      type: string
+    AccountOrderRecordStatusV2:
+      description: Indicates the status of an order. SnapTrade does a best effort
+        to map brokerage statuses to statuses in this enum.
+      enum:
+      - PENDING
+      - REJECTED
+      - CANCELED
+      - CANCEL_PENDING
+      - PARTIAL_CANCELED
+      - EXECUTED
+      - PARTIALLY_EXECUTED
+      - REPLACED
+      - REPLACE_PENDING
+      - EXPIRED
       type: string
     OptionsPosition:
       additionalProperties: true
@@ -7290,6 +7791,18 @@ components:
           - SELL_OPEN
           - SELL_CLOSE
       type: string
+    ActionStrictV2:
+      description: |
+        The action describes the intent or side of a trade.
+          - BUY
+          - SELL
+          - BUY_COVER
+          - SELL_SHORT
+          - BUY_TO_OPEN
+          - BUY_TO_CLOSE
+          - SELL_TO_OPEN
+          - SELL_TO_CLOSE
+      type: string
     Units:
       description: Number of shares for the order. This can be a decimal for fractional
         orders. Must be `null` if `notional_value` is provided.
@@ -8832,6 +9345,10 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
+    konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema:
+      example: 30
+      type: number
+      x-do-not-generate: true
     konfig-generated-schema-paths--brokerages-slug-instruments-get-parameters-0-schema:
       example: QUESTRADE
       type: string
@@ -8989,6 +9506,74 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecord-properties-expiry_date:
       example: 2024-08-05T00:05:57.409Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_type:
+      example: MARKET
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_in_force:
+      example: DAY
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_placed:
+      example: 2024-07-30T22:51:49.746Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-time_executed:
+      example: 2024-08-05T00:05:57.409Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-quote_currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-execution_price:
+      example: 12.34
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-limit_price:
+      example: 12.34
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-stop_price:
+      example: 12.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-execution_price:
+      example: 12.34
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-total_quantity:
+      example: "10"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-canceled_quantity:
+      example: "1"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLeg-properties-filled_quantity:
+      example: "9"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-symbol:
+      example: AAPL
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-description:
+      example: Apple Inc.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-asset_type:
+      example: EQUITY
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-exchange_mic_code:
+      example: XNAS
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-figi_code:
+      example: BBG000B9XRY4
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-price:
@@ -11424,6 +12009,62 @@ components:
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter: []
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        state:
+          enum:
+          - all
+          - open
+          - executed
+          type: string
+        days:
+          example: 30
+          format: int32
+          minimum: 1
+          type: integer
+          x-konfig-original-example: 30
+          x-konfig-generated-schema: konfig-generated-schema-paths--accounts-accountId-orders-v2-get-parameters-3-schema
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - state
+      - days
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        only_executed:
+          type: boolean
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - only_executed
+      - accountId
     konfig-generated-schema-single-parameter-schema-post--accounts-accountId-symbols:
       additionalProperties: true
       properties:
@@ -11758,6 +12399,22 @@ components:
           x-konfig-original-example: "12345678"
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-ChildBrokerageOrderIDs-properties-stop_loss_order_id
       type: object
+    AccountOrderRecordStatusV2Nullable:
+      description: Indicates the status of an order. SnapTrade does a best effort
+        to map brokerage statuses to statuses in this enum.
+      enum:
+      - PENDING
+      - REJECTED
+      - CANCELED
+      - CANCEL_PENDING
+      - PARTIAL_CANCELED
+      - EXECUTED
+      - PARTIALLY_EXECUTED
+      - REPLACED
+      - REPLACE_PENDING
+      - EXPIRED
+      nullable: true
+      type: string
     CurrencyNullable:
       additionalProperties: true
       description: Describes a currency object.
