@@ -16,6 +16,7 @@ export * from './api/account-information-api';
 export * from './api/api-status-api';
 export * from './api/authentication-api';
 export * from './api/connections-api';
+export * from './api/experimental-endpoints-api';
 export * from './api/options-api';
 export * from './api/reference-data-api';
 export * from './api/trading-api';

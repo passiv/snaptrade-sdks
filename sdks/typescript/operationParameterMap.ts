@@ -336,6 +336,41 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/v2-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'state'
+            },
+            {
+                name: 'days'
+            },
+        ]
+    },
+    '/accounts/{accountId}/recentOrders/v2-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'only_executed'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionsChain-GET': {
         parameters: [
             {

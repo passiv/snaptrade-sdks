@@ -36,6 +36,8 @@ tags:
     description: Reach out directly to SnapTrade to enable webhooks in order to be notified when certain events occur.
   - name: Options
     description: Endpoints to search for options prices and chains as well as place options trades if supported.
+  - name: Experimental endpoints
+    description: Endpoints that are experimental and may have breaking changes in the future. Use with caution.
 paths:
   /:
     get:
@@ -651,6 +653,64 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/orders/v2:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List account orders v2
+      operationId: AccountInformation_getUserAccountOrdersV2
+      description: |
+        Returns a list of recent orders in the specified account.
+
+        The V2 order response format will include all legs of each order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.
+
+        If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: state
+          description: defaults value is set to "all"
+          schema:
+            type: string
+            enum:
+              - all
+              - open
+              - executed
+        - in: query
+          name: days
+          description: Number of days in the past to fetch the most recent orders. Defaults to the last 30 days if no value is passed in.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            example: 30
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrdersV2Response"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   /accounts/{accountId}/recentOrders:
     get:
       tags:
@@ -691,6 +751,58 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RecentOrdersResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/recentOrders/v2:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List account recent orders (V2, last 24 hours only)
+      operationId: AccountInformation_getUserAccountRecentOrdersV2
+      description: |
+        A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account using the V2 order format.
+        This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders.
+        Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days.
+        By default only returns executed orders, but that can be changed by setting *only_executed* to false.
+        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: only_executed
+          description: Defaults to true. Indicates if request should fetch only executed orders. Set to false to retrieve non executed orders as well
+          schema:
+            type: boolean
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountOrdersV2Response"
         "403":
           description: Forbidden
           content:
@@ -2998,6 +3110,148 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ChildBrokerageOrderIDs"
+    AccountOrdersV2Response:
+      description: Contains a standardized list of account orders in the V2 format.
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders returned by the endpoint.
+          items:
+            $ref: "#/components/schemas/AccountOrderRecordV2"
+      required:
+        - orders
+    AccountOrderRecordV2:
+      description: Describes a single order in the standardized V2 format.
+      type: object
+      properties:
+        brokerage_order_id:
+          $ref: "#/components/schemas/BrokerageOrderID"
+        status:
+          $ref: "#/components/schemas/AccountOrderRecordStatus"
+        order_type:
+          description: |
+            The type of order placed.
+              - `MARKET`
+              - `LIMIT`
+              - `STOP`
+              - `STOP_LIMIT`
+          nullable: true
+          type: string
+          example: MARKET
+        time_in_force:
+          description: |
+            The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. We try our best to map brokerage time in force values to the following. When mapping fails, we will return the brokerage's time in force value.
+              - `DAY` - Day. The order is valid only for the trading day on which it is placed.
+              - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.
+              - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.
+              - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled.
+              - `GTD` - Good Til Date. The order is valid until the specified date.
+              - `MOO` - Market On Open. The order is to be executed at the day's opening price.
+              - `EHP` - Extended Hours P.M. The order is to be placed during extended hour trading, after markets close.
+          type: string
+          example: DAY
+        time_placed:
+          description: The time the order was placed. This is the time the order was submitted to the brokerage.
+          type: string
+          format: date-time
+          example: 2024-07-30T22:51:49.746270Z
+        time_executed:
+          description: The time the order was executed in the brokerage system. This value is not always available from the brokerage.
+          nullable: true
+          type: string
+          format: date-time
+          example: 2024-08-05T00:05:57.409000Z
+        quote_currency:
+          description: Quote currency code for the order.
+          type: string
+          example: USD
+        execution_price:
+          description: The price at which the order was executed.
+          nullable: true
+          type: number
+          example: 12.34
+        limit_price:
+          description: The limit price is maximum price one is willing to pay for a buy order or the minimum price one is willing to accept for a sell order. Should only apply to `Limit` and `StopLimit` orders.
+          nullable: true
+          type: number
+          example: 12.34
+        stop_price:
+          description: The stop price is the price at which a stop order is triggered. Should only apply to `Stop` and `StopLimit` orders.
+          nullable: true
+          type: number
+          example: 12.50
+        legs:
+          type: array
+          description: List of legs that make up the order.
+          items:
+            $ref: "#/components/schemas/AccountOrderRecordLeg"
+    AccountOrderRecordLeg:
+      description: Describes an individual leg that makes up an order in the V2 format.
+      type: object
+      properties:
+        leg_id:
+          description: Brokerage order identifier for this leg, if available.
+          nullable: true
+          type: string
+        instrument:
+          $ref: "#/components/schemas/AccountOrderRecordLegInstrument"
+        action:
+          $ref: "#/components/schemas/ActionStrictV2"
+        execution_price:
+          description: Execution price for this leg, if available.
+          nullable: true
+          type: number
+          example: 12.34
+        total_quantity:
+          description: The total number of shares or contracts associated with this leg. Can be a decimal number for fractional shares.
+          nullable: true
+          type: string
+          example: "10"
+        canceled_quantity:
+          description: The number of shares or contracts that have been canceled for this leg.
+          nullable: true
+          type: string
+          example: "1"
+        filled_quantity:
+          description: The number of shares or contracts that have been filled for this leg.
+          nullable: true
+          type: string
+          example: "9"
+        status:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/AccountOrderRecordStatusV2"
+
+    AccountOrderRecordLegInstrument:
+      description: Instrument metadata for an order leg.
+      type: object
+      properties:
+        symbol:
+          description: The symbol or ticker for the security.
+          type: string
+          example: AAPL
+        description:
+          description: Human-readable description of the security.
+          type: string
+          example: Apple Inc.
+        asset_type:
+          description: |
+            Type of instrument for the leg.
+            - EQUITY
+            - OPTION
+            - CRYPTO
+          type: string
+          example: EQUITY
+        exchange_mic_code:
+          description: Market Identifier Code (MIC) for the exchange on which the instrument trades.
+          type: string
+          example: XNAS
+        figi_code:
+          description: Financial Instrument Global Identifier (FIGI) if available.
+          nullable: true
+          type: string
+          example: BBG000B9XRY4
     AccountOrderRecordStatus:
       description: |
         Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
@@ -3040,6 +3294,21 @@ components:
         - ACTIVATED
         - PENDING_RISK_REVIEW
         - CONTINGENT_ORDER
+
+    AccountOrderRecordStatusV2:
+      description: Indicates the status of an order. SnapTrade does a best effort to map brokerage statuses to statuses in this enum.
+      type: string
+      enum:
+        - PENDING
+        - REJECTED
+        - CANCELED
+        - CANCEL_PENDING
+        - PARTIAL_CANCELED
+        - EXECUTED
+        - PARTIALLY_EXECUTED
+        - REPLACED
+        - REPLACE_PENDING
+        - EXPIRED
 
     OptionsPosition:
       description: Describes a single option position in an account.
@@ -4691,6 +4960,18 @@ components:
           - BUY_CLOSE
           - SELL_OPEN
           - SELL_CLOSE
+    ActionStrictV2:
+      type: string
+      description: >
+        The action describes the intent or side of a trade.
+          - BUY
+          - SELL
+          - BUY_COVER
+          - SELL_SHORT
+          - BUY_TO_OPEN
+          - BUY_TO_CLOSE
+          - SELL_TO_OPEN
+          - SELL_TO_CLOSE
     Units:
       description: Number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided.
       type: number

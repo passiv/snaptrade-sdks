@@ -92,6 +92,8 @@ Class | Method | HTTP request | Description
 *ConnectionsApi* | [**RemoveBrokerageAuthorization**](docs/ConnectionsApi.md#removebrokerageauthorization) | **Delete** /authorizations/{authorizationId} | Delete connection
 *ConnectionsApi* | [**ReturnRates**](docs/ConnectionsApi.md#returnrates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 *ConnectionsApi* | [**SessionEvents**](docs/ConnectionsApi.md#sessionevents) | **Get** /sessionEvents | Get all session events for a user
+*ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
+*ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
@@ -133,11 +135,16 @@ Class | Method | HTTP request | Description
  - [AccountInformationGetUserAccountOrderDetailRequest](docs/AccountInformationGetUserAccountOrderDetailRequest.md)
  - [AccountOrderRecord](docs/AccountOrderRecord.md)
  - [AccountOrderRecordChildBrokerageOrderIds](docs/AccountOrderRecordChildBrokerageOrderIds.md)
+ - [AccountOrderRecordLeg](docs/AccountOrderRecordLeg.md)
+ - [AccountOrderRecordLegInstrument](docs/AccountOrderRecordLegInstrument.md)
  - [AccountOrderRecordOptionSymbol](docs/AccountOrderRecordOptionSymbol.md)
  - [AccountOrderRecordQuoteCurrency](docs/AccountOrderRecordQuoteCurrency.md)
  - [AccountOrderRecordQuoteUniversalSymbol](docs/AccountOrderRecordQuoteUniversalSymbol.md)
  - [AccountOrderRecordStatus](docs/AccountOrderRecordStatus.md)
+ - [AccountOrderRecordStatusV2](docs/AccountOrderRecordStatusV2.md)
  - [AccountOrderRecordUniversalSymbol](docs/AccountOrderRecordUniversalSymbol.md)
+ - [AccountOrderRecordV2](docs/AccountOrderRecordV2.md)
+ - [AccountOrdersV2Response](docs/AccountOrdersV2Response.md)
  - [AccountSimple](docs/AccountSimple.md)
  - [AccountSyncStatus](docs/AccountSyncStatus.md)
  - [AccountUniversalActivity](docs/AccountUniversalActivity.md)

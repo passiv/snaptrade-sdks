@@ -24,11 +24,16 @@ require 'snaptrade/models/account_holdings_account'
 require 'snaptrade/models/account_information_get_user_account_order_detail_request'
 require 'snaptrade/models/account_order_record'
 require 'snaptrade/models/account_order_record_child_brokerage_order_ids'
+require 'snaptrade/models/account_order_record_leg'
+require 'snaptrade/models/account_order_record_leg_instrument'
 require 'snaptrade/models/account_order_record_option_symbol'
 require 'snaptrade/models/account_order_record_quote_currency'
 require 'snaptrade/models/account_order_record_quote_universal_symbol'
 require 'snaptrade/models/account_order_record_status'
+require 'snaptrade/models/account_order_record_status_v2'
 require 'snaptrade/models/account_order_record_universal_symbol'
+require 'snaptrade/models/account_order_record_v2'
+require 'snaptrade/models/account_orders_v2_response'
 require 'snaptrade/models/account_simple'
 require 'snaptrade/models/account_status'
 require 'snaptrade/models/account_sync_status'
@@ -178,6 +183,7 @@ require 'snaptrade/api/account_information_api'
 require 'snaptrade/api/api_status_api'
 require 'snaptrade/api/authentication_api'
 require 'snaptrade/api/connections_api'
+require 'snaptrade/api/experimental_endpoints_api'
 require 'snaptrade/api/options_api'
 require 'snaptrade/api/reference_data_api'
 require 'snaptrade/api/trading_api'
@@ -251,6 +257,7 @@ module SnapTrade
     attr_reader :api_status
     attr_reader :authentication
     attr_reader :connections
+    attr_reader :experimental_endpoints
     attr_reader :options
     attr_reader :reference_data
     attr_reader :trading
@@ -262,6 +269,7 @@ module SnapTrade
       @api_status = SnapTrade::APIStatusApi.new(@api_client)
       @authentication = SnapTrade::AuthenticationApi.new(@api_client)
       @connections = SnapTrade::ConnectionsApi.new(@api_client)
+      @experimental_endpoints = SnapTrade::ExperimentalEndpointsApi.new(@api_client)
       @options = SnapTrade::OptionsApi.new(@api_client)
       @reference_data = SnapTrade::ReferenceDataApi.new(@api_client)
       @trading = SnapTrade::TradingApi.new(@api_client)

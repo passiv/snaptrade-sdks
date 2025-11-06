@@ -47,6 +47,8 @@ class PathValues(str, enum.Enum):
     ACCOUNTS_ACCOUNT_ID_TRADING_CANCEL = "/accounts/{accountId}/trading/cancel"
     ACCOUNTS_ACCOUNT_ID_TRADING_REPLACE = "/accounts/{accountId}/trading/replace"
     SNAP_TRADE_PARTNERS = "/snapTrade/partners"
+    ACCOUNTS_ACCOUNT_ID_ORDERS_V2 = "/accounts/{accountId}/orders/v2"
+    ACCOUNTS_ACCOUNT_ID_RECENT_ORDERS_V2 = "/accounts/{accountId}/recentOrders/v2"
     ACCOUNTS_ACCOUNT_ID_SYMBOLS = "/accounts/{accountId}/symbols"
     BROKERAGES = "/brokerages"
     BROKERAGES_SLUG_INSTRUMENTS = "/brokerages/{slug}/instruments"
