@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Symbol** | Pointer to **string** | Cryptocurrency pair instrument symbol | [optional] 
 **Base** | **string** | The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 **Quote** | **string** | The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
+**Increment** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -92,6 +93,41 @@ and a boolean to check if the value has been set.
 SetQuote sets Quote field to given value.
 
 
+### GetIncrement
+
+`func (o *CryptocurrencyPair) GetIncrement() string`
+
+GetIncrement returns the Increment field if non-nil, zero value otherwise.
+
+### GetIncrementOk
+
+`func (o *CryptocurrencyPair) GetIncrementOk() (*string, bool)`
+
+GetIncrementOk returns a tuple with the Increment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIncrement
+
+`func (o *CryptocurrencyPair) SetIncrement(v string)`
+
+SetIncrement sets Increment field to given value.
+
+### HasIncrement
+
+`func (o *CryptocurrencyPair) HasIncrement() bool`
+
+HasIncrement returns a boolean if a field has been set.
+
+### SetIncrementNil
+
+`func (o *CryptocurrencyPair) SetIncrementNil(b bool)`
+
+ SetIncrementNil sets the value for Increment to be an explicit nil
+
+### UnsetIncrement
+`func (o *CryptocurrencyPair) UnsetIncrement()`
+
+UnsetIncrement ensures that no value is present for Increment, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

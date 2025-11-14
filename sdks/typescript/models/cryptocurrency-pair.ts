@@ -37,5 +37,11 @@ export interface CryptocurrencyPair {
      * @memberof CryptocurrencyPair
      */
     'quote': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CryptocurrencyPair
+     */
+    'increment'?: string | null;
 }
 

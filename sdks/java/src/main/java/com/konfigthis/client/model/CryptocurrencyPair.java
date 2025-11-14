@@ -22,6 +22,7 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,6 +62,10 @@ public class CryptocurrencyPair {
   public static final String SERIALIZED_NAME_QUOTE = "quote";
   @SerializedName(SERIALIZED_NAME_QUOTE)
   private String quote;
+
+  public static final String SERIALIZED_NAME_INCREMENT = "increment";
+  @SerializedName(SERIALIZED_NAME_INCREMENT)
+  private String increment;
 
   public CryptocurrencyPair() {
   }
@@ -151,6 +156,35 @@ public class CryptocurrencyPair {
     this.quote = quote;
   }
 
+
+  public CryptocurrencyPair increment(String increment) {
+    
+    
+    
+    
+    this.increment = increment;
+    return this;
+  }
+
+   /**
+   * The precision or smallest price incremental step available for this cryptocurrency pair 
+   * @return increment
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "0.001", value = "The precision or smallest price incremental step available for this cryptocurrency pair ")
+
+  public String getIncrement() {
+    return increment;
+  }
+
+
+  public void setIncrement(String increment) {
+    
+    
+    
+    this.increment = increment;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -208,13 +242,25 @@ public class CryptocurrencyPair {
     CryptocurrencyPair cryptocurrencyPair = (CryptocurrencyPair) o;
     return Objects.equals(this.symbol, cryptocurrencyPair.symbol) &&
         Objects.equals(this.base, cryptocurrencyPair.base) &&
-        Objects.equals(this.quote, cryptocurrencyPair.quote)&&
+        Objects.equals(this.quote, cryptocurrencyPair.quote) &&
+        Objects.equals(this.increment, cryptocurrencyPair.increment)&&
         Objects.equals(this.additionalProperties, cryptocurrencyPair.additionalProperties);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, base, quote, additionalProperties);
+    return Objects.hash(symbol, base, quote, increment, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -224,6 +270,7 @@ public class CryptocurrencyPair {
     sb.append("    symbol: ").append(toIndentedString(symbol)).append("\n");
     sb.append("    base: ").append(toIndentedString(base)).append("\n");
     sb.append("    quote: ").append(toIndentedString(quote)).append("\n");
+    sb.append("    increment: ").append(toIndentedString(increment)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -250,6 +297,7 @@ public class CryptocurrencyPair {
     openapiFields.add("symbol");
     openapiFields.add("base");
     openapiFields.add("quote");
+    openapiFields.add("increment");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -284,6 +332,9 @@ public class CryptocurrencyPair {
       }
       if (!jsonObj.get("quote").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `quote` to be a primitive type in the JSON string but got `%s`", jsonObj.get("quote").toString()));
+      }
+      if (!jsonObj.get("increment").isJsonNull() && (jsonObj.get("increment") != null && !jsonObj.get("increment").isJsonNull()) && !jsonObj.get("increment").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `increment` to be a primitive type in the JSON string but got `%s`", jsonObj.get("increment").toString()));
       }
   }
 

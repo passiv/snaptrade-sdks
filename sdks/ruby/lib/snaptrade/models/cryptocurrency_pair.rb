@@ -22,12 +22,15 @@ module SnapTrade
     # The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
     attr_accessor :quote
 
+    attr_accessor :increment
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'symbol' => :'symbol',
         :'base' => :'base',
-        :'quote' => :'quote'
+        :'quote' => :'quote',
+        :'increment' => :'increment'
       }
     end
 
@@ -41,13 +44,15 @@ module SnapTrade
       {
         :'symbol' => :'String',
         :'base' => :'String',
-        :'quote' => :'String'
+        :'quote' => :'String',
+        :'increment' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'increment'
       ])
     end
 
@@ -76,6 +81,10 @@ module SnapTrade
 
       if attributes.key?(:'quote')
         self.quote = attributes[:'quote']
+      end
+
+      if attributes.key?(:'increment')
+        self.increment = attributes[:'increment']
       end
     end
 
@@ -109,7 +118,8 @@ module SnapTrade
       self.class == o.class &&
           symbol == o.symbol &&
           base == o.base &&
-          quote == o.quote
+          quote == o.quote &&
+          increment == o.increment
     end
 
     # @see the `==` method
@@ -121,7 +131,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, base, quote].hash
+      [symbol, base, quote, increment].hash
     end
 
     # Builds the object from hash

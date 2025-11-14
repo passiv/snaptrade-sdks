@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Symbol** | **string** | Cryptocurrency pair instrument symbol | [optional] 
 **Base** | **string** | The base currency of a pair (e.g., \&quot;BTC\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
 **Quote** | **string** | The quote currency of a pair (e.g., \&quot;USD\&quot; in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.  | 
+**Increment** | **string** | The precision or smallest price incremental step available for this cryptocurrency pair  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
