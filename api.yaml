@@ -5037,6 +5037,11 @@ components:
         Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes.
       type: string
       example: USD
+    CryptocurrencyIncrement:
+      description: >
+        The precision or smallest price incremental step available for this cryptocurrency pair
+      type: string
+      example: "0.001"
     CryptocurrencyPairSymbol:
       description: Cryptocurrency pair instrument symbol
       type: string
@@ -5052,6 +5057,10 @@ components:
           $ref: "#/components/schemas/CryptocurrencyBaseSymbol"
         quote:
           $ref: "#/components/schemas/CryptocurrencyQuoteSymbol"
+        increment:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/CryptocurrencyIncrement"
     CryptocurrencyPairQuote:
       type: object
       required: ["bid", "ask"]
