@@ -15,6 +15,7 @@ import typing
 from enum import Enum
 from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
+from snaptrade_client.type.cryptocurrency_increment_nullable import CryptocurrencyIncrementNullable
 
 class RequiredCryptocurrencyPair(TypedDict):
     # The base currency of a pair (e.g., \"BTC\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
@@ -27,6 +28,8 @@ class RequiredCryptocurrencyPair(TypedDict):
 class OptionalCryptocurrencyPair(TypedDict, total=False):
     # Cryptocurrency pair instrument symbol
     symbol: str
+
+    increment: CryptocurrencyIncrementNullable
 
 class CryptocurrencyPair(RequiredCryptocurrencyPair, OptionalCryptocurrencyPair):
     pass

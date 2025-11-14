@@ -7885,6 +7885,13 @@ components:
       type: string
       x-konfig-original-example: USD
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyQuoteSymbol
+    CryptocurrencyIncrement:
+      description: |
+        The precision or smallest price incremental step available for this cryptocurrency pair
+      example: "0.001"
+      type: string
+      x-konfig-original-example: "0.001"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyIncrement
     CryptocurrencyPairSymbol:
       description: Cryptocurrency pair instrument symbol
       example: BTC-USD
@@ -7897,6 +7904,7 @@ components:
       example:
         symbol: BTC-USD
         quote: USD
+        increment: "0.001"
         base: BTC
       properties:
         symbol:
@@ -7919,10 +7927,21 @@ components:
           type: string
           x-konfig-original-example: USD
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyQuoteSymbol
+        increment:
+          description: |
+            The precision or smallest price incremental step available for this cryptocurrency pair
+          example: "0.001"
+          nullable: true
+          type: string
+          x-konfig-original-example: "0.001"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyIncrement
       required:
       - base
       - quote
       type: object
+      x-konfig-properties:
+        increment:
+          nullable: true
     CryptocurrencyPairQuote:
       additionalProperties: true
       example:
@@ -10458,6 +10477,10 @@ components:
       example: USD
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-CryptocurrencyIncrement:
+      example: "0.001"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-CryptocurrencyPairSymbol:
       example: BTC-USD
       type: string
@@ -12519,6 +12542,14 @@ components:
       type: string
       x-konfig-original-example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-UniversalSymbolID
+    CryptocurrencyIncrementNullable:
+      description: |
+        The precision or smallest price incremental step available for this cryptocurrency pair
+      example: "0.001"
+      nullable: true
+      type: string
+      x-konfig-original-example: "0.001"
+      x-konfig-generated-schema: konfig-generated-schema-components-schemas-CryptocurrencyIncrement
     SymbolNullable:
       additionalProperties: true
       description: Uniquely describes a single security + exchange combination across
@@ -12703,9 +12734,11 @@ components:
         items:
         - symbol: BTC-USD
           quote: USD
+          increment: "0.001"
           base: BTC
         - symbol: BTC-USD
           quote: USD
+          increment: "0.001"
           base: BTC
       properties:
         items:

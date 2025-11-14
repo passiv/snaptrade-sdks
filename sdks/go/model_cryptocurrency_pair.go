@@ -23,6 +23,7 @@ type CryptocurrencyPair struct {
 	Base string `json:"base"`
 	// The quote currency of a pair (e.g., \"USD\" in BTC/USD). Either fiat or cryptocurrency symbol, for fiat use ISO-4217 codes. 
 	Quote string `json:"quote"`
+	Increment NullableString `json:"increment,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -127,6 +128,48 @@ func (o *CryptocurrencyPair) SetQuote(v string) {
 	o.Quote = v
 }
 
+// GetIncrement returns the Increment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CryptocurrencyPair) GetIncrement() string {
+	if o == nil || isNil(o.Increment.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Increment.Get()
+}
+
+// GetIncrementOk returns a tuple with the Increment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CryptocurrencyPair) GetIncrementOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.Increment.Get(), o.Increment.IsSet()
+}
+
+// HasIncrement returns a boolean if a field has been set.
+func (o *CryptocurrencyPair) HasIncrement() bool {
+	if o != nil && o.Increment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIncrement gets a reference to the given NullableString and assigns it to the Increment field.
+func (o *CryptocurrencyPair) SetIncrement(v string) {
+	o.Increment.Set(&v)
+}
+// SetIncrementNil sets the value for Increment to be an explicit nil
+func (o *CryptocurrencyPair) SetIncrementNil() {
+	o.Increment.Set(nil)
+}
+
+// UnsetIncrement ensures that no value is present for Increment, not even an explicit nil
+func (o *CryptocurrencyPair) UnsetIncrement() {
+	o.Increment.Unset()
+}
+
 func (o CryptocurrencyPair) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -137,6 +180,9 @@ func (o CryptocurrencyPair) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["quote"] = o.Quote
+	}
+	if o.Increment.IsSet() {
+		toSerialize["increment"] = o.Increment.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -159,6 +205,7 @@ func (o *CryptocurrencyPair) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "symbol")
 		delete(additionalProperties, "base")
 		delete(additionalProperties, "quote")
+		delete(additionalProperties, "increment")
 		o.AdditionalProperties = additionalProperties
 	}
 
