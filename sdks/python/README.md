@@ -822,6 +822,7 @@ login_snap_trade_user_response = snaptrade.authentication.login_snap_trade_user(
     reconnect="8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connection_type="read",
     show_close_button=True,
+    dark_mode=True,
     connection_portal_version="v4",
 )
 ```
@@ -855,6 +856,10 @@ Determines connection permissions (default: read) - `read`: Data access only. - 
 ##### show_close_button: `bool`<a id="show_close_button-bool"></a>
 
 Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+
+##### dark_mode: `bool`<a id="dark_mode-bool"></a>
+
+Enable dark mode for the connection portal. Defaults to false.
 
 ##### connection_portal_version: `str`<a id="connection_portal_version-str"></a>
 

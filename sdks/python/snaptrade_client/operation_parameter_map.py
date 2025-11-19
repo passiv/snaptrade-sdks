@@ -221,6 +221,9 @@ operation_parameter_map = {
                 'name': 'showCloseButton'
             },
             {
+                'name': 'darkMode'
+            },
+            {
                 'name': 'connectionPortalVersion'
             },
         ]

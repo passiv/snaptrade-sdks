@@ -31,6 +31,9 @@ module SnapTrade
     # Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     attr_accessor :show_close_button
 
+    # Enable dark mode for the connection portal. Defaults to false.
+    attr_accessor :dark_mode
+
     # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     attr_accessor :connection_portal_version
 
@@ -43,6 +46,7 @@ module SnapTrade
         :'reconnect' => :'reconnect',
         :'connection_type' => :'connectionType',
         :'show_close_button' => :'showCloseButton',
+        :'dark_mode' => :'darkMode',
         :'connection_portal_version' => :'connectionPortalVersion'
       }
     end
@@ -61,6 +65,7 @@ module SnapTrade
         :'reconnect' => :'String',
         :'connection_type' => :'ConnectionType',
         :'show_close_button' => :'Boolean',
+        :'dark_mode' => :'Boolean',
         :'connection_portal_version' => :'ConnectionPortalVersion'
       }
     end
@@ -112,6 +117,10 @@ module SnapTrade
         self.show_close_button = attributes[:'show_close_button']
       end
 
+      if attributes.key?(:'dark_mode')
+        self.dark_mode = attributes[:'dark_mode']
+      end
+
       if attributes.key?(:'connection_portal_version')
         self.connection_portal_version = attributes[:'connection_portal_version']
       else
@@ -143,6 +152,7 @@ module SnapTrade
           reconnect == o.reconnect &&
           connection_type == o.connection_type &&
           show_close_button == o.show_close_button &&
+          dark_mode == o.dark_mode &&
           connection_portal_version == o.connection_portal_version
     end
 
@@ -155,7 +165,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, connection_portal_version].hash
+      [broker, immediate_redirect, custom_redirect, reconnect, connection_type, show_close_button, dark_mode, connection_portal_version].hash
     end
 
     # Builds the object from hash

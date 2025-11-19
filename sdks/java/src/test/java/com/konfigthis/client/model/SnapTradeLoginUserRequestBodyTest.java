@@ -87,6 +87,14 @@ public class SnapTradeLoginUserRequestBodyTest {
     }
 
     /**
+     * Test the property 'darkMode'
+     */
+    @Test
+    public void darkModeTest() {
+        // TODO: test darkMode
+    }
+
+    /**
      * Test the property 'connectionPortalVersion'
      */
     @Test

@@ -260,6 +260,7 @@ class BaseApi(api_client.Api):
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> api_client.MappedArgs:
@@ -278,6 +279,8 @@ class BaseApi(api_client.Api):
             _body["connectionType"] = connection_type
         if show_close_button is not None:
             _body["showCloseButton"] = show_close_button
+        if dark_mode is not None:
+            _body["darkMode"] = dark_mode
         if connection_portal_version is not None:
             _body["connectionPortalVersion"] = connection_portal_version
         args.body = body if body is not None else _body
@@ -531,6 +534,7 @@ class LoginSnapTradeUser(BaseApi):
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
@@ -550,6 +554,7 @@ class LoginSnapTradeUser(BaseApi):
             reconnect=reconnect,
             connection_type=connection_type,
             show_close_button=show_close_button,
+            dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
         )
         return await self._alogin_snap_trade_user_oapg(
@@ -569,6 +574,7 @@ class LoginSnapTradeUser(BaseApi):
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -587,6 +593,7 @@ class LoginSnapTradeUser(BaseApi):
             reconnect=reconnect,
             connection_type=connection_type,
             show_close_button=show_close_button,
+            dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(
@@ -608,6 +615,7 @@ class ApiForpost(BaseApi):
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
         **kwargs,
@@ -627,6 +635,7 @@ class ApiForpost(BaseApi):
             reconnect=reconnect,
             connection_type=connection_type,
             show_close_button=show_close_button,
+            dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
         )
         return await self._alogin_snap_trade_user_oapg(
@@ -646,6 +655,7 @@ class ApiForpost(BaseApi):
         reconnect: typing.Optional[str] = None,
         connection_type: typing.Optional[str] = None,
         show_close_button: typing.Optional[bool] = None,
+        dark_mode: typing.Optional[bool] = None,
         connection_portal_version: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
     ) -> typing.Union[
@@ -664,6 +674,7 @@ class ApiForpost(BaseApi):
             reconnect=reconnect,
             connection_type=connection_type,
             show_close_button=show_close_button,
+            dark_mode=dark_mode,
             connection_portal_version=connection_portal_version,
         )
         return self._login_snap_trade_user_oapg(

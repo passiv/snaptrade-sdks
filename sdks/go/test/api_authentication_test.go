@@ -63,6 +63,7 @@ func Test_snaptrade_AuthenticationApiService(t *testing.T) {
         snapTradeLoginUserRequestBody.SetReconnect("8b5f262d-4bb9-365d-888a-202bd3b15fa1")
         snapTradeLoginUserRequestBody.SetConnectionType("READ")
         snapTradeLoginUserRequestBody.SetShowCloseButton(true)
+        snapTradeLoginUserRequestBody.SetDarkMode(true)
         snapTradeLoginUserRequestBody.SetConnectionPortalVersion("V4")
         
         request := client.AuthenticationApi.LoginSnapTradeUser(

@@ -54,6 +54,12 @@ export interface SnapTradeLoginUserRequestBody {
      */
     'showCloseButton'?: boolean;
     /**
+     * Enable dark mode for the connection portal. Defaults to false.
+     * @type {boolean}
+     * @memberof SnapTradeLoginUserRequestBody
+     */
+    'darkMode'?: boolean;
+    /**
      * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
      * @type {string}
      * @memberof SnapTradeLoginUserRequestBody

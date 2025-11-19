@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Reconnect** | **string** | The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information. | [optional] 
 **ConnectionType** | **string** | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  | [optional] [default to ConnectionTypeEnum.Read]
 **ShowCloseButton** | **bool** | Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. | [optional] 
+**DarkMode** | **bool** | Enable dark mode for the connection portal. Defaults to false. | [optional] 
 **ConnectionPortalVersion** | **string** | Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to ConnectionPortalVersionEnum.V4]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

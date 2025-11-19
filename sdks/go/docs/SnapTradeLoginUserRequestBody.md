@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Reconnect** | Pointer to **string** | The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information. | [optional] 
 **ConnectionType** | Pointer to **string** | Determines connection permissions (default: read) - &#x60;read&#x60;: Data access only. - &#x60;trade&#x60;: Data and trading access. - &#x60;trade-if-available&#x60;: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically.  | [optional] [default to "read"]
 **ShowCloseButton** | Pointer to **bool** | Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true. | [optional] 
+**DarkMode** | Pointer to **bool** | Enable dark mode for the connection portal. Defaults to false. | [optional] 
 **ConnectionPortalVersion** | Pointer to **string** | Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. | [optional] [default to "v4"]
 
 ## Methods
@@ -180,6 +181,31 @@ SetShowCloseButton sets ShowCloseButton field to given value.
 `func (o *SnapTradeLoginUserRequestBody) HasShowCloseButton() bool`
 
 HasShowCloseButton returns a boolean if a field has been set.
+
+### GetDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) GetDarkMode() bool`
+
+GetDarkMode returns the DarkMode field if non-nil, zero value otherwise.
+
+### GetDarkModeOk
+
+`func (o *SnapTradeLoginUserRequestBody) GetDarkModeOk() (*bool, bool)`
+
+GetDarkModeOk returns a tuple with the DarkMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) SetDarkMode(v bool)`
+
+SetDarkMode sets DarkMode field to given value.
+
+### HasDarkMode
+
+`func (o *SnapTradeLoginUserRequestBody) HasDarkMode() bool`
+
+HasDarkMode returns a boolean if a field has been set.
 
 ### GetConnectionPortalVersion
 

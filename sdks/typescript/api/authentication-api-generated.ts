@@ -356,6 +356,7 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
                 reconnect: requestParameters.reconnect,
                 connectionType: requestParameters.connectionType,
                 showCloseButton: requestParameters.showCloseButton,
+                darkMode: requestParameters.darkMode,
                 connectionPortalVersion: requestParameters.connectionPortalVersion
             };
             const localVarAxiosArgs = await localVarAxiosParamCreator.loginSnapTradeUser(requestParameters.userId, requestParameters.userSecret, snapTradeLoginUserRequestBody, options);

@@ -38,6 +38,9 @@ class OptionalSnapTradeLoginUserRequestBody(TypedDict, total=False):
     # Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
     showCloseButton: bool
 
+    # Enable dark mode for the connection portal. Defaults to false.
+    darkMode: bool
+
     # Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     connectionPortalVersion: str
 

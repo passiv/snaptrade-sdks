@@ -871,6 +871,7 @@ Object result = client
         .reconnect(reconnect)
         .connectionType(connectionType)
         .showCloseButton(showCloseButton)
+        .darkMode(darkMode)
         .connectionPortalVersion(connectionPortalVersion)
         .execute();
 ```
@@ -904,6 +905,10 @@ Determines connection permissions (default: read) - `read`: Data access only. - 
 ##### showCloseButton: `Boolean`<a id="showclosebutton-boolean"></a>
 
 Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+
+##### darkMode: `Boolean`<a id="darkmode-boolean"></a>
+
+Enable dark mode for the connection portal. Defaults to false.
 
 ##### connectionPortalVersion: `String`<a id="connectionportalversion-string"></a>
 

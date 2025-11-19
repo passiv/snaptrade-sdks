@@ -227,6 +227,7 @@ namespace Example
             var reconnect = "8b5f262d-4bb9-365d-888a-202bd3b15fa1"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
             var connectionType = SnapTradeLoginUserRequestBody.ConnectionTypeEnum.Read; // Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
             var showCloseButton = true; // Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+            var darkMode = true; // Enable dark mode for the connection portal. Defaults to false.
             var connectionPortalVersion = SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.V4; // Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
             
             var snapTradeLoginUserRequestBody = new SnapTradeLoginUserRequestBody(
@@ -236,6 +237,7 @@ namespace Example
                 reconnect,
                 connectionType,
                 showCloseButton,
+                darkMode,
                 connectionPortalVersion
             );
             
