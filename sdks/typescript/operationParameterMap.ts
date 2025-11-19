@@ -227,6 +227,9 @@ export const operationParameterMap: Record<string, Entry> = {
                 name: 'showCloseButton'
             },
             {
+                name: 'darkMode'
+            },
+            {
                 name: 'connectionPortalVersion'
             },
         ]

@@ -123,6 +123,10 @@ public class SnapTradeLoginUserRequestBody {
   @SerializedName(SERIALIZED_NAME_SHOW_CLOSE_BUTTON)
   private Boolean showCloseButton;
 
+  public static final String SERIALIZED_NAME_DARK_MODE = "darkMode";
+  @SerializedName(SERIALIZED_NAME_DARK_MODE)
+  private Boolean darkMode;
+
   /**
    * Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
    */
@@ -353,6 +357,35 @@ public class SnapTradeLoginUserRequestBody {
   }
 
 
+  public SnapTradeLoginUserRequestBody darkMode(Boolean darkMode) {
+    
+    
+    
+    
+    this.darkMode = darkMode;
+    return this;
+  }
+
+   /**
+   * Enable dark mode for the connection portal. Defaults to false.
+   * @return darkMode
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Enable dark mode for the connection portal. Defaults to false.")
+
+  public Boolean getDarkMode() {
+    return darkMode;
+  }
+
+
+  public void setDarkMode(Boolean darkMode) {
+    
+    
+    
+    this.darkMode = darkMode;
+  }
+
+
   public SnapTradeLoginUserRequestBody connectionPortalVersion(ConnectionPortalVersionEnum connectionPortalVersion) {
     
     
@@ -442,13 +475,14 @@ public class SnapTradeLoginUserRequestBody {
         Objects.equals(this.reconnect, snapTradeLoginUserRequestBody.reconnect) &&
         Objects.equals(this.connectionType, snapTradeLoginUserRequestBody.connectionType) &&
         Objects.equals(this.showCloseButton, snapTradeLoginUserRequestBody.showCloseButton) &&
+        Objects.equals(this.darkMode, snapTradeLoginUserRequestBody.darkMode) &&
         Objects.equals(this.connectionPortalVersion, snapTradeLoginUserRequestBody.connectionPortalVersion)&&
         Objects.equals(this.additionalProperties, snapTradeLoginUserRequestBody.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, showCloseButton, connectionPortalVersion, additionalProperties);
+    return Objects.hash(broker, immediateRedirect, customRedirect, reconnect, connectionType, showCloseButton, darkMode, connectionPortalVersion, additionalProperties);
   }
 
   @Override
@@ -461,6 +495,7 @@ public class SnapTradeLoginUserRequestBody {
     sb.append("    reconnect: ").append(toIndentedString(reconnect)).append("\n");
     sb.append("    connectionType: ").append(toIndentedString(connectionType)).append("\n");
     sb.append("    showCloseButton: ").append(toIndentedString(showCloseButton)).append("\n");
+    sb.append("    darkMode: ").append(toIndentedString(darkMode)).append("\n");
     sb.append("    connectionPortalVersion: ").append(toIndentedString(connectionPortalVersion)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -491,6 +526,7 @@ public class SnapTradeLoginUserRequestBody {
     openapiFields.add("reconnect");
     openapiFields.add("connectionType");
     openapiFields.add("showCloseButton");
+    openapiFields.add("darkMode");
     openapiFields.add("connectionPortalVersion");
 
     // a set of required properties/fields (JSON key names)

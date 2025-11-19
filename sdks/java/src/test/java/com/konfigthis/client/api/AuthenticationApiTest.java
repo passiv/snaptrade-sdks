@@ -90,6 +90,7 @@ public class AuthenticationApiTest {
         String reconnect = null;
         String connectionType = null;
         Boolean showCloseButton = null;
+        Boolean darkMode = null;
         String connectionPortalVersion = null;
         Object response = api.loginSnapTradeUser(userId, userSecret)
                 .broker(broker)
@@ -98,6 +99,7 @@ public class AuthenticationApiTest {
                 .reconnect(reconnect)
                 .connectionType(connectionType)
                 .showCloseButton(showCloseButton)
+                .darkMode(darkMode)
                 .connectionPortalVersion(connectionPortalVersion)
                 .execute();
         // TODO: test validations

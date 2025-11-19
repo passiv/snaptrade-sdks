@@ -5607,6 +5607,7 @@ components:
         immediateRedirect: true
         showCloseButton: true
         customRedirect: https://snaptrade.com
+        darkMode: true
         broker: ALPACA
         connectionType: read
       properties:
@@ -5666,6 +5667,12 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-showCloseButton
+        darkMode:
+          description: Enable dark mode for the connection portal. Defaults to false.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only
@@ -9489,6 +9496,10 @@ components:
       example: true
       type: boolean
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode:
+      example: true
+      type: boolean
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-connectionPortalVersion:
       example: v4
       type: string
@@ -10400,6 +10411,12 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-showCloseButton
+        darkMode:
+          description: Enable dark mode for the connection portal. Defaults to false.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-darkMode
         connectionPortalVersion:
           default: v4
           description: Sets the connection portal version to render. Currently only

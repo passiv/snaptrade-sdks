@@ -476,6 +476,7 @@ public class AuthenticationApiGenerated {
         String reconnect;
         String connectionType;
         Boolean showCloseButton;
+        Boolean darkMode;
         String connectionPortalVersion;
 
         public LoginSnapTradeUserRequestBuilderGenerated(String userId, String userSecret) {
@@ -544,6 +545,16 @@ public class AuthenticationApiGenerated {
         }
         
         /**
+         * Set darkMode
+         * @param darkMode Enable dark mode for the connection portal. Defaults to false. (optional)
+         * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
+         */
+        public AuthenticationApi.LoginSnapTradeUserRequestBuilder darkMode(Boolean darkMode) {
+            this.darkMode = darkMode;
+            return (AuthenticationApi.LoginSnapTradeUserRequestBuilder) this;
+        }
+        
+        /**
          * Set connectionPortalVersion
          * @param connectionPortalVersion Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4. (optional, default to v4)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
@@ -579,6 +590,7 @@ public class AuthenticationApiGenerated {
             if (this.connectionType != null)
             snapTradeLoginUserRequestBody.connectionType(SnapTradeLoginUserRequestBody.ConnectionTypeEnum.fromValue(this.connectionType));
             snapTradeLoginUserRequestBody.showCloseButton(this.showCloseButton);
+            snapTradeLoginUserRequestBody.darkMode(this.darkMode);
             if (this.connectionPortalVersion != null)
             snapTradeLoginUserRequestBody.connectionPortalVersion(SnapTradeLoginUserRequestBody.ConnectionPortalVersionEnum.fromValue(this.connectionPortalVersion));
             return snapTradeLoginUserRequestBody;

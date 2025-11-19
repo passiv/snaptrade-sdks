@@ -232,6 +232,7 @@ public class Example {
     String reconnect = "reconnect_example"; // The UUID of the brokerage connection to be reconnected. This parameter should be left empty unless you are reconnecting a disabled connection. See the [guide on fixing broken connections](/docs/fix-broken-connections) for more information.
     String connectionType = "read"; // Determines connection permissions (default: read) - `read`: Data access only. - `trade`: Data and trading access. - `trade-if-available`: Attempts to establish a trading connection if the brokerage supports it, otherwise falls back to read-only access automatically. 
     Boolean showCloseButton = true; // Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+    Boolean darkMode = true; // Enable dark mode for the connection portal. Defaults to false.
     String connectionPortalVersion = "v4"; // Sets the connection portal version to render. Currently only v4 is supported and is the default. All other versions are deprecated and will automatically be set to v4.
     try {
       Object result = client
@@ -243,6 +244,7 @@ public class Example {
               .reconnect(reconnect)
               .connectionType(connectionType)
               .showCloseButton(showCloseButton)
+              .darkMode(darkMode)
               .connectionPortalVersion(connectionPortalVersion)
               .execute();
     } catch (ApiException e) {
@@ -264,6 +266,7 @@ public class Example {
               .reconnect(reconnect)
               .connectionType(connectionType)
               .showCloseButton(showCloseButton)
+              .darkMode(darkMode)
               .connectionPortalVersion(connectionPortalVersion)
               .executeWithHttpInfo();
       System.out.println(response.getResponseBody());

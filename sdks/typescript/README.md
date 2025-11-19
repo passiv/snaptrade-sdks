@@ -825,6 +825,7 @@ const loginSnapTradeUserResponse =
     reconnect: "8b5f262d-4bb9-365d-888a-202bd3b15fa1",
     connectionType: "read",
     showCloseButton: true,
+    darkMode: true,
     connectionPortalVersion: "v4",
   });
 ```
@@ -858,6 +859,10 @@ Determines connection permissions (default: read) - `read`: Data access only. - 
 ##### showCloseButton: `boolean`<a id="showclosebutton-boolean"></a>
 
 Controls whether the close (X) button is displayed in the connection portal. When false, you control closing behavior from your app. Defaults to true.
+
+##### darkMode: `boolean`<a id="darkmode-boolean"></a>
+
+Enable dark mode for the connection portal. Defaults to false.
 
 ##### connectionPortalVersion: `string`<a id="connectionportalversion-string"></a>
 

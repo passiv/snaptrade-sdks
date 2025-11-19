@@ -106,6 +106,14 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'ShowCloseButton'
         }
         /// <summary>
+        /// Test the property 'DarkMode'
+        /// </summary>
+        [Fact]
+        public void DarkModeTest()
+        {
+            // TODO unit test for the property 'DarkMode'
+        }
+        /// <summary>
         /// Test the property 'ConnectionPortalVersion'
         /// </summary>
         [Fact]
