@@ -50,6 +50,9 @@ module SnapTrade
     # This field is deprecated.
     attr_accessor :cash_restrictions
 
+    # Indicates whether the account is a paper (simulated) trading account.
+    attr_accessor :is_paper
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +68,8 @@ module SnapTrade
         :'raw_type' => :'raw_type',
         :'meta' => :'meta',
         :'portfolio_group' => :'portfolio_group',
-        :'cash_restrictions' => :'cash_restrictions'
+        :'cash_restrictions' => :'cash_restrictions',
+        :'is_paper' => :'is_paper'
       }
     end
 
@@ -89,7 +93,8 @@ module SnapTrade
         :'raw_type' => :'String',
         :'meta' => :'Hash<String, Object>',
         :'portfolio_group' => :'String',
-        :'cash_restrictions' => :'Array<String>'
+        :'cash_restrictions' => :'Array<String>',
+        :'is_paper' => :'Boolean'
       }
     end
 
@@ -172,6 +177,10 @@ module SnapTrade
           self.cash_restrictions = value
         end
       end
+
+      if attributes.key?(:'is_paper')
+        self.is_paper = attributes[:'is_paper']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -206,6 +215,10 @@ module SnapTrade
         invalid_properties.push('invalid value for "balance", balance cannot be nil.')
       end
 
+      if @is_paper.nil?
+        invalid_properties.push('invalid value for "is_paper", is_paper cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -219,6 +232,7 @@ module SnapTrade
       return false if @created_date.nil?
       return false if @sync_status.nil?
       return false if @balance.nil?
+      return false if @is_paper.nil?
       true
     end
 
@@ -239,7 +253,8 @@ module SnapTrade
           raw_type == o.raw_type &&
           meta == o.meta &&
           portfolio_group == o.portfolio_group &&
-          cash_restrictions == o.cash_restrictions
+          cash_restrictions == o.cash_restrictions &&
+          is_paper == o.is_paper
     end
 
     # @see the `==` method
@@ -251,7 +266,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions].hash
+      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
     end
 
     # Builds the object from hash

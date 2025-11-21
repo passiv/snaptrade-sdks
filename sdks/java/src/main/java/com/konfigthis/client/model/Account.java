@@ -162,6 +162,10 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_CASH_RESTRICTIONS)
   private List<String> cashRestrictions = null;
 
+  public static final String SERIALIZED_NAME_IS_PAPER = "is_paper";
+  @SerializedName(SERIALIZED_NAME_IS_PAPER)
+  private Boolean isPaper;
+
   public Account() {
   }
 
@@ -563,6 +567,35 @@ public class Account {
     this.cashRestrictions = cashRestrictions;
   }
 
+
+  public Account isPaper(Boolean isPaper) {
+    
+    
+    
+    
+    this.isPaper = isPaper;
+    return this;
+  }
+
+   /**
+   * Indicates whether the account is a paper (simulated) trading account.
+   * @return isPaper
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(example = "false", required = true, value = "Indicates whether the account is a paper (simulated) trading account.")
+
+  public Boolean getIsPaper() {
+    return isPaper;
+  }
+
+
+  public void setIsPaper(Boolean isPaper) {
+    
+    
+    
+    this.isPaper = isPaper;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -630,7 +663,8 @@ public class Account {
         Objects.equals(this.rawType, account.rawType) &&
         Objects.equals(this.meta, account.meta) &&
         Objects.equals(this.portfolioGroup, account.portfolioGroup) &&
-        Objects.equals(this.cashRestrictions, account.cashRestrictions)&&
+        Objects.equals(this.cashRestrictions, account.cashRestrictions) &&
+        Objects.equals(this.isPaper, account.isPaper)&&
         Objects.equals(this.additionalProperties, account.additionalProperties);
   }
 
@@ -640,7 +674,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -667,6 +701,7 @@ public class Account {
     sb.append("    meta: ").append(toIndentedString(meta)).append("\n");
     sb.append("    portfolioGroup: ").append(toIndentedString(portfolioGroup)).append("\n");
     sb.append("    cashRestrictions: ").append(toIndentedString(cashRestrictions)).append("\n");
+    sb.append("    isPaper: ").append(toIndentedString(isPaper)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -703,6 +738,7 @@ public class Account {
     openapiFields.add("meta");
     openapiFields.add("portfolio_group");
     openapiFields.add("cash_restrictions");
+    openapiFields.add("is_paper");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -714,6 +750,7 @@ public class Account {
     openapiRequiredFields.add("created_date");
     openapiRequiredFields.add("sync_status");
     openapiRequiredFields.add("balance");
+    openapiRequiredFields.add("is_paper");
   }
 
  /**

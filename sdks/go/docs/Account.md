@@ -17,12 +17,13 @@ Name | Type | Description | Notes
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
+**IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 
 ## Methods
 
 ### NewAccount
 
-`func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, ) *Account`
+`func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, isPaper bool, ) *Account`
 
 NewAccount instantiates a new Account object
 This constructor will assign default values to properties that have it defined,
@@ -351,6 +352,26 @@ SetCashRestrictions sets CashRestrictions field to given value.
 `func (o *Account) HasCashRestrictions() bool`
 
 HasCashRestrictions returns a boolean if a field has been set.
+
+### GetIsPaper
+
+`func (o *Account) GetIsPaper() bool`
+
+GetIsPaper returns the IsPaper field if non-nil, zero value otherwise.
+
+### GetIsPaperOk
+
+`func (o *Account) GetIsPaperOk() (*bool, bool)`
+
+GetIsPaperOk returns a tuple with the IsPaper field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsPaper
+
+`func (o *Account) SetIsPaper(v bool)`
+
+SetIsPaper sets IsPaper field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
