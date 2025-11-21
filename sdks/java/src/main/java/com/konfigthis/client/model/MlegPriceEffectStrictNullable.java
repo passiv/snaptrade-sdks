@@ -24,7 +24,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 /**
- * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+ * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
  */
 @JsonAdapter(MlegPriceEffectStrictNullable.Adapter.class)public enum MlegPriceEffectStrictNullable {
   
