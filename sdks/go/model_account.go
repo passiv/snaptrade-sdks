@@ -45,6 +45,8 @@ type Account struct {
 	// This field is deprecated.
 	// Deprecated
 	CashRestrictions []string `json:"cash_restrictions,omitempty"`
+	// Indicates whether the account is a paper (simulated) trading account.
+	IsPaper bool `json:"is_paper"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -54,7 +56,7 @@ type _Account Account
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance) *Account {
+func NewAccount(id string, brokerageAuthorization string, name NullableString, number string, institutionName string, createdDate time.Time, syncStatus AccountSyncStatus, balance AccountBalance, isPaper bool) *Account {
 	this := Account{}
 	this.Id = id
 	this.BrokerageAuthorization = brokerageAuthorization
@@ -64,6 +66,7 @@ func NewAccount(id string, brokerageAuthorization string, name NullableString, n
 	this.CreatedDate = createdDate
 	this.SyncStatus = syncStatus
 	this.Balance = balance
+	this.IsPaper = isPaper
 	return &this
 }
 
@@ -458,6 +461,30 @@ func (o *Account) SetCashRestrictions(v []string) {
 	o.CashRestrictions = v
 }
 
+// GetIsPaper returns the IsPaper field value
+func (o *Account) GetIsPaper() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsPaper
+}
+
+// GetIsPaperOk returns a tuple with the IsPaper field value
+// and a boolean to check if the value has been set.
+func (o *Account) GetIsPaperOk() (*bool, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return &o.IsPaper, true
+}
+
+// SetIsPaper sets field value
+func (o *Account) SetIsPaper(v bool) {
+	o.IsPaper = v
+}
+
 func (o Account) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -499,6 +526,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if !isNil(o.CashRestrictions) {
 		toSerialize["cash_restrictions"] = o.CashRestrictions
 	}
+	if true {
+		toSerialize["is_paper"] = o.IsPaper
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -530,6 +560,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "meta")
 		delete(additionalProperties, "portfolio_group")
 		delete(additionalProperties, "cash_restrictions")
+		delete(additionalProperties, "is_paper")
 		o.AdditionalProperties = additionalProperties
 	}
 

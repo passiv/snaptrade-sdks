@@ -102,6 +102,12 @@ export interface Account {
      * @deprecated
      */
     'cash_restrictions'?: Array<string>;
+    /**
+     * Indicates whether the account is a paper (simulated) trading account.
+     * @type {boolean}
+     * @memberof Account
+     */
+    'is_paper': boolean;
 }
 
 type AccountStatusEnum = 'open' | 'closed' | 'archived' | 'unavailable'

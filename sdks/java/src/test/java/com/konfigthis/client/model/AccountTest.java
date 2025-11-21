@@ -151,4 +151,12 @@ public class AccountTest {
         // TODO: test cashRestrictions
     }
 
+    /**
+     * Test the property 'isPaper'
+     */
+    @Test
+    public void isPaperTest() {
+        // TODO: test isPaper
+    }
+
 }

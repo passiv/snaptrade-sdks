@@ -2832,6 +2832,7 @@ components:
         - created_date
         - sync_status
         - balance
+        - is_paper
       properties:
         id:
           description: Unique identifier for the connected brokerage account. This is the UUID used to reference the account in SnapTrade. This ID should not change for as long as the connection stays active. If the connection is deleted and re-added, a new account ID will be generated.
@@ -2889,6 +2890,10 @@ components:
           items:
             type: string
           example: []
+        is_paper:
+          type: boolean
+          description: Indicates whether the account is a paper (simulated) trading account.
+          example: false
     AccountSimple:
       description: A single account at a brokerage.
       type: object

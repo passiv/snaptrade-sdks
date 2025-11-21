@@ -43,6 +43,9 @@ class RequiredAccount(TypedDict):
 
     balance: AccountBalance
 
+    # Indicates whether the account is a paper (simulated) trading account.
+    is_paper: bool
+
 
 class OptionalAccount(TypedDict, total=False):
     # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.

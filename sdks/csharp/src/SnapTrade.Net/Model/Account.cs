@@ -96,7 +96,8 @@ namespace SnapTrade.Net.Model
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>)) : base()
+        /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -141,6 +142,7 @@ namespace SnapTrade.Net.Model
                 throw new ArgumentNullException("balance is a required property for Account and cannot be null");
             }
             this.Balance = balance;
+            this.IsPaper = isPaper;
             this.Status = status;
             this.RawType = rawType;
             this.Meta = meta;
@@ -235,6 +237,13 @@ namespace SnapTrade.Net.Model
         public List<string> CashRestrictions { get; set; }
 
         /// <summary>
+        /// Indicates whether the account is a paper (simulated) trading account.
+        /// </summary>
+        /// <value>Indicates whether the account is a paper (simulated) trading account.</value>
+        [DataMember(Name = "is_paper", IsRequired = true, EmitDefaultValue = true)]
+        public bool IsPaper { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -262,6 +271,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Meta: ").Append(Meta).Append("\n");
             sb.Append("  PortfolioGroup: ").Append(PortfolioGroup).Append("\n");
             sb.Append("  CashRestrictions: ").Append(CashRestrictions).Append("\n");
+            sb.Append("  IsPaper: ").Append(IsPaper).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -363,6 +373,10 @@ namespace SnapTrade.Net.Model
                     this.CashRestrictions != null &&
                     input.CashRestrictions != null &&
                     this.CashRestrictions.SequenceEqual(input.CashRestrictions)
+                ) && base.Equals(input) && 
+                (
+                    this.IsPaper == input.IsPaper ||
+                    this.IsPaper.Equals(input.IsPaper)
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -425,6 +439,7 @@ namespace SnapTrade.Net.Model
                 {
                     hashCode = (hashCode * 59) + this.CashRestrictions.GetHashCode();
                 }
+                hashCode = (hashCode * 59) + this.IsPaper.GetHashCode();
                 if (this.AdditionalProperties != null)
                 {
                     hashCode = (hashCode * 59) + this.AdditionalProperties.GetHashCode();

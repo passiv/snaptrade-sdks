@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Meta** | **Dictionary&lt;string, Object&gt;** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
 **PortfolioGroup** | **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
 **CashRestrictions** | **List&lt;string&gt;** | This field is deprecated. | [optional] 
+**IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
