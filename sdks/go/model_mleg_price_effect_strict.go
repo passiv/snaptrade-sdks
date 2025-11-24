@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// MlegPriceEffectStrict The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+// MlegPriceEffectStrict The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
 type MlegPriceEffectStrict string
 
 // List of MlegPriceEffectStrict

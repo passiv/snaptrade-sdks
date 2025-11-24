@@ -7742,7 +7742,8 @@ components:
       x-konfig-original-example: REGULAR
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-TradingSession
     MlegPriceEffectStrict:
-      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+      description: "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.\
+        \ Values are CREDIT, DEBIT, EVEN"
       enum:
       - CREDIT
       - DEBIT
@@ -12554,7 +12555,8 @@ components:
       x-konfig-generated-schema: konfig-generated-schema-components-schemas-Units
     NotionalValueNullable: {}
     MlegPriceEffectStrictNullable:
-      description: The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+      description: "The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders.\
+        \ Values are CREDIT, DEBIT, EVEN"
       enum:
       - CREDIT
       - DEBIT

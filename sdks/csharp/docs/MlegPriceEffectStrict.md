@@ -1,5 +1,5 @@
 # SnapTrade.Net.Model.MlegPriceEffectStrict
-The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
 
 ## Properties
 

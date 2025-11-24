@@ -12,7 +12,7 @@ import type * as buffer from "buffer"
 
 
 /**
- * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders
+ * The desired price_effect for LIMIT and STOP_LOSS_LIMIT orders. Values are CREDIT, DEBIT, EVEN
  * @export
  * @enum {string}
  */
