@@ -1,25 +1,60 @@
 # Trading with SnapTrade
 
-## To trade with SnapTrade:
-
-> 🚧 Soft Rate Limit
+> 🚧 **Soft Rate Limit**
 >
-> We recommend that you limit trade requests to 1 trade per second per account to maximize the chances that they are all executed without error.
+> We recommend limiting trade requests to **1 trade per second per account** to maximize execution success.
 
+## Setup
 
+### Create a Trading Connection
 
-1. Find the universal_symbol_id of the security you want to trade using :api[ReferenceData_symbolSearchUserAccount] with the users account  
-   This will lookup tradeable securities based on the account you want to place the trade in. You will need to use this id in step 2.
-2. Either:  
-   Use order impact to present the user with the information needed to confirm the trade, as well as check to make sure the trade is valid: :api[Trading_getOrderImpact] 
-   After getting impact, you use this endpoint to place the trade with the trade id: :api[Trading_placeOrder]  
-   OR
-   If you don't want to have any validation or impact check you can use this endpoint instead of impact/place: :api[Trading_placeForceOrder] 
+By default, connections are created with read-only permissions. To create a trading-enabled connection, set the `connectionType` body parameter to `trade` when calling :api[Authentication_loginSnapTradeUser].
 
-## Create a trading connection
+### Enable Trading for Existing Connections
 
-By default connections are created with read-only permissions. To create a trading-enabled connection set the `connectionType` body parameter to `trade` when calling the :api[Authentication_loginSnapTradeUser] endpoint. 
+To enable trading for an existing read-only connection, you'll need to ask the user to re-authorize access:
 
-## Enable trading for existing connections
+1. Set the `reconnect` body parameter to the ID of the existing connection
+2. Set `connectionType=trade` when calling :api[Authentication_loginSnapTradeUser]
+3. Direct the user to the generated re-authorization URL
 
-To enable trading for an existing connection you will have to ask the user to re-authorize access. To generate the re-authorize redirect URL set the `reconnect` body parameter to the ID of the existing connection when calling the :api[Authentication_loginSnapTradeUser] along with `connectionType=trade`.
+## Trading Workflow
+
+### 1. Find the Security Symbol
+
+Use :api[ReferenceData_symbolSearchUserAccount] to find the `universal_symbol_id` of the security you want to trade. This looks up tradeable securities based on the specific account where you want to place the trade.
+
+### 2. Place the Trade
+
+Choose one of two options:
+
+**Option A: With Impact Validation** (Recommended)
+1. Use :api[Trading_getOrderImpact] to present trade information and validate the order
+2. After reviewing the impact, use :api[Trading_placeOrder] with the `trade_id` to execute
+
+**Option B: Without Impact Validation**
+- Use :api[Trading_placeForceOrder] to place the trade directly without an impact check
+- Pass either a `universal_symbol_id` (from the symbol search) or the security's ticker `symbol`
+
+## Advanced Order Types
+
+### Bracket Orders
+Use :api[Trading_placeBracketOrder] to open a position with an accompanying OCO (one-cancels-other) pair for stop-loss and take-profit exits.
+
+**Note:** This endpoint is disabled by default. Contact support to enable it and confirm the target brokerage supports bracket orders.
+
+### Options Strategies
+Use :api[Trading_placeOptionsOrder] for multi-leg option strategies. Supports multiple legs under a single trade submission.
+
+## Extended-Hours Trading
+
+Extended-hours trading is brokerage-specific and only available when the underlying account and instrument support it.
+
+**To place an extended-hours order:**
+- Set `trading_session="EXTENDED"` in the order payload to request execution in pre/post-market sessions
+- Use a `LIMIT` order type with an appropriate time-in-force
+- Most brokerages restrict extended-hours orders to `DAY` with post-market expiry, though some allow `GTC`
+
+---
+
+**Important:** Not every brokerage supports bracket orders, complex option strategies, or extended-hours sessions. Review the [SnapTrade Brokerage Support Matrix](__https://www.notion.so/snaptrade/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687__) for broker-specific coverage details.
