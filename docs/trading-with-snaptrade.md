@@ -28,7 +28,7 @@ Use :api[ReferenceData_symbolSearchUserAccount] to find the `universal_symbol_id
 
 Choose one of two options:
 
-**Option A: With Impact Validation** (Recommended)
+**Option A: With Impact Validation** 
 1. Use :api[Trading_getOrderImpact] to present trade information and validate the order
 2. After reviewing the impact, use :api[Trading_placeOrder] with the `trade_id` to execute
 
