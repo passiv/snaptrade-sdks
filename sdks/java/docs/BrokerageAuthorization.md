@@ -17,7 +17,7 @@ A single connection with a brokerage. Note that `Connection` and `Brokerage Auth
 |**disabledDate** | **OffsetDateTime** | Timestamp of when the connection was disabled in SnapTrade. |  [optional] |
 |**meta** | **Map&lt;String, Object&gt;** | Additional data about the connection. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. |  [optional] |
 |**updatedDate** | **OffsetDateTime** | Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field. |  [optional] |
-|**isEligibleForPayout** | **Boolean** | Whether the connection is eligible for a payout. |  [optional] |
+|**isEligibleForPayout** | **Boolean** | Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team. |  [optional] |
 
 
 

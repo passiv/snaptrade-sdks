@@ -37,7 +37,7 @@ type BrokerageAuthorization struct {
 	// Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
 	// Deprecated
 	UpdatedDate *time.Time `json:"updated_date,omitempty"`
-	// Whether the connection is eligible for a payout.
+	// Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
 	IsEligibleForPayout *bool `json:"is_eligible_for_payout,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

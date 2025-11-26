@@ -39,7 +39,7 @@ module SnapTrade
     # Timestamp of when the connection was last updated in SnapTrade. This field is deprecated. Please let us know if you have a valid use case for this field.
     attr_accessor :updated_date
 
-    # Whether the connection is eligible for a payout.
+    # Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
     attr_accessor :is_eligible_for_payout
 
     # Attribute mapping from ruby-style variable name to JSON key.

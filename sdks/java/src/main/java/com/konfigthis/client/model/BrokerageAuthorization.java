@@ -382,11 +382,11 @@ public class BrokerageAuthorization {
   }
 
    /**
-   * Whether the connection is eligible for a payout.
+   * Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
    * @return isEligibleForPayout
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "Whether the connection is eligible for a payout.")
+  @ApiModelProperty(example = "true", value = "Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.")
 
   public Boolean getIsEligibleForPayout() {
     return isEligibleForPayout;
