@@ -26,12 +26,6 @@ To enable trading for an existing read-only connection, you'll need to ask the u
 
 - Submit your order via :api[Trading_placeForceOrder].
 
-### Bracket Orders
-
-- Use :api[Trading_placeBracketOrder] to open a position together with an OCO (one-cancels-other) stop-loss and take-profit pair.
-- The endpoint is disabled by default. Contact support to enable it and confirm the target brokerage supports bracket orders.
-
-
 ### Options Strategies
 
 - Use :api[Trading_placeOptionsOrder] for multi-leg option strategies (for example, spreads or condors).
@@ -48,4 +42,4 @@ Extended-hours trading is brokerage-specific and only available when the underly
 
 ---
 
-**Important:** Not every brokerage supports bracket orders, complex option strategies, or extended-hours sessions. Review the [SnapTrade Brokerage Support Matrix](https://www.notion.so/snaptrade/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687) for broker-specific coverage details.
+**Important:** Not every brokerage supports complex option strategies, or extended-hours sessions. Review the [SnapTrade Brokerage Support Matrix](https://www.notion.so/snaptrade/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687) for broker-specific coverage details.
