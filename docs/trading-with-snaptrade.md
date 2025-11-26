@@ -28,7 +28,7 @@ To enable trading for an existing read-only connection, you'll need to ask the u
 
 ### Options Strategies
 
-- Use :api[Trading_placeOptionsOrder] for multi-leg option strategies (for example, spreads or condors).
+- Use :api[Trading_placeMlegOrder] for multi-leg option strategies (for example, spreads or condors).
 - The payload accepts multiple legs under a single submission.
 
 ## Extended-Hours Trading
