@@ -77,7 +77,7 @@ export interface BrokerageAuthorization {
      */
     'updated_date'?: string;
     /**
-     * Whether the connection is eligible for a payout.
+     * Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
      * @type {boolean}
      * @memberof BrokerageAuthorization
      */

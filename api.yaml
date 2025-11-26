@@ -4164,7 +4164,7 @@ components:
           format: date-time
           example: 2024-08-20T21:56:20.057224Z
         is_eligible_for_payout:
-          description: Whether the connection is eligible for a payout.
+          description: Whether the connection is eligible for a payout. This is an experimental field that is NOT generally available for all partners. Do not use in production without speaking to the SnapTrade team.
           type: boolean
           example: true
     BrokerageAuthorizationRefreshConfirmation:
