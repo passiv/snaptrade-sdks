@@ -19,7 +19,7 @@ import (
 type UnderlyingSymbolType struct {
 	// Unique identifier for the security type within SnapTrade. This is the ID used to reference the security type in SnapTrade API calls.
 	Id *string `json:"id,omitempty"`
-	// A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
+	// A short code representing the security type. For example, \"cs\" for Common Stock. Here are some common values:   - `ad` - ADR   - `bnd` - Bond   - `cs` - Common Stock   - `cef` - Closed End Fund   - `crypto` - Cryptocurrency   - `et` - ETF   - `oef` - Open Ended Fund   - `pm` - Precious Metals   - `ps` - Preferred Stock   - `rt` - Right   - `struct` - Structured Product   - `ut` - Unit   - `wi` - When Issued   - `wt` - Warrant 
 	Code *string `json:"code,omitempty"`
 	// A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
 	Description *string `json:"description,omitempty"`

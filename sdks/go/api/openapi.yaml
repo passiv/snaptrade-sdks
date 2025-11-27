@@ -8606,6 +8606,7 @@ components:
               - `crypto` - Cryptocurrency
               - `et` - ETF
               - `oef` - Open Ended Fund
+              - `pm` - Precious Metals
               - `ps` - Preferred Stock
               - `rt` - Right
               - `struct` - Structured Product
