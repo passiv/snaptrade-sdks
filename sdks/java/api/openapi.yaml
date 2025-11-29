@@ -8431,12 +8431,15 @@ components:
               - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
-              - `TAX`` - A tax related fee.
+              - `TAX` - A tax related fee.
               - `OPTIONEXPIRATION` - Option expiration event.
               - `OPTIONASSIGNMENT` - Option assignment event.
               - `OPTIONEXERCISE` - Option exercise event.
-              - `TRANSFER` - Transfer of assets from one account to another.
+              - `TRANSFER` - Transfer of asset(s) from one account to another.
+              - `EXTERNAL_ASSET_TRANSFER_IN` - Incoming transfer of an asset from an external account to this account.
+              - `EXTERNAL_ASSET_TRANSFER_OUT` - Outgoing transfer of an asset from this account to an external account.
               - `SPLIT` - A stock share split.
+              - `ADJUSTMENT` - A one time adjustment of the account's cash balance or shares of an asset
           example: BUY
           type: string
           x-konfig-original-example: BUY
