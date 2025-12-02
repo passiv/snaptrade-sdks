@@ -735,7 +735,6 @@ paths:
         This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
         Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
         By default only returns executed orders, but that can be changed by setting *only_executed* to false
-        **Because of the cost of realtime requests, each call to this endpoint incurs an additional charge. You can find the exact cost for your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing)**
       parameters:
         - in: query
           required: true
@@ -4808,7 +4807,7 @@ components:
         - type
       properties:
         symbol:
-          description: The instrument's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+          description: The instrument's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
           type: string
           example: AAPL
         type:
@@ -4863,7 +4862,7 @@ components:
         - instrument_type
       properties:
         symbol:
-          description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  131124C00240000` represents a call option on AAPL expiring on 2024-11-13 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
+          description: The security's trading ticker symbol. This currently supports stock symbols and Options symbols in the 21 character OCC format. For example `AAPL  251114C00240000` represents a call option on AAPL expiring on 2025-11-14 with a strike price of $240. For more information on the OCC format, see [here](https://en.wikipedia.org/wiki/Option_symbol#OCC_format)
           type: string
           example: PBI   250718C00006000
         instrument_type:
