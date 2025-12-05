@@ -137,7 +137,7 @@ namespace SnapTrade.Net.Api
         /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -151,7 +151,7 @@ namespace SnapTrade.Net.Api
         /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -341,7 +341,7 @@ namespace SnapTrade.Net.Api
         /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -356,7 +356,7 @@ namespace SnapTrade.Net.Api
         /// Delete connection
         /// </summary>
         /// <remarks>
-        /// Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1367,7 +1367,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Delete connection Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1381,7 +1381,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Delete connection Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1468,7 +1468,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Delete connection Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>
@@ -1483,7 +1483,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Delete connection Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+        /// Delete connection Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="authorizationId"></param>

@@ -443,7 +443,7 @@ module SnapTrade
 
     # Delete connection
     #
-    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
     #
     # @param authorization_id [String] 
     # @param user_id [String] 
@@ -456,7 +456,7 @@ module SnapTrade
 
     # Delete connection
     #
-    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
     #
     # @param authorization_id [String] 
     # @param user_id [String] 
@@ -467,7 +467,7 @@ module SnapTrade
     end
 
     # Delete connection
-    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
@@ -479,7 +479,7 @@ module SnapTrade
     end
 
     # Delete connection
-    # Deletes the connection specified by the ID. This will also delete all accounts and holdings associated with the connection. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the connection has been successfully deleted.
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is synchronous, a 204 response indicates that the data has been successfully deleted.
     # @param authorization_id [String] 
     # @param user_id [String] 
     # @param user_secret [String] 
