@@ -220,7 +220,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_INITIAL_UPDATE
 
-Sent the first time that we collect transactions data from a brokerage account.
+Sent when we complete the initial transactions sync after a new account is conencted. The duration needed for the first sync can vary by brokerage and by how many historical transactions the user has, but usually takes between 1-60 seconds.
 
 Example payload is below:
 
@@ -239,7 +239,7 @@ Example payload is below:
 
 ## ACCOUNT_TRANSACTIONS_UPDATED
 
-Sent when account transactions are updated.
+Sent when account transactions are incrementally updated. After the initial sync has already completed, account will be checked for new transactions daily, if new transactions are found we will save them and send this webhook. Only ACCOUNT_TRANSACTIONS_INITIAL_UPDATE gets sent upon first connection.
 
 Example payload is below:
 
