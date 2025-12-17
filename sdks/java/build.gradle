@@ -3,8 +3,8 @@ apply plugin: 'eclipse'
 apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
-group = 'com.konfigthis'
-version = '5.0.154'
+group = 'com.snaptrade'
+version = '5.0.155'
 
 buildscript {
     repositories {
