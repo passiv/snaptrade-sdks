@@ -21,7 +21,7 @@ See a list of our SDKs below, or visit any of our additional resources to learn 
 
 |Language|Version|Package Manager|README|Source|
 |-|-|-|-|-|
-|Java|5.0.155|[Maven Central](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.155)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java)|
+|Java|5.0.156|[Maven Central](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.156)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/java)|
 |Ruby|2.0.155|[RubyGems](https://rubygems.org/gems/snaptrade/versions/2.0.155)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/ruby)|
 |Python|11.0.154|[PyPI](https://pypi.org/project/snaptrade-python-sdk/11.0.154)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/python)|
 |TypeScript|9.0.158|[npm](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.158)|[README](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript#readme)|[Source](https://github.com/passiv/snaptrade-sdks/tree/HEAD/sdks/typescript)|
