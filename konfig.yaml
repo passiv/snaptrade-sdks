@@ -264,7 +264,7 @@ generators:
       host: github.com
       userId: passiv
       repoId: snaptrade-sdks/tree/master/sdks/java
-    groupId: com.konfigthis
+    groupId: com.snaptrade
     artifactId: snaptrade-java-sdk
   python:
     version: 11.0.154
