@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.155-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.155)
+[![Maven Central](https://img.shields.io/badge/Maven%20Central-v5.0.156-blue)](https://central.sonatype.com/artifact/com.snaptrade/snaptrade-java-sdk/5.0.156)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -117,7 +117,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.snaptrade</groupId>
   <artifactId>snaptrade-java-sdk</artifactId>
-  <version>5.0.155</version>
+  <version>5.0.156</version>
   <scope>compile</scope>
 </dependency>
 ```
@@ -133,7 +133,7 @@ repositories {
 }
 
 dependencies {
-   implementation "com.snaptrade:snaptrade-java-sdk:5.0.155"
+   implementation "com.snaptrade:snaptrade-java-sdk:5.0.156"
 }
 ```
 
@@ -170,7 +170,7 @@ mvn clean package
 
 Then manually install the following JARs:
 
-* `target/snaptrade-java-sdk-5.0.155.jar`
+* `target/snaptrade-java-sdk-5.0.156.jar`
 * `target/lib/*.jar`
 
 ## Getting Started<a id="getting-started"></a>
@@ -309,7 +309,7 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[PaginatedUniversalActivity](./src/main/java/com/konfigthis/client/model/PaginatedUniversalActivity.java)
+[PaginatedUniversalActivity](./src/main/java/com/snaptrade/client/model/PaginatedUniversalActivity.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -351,7 +351,7 @@ Optional. Comma separated list of authorization IDs (only use if filtering is ne
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountHoldings](./src/main/java/com/konfigthis/client/model/AccountHoldings.java)
+[AccountHoldings](./src/main/java/com/snaptrade/client/model/AccountHoldings.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -392,7 +392,7 @@ List<Balance> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Balance](./src/main/java/com/konfigthis/client/model/Balance.java)
+[Balance](./src/main/java/com/snaptrade/client/model/Balance.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -433,7 +433,7 @@ Account result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./src/main/java/com/konfigthis/client/model/Account.java)
+[Account](./src/main/java/com/snaptrade/client/model/Account.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -478,7 +478,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -529,7 +529,7 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -570,7 +570,7 @@ List<Position> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Position](./src/main/java/com/konfigthis/client/model/Position.java)
+[Position](./src/main/java/com/snaptrade/client/model/Position.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -613,7 +613,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[RecentOrdersResponse](./src/main/java/com/konfigthis/client/model/RecentOrdersResponse.java)
+[RecentOrdersResponse](./src/main/java/com/snaptrade/client/model/RecentOrdersResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -648,7 +648,7 @@ RateOfReturnResponse result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[RateOfReturnResponse](./src/main/java/com/konfigthis/client/model/RateOfReturnResponse.java)
+[RateOfReturnResponse](./src/main/java/com/snaptrade/client/model/RateOfReturnResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -689,7 +689,7 @@ AccountHoldingsAccount result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountHoldingsAccount](./src/main/java/com/konfigthis/client/model/AccountHoldingsAccount.java)
+[AccountHoldingsAccount](./src/main/java/com/snaptrade/client/model/AccountHoldingsAccount.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -726,7 +726,7 @@ List<Account> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./src/main/java/com/konfigthis/client/model/Account.java)
+[Account](./src/main/java/com/snaptrade/client/model/Account.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -762,7 +762,7 @@ The ID of the account to update.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Account](./src/main/java/com/konfigthis/client/model/Account.java)
+[Account](./src/main/java/com/snaptrade/client/model/Account.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -788,7 +788,7 @@ Status result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Status](./src/main/java/com/konfigthis/client/model/Status.java)
+[Status](./src/main/java/com/snaptrade/client/model/Status.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -818,7 +818,7 @@ DeleteUserResponse result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[DeleteUserResponse](./src/main/java/com/konfigthis/client/model/DeleteUserResponse.java)
+[DeleteUserResponse](./src/main/java/com/snaptrade/client/model/DeleteUserResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -945,7 +945,7 @@ SnapTrade User ID. This is chosen by the API partner and can be any string that 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UserIDandSecret](./src/main/java/com/konfigthis/client/model/UserIDandSecret.java)
+[UserIDandSecret](./src/main/java/com/snaptrade/client/model/UserIDandSecret.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -984,7 +984,7 @@ SnapTrade User Secret. This is a randomly generated string and should be stored 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UserIDandSecret](./src/main/java/com/konfigthis/client/model/UserIDandSecret.java)
+[UserIDandSecret](./src/main/java/com/snaptrade/client/model/UserIDandSecret.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1018,7 +1018,7 @@ BrokerageAuthorization result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorization](./src/main/java/com/konfigthis/client/model/BrokerageAuthorization.java)
+[BrokerageAuthorization](./src/main/java/com/snaptrade/client/model/BrokerageAuthorization.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1056,7 +1056,7 @@ BrokerageAuthorizationDisabledConfirmation result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorizationDisabledConfirmation](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationDisabledConfirmation.java)
+[BrokerageAuthorizationDisabledConfirmation](./src/main/java/com/snaptrade/client/model/BrokerageAuthorizationDisabledConfirmation.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1093,7 +1093,7 @@ List<BrokerageAuthorization> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorization](./src/main/java/com/konfigthis/client/model/BrokerageAuthorization.java)
+[BrokerageAuthorization](./src/main/java/com/snaptrade/client/model/BrokerageAuthorization.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1131,7 +1131,7 @@ BrokerageAuthorizationRefreshConfirmation result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorizationRefreshConfirmation](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationRefreshConfirmation.java)
+[BrokerageAuthorizationRefreshConfirmation](./src/main/java/com/snaptrade/client/model/BrokerageAuthorizationRefreshConfirmation.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1196,7 +1196,7 @@ RateOfReturnResponse result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[RateOfReturnResponse](./src/main/java/com/konfigthis/client/model/RateOfReturnResponse.java)
+[RateOfReturnResponse](./src/main/java/com/snaptrade/client/model/RateOfReturnResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1236,7 +1236,7 @@ Optional comma separated list of session IDs used to filter the request on speci
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[SessionEvent](./src/main/java/com/konfigthis/client/model/SessionEvent.java)
+[SessionEvent](./src/main/java/com/snaptrade/client/model/SessionEvent.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1285,7 +1285,7 @@ Number of days in the past to fetch the most recent orders. Defaults to the last
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrdersV2Response](./src/main/java/com/konfigthis/client/model/AccountOrdersV2Response.java)
+[AccountOrdersV2Response](./src/main/java/com/snaptrade/client/model/AccountOrdersV2Response.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1329,7 +1329,7 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrdersV2Response](./src/main/java/com/konfigthis/client/model/AccountOrdersV2Response.java)
+[AccountOrdersV2Response](./src/main/java/com/snaptrade/client/model/AccountOrdersV2Response.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1369,7 +1369,7 @@ Universal symbol ID if symbol
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OptionChainInner](./src/main/java/com/konfigthis/client/model/OptionChainInner.java)
+[OptionChainInner](./src/main/java/com/snaptrade/client/model/OptionChainInner.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1408,7 +1408,7 @@ List<OptionsPosition> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OptionsPosition](./src/main/java/com/konfigthis/client/model/OptionsPosition.java)
+[OptionsPosition](./src/main/java/com/snaptrade/client/model/OptionsPosition.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1440,7 +1440,7 @@ A currency pair based on currency code for example, {CAD-USD}
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[ExchangeRatePairs](./src/main/java/com/konfigthis/client/model/ExchangeRatePairs.java)
+[ExchangeRatePairs](./src/main/java/com/snaptrade/client/model/ExchangeRatePairs.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1466,7 +1466,7 @@ PartnerData result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[PartnerData](./src/main/java/com/konfigthis/client/model/PartnerData.java)
+[PartnerData](./src/main/java/com/snaptrade/client/model/PartnerData.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1492,7 +1492,7 @@ List<SecurityType> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[SecurityType](./src/main/java/com/konfigthis/client/model/SecurityType.java)
+[SecurityType](./src/main/java/com/snaptrade/client/model/SecurityType.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1518,7 +1518,7 @@ List<Exchange> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Exchange](./src/main/java/com/konfigthis/client/model/Exchange.java)
+[Exchange](./src/main/java/com/snaptrade/client/model/Exchange.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1552,7 +1552,7 @@ The search query for symbols.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
+[UniversalSymbol](./src/main/java/com/snaptrade/client/model/UniversalSymbol.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1585,7 +1585,7 @@ The ticker or Universal Symbol ID to look up the symbol with.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
+[UniversalSymbol](./src/main/java/com/snaptrade/client/model/UniversalSymbol.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1618,7 +1618,7 @@ Comma separated value of brokerage slugs
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageAuthorizationTypeReadOnly](./src/main/java/com/konfigthis/client/model/BrokerageAuthorizationTypeReadOnly.java)
+[BrokerageAuthorizationTypeReadOnly](./src/main/java/com/snaptrade/client/model/BrokerageAuthorizationTypeReadOnly.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1650,7 +1650,7 @@ A short, unique identifier for the brokerage. It is usually the name of the brok
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[BrokerageInstrumentsResponse](./src/main/java/com/konfigthis/client/model/BrokerageInstrumentsResponse.java)
+[BrokerageInstrumentsResponse](./src/main/java/com/snaptrade/client/model/BrokerageInstrumentsResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1676,7 +1676,7 @@ List<Brokerage> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Brokerage](./src/main/java/com/konfigthis/client/model/Brokerage.java)
+[Brokerage](./src/main/java/com/snaptrade/client/model/Brokerage.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1702,7 +1702,7 @@ List<Currency> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[Currency](./src/main/java/com/konfigthis/client/model/Currency.java)
+[Currency](./src/main/java/com/snaptrade/client/model/Currency.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1728,7 +1728,7 @@ List<ExchangeRatePairs> result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[ExchangeRatePairs](./src/main/java/com/konfigthis/client/model/ExchangeRatePairs.java)
+[ExchangeRatePairs](./src/main/java/com/snaptrade/client/model/ExchangeRatePairs.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1770,7 +1770,7 @@ The search query for symbols.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalSymbol](./src/main/java/com/konfigthis/client/model/UniversalSymbol.java)
+[UniversalSymbol](./src/main/java/com/snaptrade/client/model/UniversalSymbol.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1809,7 +1809,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[CancelOrderResponse](./src/main/java/com/konfigthis/client/model/CancelOrderResponse.java)
+[CancelOrderResponse](./src/main/java/com/snaptrade/client/model/CancelOrderResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1850,7 +1850,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1887,7 +1887,7 @@ CryptocurrencyPairQuote result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[CryptocurrencyPairQuote](./src/main/java/com/konfigthis/client/model/CryptocurrencyPairQuote.java)
+[CryptocurrencyPairQuote](./src/main/java/com/snaptrade/client/model/CryptocurrencyPairQuote.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -1951,7 +1951,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[ManualTradeAndImpact](./src/main/java/com/konfigthis/client/model/ManualTradeAndImpact.java)
+[ManualTradeAndImpact](./src/main/java/com/snaptrade/client/model/ManualTradeAndImpact.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2001,7 +2001,7 @@ Should be set to `True` if `symbols` are comprised of tickers. Defaults to `Fals
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[SymbolsQuotesInner](./src/main/java/com/konfigthis/client/model/SymbolsQuotesInner.java)
+[SymbolsQuotesInner](./src/main/java/com/snaptrade/client/model/SymbolsQuotesInner.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2034,15 +2034,15 @@ AccountOrderRecord result = client
 
 ##### action:<a id="action"></a>
 
-##### instrument: [`TradingInstrument`](./src/main/java/com/konfigthis/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomkonfigthisclientmodeltradinginstrumentjava"></a>
+##### instrument: [`TradingInstrument`](./src/main/java/com/snaptrade/client/model/TradingInstrument.java)<a id="instrument-tradinginstrumentsrcmainjavacomsnaptradeclientmodeltradinginstrumentjava"></a>
 
 ##### order_type:<a id="order_type"></a>
 
 ##### time_in_force:<a id="time_in_force"></a>
 
-##### stop_loss: [`StopLoss`](./src/main/java/com/konfigthis/client/model/StopLoss.java)<a id="stop_loss-stoplosssrcmainjavacomkonfigthisclientmodelstoplossjava"></a>
+##### stop_loss: [`StopLoss`](./src/main/java/com/snaptrade/client/model/StopLoss.java)<a id="stop_loss-stoplosssrcmainjavacomsnaptradeclientmodelstoplossjava"></a>
 
-##### take_profit: [`TakeProfit`](./src/main/java/com/konfigthis/client/model/TakeProfit.java)<a id="take_profit-takeprofitsrcmainjavacomkonfigthisclientmodeltakeprofitjava"></a>
+##### take_profit: [`TakeProfit`](./src/main/java/com/snaptrade/client/model/TakeProfit.java)<a id="take_profit-takeprofitsrcmainjavacomsnaptradeclientmodeltakeprofitjava"></a>
 
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
 
@@ -2066,7 +2066,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2098,7 +2098,7 @@ OrderUpdatedResponse result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/konfigthis/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomkonfigthisclientmodelcryptotradinginstrumentjava"></a>
+##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/snaptrade/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomsnaptradeclientmodelcryptotradinginstrumentjava"></a>
 
 ##### side:<a id="side"></a>
 
@@ -2138,7 +2138,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[OrderUpdatedResponse](./src/main/java/com/konfigthis/client/model/OrderUpdatedResponse.java)
+[OrderUpdatedResponse](./src/main/java/com/snaptrade/client/model/OrderUpdatedResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2208,7 +2208,7 @@ The limit price for `Limit` and `StopLimit` orders.
 
 The price at which a stop order is triggered for `Stop` and `StopLimit` orders.
 
-##### units: [`Double`](./src/main/java/com/konfigthis/client/model/ModelDouble.java)<a id="units-doublesrcmainjavacomkonfigthisclientmodelmodeldoublejava"></a>
+##### units: [`Double`](./src/main/java/com/snaptrade/client/model/ModelDouble.java)<a id="units-doublesrcmainjavacomsnaptradeclientmodelmodeldoublejava"></a>
 
 For Equity orders, this represents the number of shares for the order. This can be a decimal for fractional orders. Must be `null` if `notional_value` is provided. If placing an Option order, this field represents the number of contracts to buy or sell. (e.g., 1 contract = 100 shares).
 
@@ -2216,7 +2216,7 @@ For Equity orders, this represents the number of shares for the order. This can 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2250,7 +2250,7 @@ MlegOrderResponse result = client
 
 ##### time_in_force:<a id="time_in_force"></a>
 
-##### legs: List<[`MlegLeg`](./src/main/java/com/konfigthis/client/model/MlegLeg.java)><a id="legs-list"></a>
+##### legs: List<[`MlegLeg`](./src/main/java/com/snaptrade/client/model/MlegLeg.java)><a id="legs-list"></a>
 
 ##### userId: `String`<a id="userid-string"></a>
 
@@ -2270,7 +2270,7 @@ The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[MlegOrderResponse](./src/main/java/com/konfigthis/client/model/MlegOrderResponse.java)
+[MlegOrderResponse](./src/main/java/com/snaptrade/client/model/MlegOrderResponse.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2314,7 +2314,7 @@ Optional, defaults to true. Determines if a wait is performed to check on order 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2345,7 +2345,7 @@ CryptoOrderPreview result = client
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/konfigthis/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomkonfigthisclientmodelcryptotradinginstrumentjava"></a>
+##### instrument: [`CryptoTradingInstrument`](./src/main/java/com/snaptrade/client/model/CryptoTradingInstrument.java)<a id="instrument-cryptotradinginstrumentsrcmainjavacomsnaptradeclientmodelcryptotradinginstrumentjava"></a>
 
 ##### side:<a id="side"></a>
 
@@ -2385,7 +2385,7 @@ The expiration date of the order. Required if the time_in_force is GTD.
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[CryptoOrderPreview](./src/main/java/com/konfigthis/client/model/CryptoOrderPreview.java)
+[CryptoOrderPreview](./src/main/java/com/snaptrade/client/model/CryptoOrderPreview.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2454,7 +2454,7 @@ Number of shares for the order. This can be a decimal for fractional orders. Mus
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[AccountOrderRecord](./src/main/java/com/konfigthis/client/model/AccountOrderRecord.java)
+[AccountOrderRecord](./src/main/java/com/snaptrade/client/model/AccountOrderRecord.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2495,7 +2495,7 @@ TradingSearchCryptocurrencyPairInstruments200Response result = client
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[TradingSearchCryptocurrencyPairInstruments200Response](./src/main/java/com/konfigthis/client/model/TradingSearchCryptocurrencyPairInstruments200Response.java)
+[TradingSearchCryptocurrencyPairInstruments200Response](./src/main/java/com/snaptrade/client/model/TradingSearchCryptocurrencyPairInstruments200Response.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2560,7 +2560,7 @@ Optional comma separated list of transaction types to filter by. SnapTrade does 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[UniversalActivity](./src/main/java/com/konfigthis/client/model/UniversalActivity.java)
+[UniversalActivity](./src/main/java/com/snaptrade/client/model/UniversalActivity.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
@@ -2612,7 +2612,7 @@ Optional frequency for the rate of return chart (defaults to monthly). Possible 
 
 #### 🔄 Return<a id="🔄-return"></a>
 
-[PerformanceCustom](./src/main/java/com/konfigthis/client/model/PerformanceCustom.java)
+[PerformanceCustom](./src/main/java/com/snaptrade/client/model/PerformanceCustom.java)
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
