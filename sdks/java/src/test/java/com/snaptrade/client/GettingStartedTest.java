@@ -1,13 +1,13 @@
-package com.konfigthis.client;
+package com.snaptrade.client;
 
-import com.konfigthis.client.model.Account;
-import com.konfigthis.client.model.AccountHoldings;
-import com.konfigthis.client.model.Brokerage;
-import com.konfigthis.client.model.DeleteUserResponse;
-import com.konfigthis.client.model.SnapTradeRegisterUserRequestBody;
-import com.konfigthis.client.model.Status;
-import com.konfigthis.client.model.UniversalSymbol;
-import com.konfigthis.client.model.UserIDandSecret;
+import com.snaptrade.client.model.Account;
+import com.snaptrade.client.model.AccountHoldings;
+import com.snaptrade.client.model.Brokerage;
+import com.snaptrade.client.model.DeleteUserResponse;
+import com.snaptrade.client.model.SnapTradeRegisterUserRequestBody;
+import com.snaptrade.client.model.Status;
+import com.snaptrade.client.model.UniversalSymbol;
+import com.snaptrade.client.model.UserIDandSecret;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
