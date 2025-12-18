@@ -11,6 +11,8 @@ Connect brokerage accounts to your app for live positions and trading
 
 </div>
 
+Starting with version **5.0.155**, the SnapTrade Java SDK has migrated from the `com.konfigthis` Maven namespace to `com.snaptrade`. For migration steps refer to the [Java SDK Namespace Migration Guide](../../docs/java-namespace-migration.md).
+
 ## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
@@ -107,7 +109,6 @@ To deploy it to a remote Maven repository instead, configure the settings of the
 mvn clean deploy
 ```
 
-Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
 
 ### Maven users<a id="maven-users"></a>
 
@@ -178,10 +179,10 @@ Then manually install the following JARs:
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.Configuration;
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.model.*;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.model.*;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
