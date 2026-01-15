@@ -4,7 +4,7 @@ apply plugin: 'java'
 apply plugin: 'com.diffplug.spotless'
 
 group = 'com.snaptrade'
-version = '5.0.157'
+version = '5.0.158'
 
 buildscript {
     repositories {
