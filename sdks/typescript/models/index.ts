@@ -129,6 +129,7 @@ export * from './symbol-figi-instrument';
 export * from './symbol-query';
 export * from './symbols-quotes-inner';
 export * from './take-profit';
+export * from './tax-lot';
 export * from './time-in-force-strict';
 export * from './trading-instrument';
 export * from './trading-search-cryptocurrency-pair-instruments200-response';

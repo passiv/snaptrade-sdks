@@ -21,9 +21,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.PositionCurrency;
 import com.snaptrade.client.model.PositionSymbol;
+import com.snaptrade.client.model.TaxLot;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -84,6 +87,10 @@ public class Position {
   public static final String SERIALIZED_NAME_CASH_EQUIVALENT = "cash_equivalent";
   @SerializedName(SERIALIZED_NAME_CASH_EQUIVALENT)
   private Boolean cashEquivalent;
+
+  public static final String SERIALIZED_NAME_TAX_LOTS = "tax_lots";
+  @SerializedName(SERIALIZED_NAME_TAX_LOTS)
+  private List<TaxLot> taxLots = null;
 
   public Position() {
   }
@@ -366,6 +373,43 @@ public class Position {
     this.cashEquivalent = cashEquivalent;
   }
 
+
+  public Position taxLots(List<TaxLot> taxLots) {
+    
+    
+    
+    
+    this.taxLots = taxLots;
+    return this;
+  }
+
+  public Position addTaxLotsItem(TaxLot taxLotsItem) {
+    if (this.taxLots == null) {
+      this.taxLots = new ArrayList<>();
+    }
+    this.taxLots.add(taxLotsItem);
+    return this;
+  }
+
+   /**
+   * List of tax lots for the given position (disabled by default, contact support if needed)
+   * @return taxLots
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "List of tax lots for the given position (disabled by default, contact support if needed)")
+
+  public List<TaxLot> getTaxLots() {
+    return taxLots;
+  }
+
+
+  public void setTaxLots(List<TaxLot> taxLots) {
+    
+    
+    
+    this.taxLots = taxLots;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -428,7 +472,8 @@ public class Position {
         Objects.equals(this.averagePurchasePrice, position.averagePurchasePrice) &&
         Objects.equals(this.fractionalUnits, position.fractionalUnits) &&
         Objects.equals(this.currency, position.currency) &&
-        Objects.equals(this.cashEquivalent, position.cashEquivalent)&&
+        Objects.equals(this.cashEquivalent, position.cashEquivalent) &&
+        Objects.equals(this.taxLots, position.taxLots)&&
         Objects.equals(this.additionalProperties, position.additionalProperties);
   }
 
@@ -438,7 +483,7 @@ public class Position {
 
   @Override
   public int hashCode() {
-    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, cashEquivalent, additionalProperties);
+    return Objects.hash(symbol, units, price, openPnl, averagePurchasePrice, fractionalUnits, currency, cashEquivalent, taxLots, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -460,6 +505,7 @@ public class Position {
     sb.append("    fractionalUnits: ").append(toIndentedString(fractionalUnits)).append("\n");
     sb.append("    currency: ").append(toIndentedString(currency)).append("\n");
     sb.append("    cashEquivalent: ").append(toIndentedString(cashEquivalent)).append("\n");
+    sb.append("    taxLots: ").append(toIndentedString(taxLots)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -491,6 +537,7 @@ public class Position {
     openapiFields.add("fractional_units");
     openapiFields.add("currency");
     openapiFields.add("cash_equivalent");
+    openapiFields.add("tax_lots");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -515,6 +562,20 @@ public class Position {
       // validate the optional field `currency`
       if (jsonObj.get("currency") != null && !jsonObj.get("currency").isJsonNull()) {
         PositionCurrency.validateJsonObject(jsonObj.getAsJsonObject("currency"));
+      }
+      if (jsonObj.get("tax_lots") != null && !jsonObj.get("tax_lots").isJsonNull()) {
+        JsonArray jsonArraytaxLots = jsonObj.getAsJsonArray("tax_lots");
+        if (jsonArraytaxLots != null) {
+          // ensure the json data is an array
+          if (!jsonObj.get("tax_lots").isJsonArray()) {
+            throw new IllegalArgumentException(String.format("Expected the field `tax_lots` to be an array in the JSON string but got `%s`", jsonObj.get("tax_lots").toString()));
+          }
+
+          // validate the optional field `tax_lots` (array)
+          for (int i = 0; i < jsonArraytaxLots.size(); i++) {
+            TaxLot.validateJsonObject(jsonArraytaxLots.get(i).getAsJsonObject());
+          };
+        }
       }
   }
 

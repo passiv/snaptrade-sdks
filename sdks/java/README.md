@@ -11,8 +11,6 @@ Connect brokerage accounts to your app for live positions and trading
 
 </div>
 
-#### Starting with version **5.0.155**, the SnapTrade Java SDK has migrated from the `com.konfigthis` Maven namespace to `com.snaptrade`. For migration steps refer to the [Java SDK Namespace Migration Guide](#java-namespace-migration).
-
 ## Table of Contents<a id="table-of-contents"></a>
 
 <!-- toc -->
@@ -109,6 +107,7 @@ To deploy it to a remote Maven repository instead, configure the settings of the
 mvn clean deploy
 ```
 
+Refer to the [OSSRH Guide](http://central.sonatype.org/pages/ossrh-guide.html) for more information.
 
 ### Maven users<a id="maven-users"></a>
 
@@ -174,125 +173,15 @@ Then manually install the following JARs:
 * `target/snaptrade-java-sdk-5.0.157.jar`
 * `target/lib/*.jar`
 
-
-## Java Namespace Migration Guide<a id="java-namespace-migration"></a>
-
-Starting with version **5.0.155**, the SnapTrade Java SDK migrated from the `com.konfigthis` Maven namespace to `com.snaptrade`. If your project was previously running on a version <**5.0.155** this will be a breaking change and requires updates to your project.
-
-### What changed?
-
-- Maven coordinates (groupId) changed from `com.konfigthis` → `com.snaptrade`.
-- Java package imports changed from `com.konfigthis.client.*` → `com.snaptrade.client.*`.
-- No API, model, or behavioral changes — only package and Maven coordinates.
-
-### What you need to do
-
-#### Update Maven dependency
-
-**Before (version 5.0.154 and earlier):**
-```xml
-<dependency>
-        <groupId>com.konfigthis</groupId>
-        <artifactId>snaptrade-java-sdk</artifactId>
-        <version>5.0.154</version>
-</dependency>
-```
-
-**After (version 5.0.155 and later):**
-```xml
-<dependency>
-        <groupId>com.snaptrade</groupId>
-        <artifactId>snaptrade-java-sdk</artifactId>
-        <version>5.0.155</version>
-</dependency>
-```
-
-#### Update Gradle dependency
-
-**Before:**
-```gradle
-implementation 'com.konfigthis:snaptrade-java-sdk:5.0.154'
-```
-
-**After:**
-```gradle
-implementation 'com.snaptrade:snaptrade-java-sdk:5.0.155'
-```
-
-#### Update import statements
-
-Find and replace package imports:
-
-**Find:**
-```java
-import com.konfigthis.client
-```
-
-**Replace with:**
-```java
-import com.snaptrade.client
-```
-
-Examples:
-```java
-// Before
-import com.konfigthis.client.Snaptrade;
-import com.konfigthis.client.ApiException;
-import com.konfigthis.client.model.Account;
-import com.konfigthis.client.api.AccountInformationApi;
-
-// After
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.model.Account;
-import com.snaptrade.client.api.AccountInformationApi;
-```
-
-#### Rebuild your project
-
-After updating dependencies and imports, rebuild:
-
-```bash
-# Maven
-mvn clean install
-
-# Gradle
-gradle clean build
-```
-
-### What stays the same
-
-- **All API methods** remain exactly the same
-- **All model classes** have the same names and structure
-- **Authentication** works identically
-- **SDK functionality** is unchanged
-
-The only changes are the Maven coordinates and Java package names.
-
-### Support for the old namespace
-
-- The old `com.konfigthis:snaptrade-java-sdk` namespace remains available on Maven Central for existing versions (up to 5.0.154).
-- **No new versions** will be published under `com.konfigthis`.
-- **All future releases** will use the `com.snaptrade` namespace.
-
-### Need help?
-
-If you encounter issues during migration:
-
-- Check our [GitHub Issues](https://github.com/passiv/snaptrade-sdks/issues)
-- Join our [Discord](https://discord.gg/rkYWBxb8Qu)
-- Contact support at support@snaptrade.com
-
-
 ## Getting Started<a id="getting-started"></a>
 
 Please follow the [installation](#installation) instruction and execute the following Java code:
 
 ```java
-import com.snaptrade.client.ApiException;
-import com.snaptrade.client.Configuration;
-import com.snaptrade.client.Snaptrade;
-import com.snaptrade.client.model.*;
+import com.konfigthis.client.ApiException;
+import com.konfigthis.client.Configuration;
+import com.konfigthis.client.Snaptrade;
+import com.konfigthis.client.model.*;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;

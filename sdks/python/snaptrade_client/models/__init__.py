@@ -171,6 +171,7 @@ from snaptrade_client.model.symbols_quotes import SymbolsQuotes
 from snaptrade_client.model.sync_status_date import SyncStatusDate
 from snaptrade_client.model.sync_status_date_nullable import SyncStatusDateNullable
 from snaptrade_client.model.take_profit import TakeProfit
+from snaptrade_client.model.tax_lot import TaxLot
 from snaptrade_client.model.time import Time
 from snaptrade_client.model.time_in_force import TimeInForce
 from snaptrade_client.model.time_in_force_strict import TimeInForceStrict

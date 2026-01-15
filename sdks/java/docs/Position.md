@@ -16,6 +16,7 @@ Describes a single stock/ETF/crypto/mutual fund position in an account.
 |**fractionalUnits** | **Double** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward |  [optional] |
 |**currency** | [**PositionCurrency**](PositionCurrency.md) |  |  [optional] |
 |**cashEquivalent** | **Boolean** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power |  [optional] |
+|**taxLots** | [**List&lt;TaxLot&gt;**](TaxLot.md) | List of tax lots for the given position (disabled by default, contact support if needed) |  [optional] |
 
 
 

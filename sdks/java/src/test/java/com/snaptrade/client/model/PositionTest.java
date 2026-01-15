@@ -19,9 +19,12 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import com.snaptrade.client.model.PositionCurrency;
 import com.snaptrade.client.model.PositionSymbol;
+import com.snaptrade.client.model.TaxLot;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -103,6 +106,14 @@ public class PositionTest {
     @Test
     public void cashEquivalentTest() {
         // TODO: test cashEquivalent
+    }
+
+    /**
+     * Test the property 'taxLots'
+     */
+    @Test
+    public void taxLotsTest() {
+        // TODO: test taxLots
     }
 
 }
