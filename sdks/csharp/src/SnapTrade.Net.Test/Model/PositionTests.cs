@@ -121,6 +121,14 @@ namespace SnapTrade.Net.Test.Model
         {
             // TODO unit test for the property 'CashEquivalent'
         }
+        /// <summary>
+        /// Test the property 'TaxLots'
+        /// </summary>
+        [Fact]
+        public void TaxLotsTest()
+        {
+            // TODO unit test for the property 'TaxLots'
+        }
 
     }
 

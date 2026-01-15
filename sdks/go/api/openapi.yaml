@@ -3444,6 +3444,19 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
           cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
@@ -3478,6 +3491,19 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
           cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
@@ -3658,6 +3684,19 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
           cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
@@ -3692,6 +3731,19 @@ components:
             local_id: "3291231"
             description: VANGUARD CDN AGGREGATE BOND INDEX ETF
             id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+          tax_lots:
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
+          - original_purchase_date: 2022-01-15T10:30:00Z
+            cost_basis: "1005.00"
+            quantity: "10"
+            position_type: LONG
+            purchased_price: "100.50"
+            current_value: "1200.00"
           cash_equivalent: false
           fractional_units: 1.44
           price: 113.15
@@ -5525,6 +5577,19 @@ components:
           local_id: "3291231"
           description: VANGUARD CDN AGGREGATE BOND INDEX ETF
           id: 2bcd7cc3-e922-4976-bce1-9858296801c3
+        tax_lots:
+        - original_purchase_date: 2022-01-15T10:30:00Z
+          cost_basis: "1005.00"
+          quantity: "10"
+          position_type: LONG
+          purchased_price: "100.50"
+          current_value: "1200.00"
+        - original_purchase_date: 2022-01-15T10:30:00Z
+          cost_basis: "1005.00"
+          quantity: "10"
+          position_type: LONG
+          purchased_price: "100.50"
+          current_value: "1200.00"
         cash_equivalent: false
         fractional_units: 1.44
         price: 113.15
@@ -5590,6 +5655,68 @@ components:
           type: boolean
           x-konfig-original-example: false
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Position-properties-cash_equivalent
+        tax_lots:
+          description: "List of tax lots for the given position (disabled by default,\
+            \ contact support if needed)"
+          items:
+            $ref: '#/components/schemas/TaxLot'
+          type: array
+      type: object
+    TaxLot:
+      additionalProperties: true
+      description: Describes a single tax lot for a position.
+      example:
+        original_purchase_date: 2022-01-15T10:30:00Z
+        cost_basis: "1005.00"
+        quantity: "10"
+        position_type: LONG
+        purchased_price: "100.50"
+        current_value: "1200.00"
+      properties:
+        original_purchase_date:
+          description: The date and time of the purchase.
+          example: 2022-01-15T10:30:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2022-01-15T10:30:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-original_purchase_date
+        quantity:
+          description: The number of shares in the tax lot. This can be fractional
+            or integer units.
+          example: "10"
+          nullable: true
+          type: string
+          x-konfig-original-example: "10"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-quantity
+        purchased_price:
+          description: The purchase price per share for the tax lot.
+          example: "100.50"
+          nullable: true
+          type: string
+          x-konfig-original-example: "100.50"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-purchased_price
+        cost_basis:
+          description: The cost basis of the entire lot.
+          example: "1005.00"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1005.00"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-cost_basis
+        current_value:
+          description: The current market value of the entire lot.
+          example: "1200.00"
+          nullable: true
+          type: string
+          x-konfig-original-example: "1200.00"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-current_value
+        position_type:
+          description: "The type of position for the tax lot (e.g., LONG, SHORT)."
+          example: LONG
+          nullable: true
+          type: string
+          x-konfig-original-example: LONG
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-position_type
       type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
@@ -9491,6 +9618,30 @@ components:
     konfig-generated-schema-components-schemas-Position-properties-cash_equivalent:
       example: false
       type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-original_purchase_date:
+      example: 2022-01-15T10:30:00Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-quantity:
+      example: "10"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-purchased_price:
+      example: "100.50"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-cost_basis:
+      example: "1005.00"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-current_value:
+      example: "1200.00"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-position_type:
+      example: LONG
+      type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:
       example: ALPACA

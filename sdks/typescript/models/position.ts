@@ -12,6 +12,7 @@ import type * as buffer from "buffer"
 
 import { PositionCurrency } from './position-currency';
 import { PositionSymbol } from './position-symbol';
+import { TaxLot } from './tax-lot';
 
 /**
  * Describes a single stock/ETF/crypto/mutual fund position in an account.
@@ -70,5 +71,11 @@ export interface Position {
      * @memberof Position
      */
     'cash_equivalent'?: boolean | null;
+    /**
+     * List of tax lots for the given position (disabled by default, contact support if needed)
+     * @type {Array<TaxLot>}
+     * @memberof Position
+     */
+    'tax_lots'?: Array<TaxLot>;
 }
 

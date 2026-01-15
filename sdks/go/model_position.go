@@ -32,6 +32,8 @@ type Position struct {
 	Currency *PositionCurrency `json:"currency,omitempty"`
 	// If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
 	CashEquivalent NullableBool `json:"cash_equivalent,omitempty"`
+	// List of tax lots for the given position (disabled by default, contact support if needed)
+	TaxLots []TaxLot `json:"tax_lots,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -373,6 +375,38 @@ func (o *Position) UnsetCashEquivalent() {
 	o.CashEquivalent.Unset()
 }
 
+// GetTaxLots returns the TaxLots field value if set, zero value otherwise.
+func (o *Position) GetTaxLots() []TaxLot {
+	if o == nil || isNil(o.TaxLots) {
+		var ret []TaxLot
+		return ret
+	}
+	return o.TaxLots
+}
+
+// GetTaxLotsOk returns a tuple with the TaxLots field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Position) GetTaxLotsOk() ([]TaxLot, bool) {
+	if o == nil || isNil(o.TaxLots) {
+    return nil, false
+	}
+	return o.TaxLots, true
+}
+
+// HasTaxLots returns a boolean if a field has been set.
+func (o *Position) HasTaxLots() bool {
+	if o != nil && !isNil(o.TaxLots) {
+		return true
+	}
+
+	return false
+}
+
+// SetTaxLots gets a reference to the given []TaxLot and assigns it to the TaxLots field.
+func (o *Position) SetTaxLots(v []TaxLot) {
+	o.TaxLots = v
+}
+
 func (o Position) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Symbol) {
@@ -398,6 +432,9 @@ func (o Position) MarshalJSON() ([]byte, error) {
 	}
 	if o.CashEquivalent.IsSet() {
 		toSerialize["cash_equivalent"] = o.CashEquivalent.Get()
+	}
+	if !isNil(o.TaxLots) {
+		toSerialize["tax_lots"] = o.TaxLots
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -425,6 +462,7 @@ func (o *Position) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "fractional_units")
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "cash_equivalent")
+		delete(additionalProperties, "tax_lots")
 		o.AdditionalProperties = additionalProperties
 	}
 

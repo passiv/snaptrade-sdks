@@ -197,6 +197,32 @@ class Position(
                         *args,
                         _configuration=_configuration,
                     )
+            
+            
+            class tax_lots(
+                schemas.ListSchema
+            ):
+            
+            
+                class MetaOapg:
+                    
+                    @staticmethod
+                    def items() -> typing.Type['TaxLot']:
+                        return TaxLot
+            
+                def __new__(
+                    cls,
+                    arg: typing.Union[typing.Tuple['TaxLot'], typing.List['TaxLot']],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'tax_lots':
+                    return super().__new__(
+                        cls,
+                        arg,
+                        _configuration=_configuration,
+                    )
+            
+                def __getitem__(self, i: int) -> 'TaxLot':
+                    return super().__getitem__(i)
             __annotations__ = {
                 "symbol": symbol,
                 "units": units,
@@ -206,6 +232,7 @@ class Position(
                 "fractional_units": fractional_units,
                 "currency": currency,
                 "cash_equivalent": cash_equivalent,
+                "tax_lots": tax_lots,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -234,9 +261,12 @@ class Position(
     def __getitem__(self, name: typing_extensions.Literal["cash_equivalent"]) -> MetaOapg.properties.cash_equivalent: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["tax_lots"]) -> MetaOapg.properties.tax_lots: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], typing_extensions.Literal["cash_equivalent"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], typing_extensions.Literal["cash_equivalent"], typing_extensions.Literal["tax_lots"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -265,9 +295,12 @@ class Position(
     def get_item_oapg(self, name: typing_extensions.Literal["cash_equivalent"]) -> typing.Union[MetaOapg.properties.cash_equivalent, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["tax_lots"]) -> typing.Union[MetaOapg.properties.tax_lots, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], typing_extensions.Literal["cash_equivalent"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["symbol"], typing_extensions.Literal["units"], typing_extensions.Literal["price"], typing_extensions.Literal["open_pnl"], typing_extensions.Literal["average_purchase_price"], typing_extensions.Literal["fractional_units"], typing_extensions.Literal["currency"], typing_extensions.Literal["cash_equivalent"], typing_extensions.Literal["tax_lots"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -281,6 +314,7 @@ class Position(
         fractional_units: typing.Union[MetaOapg.properties.fractional_units, None, decimal.Decimal, int, float, schemas.Unset] = schemas.unset,
         currency: typing.Union[MetaOapg.properties.currency, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, schemas.Unset] = schemas.unset,
         cash_equivalent: typing.Union[MetaOapg.properties.cash_equivalent, None, bool, schemas.Unset] = schemas.unset,
+        tax_lots: typing.Union[MetaOapg.properties.tax_lots, list, tuple, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'Position':
@@ -295,9 +329,11 @@ class Position(
             fractional_units=fractional_units,
             currency=currency,
             cash_equivalent=cash_equivalent,
+            tax_lots=tax_lots,
             _configuration=_configuration,
             **kwargs,
         )
 
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.position_symbol import PositionSymbol
+from snaptrade_client.model.tax_lot import TaxLot

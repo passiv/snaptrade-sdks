@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **FractionalUnits** | Pointer to **NullableFloat32** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **Currency** | Pointer to [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
 **CashEquivalent** | Pointer to **NullableBool** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
+**TaxLots** | Pointer to [**[]TaxLot**](TaxLot.md) | List of tax lots for the given position (disabled by default, contact support if needed) | [optional] 
 
 ## Methods
 
@@ -292,6 +293,31 @@ HasCashEquivalent returns a boolean if a field has been set.
 `func (o *Position) UnsetCashEquivalent()`
 
 UnsetCashEquivalent ensures that no value is present for CashEquivalent, not even an explicit nil
+### GetTaxLots
+
+`func (o *Position) GetTaxLots() []TaxLot`
+
+GetTaxLots returns the TaxLots field if non-nil, zero value otherwise.
+
+### GetTaxLotsOk
+
+`func (o *Position) GetTaxLotsOk() (*[]TaxLot, bool)`
+
+GetTaxLotsOk returns a tuple with the TaxLots field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxLots
+
+`func (o *Position) SetTaxLots(v []TaxLot)`
+
+SetTaxLots sets TaxLots field to given value.
+
+### HasTaxLots
+
+`func (o *Position) HasTaxLots() bool`
+
+HasTaxLots returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

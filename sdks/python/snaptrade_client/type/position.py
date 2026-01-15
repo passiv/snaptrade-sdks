@@ -17,6 +17,7 @@ from typing_extensions import TypedDict, Literal, TYPE_CHECKING
 
 from snaptrade_client.type.currency import Currency
 from snaptrade_client.type.position_symbol import PositionSymbol
+from snaptrade_client.type.tax_lot import TaxLot
 
 class RequiredPosition(TypedDict):
     pass
@@ -45,6 +46,9 @@ class OptionalPosition(TypedDict, total=False):
 
     # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
     cash_equivalent: typing.Optional[bool]
+
+    # List of tax lots for the given position (disabled by default, contact support if needed)
+    tax_lots: typing.List[TaxLot]
 
 class Position(RequiredPosition, OptionalPosition):
     pass

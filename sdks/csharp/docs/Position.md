@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **FractionalUnits** | **double?** | Deprecated, use the &#x60;units&#x60; field for both fractional and integer units going forward | [optional] 
 **Currency** | [**PositionCurrency**](PositionCurrency.md) |  | [optional] 
 **CashEquivalent** | **bool?** | If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power | [optional] 
+**TaxLots** | [**List&lt;TaxLot&gt;**](TaxLot.md) | List of tax lots for the given position (disabled by default, contact support if needed) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

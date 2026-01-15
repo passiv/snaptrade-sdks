@@ -3863,6 +3863,46 @@ components:
           example: false
           nullable: true
           description: If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
+        tax_lots:
+          type: array
+          description: List of tax lots for the given position (disabled by default, contact support if needed)
+          items:
+            $ref: "#/components/schemas/TaxLot"
+    TaxLot:
+      description: Describes a single tax lot for a position.
+      type: object
+      properties:
+        original_purchase_date:
+          nullable: true
+          type: string
+          format: date-time
+          description: The date and time of the purchase.
+          example: "2022-01-15T10:30:00Z"
+        quantity:
+          nullable: true
+          type: string
+          description: The number of shares in the tax lot. This can be fractional or integer units.
+          example: "10"
+        purchased_price:
+          nullable: true
+          type: string
+          description: The purchase price per share for the tax lot.
+          example: "100.50"
+        cost_basis:
+          nullable: true
+          type: string
+          description: The cost basis of the entire lot.
+          example: "1005.00"
+        current_value:
+          nullable: true
+          type: string
+          description: The current market value of the entire lot.
+          example: "1200.00"
+        position_type:
+          nullable: true
+          type: string
+          description: The type of position for the tax lot (e.g., LONG, SHORT).
+          example: LONG
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object

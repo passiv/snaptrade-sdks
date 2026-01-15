@@ -11,45 +11,35 @@ require 'date'
 require 'time'
 
 module SnapTrade
-  # Describes a single stock/ETF/crypto/mutual fund position in an account.
-  class Position
-    attr_accessor :symbol
+  # Describes a single tax lot for a position.
+  class TaxLot
+    # The date and time of the purchase.
+    attr_accessor :original_purchase_date
 
-    # The number of shares of the position. This can be fractional or integer units.
-    attr_accessor :units
+    # The number of shares in the tax lot. This can be fractional or integer units.
+    attr_accessor :quantity
 
-    # Last known market price for the symbol. The freshness of this price depends on the brokerage. Some brokerages provide real-time prices, while others provide delayed prices. It is recommended that you rely on your own third-party market data provider for most up to date prices.
-    attr_accessor :price
+    # The purchase price per share for the tax lot.
+    attr_accessor :purchased_price
 
-    # The profit or loss on the position since it was opened. This is calculated as the difference between the current market value of the position and the total cost of the position. It is recommended to calculate this value using the average purchase price and the current market price yourself, instead of relying on this field.
-    attr_accessor :open_pnl
+    # The cost basis of the entire lot.
+    attr_accessor :cost_basis
 
-    # Cost basis _per share_ of this position.
-    attr_accessor :average_purchase_price
+    # The current market value of the entire lot.
+    attr_accessor :current_value
 
-    # Deprecated, use the `units` field for both fractional and integer units going forward
-    attr_accessor :fractional_units
-
-    attr_accessor :currency
-
-    # If the position is a cash equivalent (usually a money market fund) that is also counted in account cash balance and buying power
-    attr_accessor :cash_equivalent
-
-    # List of tax lots for the given position (disabled by default, contact support if needed)
-    attr_accessor :tax_lots
+    # The type of position for the tax lot (e.g., LONG, SHORT).
+    attr_accessor :position_type
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'symbol' => :'symbol',
-        :'units' => :'units',
-        :'price' => :'price',
-        :'open_pnl' => :'open_pnl',
-        :'average_purchase_price' => :'average_purchase_price',
-        :'fractional_units' => :'fractional_units',
-        :'currency' => :'currency',
-        :'cash_equivalent' => :'cash_equivalent',
-        :'tax_lots' => :'tax_lots'
+        :'original_purchase_date' => :'original_purchase_date',
+        :'quantity' => :'quantity',
+        :'purchased_price' => :'purchased_price',
+        :'cost_basis' => :'cost_basis',
+        :'current_value' => :'current_value',
+        :'position_type' => :'position_type'
       }
     end
 
@@ -61,27 +51,24 @@ module SnapTrade
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'symbol' => :'PositionSymbol',
-        :'units' => :'Float',
-        :'price' => :'Float',
-        :'open_pnl' => :'Float',
-        :'average_purchase_price' => :'Float',
-        :'fractional_units' => :'Float',
-        :'currency' => :'PositionCurrency',
-        :'cash_equivalent' => :'Boolean',
-        :'tax_lots' => :'Array<TaxLot>'
+        :'original_purchase_date' => :'Time',
+        :'quantity' => :'String',
+        :'purchased_price' => :'String',
+        :'cost_basis' => :'String',
+        :'current_value' => :'String',
+        :'position_type' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'units',
-        :'price',
-        :'open_pnl',
-        :'average_purchase_price',
-        :'fractional_units',
-        :'cash_equivalent',
+        :'original_purchase_date',
+        :'quantity',
+        :'purchased_price',
+        :'cost_basis',
+        :'current_value',
+        :'position_type'
       ])
     end
 
@@ -89,53 +76,39 @@ module SnapTrade
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::Position` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `SnapTrade::TaxLot` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::Position`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `SnapTrade::TaxLot`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'symbol')
-        self.symbol = attributes[:'symbol']
+      if attributes.key?(:'original_purchase_date')
+        self.original_purchase_date = attributes[:'original_purchase_date']
       end
 
-      if attributes.key?(:'units')
-        self.units = attributes[:'units']
+      if attributes.key?(:'quantity')
+        self.quantity = attributes[:'quantity']
       end
 
-      if attributes.key?(:'price')
-        self.price = attributes[:'price']
+      if attributes.key?(:'purchased_price')
+        self.purchased_price = attributes[:'purchased_price']
       end
 
-      if attributes.key?(:'open_pnl')
-        self.open_pnl = attributes[:'open_pnl']
+      if attributes.key?(:'cost_basis')
+        self.cost_basis = attributes[:'cost_basis']
       end
 
-      if attributes.key?(:'average_purchase_price')
-        self.average_purchase_price = attributes[:'average_purchase_price']
+      if attributes.key?(:'current_value')
+        self.current_value = attributes[:'current_value']
       end
 
-      if attributes.key?(:'fractional_units')
-        self.fractional_units = attributes[:'fractional_units']
-      end
-
-      if attributes.key?(:'currency')
-        self.currency = attributes[:'currency']
-      end
-
-      if attributes.key?(:'cash_equivalent')
-        self.cash_equivalent = attributes[:'cash_equivalent']
-      end
-
-      if attributes.key?(:'tax_lots')
-        if (value = attributes[:'tax_lots']).is_a?(Array)
-          self.tax_lots = value
-        end
+      if attributes.key?(:'position_type')
+        self.position_type = attributes[:'position_type']
       end
     end
 
@@ -157,15 +130,12 @@ module SnapTrade
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          symbol == o.symbol &&
-          units == o.units &&
-          price == o.price &&
-          open_pnl == o.open_pnl &&
-          average_purchase_price == o.average_purchase_price &&
-          fractional_units == o.fractional_units &&
-          currency == o.currency &&
-          cash_equivalent == o.cash_equivalent &&
-          tax_lots == o.tax_lots
+          original_purchase_date == o.original_purchase_date &&
+          quantity == o.quantity &&
+          purchased_price == o.purchased_price &&
+          cost_basis == o.cost_basis &&
+          current_value == o.current_value &&
+          position_type == o.position_type
     end
 
     # @see the `==` method
@@ -177,7 +147,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [symbol, units, price, open_pnl, average_purchase_price, fractional_units, currency, cash_equivalent, tax_lots].hash
+      [original_purchase_date, quantity, purchased_price, cost_basis, current_value, position_type].hash
     end
 
     # Builds the object from hash
