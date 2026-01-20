@@ -104,8 +104,6 @@ portal:
       post: true
     /brokerages/{brokerageId}/instruments:
       get: true
-    /accounts/{accountId}/orders/details:
-      post: true
     /accounts/{accountId}/orders/v2:
       get: true
     /accounts/{accountId}/recentOrders/v2:
