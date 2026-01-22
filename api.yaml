@@ -934,7 +934,7 @@ paths:
               - `STOCK_DIVIDEND` - A type of dividend where a company distributes shares instead of cash
               - `INTEREST` - Interest deposited into the account.
               - `FEE` - Fee withdrawn from the account.
-              - `TAX`` - A tax related fee.
+              - `TAX` - A tax related fee.
               - `OPTIONEXPIRATION` - Option expiration event.
               - `OPTIONASSIGNMENT` - Option assignment event.
               - `OPTIONEXERCISE` - Option exercise event.
