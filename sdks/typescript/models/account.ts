@@ -58,6 +58,18 @@ export interface Account {
      */
     'created_date': string;
     /**
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+     * @type {string}
+     * @memberof Account
+     */
+    'funding_date'?: string | null;
+    /**
+     * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+     * @type {string}
+     * @memberof Account
+     */
+    'opening_date'?: string | null;
+    /**
      * 
      * @type {AccountSyncStatus}
      * @memberof Account

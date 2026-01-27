@@ -378,6 +378,8 @@ public class Example {
       System.out.println(result.getNumber());
       System.out.println(result.getInstitutionName());
       System.out.println(result.getCreatedDate());
+      System.out.println(result.getFundingDate());
+      System.out.println(result.getOpeningDate());
       System.out.println(result.getSyncStatus());
       System.out.println(result.getBalance());
       System.out.println(result.getStatus());

@@ -3198,7 +3198,9 @@ components:
             first_transaction_date: ""
         id: ""
         created_date: 2024-07-23T22:50:22.761Z
+        funding_date: 2024-07-25T12:00:00Z
         cash_restrictions: []
+        opening_date: 2024-07-20T09:30:00Z
         status: open
       properties:
         id:
@@ -3247,6 +3249,24 @@ components:
           type: string
           x-konfig-original-example: 2024-07-23T22:50:22.761Z
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-created_date
+        funding_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the account was funded."
+          example: 2024-07-25T12:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-07-25T12:00:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-funding_date
+        opening_date:
+          description: "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601)\
+            \ format indicating when the account was opened at the brokerage."
+          example: 2024-07-20T09:30:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2024-07-20T09:30:00.000Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-opening_date
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
         balance:
@@ -3822,7 +3842,9 @@ components:
               first_transaction_date: ""
           id: ""
           created_date: 2024-07-23T22:50:22.761Z
+          funding_date: 2024-07-25T12:00:00Z
           cash_restrictions: []
+          opening_date: 2024-07-20T09:30:00Z
           status: open
       properties:
         account:
@@ -9092,6 +9114,14 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-created_date:
       example: 2024-07-23T22:50:22.761Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-funding_date:
+      example: 2024-07-25T12:00:00.000Z
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-opening_date:
+      example: 2024-07-20T09:30:00.000Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-status:

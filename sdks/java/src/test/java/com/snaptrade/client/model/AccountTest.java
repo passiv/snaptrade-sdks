@@ -96,6 +96,22 @@ public class AccountTest {
     }
 
     /**
+     * Test the property 'fundingDate'
+     */
+    @Test
+    public void fundingDateTest() {
+        // TODO: test fundingDate
+    }
+
+    /**
+     * Test the property 'openingDate'
+     */
+    @Test
+    public void openingDateTest() {
+        // TODO: test openingDate
+    }
+
+    /**
      * Test the property 'syncStatus'
      */
     @Test

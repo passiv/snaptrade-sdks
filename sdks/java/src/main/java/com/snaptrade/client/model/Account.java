@@ -83,6 +83,14 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_CREATED_DATE)
   private OffsetDateTime createdDate;
 
+  public static final String SERIALIZED_NAME_FUNDING_DATE = "funding_date";
+  @SerializedName(SERIALIZED_NAME_FUNDING_DATE)
+  private OffsetDateTime fundingDate;
+
+  public static final String SERIALIZED_NAME_OPENING_DATE = "opening_date";
+  @SerializedName(SERIALIZED_NAME_OPENING_DATE)
+  private OffsetDateTime openingDate;
+
   public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
   @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
   private AccountSyncStatus syncStatus;
@@ -340,6 +348,64 @@ public class Account {
     
     
     this.createdDate = createdDate;
+  }
+
+
+  public Account fundingDate(OffsetDateTime fundingDate) {
+    
+    
+    
+    
+    this.fundingDate = fundingDate;
+    return this;
+  }
+
+   /**
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+   * @return fundingDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-07-25T12:00Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.")
+
+  public OffsetDateTime getFundingDate() {
+    return fundingDate;
+  }
+
+
+  public void setFundingDate(OffsetDateTime fundingDate) {
+    
+    
+    
+    this.fundingDate = fundingDate;
+  }
+
+
+  public Account openingDate(OffsetDateTime openingDate) {
+    
+    
+    
+    
+    this.openingDate = openingDate;
+    return this;
+  }
+
+   /**
+   * Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+   * @return openingDate
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "2024-07-20T09:30Z", value = "Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.")
+
+  public OffsetDateTime getOpeningDate() {
+    return openingDate;
+  }
+
+
+  public void setOpeningDate(OffsetDateTime openingDate) {
+    
+    
+    
+    this.openingDate = openingDate;
   }
 
 
@@ -657,6 +723,8 @@ public class Account {
         Objects.equals(this.number, account.number) &&
         Objects.equals(this.institutionName, account.institutionName) &&
         Objects.equals(this.createdDate, account.createdDate) &&
+        Objects.equals(this.fundingDate, account.fundingDate) &&
+        Objects.equals(this.openingDate, account.openingDate) &&
         Objects.equals(this.syncStatus, account.syncStatus) &&
         Objects.equals(this.balance, account.balance) &&
         Objects.equals(this.status, account.status) &&
@@ -674,7 +742,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, fundingDate, openingDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -694,6 +762,8 @@ public class Account {
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
     sb.append("    institutionName: ").append(toIndentedString(institutionName)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
+    sb.append("    fundingDate: ").append(toIndentedString(fundingDate)).append("\n");
+    sb.append("    openingDate: ").append(toIndentedString(openingDate)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
@@ -731,6 +801,8 @@ public class Account {
     openapiFields.add("number");
     openapiFields.add("institution_name");
     openapiFields.add("created_date");
+    openapiFields.add("funding_date");
+    openapiFields.add("opening_date");
     openapiFields.add("sync_status");
     openapiFields.add("balance");
     openapiFields.add("status");

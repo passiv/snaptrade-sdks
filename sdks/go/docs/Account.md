@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
 **InstitutionName** | **string** | The name of the brokerage that holds the account. | 
 **CreatedDate** | **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. | 
+**FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. | [optional] 
+**OpeningDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage. | [optional] 
 **SyncStatus** | [**AccountSyncStatus**](AccountSyncStatus.md) |  | 
 **Balance** | [**AccountBalance**](AccountBalance.md) |  | 
 **Status** | Pointer to **NullableString** | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage. | [optional] 
@@ -168,6 +170,76 @@ and a boolean to check if the value has been set.
 SetCreatedDate sets CreatedDate field to given value.
 
 
+### GetFundingDate
+
+`func (o *Account) GetFundingDate() time.Time`
+
+GetFundingDate returns the FundingDate field if non-nil, zero value otherwise.
+
+### GetFundingDateOk
+
+`func (o *Account) GetFundingDateOk() (*time.Time, bool)`
+
+GetFundingDateOk returns a tuple with the FundingDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFundingDate
+
+`func (o *Account) SetFundingDate(v time.Time)`
+
+SetFundingDate sets FundingDate field to given value.
+
+### HasFundingDate
+
+`func (o *Account) HasFundingDate() bool`
+
+HasFundingDate returns a boolean if a field has been set.
+
+### SetFundingDateNil
+
+`func (o *Account) SetFundingDateNil(b bool)`
+
+ SetFundingDateNil sets the value for FundingDate to be an explicit nil
+
+### UnsetFundingDate
+`func (o *Account) UnsetFundingDate()`
+
+UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
+### GetOpeningDate
+
+`func (o *Account) GetOpeningDate() time.Time`
+
+GetOpeningDate returns the OpeningDate field if non-nil, zero value otherwise.
+
+### GetOpeningDateOk
+
+`func (o *Account) GetOpeningDateOk() (*time.Time, bool)`
+
+GetOpeningDateOk returns a tuple with the OpeningDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpeningDate
+
+`func (o *Account) SetOpeningDate(v time.Time)`
+
+SetOpeningDate sets OpeningDate field to given value.
+
+### HasOpeningDate
+
+`func (o *Account) HasOpeningDate() bool`
+
+HasOpeningDate returns a boolean if a field has been set.
+
+### SetOpeningDateNil
+
+`func (o *Account) SetOpeningDateNil(b bool)`
+
+ SetOpeningDateNil sets the value for OpeningDate to be an explicit nil
+
+### UnsetOpeningDate
+`func (o *Account) UnsetOpeningDate()`
+
+UnsetOpeningDate ensures that no value is present for OpeningDate, not even an explicit nil
 ### GetSyncStatus
 
 `func (o *Account) GetSyncStatus() AccountSyncStatus`
