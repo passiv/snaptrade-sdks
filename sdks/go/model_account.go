@@ -30,6 +30,10 @@ type Account struct {
 	InstitutionName string `json:"institution_name"`
 	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
 	CreatedDate time.Time `json:"created_date"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+	FundingDate NullableTime `json:"funding_date,omitempty"`
+	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+	OpeningDate NullableTime `json:"opening_date,omitempty"`
 	SyncStatus AccountSyncStatus `json:"sync_status"`
 	Balance AccountBalance `json:"balance"`
 	// The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
@@ -222,6 +226,90 @@ func (o *Account) GetCreatedDateOk() (*time.Time, bool) {
 // SetCreatedDate sets field value
 func (o *Account) SetCreatedDate(v time.Time) {
 	o.CreatedDate = v
+}
+
+// GetFundingDate returns the FundingDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetFundingDate() time.Time {
+	if o == nil || isNil(o.FundingDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.FundingDate.Get()
+}
+
+// GetFundingDateOk returns a tuple with the FundingDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetFundingDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.FundingDate.Get(), o.FundingDate.IsSet()
+}
+
+// HasFundingDate returns a boolean if a field has been set.
+func (o *Account) HasFundingDate() bool {
+	if o != nil && o.FundingDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFundingDate gets a reference to the given NullableTime and assigns it to the FundingDate field.
+func (o *Account) SetFundingDate(v time.Time) {
+	o.FundingDate.Set(&v)
+}
+// SetFundingDateNil sets the value for FundingDate to be an explicit nil
+func (o *Account) SetFundingDateNil() {
+	o.FundingDate.Set(nil)
+}
+
+// UnsetFundingDate ensures that no value is present for FundingDate, not even an explicit nil
+func (o *Account) UnsetFundingDate() {
+	o.FundingDate.Unset()
+}
+
+// GetOpeningDate returns the OpeningDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetOpeningDate() time.Time {
+	if o == nil || isNil(o.OpeningDate.Get()) {
+		var ret time.Time
+		return ret
+	}
+	return *o.OpeningDate.Get()
+}
+
+// GetOpeningDateOk returns a tuple with the OpeningDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetOpeningDateOk() (*time.Time, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.OpeningDate.Get(), o.OpeningDate.IsSet()
+}
+
+// HasOpeningDate returns a boolean if a field has been set.
+func (o *Account) HasOpeningDate() bool {
+	if o != nil && o.OpeningDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOpeningDate gets a reference to the given NullableTime and assigns it to the OpeningDate field.
+func (o *Account) SetOpeningDate(v time.Time) {
+	o.OpeningDate.Set(&v)
+}
+// SetOpeningDateNil sets the value for OpeningDate to be an explicit nil
+func (o *Account) SetOpeningDateNil() {
+	o.OpeningDate.Set(nil)
+}
+
+// UnsetOpeningDate ensures that no value is present for OpeningDate, not even an explicit nil
+func (o *Account) UnsetOpeningDate() {
+	o.OpeningDate.Unset()
 }
 
 // GetSyncStatus returns the SyncStatus field value
@@ -505,6 +593,12 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["created_date"] = o.CreatedDate
 	}
+	if o.FundingDate.IsSet() {
+		toSerialize["funding_date"] = o.FundingDate.Get()
+	}
+	if o.OpeningDate.IsSet() {
+		toSerialize["opening_date"] = o.OpeningDate.Get()
+	}
 	if true {
 		toSerialize["sync_status"] = o.SyncStatus
 	}
@@ -553,6 +647,8 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "number")
 		delete(additionalProperties, "institution_name")
 		delete(additionalProperties, "created_date")
+		delete(additionalProperties, "funding_date")
+		delete(additionalProperties, "opening_date")
 		delete(additionalProperties, "sync_status")
 		delete(additionalProperties, "balance")
 		delete(additionalProperties, "status")

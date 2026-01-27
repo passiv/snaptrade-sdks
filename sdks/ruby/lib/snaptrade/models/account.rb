@@ -31,6 +31,12 @@ module SnapTrade
     # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
     attr_accessor :created_date
 
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    attr_accessor :funding_date
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    attr_accessor :opening_date
+
     attr_accessor :sync_status
 
     attr_accessor :balance
@@ -62,6 +68,8 @@ module SnapTrade
         :'number' => :'number',
         :'institution_name' => :'institution_name',
         :'created_date' => :'created_date',
+        :'funding_date' => :'funding_date',
+        :'opening_date' => :'opening_date',
         :'sync_status' => :'sync_status',
         :'balance' => :'balance',
         :'status' => :'status',
@@ -87,6 +95,8 @@ module SnapTrade
         :'number' => :'String',
         :'institution_name' => :'String',
         :'created_date' => :'Time',
+        :'funding_date' => :'Time',
+        :'opening_date' => :'Time',
         :'sync_status' => :'AccountSyncStatus',
         :'balance' => :'AccountBalance',
         :'status' => :'AccountStatus',
@@ -102,6 +112,8 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'funding_date',
+        :'opening_date',
         :'status',
         :'raw_type',
       ])
@@ -144,6 +156,14 @@ module SnapTrade
 
       if attributes.key?(:'created_date')
         self.created_date = attributes[:'created_date']
+      end
+
+      if attributes.key?(:'funding_date')
+        self.funding_date = attributes[:'funding_date']
+      end
+
+      if attributes.key?(:'opening_date')
+        self.opening_date = attributes[:'opening_date']
       end
 
       if attributes.key?(:'sync_status')
@@ -247,6 +267,8 @@ module SnapTrade
           number == o.number &&
           institution_name == o.institution_name &&
           created_date == o.created_date &&
+          funding_date == o.funding_date &&
+          opening_date == o.opening_date &&
           sync_status == o.sync_status &&
           balance == o.balance &&
           status == o.status &&
@@ -266,7 +288,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
+      [id, brokerage_authorization, name, number, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
     end
 
     # Builds the object from hash

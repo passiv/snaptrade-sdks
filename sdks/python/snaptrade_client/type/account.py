@@ -48,6 +48,12 @@ class RequiredAccount(TypedDict):
 
 
 class OptionalAccount(TypedDict, total=False):
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+    funding_date: typing.Optional[datetime]
+
+    # Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+    opening_date: typing.Optional[datetime]
+
     # The current status of the account. Can be either \"open\", \"closed\", \"archived\" or null if the status is unknown or not provided by the brokerage.
     status: typing.Optional[str]
 

@@ -106,6 +106,22 @@ namespace SnapTrade.Net.Test.Model
             // TODO unit test for the property 'CreatedDate'
         }
         /// <summary>
+        /// Test the property 'FundingDate'
+        /// </summary>
+        [Fact]
+        public void FundingDateTest()
+        {
+            // TODO unit test for the property 'FundingDate'
+        }
+        /// <summary>
+        /// Test the property 'OpeningDate'
+        /// </summary>
+        [Fact]
+        public void OpeningDateTest()
+        {
+            // TODO unit test for the property 'OpeningDate'
+        }
+        /// <summary>
         /// Test the property 'SyncStatus'
         /// </summary>
         [Fact]

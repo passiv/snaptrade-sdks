@@ -89,6 +89,8 @@ namespace SnapTrade.Net.Model
         /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
         /// <param name="institutionName">The name of the brokerage that holds the account. (required).</param>
         /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. (required).</param>
+        /// <param name="fundingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded..</param>
+        /// <param name="openingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage..</param>
         /// <param name="syncStatus">syncStatus (required).</param>
         /// <param name="balance">balance (required).</param>
         /// <param name="status">The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage..</param>
@@ -97,7 +99,7 @@ namespace SnapTrade.Net.Model
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), DateTime? fundingDate = default(DateTime?), DateTime? openingDate = default(DateTime?), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -143,6 +145,8 @@ namespace SnapTrade.Net.Model
             }
             this.Balance = balance;
             this.IsPaper = isPaper;
+            this.FundingDate = fundingDate;
+            this.OpeningDate = openingDate;
             this.Status = status;
             this.RawType = rawType;
             this.Meta = meta;
@@ -192,6 +196,20 @@ namespace SnapTrade.Net.Model
         /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.</value>
         [DataMember(Name = "created_date", IsRequired = true, EmitDefaultValue = true)]
         public DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.
+        /// </summary>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded.</value>
+        [DataMember(Name = "funding_date", EmitDefaultValue = true)]
+        public DateTime? FundingDate { get; set; }
+
+        /// <summary>
+        /// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.
+        /// </summary>
+        /// <value>Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was opened at the brokerage.</value>
+        [DataMember(Name = "opening_date", EmitDefaultValue = true)]
+        public DateTime? OpeningDate { get; set; }
 
         /// <summary>
         /// Gets or Sets SyncStatus
@@ -264,6 +282,8 @@ namespace SnapTrade.Net.Model
             sb.Append("  Number: ").Append(Number).Append("\n");
             sb.Append("  InstitutionName: ").Append(InstitutionName).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
+            sb.Append("  FundingDate: ").Append(FundingDate).Append("\n");
+            sb.Append("  OpeningDate: ").Append(OpeningDate).Append("\n");
             sb.Append("  SyncStatus: ").Append(SyncStatus).Append("\n");
             sb.Append("  Balance: ").Append(Balance).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
@@ -337,6 +357,16 @@ namespace SnapTrade.Net.Model
                     this.CreatedDate == input.CreatedDate ||
                     (this.CreatedDate != null &&
                     this.CreatedDate.Equals(input.CreatedDate))
+                ) && base.Equals(input) && 
+                (
+                    this.FundingDate == input.FundingDate ||
+                    (this.FundingDate != null &&
+                    this.FundingDate.Equals(input.FundingDate))
+                ) && base.Equals(input) && 
+                (
+                    this.OpeningDate == input.OpeningDate ||
+                    (this.OpeningDate != null &&
+                    this.OpeningDate.Equals(input.OpeningDate))
                 ) && base.Equals(input) && 
                 (
                     this.SyncStatus == input.SyncStatus ||
@@ -413,6 +443,14 @@ namespace SnapTrade.Net.Model
                 if (this.CreatedDate != null)
                 {
                     hashCode = (hashCode * 59) + this.CreatedDate.GetHashCode();
+                }
+                if (this.FundingDate != null)
+                {
+                    hashCode = (hashCode * 59) + this.FundingDate.GetHashCode();
+                }
+                if (this.OpeningDate != null)
+                {
+                    hashCode = (hashCode * 59) + this.OpeningDate.GetHashCode();
                 }
                 if (this.SyncStatus != null)
                 {
