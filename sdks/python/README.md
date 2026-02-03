@@ -47,6 +47,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.connections.remove_brokerage_authorization`](#snaptradeconnectionsremove_brokerage_authorization)
   * [`snaptrade.connections.return_rates`](#snaptradeconnectionsreturn_rates)
   * [`snaptrade.connections.session_events`](#snaptradeconnectionssession_events)
+  * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
@@ -1199,6 +1200,58 @@ Optional comma separated list of session IDs used to filter the request on speci
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/sessionEvents` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
+
+Returns the detail of a single order using the external order ID provided in the request body.
+
+The V2 order response format includes all legs of the order in the `legs` list field.
+If the order is single legged, `legs` will be a list of one leg.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_user_account_order_detail_v2_response = (
+    snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
+        brokerage_order_id="66a033fa-da74-4fcf-b527-feefdec9257e",
+        account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+        user_id="snaptrade-user-123",
+        user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    )
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### brokerage_order_id: `str`<a id="brokerage_order_id-str"></a>
+
+Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`Any`](./snaptrade_client/type/typing_any.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`AccountOrderRecordV2`](./snaptrade_client/type/account_order_record_v2.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/orders/details/v2` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

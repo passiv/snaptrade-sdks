@@ -333,6 +333,22 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/details/v2-POST': {
+        'parameters': [
+            {
+                'name': 'brokerage_order_id'
+            },
+            {
+                'name': 'accountId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/v2-GET': {
         'parameters': [
             {

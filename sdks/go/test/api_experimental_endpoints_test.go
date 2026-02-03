@@ -26,6 +26,28 @@ func Test_snaptrade_ExperimentalEndpointsApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
+    t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrderDetailV2", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        
+        accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
+            "66a033fa-da74-4fcf-b527-feefdec9257e",
+        )
+        
+        request := client.ExperimentalEndpointsApi.GetUserAccountOrderDetailV2(
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            "userId_example",
+            "userSecret_example",
+            accountInformationGetUserAccountOrderDetailRequest,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test ExperimentalEndpointsApiService GetUserAccountOrdersV2", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.ExperimentalEndpointsApi.GetUserAccountOrdersV2(

@@ -2862,6 +2862,72 @@ paths:
       - Reference Data
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
+  /accounts/{accountId}/orders/details/v2:
+    post:
+      description: |
+        Returns the detail of a single order using the external order ID provided in the request body.
+
+        The V2 order response format includes all legs of the order in the `legs` list field.
+        If the order is single legged, `legs` will be a list of one leg.
+
+        This endpoint is always realtime and does not rely on cached data.
+
+        This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+      operationId: AccountInformation_getUserAccountOrderDetailV2
+      parameters:
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/OrderDetailRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOrderRecordV2'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Not Found
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+      summary: Get account order detail (V2)
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details-v2
 components:
   requestBodies:
     RegisterUserRequestBody:
@@ -11965,6 +12031,28 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details-v2:
+      additionalProperties: true
+      properties:
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        brokerage_order_id:
+          $ref: '#/components/schemas/BrokerageOrderID'
+      required:
+      - accountId
+      - brokerage_order_id
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - accountId
+      - userId
+      - userSecret
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:
       additionalProperties: true
       properties:

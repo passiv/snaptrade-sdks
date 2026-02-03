@@ -16,6 +16,8 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
+import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
+import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -40,6 +42,24 @@ public class ExperimentalEndpointsApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new ExperimentalEndpointsApi(apiClient);
+    }
+
+    /**
+     * Get account order detail (V2)
+     *
+     * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getUserAccountOrderDetailV2Test() throws ApiException {
+        String brokerageOrderId = null;
+        UUID accountId = null;
+        String userId = null;
+        String userSecret = null;
+        AccountOrderRecordV2 response = api.getUserAccountOrderDetailV2(brokerageOrderId, accountId, userId, userSecret)
+                .execute();
+        // TODO: test validations
     }
 
     /**
