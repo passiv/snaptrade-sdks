@@ -24,6 +24,212 @@ import (
 // ExperimentalEndpointsApiService ExperimentalEndpointsApi service
 type ExperimentalEndpointsApiService service
 
+type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request struct {
+	ctx context.Context
+	ApiService *ExperimentalEndpointsApiService
+	accountId string
+	userId string
+	userSecret string
+	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
+}
+
+func (r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) Execute() (*AccountOrderRecordV2, *http.Response, error) {
+	return r.ApiService.GetUserAccountOrderDetailV2Execute(r)
+}
+
+/*
+GetUserAccountOrderDetailV2 Get account order detail (V2)
+
+Returns the detail of a single order using the external order ID provided in the request body.
+
+The V2 order response format includes all legs of the order in the `legs` list field.
+If the order is single legged, `legs` will be a list of one leg.
+
+This endpoint is always realtime and does not rely on cached data.
+
+This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param accountId
+ @param userId
+ @param userSecret
+ @param accountInformationGetUserAccountOrderDetailRequest
+ @return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request
+*/
+func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId string, userId string, userSecret string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request {
+	return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request{
+		ApiService: a,
+		ctx: a.client.cfg.Context,
+		accountId: accountId,
+		userId: userId,
+		userSecret: userSecret,
+		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
+	}
+}
+
+// Execute executes the request
+//  @return AccountOrderRecordV2
+func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) (*AccountOrderRecordV2, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AccountOrderRecordV2
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExperimentalEndpointsApiService.GetUserAccountOrderDetailV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+    subpath := "/accounts/{accountId}/orders/details/v2"
+	localVarPath := localBasePath + subpath
+	if a.client.cfg.Host != "" {
+		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
+	}
+	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
+	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
+        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
+    }
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerClientId"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("clientId", key)
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerSignature"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Signature"] = key
+			}
+		}
+	}
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["PartnerTimestamp"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarQueryParams.Add("timestamp", key)
+			}
+		}
+	}
+
+    prepareRequestBefore(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Model400FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Model404FailedRequestResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v Model500UnexpectedExceptionResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+            		newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ExperimentalEndpointsApiGetUserAccountOrdersV2Request struct {
 	ctx context.Context
 	ApiService *ExperimentalEndpointsApiService

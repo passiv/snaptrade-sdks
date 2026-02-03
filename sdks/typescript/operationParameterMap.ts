@@ -339,6 +339,22 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/orders/details/v2-POST': {
+        parameters: [
+            {
+                name: 'brokerage_order_id'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/v2-GET': {
         parameters: [
             {

@@ -27,6 +27,21 @@ describe 'ExperimentalEndpointsApi' do
     end
   end
 
+  # unit tests for get_user_account_order_detail_v2
+  # Get account order detail (V2)
+  # Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+  # @param account_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_information_get_user_account_order_detail_request 
+  # @param [Hash] opts the optional parameters
+  # @return [AccountOrderRecordV2]
+  describe 'get_user_account_order_detail_v2 test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_user_account_orders_v2
   # List account orders v2
   # Returns a list of recent orders in the specified account.  The V2 order response format will include all legs of each order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection. 

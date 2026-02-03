@@ -26,6 +26,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
+import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
+import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import java.util.UUID;
 
@@ -73,6 +75,213 @@ public class ExperimentalEndpointsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    private okhttp3.Call getUserAccountOrderDetailV2Call(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = accountInformationGetUserAccountOrderDetailRequest;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/orders/details/v2"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserAccountOrderDetailV2ValidateBeforeCall(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountOrderDetailV2(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getUserAccountOrderDetailV2(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAccountOrderDetailV2(Async)");
+        }
+
+        // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
+        if (accountInformationGetUserAccountOrderDetailRequest == null) {
+            throw new ApiException("Missing the required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling getUserAccountOrderDetailV2(Async)");
+        }
+
+        return getUserAccountOrderDetailV2Call(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+
+    }
+
+
+    private ApiResponse<AccountOrderRecordV2> getUserAccountOrderDetailV2WithHttpInfo(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest) throws ApiException {
+        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, null);
+        Type localVarReturnType = new TypeToken<AccountOrderRecordV2>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getUserAccountOrderDetailV2Async(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+        Type localVarReturnType = new TypeToken<AccountOrderRecordV2>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetUserAccountOrderDetailV2RequestBuilderGenerated {
+        final String brokerageOrderId;
+        final UUID accountId;
+        final String userId;
+        final String userSecret;
+
+        public GetUserAccountOrderDetailV2RequestBuilderGenerated(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
+            this.brokerageOrderId = brokerageOrderId;
+            this.accountId = accountId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for getUserAccountOrderDetailV2
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
+            return getUserAccountOrderDetailV2Call(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+        }
+
+        private AccountInformationGetUserAccountOrderDetailRequest buildBodyParams() {
+            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest();
+            accountInformationGetUserAccountOrderDetailRequest.brokerageOrderId(this.brokerageOrderId);
+            return accountInformationGetUserAccountOrderDetailRequest;
+        }
+
+        /**
+         * Execute getUserAccountOrderDetailV2 request
+         * @return AccountOrderRecordV2
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public AccountOrderRecordV2 execute() throws ApiException {
+            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
+            ApiResponse<AccountOrderRecordV2> localVarResp = getUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getUserAccountOrderDetailV2 request with HTTP info returned
+         * @return ApiResponse&lt;AccountOrderRecordV2&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AccountOrderRecordV2> executeWithHttpInfo() throws ApiException {
+            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
+            return getUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+        }
+
+        /**
+         * Execute getUserAccountOrderDetailV2 request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
+            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
+            return getUserAccountOrderDetailV2Async(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+        }
+    }
+
+    /**
+     * Get account order detail (V2)
+     * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * @param accountId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountInformationGetUserAccountOrderDetailRequest  (required)
+     * @return GetUserAccountOrderDetailV2RequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+     </table>
+     */
+    public ExperimentalEndpointsApi.GetUserAccountOrderDetailV2RequestBuilder getUserAccountOrderDetailV2(String brokerageOrderId, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ExperimentalEndpointsApi) this).new GetUserAccountOrderDetailV2RequestBuilder(brokerageOrderId, accountId, userId, userSecret);
+    }
     private okhttp3.Call getUserAccountOrdersV2Call(String userId, String userSecret, UUID accountId, String state, Integer days, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

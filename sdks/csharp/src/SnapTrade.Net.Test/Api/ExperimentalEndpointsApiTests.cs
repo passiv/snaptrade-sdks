@@ -47,6 +47,41 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetUserAccountOrderDetailV2
+        /// </summary>
+        [Fact]
+        public void GetUserAccountOrderDetailV2Test()
+        {
+            var accountId = "accountId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
+            
+            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
+                brokerageOrderId
+            );
+            
+            try
+            {
+                // Get account order detail (V2)
+                AccountOrderRecordV2 result = client.ExperimentalEndpoints.GetUserAccountOrderDetailV2(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetUserAccountOrderDetailV2: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetUserAccountOrdersV2
         /// </summary>
         [Fact]
