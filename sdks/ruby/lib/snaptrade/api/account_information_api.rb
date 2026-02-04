@@ -907,9 +907,9 @@ module SnapTrade
 
     # List account recent orders (last 24 hours only)
     #
-    # A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
     # This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
-    # Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+    # Differs from /orders in that it is always realtime, and only checks the last 24 hours
     # By default only returns executed orders, but that can be changed by setting *only_executed* to false
     #
     # @param user_id [String] 
@@ -925,9 +925,9 @@ module SnapTrade
 
     # List account recent orders (last 24 hours only)
     #
-    # A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account.
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders.
     # This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders
-    # Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days
+    # Differs from /orders in that it is always realtime, and only checks the last 24 hours
     # By default only returns executed orders, but that can be changed by setting *only_executed* to false
     #
     # @param user_id [String] 
@@ -941,7 +941,7 @@ module SnapTrade
     end
 
     # List account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false 
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -954,7 +954,7 @@ module SnapTrade
     end
 
     # List account recent orders (last 24 hours only)
-    # A lightweight endpoint that returns a list of orders executed in the last 24 hours in the specified account. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is realtime, and only checks the last 24 hours as opposed to the last 30 days By default only returns executed orders, but that can be changed by setting *only_executed* to false 
+    # A lightweight endpoint that returns the latest page of orders placed in the last 24 hours in the specified account. For most brokerages, the default page size is 100 meaning the endpoint will return a max of 100 orders. This endpoint is realtime and can be used to quickly check if account state has recently changed due to an execution, or check status of recently placed orders Differs from /orders in that it is always realtime, and only checks the last 24 hours By default only returns executed orders, but that can be changed by setting *only_executed* to false 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
