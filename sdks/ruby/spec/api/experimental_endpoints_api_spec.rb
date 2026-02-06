@@ -29,11 +29,11 @@ describe 'ExperimentalEndpointsApi' do
 
   # unit tests for get_user_account_order_detail_v2
   # Get account order detail (V2)
-  # Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+  # Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
   # @param account_id 
+  # @param brokerage_order_id 
   # @param user_id 
   # @param user_secret 
-  # @param account_information_get_user_account_order_detail_request 
   # @param [Hash] opts the optional parameters
   # @return [AccountOrderRecordV2]
   describe 'get_user_account_order_detail_v2 test' do

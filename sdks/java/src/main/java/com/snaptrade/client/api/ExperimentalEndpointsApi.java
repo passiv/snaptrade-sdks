@@ -1,7 +1,6 @@
 package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
-import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import java.util.UUID;
@@ -16,8 +15,8 @@ public class ExperimentalEndpointsApi extends ExperimentalEndpointsApiGenerated 
         super(apiClient);
     }
     public class GetUserAccountOrderDetailV2RequestBuilder extends GetUserAccountOrderDetailV2RequestBuilderGenerated {
-        public GetUserAccountOrderDetailV2RequestBuilder(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
-            super(brokerageOrderId, accountId, userId, userSecret);
+        public GetUserAccountOrderDetailV2RequestBuilder(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
+            super(accountId, brokerageOrderId, userId, userSecret);
         }
     }
     public class GetUserAccountOrdersV2RequestBuilder extends GetUserAccountOrdersV2RequestBuilderGenerated {

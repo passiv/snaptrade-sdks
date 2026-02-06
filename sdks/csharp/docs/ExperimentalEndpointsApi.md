@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **POST** /accounts/{accountId}/orders/details/v2 | Get account order detail (V2) |
+| [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
 
@@ -13,7 +13,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 
 
-Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
 
 ### Example
 ```csharp
@@ -36,18 +36,14 @@ namespace Example
             client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
 
             var accountId = "accountId_example";
+            var brokerageOrderId = "brokerageOrderId_example";
             var userId = "userId_example";
             var userSecret = "userSecret_example";
-            var brokerageOrderId = "66a033fa-da74-4fcf-b527-feefdec9257e"; // Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-            
-            var accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest(
-                brokerageOrderId
-            );
             
             try
             {
                 // Get account order detail (V2)
-                AccountOrderRecordV2 result = client.ExperimentalEndpoints.GetUserAccountOrderDetailV2(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+                AccountOrderRecordV2 result = client.ExperimentalEndpoints.GetUserAccountOrderDetailV2(accountId, brokerageOrderId, userId, userSecret);
                 Console.WriteLine(result);
             }
             catch (ApiException e)
@@ -74,7 +70,7 @@ This returns an ApiResponse object which contains the response data, status code
 try
 {
     // Get account order detail (V2)
-    ApiResponse<AccountOrderRecordV2> response = apiInstance.GetUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+    ApiResponse<AccountOrderRecordV2> response = apiInstance.GetUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
     Debug.Write("Status Code: " + response.StatusCode);
     Debug.Write("Response Headers: " + response.Headers);
     Debug.Write("Response Body: " + response.Data);
@@ -92,9 +88,9 @@ catch (ApiException e)
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **accountId** | **string** |  |  |
+| **brokerageOrderId** | **string** |  |  |
 | **userId** | **string** |  |  |
 | **userSecret** | **string** |  |  |
-| **accountInformationGetUserAccountOrderDetailRequest** | [**AccountInformationGetUserAccountOrderDetailRequest**](AccountInformationGetUserAccountOrderDetailRequest.md) |  |  |
 
 ### Return type
 
@@ -105,7 +101,6 @@ catch (ApiException e)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
-| **400** | Bad Request |  -  |
 | **404** | Not Found |  -  |
 | **500** | Unexpected error |  -  |
 

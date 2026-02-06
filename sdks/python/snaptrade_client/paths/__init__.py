@@ -60,4 +60,4 @@ class PathValues(str, enum.Enum):
     SECURITY_TYPES = "/securityTypes"
     SYMBOLS = "/symbols"
     SYMBOLS_QUERY = "/symbols/{query}"
-    ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2 = "/accounts/{accountId}/orders/details/v2"
+    ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS_V2_BROKERAGE_ORDER_ID = "/accounts/{accountId}/orders/details/v2/{brokerageOrderId}"

@@ -1250,7 +1250,7 @@ Optional comma separated list of session IDs used to filter the request on speci
 
 ### `snaptrade.experimentalEndpoints.getUserAccountOrderDetailV2`<a id="snaptradeexperimentalendpointsgetuseraccountorderdetailv2"></a>
 
-Returns the detail of a single order using the external order ID provided in the request body.
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
 The V2 order response format includes all legs of the order in the `legs` list field.
 If the order is single legged, `legs` will be a list of one leg.
@@ -1265,17 +1265,15 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 ```java
 AccountOrderRecordV2 result = client
         .experimentalEndpoints
-        .getUserAccountOrderDetailV2(brokerageOrderId, accountId, userId, userSecret)
+        .getUserAccountOrderDetailV2(accountId, brokerageOrderId, userId, userSecret)
         .execute();
 ```
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-
-Order ID returned by brokerage. This is the unique identifier for the order in the brokerage system.
-
 ##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### brokerageOrderId: `String`<a id="brokerageorderid-string"></a>
 
 ##### userId: `String`<a id="userid-string"></a>
 
@@ -1287,7 +1285,7 @@ Order ID returned by brokerage. This is the unique identifier for the order in t
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/details/v2` `POST`
+`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

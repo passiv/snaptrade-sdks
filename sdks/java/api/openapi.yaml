@@ -3017,10 +3017,10 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--symbols-query
       x-accepts: application/json
-  /accounts/{accountId}/orders/details/v2:
-    post:
+  /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
+    get:
       description: |
-        Returns the detail of a single order using the external order ID provided in the request body.
+        Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
         The V2 order response format includes all legs of the order in the `legs` list field.
         If the order is single legged, `legs` will be a list of one leg.
@@ -3037,6 +3037,13 @@ paths:
         schema:
           $ref: '#/components/schemas/AccountID'
         style: simple
+      - explode: false
+        in: path
+        name: brokerageOrderId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageOrderID'
+        style: simple
       - explode: true
         in: query
         name: userId
@@ -3051,8 +3058,6 @@ paths:
         schema:
           $ref: '#/components/schemas/UserSecret'
         style: form
-      requestBody:
-        $ref: '#/components/requestBodies/OrderDetailRequestBody'
       responses:
         "200":
           content:
@@ -3060,13 +3065,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccountOrderRecordV2'
           description: OK
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/400FailedRequestResponse'
-          description: Bad Request
-          x-do-not-generate: true
         "404":
           content:
             application/json:
@@ -3085,8 +3083,7 @@ paths:
       tags:
       - Experimental endpoints
       x-konfig-operation-can-have-single-parameter: true
-      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details-v2
-      x-content-type: application/json
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId
       x-accepts: application/json
 components:
   requestBodies:
@@ -12507,26 +12504,27 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - query
-    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-orders-details-v2:
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-details-v2-brokerageOrderId:
       additionalProperties: true
       properties:
         accountId:
           $ref: '#/components/schemas/AccountID'
+        brokerageOrderId:
+          $ref: '#/components/schemas/BrokerageOrderID'
         userId:
           $ref: '#/components/schemas/UserID'
         userSecret:
           $ref: '#/components/schemas/UserSecret'
-        brokerage_order_id:
-          $ref: '#/components/schemas/BrokerageOrderID'
       required:
       - accountId
-      - brokerage_order_id
+      - brokerageOrderId
       - userId
       - userSecret
       type: object
       x-do-not-generate: true
       x-konfig-is-parameter:
       - accountId
+      - brokerageOrderId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-post--connectionAdded:

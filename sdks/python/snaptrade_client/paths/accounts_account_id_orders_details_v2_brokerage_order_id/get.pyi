@@ -32,12 +32,10 @@ import frozendict  # noqa: F401
 
 from snaptrade_client import schemas  # noqa: F401
 
-from snaptrade_client.model.model400_failed_request_response import Model400FailedRequestResponse as Model400FailedRequestResponseSchema
 from snaptrade_client.model.account_order_record_v2 import AccountOrderRecordV2 as AccountOrderRecordV2Schema
 from snaptrade_client.model.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse as Model500UnexpectedExceptionResponseSchema
 from snaptrade_client.model.model404_failed_request_response import Model404FailedRequestResponse as Model404FailedRequestResponseSchema
 
-from snaptrade_client.type.model400_failed_request_response import Model400FailedRequestResponse
 from snaptrade_client.type.model500_unexpected_exception_response import Model500UnexpectedExceptionResponse
 from snaptrade_client.type.account_order_record_v2 import AccountOrderRecordV2
 from snaptrade_client.type.model404_failed_request_response import Model404FailedRequestResponse
@@ -80,10 +78,12 @@ request_query_user_secret = api_client.QueryParameter(
 )
 # Path params
 AccountIdSchema = schemas.UUIDSchema
+BrokerageOrderIdSchema = schemas.StrSchema
 RequestRequiredPathParams = typing_extensions.TypedDict(
     'RequestRequiredPathParams',
     {
         'accountId': typing.Union[AccountIdSchema, str, uuid.UUID, ],
+        'brokerageOrderId': typing.Union[BrokerageOrderIdSchema, str, ],
     }
 )
 RequestOptionalPathParams = typing_extensions.TypedDict(
@@ -104,69 +104,10 @@ request_path_account_id = api_client.PathParameter(
     schema=AccountIdSchema,
     required=True,
 )
-# body param
-
-
-class SchemaForRequestBodyApplicationJson(
-    schemas.DictSchema
-):
-
-
-    class MetaOapg:
-        required = {
-            "brokerage_order_id",
-        }
-        
-        class properties:
-            brokerage_order_id = schemas.StrSchema
-            __annotations__ = {
-                "brokerage_order_id": brokerage_order_id,
-            }
-    
-    brokerage_order_id: MetaOapg.properties.brokerage_order_id
-    
-    @typing.overload
-    def __getitem__(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
-    
-    @typing.overload
-    def __getitem__(self, name: str) -> schemas.UnsetAnyTypeSchema: ...
-    
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
-        # dict_instance[name] accessor
-        return super().__getitem__(name)
-    
-    
-    @typing.overload
-    def get_item_oapg(self, name: typing_extensions.Literal["brokerage_order_id"]) -> MetaOapg.properties.brokerage_order_id: ...
-    
-    @typing.overload
-    def get_item_oapg(self, name: str) -> typing.Union[schemas.UnsetAnyTypeSchema, schemas.Unset]: ...
-    
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["brokerage_order_id", ], str]):
-        return super().get_item_oapg(name)
-    
-
-    def __new__(
-        cls,
-        *args: typing.Union[dict, frozendict.frozendict, ],
-        brokerage_order_id: typing.Union[MetaOapg.properties.brokerage_order_id, str, ],
-        _configuration: typing.Optional[schemas.Configuration] = None,
-        **kwargs: typing.Union[schemas.AnyTypeSchema, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, None, list, tuple, bytes],
-    ) -> 'SchemaForRequestBodyApplicationJson':
-        return super().__new__(
-            cls,
-            *args,
-            brokerage_order_id=brokerage_order_id,
-            _configuration=_configuration,
-            **kwargs,
-        )
-
-
-request_body_typing_any = api_client.RequestBody(
-    content={
-        'application/json': api_client.MediaType(
-            schema=SchemaForRequestBodyApplicationJson),
-    },
+request_path_brokerage_order_id = api_client.PathParameter(
+    name="brokerageOrderId",
+    style=api_client.ParameterStyle.SIMPLE,
+    schema=BrokerageOrderIdSchema,
     required=True,
 )
 SchemaFor200ResponseBodyApplicationJson = AccountOrderRecordV2Schema
@@ -188,27 +129,6 @@ _response_for_200 = api_client.OpenApiResponse(
     content={
         'application/json': api_client.MediaType(
             schema=SchemaFor200ResponseBodyApplicationJson),
-    },
-)
-SchemaFor400ResponseBodyApplicationJson = Model400FailedRequestResponseSchema
-
-
-@dataclass
-class ApiResponseFor400(api_client.ApiResponse):
-    body: Model400FailedRequestResponse
-
-
-@dataclass
-class ApiResponseFor400Async(api_client.AsyncApiResponse):
-    body: Model400FailedRequestResponse
-
-
-_response_for_400 = api_client.OpenApiResponse(
-    response_cls=ApiResponseFor400,
-    response_cls_async=ApiResponseFor400Async,
-    content={
-        'application/json': api_client.MediaType(
-            schema=SchemaFor400ResponseBodyApplicationJson),
     },
 )
 SchemaFor404ResponseBodyApplicationJson = Model404FailedRequestResponseSchema
@@ -262,9 +182,8 @@ class BaseApi(api_client.Api):
 
     def _get_user_account_order_detail_v2_mapped_args(
         self,
-        body: typing.Optional[typing.Any] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -273,29 +192,25 @@ class BaseApi(api_client.Api):
         args: api_client.MappedArgs = api_client.MappedArgs()
         _query_params = {}
         _path_params = {}
-        _body = {}
-        if brokerage_order_id is not None:
-            _body["brokerage_order_id"] = brokerage_order_id
-        args.body = body if body is not None else _body
         if user_id is not None:
             _query_params["userId"] = user_id
         if user_secret is not None:
             _query_params["userSecret"] = user_secret
         if account_id is not None:
             _path_params["accountId"] = account_id
+        if brokerage_order_id is not None:
+            _path_params["brokerageOrderId"] = brokerage_order_id
         args.query = query_params if query_params else _query_params
         args.path = path_params if path_params else _path_params
         return args
 
     async def _aget_user_account_order_detail_v2_oapg(
         self,
-        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        content_type: str = 'application/json',
         stream: bool = False,
         **kwargs,
     ) -> typing.Union[
@@ -316,6 +231,7 @@ class BaseApi(api_client.Api):
         _path_params = {}
         for parameter in (
             request_path_account_id,
+            request_path_brokerage_order_id,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -345,36 +261,20 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'post'.upper()
-        _headers.add('Content-Type', content_type)
-    
-        if body is schemas.unset:
-            raise exceptions.ApiValueError(
-                'The required body parameter has an invalid value of: unset. Set a valid value instead')
-        _fields = None
-        _body = None
+        method = 'get'.upper()
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/accounts/{accountId}/orders/details/v2',
-            body=body,
+            path_template='/accounts/{accountId}/orders/details/v2/{brokerageOrderId}',
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
-        if 'fields' in serialized_data:
-            _fields = serialized_data['fields']
-        elif 'body' in serialized_data:
-            _body = serialized_data['body']
     
         response = await self.api_client.async_call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
-            fields=_fields,
-            serialized_body=_body,
-            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -437,13 +337,11 @@ class BaseApi(api_client.Api):
 
     def _get_user_account_order_detail_v2_oapg(
         self,
-        body: typing.Any = None,
         query_params: typing.Optional[dict] = {},
         path_params: typing.Optional[dict] = {},
         skip_deserialization: bool = True,
         timeout: typing.Optional[typing.Union[float, typing.Tuple]] = None,
         accept_content_types: typing.Tuple[str] = _all_accept_content_types,
-        content_type: str = 'application/json',
         stream: bool = False,
     ) -> typing.Union[
         ApiResponseFor200,
@@ -462,6 +360,7 @@ class BaseApi(api_client.Api):
         _path_params = {}
         for parameter in (
             request_path_account_id,
+            request_path_brokerage_order_id,
         ):
             parameter_data = path_params.get(parameter.name, schemas.unset)
             if parameter_data is schemas.unset:
@@ -491,36 +390,20 @@ class BaseApi(api_client.Api):
         if accept_content_types:
             for accept_content_type in accept_content_types:
                 _headers.add('Accept', accept_content_type)
-        method = 'post'.upper()
-        _headers.add('Content-Type', content_type)
-    
-        if body is schemas.unset:
-            raise exceptions.ApiValueError(
-                'The required body parameter has an invalid value of: unset. Set a valid value instead')
-        _fields = None
-        _body = None
+        method = 'get'.upper()
         request_before_hook(
             resource_path=used_path,
             method=method,
             configuration=self.api_client.configuration,
-            path_template='/accounts/{accountId}/orders/details/v2',
-            body=body,
+            path_template='/accounts/{accountId}/orders/details/v2/{brokerageOrderId}',
             auth_settings=_auth,
             headers=_headers,
         )
-        serialized_data = request_body_typing_any.serialize(body, content_type)
-        if 'fields' in serialized_data:
-            _fields = serialized_data['fields']
-        elif 'body' in serialized_data:
-            _body = serialized_data['body']
     
         response = self.api_client.call_api(
             resource_path=used_path,
             method=method,
             headers=_headers,
-            fields=_fields,
-            serialized_body=_body,
-            body=body,
             auth_settings=_auth,
             prefix_separator_iterator=prefix_separator_iterator,
             timeout=timeout,
@@ -555,9 +438,8 @@ class GetUserAccountOrderDetailV2(BaseApi):
 
     async def aget_user_account_order_detail_v2(
         self,
-        body: typing.Optional[typing.Any] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -569,16 +451,14 @@ class GetUserAccountOrderDetailV2(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._get_user_account_order_detail_v2_mapped_args(
-            body=body,
             query_params=query_params,
             path_params=path_params,
-            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
         )
         return await self._aget_user_account_order_detail_v2_oapg(
-            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
@@ -586,9 +466,8 @@ class GetUserAccountOrderDetailV2(BaseApi):
     
     def get_user_account_order_detail_v2(
         self,
-        body: typing.Optional[typing.Any] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -597,30 +476,27 @@ class GetUserAccountOrderDetailV2(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_v2_mapped_args(
-            body=body,
             query_params=query_params,
             path_params=path_params,
-            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
         )
         return self._get_user_account_order_detail_v2_oapg(
-            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )
 
-class ApiForpost(BaseApi):
+class ApiForget(BaseApi):
     # this class is used by api classes that refer to endpoints by path and http method names
 
-    async def apost(
+    async def aget(
         self,
-        body: typing.Optional[typing.Any] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -632,26 +508,23 @@ class ApiForpost(BaseApi):
         AsyncGeneratorResponse,
     ]:
         args = self._get_user_account_order_detail_v2_mapped_args(
-            body=body,
             query_params=query_params,
             path_params=path_params,
-            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
         )
         return await self._aget_user_account_order_detail_v2_oapg(
-            body=args.body,
             query_params=args.query,
             path_params=args.path,
             **kwargs,
         )
     
-    def post(
+    def get(
         self,
-        body: typing.Optional[typing.Any] = None,
-        brokerage_order_id: typing.Optional[str] = None,
         account_id: typing.Optional[str] = None,
+        brokerage_order_id: typing.Optional[str] = None,
         user_id: typing.Optional[str] = None,
         user_secret: typing.Optional[str] = None,
         query_params: typing.Optional[dict] = {},
@@ -660,18 +533,16 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
+        """ Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint.  """
         args = self._get_user_account_order_detail_v2_mapped_args(
-            body=body,
             query_params=query_params,
             path_params=path_params,
-            brokerage_order_id=brokerage_order_id,
             account_id=account_id,
+            brokerage_order_id=brokerage_order_id,
             user_id=user_id,
             user_secret=user_secret,
         )
         return self._get_user_account_order_detail_v2_oapg(
-            body=args.body,
             query_params=args.query,
             path_params=args.path,
         )

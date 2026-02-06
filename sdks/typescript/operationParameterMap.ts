@@ -339,13 +339,13 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
-    '/accounts/{accountId}/orders/details/v2-POST': {
+    '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         parameters: [
             {
-                name: 'brokerage_order_id'
+                name: 'accountId'
             },
             {
-                name: 'accountId'
+                name: 'brokerageOrderId'
             },
             {
                 name: 'userId'
