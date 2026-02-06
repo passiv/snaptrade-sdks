@@ -28,9 +28,9 @@ type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request struct {
 	ctx context.Context
 	ApiService *ExperimentalEndpointsApiService
 	accountId string
+	brokerageOrderId string
 	userId string
 	userSecret string
-	accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest
 }
 
 func (r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) Execute() (*AccountOrderRecordV2, *http.Response, error) {
@@ -40,7 +40,7 @@ func (r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) Execute() (*
 /*
 GetUserAccountOrderDetailV2 Get account order detail (V2)
 
-Returns the detail of a single order using the external order ID provided in the request body.
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
 The V2 order response format includes all legs of the order in the `legs` list field.
 If the order is single legged, `legs` will be a list of one leg.
@@ -52,19 +52,19 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param accountId
+ @param brokerageOrderId
  @param userId
  @param userSecret
- @param accountInformationGetUserAccountOrderDetailRequest
  @return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request
 */
-func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId string, userId string, userSecret string, accountInformationGetUserAccountOrderDetailRequest AccountInformationGetUserAccountOrderDetailRequest) ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request {
+func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId string, brokerageOrderId string, userId string, userSecret string) ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request {
 	return ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request{
 		ApiService: a,
 		ctx: a.client.cfg.Context,
 		accountId: accountId,
+		brokerageOrderId: brokerageOrderId,
 		userId: userId,
 		userSecret: userSecret,
-		accountInformationGetUserAccountOrderDetailRequest: accountInformationGetUserAccountOrderDetailRequest,
 	}
 }
 
@@ -72,7 +72,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2(accountId 
 //  @return AccountOrderRecordV2
 func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request) (*AccountOrderRecordV2, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
+		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
 		localVarReturnValue  *AccountOrderRecordV2
@@ -83,12 +83,13 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r E
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-    subpath := "/accounts/{accountId}/orders/details/v2"
+    subpath := "/accounts/{accountId}/orders/details/v2/{brokerageOrderId}"
 	localVarPath := localBasePath + subpath
 	if a.client.cfg.Host != "" {
 		localVarPath = a.client.cfg.Scheme + "://" + a.client.cfg.Host + subpath
 	}
 	localVarPath = strings.Replace(localVarPath, "{"+"accountId"+"}", url.PathEscape(parameterToString(r.accountId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"brokerageOrderId"+"}", url.PathEscape(parameterToString(r.brokerageOrderId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -97,7 +98,7 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r E
 	localVarQueryParams.Add("userId", parameterToString(r.userId, ""))
 	localVarQueryParams.Add("userSecret", parameterToString(r.userSecret, ""))
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -113,10 +114,6 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r E
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
-	// body params
-    if !checkNilInterface(r.accountInformationGetUserAccountOrderDetailRequest) {
-        localVarPostBody = r.accountInformationGetUserAccountOrderDetailRequest
-    }
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -182,17 +179,6 @@ func (a *ExperimentalEndpointsApiService) GetUserAccountOrderDetailV2Execute(r E
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v Model400FailedRequestResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-            		newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-            		newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Model404FailedRequestResponse

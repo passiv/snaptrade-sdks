@@ -4,7 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
-[**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Post** /accounts/{accountId}/orders/details/v2 | Get account order detail (V2)
+[**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#GetUserAccountOrderDetailV2) | **Get** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2)
 [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountOrdersV2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#GetUserAccountRecentOrdersV2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 
@@ -33,16 +33,11 @@ func main() {
     configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
     client := snaptrade.NewAPIClient(configuration)
 
-    
-    accountInformationGetUserAccountOrderDetailRequest := *snaptrade.NewAccountInformationGetUserAccountOrderDetailRequest(
-        "66a033fa-da74-4fcf-b527-feefdec9257e",
-    )
-    
     request := client.ExperimentalEndpointsApi.GetUserAccountOrderDetailV2(
         ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "brokerageOrderId_example",
         "userId_example",
         "userSecret_example",
-        accountInformationGetUserAccountOrderDetailRequest,
     )
     
     resp, httpRes, err := request.Execute()

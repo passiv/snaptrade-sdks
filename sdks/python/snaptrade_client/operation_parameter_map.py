@@ -333,13 +333,13 @@ operation_parameter_map = {
             },
         ]
     },
-    '/accounts/{accountId}/orders/details/v2-POST': {
+    '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         'parameters': [
             {
-                'name': 'brokerage_order_id'
+                'name': 'accountId'
             },
             {
-                'name': 'accountId'
+                'name': 'brokerageOrderId'
             },
             {
                 'name': 'userId'

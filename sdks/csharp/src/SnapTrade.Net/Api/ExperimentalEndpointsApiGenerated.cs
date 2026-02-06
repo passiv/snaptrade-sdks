@@ -31,31 +31,31 @@ namespace SnapTrade.Net.Api
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecordV2</returns>
-        AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
+        AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
 
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecordV2</returns>
-        ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0);
+        ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0);
         /// <summary>
         /// List account orders v2
         /// </summary>
@@ -129,33 +129,33 @@ namespace SnapTrade.Net.Api
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecordV2</returns>
-        System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <summary>
         /// Get account order detail (V2)
         /// </summary>
         /// <remarks>
-        /// Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecordV2)</returns>
-        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// List account orders v2
         /// </summary>
@@ -341,37 +341,43 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>AccountOrderRecordV2</returns>
-        public AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
+        public AccountOrderRecordV2 GetUserAccountOrderDetailV2(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = GetUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = GetUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <returns>ApiResponse of AccountOrderRecordV2</returns>
-        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0)
+        public SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> GetUserAccountOrderDetailV2WithHttpInfo(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0)
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
             }
 
             // verify the required parameter 'userId' is set
@@ -386,16 +392,9 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
             }
 
-            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
-            if (accountInformationGetUserAccountOrderDetailRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
-            }
-
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
-                "application/json"
             };
 
             // to determine the Accept header
@@ -416,9 +415,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetUserAccountOrderDetailV2";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -440,7 +439,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<AccountOrderRecordV2>("/accounts/{accountId}/orders/details/v2", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<AccountOrderRecordV2>("/accounts/{accountId}/orders/details/v2/{brokerageOrderId}", localVarRequestOptions, this.Configuration);
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetUserAccountOrderDetailV2", localVarResponse);
@@ -454,39 +453,45 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of AccountOrderRecordV2</returns>
-        public async System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async System.Threading.Tasks.Task<AccountOrderRecordV2> GetUserAccountOrderDetailV2Async(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = await GetUserAccountOrderDetailV2WithHttpInfoAsync(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, operationIndex, cancellationToken).ConfigureAwait(false);
+            SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2> localVarResponse = await GetUserAccountOrderDetailV2WithHttpInfoAsync(accountId, brokerageOrderId, userId, userSecret, operationIndex, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get account order detail (V2) Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+        /// Get account order detail (V2) Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="accountId"></param>
+        /// <param name="brokerageOrderId"></param>
         /// <param name="userId"></param>
         /// <param name="userSecret"></param>
-        /// <param name="accountInformationGetUserAccountOrderDetailRequest"></param>
         /// <param name="operationIndex">Index associated with the operation.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (AccountOrderRecordV2)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string userId, string userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<AccountOrderRecordV2>> GetUserAccountOrderDetailV2WithHttpInfoAsync(string accountId, string brokerageOrderId, string userId, string userSecret, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // verify the required parameter 'accountId' is set
             if (accountId == null)
             {
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
+            }
+
+            // verify the required parameter 'brokerageOrderId' is set
+            if (brokerageOrderId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'brokerageOrderId' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
             }
 
             // verify the required parameter 'userId' is set
@@ -501,17 +506,10 @@ namespace SnapTrade.Net.Api
                 throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
             }
 
-            // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
-            if (accountInformationGetUserAccountOrderDetailRequest == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling ExperimentalEndpointsApi->GetUserAccountOrderDetailV2");
-            }
-
 
             SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
 
             string[] _contentTypes = new string[] {
-                "application/json"
             };
 
             // to determine the Accept header
@@ -532,9 +530,9 @@ namespace SnapTrade.Net.Api
             }
 
             localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.PathParameters.Add("brokerageOrderId", SnapTrade.Net.Client.ClientUtils.ParameterToString(brokerageOrderId)); // path parameter
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
             localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.Data = accountInformationGetUserAccountOrderDetailRequest;
 
             localVarRequestOptions.Operation = "ExperimentalEndpointsApi.GetUserAccountOrderDetailV2";
             localVarRequestOptions.OperationIndex = operationIndex;
@@ -556,7 +554,7 @@ namespace SnapTrade.Net.Api
             }
 
             // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.PostAsync<AccountOrderRecordV2>("/accounts/{accountId}/orders/details/v2", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<AccountOrderRecordV2>("/accounts/{accountId}/orders/details/v2/{brokerageOrderId}", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {

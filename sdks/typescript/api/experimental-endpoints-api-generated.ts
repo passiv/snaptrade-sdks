@@ -19,13 +19,9 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
-import { AccountInformationGetUserAccountOrderDetailRequest } from '../models';
-// @ts-ignore
 import { AccountOrderRecordV2 } from '../models';
 // @ts-ignore
 import { AccountOrdersV2Response } from '../models';
-// @ts-ignore
-import { Model400FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model403FeatureNotEnabledResponse } from '../models';
 // @ts-ignore
@@ -42,26 +38,27 @@ import { requestBeforeHook } from '../requestBeforeHook';
 export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {string} accountId 
+         * @param {string} brokerageOrderId 
          * @param {string} userId 
          * @param {string} userSecret 
-         * @param {AccountInformationGetUserAccountOrderDetailRequest} accountInformationGetUserAccountOrderDetailRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserAccountOrderDetailV2: async (accountId: string, userId: string, userSecret: string, accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserAccountOrderDetailV2: async (accountId: string, brokerageOrderId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'accountId' is not null or undefined
             assertParamExists('getUserAccountOrderDetailV2', 'accountId', accountId)
+            // verify required parameter 'brokerageOrderId' is not null or undefined
+            assertParamExists('getUserAccountOrderDetailV2', 'brokerageOrderId', brokerageOrderId)
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('getUserAccountOrderDetailV2', 'userId', userId)
             // verify required parameter 'userSecret' is not null or undefined
             assertParamExists('getUserAccountOrderDetailV2', 'userSecret', userSecret)
-            // verify required parameter 'accountInformationGetUserAccountOrderDetailRequest' is not null or undefined
-            assertParamExists('getUserAccountOrderDetailV2', 'accountInformationGetUserAccountOrderDetailRequest', accountInformationGetUserAccountOrderDetailRequest)
-            const localVarPath = `/accounts/{accountId}/orders/details/v2`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            const localVarPath = `/accounts/{accountId}/orders/details/v2/{brokerageOrderId}`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)))
+                .replace(`{${"brokerageOrderId"}}`, encodeURIComponent(String(brokerageOrderId !== undefined ? brokerageOrderId : `-brokerageOrderId-`)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -69,7 +66,7 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -89,21 +86,16 @@ export const ExperimentalEndpointsApiAxiosParamCreator = function (configuration
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             requestBeforeHook({
-                requestBody: accountInformationGetUserAccountOrderDetailRequest,
                 queryParameters: localVarQueryParameter,
                 requestConfig: localVarRequestOptions,
                 path: localVarPath,
                 configuration,
-                pathTemplate: '/accounts/{accountId}/orders/details/v2',
-                httpMethod: 'POST'
+                pathTemplate: '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}',
+                httpMethod: 'GET'
             });
-            localVarRequestOptions.data = serializeDataIfNeeded(accountInformationGetUserAccountOrderDetailRequest, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -261,17 +253,14 @@ export const ExperimentalEndpointsApiFp = function(configuration?: Configuration
     const localVarAxiosParamCreator = ExperimentalEndpointsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         async getUserAccountOrderDetailV2(requestParameters: ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountOrderRecordV2>> {
-            const accountInformationGetUserAccountOrderDetailRequest: AccountInformationGetUserAccountOrderDetailRequest = {
-                brokerage_order_id: requestParameters.brokerage_order_id
-            };
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetailV2(requestParameters.accountId, requestParameters.userId, requestParameters.userSecret, accountInformationGetUserAccountOrderDetailRequest, options);
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getUserAccountOrderDetailV2(requestParameters.accountId, requestParameters.brokerageOrderId, requestParameters.userId, requestParameters.userSecret, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -307,7 +296,7 @@ export const ExperimentalEndpointsApiFactory = function (configuration?: Configu
     const localVarFp = ExperimentalEndpointsApiFp(configuration)
     return {
         /**
-         * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+         * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
          * @summary Get account order detail (V2)
          * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -358,6 +347,13 @@ export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request = {
     * @type {string}
     * @memberof ExperimentalEndpointsApiGetUserAccountOrderDetailV2
     */
+    readonly brokerageOrderId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ExperimentalEndpointsApiGetUserAccountOrderDetailV2
+    */
     readonly userId: string
     
     /**
@@ -367,7 +363,7 @@ export type ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request = {
     */
     readonly userSecret: string
     
-} & AccountInformationGetUserAccountOrderDetailRequest
+}
 
 /**
  * Request parameters for getUserAccountOrdersV2 operation in ExperimentalEndpointsApi.
@@ -458,7 +454,7 @@ export type ExperimentalEndpointsApiGetUserAccountRecentOrdersV2Request = {
  */
 export class ExperimentalEndpointsApiGenerated extends BaseAPI {
     /**
-     * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the `legs` list field. If the order is single legged, `legs` will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @summary Get account order detail (V2)
      * @param {ExperimentalEndpointsApiGetUserAccountOrderDetailV2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

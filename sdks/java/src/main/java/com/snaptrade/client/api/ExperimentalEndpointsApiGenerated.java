@@ -26,7 +26,6 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import com.snaptrade.client.model.AccountInformationGetUserAccountOrderDetailRequest;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
 import java.util.UUID;
@@ -75,7 +74,7 @@ public class ExperimentalEndpointsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call getUserAccountOrderDetailV2Call(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOrderDetailV2Call(UUID accountId, String brokerageOrderId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -89,11 +88,12 @@ public class ExperimentalEndpointsApiGenerated {
             basePath = null;
         }
 
-        Object localVarPostBody = accountInformationGetUserAccountOrderDetailRequest;
+        Object localVarPostBody = null;
 
         // create path and map variables
-        String localVarPath = "/accounts/{accountId}/orders/details/v2"
-            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+        String localVarPath = "/accounts/{accountId}/orders/details/v2/{brokerageOrderId}"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()))
+            .replace("{" + "brokerageOrderId" + "}", localVarApiClient.escapeString(brokerageOrderId.toString()));
 
         List<Pair> localVarQueryParams = new ArrayList<Pair>();
         List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
@@ -118,7 +118,6 @@ public class ExperimentalEndpointsApiGenerated {
         }
 
         final String[] localVarContentTypes = {
-            "application/json"
         };
         final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
         if (localVarContentType != null) {
@@ -126,14 +125,19 @@ public class ExperimentalEndpointsApiGenerated {
         }
 
         String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserAccountOrderDetailV2ValidateBeforeCall(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOrderDetailV2ValidateBeforeCall(UUID accountId, String brokerageOrderId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'accountId' is set
         if (accountId == null) {
             throw new ApiException("Missing the required parameter 'accountId' when calling getUserAccountOrderDetailV2(Async)");
+        }
+
+        // verify the required parameter 'brokerageOrderId' is set
+        if (brokerageOrderId == null) {
+            throw new ApiException("Missing the required parameter 'brokerageOrderId' when calling getUserAccountOrderDetailV2(Async)");
         }
 
         // verify the required parameter 'userId' is set
@@ -146,39 +150,34 @@ public class ExperimentalEndpointsApiGenerated {
             throw new ApiException("Missing the required parameter 'userSecret' when calling getUserAccountOrderDetailV2(Async)");
         }
 
-        // verify the required parameter 'accountInformationGetUserAccountOrderDetailRequest' is set
-        if (accountInformationGetUserAccountOrderDetailRequest == null) {
-            throw new ApiException("Missing the required parameter 'accountInformationGetUserAccountOrderDetailRequest' when calling getUserAccountOrderDetailV2(Async)");
-        }
-
-        return getUserAccountOrderDetailV2Call(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+        return getUserAccountOrderDetailV2Call(accountId, brokerageOrderId, userId, userSecret, _callback);
 
     }
 
 
-    private ApiResponse<AccountOrderRecordV2> getUserAccountOrderDetailV2WithHttpInfo(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest) throws ApiException {
-        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, null);
+    private ApiResponse<AccountOrderRecordV2> getUserAccountOrderDetailV2WithHttpInfo(UUID accountId, String brokerageOrderId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, null);
         Type localVarReturnType = new TypeToken<AccountOrderRecordV2>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getUserAccountOrderDetailV2Async(UUID accountId, String userId, String userSecret, AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest, final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
+    private okhttp3.Call getUserAccountOrderDetailV2Async(UUID accountId, String brokerageOrderId, String userId, String userSecret, final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+        okhttp3.Call localVarCall = getUserAccountOrderDetailV2ValidateBeforeCall(accountId, brokerageOrderId, userId, userSecret, _callback);
         Type localVarReturnType = new TypeToken<AccountOrderRecordV2>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public abstract class GetUserAccountOrderDetailV2RequestBuilderGenerated {
-        final String brokerageOrderId;
         final UUID accountId;
+        final String brokerageOrderId;
         final String userId;
         final String userSecret;
 
-        public GetUserAccountOrderDetailV2RequestBuilderGenerated(String brokerageOrderId, UUID accountId, String userId, String userSecret) {
-            this.brokerageOrderId = brokerageOrderId;
+        public GetUserAccountOrderDetailV2RequestBuilderGenerated(UUID accountId, String brokerageOrderId, String userId, String userSecret) {
             this.accountId = accountId;
+            this.brokerageOrderId = brokerageOrderId;
             this.userId = userId;
             this.userSecret = userSecret;
         }
@@ -195,15 +194,9 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
-            return getUserAccountOrderDetailV2Call(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+            return getUserAccountOrderDetailV2Call(accountId, brokerageOrderId, userId, userSecret, _callback);
         }
 
-        private AccountInformationGetUserAccountOrderDetailRequest buildBodyParams() {
-            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = new AccountInformationGetUserAccountOrderDetailRequest();
-            accountInformationGetUserAccountOrderDetailRequest.brokerageOrderId(this.brokerageOrderId);
-            return accountInformationGetUserAccountOrderDetailRequest;
-        }
 
         /**
          * Execute getUserAccountOrderDetailV2 request
@@ -216,8 +209,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public AccountOrderRecordV2 execute() throws ApiException {
-            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
-            ApiResponse<AccountOrderRecordV2> localVarResp = getUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+            ApiResponse<AccountOrderRecordV2> localVarResp = getUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
             return localVarResp.getResponseBody();
         }
 
@@ -232,8 +224,7 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public ApiResponse<AccountOrderRecordV2> executeWithHttpInfo() throws ApiException {
-            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
-            return getUserAccountOrderDetailV2WithHttpInfo(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest);
+            return getUserAccountOrderDetailV2WithHttpInfo(accountId, brokerageOrderId, userId, userSecret);
         }
 
         /**
@@ -248,18 +239,17 @@ public class ExperimentalEndpointsApiGenerated {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<AccountOrderRecordV2> _callback) throws ApiException {
-            AccountInformationGetUserAccountOrderDetailRequest accountInformationGetUserAccountOrderDetailRequest = buildBodyParams();
-            return getUserAccountOrderDetailV2Async(accountId, userId, userSecret, accountInformationGetUserAccountOrderDetailRequest, _callback);
+            return getUserAccountOrderDetailV2Async(accountId, brokerageOrderId, userId, userSecret, _callback);
         }
     }
 
     /**
      * Get account order detail (V2)
-     * Returns the detail of a single order using the external order ID provided in the request body.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
+     * Returns the detail of a single order using the brokerage order ID provided as a path parameter.  The V2 order response format includes all legs of the order in the &#x60;legs&#x60; list field. If the order is single legged, &#x60;legs&#x60; will be a list of one leg.  This endpoint is always realtime and does not rely on cached data.  This endpoint only returns orders placed through SnapTrade. In other words, orders placed outside of the SnapTrade network are not returned by this endpoint. 
      * @param accountId  (required)
+     * @param brokerageOrderId  (required)
      * @param userId  (required)
      * @param userSecret  (required)
-     * @param accountInformationGetUserAccountOrderDetailRequest  (required)
      * @return GetUserAccountOrderDetailV2RequestBuilder
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -267,11 +257,11 @@ public class ExperimentalEndpointsApiGenerated {
         <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
      </table>
      */
-    public ExperimentalEndpointsApi.GetUserAccountOrderDetailV2RequestBuilder getUserAccountOrderDetailV2(String brokerageOrderId, UUID accountId, String userId, String userSecret) throws IllegalArgumentException {
-        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
+    public ExperimentalEndpointsApi.GetUserAccountOrderDetailV2RequestBuilder getUserAccountOrderDetailV2(UUID accountId, String brokerageOrderId, String userId, String userSecret) throws IllegalArgumentException {
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
             
 
-        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+        if (brokerageOrderId == null) throw new IllegalArgumentException("\"brokerageOrderId\" is required but got null");
             
 
         if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
@@ -280,7 +270,7 @@ public class ExperimentalEndpointsApiGenerated {
         if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
             
 
-        return ((ExperimentalEndpointsApi) this).new GetUserAccountOrderDetailV2RequestBuilder(brokerageOrderId, accountId, userId, userSecret);
+        return ((ExperimentalEndpointsApi) this).new GetUserAccountOrderDetailV2RequestBuilder(accountId, brokerageOrderId, userId, userSecret);
     }
     private okhttp3.Call getUserAccountOrdersV2Call(String userId, String userSecret, UUID accountId, String state, Integer days, final ApiCallback _callback) throws ApiException {
         String basePath = null;

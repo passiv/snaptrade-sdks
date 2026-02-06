@@ -9,7 +9,7 @@
     Created by: https://snaptrade.com/
 """
 
-from snaptrade_client.paths.accounts_account_id_orders_details_v2.post import GetUserAccountOrderDetailV2
+from snaptrade_client.paths.accounts_account_id_orders_details_v2_brokerage_order_id.get import GetUserAccountOrderDetailV2
 from snaptrade_client.paths.accounts_account_id_orders_v2.get import GetUserAccountOrdersV2
 from snaptrade_client.paths.accounts_account_id_recent_orders_v2.get import GetUserAccountRecentOrdersV2
 

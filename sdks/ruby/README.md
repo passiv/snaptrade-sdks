@@ -1131,7 +1131,7 @@ specific users
 
 ### `snaptrade.experimental_endpoints.get_user_account_order_detail_v2`<a id="snaptradeexperimental_endpointsget_user_account_order_detail_v2"></a>
 
-Returns the detail of a single order using the external order ID provided in the request body.
+Returns the detail of a single order using the brokerage order ID provided as a path parameter.
 
 The V2 order response format includes all legs of the order in the `legs` list field.
 If the order is single legged, `legs` will be a list of one leg.
@@ -1145,8 +1145,8 @@ This endpoint only returns orders placed through SnapTrade. In other words, orde
 
 ```ruby
 result = snaptrade.experimental_endpoints.get_user_account_order_detail_v2(
-  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  brokerage_order_id: "66a033fa-da74-4fcf-b527-feefdec9257e",
   user_id: "snaptrade-user-123",
   user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
 )
@@ -1155,11 +1155,8 @@ p result
 
 #### ⚙️ Parameters<a id="⚙️-parameters"></a>
 
-##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
-Order ID returned by brokerage. This is the unique identifier for the order in
-the brokerage system.
-
 ##### account_id: `String`<a id="account_id-string"></a>
+##### brokerage_order_id: `String`<a id="brokerage_order_id-string"></a>
 ##### user_id: `String`<a id="user_id-string"></a>
 ##### user_secret: `String`<a id="user_secret-string"></a>
 #### 🔄 Return<a id="🔄-return"></a>
@@ -1168,7 +1165,7 @@ the brokerage system.
 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
-`/accounts/{accountId}/orders/details/v2` `POST`
+`/accounts/{accountId}/orders/details/v2/{brokerageOrderId}` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 
