@@ -154,7 +154,7 @@ portal:
     /accounts/{accountId}/recentOrders/v2:
       get: true
     /accounts/{accountId}/orders/details/v2:
-      post: true
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
