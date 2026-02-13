@@ -108,7 +108,7 @@ portal:
       get: true
     /accounts/{accountId}/recentOrders/v2:
       get: true
-    /accounts/{accountId}/orders/details/v2:
+    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
   hideOperations:
     /activities:
@@ -153,7 +153,7 @@ portal:
       get: true
     /accounts/{accountId}/recentOrders/v2:
       get: true
-    /accounts/{accountId}/orders/details/v2:
+    /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
       get: true
   hideSecurity:
     - name: PartnerSignature
