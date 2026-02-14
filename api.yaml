@@ -1015,6 +1015,8 @@ paths:
 
         The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
 
+        **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
+
         This endpoint does not work for options quotes.
 
         This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
@@ -3970,6 +3972,11 @@ components:
           type: string
           description: The type of position for the tax lot (e.g., LONG, SHORT).
           example: LONG
+        lot_id:
+          nullable: true
+          type: string
+          description: The unique id for this specific tax lot
+          example: "12345678"
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
       type: object
