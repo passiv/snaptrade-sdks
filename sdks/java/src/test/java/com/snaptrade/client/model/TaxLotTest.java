@@ -88,4 +88,12 @@ public class TaxLotTest {
         // TODO: test positionType
     }
 
+    /**
+     * Test the property 'lotId'
+     */
+    @Test
+    public void lotIdTest() {
+        // TODO: test lotId
+    }
+
 }

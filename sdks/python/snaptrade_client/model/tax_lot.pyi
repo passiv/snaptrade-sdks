@@ -162,6 +162,26 @@ class TaxLot(
                         *args,
                         _configuration=_configuration,
                     )
+            
+            
+            class lot_id(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'lot_id':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
             __annotations__ = {
                 "original_purchase_date": original_purchase_date,
                 "quantity": quantity,
@@ -169,6 +189,7 @@ class TaxLot(
                 "cost_basis": cost_basis,
                 "current_value": current_value,
                 "position_type": position_type,
+                "lot_id": lot_id,
             }
         additional_properties = schemas.AnyTypeSchema
     
@@ -191,9 +212,12 @@ class TaxLot(
     def __getitem__(self, name: typing_extensions.Literal["position_type"]) -> MetaOapg.properties.position_type: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["lot_id"]) -> MetaOapg.properties.lot_id: ...
+    
+    @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["original_purchase_date"], typing_extensions.Literal["quantity"], typing_extensions.Literal["purchased_price"], typing_extensions.Literal["cost_basis"], typing_extensions.Literal["current_value"], typing_extensions.Literal["position_type"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["original_purchase_date"], typing_extensions.Literal["quantity"], typing_extensions.Literal["purchased_price"], typing_extensions.Literal["cost_basis"], typing_extensions.Literal["current_value"], typing_extensions.Literal["position_type"], typing_extensions.Literal["lot_id"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -216,9 +240,12 @@ class TaxLot(
     def get_item_oapg(self, name: typing_extensions.Literal["position_type"]) -> typing.Union[MetaOapg.properties.position_type, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["lot_id"]) -> typing.Union[MetaOapg.properties.lot_id, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["original_purchase_date"], typing_extensions.Literal["quantity"], typing_extensions.Literal["purchased_price"], typing_extensions.Literal["cost_basis"], typing_extensions.Literal["current_value"], typing_extensions.Literal["position_type"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["original_purchase_date"], typing_extensions.Literal["quantity"], typing_extensions.Literal["purchased_price"], typing_extensions.Literal["cost_basis"], typing_extensions.Literal["current_value"], typing_extensions.Literal["position_type"], typing_extensions.Literal["lot_id"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -230,6 +257,7 @@ class TaxLot(
         cost_basis: typing.Union[MetaOapg.properties.cost_basis, None, str, schemas.Unset] = schemas.unset,
         current_value: typing.Union[MetaOapg.properties.current_value, None, str, schemas.Unset] = schemas.unset,
         position_type: typing.Union[MetaOapg.properties.position_type, None, str, schemas.Unset] = schemas.unset,
+        lot_id: typing.Union[MetaOapg.properties.lot_id, None, str, schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
     ) -> 'TaxLot':
@@ -242,6 +270,7 @@ class TaxLot(
             cost_basis=cost_basis,
             current_value=current_value,
             position_type=position_type,
+            lot_id=lot_id,
             _configuration=_configuration,
             **kwargs,
         )

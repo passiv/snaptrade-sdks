@@ -367,7 +367,7 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {string} userId 
          * @param {string} userSecret 
@@ -1069,7 +1069,7 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1286,7 +1286,7 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOrderImpact(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+         * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
          * @summary Get equity symbol quotes
          * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -1846,7 +1846,7 @@ export class TradingApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
+     * Returns quotes from the brokerage for the specified symbols and account.  The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.  **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**  This endpoint does not work for options quotes.  This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed. 
      * @summary Get equity symbol quotes
      * @param {TradingApiGetUserAccountQuotesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.

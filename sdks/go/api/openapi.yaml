@@ -1677,6 +1677,8 @@ paths:
 
         The quotes returned can be delayed depending on the brokerage the account belongs to. It is highly recommended that you use your own market data provider for real-time quotes instead of relying on this endpoint.
 
+        **This endpoint is not a substitute for a market data provider. Frequent polling of this endpoint may result in the disabling of your keys**
+
         This endpoint does not work for options quotes.
 
         This endpoint is disabled for free plans by default. Please contact support to enable this endpoint if needed.
@@ -3533,12 +3535,14 @@ components:
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
@@ -3580,12 +3584,14 @@ components:
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
@@ -3773,12 +3779,14 @@ components:
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
@@ -3820,12 +3828,14 @@ components:
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
           - original_purchase_date: 2022-01-15T10:30:00Z
             cost_basis: "1005.00"
             quantity: "10"
+            lot_id: "12345678"
             position_type: LONG
             purchased_price: "100.50"
             current_value: "1200.00"
@@ -5668,12 +5678,14 @@ components:
         - original_purchase_date: 2022-01-15T10:30:00Z
           cost_basis: "1005.00"
           quantity: "10"
+          lot_id: "12345678"
           position_type: LONG
           purchased_price: "100.50"
           current_value: "1200.00"
         - original_purchase_date: 2022-01-15T10:30:00Z
           cost_basis: "1005.00"
           quantity: "10"
+          lot_id: "12345678"
           position_type: LONG
           purchased_price: "100.50"
           current_value: "1200.00"
@@ -5756,6 +5768,7 @@ components:
         original_purchase_date: 2022-01-15T10:30:00Z
         cost_basis: "1005.00"
         quantity: "10"
+        lot_id: "12345678"
         position_type: LONG
         purchased_price: "100.50"
         current_value: "1200.00"
@@ -5804,6 +5817,13 @@ components:
           type: string
           x-konfig-original-example: LONG
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-position_type
+        lot_id:
+          description: The unique id for this specific tax lot
+          example: "12345678"
+          nullable: true
+          type: string
+          x-konfig-original-example: "12345678"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-TaxLot-properties-lot_id
       type: object
     SnapTradeRegisterUserRequestBody:
       description: Data required to register a user via SnapTrade Partner
@@ -9736,6 +9756,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-TaxLot-properties-position_type:
       example: LONG
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-TaxLot-properties-lot_id:
+      example: "12345678"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-SnapTradeLoginUserRequestBody-properties-broker:

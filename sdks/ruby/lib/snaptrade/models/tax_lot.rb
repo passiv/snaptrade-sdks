@@ -31,6 +31,9 @@ module SnapTrade
     # The type of position for the tax lot (e.g., LONG, SHORT).
     attr_accessor :position_type
 
+    # The unique id for this specific tax lot
+    attr_accessor :lot_id
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -39,7 +42,8 @@ module SnapTrade
         :'purchased_price' => :'purchased_price',
         :'cost_basis' => :'cost_basis',
         :'current_value' => :'current_value',
-        :'position_type' => :'position_type'
+        :'position_type' => :'position_type',
+        :'lot_id' => :'lot_id'
       }
     end
 
@@ -56,7 +60,8 @@ module SnapTrade
         :'purchased_price' => :'String',
         :'cost_basis' => :'String',
         :'current_value' => :'String',
-        :'position_type' => :'String'
+        :'position_type' => :'String',
+        :'lot_id' => :'String'
       }
     end
 
@@ -68,7 +73,8 @@ module SnapTrade
         :'purchased_price',
         :'cost_basis',
         :'current_value',
-        :'position_type'
+        :'position_type',
+        :'lot_id'
       ])
     end
 
@@ -110,6 +116,10 @@ module SnapTrade
       if attributes.key?(:'position_type')
         self.position_type = attributes[:'position_type']
       end
+
+      if attributes.key?(:'lot_id')
+        self.lot_id = attributes[:'lot_id']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -135,7 +145,8 @@ module SnapTrade
           purchased_price == o.purchased_price &&
           cost_basis == o.cost_basis &&
           current_value == o.current_value &&
-          position_type == o.position_type
+          position_type == o.position_type &&
+          lot_id == o.lot_id
     end
 
     # @see the `==` method
@@ -147,7 +158,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [original_purchase_date, quantity, purchased_price, cost_basis, current_value, position_type].hash
+      [original_purchase_date, quantity, purchased_price, cost_basis, current_value, position_type, lot_id].hash
     end
 
     # Builds the object from hash

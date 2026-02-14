@@ -30,6 +30,8 @@ type TaxLot struct {
 	CurrentValue NullableString `json:"current_value,omitempty"`
 	// The type of position for the tax lot (e.g., LONG, SHORT).
 	PositionType NullableString `json:"position_type,omitempty"`
+	// The unique id for this specific tax lot
+	LotId NullableString `json:"lot_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -304,6 +306,48 @@ func (o *TaxLot) UnsetPositionType() {
 	o.PositionType.Unset()
 }
 
+// GetLotId returns the LotId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TaxLot) GetLotId() string {
+	if o == nil || isNil(o.LotId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.LotId.Get()
+}
+
+// GetLotIdOk returns a tuple with the LotId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TaxLot) GetLotIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.LotId.Get(), o.LotId.IsSet()
+}
+
+// HasLotId returns a boolean if a field has been set.
+func (o *TaxLot) HasLotId() bool {
+	if o != nil && o.LotId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLotId gets a reference to the given NullableString and assigns it to the LotId field.
+func (o *TaxLot) SetLotId(v string) {
+	o.LotId.Set(&v)
+}
+// SetLotIdNil sets the value for LotId to be an explicit nil
+func (o *TaxLot) SetLotIdNil() {
+	o.LotId.Set(nil)
+}
+
+// UnsetLotId ensures that no value is present for LotId, not even an explicit nil
+func (o *TaxLot) UnsetLotId() {
+	o.LotId.Unset()
+}
+
 func (o TaxLot) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.OriginalPurchaseDate.IsSet() {
@@ -323,6 +367,9 @@ func (o TaxLot) MarshalJSON() ([]byte, error) {
 	}
 	if o.PositionType.IsSet() {
 		toSerialize["position_type"] = o.PositionType.Get()
+	}
+	if o.LotId.IsSet() {
+		toSerialize["lot_id"] = o.LotId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -348,6 +395,7 @@ func (o *TaxLot) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "cost_basis")
 		delete(additionalProperties, "current_value")
 		delete(additionalProperties, "position_type")
+		delete(additionalProperties, "lot_id")
 		o.AdditionalProperties = additionalProperties
 	}
 

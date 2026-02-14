@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **CostBasis** | **string** | The cost basis of the entire lot. | [optional] 
 **CurrentValue** | **string** | The current market value of the entire lot. | [optional] 
 **PositionType** | **string** | The type of position for the tax lot (e.g., LONG, SHORT). | [optional] 
+**LotId** | **string** | The unique id for this specific tax lot | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
