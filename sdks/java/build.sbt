@@ -2,7 +2,7 @@ lazy val root = (project in file(".")).
   settings(
     organization := "com.snaptrade",
     name := "snaptrade-java-sdk",
-    version := "5.0.163",
+    version := "5.0.164",
     scalaVersion := "2.11.4",
     scalacOptions ++= Seq("-feature"),
     javacOptions in compile ++= Seq("-Xlint:deprecation"),
