@@ -76,6 +76,10 @@ public class TaxLot {
   @SerializedName(SERIALIZED_NAME_POSITION_TYPE)
   private String positionType;
 
+  public static final String SERIALIZED_NAME_LOT_ID = "lot_id";
+  @SerializedName(SERIALIZED_NAME_LOT_ID)
+  private String lotId;
+
   public TaxLot() {
   }
 
@@ -252,6 +256,35 @@ public class TaxLot {
     this.positionType = positionType;
   }
 
+
+  public TaxLot lotId(String lotId) {
+    
+    
+    
+    
+    this.lotId = lotId;
+    return this;
+  }
+
+   /**
+   * The unique id for this specific tax lot
+   * @return lotId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "12345678", value = "The unique id for this specific tax lot")
+
+  public String getLotId() {
+    return lotId;
+  }
+
+
+  public void setLotId(String lotId) {
+    
+    
+    
+    this.lotId = lotId;
+  }
+
   /**
    * A container for additional, undeclared properties.
    * This is a holder for any undeclared properties as specified with
@@ -312,7 +345,8 @@ public class TaxLot {
         Objects.equals(this.purchasedPrice, taxLot.purchasedPrice) &&
         Objects.equals(this.costBasis, taxLot.costBasis) &&
         Objects.equals(this.currentValue, taxLot.currentValue) &&
-        Objects.equals(this.positionType, taxLot.positionType)&&
+        Objects.equals(this.positionType, taxLot.positionType) &&
+        Objects.equals(this.lotId, taxLot.lotId)&&
         Objects.equals(this.additionalProperties, taxLot.additionalProperties);
   }
 
@@ -322,7 +356,7 @@ public class TaxLot {
 
   @Override
   public int hashCode() {
-    return Objects.hash(originalPurchaseDate, quantity, purchasedPrice, costBasis, currentValue, positionType, additionalProperties);
+    return Objects.hash(originalPurchaseDate, quantity, purchasedPrice, costBasis, currentValue, positionType, lotId, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -342,6 +376,7 @@ public class TaxLot {
     sb.append("    costBasis: ").append(toIndentedString(costBasis)).append("\n");
     sb.append("    currentValue: ").append(toIndentedString(currentValue)).append("\n");
     sb.append("    positionType: ").append(toIndentedString(positionType)).append("\n");
+    sb.append("    lotId: ").append(toIndentedString(lotId)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -371,6 +406,7 @@ public class TaxLot {
     openapiFields.add("cost_basis");
     openapiFields.add("current_value");
     openapiFields.add("position_type");
+    openapiFields.add("lot_id");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -402,6 +438,9 @@ public class TaxLot {
       }
       if (!jsonObj.get("position_type").isJsonNull() && (jsonObj.get("position_type") != null && !jsonObj.get("position_type").isJsonNull()) && !jsonObj.get("position_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `position_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("position_type").toString()));
+      }
+      if (!jsonObj.get("lot_id").isJsonNull() && (jsonObj.get("lot_id") != null && !jsonObj.get("lot_id").isJsonNull()) && !jsonObj.get("lot_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `lot_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("lot_id").toString()));
       }
   }
 

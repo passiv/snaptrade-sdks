@@ -41,7 +41,8 @@ namespace SnapTrade.Net.Model
         /// <param name="costBasis">The cost basis of the entire lot..</param>
         /// <param name="currentValue">The current market value of the entire lot..</param>
         /// <param name="positionType">The type of position for the tax lot (e.g., LONG, SHORT)..</param>
-        public TaxLot(DateTime? originalPurchaseDate = default(DateTime?), string quantity = default(string), string purchasedPrice = default(string), string costBasis = default(string), string currentValue = default(string), string positionType = default(string)) : base()
+        /// <param name="lotId">The unique id for this specific tax lot.</param>
+        public TaxLot(DateTime? originalPurchaseDate = default(DateTime?), string quantity = default(string), string purchasedPrice = default(string), string costBasis = default(string), string currentValue = default(string), string positionType = default(string), string lotId = default(string)) : base()
         {
             this.OriginalPurchaseDate = originalPurchaseDate;
             this.Quantity = quantity;
@@ -49,6 +50,7 @@ namespace SnapTrade.Net.Model
             this.CostBasis = costBasis;
             this.CurrentValue = currentValue;
             this.PositionType = positionType;
+            this.LotId = lotId;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -95,6 +97,13 @@ namespace SnapTrade.Net.Model
         public string PositionType { get; set; }
 
         /// <summary>
+        /// The unique id for this specific tax lot
+        /// </summary>
+        /// <value>The unique id for this specific tax lot</value>
+        [DataMember(Name = "lot_id", EmitDefaultValue = true)]
+        public string LotId { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -115,6 +124,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  CostBasis: ").Append(CostBasis).Append("\n");
             sb.Append("  CurrentValue: ").Append(CurrentValue).Append("\n");
             sb.Append("  PositionType: ").Append(PositionType).Append("\n");
+            sb.Append("  LotId: ").Append(LotId).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -180,6 +190,11 @@ namespace SnapTrade.Net.Model
                     this.PositionType == input.PositionType ||
                     (this.PositionType != null &&
                     this.PositionType.Equals(input.PositionType))
+                ) && base.Equals(input) && 
+                (
+                    this.LotId == input.LotId ||
+                    (this.LotId != null &&
+                    this.LotId.Equals(input.LotId))
                 )
                 && (this.AdditionalProperties.Count == input.AdditionalProperties.Count && !this.AdditionalProperties.Except(input.AdditionalProperties).Any());
         }
@@ -216,6 +231,10 @@ namespace SnapTrade.Net.Model
                 if (this.PositionType != null)
                 {
                     hashCode = (hashCode * 59) + this.PositionType.GetHashCode();
+                }
+                if (this.LotId != null)
+                {
+                    hashCode = (hashCode * 59) + this.LotId.GetHashCode();
                 }
                 if (this.AdditionalProperties != null)
                 {

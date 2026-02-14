@@ -55,5 +55,11 @@ export interface TaxLot {
      * @memberof TaxLot
      */
     'position_type'?: string | null;
+    /**
+     * The unique id for this specific tax lot
+     * @type {string}
+     * @memberof TaxLot
+     */
+    'lot_id'?: string | null;
 }
 

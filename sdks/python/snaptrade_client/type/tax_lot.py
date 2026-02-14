@@ -38,5 +38,8 @@ class OptionalTaxLot(TypedDict, total=False):
     # The type of position for the tax lot (e.g., LONG, SHORT).
     position_type: typing.Optional[str]
 
+    # The unique id for this specific tax lot
+    lot_id: typing.Optional[str]
+
 class TaxLot(RequiredTaxLot, OptionalTaxLot):
     pass

@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CostBasis** | Pointer to **NullableString** | The cost basis of the entire lot. | [optional] 
 **CurrentValue** | Pointer to **NullableString** | The current market value of the entire lot. | [optional] 
 **PositionType** | Pointer to **NullableString** | The type of position for the tax lot (e.g., LONG, SHORT). | [optional] 
+**LotId** | Pointer to **NullableString** | The unique id for this specific tax lot | [optional] 
 
 ## Methods
 
@@ -240,6 +241,41 @@ HasPositionType returns a boolean if a field has been set.
 `func (o *TaxLot) UnsetPositionType()`
 
 UnsetPositionType ensures that no value is present for PositionType, not even an explicit nil
+### GetLotId
+
+`func (o *TaxLot) GetLotId() string`
+
+GetLotId returns the LotId field if non-nil, zero value otherwise.
+
+### GetLotIdOk
+
+`func (o *TaxLot) GetLotIdOk() (*string, bool)`
+
+GetLotIdOk returns a tuple with the LotId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLotId
+
+`func (o *TaxLot) SetLotId(v string)`
+
+SetLotId sets LotId field to given value.
+
+### HasLotId
+
+`func (o *TaxLot) HasLotId() bool`
+
+HasLotId returns a boolean if a field has been set.
+
+### SetLotIdNil
+
+`func (o *TaxLot) SetLotIdNil(b bool)`
+
+ SetLotIdNil sets the value for LotId to be an explicit nil
+
+### UnsetLotId
+`func (o *TaxLot) UnsetLotId()`
+
+UnsetLotId ensures that no value is present for LotId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

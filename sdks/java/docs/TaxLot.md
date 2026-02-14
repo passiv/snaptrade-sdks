@@ -14,6 +14,7 @@ Describes a single tax lot for a position.
 |**costBasis** | **String** | The cost basis of the entire lot. |  [optional] |
 |**currentValue** | **String** | The current market value of the entire lot. |  [optional] |
 |**positionType** | **String** | The type of position for the tax lot (e.g., LONG, SHORT). |  [optional] |
+|**lotId** | **String** | The unique id for this specific tax lot |  [optional] |
 
 
 
