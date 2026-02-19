@@ -1,6 +1,6 @@
 # Syncing and Data Freshness
 
-It's first important to understand whether you are on the realtime or cached data plan which you can find in [the dahsboard](https://dashboard.snaptrade.com/settings/billing). Note that [if the connection is disabled](https://docs.snaptrade.com/docs/fix-broken-connections), fresh data cannot be fetched on either plan until the connection is fixed.
+It's first important to understand whether you are on the realtime or cached data plan which you can find in [the dashboard](https://dashboard.snaptrade.com/settings/billing). Note that [if the connection is disabled](https://docs.snaptrade.com/docs/fix-broken-connections), fresh data cannot be fetched on either plan until the connection is fixed.
 SnapTrade syncs account data at least once per connection per day, these syncs are spread over 24 hours and update transactions as well as holdings data.
 
 Real Time Plan: holdings (positions, balances, orders) are fetched with every API request.
