@@ -66,8 +66,6 @@ OPTIONEXERCISE - Option exercise event.
 TRANSFER - Transfer of assets from one account to another.
 SPLIT - A stock share split.
 
-
-
 ## Syncing and data freshness
 
 It's first important to understand whether you are on the realtime or cached data plan which you can find in [the dahsboard](https://dashboard.snaptrade.com/settings/billing). Note that [if the connection is disabled](https://docs.snaptrade.com/docs/fix-broken-connections), fresh data cannot be fetched on either plan until the connection is fixed.
