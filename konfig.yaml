@@ -72,7 +72,7 @@ portal:
               path: docs/connections.md
             - id: account-data
               path: docs/account-data.md
-            - id: asyncing
+            - id: syncing
               path: docs/syncing.md
         - label: Troubleshooting
           links:
