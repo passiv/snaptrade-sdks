@@ -48,23 +48,7 @@ SnapTrade classifies common transactions under the predefined types, with extra 
 We usually recommend you try not to individually handle every type beyond the most common ones, and instead rely on the other fields: amount, units, price, symbol, option_symbol, etc.
 If amount is positive it represents gaining cash, if amount is negative it represents spending cash. Same with units, so a BUY for instance would have positive units and negative amount, a sell would be negative units positive amount.
 
-Here are some of the most popular types:
-
-BUY - Asset bought.
-SELL - Asset sold.
-DIVIDEND - Dividend payout.
-CONTRIBUTION - Cash contribution.
-WITHDRAWAL - Cash withdrawal.
-REI - Dividend reinvestment.
-STOCK_DIVIDEND - A type of dividend where a company distributes shares instead of cash
-INTEREST - Interest deposited into the account.
-FEE - Fee withdrawn from the account.
-TAX - A tax related fee.
-OPTIONEXPIRATION - Option expiration event.
-OPTIONASSIGNMENT - Option assignment event.
-OPTIONEXERCISE - Option exercise event.
-TRANSFER - Transfer of assets from one account to another.
-SPLIT - A stock share split.
+Check [our API Spec](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getAccountActivities) for some of the most common transaction types.
 
 ## Syncing and data freshness
 
