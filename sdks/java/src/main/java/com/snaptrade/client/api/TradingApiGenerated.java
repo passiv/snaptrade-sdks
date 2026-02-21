@@ -47,6 +47,7 @@ import com.snaptrade.client.model.MlegOrderTypeStrict;
 import com.snaptrade.client.model.MlegPriceEffectStrictNullable;
 import com.snaptrade.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
+import com.snaptrade.client.model.OptionImpact;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
 import com.snaptrade.client.model.StopLoss;
@@ -735,6 +736,265 @@ public class TradingApiGenerated {
             
 
         return ((TradingApi) this).new GetCryptocurrencyPairQuoteRequestBuilder(userId, userSecret, accountId, instrumentSymbol);
+    }
+    private okhttp3.Call getOptionImpactCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = mlegTradeForm;
+
+        // create path and map variables
+        String localVarPath = "/accounts/{accountId}/trading/options/impact"
+            .replace("{" + "accountId" + "}", localVarApiClient.escapeString(accountId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getOptionImpactValidateBeforeCall(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling getOptionImpact(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling getOptionImpact(Async)");
+        }
+
+        // verify the required parameter 'accountId' is set
+        if (accountId == null) {
+            throw new ApiException("Missing the required parameter 'accountId' when calling getOptionImpact(Async)");
+        }
+
+        // verify the required parameter 'mlegTradeForm' is set
+        if (mlegTradeForm == null) {
+            throw new ApiException("Missing the required parameter 'mlegTradeForm' when calling getOptionImpact(Async)");
+        }
+
+        return getOptionImpactCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+
+    }
+
+
+    private ApiResponse<OptionImpact> getOptionImpactWithHttpInfo(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm) throws ApiException {
+        okhttp3.Call localVarCall = getOptionImpactValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, null);
+        Type localVarReturnType = new TypeToken<OptionImpact>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getOptionImpactAsync(String userId, String userSecret, UUID accountId, MlegTradeForm mlegTradeForm, final ApiCallback<OptionImpact> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getOptionImpactValidateBeforeCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+        Type localVarReturnType = new TypeToken<OptionImpact>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class GetOptionImpactRequestBuilderGenerated {
+        final MlegOrderTypeStrict orderType;
+        final TimeInForceStrict timeInForce;
+        final List<MlegLeg> legs;
+        final String userId;
+        final String userSecret;
+        final UUID accountId;
+        BigDecimal limitPrice;
+        BigDecimal stopPrice;
+        MlegPriceEffectStrictNullable priceEffect;
+
+        public GetOptionImpactRequestBuilderGenerated(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) {
+            this.orderType = orderType;
+            this.timeInForce = timeInForce;
+            this.legs = legs;
+            this.userId = userId;
+            this.userSecret = userSecret;
+            this.accountId = accountId;
+        }
+
+        /**
+         * Set limitPrice
+         * @param limitPrice The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.GetOptionImpactRequestBuilder
+         */
+        public TradingApi.GetOptionImpactRequestBuilder limitPrice(BigDecimal limitPrice) {
+            this.limitPrice = limitPrice;
+            return (TradingApi.GetOptionImpactRequestBuilder) this;
+        }
+        
+        /**
+         * Set stopPrice
+         * @param stopPrice The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT. (optional)
+         * @return TradingApi.GetOptionImpactRequestBuilder
+         */
+        public TradingApi.GetOptionImpactRequestBuilder stopPrice(BigDecimal stopPrice) {
+            this.stopPrice = stopPrice;
+            return (TradingApi.GetOptionImpactRequestBuilder) this;
+        }
+        
+        /**
+         * Set priceEffect
+         * @param priceEffect  (optional)
+         * @return TradingApi.GetOptionImpactRequestBuilder
+         */
+        public TradingApi.GetOptionImpactRequestBuilder priceEffect(MlegPriceEffectStrictNullable priceEffect) {
+            this.priceEffect = priceEffect;
+            return (TradingApi.GetOptionImpactRequestBuilder) this;
+        }
+        
+        /**
+         * Build call for getOptionImpact
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return getOptionImpactCall(userId, userSecret, accountId, mlegTradeForm, _callback);
+        }
+
+        private MlegTradeForm buildBodyParams() {
+            MlegTradeForm mlegTradeForm = new MlegTradeForm();
+            mlegTradeForm.orderType(this.orderType);
+            mlegTradeForm.timeInForce(this.timeInForce);
+            mlegTradeForm.limitPrice(this.limitPrice);
+            mlegTradeForm.stopPrice(this.stopPrice);
+            mlegTradeForm.priceEffect(this.priceEffect);
+            mlegTradeForm.legs(this.legs);
+            return mlegTradeForm;
+        }
+
+        /**
+         * Execute getOptionImpact request
+         * @return OptionImpact
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+         </table>
+         */
+        public OptionImpact execute() throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            ApiResponse<OptionImpact> localVarResp = getOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute getOptionImpact request with HTTP info returned
+         * @return ApiResponse&lt;OptionImpact&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OptionImpact> executeWithHttpInfo() throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return getOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+        }
+
+        /**
+         * Execute getOptionImpact request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+            <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OptionImpact> _callback) throws ApiException {
+            MlegTradeForm mlegTradeForm = buildBodyParams();
+            return getOptionImpactAsync(userId, userSecret, accountId, mlegTradeForm, _callback);
+        }
+    }
+
+    /**
+     * Get option order impact
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @param accountId  (required)
+     * @param mlegTradeForm  (required)
+     * @return GetOptionImpactRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 500 </td><td> Unexpected Error </td><td>  -  </td></tr>
+        <tr><td> 501 </td><td> Not Implemented - option impact is not supported for this brokerage </td><td>  -  </td></tr>
+     </table>
+     */
+    public TradingApi.GetOptionImpactRequestBuilder getOptionImpact(MlegOrderTypeStrict orderType, TimeInForceStrict timeInForce, List<MlegLeg> legs, String userId, String userSecret, UUID accountId) throws IllegalArgumentException {
+        if (orderType == null) throw new IllegalArgumentException("\"orderType\" is required but got null");
+        if (timeInForce == null) throw new IllegalArgumentException("\"timeInForce\" is required but got null");
+        if (legs == null) throw new IllegalArgumentException("\"legs\" is required but got null");
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        if (accountId == null) throw new IllegalArgumentException("\"accountId\" is required but got null");
+            
+
+        return ((TradingApi) this).new GetOptionImpactRequestBuilder(orderType, timeInForce, legs, userId, userSecret, accountId);
     }
     private okhttp3.Call getOrderImpactCall(String userId, String userSecret, ManualTradeForm manualTradeForm, final ApiCallback _callback) throws ApiException {
         String basePath = null;

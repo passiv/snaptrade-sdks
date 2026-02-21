@@ -378,6 +378,152 @@ module SnapTrade
     end
 
 
+    # Get option order impact
+    #
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+    # Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+    #
+    # @param order_type [MlegOrderTypeStrict] The type of order to place.
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+    # @param legs [Array<MlegLeg>] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # @param price_effect [MlegPriceEffectStrict] 
+    # @param body [MlegTradeForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_option_impact(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      mleg_trade_form = _body
+      data, _status_code, _headers = get_option_impact_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
+      data
+    end
+
+    # Get option order impact
+    #
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+    # Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+    #
+    # @param order_type [MlegOrderTypeStrict] The type of order to place.
+    # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+    # @param legs [Array<MlegLeg>] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param limit_price [Float] The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    # @param stop_price [Float] The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    # @param price_effect [MlegPriceEffectStrict] 
+    # @param body [MlegTradeForm] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_option_impact_with_http_info(order_type:, time_in_force:, legs:, user_id:, user_secret:, account_id:, limit_price: SENTINEL, stop_price: SENTINEL, price_effect: SENTINEL, extra: {})
+      _body = {}
+      _body[:order_type] = order_type if order_type != SENTINEL
+      _body[:time_in_force] = time_in_force if time_in_force != SENTINEL
+      _body[:limit_price] = limit_price if limit_price != SENTINEL
+      _body[:stop_price] = stop_price if stop_price != SENTINEL
+      _body[:price_effect] = price_effect if price_effect != SENTINEL
+      _body[:legs] = legs if legs != SENTINEL
+      mleg_trade_form = _body
+      get_option_impact_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, extra)
+    end
+
+    # Get option order impact
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param mleg_trade_form [MlegTradeForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [OptionImpact]
+    private def get_option_impact_impl(user_id, user_secret, account_id, mleg_trade_form, opts = {})
+      data, _status_code, _headers = get_option_impact_with_http_info(user_id, user_secret, account_id, mleg_trade_form, opts)
+      data
+    end
+
+    # Get option order impact
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param mleg_trade_form [MlegTradeForm] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(OptionImpact, Integer, Hash)>] OptionImpact data, response status code and response headers
+    private def get_option_impact_with_http_info_impl(user_id, user_secret, account_id, mleg_trade_form, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: TradingApi.get_option_impact ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling TradingApi.get_option_impact"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling TradingApi.get_option_impact"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling TradingApi.get_option_impact"
+      end
+      # verify the required parameter 'mleg_trade_form' is set
+      if @api_client.config.client_side_validation && mleg_trade_form.nil?
+        fail ArgumentError, "Missing the required parameter 'mleg_trade_form' when calling TradingApi.get_option_impact"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/trading/options/impact'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      content_type = @api_client.select_header_content_type(['application/json'])
+      if !content_type.nil?
+        header_params['Content-Type'] = content_type
+      end
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(mleg_trade_form)
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'OptionImpact'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"TradingApi.get_option_impact",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:POST, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: TradingApi#get_option_impact\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Check equity order impact
     #
     # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.

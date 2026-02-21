@@ -2504,6 +2504,68 @@ paths:
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-replace
       x-content-type: application/json
       x-accepts: application/json
+  /accounts/{accountId}/trading/options/impact:
+    post:
+      description: |
+        Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+        Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+      operationId: Trading_getOptionImpact
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/MlegOrderRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionImpact'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/400FailedRequestResponse'
+          description: Invalid request
+          x-do-not-generate: true
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FailedRequestResponse'
+          description: Forbidden
+          x-do-not-generate: true
+        "500":
+          description: Unexpected Error
+        "501":
+          description: Not Implemented - option impact is not supported for this brokerage
+      summary: Get option order impact
+      tags:
+      - Trading
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact
+      x-content-type: application/json
+      x-accepts: application/json
   /snapTrade/partners:
     get:
       description: "Returns configurations for your SnapTrade Client ID, including\
@@ -7505,6 +7567,27 @@ components:
       x-konfig-properties:
         notional_value:
           nullable: true
+    OptionImpact:
+      additionalProperties: true
+      description: Estimated cost and fees for an option order before it is placed.
+      example:
+        estimated_transaction_fee: "0.50"
+        estimated_cost: "1.97"
+      properties:
+        estimated_cost:
+          description: Estimated option premium for the order (before fees).
+          example: "1.97"
+          type: string
+          x-konfig-original-example: "1.97"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cost
+        estimated_transaction_fee:
+          description: Estimated transaction fees and commissions for the order.
+          example: "0.50"
+          type: string
+          x-konfig-original-example: "0.50"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_transaction_fee
+      type: object
+      x-konfig-is-used-in-successful-response: true
     MlegTradeForm:
       description: Inputs for placing a multi-leg order with the brokerage.
       example:
@@ -10650,6 +10733,14 @@ components:
       example: 31.33
       type: number
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_cost:
+      example: "1.97"
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionImpact-properties-estimated_transaction_fee:
+      example: "0.50"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price:
       example: ""
       type: string
@@ -12351,6 +12442,55 @@ components:
       - accountId
       - userId
       - userSecret
+    konfig-generated-schema-single-parameter-schema-post--accounts-accountId-trading-options-impact:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+        order_type:
+          $ref: '#/components/schemas/MlegOrderTypeStrict'
+        time_in_force:
+          $ref: '#/components/schemas/TimeInForceStrict'
+        limit_price:
+          description: "The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-limit_price
+        stop_price:
+          description: "The stop price. Required if the order type is STOP_LOSS_MARKET,\
+            \ STOP_LOSS_LIMIT."
+          example: ""
+          format: decimal
+          nullable: true
+          type: string
+          x-konfig-original-example: ""
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-MlegTradeForm-properties-stop_price
+        price_effect:
+          $ref: '#/components/schemas/MlegPriceEffectStrictNullable'
+        legs:
+          items:
+            $ref: '#/components/schemas/MlegLeg'
+          type: array
+      required:
+      - accountId
+      - legs
+      - order_type
+      - time_in_force
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
+      - accountId
     konfig-generated-schema-single-parameter-schema-get--snapTrade-partners:
       additionalProperties: true
       properties: {}

@@ -68,6 +68,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
+  * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
@@ -1937,6 +1938,61 @@ CryptocurrencyPairQuote result = client
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+OptionImpact result = client
+        .trading
+        .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+        .limitPrice(limitPrice)
+        .stopPrice(stopPrice)
+        .priceEffect(priceEffect)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type:<a id="order_type"></a>
+
+##### time_in_force:<a id="time_in_force"></a>
+
+##### legs: List<[`MlegLeg`](./src/main/java/com/snaptrade/client/model/MlegLeg.java)><a id="legs-list"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+##### accountId: `UUID`<a id="accountid-uuid"></a>
+
+##### limit_price: `BigDecimal`<a id="limit_price-bigdecimal"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `BigDecimal`<a id="stop_price-bigdecimal"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect:<a id="price_effect"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionImpact](./src/main/java/com/snaptrade/client/model/OptionImpact.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

@@ -65,6 +65,8 @@ import { Model403FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
+import { OptionImpact } from '../models';
+// @ts-ignore
 import { OrderTypeStrict } from '../models';
 // @ts-ignore
 import { OrderUpdatedResponse } from '../models';
@@ -293,6 +295,76 @@ export const TradingApiAxiosParamCreator = function (configuration?: Configurati
                 pathTemplate: '/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote',
                 httpMethod: 'GET'
             });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+         * @summary Get option order impact
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} accountId 
+         * @param {MlegTradeForm} mlegTradeForm 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionImpact: async (userId: string, userSecret: string, accountId: string, mlegTradeForm: MlegTradeForm, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getOptionImpact', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getOptionImpact', 'userSecret', userSecret)
+            // verify required parameter 'accountId' is not null or undefined
+            assertParamExists('getOptionImpact', 'accountId', accountId)
+            // verify required parameter 'mlegTradeForm' is not null or undefined
+            assertParamExists('getOptionImpact', 'mlegTradeForm', mlegTradeForm)
+            const localVarPath = `/accounts/{accountId}/trading/options/impact`
+                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                requestBody: mlegTradeForm,
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/accounts/{accountId}/trading/options/impact',
+                httpMethod: 'POST'
+            });
+            localVarRequestOptions.data = serializeDataIfNeeded(mlegTradeForm, localVarRequestOptions, configuration)
 
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             return {
@@ -1047,6 +1119,25 @@ export const TradingApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
+         * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+         * @summary Get option order impact
+         * @param {TradingApiGetOptionImpactRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionImpact>> {
+            const mlegTradeForm: MlegTradeForm = {
+                order_type: requestParameters.order_type,
+                time_in_force: requestParameters.time_in_force,
+                limit_price: requestParameters.limit_price,
+                stop_price: requestParameters.stop_price,
+                price_effect: requestParameters.price_effect,
+                legs: requestParameters.legs
+            };
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionImpact(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, mlegTradeForm, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
          * @summary Check equity order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
@@ -1276,6 +1367,16 @@ export const TradingApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getCryptocurrencyPairQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
+         * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+         * @summary Get option order impact
+         * @param {TradingApiGetOptionImpactRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest, options?: AxiosRequestConfig): AxiosPromise<OptionImpact> {
+            return localVarFp.getOptionImpact(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a `Trade` object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the `Trade` object returned expires after 5 minutes. Any order placed using an expired `Trade` will be rejected.
          * @summary Check equity order impact
          * @param {TradingApiGetOrderImpactRequest} requestParameters Request parameters.
@@ -1474,6 +1575,36 @@ export type TradingApiGetCryptocurrencyPairQuoteRequest = {
     readonly instrumentSymbol: string
     
 }
+
+/**
+ * Request parameters for getOptionImpact operation in TradingApi.
+ * @export
+ * @interface TradingApiGetOptionImpactRequest
+ */
+export type TradingApiGetOptionImpactRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetOptionImpact
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetOptionImpact
+    */
+    readonly userSecret: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof TradingApiGetOptionImpact
+    */
+    readonly accountId: string
+    
+} & MlegTradeForm
 
 /**
  * Request parameters for getOrderImpact operation in TradingApi.
@@ -1831,6 +1962,18 @@ export class TradingApiGenerated extends BaseAPI {
      */
     public getCryptocurrencyPairQuote(requestParameters: TradingApiGetCryptocurrencyPairQuoteRequest, options?: AxiosRequestConfig) {
         return TradingApiFp(this.configuration).getCryptocurrencyPairQuote(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+     * @summary Get option order impact
+     * @param {TradingApiGetOptionImpactRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TradingApiGenerated
+     */
+    public getOptionImpact(requestParameters: TradingApiGetOptionImpactRequest, options?: AxiosRequestConfig) {
+        return TradingApiFp(this.configuration).getOptionImpact(requestParameters, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

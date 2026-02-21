@@ -64,6 +64,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
+  * [`snaptrade.trading.get_option_impact`](#snaptradetradingget_option_impact)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
@@ -1791,6 +1792,77 @@ p result
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.trading.get_option_impact(
+  order_type: "MARKET",
+  time_in_force: "Day",
+  legs: [
+        {
+            "instrument" => {
+                "symbol" => "PBI   250718C00006000",
+                "instrument_type" => "OPTION",
+            },
+            "action" => "BUY_TO_OPEN",
+            "units" => 1,
+        }
+    ],
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  account_id: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  limit_price: "",
+  stop_price: "",
+  price_effect: "DEBIT",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./lib/snaptrade/models/mleg_order_type_strict.rb)<a id="order_type-mlegordertypestrictlibsnaptrademodelsmleg_order_type_strictrb"></a>
+The type of order to place.
+
+##### time_in_force: [`TimeInForceStrict`](./lib/snaptrade/models/time_in_force_strict.rb)<a id="time_in_force-timeinforcestrictlibsnaptrademodelstime_in_force_strictrb"></a>
+The Time in Force type for the order. This field indicates how long the order
+will remain active before it is executed or expires. Here are the supported
+values: - `Day` - Day. The order is valid only for the trading day on which it
+is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed
+or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety
+immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order
+must be executed immediately. Any portion of the order that cannot be filled
+immediately will be canceled.
+
+##### legs: Array<[`MlegLeg`](./lib/snaptrade/models/mleg_leg.rb)><a id="legs-array"></a>
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### account_id: `String`<a id="account_id-string"></a>
+##### limit_price: `Float`<a id="limit_price-float"></a>
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `Float`<a id="stop_price-float"></a>
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`MlegPriceEffectStrict`](./lib/snaptrade/models/mleg_price_effect_strict.rb)<a id="price_effect-mlegpriceeffectstrictlibsnaptrademodelsmleg_price_effect_strictrb"></a>
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionImpact](./lib/snaptrade/models/option_impact.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

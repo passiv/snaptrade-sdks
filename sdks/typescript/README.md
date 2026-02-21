@@ -63,6 +63,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancelOrder`](#snaptradetradingcancelorder)
   * [`snaptrade.trading.cancelUserAccountOrder`](#snaptradetradingcanceluseraccountorder)
   * [`snaptrade.trading.getCryptocurrencyPairQuote`](#snaptradetradinggetcryptocurrencypairquote)
+  * [`snaptrade.trading.getOptionImpact`](#snaptradetradinggetoptionimpact)
   * [`snaptrade.trading.getOrderImpact`](#snaptradetradinggetorderimpact)
   * [`snaptrade.trading.getUserAccountQuotes`](#snaptradetradinggetuseraccountquotes)
   * [`snaptrade.trading.placeBracketOrder`](#snaptradetradingplacebracketorder)
@@ -1908,6 +1909,78 @@ const getCryptocurrencyPairQuoteResponse =
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```typescript
+const getOptionImpactResponse = await snaptrade.trading.getOptionImpact({
+  userId: "snaptrade-user-123",
+  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  accountId: "917c8734-8470-4a3e-a18f-57c3f2ee6631",
+  order_type: "MARKET",
+  time_in_force: "Day",
+  limit_price: "",
+  stop_price: "",
+  price_effect: "DEBIT",
+  legs: [
+    {
+      instrument: {
+        symbol: "PBI   250718C00006000",
+        instrument_type: "OPTION",
+      },
+      action: "BUY_TO_OPEN",
+      units: 1,
+    },
+  ],
+});
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./models/mleg-order-type-strict.ts)<a id="order_type-mlegordertypestrictmodelsmleg-order-type-strictts"></a>
+
+The type of order to place.
+
+##### time_in_force: [`TimeInForceStrict`](./models/time-in-force-strict.ts)<a id="time_in_force-timeinforcestrictmodelstime-in-force-strictts"></a>
+
+The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values:   - `Day` - Day. The order is valid only for the trading day on which it is placed.   - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled.   - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely.   - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
+
+##### legs: [`MlegLeg`](./models/mleg-leg.ts)[]<a id="legs-mleglegmodelsmleg-legts"></a>
+
+##### userId: `string`<a id="userid-string"></a>
+
+##### userSecret: `string`<a id="usersecret-string"></a>
+
+##### accountId: `string`<a id="accountid-string"></a>
+
+##### limit_price: `string`<a id="limit_price-string"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `string`<a id="stop_price-string"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`MlegPriceEffectStrict`](./models/mleg-price-effect-strict.ts)<a id="price_effect-mlegpriceeffectstrictmodelsmleg-price-effect-strictts"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionImpact](./models/option-impact.ts)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `POST`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

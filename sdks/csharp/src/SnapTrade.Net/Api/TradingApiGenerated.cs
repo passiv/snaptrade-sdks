@@ -117,6 +117,35 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of CryptocurrencyPairQuote</returns>
         ApiResponse<CryptocurrencyPairQuote> GetCryptocurrencyPairQuoteWithHttpInfo(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0);
         /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OptionImpact</returns>
+        OptionImpact GetOptionImpact(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
+
+        /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OptionImpact</returns>
+        ApiResponse<OptionImpact> GetOptionImpactWithHttpInfo(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0);
+        /// <summary>
         /// Check equity order impact
         /// </summary>
         /// <remarks>
@@ -510,6 +539,37 @@ namespace SnapTrade.Net.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (CryptocurrencyPairQuote)</returns>
         System.Threading.Tasks.Task<ApiResponse<CryptocurrencyPairQuote>> GetCryptocurrencyPairQuoteWithHttpInfoAsync(string userId, string userSecret, string accountId, string instrumentSymbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OptionImpact</returns>
+        System.Threading.Tasks.Task<OptionImpact> GetOptionImpactAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <summary>
+        /// Get option order impact
+        /// </summary>
+        /// <remarks>
+        /// Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </remarks>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OptionImpact)</returns>
+        System.Threading.Tasks.Task<ApiResponse<OptionImpact>> GetOptionImpactWithHttpInfoAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
         /// Check equity order impact
         /// </summary>
@@ -1623,6 +1683,236 @@ namespace SnapTrade.Net.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("GetCryptocurrencyPairQuote", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>OptionImpact</returns>
+        public OptionImpact GetOptionImpact(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0)
+        {
+            SnapTrade.Net.Client.ApiResponse<OptionImpact> localVarResponse = GetOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <returns>ApiResponse of OptionImpact</returns>
+        public SnapTrade.Net.Client.ApiResponse<OptionImpact> GetOptionImpactWithHttpInfo(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0)
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'mlegTradeForm' is set
+            if (mlegTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'mlegTradeForm' when calling TradingApi->GetOptionImpact");
+            }
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = mlegTradeForm;
+
+            localVarRequestOptions.Operation = "TradingApi.GetOptionImpact";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = this.Client.Post<OptionImpact>("/accounts/{accountId}/trading/options/impact", localVarRequestOptions, this.Configuration);
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOptionImpact", localVarResponse);
+                if (_exception != null)
+                {
+                    throw _exception;
+                }
+            }
+
+            return localVarResponse;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of OptionImpact</returns>
+        public async System.Threading.Tasks.Task<OptionImpact> GetOptionImpactAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            SnapTrade.Net.Client.ApiResponse<OptionImpact> localVarResponse = await GetOptionImpactWithHttpInfoAsync(userId, userSecret, accountId, mlegTradeForm, operationIndex, cancellationToken).ConfigureAwait(false);
+            return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Get option order impact Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+        /// </summary>
+        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="userId"></param>
+        /// <param name="userSecret"></param>
+        /// <param name="accountId"></param>
+        /// <param name="mlegTradeForm"></param>
+        /// <param name="operationIndex">Index associated with the operation.</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns>Task of ApiResponse (OptionImpact)</returns>
+        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<OptionImpact>> GetOptionImpactWithHttpInfoAsync(string userId, string userSecret, string accountId, MlegTradeForm mlegTradeForm, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            // verify the required parameter 'userId' is set
+            if (userId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'userSecret' is set
+            if (userSecret == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'accountId' is set
+            if (accountId == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling TradingApi->GetOptionImpact");
+            }
+
+            // verify the required parameter 'mlegTradeForm' is set
+            if (mlegTradeForm == null)
+            {
+                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'mlegTradeForm' when calling TradingApi->GetOptionImpact");
+            }
+
+
+            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
+
+            string[] _contentTypes = new string[] {
+                "application/json"
+            };
+
+            // to determine the Accept header
+            string[] _accepts = new string[] {
+                "application/json"
+            };
+
+            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
+            if (localVarContentType != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
+            }
+
+            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
+            if (localVarAccept != null)
+            {
+                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
+            }
+
+            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
+            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
+            localVarRequestOptions.Data = mlegTradeForm;
+
+            localVarRequestOptions.Operation = "TradingApi.GetOptionImpact";
+            localVarRequestOptions.OperationIndex = operationIndex;
+
+            // authentication (PartnerClientId) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
+            }
+            // authentication (PartnerSignature) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
+            {
+                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
+            }
+            // authentication (PartnerTimestamp) required
+            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
+            {
+                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
+            }
+
+            // make the HTTP request
+            var localVarResponse = await this.AsynchronousClient.PostAsync<OptionImpact>("/accounts/{accountId}/trading/options/impact", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+
+            if (this.ExceptionFactory != null)
+            {
+                Exception _exception = this.ExceptionFactory("GetOptionImpact", localVarResponse);
                 if (_exception != null)
                 {
                     throw _exception;
