@@ -2285,6 +2285,57 @@ paths:
         "500":
           description: Unexpected Error
 
+  /accounts/{accountId}/trading/options/impact:
+    post:
+      tags:
+        - Trading
+      summary: Get option order impact
+      description: |
+        Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+        Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+      operationId: Trading_getOptionImpact
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          required: true
+          name: accountId
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      requestBody:
+        $ref: "#/components/requestBodies/MlegOrderRequestBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptionImpact"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/400FailedRequestResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FailedRequestResponse"
+        "501":
+          description: Not Implemented - option impact is not supported for this brokerage
+        "500":
+          description: Unexpected Error
+
   /accounts/{accountId}/trading/options:
     post:
       tags:
@@ -4739,6 +4790,18 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/NotionalValue"
+    OptionImpact:
+      description: Estimated cost and fees for an option order before it is placed.
+      type: object
+      properties:
+        estimated_cost:
+          description: Estimated option premium for the order (before fees).
+          type: string
+          example: "1.97"
+        estimated_transaction_fee:
+          description: Estimated transaction fees and commissions for the order.
+          type: string
+          example: "0.50"
     MlegTradeForm:
       description: Inputs for placing a multi-leg order with the brokerage.
       type: object
