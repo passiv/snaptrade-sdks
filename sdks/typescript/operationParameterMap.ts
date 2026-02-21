@@ -542,6 +542,37 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/trading/options/impact-POST': {
+        parameters: [
+            {
+                name: 'order_type'
+            },
+            {
+                name: 'time_in_force'
+            },
+            {
+                name: 'legs'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+            {
+                name: 'limit_price'
+            },
+            {
+                name: 'stop_price'
+            },
+            {
+                name: 'price_effect'
+            },
+        ]
+    },
     '/trade/impact-POST': {
         parameters: [
             {

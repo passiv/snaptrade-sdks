@@ -7,6 +7,7 @@ Method | Path | Description
 [**CancelOrder**](TradingApi.md#CancelOrder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
 [**CancelUserAccountOrder**](TradingApi.md#CancelUserAccountOrder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
 [**GetCryptocurrencyPairQuote**](TradingApi.md#GetCryptocurrencyPairQuote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
+[**GetOptionImpact**](TradingApi.md#GetOptionImpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
 [**GetOrderImpact**](TradingApi.md#GetOrderImpact) | **Post** /trade/impact | Check equity order impact
 [**GetUserAccountQuotes**](TradingApi.md#GetUserAccountQuotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 [**PlaceBracketOrder**](TradingApi.md#PlaceBracketOrder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
@@ -189,6 +190,65 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `CryptocurrencyPairQuote.GetCryptocurrencyPairQuote.Ask`: %v\n", resp.Ask)
     fmt.Fprintf(os.Stdout, "Response from `CryptocurrencyPairQuote.GetCryptocurrencyPairQuote.Mid`: %v\n", *resp.Mid)
     fmt.Fprintf(os.Stdout, "Response from `CryptocurrencyPairQuote.GetCryptocurrencyPairQuote.Timestamp`: %v\n", *resp.Timestamp)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOptionImpact
+
+Get option order impact
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    priceEffect := *snaptrade.NewMlegPriceEffectStrict()
+    
+    mlegTradeForm := *snaptrade.NewMlegTradeForm(
+        null,
+        null,
+        null,
+    )
+    mlegTradeForm.SetLimitPrice("")
+    mlegTradeForm.SetStopPrice("")
+    mlegTradeForm.SetPriceEffect(priceEffect)
+    
+    request := client.TradingApi.GetOptionImpact(
+        "userId_example",
+        "userSecret_example",
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        mlegTradeForm,
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TradingApi.GetOptionImpact``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `GetOptionImpact`: OptionImpact
+    fmt.Fprintf(os.Stdout, "Response from `TradingApi.GetOptionImpact`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedCost`: %v\n", *resp.EstimatedCost)
+    fmt.Fprintf(os.Stdout, "Response from `OptionImpact.GetOptionImpact.EstimatedTransactionFee`: %v\n", *resp.EstimatedTransactionFee)
 }
 ```
 

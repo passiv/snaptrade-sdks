@@ -37,6 +37,7 @@ import com.snaptrade.client.model.MlegOrderTypeStrict;
 import com.snaptrade.client.model.MlegPriceEffectStrictNullable;
 import com.snaptrade.client.model.MlegTradeForm;
 import java.time.OffsetDateTime;
+import com.snaptrade.client.model.OptionImpact;
 import com.snaptrade.client.model.OrderTypeStrict;
 import com.snaptrade.client.model.OrderUpdatedResponse;
 import com.snaptrade.client.model.StopLoss;
@@ -122,6 +123,32 @@ public class TradingApiTest {
         UUID accountId = null;
         String instrumentSymbol = null;
         CryptocurrencyPairQuote response = api.getCryptocurrencyPairQuote(userId, userSecret, accountId, instrumentSymbol)
+                .execute();
+        // TODO: test validations
+    }
+
+    /**
+     * Get option order impact
+     *
+     * Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getOptionImpactTest() throws ApiException {
+        MlegOrderTypeStrict orderType = null;
+        TimeInForceStrict timeInForce = null;
+        List<MlegLeg> legs = null;
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        BigDecimal limitPrice = null;
+        BigDecimal stopPrice = null;
+        MlegPriceEffectStrictNullable priceEffect = null;
+        OptionImpact response = api.getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+                .limitPrice(limitPrice)
+                .stopPrice(stopPrice)
+                .priceEffect(priceEffect)
                 .execute();
         // TODO: test validations
     }

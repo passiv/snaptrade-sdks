@@ -72,6 +72,21 @@ describe 'TradingApi' do
     end
   end
 
+  # unit tests for get_option_impact
+  # Get option order impact
+  # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+  # @param user_id 
+  # @param user_secret 
+  # @param account_id 
+  # @param mleg_trade_form 
+  # @param [Hash] opts the optional parameters
+  # @return [OptionImpact]
+  describe 'get_option_impact test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_order_impact
   # Check equity order impact
   # Simulates an order and its impact on the account. This endpoint does not place the order with the brokerage. If successful, it returns a &#x60;Trade&#x60; object and the ID of the object can be used to place the order with the brokerage using the [place checked order endpoint](/reference/Trading/Trading_placeOrder). Please note that the &#x60;Trade&#x60; object returned expires after 5 minutes. Any order placed using an expired &#x60;Trade&#x60; will be rejected.

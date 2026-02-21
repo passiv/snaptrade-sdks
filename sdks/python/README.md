@@ -67,6 +67,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.trading.cancel_order`](#snaptradetradingcancel_order)
   * [`snaptrade.trading.cancel_user_account_order`](#snaptradetradingcancel_user_account_order)
   * [`snaptrade.trading.get_cryptocurrency_pair_quote`](#snaptradetradingget_cryptocurrency_pair_quote)
+  * [`snaptrade.trading.get_option_impact`](#snaptradetradingget_option_impact)
   * [`snaptrade.trading.get_order_impact`](#snaptradetradingget_order_impact)
   * [`snaptrade.trading.get_user_account_quotes`](#snaptradetradingget_user_account_quotes)
   * [`snaptrade.trading.place_bracket_order`](#snaptradetradingplace_bracket_order)
@@ -1894,6 +1895,76 @@ get_cryptocurrency_pair_quote_response = (
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.trading.get_option_impact`<a id="snaptradetradingget_option_impact"></a>
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
+Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_option_impact_response = snaptrade.trading.get_option_impact(
+    order_type="MARKET",
+    time_in_force="Day",
+    legs=[
+        {
+            "instrument": {
+                "symbol": "PBI   250718C00006000",
+                "instrument_type": "OPTION",
+            },
+            "action": "BUY_TO_OPEN",
+            "units": 1,
+        }
+    ],
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    account_id="917c8734-8470-4a3e-a18f-57c3f2ee6631",
+    limit_price="",
+    stop_price="",
+    price_effect="DEBIT",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### order_type: [`MlegOrderTypeStrict`](./snaptrade_client/type/mleg_order_type_strict.py)<a id="order_type-mlegordertypestrictsnaptrade_clienttypemleg_order_type_strictpy"></a>
+
+##### time_in_force: [`TimeInForceStrict`](./snaptrade_client/type/time_in_force_strict.py)<a id="time_in_force-timeinforcestrictsnaptrade_clienttypetime_in_force_strictpy"></a>
+
+##### legs: List[`MlegLeg`]<a id="legs-listmlegleg"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### account_id: `str`<a id="account_id-str"></a>
+
+##### limit_price: `Optional[str]`<a id="limit_price-optionalstr"></a>
+
+The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+
+##### stop_price: `Optional[str]`<a id="stop_price-optionalstr"></a>
+
+The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+
+##### price_effect: [`MlegPriceEffectStrictNullable`](./snaptrade_client/type/mleg_price_effect_strict_nullable.py)<a id="price_effect-mlegpriceeffectstrictnullablesnaptrade_clienttypemleg_price_effect_strict_nullablepy"></a>
+
+#### ⚙️ Request Body<a id="⚙️-request-body"></a>
+
+[`MlegTradeForm`](./snaptrade_client/type/mleg_trade_form.py)
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`OptionImpact`](./snaptrade_client/type/option_impact.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/accounts/{accountId}/trading/options/impact` `post`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

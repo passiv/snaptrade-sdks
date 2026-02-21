@@ -7,6 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**cancelOrder**](TradingApi.md#cancelOrder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
 | [**cancelUserAccountOrder**](TradingApi.md#cancelUserAccountOrder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
 | [**getCryptocurrencyPairQuote**](TradingApi.md#getCryptocurrencyPairQuote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**getOptionImpact**](TradingApi.md#getOptionImpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact |
 | [**getOrderImpact**](TradingApi.md#getOrderImpact) | **POST** /trade/impact | Check equity order impact |
 | [**getUserAccountQuotes**](TradingApi.md#getUserAccountQuotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**placeBracketOrder**](TradingApi.md#placeBracketOrder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
@@ -342,6 +343,119 @@ public class Example {
 |-------------|-------------|------------------|
 | **200** | OK |  -  |
 | **500** | Unexpected Error |  -  |
+
+<a name="getOptionImpact"></a>
+# **getOptionImpact**
+> OptionImpact getOptionImpact(userId, userSecret, accountId, mlegTradeForm).execute();
+
+Get option order impact
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.TradingApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    MlegOrderTypeStrict orderType = MlegOrderTypeStrict.fromValue("MARKET");
+    TimeInForceStrict timeInForce = TimeInForceStrict.fromValue("FOK");
+    List<MlegLeg> legs = Arrays.asList();
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    BigDecimal limitPrice = new BigDecimal(78); // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+    BigDecimal stopPrice = new BigDecimal(78); // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+    MlegPriceEffectStrictNullable priceEffect = MlegPriceEffectStrictNullable.fromValue("CREDIT");
+    try {
+      OptionImpact result = client
+              .trading
+              .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getEstimatedCost());
+      System.out.println(result.getEstimatedTransactionFee());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getOptionImpact");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<OptionImpact> response = client
+              .trading
+              .getOptionImpact(orderType, timeInForce, legs, userId, userSecret, accountId)
+              .limitPrice(limitPrice)
+              .stopPrice(stopPrice)
+              .priceEffect(priceEffect)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling TradingApi#getOptionImpact");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md)|  | |
+
+### Return type
+
+[**OptionImpact**](OptionImpact.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **500** | Unexpected Error |  -  |
+| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
 
 <a name="getOrderImpact"></a>
 # **getOrderImpact**

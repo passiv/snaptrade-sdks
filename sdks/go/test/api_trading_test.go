@@ -87,6 +87,34 @@ func Test_snaptrade_TradingApiService(t *testing.T) {
         */
     })
 
+    t.Run("Test TradingApiService GetOptionImpact", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        priceEffect := *snaptrade.NewMlegPriceEffectStrict()
+        
+        mlegTradeForm := *snaptrade.NewMlegTradeForm(
+            null,
+            null,
+            null,
+        )
+        mlegTradeForm.SetLimitPrice("")
+        mlegTradeForm.SetStopPrice("")
+        mlegTradeForm.SetPriceEffect(priceEffect)
+        
+        request := client.TradingApi.GetOptionImpact(
+            "userId_example",
+            "userSecret_example",
+            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+            mlegTradeForm,
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test TradingApiService GetOrderImpact", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         units := *snaptrade.Newfloat32()

@@ -7,6 +7,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**CancelOrder**](TradingApi.md#cancelorder) | **POST** /accounts/{accountId}/trading/cancel | Cancel order |
 | [**CancelUserAccountOrder**](TradingApi.md#canceluseraccountorder) | **POST** /accounts/{accountId}/orders/cancel | Cancel equity order |
 | [**GetCryptocurrencyPairQuote**](TradingApi.md#getcryptocurrencypairquote) | **GET** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote |
+| [**GetOptionImpact**](TradingApi.md#getoptionimpact) | **POST** /accounts/{accountId}/trading/options/impact | Get option order impact |
 | [**GetOrderImpact**](TradingApi.md#getorderimpact) | **POST** /trade/impact | Check equity order impact |
 | [**GetUserAccountQuotes**](TradingApi.md#getuseraccountquotes) | **GET** /accounts/{accountId}/quotes | Get equity symbol quotes |
 | [**PlaceBracketOrder**](TradingApi.md#placebracketorder) | **POST** /accounts/{accountId}/trading/bracket | Place bracket order |
@@ -317,6 +318,120 @@ catch (ApiException e)
 | **200** | OK |  -  |
 | **400** | Invalid request |  -  |
 | **500** | Unexpected Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
+# **GetOptionImpact**
+
+
+
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class GetOptionImpactExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            var orderType = MlegOrderTypeStrict.MARKET;
+            var timeInForce = TimeInForceStrict.FOK;
+            var limitPrice = ""; // The limit price. Required if the order type is LIMIT, STOP_LOSS_LIMIT.
+            var stopPrice = ""; // The stop price. Required if the order type is STOP_LOSS_MARKET, STOP_LOSS_LIMIT.
+            var priceEffect = MlegPriceEffectStrictNullable.CREDIT;
+            var legs = new List<MlegLeg>();
+            
+            var mlegTradeForm = new MlegTradeForm(
+                orderType,
+                timeInForce,
+                limitPrice,
+                stopPrice,
+                priceEffect,
+                legs
+            );
+            
+            try
+            {
+                // Get option order impact
+                OptionImpact result = client.Trading.GetOptionImpact(userId, userSecret, accountId, mlegTradeForm);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling TradingApi.GetOptionImpact: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetOptionImpactWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Get option order impact
+    ApiResponse<OptionImpact> response = apiInstance.GetOptionImpactWithHttpInfo(userId, userSecret, accountId, mlegTradeForm);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling TradingApi.GetOptionImpactWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+| **mlegTradeForm** | [**MlegTradeForm**](MlegTradeForm.md) |  |  |
+
+### Return type
+
+[**OptionImpact**](OptionImpact.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Invalid request |  -  |
+| **403** | Forbidden |  -  |
+| **500** | Unexpected Error |  -  |
+| **501** | Not Implemented - option impact is not supported for this brokerage |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

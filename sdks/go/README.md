@@ -112,6 +112,7 @@ Class | Method | HTTP request | Description
 *TradingApi* | [**CancelOrder**](docs/TradingApi.md#cancelorder) | **Post** /accounts/{accountId}/trading/cancel | Cancel order
 *TradingApi* | [**CancelUserAccountOrder**](docs/TradingApi.md#canceluseraccountorder) | **Post** /accounts/{accountId}/orders/cancel | Cancel equity order
 *TradingApi* | [**GetCryptocurrencyPairQuote**](docs/TradingApi.md#getcryptocurrencypairquote) | **Get** /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote | Get crypto pair quote
+*TradingApi* | [**GetOptionImpact**](docs/TradingApi.md#getoptionimpact) | **Post** /accounts/{accountId}/trading/options/impact | Get option order impact
 *TradingApi* | [**GetOrderImpact**](docs/TradingApi.md#getorderimpact) | **Post** /trade/impact | Check equity order impact
 *TradingApi* | [**GetUserAccountQuotes**](docs/TradingApi.md#getuseraccountquotes) | **Get** /accounts/{accountId}/quotes | Get equity symbol quotes
 *TradingApi* | [**PlaceBracketOrder**](docs/TradingApi.md#placebracketorder) | **Post** /accounts/{accountId}/trading/bracket | Place bracket order
@@ -219,6 +220,7 @@ Class | Method | HTTP request | Description
  - [OptionChainInner](docs/OptionChainInner.md)
  - [OptionChainInnerChainPerRootInner](docs/OptionChainInnerChainPerRootInner.md)
  - [OptionChainInnerChainPerRootInnerChainPerStrikePriceInner](docs/OptionChainInnerChainPerRootInnerChainPerStrikePriceInner.md)
+ - [OptionImpact](docs/OptionImpact.md)
  - [OptionLeg](docs/OptionLeg.md)
  - [OptionStrategy](docs/OptionStrategy.md)
  - [OptionStrategyLegsInner](docs/OptionStrategyLegsInner.md)
