@@ -4,9 +4,119 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**getOptionQuote**](OptionsApi.md#getOptionQuote) | **GET** /marketData/options/quotes | Get option quote |
 | [**getOptionsChain**](OptionsApi.md#getOptionsChain) | **GET** /accounts/{accountId}/optionsChain | Get the options chain for a symbol |
 | [**listOptionHoldings**](OptionsApi.md#listOptionHoldings) | **GET** /accounts/{accountId}/options | List account option positions |
 
+
+<a name="getOptionQuote"></a>
+# **getOptionQuote**
+> OptionQuote getOptionQuote(userId, userSecret, symbol).execute();
+
+Get option quote
+
+Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.OptionsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    String symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
+    try {
+      OptionQuote result = client
+              .options
+              .getOptionQuote(userId, userSecret, symbol)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getSymbol());
+      System.out.println(result.getBidPrice());
+      System.out.println(result.getBidSize());
+      System.out.println(result.getAskPrice());
+      System.out.println(result.getAskSize());
+      System.out.println(result.getLastPrice());
+      System.out.println(result.getLastSize());
+      System.out.println(result.getOpenInterest());
+      System.out.println(result.getVolume());
+      System.out.println(result.getImpliedVolatility());
+      System.out.println(result.getUnderlyingPrice());
+      System.out.println(result.getTimestamp());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#getOptionQuote");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<OptionQuote> response = client
+              .options
+              .getOptionQuote(userId, userSecret, symbol)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling OptionsApi#getOptionQuote");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **symbol** | **String**| The OCC-formatted option symbol. | |
+
+### Return type
+
+[**OptionQuote**](OptionQuote.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **429** | Rate limit exceeded |  -  |
 
 <a name="getOptionsChain"></a>
 # **getOptionsChain**

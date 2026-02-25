@@ -92,6 +92,7 @@ export * from './option-chain-inner-chain-per-root-inner';
 export * from './option-chain-inner-chain-per-root-inner-chain-per-strike-price-inner';
 export * from './option-impact';
 export * from './option-leg';
+export * from './option-quote';
 export * from './option-strategy';
 export * from './option-strategy-legs-inner';
 export * from './options-position';

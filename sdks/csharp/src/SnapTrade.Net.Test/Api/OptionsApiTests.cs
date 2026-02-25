@@ -47,6 +47,36 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
+        /// Test GetOptionQuote
+        /// </summary>
+        [Fact]
+        public void GetOptionQuoteTest()
+        {
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var symbol = "AAPL  251219C00150000"; // The OCC-formatted option symbol.
+            
+            try
+            {
+                // Get option quote
+                OptionQuote result = client.Options.GetOptionQuote(userId, userSecret, symbol);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling OptionsApi.GetOptionQuote: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+
+        /// <summary>
         /// Test GetOptionsChain
         /// </summary>
         [Fact]

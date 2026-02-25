@@ -17,6 +17,114 @@ module SnapTrade
       @api_client = api_client
     end
 
+    # Get option quote
+    #
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+    # 
+    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbol [String] The OCC-formatted option symbol.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_option_quote(user_id:, user_secret:, symbol:, extra: {})
+      data, _status_code, _headers = get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
+      data
+    end
+
+    # Get option quote
+    #
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+    # 
+    # OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbol [String] The OCC-formatted option symbol.
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_option_quote_with_http_info(user_id:, user_secret:, symbol:, extra: {})
+      get_option_quote_with_http_info_impl(user_id, user_secret, symbol, extra)
+    end
+
+    # Get option quote
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbol [String] The OCC-formatted option symbol.
+    # @param [Hash] opts the optional parameters
+    # @return [OptionQuote]
+    private def get_option_quote_impl(user_id, user_secret, symbol, opts = {})
+      data, _status_code, _headers = get_option_quote_with_http_info(user_id, user_secret, symbol, opts)
+      data
+    end
+
+    # Get option quote
+    # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param symbol [String] The OCC-formatted option symbol.
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(OptionQuote, Integer, Hash)>] OptionQuote data, response status code and response headers
+    private def get_option_quote_with_http_info_impl(user_id, user_secret, symbol, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: OptionsApi.get_option_quote ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling OptionsApi.get_option_quote"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling OptionsApi.get_option_quote"
+      end
+      # verify the required parameter 'symbol' is set
+      if @api_client.config.client_side_validation && symbol.nil?
+        fail ArgumentError, "Missing the required parameter 'symbol' when calling OptionsApi.get_option_quote"
+      end
+      # resource path
+      local_var_path = '/marketData/options/quotes'
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+      query_params[:'symbol'] = symbol
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'OptionQuote'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"OptionsApi.get_option_quote",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: OptionsApi#get_option_quote\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get the options chain for a symbol
     #
     # Returns the option chain for the specified symbol in the specified account.

@@ -1242,6 +1242,56 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  "/marketData/options/quotes":
+    get:
+      tags:
+        - Options
+      summary: Get option quote
+      description: |
+        Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+
+        OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+
+      operationId: Options_getOptionQuote
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: query
+          name: symbol
+          required: true
+          description: The OCC-formatted option symbol.
+          schema:
+            type: string
+            example: "AAPL  251219C00150000"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OptionQuote"
+        "404":
+          description: Option contract not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/404FailedRequestResponse"
+        "429":
+          description: Rate limit exceeded
+        "500":
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
   "/authorizations":
     get:
       tags:
@@ -3449,6 +3499,60 @@ components:
         - REPLACE_PENDING
         - EXPIRED
 
+    OptionQuote:
+      description: Real-time quote for a single option contract.
+      type: object
+      properties:
+        symbol:
+          type: string
+          description: The OCC-formatted option symbol.
+          example: "AAPL  251219C00150000"
+        bid_price:
+          type: number
+          description: The best bid price for the option contract.
+          example: 3.50
+        bid_size:
+          type: integer
+          description: The number of contracts available at the bid price.
+          example: 10
+        ask_price:
+          type: number
+          description: The best ask price for the option contract.
+          example: 3.70
+        ask_size:
+          type: integer
+          description: The number of contracts available at the ask price.
+          example: 15
+        last_price:
+          type: number
+          description: The price of the last trade for the option contract.
+          example: 3.60
+        last_size:
+          type: integer
+          description: The number of contracts in the last trade.
+          example: 5
+        open_interest:
+          type: integer
+          description: The total number of outstanding contracts.
+          example: 1200
+        volume:
+          type: integer
+          description: The total number of contracts traded during the current session.
+          example: 350
+        implied_volatility:
+          type: number
+          description: The implied volatility of the option contract.
+          example: 0.32145678
+        underlying_price:
+          type: number
+          description: The current price of the underlying security.
+          example: 150.25
+        timestamp:
+          type: string
+          format: date-time
+          nullable: true
+          description: The timestamp of the quote.
+          example: "2026-01-15T14:30:00Z"
     OptionsPosition:
       description: Describes a single option position in an account.
       type: object

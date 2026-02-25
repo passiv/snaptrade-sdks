@@ -384,6 +384,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/marketData/options/quotes-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'symbol'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionsChain-GET': {
         'parameters': [
             {
