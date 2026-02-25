@@ -390,6 +390,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/marketData/options/quotes-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'symbol'
+            },
+        ]
+    },
     '/accounts/{accountId}/optionsChain-GET': {
         parameters: [
             {

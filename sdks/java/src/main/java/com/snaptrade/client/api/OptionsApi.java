@@ -2,6 +2,7 @@ package com.snaptrade.client.api;
 
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.OptionChainInner;
+import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OptionsPosition;
 import java.util.UUID;
 import java.util.ArrayList;
@@ -13,6 +14,11 @@ public class OptionsApi extends OptionsApiGenerated {
 
     public OptionsApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
+    }
+    public class GetOptionQuoteRequestBuilder extends GetOptionQuoteRequestBuilderGenerated {
+        public GetOptionQuoteRequestBuilder(String userId, String userSecret, String symbol) {
+            super(userId, userSecret, symbol);
+        }
     }
     public class GetOptionsChainRequestBuilder extends GetOptionsChainRequestBuilderGenerated {
         public GetOptionsChainRequestBuilder(String userId, String userSecret, UUID accountId, UUID symbol) {

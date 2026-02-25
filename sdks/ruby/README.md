@@ -47,6 +47,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.options.get_option_quote`](#snaptradeoptionsget_option_quote)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
@@ -1257,6 +1258,44 @@ false to retrieve non executed orders as well
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `GET`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
+
+Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+
+OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```ruby
+result = snaptrade.options.get_option_quote(
+  user_id: "snaptrade-user-123",
+  user_secret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
+  symbol: "AAPL  251219C00150000",
+)
+p result
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `String`<a id="user_id-string"></a>
+##### user_secret: `String`<a id="user_secret-string"></a>
+##### symbol: `String`<a id="symbol-string"></a>
+The OCC-formatted option symbol.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[OptionQuote](./lib/snaptrade/models/option_quote.rb)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/marketData/options/quotes` `GET`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

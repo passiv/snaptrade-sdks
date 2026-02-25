@@ -26,6 +26,7 @@ from snaptrade_client.apis.paths.accounts_account_id_activities import AccountsA
 from snaptrade_client.apis.paths.accounts_account_id_orders_details import AccountsAccountIdOrdersDetails
 from snaptrade_client.apis.paths.accounts_account_id_options import AccountsAccountIdOptions
 from snaptrade_client.apis.paths.accounts_account_id_options_chain import AccountsAccountIdOptionsChain
+from snaptrade_client.apis.paths.market_data_options_quotes import MarketDataOptionsQuotes
 from snaptrade_client.apis.paths.activities import Activities
 from snaptrade_client.apis.paths.performance_custom import PerformanceCustom
 from snaptrade_client.apis.paths.accounts_account_id_quotes import AccountsAccountIdQuotes
@@ -86,6 +87,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
+        PathValues.MARKET_DATA_OPTIONS_QUOTES: MarketDataOptionsQuotes,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
@@ -147,6 +149,7 @@ path_to_api = PathToApi(
         PathValues.ACCOUNTS_ACCOUNT_ID_ORDERS_DETAILS: AccountsAccountIdOrdersDetails,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS: AccountsAccountIdOptions,
         PathValues.ACCOUNTS_ACCOUNT_ID_OPTIONS_CHAIN: AccountsAccountIdOptionsChain,
+        PathValues.MARKET_DATA_OPTIONS_QUOTES: MarketDataOptionsQuotes,
         PathValues.ACTIVITIES: Activities,
         PathValues.PERFORMANCE_CUSTOM: PerformanceCustom,
         PathValues.ACCOUNTS_ACCOUNT_ID_QUOTES: AccountsAccountIdQuotes,
