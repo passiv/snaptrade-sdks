@@ -26,6 +26,22 @@ func Test_snaptrade_OptionsApiService(t *testing.T) {
     client := snaptrade.NewAPIClient(configuration)
     */
 
+    t.Run("Test OptionsApiService GetOptionQuote", func(t *testing.T) {
+        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
+        request := client.OptionsApi.GetOptionQuote(
+            "userId_example",
+            "userSecret_example",
+            ""AAPL  251219C00150000"",
+        )
+        
+        resp, httpRes, err := request.Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+        */
+    })
+
     t.Run("Test OptionsApiService GetOptionsChain", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.OptionsApi.GetOptionsChain(

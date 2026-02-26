@@ -118,6 +118,7 @@ require 'snaptrade/models/option_chain_inner_chain_per_root_inner_chain_per_stri
 require 'snaptrade/models/option_impact'
 require 'snaptrade/models/option_leg'
 require 'snaptrade/models/option_leg_action'
+require 'snaptrade/models/option_quote'
 require 'snaptrade/models/option_strategy'
 require 'snaptrade/models/option_strategy_legs_inner'
 require 'snaptrade/models/option_type'

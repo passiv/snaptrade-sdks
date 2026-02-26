@@ -7,7 +7,7 @@
 Connect brokerage accounts to your app for live positions and trading
 
 
-[![PyPI](https://img.shields.io/badge/PyPI-v11.0.162-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.162)
+[![PyPI](https://img.shields.io/badge/PyPI-v11.0.163-blue)](https://pypi.org/project/snaptrade-python-sdk/11.0.163)
 [![README.md](https://img.shields.io/badge/README-Click%20Here-green)](https://github.com/passiv/snaptrade-sdks/tree/master/sdks/python#readme)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
@@ -50,6 +50,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimental_endpoints.get_user_account_order_detail_v2`](#snaptradeexperimental_endpointsget_user_account_order_detail_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_orders_v2`](#snaptradeexperimental_endpointsget_user_account_orders_v2)
   * [`snaptrade.experimental_endpoints.get_user_account_recent_orders_v2`](#snaptradeexperimental_endpointsget_user_account_recent_orders_v2)
+  * [`snaptrade.options.get_option_quote`](#snaptradeoptionsget_option_quote)
   * [`snaptrade.options.get_options_chain`](#snaptradeoptionsget_options_chain)
   * [`snaptrade.options.list_option_holdings`](#snaptradeoptionslist_option_holdings)
   * [`snaptrade.reference_data.get_currency_exchange_rate_pair`](#snaptradereference_dataget_currency_exchange_rate_pair)
@@ -90,7 +91,7 @@ Python >=3.8
 ## Installation<a id="installation"></a>
 
 ```sh
-pip install snaptrade-python-sdk==11.0.162
+pip install snaptrade-python-sdk==11.0.163
 ```
 
 ## Getting Started<a id="getting-started"></a>
@@ -1345,6 +1346,45 @@ Defaults to true. Indicates if request should fetch only executed orders. Set to
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/accounts/{accountId}/recentOrders/v2` `get`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+### `snaptrade.options.get_option_quote`<a id="snaptradeoptionsget_option_quote"></a>
+
+Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+
+OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```python
+get_option_quote_response = snaptrade.options.get_option_quote(
+    user_id="snaptrade-user-123",
+    user_secret="adf2aa34-8219-40f7-a6b3-60156985cc61",
+    symbol="AAPL  251219C00150000",
+)
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### user_id: `str`<a id="user_id-str"></a>
+
+##### user_secret: `str`<a id="user_secret-str"></a>
+
+##### symbol: `str`<a id="symbol-str"></a>
+
+The OCC-formatted option symbol.
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[`OptionQuote`](./snaptrade_client/type/option_quote.py)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/marketData/options/quotes` `get`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

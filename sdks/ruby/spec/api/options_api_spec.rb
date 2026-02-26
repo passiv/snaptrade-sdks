@@ -27,6 +27,20 @@ describe 'OptionsApi' do
     end
   end
 
+  # unit tests for get_option_quote
+  # Get option quote
+  # Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+  # @param user_id 
+  # @param user_secret 
+  # @param symbol The OCC-formatted option symbol.
+  # @param [Hash] opts the optional parameters
+  # @return [OptionQuote]
+  describe 'get_option_quote test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for get_options_chain
   # Get the options chain for a symbol
   # Returns the option chain for the specified symbol in the specified account.

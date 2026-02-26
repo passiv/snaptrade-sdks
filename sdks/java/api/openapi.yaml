@@ -1560,6 +1560,68 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-optionsChain
       x-accepts: application/json
+  /marketData/options/quotes:
+    get:
+      description: |
+        Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.
+
+        OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike).
+      operationId: Options_getOptionQuote
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - description: The OCC-formatted option symbol.
+        explode: true
+        in: query
+        name: symbol
+        required: true
+        schema:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptionQuote'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/404FailedRequestResponse'
+          description: Option contract not found
+          x-do-not-generate: true
+        "429":
+          description: Rate limit exceeded
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/500UnexpectedExceptionResponse'
+          description: Unexpected error
+          x-do-not-generate: true
+      summary: Get option quote
+      tags:
+      - Options
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--marketData-options-quotes
+      x-accepts: application/json
   /activities:
     get:
       deprecated: true
@@ -4924,6 +4986,99 @@ components:
       - REPLACE_PENDING
       - EXPIRED
       type: string
+    OptionQuote:
+      additionalProperties: true
+      description: Real-time quote for a single option contract.
+      example:
+        volume: 350
+        symbol: AAPL  251219C00150000
+        ask_size: 15
+        underlying_price: 150.25
+        bid_size: 10
+        open_interest: 1200
+        implied_volatility: 0.32145678
+        last_size: 5
+        bid_price: 3.5
+        ask_price: 3.7
+        last_price: 3.6
+        timestamp: 2026-01-15T14:30:00Z
+      properties:
+        symbol:
+          description: The OCC-formatted option symbol.
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-symbol
+        bid_price:
+          description: The best bid price for the option contract.
+          example: 3.5
+          type: number
+          x-konfig-original-example: 3.5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-bid_price
+        bid_size:
+          description: The number of contracts available at the bid price.
+          example: 10
+          type: integer
+          x-konfig-original-example: 10
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-bid_size
+        ask_price:
+          description: The best ask price for the option contract.
+          example: 3.7
+          type: number
+          x-konfig-original-example: 3.7
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-ask_price
+        ask_size:
+          description: The number of contracts available at the ask price.
+          example: 15
+          type: integer
+          x-konfig-original-example: 15
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-ask_size
+        last_price:
+          description: The price of the last trade for the option contract.
+          example: 3.6
+          type: number
+          x-konfig-original-example: 3.6
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-last_price
+        last_size:
+          description: The number of contracts in the last trade.
+          example: 5
+          type: integer
+          x-konfig-original-example: 5
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-last_size
+        open_interest:
+          description: The total number of outstanding contracts.
+          example: 1200
+          type: integer
+          x-konfig-original-example: 1200
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-open_interest
+        volume:
+          description: The total number of contracts traded during the current session.
+          example: 350
+          type: integer
+          x-konfig-original-example: 350
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-volume
+        implied_volatility:
+          description: The implied volatility of the option contract.
+          example: 0.32145678
+          type: number
+          x-konfig-original-example: 0.32145678
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-implied_volatility
+        underlying_price:
+          description: The current price of the underlying security.
+          example: 150.25
+          type: number
+          x-konfig-original-example: 150.25
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-underlying_price
+        timestamp:
+          description: The timestamp of the quote.
+          example: 2026-01-15T14:30:00Z
+          format: date-time
+          nullable: true
+          type: string
+          x-konfig-original-example: 2026-01-15T14:30:00Z
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-OptionQuote-properties-timestamp
+      type: object
+      x-konfig-is-used-in-successful-response: true
     OptionsPosition:
       additionalProperties: true
       description: Describes a single option position in an account.
@@ -9714,6 +9869,10 @@ components:
       example: "BUY,SELL,DIVIDEND"
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema:
+      example: AAPL  251219C00150000
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-paths--activities-get-parameters-4-schema:
       example: "BUY,SELL,DIVIDEND"
       type: string
@@ -9963,6 +10122,54 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordLegInstrument-properties-figi_code:
       example: BBG000B9XRY4
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-symbol:
+      example: AAPL  251219C00150000
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-bid_price:
+      example: 3.5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-bid_size:
+      example: 10
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-ask_price:
+      example: 3.7
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-ask_size:
+      example: 15
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-last_price:
+      example: 3.6
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-last_size:
+      example: 5
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-open_interest:
+      example: 1200
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-volume:
+      example: 350
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-implied_volatility:
+      example: 0.32145678
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-underlying_price:
+      example: 150.25
+      type: number
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-OptionQuote-properties-timestamp:
+      example: 2026-01-15T14:30:00Z
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-OptionsPosition-properties-price:
@@ -11769,6 +11976,28 @@ components:
       - userId
       - userSecret
       - accountId
+      - symbol
+    konfig-generated-schema-single-parameter-schema-get--marketData-options-quotes:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        symbol:
+          example: AAPL  251219C00150000
+          type: string
+          x-konfig-original-example: AAPL  251219C00150000
+          x-konfig-generated-schema: konfig-generated-schema-paths--marketData-options-quotes-get-parameters-2-schema
+      required:
+      - symbol
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
       - symbol
     konfig-generated-schema-single-parameter-schema-get--activities:
       additionalProperties: true

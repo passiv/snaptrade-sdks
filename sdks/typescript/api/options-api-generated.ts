@@ -19,9 +19,13 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
+import { Model404FailedRequestResponse } from '../models';
+// @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
 import { OptionChainInner } from '../models';
+// @ts-ignore
+import { OptionQuote } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';
 import { paginate } from "../pagination/paginate";
@@ -33,6 +37,71 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const OptionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * @summary Get option quote
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {string} symbol The OCC-formatted option symbol.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionQuote: async (userId: string, userSecret: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('getOptionQuote', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('getOptionQuote', 'userSecret', userSecret)
+            // verify required parameter 'symbol' is not null or undefined
+            assertParamExists('getOptionQuote', 'symbol', symbol)
+            const localVarPath = `/marketData/options/quotes`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+            if (symbol !== undefined) {
+                localVarQueryParameter['symbol'] = symbol;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/marketData/options/quotes',
+                httpMethod: 'GET'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Returns the option chain for the specified symbol in the specified account.
          * @summary Get the options chain for a symbol
@@ -175,6 +244,17 @@ export const OptionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = OptionsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * @summary Get option quote
+         * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getOptionQuote(requestParameters: OptionsApiGetOptionQuoteRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OptionQuote>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionQuote(requestParameters.userId, requestParameters.userSecret, requestParameters.symbol, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns the option chain for the specified symbol in the specified account.
          * @summary Get the options chain for a symbol
          * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
@@ -207,6 +287,16 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
     const localVarFp = OptionsApiFp(configuration)
     return {
         /**
+         * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+         * @summary Get option quote
+         * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getOptionQuote(requestParameters: OptionsApiGetOptionQuoteRequest, options?: AxiosRequestConfig): AxiosPromise<OptionQuote> {
+            return localVarFp.getOptionQuote(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns the option chain for the specified symbol in the specified account.
          * @summary Get the options chain for a symbol
          * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
@@ -228,6 +318,36 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
         },
     };
 };
+
+/**
+ * Request parameters for getOptionQuote operation in OptionsApi.
+ * @export
+ * @interface OptionsApiGetOptionQuoteRequest
+ */
+export type OptionsApiGetOptionQuoteRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionQuote
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof OptionsApiGetOptionQuote
+    */
+    readonly userSecret: string
+    
+    /**
+    * The OCC-formatted option symbol.
+    * @type {string}
+    * @memberof OptionsApiGetOptionQuote
+    */
+    readonly symbol: string
+    
+}
 
 /**
  * Request parameters for getOptionsChain operation in OptionsApi.
@@ -303,6 +423,18 @@ export type OptionsApiListOptionHoldingsRequest = {
  * @extends {BaseAPI}
  */
 export class OptionsApiGenerated extends BaseAPI {
+    /**
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: `AAPL  251219C00150000` (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+     * @summary Get option quote
+     * @param {OptionsApiGetOptionQuoteRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof OptionsApiGenerated
+     */
+    public getOptionQuote(requestParameters: OptionsApiGetOptionQuoteRequest, options?: AxiosRequestConfig) {
+        return OptionsApiFp(this.configuration).getOptionQuote(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Returns the option chain for the specified symbol in the specified account.
      * @summary Get the options chain for a symbol

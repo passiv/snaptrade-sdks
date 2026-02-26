@@ -17,6 +17,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.OptionChainInner;
+import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OptionsPosition;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
@@ -41,6 +42,23 @@ public class OptionsApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new OptionsApi(apiClient);
+    }
+
+    /**
+     * Get option quote
+     *
+     * Returns a real-time quote for a single option contract. The option contract is specified using an OCC-formatted symbol.  OCC format: &#x60;AAPL  251219C00150000&#x60; (underlying padded to 6 characters with spaces, followed by date, put/call, and strike). 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getOptionQuoteTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        String symbol = null;
+        OptionQuote response = api.getOptionQuote(userId, userSecret, symbol)
+                .execute();
+        // TODO: test validations
     }
 
     /**
