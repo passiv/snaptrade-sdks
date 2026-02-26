@@ -145,3 +145,4 @@ The order will now show over the :api[AccountInformation_getUserAccountOrders] e
 
 - To get started with Webhooks, see [Webhooks](https://docs.snaptrade.com/docs/webhooks)
 - To get started with implementing the SnapTrade Connection Portal, see [Methods to Integrate the Connection Portal into Your Application](https://docs.snaptrade.com/docs/implement-connection-portal)
+- To understand when data is real-time vs daily cached, see [Real-Time vs Cached Data](https://docs.snaptrade.com/docs/realtime-vs-cached-data)
