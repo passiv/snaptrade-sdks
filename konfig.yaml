@@ -160,7 +160,7 @@ portal:
     /accounts/{accountId}/trading/options/impact:
       post: true
     /marketData/options/quotes:
-      post: true
+      get: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
