@@ -90,19 +90,9 @@ portal:
     - id: placing-trades
       path: demos/placing-trades.md
   betaOperations:
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs:
-      get: true
-    /accounts/{accountId}/trading/instruments/cryptocurrencyPairs/{instrumentSymbol}/quote:
-      get: true
-    /accounts/{accountId}/trading/simple:
-      post: true
-    /accounts/{accountId}/trading/bracket:
-      post: true
     /accounts/{accountId}/trading/simple/{brokerageOrderId}/replace:
       patch: true
     /accounts/{accountId}/trading/simple/preview:
-      post: true
-    /accounts/{accountId}/trading/options:
       post: true
     /brokerages/{brokerageId}/instruments:
       get: true
@@ -111,6 +101,10 @@ portal:
     /accounts/{accountId}/recentOrders/v2:
       get: true
     /accounts/{accountId}/orders/details/v2/{brokerageOrderId}:
+      get: true
+    /accounts/{accountId}/trading/options/impact:
+      post: true
+    /marketData/options/quotes:
       get: true
   hideOperations:
     /activities:
