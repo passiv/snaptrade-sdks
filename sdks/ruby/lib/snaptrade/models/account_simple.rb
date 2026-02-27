@@ -22,6 +22,9 @@ module SnapTrade
     # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     attr_accessor :number
 
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    attr_accessor :institution_account_id
+
     attr_accessor :sync_status
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -30,6 +33,7 @@ module SnapTrade
         :'id' => :'id',
         :'name' => :'name',
         :'number' => :'number',
+        :'institution_account_id' => :'institution_account_id',
         :'sync_status' => :'sync_status'
       }
     end
@@ -45,6 +49,7 @@ module SnapTrade
         :'id' => :'String',
         :'name' => :'String',
         :'number' => :'String',
+        :'institution_account_id' => :'String',
         :'sync_status' => :'AccountSyncStatus'
       }
     end
@@ -52,6 +57,7 @@ module SnapTrade
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'institution_account_id',
       ])
     end
 
@@ -82,6 +88,10 @@ module SnapTrade
         self.number = attributes[:'number']
       end
 
+      if attributes.key?(:'institution_account_id')
+        self.institution_account_id = attributes[:'institution_account_id']
+      end
+
       if attributes.key?(:'sync_status')
         self.sync_status = attributes[:'sync_status']
       end
@@ -108,6 +118,7 @@ module SnapTrade
           id == o.id &&
           name == o.name &&
           number == o.number &&
+          institution_account_id == o.institution_account_id &&
           sync_status == o.sync_status
     end
 
@@ -120,7 +131,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, number, sync_status].hash
+      [id, name, number, institution_account_id, sync_status].hash
     end
 
     # Builds the object from hash

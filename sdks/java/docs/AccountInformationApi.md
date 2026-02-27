@@ -376,6 +376,7 @@ public class Example {
       System.out.println(result.getBrokerageAuthorization());
       System.out.println(result.getName());
       System.out.println(result.getNumber());
+      System.out.println(result.getInstitutionAccountId());
       System.out.println(result.getInstitutionName());
       System.out.println(result.getCreatedDate());
       System.out.println(result.getFundingDate());
@@ -1074,7 +1075,7 @@ public class Example {
 
 List accounts
 
-Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.  Please note that this data is cached and only refreshed once a day.  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).   - If you don&#39;t, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization). 
 
 ### Example
 ```java

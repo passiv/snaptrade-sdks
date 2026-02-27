@@ -39,6 +39,12 @@ export interface AccountSimple {
      */
     'number'?: string;
     /**
+     * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     * @type {string}
+     * @memberof AccountSimple
+     */
+    'institution_account_id'?: string | null;
+    /**
      * 
      * @type {AccountSyncStatus}
      * @memberof AccountSimple

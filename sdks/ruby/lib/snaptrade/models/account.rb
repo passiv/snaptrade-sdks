@@ -25,6 +25,9 @@ module SnapTrade
     # The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
     attr_accessor :number
 
+    # A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+    attr_accessor :institution_account_id
+
     # The name of the brokerage that holds the account.
     attr_accessor :institution_name
 
@@ -66,6 +69,7 @@ module SnapTrade
         :'brokerage_authorization' => :'brokerage_authorization',
         :'name' => :'name',
         :'number' => :'number',
+        :'institution_account_id' => :'institution_account_id',
         :'institution_name' => :'institution_name',
         :'created_date' => :'created_date',
         :'funding_date' => :'funding_date',
@@ -93,6 +97,7 @@ module SnapTrade
         :'brokerage_authorization' => :'String',
         :'name' => :'String',
         :'number' => :'String',
+        :'institution_account_id' => :'String',
         :'institution_name' => :'String',
         :'created_date' => :'Time',
         :'funding_date' => :'Time',
@@ -112,6 +117,7 @@ module SnapTrade
     def self.openapi_nullable
       Set.new([
         :'name',
+        :'institution_account_id',
         :'funding_date',
         :'opening_date',
         :'status',
@@ -148,6 +154,10 @@ module SnapTrade
 
       if attributes.key?(:'number')
         self.number = attributes[:'number']
+      end
+
+      if attributes.key?(:'institution_account_id')
+        self.institution_account_id = attributes[:'institution_account_id']
       end
 
       if attributes.key?(:'institution_name')
@@ -265,6 +275,7 @@ module SnapTrade
           brokerage_authorization == o.brokerage_authorization &&
           name == o.name &&
           number == o.number &&
+          institution_account_id == o.institution_account_id &&
           institution_name == o.institution_name &&
           created_date == o.created_date &&
           funding_date == o.funding_date &&
@@ -288,7 +299,7 @@ module SnapTrade
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, brokerage_authorization, name, number, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
+      [id, brokerage_authorization, name, number, institution_account_id, institution_name, created_date, funding_date, opening_date, sync_status, balance, status, raw_type, meta, portfolio_group, cash_restrictions, is_paper].hash
     end
 
     # Builds the object from hash

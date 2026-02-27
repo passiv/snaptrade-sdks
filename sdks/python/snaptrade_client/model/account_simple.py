@@ -40,6 +40,26 @@ class AccountSimple(
             id = schemas.UUIDSchema
             name = schemas.StrSchema
             number = schemas.StrSchema
+            
+            
+            class institution_account_id(
+                schemas.StrBase,
+                schemas.NoneBase,
+                schemas.Schema,
+                schemas.NoneStrMixin
+            ):
+            
+            
+                def __new__(
+                    cls,
+                    *args: typing.Union[None, str, ],
+                    _configuration: typing.Optional[schemas.Configuration] = None,
+                ) -> 'institution_account_id':
+                    return super().__new__(
+                        cls,
+                        *args,
+                        _configuration=_configuration,
+                    )
         
             @staticmethod
             def sync_status() -> typing.Type['AccountSyncStatus']:
@@ -48,6 +68,7 @@ class AccountSimple(
                 "id": id,
                 "name": name,
                 "number": number,
+                "institution_account_id": institution_account_id,
                 "sync_status": sync_status,
             }
         additional_properties = schemas.AnyTypeSchema
@@ -62,12 +83,15 @@ class AccountSimple(
     def __getitem__(self, name: typing_extensions.Literal["number"]) -> MetaOapg.properties.number: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["institution_account_id"]) -> MetaOapg.properties.institution_account_id: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["sync_status"]) -> 'AccountSyncStatus': ...
     
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["sync_status"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["sync_status"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -81,12 +105,15 @@ class AccountSimple(
     def get_item_oapg(self, name: typing_extensions.Literal["number"]) -> typing.Union[MetaOapg.properties.number, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["institution_account_id"]) -> typing.Union[MetaOapg.properties.institution_account_id, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["sync_status"]) -> typing.Union['AccountSyncStatus', schemas.Unset]: ...
     
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["sync_status"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["name"], typing_extensions.Literal["number"], typing_extensions.Literal["institution_account_id"], typing_extensions.Literal["sync_status"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -95,6 +122,7 @@ class AccountSimple(
         id: typing.Union[MetaOapg.properties.id, str, uuid.UUID, schemas.Unset] = schemas.unset,
         name: typing.Union[MetaOapg.properties.name, str, schemas.Unset] = schemas.unset,
         number: typing.Union[MetaOapg.properties.number, str, schemas.Unset] = schemas.unset,
+        institution_account_id: typing.Union[MetaOapg.properties.institution_account_id, None, str, schemas.Unset] = schemas.unset,
         sync_status: typing.Union['AccountSyncStatus', schemas.Unset] = schemas.unset,
         _configuration: typing.Optional[schemas.Configuration] = None,
         **kwargs: typing.Union[MetaOapg.additional_properties, dict, frozendict.frozendict, str, date, datetime, uuid.UUID, int, float, decimal.Decimal, bool, None, list, tuple, bytes, io.FileIO, io.BufferedReader, ],
@@ -105,6 +133,7 @@ class AccountSimple(
             id=id,
             name=name,
             number=number,
+            institution_account_id=institution_account_id,
             sync_status=sync_status,
             _configuration=_configuration,
             **kwargs,

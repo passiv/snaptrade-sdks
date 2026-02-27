@@ -87,6 +87,7 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageAuthorization">Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. (required).</param>
         /// <param name="name">A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. (required).</param>
         /// <param name="number">The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. (required).</param>
+        /// <param name="institutionAccountId">A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections..</param>
         /// <param name="institutionName">The name of the brokerage that holds the account. (required).</param>
         /// <param name="createdDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. (required).</param>
         /// <param name="fundingDate">Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded..</param>
@@ -99,7 +100,7 @@ namespace SnapTrade.Net.Model
         /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
-        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), DateTime? fundingDate = default(DateTime?), DateTime? openingDate = default(DateTime?), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
+        public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionAccountId = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), DateTime? fundingDate = default(DateTime?), DateTime? openingDate = default(DateTime?), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
         {
             // to ensure "id" is required (not null)
             if (id == null)
@@ -145,6 +146,7 @@ namespace SnapTrade.Net.Model
             }
             this.Balance = balance;
             this.IsPaper = isPaper;
+            this.InstitutionAccountId = institutionAccountId;
             this.FundingDate = fundingDate;
             this.OpeningDate = openingDate;
             this.Status = status;
@@ -182,6 +184,13 @@ namespace SnapTrade.Net.Model
         /// <value>The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.</value>
         [DataMember(Name = "number", IsRequired = true, EmitDefaultValue = true)]
         public string Number { get; set; }
+
+        /// <summary>
+        /// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+        /// </summary>
+        /// <value>A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.</value>
+        [DataMember(Name = "institution_account_id", EmitDefaultValue = true)]
+        public string InstitutionAccountId { get; set; }
 
         /// <summary>
         /// The name of the brokerage that holds the account.
@@ -280,6 +289,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  BrokerageAuthorization: ").Append(BrokerageAuthorization).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Number: ").Append(Number).Append("\n");
+            sb.Append("  InstitutionAccountId: ").Append(InstitutionAccountId).Append("\n");
             sb.Append("  InstitutionName: ").Append(InstitutionName).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
             sb.Append("  FundingDate: ").Append(FundingDate).Append("\n");
@@ -347,6 +357,11 @@ namespace SnapTrade.Net.Model
                     this.Number == input.Number ||
                     (this.Number != null &&
                     this.Number.Equals(input.Number))
+                ) && base.Equals(input) && 
+                (
+                    this.InstitutionAccountId == input.InstitutionAccountId ||
+                    (this.InstitutionAccountId != null &&
+                    this.InstitutionAccountId.Equals(input.InstitutionAccountId))
                 ) && base.Equals(input) && 
                 (
                     this.InstitutionName == input.InstitutionName ||
@@ -435,6 +450,10 @@ namespace SnapTrade.Net.Model
                 if (this.Number != null)
                 {
                     hashCode = (hashCode * 59) + this.Number.GetHashCode();
+                }
+                if (this.InstitutionAccountId != null)
+                {
+                    hashCode = (hashCode * 59) + this.InstitutionAccountId.GetHashCode();
                 }
                 if (this.InstitutionName != null)
                 {

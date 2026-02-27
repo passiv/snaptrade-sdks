@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **BrokerageAuthorization** | **string** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. | 
 **Name** | **NullableString** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. | 
 **Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
+**InstitutionAccountId** | Pointer to **NullableString** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
 **InstitutionName** | **string** | The name of the brokerage that holds the account. | 
 **CreatedDate** | **time.Time** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. | 
 **FundingDate** | Pointer to **NullableTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. | [optional] 
@@ -130,6 +131,41 @@ and a boolean to check if the value has been set.
 SetNumber sets Number field to given value.
 
 
+### GetInstitutionAccountId
+
+`func (o *Account) GetInstitutionAccountId() string`
+
+GetInstitutionAccountId returns the InstitutionAccountId field if non-nil, zero value otherwise.
+
+### GetInstitutionAccountIdOk
+
+`func (o *Account) GetInstitutionAccountIdOk() (*string, bool)`
+
+GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstitutionAccountId
+
+`func (o *Account) SetInstitutionAccountId(v string)`
+
+SetInstitutionAccountId sets InstitutionAccountId field to given value.
+
+### HasInstitutionAccountId
+
+`func (o *Account) HasInstitutionAccountId() bool`
+
+HasInstitutionAccountId returns a boolean if a field has been set.
+
+### SetInstitutionAccountIdNil
+
+`func (o *Account) SetInstitutionAccountIdNil(b bool)`
+
+ SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+
+### UnsetInstitutionAccountId
+`func (o *Account) UnsetInstitutionAccountId()`
+
+UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
 ### GetInstitutionName
 
 `func (o *Account) GetInstitutionName() string`

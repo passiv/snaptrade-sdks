@@ -38,6 +38,12 @@ describe SnapTrade::AccountSimple do
     end
   end
 
+  describe 'test attribute "institution_account_id"' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   describe 'test attribute "sync_status"' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers

@@ -636,9 +636,11 @@ paths:
       description: |
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
+        Please note that this data is cached and only refreshed once a day.
+
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-          - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
+          - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listUserAccounts
       parameters:
       - explode: true
@@ -3360,6 +3362,7 @@ components:
         brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
         portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
         is_paper: false
+        institution_account_id: "54953432"
         institution_name: Robinhood
         number: Q6542138443
         balance:
@@ -3418,6 +3421,15 @@ components:
           type: string
           x-konfig-original-example: Q6542138443
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-number
+        institution_account_id:
+          description: "A stable and unique account identifier provided by the institution.\
+            \ Will be set to null if not provided. When present, can be used to check\
+            \ if a user has connected the same brokerage account across multiple connections."
+          example: "54953432"
+          nullable: true
+          type: string
+          x-konfig-original-example: "54953432"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Account-properties-institution_account_id
         institution_name:
           description: The name of the brokerage that holds the account.
           example: Robinhood
@@ -3544,6 +3556,7 @@ components:
             initial_sync_completed: true
             first_transaction_date: ""
         id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+        institution_account_id: "54953432"
       properties:
         id:
           description: Unique identifier for the connected brokerage account. This
@@ -3568,6 +3581,15 @@ components:
           type: string
           x-konfig-original-example: Q6542138443
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountSimple-properties-number
+        institution_account_id:
+          description: "A stable and unique account identifier provided by the institution.\
+            \ Will be set to null if not provided. When present, can be used to check\
+            \ if a user has connected the same brokerage account across multiple connections."
+          example: "54953432"
+          nullable: true
+          type: string
+          x-konfig-original-example: "54953432"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountSimple-properties-institution_account_id
         sync_status:
           $ref: '#/components/schemas/AccountSyncStatus'
       type: object
@@ -4012,6 +4034,7 @@ components:
           brokerage_authorization: 87b24961-b51e-4db8-9226-f198f6518a89
           portfolio_group: 2bcd7cc3-e922-4976-bce1-9858296801c3
           is_paper: false
+          institution_account_id: "54953432"
           institution_name: Robinhood
           number: Q6542138443
           balance:
@@ -7299,6 +7322,7 @@ components:
               initial_sync_completed: true
               first_transaction_date: ""
           id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          institution_account_id: "54953432"
       properties:
         account:
           $ref: '#/components/schemas/AccountSimple'
@@ -7363,6 +7387,7 @@ components:
                 initial_sync_completed: true
                 first_transaction_date: ""
             id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+            institution_account_id: "54953432"
       properties:
         trade:
           $ref: '#/components/schemas/ManualTrade'
@@ -8597,6 +8622,7 @@ components:
               initial_sync_completed: true
               first_transaction_date: ""
           id: 917c8734-8470-4a3e-a18f-57c3f2ee6631
+          institution_account_id: "54953432"
       properties:
         id:
           description: |
@@ -9426,6 +9452,10 @@ components:
       example: Q6542138443
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Account-properties-institution_account_id:
+      example: "54953432"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-Account-properties-institution_name:
       example: Robinhood
       type: string
@@ -9483,6 +9513,10 @@ components:
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountSimple-properties-number:
       example: Q6542138443
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountSimple-properties-institution_account_id:
+      example: "54953432"
       type: string
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountID:

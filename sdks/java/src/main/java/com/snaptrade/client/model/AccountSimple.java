@@ -24,6 +24,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.UUID;
+import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -63,6 +64,10 @@ public class AccountSimple {
   public static final String SERIALIZED_NAME_NUMBER = "number";
   @SerializedName(SERIALIZED_NAME_NUMBER)
   private String number;
+
+  public static final String SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID = "institution_account_id";
+  @SerializedName(SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID)
+  private String institutionAccountId;
 
   public static final String SERIALIZED_NAME_SYNC_STATUS = "sync_status";
   @SerializedName(SERIALIZED_NAME_SYNC_STATUS)
@@ -158,6 +163,35 @@ public class AccountSimple {
   }
 
 
+  public AccountSimple institutionAccountId(String institutionAccountId) {
+    
+    
+    
+    
+    this.institutionAccountId = institutionAccountId;
+    return this;
+  }
+
+   /**
+   * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+   * @return institutionAccountId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "54953432", value = "A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.")
+
+  public String getInstitutionAccountId() {
+    return institutionAccountId;
+  }
+
+
+  public void setInstitutionAccountId(String institutionAccountId) {
+    
+    
+    
+    this.institutionAccountId = institutionAccountId;
+  }
+
+
   public AccountSimple syncStatus(AccountSyncStatus syncStatus) {
     
     
@@ -244,13 +278,25 @@ public class AccountSimple {
     return Objects.equals(this.id, accountSimple.id) &&
         Objects.equals(this.name, accountSimple.name) &&
         Objects.equals(this.number, accountSimple.number) &&
+        Objects.equals(this.institutionAccountId, accountSimple.institutionAccountId) &&
         Objects.equals(this.syncStatus, accountSimple.syncStatus)&&
         Objects.equals(this.additionalProperties, accountSimple.additionalProperties);
   }
 
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, number, syncStatus, additionalProperties);
+    return Objects.hash(id, name, number, institutionAccountId, syncStatus, additionalProperties);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override
@@ -260,6 +306,7 @@ public class AccountSimple {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
+    sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
     sb.append("    syncStatus: ").append(toIndentedString(syncStatus)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
@@ -287,6 +334,7 @@ public class AccountSimple {
     openapiFields.add("id");
     openapiFields.add("name");
     openapiFields.add("number");
+    openapiFields.add("institution_account_id");
     openapiFields.add("sync_status");
 
     // a set of required properties/fields (JSON key names)
@@ -313,6 +361,9 @@ public class AccountSimple {
       }
       if ((jsonObj.get("number") != null && !jsonObj.get("number").isJsonNull()) && !jsonObj.get("number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
+      }
+      if (!jsonObj.get("institution_account_id").isJsonNull() && (jsonObj.get("institution_account_id") != null && !jsonObj.get("institution_account_id").isJsonNull()) && !jsonObj.get("institution_account_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `institution_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_account_id").toString()));
       }
       // validate the optional field `sync_status`
       if (jsonObj.get("sync_status") != null && !jsonObj.get("sync_status").isJsonNull()) {

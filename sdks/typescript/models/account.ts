@@ -46,6 +46,12 @@ export interface Account {
      */
     'number': string;
     /**
+     * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+     * @type {string}
+     * @memberof Account
+     */
+    'institution_account_id'?: string | null;
+    /**
      * The name of the brokerage that holds the account.
      * @type {string}
      * @memberof Account

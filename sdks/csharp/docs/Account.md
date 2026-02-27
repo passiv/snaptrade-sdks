@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **BrokerageAuthorization** | **string** | Unique identifier for the connection. This is the UUID used to reference the connection in SnapTrade. | 
 **Name** | **string** | A display name for the account. Either assigned by the user or by the brokerage itself. For certain brokerages, SnapTrade appends the brokerage name to the account name for clarity. | 
 **Number** | **string** | The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons. | 
+**InstitutionAccountId** | **string** | A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections. | [optional] 
 **InstitutionName** | **string** | The name of the brokerage that holds the account. | 
 **CreatedDate** | **DateTime** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage. | 
 **FundingDate** | **DateTime?** | Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was funded. | [optional] 
