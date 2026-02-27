@@ -75,6 +75,10 @@ public class Account {
   @SerializedName(SERIALIZED_NAME_NUMBER)
   private String number;
 
+  public static final String SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID = "institution_account_id";
+  @SerializedName(SERIALIZED_NAME_INSTITUTION_ACCOUNT_ID)
+  private String institutionAccountId;
+
   public static final String SERIALIZED_NAME_INSTITUTION_NAME = "institution_name";
   @SerializedName(SERIALIZED_NAME_INSTITUTION_NAME)
   private String institutionName;
@@ -290,6 +294,35 @@ public class Account {
     
     
     this.number = number;
+  }
+
+
+  public Account institutionAccountId(String institutionAccountId) {
+    
+    
+    
+    
+    this.institutionAccountId = institutionAccountId;
+    return this;
+  }
+
+   /**
+   * A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+   * @return institutionAccountId
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "54953432", value = "A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.")
+
+  public String getInstitutionAccountId() {
+    return institutionAccountId;
+  }
+
+
+  public void setInstitutionAccountId(String institutionAccountId) {
+    
+    
+    
+    this.institutionAccountId = institutionAccountId;
   }
 
 
@@ -721,6 +754,7 @@ public class Account {
         Objects.equals(this.brokerageAuthorization, account.brokerageAuthorization) &&
         Objects.equals(this.name, account.name) &&
         Objects.equals(this.number, account.number) &&
+        Objects.equals(this.institutionAccountId, account.institutionAccountId) &&
         Objects.equals(this.institutionName, account.institutionName) &&
         Objects.equals(this.createdDate, account.createdDate) &&
         Objects.equals(this.fundingDate, account.fundingDate) &&
@@ -742,7 +776,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, brokerageAuthorization, name, number, institutionName, createdDate, fundingDate, openingDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
+    return Objects.hash(id, brokerageAuthorization, name, number, institutionAccountId, institutionName, createdDate, fundingDate, openingDate, syncStatus, balance, status, rawType, meta, portfolioGroup, cashRestrictions, isPaper, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -760,6 +794,7 @@ public class Account {
     sb.append("    brokerageAuthorization: ").append(toIndentedString(brokerageAuthorization)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    number: ").append(toIndentedString(number)).append("\n");
+    sb.append("    institutionAccountId: ").append(toIndentedString(institutionAccountId)).append("\n");
     sb.append("    institutionName: ").append(toIndentedString(institutionName)).append("\n");
     sb.append("    createdDate: ").append(toIndentedString(createdDate)).append("\n");
     sb.append("    fundingDate: ").append(toIndentedString(fundingDate)).append("\n");
@@ -799,6 +834,7 @@ public class Account {
     openapiFields.add("brokerage_authorization");
     openapiFields.add("name");
     openapiFields.add("number");
+    openapiFields.add("institution_account_id");
     openapiFields.add("institution_name");
     openapiFields.add("created_date");
     openapiFields.add("funding_date");
@@ -852,6 +888,9 @@ public class Account {
       }
       if (!jsonObj.get("number").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `number` to be a primitive type in the JSON string but got `%s`", jsonObj.get("number").toString()));
+      }
+      if (!jsonObj.get("institution_account_id").isJsonNull() && (jsonObj.get("institution_account_id") != null && !jsonObj.get("institution_account_id").isJsonNull()) && !jsonObj.get("institution_account_id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `institution_account_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_account_id").toString()));
       }
       if (!jsonObj.get("institution_name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `institution_name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("institution_name").toString()));

@@ -80,6 +80,14 @@ public class AccountTest {
     }
 
     /**
+     * Test the property 'institutionAccountId'
+     */
+    @Test
+    public void institutionAccountIdTest() {
+        // TODO: test institutionAccountId
+    }
+
+    /**
      * Test the property 'institutionName'
      */
     @Test

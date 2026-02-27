@@ -26,6 +26,8 @@ type Account struct {
 	Name NullableString `json:"name"`
 	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
 	Number string `json:"number"`
+	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	// The name of the brokerage that holds the account.
 	InstitutionName string `json:"institution_name"`
 	// Timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format indicating when the account was created in SnapTrade. This is _not_ the account opening date at the brokerage.
@@ -178,6 +180,48 @@ func (o *Account) GetNumberOk() (*string, bool) {
 // SetNumber sets field value
 func (o *Account) SetNumber(v string) {
 	o.Number = v
+}
+
+// GetInstitutionAccountId returns the InstitutionAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Account) GetInstitutionAccountId() string {
+	if o == nil || isNil(o.InstitutionAccountId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.InstitutionAccountId.Get()
+}
+
+// GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Account) GetInstitutionAccountIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.InstitutionAccountId.Get(), o.InstitutionAccountId.IsSet()
+}
+
+// HasInstitutionAccountId returns a boolean if a field has been set.
+func (o *Account) HasInstitutionAccountId() bool {
+	if o != nil && o.InstitutionAccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstitutionAccountId gets a reference to the given NullableString and assigns it to the InstitutionAccountId field.
+func (o *Account) SetInstitutionAccountId(v string) {
+	o.InstitutionAccountId.Set(&v)
+}
+// SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+func (o *Account) SetInstitutionAccountIdNil() {
+	o.InstitutionAccountId.Set(nil)
+}
+
+// UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
+func (o *Account) UnsetInstitutionAccountId() {
+	o.InstitutionAccountId.Unset()
 }
 
 // GetInstitutionName returns the InstitutionName field value
@@ -587,6 +631,9 @@ func (o Account) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["number"] = o.Number
 	}
+	if o.InstitutionAccountId.IsSet() {
+		toSerialize["institution_account_id"] = o.InstitutionAccountId.Get()
+	}
 	if true {
 		toSerialize["institution_name"] = o.InstitutionName
 	}
@@ -645,6 +692,7 @@ func (o *Account) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "brokerage_authorization")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "number")
+		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "institution_name")
 		delete(additionalProperties, "created_date")
 		delete(additionalProperties, "funding_date")

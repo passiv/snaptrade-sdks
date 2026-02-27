@@ -23,6 +23,8 @@ type AccountSimple struct {
 	Name *string `json:"name,omitempty"`
 	// The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
 	Number *string `json:"number,omitempty"`
+	// A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
+	InstitutionAccountId NullableString `json:"institution_account_id,omitempty"`
 	SyncStatus *AccountSyncStatus `json:"sync_status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -142,6 +144,48 @@ func (o *AccountSimple) SetNumber(v string) {
 	o.Number = &v
 }
 
+// GetInstitutionAccountId returns the InstitutionAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AccountSimple) GetInstitutionAccountId() string {
+	if o == nil || isNil(o.InstitutionAccountId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.InstitutionAccountId.Get()
+}
+
+// GetInstitutionAccountIdOk returns a tuple with the InstitutionAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AccountSimple) GetInstitutionAccountIdOk() (*string, bool) {
+	if o == nil {
+    return nil, false
+	}
+	return o.InstitutionAccountId.Get(), o.InstitutionAccountId.IsSet()
+}
+
+// HasInstitutionAccountId returns a boolean if a field has been set.
+func (o *AccountSimple) HasInstitutionAccountId() bool {
+	if o != nil && o.InstitutionAccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstitutionAccountId gets a reference to the given NullableString and assigns it to the InstitutionAccountId field.
+func (o *AccountSimple) SetInstitutionAccountId(v string) {
+	o.InstitutionAccountId.Set(&v)
+}
+// SetInstitutionAccountIdNil sets the value for InstitutionAccountId to be an explicit nil
+func (o *AccountSimple) SetInstitutionAccountIdNil() {
+	o.InstitutionAccountId.Set(nil)
+}
+
+// UnsetInstitutionAccountId ensures that no value is present for InstitutionAccountId, not even an explicit nil
+func (o *AccountSimple) UnsetInstitutionAccountId() {
+	o.InstitutionAccountId.Unset()
+}
+
 // GetSyncStatus returns the SyncStatus field value if set, zero value otherwise.
 func (o *AccountSimple) GetSyncStatus() AccountSyncStatus {
 	if o == nil || isNil(o.SyncStatus) {
@@ -185,6 +229,9 @@ func (o AccountSimple) MarshalJSON() ([]byte, error) {
 	if !isNil(o.Number) {
 		toSerialize["number"] = o.Number
 	}
+	if o.InstitutionAccountId.IsSet() {
+		toSerialize["institution_account_id"] = o.InstitutionAccountId.Get()
+	}
 	if !isNil(o.SyncStatus) {
 		toSerialize["sync_status"] = o.SyncStatus
 	}
@@ -209,6 +256,7 @@ func (o *AccountSimple) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "number")
+		delete(additionalProperties, "institution_account_id")
 		delete(additionalProperties, "sync_status")
 		o.AdditionalProperties = additionalProperties
 	}
