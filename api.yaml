@@ -418,10 +418,11 @@ paths:
       description: |
         Returns all brokerage accounts across all connections known to SnapTrade for the authenticated user.
 
-        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
-          - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+        Please note that this data is cached and only refreshed once a day.
 
+        Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
+          - If you do, real-time data can be fetched using the [update account details endpoint](/reference/Account%20Information/AccountInformation_getUserAccountDetails).
+          - If you don't, the data is cached and refreshed once a day. If you need real-time, use the [manual refresh endpoint](/reference/Connections/Connections_refreshBrokerageAuthorization).
       operationId: AccountInformation_listUserAccounts
       parameters:
         - in: query
@@ -3006,6 +3007,11 @@ components:
           type: string
           example: Q6542138443
           description: The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+        institution_account_id:
+          type: string
+          example: "54953432"
+          nullable: true
+          description: A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
         institution_name:
           type: string
           description: The name of the brokerage that holds the account.
@@ -3077,6 +3083,11 @@ components:
           type: string
           example: Q6542138443
           description: The account number assigned by the brokerage. For some brokerages, this field may be masked for security reasons.
+        institution_account_id:
+          type: string
+          example: "54953432"
+          nullable: true
+          description: A stable and unique account identifier provided by the institution. Will be set to null if not provided. When present, can be used to check if a user has connected the same brokerage account across multiple connections.
         sync_status:
           $ref: "#/components/schemas/AccountSyncStatus"
     AccountID:
