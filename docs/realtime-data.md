@@ -1,4 +1,4 @@
-## Showing users up to date data
+# Showing users up to date data
 
 SnapTrade offers the ability to get real-time data on both real-time (including Pay as you go) and cached plans. See [our pricing page](https://snaptrade.com/pricing) for more information on plans
 
@@ -16,7 +16,7 @@ On the cached plan, SnapTrade will update your data once a day. To get real-time
 If you need to know when a trade has been placed by a specific user, the recommendation is to poll the [Recent Orders endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders), only during market hours. This endpoint defaults to returning the last day of executed orders. Keep a copy of this list on your end, and check if a new order is present in the polling responses. To avoid SnapTrade and institution rate limits, we recommend polling once every 10 seconds per account
 
 
-## Endpoint reference 
+## Relevant Endpoints 
 
 [List account positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions)
 
