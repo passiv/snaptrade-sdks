@@ -56,6 +56,8 @@ portal:
               path: docs/trading-with-snaptrade.md
             - id: crypto-trading
               path: docs/crypto-trading.md
+            - id: realtime-data
+              path: docs/realtime-data.md
             - id: webhooks
               path: docs/webhooks.md
             - id: ratelimiting
