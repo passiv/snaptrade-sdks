@@ -1391,6 +1391,42 @@ paths:
           description: Not Found
         default:
           description: Unexpected error
+  "/connection/{connectionId}":
+    delete:
+      tags:
+        - Connections
+      summary: Delete connection
+      description: Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+      operationId: Connections_deleteConnection
+      parameters:
+        - in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BrokerageAuthID"
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteConnectionConfirmation"
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        default:
+          description: Unexpected error
   "/authorizations/{authorizationId}/refresh":
     post:
       tags:
@@ -4454,6 +4490,18 @@ components:
           description: Refresh confirmation details
           type: string
           example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
+    DeleteConnectionConfirmation:
+      description: Confirmation that a task has been scheduled to delete the connection.
+      type: object
+      properties:
+        detail:
+          description: Connection queued for deletion; please wait for webhook for confirmation.
+          type: string
+          example: Connection queued for deletion; please wait for webhook for confirmation.
+        connection_id:
+          description: The ID of the connection (brokerage authorization) that was scheduled for deletion.
+          type: string
+          example: 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
     BrokerageAuthorizationDisabledConfirmation:
       description: Confirmation that the connection has been disabled.
       type: object
