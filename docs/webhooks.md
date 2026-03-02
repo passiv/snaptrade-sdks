@@ -180,7 +180,7 @@ Example payload is below:
 
 ## CONNECTION_BROKEN
 
-Sent when a user's connection is broken for some reason, usually an inability to handshake with the brokerage's API.
+Sent when a user's connection is broken (also referred to as disabled) for some reason, usually an inability to handshake with the brokerage's API. To resolve this state, see [Fix Disabled Connections](https://docs.snaptrade.com/docs/fix-broken-connections).
 
 Example payload is below:
 
@@ -198,7 +198,7 @@ Example payload is below:
 
 ## CONNECTION_FIXED
 
-Sent when a broken connection is fixed.
+Sent when a broken (disabled) connection is fixed.
 
 Example payload is below:
 
