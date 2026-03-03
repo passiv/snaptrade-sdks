@@ -116,6 +116,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**LoginSnapTradeUser**](docs/AuthenticationApi.md#loginsnaptradeuser) | **POST** /snapTrade/login | Generate Connection Portal URL
 *AuthenticationApi* | [**RegisterSnapTradeUser**](docs/AuthenticationApi.md#registersnaptradeuser) | **POST** /snapTrade/registerUser | Register user
 *AuthenticationApi* | [**ResetSnapTradeUserSecret**](docs/AuthenticationApi.md#resetsnaptradeusersecret) | **POST** /snapTrade/resetUserSecret | Rotate user secret
+*ConnectionsApi* | [**DeleteConnection**](docs/ConnectionsApi.md#deleteconnection) | **DELETE** /connection/{connectionId} | Delete connection
 *ConnectionsApi* | [**DetailBrokerageAuthorization**](docs/ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get connection detail
 *ConnectionsApi* | [**DisableBrokerageAuthorization**](docs/ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection
 *ConnectionsApi* | [**ListBrokerageAuthorizations**](docs/ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections
@@ -209,6 +210,7 @@ Class | Method | HTTP request | Description
  - [CryptocurrencyPairQuote](docs/CryptocurrencyPairQuote.md)
  - [Currency](docs/Currency.md)
  - [CurrencyNullable](docs/CurrencyNullable.md)
+ - [DeleteConnectionConfirmation](docs/DeleteConnectionConfirmation.md)
  - [DeleteUserResponse](docs/DeleteUserResponse.md)
  - [DividendAtDate](docs/DividendAtDate.md)
  - [EncryptedResponse](docs/EncryptedResponse.md)

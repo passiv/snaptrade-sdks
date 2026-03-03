@@ -17,6 +17,109 @@ module SnapTrade
       @api_client = api_client
     end
 
+    # Delete connection
+    #
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+    #
+    # @param connection_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def delete_connection(connection_id:, user_id:, user_secret:, extra: {})
+      data, _status_code, _headers = delete_connection_with_http_info_impl(connection_id, user_id, user_secret, extra)
+      data
+    end
+
+    # Delete connection
+    #
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+    #
+    # @param connection_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def delete_connection_with_http_info(connection_id:, user_id:, user_secret:, extra: {})
+      delete_connection_with_http_info_impl(connection_id, user_id, user_secret, extra)
+    end
+
+    # Delete connection
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+    # @param connection_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [DeleteConnectionConfirmation]
+    private def delete_connection_impl(connection_id, user_id, user_secret, opts = {})
+      data, _status_code, _headers = delete_connection_with_http_info(connection_id, user_id, user_secret, opts)
+      data
+    end
+
+    # Delete connection
+    # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+    # @param connection_id [String] 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(DeleteConnectionConfirmation, Integer, Hash)>] DeleteConnectionConfirmation data, response status code and response headers
+    private def delete_connection_with_http_info_impl(connection_id, user_id, user_secret, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ConnectionsApi.delete_connection ...'
+      end
+      # verify the required parameter 'connection_id' is set
+      if @api_client.config.client_side_validation && connection_id.nil?
+        fail ArgumentError, "Missing the required parameter 'connection_id' when calling ConnectionsApi.delete_connection"
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ConnectionsApi.delete_connection"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ConnectionsApi.delete_connection"
+      end
+      # resource path
+      local_var_path = '/connection/{connectionId}'.sub('{' + 'connectionId' + '}', CGI.escape(connection_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'DeleteConnectionConfirmation'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ConnectionsApi.delete_connection",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:DELETE, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ConnectionsApi#delete_connection\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get connection detail
     #
     # Returns a single connection for the specified ID.

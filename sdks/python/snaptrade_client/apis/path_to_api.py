@@ -10,6 +10,7 @@ from snaptrade_client.apis.paths.snap_trade_reset_user_secret import SnapTradeRe
 from snaptrade_client.apis.paths.authorizations_authorization_id_return_rates import AuthorizationsAuthorizationIdReturnRates
 from snaptrade_client.apis.paths.authorizations import Authorizations
 from snaptrade_client.apis.paths.authorizations_authorization_id import AuthorizationsAuthorizationId
+from snaptrade_client.apis.paths.connection_connection_id import ConnectionConnectionId
 from snaptrade_client.apis.paths.authorizations_authorization_id_refresh import AuthorizationsAuthorizationIdRefresh
 from snaptrade_client.apis.paths.authorizations_authorization_id_disable import AuthorizationsAuthorizationIdDisable
 from snaptrade_client.apis.paths.session_events import SessionEvents
@@ -71,6 +72,7 @@ PathToApi = typing_extensions.TypedDict(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_RETURN_RATES: AuthorizationsAuthorizationIdReturnRates,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.CONNECTION_CONNECTION_ID: ConnectionConnectionId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.SESSION_EVENTS: SessionEvents,
@@ -133,6 +135,7 @@ path_to_api = PathToApi(
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_RETURN_RATES: AuthorizationsAuthorizationIdReturnRates,
         PathValues.AUTHORIZATIONS: Authorizations,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID: AuthorizationsAuthorizationId,
+        PathValues.CONNECTION_CONNECTION_ID: ConnectionConnectionId,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH: AuthorizationsAuthorizationIdRefresh,
         PathValues.AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE: AuthorizationsAuthorizationIdDisable,
         PathValues.SESSION_EVENTS: SessionEvents,

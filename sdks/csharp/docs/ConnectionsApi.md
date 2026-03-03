@@ -4,6 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**DeleteConnection**](ConnectionsApi.md#deleteconnection) | **DELETE** /connection/{connectionId} | Delete connection |
 | [**DetailBrokerageAuthorization**](ConnectionsApi.md#detailbrokerageauthorization) | **GET** /authorizations/{authorizationId} | Get connection detail |
 | [**DisableBrokerageAuthorization**](ConnectionsApi.md#disablebrokerageauthorization) | **POST** /authorizations/{authorizationId}/disable | Force disable connection |
 | [**ListBrokerageAuthorizations**](ConnectionsApi.md#listbrokerageauthorizations) | **GET** /authorizations | List all connections |
@@ -11,6 +12,103 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 | [**RemoveBrokerageAuthorization**](ConnectionsApi.md#removebrokerageauthorization) | **DELETE** /authorizations/{authorizationId} | Delete connection |
 | [**ReturnRates**](ConnectionsApi.md#returnrates) | **GET** /authorizations/{authorizationId}/returnRates | List connection rate of returns |
 | [**SessionEvents**](ConnectionsApi.md#sessionevents) | **GET** /sessionEvents | Get all session events for a user |
+
+
+# **DeleteConnection**
+
+
+
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class DeleteConnectionExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var connectionId = "connectionId_example";
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            
+            try
+            {
+                // Delete connection
+                DeleteConnectionConfirmation result = client.Connections.DeleteConnection(connectionId, userId, userSecret);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ConnectionsApi.DeleteConnection: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the DeleteConnectionWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // Delete connection
+    ApiResponse<DeleteConnectionConfirmation> response = apiInstance.DeleteConnectionWithHttpInfo(connectionId, userId, userSecret);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ConnectionsApi.DeleteConnectionWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **connectionId** | **string** |  |  |
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+
+### Return type
+
+[**DeleteConnectionConfirmation**](DeleteConnectionConfirmation.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **400** | Bad Request |  -  |
+| **404** | Not Found |  -  |
+| **0** | Unexpected error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 # **DetailBrokerageAuthorization**

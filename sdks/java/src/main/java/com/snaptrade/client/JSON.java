@@ -151,6 +151,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.CryptocurrencyPairQuote.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.Currency.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.CurrencyNullable.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.DeleteConnectionConfirmation.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.DeleteUserResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.DividendAtDate.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.snaptrade.client.model.EncryptedResponse.CustomTypeAdapterFactory());

@@ -245,6 +245,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/connection/{connectionId}-DELETE': {
+        'parameters': [
+            {
+                'name': 'connectionId'
+            },
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}-GET': {
         'parameters': [
             {

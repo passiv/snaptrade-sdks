@@ -46,6 +46,7 @@ export * from './crypto-trading-instrument';
 export * from './cryptocurrency-pair';
 export * from './cryptocurrency-pair-quote';
 export * from './currency';
+export * from './delete-connection-confirmation';
 export * from './delete-user-response';
 export * from './dividend-at-date';
 export * from './encrypted-response';

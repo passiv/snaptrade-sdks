@@ -9,6 +9,7 @@
     Created by: https://snaptrade.com/
 """
 
+from snaptrade_client.paths.connection_connection_id.delete import DeleteConnection
 from snaptrade_client.paths.authorizations_authorization_id.get import DetailBrokerageAuthorization
 from snaptrade_client.paths.authorizations_authorization_id_disable.post import DisableBrokerageAuthorization
 from snaptrade_client.paths.authorizations.get import ListBrokerageAuthorizations
@@ -19,6 +20,7 @@ from snaptrade_client.paths.session_events.get import SessionEvents
 
 
 class ConnectionsApiGenerated(
+    DeleteConnection,
     DetailBrokerageAuthorization,
     DisableBrokerageAuthorization,
     ListBrokerageAuthorizations,

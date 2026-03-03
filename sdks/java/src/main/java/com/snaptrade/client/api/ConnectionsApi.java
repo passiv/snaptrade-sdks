@@ -4,6 +4,7 @@ import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
 import java.util.UUID;
@@ -16,6 +17,11 @@ public class ConnectionsApi extends ConnectionsApiGenerated {
 
     public ConnectionsApi(ApiClient apiClient) throws IllegalArgumentException {
         super(apiClient);
+    }
+    public class DeleteConnectionRequestBuilder extends DeleteConnectionRequestBuilderGenerated {
+        public DeleteConnectionRequestBuilder(UUID connectionId, String userId, String userSecret) {
+            super(connectionId, userId, userSecret);
+        }
     }
     public class DetailBrokerageAuthorizationRequestBuilder extends DetailBrokerageAuthorizationRequestBuilderGenerated {
         public DetailBrokerageAuthorizationRequestBuilder(UUID authorizationId, String userId, String userSecret) {

@@ -27,6 +27,8 @@ import { BrokerageAuthorizationRefreshConfirmation } from '../models';
 // @ts-ignore
 import { ConnectionsSessionEvents200ResponseInner } from '../models';
 // @ts-ignore
+import { DeleteConnectionConfirmation } from '../models';
+// @ts-ignore
 import { Model401FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model402BrokerageAuthAlreadyDisabledException } from '../models';
@@ -49,6 +51,68 @@ import { requestBeforeHook } from '../requestBeforeHook';
  */
 export const ConnectionsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+         * @summary Delete connection
+         * @param {string} connectionId 
+         * @param {string} userId 
+         * @param {string} userSecret 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnection: async (connectionId: string, userId: string, userSecret: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'connectionId' is not null or undefined
+            assertParamExists('deleteConnection', 'connectionId', connectionId)
+            // verify required parameter 'userId' is not null or undefined
+            assertParamExists('deleteConnection', 'userId', userId)
+            // verify required parameter 'userSecret' is not null or undefined
+            assertParamExists('deleteConnection', 'userSecret', userSecret)
+            const localVarPath = `/connection/{connectionId}`
+                .replace(`{${"connectionId"}}`, encodeURIComponent(String(connectionId !== undefined ? connectionId : `-connectionId-`)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions: AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication PartnerClientId required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
+            // authentication PartnerSignature required
+            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
+            // authentication PartnerTimestamp required
+            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
+            if (userId !== undefined) {
+                localVarQueryParameter['userId'] = userId;
+            }
+
+            if (userSecret !== undefined) {
+                localVarQueryParameter['userSecret'] = userSecret;
+            }
+
+
+    
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            requestBeforeHook({
+                queryParameters: localVarQueryParameter,
+                requestConfig: localVarRequestOptions,
+                path: localVarPath,
+                configuration,
+                pathTemplate: '/connection/{connectionId}',
+                httpMethod: 'DELETE'
+            });
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Returns a single connection for the specified ID.
          * @summary Get connection detail
@@ -489,6 +553,17 @@ export const ConnectionsApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ConnectionsApiAxiosParamCreator(configuration)
     return {
         /**
+         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+         * @summary Delete connection
+         * @param {ConnectionsApiDeleteConnectionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DeleteConnectionConfirmation>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.deleteConnection(requestParameters.connectionId, requestParameters.userId, requestParameters.userSecret, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
          * Returns a single connection for the specified ID.
          * @summary Get connection detail
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
@@ -576,6 +651,16 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
     const localVarFp = ConnectionsApiFp(configuration)
     return {
         /**
+         * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+         * @summary Delete connection
+         * @param {ConnectionsApiDeleteConnectionRequest} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest, options?: AxiosRequestConfig): AxiosPromise<DeleteConnectionConfirmation> {
+            return localVarFp.deleteConnection(requestParameters, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a single connection for the specified ID.
          * @summary Get connection detail
          * @param {ConnectionsApiDetailBrokerageAuthorizationRequest} requestParameters Request parameters.
@@ -647,6 +732,36 @@ export const ConnectionsApiFactory = function (configuration?: Configuration, ba
         },
     };
 };
+
+/**
+ * Request parameters for deleteConnection operation in ConnectionsApi.
+ * @export
+ * @interface ConnectionsApiDeleteConnectionRequest
+ */
+export type ConnectionsApiDeleteConnectionRequest = {
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDeleteConnection
+    */
+    readonly connectionId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDeleteConnection
+    */
+    readonly userId: string
+    
+    /**
+    * 
+    * @type {string}
+    * @memberof ConnectionsApiDeleteConnection
+    */
+    readonly userSecret: string
+    
+}
 
 /**
  * Request parameters for detailBrokerageAuthorization operation in ConnectionsApi.
@@ -858,6 +973,18 @@ export type ConnectionsApiSessionEventsRequest = {
  * @extends {BaseAPI}
  */
 export class ConnectionsApiGenerated extends BaseAPI {
+    /**
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     * @summary Delete connection
+     * @param {ConnectionsApiDeleteConnectionRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ConnectionsApiGenerated
+     */
+    public deleteConnection(requestParameters: ConnectionsApiDeleteConnectionRequest, options?: AxiosRequestConfig) {
+        return ConnectionsApiFp(this.configuration).deleteConnection(requestParameters, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Returns a single connection for the specified ID.
      * @summary Get connection detail

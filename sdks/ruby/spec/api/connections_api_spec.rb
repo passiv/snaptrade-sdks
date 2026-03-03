@@ -27,6 +27,20 @@ describe 'ConnectionsApi' do
     end
   end
 
+  # unit tests for delete_connection
+  # Delete connection
+  # Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+  # @param connection_id 
+  # @param user_id 
+  # @param user_secret 
+  # @param [Hash] opts the optional parameters
+  # @return [DeleteConnectionConfirmation]
+  describe 'delete_connection test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for detail_brokerage_authorization
   # Get connection detail
   # Returns a single connection for the specified ID.

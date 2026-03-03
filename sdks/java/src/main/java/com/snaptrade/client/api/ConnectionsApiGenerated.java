@@ -29,6 +29,7 @@ import java.io.IOException;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
 import java.util.UUID;
@@ -77,6 +78,207 @@ public class ConnectionsApiGenerated {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
+    private okhttp3.Call deleteConnectionCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/connection/{connectionId}"
+            .replace("{" + "connectionId" + "}", localVarApiClient.escapeString(connectionId.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (userId != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userId", userId));
+        }
+
+        if (userSecret != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("userSecret", userSecret));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "PartnerClientId", "PartnerSignature", "PartnerTimestamp" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call deleteConnectionValidateBeforeCall(UUID connectionId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'connectionId' is set
+        if (connectionId == null) {
+            throw new ApiException("Missing the required parameter 'connectionId' when calling deleteConnection(Async)");
+        }
+
+        // verify the required parameter 'userId' is set
+        if (userId == null) {
+            throw new ApiException("Missing the required parameter 'userId' when calling deleteConnection(Async)");
+        }
+
+        // verify the required parameter 'userSecret' is set
+        if (userSecret == null) {
+            throw new ApiException("Missing the required parameter 'userSecret' when calling deleteConnection(Async)");
+        }
+
+        return deleteConnectionCall(connectionId, userId, userSecret, _callback);
+
+    }
+
+
+    private ApiResponse<DeleteConnectionConfirmation> deleteConnectionWithHttpInfo(UUID connectionId, String userId, String userSecret) throws ApiException {
+        okhttp3.Call localVarCall = deleteConnectionValidateBeforeCall(connectionId, userId, userSecret, null);
+        Type localVarReturnType = new TypeToken<DeleteConnectionConfirmation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call deleteConnectionAsync(UUID connectionId, String userId, String userSecret, final ApiCallback<DeleteConnectionConfirmation> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteConnectionValidateBeforeCall(connectionId, userId, userSecret, _callback);
+        Type localVarReturnType = new TypeToken<DeleteConnectionConfirmation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public abstract class DeleteConnectionRequestBuilderGenerated {
+        final UUID connectionId;
+        final String userId;
+        final String userSecret;
+
+        public DeleteConnectionRequestBuilderGenerated(UUID connectionId, String userId, String userSecret) {
+            this.connectionId = connectionId;
+            this.userId = userId;
+            this.userSecret = userSecret;
+        }
+
+        /**
+         * Build call for deleteConnection
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return deleteConnectionCall(connectionId, userId, userSecret, _callback);
+        }
+
+
+        /**
+         * Execute deleteConnection request
+         * @return DeleteConnectionConfirmation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public DeleteConnectionConfirmation execute() throws ApiException {
+            ApiResponse<DeleteConnectionConfirmation> localVarResp = deleteConnectionWithHttpInfo(connectionId, userId, userSecret);
+            return localVarResp.getResponseBody();
+        }
+
+        /**
+         * Execute deleteConnection request with HTTP info returned
+         * @return ApiResponse&lt;DeleteConnectionConfirmation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<DeleteConnectionConfirmation> executeWithHttpInfo() throws ApiException {
+            return deleteConnectionWithHttpInfo(connectionId, userId, userSecret);
+        }
+
+        /**
+         * Execute deleteConnection request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<DeleteConnectionConfirmation> _callback) throws ApiException {
+            return deleteConnectionAsync(connectionId, userId, userSecret, _callback);
+        }
+    }
+
+    /**
+     * Delete connection
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     * @param connectionId  (required)
+     * @param userId  (required)
+     * @param userSecret  (required)
+     * @return DeleteConnectionRequestBuilder
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> OK </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> Bad Request </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Unexpected error </td><td>  -  </td></tr>
+     </table>
+     */
+    public ConnectionsApi.DeleteConnectionRequestBuilder deleteConnection(UUID connectionId, String userId, String userSecret) throws IllegalArgumentException {
+        if (connectionId == null) throw new IllegalArgumentException("\"connectionId\" is required but got null");
+            
+
+        if (userId == null) throw new IllegalArgumentException("\"userId\" is required but got null");
+            
+
+        if (userSecret == null) throw new IllegalArgumentException("\"userSecret\" is required but got null");
+            
+
+        return ((ConnectionsApi) this).new DeleteConnectionRequestBuilder(connectionId, userId, userSecret);
+    }
     private okhttp3.Call detailBrokerageAuthorizationCall(UUID authorizationId, String userId, String userSecret, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers

@@ -4,6 +4,7 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 Method | Path | Description
 ------------- | ------------- | -------------
+[**DeleteConnection**](ConnectionsApi.md#DeleteConnection) | **Delete** /connection/{connectionId} | Delete connection
 [**DetailBrokerageAuthorization**](ConnectionsApi.md#DetailBrokerageAuthorization) | **Get** /authorizations/{authorizationId} | Get connection detail
 [**DisableBrokerageAuthorization**](ConnectionsApi.md#DisableBrokerageAuthorization) | **Post** /authorizations/{authorizationId}/disable | Force disable connection
 [**ListBrokerageAuthorizations**](ConnectionsApi.md#ListBrokerageAuthorizations) | **Get** /authorizations | List all connections
@@ -12,6 +13,53 @@ Method | Path | Description
 [**ReturnRates**](ConnectionsApi.md#ReturnRates) | **Get** /authorizations/{authorizationId}/returnRates | List connection rate of returns
 [**SessionEvents**](ConnectionsApi.md#SessionEvents) | **Get** /sessionEvents | Get all session events for a user
 
+
+
+## DeleteConnection
+
+Delete connection
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+    snaptrade "github.com/passiv/snaptrade-sdks/sdks/go"
+)
+
+func main() {
+    configuration := snaptrade.NewConfiguration()
+    configuration.SetPartnerClientId(os.Getenv("SNAPTRADE_CLIENT_ID"))
+    configuration.SetConsumerKey(os.Getenv("SNAPTRADE_CONSUMER_KEY"))
+    client := snaptrade.NewAPIClient(configuration)
+
+    request := client.ConnectionsApi.DeleteConnection(
+        ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
+        "userId_example",
+        "userSecret_example",
+    )
+    
+    resp, httpRes, err := request.Execute()
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ConnectionsApi.DeleteConnection``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", httpRes)
+    }
+    // response from `DeleteConnection`: DeleteConnectionConfirmation
+    fmt.Fprintf(os.Stdout, "Response from `ConnectionsApi.DeleteConnection`: %v\n", resp)
+    fmt.Fprintf(os.Stdout, "Response from `DeleteConnectionConfirmation.DeleteConnection.Detail`: %v\n", *resp.Detail)
+    fmt.Fprintf(os.Stdout, "Response from `DeleteConnectionConfirmation.DeleteConnection.ConnectionId`: %v\n", *resp.ConnectionId)
+}
+```
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DetailBrokerageAuthorization
