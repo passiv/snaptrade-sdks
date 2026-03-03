@@ -71,6 +71,7 @@ from snaptrade_client.model.cryptocurrency_symbol import CryptocurrencySymbol
 from snaptrade_client.model.currency import Currency
 from snaptrade_client.model.currency_id import CurrencyID
 from snaptrade_client.model.currency_nullable import CurrencyNullable
+from snaptrade_client.model.delete_connection_confirmation import DeleteConnectionConfirmation
 from snaptrade_client.model.delete_user_response import DeleteUserResponse
 from snaptrade_client.model.dividend_at_date import DividendAtDate
 from snaptrade_client.model.encrypted_response import EncryptedResponse

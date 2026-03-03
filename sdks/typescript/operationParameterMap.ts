@@ -251,6 +251,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/connection/{connectionId}-DELETE': {
+        parameters: [
+            {
+                name: 'connectionId'
+            },
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+        ]
+    },
     '/authorizations/{authorizationId}-GET': {
         parameters: [
             {

@@ -41,6 +41,7 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.authentication.loginSnapTradeUser`](#snaptradeauthenticationloginsnaptradeuser)
   * [`snaptrade.authentication.registerSnapTradeUser`](#snaptradeauthenticationregistersnaptradeuser)
   * [`snaptrade.authentication.resetSnapTradeUserSecret`](#snaptradeauthenticationresetsnaptradeusersecret)
+  * [`snaptrade.connections.deleteConnection`](#snaptradeconnectionsdeleteconnection)
   * [`snaptrade.connections.detailBrokerageAuthorization`](#snaptradeconnectionsdetailbrokerageauthorization)
   * [`snaptrade.connections.disableBrokerageAuthorization`](#snaptradeconnectionsdisablebrokerageauthorization)
   * [`snaptrade.connections.listBrokerageAuthorizations`](#snaptradeconnectionslistbrokerageauthorizations)
@@ -994,6 +995,40 @@ SnapTrade User Secret. This is a randomly generated string and should be stored 
 #### 🌐 Endpoint<a id="🌐-endpoint"></a>
 
 `/snapTrade/resetUserSecret` `POST`
+
+[🔙 **Back to Table of Contents**](#table-of-contents)
+
+---
+
+
+### `snaptrade.connections.deleteConnection`<a id="snaptradeconnectionsdeleteconnection"></a>
+
+Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+
+#### 🛠️ Usage<a id="🛠️-usage"></a>
+
+```java
+DeleteConnectionConfirmation result = client
+        .connections
+        .deleteConnection(connectionId, userId, userSecret)
+        .execute();
+```
+
+#### ⚙️ Parameters<a id="⚙️-parameters"></a>
+
+##### connectionId: `UUID`<a id="connectionid-uuid"></a>
+
+##### userId: `String`<a id="userid-string"></a>
+
+##### userSecret: `String`<a id="usersecret-string"></a>
+
+#### 🔄 Return<a id="🔄-return"></a>
+
+[DeleteConnectionConfirmation](./src/main/java/com/snaptrade/client/model/DeleteConnectionConfirmation.java)
+
+#### 🌐 Endpoint<a id="🌐-endpoint"></a>
+
+`/connection/{connectionId}` `DELETE`
 
 [🔙 **Back to Table of Contents**](#table-of-contents)
 

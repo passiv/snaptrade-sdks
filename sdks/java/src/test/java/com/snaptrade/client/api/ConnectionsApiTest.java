@@ -19,6 +19,7 @@ import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.BrokerageAuthorization;
 import com.snaptrade.client.model.BrokerageAuthorizationDisabledConfirmation;
 import com.snaptrade.client.model.BrokerageAuthorizationRefreshConfirmation;
+import com.snaptrade.client.model.DeleteConnectionConfirmation;
 import com.snaptrade.client.model.RateOfReturnResponse;
 import com.snaptrade.client.model.SessionEvent;
 import java.util.UUID;
@@ -44,6 +45,23 @@ public class ConnectionsApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new ConnectionsApi(apiClient);
+    }
+
+    /**
+     * Delete connection
+     *
+     * Deletes the SnapTrade connection specified by the ID. This will also remove the accounts and holdings data associated with the connection from SnapTrade. This action is irreversible. This endpoint is asynchronous, a 200 response indicates that a task has been queued to delete the connection. Listen for the [&#x60;CONNECTION_DELETED&#x60; webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted) webhook to know when the deletion has been completed and the data has been removed.
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void deleteConnectionTest() throws ApiException {
+        UUID connectionId = null;
+        String userId = null;
+        String userSecret = null;
+        DeleteConnectionConfirmation response = api.deleteConnection(connectionId, userId, userSecret)
+                .execute();
+        // TODO: test validations
     }
 
     /**

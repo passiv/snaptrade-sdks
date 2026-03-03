@@ -451,6 +451,56 @@ paths:
       - Connections
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--authorizations-authorizationId
+  /connection/{connectionId}:
+    delete:
+      description: "Deletes the SnapTrade connection specified by the ID. This will\
+        \ also remove the accounts and holdings data associated with the connection\
+        \ from SnapTrade. This action is irreversible. This endpoint is asynchronous,\
+        \ a 200 response indicates that a task has been queued to delete the connection.\
+        \ Listen for the [`CONNECTION_DELETED` webhook](https://docs.snaptrade.com/docs/webhooks#webhooks-connection_deleted)\
+        \ webhook to know when the deletion has been completed and the data has been\
+        \ removed."
+      operationId: Connections_deleteConnection
+      parameters:
+      - explode: false
+        in: path
+        name: connectionId
+        required: true
+        schema:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        style: simple
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConnectionConfirmation'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        default:
+          description: Unexpected error
+      summary: Delete connection
+      tags:
+      - Connections
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-delete--connection-connectionId
   /authorizations/{authorizationId}/refresh:
     post:
       description: |
@@ -6613,6 +6663,29 @@ components:
             scheduled for refresh
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-BrokerageAuthorizationRefreshConfirmation-properties-detail
       type: object
+    DeleteConnectionConfirmation:
+      additionalProperties: true
+      description: Confirmation that a task has been scheduled to delete the connection.
+      example:
+        connection_id: 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+        detail: Connection queued for deletion; please wait for webhook for confirmation.
+      properties:
+        detail:
+          description: Connection queued for deletion; please wait for webhook for
+            confirmation.
+          example: Connection queued for deletion; please wait for webhook for confirmation.
+          type: string
+          x-konfig-original-example: Connection queued for deletion; please wait for
+            webhook for confirmation.
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DeleteConnectionConfirmation-properties-detail
+        connection_id:
+          description: The ID of the connection (brokerage authorization) that was
+            scheduled for deletion.
+          example: 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+          type: string
+          x-konfig-original-example: 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-DeleteConnectionConfirmation-properties-connection_id
+      type: object
     BrokerageAuthorizationDisabledConfirmation:
       additionalProperties: true
       description: Confirmation that the connection has been disabled.
@@ -10259,6 +10332,14 @@ components:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf scheduled for refresh
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-DeleteConnectionConfirmation-properties-detail:
+      example: Connection queued for deletion; please wait for webhook for confirmation.
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-DeleteConnectionConfirmation-properties-connection_id:
+      example: 0b3ebefb-ed47-43df-cd8f-729a4420b5cf
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-BrokerageAuthorizationDisabledConfirmation-properties-detail:
       example: Connection 0b3ebefb-ed47-43df-cd8f-729a4420b5cf has been disabled
       type: string
@@ -11148,6 +11229,25 @@ components:
       x-do-not-generate: true
       x-konfig-is-parameter:
       - authorizationId
+      - userId
+      - userSecret
+    konfig-generated-schema-single-parameter-schema-delete--connection-connectionId:
+      additionalProperties: true
+      properties:
+        connectionId:
+          $ref: '#/components/schemas/BrokerageAuthID'
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+      required:
+      - connectionId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - connectionId
       - userId
       - userSecret
     konfig-generated-schema-single-parameter-schema-post--authorizations-authorizationId-refresh:

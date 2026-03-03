@@ -15,6 +15,7 @@ class PathValues(str, enum.Enum):
     AUTHORIZATIONS_AUTHORIZATION_ID_RETURN_RATES = "/authorizations/{authorizationId}/returnRates"
     AUTHORIZATIONS = "/authorizations"
     AUTHORIZATIONS_AUTHORIZATION_ID = "/authorizations/{authorizationId}"
+    CONNECTION_CONNECTION_ID = "/connection/{connectionId}"
     AUTHORIZATIONS_AUTHORIZATION_ID_REFRESH = "/authorizations/{authorizationId}/refresh"
     AUTHORIZATIONS_AUTHORIZATION_ID_DISABLE = "/authorizations/{authorizationId}/disable"
     SESSION_EVENTS = "/sessionEvents"
