@@ -157,6 +157,8 @@ portal:
       post: true
     /marketData/options/quotes:
       get: true
+    /authorizations/{authorizationId}:
+      delete: true
   hideSecurity:
     - name: PartnerSignature
     - name: PartnerTimestamp
