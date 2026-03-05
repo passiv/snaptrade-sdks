@@ -6,7 +6,7 @@
 You need an existing SnapTrade user with a connected brokerage account for this demo. Please finish the [Getting Started](https://docs.snaptrade.com/demo/getting-started) demo first.
 :::
 
-In this interactive demo, you'll learn how to place equity order using the SnapTrade API. Trading is only available to certain brokerages. See [here](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687&pvs=4) for a complete list of supported brokerages and their capabilities.
+In this interactive demo, you'll learn how to place equity order using the SnapTrade API. Trading is only available to certain brokerages. See [here](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for a complete list of supported brokerages and their capabilities.
 
 ---
 
@@ -68,7 +68,6 @@ From the response, open the redirect URL in a new browser tab to complete the co
 
 If you don't have a live brokerage account to test with, you can create a Paper Trading account with [Alpaca](https://app.alpaca.markets/signup) and select "Alpaca Paper" as the instituion in the Connection Portal when prompted.
 
-
 ## 3. List connected accounts
 
 Once the end user makes a successful connection, SnapTrade will retrieve all the brokerage accounts that the user has granted access to. You can use the <a href="https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_listUserAccounts" target="_blank">List Accounts</a> endpoint to retrieve all connected accounts. For each account, the `id` field uniquely identifies the account within SnapTrade and needs to be passed in for all subsequent account-related API calls.
@@ -115,7 +114,6 @@ universal_symbol_id = quotes.body[0]['symbol']['id']
 ::button[Get Quotes]
 
 :::
-
 
 ## 5. Submit an equity order
 
