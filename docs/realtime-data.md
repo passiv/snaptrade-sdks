@@ -1,4 +1,4 @@
-# Showing users up to date data
+# Data freshness on SnapTrade
 
 SnapTrade offers the ability to get real-time data on both real-time (including Pay as you go) and cached plans. See [our pricing page](https://snaptrade.com/pricing) for more information on plans
 
@@ -11,7 +11,7 @@ The best practice for showing users accurate data on a real-time plan is to upda
 On the cached plan, SnapTrade will update your data once a day. To get real-time data we recommend calling [the manual refresh endpoint](https://docs.snaptrade.com/reference/Connections/Connections_refreshBrokerageAuthorization) to update the data. SnapTrade will begin a sync and notify you via [ACCOUNT_HOLDINGS_UPDATED](https://docs.snaptrade.com/docs/webhooks#webhooks-account_holdings_updated) webhooks when each account has finished syncing, at which point you can call [/positions](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountPositions), [/options](https://docs.snaptrade.com/reference/Options/Options_listOptionHoldings), [/balances](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountBalance) for each account. If you expect your users to want intraday updates, it is a good idea to give the option of a refresh button that lets the user refresh their data in the same way. Note that calls to the Refresh endpoint will incur additional charges according to your plan
 
 
-## Real-time trade detection
+## Get notified when users place trades at their broker
 
 If you need to know when a trade has been placed by a specific user, the recommendation is to poll the [Recent Orders endpoint](https://docs.snaptrade.com/reference/Account%20Information/AccountInformation_getUserAccountRecentOrders), only during market hours. This endpoint defaults to returning the last day of executed orders. Keep a copy of this list on your end, and check if a new order is present in the polling responses. To avoid SnapTrade and institution rate limits, we recommend polling once every 10 seconds per account
 
