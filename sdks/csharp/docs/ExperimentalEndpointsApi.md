@@ -4,9 +4,105 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**GetAccountBalanceHistory**](ExperimentalEndpointsApi.md#getaccountbalancehistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
 | [**GetUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getuseraccountorderdetailv2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**GetUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountordersv2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**GetUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
+
+
+# **GetAccountBalanceHistory**
+
+
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+
+### Example
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using SnapTrade.Net.Client;
+using SnapTrade.Net.Model;
+
+namespace Example
+{
+    public class GetAccountBalanceHistoryExample
+    {
+        public static void Main()
+        {
+            Snaptrade client = new Snaptrade();
+            // Configure custom BasePath if desired
+            // client.SetBasePath("https://api.snaptrade.com/api/v1");
+            client.SetClientId(System.Environment.GetEnvironmentVariable("SNAPTRADE_CLIENT_ID"));
+            client.SetConsumerKey(System.Environment.GetEnvironmentVariable("SNAPTRADE_CONSUMER_KEY"));
+
+            var userId = "userId_example";
+            var userSecret = "userSecret_example";
+            var accountId = "accountId_example";
+            
+            try
+            {
+                // List historical account total value
+                AccountValueHistoryResponse result = client.ExperimentalEndpoints.GetAccountBalanceHistory(userId, userSecret, accountId);
+                Console.WriteLine(result);
+            }
+            catch (ApiException e)
+            {
+                Console.WriteLine("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistory: " + e.Message);
+                Console.WriteLine("Status Code: "+ e.ErrorCode);
+                Console.WriteLine(e.StackTrace);
+            }
+            catch (ClientException e)
+            {
+                Console.WriteLine(e.Response.StatusCode);
+                Console.WriteLine(e.Response.RawContent);
+                Console.WriteLine(e.InnerException);
+            }
+        }
+    }
+}
+```
+
+#### Using the GetAccountBalanceHistoryWithHttpInfo variant
+This returns an ApiResponse object which contains the response data, status code and headers.
+
+```csharp
+try
+{
+    // List historical account total value
+    ApiResponse<AccountValueHistoryResponse> response = apiInstance.GetAccountBalanceHistoryWithHttpInfo(userId, userSecret, accountId);
+    Debug.Write("Status Code: " + response.StatusCode);
+    Debug.Write("Response Headers: " + response.Headers);
+    Debug.Write("Response Body: " + response.Data);
+}
+catch (ApiException e)
+{
+    Debug.Print("Exception when calling ExperimentalEndpointsApi.GetAccountBalanceHistoryWithHttpInfo: " + e.Message);
+    Debug.Print("Status Code: " + e.ErrorCode);
+    Debug.Print(e.StackTrace);
+}
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **userId** | **string** |  |  |
+| **userSecret** | **string** |  |  |
+| **accountId** | **string** |  |  |
+
+### Return type
+
+[**AccountValueHistoryResponse**](AccountValueHistoryResponse.md)
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
+| **403** | Forbidden |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 # **GetUserAccountOrderDetailV2**

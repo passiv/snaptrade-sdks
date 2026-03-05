@@ -4,10 +4,109 @@ All URIs are relative to *https://api.snaptrade.com/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**getAccountBalanceHistory**](ExperimentalEndpointsApi.md#getAccountBalanceHistory) | **GET** /accounts/{accountId}/balanceHistory | List historical account total value |
 | [**getUserAccountOrderDetailV2**](ExperimentalEndpointsApi.md#getUserAccountOrderDetailV2) | **GET** /accounts/{accountId}/orders/details/v2/{brokerageOrderId} | Get account order detail (V2) |
 | [**getUserAccountOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountOrdersV2) | **GET** /accounts/{accountId}/orders/v2 | List account orders v2 |
 | [**getUserAccountRecentOrdersV2**](ExperimentalEndpointsApi.md#getUserAccountRecentOrdersV2) | **GET** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only) |
 
+
+<a name="getAccountBalanceHistory"></a>
+# **getAccountBalanceHistory**
+> AccountValueHistoryResponse getAccountBalanceHistory(userId, userSecret, accountId).execute();
+
+List historical account total value
+
+An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+
+### Example
+```java
+import com.snaptrade.client.ApiClient;
+import com.snaptrade.client.ApiException;
+import com.snaptrade.client.ApiResponse;
+import com.snaptrade.client.Snaptrade;
+import com.snaptrade.client.Configuration;
+import com.snaptrade.client.auth.*;
+import com.snaptrade.client.model.*;
+import com.snaptrade.client.api.ExperimentalEndpointsApi;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+public class Example {
+  public static void main(String[] args) {
+    Configuration configuration = new Configuration();
+    configuration.host = "https://api.snaptrade.com/api/v1";
+    configuration.clientId = System.getenv("SNAPTRADE_CLIENT_ID");
+    configuration.consumerKey = System.getenv("SNAPTRADE_CONSUMER_KEY");
+    
+    Snaptrade client = new Snaptrade(configuration);
+    String userId = "userId_example";
+    String userSecret = "userSecret_example";
+    UUID accountId = UUID.randomUUID();
+    try {
+      AccountValueHistoryResponse result = client
+              .experimentalEndpoints
+              .getAccountBalanceHistory(userId, userSecret, accountId)
+              .execute();
+      System.out.println(result);
+      System.out.println(result.getHistory());
+      System.out.println(result.getCurrency());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountBalanceHistory");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+
+    // Use .executeWithHttpInfo() to retrieve HTTP Status Code, Headers and Request
+    try {
+      ApiResponse<AccountValueHistoryResponse> response = client
+              .experimentalEndpoints
+              .getAccountBalanceHistory(userId, userSecret, accountId)
+              .executeWithHttpInfo();
+      System.out.println(response.getResponseBody());
+      System.out.println(response.getResponseHeaders());
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getRoundTripTime());
+      System.out.println(response.getRequest());
+    } catch (ApiException e) {
+      System.err.println("Exception when calling ExperimentalEndpointsApi#getAccountBalanceHistory");
+      System.err.println("Status code: " + e.getStatusCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userId** | **String**|  | |
+| **userSecret** | **String**|  | |
+| **accountId** | **UUID**|  | |
+
+### Return type
+
+[**AccountValueHistoryResponse**](AccountValueHistoryResponse.md)
+
+### Authorization
+
+[PartnerClientId](../README.md#PartnerClientId), [PartnerSignature](../README.md#PartnerSignature), [PartnerTimestamp](../README.md#PartnerTimestamp)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | OK |  -  |
 
 <a name="getUserAccountOrderDetailV2"></a>
 # **getUserAccountOrderDetailV2**

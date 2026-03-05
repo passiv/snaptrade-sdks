@@ -81,6 +81,12 @@ export interface Brokerage {
      */
     'maintenance_mode'?: boolean;
     /**
+     * Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+     * @type {boolean}
+     * @memberof Brokerage
+     */
+    'is_degraded'?: boolean;
+    /**
      * Whether the brokerage allows trading through SnapTrade.
      * @type {boolean}
      * @memberof Brokerage

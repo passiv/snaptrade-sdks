@@ -45,6 +45,7 @@ namespace SnapTrade.Net.Model
         /// <param name="url">URL to the brokerage&#39;s website..</param>
         /// <param name="enabled">Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections..</param>
         /// <param name="maintenanceMode">Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections..</param>
+        /// <param name="isDegraded">Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues..</param>
         /// <param name="allowsTrading">Whether the brokerage allows trading through SnapTrade..</param>
         /// <param name="allowsFractionalUnits">This field is deprecated. Please contact us if you have a valid use case for it..</param>
         /// <param name="hasReporting">This field is deprecated. Please contact us if you have a valid use case for it..</param>
@@ -52,7 +53,7 @@ namespace SnapTrade.Net.Model
         /// <param name="brokerageType">brokerageType.</param>
         /// <param name="exchanges">This field is deprecated. Please contact us if you have a valid use case for it..</param>
         /// <param name="openUrl">This field is deprecated..</param>
-        public Brokerage(string id = default(string), string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool? allowsTrading = default(bool?), bool? allowsFractionalUnits = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>), string openUrl = default(string)) : base()
+        public Brokerage(string id = default(string), string slug = default(string), string name = default(string), string displayName = default(string), string description = default(string), string awsS3LogoUrl = default(string), string awsS3SquareLogoUrl = default(string), string url = default(string), bool enabled = default(bool), bool maintenanceMode = default(bool), bool isDegraded = default(bool), bool? allowsTrading = default(bool?), bool? allowsFractionalUnits = default(bool?), bool? hasReporting = default(bool?), bool isRealTimeConnection = default(bool), BrokerageType brokerageType = default(BrokerageType), List<Object> exchanges = default(List<Object>), string openUrl = default(string)) : base()
         {
             this.Id = id;
             this.Slug = slug;
@@ -64,6 +65,7 @@ namespace SnapTrade.Net.Model
             this.Url = url;
             this.Enabled = enabled;
             this.MaintenanceMode = maintenanceMode;
+            this.IsDegraded = isDegraded;
             this.AllowsTrading = allowsTrading;
             this.AllowsFractionalUnits = allowsFractionalUnits;
             this.HasReporting = hasReporting;
@@ -145,6 +147,13 @@ namespace SnapTrade.Net.Model
         public bool MaintenanceMode { get; set; }
 
         /// <summary>
+        /// Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+        /// </summary>
+        /// <value>Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.</value>
+        [DataMember(Name = "is_degraded", EmitDefaultValue = true)]
+        public bool IsDegraded { get; set; }
+
+        /// <summary>
         /// Whether the brokerage allows trading through SnapTrade.
         /// </summary>
         /// <value>Whether the brokerage allows trading through SnapTrade.</value>
@@ -222,6 +231,7 @@ namespace SnapTrade.Net.Model
             sb.Append("  Url: ").Append(Url).Append("\n");
             sb.Append("  Enabled: ").Append(Enabled).Append("\n");
             sb.Append("  MaintenanceMode: ").Append(MaintenanceMode).Append("\n");
+            sb.Append("  IsDegraded: ").Append(IsDegraded).Append("\n");
             sb.Append("  AllowsTrading: ").Append(AllowsTrading).Append("\n");
             sb.Append("  AllowsFractionalUnits: ").Append(AllowsFractionalUnits).Append("\n");
             sb.Append("  HasReporting: ").Append(HasReporting).Append("\n");
@@ -314,6 +324,10 @@ namespace SnapTrade.Net.Model
                     this.MaintenanceMode.Equals(input.MaintenanceMode)
                 ) && base.Equals(input) && 
                 (
+                    this.IsDegraded == input.IsDegraded ||
+                    this.IsDegraded.Equals(input.IsDegraded)
+                ) && base.Equals(input) && 
+                (
                     this.AllowsTrading == input.AllowsTrading ||
                     (this.AllowsTrading != null &&
                     this.AllowsTrading.Equals(input.AllowsTrading))
@@ -394,6 +408,7 @@ namespace SnapTrade.Net.Model
                 }
                 hashCode = (hashCode * 59) + this.Enabled.GetHashCode();
                 hashCode = (hashCode * 59) + this.MaintenanceMode.GetHashCode();
+                hashCode = (hashCode * 59) + this.IsDegraded.GetHashCode();
                 if (this.AllowsTrading != null)
                 {
                     hashCode = (hashCode * 59) + this.AllowsTrading.GetHashCode();

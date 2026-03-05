@@ -460,6 +460,7 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Url`: %v\n", *resp.Url)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.Enabled`: %v\n", *resp.Enabled)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.MaintenanceMode`: %v\n", *resp.MaintenanceMode)
+    fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.IsDegraded`: %v\n", *resp.IsDegraded)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AllowsTrading`: %v\n", *resp.AllowsTrading)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.AllowsFractionalUnits`: %v\n", *resp.AllowsFractionalUnits)
     fmt.Fprintf(os.Stdout, "Response from `Brokerage.ListAllBrokerages.HasReporting`: %v\n", *resp.HasReporting)

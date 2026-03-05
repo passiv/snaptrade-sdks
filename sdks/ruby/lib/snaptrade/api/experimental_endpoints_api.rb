@@ -17,6 +17,109 @@ module SnapTrade
       @api_client = api_client
     end
 
+    # List historical account total value
+    #
+    # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_balance_history(user_id:, user_secret:, account_id:, extra: {})
+      data, _status_code, _headers = get_account_balance_history_with_http_info_impl(user_id, user_secret, account_id, extra)
+      data
+    end
+
+    # List historical account total value
+    #
+    # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+    #
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] extra additional parameters to pass along through :header_params, :query_params, or parameter name
+    def get_account_balance_history_with_http_info(user_id:, user_secret:, account_id:, extra: {})
+      get_account_balance_history_with_http_info_impl(user_id, user_secret, account_id, extra)
+    end
+
+    # List historical account total value
+    # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [AccountValueHistoryResponse]
+    private def get_account_balance_history_impl(user_id, user_secret, account_id, opts = {})
+      data, _status_code, _headers = get_account_balance_history_with_http_info(user_id, user_secret, account_id, opts)
+      data
+    end
+
+    # List historical account total value
+    # An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+    # @param user_id [String] 
+    # @param user_secret [String] 
+    # @param account_id [String] 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AccountValueHistoryResponse, Integer, Hash)>] AccountValueHistoryResponse data, response status code and response headers
+    private def get_account_balance_history_with_http_info_impl(user_id, user_secret, account_id, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: ExperimentalEndpointsApi.get_account_balance_history ...'
+      end
+      # verify the required parameter 'user_id' is set
+      if @api_client.config.client_side_validation && user_id.nil?
+        fail ArgumentError, "Missing the required parameter 'user_id' when calling ExperimentalEndpointsApi.get_account_balance_history"
+      end
+      # verify the required parameter 'user_secret' is set
+      if @api_client.config.client_side_validation && user_secret.nil?
+        fail ArgumentError, "Missing the required parameter 'user_secret' when calling ExperimentalEndpointsApi.get_account_balance_history"
+      end
+      # verify the required parameter 'account_id' is set
+      if @api_client.config.client_side_validation && account_id.nil?
+        fail ArgumentError, "Missing the required parameter 'account_id' when calling ExperimentalEndpointsApi.get_account_balance_history"
+      end
+      # resource path
+      local_var_path = '/accounts/{accountId}/balanceHistory'.sub('{' + 'accountId' + '}', CGI.escape(account_id.to_s))
+
+      # query parameters
+      query_params = opts[:query_params] || {}
+      query_params[:'userId'] = user_id
+      query_params[:'userSecret'] = user_secret
+
+      # header parameters
+      header_params = opts[:header_params] || {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+
+      # form parameters
+      form_params = opts[:form_params] || {}
+
+      # http body (model)
+      post_body = opts[:debug_body]
+
+      # return_type
+      return_type = opts[:debug_return_type] || 'AccountValueHistoryResponse'
+
+      # auth_names
+      auth_names = opts[:debug_auth_names] || ['PartnerClientId', 'PartnerSignature', 'PartnerTimestamp']
+
+      new_options = opts.merge(
+        :operation => :"ExperimentalEndpointsApi.get_account_balance_history",
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => return_type
+      )
+
+      data, status_code, headers, response = @api_client.call_api(:GET, local_var_path, new_options)
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: ExperimentalEndpointsApi#get_account_balance_history\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers, response
+    end
+
+
     # Get account order detail (V2)
     #
     # Returns the detail of a single order using the brokerage order ID provided as a path parameter.

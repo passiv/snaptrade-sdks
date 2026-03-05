@@ -37,6 +37,8 @@ type Brokerage struct {
 	Enabled *bool `json:"enabled,omitempty"`
 	// Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
 	MaintenanceMode *bool `json:"maintenance_mode,omitempty"`
+	// Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+	IsDegraded *bool `json:"is_degraded,omitempty"`
 	// Whether the brokerage allows trading through SnapTrade.
 	AllowsTrading NullableBool `json:"allows_trading,omitempty"`
 	// This field is deprecated. Please contact us if you have a valid use case for it.
@@ -407,6 +409,38 @@ func (o *Brokerage) SetMaintenanceMode(v bool) {
 	o.MaintenanceMode = &v
 }
 
+// GetIsDegraded returns the IsDegraded field value if set, zero value otherwise.
+func (o *Brokerage) GetIsDegraded() bool {
+	if o == nil || isNil(o.IsDegraded) {
+		var ret bool
+		return ret
+	}
+	return *o.IsDegraded
+}
+
+// GetIsDegradedOk returns a tuple with the IsDegraded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Brokerage) GetIsDegradedOk() (*bool, bool) {
+	if o == nil || isNil(o.IsDegraded) {
+    return nil, false
+	}
+	return o.IsDegraded, true
+}
+
+// HasIsDegraded returns a boolean if a field has been set.
+func (o *Brokerage) HasIsDegraded() bool {
+	if o != nil && !isNil(o.IsDegraded) {
+		return true
+	}
+
+	return false
+}
+
+// SetIsDegraded gets a reference to the given bool and assigns it to the IsDegraded field.
+func (o *Brokerage) SetIsDegraded(v bool) {
+	o.IsDegraded = &v
+}
+
 // GetAllowsTrading returns the AllowsTrading field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Brokerage) GetAllowsTrading() bool {
 	if o == nil || isNil(o.AllowsTrading.Get()) {
@@ -718,6 +752,9 @@ func (o Brokerage) MarshalJSON() ([]byte, error) {
 	if !isNil(o.MaintenanceMode) {
 		toSerialize["maintenance_mode"] = o.MaintenanceMode
 	}
+	if !isNil(o.IsDegraded) {
+		toSerialize["is_degraded"] = o.IsDegraded
+	}
 	if o.AllowsTrading.IsSet() {
 		toSerialize["allows_trading"] = o.AllowsTrading.Get()
 	}
@@ -767,6 +804,7 @@ func (o *Brokerage) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "url")
 		delete(additionalProperties, "enabled")
 		delete(additionalProperties, "maintenance_mode")
+		delete(additionalProperties, "is_degraded")
 		delete(additionalProperties, "allows_trading")
 		delete(additionalProperties, "allows_fractional_units")
 		delete(additionalProperties, "has_reporting")

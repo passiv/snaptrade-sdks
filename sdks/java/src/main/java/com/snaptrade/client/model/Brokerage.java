@@ -95,6 +95,10 @@ public class Brokerage {
   @SerializedName(SERIALIZED_NAME_MAINTENANCE_MODE)
   private Boolean maintenanceMode;
 
+  public static final String SERIALIZED_NAME_IS_DEGRADED = "is_degraded";
+  @SerializedName(SERIALIZED_NAME_IS_DEGRADED)
+  private Boolean isDegraded;
+
   public static final String SERIALIZED_NAME_ALLOWS_TRADING = "allows_trading";
   @SerializedName(SERIALIZED_NAME_ALLOWS_TRADING)
   private Boolean allowsTrading;
@@ -416,6 +420,35 @@ public class Brokerage {
   }
 
 
+  public Brokerage isDegraded(Boolean isDegraded) {
+    
+    
+    
+    
+    this.isDegraded = isDegraded;
+    return this;
+  }
+
+   /**
+   * Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
+   * @return isDegraded
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(example = "true", value = "Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.")
+
+  public Boolean getIsDegraded() {
+    return isDegraded;
+  }
+
+
+  public void setIsDegraded(Boolean isDegraded) {
+    
+    
+    
+    this.isDegraded = isDegraded;
+  }
+
+
   public Brokerage allowsTrading(Boolean allowsTrading) {
     
     
@@ -701,6 +734,7 @@ public class Brokerage {
         Objects.equals(this.url, brokerage.url) &&
         Objects.equals(this.enabled, brokerage.enabled) &&
         Objects.equals(this.maintenanceMode, brokerage.maintenanceMode) &&
+        Objects.equals(this.isDegraded, brokerage.isDegraded) &&
         Objects.equals(this.allowsTrading, brokerage.allowsTrading) &&
         Objects.equals(this.allowsFractionalUnits, brokerage.allowsFractionalUnits) &&
         Objects.equals(this.hasReporting, brokerage.hasReporting) &&
@@ -717,7 +751,7 @@ public class Brokerage {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, slug, name, displayName, description, awsS3LogoUrl, awsS3SquareLogoUrl, url, enabled, maintenanceMode, allowsTrading, allowsFractionalUnits, hasReporting, isRealTimeConnection, brokerageType, exchanges, openUrl, additionalProperties);
+    return Objects.hash(id, slug, name, displayName, description, awsS3LogoUrl, awsS3SquareLogoUrl, url, enabled, maintenanceMode, isDegraded, allowsTrading, allowsFractionalUnits, hasReporting, isRealTimeConnection, brokerageType, exchanges, openUrl, additionalProperties);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -741,6 +775,7 @@ public class Brokerage {
     sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("    enabled: ").append(toIndentedString(enabled)).append("\n");
     sb.append("    maintenanceMode: ").append(toIndentedString(maintenanceMode)).append("\n");
+    sb.append("    isDegraded: ").append(toIndentedString(isDegraded)).append("\n");
     sb.append("    allowsTrading: ").append(toIndentedString(allowsTrading)).append("\n");
     sb.append("    allowsFractionalUnits: ").append(toIndentedString(allowsFractionalUnits)).append("\n");
     sb.append("    hasReporting: ").append(toIndentedString(hasReporting)).append("\n");
@@ -781,6 +816,7 @@ public class Brokerage {
     openapiFields.add("url");
     openapiFields.add("enabled");
     openapiFields.add("maintenance_mode");
+    openapiFields.add("is_degraded");
     openapiFields.add("allows_trading");
     openapiFields.add("allows_fractional_units");
     openapiFields.add("has_reporting");

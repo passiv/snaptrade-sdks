@@ -18,6 +18,7 @@ Describes a brokerage that SnapTrade supports.
 |**url** | **String** | URL to the brokerage&#39;s website. |  [optional] |
 |**enabled** | **Boolean** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. |  [optional] |
 |**maintenanceMode** | **Boolean** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. |  [optional] |
+|**isDegraded** | **Boolean** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. |  [optional] |
 |**allowsTrading** | **Boolean** | Whether the brokerage allows trading through SnapTrade. |  [optional] |
 |**allowsFractionalUnits** | **Boolean** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |
 |**hasReporting** | **Boolean** | This field is deprecated. Please contact us if you have a valid use case for it. |  [optional] |

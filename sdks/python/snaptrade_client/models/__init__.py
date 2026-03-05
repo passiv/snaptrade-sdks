@@ -30,6 +30,8 @@ from snaptrade_client.model.account_orders_v2_response import AccountOrdersV2Res
 from snaptrade_client.model.account_simple import AccountSimple
 from snaptrade_client.model.account_sync_status import AccountSyncStatus
 from snaptrade_client.model.account_universal_activity import AccountUniversalActivity
+from snaptrade_client.model.account_value_history_item import AccountValueHistoryItem
+from snaptrade_client.model.account_value_history_response import AccountValueHistoryResponse
 from snaptrade_client.model.action import Action
 from snaptrade_client.model.action_strict import ActionStrict
 from snaptrade_client.model.action_strict_v2 import ActionStrictV2

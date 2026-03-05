@@ -18,6 +18,7 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
 import com.snaptrade.client.model.AccountOrderRecordV2;
 import com.snaptrade.client.model.AccountOrdersV2Response;
+import com.snaptrade.client.model.AccountValueHistoryResponse;
 import java.util.UUID;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -41,6 +42,23 @@ public class ExperimentalEndpointsApiTest {
     public static void beforeClass() {
         ApiClient apiClient = Configuration.getDefaultApiClient();
         api = new ExperimentalEndpointsApi(apiClient);
+    }
+
+    /**
+     * List historical account total value
+     *
+     * An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year. 
+     *
+     * @throws ApiException if the Api call fails
+     */
+    @Test
+    public void getAccountBalanceHistoryTest() throws ApiException {
+        String userId = null;
+        String userSecret = null;
+        UUID accountId = null;
+        AccountValueHistoryResponse response = api.getAccountBalanceHistory(userId, userSecret, accountId)
+                .execute();
+        // TODO: test validations
     }
 
     /**

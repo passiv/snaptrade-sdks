@@ -70,6 +70,7 @@ class Brokerage(
             url = schemas.StrSchema
             enabled = schemas.BoolSchema
             maintenance_mode = schemas.BoolSchema
+            is_degraded = schemas.BoolSchema
             
             
             class allows_trading(
@@ -174,6 +175,7 @@ class Brokerage(
                 "url": url,
                 "enabled": enabled,
                 "maintenance_mode": maintenance_mode,
+                "is_degraded": is_degraded,
                 "allows_trading": allows_trading,
                 "allows_fractional_units": allows_fractional_units,
                 "has_reporting": has_reporting,
@@ -215,6 +217,9 @@ class Brokerage(
     def __getitem__(self, name: typing_extensions.Literal["maintenance_mode"]) -> MetaOapg.properties.maintenance_mode: ...
     
     @typing.overload
+    def __getitem__(self, name: typing_extensions.Literal["is_degraded"]) -> MetaOapg.properties.is_degraded: ...
+    
+    @typing.overload
     def __getitem__(self, name: typing_extensions.Literal["allows_trading"]) -> MetaOapg.properties.allows_trading: ...
     
     @typing.overload
@@ -238,7 +243,7 @@ class Brokerage(
     @typing.overload
     def __getitem__(self, name: str) -> MetaOapg.additional_properties: ...
     
-    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["slug"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], typing_extensions.Literal["open_url"], str, ]):
+    def __getitem__(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["slug"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["is_degraded"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], typing_extensions.Literal["open_url"], str, ]):
         # dict_instance[name] accessor
         return super().__getitem__(name)
     
@@ -273,6 +278,9 @@ class Brokerage(
     def get_item_oapg(self, name: typing_extensions.Literal["maintenance_mode"]) -> typing.Union[MetaOapg.properties.maintenance_mode, schemas.Unset]: ...
     
     @typing.overload
+    def get_item_oapg(self, name: typing_extensions.Literal["is_degraded"]) -> typing.Union[MetaOapg.properties.is_degraded, schemas.Unset]: ...
+    
+    @typing.overload
     def get_item_oapg(self, name: typing_extensions.Literal["allows_trading"]) -> typing.Union[MetaOapg.properties.allows_trading, schemas.Unset]: ...
     
     @typing.overload
@@ -296,7 +304,7 @@ class Brokerage(
     @typing.overload
     def get_item_oapg(self, name: str) -> typing.Union[MetaOapg.additional_properties, schemas.Unset]: ...
     
-    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["slug"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], typing_extensions.Literal["open_url"], str, ]):
+    def get_item_oapg(self, name: typing.Union[typing_extensions.Literal["id"], typing_extensions.Literal["slug"], typing_extensions.Literal["name"], typing_extensions.Literal["display_name"], typing_extensions.Literal["description"], typing_extensions.Literal["aws_s3_logo_url"], typing_extensions.Literal["aws_s3_square_logo_url"], typing_extensions.Literal["url"], typing_extensions.Literal["enabled"], typing_extensions.Literal["maintenance_mode"], typing_extensions.Literal["is_degraded"], typing_extensions.Literal["allows_trading"], typing_extensions.Literal["allows_fractional_units"], typing_extensions.Literal["has_reporting"], typing_extensions.Literal["is_real_time_connection"], typing_extensions.Literal["brokerage_type"], typing_extensions.Literal["exchanges"], typing_extensions.Literal["open_url"], str, ]):
         return super().get_item_oapg(name)
 
     def __new__(
@@ -312,6 +320,7 @@ class Brokerage(
         url: typing.Union[MetaOapg.properties.url, str, schemas.Unset] = schemas.unset,
         enabled: typing.Union[MetaOapg.properties.enabled, bool, schemas.Unset] = schemas.unset,
         maintenance_mode: typing.Union[MetaOapg.properties.maintenance_mode, bool, schemas.Unset] = schemas.unset,
+        is_degraded: typing.Union[MetaOapg.properties.is_degraded, bool, schemas.Unset] = schemas.unset,
         allows_trading: typing.Union[MetaOapg.properties.allows_trading, None, bool, schemas.Unset] = schemas.unset,
         allows_fractional_units: typing.Union[MetaOapg.properties.allows_fractional_units, None, bool, schemas.Unset] = schemas.unset,
         has_reporting: typing.Union[MetaOapg.properties.has_reporting, None, bool, schemas.Unset] = schemas.unset,
@@ -335,6 +344,7 @@ class Brokerage(
             url=url,
             enabled=enabled,
             maintenance_mode=maintenance_mode,
+            is_degraded=is_degraded,
             allows_trading=allows_trading,
             allows_fractional_units=allows_fractional_units,
             has_reporting=has_reporting,

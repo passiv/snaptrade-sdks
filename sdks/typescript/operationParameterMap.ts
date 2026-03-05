@@ -352,6 +352,19 @@ export const operationParameterMap: Record<string, Entry> = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        parameters: [
+            {
+                name: 'userId'
+            },
+            {
+                name: 'userSecret'
+            },
+            {
+                name: 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         parameters: [
             {

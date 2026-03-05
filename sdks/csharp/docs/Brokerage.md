@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **Url** | **string** | URL to the brokerage&#39;s website. | [optional] 
 **Enabled** | **bool** | Whether the brokerage is enabled in SnapTrade. A disabled brokerage will not be available for new connections. | [optional] 
 **MaintenanceMode** | **bool** | Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections. | [optional] 
+**IsDegraded** | **bool** | Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues. | [optional] 
 **AllowsTrading** | **bool?** | Whether the brokerage allows trading through SnapTrade. | [optional] 
 **AllowsFractionalUnits** | **bool?** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
 **HasReporting** | **bool?** | This field is deprecated. Please contact us if you have a valid use case for it. | [optional] 
