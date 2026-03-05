@@ -326,7 +326,7 @@ catch (ApiException e)
 
 
 
-Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
 
 ### Example
 ```csharp
@@ -1014,7 +1014,7 @@ catch (ApiException e)
 
 
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
 
 ### Example
 ```csharp

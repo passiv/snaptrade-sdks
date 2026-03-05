@@ -10,13 +10,11 @@
 """
 
 from snaptrade_client.paths.market_data_options_quotes.get import GetOptionQuote
-from snaptrade_client.paths.accounts_account_id_options_chain.get import GetOptionsChain
 from snaptrade_client.paths.accounts_account_id_options.get import ListOptionHoldings
 
 
 class OptionsApiGenerated(
     GetOptionQuote,
-    GetOptionsChain,
     ListOptionHoldings,
 ):
     """NOTE:
