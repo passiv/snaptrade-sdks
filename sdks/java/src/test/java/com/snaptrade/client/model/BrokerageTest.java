@@ -124,6 +124,14 @@ public class BrokerageTest {
     }
 
     /**
+     * Test the property 'isDegraded'
+     */
+    @Test
+    public void isDegradedTest() {
+        // TODO: test isDegraded
+    }
+
+    /**
      * Test the property 'allowsTrading'
      */
     @Test

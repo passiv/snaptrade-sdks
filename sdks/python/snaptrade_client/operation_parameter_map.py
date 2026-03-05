@@ -346,6 +346,19 @@ operation_parameter_map = {
             },
         ]
     },
+    '/accounts/{accountId}/balanceHistory-GET': {
+        'parameters': [
+            {
+                'name': 'userId'
+            },
+            {
+                'name': 'userSecret'
+            },
+            {
+                'name': 'accountId'
+            },
+        ]
+    },
     '/accounts/{accountId}/orders/details/v2/{brokerageOrderId}-GET': {
         'parameters': [
             {

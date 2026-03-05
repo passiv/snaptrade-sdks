@@ -9,12 +9,14 @@
     Created by: https://snaptrade.com/
 """
 
+from snaptrade_client.paths.accounts_account_id_balance_history.get import GetAccountBalanceHistory
 from snaptrade_client.paths.accounts_account_id_orders_details_v2_brokerage_order_id.get import GetUserAccountOrderDetailV2
 from snaptrade_client.paths.accounts_account_id_orders_v2.get import GetUserAccountOrdersV2
 from snaptrade_client.paths.accounts_account_id_recent_orders_v2.get import GetUserAccountRecentOrdersV2
 
 
 class ExperimentalEndpointsApiGenerated(
+    GetAccountBalanceHistory,
     GetUserAccountOrderDetailV2,
     GetUserAccountOrdersV2,
     GetUserAccountRecentOrdersV2,

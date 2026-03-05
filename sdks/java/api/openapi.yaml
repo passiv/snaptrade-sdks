@@ -2800,6 +2800,53 @@ paths:
       x-konfig-operation-can-have-single-parameter: true
       x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-orders-v2
       x-accepts: application/json
+  /accounts/{accountId}/balanceHistory:
+    get:
+      description: |
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+      operationId: AccountInformation_getAccountBalanceHistory
+      parameters:
+      - explode: true
+        in: query
+        name: userId
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserID'
+        style: form
+      - explode: true
+        in: query
+        name: userSecret
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserSecret'
+        style: form
+      - explode: false
+        in: path
+        name: accountId
+        required: true
+        schema:
+          $ref: '#/components/schemas/AccountID'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountValueHistoryResponse'
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/403FeatureNotEnabledResponse'
+          description: Forbidden
+          x-do-not-generate: true
+      summary: List historical account total value
+      tags:
+      - Experimental endpoints
+      x-konfig-operation-can-have-single-parameter: true
+      x-konfig-single-parameter-schema: konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balanceHistory
+      x-accepts: application/json
   /accounts/{accountId}/recentOrders/v2:
     get:
       description: |
@@ -3998,6 +4045,7 @@ components:
               display_name: Robinhood
               url: https://robinhood.com
               enabled: true
+              is_degraded: true
               allows_trading: true
               has_reporting: true
               aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -4663,6 +4711,54 @@ components:
       x-konfig-properties:
         child_brokerage_order_ids:
           nullable: true
+    AccountValueHistoryResponse:
+      additionalProperties: true
+      description: "The response to the account value history endpoint, containing\
+        \ a list of estimated account values at different points in time."
+      example:
+        currency: USD
+        history:
+        - date: 2026-01-01T00:00:00.000+00:00
+          total_value: "15363.23"
+        - date: 2026-01-01T00:00:00.000+00:00
+          total_value: "15363.23"
+      properties:
+        history:
+          description: List of estimated account values over time returned by the
+            endpoint.
+          items:
+            $ref: '#/components/schemas/AccountValueHistoryItem'
+          type: array
+        currency:
+          description: The ISO-4217 currency code for the account values.
+          example: USD
+          type: string
+          x-konfig-original-example: USD
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountValueHistoryResponse-properties-currency
+      type: object
+      x-konfig-is-used-in-successful-response: true
+    AccountValueHistoryItem:
+      additionalProperties: true
+      description: The estimeated account value at a specific point in time.
+      example:
+        date: 2026-01-01T00:00:00.000+00:00
+        total_value: "15363.23"
+      properties:
+        date:
+          description: The date of the estimated account value
+          example: 2026-01-01
+          format: date
+          type: string
+          x-konfig-original-example: 2026-01-01
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountValueHistoryItem-properties-date
+        total_value:
+          description: "Estimate of the total market value of this account (includes\
+            \ cash, equity, fixed income, etc) at the given date."
+          example: "15363.23"
+          type: string
+          x-konfig-original-example: "15363.23"
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-AccountValueHistoryItem-properties-total_value
+      type: object
     AccountOrdersV2Response:
       additionalProperties: true
       description: Contains a standardized list of account orders in the V2 format.
@@ -5395,6 +5491,7 @@ components:
             display_name: Robinhood
             url: https://robinhood.com
             enabled: true
+            is_degraded: true
             allows_trading: true
             has_reporting: true
             aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -6054,6 +6151,7 @@ components:
           display_name: Robinhood
           url: https://robinhood.com
           enabled: true
+          is_degraded: true
           allows_trading: true
           has_reporting: true
           aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -6076,6 +6174,7 @@ components:
           display_name: Robinhood
           url: https://robinhood.com
           enabled: true
+          is_degraded: true
           allows_trading: true
           has_reporting: true
           aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -6638,6 +6737,7 @@ components:
         display_name: Robinhood
         url: https://robinhood.com
         enabled: true
+        is_degraded: true
         allows_trading: true
         has_reporting: true
         aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -6721,6 +6821,13 @@ components:
           type: boolean
           x-konfig-original-example: true
           x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-maintenance_mode
+        is_degraded:
+          description: Whether the brokerage is currently degraded. A degraded brokerage
+            may have reduced functionality or be experiencing technical issues.
+          example: true
+          type: boolean
+          x-konfig-original-example: true
+          x-konfig-generated-schema: konfig-generated-schema-components-schemas-Brokerage-properties-is_degraded
         allows_trading:
           description: Whether the brokerage allows trading through SnapTrade.
           example: true
@@ -6797,6 +6904,7 @@ components:
           display_name: Robinhood
           url: https://robinhood.com
           enabled: true
+          is_degraded: true
           allows_trading: true
           has_reporting: true
           aws_s3_square_logo_url: https://passiv-brokerage-logos.s3.ca-central-1.amazonaws.com/robinhood-logo-square.png
@@ -10165,6 +10273,18 @@ components:
       example: 2024-08-05T00:05:57.409Z
       type: string
       x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountValueHistoryResponse-properties-currency:
+      example: USD
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountValueHistoryItem-properties-date:
+      example: 2026-01-01
+      type: string
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-AccountValueHistoryItem-properties-total_value:
+      example: "15363.23"
+      type: string
+      x-do-not-generate: true
     konfig-generated-schema-components-schemas-AccountOrderRecordV2-properties-order_type:
       example: MARKET
       type: string
@@ -10755,6 +10875,10 @@ components:
       type: boolean
       x-do-not-generate: true
     konfig-generated-schema-components-schemas-Brokerage-properties-maintenance_mode:
+      example: true
+      type: boolean
+      x-do-not-generate: true
+    konfig-generated-schema-components-schemas-Brokerage-properties-is_degraded:
       example: true
       type: boolean
       x-do-not-generate: true
@@ -12895,6 +13019,25 @@ components:
       - userSecret
       - state
       - days
+      - accountId
+    konfig-generated-schema-single-parameter-schema-get--accounts-accountId-balanceHistory:
+      additionalProperties: true
+      properties:
+        userId:
+          $ref: '#/components/schemas/UserID'
+        userSecret:
+          $ref: '#/components/schemas/UserSecret'
+        accountId:
+          $ref: '#/components/schemas/AccountID'
+      required:
+      - accountId
+      - userId
+      - userSecret
+      type: object
+      x-do-not-generate: true
+      x-konfig-is-parameter:
+      - userId
+      - userSecret
       - accountId
     konfig-generated-schema-single-parameter-schema-get--accounts-accountId-recentOrders-v2:
       additionalProperties: true

@@ -22,6 +22,8 @@ export * from './account-universal-activity';
 export * from './account-universal-activity-currency';
 export * from './account-universal-activity-option-symbol';
 export * from './account-universal-activity-symbol';
+export * from './account-value-history-item';
+export * from './account-value-history-response';
 export * from './action-strict';
 export * from './action-strict-with-options';
 export * from './authentication-login-snap-trade-user200-response';

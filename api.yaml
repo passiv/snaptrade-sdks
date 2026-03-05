@@ -725,6 +725,43 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/500UnexpectedExceptionResponse"
+  /accounts/{accountId}/balanceHistory:
+    get:
+      tags:
+        - Experimental endpoints
+      summary: List historical account total value
+      operationId: AccountInformation_getAccountBalanceHistory
+      description: |
+        An experimental endpoint that returns estimated historical total account value for the specified account. Total account value is the sum of the market value of all positions and cash in the account at a given time. This endpoint is experimental, disabled by default, and only available for certain brokerages with a maximum lookback of 1 year.
+      parameters:
+        - in: query
+          required: true
+          name: userId
+          schema:
+            $ref: "#/components/schemas/UserID"
+        - in: query
+          required: true
+          name: userSecret
+          schema:
+            $ref: "#/components/schemas/UserSecret"
+        - in: path
+          name: accountId
+          required: true
+          schema:
+            $ref: "#/components/schemas/AccountID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountValueHistoryResponse"
+        "403":
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/403FeatureNotEnabledResponse"
   /accounts/{accountId}/recentOrders:
     get:
       tags:
@@ -3346,6 +3383,32 @@ components:
           nullable: true
           allOf:
             - $ref: "#/components/schemas/ChildBrokerageOrderIDs"
+    AccountValueHistoryResponse:
+      description: The response to the account value history endpoint, containing a list of estimated account values at different points in time.
+      type: object
+      properties:
+        history:
+          type: array
+          description: List of estimated account values over time returned by the endpoint.
+          items:
+            $ref: "#/components/schemas/AccountValueHistoryItem"
+        currency:
+          type: string
+          description: The ISO-4217 currency code for the account values.
+          example: "USD"
+    AccountValueHistoryItem:
+      description: The estimeated account value at a specific point in time.
+      type: object
+      properties:
+        date:
+          description: The date of the estimated account value
+          type: string
+          format: date
+          example: "2026-01-01"
+        total_value:
+          description: Estimate of the total market value of this account (includes cash, equity, fixed income, etc) at the given date.
+          type: string
+          example: "15363.23"
     AccountOrdersV2Response:
       description: Contains a standardized list of account orders in the V2 format.
       type: object
@@ -4383,6 +4446,10 @@ components:
           example: true
         maintenance_mode:
           description: Whether the brokerage is currently in maintenance mode. A brokerage in maintenance mode will not be available for new connections.
+          type: boolean
+          example: true
+        is_degraded:
+          description: Whether the brokerage is currently degraded. A degraded brokerage may have reduced functionality or be experiencing technical issues.
           type: boolean
           example: true
         allows_trading:
