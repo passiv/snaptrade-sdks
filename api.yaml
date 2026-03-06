@@ -4595,18 +4595,18 @@ components:
           example: VANGUARD CDN AGGREGATE BOND INDEX ETF
         local_id:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: string
           example: "3291231"
           nullable: true
         is_quotable:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: boolean
           example: true
         is_tradable:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: boolean
           example: true
     OptionChain:
@@ -4766,7 +4766,7 @@ components:
           type: string
           example: CAD
     PortfolioGroupID:
-      description: Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+      description: Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
       deprecated: true
       type: string
       format: uuid
@@ -5788,7 +5788,7 @@ components:
             - $ref: "#/components/schemas/FigiInstrument"
         currencies:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: array
           items:
             $ref: "#/components/schemas/Currency"
@@ -5842,7 +5842,7 @@ components:
             - $ref: "#/components/schemas/FigiInstrument"
         currencies:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: array
           items:
             $ref: "#/components/schemas/Currency"
@@ -5935,7 +5935,7 @@ components:
           example: Common Stock
         is_supported:
           deprecated: true
-          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+          description: This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
           type: boolean
           example: true
     Time:
