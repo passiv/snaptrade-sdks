@@ -16,7 +16,6 @@ import com.snaptrade.client.ApiException;
 import com.snaptrade.client.ApiClient;
 import com.snaptrade.client.ApiException;
 import com.snaptrade.client.Configuration;
-import com.snaptrade.client.model.OptionChainInner;
 import com.snaptrade.client.model.OptionQuote;
 import com.snaptrade.client.model.OptionsPosition;
 import java.util.UUID;
@@ -62,27 +61,9 @@ public class OptionsApiTest {
     }
 
     /**
-     * Get the options chain for a symbol
-     *
-     * Returns the option chain for the specified symbol in the specified account.
-     *
-     * @throws ApiException if the Api call fails
-     */
-    @Test
-    public void getOptionsChainTest() throws ApiException {
-        String userId = null;
-        String userSecret = null;
-        UUID accountId = null;
-        UUID symbol = null;
-        List<OptionChainInner> response = api.getOptionsChain(userId, userSecret, accountId, symbol)
-                .execute();
-        // TODO: test validations
-    }
-
-    /**
      * List account option positions
      *
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
      *
      * @throws ApiException if the Api call fails
      */

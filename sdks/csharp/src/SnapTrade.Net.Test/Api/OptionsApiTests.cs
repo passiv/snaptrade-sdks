@@ -77,37 +77,6 @@ namespace SnapTrade.Net.Test.Api
         }
 
         /// <summary>
-        /// Test GetOptionsChain
-        /// </summary>
-        [Fact]
-        public void GetOptionsChainTest()
-        {
-            var userId = "userId_example";
-            var userSecret = "userSecret_example";
-            var accountId = "accountId_example"; // The ID of the account to get the options chain from.
-            var symbol = "symbol_example"; // Universal symbol ID if symbol
-            
-            try
-            {
-                // Get the options chain for a symbol
-                List<OptionChainInner> result = client.Options.GetOptionsChain(userId, userSecret, accountId, symbol);
-                Console.WriteLine(result);
-            }
-            catch (ApiException e)
-            {
-                Console.WriteLine("Exception when calling OptionsApi.GetOptionsChain: " + e.Message);
-                Console.WriteLine("Status Code: "+ e.ErrorCode);
-                Console.WriteLine(e.StackTrace);
-            }
-            catch (ClientException e)
-            {
-                Console.WriteLine(e.Response.StatusCode);
-                Console.WriteLine(e.Response.RawContent);
-                Console.WriteLine(e.InnerException);
-            }
-        }
-
-        /// <summary>
         /// Test ListOptionHoldings
         /// </summary>
         [Fact]

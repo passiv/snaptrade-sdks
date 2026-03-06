@@ -42,23 +42,6 @@ func Test_snaptrade_OptionsApiService(t *testing.T) {
         */
     })
 
-    t.Run("Test OptionsApiService GetOptionsChain", func(t *testing.T) {
-        /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
-        request := client.OptionsApi.GetOptionsChain(
-            "userId_example",
-            "userSecret_example",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-            ""38400000-8cf0-11bd-b23e-10b96e4ef00d"",
-        )
-        
-        resp, httpRes, err := request.Execute()
-
-        require.Nil(t, err)
-        require.NotNil(t, resp)
-        assert.Equal(t, 200, httpRes.StatusCode)
-        */
-    })
-
     t.Run("Test OptionsApiService ListOptionHoldings", func(t *testing.T) {
         /* TODO: ENG-1367 Fix parameter values for Go SDK generated tests
         request := client.OptionsApi.ListOptionHoldings(

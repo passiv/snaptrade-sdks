@@ -23,8 +23,6 @@ import { Model404FailedRequestResponse } from '../models';
 // @ts-ignore
 import { Model500UnexpectedExceptionResponse } from '../models';
 // @ts-ignore
-import { OptionChainInner } from '../models';
-// @ts-ignore
 import { OptionQuote } from '../models';
 // @ts-ignore
 import { OptionsPosition } from '../models';
@@ -103,76 +101,7 @@ export const OptionsApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Returns the option chain for the specified symbol in the specified account.
-         * @summary Get the options chain for a symbol
-         * @param {string} userId 
-         * @param {string} userSecret 
-         * @param {string} accountId The ID of the account to get the options chain from.
-         * @param {string} symbol Universal symbol ID if symbol
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOptionsChain: async (userId: string, userSecret: string, accountId: string, symbol: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'userId' is not null or undefined
-            assertParamExists('getOptionsChain', 'userId', userId)
-            // verify required parameter 'userSecret' is not null or undefined
-            assertParamExists('getOptionsChain', 'userSecret', userSecret)
-            // verify required parameter 'accountId' is not null or undefined
-            assertParamExists('getOptionsChain', 'accountId', accountId)
-            // verify required parameter 'symbol' is not null or undefined
-            assertParamExists('getOptionsChain', 'symbol', symbol)
-            const localVarPath = `/accounts/{accountId}/optionsChain`
-                .replace(`{${"accountId"}}`, encodeURIComponent(String(accountId !== undefined ? accountId : `-accountId-`)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions: AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = configuration && !isBrowser() ? { "User-Agent": configuration.userAgent } : {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication PartnerClientId required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "clientId", keyParamName: "clientId", configuration})
-            // authentication PartnerSignature required
-            await setApiKeyToObject({ object: localVarHeaderParameter, key: "Signature", keyParamName: "signature", configuration })
-            // authentication PartnerTimestamp required
-            await setApiKeyToObject({object: localVarQueryParameter, key: "timestamp", keyParamName: "timestamp", configuration})
-            if (userId !== undefined) {
-                localVarQueryParameter['userId'] = userId;
-            }
-
-            if (userSecret !== undefined) {
-                localVarQueryParameter['userSecret'] = userSecret;
-            }
-
-            if (symbol !== undefined) {
-                localVarQueryParameter['symbol'] = symbol;
-            }
-
-
-    
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            requestBeforeHook({
-                queryParameters: localVarQueryParameter,
-                requestConfig: localVarRequestOptions,
-                path: localVarPath,
-                configuration,
-                pathTemplate: '/accounts/{accountId}/optionsChain',
-                httpMethod: 'GET'
-            });
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
          * @param {string} userId 
          * @param {string} userSecret 
@@ -255,18 +184,7 @@ export const OptionsApiFp = function(configuration?: Configuration) {
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
-         * Returns the option chain for the specified symbol in the specified account.
-         * @summary Get the options chain for a symbol
-         * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getOptionsChain(requestParameters: OptionsApiGetOptionsChainRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<OptionChainInner>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOptionsChain(requestParameters.userId, requestParameters.userSecret, requestParameters.accountId, requestParameters.symbol, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -297,17 +215,7 @@ export const OptionsApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.getOptionQuote(requestParameters, options).then((request) => request(axios, basePath));
         },
         /**
-         * Returns the option chain for the specified symbol in the specified account.
-         * @summary Get the options chain for a symbol
-         * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getOptionsChain(requestParameters: OptionsApiGetOptionsChainRequest, options?: AxiosRequestConfig): AxiosPromise<Array<OptionChainInner>> {
-            return localVarFp.getOptionsChain(requestParameters, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+         * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
          * @summary List account option positions
          * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
@@ -344,43 +252,6 @@ export type OptionsApiGetOptionQuoteRequest = {
     * The OCC-formatted option symbol.
     * @type {string}
     * @memberof OptionsApiGetOptionQuote
-    */
-    readonly symbol: string
-    
-}
-
-/**
- * Request parameters for getOptionsChain operation in OptionsApi.
- * @export
- * @interface OptionsApiGetOptionsChainRequest
- */
-export type OptionsApiGetOptionsChainRequest = {
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof OptionsApiGetOptionsChain
-    */
-    readonly userId: string
-    
-    /**
-    * 
-    * @type {string}
-    * @memberof OptionsApiGetOptionsChain
-    */
-    readonly userSecret: string
-    
-    /**
-    * The ID of the account to get the options chain from.
-    * @type {string}
-    * @memberof OptionsApiGetOptionsChain
-    */
-    readonly accountId: string
-    
-    /**
-    * Universal symbol ID if symbol
-    * @type {string}
-    * @memberof OptionsApiGetOptionsChain
     */
     readonly symbol: string
     
@@ -436,19 +307,7 @@ export class OptionsApiGenerated extends BaseAPI {
     }
 
     /**
-     * Returns the option chain for the specified symbol in the specified account.
-     * @summary Get the options chain for a symbol
-     * @param {OptionsApiGetOptionsChainRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof OptionsApiGenerated
-     */
-    public getOptionsChain(requestParameters: OptionsApiGetOptionsChainRequest, options?: AxiosRequestConfig) {
-        return OptionsApiFp(this.configuration).getOptionsChain(requestParameters, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+     * Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don\'t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for \"Cache Expiry Time\" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
      * @summary List account option positions
      * @param {OptionsApiListOptionHoldingsRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
