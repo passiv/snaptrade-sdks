@@ -36,7 +36,7 @@ The best thing to do in this case is to rotate the user secret using :api[Authe
 
 ## Connections
 
-### What is the format of “*disabled_date*”?
+### What is the format of “_disabled_date_”?
 
 All of our timestamp fields return datetime in ISO-8601 format.
 
@@ -68,7 +68,7 @@ By default, all brokers which can be enabled for you are enabled. For now, broke
 
 ### What kind of accounts does SnapTrade support?
 
-We support all kinds of accounts and it is brokerage dependent. In general, if the brokerage returns it to us, we will return it over the API. You can refer to the [SnapTrade Broker Support Matrix](https://snaptrade.notion.site/brokerages) and the field will be returned over the `raw_type` on the account object.
+We support all kinds of accounts and it is brokerage dependent. In general, if the brokerage returns it to us, we will return it over the API. You can refer to the [SnapTrade Broker Support Matrix](https://support.snaptrade.com/brokerages) and the field will be returned over the `raw_type` on the account object.
 
 ### How do I determine if an activity indicates the position was bought or sold?
 
@@ -81,7 +81,7 @@ Determining a stock's first purchase date varies by brokerage. Two key requireme
 1. The brokerage must provide activities or transaction data that includes historical buy/sell records.
 2. The brokerage must include complete transaction history in the account data.
 
-Some brokerages have data retention limits—for example, Schwab only provides up to 4 years of historical data. You can check this here [SnapTrade Broker Support Matrix](https://snaptrade.notion.site/brokerages)
+Some brokerages have data retention limits—for example, Schwab only provides up to 4 years of historical data. You can check this here [SnapTrade Broker Support Matrix](https://support.snaptrade.com/brokerages)
 
 ### When does account data get synced daily?
 

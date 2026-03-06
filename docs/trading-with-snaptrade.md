@@ -36,10 +36,11 @@ To enable trading for an existing read-only connection, you'll need to ask the u
 Extended-hours trading is brokerage-specific and only available when the underlying account and instrument support it.
 
 **To place an extended-hours order:**
+
 - Set `trading_session="EXTENDED"` in the order payload to request execution in pre/post-market sessions.
 - Use a `LIMIT` order type with an appropriate time-in-force.
 - Most brokerages restrict extended-hours orders to `DAY` with post-market expiry, though some allow `GTC`.
 
 ---
 
-**Important:** Not every brokerage supports complex option strategies, or extended-hours sessions. Review the [SnapTrade Brokerage Support Matrix](https://www.notion.so/snaptrade/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687) for broker-specific coverage details.
+**Important:** Not every brokerage supports complex option strategies, or extended-hours sessions. Review the [SnapTrade Brokerage Support Matrix](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for broker-specific coverage details.
