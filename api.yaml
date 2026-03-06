@@ -362,7 +362,7 @@ paths:
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -533,7 +533,7 @@ paths:
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -574,7 +574,7 @@ paths:
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       operationId: AccountInformation_getUserAccountPositions
@@ -616,7 +616,7 @@ paths:
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
         If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
       parameters:
@@ -1202,7 +1202,7 @@ paths:
 
         Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
           - If you do, this endpoint returns real-time data.
-          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+          - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       operationId: Options_listOptionHoldings
       parameters:
         - in: query
@@ -1229,51 +1229,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/OptionsPosition"
-        "500":
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/500UnexpectedExceptionResponse"
-  "/accounts/{accountId}/optionsChain":
-    get:
-      tags:
-        - Options
-      summary: Get the options chain for a symbol
-      description: Returns the option chain for the specified symbol in the specified account.
-      operationId: Options_getOptionsChain
-      parameters:
-        - in: query
-          required: true
-          name: userId
-          schema:
-            $ref: "#/components/schemas/UserID"
-        - in: query
-          required: true
-          name: userSecret
-          schema:
-            $ref: "#/components/schemas/UserSecret"
-        - in: path
-          name: accountId
-          required: true
-          description: The ID of the account to get the options chain from.
-          schema:
-            type: string
-            format: uuid
-        - in: query
-          name: symbol
-          required: true
-          description: Universal symbol ID if symbol
-          schema:
-            type: string
-            format: uuid
-      responses:
-        "200":
-          description: List of all Options available for the brokerage symbol
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/OptionChain"
         "500":
           description: Unexpected error
           content:
@@ -2416,7 +2371,7 @@ paths:
       summary: Get option order impact
       description: |
         Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-        Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+        Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
       operationId: Trading_getOptionImpact
       parameters:
         - in: query
@@ -2466,7 +2421,7 @@ paths:
         - Trading
       summary: Place option order
       description: |
-        Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+        Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
       operationId: Trading_placeMlegOrder
       parameters:
         - in: query
@@ -3002,7 +2957,7 @@ components:
     TransactionsStatus:
       description: |
         Status of account transaction sync. SnapTrade syncs transactions from the brokerage under the following conditions:
-        1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage.
+        1. Initial connection - SnapTrade syncs all transactions from the brokerage account as far back as the brokerage allows. Check [our integrations doc](https://support.snaptrade.com/brokerages-table?v=6fab8012ade6441fa0c6d9af9c55ce3a) for details on how far back we sync for each brokerage.
         2. Daily sync - Once a day SnapTrade syncs new transactions from the brokerage.
         3. Manual sync - You can retrigger an incremental sync of transactions with the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
       properties:
@@ -4255,7 +4210,7 @@ components:
       type: object
       properties:
         broker:
-          description: Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+          description: Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
           type: string
           example: ALPACA
         immediateRedirect:
@@ -5412,7 +5367,7 @@ components:
       nullable: true
       example: 31.33
     NotionalValue:
-      description: Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=e7bbcbf9f272441593f93decde660687) for more information.
+      description: Total notional amount for the order. Must be `null` if `units` is provided. Can only work with `Market` for `order_type` and `Day` for `time_in_force`. This is only available for certain brokerages. Please check the [integrations doc](https://support.snaptrade.com/brokerages-table?v=e7bbcbf9f272441593f93decde660687) for more information.
       oneOf:
         - type: string
         - type: number
@@ -5653,7 +5608,7 @@ components:
           type: string
           example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
         trade_date:
-          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://support.snaptrade.com/brokerages-table?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
           type: string
           format: date-time
           example: 2024-03-22T16:27:55Z
@@ -5751,7 +5706,7 @@ components:
           type: string
           example: WALT DISNEY UNIT DIST ON 21 SHS REC 12/31/21 PAY 01/06/22
         trade_date:
-          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
+          description: The recorded time for the transaction. The granularity of this timestamp depends on the brokerage. Some brokerages provide the exact time of the transaction, while others provide only the date. Please check the [integrations page](https://support.snaptrade.com/brokerages-table?v=6fab8012ade6441fa0c6d9af9c55ce3a) for the specific brokerage to see the granularity of the timestamps. Note that even though the field is named `trade_date`, it can represent any type of transaction, not just trades.
           type: string
           format: date-time
           example: 2024-03-22T16:27:55Z

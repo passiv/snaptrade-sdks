@@ -193,11 +193,11 @@ public class SnapTradeLoginUserRequestBody {
   }
 
    /**
-   * Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs.
+   * Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
    * @return broker
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.")
+  @ApiModelProperty(example = "ALPACA", value = "Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.")
 
   public String getBroker() {
     return broker;

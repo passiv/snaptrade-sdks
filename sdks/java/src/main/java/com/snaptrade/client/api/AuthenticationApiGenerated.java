@@ -486,7 +486,7 @@ public class AuthenticationApiGenerated {
 
         /**
          * Set broker
-         * @param broker Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;3cfea70ef4254afc89704e47275a7a9a&amp;pvs&#x3D;4) for a list of supported brokerages and their slugs. (optional)
+         * @param broker Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs. (optional)
          * @return AuthenticationApi.LoginSnapTradeUserRequestBuilder
          */
         public AuthenticationApi.LoginSnapTradeUserRequestBuilder broker(String broker) {

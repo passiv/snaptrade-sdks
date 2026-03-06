@@ -175,16 +175,5 @@ namespace SnapTrade.Net.Test.Api
             Console.WriteLine(activities);
         }
 
-        [Fact(Skip = "Getting 500 error code")]
-        public void GetOptionsChain()
-        {
-            var accounts = accountInformationApi.ListUserAccounts(this.testUserId, this.testUserSecret);
-            Console.WriteLine(accounts.ToString());
-            var symbols = referenceDataApi.GetSymbols(new SymbolQuery("apple"));
-            Console.WriteLine(symbols.ToString());
-            var optionsChain = optionsApi.GetOptionsChain(this.testUserId, this.testUserSecret, accounts[0].Id, symbols[0].Id);
-            Console.WriteLine(optionsChain);
-        }
-
     }
 }

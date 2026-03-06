@@ -381,7 +381,7 @@ module SnapTrade
     # Get option order impact
     #
     # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-    # Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+    # Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -410,7 +410,7 @@ module SnapTrade
     # Get option order impact
     #
     # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-    # Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+    # Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -436,7 +436,7 @@ module SnapTrade
     end
 
     # Get option order impact
-    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -449,7 +449,7 @@ module SnapTrade
     end
 
     # Get option order impact
-    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support. 
+    # Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support. 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1289,7 +1289,7 @@ module SnapTrade
 
     # Place option order
     #
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -1317,7 +1317,7 @@ module SnapTrade
 
     # Place option order
     #
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
     #
     # @param order_type [MlegOrderTypeStrict] The type of order to place.
     # @param time_in_force [TimeInForceStrict] The Time in Force type for the order. This field indicates how long the order will remain active before it is executed or expires. Here are the supported values: - `Day` - Day. The order is valid only for the trading day on which it is placed. - `GTC` - Good Til Canceled. The order is valid until it is executed or canceled. - `FOK` - Fill Or Kill. The order must be executed in its entirety immediately or be canceled completely. - `IOC` - Immediate Or Cancel. The order must be executed immediately. Any portion of the order that cannot be filled immediately will be canceled. 
@@ -1343,7 +1343,7 @@ module SnapTrade
     end
 
     # Place option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 
@@ -1356,7 +1356,7 @@ module SnapTrade
     end
 
     # Place option order
-    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support 
+    # Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support 
     # @param user_id [String] 
     # @param user_secret [String] 
     # @param account_id [String] 

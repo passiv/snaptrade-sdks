@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.139)
+[![Go Reference](https://pkg.go.dev/badge/github.com/passiv/snaptrade-sdks/sdks/go)](https://pkg.go.dev/github.com/passiv/snaptrade-sdks/sdks/go@v1.0.140)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -98,7 +98,6 @@ Class | Method | HTTP request | Description
 *ExperimentalEndpointsApi* | [**GetUserAccountOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountordersv2) | **Get** /accounts/{accountId}/orders/v2 | List account orders v2
 *ExperimentalEndpointsApi* | [**GetUserAccountRecentOrdersV2**](docs/ExperimentalEndpointsApi.md#getuseraccountrecentordersv2) | **Get** /accounts/{accountId}/recentOrders/v2 | List account recent orders (V2, last 24 hours only)
 *OptionsApi* | [**GetOptionQuote**](docs/OptionsApi.md#getoptionquote) | **Get** /marketData/options/quotes | Get option quote
-*OptionsApi* | [**GetOptionsChain**](docs/OptionsApi.md#getoptionschain) | **Get** /accounts/{accountId}/optionsChain | Get the options chain for a symbol
 *OptionsApi* | [**ListOptionHoldings**](docs/OptionsApi.md#listoptionholdings) | **Get** /accounts/{accountId}/options | List account option positions
 *ReferenceDataApi* | [**GetCurrencyExchangeRatePair**](docs/ReferenceDataApi.md#getcurrencyexchangeratepair) | **Get** /currencies/rates/{currencyPair} | Get exchange rate of a currency pair
 *ReferenceDataApi* | [**GetPartnerInfo**](docs/ReferenceDataApi.md#getpartnerinfo) | **Get** /snapTrade/partners | Get Client Info

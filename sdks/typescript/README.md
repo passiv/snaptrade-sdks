@@ -6,7 +6,7 @@
 
 Connect brokerage accounts to your app for live positions and trading
 
-[![npm](https://img.shields.io/badge/npm-v9.0.170-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.170)
+[![npm](https://img.shields.io/badge/npm-v9.0.171-blue)](https://www.npmjs.com/package/snaptrade-typescript-sdk/v/9.0.171)
 [![More Info](https://img.shields.io/badge/More%20Info-Click%20Here-orange)](https://snaptrade.com/)
 
 </div>
@@ -49,7 +49,6 @@ Connect brokerage accounts to your app for live positions and trading
   * [`snaptrade.experimentalEndpoints.getUserAccountOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountordersv2)
   * [`snaptrade.experimentalEndpoints.getUserAccountRecentOrdersV2`](#snaptradeexperimentalendpointsgetuseraccountrecentordersv2)
   * [`snaptrade.options.getOptionQuote`](#snaptradeoptionsgetoptionquote)
-  * [`snaptrade.options.getOptionsChain`](#snaptradeoptionsgetoptionschain)
   * [`snaptrade.options.listOptionHoldings`](#snaptradeoptionslistoptionholdings)
   * [`snaptrade.referenceData.getCurrencyExchangeRatePair`](#snaptradereferencedatagetcurrencyexchangeratepair)
   * [`snaptrade.referenceData.getPartnerInfo`](#snaptradereferencedatagetpartnerinfo)
@@ -312,7 +311,7 @@ Returns a list of balances for the account. Each element of the list has a disti
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -446,7 +445,7 @@ Returns a list of recent orders in the specified account.
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -499,7 +498,7 @@ Returns a list of stock/ETF/crypto/mutual fund positions in the specified accoun
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -623,7 +622,7 @@ Returns a list of balances, positions, and recent orders for the specified accou
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 If the connection has become disabled, it can no longer access the latest data from the brokerage, but will continue to return the last available cached state. Please see [this guide](/docs/fix-broken-connections) on how to fix a disabled connection.
 
@@ -844,7 +843,7 @@ const loginSnapTradeUserResponse =
 
 ##### broker: `string`<a id="broker-string"></a>
 
-Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
 
 ##### immediateRedirect: `boolean`<a id="immediateredirect-boolean"></a>
 
@@ -1477,55 +1476,13 @@ The OCC-formatted option symbol.
 ---
 
 
-### `snaptrade.options.getOptionsChain`<a id="snaptradeoptionsgetoptionschain"></a>
-
-Returns the option chain for the specified symbol in the specified account.
-
-#### 🛠️ Usage<a id="🛠️-usage"></a>
-
-```typescript
-const getOptionsChainResponse = await snaptrade.options.getOptionsChain({
-  userId: "snaptrade-user-123",
-  userSecret: "adf2aa34-8219-40f7-a6b3-60156985cc61",
-  accountId: "accountId_example",
-  symbol: "symbol_example",
-});
-```
-
-#### ⚙️ Parameters<a id="⚙️-parameters"></a>
-
-##### userId: `string`<a id="userid-string"></a>
-
-##### userSecret: `string`<a id="usersecret-string"></a>
-
-##### accountId: `string`<a id="accountid-string"></a>
-
-The ID of the account to get the options chain from.
-
-##### symbol: `string`<a id="symbol-string"></a>
-
-Universal symbol ID if symbol
-
-#### 🔄 Return<a id="🔄-return"></a>
-
-[OptionChainInner](./models/option-chain-inner.ts)
-
-#### 🌐 Endpoint<a id="🌐-endpoint"></a>
-
-`/accounts/{accountId}/optionsChain` `GET`
-
-[🔙 **Back to Table of Contents**](#table-of-contents)
-
----
-
-
 ### `snaptrade.options.listOptionHoldings`<a id="snaptradeoptionslistoptionholdings"></a>
 
 Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).
 
 Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:
   - If you do, this endpoint returns real-time data.
-  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
+  - If you don't, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v=d16c4c97b8d5438bbb2d8581ac53b11e) and look for "Cache Expiry Time" to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2035,7 +1992,7 @@ const getCryptocurrencyPairQuoteResponse =
 ### `snaptrade.trading.getOptionImpact`<a id="snaptradetradinggetoptionimpact"></a>
 
 Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it.
-Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.
+Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>
@@ -2490,7 +2447,7 @@ For Equity orders, this represents the number of shares for the order. This can 
 
 ### `snaptrade.trading.placeMlegOrder`<a id="snaptradetradingplacemlegorder"></a>
 
-Places a multi-leg option order. Only supported on certain option trading brokerages. https://snaptrade.notion.site/brokerages has information on brokerage trading support
+Places a multi-leg option order. Only supported on certain option trading brokerages. https://support.snaptrade.com/brokerages has information on brokerage trading support
 
 
 #### 🛠️ Usage<a id="🛠️-usage"></a>

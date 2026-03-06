@@ -17,7 +17,7 @@ import (
 
 // SnapTradeLoginUserRequestBody Data to login a user via SnapTrade Partner
 type SnapTradeLoginUserRequestBody struct {
-	// Slug of the brokerage to connect the user to. See [the integrations page](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v=3cfea70ef4254afc89704e47275a7a9a&pvs=4) for a list of supported brokerages and their slugs.
+	// Slug of the brokerage to connect the user to. See [the integrations page](https://support.snaptrade.com/brokerages) for a list of supported brokerages and their slugs.
 	Broker *string `json:"broker,omitempty"`
 	// When set to `true`, user will be redirected back to the partner's site instead of the connection portal. This parameter is ignored if the connection portal is loaded inside an iframe. See the [guide on ways to integrate the connection portal](/docs/implement-connection-portal) for more information.
 	ImmediateRedirect *bool `json:"immediateRedirect,omitempty"`

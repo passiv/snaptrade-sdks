@@ -55,39 +55,10 @@ namespace SnapTrade.Net.Api
         /// <returns>ApiResponse of OptionQuote</returns>
         ApiResponse<OptionQuote> GetOptionQuoteWithHttpInfo(string userId, string userSecret, string symbol, int operationIndex = 0);
         /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;OptionChainInner&gt;</returns>
-        List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
-
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0);
-        /// <summary>
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -101,7 +72,7 @@ namespace SnapTrade.Net.Api
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -149,41 +120,10 @@ namespace SnapTrade.Net.Api
         /// <returns>Task of ApiResponse (OptionQuote)</returns>
         System.Threading.Tasks.Task<ApiResponse<OptionQuote>> GetOptionQuoteWithHttpInfoAsync(string userId, string userSecret, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
         /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <summary>
-        /// Get the options chain for a symbol
-        /// </summary>
-        /// <remarks>
-        /// Returns the option chain for the specified symbol in the specified account.
-        /// </remarks>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-        /// <summary>
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -198,7 +138,7 @@ namespace SnapTrade.Net.Api
         /// List account option positions
         /// </summary>
         /// <remarks>
-        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </remarks>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -539,235 +479,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>List&lt;OptionChainInner&gt;</returns>
-        public List<OptionChainInner> GetOptionsChain(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
-        {
-            SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = GetOptionsChainWithHttpInfo(userId, userSecret, accountId, symbol);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <returns>ApiResponse of List&lt;OptionChainInner&gt;</returns>
-        public SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> GetOptionsChainWithHttpInfo(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0)
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'symbol' is set
-            if (symbol == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
-            }
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Get<List<OptionChainInner>>("/accounts/{accountId}/optionsChain", localVarRequestOptions, this.Configuration);
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionsChain", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of List&lt;OptionChainInner&gt;</returns>
-        public async System.Threading.Tasks.Task<List<OptionChainInner>> GetOptionsChainAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>> localVarResponse = await GetOptionsChainWithHttpInfoAsync(userId, userSecret, accountId, symbol, operationIndex, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Get the options chain for a symbol Returns the option chain for the specified symbol in the specified account.
-        /// </summary>
-        /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="userSecret"></param>
-        /// <param name="accountId">The ID of the account to get the options chain from.</param>
-        /// <param name="symbol">Universal symbol ID if symbol</param>
-        /// <param name="operationIndex">Index associated with the operation.</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (List&lt;OptionChainInner&gt;)</returns>
-        public virtual async System.Threading.Tasks.Task<SnapTrade.Net.Client.ApiResponse<List<OptionChainInner>>> GetOptionsChainWithHttpInfoAsync(string userId, string userSecret, string accountId, string symbol, int operationIndex = 0, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
-        {
-            // verify the required parameter 'userId' is set
-            if (userId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userId' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'userSecret' is set
-            if (userSecret == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'userSecret' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'accountId' is set
-            if (accountId == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'accountId' when calling OptionsApi->GetOptionsChain");
-            }
-
-            // verify the required parameter 'symbol' is set
-            if (symbol == null)
-            {
-                throw new SnapTrade.Net.Client.ApiException(400, "Missing required parameter 'symbol' when calling OptionsApi->GetOptionsChain");
-            }
-
-
-            SnapTrade.Net.Client.RequestOptions localVarRequestOptions = new SnapTrade.Net.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = SnapTrade.Net.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-            }
-
-            var localVarAccept = SnapTrade.Net.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null)
-            {
-                localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-            }
-
-            localVarRequestOptions.PathParameters.Add("accountId", SnapTrade.Net.Client.ClientUtils.ParameterToString(accountId)); // path parameter
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userId", userId, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "userSecret", userSecret, ""));
-            localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "symbol", symbol, ""));
-
-            localVarRequestOptions.Operation = "OptionsApi.GetOptionsChain";
-            localVarRequestOptions.OperationIndex = operationIndex;
-
-            // authentication (PartnerClientId) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("clientId")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "clientId", this.Configuration.GetApiKeyWithPrefix("clientId")));
-            }
-            // authentication (PartnerSignature) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("Signature")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("Signature", this.Configuration.GetApiKeyWithPrefix("Signature"));
-            }
-            // authentication (PartnerTimestamp) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("timestamp")))
-            {
-                localVarRequestOptions.QueryParameters.Add(SnapTrade.Net.Client.ClientUtils.ParameterToMultiMap("", "timestamp", this.Configuration.GetApiKeyWithPrefix("timestamp")));
-            }
-
-            // make the HTTP request
-            var localVarResponse = await this.AsynchronousClient.GetAsync<List<OptionChainInner>>("/accounts/{accountId}/optionsChain", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GetOptionsChain", localVarResponse);
-                if (_exception != null)
-                {
-                    throw _exception;
-                }
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -782,7 +494,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -870,7 +582,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
@@ -886,7 +598,7 @@ namespace SnapTrade.Net.Api
         }
 
         /// <summary>
-        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://snaptrade.notion.site/66793431ad0b416489eaabaf248d0afb?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
+        /// List account option positions Returns a list of option positions in the specified account. For stock/ETF/crypto/mutual fund positions, please use the [positions endpoint](/reference/Account%20Information/AccountInformation_getUserAccountPositions).  Check your API key on the [Customer Dashboard billing page](https://dashboard.snaptrade.com/settings/billing) to see if you have real-time data access:   - If you do, this endpoint returns real-time data.   - If you don&#39;t, the data is cached and refreshed once a day. How long the data is cached for varies by brokerage. Check the [brokerage integrations doc](https://support.snaptrade.com/brokerages-table?v&#x3D;d16c4c97b8d5438bbb2d8581ac53b11e) and look for \&quot;Cache Expiry Time\&quot; to see the exact value for a specific brokerage. If you need real-time, use the [manual refresh](/reference/Connections/Connections_refreshBrokerageAuthorization) endpoint. 
         /// </summary>
         /// <exception cref="SnapTrade.Net.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>

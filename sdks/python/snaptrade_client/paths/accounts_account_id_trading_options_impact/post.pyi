@@ -592,7 +592,7 @@ class GetOptionImpact(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.  """
+        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.  """
         args = self._get_option_impact_mapped_args(
             body=body,
             query_params=query_params,
@@ -675,7 +675,7 @@ class ApiForpost(BaseApi):
         ApiResponseFor200,
         api_client.ApiResponseWithoutDeserialization,
     ]:
-        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://snaptrade.notion.site/brokerages for more information on brokerage trading support.  """
+        """ Simulates an option order with up to 4 legs and returns the estimated cost and transaction fees without placing it. Only supported for certain brokerages. Please refer to https://support.snaptrade.com/brokerages for more information on brokerage trading support.  """
         args = self._get_option_impact_mapped_args(
             body=body,
             query_params=query_params,
