@@ -22,7 +22,7 @@ module SnapTrade
     # A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
     attr_accessor :description
 
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     attr_accessor :is_supported
 
     # Attribute mapping from ruby-style variable name to JSON key.

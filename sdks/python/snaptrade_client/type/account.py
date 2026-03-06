@@ -67,7 +67,7 @@ class OptionalAccount(TypedDict, total=False):
     meta: AccountMeta
 
     # WARNING: This property is deprecated
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
     portfolio_group: str
 
     # WARNING: This property is deprecated

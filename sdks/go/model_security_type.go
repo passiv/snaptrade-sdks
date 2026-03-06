@@ -23,7 +23,7 @@ type SecurityType struct {
 	Code *string `json:"code,omitempty"`
 	// A human-readable description of the security type. For example, \"Common Stock\" or \"ETF\".
 	Description *string `json:"description,omitempty"`
-	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+	// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
 	// Deprecated
 	IsSupported *bool `json:"is_supported,omitempty"`
 	AdditionalProperties map[string]interface{}

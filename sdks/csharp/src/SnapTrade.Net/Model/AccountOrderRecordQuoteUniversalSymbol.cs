@@ -49,7 +49,7 @@ namespace SnapTrade.Net.Model
         /// <param name="type">type (required).</param>
         /// <param name="figiCode">This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property..</param>
         /// <param name="figiInstrument">figiInstrument.</param>
-        /// <param name="currencies">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. (required).</param>
+        /// <param name="currencies">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. (required).</param>
         public AccountOrderRecordQuoteUniversalSymbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), SymbolCurrency currency = default(SymbolCurrency), SymbolExchange exchange = default(SymbolExchange), SecurityType type = default(SecurityType), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable), List<Currency> currencies = default(List<Currency>))
         {
             // to ensure "id" is required (not null)
@@ -154,9 +154,9 @@ namespace SnapTrade.Net.Model
         public FigiInstrumentNullable FigiInstrument { get; set; }
 
         /// <summary>
-        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
         /// </summary>
-        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.</value>
         [DataMember(Name = "currencies", IsRequired = true, EmitDefaultValue = true)]
         [Obsolete]
         public List<Currency> Currencies { get; set; }

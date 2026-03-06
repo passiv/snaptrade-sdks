@@ -53,7 +53,7 @@ module SnapTrade
     # Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there's no standard format for this data. This field is deprecated and subject to removal in a future version.
     attr_accessor :meta
 
-    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+    # Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
     attr_accessor :portfolio_group
 
     # This field is deprecated.

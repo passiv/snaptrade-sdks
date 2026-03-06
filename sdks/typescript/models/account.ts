@@ -107,7 +107,7 @@ export interface Account {
      */
     'meta'?: { [key: string]: any; };
     /**
-     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+     * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
      * @type {string}
      * @memberof Account
      * @deprecated

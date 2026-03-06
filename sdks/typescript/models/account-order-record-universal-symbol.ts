@@ -78,7 +78,7 @@ export interface AccountOrderRecordUniversalSymbol {
      */
     'figi_instrument'?: SymbolFigiInstrument | null;
     /**
-     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+     * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
      * @type {Array<Currency>}
      * @memberof AccountOrderRecordUniversalSymbol
      * @deprecated
