@@ -97,7 +97,7 @@ namespace SnapTrade.Net.Model
         /// <param name="status">The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage..</param>
         /// <param name="rawType">The account type as provided by the brokerage.</param>
         /// <param name="meta">Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version..</param>
-        /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it..</param>
+        /// <param name="portfolioGroup">Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it..</param>
         /// <param name="cashRestrictions">This field is deprecated..</param>
         /// <param name="isPaper">Indicates whether the account is a paper (simulated) trading account. (required).</param>
         public Account(string id = default(string), string brokerageAuthorization = default(string), string name = default(string), string number = default(string), string institutionAccountId = default(string), string institutionName = default(string), DateTime createdDate = default(DateTime), DateTime? fundingDate = default(DateTime?), DateTime? openingDate = default(DateTime?), AccountSyncStatus syncStatus = default(AccountSyncStatus), AccountBalance balance = default(AccountBalance), StatusEnum? status = default(StatusEnum?), string rawType = default(string), Dictionary<string, Object> meta = default(Dictionary<string, Object>), string portfolioGroup = default(string), List<string> cashRestrictions = default(List<string>), bool isPaper = default(bool)) : base()
@@ -248,9 +248,9 @@ namespace SnapTrade.Net.Model
         public Dictionary<string, Object> Meta { get; set; }
 
         /// <summary>
-        /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+        /// Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
         /// </summary>
-        /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.</value>
+        /// <value>Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.</value>
         [DataMember(Name = "portfolio_group", EmitDefaultValue = false)]
         [Obsolete]
         public string PortfolioGroup { get; set; }

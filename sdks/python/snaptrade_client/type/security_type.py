@@ -30,7 +30,7 @@ class OptionalSecurityType(TypedDict, total=False):
     description: str
 
     # WARNING: This property is deprecated
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     is_supported: bool
 
 class SecurityType(RequiredSecurityType, OptionalSecurityType):

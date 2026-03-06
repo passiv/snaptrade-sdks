@@ -607,13 +607,13 @@ public class Account {
   }
 
    /**
-   * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.
+   * Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.
    * @return portfolioGroup
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it.")
+  @ApiModelProperty(example = "2bcd7cc3-e922-4976-bce1-9858296801c3", value = "Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it.")
 
   public UUID getPortfolioGroup() {
     return portfolioGroup;

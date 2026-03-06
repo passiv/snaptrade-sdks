@@ -381,13 +381,13 @@ public class UnderlyingSymbol {
   }
 
    /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
    * @return currencies
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+  @ApiModelProperty(value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.")
 
   public List<Currency> getCurrencies() {
     return currencies;

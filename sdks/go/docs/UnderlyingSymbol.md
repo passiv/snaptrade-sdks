@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to [**UnderlyingSymbolType**](UnderlyingSymbolType.md) |  | [optional] 
 **FigiCode** | Pointer to **NullableString** | This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property. | [optional] 
 **FigiInstrument** | Pointer to [**NullableSymbolFigiInstrument**](SymbolFigiInstrument.md) |  | [optional] 
-**Currencies** | Pointer to [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this. | [optional] 
+**Currencies** | Pointer to [**[]Currency**](Currency.md) | This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this. | [optional] 
 
 ## Methods
 

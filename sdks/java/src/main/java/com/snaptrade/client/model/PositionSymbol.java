@@ -181,13 +181,13 @@ public class PositionSymbol {
   }
 
    /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
    * @return localId
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "3291231", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+  @ApiModelProperty(example = "3291231", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.")
 
   public String getLocalId() {
     return localId;
@@ -212,13 +212,13 @@ public class PositionSymbol {
   }
 
    /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
    * @return isQuotable
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+  @ApiModelProperty(example = "true", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.")
 
   public Boolean getIsQuotable() {
     return isQuotable;
@@ -243,13 +243,13 @@ public class PositionSymbol {
   }
 
    /**
-   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+   * This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
    * @return isTradable
    * @deprecated
   **/
   @Deprecated
   @javax.annotation.Nullable
-  @ApiModelProperty(example = "true", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.")
+  @ApiModelProperty(example = "true", value = "This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.")
 
   public Boolean getIsTradable() {
     return isTradable;

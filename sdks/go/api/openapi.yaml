@@ -3547,7 +3547,7 @@ components:
         portfolio_group:
           deprecated: true
           description: Portfolio Group ID. Portfolio Groups have been deprecated.
-            Please contact support if you have a usecase for it.
+            Please contact support if you have a use case for it.
           example: 2bcd7cc3-e922-4976-bce1-9858296801c3
           format: uuid
           type: string
@@ -6935,7 +6935,7 @@ components:
         local_id:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           example: "3291231"
           nullable: true
           type: string
@@ -6944,7 +6944,7 @@ components:
         is_quotable:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           example: true
           type: boolean
           x-konfig-original-example: true
@@ -6952,7 +6952,7 @@ components:
         is_tradable:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           example: true
           type: boolean
           x-konfig-original-example: true
@@ -7189,7 +7189,7 @@ components:
     PortfolioGroupID:
       deprecated: true
       description: Portfolio Group ID. Portfolio Groups have been deprecated. Please
-        contact support if you have a usecase for it.
+        contact support if you have a use case for it.
       example: 2bcd7cc3-e922-4976-bce1-9858296801c3
       format: uuid
       type: string
@@ -8991,7 +8991,7 @@ components:
         currencies:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           items:
             $ref: '#/components/schemas/Currency'
           type: array
@@ -9080,7 +9080,7 @@ components:
         currencies:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           items:
             $ref: '#/components/schemas/Currency'
           type: array
@@ -9240,7 +9240,7 @@ components:
         is_supported:
           deprecated: true
           description: This field is deprecated and should not be used. Please reach
-            out to SnapTrade support if you have a valid usecase for this.
+            out to SnapTrade support if you have a valid use case for this.
           example: true
           type: boolean
           x-konfig-original-example: true

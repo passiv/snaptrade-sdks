@@ -44,7 +44,7 @@ namespace SnapTrade.Net.Model
         /// <param name="type">type.</param>
         /// <param name="figiCode">This identifier is unique per security per trading venue. See section 1.4.1 of the [FIGI Standard](https://www.openfigi.com/assets/local/figi-allocation-rules.pdf) for more information. This value should be the same as the &#x60;figi_code&#x60; in the &#x60;figi_instrument&#x60; child property..</param>
         /// <param name="figiInstrument">figiInstrument.</param>
-        /// <param name="currencies">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this..</param>
+        /// <param name="currencies">This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this..</param>
         public UnderlyingSymbol(string id = default(string), string symbol = default(string), string rawSymbol = default(string), string description = default(string), SymbolCurrency currency = default(SymbolCurrency), UnderlyingSymbolExchange exchange = default(UnderlyingSymbolExchange), UnderlyingSymbolType type = default(UnderlyingSymbolType), string figiCode = default(string), FigiInstrumentNullable figiInstrument = default(FigiInstrumentNullable), List<Currency> currencies = default(List<Currency>)) : base()
         {
             this.Id = id;
@@ -120,9 +120,9 @@ namespace SnapTrade.Net.Model
         public FigiInstrumentNullable FigiInstrument { get; set; }
 
         /// <summary>
-        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+        /// This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
         /// </summary>
-        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.</value>
+        /// <value>This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.</value>
         [DataMember(Name = "currencies", EmitDefaultValue = false)]
         [Obsolete]
         public List<Currency> Currencies { get; set; }

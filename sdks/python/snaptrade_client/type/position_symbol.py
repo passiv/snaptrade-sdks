@@ -32,15 +32,15 @@ class OptionalPositionSymbol(TypedDict, total=False):
     description: str
 
     # WARNING: This property is deprecated
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     local_id: typing.Optional[str]
 
     # WARNING: This property is deprecated
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     is_quotable: bool
 
     # WARNING: This property is deprecated
-    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid usecase for this.
+    # This field is deprecated and should not be used. Please reach out to SnapTrade support if you have a valid use case for this.
     is_tradable: bool
 
 class PositionSymbol(RequiredPositionSymbol, OptionalPositionSymbol):

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **NullableString** | The current status of the account. Can be either \&quot;open\&quot;, \&quot;closed\&quot;, \&quot;archived\&quot; or null if the status is unknown or not provided by the brokerage. | [optional] 
 **RawType** | Pointer to **NullableString** | The account type as provided by the brokerage | [optional] 
 **Meta** | Pointer to **map[string]interface{}** | Additional information about the account, such as account type, status, etc. This information is specific to the brokerage and there&#39;s no standard format for this data. This field is deprecated and subject to removal in a future version. | [optional] 
-**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a usecase for it. | [optional] 
+**PortfolioGroup** | Pointer to **string** | Portfolio Group ID. Portfolio Groups have been deprecated. Please contact support if you have a use case for it. | [optional] 
 **CashRestrictions** | Pointer to **[]string** | This field is deprecated. | [optional] 
 **IsPaper** | **bool** | Indicates whether the account is a paper (simulated) trading account. | 
 
