@@ -1,270 +1,579 @@
-# Integrate the Connection Portal into Your Application
+# SnapTrade Connection Portal
 
-This document outlines the various methods for integrating the connection portal with your application. You can choose from the following methods:
+## Overview
 
-## 1. Implementation via Regular Web Browser
+The SnapTrade Connection Portal is the front-end interface your users interact with to link their brokerage accounts to the SnapTrade API.
 
-**Why use this method?**
+<img src="./assets/portal-overview.png" alt="connection portal overview" width="700"/>
 
-This method is suitable for applications aiming to open external links in a separate browser window or tab, requiring minimal setup without additional SDKs or libraries. It's straightforward but does necessitate users temporarily leaving your platform.
+### Introduction
 
-**Example Flow:**
+The Connection Portal is a drop-in UI that lets your users link brokerage accounts to the SnapTrade API. It handles credential entry, MFA, reconnects, and redirects, so your app only needs to open a connection portal link and and process the connection result when users are returned to your app.
 
-1. The user clicks on `Connect Institution` in your app.
-2. A new browser tab opens where the user completes the connection to their broker.
-3. After connecting, the user clicks `Done` to return to your app.
+SnapTrade’s connection portal is built to run smoothly on all modern browsers and platforms, including:
 
-**Key Considerations**:
+- Web apps
+- Native iOS
+- Native Android
+- React Native
 
-- To monitor window messages for successful connections or failures, the connection portal must be opened in a new window using `window.opener`; otherwise, capturing client-side window messages is not feasible. Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
-- You can provide a custom redirect to navigate the user back to a specific page in your app post-connection.
-- Enable `immediateRedirect` by setting it to `true` within the login link to automatically redirect users back to your application (either to the custom or default redirect page) upon
-  successfully connecting or in the case of a connection failure.
+### Initializing
 
-## 2. Implementation Using React SDK
+The SnapTrade connection flow begins when your user shows intent to connect their brokerage account to your app.
 
-For React applications, the `snaptrade-react` SDK offers a seamless integration process. For installation and setup instructions, refer to [SnapTrade React SDK on npm](https://www.npmjs.com/package/snaptrade-react).
+1
 
-**Why use this method?**
+User taps _Connect Account_ in your app.
 
-This method is recommended for React applications because it offers a streamlined integration process that renders the connection portal in an iframe to keep the connection flow within your application. The SDK also provides built-in callbacks that allow you to use client-side window messages for monitoring successful connections or failures, ensuring a smoother user experience.
+Your app calls your backend to generate a SnapTrade connection portal login link and returns it to the client.
 
-**Callbacks provided by the SDK:**
+---
 
-- `onSuccess`: This function is executed when a user successfully connects their
-  institution, and it returns the authorization ID associated with the new connection.
-- `onError`: This function is triggered when a user encounters an error while
-  attempting to connect to their institution. The function returns an
-  object containing error code, status code, and a detailed
-  description of the error.
-- `onExit`: This function is triggered when a user opts to exit the connection flow or closes the second tab opened for making an oAuth connection.
+2
 
-## 3. Implementation via an iFrame
+Your app opens the SnapTrade connection portal login link for the user (see [Integration Methods for platform-specific best practices](#integration-methods)).
 
-**Why use this method?**
+They select their brokerage and go through the login flow.
 
-This method is ideal if you want to keep the connection flow within your application, providing a more integrated user experience. It's especially useful if you're not using React for your frontend but still want to maintain the connection process within your app.
+---
 
-**Example Flow:**
+3
 
-1. Install a library that offers a Modal component or use your own. In this example, we will use the Modal component from Ant Design: https://ant.design/components/modal
-2. Import the Modal component in your React project.
-3. Load the generated login link within the iframe:
+After successfully connecting, SnapTrade redirects the user back to your app.
 
-```jsx
-import { Modal } from 'antd';
+---
 
-const MyModal = () => {
-  const loginLink = '<LOGIN_LINK>';
+4
 
-  return (
-    <Modal title="SnapTrade Connection Portal" visible footer={null}>
-      <iframe
-        id="snaptrade-connection-portal"
-        src={loginLink}
-        title="SnapTrade Connection Portal"
-        allowfullscreen
-      ></iframe>
-    </Modal>
-  );
-};
+Your backend can now fetch and store the connection details and use them to make necessary API requests for the user.
 
-export default MyModal;
-```
+### Login Link Parameters
 
-**Key Considerations:**
+- **connectionType (optional):** Sets the level of access requested. Defaults to `read`.
+  - `read`: Data access only
+  - `trade`: Data + trading access
+  - `trade-if-available`: Requests trading access if supported; otherwise falls back to `read`
 
-- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
-- This method may require additional styling and layout considerations to ensure the iframe fits appropriately within your application's design.
+- **broker (optional) - broker slug:** If you display broker options in your own UI instead of using SnapTrade’s built-in selection screen, pass the broker slug here. This skips the integrations selection screen and goes directly into that brokerage’s login flow. See the [integrations page](https://support.snaptrade.com/brokerages-table)
+- **customRedirect (optional):** Override the default redirect URL for this session.
+- **immediateRedirect (optional, boolean):** If true, skips the Connection Portal’s success or error screen and sends the user straight back to your app after the connection attempt, using either the default or custom redirect URL.
+- **reconnect (required for reconnect flow):** The UUID of a connection that needs to be re-established. Leave this empty unless you are explicitly reconnecting a disabled connections.
+- **showCloseButton (optional, boolean):** Set to `false` to hide the close (X) button. Useful for mobile implementations where the native WebView or browser already provides a close button. Defaults to `true`.
 
-## 4. Implementation in a React Native WebView
+## Integration Methods
 
-**Why use this method?**
-This method is ideal for React Native applications that want to keep the connection flow within the app while leveraging the power of WebView.
+You can display the Connection Portal in your application using one of the following methods. Pick one method depending on platform and UX needs.
 
-**Example Flow:**
+### Embedded iframe (recommended for web apps)
 
-1. Install the `react-native-webview` library: `npm install react-native-webview`
-2. Import the WebView component in your React Native project.
-3. Load the generated login link within the WebView component
-4. Utilize the `onMessage` prop to handle window messages:
+Displays the portal within your application using an iframe.
+
+**Best for:** Web apps - Keeping users within your app, better user experience, when you want full control over the flow.
+
+- Example React snippet:
 
 ```jsx
-import { WebView } from "react-native-webview";
-const MyWebView = () => {
-  const loginLink = "<LOGIN_LINK>";
-
-  return (
-    <WebView
-      source={{
-        uri: loginLink,
-      }}
-      javaScriptEnabled={true}
-      injectedJavaScript={`
-    window.addEventListener('message',(event) => {
-     window.ReactNativeWebView.postMessage(event.data);
-    });
-   `}
-      onMessage={(event) => {
-        const messageData = event.nativeEvent.data;
-        if (messageData) {
-	        // Handle window messages here
-      }}
+const ConnectionPortalModal = ({ loginLink }) => (
+  <Modal title="SnapTrade Connection Portal" visible footer={null}>
+    <iframe
+      id="snaptrade-connection-portal"
+      src={loginLink}
+      title="SnapTrade Connection Portal"
+      style={{ width: "100%", height: "70vh", border: 0 }}
+      sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+      referrerPolicy="no-referrer"
+      allow="clipboard-read; clipboard-write"
+      aria-label="SnapTrade connection portal"
     />
-  );
-};
+  </Modal>
+);
 ```
 
-**Key Considerations:**
+- Key Considerations:
+  - Find guidance on how to monitor window messages [here](#window-messages).
+  - Your application is responsible for closing the iframe modal post connections.
+  - If not using `snaptrade-react` SDK, you must handle responsive sizing and closing the modal. The SDK simplifies this.
 
-- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
+:::info
+For React applications, we recommend using our `snaptrade-react` SDK which offers a seamless integration process. For installation and setup instructions, refer to [SnapTrade React SDK on npm](https://www.npmjs.com/package/snaptrade-react). The SDK provides built-in callbacks that allow you to use client-side window messages for monitoring successful connections or failures, ensuring a smoother user experience.
+:::
 
-## 5. Implementation in an iOS WebView
+### New Browser Tab
 
-**Why use this method?**
+Opens the portal in a separate browser tab or popup window.
 
-This method is ideal for native iOS applications that want to keep the connection flow within the app while leveraging the power of WebView components.
+**Best for:** Web apps - Straightforward connection flows.
 
-**Example Flow:**
+- Key Considerations:
+  - To determine the connection state, your application can use one of the following approaches:
+    - **Option 1: Window messages**
+      - Open the Connection Portal in a new window using `window.open`. This is required to receive client-side window messages.
+      - Refer to the documentation on how to listen for and handle these messages [here](#window-messages).
+    - **Option 2: Query parameters in redirect**
+      - The portal will redirect back to your URL with query parameters:
+        - **SUCCESS:** `{your_redirect_url}?status=SUCCESS&connection_id={connection_id}`
+        - **ERROR:** `{your_redirect_url}?status=ERROR&status_code={status_code}&error_code={error_code}`
+        - **ABANDONED:** `{your_redirect_url}?status=ABANDONED`
+  - You can provide a custom redirect to navigate the user back to a specific page in your app post-connection.
+  - Set `immediateRedirect` to true in the login link to skip the connection portal’s internal finish screens and redirect immediately.
 
-1. Import the necessary WebView component (`UIWebView` or `WKWebView`) in your iOS project.
-2. Load the generated login link within the WebView component.
-3. Set up appropriate delegates or handlers to manage events like successful connections or connection failures.
+### Mobile In-app Browser (Recommended for mobile apps)
 
-```swift
-import UIKit
-import WebKit
+Use _SFSafariViewController_ on iOS, _Chrome Custom Tabs_ on Android, or the recommended in-app browser library for React Native. This preserves browser features required by OAuth and Passkeys.
 
-class MyWebViewController: UIViewController, WKNavigationDelegate {
+**Best for:** Mobile applications (React Native, native iOS/Android apps, etc.)
 
-  var webView: WKWebView!
-  let loginLink = "<LOGIN_LINK>"
-  override func loadView() {
-    let webConfiguration = WKWebViewConfiguration()
-    webView = WKWebView(frame: .zero, configuration: webConfiguration)
-    webView.navigationDelegate = self
-    view.addSubview(webView)
-  }
+**Implementation guides:**
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    let request = URLRequest(url: URL(string: loginLink)!)
-    webView.load(request)
-  }
+- [React Native](#react-native-implementation-guide)
+- [iOS](#ios-implementation-guide)
+- [Android](#android-implementation-guide)
 
-  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-     // Handle window messages here
-  }
-}
+## Window messages
 
-```
+We send these [window messages](https://developer.mozilla.org/en-US/docs/Web/API/Window/message_event) to notify your app about user actions and the status of the connection attempt.
 
-**Key Considerations:**
+Your app should listen for these messages and respond accordingly, for example by showing toast notifications, performing redirects, or running any other app logic that makes sense for your use case.
 
-- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
-
-## 6. Implementation in an Android WebView
-
-**Why use this method?**
-
-This method is ideal for native Android applications that want to keep the connection flow within the app while leveraging the power of WebView components.
-
-**Example Flow:**
-
-1. Import the `WebView` component in your Android project.
-2. Load the generated login link within the `WebView` component.
-3. Set up appropriate listeners or handlers to manage events like successful connections or connection failures.
-
-```java
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-public class MyWebViewActivity extends AppCompatActivity {
-    private WebView webView;
-    private String loginLink = "<LOGIN_LINK>";
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        webView = (WebView) findViewById(R.id.webView);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-              // Handle window messages here
-            }
-        });
-        webView.loadUrl(loginLink);
-    }
-}
-```
-
-**Key Considerations:**
-
-- Find guidance on how to monitor window messages [here](#implement-connection-portal-window-messages-to-monitor-on-the-client-side).
-
-## Window Messages to Monitor on the client side:
-
-- `SUCCESS`: Indicates successful institution connection. The message contains the authorization ID.
-
-  - Structure:
+- Messages
+  - **SUCCESS:** Indicates successful institution connection. The message contains the authorization ID (same as connection id).
 
   ```
   {status: 'SUCCESS', authorizationId: 'AUTHORIZATION_ID'}
   ```
 
-  - Note: Legacy string format `SUCCESS:AUTHORIZATION_ID` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
-
-- `ERROR`: Sent when a connection error occurs, including an error code, status code and description.
-
-  - Structure:
+  - **ERROR:** Sent when a connection error occurs, including an error code, status code and description.
 
   ```
   {status: 'ERROR', errorCode: 'ERROR_CODE', statusCode: 'STATUS_CODE', detail: 'DETAIL_OF_THE_ERROR'}
   ```
 
-  - Note: Legacy string format `ERROR:STATUS_CODE` is for backward compatibility and it may be deprecated in the future. It is essential to use the object format.
+  - **CLOSED:** Sent when the user manually closes the OAuth connection window that opens in a new tab.
+    - Note: This message is only emitted when the connection portal is loaded inside an iframe. In other integration methods, the OAuth flow opens in the same tab as the connection portal, so closing the OAuth window also ends the entire connection portal session.
 
-- `CLOSED`: Sent when the user closes the OAuth connection window that opens in a new tab.
+  - **ABANDONED:** Functions the same as `CLOSE_MODAL` but only triggers for non-iframe implementations.
+    - Example React snippet:
 
-  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#implement-connection-portal-3-implementation-via-an-iframe)
+    ```jsx
+    useEffect(() => {
+      const handleMessageEvent = (e) => {
+        if (e.data) {
+          const data = e.data;
 
-- `CLOSE_MODAL`: Sent when the user opts to exit the connection flow or clicks `Done` after successful connection (if the portal is not already closed when listening for `SUCCESS`).
-  - Note: This window message only triggers if connection portal is loading in an Iframe [#3](#implement-connection-portal-3-implementation-via-an-iframe).
-- `ABANDONED`: Functions the same as `CLOSE_MODAL` but only triggers for non-iframe implementations.
-<aside>
-💡 **Note**: When loading the connection portal in an iframe, your application is responsible for closing the modal and displaying success/error messages post <u>OAuth connections</u>.
+          if (data.status === "SUCCESS") {
+            const authorizationId = data.authorizationId;
+            // close the connection portal/modal and display success message to the user
+          } else if (data.status === "ERROR") {
+            const { errorCode, statusCode, detail } = data;
+            // close the connection portal/modal and display error message to the user
+          } else if (
+            data === "CLOSED" ||
+            data === "CLOSE_MODAL" ||
+            data === "ABANDONED"
+          ) {
+            // close the modal
+          }
+        }
+      };
 
-</aside>
+      window.addEventListener("message", handleMessageEvent, false);
 
-**Example of how these events can be captured in a React app:**
+      return () => {
+        window.removeEventListener("message", handleMessageEvent, false);
+      };
+    }, []);
+    ```
 
-```jsx
-useEffect(() => {
-  const handleMessageEvent = (e) => {
-    if (e.data) {
-      const data = e.data;
-      if (data.status === 'SUCCESS') {
-        const authorizationId = data.authorizationId;
-        // close the connection portal/modal and display success message to the user
-      }
-      if (data.status === 'ERROR') {
-        const { errorCode, statusCode, detail } = data;
-        // close the connection portal/modal and display error message to the user
-      }
-      if (data === 'CLOSED') {
-        // close the modal
-      }
-      if (data === 'CLOSE_MODAL') {
-        // close the modal
-      }
-      if (data === 'ABANDONED') {
-        // close the connection portal
-      }
+## React Native Implementation Guide:
+
+Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
+
+### Redirect URL Parameters
+
+SnapTrade redirects back to your app with these parameters:
+
+- **Success:**
+  - `status=SUCCESS`
+  - `connection_id=<string>` - The connection ID to use for API calls
+
+- **Error:**
+  - `status=ERROR`
+  - `error_code=<string>` - Error code describing what went wrong
+  - `status_code=<number>` - HTTP status code
+
+### Expo
+
+1. Configure URL scheme in `app.config.json` or `app.json`:
+
+```js
+export default {
+  expo: {
+    scheme: "yourapp",
+    // ... other config
+  },
+};
+```
+
+2. Install Dependencies:
+
+```bash
+npx expo install expo-web-browser expo-linking
+```
+
+3. Rebuild the app after adding URL schemes:
+
+```bash
+npx expo prebuild --clean
+npx expo run:ios
+npx expo run:android
+```
+
+4. Basic implementation:
+
+```tsx
+import * as WebBrowser from "expo-web-browser";
+import * as Linking from "expo-linking";
+import { useEffect } from "react";
+
+function SnapTradeConnect() {
+  // Handle incoming deep links
+  useEffect(() => {
+    // Handle deep link when app is already open
+    const subscription = Linking.addEventListener("url", handleDeepLink);
+
+    // Handle deep link when app opens from closed state
+    Linking.getInitialURL().then((url) => {
+      if (url) handleDeepLink({ url });
+    });
+
+    return () => subscription.remove();
+  }, []);
+
+  const handleDeepLink = (event) => {
+    const { url } = event;
+    const { queryParams } = Linking.parse(url);
+
+    // Dismiss the in-app browser
+    WebBrowser.dismissBrowser();
+
+    // Handle the callback
+    if (queryParams.status === "SUCCESS") {
+      console.log("Connection successful!", queryParams.connection_id);
+      // Save connection_id and proceed with your flow
+    } else if (queryParams.status === "ERROR") {
+      console.error("Connection failed:", queryParams.error_code);
+      // Show error to user
     }
   };
-  return () => {
-    window.removeEventListener('message', handleMessageEvent, false);
+
+  const openSnapTrade = async () => {
+    const snaptradeUrl = "YOUR_SNAPTRADE_LOGIN_LINK";
+
+    try {
+      await WebBrowser.openBrowserAsync(snaptradeUrl);
+    } catch (error) {
+      console.error("Failed to open browser:", error);
+    }
   };
-}, []);
+
+  return <Button onPress={openSnapTrade}>Connect Account</Button>;
+}
 ```
+
+### Vanilla React Native
+
+1. Configure URL scheme:
+
+- iOS: Add to `Info.plist`:
+
+```swift
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>yourapp</string>
+    </array>
+  </dict>
+</array>
+
+```
+
+- Android: Add to `AndroidManifest.xml`:
+
+```kotlin
+<intent-filter>
+  <action android:name="android.intent.action.VIEW" />
+  <category android:name="android.intent.category.DEFAULT" />
+  <category android:name="android.intent.category.BROWSABLE" />
+  <data android:scheme="yourapp" />
+</intent-filter>
+```
+
+2. Install Dependencies:
+
+```bash
+npm install react-native-inappbrowser-reborn\
+```
+
+3. Basic Implementation:
+
+```tsx
+import InAppBrowser from "react-native-inappbrowser-reborn";
+import { Linking } from "react-native";
+import { useEffect } from "react";
+
+function SnapTradeConnect() {
+  useEffect(() => {
+    const handleDeepLink = (event) => {
+      const url = event.url;
+      const params = parseUrl(url);
+
+      if (params.status === "SUCCESS") {
+        console.log("Connection successful!", params.connection_id);
+      } else if (params.status === "ERROR") {
+        console.error("Connection failed:", params.error_code);
+      }
+    };
+
+    const subscription = Linking.addEventListener("url", handleDeepLink);
+
+    Linking.getInitialURL().then((url) => {
+      if (url) handleDeepLink({ url });
+    });
+
+    return () => subscription.remove();
+  }, []);
+
+  const openSnapTrade = async () => {
+    const snaptradeUrl = "YOUR_SNAPTRADE_LOGIN_LINK";
+
+    try {
+      if (await InAppBrowser.isAvailable()) {
+        await InAppBrowser.open(snaptradeUrl);
+      }
+    } catch (error) {
+      console.error("Failed to open browser:", error);
+    }
+  };
+
+  const parseUrl = (url) => {
+    const urlObj = new URL(url);
+    const params = {};
+    urlObj.searchParams.forEach((value, key) => {
+      params[key] = value;
+    });
+    return params;
+  };
+
+  return <Button onPress={openSnapTrade}>Connect SnapTrade Account</Button>;
+}
+```
+
+## Native iOS Implementation Guide:
+
+Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
+
+### Redirect URL Parameters
+
+SnapTrade redirects back to your app with these parameters:
+
+- **Success:**
+  - `status=SUCCESS`
+  - `connection_id=<string>` - The connection ID to use for API calls
+
+- **Error:**
+  - `status=ERROR`
+  - `error_code=<string>` - Error code describing what went wrong
+  - `status_code=<number>` - HTTP status code
+
+### Implementation
+
+1. Configure URL scheme in `Info.plist` :
+
+```swift
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>yourapp</string>
+    </array>
+  </dict>
+</array>
+
+```
+
+2. Basic implementation:
+
+```swift
+import SafariServices
+
+class ViewController: UIViewController {
+
+    func openSnapTrade() {
+        guard let url = URL(string: "YOUR_SNAPTRADE_LOGIN_LINK") else { return }
+
+        let safariVC = SFSafariViewController(url: url)
+
+        present(safariVC, animated: true)
+    }
+}
+
+// In AppDelegate.swift or SceneDelegate.swift
+func application(_ app: UIApplication,
+                 open url: URL,
+                 options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    // Dismiss Safari View Controller
+    if let presented = UIApplication.shared.windows.first?.rootViewController?.presentedViewController as? SFSafariViewController {
+        presented.dismiss(animated: true)
+    }
+
+    // Parse URL
+    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+          let queryItems = components.queryItems else {
+        return false
+    }
+
+    let params = queryItems.reduce(into: [String: String]()) { result, item in
+        result[item.name] = item.value
+    }
+
+    // Handle callback
+    if params["status"] == "SUCCESS",
+       let connectionId = params["connection_id"] {
+        print("Connection successful: \\(connectionId)")
+        // Save connection_id and proceed
+    } else if params["status"] == "ERROR",
+              let errorCode = params["error_code"] {
+        print("Connection failed: \\(errorCode)")
+        // Show error to user
+    }
+
+    return true
+}
+
+// For iOS 13+ with SceneDelegate
+func scene(_ scene: UIScene,
+           openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    guard let url = URLContexts.first?.url else { return }
+    // Handle URL same as above
+}
+```
+
+## Native Android Implementation Guide
+
+Authentication Flow: `[Your App] → [In-App Browser] → [SnapTrade Auth] → [Redirect] → [Your App]`
+
+### Redirect URL Parameters
+
+SnapTrade redirects back to your app with these parameters:
+
+- **Success:**
+  - `status=SUCCESS`
+  - `connection_id=<string>` - The connection ID to use for API calls
+
+- **Error:**
+  - `status=ERROR`
+  - `error_code=<string>` - Error code describing what went wrong
+  - `status_code=<number>` - HTTP status code
+
+### Implementation
+
+1. Configure URL scheme in `AndroidManifest.xml`, add to your main Activity:
+
+```kotlin
+<activity android:name=".MainActivity">
+    <intent-filter>
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="yourapp" />
+    </intent-filter>
+</activity>
+```
+
+2. Basic implementation:
+
+```kotlin
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Handle incoming deep link
+        handleIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        intent?.let { handleIntent(it) }
+    }
+
+    private fun handleIntent(intent: Intent) {
+        val data: Uri? = intent.data
+
+        data?.let { uri ->
+            val status = uri.getQueryParameter("status")
+            val connectionId = uri.getQueryParameter("connection_id")
+            val errorCode = uri.getQueryParameter("error_code")
+
+            when (status) {
+                "SUCCESS" -> {
+                    println("Connection successful: $connectionId")
+                    // Save connection_id and proceed
+                }
+                "ERROR" -> {
+                    println("Connection failed: $errorCode")
+                    // Show error to user
+                }
+            }
+        }
+    }
+
+    fun openSnapTrade() {
+         val url = "YOUR_SNAPTRADE_LOGIN_LINK"
+         CustomTabsIntent.Builder()
+	         .build()
+	         .launchUrl(this, Uri.parse(url))
+    }
+}
+```
+
+## Troubleshooting
+
+### Coinbase Mobile Authentication Issues
+
+- Problem: Coinbase uses OAuth and supports Passkeys, Google, and Apple sign-in. When the portal runs inside a mobile WebView, Passkey and Google sign-in often fail. WebViews impose restrictions on third-party cookies, credential delegation, and embedded authentication flows. This breaks modern auth flows.
+- Solution: We recommend using in-app browser for all integrations. It’s more secure and avoids problems like this.
+
+<img src="./assets/coinbase-passkey.png" alt="coinbase mobile authentication" width="400"/>
+
+## Brokerage Connectivity Issue Screen
+
+- What it looks like: Users see a connectivity warning before reaching the login page for a specific brokerage.
+
+<img src="./assets/connectivity-issue.png" alt="connectivity issue screen" width="400"/>
+
+- Why it happens: SnapTrade detects degraded connectivity to that brokerage. Some users may still connect, but analytics show an unhealthy success rate.
+- How to handle:
+  - For users: Recommend trying again later if they cannot connect.
+  - For developers: No code changes are required. This is an automatic protection against poor user experience.
+
+## Brokerage Under Maintenance Screen
+
+- What it looks like: A warning that the selected brokerage is temporarily unavailable and the connection cannot proceed right now.
+
+  <img src="./assets/brokerage-maintenance.png" alt="brokerage maintenance screen" width="400"/>
+
+- Why it happens:
+  - The brokerage is in scheduled or unscheduled maintenance.
+  - SnapTrade is experiencing degraded connectivity to the broker, preventing the creation of any new connections.
+
+- How to handle:
+  - For users: Recommend trying again later when the maintenance window is over.
+  - For developers: No code changes required. SnapTrade automatically re-enables connections when the brokerage or our service recovers.
